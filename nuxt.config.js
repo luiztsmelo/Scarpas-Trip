@@ -1,5 +1,5 @@
 module.exports = {
-  mode: 'spa',
+  /* mode: 'spa', */
   /*
   ** Build configuration
   */
@@ -21,9 +21,11 @@ module.exports = {
     color: '#0D0D0D',
     background: 'white'
   },
-  
+
   manifest: {
-    theme_color: '#3B8070'
+    name: 'Scarpas Trip',
+    theme_color: '#3B8070',
+    lang: 'pt-br'
   },
   /*
   ** Modules
