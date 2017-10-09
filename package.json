@@ -4,6 +4,10 @@
   "description": "Nuxt.js project",
   "author": "Tarcisio Melo <luiztsmelo@gmail.com>",
   "private": true,
+  "engines": {
+    "node": "8.4.0",
+    "npm": "5.3.0"
+  },
   "dependencies": {
     "nuxt": "latest",
     "@nuxtjs/pwa": "latest"
