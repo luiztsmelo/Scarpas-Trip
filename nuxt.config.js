@@ -9,8 +9,7 @@ module.exports = {
   */
   head: {
     link: [
-      { rel: 'icon', type: 'image/png', sizes: '24x24', href: '/icon.png' },
-      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800,900|Poiret+One' }
+      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800,900' }
     ]
   },
   /*
@@ -21,8 +20,18 @@ module.exports = {
   ** Customize app manifest
   */
   manifest: {
+    name: 'Escarpas Trip',
     theme_color: 'black',
-    lang: 'pt-br'
+    lang: 'pt-br',
+    icons: [{
+      src: './static/brand64.png',
+      sizes: '64x64',
+      type: 'image/png'
+    }, {
+      src: './static/brand128.png',
+      sizes: '128x128',
+      type: 'image/png'
+    }]
   },
   /*
   ** Modules

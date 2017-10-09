@@ -1,4 +1,4 @@
-# escarpas-trip
+# Escarpas-trip
 
 > Nuxt.js project
 

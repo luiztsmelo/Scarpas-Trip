@@ -6,6 +6,11 @@
 
 <script>
 export default {
+  head () {
+    return {
+      title: 'Escarpas Trip'
+    }
+  }
 }
 </script>
 
