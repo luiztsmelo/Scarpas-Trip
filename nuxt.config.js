@@ -10,7 +10,7 @@ module.exports = {
   head: {
     link: [
       { rel: 'icon', type: 'image/png', sizes: '24x24', href: '/icon.png' },
-      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Arizonia' }
+      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Engagement' }
     ]
   },
   /*
@@ -22,7 +22,7 @@ module.exports = {
   */
   manifest: {
     name: 'Scarpas Trip',
-    theme_color: 'black',
+    theme_color: 'rgb(255, 89, 97)',
     lang: 'pt-br'
   },
   /*
