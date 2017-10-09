@@ -32,10 +32,9 @@ export default {
   z-index: 3;
   height: 3.5rem;
   width:  100%;
-  background: black;
+  background: rgb(255, 117, 89);
   transition: all .3s ease;
   padding: 0 6%;
-  box-shadow: 0px 1px 4px 0px rgba(0,0,0,0.07);
   & .navbar-body {
     position: relative;
     top: 50%;
@@ -48,7 +47,7 @@ export default {
       font-size: 22px;
       line-height: 0;
       user-select: none;
-      font-weight: 400;
+      font-weight: 300;
       color: white;
       transition: all ease .3s;
     }
