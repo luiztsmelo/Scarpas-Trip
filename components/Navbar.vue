@@ -32,7 +32,7 @@ export default {
   z-index: 3;
   height: 3rem;
   width:  100%;
-  background: white;
+  background: black;
   transition: all .3s ease;
   padding: 0 6%;
   box-shadow: 0px 1px 4px 0px rgba(0,0,0,0.1);
@@ -49,7 +49,7 @@ export default {
       line-height: 0;
       user-select: none;
       font-weight: 400;
-      color: var(--color00);
+      color: white;
       transition: all ease .3s;
     }
     & .nav {
@@ -63,8 +63,8 @@ export default {
         & .bar {
           transition: all .3s ease;
           width: 22px;
-          height: 1px;
-          background-color: var(--color00);
+          height: 2px;
+          background-color: white;
           margin: 5px 0;
         }
       }
