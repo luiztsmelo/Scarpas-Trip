@@ -21,7 +21,7 @@ module.exports = {
   */
   manifest: {
     name: 'Escarpas Trip',
-    display: 'standalone',
+    display: 'fullscreen',
     theme_color: 'black',
     lang: 'pt-br',
     icons: [{
