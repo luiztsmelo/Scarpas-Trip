@@ -10,7 +10,7 @@ module.exports = {
   head: {
     link: [
       { rel: 'icon', type: 'image/png', sizes: '24x24', href: '/icon.png' },
-      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Engagement' }
+      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Montez' }
     ]
   },
   /*
