@@ -32,7 +32,7 @@ export default {
   z-index: 3;
   height: 3.5rem;
   width:  100%;
-  background: rgb(255, 97, 107);
+  background: rgb(255, 117, 89);
   transition: all .3s ease;
   padding: 0 6%;
   & .navbar-body {
