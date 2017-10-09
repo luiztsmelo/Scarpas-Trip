@@ -2,7 +2,7 @@
   <div class="navbar">
     <div class="navbar-body">
 
-      <nuxt-link to="/" class="__brand-name">Scarpas Trip</nuxt-link>
+      <nuxt-link to="/" class="__brand-name">Escarpas Trip</nuxt-link>
 
       <nav class="nav">
         <div class="__menu">
@@ -44,11 +44,11 @@ export default {
     justify-content: space-between;
     align-items: center;
     & .__brand-name {
-      font-family: var(--brand-font);
-      font-size: 32px;
+      font-family: var(--main-font);
+      font-size: 22px;
       line-height: 0;
       user-select: none;
-      font-weight: 400;
+      font-weight: 600;
       color: var(--color00);
       transition: all ease .3s;
     }
@@ -63,7 +63,7 @@ export default {
         & .bar {
           transition: all .3s ease;
           width: 23px;
-          height: 2px;
+          height: 1px;
           background-color: var(--color00);
           margin: 5px 0;
         }
