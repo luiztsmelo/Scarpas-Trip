@@ -48,7 +48,7 @@ export default {
       font-size: 22px;
       line-height: 0;
       user-select: none;
-      font-weight: 600;
+      font-weight: 700;
       color: var(--color00);
       transition: all ease .3s;
     }
@@ -63,7 +63,7 @@ export default {
         & .bar {
           transition: all .3s ease;
           width: 23px;
-          height: 1px;
+          height: 2px;
           background-color: var(--color00);
           margin: 5px 0;
         }

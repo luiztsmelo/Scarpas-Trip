@@ -21,7 +21,7 @@ module.exports = {
   ** Customize app manifest
   */
   manifest: {
-    name: 'Scarpas Trip',
+    name: 'Escarpas Trip',
     theme_color: 'black',
     lang: 'pt-br'
   },
