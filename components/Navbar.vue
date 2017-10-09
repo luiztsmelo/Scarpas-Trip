@@ -32,7 +32,7 @@ export default {
   z-index: 3;
   height: 3.5rem;
   width:  100%;
-  background: white;
+  background: rgb(255, 193, 7);
   transition: all .3s ease;
   padding: 0 6%;
   box-shadow: 0px 1px 4px 0px rgba(0,0,0,0.07);
@@ -44,12 +44,12 @@ export default {
     justify-content: space-between;
     align-items: center;
     & .__brand-name {
-      font-family: var(--main-font);
-      font-size: 22px;
+      font-family: var(--brand-font);
+      font-size: 26px;
       line-height: 0;
       user-select: none;
       font-weight: 700;
-      color: var(--color00);
+      color: white;
       transition: all ease .3s;
     }
     & .nav {
@@ -64,7 +64,7 @@ export default {
           transition: all .3s ease;
           width: 23px;
           height: 2px;
-          background-color: var(--color00);
+          background-color: white;
           margin: 5px 0;
         }
       }
