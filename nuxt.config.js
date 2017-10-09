@@ -22,7 +22,7 @@ module.exports = {
   */
   manifest: {
     name: 'Scarpas Trip',
-    theme_color: 'rgb(255, 89, 97)',
+    theme_color: 'black',
     lang: 'pt-br'
   },
   /*
