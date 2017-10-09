@@ -15,7 +15,7 @@ module.exports = {
   /*
   ** Customize the progress-bar color
   */
-  loading: { color: '#3B8070' },
+  loading: { color: '#ffffff' },
   /*
   ** Customize app manifest
   */
@@ -25,12 +25,20 @@ module.exports = {
     theme_color: 'black',
     lang: 'pt-br',
     icons: [{
-      src: './static/brand64.png',
+      src: '/static/brand64.png',
       sizes: '64x64',
       type: 'image/png'
     }, {
-      src: './static/brand128.png',
+      src: '/static/brand128.png',
       sizes: '128x128',
+      type: 'image/png'
+    }, {
+      src: '/static/brand256.png',
+      sizes: '256x256',
+      type: 'image/png'
+    }, {
+      src: '/static/brand512.png',
+      sizes: '5126x512',
       type: 'image/png'
     }]
   },
