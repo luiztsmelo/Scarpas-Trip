@@ -69,10 +69,10 @@ export default {
       filter: invert(0%);
     }
     & .__foobar1-icon {
-      transform: scale(1.1);
+      transform: scale(1);
     }
     & .__foobar2-icon {
-      transform: scale(1.1);
+      transform: scale(1);
     }
     & .__foobar3-icon {
       transform: scale(1);
