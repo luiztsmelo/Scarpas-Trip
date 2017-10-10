@@ -65,7 +65,7 @@ export default {
   & .home-body {
     display: flex;
     flex-flow: column;
-    padding: 1rem 6%;
+    padding: .5rem 6%;
     margin-bottom: 100rem;
     & .__title {
       font-size: 22px;
