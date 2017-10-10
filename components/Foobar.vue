@@ -3,7 +3,7 @@
     <div class="foobar">
       <div class="foobar-body">
         
-        <img src="../assets/img/foobar1.svg" 
+        <img src="../assets/img/foobar1a.svg" 
         class="__foobar1-icon" 
         :class="{ activeFoobar: onFoobar1 }" 
         @click="onFoobar1=true, onFoobar2=false, onFoobar3=false, onFoobar4=false">
