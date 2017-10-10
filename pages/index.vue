@@ -72,7 +72,7 @@ export default {
       & .__subtitle {
         color: white;
         font-size: 18px;
-        font-weight: 300;
+        font-weight: 200;
         line-height: 22px;
       }
     }
@@ -94,13 +94,13 @@ export default {
         padding-bottom: 1.5rem;
         & .__title {
           font-size: 22px;
-          font-weight: 800;
+          font-weight: 700;
         }
         & .see-all {
           cursor: pointer;
           & .__see-all-text {
             font-size: 13px;
-            font-weight: 600;
+            font-weight: 500;
             color: rgb(122, 122, 122);
             padding-right: 2px;
           }
