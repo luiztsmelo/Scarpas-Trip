@@ -87,12 +87,12 @@ export default {
          & .__see-all-text {
           font-size: 13px;
           font-weight: 500;
-          color: rgb(102, 102, 102);
+          color: rgb(122, 122, 122);
           padding-right: 2px;
         }
         & .__see-all-arrow {
           transform: translateY(2px);
-          filter: invert(50%);
+          filter: invert(60%);
           width: .6rem;
           height: auto;
         }
