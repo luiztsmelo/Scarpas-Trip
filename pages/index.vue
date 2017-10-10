@@ -9,7 +9,15 @@
     </div>
 
     <div class="home-body">
-      <h1 class="__title">Próximos Eventos</h1>
+      <div class="title-row">
+        <h1 class="__title">Próximos Eventos</h1>
+        <div class="see-all">
+          <span class="__see-all-text">Veja mais</span>
+          <img class="__see-all-arrow" src="../assets/img/see-all-arrow.svg">
+        </div>
+        
+      </div>
+      
 
     </div>
 
@@ -67,10 +75,28 @@ export default {
     flex-flow: column;
     padding: .5rem 6%;
     margin-bottom: 100rem;
-    & .__title {
-      font-size: 22px;
-      font-weight: 700;
-      margin-bottom: 1rem;
+    & .title-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      & .__title {
+        font-size: 22px;
+        font-weight: 700;
+      }
+      & .see-all {
+         & .__see-all-text {
+          font-size: 13px;
+          font-weight: 500;
+          color: rgb(102, 102, 102);
+          padding-right: 2px;
+        }
+        & .__see-all-arrow {
+          transform: translateY(2px);
+          filter: invert(50%);
+          width: .6rem;
+          height: auto;
+        }
+      }
     }
   }
 }
