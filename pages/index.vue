@@ -1,12 +1,17 @@
 <template>
   <div class="home">
+
     <div class="heading">
       <div class="welcome">
         <h1 class="__title">Visite Escarpas do Lago</h1>
         <h2 class="__subtitle">Maior balneário de água doce da América do Sul</h2>
       </div>
-      
     </div>
+
+    <div class="home-body">
+      <h1 class="__title">Próximos Eventos</h1>
+    </div>
+
   </div>
 </template>
 
@@ -39,7 +44,7 @@ export default {
       text-align: center;
       justify-content: center;
       align-items: center;
-      background: linear-gradient(rgba(4, 12, 31, .8) 40%, rgba(255, 255, 255, 1));
+      background: linear-gradient(rgba(0, 1, 4, .8) 37%, rgba(255, 255, 255, 1));
       padding: 0 6%;
       height: 14rem;
       padding-bottom: 2.5rem;
@@ -55,6 +60,16 @@ export default {
         font-size: 18px;
         font-weight: 200;
       }
+    }
+  }
+  & .home-body {
+    display: flex;
+    flex-flow: column;
+    padding: 1rem 6%;
+    & .__title {
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 1rem;
     }
   }
 }
