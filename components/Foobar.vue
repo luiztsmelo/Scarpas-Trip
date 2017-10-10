@@ -62,7 +62,7 @@ export default {
     align-items: center;
     & img {
       filter: invert(40%);
-      width: 1.8rem;
+      width: 1.9rem;
       height: auto;
     }
     & .activeFoobar {
