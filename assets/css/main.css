@@ -3,11 +3,11 @@
 :root {
   /* ******* FONTS ******* */
   --brand-font: 'Poiret One';
-  --main-font: 'Poppins', sans-serif;
+  --main-font: 'Montserrat', sans-serif;
   --text-font: 'Lora', serif;
   /* ******* COLOR PALETTE ******* */
   --color00: rgb(7, 7, 7);
-  --color01: rgb(33, 33, 33);
+  --color01: rgb(72, 72, 72);
   --color02: rgb(243, 110, 95);
   --color03: rgb(45, 204, 112);
   --color04: rgb(52, 0, 255);
