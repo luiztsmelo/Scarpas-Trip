@@ -61,10 +61,10 @@ export default {
         -webkit-tap-highlight-color: rgba(255, 255, 45, 0);
         & .bar {
           transition: all .3s ease;
-          width: 23px;
+          width: 24px;
           height: 1px;
           background-color: white;
-          margin: 5px 0;
+          margin: 6px 0;
         }
       }
     }
