@@ -61,8 +61,8 @@ export default {
     justify-content: space-around;
     align-items: center;
     & img {
-      filter: invert(40%);
-      width: 1.9rem;
+      filter: invert(30%);
+      width: 2.0rem;
       height: auto;
     }
     & .activeFoobar {
