@@ -44,7 +44,7 @@ export default {
       text-align: center;
       justify-content: center;
       align-items: center;
-      background: linear-gradient(rgba(1, 5, 14, .84), rgba(255, 255, 255, 1));
+      background: linear-gradient(rgba(1, 5, 14, .88) 15%, rgba(255, 255, 255, 1));
       padding: 0 6%;
       height: 20rem;
       padding-bottom: 1.7rem;
