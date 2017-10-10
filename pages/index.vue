@@ -4,7 +4,7 @@
     <div class="heading">
       <div class="welcome">
         <h1 class="__title">Visite Escarpas do Lago</h1>
-        <h2 class="__subtitle">Maior balneário de água doce da América do Sul</h2>
+        <h2 class="__subtitle">O maior balneário de água doce da América do Sul</h2>
       </div>
     </div>
 
@@ -34,7 +34,7 @@ export default {
   flex-flow: column;
   justify-content: space-between;
   & .heading {
-    height: 14rem;
+    height: 13rem;
     background-image: url('../assets/img/bgimg.jpg');
     background-repeat: no-repeat;
     background-size: cover;
@@ -46,8 +46,8 @@ export default {
       align-items: center;
       background: linear-gradient(rgba(1, 5, 15, .8) 37%, rgba(255, 255, 255, 1));
       padding: 0 6%;
-      height: 14rem;
-      padding-bottom: 2.5rem;
+      height: 13rem;
+      padding-bottom: 2rem;
       & .__title {
         font-family: var(--heading-font);
         color: white;
