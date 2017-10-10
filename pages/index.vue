@@ -9,18 +9,18 @@
     </div>
 
     <div class="home-body">
+
       <div class="title-row">
         <h1 class="__title">Próximos Eventos</h1>
         <div class="see-all">
           <span class="__see-all-text">Veja mais</span>
           <img class="__see-all-arrow" src="../assets/img/see-all-arrow.svg">
         </div>
-        
       </div>
       
+      <div class="__img"></div>
 
     </div>
-
   </div>
 </template>
 
@@ -70,6 +70,7 @@ export default {
       }
     }
   }
+
   & .home-body {
     display: flex;
     flex-flow: column;
@@ -79,11 +80,13 @@ export default {
       display: flex;
       justify-content: space-between;
       align-items: center;
+      padding-bottom: 1.5rem;
       & .__title {
         font-size: 22px;
         font-weight: 700;
       }
       & .see-all {
+        cursor: pointer;
          & .__see-all-text {
           font-size: 13px;
           font-weight: 500;
@@ -92,11 +95,18 @@ export default {
         }
         & .__see-all-arrow {
           transform: translateY(2px);
-          filter: invert(60%);
+          opacity: .5;
           width: .6rem;
           height: auto;
         }
       }
+    }
+    & .__img {
+      width: 160px;
+      height: 120px;
+      background: url('../assets/img/bgimg2.jpg') no-repeat; 
+      background-size: cover;
+      border-radius: 4px;
     }
   }
 }
