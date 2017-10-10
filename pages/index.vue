@@ -10,16 +10,22 @@
 
     <div class="home-body">
 
-      <div class="title-row">
-        <h1 class="__title">Próximos Eventos</h1>
-        <div class="see-all">
-          <span class="__see-all-text">Veja mais</span>
-          <img class="__see-all-arrow" src="../assets/img/see-all-arrow.svg">
+      <div class="category-container">
+        <div class="title-row">
+          <h1 class="__title">Próximos Eventos</h1>
+          <div class="see-all">
+            <span class="__see-all-text">Veja mais</span>
+            <img class="__see-all-arrow" src="../assets/img/see-all-arrow.svg">
+          </div>
+        </div>
+
+        <div class="carousel-row">
+          <div class="__img"></div>
+          <div class="__img"></div>
+          <div class="__img"></div>
         </div>
       </div>
       
-      <div class="__img"></div>
-
     </div>
   </div>
 </template>
@@ -52,7 +58,7 @@ export default {
       text-align: center;
       justify-content: center;
       align-items: center;
-      background: linear-gradient(rgba(4, 12, 31, .94) 20%, rgba(255, 255, 255, 1));
+      background: linear-gradient(rgba(4, 12, 31, .95) 20%, rgba(255, 255, 255, 1));
       padding: 0 6%;
       height: 20rem;
       padding-bottom: 2rem;
@@ -76,38 +82,51 @@ export default {
     flex-flow: column;
     padding: .5rem 6%;
     margin-bottom: 100rem;
-    & .title-row {
+    & .category-container {
       display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding-bottom: 1.5rem;
-      & .__title {
-        font-size: 22px;
-        font-weight: 700;
-      }
-      & .see-all {
-        cursor: pointer;
-         & .__see-all-text {
-          font-size: 13px;
-          font-weight: 500;
-          color: rgb(122, 122, 122);
-          padding-right: 2px;
+      flex-flow: column;
+      overflow-x: hidden;
+      & .title-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-bottom: 1.5rem;
+        & .__title {
+          font-size: 22px;
+          font-weight: 700;
         }
-        & .__see-all-arrow {
-          transform: translateY(2px);
-          opacity: .5;
-          width: .6rem;
-          height: auto;
+        & .see-all {
+          cursor: pointer;
+          & .__see-all-text {
+            font-size: 13px;
+            font-weight: 500;
+            color: rgb(122, 122, 122);
+            padding-right: 2px;
+          }
+          & .__see-all-arrow {
+            transform: translateY(2px);
+            opacity: .5;
+            width: .6rem;
+            height: auto;
+          }
         }
       }
-    }
-    & .__img {
-      width: 160px;
-      height: 120px;
-      background: url('../assets/img/bgimg2.jpg') no-repeat; 
-      background-size: cover;
-      border-radius: 4px;
+      & .carousel-row {
+        display: flex;
+        flex-flow: row nowrap;
+        overflow-x: hidden;
+          & .__img {
+          min-width: 145px;
+          height: 100px;
+          margin-right: .8rem;
+          background: url('../assets/img/bgimg2.jpg') no-repeat; 
+          background-size: cover;
+          border-radius: 4px;
+        }
+      }
     }
   }
+
+  
 }
 </style>
