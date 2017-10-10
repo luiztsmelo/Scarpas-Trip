@@ -47,7 +47,7 @@ export default {
       font-size: 24px;
       line-height: 0;
       user-select: none;
-      font-weight: 600;
+      font-weight: 300;
       color: white;
       transition: all ease .3s;
     }
