@@ -51,9 +51,7 @@ export default {
   justify-content: space-between;
   & .heading {
     height: 13rem;
-    background-image: url('../assets/img/bgimg.jpg');
-    background-attachment: fixed;
-    background-repeat: no-repeat;
+    background: url('../assets/img/bgimg.jpg') no-repeat center center fixed; 
     background-size: cover;
     & .welcome {
       display: flex;
