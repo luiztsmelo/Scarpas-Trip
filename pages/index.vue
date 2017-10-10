@@ -10,6 +10,22 @@
 
     <div class="home-body">
       <h1 class="__title">Próximos Eventos</h1>
+      <p>.</p>
+      <p>.</p>
+      <p>.</p>
+      <p>.</p>
+      <p>.</p>
+      <p>.</p>
+      <p>.</p>
+      <p>.</p>
+      <p>.</p>
+      <p>.</p>
+      <p>.</p>
+      <p>.</p>
+      <p>.</p>
+      <p>.</p>
+      <p>.</p>
+      <p>.</p>
     </div>
 
   </div>
@@ -36,6 +52,7 @@ export default {
   & .heading {
     height: 13rem;
     background-image: url('../assets/img/bgimg.jpg');
+    background-attachment: fixed;
     background-repeat: no-repeat;
     background-size: cover;
     & .welcome {
