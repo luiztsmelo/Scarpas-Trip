@@ -65,7 +65,7 @@ export default {
       & .__title {
         font-family: var(--heading-font);
         color: white;
-        font-size: 31px;
+        font-size: 32px;
         font-weight: 400;
         margin-bottom: 1rem;
       }
@@ -73,6 +73,7 @@ export default {
         color: white;
         font-size: 18px;
         font-weight: 200;
+        line-height: 22px;
       }
     }
   }
