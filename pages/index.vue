@@ -39,9 +39,10 @@ export default {
       text-align: center;
       justify-content: center;
       align-items: center;
-      background: linear-gradient(rgba(0, 0, 0, .9), rgba(255, 255, 255, 1));
+      background: linear-gradient(rgba(0, 0, 0, .8), rgba(255, 255, 255, 1));
       padding: 0 6%;
       height: 15rem;
+      padding-bottom: 2rem;
       & .__title {
         font-family: var(--heading-font);
         color: white;
