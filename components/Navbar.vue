@@ -43,7 +43,7 @@ export default {
     justify-content: space-between;
     align-items: center;
     & .__brand-name {
-      font-family: var(--brand-font);
+      font-family: var(--main-font);
       font-size: 22px;
       letter-spacing: 1px;
       line-height: 0;
