@@ -4,7 +4,7 @@
   /* ******* FONTS ******* */
   --brand-font: 'Montez';
   --main-font: 'Montserrat', sans-serif;
-  --text-font: 'Lora', serif;
+  --heading-font: 'Fjalla One', serif;
   /* ******* COLOR PALETTE ******* */
   --color00: rgb(7, 7, 7);
   --color01: rgb(72, 72, 72);
@@ -34,7 +34,7 @@ html
 }
 
 p {
-  font-family: var(--text-font);
+  font-family: var(--main-font);
   font-size: 18px;
   line-height: 31px;
   margin-bottom: 20px;
