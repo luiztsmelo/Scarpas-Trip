@@ -32,7 +32,7 @@ export default {
   z-index: 3;
   height: 3.5rem;
   width:  100%;
-  background: rgb(0, 10, 23);
+  background: rgb(28, 24, 41);
   transition: all .3s ease;
   padding: 0 6%;
   & .navbar-body {
@@ -44,7 +44,7 @@ export default {
     align-items: center;
     & .__brand-name {
       font-family: var(--main-font);
-      font-size: 24px;
+      font-size: 23px;
       line-height: 0;
       user-select: none;
       font-weight: 300;
