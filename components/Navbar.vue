@@ -62,7 +62,7 @@ export default {
         & .bar {
           transition: all .3s ease;
           width: 23px;
-          height: 2px;
+          height: 1px;
           background-color: white;
           margin: 5px 0;
         }
