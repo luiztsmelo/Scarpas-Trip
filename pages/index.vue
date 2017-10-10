@@ -36,7 +36,7 @@ export default {
   justify-content: space-between;
   & .heading {
     height: 13rem;
-    background: url('../assets/img/bgimg.jpg') no-repeat fixed; 
+    background: url('../assets/img/bgimg2.jpg') no-repeat fixed; 
     background-size: cover;
     & .welcome {
       display: flex;
@@ -44,7 +44,7 @@ export default {
       text-align: center;
       justify-content: center;
       align-items: center;
-      background: linear-gradient(rgba(4, 12, 31, .85) 37%, rgba(255, 255, 255, 1));
+      background: linear-gradient(rgba(4, 12, 31, .85) 40%, rgba(255, 255, 255, 1));
       padding: 0 6%;
       height: 13rem;
       padding-bottom: 2rem;
