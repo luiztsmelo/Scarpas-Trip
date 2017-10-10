@@ -61,7 +61,7 @@ export default {
     justify-content: space-around;
     align-items: center;
     & img {
-      filter: invert(30%);
+      filter: invert(10%);
       width: 2.0rem;
       height: auto;
     }
