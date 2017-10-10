@@ -10,22 +10,7 @@
 
     <div class="home-body">
       <h1 class="__title">Próximos Eventos</h1>
-      <p>.</p>
-      <p>.</p>
-      <p>.</p>
-      <p>.</p>
-      <p>.</p>
-      <p>.</p>
-      <p>.</p>
-      <p>.</p>
-      <p>.</p>
-      <p>.</p>
-      <p>.</p>
-      <p>.</p>
-      <p>.</p>
-      <p>.</p>
-      <p>.</p>
-      <p>.</p>
+
     </div>
 
   </div>
@@ -59,7 +44,7 @@ export default {
       text-align: center;
       justify-content: center;
       align-items: center;
-      background: linear-gradient(rgba(1, 5, 15, .8) 37%, rgba(255, 255, 255, 1));
+      background: linear-gradient(rgba(4, 12, 31, .8) 37%, rgba(255, 255, 255, 1));
       padding: 0 6%;
       height: 13rem;
       padding-bottom: 2rem;
@@ -81,6 +66,7 @@ export default {
     display: flex;
     flex-flow: column;
     padding: 1rem 6%;
+    margin-bottom: 100rem;
     & .__title {
       font-size: 22px;
       font-weight: 700;
