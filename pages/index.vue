@@ -29,7 +29,7 @@ export default {
   flex-flow: column;
   justify-content: space-between;
   & .heading {
-    height: 15rem;
+    height: 14rem;
     background-image: url('../assets/img/bgimg.jpg');
     background-repeat: no-repeat;
     background-size: cover;
@@ -39,14 +39,14 @@ export default {
       text-align: center;
       justify-content: center;
       align-items: center;
-      background: linear-gradient(rgba(0, 0, 0, .8), rgba(255, 255, 255, 1));
+      background: linear-gradient(rgba(0, 0, 0, .8) 40%, rgba(255, 255, 255, 1));
       padding: 0 6%;
-      height: 15rem;
-      padding-bottom: 2rem;
+      height: 14rem;
+      padding-bottom: 2.5rem;
       & .__title {
         font-family: var(--heading-font);
         color: white;
-        font-size: 30px;
+        font-size: 31px;
         font-weight: 400;
         margin-bottom: 1rem;
       }
