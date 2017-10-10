@@ -35,7 +35,7 @@ export default {
   flex-flow: column;
   justify-content: space-between;
   & .heading {
-    height: 13rem;
+    height: 12rem;
     background: url('../assets/img/bgimg2.jpg') no-repeat fixed; 
     background-size: cover;
     & .welcome {
@@ -46,8 +46,8 @@ export default {
       align-items: center;
       background: linear-gradient(rgba(4, 12, 31, .82) 30%, rgba(255, 255, 255, 1));
       padding: 0 6%;
-      height: 13rem;
-      padding-bottom: 2rem;
+      height: 12rem;
+      padding-bottom: 1.7rem;
       & .__title {
         font-family: var(--heading-font);
         color: white;
