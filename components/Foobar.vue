@@ -61,17 +61,18 @@ export default {
     justify-content: space-around;
     align-items: center;
     & img {
-      filter: invert(50%);
-      width: 1.9rem;
+      filter: invert(40%);
+      width: 1.8rem;
       height: auto;
     }
     & .activeFoobar {
       filter: invert(0%);
     }
     & .__foobar1-icon {
+      transform: scale(1.1);
     }
     & .__foobar2-icon {
-      transform: scale(1);
+      transform: scale(1.1);
     }
     & .__foobar3-icon {
       transform: scale(1);
