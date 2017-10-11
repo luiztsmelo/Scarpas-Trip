@@ -54,7 +54,7 @@ export default {
     return {
       eventosData: [
         {title: 'Réveillon Kanto da Ilha 2018', subtitle: 'Venha curtir com a gente!'},
-        {title: 'Molejão ao Vivo', subtitle: 'Gravação do novo DVD'},
+        {title: 'Show Mr. Catra', subtitle: 'O papai chegou'},
         {title: 'Mc Catra no Kanto da Ilha', subtitle: 'Curtindo com a galera'}
       ]
     }
