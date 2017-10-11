@@ -48,7 +48,7 @@ export default {
   data () {
     return {
       eventosData: [
-        {title: 'Reveillon 2018', subtitle: 'Venha curtir com a gente!'},
+        {title: 'Reveillon Kanto da Ilha 2018', subtitle: 'Venha curtir com a gente!'},
         {title: 'Molejão ao Vivo', subtitle: 'Gravação do novo DVD'},
         {title: 'Mc Catra no Kanto da Ilha', subtitle: 'Curtindo com a galera'}
       ]
@@ -148,8 +148,8 @@ export default {
             border-radius: 4px;
           }
           & .__card-title {
-            margin: .5rem 0 .2rem 0;
-            font-size: 18px;
+            margin: .6rem 0 .3rem 0;
+            font-size: 16px;
             font-weight: 600;
           }
           & .__card-subtitle {
