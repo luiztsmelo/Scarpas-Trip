@@ -3,10 +3,10 @@
     <div class="foobar">
       <div class="foobar-body">
         
-        <nuxt-link to="/imoveis">
+        <nuxt-link to="/estadia">
           <div class="foobar-box" @click="onFoobar1=false, onFoobar2=true, onFoobar3=true, onFoobar4=true">
             <img src="../assets/img/foobar1.svg" class="__foobar1-icon" :class="{ coloricon: onFoobar1 }">
-            <h1 class="__foobar-title" :class="{ colortitle: onFoobar1 }">IMOVEIS</h1>
+            <h1 class="__foobar-title" :class="{ colortitle: onFoobar1 }">ESTADIA</h1>
           </div>
         </nuxt-link>
 
