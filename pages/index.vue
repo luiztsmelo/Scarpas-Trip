@@ -65,7 +65,7 @@ export default {
       & .__title {
         font-family: var(--heading-font);
         color: white;
-        font-size: 32px;
+        font-size: 33px;
         font-weight: 400;
         margin-bottom: 1rem;
       }
