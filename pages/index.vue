@@ -49,7 +49,7 @@ export default {
   flex-flow: column;
   justify-content: space-between;
   & .heading {
-    height: 17rem;
+    height: 15rem;
     background: url('../assets/img/bgimg2.jpg') no-repeat fixed; 
     background-size: cover;
     & .welcome {
@@ -60,7 +60,7 @@ export default {
       align-items: center;
       background: rgba(1, 5, 15, .9);
       padding: 0 6%;
-      height: 17rem;
+      height: 15rem;
       padding-bottom: 2rem;
       & .__title {
         font-family: var(--heading-font);
