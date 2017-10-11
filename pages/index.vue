@@ -50,6 +50,7 @@ export default {
       title: 'Escarpas Trip'
     }
   },
+  transition: 'slide-right',
   data () {
     return {
       eventosData: [
@@ -70,6 +71,7 @@ export default {
   display: flex;
   flex-flow: column;
   justify-content: space-between;
+  transition: all ease .3s;
   & .heading {
     height: 17rem;
     background: url('../assets/img/bgimg2.jpg') no-repeat fixed; 

@@ -11,6 +11,7 @@ export default {
       title: 'Eventos ‒ Escarpas Trip'
     }
   },
+  transition: 'slide-left',
   data () {
     return {
       eventosData: [
@@ -30,5 +31,6 @@ export default {
   margin-top: 3.5rem;
   display: flex;
   flex-flow: column;
+  transition: all ease .3s;
 }
 </style>
