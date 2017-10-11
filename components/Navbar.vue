@@ -2,8 +2,6 @@
   <div class="navbar">
     <div class="navbar-body">
 
-      <nuxt-link to="/" class="__brand-name">Escarpas Trip</nuxt-link>
-
       <nav class="nav">
         <div class="__menu">
           <div class="bar"></div>
@@ -11,6 +9,8 @@
           <div class="bar"></div>
         </div>
       </nav>
+
+      <nuxt-link to="/" class="__brand-name">Escarpas Trip</nuxt-link>
 
     </div>
   </div>
@@ -40,7 +40,7 @@ export default {
     top: 50%;
     transform: translateY(-50%);
     display: flex;
-    justify-content: space-between;
+    
     align-items: center;
     & .__brand-name {
       font-family: var(--brand-font);
@@ -56,13 +56,13 @@ export default {
       display: flex;
       align-items: center;
       & .__menu {
-        margin: .7rem 0 .7rem .7rem; /* Aumentar área de contato ao pressionar */
+        margin-right: .7rem;
         display: inline-block;
         cursor: pointer;
         -webkit-tap-highlight-color: rgba(255, 255, 45, 0);
         & .bar {
           transition: all .3s ease;
-          width: 24px;
+          width: 23px;
           height: 1px;
           background-color: white;
           margin: 6px 0;
