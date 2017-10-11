@@ -94,7 +94,7 @@ export default {
         margin-bottom: 1rem;
       }
       & .__subtitle {
-        color: rgb(235, 235, 235);
+        color: rgb(237, 237, 237);
         font-size: 18px;
         font-weight: 200;
         line-height: 22px;
