@@ -21,15 +21,18 @@
           </div>
         </div>
 
-        <ul class="carousel-row">
-          <li class="card" v-for="evento in eventosData">
+        <div class="carousel-container">
+          <ul class="carousel-row">
+            <li class="card" v-for="evento in eventosData">
 
-            <div class="__card-img"></div>
-            <h1 class="__card-title">{{ evento.title}}</h1>
-            <h2 class="__card-subtitle">{{ evento.subtitle}}</h2>
+              <div class="__card-img"></div>
+              <h1 class="__card-title">{{ evento.title}}</h1>
+              <h2 class="__card-subtitle">{{ evento.subtitle}}</h2>
 
-          </li>
-        </ul>
+            </li>
+          </ul>
+        </div>
+        
 
       </div>
       
@@ -48,7 +51,7 @@ export default {
   data () {
     return {
       eventosData: [
-        {title: 'Reveillon Kanto da Ilha 2018', subtitle: 'Venha curtir com a gente!'},
+        {title: 'Réveillon Kanto da Ilha 2018', subtitle: 'Venha curtir com a gente!'},
         {title: 'Molejão ao Vivo', subtitle: 'Gravação do novo DVD'},
         {title: 'Mc Catra no Kanto da Ilha', subtitle: 'Curtindo com a galera'}
       ]
@@ -129,32 +132,34 @@ export default {
           }
         }
       }
-      & .carousel-row {
-        display: flex;
-        flex-flow: row nowrap;
+      & .carousel-container {
         overflow-x: hidden;
-        padding: 0;
-        & .card {
-          max-width: 44%;
-          min-width: 44%;
-          cursor: pointer;
-          list-style-type: none;
-          margin-right: 1rem;
-          & .__card-img {
-            width: 100%;
-            height: 100px;
-            background: url('../assets/img/eventos/evento.jpg') no-repeat; 
-            background-size: cover;
-            border-radius: 4px;
-          }
-          & .__card-title {
-            margin: .6rem 0 .3rem 0;
-            font-size: 16px;
-            font-weight: 600;
-          }
-          & .__card-subtitle {
-            font-size: 14px;
-            font-weight: 300;
+        & .carousel-row {
+          display: flex;
+          flex-flow: row nowrap;
+          padding: 0;
+          transform: translateX(-0%);
+          & .card {
+            max-width: 144px;
+            min-width: 144px;
+            cursor: pointer;
+            list-style-type: none;
+            margin-right: 1rem;
+            & .__card-img {
+              min-height: 100px;
+              background: url('../assets/img/eventos/evento.jpg') no-repeat; 
+              background-size: cover;
+              border-radius: 4px;
+            }
+            & .__card-title {
+              margin: .6rem 0 .3rem 0;
+              font-size: 16px;
+              font-weight: 600;
+            }
+            & .__card-subtitle {
+              font-size: 14px;
+              font-weight: 300;
+            }
           }
         }
       }
