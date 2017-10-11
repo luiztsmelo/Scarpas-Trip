@@ -28,8 +28,8 @@
             <li class="card" v-for="evento in eventosData">
 
               <div class="__card-img"></div>
-              <h1 class="__card-title">{{ evento.title}}</h1>
-              <h2 class="__card-subtitle">{{ evento.subtitle}}</h2>
+              <h1 class="__card-title">{{ evento.title }}</h1>
+              <h2 class="__card-subtitle">{{ evento.subtitle }}</h2>
 
             </li>
           </ul>
@@ -53,9 +53,9 @@ export default {
   data () {
     return {
       eventosData: [
-        {title: 'Réveillon Kanto da Ilha 2018', subtitle: 'Venha curtir com a gente!'},
-        {title: 'Show Mr. Catra', subtitle: 'O papai chegou'},
-        {title: 'Mc Catra no Kanto da Ilha', subtitle: 'Curtindo com a galera'}
+        {title: 'Réveillon Kanto da Ilha 2018', subtitle: 'Venha curtir com a gente!', img: "'../static/eventos/evento.jpg'"},
+        {title: 'Show Mr. Catra', subtitle: 'O papai chegou', img: "'../static/eventos/evento2.jpg'"},
+        {title: 'Mc Catra no Kanto da Ilha', subtitle: 'Curtindo com a galera', img: "'../static/eventos/evento.jpg'"}
       ]
     }
   }
@@ -151,7 +151,7 @@ export default {
             -webkit-tap-highlight-color: rgba(255, 255, 45, 0);
             & .__card-img {
               min-height: 100px;
-              background: url('../assets/img/eventos/evento.jpg') no-repeat; 
+              background-image: url('../static/eventos/evento2.jpg');
               background-size: cover;
               border-radius: 4px;
             }
