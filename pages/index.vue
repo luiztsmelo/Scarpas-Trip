@@ -110,8 +110,8 @@ export default {
         align-items: center;
         padding-bottom: 1.5rem;
         & .__title {
-          font-size: 22px;
-          font-weight: 700;
+          font-size: 23px;
+          font-weight: 600;
         }
         & .see-all {
           cursor: pointer;
