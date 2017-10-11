@@ -70,13 +70,13 @@ export default {
       & .__foobar-title {
         font-size: 9px;
         font-weight: 600;
-        color: #D32F2F;
+        color: #F57C00;
       }
       & .colortitle {
         color: var(--color01);
       }
       & img {
-        margin-bottom: 3px;
+        margin-bottom: 4px;
         filter: invert(20%);
         width: 1.9rem;
         height: auto;
