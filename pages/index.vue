@@ -148,6 +148,7 @@ export default {
             cursor: pointer;
             list-style-type: none;
             margin-right: 1rem;
+            -webkit-tap-highlight-color: rgba(255, 255, 45, 0);
             & .__card-img {
               min-height: 100px;
               background: url('../assets/img/eventos/evento.jpg') no-repeat; 
