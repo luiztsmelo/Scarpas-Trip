@@ -15,10 +15,12 @@
 
         <div class="title-row">
           <h1 class="__title">Próximos Eventos</h1>
-          <div class="see-all">
-            <span class="__see-all-text">Ver mais</span>
-            <img class="__see-all-arrow" src="../assets/img/see-all-arrow.svg">
-          </div>
+          <nuxt-link to="/eventos">
+            <div class="see-all">
+              <span class="__see-all-text">Ver mais</span>
+              <img class="__see-all-arrow" src="../assets/img/see-all-arrow.svg">
+            </div>
+          </nuxt-link>  
         </div>
 
         <div class="carousel-container">

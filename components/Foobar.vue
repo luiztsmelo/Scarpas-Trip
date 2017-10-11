@@ -41,7 +41,7 @@
 export default {
   data () {
     return {
-      onFoobar1: false,
+      onFoobar1: true,
       onFoobar2: true,
       onFoobar3: true,
       onFoobar4: true
