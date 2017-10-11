@@ -49,7 +49,7 @@ export default {
   flex-flow: column;
   justify-content: space-between;
   & .heading {
-    height: 15rem;
+    height: 17rem;
     background: url('../assets/img/bgimg2.jpg') no-repeat fixed; 
     background-size: cover;
     & .welcome {
@@ -58,9 +58,9 @@ export default {
       text-align: center;
       justify-content: center;
       align-items: center;
-      background: rgba(1, 5, 15, .9);
+      background: linear-gradient(rgba(4, 12, 31, .91), rgba(255, 255, 255, 1));
       padding: 0 6%;
-      height: 15rem;
+      height: 17rem;
       padding-bottom: 2rem;
       & .__title {
         font-family: var(--heading-font);
@@ -70,7 +70,7 @@ export default {
         margin-bottom: 1rem;
       }
       & .__subtitle {
-        color: rgb(230, 230, 230);
+        color: white;
         font-size: 18px;
         font-weight: 200;
         line-height: 22px;
