@@ -4,7 +4,7 @@
     <div class="heading">
       <div class="welcome">
         <h1 class="__title">Visite Escarpas do Lago</h1>
-        <h2 class="__subtitle">O maior balneário de água doce da América do Sul</h2>
+        <h2 class="__subtitle">O maior balneário de água doce da América Latina</h2>
       </div>
     </div>
 
@@ -102,10 +102,10 @@ export default {
             font-size: 13px;
             font-weight: 500;
             color: rgb(122, 122, 122);
-            padding-right: 2px;
+            padding-right: 3px;
           }
           & .__see-all-arrow {
-            transform: translateY(2px);
+            transform: translateY(1px);
             opacity: .5;
             width: .6rem;
             height: auto;
