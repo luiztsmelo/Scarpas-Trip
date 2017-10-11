@@ -74,7 +74,7 @@ export default {
   transition: all ease .3s;
   & .heading {
     height: 17rem;
-    background: url('../assets/img/bgimg1.jpg') no-repeat fixed; 
+    background: url('../assets/img/bgimg3.jpg') no-repeat fixed; 
     background-size: cover;
     & .welcome {
       display: flex;
