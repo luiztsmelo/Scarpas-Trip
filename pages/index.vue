@@ -120,7 +120,7 @@ export default {
           min-width: 145px;
           height: 100px;
           margin-right: .8rem;
-          background: url('../assets/img/bgimg2.jpg') no-repeat; 
+          background: url('../assets/img/evento.jpg') no-repeat; 
           background-size: cover;
           border-radius: 4px;
         }
