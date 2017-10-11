@@ -137,6 +137,7 @@ export default {
         & .carousel-row {
           display: flex;
           flex-flow: row nowrap;
+          height: 14rem;
           padding: 0;
           transform: translateX(-0%);
           & .card {
