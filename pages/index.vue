@@ -72,9 +72,9 @@ export default {
   flex-flow: column;
   justify-content: space-between;
   transition: all ease .3s;
+  
   & .heading {
     height: 17rem;
-    background-color: rgb(4, 12, 31);
     background: url('../assets/img/bgimg3.jpg') no-repeat fixed; 
     background-size: cover;
     & .welcome {

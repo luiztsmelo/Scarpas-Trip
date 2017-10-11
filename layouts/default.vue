@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="app">
 
     <navbar/>
     <nuxt/>
@@ -18,5 +18,6 @@ export default {
 </script>
 
 <style>
-
+.app {
+}
 </style>
