@@ -58,7 +58,7 @@ export default {
       text-align: center;
       justify-content: center;
       align-items: center;
-      background: linear-gradient(rgba(4, 12, 31, .9), rgba(107, 183, 185, 1));
+      background: rgba(0, 0, 0, .9);
       padding: 0 6%;
       height: 17rem;
       padding-bottom: 2rem;
