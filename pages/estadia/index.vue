@@ -10,7 +10,8 @@ export default {
     return {
       title: 'Estadia ‒ Escarpas Trip'
     }
-  }
+  },
+  transition: 'slide-left'
 }
 </script>
 
@@ -21,5 +22,7 @@ export default {
   margin-top: 3.5rem;
   display: flex;
   flex-flow: column;
+  padding: 6%;
+  transition: all ease .3s;
 }
 </style>
