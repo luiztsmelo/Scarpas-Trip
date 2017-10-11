@@ -3,25 +3,25 @@
     <div class="foobar">
       <div class="foobar-body">
         
-        <img src="../assets/img/foobar1.svg" 
-        class="__foobar1-icon" 
-        :class="{ desactiveFoobar: onFoobar1 }" 
-        @click="onFoobar1=false, onFoobar2=true, onFoobar3=true, onFoobar4=true">
+        <div class="foobar-box" @click="onFoobar1=false, onFoobar2=true, onFoobar3=true, onFoobar4=true">
+          <img src="../assets/img/foobar1.svg" class="__foobar1-icon" :class="{ coloricon: onFoobar1 }">
+          <h1 class="__foobar-title" :class="{ colortitle: onFoobar1 }">IMOVEIS</h1>
+        </div>
         
-        <img src="../assets/img/foobar2.svg" 
-        class="__foobar2-icon" 
-        :class="{ desactiveFoobar: onFoobar2 }"
-        @click="onFoobar1=true, onFoobar2=false, onFoobar3=true, onFoobar4=true">
-        
-        <img src="../assets/img/foobar3.svg" 
-        class="__foobar3-icon" 
-        :class="{ desactiveFoobar: onFoobar3 }"
-        @click="onFoobar1=true, onFoobar2=true, onFoobar3=false, onFoobar4=true">
-        
-        <img src="../assets/img/foobar4.svg" 
-        class="__foobar4-icon" 
-        :class="{ desactiveFoobar: onFoobar4 }"
-        @click="onFoobar1=true, onFoobar2=true, onFoobar3=true, onFoobar4=false">
+        <div class="foobar-box" @click="onFoobar1=true, onFoobar2=false, onFoobar3=true, onFoobar4=true">
+          <img src="../assets/img/foobar2.svg" class="__foobar2-icon" :class="{ coloricon: onFoobar2 }">
+          <h1 class="__foobar-title" :class="{ colortitle: onFoobar2 }">PASSEIOS</h1>
+        </div>
+
+        <div class="foobar-box" @click="onFoobar1=true, onFoobar2=true, onFoobar3=false, onFoobar4=true">
+          <img src="../assets/img/foobar3.svg" class="__foobar3-icon" :class="{ coloricon: onFoobar3 }">
+          <h1 class="__foobar-title" :class="{ colortitle: onFoobar3 }">COMIDAS</h1>
+        </div>
+
+        <div class="foobar-box" @click="onFoobar1=true, onFoobar2=true, onFoobar3=true, onFoobar4=false">
+          <img src="../assets/img/foobar4.svg" class="__foobar4-icon" :class="{ coloricon: onFoobar4 }">
+          <h1 class="__foobar-title" :class="{ colortitle: onFoobar4 }">EVENTOS</h1>
+        </div>
 
       </div>
     </div>
@@ -48,6 +48,7 @@ export default {
   position: fixed;
   z-index: 3;
   bottom: 0;
+  left: 0;
   height: 3.5rem;
   width: 100%;
   background: white;
@@ -60,24 +61,41 @@ export default {
     display: flex;
     justify-content: space-around;
     align-items: center;
-    & img {
-      width: 2.0rem;
-      height: auto;
-    }
-    & .desactiveFoobar {
-      filter: grayscale(100%);
-    }
-    & .__foobar1-icon {
-      transform: scale(1);
-    }
-    & .__foobar2-icon {
-      transform: scale(1);
-    }
-    & .__foobar3-icon {
-      transform: scale(1);
-    }
-    & .__foobar4-icon {
-      transform: scale(1);
+    & .foobar-box {
+      display: flex;
+      flex-flow: column;
+      text-align: center;
+      justify-content: center;
+      align-items: center;
+      & .__foobar-title {
+        font-size: 9px;
+        font-weight: 600;
+        color: #D32F2F;
+      }
+      & .colortitle {
+        color: var(--color01);
+      }
+      & img {
+        margin-bottom: 3px;
+        filter: invert(20%);
+        width: 1.9rem;
+        height: auto;
+      }
+      & .coloricon {
+        filter: grayscale(100%);
+      }
+      & .__foobar1-icon {
+        transform: scale(1);
+      }
+      & .__foobar2-icon {
+        transform: scale(1);
+      }
+      & .__foobar3-icon {
+        transform: scale(1);
+      }
+      & .__foobar4-icon {
+        transform: scale(1);
+      }
     }
   }
 }
