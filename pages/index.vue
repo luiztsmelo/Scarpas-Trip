@@ -58,7 +58,7 @@ export default {
       text-align: center;
       justify-content: center;
       align-items: center;
-      background: rgba(0, 0, 0, .9);
+      background: rgba(1, 5, 15, .9);
       padding: 0 6%;
       height: 17rem;
       padding-bottom: 2rem;
