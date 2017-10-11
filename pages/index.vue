@@ -65,12 +65,12 @@ export default {
       & .__title {
         font-family: var(--heading-font);
         color: white;
-        font-size: 33px;
+        font-size: 34px;
         font-weight: 400;
         margin-bottom: 1rem;
       }
       & .__subtitle {
-        color: white;
+        color: rgb(230, 230, 230);
         font-size: 18px;
         font-weight: 200;
         line-height: 22px;
