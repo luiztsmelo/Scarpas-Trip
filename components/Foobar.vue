@@ -3,25 +3,25 @@
     <div class="foobar">
       <div class="foobar-body">
         
-        <img src="../assets/img/foobar1a.svg" 
+        <img src="../assets/img/foobar1.svg" 
         class="__foobar1-icon" 
-        :class="{ activeFoobar: onFoobar1 }" 
-        @click="onFoobar1=true, onFoobar2=false, onFoobar3=false, onFoobar4=false">
+        :class="{ desactiveFoobar: onFoobar1 }" 
+        @click="onFoobar1=false, onFoobar2=true, onFoobar3=true, onFoobar4=true">
         
         <img src="../assets/img/foobar2.svg" 
         class="__foobar2-icon" 
-        :class="{ activeFoobar: onFoobar2 }"
-        @click="onFoobar1=false, onFoobar2=true, onFoobar3=false, onFoobar4=false">
+        :class="{ desactiveFoobar: onFoobar2 }"
+        @click="onFoobar1=true, onFoobar2=false, onFoobar3=true, onFoobar4=true">
         
         <img src="../assets/img/foobar3.svg" 
         class="__foobar3-icon" 
-        :class="{ activeFoobar: onFoobar3 }"
-        @click="onFoobar1=false, onFoobar2=false, onFoobar3=true, onFoobar4=false">
+        :class="{ desactiveFoobar: onFoobar3 }"
+        @click="onFoobar1=true, onFoobar2=true, onFoobar3=false, onFoobar4=true">
         
         <img src="../assets/img/foobar4.svg" 
         class="__foobar4-icon" 
-        :class="{ activeFoobar: onFoobar4 }"
-        @click="onFoobar1=false, onFoobar2=false, onFoobar3=false, onFoobar4=true">
+        :class="{ desactiveFoobar: onFoobar4 }"
+        @click="onFoobar1=true, onFoobar2=true, onFoobar3=true, onFoobar4=false">
 
       </div>
     </div>
@@ -32,10 +32,10 @@
 export default {
   data () {
     return {
-      onFoobar1: true,
-      onFoobar2: false,
-      onFoobar3: false,
-      onFoobar4: false
+      onFoobar1: false,
+      onFoobar2: true,
+      onFoobar3: true,
+      onFoobar4: true
     }
   }
 }
@@ -65,8 +65,8 @@ export default {
       width: 2.0rem;
       height: auto;
     }
-    & .activeFoobar {
-      filter: invert(0%);
+    & .desactiveFoobar {
+      filter: grayscale(100%);
     }
     & .__foobar1-icon {
       transform: scale(1);
