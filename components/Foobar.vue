@@ -3,25 +3,34 @@
     <div class="foobar">
       <div class="foobar-body">
         
-        <div class="foobar-box" @click="onFoobar1=false, onFoobar2=true, onFoobar3=true, onFoobar4=true">
-          <img src="../assets/img/foobar1.svg" class="__foobar1-icon" :class="{ coloricon: onFoobar1 }">
-          <h1 class="__foobar-title" :class="{ colortitle: onFoobar1 }">IMOVEIS</h1>
-        </div>
+        <nuxt-link to="/imoveis">
+          <div class="foobar-box" @click="onFoobar1=false, onFoobar2=true, onFoobar3=true, onFoobar4=true">
+            <img src="../assets/img/foobar1.svg" class="__foobar1-icon" :class="{ coloricon: onFoobar1 }">
+            <h1 class="__foobar-title" :class="{ colortitle: onFoobar1 }">IMOVEIS</h1>
+          </div>
+        </nuxt-link>
+
+        <nuxt-link to="/passeios">
+          <div class="foobar-box" @click="onFoobar1=true, onFoobar2=false, onFoobar3=true, onFoobar4=true">
+            <img src="../assets/img/foobar2.svg" class="__foobar2-icon" :class="{ coloricon: onFoobar2 }">
+            <h1 class="__foobar-title" :class="{ colortitle: onFoobar2 }">PASSEIOS</h1>
+          </div>
+        </nuxt-link>
+
+        <nuxt-link to="/comidas">
+          <div class="foobar-box" @click="onFoobar1=true, onFoobar2=true, onFoobar3=false, onFoobar4=true">
+            <img src="../assets/img/foobar3.svg" class="__foobar3-icon" :class="{ coloricon: onFoobar3 }">
+            <h1 class="__foobar-title" :class="{ colortitle: onFoobar3 }">COMIDAS</h1>
+          </div>
+        </nuxt-link>
+
+        <nuxt-link to="/eventos">
+          <div class="foobar-box" @click="onFoobar1=true, onFoobar2=true, onFoobar3=true, onFoobar4=false">
+            <img src="../assets/img/foobar4.svg" class="__foobar4-icon" :class="{ coloricon: onFoobar4 }">
+            <h1 class="__foobar-title" :class="{ colortitle: onFoobar4 }">EVENTOS</h1>
+          </div>
+        </nuxt-link>
         
-        <div class="foobar-box" @click="onFoobar1=true, onFoobar2=false, onFoobar3=true, onFoobar4=true">
-          <img src="../assets/img/foobar2.svg" class="__foobar2-icon" :class="{ coloricon: onFoobar2 }">
-          <h1 class="__foobar-title" :class="{ colortitle: onFoobar2 }">PASSEIOS</h1>
-        </div>
-
-        <div class="foobar-box" @click="onFoobar1=true, onFoobar2=true, onFoobar3=false, onFoobar4=true">
-          <img src="../assets/img/foobar3.svg" class="__foobar3-icon" :class="{ coloricon: onFoobar3 }">
-          <h1 class="__foobar-title" :class="{ colortitle: onFoobar3 }">COMIDAS</h1>
-        </div>
-
-        <div class="foobar-box" @click="onFoobar1=true, onFoobar2=true, onFoobar3=true, onFoobar4=false">
-          <img src="../assets/img/foobar4.svg" class="__foobar4-icon" :class="{ coloricon: onFoobar4 }">
-          <h1 class="__foobar-title" :class="{ colortitle: onFoobar4 }">EVENTOS</h1>
-        </div>
 
       </div>
     </div>
