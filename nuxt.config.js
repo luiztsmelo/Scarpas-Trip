@@ -18,7 +18,7 @@ module.exports = {
   /*
   ** Customize the progress-bar color
   */
-  loading: { color: '#ffffff' },
+  loading: false,
   /*
   ** Customize app manifest
   */
