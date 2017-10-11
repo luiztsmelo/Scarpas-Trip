@@ -10,22 +10,30 @@
 
     <div class="home-body">
 
+
       <div class="category-container">
+
         <div class="title-row">
           <h1 class="__title">Próximos Eventos</h1>
           <div class="see-all">
-            <span class="__see-all-text">Veja mais</span>
+            <span class="__see-all-text">Ver mais</span>
             <img class="__see-all-arrow" src="../assets/img/see-all-arrow.svg">
           </div>
         </div>
 
-        <div class="carousel-row">
-          <div class="__img"></div>
-          <div class="__img"></div>
-          <div class="__img"></div>
-        </div>
+        <ul class="carousel-row">
+          <li class="card" v-for="evento in eventosData">
+
+            <div class="__card-img"></div>
+            <h1 class="__card-title">{{ evento.title}}</h1>
+            <h2 class="__card-subtitle">{{ evento.subtitle}}</h2>
+
+          </li>
+        </ul>
+
       </div>
       
+
     </div>
   </div>
 </template>
@@ -35,6 +43,15 @@ export default {
   head () {
     return {
       title: 'Escarpas Trip'
+    }
+  },
+  data () {
+    return {
+      eventosData: [
+        {title: 'Reveillon 2018', subtitle: 'Venha curtir com a gente!'},
+        {title: 'Molejão ao Vivo', subtitle: 'Gravação do novo DVD'},
+        {title: 'Mc Catra no Kanto da Ilha', subtitle: 'Curtindo com a galera'}
+      ]
     }
   }
 }
@@ -116,18 +133,32 @@ export default {
         display: flex;
         flex-flow: row nowrap;
         overflow-x: hidden;
-          & .__img {
-          min-width: 145px;
-          height: 100px;
-          margin-right: .8rem;
-          background: url('../assets/img/evento.jpg') no-repeat; 
-          background-size: cover;
-          border-radius: 4px;
+        padding: 0;
+        & .card {
+          max-width: 44%;
+          min-width: 44%;
+          cursor: pointer;
+          list-style-type: none;
+          margin-right: 1rem;
+          & .__card-img {
+            width: 100%;
+            height: 100px;
+            background: url('../assets/img/eventos/evento.jpg') no-repeat; 
+            background-size: cover;
+            border-radius: 4px;
+          }
+          & .__card-title {
+            margin: .5rem 0 .2rem 0;
+            font-size: 18px;
+            font-weight: 600;
+          }
+          & .__card-subtitle {
+            font-size: 14px;
+            font-weight: 300;
+          }
         }
       }
     }
   }
-
-  
 }
 </style>
