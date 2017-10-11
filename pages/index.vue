@@ -85,7 +85,7 @@ export default {
       background: rgba(0, 1, 5, .7);
       padding: 0 6%;
       height: 17rem;
-      padding-bottom: 2rem;
+      padding-bottom: 2.5rem;
       & .__title {
         font-family: var(--heading-font);
         color: white;
@@ -94,7 +94,7 @@ export default {
         margin-bottom: 1rem;
       }
       & .__subtitle {
-        color: rgb(222, 222, 222);
+        color: rgb(235, 235, 235);
         font-size: 18px;
         font-weight: 200;
         line-height: 22px;
