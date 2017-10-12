@@ -94,8 +94,8 @@ export default {
       }
       & img {
         margin-bottom: 4px;
-        filter: invert(25%);
-        width: 1.7rem;
+        filter: invert(20%);
+        width: 1.6rem;
         height: auto;
       }
       & .coloricon {

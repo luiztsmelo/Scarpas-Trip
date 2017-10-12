@@ -105,7 +105,7 @@ export default {
   & .home-body {
     display: flex;
     flex-flow: column;
-    padding: 2.5rem 6%;
+    padding: 3rem 6%;
     margin-bottom: 100rem;
     & .category-container {
       display: flex;
