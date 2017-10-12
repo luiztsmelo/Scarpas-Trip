@@ -1,4 +1,5 @@
 module.exports = {
+  mode: 'spa',
   /*
   ** Build configuration
   */
@@ -15,6 +16,12 @@ module.exports = {
       { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Montserrat:200,300,400,500,600,700,800,900|Oswald|Indie+Flower' }
     ]
   },
+  /*
+  ** Plugins
+  */
+  plugins: [
+    '~plugins/vue-touch'
+  ],
   /*
   ** Customize the progress-bar color
   */

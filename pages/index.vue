@@ -24,15 +24,17 @@
         </div>
 
         <div class="carousel-container">
-          <ul class="carousel-row">
-            <li class="card" v-for="evento in eventosData">
+          <v-touch @panleft="leftCarousel" @panright="rightCarousel">
+            <ul class="carousel-row" :style="'transform: translateX(' + positionCarousel + 'px)'">
+              <li class="card" v-for="evento in eventosData">
 
-              <div class="__card-img"></div>
-              <h1 class="__card-title">{{ evento.title }}</h1>
-              <h2 class="__card-subtitle">{{ evento.subtitle }}</h2>
+                <div class="__card-img"></div>
+                <h1 class="__card-title">{{ evento.title }}</h1>
+                <h2 class="__card-subtitle">{{ evento.subtitle }}</h2>
 
-            </li>
-          </ul>
+              </li>
+            </ul>
+          </v-touch>  
         </div>
         
 
@@ -53,13 +55,22 @@ export default {
   transition: 'slide-right',
   data () {
     return {
+      positionCarousel: '',
       eventosData: [
         {title: 'Bier Haus ‒ Sávio Calegari', subtitle: 'Venha curtir com a gente!', img: "'../static/eventos/evento.jpg'"},
         {title: 'Show Mr. Catra', subtitle: 'O papai chegou', img: "'../static/eventos/evento2.jpg'"},
         {title: 'Mc Catra no Kanto da Ilha', subtitle: 'Curtindo com a galera', img: "'../static/eventos/evento.jpg'"}
       ]
     }
-  }
+  },
+  methods: {
+    leftCarousel (e) {
+      this.positionCarousel = e.deltaX
+    },
+    rightCarousel (e) {
+      this.positionCarousel = e.deltaX
+    }
+  },
 }
 </script>
 
