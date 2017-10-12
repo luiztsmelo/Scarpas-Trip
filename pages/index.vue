@@ -54,7 +54,7 @@ export default {
   data () {
     return {
       eventosData: [
-        {title: 'Réveillon Kanto da Ilha 2018', subtitle: 'Venha curtir com a gente!', img: "'../static/eventos/evento.jpg'"},
+        {title: 'Bier Haus ‒ Sávio Calegari', subtitle: 'Venha curtir com a gente!', img: "'../static/eventos/evento.jpg'"},
         {title: 'Show Mr. Catra', subtitle: 'O papai chegou', img: "'../static/eventos/evento2.jpg'"},
         {title: 'Mc Catra no Kanto da Ilha', subtitle: 'Curtindo com a galera', img: "'../static/eventos/evento.jpg'"}
       ]
@@ -153,7 +153,7 @@ export default {
             -webkit-tap-highlight-color: rgba(255, 255, 45, 0);
             & .__card-img {
               min-height: 90px;
-              background-image: url('../static/eventos/evento2.jpg');
+              background-image: url('../static/eventos/evento4.jpg');
               background-size: cover;
               border-radius: 4px;
             }
