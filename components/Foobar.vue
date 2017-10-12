@@ -30,6 +30,12 @@
             <h1 class="__foobar-title" :class="{ colortitle: onFoobar4 }">EVENTOS</h1>
           </div>
         </nuxt-link>
+        <nuxt-link to="/eventos">
+          <div class="foobar-box" @click="onFoobar1=true, onFoobar2=true, onFoobar3=true, onFoobar4=false">
+            <img src="../assets/img/foobar4.svg" class="__foobar4-icon" :class="{ coloricon: onFoobar4 }">
+            <h1 class="__foobar-title" :class="{ colortitle: onFoobar4 }">ATRAÇOES</h1>
+          </div>
+        </nuxt-link>
         
 
       </div>
