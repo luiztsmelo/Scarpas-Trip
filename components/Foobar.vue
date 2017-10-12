@@ -93,8 +93,8 @@ export default {
         color: var(--color01);
       }
       & img {
-        margin-bottom: 4px;
-        filter: invert(20%);
+        margin-bottom: 5px;
+        filter: invert(15%);
         width: 1.6rem;
         height: auto;
       }
