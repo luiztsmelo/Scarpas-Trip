@@ -83,16 +83,16 @@ export default {
       text-align: center;
       justify-content: center;
       align-items: center;
-      background: rgba(0, 1, 5, .6);
+      background: rgba(0, 1, 5, .5);
       padding: 0 6%;
       height: 17rem;
-      padding-bottom: 2.5rem;
+      padding-bottom: 2.7rem;
       & .__title {
         font-family: var(--heading-font);
         color: white;
         font-size: 34px;
         font-weight: 400;
-        margin-bottom: 1rem;
+        margin-bottom: .8rem;
       }
       & .__subtitle {
         color: rgb(237, 237, 237);
