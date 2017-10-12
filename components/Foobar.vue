@@ -94,7 +94,7 @@ export default {
       }
       & img {
         margin-bottom: 4px;
-        filter: invert(20%);
+        filter: invert(25%);
         width: 1.7rem;
         height: auto;
       }
