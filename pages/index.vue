@@ -24,7 +24,7 @@
         </div>
 
         <div class="carousel-container">
-          <v-touch @panleft="leftCarousel" @panright="rightCarousel">
+          <v-touch @panleft="leftCarousel" @panright="rightCarousel" :pan-options="{ direction: 'horizontal', threshold: 10 }">
             <ul class="carousel-row" :style="'transform: translateX(' + positionCarousel + 'px)'">
               <li class="card" v-for="evento in eventosData">
 
@@ -65,12 +65,14 @@ export default {
   },
   methods: {
     leftCarousel (e) {
-      this.positionCarousel = e.deltaX
+      this.positionCarousel = e.deltaX 
+      console.log(e.deltaX + ' - ' + this.positionCarousel)
     },
     rightCarousel (e) {
-      this.positionCarousel = e.deltaX
+      this.positionCarousel = e.deltaX 
+      console.log(e.deltaX + ' - ' + this.positionCarousel)
     }
-  },
+  }
 }
 </script>
 
@@ -154,7 +156,7 @@ export default {
           flex-flow: row nowrap;
           height: 14rem;
           padding: 0;
-          transform: translateX(-0%);
+          transition: all ease .2s;
           & .card {
             max-width: 135px;
             min-width: 135px;
