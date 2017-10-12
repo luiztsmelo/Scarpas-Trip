@@ -4,7 +4,7 @@
     <div class="heading">
       <div class="welcome">
         <h1 class="__title">Visite Escarpas do Lago</h1>
-        <!-- <h2 class="__subtitle">O maior balneário de água doce da América Latina</h2> -->
+        <h2 class="__subtitle">O maior balneário de água doce da América Latina</h2>
       </div>
     </div>
 
@@ -83,10 +83,10 @@ export default {
       text-align: center;
       justify-content: center;
       align-items: center;
-      background: rgba(0, 0, 0, .4);
+      background: linear-gradient(rgba(4, 12, 31, .9) 25%, rgba(255, 255, 255, 1)); 
       padding: 0 6%;
       height: 15rem;
-      /* padding-bottom: 2.7rem; */
+      padding-bottom: 2.7rem;
       & .__title {
         font-family: var(--heading-font);
         color: white;
@@ -95,7 +95,7 @@ export default {
         margin-bottom: .6rem;
       }
       & .__subtitle {
-        color: rgb(242, 242, 242);
+        color: white;
         font-size: 18px;
         font-weight: 200;
         line-height: 22px;
