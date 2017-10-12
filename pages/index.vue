@@ -145,21 +145,21 @@ export default {
           padding: 0;
           transform: translateX(-0%);
           & .card {
-            max-width: 130px;
-            min-width: 130px;
+            max-width: 135px;
+            min-width: 135px;
             cursor: pointer;
             list-style-type: none;
             margin-right: 1rem;
             -webkit-tap-highlight-color: rgba(255, 255, 45, 0);
             & .__card-img {
-              min-height: 90px;
+              min-height: 95px;
               background-image: url('../static/eventos/evento4.jpg');
               background-size: cover;
               border-radius: 4px;
             }
             & .__card-title {
               margin: .6rem 0 .3rem 0;
-              font-size: 14px;
+              font-size: 15px;
               font-weight: 600;
             }
             & .__card-subtitle {
