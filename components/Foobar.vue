@@ -34,7 +34,7 @@
         <nuxt-link to="/atracoes">
           <div class="foobar-box" @click="onFoobar1=true, onFoobar2=true, onFoobar3=true, onFoobar4=true, onFoobar5=false">
             <img src="../assets/img/foobar5.svg" class="__foobar5-icon" :class="{ coloricon: onFoobar4 }">
-            <h1 class="__foobar-title" :class="{ colortitle: onFoobar5 }">ATRAÇOES</h1>
+            <h1 class="__foobar-title" :class="{ colortitle: onFoobar5 }">ATRAÇÕES</h1>
           </div>
         </nuxt-link>
         
@@ -95,7 +95,7 @@ export default {
       & img {
         margin-bottom: 4px;
         filter: invert(20%);
-        width: 1.8rem;
+        width: 1.7rem;
         height: auto;
       }
       & .coloricon {
