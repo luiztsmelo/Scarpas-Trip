@@ -74,7 +74,7 @@ export default {
   transition: all ease .3s;
   
   & .heading {
-    height: 14rem;
+    height: 15rem;
     background: url('../assets/img/bgimg3.jpg') no-repeat fixed; 
     background-size: cover;
     & .welcome {
@@ -83,9 +83,9 @@ export default {
       text-align: center;
       justify-content: center;
       align-items: center;
-      background: rgba(0, 1, 5, .5);
+      background: rgba(0, 0, 0, .4);
       padding: 0 6%;
-      height: 14rem;
+      height: 15rem;
       /* padding-bottom: 2.7rem; */
       & .__title {
         font-family: var(--heading-font);
