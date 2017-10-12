@@ -86,11 +86,11 @@ export default {
       background: rgba(0, 1, 5, .5);
       padding: 0 6%;
       height: 15rem;
-      padding-bottom: 2.7rem;
+      /* padding-bottom: 2.7rem; */
       & .__title {
         font-family: var(--heading-font);
         color: white;
-        font-size: 35px;
+        font-size: 34px;
         font-weight: 400;
         margin-bottom: .6rem;
       }
