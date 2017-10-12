@@ -106,7 +106,7 @@ export default {
   & .home-body {
     display: flex;
     flex-flow: column;
-    padding: 1rem 6%;
+    padding: 2rem 6%;
     margin-bottom: 100rem;
     & .category-container {
       display: flex;
@@ -146,21 +146,21 @@ export default {
           padding: 0;
           transform: translateX(-0%);
           & .card {
-            max-width: 144px;
-            min-width: 144px;
+            max-width: 130px;
+            min-width: 130px;
             cursor: pointer;
             list-style-type: none;
             margin-right: 1rem;
             -webkit-tap-highlight-color: rgba(255, 255, 45, 0);
             & .__card-img {
-              min-height: 100px;
+              min-height: 90px;
               background-image: url('../static/eventos/evento2.jpg');
               background-size: cover;
               border-radius: 4px;
             }
             & .__card-title {
               margin: .6rem 0 .3rem 0;
-              font-size: 16px;
+              font-size: 15px;
               font-weight: 600;
             }
             & .__card-subtitle {
