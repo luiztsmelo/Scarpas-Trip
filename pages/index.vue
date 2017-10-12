@@ -83,7 +83,7 @@ export default {
       text-align: center;
       justify-content: center;
       align-items: center;
-      background: linear-gradient(rgba(4, 12, 31, .7) 42%, rgba(255, 255, 255, 1)); 
+      background: linear-gradient(rgba(4, 12, 31, .65) 42%, rgba(255, 255, 255, 1)); 
       padding: 0 6%;
       height: 15rem;
       padding-bottom: 2.7rem;
@@ -96,7 +96,7 @@ export default {
       }
       & .__subtitle {
         color: white;
-        font-size: 18px;
+        font-size: 17px;
         font-weight: 200;
         line-height: 22px;
       }
@@ -160,7 +160,7 @@ export default {
             }
             & .__card-title {
               margin: .6rem 0 .3rem 0;
-              font-size: 15px;
+              font-size: 14px;
               font-weight: 600;
             }
             & .__card-subtitle {
