@@ -24,7 +24,7 @@
         </div>
 
         <div class="carousel-container">
-          <v-touch @panleft="leftCarousel" @panright="rightCarousel" v-bind:pan-options="{ direction: 'horizontal', threshold: 100 }">
+          <!-- <v-touch @panleft="leftCarousel" @panright="rightCarousel" v-bind:pan-options="{ direction: 'horizontal' }"> -->
             <ul class="carousel-row" :style="'transform: translateX(' + positionCarousel + 'px)'">
               <li class="card" v-for="evento in eventosData">
 
@@ -34,7 +34,7 @@
 
               </li>
             </ul>
-          </v-touch>  
+          <!-- </v-touch>   -->
         </div>
         
 
@@ -166,7 +166,7 @@ export default {
             -webkit-tap-highlight-color: rgba(255, 255, 45, 0);
             & .__card-img {
               min-height: 95px;
-              background-image: url('../static/eventos/evento4.jpg');
+              background-image: url('../static/eventos/evento.jpg');
               background-size: cover;
               border-radius: 4px;
             }
