@@ -8,7 +8,7 @@
         <div class="__menu">
           <div class="bar"></div>
           <div class="bar"></div>
-          <div class="bar"></div>
+          <div class="bar" ></div>
         </div>
       </nav>
 
