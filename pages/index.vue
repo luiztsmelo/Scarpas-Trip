@@ -158,14 +158,14 @@ export default {
           padding: 0;
           transition: all ease .2s;
           & .card {
-            max-width: 135px;
-            min-width: 135px;
+            max-width: 145px;
+            min-width: 145px;
             cursor: pointer;
             list-style-type: none;
             margin-right: 1rem;
             -webkit-tap-highlight-color: rgba(255, 255, 45, 0);
             & .__card-img {
-              min-height: 95px;
+              min-height: 90px;
               background-image: url('../static/eventos/evento.jpg');
               background-size: cover;
               border-radius: 4px;
