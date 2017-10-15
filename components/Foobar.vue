@@ -86,7 +86,7 @@ export default {
       align-items: center;
       & .__foobar-title {
         font-size: 9px;
-        font-weight: 600;
+        font-weight: 500;
         color: #FC5658;
       }
       & .colortitle {
