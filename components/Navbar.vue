@@ -45,7 +45,7 @@ export default {
     align-items: center;
     & .__brand-name {
       font-family: var(--brand-font);
-      font-size: 28px;
+      font-size: 24px;
       line-height: 0;
       user-select: none;
       font-weight: 400;
