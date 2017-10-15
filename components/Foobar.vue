@@ -93,8 +93,8 @@ export default {
         color: var(--color01);
       }
       & img {
-        margin-bottom: 5px;
-        width: 1.6rem;
+        margin-bottom: 6px;
+        width: 1.5rem;
         height: auto;
       }
       & .coloricon {
