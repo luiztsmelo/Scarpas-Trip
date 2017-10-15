@@ -2,9 +2,9 @@
 
 :root {
   /* ******* FONTS ******* */
-  --brand-font: 'Pacifico';
-  --main-font: 'Montserrat', sans-serif;
-  --heading-font: 'Oswald', sans-serif;
+  --brand-font: 'Pacifico' !important;
+  --main-font: 'Work Sans', sans-serif !important;
+  --heading-font: 'Oswald', sans-serif !important;
   /* ******* COLOR PALETTE ******* */
   --color00: rgb(4, 12, 31);
   --color01: rgb(77, 77, 77);

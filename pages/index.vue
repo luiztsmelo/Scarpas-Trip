@@ -109,7 +109,7 @@ export default {
       & .__subtitle {
         color: white;
         font-size: 17px;
-        font-weight: 200;
+        font-weight: 300;
         line-height: 22px;
       }
     }
@@ -130,8 +130,8 @@ export default {
         align-items: center;
         padding: 0 7% 1.5rem 0;
         & .__title {
-          font-size: 23px;
-          font-weight: 600;
+          font-size: 24px;
+          font-weight: 700;
         }
         & .see-all {
           cursor: pointer;
@@ -162,13 +162,13 @@ export default {
             min-width: 145px;
             cursor: pointer;
             list-style-type: none;
-            margin-right: 1rem;
+            margin-right: .8rem;
             -webkit-tap-highlight-color: rgba(255, 255, 45, 0);
             & .__card-img {
               min-height: 90px;
               background-image: url('../static/eventos/evento.jpg');
               background-size: cover;
-              border-radius: 4px;
+              border-radius: 3px;
             }
             & .__card-title {
               margin: .6rem 0 .3rem 0;
