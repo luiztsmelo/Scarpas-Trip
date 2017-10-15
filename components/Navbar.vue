@@ -43,12 +43,11 @@ export default {
     justify-content: space-between;
     align-items: center;
     & .__brand-name {
-      font-family: var(--main-font);
-      font-size: 18px;
-      
+      font-family: var(--brand-font);
+      font-size: 20px;
       line-height: 0;
       user-select: none;
-      font-weight: 600;
+      font-weight: 400;
       color: white;
       transition: all ease .3s;
     }
