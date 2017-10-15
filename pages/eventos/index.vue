@@ -31,7 +31,7 @@ export default {
   margin-top: 3.5rem;
   display: flex;
   flex-flow: column;
-  padding: 6%;
+  padding: 7%;
   transition: all ease .3s;
 }
 </style>

@@ -96,7 +96,7 @@ export default {
       justify-content: center;
       align-items: center;
       background: linear-gradient(rgba(1, 5, 15, .6) 55%, rgba(255, 255, 255, 1)); 
-      padding: 0 6%;
+      padding: 0 7%;
       height: 15rem;
       padding-bottom: 2.7rem;
       & .__title {
@@ -118,7 +118,7 @@ export default {
   & .home-body {
     display: flex;
     flex-flow: column;
-    padding: 3rem 6%;
+    padding: 3rem 0 3rem 7%;
     margin-bottom: 100rem;
     & .category-container {
       display: flex;
@@ -128,7 +128,7 @@ export default {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding-bottom: 1.5rem;
+        padding: 0 7% 1.5rem 0;
         & .__title {
           font-size: 23px;
           font-weight: 600;

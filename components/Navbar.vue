@@ -34,7 +34,7 @@ export default {
   width:  100%;
   background: rgb(4, 12, 31);
   transition: all .3s ease;
-  padding: 0 6%;
+  padding: 0 7%;
   & .navbar-body {
     position: relative;
     top: 50%;
