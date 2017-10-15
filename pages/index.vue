@@ -1,12 +1,12 @@
 <template>
   <div class="home">
 
-    <div class="heading">
+    <!-- <div class="heading">
       <div class="welcome">
         <h1 class="__title">Visite Escarpas do Lago</h1>
         <h2 class="__subtitle">O maior balneário de água doce da América Latina</h2>
       </div>
-    </div>
+    </div> -->
 
     <div class="home-body">
 
