@@ -176,7 +176,7 @@ export default {
               font-weight: 600;
             }
             & .__card-subtitle {
-              font-size: 14px;
+              font-size: 15px;
               font-weight: 300;
             }
           }

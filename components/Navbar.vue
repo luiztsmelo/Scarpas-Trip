@@ -32,7 +32,7 @@ export default {
   z-index: 3;
   height: 3.5rem;
   width:  100%;
-  background: rgb(4, 12, 31);
+  background: white;
   transition: all .3s ease;
   padding: 0 7%;
   & .navbar-body {
@@ -48,7 +48,7 @@ export default {
       line-height: 0;
       user-select: none;
       font-weight: 400;
-      color: white;
+      color: var(--color01);
       transition: all ease .3s;
     }
     & .nav {
@@ -63,7 +63,7 @@ export default {
           transition: all .3s ease;
           width: 24px;
           height: 1px;
-          background-color: white;
+          background-color: var(--color01);
           margin: 6px 0;
         }
       }

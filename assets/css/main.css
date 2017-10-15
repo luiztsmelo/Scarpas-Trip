@@ -7,7 +7,7 @@
   --heading-font: 'Oswald', sans-serif !important;
   /* ******* COLOR PALETTE ******* */
   --color00: rgb(4, 12, 31);
-  --color01: rgb(77, 77, 77);
+  --color01: rgb(72, 72, 72);
   --color02: rgb(243, 110, 95);
   --color03: rgb(45, 204, 112);
   --color04: rgb(52, 0, 255);
@@ -55,14 +55,14 @@ a a:hover, a:visited, a:link, a:active
 .slide-right-leave-active 
 {
   opacity: 0;
-  transform: scale(1.2);
+  transform: scale(1.15);
 }
 
 .slide-left-leave-active,
 .slide-right-enter 
 {
   opacity: 0;
-  transform: scale(0.8);
+  transform: scale(0.85);
 }
 
 /* ******* TEXT HIGHLIGHT COLOR ******* */
