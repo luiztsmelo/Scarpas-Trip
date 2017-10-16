@@ -57,7 +57,7 @@ export default {
     return {
       positionCarousel: '',
       eventosData: [
-        {title: 'YDE WEEKEND - ALOK', subtitle: 'Venha curtir com a gente!', img: "../assets/img/alok.png"},
+        {title: 'YDE WEEKEND - ALOK', subtitle: 'Venha curtir com a gente!', img: "https://s3.amazonaws.com/sh2-img-eventos/site/20171002182709.png"},
         {title: 'Show Mr. Catra', subtitle: 'O papai chegou', img: "https://s3.amazonaws.com/sh2-img-eventos/site/20171002182729.png"},
         {title: 'Mc Catra no Kanto da Ilha', subtitle: 'Curtindo com a galera', img: "https://s3.amazonaws.com/sh2-img-eventos/site/20171002182657.png"}
       ]
