@@ -35,7 +35,7 @@ export default {
   background: white;
   transition: all .3s ease;
   padding: 0 7%;
-  box-shadow: 0px 1px 4px 0px rgba(0,0,0,0.07);
+  box-shadow: 0px 1px 4px 0px rgba(0,0,0,0.1);
   & .navbar-body {
     position: relative;
     top: 50%;
@@ -45,7 +45,7 @@ export default {
     align-items: center;
     & .__brand-name {
       font-family: var(--brand-font);
-      font-size: 26px;
+      font-size: 27px;
       line-height: 0;
       user-select: none;
       font-weight: 400;
