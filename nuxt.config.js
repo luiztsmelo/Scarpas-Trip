@@ -13,7 +13,7 @@ module.exports = {
       { name: 'viewport', content: 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' }
     ],
     link: [
-      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Work+Sans:200,300,400,500,600,700,800,900|Oswald|Satisfy' }
+      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Work+Sans:200,300,400,500,600,700,800,900|Oswald|Damion' }
     ]
   },
   /*
