@@ -172,7 +172,7 @@ export default {
             }
             & .__card-title {
               margin: .6rem 0 .3rem 0;
-              font-size: 15px;
+              font-size: 16px;
               font-weight: 600;
             }
             & .__card-subtitle {
