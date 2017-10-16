@@ -90,7 +90,7 @@ export default {
         color: #FC5658;
       }
       & .colortitle {
-        color: var(--color01);
+        color: rgb(51, 51, 51);
       }
       & img {
         margin-bottom: 6px;
@@ -98,7 +98,7 @@ export default {
         height: auto;
       }
       & .coloricon {
-        filter: grayscale(100%) invert(10%);
+        filter: grayscale(100%) invert(5%);
       }
       & .__foobar1-icon {
         transform: scale(1);
