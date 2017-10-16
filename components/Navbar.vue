@@ -49,7 +49,7 @@ export default {
       line-height: 0;
       user-select: none;
       font-weight: 400;
-      color: rgb(51, 51, 51);
+      color: rgb(42, 42, 42);
       transition: all ease .3s;
     }
     & .nav {
