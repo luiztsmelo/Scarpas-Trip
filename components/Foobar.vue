@@ -20,21 +20,21 @@
         <nuxt-link to="/passeios">
           <div class="foobar-box" @click="onFoobar1=true, onFoobar2=true, onFoobar3=false, onFoobar4=true, onFoobar5=true">
             <img src="../assets/img/foobar3.svg" class="__foobar3-icon" :class="{ coloricon: onFoobar3 }">
-            <h1 class="__foobar-title" :class="{ colortitle: onFoobar3 }">PASSEIOS</h1>
+            <h1 class="__foobar-title" :class="{ colortitle: onFoobar3 }">ATRAÇÕES</h1>
           </div>
         </nuxt-link>
 
         <nuxt-link to="/comidas">
           <div class="foobar-box" @click="onFoobar1=true, onFoobar2=true, onFoobar3=true, onFoobar4=false, onFoobar5=true">
             <img src="../assets/img/foobar4.svg" class="__foobar4-icon" :class="{ coloricon: onFoobar4 }">
-            <h1 class="__foobar-title" :class="{ colortitle: onFoobar4 }">COMIDAS</h1>
+            <h1 class="__foobar-title" :class="{ colortitle: onFoobar4 }">PASSEIOS</h1>
           </div>
         </nuxt-link>
 
         <nuxt-link to="/atracoes">
           <div class="foobar-box" @click="onFoobar1=true, onFoobar2=true, onFoobar3=true, onFoobar4=true, onFoobar5=false">
             <img src="../assets/img/foobar5.svg" class="__foobar5-icon" :class="{ coloricon: onFoobar5 }">
-            <h1 class="__foobar-title" :class="{ colortitle: onFoobar5 }">ATRAÇÕES</h1>
+            <h1 class="__foobar-title" :class="{ colortitle: onFoobar5 }">COMIDAS</h1>
           </div>
         </nuxt-link>
         
