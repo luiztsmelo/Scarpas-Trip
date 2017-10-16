@@ -79,6 +79,7 @@ export default {
     justify-content: space-around;
     align-items: center;
     & .foobar-box {
+      width: 3.5rem;
       display: flex;
       flex-flow: column;
       text-align: center;
