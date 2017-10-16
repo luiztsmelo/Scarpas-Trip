@@ -45,11 +45,11 @@ export default {
     align-items: center;
     & .__brand-name {
       font-family: var(--brand-font);
-      font-size: 27px;
+      font-size: 26px;
       line-height: 0;
       user-select: none;
       font-weight: 400;
-      color: var(--color01);
+      color: rgb(51, 51, 51);
       transition: all ease .3s;
     }
     & .nav {
