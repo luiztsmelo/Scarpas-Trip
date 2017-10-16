@@ -28,7 +28,7 @@
             <ul class="carousel-row" :style="'transform: translateX(' + positionCarousel + 'px)'">
               <li class="card" v-for="evento in eventosData">
 
-                <div class="__card-img"></div>
+                <img class="__card-img" :src="evento.img" alt="">
                 <h1 class="__card-title">{{ evento.title }}</h1>
                 <h2 class="__card-subtitle">{{ evento.subtitle }}</h2>
 
@@ -57,9 +57,9 @@ export default {
     return {
       positionCarousel: '',
       eventosData: [
-        {title: 'Bier Haus ‒ Sávio Calegari', subtitle: 'Venha curtir com a gente!', img: "'../static/eventos/evento.jpg'"},
-        {title: 'Show Mr. Catra', subtitle: 'O papai chegou', img: "'../static/eventos/evento2.jpg'"},
-        {title: 'Mc Catra no Kanto da Ilha', subtitle: 'Curtindo com a galera', img: "'../static/eventos/evento.jpg'"}
+        {title: 'YDE WEEKEND - ALOK', subtitle: 'Venha curtir com a gente!', img: "../assets/img/alok.png"},
+        {title: 'Show Mr. Catra', subtitle: 'O papai chegou', img: "https://s3.amazonaws.com/sh2-img-eventos/site/20171002182729.png"},
+        {title: 'Mc Catra no Kanto da Ilha', subtitle: 'Curtindo com a galera', img: "https://s3.amazonaws.com/sh2-img-eventos/site/20171002182657.png"}
       ]
     }
   },
@@ -165,9 +165,9 @@ export default {
             margin-right: .8rem;
             -webkit-tap-highlight-color: rgba(255, 255, 45, 0);
             & .__card-img {
+              width: 100%;
               min-height: 90px;
-              background-image: url('../static/eventos/evento.jpg');
-              background-size: cover;
+            
               border-radius: 3px;
             }
             & .__card-title {

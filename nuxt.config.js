@@ -3,7 +3,9 @@ module.exports = {
   /*
   ** Build configuration
   */
-  build: {},
+  build: {
+    vendor: ['firebase']
+  },
   /*
   ** Headers
   ** Common headers are already provided by @nuxtjs/pwa preset
@@ -20,6 +22,7 @@ module.exports = {
   ** Plugins
   */
   plugins: [
+    '~/plugins/firebase',
     '~plugins/vue-touch'
   ],
   /*
