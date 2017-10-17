@@ -58,7 +58,7 @@ export default {
       user-select: none;
       font-weight: 400;
       color: rgb(42, 42, 42);
-      transition: all ease .3s;
+      transition: all ease .25s;
     }
     & .__anunciar {
       padding: 1rem 0;

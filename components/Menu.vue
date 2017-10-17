@@ -41,7 +41,7 @@ export default {
     padding: 3rem 7%;
     & .__menu-item {
       padding-bottom: .5rem;
-      font-size: 24px;
+      font-size: 25px;
       font-weight: 600;
     }
   }
