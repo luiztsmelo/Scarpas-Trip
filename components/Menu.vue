@@ -30,6 +30,7 @@ export default {
   height: 100%;
   top: 3.5rem;
   background: white;
+  overflow: hidden;
   transition: all .3s ease;
   & .menu-body {
     display: flex;

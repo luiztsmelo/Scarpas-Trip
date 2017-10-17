@@ -3,14 +3,15 @@
     <div class="navbar-body">
 
       <nuxt-link to="/" class="__brand-name">Escarpas Trip</nuxt-link>
+      <nuxt-link to="/" class="__anunciar">ANUNCIAR</nuxt-link>
 
-      <nav class="nav">
+      <!-- <nav class="nav">
         <div class="__menu" @click="$store.commit('m_showMenu', !showMenu), $store.commit('m_menuIconAnime', !menuIconAnime)">
           <div class="bar" :class="{ menuIconAnime1: menuIconAnime }"></div>
           <div class="bar" :class="{ menuIconAnime2: menuIconAnime }"></div>
           <div class="bar" :class="{ menuIconAnime3: menuIconAnime }"></div>
         </div>
-      </nav>
+      </nav> -->
 
     </div>
   </div>
@@ -58,6 +59,10 @@ export default {
       font-weight: 400;
       color: rgb(42, 42, 42);
       transition: all ease .3s;
+    }
+    & .__anunciar {
+      font-size: 11px;
+      font-weight: 600;
     }
     & .nav {
       display: flex;
