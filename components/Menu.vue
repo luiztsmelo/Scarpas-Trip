@@ -3,7 +3,7 @@
     <div class="menu" v-show="showMenu">
 
       <div class="menu-body">
-        <nuxt-link to="/anunciar" class="__menu-item"><span @click="$store.commit('m_showMenu', false), $store.commit('m_menuIconAnime', false)">Anunciar</span></nuxt-link>
+        <nuxt-link to="/anunciar" class="__menu-item"><span @click="$store.commit('m_showMenu', false), $store.commit('m_menuIconAnime', false), $store.commit('m_showFoobar', false)">Anunciar</span></nuxt-link>
       </div>
       
     </div>

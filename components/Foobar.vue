@@ -1,5 +1,5 @@
 <template>
-
+  <transition name="foobar-animation">  
     <div class="foobar" v-show="showFoobar">
       <div class="foobar-body">
         
@@ -41,7 +41,7 @@
 
       </div>
     </div>
-
+  </transition>
 </template>
 
 <script>

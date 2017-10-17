@@ -2,7 +2,7 @@
   <div class="navbar">
     <div class="navbar-body">
 
-      <nuxt-link to="/" class="__brand-name"><span @click="$store.commit('m_showMenu', false), $store.commit('m_menuIconAnime', false)">Escarpas Trip</span></nuxt-link>
+      <nuxt-link to="/" class="__brand-name"><span @click="$store.commit('m_showMenu', false), $store.commit('m_menuIconAnime', false), $store.commit('m_showFoobar', true)">Escarpas Trip</span></nuxt-link>
       
 
       <nav class="nav">
