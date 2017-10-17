@@ -5,8 +5,26 @@
 
         <div @click="$store.commit('m_showMenu', false), $store.commit('m_menuIconAnime', false), $store.commit('m_showFoobar', false)">
           <nuxt-link to="/anunciar" class="menu-item">
-            <img src="../assets/img/anunciar.svg" alt="" class="__item-img">
-            <span class="__item-text" >Anunciar</span>
+            <img src="../assets/img/estadia.svg" alt="" class="__item-img">
+            <span class="__item-text" >Anunciar Estadia</span>
+          </nuxt-link>
+        </div>
+        <div @click="$store.commit('m_showMenu', false), $store.commit('m_menuIconAnime', false), $store.commit('m_showFoobar', false)">
+          <nuxt-link to="/anunciar" class="menu-item">
+            <img src="../assets/img/eventos.svg" alt="" class="__item-img">
+            <span class="__item-text" >Anunciar Evento</span>
+          </nuxt-link>
+        </div>
+        <div @click="$store.commit('m_showMenu', false), $store.commit('m_menuIconAnime', false), $store.commit('m_showFoobar', false)">
+          <nuxt-link to="/anunciar" class="menu-item">
+            <img src="../assets/img/passeios.svg" alt="" class="__item-img">
+            <span class="__item-text" >Anunciar Passeio</span>
+          </nuxt-link>
+        </div>
+        <div @click="$store.commit('m_showMenu', false), $store.commit('m_menuIconAnime', false), $store.commit('m_showFoobar', false)">
+          <nuxt-link to="/anunciar" class="menu-item">
+            <img src="../assets/img/comidas.svg" alt="" class="__item-img">
+            <span class="__item-text" >Anunciar Restaurante</span>
           </nuxt-link>
         </div>
 
@@ -40,20 +58,21 @@ export default {
   & .menu-body {
     display: flex;
     flex-flow: column;
-    align-items: center;
     text-align: center;
     padding: 3rem 7%;
     & .menu-item {
       display: flex;
       align-items: center;
+      padding-bottom: 1.4rem;
       & .__item-img {
-        width: 2.2rem;
+        width: 1.7rem;
         height: auto;
         margin-right: .8rem;
+        filter: grayscale(100%) brightness(70%);
       }
       & .__item-text {
-        font-size: 22px;
-        font-weight: 400;
+        font-size: 18px;
+        font-weight: 300;
       }
     }
   }
