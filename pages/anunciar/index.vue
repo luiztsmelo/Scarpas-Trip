@@ -65,7 +65,7 @@ export default {
       display: flex;
       justify-content: flex-start;
       align-items: center;
-      height: 2.9rem;
+      height: 3rem;
      
       & .__anuncio-img {
         width: 1.8rem;
