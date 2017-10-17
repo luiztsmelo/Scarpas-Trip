@@ -73,7 +73,7 @@ export default {
         margin-right: .8rem;
       }
       & .__anuncio-text {
-        font-size: 20px;
+        font-size: 18px;
         font-weight: 400;
       }
     }
