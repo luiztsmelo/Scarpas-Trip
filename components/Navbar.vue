@@ -3,7 +3,7 @@
     <div class="navbar-body">
 
       <nuxt-link to="/" class="__brand-name">Escarpas Trip</nuxt-link>
-      <nuxt-link to="/" class="__anunciar">ANUNCIAR</nuxt-link>
+      <nuxt-link to="/anunciar" class="__anunciar">ANUNCIAR</nuxt-link>
 
       <!-- <nav class="nav">
         <div class="__menu" @click="$store.commit('m_showMenu', !showMenu), $store.commit('m_menuIconAnime', !menuIconAnime)">
@@ -61,6 +61,7 @@ export default {
       transition: all ease .3s;
     }
     & .__anunciar {
+      padding: 1rem 0;
       font-size: 11px;
       font-weight: 600;
     }
