@@ -5,10 +5,10 @@
       <nuxt-link to="/" class="__brand-name">Escarpas Trip</nuxt-link>
 
       <nav class="nav">
-        <div class="__menu">
-          <div class="bar"></div>
-          <div class="bar"></div>
-          <div class="bar"></div>
+        <div class="__menu" @click="$store.commit('m_showMenu', !showMenu), $store.commit('m_menuIconAnime', !menuIconAnime)">
+          <div class="bar" :class="{ menuIconAnime1: menuIconAnime }"></div>
+          <div class="bar" :class="{ menuIconAnime2: menuIconAnime }"></div>
+          <div class="bar" :class="{ menuIconAnime3: menuIconAnime }"></div>
         </div>
       </nav>
 
@@ -18,7 +18,14 @@
 
 <script>
 export default {
- 
+  computed: {
+    showMenu () {
+      return this.$store.getters.showMenu
+    },
+    menuIconAnime () {
+      return this.$store.getters.menuIconAnime
+    }
+  }
 }
 </script>
 
@@ -29,7 +36,7 @@ export default {
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 3;
+  z-index: 5;
   height: 3.5rem;
   width:  100%;
   background: white;
@@ -56,7 +63,6 @@ export default {
       display: flex;
       align-items: center;
       & .__menu {
-        margin: .7rem 0 .7rem .7rem; /* Aumentar área de contato ao pressionar */
         display: inline-block;
         cursor: pointer;
         -webkit-tap-highlight-color: rgba(255, 255, 45, 0);
@@ -65,7 +71,7 @@ export default {
           width: 24px;
           height: 1px;
           background-color: var(--color01);
-          margin: 6px 0;
+          margin: 5px 0;
         }
       }
     }
@@ -75,7 +81,7 @@ export default {
 
 /* TRANSITIONS */
 
-/* .fadeBrandSidebar {
+/* .fadeBrandMenu {
   transform: translateY(-3.1rem) scale(.5);
 } */
 
