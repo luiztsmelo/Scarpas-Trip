@@ -29,8 +29,8 @@
               <li class="card" v-for="evento in eventosData">
                 
                 <progressive-img class="__card-img" :src="evento.img" :placeholder="evento.img" alt="" no-ratio />
-                <h1 class="__card-title">{{ evento.title }}</h1>
-                <h2 class="__card-subtitle">{{ evento.subtitle | snippet }}</h2>
+                <h1 class="__card-title">{{ evento.title | snippetTitle }}</h1>
+                <h2 class="__card-subtitle">{{ evento.subtitle | snippetSubtitle }}</h2>
 
               </li>
             </ul>
@@ -74,8 +74,19 @@ export default {
     }
   },
   filters: {
-    snippet (value) {
-      return value.slice(0, 31) + '...'
+    snippetTitle (value) {
+      if (value.length > 27) {
+        return value.slice(0, 27) + '...'
+      } else {
+        return value.slice(0)
+      }
+    },
+    snippetSubtitle (value) {
+      if (value.length > 31) {
+        return value.slice(0, 31) + '...'
+      } else {
+        return value.slice(0)
+      }
     }
   }
 }
