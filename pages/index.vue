@@ -84,7 +84,7 @@ export default {
   display: flex;
   flex-flow: column;
   justify-content: space-between;
-  transition: all ease .25s;
+  transition: all .222s ease;
   /* & .heading {
     height: 15rem;
     background: url('../assets/img/bgimg3.jpg') no-repeat fixed; 

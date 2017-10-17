@@ -41,7 +41,7 @@ export default {
   height: 3.5rem;
   width:  100%;
   background: white;
-  transition: all .3s ease;
+  transition: all .222s ease;
   padding: 0 7%;
   box-shadow: 0px 1px 1px 0px rgba(0,0,0,0.15);
   & .navbar-body {
@@ -58,7 +58,7 @@ export default {
       user-select: none;
       font-weight: 400;
       color: rgb(42, 42, 42);
-      transition: all ease .25s;
+      transition: all .222s ease;
     }
     & .__anunciar {
       padding: 1rem 0;

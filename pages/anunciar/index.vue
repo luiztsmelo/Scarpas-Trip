@@ -55,7 +55,7 @@ export default {
   margin-top: 3.5rem;
   display: flex;
   flex-flow: column;
-  transition: all ease .25s;
+  transition: all .222s ease;
   & .__title {
     padding: 3rem 7%;
   }
