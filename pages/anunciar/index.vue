@@ -65,7 +65,7 @@ export default {
       display: flex;
       justify-content: flex-start;
       align-items: center;
-      height: 2.8rem;
+      height: 2.9rem;
      
       & .__anuncio-img {
         width: 1.8rem;
@@ -73,7 +73,7 @@ export default {
         margin-right: .8rem;
       }
       & .__anuncio-text {
-        font-size: 18px;
+        font-size: 17px;
         font-weight: 400;
       }
     }
