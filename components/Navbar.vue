@@ -2,16 +2,16 @@
   <div class="navbar">
     <div class="navbar-body">
 
-      <nuxt-link to="/" class="__brand-name">Escarpas Trip</nuxt-link>
-      <nuxt-link to="/anunciar" class="__anunciar">ANUNCIAR</nuxt-link>
+      <nuxt-link to="/" class="__brand-name"><span @click="$store.commit('m_showMenu', false), $store.commit('m_menuIconAnime', false)">Escarpas Trip</span></nuxt-link>
+      
 
-      <!-- <nav class="nav">
+      <nav class="nav">
         <div class="__menu" @click="$store.commit('m_showMenu', !showMenu), $store.commit('m_menuIconAnime', !menuIconAnime)">
           <div class="bar" :class="{ menuIconAnime1: menuIconAnime }"></div>
           <div class="bar" :class="{ menuIconAnime2: menuIconAnime }"></div>
           <div class="bar" :class="{ menuIconAnime3: menuIconAnime }"></div>
         </div>
-      </nav> -->
+      </nav>
 
     </div>
   </div>

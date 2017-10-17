@@ -3,7 +3,7 @@
     <div class="menu" v-show="showMenu">
 
       <div class="menu-body">
-        <h1 class="__title">Anuncie</h1>
+        <nuxt-link to="/anunciar" class="__menu-item"><span @click="$store.commit('m_showMenu', false), $store.commit('m_menuIconAnime', false)">Anunciar</span></nuxt-link>
       </div>
       
     </div>
@@ -39,7 +39,7 @@ export default {
     align-items: center;
     text-align: center;
     padding: 3rem 7%;
-    & .__title {
+    & .__menu-item {
       padding-bottom: .5rem;
       font-size: 24px;
       font-weight: 600;
@@ -50,6 +50,6 @@ export default {
 /* TRANSITIONS */
 .menu-animation-enter,
 .menu-animation-leave-active {
-  transform: translateY(-100%);
+  transform: translateY(100%);
 }
 </style>
