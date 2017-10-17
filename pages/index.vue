@@ -27,8 +27,8 @@
           <!-- <v-touch @panleft="leftCarousel" @panright="rightCarousel" v-bind:pan-options="{ direction: 'horizontal' }"> -->
             <ul class="carousel-row" :style="'transform: translateX(' + positionCarousel + 'px)'">
               <li class="card" v-for="evento in eventosData">
-
-                <img class="__card-img" :src="evento.img" alt="">
+                
+                <progressive-img class="__card-img" :src="evento.img" :placeholder="evento.img" alt="" no-ratio />
                 <h1 class="__card-title">{{ evento.title }}</h1>
                 <h2 class="__card-subtitle">{{ evento.subtitle }}</h2>
 
@@ -85,7 +85,7 @@ export default {
   flex-flow: column;
   justify-content: space-between;
   transition: all ease .3s;
-  & .heading {
+  /* & .heading {
     height: 15rem;
     background: url('../assets/img/bgimg3.jpg') no-repeat fixed; 
     background-size: cover;
@@ -113,7 +113,7 @@ export default {
         line-height: 22px;
       }
     }
-  }
+  } */
 
   & .home-body {
     display: flex;

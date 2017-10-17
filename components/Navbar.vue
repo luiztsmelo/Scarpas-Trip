@@ -76,14 +76,10 @@ export default {
       }
     }
   }
-  
 }
 
 /* TRANSITIONS */
 
-/* .fadeBrandMenu {
-  transform: translateY(-3.1rem) scale(.5);
-} */
 
 .menuIconAnime1 {
   transform: rotate(-45deg) translate(-4px, 4px);
