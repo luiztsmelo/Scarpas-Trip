@@ -40,13 +40,11 @@ export default {
   & .menu-body {
     display: flex;
     flex-flow: column;
-    justify-content: center;
     align-items: center;
     text-align: center;
     padding: 3rem 7%;
     & .menu-item {
       display: flex;
-      justify-content: flex-start;
       align-items: center;
       & .__item-img {
         width: 2.2rem;
@@ -54,7 +52,7 @@ export default {
         margin-right: .8rem;
       }
       & .__item-text {
-        font-size: 25px;
+        font-size: 22px;
         font-weight: 400;
       }
     }

@@ -30,7 +30,7 @@
                 
                 <progressive-img class="__card-img" :src="evento.img" :placeholder="evento.img" alt="" no-ratio />
                 <h1 class="__card-title">{{ evento.title }}</h1>
-                <h2 class="__card-subtitle">{{ evento.subtitle }}</h2>
+                <h2 class="__card-subtitle">{{ evento.subtitle | snippet }}</h2>
 
               </li>
             </ul>
@@ -57,8 +57,8 @@ export default {
     return {
       positionCarousel: '',
       eventosData: [
-        {title: 'YDE WEEKEND - ALOK', subtitle: 'Venha curtir com a gente!', img: "https://s3.amazonaws.com/sh2-img-eventos/site/20171002182709.png"},
-        {title: 'Show Mr. Catra', subtitle: 'O papai chegou', img: "https://s3.amazonaws.com/sh2-img-eventos/site/20171002182729.png"},
+        {title: 'YDE WEEKEND - ALOK', subtitle: 'Iremos invadir Escarpas do Lago - MG', img: "https://s3.amazonaws.com/sh2-img-eventos/site/20171002182709.png"},
+        {title: 'Show Mr. Catra', subtitle: 'O papai chegou', img: "https://rd1.com.br/wp-content/uploads/2016/01/19_56_29_654_file.jpeg"},
         {title: 'Mc Catra no Kanto da Ilha', subtitle: 'Curtindo com a galera', img: "https://s3.amazonaws.com/sh2-img-eventos/site/20171002182657.png"}
       ]
     }
@@ -71,6 +71,11 @@ export default {
     rightCarousel (e) {
       this.positionCarousel = e.deltaX 
       console.log(e.deltaX + ' - ' + this.positionCarousel)
+    }
+  },
+  filters: {
+    snippet (value) {
+      return value.slice(0, 31) + '...'
     }
   }
 }
