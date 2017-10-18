@@ -51,10 +51,11 @@ export default {
   & .pricing-box {
     display: flex;
     flex-flow: column;
-    padding: 2rem 7% 0 7%;
+    padding: 3rem 7% 0 7%;
     & .__pricing-box-title {
-      font-size: 22px;
+      font-size: 21px;
       font-weight: 400;
+      padding-bottom: .5rem;
     }
     & .plano-row {
       display: flex;
