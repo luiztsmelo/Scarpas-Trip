@@ -24,7 +24,7 @@
         </div>
 
         <div class="carousel-container">
-          <!-- <v-touch @panleft="leftCarousel" @panright="rightCarousel" v-bind:pan-options="{ direction: 'horizontal' }"> -->
+          <v-touch @panleft="leftCarousel" @panright="rightCarousel" v-bind:pan-options="{ direction: 'horizontal' }">
             <ul class="carousel-row" :style="'transform: translateX(' + positionCarousel + 'px)'">
               <li class="card" v-for="evento in eventosData">
                 
@@ -34,7 +34,7 @@
 
               </li>
             </ul>
-          <!-- </v-touch>   -->
+          </v-touch>  
         </div>
         
 
