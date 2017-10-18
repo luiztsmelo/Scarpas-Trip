@@ -1,6 +1,6 @@
 <template>
   <div class="anunciar-restaurante">
-    <h1 class="__title">Anunciar Restaurante</h1>
+    <h1 class="__title">“A melhor maneira de encontrar o seu cliente é ser encontrado por ele.”– Conrado Adolpho</h1>
 
   </div>
 </template>
