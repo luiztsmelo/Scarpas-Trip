@@ -1,35 +1,39 @@
 <template>
   <div class="anunciar-evento">
 
-    <!-- PLANO CONTAINER -->
-    
-      <div class="plano-evento" v-show="!planoEventoSelecionado">
-        
-        <h1 class="__title">Divulgação: a chave para o sucesso do seu evento!</h1>
+    <!-- PLANO EVENTO -->
+    <div class="plano-evento" v-show="!planoEventoSelecionado">
+      
+      <h1 class="__title">Divulgação: a chave para o sucesso do seu evento!</h1>
 
-        <div class="pricing-box">
-          <h2 class="__pricing-box-title">Selecione um plano:</h2>
+      <div class="pricing-box">
+        <h2 class="__pricing-box-title">Selecione um plano:</h2>
 
-          <div class="plano-row casual" @click="$store.commit('m_planoEventoSelecionado', true)">
-            <span class="__plano-valor">R$25</span>
-            <span class="__plano-title">CASUAL</span>
-          </div>
-
-          <div class="plano-row profissional" @click="$store.commit('m_planoEventoSelecionado', true)">
-            <span class="__plano-valor">R$100</span>
-            <span class="__plano-title">PROFISSIONAL</span>
-          </div>
-
+        <div class="plano-row casual" @click="$store.commit('m_planoEventoSelecionado', true), $store.commit('m_isPlanoEventoCasual', true)">
+          <span class="__plano-valor">R$25</span>
+          <span class="__plano-title">CASUAL</span>
         </div>
-      </div>
-    <!-- PLANO CONTAINER -->
 
+        <div class="plano-row profissional" @click="$store.commit('m_planoEventoSelecionado', true), $store.commit('m_isPlanoEventoPro', true)">
+          <span class="__plano-valor">R$100</span>
+          <span class="__plano-title">PROFISSIONAL</span>
+        </div>
+
+      </div>
+    </div><!-- PLANO CONTAINER -->
+
+    <!-- CADASTRO EVENTO -->
     <transition name="plano-animation">
       <form class="cadastro-evento" v-show="planoEventoSelecionado">
 
         <h1 class="__title">Cadastro de Evento</h1> 
 
         <h1 class="__form-title">Informações básicas</h1>
+
+        <div class="item-form">
+          <label>Plano</label>
+          <span class="__plano">{{ plano }}</span>
+        </div>  
 
         <div class="item-form">
           <label>Nome do evento</label>
@@ -43,9 +47,8 @@
 
         <h1 class="__form-title">Pagamento</h1>
       
-
       </form>
-    </transition>
+    </transition><!-- CADASTRO EVENTO -->
 
   </div>
 </template>
@@ -60,7 +63,14 @@ export default {
   transition: 'slide-left',
   computed: {
     planoEventoSelecionado () {
-      return this.$store.getters.planoEventoSelecionado
+      return this.$store.state.planoEventoSelecionado
+    },
+    plano () {
+      if (this.$store.state.isPlanoEventoCasual === true) {
+        return 'Casual'
+      } else {
+        return 'Profissional'
+      }
     }
   },
 }
@@ -127,6 +137,13 @@ export default {
       font-weight: 600;
       padding-top: 3rem;
     }
+    & .__plano {
+      font-size: 19px;
+      font-weight: 300;
+      padding: .5rem 0 .8em 0;
+      color: rgb(92, 92, 92);
+      border-bottom: 1px solid rgb(210, 210, 210);
+    }
     & .__form-title {
       font-size: 23px;
       font-weight: 600;
@@ -139,7 +156,6 @@ export default {
       & label {
         font-size: 15px;
         font-weight: 500;
-      
       }
       & input {
         font-size: 19px;

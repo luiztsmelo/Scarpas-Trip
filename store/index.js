@@ -2,29 +2,28 @@ import Vuex from 'vuex'
 /* import * as firebase from 'firebase' */
 
 const store = () => new Vuex.Store({
-  /* ******* STATE ******* */
+  /*
+  ******************** STATE ********************
+  */
   state: {
     showMenu: false,
     showFoobar: true,
     menuIconAnime: false,
-    planoEventoSelecionado: false
+    /*
+    ** Anúncios
+    */
+    planoEventoSelecionado: false,
+    isPlanoEventoCasual: false,
+    isPlanoEventoPro: false
   },
-  /* ******* GETTERS ******* */
+  /*
+  ******************** GETTERS ********************
+  */
   getters: {
-    showMenu (state) {
-      return state.showMenu
-    },
-    showFoobar (state) {
-      return state.showFoobar
-    },
-    menuIconAnime (state) {
-      return state.menuIconAnime
-    },
-    planoEventoSelecionado (state) {
-      return state.planoEventoSelecionado
-    }
   },
-  /* ******* MUTATIONS ******* */
+  /*
+  ******************** MUTATIONS ********************
+  */
   mutations: {
     m_showMenu (state, payload) {
       state.showMenu = payload
@@ -35,11 +34,22 @@ const store = () => new Vuex.Store({
     m_menuIconAnime (state, payload) {
       state.menuIconAnime = payload
     },
+    /*
+    ** Anúncios
+    */
     m_planoEventoSelecionado (state, payload) {
       state.planoEventoSelecionado = payload
+    },
+    m_isPlanoEventoCasual (state, payload) {
+      state.isPlanoEventoCasual = payload
+    },
+    m_isPlanoEventoPro (state, payload) {
+      state.isPlanoEventoPro = payload
     }
   },
-  /* ******* ACTIONS ******* */
+  /*
+  ******************** ACTIONS ********************
+  */
   actions: {
   }
 })

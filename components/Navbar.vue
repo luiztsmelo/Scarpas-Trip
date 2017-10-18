@@ -21,10 +21,10 @@
 export default {
   computed: {
     showMenu () {
-      return this.$store.getters.showMenu
+      return this.$store.state.showMenu
     },
     menuIconAnime () {
-      return this.$store.getters.menuIconAnime
+      return this.$store.state.menuIconAnime
     }
   }
 }

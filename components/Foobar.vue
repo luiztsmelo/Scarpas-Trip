@@ -57,7 +57,7 @@ export default {
   },
   computed: {
     showFoobar () {
-      return this.$store.getters.showFoobar
+      return this.$store.state.showFoobar
     }
   }
 }
