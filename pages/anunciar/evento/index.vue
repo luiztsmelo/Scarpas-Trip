@@ -133,35 +133,35 @@ export default {
     height: calc(100vh - 3.5rem);
     padding: 0 7%;
     & .__title {
-      font-size: 28px;
+      font-size: 30px;
       font-weight: 600;
       padding-top: 3rem;
     }
     & .__plano {
       font-size: 19px;
       font-weight: 300;
-      padding: .5rem 0 .8em 0;
+      padding: .5rem 0 .6em 0;
       color: rgb(92, 92, 92);
       border-bottom: 1px solid rgb(210, 210, 210);
     }
     & .__form-title {
-      font-size: 23px;
+      font-size: 24px;
       font-weight: 600;
       padding-top: 3rem;
     }
     & .item-form {
       display: flex;
       flex-flow: column;
-      margin: 1.2rem 0;
+      margin: 1.3rem 0;
       & label {
-        font-size: 15px;
+        font-size: 16px;
         font-weight: 500;
       }
       & input {
         font-size: 19px;
         font-weight: 300;
         color: rgb(92, 92, 92);
-        padding: .5rem 0 .8em 0;
+        padding: .5rem 0 .6em 0;
         border: none;
         border-bottom: 1px solid rgb(210, 210, 210);
         outline: none;
