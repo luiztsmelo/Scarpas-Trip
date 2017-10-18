@@ -37,12 +37,12 @@
 
         <div class="item-form">
           <label>Nome do evento</label>
-          <input type="text" autofocus>
+          <input type="text" required>
         </div>  
 
         <div class="item-form">
           <label>Descrição básica</label>
-          <input type="text">
+          <input type="text" required>
         </div>  
 
         <h1 class="__form-title">Pagamento</h1>
