@@ -6,7 +6,8 @@ const store = () => new Vuex.Store({
   state: {
     showMenu: false,
     showFoobar: true,
-    menuIconAnime: false
+    menuIconAnime: false,
+    planoEventoSelecionado: false
   },
   /* ******* GETTERS ******* */
   getters: {
@@ -18,6 +19,9 @@ const store = () => new Vuex.Store({
     },
     menuIconAnime (state) {
       return state.menuIconAnime
+    },
+    planoEventoSelecionado (state) {
+      return state.planoEventoSelecionado
     }
   },
   /* ******* MUTATIONS ******* */
@@ -30,6 +34,9 @@ const store = () => new Vuex.Store({
     },
     m_menuIconAnime (state, payload) {
       state.menuIconAnime = payload
+    },
+    m_planoEventoSelecionado (state, payload) {
+      state.planoEventoSelecionado = payload
     }
   },
   /* ******* ACTIONS ******* */
