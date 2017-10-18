@@ -37,7 +37,7 @@
 
         <div class="item-form">
           <label>Nome do evento</label>
-          <input type="text">
+          <input type="text" autofocus>
         </div>  
 
         <div class="item-form">
