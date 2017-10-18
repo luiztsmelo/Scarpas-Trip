@@ -119,7 +119,7 @@ export default {
     height: calc(100vh - 3.5rem);
     padding: 0 7%;
     & .__form-title {
-      font-size: 22px;
+      font-size: 23px;
       font-weight: 600;
       padding-top: 3rem;
     }
@@ -128,10 +128,14 @@ export default {
       flex-flow: column;
       margin: 1.2rem 0;
       & label {
-        font-size: 14px;
+        font-size: 15px;
         font-weight: 500;
+      
       }
       & input {
+        font-size: 19px;
+        font-weight: 300;
+        color: rgb(92, 92, 92);
         padding: .5rem 0 .8em 0;
         border: none;
         border-bottom: 1px solid rgb(210, 210, 210);
