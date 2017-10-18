@@ -60,7 +60,7 @@ export default {
       title: 'Anunciar Evento em Escarpas do Lago ‒ Escarpas Trip'
     }
   },
-  transition: 'slide-down',
+  transition: 'opacity',
   computed: {
     planoEventoSelecionado () {
       return this.$store.state.planoEventoSelecionado
