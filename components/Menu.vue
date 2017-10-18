@@ -41,6 +41,8 @@
           </div>
         </div>
 
+        <span class="tmstudio">Desenvolvido por TMstudio</span>
+
       </div> 
     </div>
   </transition>
@@ -73,6 +75,7 @@ export default {
     flex-flow: column;
     text-align: center;
     padding: 3rem 7%;
+    height: 100%;
     & .menu-item {
       display: flex;
       align-items: center;
@@ -100,6 +103,15 @@ export default {
     & .info-box {
       padding: .8rem 0;
       border-bottom: 1px solid rgb(200, 200, 200);
+    }
+    & .tmstudio {
+      position: absolute;
+      bottom: 4.2rem;
+      left: 0;
+      right: 0;
+      margin: 0 auto;
+      font-size: 14px;
+      font-weight: 300;
     }
   }
 }
