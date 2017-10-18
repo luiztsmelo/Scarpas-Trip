@@ -60,9 +60,9 @@ export default {
     & .plano-row {
       display: flex;
       align-items: center;
-      height: 3rem;
+      height: 3.5rem;
       margin: .5rem 0;
-        & .__plano-valor {
+      & .__plano-valor {
         font-size: 25px;
         font-weight: 300;
         padding: 0 .7rem;
@@ -73,11 +73,11 @@ export default {
       }
     }
     & .casual {
-      background: rgba(255,255,255, .98);
+      background: white;
       color: var(--color01);
     }
     & .profissional {
-      background: rgba(0,0,0, .9);
+      background: black;
     }
   }
 }
