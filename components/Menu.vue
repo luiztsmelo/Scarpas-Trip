@@ -3,29 +3,42 @@
     <div class="menu" v-show="showMenu">
       <div class="menu-body">
 
-        <div @click="$store.commit('m_showMenu', false), $store.commit('m_menuIconAnime', false), $store.commit('m_showFoobar', false)">
-          <nuxt-link to="/anunciar" class="menu-item">
-            <img src="../assets/img/estadia.svg" alt="" class="__item-img">
-            <span class="__item-text" >Anunciar Estadia</span>
-          </nuxt-link>
+        <div class="anuncio-box">
+          
+          <div @click="$store.commit('m_showMenu', false), $store.commit('m_menuIconAnime', false), $store.commit('m_showFoobar', false)">
+            <nuxt-link to="/anunciar" class="menu-item">
+              <img src="../assets/img/estadia.svg" alt="" class="__item-img-color">
+              <span class="__item-text" >Anunciar Estadia</span>
+            </nuxt-link>
+          </div>
+          <div @click="$store.commit('m_showMenu', false), $store.commit('m_menuIconAnime', false), $store.commit('m_showFoobar', false)">
+            <nuxt-link to="/anunciar" class="menu-item">
+              <img src="../assets/img/eventos.svg" alt="" class="__item-img-color">
+              <span class="__item-text" >Anunciar Evento</span>
+            </nuxt-link>
+          </div>
+          <div @click="$store.commit('m_showMenu', false), $store.commit('m_menuIconAnime', false), $store.commit('m_showFoobar', false)">
+            <nuxt-link to="/anunciar" class="menu-item">
+              <img src="../assets/img/passeios.svg" alt="" class="__item-img-color">
+              <span class="__item-text" >Anunciar Passeio</span>
+            </nuxt-link>
+          </div>
+          <div @click="$store.commit('m_showMenu', false), $store.commit('m_menuIconAnime', false), $store.commit('m_showFoobar', false)">
+            <nuxt-link to="/anunciar" class="menu-item">
+              <img src="../assets/img/comidas.svg" alt="" class="__item-img-color">
+              <span class="__item-text" >Anunciar Restaurante</span>
+            </nuxt-link>
+          </div>
+
         </div>
-        <div @click="$store.commit('m_showMenu', false), $store.commit('m_menuIconAnime', false), $store.commit('m_showFoobar', false)">
-          <nuxt-link to="/anunciar" class="menu-item">
-            <img src="../assets/img/eventos.svg" alt="" class="__item-img">
-            <span class="__item-text" >Anunciar Evento</span>
-          </nuxt-link>
-        </div>
-        <div @click="$store.commit('m_showMenu', false), $store.commit('m_menuIconAnime', false), $store.commit('m_showFoobar', false)">
-          <nuxt-link to="/anunciar" class="menu-item">
-            <img src="../assets/img/passeios.svg" alt="" class="__item-img">
-            <span class="__item-text" >Anunciar Passeio</span>
-          </nuxt-link>
-        </div>
-        <div @click="$store.commit('m_showMenu', false), $store.commit('m_menuIconAnime', false), $store.commit('m_showFoobar', false)">
-          <nuxt-link to="/anunciar" class="menu-item">
-            <img src="../assets/img/comidas.svg" alt="" class="__item-img">
-            <span class="__item-text" >Anunciar Restaurante</span>
-          </nuxt-link>
+
+        <div class="info-box">
+          <div @click="$store.commit('m_showMenu', false), $store.commit('m_menuIconAnime', false), $store.commit('m_showFoobar', false)">
+            <nuxt-link to="/anunciar" class="menu-item">
+              <img src="../assets/img/contato.svg" alt="" class="__item-img">
+              <span class="__item-text" >Contato</span>
+            </nuxt-link>
+          </div>
         </div>
 
       </div> 
@@ -63,17 +76,30 @@ export default {
     & .menu-item {
       display: flex;
       align-items: center;
-      padding-bottom: 1.4rem;
+      padding: .8rem 0;
+      & .__item-img-color {
+        width: 1.7rem;
+        height: auto;
+        margin-right: 1rem;
+        filter: grayscale(100%) brightness(60%);
+      }
       & .__item-img {
         width: 1.7rem;
         height: auto;
-        margin-right: .8rem;
-        filter: grayscale(100%) brightness(70%);
+        margin-right: 1rem;
       }
       & .__item-text {
         font-size: 18px;
         font-weight: 300;
       }
+    }
+    & .anuncio-box {
+      padding-bottom: .8rem;
+      border-bottom: 1px solid rgb(200, 200, 200);
+    }
+    & .info-box {
+      padding: .8rem 0;
+      border-bottom: 1px solid rgb(200, 200, 200);
     }
   }
 }
