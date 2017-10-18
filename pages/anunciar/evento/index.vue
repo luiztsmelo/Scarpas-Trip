@@ -175,6 +175,6 @@ export default {
 .plano-animation-enter,
 .plano-animation-leave-active {
   opacity: 0;
-  transform: translateX(60px);
+  transform: translateY(100%);
 }
 </style>
