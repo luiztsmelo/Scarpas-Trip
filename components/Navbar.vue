@@ -57,6 +57,7 @@ export default {
       line-height: 0;
       user-select: none;
       font-weight: 400;
+      letter-spacing: 1px;
       color: rgb(42, 42, 42);
       transition: all .222s ease;
     }
