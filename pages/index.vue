@@ -134,7 +134,7 @@ export default {
   & .home-body {
     display: flex;
     flex-flow: column;
-    padding: 3rem 0 3rem 7%;
+    padding: 3rem 0;
     margin-bottom: 100rem;
     & .category-container {
       display: flex;
@@ -144,7 +144,7 @@ export default {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: 0 7% 1.5rem 0;
+        padding: 0 7% 1.5rem 7%;
         & .__title {
           font-size: 25px;
           font-weight: 600;
@@ -173,6 +173,7 @@ export default {
           height: 14rem;
           padding: 0;
           transition: all ease .1s;
+          transform: translateX(7%);
           & .card {
             max-width: 145px;
             min-width: 145px;
