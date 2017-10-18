@@ -140,7 +140,7 @@ export default {
     & .__plano {
       font-size: 19px;
       font-weight: 300;
-      padding: .5rem 0 .6em 0;
+      padding: .4rem 0 .7rem 0;
       color: rgb(92, 92, 92);
       border-bottom: 1px solid rgb(210, 210, 210);
     }
@@ -152,7 +152,7 @@ export default {
     & .item-form {
       display: flex;
       flex-flow: column;
-      margin: 1.3rem 0;
+      margin: 1.4rem 0;
       & label {
         font-size: 16px;
         font-weight: 500;
@@ -161,7 +161,7 @@ export default {
         font-size: 19px;
         font-weight: 300;
         color: rgb(92, 92, 92);
-        padding: .5rem 0 .6em 0;
+        padding: .4rem 0 .7rem 0;
         border: none;
         border-bottom: 1px solid rgb(210, 210, 210);
         outline: none;
