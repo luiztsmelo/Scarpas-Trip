@@ -89,7 +89,7 @@ export default {
   height: calc(100vh - 3.5rem);
   & .plano-evento {
     & .__title {
-      font-size: 27px;
+      font-size: 28px;
       font-weight: 600;
       padding: 3rem 7% 0 7%;
     }
