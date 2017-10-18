@@ -1,6 +1,6 @@
 <template>
-  <div class="anunciar">
-    <h1 class="__title">Anunciar</h1>
+  <div class="anunciar-restaurante">
+    <h1 class="__title">Anunciar Restaurante</h1>
 
   </div>
 </template>
@@ -9,7 +9,7 @@
 export default {
   head () {
     return {
-      title: 'Anuncie em Escarpas do Lago ‒ Escarpas Trip'
+      title: 'Anunciar Restaurante em Escarpas do Lago ‒ Escarpas Trip'
     }
   },
   transition: 'slide-left'
@@ -17,15 +17,15 @@ export default {
 </script>
 
 <style scope>
-@import url('../../assets/css/main.css');
+@import url('../../../assets/css/main.css');
 
-.anunciar {
+.anunciar-restaurante {
   margin-top: 3.5rem;
   display: flex;
   flex-flow: column;
   transition: all .222s ease;
   & .__title {
-    padding: 3rem 7%;
+    padding: 3rem 7% 0 7%;
   }
 }
 </style>
