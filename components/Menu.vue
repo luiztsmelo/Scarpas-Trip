@@ -36,12 +36,12 @@
           <div @click="$store.commit('m_showMenu', false), $store.commit('m_menuIconAnime', false), $store.commit('m_showFoobar', false)">
             <nuxt-link to="/anunciar" class="menu-item">
               <img src="../assets/img/contato.svg" alt="" class="__item-img">
-              <span class="__item-text" >Contato</span>
+              <span class="__item-text">Contato</span>
             </nuxt-link>
           </div>
         </div>
 
-        <span class="tmstudio">Desenvolvido por TMstudio</span>
+        <span class="tmstudio">Desenvolvido por <strong>TMstudio</strong></span>
 
       </div> 
     </div>
@@ -109,8 +109,11 @@ export default {
       left: 0;
       right: 0;
       margin: 0 auto;
-      font-size: 14px;
+      font-size: 13px;
       font-weight: 300;
+      & strong {
+        font-weight: 400;
+      }
     }
   }
 }
