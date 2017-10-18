@@ -132,6 +132,7 @@ export default {
     color: var(--color01);
     height: calc(100vh - 3.5rem);
     padding: 0 7%;
+    transition: all .222s ease;
     & .__title {
       font-size: 30px;
       font-weight: 600;
