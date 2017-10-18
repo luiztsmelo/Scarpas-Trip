@@ -27,6 +27,8 @@
     <transition name="plano-animation">
       <form class="cadastro-evento" v-show="planoEventoSelecionado">
 
+        <h1 class="__title">Cadastro de Evento</h1> 
+
         <h1 class="__form-title">Informações básicas</h1>
 
         <div class="item-form">
@@ -38,7 +40,8 @@
           <label>Descrição básica</label>
           <input type="text">
         </div>  
- 
+
+        <h1 class="__form-title">Pagamento</h1>
       
 
       </form>
@@ -119,6 +122,11 @@ export default {
     color: var(--color01);
     height: calc(100vh - 3.5rem);
     padding: 0 7%;
+    & .__title {
+      font-size: 28px;
+      font-weight: 600;
+      padding-top: 3rem;
+    }
     & .__form-title {
       font-size: 23px;
       font-weight: 600;
