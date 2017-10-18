@@ -38,7 +38,7 @@ export default {
   margin-top: 3.5rem;
   display: flex;
   flex-flow: column;
-  background: linear-gradient(45deg, #ee0979, #ff6a00);
+  background: linear-gradient(60deg, #ee0979, #ff6a00);
   color: white;
   transition: all .222s ease;
   height: calc(100vh - 3.5rem);
@@ -73,11 +73,11 @@ export default {
       }
     }
     & .casual {
-      background: white;
+      background: rgba(255,255,255, .98);
       color: var(--color01);
     }
     & .profissional {
-      background: black;
+      background: rgba(0,0,0, .9);
     }
   }
 }
