@@ -8,7 +8,7 @@
 export default {
   head () {
     return {
-      title: 'Atrações ‒ Escarpas Trip'
+      title: 'Atrações em Escarpas do Lago ‒ Escarpas Trip'
     }
   },
   transition: 'slide-left'
