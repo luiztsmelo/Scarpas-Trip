@@ -92,7 +92,7 @@ export default {
         margin-right: 1rem;
       }
       & .__item-text {
-        font-size: 18px;
+        font-size: 19px;
         font-weight: 300;
       }
     }

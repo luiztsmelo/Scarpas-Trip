@@ -155,12 +155,11 @@ export default {
             font-size: 13px;
             font-weight: 500;
             color: rgb(122, 122, 122);
-            padding-right: 3px;
+            padding-right: 2px;
           }
           & .__see-all-arrow {
-            transform: translateY(1px);
             opacity: .5;
-            width: .6rem;
+            width: .5rem;
             height: auto;
           }
         }
