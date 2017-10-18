@@ -69,6 +69,13 @@ a a:hover, a:visited, a:link, a:active
   transform: scale(0.95);
 }
 
+.slide-down-leave-active,
+.slide-down-enter 
+{
+  transform: translateY(-100%);
+  opacity: 0;
+}
+
 /* ******* TEXT HIGHLIGHT COLOR ******* */
 ::-moz-selection { /* Firefox */
   color: white;
