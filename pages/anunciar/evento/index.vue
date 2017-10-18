@@ -70,13 +70,13 @@ export default {
   margin-top: 3.5rem;
   display: flex;
   flex-flow: column;
-  background: linear-gradient(60deg, #ee0979, #ff6a00);
+  background: linear-gradient(60deg, #4568dc  , #b06ab3);
   color: white;
   transition: all .222s ease;
   height: calc(100vh - 3.5rem);
   & .plano-evento {
     & .__title {
-      font-size: 26px;
+      font-size: 27px;
       font-weight: 600;
       padding: 3rem 7% 0 7%;
     }
@@ -94,6 +94,7 @@ export default {
         align-items: center;
         height: 3.5rem;
         margin: .5rem 0;
+        border-radius: 3px;
         & .__plano-valor {
           font-size: 25px;
           font-weight: 300;
