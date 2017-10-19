@@ -52,11 +52,11 @@ export default {
     justify-content: space-between;
     align-items: center;
     & .__brand-name {
-      font-family: var(--main-font);
-      font-size: 22px;
+      font-family: var(--brand-font);
+      font-size: 26px;
       line-height: 0;
       user-select: none;
-      font-weight: 800;
+      font-weight: 400;
       color: rgb(28, 42, 75);
     }
     & .__anunciar {
