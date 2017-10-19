@@ -43,6 +43,13 @@
           <input type="text" v-model="eventSubtitle" required>
         </div>   
 
+        <div class="back-next"> 
+          <div class="back-next-body">
+            <button type="button" class="__back" @click="backBtn1">Voltar</button>
+            <button type="button" class="__next" :style="form1ok" @click="nextBtn1">Próximo</button>
+          </div>
+        </div> 
+
       </form> <!-- CADASTRO EVENTO Pg.1 -->
    
 
@@ -50,6 +57,13 @@
       <form class="cadastro-evento" v-show="cadastroEvento2">
 
         <h1 class="__form-title">Data e Horário</h1>
+
+        <div class="back-next"> 
+          <div class="back-next-body">
+            <button type="button" class="__back" @click="backBtn2">Voltar</button>
+            <button type="button" class="__next" @click="nextBtn2">Próximo</button>
+          </div>
+        </div> 
       
       </form><!-- CADASTRO EVENTO Pg.2 -->
 
@@ -82,12 +96,7 @@
       </form><!-- CADASTRO EVENTO Pg.6 -->
    
 
-    <div class="back-next" v-show="!cadastroEvento0"> 
-      <div class="back-next-body">
-        <button class="__back" @click="backBtn">Voltar</button>
-        <button class="__next" @click="nextBtn">Próximo</button>
-      </div>
-    </div> 
+    
 
   </div>
 </template>
@@ -100,52 +109,33 @@ export default {
     }
   },
   transition: 'opacity',
-  data() {
+  data () {
     return {
       eventTitle: '',
       eventSubtitle: ''
     }
   },
   methods: {
-    backBtn () {
-      if (this.$store.state.cadastroEvento1 === true) {
-        return this.$store.commit('m_cadastroEvento1', false), this.$store.commit('m_cadastroEvento0', true)
-      }
-      if (this.$store.state.cadastroEvento2 === true) {
-        return this.$store.commit('m_cadastroEvento2', false), this.$store.commit('m_cadastroEvento1', true)
-      }
-      if (this.$store.state.cadastroEvento3 === true) {
-        return this.$store.commit('m_cadastroEvento3', false), this.$store.commit('m_cadastroEvento2', true)
-      }
-      if (this.$store.state.cadastroEvento4 === true) {
-        return this.$store.commit('m_cadastroEvento4', false), this.$store.commit('m_cadastroEvento3', true)
-      }
-      if (this.$store.state.cadastroEvento5 === true) {
-        return this.$store.commit('m_cadastroEvento5', false), this.$store.commit('m_cadastroEvento4', true)
-      }
-      if (this.$store.state.cadastroEvento6 === true) {
-        return this.$store.commit('m_cadastroEvento6', false), this.$store.commit('m_cadastroEvento5', true)
-      }
+    backBtn1 () {
+      return this.$store.commit('m_cadastroEvento1', false), this.$store.commit('m_cadastroEvento0', true)
     },
-    nextBtn () {
-      if (this.$store.state.cadastroEvento1 === true) {
+    backBtn2 () {
+      return this.$store.commit('m_cadastroEvento2', false), this.$store.commit('m_cadastroEvento1', true)
+    },
+    nextBtn1 () {
+      if (this.eventTitle.length > 0 && this.eventSubtitle.length > 0) {
         return this.$store.commit('m_cadastroEvento1', false), this.$store.commit('m_cadastroEvento2', true)
       }
-      if (this.$store.state.cadastroEvento2 === true) {
-        return this.$store.commit('m_cadastroEvento2', false), this.$store.commit('m_cadastroEvento3', true)
-      }
-      if (this.$store.state.cadastroEvento3 === true) {
-        return this.$store.commit('m_cadastroEvento3', false), this.$store.commit('m_cadastroEvento4', true)
-      }
-      if (this.$store.state.cadastroEvento4 === true) {
-        return this.$store.commit('m_cadastroEvento4', false), this.$store.commit('m_cadastroEvento5', true)
-      }
-      if (this.$store.state.cadastroEvento5 === true) {
-        return this.$store.commit('m_cadastroEvento5', false), this.$store.commit('m_cadastroEvento6', true)
-      }
-    }
+    },  
+    nextBtn2 () {
+    }  
   },
   computed: {
+    form1ok () {
+      if (this.eventTitle.length > 0 && this.eventSubtitle.length > 0) {
+        return 'background: rgb(252, 86, 86)'
+      }
+    },
     eventoPlanoCasual () {
       return this.$store.state.eventoPlanoCasual
     },
@@ -269,28 +259,28 @@ export default {
         outline: none;
       }
     }
-  }
-  & .back-next {
-    position: fixed;
-    z-index: 4;
-    bottom: 0;
-    left: 0;
-    height: 3rem;
-    width: 100%;
-    background: white;
-    box-shadow: 0px -1px 1px 0px rgba(0,0,0,0.15);
-    & .back-next-body {
-      display: flex;
-      & button {
-        width: 50%;
-        height: 3rem;
-      }
-      & .__back {
-        background: white;
-      }
-      & .__next {
-        background: #FC5658;
-        color: white;
+    & .back-next {
+      position: fixed;
+      z-index: 4;
+      bottom: 0;
+      left: 0;
+      height: 3rem;
+      width: 100%;
+      background: white;
+      box-shadow: 0px -1px 1px 0px rgba(0,0,0,0.15);
+      & .back-next-body {
+        display: flex;
+        & button {
+          width: 50%;
+          height: 3rem;
+        }
+        & .__back {
+          background: white;
+        }
+        & .__next {
+          background: rgb(255, 165, 165);
+          color: white;
+        }
       }
     }
   }
