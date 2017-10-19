@@ -81,13 +81,13 @@ export default {
       align-items: center;
       padding: .9rem 0;
       & .__item-img-color {
-        width: 1.7rem;
+        width: 1.6rem;
         height: auto;
         margin-right: 1rem;
         filter: grayscale(100%) brightness(60%);
       }
       & .__item-img {
-        width: 1.7rem;
+        width: 1.6rem;
         height: auto;
         margin-right: 1rem;
       }
