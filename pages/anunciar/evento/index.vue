@@ -23,7 +23,7 @@
     </div><!-- PLANO CONTAINER -->
 
     <!-- CADASTRO EVENTO Pg1 -->
-    <transition name="cadastro-evento-animation">
+    <!-- <transition name="cadastro-evento-animation"> -->
       <form class="cadastro-evento" v-show="cadastroEvento1">
 
         <h1 class="__form-title">Informações básicas</h1>
@@ -41,22 +41,26 @@
         <div class="item-form">
           <label>Descrição básica</label>
           <input type="text" required>
-        </div>  
+        </div>   
 
-        <button @click="$store.commit('m_cadastroEvento1', false), $store.commit('m_cadastroEvento2', true)">Próximo</button>
-      
       </form>
-    </transition><!-- CADASTRO EVENTO Pg1 -->
+    <!-- </transition> --><!-- CADASTRO EVENTO Pg1 -->
 
     <!-- CADASTRO EVENTO Pg2 -->
-    <transition name="cadastro-evento-animation">
+    <!-- <transition name="cadastro-evento-animation"> -->
       <form class="cadastro-evento" v-show="cadastroEvento2">
 
         <h1 class="__form-title">Pagamento</h1>
- 
       
       </form>
-    </transition><!-- CADASTRO EVENTO Pg2 -->
+    <!-- </transition> --><!-- CADASTRO EVENTO Pg2 -->
+
+    <div class="back-next" v-show="!cadastroEvento0"> 
+      <div class="back-next-body">
+        <button class="__back" @click="backBtn">Voltar</button>
+        <button class="__next" @click="nextBtn">Próximo</button>
+      </div>
+    </div> 
 
   </div>
 </template>
@@ -69,6 +73,27 @@ export default {
     }
   },
   transition: 'opacity',
+  methods: {
+    backBtn () {
+      if (this.$store.state.cadastroEvento1 === true) {
+        return this.$store.commit('m_cadastroEvento1', false), this.$store.commit('m_cadastroEvento0', true)
+      }
+      if (this.$store.state.cadastroEvento2 === true) {
+        return this.$store.commit('m_cadastroEvento2', false), this.$store.commit('m_cadastroEvento1', true)
+      }
+      if (this.$store.state.cadastroEvento3 === true) {
+        return this.$store.commit('m_cadastroEvento3', false), this.$store.commit('m_cadastroEvento2', true)
+      }
+    },
+    nextBtn () {
+      if (this.$store.state.cadastroEvento1 === true) {
+        return this.$store.commit('m_cadastroEvento1', false), this.$store.commit('m_cadastroEvento2', true)
+      }
+      if (this.$store.state.cadastroEvento2 === true) {
+        return this.$store.commit('m_cadastroEvento2', false), this.$store.commit('m_cadastroEvento3', true)
+      }
+    }
+  },
   computed: {
     cadastroEvento0 () {
       return this.$store.state.cadastroEvento0
@@ -180,6 +205,30 @@ export default {
         border: none;
         border-bottom: 1px solid rgb(210, 210, 210);
         outline: none;
+      }
+    }
+  }
+  & .back-next {
+    position: fixed;
+    z-index: 4;
+    bottom: 0;
+    left: 0;
+    height: 3rem;
+    width: 100%;
+    background: white;
+    box-shadow: 0px -1px 1px 0px rgba(0,0,0,0.15);
+    & .back-next-body {
+      display: flex;
+      & button {
+        width: 50%;
+        height: 3rem;
+      }
+      & .__back {
+        background: white;
+      }
+      & .__next {
+        background: #FC5658;
+        color: white;
       }
     }
   }

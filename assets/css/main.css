@@ -30,6 +30,13 @@ html
   margin: 0;
 }
 
+button {
+  border: none;
+  outline: none !important;
+  user-select: none;
+  -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+}
+
 p {
   font-family: var(--main-font);
   font-size: 18px;
