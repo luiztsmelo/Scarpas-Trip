@@ -79,7 +79,7 @@ export default {
     & .menu-item {
       display: flex;
       align-items: center;
-      padding: 1rem 0;
+      padding: 1.1rem 0;
       & .__item-img-color {
         width: 1.4rem;
         height: auto;
@@ -97,11 +97,11 @@ export default {
       }
     }
     & .anuncio-box {
-      padding-bottom: .9rem;
+      padding-bottom: 1.1rem;
       border-bottom: 1px solid rgb(210, 210, 210);
     }
     & .info-box {
-      padding: .9rem 0;
+      padding: 1.1rem 0;
     }
     & .tmstudio {
       position: absolute;
