@@ -56,7 +56,7 @@ export default {
       font-size: 21px;
       line-height: 0;
       user-select: none;
-      font-weight: 700;
+      font-weight: 800;
       color: var(--color01);
     }
     & .__anunciar {
