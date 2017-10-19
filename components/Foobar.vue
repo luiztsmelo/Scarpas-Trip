@@ -100,7 +100,7 @@ export default {
       }
       & img {
         margin-bottom: 7px;
-        width: 1.5rem;
+        width: 1.4rem;
         height: auto;
       }
       & .coloricon {
