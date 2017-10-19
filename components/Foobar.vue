@@ -99,7 +99,7 @@ export default {
         color: rgb(51, 51, 51);
       }
       & img {
-        margin-bottom: 7px;
+        margin-bottom: 8px;
         width: 1.3rem;
         height: auto;
       }

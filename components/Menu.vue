@@ -79,7 +79,7 @@ export default {
     & .menu-item {
       display: flex;
       align-items: center;
-      padding: .9rem 0;
+      padding: 1rem 0;
       & .__item-img-color {
         width: 1.4rem;
         height: auto;
