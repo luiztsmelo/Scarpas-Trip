@@ -4,13 +4,10 @@
   /* ******* FONTS ******* */
   --brand-font: 'Damion' !important;
   --main-font: 'Work Sans', sans-serif !important;
-  --heading-font: 'Oswald', sans-serif !important;
   /* ******* COLOR PALETTE ******* */
   --color00: rgb(4, 12, 31);
   --color01: rgb(72, 72, 72);
   --color02: rgb(243, 110, 95);
-  --color03: rgb(45, 204, 112);
-  --color04: rgb(52, 0, 255);
 }
 
 html 
