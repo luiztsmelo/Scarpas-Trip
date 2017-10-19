@@ -22,8 +22,7 @@
       </div>
     </div><!-- PLANO CONTAINER -->
 
-    <!-- CADASTRO EVENTO Pg1 -->
-    <!-- <transition name="cadastro-evento-animation"> -->
+      <!-- CADASTRO EVENTO Pg.1 -->
       <form class="cadastro-evento" v-show="cadastroEvento1">
 
         <h1 class="__form-title">Informações básicas</h1>
@@ -44,17 +43,37 @@
           <input type="text" v-model="eventSubtitle" required>
         </div>   
 
-      </form>
-    <!-- </transition> --><!-- CADASTRO EVENTO Pg1 -->
+      </form> <!-- CADASTRO EVENTO Pg.1 -->
+   
 
-    <!-- CADASTRO EVENTO Pg2 -->
-    <!-- <transition name="cadastro-evento-animation"> -->
+      <!-- CADASTRO EVENTO Pg.2 -->
       <form class="cadastro-evento" v-show="cadastroEvento2">
 
-        <h1 class="__form-title">Pagamento</h1>
+        <h1 class="__form-title">Data e Horário</h1>
       
-      </form>
-    <!-- </transition> --><!-- CADASTRO EVENTO Pg2 -->
+      </form><!-- CADASTRO EVENTO Pg.2 -->
+
+      <!-- CADASTRO EVENTO Pg.3 -->
+      <form class="cadastro-evento" v-show="cadastroEvento3">
+
+        <h1 class="__form-title">Local</h1>
+      
+      </form><!-- CADASTRO EVENTO Pg.3 -->
+
+      <!-- CADASTRO EVENTO Pg.4 -->
+      <form class="cadastro-evento" v-show="cadastroEvento4">
+
+        <h1 class="__form-title">Valor do Ingresso</h1>
+      
+      </form><!-- CADASTRO EVENTO Pg.4 -->
+
+      <!-- CADASTRO EVENTO Pg.5 -->
+      <form class="cadastro-evento" v-show="cadastroEvento5">
+
+        <h1 class="__form-title">Investimento</h1>
+      
+      </form><!-- CADASTRO EVENTO Pg.5 -->
+   
 
     <div class="back-next" v-show="!cadastroEvento0"> 
       <div class="back-next-body">
@@ -91,6 +110,12 @@ export default {
       if (this.$store.state.cadastroEvento3 === true) {
         return this.$store.commit('m_cadastroEvento3', false), this.$store.commit('m_cadastroEvento2', true)
       }
+      if (this.$store.state.cadastroEvento4 === true) {
+        return this.$store.commit('m_cadastroEvento4', false), this.$store.commit('m_cadastroEvento3', true)
+      }
+      if (this.$store.state.cadastroEvento5 === true) {
+        return this.$store.commit('m_cadastroEvento5', false), this.$store.commit('m_cadastroEvento4', true)
+      }
     },
     nextBtn () {
       if (this.$store.state.cadastroEvento1 === true) {
@@ -98,6 +123,12 @@ export default {
       }
       if (this.$store.state.cadastroEvento2 === true) {
         return this.$store.commit('m_cadastroEvento2', false), this.$store.commit('m_cadastroEvento3', true)
+      }
+      if (this.$store.state.cadastroEvento3 === true) {
+        return this.$store.commit('m_cadastroEvento3', false), this.$store.commit('m_cadastroEvento4', true)
+      }
+      if (this.$store.state.cadastroEvento4 === true) {
+        return this.$store.commit('m_cadastroEvento4', false), this.$store.commit('m_cadastroEvento5', true)
       }
     }
   },
@@ -116,6 +147,15 @@ export default {
     },
     cadastroEvento2 () {
       return this.$store.state.cadastroEvento2
+    },
+    cadastroEvento3 () {
+      return this.$store.state.cadastroEvento3
+    },
+    cadastroEvento4 () {
+      return this.$store.state.cadastroEvento4
+    },
+    cadastroEvento5 () {
+      return this.$store.state.cadastroEvento5
     }
   },
 }
