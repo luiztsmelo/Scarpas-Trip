@@ -1,9 +1,9 @@
 import Vuex from 'vuex'
 /* import * as firebase from 'firebase' */
-/* import createPersistedState from 'vuex-persistedstate' */
+import createPersistedState from 'vuex-persistedstate'
 
 const store = () => new Vuex.Store({
-  /* plugins: [createPersistedState()], */
+  plugins: [createPersistedState()],
   /*
   ******************** STATE ********************
   */
@@ -18,8 +18,8 @@ const store = () => new Vuex.Store({
     cadastroEvento1: false,
     cadastroEvento2: false,
     cadastroEvento3: false,
-    isPlanoEventoCasual: false,
-    isPlanoEventoPro: false
+    eventoPlanoCasual: false,
+    eventoPlanoPro: false
   },
   /*
   ******************** GETTERS ********************
@@ -54,11 +54,11 @@ const store = () => new Vuex.Store({
     m_cadastroEvento3 (state, payload) {
       state.cadastroEvento2 = payload
     },
-    m_isPlanoEventoCasual (state, payload) {
-      state.isPlanoEventoCasual = payload
+    m_eventoPlanoCasual (state, payload) {
+      state.eventoPlanoCasual = payload
     },
-    m_isPlanoEventoPro (state, payload) {
-      state.isPlanoEventoPro = payload
+    m_eventoPlanoPro (state, payload) {
+      state.eventoPlanoPro = payload
     }
   },
   /*

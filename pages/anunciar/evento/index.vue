@@ -9,12 +9,12 @@
       <div class="pricing-box">
         <h2 class="__pricing-box-title">Selecione um plano:</h2>
 
-        <div class="plano-row casual" @click="$store.commit('m_cadastroEvento1', true), $store.commit('m_cadastroEvento0', false), $store.commit('m_isPlanoEventoCasual', true)">
+        <div class="plano-row casual" @click="$store.commit('m_cadastroEvento1', true), $store.commit('m_cadastroEvento0', false), $store.commit('m_eventoPlanoCasual', true), $store.commit('m_eventoPlanoPro', false)">
           <span class="__plano-valor">R$25</span>
           <span class="__plano-title">CASUAL</span>
         </div>
 
-        <div class="plano-row profissional" @click="$store.commit('m_cadastroEvento1', true), $store.commit('m_cadastroEvento0', false), $store.commit('m_isPlanoEventoPro', true)">
+        <div class="plano-row profissional" @click="$store.commit('m_cadastroEvento1', true), $store.commit('m_cadastroEvento0', false), $store.commit('m_eventoPlanoPro', true), $store.commit('m_eventoPlanoCasual', false)">
           <span class="__plano-valor">R$100</span>
           <span class="__plano-title">PROFISSIONAL</span>
         </div>
@@ -30,17 +30,18 @@
 
         <div class="item-form">
           <label>Plano</label>
-          <span class="__plano">{{ plano }}</span>
+          <span class="__plano" v-show="eventoPlanoCasual">Casual</span>
+          <span class="__plano" v-show="eventoPlanoPro">Profissional</span>
         </div>  
 
         <div class="item-form">
           <label>Nome do evento</label>
-          <input type="text" required>
+          <input type="text" v-model="eventTitle" required>
         </div>  
 
         <div class="item-form">
           <label>Descrição básica</label>
-          <input type="text" required>
+          <input type="text" v-model="eventSubtitle" required>
         </div>   
 
       </form>
@@ -73,6 +74,12 @@ export default {
     }
   },
   transition: 'opacity',
+  data() {
+    return {
+      eventTitle: '',
+      eventSubtitle: ''
+    }
+  },
   methods: {
     backBtn () {
       if (this.$store.state.cadastroEvento1 === true) {
@@ -95,6 +102,12 @@ export default {
     }
   },
   computed: {
+    eventoPlanoCasual () {
+      return this.$store.state.eventoPlanoCasual
+    },
+    eventoPlanoPro () {
+      return this.$store.state.eventoPlanoPro
+    },
     cadastroEvento0 () {
       return this.$store.state.cadastroEvento0
     },
@@ -103,13 +116,6 @@ export default {
     },
     cadastroEvento2 () {
       return this.$store.state.cadastroEvento2
-    },
-    plano () {
-      if (this.$store.state.isPlanoEventoCasual === true) {
-        return 'Casual'
-      } else {
-        return 'Profissional'
-      }
     }
   },
 }
@@ -185,7 +191,7 @@ export default {
       border-bottom: 1px solid rgb(210, 210, 210);
     }
     & .__form-title {
-      font-size: 27px;
+      font-size: 30px;
       font-weight: 600;
       padding-top: 3rem;
     }
@@ -194,7 +200,7 @@ export default {
       flex-flow: column;
       margin: 1.4rem 0;
       & label {
-        font-size: 16px;
+        font-size: 17px;
         font-weight: 500;
       }
       & input {
