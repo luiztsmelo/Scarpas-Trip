@@ -53,11 +53,11 @@ export default {
     align-items: center;
     & .__brand-name {
       font-family: var(--main-font);
-      font-size: 21px;
+      font-size: 22px;
       line-height: 0;
       user-select: none;
       font-weight: 800;
-      color: var(--color00);
+      color: rgb(13, 25, 52);
     }
     & .__anunciar {
       padding: 1rem 0;
