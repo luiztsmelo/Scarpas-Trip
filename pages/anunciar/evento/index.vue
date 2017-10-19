@@ -231,14 +231,14 @@ export default {
       border-bottom: 1px solid rgb(210, 210, 210);
     }
     & .__form-title {
-      font-size: 30px;
+      font-size: 29px;
       font-weight: 600;
-      padding-top: 3rem;
+      padding: 3rem 0 1.5rem 0;
     }
     & .item-form {
       display: flex;
       flex-flow: column;
-      margin: 1.4rem 0;
+      margin: 1.5rem 0;
       & label {
         font-size: 17px;
         font-weight: 500;
