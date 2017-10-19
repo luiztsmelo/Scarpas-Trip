@@ -56,7 +56,7 @@ export default {
       font-size: 26px;
       line-height: 0;
       user-select: none;
-      font-weight: 400;
+      font-weight: 700;
       color: rgb(28, 42, 75);
     }
     & .__anunciar {
