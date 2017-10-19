@@ -57,7 +57,7 @@ export default {
       line-height: 0;
       user-select: none;
       font-weight: 800;
-      color: var(--color01);
+      color: var(--color00);
     }
     & .__anunciar {
       padding: 1rem 0;
