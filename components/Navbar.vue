@@ -57,7 +57,7 @@ export default {
       line-height: 0;
       user-select: none;
       font-weight: 800;
-      color: rgb(13, 25, 52);
+      color: rgb(28, 42, 75);
     }
     & .__anunciar {
       padding: 1rem 0;
