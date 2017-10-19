@@ -53,10 +53,10 @@ export default {
     align-items: center;
     & .__brand-name {
       font-family: var(--brand-font);
-      font-size: 26px;
+      font-size: 22px;
       line-height: 0;
       user-select: none;
-      font-weight: 700;
+      font-weight: 400;
       color: rgb(28, 42, 75);
     }
     & .__anunciar {
