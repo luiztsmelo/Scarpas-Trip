@@ -12,7 +12,9 @@ const store = () => new Vuex.Store({
     /*
     ** Anúncios
     */
-    planoEventoSelecionado: false,
+    cadastroEvento0: true,
+    cadastroEvento1: false,
+    cadastroEvento2: false,
     isPlanoEventoCasual: false,
     isPlanoEventoPro: false
   },
@@ -37,8 +39,14 @@ const store = () => new Vuex.Store({
     /*
     ** Anúncios
     */
-    m_planoEventoSelecionado (state, payload) {
-      state.planoEventoSelecionado = payload
+    m_cadastroEvento0 (state, payload) {
+      state.cadastroEvento0 = payload
+    },
+    m_cadastroEvento1 (state, payload) {
+      state.cadastroEvento1 = payload
+    },
+    m_cadastroEvento2 (state, payload) {
+      state.cadastroEvento2 = payload
     },
     m_isPlanoEventoCasual (state, payload) {
       state.isPlanoEventoCasual = payload

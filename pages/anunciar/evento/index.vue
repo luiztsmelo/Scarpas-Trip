@@ -2,19 +2,19 @@
   <div class="anunciar-evento">
 
     <!-- PLANO EVENTO -->
-    <div class="plano-evento" v-show="!planoEventoSelecionado">
+    <div class="plano-evento" v-show="cadastroEvento0">
       
       <h1 class="__title">Divulgação: a chave para o sucesso do seu evento!</h1>
 
       <div class="pricing-box">
         <h2 class="__pricing-box-title">Selecione um plano:</h2>
 
-        <div class="plano-row casual" @click="$store.commit('m_planoEventoSelecionado', true), $store.commit('m_isPlanoEventoCasual', true)">
+        <div class="plano-row casual" @click="$store.commit('m_cadastroEvento1', true), $store.commit('m_cadastroEvento0', false), $store.commit('m_isPlanoEventoCasual', true)">
           <span class="__plano-valor">R$25</span>
           <span class="__plano-title">CASUAL</span>
         </div>
 
-        <div class="plano-row profissional" @click="$store.commit('m_planoEventoSelecionado', true), $store.commit('m_isPlanoEventoPro', true)">
+        <div class="plano-row profissional" @click="$store.commit('m_cadastroEvento1', true), $store.commit('m_cadastroEvento0', false), $store.commit('m_isPlanoEventoPro', true)">
           <span class="__plano-valor">R$100</span>
           <span class="__plano-title">PROFISSIONAL</span>
         </div>
@@ -22,11 +22,9 @@
       </div>
     </div><!-- PLANO CONTAINER -->
 
-    <!-- CADASTRO EVENTO -->
-    <transition name="plano-animation">
-      <form class="cadastro-evento" v-show="planoEventoSelecionado">
-
-        <h1 class="__title">Cadastro de Evento</h1> 
+    <!-- CADASTRO EVENTO Pg1 -->
+    <transition name="cadastro-evento-animation">
+      <form class="cadastro-evento" v-show="cadastroEvento1">
 
         <h1 class="__form-title">Informações básicas</h1>
 
@@ -45,10 +43,20 @@
           <input type="text" required>
         </div>  
 
-        <h1 class="__form-title">Pagamento</h1>
+        <button @click="$store.commit('m_cadastroEvento1', false), $store.commit('m_cadastroEvento2', true)">Próximo</button>
       
       </form>
-    </transition><!-- CADASTRO EVENTO -->
+    </transition><!-- CADASTRO EVENTO Pg1 -->
+
+    <!-- CADASTRO EVENTO Pg2 -->
+    <transition name="cadastro-evento-animation">
+      <form class="cadastro-evento" v-show="cadastroEvento2">
+
+        <h1 class="__form-title">Pagamento</h1>
+ 
+      
+      </form>
+    </transition><!-- CADASTRO EVENTO Pg2 -->
 
   </div>
 </template>
@@ -62,8 +70,14 @@ export default {
   },
   transition: 'opacity',
   computed: {
-    planoEventoSelecionado () {
-      return this.$store.state.planoEventoSelecionado
+    cadastroEvento0 () {
+      return this.$store.state.cadastroEvento0
+    },
+    cadastroEvento1 () {
+      return this.$store.state.cadastroEvento1
+    },
+    cadastroEvento2 () {
+      return this.$store.state.cadastroEvento2
     },
     plano () {
       if (this.$store.state.isPlanoEventoCasual === true) {
@@ -83,7 +97,7 @@ export default {
   margin-top: 3.5rem;
   display: flex;
   flex-flow: column;
-  background: linear-gradient(60deg, #4568dc  , #b06ab3);
+  background: linear-gradient(60deg, #4568dc, #b06ab3);
   color: white;
   transition: all .222s ease;
   height: calc(100vh - 3.5rem);
@@ -146,7 +160,7 @@ export default {
       border-bottom: 1px solid rgb(210, 210, 210);
     }
     & .__form-title {
-      font-size: 24px;
+      font-size: 27px;
       font-weight: 600;
       padding-top: 3rem;
     }
@@ -172,8 +186,8 @@ export default {
 }
 
 /* TRANSITIONS */
-.plano-animation-enter,
-.plano-animation-leave-active {
+.cadastro-evento-animation-enter,
+.cadastro-evento-animation-leave-active {
   opacity: 0;
   transform: translateY(100%);
 }
