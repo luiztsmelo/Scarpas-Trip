@@ -20,6 +20,7 @@ const store = () => new Vuex.Store({
     cadastroEvento3: false,
     cadastroEvento4: false,
     cadastroEvento5: false,
+    cadastroEvento6: false,
     eventoPlanoCasual: false,
     eventoPlanoPro: false
   },
@@ -61,6 +62,9 @@ const store = () => new Vuex.Store({
     },
     m_cadastroEvento5 (state, payload) {
       state.cadastroEvento5 = payload
+    },
+    m_cadastroEvento6 (state, payload) {
+      state.cadastroEvento6 = payload
     },
     m_eventoPlanoCasual (state, payload) {
       state.eventoPlanoCasual = payload

@@ -70,9 +70,16 @@
       <!-- CADASTRO EVENTO Pg.5 -->
       <form class="cadastro-evento" v-show="cadastroEvento5">
 
-        <h1 class="__form-title">Investimento</h1>
+        <h1 class="__form-title">Imagens e Vídeo</h1>
       
       </form><!-- CADASTRO EVENTO Pg.5 -->
+
+      <!-- CADASTRO EVENTO Pg.6 -->
+      <form class="cadastro-evento" v-show="cadastroEvento6">
+
+        <h1 class="__form-title">Investimento</h1>
+      
+      </form><!-- CADASTRO EVENTO Pg.6 -->
    
 
     <div class="back-next" v-show="!cadastroEvento0"> 
@@ -116,6 +123,9 @@ export default {
       if (this.$store.state.cadastroEvento5 === true) {
         return this.$store.commit('m_cadastroEvento5', false), this.$store.commit('m_cadastroEvento4', true)
       }
+      if (this.$store.state.cadastroEvento6 === true) {
+        return this.$store.commit('m_cadastroEvento6', false), this.$store.commit('m_cadastroEvento5', true)
+      }
     },
     nextBtn () {
       if (this.$store.state.cadastroEvento1 === true) {
@@ -129,6 +139,9 @@ export default {
       }
       if (this.$store.state.cadastroEvento4 === true) {
         return this.$store.commit('m_cadastroEvento4', false), this.$store.commit('m_cadastroEvento5', true)
+      }
+      if (this.$store.state.cadastroEvento5 === true) {
+        return this.$store.commit('m_cadastroEvento5', false), this.$store.commit('m_cadastroEvento6', true)
       }
     }
   },
@@ -156,6 +169,9 @@ export default {
     },
     cadastroEvento5 () {
       return this.$store.state.cadastroEvento5
+    },
+    cadastroEvento6 () {
+      return this.$store.state.cadastroEvento6
     }
   },
 }
