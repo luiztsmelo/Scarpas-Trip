@@ -300,7 +300,7 @@ export default {
       }
     }
     & .back-next {
-      position: fixed;
+      position: absolute;
       z-index: 4;
       bottom: 0;
       left: 0;
