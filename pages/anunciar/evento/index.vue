@@ -86,7 +86,7 @@
         </gmap-autocomplete>
 
         <gmap-map
-        :center="{lat:-20.6141320, lng:-46.0478760}"
+        :center="gmapCenter"
         :zoom="gmapZoom"
         style="width: 100%; height: 260px">
           <Gmap-Marker
@@ -162,6 +162,7 @@ export default {
   data () {
     return {
       place: null,
+      gmapCenter: {lat:-20.6141320, lng:-46.0478760},
       eventTitle: '',
       eventSubtitle: ''
     }
@@ -169,6 +170,7 @@ export default {
   methods: {
     setPlace (place) {
       this.place = place
+      this.gmapCenter = this.place.geometry.location
     },
     /* ******************** BACK BUTTONS ******************** */
     backBtn1 () {
@@ -201,6 +203,11 @@ export default {
     }  
   },
   computed: {
+    gmapCenter() {
+      if (this.place !== null) {
+        return this.gmapCenter = {lat: this.place.geometry.location.lat, lng: this.place.geometry.location.lng}
+      }
+    },
     gmapZoom () {
       if (this.place !== null) {
         return 15
@@ -250,7 +257,7 @@ export default {
     cadastroEvento6 () {
       return this.$store.state.cadastroEvento6
     }
-  },
+  }
 }
 </script>
 
