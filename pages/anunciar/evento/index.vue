@@ -77,6 +77,10 @@
 
         <h1 class="__form-title">Local</h1>
 
+        <gmap-autocomplete style="width: 100%;height:2rem;margin-bottom:1rem"
+          @place_changed="setPlace">
+        </gmap-autocomplete>
+
         <gmap-map
         :center="{lat:10, lng:10}"
         :zoom="7"
