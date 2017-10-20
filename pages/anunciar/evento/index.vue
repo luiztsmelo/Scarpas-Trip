@@ -31,8 +31,8 @@
 
         <div class="item-form">
           <label>Plano</label>
-          <span class="__plano" v-show="eventoPlanoCasual">Casual</span>
-          <span class="__plano" v-show="eventoPlanoPro">Profissional</span>
+          <span class="__plano-selecionado" v-show="eventoPlanoCasual">Casual</span>
+          <span class="__plano-selecionado" v-show="eventoPlanoPro">Profissional</span>
         </div>  
 
         <div class="item-form">
@@ -77,15 +77,14 @@
 
         <h1 class="__form-title">Local</h1>
 
-        <gmap-autocomplete style="width: 100%;height:2rem;margin-bottom:1rem"
-          @place_changed="setPlace">
+        <gmap-autocomplete class="__gmap-autocomplete"
+        @place_changed="setPlace">
         </gmap-autocomplete>
 
         <gmap-map
-        :center="{lat:10, lng:10}"
-        :zoom="7"
-        map-type-id="terrain"
-        style="width: 100%; height: 250px">
+        :center="{lat:-20.6141320, lng:-46.0478760}"
+        :zoom="11"
+        style="width: 100%; height: 260px">
         </gmap-map>
 
         <div class="back-next"> 
@@ -269,7 +268,7 @@ export default {
       font-weight: 600;
       padding-top: 3rem;
     }
-    & .__plano {
+    & .__plano-selecionado {
       font-size: 19px;
       font-weight: 300;
       padding: .4rem 0 .6rem 0;
@@ -324,6 +323,16 @@ export default {
           color: white;
         }
       }
+    }
+    & .__gmap-autocomplete {
+      font-size: 17px;
+      font-weight: 300;
+      color: rgb(92, 92, 92);
+      width: 100%;
+      height: 2rem;
+      border: none;
+      border-bottom: 1px solid rgb(210, 210, 210);
+      margin-bottom: 1.2rem;
     }
   }
 }
