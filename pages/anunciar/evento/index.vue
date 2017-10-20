@@ -199,7 +199,7 @@ export default {
       flex-flow: column;
       padding: 3rem 7% 0 7%;
       & .__pricing-box-title {
-        font-size: 21px;
+        font-size: 20px;
         font-weight: 400;
         padding-bottom: .5rem;
       }
