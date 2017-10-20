@@ -14,6 +14,7 @@
     "nuxt": "latest",
     "vue-progressive-image": "^2.3.1",
     "vue-touch": "^2.0.0-beta.4",
+    "vue2-google-maps": "^0.8.4",
     "vuex-persistedstate": "^2.0.0"
   },
   "scripts": {

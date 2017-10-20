@@ -64,7 +64,7 @@
         <div class="back-next"> 
           <div class="back-next-body">
             <button type="button" class="__back" @click="backBtn2">Voltar</button>
-            <button type="button" class="__next" @click="nextBtn2">Próximo</button>
+            <button type="button" class="__next" :style="form2ok" @click="nextBtn2">Próximo</button>
           </div>
         </div> 
       
@@ -76,6 +76,20 @@
       <form class="cadastro-evento" v-show="cadastroEvento3">
 
         <h1 class="__form-title">Local</h1>
+
+        <gmap-map
+        :center="{lat:10, lng:10}"
+        :zoom="7"
+        map-type-id="terrain"
+        style="width: 100%; height: 250px">
+        </gmap-map>
+
+        <div class="back-next"> 
+          <div class="back-next-body">
+            <button type="button" class="__back" @click="backBtn3">Voltar</button>
+            <button type="button" class="__next" @click="nextBtn3">Próximo</button>
+          </div>
+        </div> 
       
       </form><!-- CADASTRO EVENTO Pg.3 -->
 
@@ -132,17 +146,28 @@ export default {
     backBtn2 () {
       return this.$store.commit('m_cadastroEvento2', false), this.$store.commit('m_cadastroEvento1', true)
     },
+    backBtn3 () {
+      return this.$store.commit('m_cadastroEvento3', false), this.$store.commit('m_cadastroEvento2', true)
+    },
     nextBtn1 () {
       if (this.eventTitle.length > 0 && this.eventSubtitle.length > 0) {
         return this.$store.commit('m_cadastroEvento1', false), this.$store.commit('m_cadastroEvento2', true)
       }
     },  
     nextBtn2 () {
+      if (1 < 2) {
+        return this.$store.commit('m_cadastroEvento2', false), this.$store.commit('m_cadastroEvento3', true)
+      }
     }  
   },
   computed: {
     form1ok () {
       if (this.eventTitle.length > 0 && this.eventSubtitle.length > 0) {
+        return 'background:rgb(252, 86, 86);cursor:pointer'
+      }
+    },
+    form2ok () {
+      if (1 < 2) {
         return 'background:rgb(252, 86, 86);cursor:pointer'
       }
     },
