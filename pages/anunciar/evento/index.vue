@@ -22,6 +22,8 @@
       </div>
     </div><!-- PLANO CONTAINER -->
 
+
+
       <!-- CADASTRO EVENTO Pg.1 -->
       <form class="cadastro-evento" v-show="cadastroEvento1">
 
@@ -53,6 +55,7 @@
       </form> <!-- CADASTRO EVENTO Pg.1 -->
    
 
+
       <!-- CADASTRO EVENTO Pg.2 -->
       <form class="cadastro-evento" v-show="cadastroEvento2">
 
@@ -67,12 +70,16 @@
       
       </form><!-- CADASTRO EVENTO Pg.2 -->
 
+
+
       <!-- CADASTRO EVENTO Pg.3 -->
       <form class="cadastro-evento" v-show="cadastroEvento3">
 
         <h1 class="__form-title">Local</h1>
       
       </form><!-- CADASTRO EVENTO Pg.3 -->
+
+
 
       <!-- CADASTRO EVENTO Pg.4 -->
       <form class="cadastro-evento" v-show="cadastroEvento4">
@@ -81,6 +88,8 @@
       
       </form><!-- CADASTRO EVENTO Pg.4 -->
 
+
+
       <!-- CADASTRO EVENTO Pg.5 -->
       <form class="cadastro-evento" v-show="cadastroEvento5">
 
@@ -88,15 +97,16 @@
       
       </form><!-- CADASTRO EVENTO Pg.5 -->
 
+
+
       <!-- CADASTRO EVENTO Pg.6 -->
       <form class="cadastro-evento" v-show="cadastroEvento6">
 
         <h1 class="__form-title">Investimento</h1>
       
       </form><!-- CADASTRO EVENTO Pg.6 -->
-   
-
     
+
 
   </div>
 </template>
@@ -133,7 +143,7 @@ export default {
   computed: {
     form1ok () {
       if (this.eventTitle.length > 0 && this.eventSubtitle.length > 0) {
-        return 'background: rgb(252, 86, 86)'
+        return 'background:rgb(252, 86, 86);cursor:pointer'
       }
     },
     eventoPlanoCasual () {
@@ -194,6 +204,7 @@ export default {
         padding-bottom: .5rem;
       }
       & .plano-row {
+        cursor: pointer;
         display: flex;
         align-items: center;
         height: 3.5rem;
@@ -275,9 +286,11 @@ export default {
           height: 3rem;
         }
         & .__back {
+          cursor: pointer;
           background: white;
         }
         & .__next {
+          cursor: no-drop;
           background: rgb(255, 165, 165);
           color: white;
         }
