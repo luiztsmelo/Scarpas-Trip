@@ -24,7 +24,8 @@
 
 
 
-      <!-- CADASTRO EVENTO Pg.1 -->
+
+      <!-- ********** CADASTRO EVENTO Pg.1 ********** -->
       <form class="cadastro-evento" v-show="cadastroEvento1">
 
         <h1 class="__form-title">Informações básicas</h1>
@@ -52,11 +53,12 @@
           </div>
         </div> 
 
-      </form> <!-- CADASTRO EVENTO Pg.1 -->
+      </form> <!-- ********** CADASTRO EVENTO Pg.1 ********** -->
    
 
 
-      <!-- CADASTRO EVENTO Pg.2 -->
+
+      <!-- ********** CADASTRO EVENTO Pg.2 ********** -->
       <form class="cadastro-evento" v-show="cadastroEvento2">
 
         <h1 class="__form-title">Data e Horário</h1>
@@ -68,61 +70,82 @@
           </div>
         </div> 
       
-      </form><!-- CADASTRO EVENTO Pg.2 -->
+      </form><!-- ********** CADASTRO EVENTO Pg.2 ********** -->
 
 
 
-      <!-- CADASTRO EVENTO Pg.3 -->
+
+      <!-- ********** CADASTRO EVENTO Pg.3 ********** -->
       <form class="cadastro-evento" v-show="cadastroEvento3">
 
         <h1 class="__form-title">Local</h1>
 
         <gmap-autocomplete class="__gmap-autocomplete"
+        placeholder="Digite o endereço aqui"
         @place_changed="setPlace">
         </gmap-autocomplete>
 
         <gmap-map
         :center="{lat:-20.6141320, lng:-46.0478760}"
-        :zoom="11"
+        :zoom="gmapZoom"
         style="width: 100%; height: 260px">
+          <Gmap-Marker
+          v-if="this.place"
+          label=""
+          :position="{
+            lat: this.place.geometry.location.lat(),
+            lng: this.place.geometry.location.lng(),
+          }"
+          ></Gmap-Marker>
         </gmap-map>
 
         <div class="back-next"> 
           <div class="back-next-body">
             <button type="button" class="__back" @click="backBtn3">Voltar</button>
-            <button type="button" class="__next" @click="nextBtn3">Próximo</button>
+            <button type="button" class="__next" :style="form3ok" @click="nextBtn3">Próximo</button>
           </div>
         </div> 
       
-      </form><!-- CADASTRO EVENTO Pg.3 -->
+      </form><!-- ********** CADASTRO EVENTO Pg.3 ********** -->
 
 
 
-      <!-- CADASTRO EVENTO Pg.4 -->
+
+      <!-- ********** CADASTRO EVENTO Pg.4 ********** -->
       <form class="cadastro-evento" v-show="cadastroEvento4">
 
         <h1 class="__form-title">Valor do Ingresso</h1>
+
+         <div class="back-next"> 
+          <div class="back-next-body">
+            <button type="button" class="__back" @click="backBtn4">Voltar</button>
+            <button type="button" class="__next" :style="form4ok" @click="nextBtn4">Próximo</button>
+          </div>
+        </div> 
       
-      </form><!-- CADASTRO EVENTO Pg.4 -->
+      </form><!-- ********** CADASTRO EVENTO Pg.4 ********** -->
 
 
 
-      <!-- CADASTRO EVENTO Pg.5 -->
+
+      <!-- ********** CADASTRO EVENTO Pg.5 ********** -->
       <form class="cadastro-evento" v-show="cadastroEvento5">
 
         <h1 class="__form-title">Imagens e Vídeo</h1>
       
-      </form><!-- CADASTRO EVENTO Pg.5 -->
+      </form><!-- ********** CADASTRO EVENTO Pg.5 ********** -->
 
 
 
-      <!-- CADASTRO EVENTO Pg.6 -->
+
+      <!-- ********** CADASTRO EVENTO Pg.6 ********** -->
       <form class="cadastro-evento" v-show="cadastroEvento6">
 
         <h1 class="__form-title">Investimento</h1>
       
-      </form><!-- CADASTRO EVENTO Pg.6 -->
+      </form><!-- ********** CADASTRO EVENTO Pg.6 ********** -->
     
+
 
 
   </div>
@@ -138,11 +161,16 @@ export default {
   transition: 'opacity',
   data () {
     return {
+      place: null,
       eventTitle: '',
       eventSubtitle: ''
     }
   },
   methods: {
+    setPlace (place) {
+      this.place = place
+    },
+    /* ******************** BACK BUTTONS ******************** */
     backBtn1 () {
       return this.$store.commit('m_cadastroEvento1', false), this.$store.commit('m_cadastroEvento0', true)
     },
@@ -152,6 +180,10 @@ export default {
     backBtn3 () {
       return this.$store.commit('m_cadastroEvento3', false), this.$store.commit('m_cadastroEvento2', true)
     },
+    backBtn4 () {
+      return this.$store.commit('m_cadastroEvento4', false), this.$store.commit('m_cadastroEvento3', true)
+    },
+    /* ******************** NEXT BUTTONS ******************** */
     nextBtn1 () {
       if (this.eventTitle.length > 0 && this.eventSubtitle.length > 0) {
         return this.$store.commit('m_cadastroEvento1', false), this.$store.commit('m_cadastroEvento2', true)
@@ -161,9 +193,21 @@ export default {
       if (1 < 2) {
         return this.$store.commit('m_cadastroEvento2', false), this.$store.commit('m_cadastroEvento3', true)
       }
+    },
+    nextBtn3 () {
+      if (this.place !== null) {
+        return this.$store.commit('m_cadastroEvento3', false), this.$store.commit('m_cadastroEvento4', true)
+      }
     }  
   },
   computed: {
+    gmapZoom () {
+      if (this.place !== null) {
+        return 15
+      } else {
+        return 12
+      }
+    },
     form1ok () {
       if (this.eventTitle.length > 0 && this.eventSubtitle.length > 0) {
         return 'background:rgb(252, 86, 86);cursor:pointer'
@@ -171,6 +215,11 @@ export default {
     },
     form2ok () {
       if (1 < 2) {
+        return 'background:rgb(252, 86, 86);cursor:pointer'
+      }
+    },
+    form3ok () {
+      if (this.place !== null) {
         return 'background:rgb(252, 86, 86);cursor:pointer'
       }
     },
@@ -299,7 +348,7 @@ export default {
       }
     }
     & .back-next {
-      position: absolute;
+      position: fixed;
       z-index: 4;
       bottom: 0;
       left: 0;
@@ -333,6 +382,7 @@ export default {
       border: none;
       border-bottom: 1px solid rgb(210, 210, 210);
       margin-bottom: 1.2rem;
+      outline: none;
     }
   }
 }
