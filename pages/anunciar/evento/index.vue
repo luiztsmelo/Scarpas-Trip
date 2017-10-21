@@ -38,12 +38,12 @@
 
         <div class="item-form">
           <label>Nome do evento</label>
-          <input type="text" v-model="eventTitle" required>
+          <input type="text" v-model="event.title" required>
         </div>  
 
         <div class="item-form">
           <label>Descrição básica</label>
-          <input type="text" v-model="eventSubtitle" required>
+          <input type="text" v-model="event.subtitle" required>
         </div>   
 
         <div class="back-next"> 
@@ -62,6 +62,16 @@
       <form class="cadastro-evento" v-show="cadastroEvento2">
 
         <h1 class="__form-title">Data e Horário</h1>
+
+        <div class="item-form">
+          <label>Dia do evento</label>
+          <input type="date" v-model="event.date" required>
+        </div>  
+
+        <div class="item-form">
+          <label>Horário</label>
+          <input type="time" v-model="event.hour" required>
+        </div>  
 
         <div class="back-next"> 
           <div class="back-next-body">
@@ -86,7 +96,7 @@
         </gmap-autocomplete>
 
         <gmap-map
-        :center="eventPosition"
+        :center="event.position"
         :zoom="mapZoom"
         :options="{styles: styles}"
         style="width: 100%; height: 260px">
@@ -165,16 +175,21 @@ export default {
   data () {
     return {
       place: null,
-      eventPosition: {lat:-20.6141320, lng:-46.0478760},
-      eventTitle: '',
-      eventSubtitle: '',
+      event: {  
+        position: {lat:-20.6141320, lng:-46.0478760},
+        title: '',
+        subtitle: '',
+        date: '',
+        hour: ''
+      }
+      
       
     }
   },
   methods: {
     setPlace (place) {
       this.place = place
-      this.eventPosition = this.place.geometry.location
+      this.event.position = this.place.geometry.location
     },
     /* ******************** BACK BUTTONS ******************** */
     backBtn1 () {
@@ -191,12 +206,12 @@ export default {
     },
     /* ******************** NEXT BUTTONS ******************** */
     nextBtn1 () {
-      if (this.eventTitle.length > 0 && this.eventSubtitle.length > 0) {
+      if (this.event.title.length > 0 && this.event.subtitle.length > 0) {
         return this.$store.commit('m_cadastroEvento1', false), this.$store.commit('m_cadastroEvento2', true)
       }
     },  
     nextBtn2 () {
-      if (1 < 2) {
+      if (this.event.date.length > 0 && this.event.hour.length > 0) {
         return this.$store.commit('m_cadastroEvento2', false), this.$store.commit('m_cadastroEvento3', true)
       }
     },
@@ -220,12 +235,12 @@ export default {
       }
     },
     form1ok () {
-      if (this.eventTitle.length > 0 && this.eventSubtitle.length > 0) {
+      if (this.event.title.length > 0 && this.event.subtitle.length > 0) {
         return 'background:rgb(255, 88, 88);cursor:pointer'
       }
     },
     form2ok () {
-      if (1 < 2) {
+      if (this.event.date.length > 0 && this.event.hour.length > 0) {
         return 'background:rgb(255, 88, 88);cursor:pointer'
       }
     },
