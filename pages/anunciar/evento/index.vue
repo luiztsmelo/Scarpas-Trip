@@ -222,22 +222,16 @@ export default {
     form1ok () {
       if (this.eventTitle.length > 0 && this.eventSubtitle.length > 0) {
         return 'background:rgb(255, 88, 88);cursor:pointer'
-      } else {
-        return 'background:rgb(255, 167, 167);cursor:pointer'
       }
     },
     form2ok () {
       if (1 < 2) {
         return 'background:rgb(255, 88, 88);cursor:pointer'
-      } else {
-        return 'background:rgb(255, 167, 167);cursor:pointer'
       }
     },
     form3ok () {
       if (this.place !== null) {
         return 'background:rgb(255, 88, 88);cursor:pointer'
-      } else {
-        return 'background:rgb(255, 167, 167);cursor:pointer'
       }
     },
     eventoPlanoCasual () {
@@ -385,6 +379,7 @@ export default {
         }
         & .__next {
           cursor: no-drop;
+          background:rgb(255, 167, 167);
           color: white;
         }
       }
