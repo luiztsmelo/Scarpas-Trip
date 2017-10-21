@@ -88,6 +88,7 @@
         <gmap-map
         :center="eventPosition"
         :zoom="mapZoom"
+        :options="{styles: styles}"
         style="width: 100%; height: 260px">
           <Gmap-Marker
           v-if="this.place"
@@ -151,7 +152,10 @@
 </template>
 
 <script>
+import { mapstyle } from '../../../mixins/mapstyle'
+
 export default {
+  mixins: [mapstyle],
   head () {
     return {
       title: 'Anunciar Evento em Escarpas do Lago ‒ Escarpas Trip'
@@ -163,7 +167,8 @@ export default {
       place: null,
       eventPosition: {lat:-20.6141320, lng:-46.0478760},
       eventTitle: '',
-      eventSubtitle: ''
+      eventSubtitle: '',
+      
     }
   },
   methods: {
