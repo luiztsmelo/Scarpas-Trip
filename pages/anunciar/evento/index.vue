@@ -65,7 +65,7 @@
 
         <div class="item-form">
           <label>Dia do evento</label>
-          <input type="date" v-model="event.date" required>
+          <input type="date" v-model="event.date" :min="today" required>
         </div>  
 
         <div class="item-form">
@@ -222,6 +222,18 @@ export default {
     }  
   },
   computed: {
+    today () {
+      let dd = new Date().getDate()
+      let mm = new Date().getMonth() + 1
+      let yyyy = new Date().getFullYear()
+      if (dd < 10) {
+        dd = '0' + dd
+      } 
+      if (mm < 10) {
+        mm = '0' + mm
+      } 
+      return yyyy + '-' + mm + '-' + dd
+    },
     eventPosition() {
       if (this.place !== null) {
         return this.eventPosition = {lat: this.place.geometry.location.lat, lng: this.place.geometry.location.lng}
