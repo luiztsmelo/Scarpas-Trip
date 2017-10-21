@@ -379,7 +379,7 @@ export default {
         }
         & .__next {
           cursor: no-drop;
-          background: rgb(119, 190, 245);
+          background: rgb(163, 212, 250);
           color: white;
         }
       }
