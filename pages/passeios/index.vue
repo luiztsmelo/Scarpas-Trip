@@ -22,7 +22,7 @@ export default {
   margin-top: 3.5rem;
   display: flex;
   flex-flow: column;
-  padding: 7%;
+  padding: 3rem 7%;
   transition: all .222s ease;
 }
 </style>
