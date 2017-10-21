@@ -221,17 +221,17 @@ export default {
     },
     form1ok () {
       if (this.eventTitle.length > 0 && this.eventSubtitle.length > 0) {
-        return 'background:rgb(252, 86, 86);cursor:pointer'
+        return 'background:rgb(33, 150, 243);cursor:pointer'
       }
     },
     form2ok () {
       if (1 < 2) {
-        return 'background:rgb(252, 86, 86);cursor:pointer'
+        return 'background:rgb(33, 150, 243);cursor:pointer'
       }
     },
     form3ok () {
       if (this.place !== null) {
-        return 'background:rgb(252, 86, 86);cursor:pointer'
+        return 'background:rgb(33, 150, 243);cursor:pointer'
       }
     },
     eventoPlanoCasual () {
@@ -379,7 +379,7 @@ export default {
         }
         & .__next {
           cursor: no-drop;
-          background: rgb(255, 165, 165);
+          background: rgb(119, 190, 245);
           color: white;
         }
       }
