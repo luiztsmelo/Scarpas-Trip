@@ -86,16 +86,15 @@
         </gmap-autocomplete>
 
         <gmap-map
-        :center="gmapCenter"
-        :zoom="gmapZoom"
+        :center="eventPosition"
+        :zoom="mapZoom"
         style="width: 100%; height: 260px">
           <Gmap-Marker
           v-if="this.place"
-          label=""
-          :position="{
-            lat: this.place.geometry.location.lat(),
-            lng: this.place.geometry.location.lng(),
-          }"
+          :clickable="true"
+          :draggable="true"
+          animation="4"
+          :position="this.place.geometry.location"
           ></Gmap-Marker>
         </gmap-map>
 
@@ -162,7 +161,7 @@ export default {
   data () {
     return {
       place: null,
-      gmapCenter: {lat:-20.6141320, lng:-46.0478760},
+      eventPosition: {lat:-20.6141320, lng:-46.0478760},
       eventTitle: '',
       eventSubtitle: ''
     }
@@ -170,7 +169,7 @@ export default {
   methods: {
     setPlace (place) {
       this.place = place
-      this.gmapCenter = this.place.geometry.location
+      this.eventPosition = this.place.geometry.location
     },
     /* ******************** BACK BUTTONS ******************** */
     backBtn1 () {
@@ -203,12 +202,12 @@ export default {
     }  
   },
   computed: {
-    gmapCenter() {
+    eventPosition() {
       if (this.place !== null) {
-        return this.gmapCenter = {lat: this.place.geometry.location.lat, lng: this.place.geometry.location.lng}
+        return this.eventPosition = {lat: this.place.geometry.location.lat, lng: this.place.geometry.location.lng}
       }
     },
-    gmapZoom () {
+    mapZoom () {
       if (this.place !== null) {
         return 15
       } else {
