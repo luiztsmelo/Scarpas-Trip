@@ -307,7 +307,7 @@ export default {
   & .progress-bar {
     position: fixed;
     top: 3.5rem;
-    height: 4px;
+    height: 3px;
     background: linear-gradient(80deg, #f857a6, #ff5858);
     transition: all .222s ease;
   }
