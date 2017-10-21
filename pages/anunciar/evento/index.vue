@@ -1,5 +1,5 @@
 <template>
-  <div class="anunciar-evento" :class="{ whitebgcolor: !cadastroEvento0 }">
+  <div class="anunciar-evento">
 
     <!-- PLANO EVENTO -->
     <div class="plano-evento" v-show="cadastroEvento0">
@@ -272,13 +272,13 @@ export default {
   margin-top: 3.5rem;
   display: flex;
   flex-flow: column;
-  background: linear-gradient(60deg, #4568dc, #b06ab3);
+  background: linear-gradient(40deg,#f857a6, #ff5858);
   color: white;
   transition: all .222s ease;
   height: calc(100vh - 3.5rem);
   & .plano-evento {
     & .__title {
-      font-size: 28px;
+      font-size: 29px;
       font-weight: 600;
       padding: 3rem 7% 0 7%;
     }
@@ -398,9 +398,6 @@ export default {
   }
 }
 
-.whitebgcolor {
-  background: white;
-}
 /* TRANSITIONS */
 
 .cadastro-evento-animation-enter-active, .cadastro-evento-animation-leave-active {

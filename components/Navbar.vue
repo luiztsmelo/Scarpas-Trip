@@ -59,11 +59,6 @@ export default {
       font-weight: 400;
       color: rgb(42, 42, 42);
     }
-    & .__anunciar {
-      padding: 1rem 0;
-      font-size: 11px;
-      font-weight: 600;
-    }
     & .nav {
       display: flex;
       align-items: center;
