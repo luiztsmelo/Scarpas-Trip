@@ -91,6 +91,7 @@
         <h1 class="__form-title">Local</h1>
 
         <gmap-autocomplete class="__gmap-autocomplete"
+        type="search"
         placeholder="Digite o endereço aqui"
         @place_changed="setPlace">
         </gmap-autocomplete>
