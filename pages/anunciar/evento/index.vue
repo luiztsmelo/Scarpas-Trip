@@ -377,6 +377,7 @@ export default {
         font-weight: 500;
       }
       & input {
+        width: 100%;
         font-size: 19px;
         font-weight: 300;
         background: white;
