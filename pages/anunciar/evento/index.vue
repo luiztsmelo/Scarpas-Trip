@@ -23,139 +23,140 @@
     </div><!-- PLANO CONTAINER -->
 
 
+    <div class="progress-bar" v-show="!cadastroEvento0" :style="'width:' + progressBar + '%'"></div>
 
 
-      <!-- ********** CADASTRO EVENTO Pg.1 ********** -->
-      <form class="cadastro-evento" v-show="cadastroEvento1">
+    <!-- ********** CADASTRO EVENTO Pg.1 ********** -->
+    <form class="cadastro-evento" v-show="cadastroEvento1">
 
-        <h1 class="__form-title">Informações básicas</h1>
+      <h1 class="__form-title">Informações básicas</h1>
 
-        <div class="item-form">
-          <label>Plano</label>
-          <span class="__plano-selecionado" v-show="eventoPlanoCasual">Casual</span>
-          <span class="__plano-selecionado" v-show="eventoPlanoPro">Profissional</span>
-        </div>  
+      <div class="item-form">
+        <label>Plano</label>
+        <span class="__plano-selecionado" v-show="eventoPlanoCasual">Casual</span>
+        <span class="__plano-selecionado" v-show="eventoPlanoPro">Profissional</span>
+      </div>  
 
-        <div class="item-form">
-          <label>Nome do evento</label>
-          <input type="text" v-model="event.title" required>
-        </div>  
+      <div class="item-form">
+        <label>Nome do evento</label>
+        <input type="text" v-model="event.title" required>
+      </div>  
 
-        <div class="item-form">
-          <label>Descrição básica</label>
-          <input type="text" v-model="event.subtitle" required>
-        </div>   
+      <div class="item-form">
+        <label>Descrição básica</label>
+        <input type="text" v-model="event.subtitle" required>
+      </div>   
 
-        <div class="back-next"> 
-          <div class="back-next-body">
-            <button type="button" class="__back" @click="backBtn1">Voltar</button>
-            <button type="button" class="__next" :style="form1ok" @click="nextBtn1">Próximo</button>
-          </div>
-        </div> 
+      <div class="back-next"> 
+        <div class="back-next-body">
+          <button type="button" class="__back" @click="backBtn1">Voltar</button>
+          <button type="button" class="__next" :style="form1ok" @click="nextBtn1">Próximo</button>
+        </div>
+      </div> 
 
-      </form> <!-- ********** CADASTRO EVENTO Pg.1 ********** -->
-   
-
-
-
-      <!-- ********** CADASTRO EVENTO Pg.2 ********** -->
-      <form class="cadastro-evento" v-show="cadastroEvento2">
-
-        <h1 class="__form-title">Data e Horário</h1>
-
-        <div class="item-form">
-          <label>Dia do evento</label>
-          <input type="date" v-model="event.date" :min="today" required>
-        </div>  
-
-        <div class="item-form">
-          <label>Horário</label>
-          <input type="time" v-model="event.hour" required>
-        </div>  
-
-        <div class="back-next"> 
-          <div class="back-next-body">
-            <button type="button" class="__back" @click="backBtn2">Voltar</button>
-            <button type="button" class="__next" :style="form2ok" @click="nextBtn2">Próximo</button>
-          </div>
-        </div> 
-      
-      </form><!-- ********** CADASTRO EVENTO Pg.2 ********** -->
+    </form> <!-- ********** CADASTRO EVENTO Pg.1 ********** -->
+  
 
 
 
+    <!-- ********** CADASTRO EVENTO Pg.2 ********** -->
+    <form class="cadastro-evento" v-show="cadastroEvento2">
 
-      <!-- ********** CADASTRO EVENTO Pg.3 ********** -->
-      <form class="cadastro-evento" v-show="cadastroEvento3">
+      <h1 class="__form-title">Data e Horário</h1>
 
-        <h1 class="__form-title">Local</h1>
+      <div class="item-form">
+        <label>Dia do evento</label>
+        <input type="date" v-model="event.date" :min="today" required>
+      </div>  
 
-        <gmap-autocomplete class="__gmap-autocomplete"
-        type="search"
-        placeholder="Digite o endereço aqui"
-        @place_changed="setPlace">
-        </gmap-autocomplete>
+      <div class="item-form">
+        <label>Horário</label>
+        <input type="time" v-model="event.hour" required>
+      </div>  
 
-        <gmap-map
-        :center="event.position"
-        :zoom="mapZoom"
-        :options="{styles: styles}"
-        style="width: 100%; height: 260px">
-          <Gmap-Marker
-          v-if="this.place"
-          :clickable="true"
-          :draggable="true"
-          animation="4"
-          :position="this.place.geometry.location"
-          ></Gmap-Marker>
-        </gmap-map>
-
-        <div class="back-next"> 
-          <div class="back-next-body">
-            <button type="button" class="__back" @click="backBtn3">Voltar</button>
-            <button type="button" class="__next" :style="form3ok" @click="nextBtn3">Próximo</button>
-          </div>
-        </div> 
-      
-      </form><!-- ********** CADASTRO EVENTO Pg.3 ********** -->
-
-
-
-
-      <!-- ********** CADASTRO EVENTO Pg.4 ********** -->
-      <form class="cadastro-evento" v-show="cadastroEvento4">
-
-        <h1 class="__form-title">Valor do Ingresso</h1>
-
-         <div class="back-next"> 
-          <div class="back-next-body">
-            <button type="button" class="__back" @click="backBtn4">Voltar</button>
-            <button type="button" class="__next" :style="form4ok" @click="nextBtn4">Próximo</button>
-          </div>
-        </div> 
-      
-      </form><!-- ********** CADASTRO EVENTO Pg.4 ********** -->
-
-
-
-
-      <!-- ********** CADASTRO EVENTO Pg.5 ********** -->
-      <form class="cadastro-evento" v-show="cadastroEvento5">
-
-        <h1 class="__form-title">Imagens e Vídeo</h1>
-      
-      </form><!-- ********** CADASTRO EVENTO Pg.5 ********** -->
-
-
-
-
-      <!-- ********** CADASTRO EVENTO Pg.6 ********** -->
-      <form class="cadastro-evento" v-show="cadastroEvento6">
-
-        <h1 class="__form-title">Investimento</h1>
-      
-      </form><!-- ********** CADASTRO EVENTO Pg.6 ********** -->
+      <div class="back-next"> 
+        <div class="back-next-body">
+          <button type="button" class="__back" @click="backBtn2">Voltar</button>
+          <button type="button" class="__next" :style="form2ok" @click="nextBtn2">Próximo</button>
+        </div>
+      </div> 
     
+    </form><!-- ********** CADASTRO EVENTO Pg.2 ********** -->
+
+
+
+
+    <!-- ********** CADASTRO EVENTO Pg.3 ********** -->
+    <form class="cadastro-evento" v-show="cadastroEvento3">
+
+      <h1 class="__form-title">Local</h1>
+
+      <gmap-autocomplete class="__gmap-autocomplete"
+      type="search"
+      placeholder="Digite o endereço aqui"
+      @place_changed="setPlace">
+      </gmap-autocomplete>
+
+      <gmap-map
+      :center="event.position"
+      :zoom="mapZoom"
+      :options="{styles: styles}"
+      style="width: 100%; height: 260px">
+        <Gmap-Marker
+        v-if="this.place"
+        :clickable="true"
+        :draggable="true"
+        animation="4"
+        :position="this.place.geometry.location"
+        ></Gmap-Marker>
+      </gmap-map>
+
+      <div class="back-next"> 
+        <div class="back-next-body">
+          <button type="button" class="__back" @click="backBtn3">Voltar</button>
+          <button type="button" class="__next" :style="form3ok" @click="nextBtn3">Próximo</button>
+        </div>
+      </div> 
+    
+    </form><!-- ********** CADASTRO EVENTO Pg.3 ********** -->
+
+
+
+
+    <!-- ********** CADASTRO EVENTO Pg.4 ********** -->
+    <form class="cadastro-evento" v-show="cadastroEvento4">
+
+      <h1 class="__form-title">Valor do Ingresso</h1>
+
+        <div class="back-next"> 
+        <div class="back-next-body">
+          <button type="button" class="__back" @click="backBtn4">Voltar</button>
+          <button type="button" class="__next" :style="form4ok" @click="nextBtn4">Próximo</button>
+        </div>
+      </div> 
+    
+    </form><!-- ********** CADASTRO EVENTO Pg.4 ********** -->
+
+
+
+
+    <!-- ********** CADASTRO EVENTO Pg.5 ********** -->
+    <form class="cadastro-evento" v-show="cadastroEvento5">
+
+      <h1 class="__form-title">Imagens e Vídeo</h1>
+    
+    </form><!-- ********** CADASTRO EVENTO Pg.5 ********** -->
+
+
+
+
+    <!-- ********** CADASTRO EVENTO Pg.6 ********** -->
+    <form class="cadastro-evento" v-show="cadastroEvento6">
+
+      <h1 class="__form-title">Investimento</h1>
+    
+    </form><!-- ********** CADASTRO EVENTO Pg.6 ********** -->
+  
 
 
 
@@ -175,6 +176,7 @@ export default {
   transition: 'opacity',
   data () {
     return {
+      progressBar: 0,
       place: null,
       event: {  
         position: {lat:-20.6141320, lng:-46.0478760},
@@ -183,8 +185,6 @@ export default {
         date: '',
         hour: ''
       }
-      
-      
     }
   },
   methods: {
@@ -208,17 +208,17 @@ export default {
     /* ******************** NEXT BUTTONS ******************** */
     nextBtn1 () {
       if (this.event.title.length > 0 && this.event.subtitle.length > 0) {
-        return this.$store.commit('m_cadastroEvento1', false), this.$store.commit('m_cadastroEvento2', true)
+        return this.$store.commit('m_cadastroEvento1', false), this.$store.commit('m_cadastroEvento2', true), this.progressBar = (100/6)
       }
     },  
     nextBtn2 () {
       if (this.event.date.length > 0 && this.event.hour.length > 0) {
-        return this.$store.commit('m_cadastroEvento2', false), this.$store.commit('m_cadastroEvento3', true)
+        return this.$store.commit('m_cadastroEvento2', false), this.$store.commit('m_cadastroEvento3', true), this.progressBar = (100/6)*2
       }
     },
     nextBtn3 () {
       if (this.place !== null) {
-        return this.$store.commit('m_cadastroEvento3', false), this.$store.commit('m_cadastroEvento4', true)
+        return this.$store.commit('m_cadastroEvento3', false), this.$store.commit('m_cadastroEvento4', true), this.progressBar = (100/6)*3
       }
     }  
   },
@@ -304,6 +304,14 @@ export default {
   color: white;
   transition: all .222s ease;
   height: calc(100vh - 3.5rem);
+  & .progress-bar {
+    position: fixed;
+    top: 3.5rem;
+    height: 4px;
+    background: linear-gradient(80deg, #f857a6, #ff5858);
+    transition: all .222s ease;
+  }
+  /* ******************** PLANO EVENTO ******************** */
   & .plano-evento {
     & .__title {
       font-size: 29px;
@@ -345,6 +353,7 @@ export default {
       }
     }
   }
+  /* ******************** CADASTRO EVENTO ******************** */
   & .cadastro-evento {
     background: white;
     color: var(--color01);
