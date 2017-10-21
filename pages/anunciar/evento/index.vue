@@ -379,6 +379,7 @@ export default {
       & input {
         font-size: 19px;
         font-weight: 300;
+        background: white;
         color: rgb(92, 92, 92);
         padding: .4rem 0 .6rem 0;
         border: none;
