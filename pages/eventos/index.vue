@@ -28,7 +28,7 @@ export default {
 @import url('../../assets/css/main.css');
 
 .eventos {
-  margin-top: 3.1rem;
+  margin-top: 3.3rem;
   display: flex;
   flex-flow: column;
   padding: 3rem 7%;

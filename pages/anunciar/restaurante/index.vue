@@ -20,13 +20,13 @@ export default {
 @import url('../../../assets/css/main.css');
 
 .anunciar-restaurante {
-  margin-top: 3.1rem;
+  margin-top: 3.3rem;
   display: flex;
   flex-flow: column;
   background: linear-gradient(40deg, #feb47b, #ff7e5f);
   color: white;
   transition: all .222s ease;
-  height: calc(100vh - 3.1rem);
+  height: calc(100vh - 3.3rem);
   & .__title {
     font-size: 29px;
     font-weight: 600;

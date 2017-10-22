@@ -69,7 +69,7 @@ export default {
   z-index: 4;
   width:  100%;
   height: 100%;
-  top: 3.1rem;
+  top: 3.3rem;
   background: white;
   overflow: hidden;
   transition: all .3s ease;
