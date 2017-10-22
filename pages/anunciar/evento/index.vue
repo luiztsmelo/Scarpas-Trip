@@ -543,21 +543,21 @@ export default {
       flex-flow: column;
       margin-top: 1.5rem;
       & .__valor-lotes-title {
-        font-size: 21px;
+        font-size: 22px;
         font-weight: 400;
-        margin-bottom: 1.2rem;
+        margin-bottom: 1.3rem;
       }
       & .valor-lotes-checks {
         display: flex;
         align-items: center;
-        margin-bottom: .6rem;
-        & .__valor-lotes-checkbox {
-
+        margin-bottom: .8rem;
+        & .__valor-lotes-checkbox:checked {
+          background: #ff5858;
         }
         & .__valor-lotes-answer {
-          font-size: 19px;
+          font-size: 20px;
           font-weight: 300;
-          padding-left: .6rem;
+          padding-left: .7rem;
         }
       }
     }

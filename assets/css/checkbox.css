@@ -1,3 +1,7 @@
 input[type="checkbox"] {
-  
+  all: initial;
+  width: 1.3rem;
+  height: 1.3rem;
+  background: rgb(222, 222, 222);
+  border-radius: 50%;
 }
