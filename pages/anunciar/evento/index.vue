@@ -128,6 +128,21 @@
 
       <h1 class="__form-title">Valor do Ingresso</h1>
 
+      <div class="valor-lotes">
+        <h2 class="__valor-lotes-title">Lote único ou múltiplo?</h2>
+        <div class="valor-lotes-checks">
+          <input class="__valor-lotes-checkbox" ref="valorCheck1" type="checkbox">
+          <span class="__valor-lotes-answer" @click="onValorChecked1">Único</span>
+        </div>    
+        <div class="valor-lotes-checks">
+          <input class="__valor-lotes-checkbox" ref="valorCheck2" type="checkbox">
+          <span class="__valor-lotes-answer" @click="onValorChecked2">Múltiplo</span>
+        </div> 
+      </div>
+      <!-- <input type="number" placeholder="0,00" min="0" step="any" data-number-to-fixed="2" data-number-stepfactor="100" class="currency" /> -->
+
+      
+
       <div class="back-next"> 
         <div class="back-next-body">
           <button type="button" class="__back" @click="backBtn4">Voltar</button>
@@ -145,7 +160,7 @@
 
       <h1 class="__form-title">Imagens e Vídeo</h1>
 
-      <h2 class="__form-subtitle">Banner e vídeo legais fará toda a diferença na hora da divulgação de seu evento. Capriche 😉</h2>
+      <h2 class="__form-subtitle">Banner e vídeo legais farão toda a diferença na hora da divulgação de seu evento. Se possível, adicione também fotos do local do evento 😉</h2>
 
       <button type="button" @click="onPickImage" class="__image-input-btn">Adicionar Imagens</button>
       <input type="file" style="display:none" ref="imageInput" accept="image/*" @change="onImagePicked">
@@ -211,27 +226,35 @@ export default {
     }
   },
   methods: {
+    onValorChecked1 () {
+      this.$refs.valorCheck1.click()
+    },
+    onValorChecked2 () {
+      this.$refs.valorCheck2.click()
+    },
+    /* ******************** IMAGE INPUT ******************** */
     onPickImage () {
       this.$refs.imageInput.click()
     },
     onImagePicked (e) {
-      var files = e.target.files || e.dataTransfer.files
+      const files = e.target.files || e.dataTransfer.files
       if (!files.length)
         return
       this.createImage(files[0])
     },
-    createImage(file) {
-      var image = new Image()
-      var reader = new FileReader()
+    createImage (file) {
+      const image = new Image()
+      const reader = new FileReader()
 
       reader.onload = (e) => {
         this.event.image = e.target.result
-      };
+      }
       reader.readAsDataURL(file)
     },
     removeImage: function (e) {
       this.event.image = ''
     },
+    /* ******************** GOOGLE MAPS ******************** */
     setPlace (place) {
       this.place = place
       this.event.position = this.place.geometry.location
@@ -514,6 +537,29 @@ export default {
       border-bottom: 1px solid rgb(210, 210, 210);
       margin: 1rem 0;
       outline: none;
+    }
+    & .valor-lotes {
+      display: flex;
+      flex-flow: column;
+      margin-top: 1.5rem;
+      & .__valor-lotes-title {
+        font-size: 21px;
+        font-weight: 400;
+        margin-bottom: 1.2rem;
+      }
+      & .valor-lotes-checks {
+        display: flex;
+        align-items: center;
+        margin-bottom: .6rem;
+        & .__valor-lotes-checkbox {
+
+        }
+        & .__valor-lotes-answer {
+          font-size: 19px;
+          font-weight: 300;
+          padding-left: .6rem;
+        }
+      }
     }
     & .__image-input-btn {
       font-size: 15px;
