@@ -130,13 +130,13 @@
 
       <div class="valor-lotes">
         <h2 class="__valor-lotes-title">Lote único ou múltiplo?</h2>
-        <div class="valor-lotes-checks">
+        <div class="valor-lotes-checks" @click="onValorChecked1">
           <input class="__valor-lotes-checkbox" ref="valorCheck1" type="checkbox">
-          <span class="__valor-lotes-answer" @click="onValorChecked1">Único</span>
+          <span class="__valor-lotes-answer">Único</span>
         </div>    
-        <div class="valor-lotes-checks">
+        <div class="valor-lotes-checks" @click="onValorChecked2">
           <input class="__valor-lotes-checkbox" ref="valorCheck2" type="checkbox">
-          <span class="__valor-lotes-answer" @click="onValorChecked2">Múltiplo</span>
+          <span class="__valor-lotes-answer">Múltiplo</span>
         </div> 
       </div>
       <!-- <input type="number" placeholder="0,00" min="0" step="any" data-number-to-fixed="2" data-number-stepfactor="100" class="currency" /> -->
@@ -550,7 +550,7 @@ export default {
       & .valor-lotes-checks {
         display: flex;
         align-items: center;
-        margin-bottom: .8rem;
+        margin-bottom: .9rem;
         & .__valor-lotes-checkbox:checked {
           background: #ff5858;
         }
