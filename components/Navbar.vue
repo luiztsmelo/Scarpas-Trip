@@ -38,7 +38,7 @@ export default {
   top: 0;
   left: 0;
   z-index: 5;
-  height: 3.5rem;
+  height: 3.1rem;
   width:  100%;
   background: white;
   transition: all .222s ease;
@@ -53,7 +53,7 @@ export default {
     align-items: center;
     & .__brand-name {
       font-family: var(--brand-font);
-      font-size: 26px;
+      font-size: 25px;
       line-height: 0;
       user-select: none;
       font-weight: 400;

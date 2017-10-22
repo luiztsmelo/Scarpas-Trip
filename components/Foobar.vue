@@ -72,7 +72,7 @@ export default {
   z-index: 3;
   bottom: 0;
   left: 0;
-  height: 3.5rem;
+  height: 3.1rem;
   width: 100%;
   background: white;
   transition: all .3s ease;
@@ -100,7 +100,7 @@ export default {
         color: rgb(51, 51, 51);
       }
       & img {
-        margin-bottom: 9px;
+        margin-bottom: 7px;
         width: 1.3rem;
         height: auto;
       }

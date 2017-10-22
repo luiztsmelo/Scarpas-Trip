@@ -96,7 +96,7 @@ export default {
 @import url('../assets/css/main.css');
 
 .home {
-  margin-top: 3.5rem;
+  margin-top: 3.1rem;
   display: flex;
   flex-flow: column;
   justify-content: space-between;

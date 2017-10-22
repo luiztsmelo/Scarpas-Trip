@@ -297,16 +297,16 @@ export default {
 @import url('../../../assets/css/main.css');
 
 .anunciar-evento {
-  margin-top: 3.5rem;
+  margin-top: 3.1rem;
   display: flex;
   flex-flow: column;
   background: linear-gradient(40deg,#f857a6, #ff5858);
   color: white;
   transition: all .222s ease;
-  height: calc(100vh - 3.5rem);
+  height: calc(100vh - 3.1rem);
   & .progress-bar {
     position: fixed;
-    top: 3.5rem;
+    top: 3.1rem;
     height: 3px;
     background: linear-gradient(80deg, #f857a6, #ff5858);
     transition: all .222s ease;
@@ -331,7 +331,7 @@ export default {
         cursor: pointer;
         display: flex;
         align-items: center;
-        height: 3.5rem;
+        height: 3.1rem;
         margin: .5rem 0;
         border-radius: 3px;
         & .__plano-valor {
@@ -357,7 +357,7 @@ export default {
   & .cadastro-evento {
     background: white;
     color: var(--color01);
-    height: calc(100vh - 3.5rem);
+    height: calc(100vh - 3.1rem);
     padding: 0 7%;
 
     & .__title {

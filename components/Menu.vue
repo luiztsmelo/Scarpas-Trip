@@ -25,7 +25,7 @@
               <span class="__item-text" >Anunciar Passeio</span>
             </nuxt-link>
           </div>
-          
+
           <div @click="$store.commit('m_showMenu', false), $store.commit('m_menuIconAnime', false), $store.commit('m_showFoobar', false)">
             <nuxt-link to="/anunciar/restaurante" class="menu-item">
               <img src="../assets/img/comidas.svg" alt="" class="__item-img-color">
@@ -69,7 +69,7 @@ export default {
   z-index: 4;
   width:  100%;
   height: 100%;
-  top: 3.5rem;
+  top: 3.1rem;
   background: white;
   overflow: hidden;
   transition: all .3s ease;
