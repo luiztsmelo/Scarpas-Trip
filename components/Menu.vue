@@ -108,7 +108,7 @@ export default {
     }
     & .tmstudio {
       position: absolute;
-      bottom: 4.2rem;
+      bottom: 3.7rem;
       left: 0;
       right: 0;
       margin: 0 auto;

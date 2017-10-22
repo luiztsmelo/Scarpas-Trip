@@ -23,7 +23,7 @@ export default {
   margin-top: 3.1rem;
   display: flex;
   flex-flow: column;
-  background: linear-gradient(40deg, #ff7e5f, #feb47b);
+  background: linear-gradient(40deg, #feb47b, #ff7e5f);
   color: white;
   transition: all .222s ease;
   height: calc(100vh - 3.1rem);
