@@ -130,12 +130,12 @@
 
       <div class="valor-lotes">
         <h2 class="__valor-lotes-title">Lote único ou múltiplo?</h2>
-        <div class="valor-lotes-checks" @click="onValorChecked1">
-          <input class="__valor-lotes-checkbox" ref="valorCheck1" type="checkbox">
+        <div class="valor-lotes-checks" @click="checkboxUnico, event.isLoteUnico=true, event.isLoteMultiplo=false">
+          <input class="__valor-lotes-checkbox" ref="loteUnico" type="checkbox" :checked="event.isLoteUnico">
           <span class="__valor-lotes-answer">Único</span>
         </div>    
-        <div class="valor-lotes-checks" @click="onValorChecked2">
-          <input class="__valor-lotes-checkbox" ref="valorCheck2" type="checkbox">
+        <div class="valor-lotes-checks" @click="checkboxMultiplo, event.isLoteMultiplo=true, event.isLoteUnico=false">
+          <input class="__valor-lotes-checkbox" ref="loteMultiplo" type="checkbox" :checked="event.isLoteMultiplo">
           <span class="__valor-lotes-answer">Múltiplo</span>
         </div> 
       </div>
@@ -213,6 +213,7 @@ export default {
   data () {
     return {
       progressBar: 0,
+      
       place: '',
       event: {  
         position: {lat:-20.6141320, lng:-46.0478760},
@@ -220,17 +221,19 @@ export default {
         subtitle: '',
         date: '',
         hour: '',
+        isLoteUnico: false,
+        isLoteMultiplo: false,
         imageURL: '',
         image: ''
       }
     }
   },
   methods: {
-    onValorChecked1 () {
-      this.$refs.valorCheck1.click()
+    checkboxUnico () {
+      this.$refs.loteUnico.click()
     },
-    onValorChecked2 () {
-      this.$refs.valorCheck2.click()
+    checkboxMultiplo () {
+      this.$refs.loteMultiplo.click()
     },
     /* ******************** IMAGE INPUT ******************** */
     onPickImage () {
@@ -486,12 +489,12 @@ export default {
       flex-flow: column;
       margin: 1.7rem 0;
       & label {
-        font-size: 17px;
+        font-size: 18px;
         font-weight: 500;
       }
       & input {
         width: 100%;
-        font-size: 19px;
+        font-size: 20px;
         font-weight: 300;
         background: white;
         color: rgb(92, 92, 92);
@@ -528,7 +531,7 @@ export default {
       }
     }
     & .__gmap-autocomplete {
-      font-size: 17px;
+      font-size: 19px;
       font-weight: 300;
       color: rgb(92, 92, 92);
       width: 100%;
@@ -543,7 +546,7 @@ export default {
       flex-flow: column;
       margin-top: 1.5rem;
       & .__valor-lotes-title {
-        font-size: 22px;
+        font-size: 23px;
         font-weight: 400;
         margin-bottom: 1.3rem;
       }
