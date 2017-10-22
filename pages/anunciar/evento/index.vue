@@ -555,7 +555,7 @@ export default {
           background: #ff5858;
         }
         & .__valor-lotes-answer {
-          font-size: 20px;
+          font-size: 21px;
           font-weight: 300;
           padding-left: .7rem;
         }
