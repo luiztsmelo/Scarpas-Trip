@@ -148,7 +148,9 @@
       <h2 class="__form-subtitle">Banner e vídeo legais fará toda a diferença na hora da divulgação de seu evento. Capriche 😉</h2>
 
       <button type="button" @click="onPickImage" class="__image-input-btn">Adicionar Imagens</button>
-      <input type="file" style="display:none" ref="imageInput" accept="image/*">
+      <input type="file" style="display:none" ref="imageInput" accept="image/*" @change="onImagePicked">
+
+      <img :src="event.image" class="__preview-img">
 
       <div class="back-next"> 
         <div class="back-next-body">
@@ -196,19 +198,39 @@ export default {
   data () {
     return {
       progressBar: 0,
-      place: null,
+      place: '',
       event: {  
         position: {lat:-20.6141320, lng:-46.0478760},
         title: '',
         subtitle: '',
         date: '',
-        hour: ''
+        hour: '',
+        imageURL: '',
+        image: ''
       }
     }
   },
   methods: {
     onPickImage () {
       this.$refs.imageInput.click()
+    },
+    onImagePicked (e) {
+      var files = e.target.files || e.dataTransfer.files
+      if (!files.length)
+        return
+      this.createImage(files[0])
+    },
+    createImage(file) {
+      var image = new Image()
+      var reader = new FileReader()
+
+      reader.onload = (e) => {
+        this.event.image = e.target.result
+      };
+      reader.readAsDataURL(file)
+    },
+    removeImage: function (e) {
+      this.event.image = ''
     },
     setPlace (place) {
       this.place = place
@@ -501,6 +523,10 @@ export default {
       background: rgb(92, 92, 92);
       padding: .7rem 1.1rem;
       border-radius: 4px;
+    }
+    & .__preview-img {
+      width: 100%;
+      height: auto;
     }
   }
 }
