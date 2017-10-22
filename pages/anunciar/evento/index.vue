@@ -145,7 +145,7 @@
 
       <h1 class="__form-title">Imagens e Vídeo</h1>
 
-      <h2 class="__form-subtitle">Qualidade aqui faz toda a diferença na hora da divulgação de seu evento</h2>
+      <h2 class="__form-subtitle">Banner e vídeo legais fará toda a diferença na hora da divulgação de seu evento. Capriche 😉</h2>
 
       <button type="button" @click="onPickImage" class="__image-input-btn">Adicionar Imagens</button>
       <input type="file" style="display:none" ref="imageInput" accept="image/*">
@@ -433,7 +433,8 @@ export default {
     & .__form-subtitle {
       font-size: 18px;
       font-weight: 400;
-      padding: 1rem 0 1.5rem 0;
+      padding: 1.5rem 0 1.5rem 0;
+      line-height: 25px;
     }
     & .item-form {
       display: flex;
@@ -495,7 +496,7 @@ export default {
     & .__image-input-btn {
       font-size: 15px;
       font-weight: 500;
-      margin: 1rem 0;
+      margin: .5rem 0;
       color: white;
       background: rgb(92, 92, 92);
       padding: .7rem 1.1rem;
