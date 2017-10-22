@@ -128,7 +128,7 @@
 
       <h1 class="__form-title">Valor do Ingresso</h1>
 
-        <div class="back-next"> 
+      <div class="back-next"> 
         <div class="back-next-body">
           <button type="button" class="__back" @click="backBtn4">Voltar</button>
           <button type="button" class="__next" :style="form4ok" @click="nextBtn4">Próximo</button>
@@ -144,6 +144,18 @@
     <form class="cadastro-evento" v-show="cadastroEvento5">
 
       <h1 class="__form-title">Imagens e Vídeo</h1>
+
+      <h2 class="__form-subtitle">Qualidade aqui faz toda a diferença na hora da divulgação de seu evento</h2>
+
+      <button type="button" @click="onPickImage" class="__image-input-btn">Adicionar Imagens</button>
+      <input type="file" style="display:none" ref="imageInput" accept="image/*">
+
+      <div class="back-next"> 
+        <div class="back-next-body">
+          <button type="button" class="__back" @click="backBtn5">Voltar</button>
+          <button type="button" class="__next" :style="form5ok" @click="nextBtn5">Próximo</button>
+        </div>
+      </div> 
     
     </form><!-- ********** CADASTRO EVENTO Pg.5 ********** -->
 
@@ -154,6 +166,13 @@
     <form class="cadastro-evento" v-show="cadastroEvento6">
 
       <h1 class="__form-title">Investimento</h1>
+
+      <div class="back-next"> 
+        <div class="back-next-body">
+          <button type="button" class="__back" @click="backBtn6">Voltar</button>
+          <button type="button" class="__next" :style="form6ok" @click="nextBtn6">Próximo</button>
+        </div>
+      </div>
     
     </form><!-- ********** CADASTRO EVENTO Pg.6 ********** -->
   
@@ -188,6 +207,9 @@ export default {
     }
   },
   methods: {
+    onPickImage () {
+      this.$refs.imageInput.click()
+    },
     setPlace (place) {
       this.place = place
       this.event.position = this.place.geometry.location
@@ -205,6 +227,12 @@ export default {
     backBtn4 () {
       return this.$store.commit('m_cadastroEvento4', false), this.$store.commit('m_cadastroEvento3', true)
     },
+    backBtn5 () {
+      return this.$store.commit('m_cadastroEvento5', false), this.$store.commit('m_cadastroEvento4', true)
+    },
+    backBtn6 () {
+      return this.$store.commit('m_cadastroEvento6', false), this.$store.commit('m_cadastroEvento5', true)
+    },
     /* ******************** NEXT BUTTONS ******************** */
     nextBtn1 () {
       if (this.event.title.length > 0 && this.event.subtitle.length > 0) {
@@ -219,6 +247,16 @@ export default {
     nextBtn3 () {
       if (this.place !== null) {
         return this.$store.commit('m_cadastroEvento3', false), this.$store.commit('m_cadastroEvento4', true), this.progressBar = (100/6)*3
+      }
+    },  
+    nextBtn4 () {
+      if (1<2) {
+        return this.$store.commit('m_cadastroEvento4', false), this.$store.commit('m_cadastroEvento5', true), this.progressBar = (100/6)*4
+      }
+    },
+    nextBtn5 () {
+      if (1<2) {
+        return this.$store.commit('m_cadastroEvento5', false), this.$store.commit('m_cadastroEvento6', true), this.progressBar = (100/6)*5
       }
     }  
   },
@@ -259,6 +297,21 @@ export default {
     },
     form3ok () {
       if (this.place !== null) {
+        return 'background:rgb(255, 88, 88);cursor:pointer'
+      }
+    },
+    form4ok () {
+      if (1<2) {
+        return 'background:rgb(255, 88, 88);cursor:pointer'
+      }
+    },
+    form5ok () {
+      if (1<2) {
+        return 'background:rgb(255, 88, 88);cursor:pointer'
+      }
+    },
+    form6ok () {
+      if (1<2) {
         return 'background:rgb(255, 88, 88);cursor:pointer'
       }
     },
@@ -377,6 +430,11 @@ export default {
       font-weight: 600;
       padding: 3rem 0 1.5rem 0;
     }
+    & .__form-subtitle {
+      font-size: 18px;
+      font-weight: 400;
+      padding: 1rem 0 1.5rem 0;
+    }
     & .item-form {
       display: flex;
       flex-flow: column;
@@ -431,8 +489,17 @@ export default {
       height: 2rem;
       border: none;
       border-bottom: 1px solid rgb(210, 210, 210);
-      margin-bottom: 1.2rem;
+      margin: 1rem 0;
       outline: none;
+    }
+    & .__image-input-btn {
+      font-size: 15px;
+      font-weight: 500;
+      margin: 1rem 0;
+      color: white;
+      background: rgb(92, 92, 92);
+      padding: .7rem 1.1rem;
+      border-radius: 4px;
     }
   }
 }

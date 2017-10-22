@@ -12,7 +12,7 @@ export default {
       title: 'Anunciar Estadia em Escarpas do Lago ‒ Escarpas Trip'
     }
   },
-  transition: 'slide-left'
+  transition: 'opacity'
 }
 </script>
 

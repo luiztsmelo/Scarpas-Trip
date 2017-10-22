@@ -12,7 +12,7 @@ export default {
       title: 'Anunciar Restaurante em Escarpas do Lago ‒ Escarpas Trip'
     }
   },
-  transition: 'slide-left'
+  transition: 'opacity'
 }
 </script>
 
