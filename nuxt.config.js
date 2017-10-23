@@ -26,7 +26,8 @@ module.exports = {
     '~/plugins/firebase',
     '~plugins/vue-touch',
     '~plugins/vue-progressive-image',
-    '~plugins/vue-google-maps'
+    '~plugins/vue-google-maps',
+    '~plugins/vue-mask'
   ],
   /*
   ** Customize the progress-bar color

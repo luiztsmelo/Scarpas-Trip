@@ -128,18 +128,10 @@
 
       <h1 class="__form-title">Valor do Ingresso</h1>
 
-      <div class="valor-lotes">
-        <h2 class="__valor-lotes-title">Lote único ou múltiplo?</h2>
-        <div class="valor-lotes-checks" @click="checkboxUnico, event.isLoteUnico=true, event.isLoteMultiplo=false">
-          <input class="__valor-lotes-checkbox" ref="loteUnico" type="checkbox" :checked="event.isLoteUnico">
-          <span class="__valor-lotes-answer">Único</span>
-        </div>    
-        <div class="valor-lotes-checks" @click="checkboxMultiplo, event.isLoteMultiplo=true, event.isLoteUnico=false">
-          <input class="__valor-lotes-checkbox" ref="loteMultiplo" type="checkbox" :checked="event.isLoteMultiplo">
-          <span class="__valor-lotes-answer">Múltiplo</span>
-        </div> 
+      <div class="valor-box">
+        <input type="text" v-mask="valorMask"  v-model="event.valorIngresso" />
       </div>
-      <!-- <input type="number" placeholder="0,00" min="0" step="any" data-number-to-fixed="2" data-number-stepfactor="100" class="currency" /> -->
+      
 
       
 
@@ -221,8 +213,7 @@ export default {
         subtitle: '',
         date: '',
         hour: '',
-        isLoteUnico: false,
-        isLoteMultiplo: false,
+        valorIngresso: '',
         imageURL: '',
         image: ''
       }
@@ -309,6 +300,13 @@ export default {
     }  
   },
   computed: {
+    valorMask () {
+      if (this.event.valorIngresso.length <= 7) {
+        return 'R$##,##'
+      } else {
+        return 'R$###,##'
+      }
+    },
     today () {
       let dd = new Date().getDate()
       let mm = new Date().getMonth() + 1
@@ -541,28 +539,11 @@ export default {
       margin: 1rem 0;
       outline: none;
     }
-    & .valor-lotes {
+    & .valor-box {
       display: flex;
       flex-flow: column;
       margin-top: 1.5rem;
-      & .__valor-lotes-title {
-        font-size: 23px;
-        font-weight: 400;
-        margin-bottom: 1.3rem;
-      }
-      & .valor-lotes-checks {
-        display: flex;
-        align-items: center;
-        margin-bottom: .9rem;
-        & .__valor-lotes-checkbox:checked {
-          background: #ff5858;
-        }
-        & .__valor-lotes-answer {
-          font-size: 21px;
-          font-weight: 300;
-          padding-left: .7rem;
-        }
-      }
+ 
     }
     & .__image-input-btn {
       font-size: 15px;
