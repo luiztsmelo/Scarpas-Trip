@@ -33,6 +33,7 @@ html
 }
 
 button {
+  cursor: pointer;
   border: none;
   outline: none !important;
   user-select: none;

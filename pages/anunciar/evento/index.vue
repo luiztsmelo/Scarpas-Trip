@@ -10,12 +10,12 @@
         <h2 class="__pricing-box-title">Selecione um plano:</h2>
 
         <div class="plano-row casual" @click="$store.commit('m_cadastroEvento1', true), $store.commit('m_cadastroEvento0', false), $store.commit('m_eventoPlanoCasual', true), $store.commit('m_eventoPlanoPro', false)">
-          <span class="__plano-valor">R$25</span>
+          <span class="__plano-valor">R$29</span>
           <span class="__plano-title">CASUAL</span>
         </div>
 
         <div class="plano-row profissional" @click="$store.commit('m_cadastroEvento1', true), $store.commit('m_cadastroEvento0', false), $store.commit('m_eventoPlanoPro', true), $store.commit('m_eventoPlanoCasual', false)">
-          <span class="__plano-valor">R$100</span>
+          <span class="__plano-valor">R$97</span>
           <span class="__plano-title">PROFISSIONAL</span>
         </div>
 
@@ -160,7 +160,7 @@
 
       <h1 class="__form-title">Imagens e Vídeo</h1>
 
-      <h2 class="__form-subtitle">Banner e vídeo legais farão toda a diferença na hora da divulgação de seu evento. Se possível, adicione também fotos do local do evento 😉</h2>
+      <h2 class="__form-subtitle">Banner e vídeo legais farão toda a diferença na hora da divulgação do seu evento</h2>
 
       <button type="button" @click="onPickImage" class="__image-input-btn">Adicionar Imagens</button>
       <input type="file" style="display:none" ref="imageInput" accept="image/*" @change="onImagePicked">
@@ -330,7 +330,7 @@ export default {
       if (this.place !== null) {
         return 15
       } else {
-        return 12
+        return 11
       }
     },
     form1ok () {
@@ -436,7 +436,7 @@ export default {
         margin: .5rem 0;
         border-radius: 3px;
         & .__plano-valor {
-          font-size: 25px;
+          font-size: 23px;
           font-weight: 300;
           padding: 0 .7rem;
         }

@@ -15,6 +15,7 @@ module.exports = {
       { name: 'viewport', content: 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' }
     ],
     link: [
+      { rel: 'icon', type: 'image/png', sizes: '24x24', href: '/brand.png' },
       { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Work+Sans:200,300,400,500,600,700,800|Damion' }
     ]
   },
@@ -41,24 +42,7 @@ module.exports = {
     name: 'Escarpas Trip',
     display: 'fullscreen',
     /* theme_color: 'rgb(4, 12, 31)', */
-    lang: 'pt-br',
-    icons: [{
-      src: '/static/brand64.png',
-      sizes: '64x64',
-      type: 'image/png'
-    }, {
-      src: '/static/brand128.png',
-      sizes: '128x128',
-      type: 'image/png'
-    }, {
-      src: '/static/brand256.png',
-      sizes: '256x256',
-      type: 'image/png'
-    }, {
-      src: '/static/brand512.png',
-      sizes: '5126x512',
-      type: 'image/png'
-    }]
+    lang: 'pt-br'
   },
   /*
   ** Modules
