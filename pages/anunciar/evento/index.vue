@@ -128,9 +128,13 @@
 
       <h1 class="__form-title">Valor do Ingresso</h1>
 
-      <div class="valor-box">
-        <vue-numeric currency="R$" separator="," v-model="event.valorIngresso" :minus="false"></vue-numeric>
-      </div>
+      <div class="item-form">
+        <label>1º Lote</label>
+        <vue-numeric class="__vue-numeric" currency="R$" separator="," v-model="event.valorIngresso" :minus="false"></vue-numeric>
+      </div>  
+    
+      <button type="button" @click="" class="__image-input-btn">Mais lotes?</button>
+
       
 
     
@@ -204,7 +208,6 @@ export default {
   data () {
     return {
       progressBar: 0,
-      
       place: '',
       event: {  
         position: {lat:-20.6141320, lng:-46.0478760},
@@ -212,7 +215,7 @@ export default {
         subtitle: '',
         date: '',
         hour: '',
-        valorIngresso: '',
+        valorIngresso: 0,
         imageURL: '',
         image: ''
       }
@@ -288,7 +291,7 @@ export default {
       }
     },  
     nextBtn4 () {
-      if (1<2) {
+      if (this.event.valorIngresso !== null) {
         return this.$store.commit('m_cadastroEvento4', false), this.$store.commit('m_cadastroEvento5', true), this.progressBar = (100/6)*4
       }
     },
@@ -488,7 +491,7 @@ export default {
         font-weight: 300;
         background: white;
         color: rgb(92, 92, 92);
-        padding: .4rem 0 .6rem 0;
+        padding: .5rem 0 .6rem 0;
         border: none;
         border-bottom: 1px solid rgb(210, 210, 210);
         outline: none;
@@ -525,25 +528,33 @@ export default {
       font-weight: 300;
       color: rgb(92, 92, 92);
       width: 100%;
-      height: 2rem;
       border: none;
       border-bottom: 1px solid rgb(210, 210, 210);
-      margin: 1rem 0;
+      margin: 1.5rem 0 1rem 0;
+      padding: .5rem 0 .6rem 0;
       outline: none;
     }
-    & .valor-box {
+    & .__vue-numeric {
+      font-size: 20px;
+      font-weight: 300;
+      color: rgb(92, 92, 92);
+      width: 100%;
+      padding: .5rem 0 .6rem 0;
+      border: none;
+      border-bottom: 1px solid rgb(210, 210, 210);
+      outline: none;
+    }
+    & .lote-box {
       display: flex;
-      flex-flow: column;
-      margin-top: 1.5rem;
- 
+      margin-top: 1rem;
+      
     }
     & .__image-input-btn {
       font-size: 15px;
       font-weight: 500;
-      margin: .5rem 0;
       color: white;
-      background: rgb(92, 92, 92);
-      padding: .7rem 1.1rem;
+      background: rgb(122, 122, 122);
+      padding: .6rem 1.1rem;
       border-radius: 4px;
     }
     & .__preview-img {
