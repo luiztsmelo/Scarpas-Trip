@@ -129,12 +129,11 @@
       <h1 class="__form-title">Valor do Ingresso</h1>
 
       <div class="valor-box">
-        <input type="text" v-mask="valorMask"  v-model="event.valorIngresso" />
+        <vue-numeric currency="R$" separator="," v-model="event.valorIngresso" :minus="false"></vue-numeric>
       </div>
       
 
-      
-
+    
       <div class="back-next"> 
         <div class="back-next-body">
           <button type="button" class="__back" @click="backBtn4">Voltar</button>
@@ -300,13 +299,6 @@ export default {
     }  
   },
   computed: {
-    valorMask () {
-      if (this.event.valorIngresso.length <= 7) {
-        return 'R$##,##'
-      } else {
-        return 'R$###,##'
-      }
-    },
     today () {
       let dd = new Date().getDate()
       let mm = new Date().getMonth() + 1
