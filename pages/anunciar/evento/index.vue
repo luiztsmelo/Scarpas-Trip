@@ -531,7 +531,7 @@ export default {
       }
     }
     & .__gmap-autocomplete {
-      font-size: 19px;
+      font-size: 20px;
       font-weight: 300;
       color: rgb(92, 92, 92);
       width: 100%;
