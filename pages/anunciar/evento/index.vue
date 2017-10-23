@@ -10,12 +10,12 @@
         <h2 class="__pricing-box-title">Selecione um plano:</h2>
 
         <div class="plano-row casual" @click="$store.commit('m_cadastroEvento1', true), $store.commit('m_cadastroEvento0', false), $store.commit('m_eventoPlanoCasual', true), $store.commit('m_eventoPlanoPro', false)">
-          <span class="__plano-valor">R$29</span>
+          <span class="__plano-valor">R$30</span>
           <span class="__plano-title">CASUAL</span>
         </div>
 
         <div class="plano-row profissional" @click="$store.commit('m_cadastroEvento1', true), $store.commit('m_cadastroEvento0', false), $store.commit('m_eventoPlanoPro', true), $store.commit('m_eventoPlanoCasual', false)">
-          <span class="__plano-valor">R$97</span>
+          <span class="__plano-valor">R$100</span>
           <span class="__plano-title">PROFISSIONAL</span>
         </div>
 
