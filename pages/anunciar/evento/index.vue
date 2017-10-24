@@ -403,7 +403,7 @@ export default {
     top: 3.3rem;
     height: 3px;
     background: linear-gradient(80deg, #f857a6, #ff5858);
-    transition: all .222s ease;
+    transition: all .3s ease;
   }
   /* ******************** PLANO EVENTO ******************** */
   & .plano-evento {
