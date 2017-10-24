@@ -9,12 +9,12 @@
       <div class="pricing-box">
         <h2 class="__pricing-box-title">Selecione um plano:</h2>
 
-        <div class="plano-row casual" @click="$store.commit('m_cadastroEvento1', true), $store.commit('m_cadastroEvento0', false), $store.commit('m_eventoPlanoCasual', true), $store.commit('m_eventoPlanoPro', false)">
+        <div class="plano-row casual" @click="$store.commit('m_cadastroEvento1', true), $store.commit('m_cadastroEvento0', false), $store.commit('m_eventoPlanoCasual', true), $store.commit('m_eventoPlanoPro', false), progressBar = (100/7)">
           <span class="__plano-valor">R$30</span>
           <span class="__plano-title">CASUAL</span>
         </div>
 
-        <div class="plano-row profissional" @click="$store.commit('m_cadastroEvento1', true), $store.commit('m_cadastroEvento0', false), $store.commit('m_eventoPlanoPro', true), $store.commit('m_eventoPlanoCasual', false)">
+        <div class="plano-row profissional" @click="$store.commit('m_cadastroEvento1', true), $store.commit('m_cadastroEvento0', false), $store.commit('m_eventoPlanoPro', true), $store.commit('m_eventoPlanoCasual', false), progressBar = (100/7)">
           <span class="__plano-valor">R$100</span>
           <span class="__plano-title">PROFISSIONAL</span>
         </div>
@@ -130,7 +130,7 @@
 
       <div class="item-form">
         <label>1º Lote</label>
-        <vue-numeric class="__vue-numeric" currency="R$" separator="," v-model="event.valorIngresso" :minus="false"></vue-numeric>
+        <vue-numeric class="__vue-numeric" currency="R$" separator="space" :precision="2" v-model="event.valorIngresso" :minus="false"></vue-numeric>
       </div>  
     
       <button type="button" @click="" class="__image-input-btn">Mais lotes?</button>
@@ -277,27 +277,27 @@ export default {
     /* ******************** NEXT BUTTONS ******************** */
     nextBtn1 () {
       if (this.event.title.length > 0 && this.event.subtitle.length > 0) {
-        return this.$store.commit('m_cadastroEvento1', false), this.$store.commit('m_cadastroEvento2', true), this.progressBar = (100/6)
+        return this.$store.commit('m_cadastroEvento1', false), this.$store.commit('m_cadastroEvento2', true), this.progressBar = (100/7)*2
       }
     },  
     nextBtn2 () {
       if (this.event.date.length > 0 && this.event.hour.length > 0) {
-        return this.$store.commit('m_cadastroEvento2', false), this.$store.commit('m_cadastroEvento3', true), this.progressBar = (100/6)*2
+        return this.$store.commit('m_cadastroEvento2', false), this.$store.commit('m_cadastroEvento3', true), this.progressBar = (100/7)*3
       }
     },
     nextBtn3 () {
       if (this.place !== null) {
-        return this.$store.commit('m_cadastroEvento3', false), this.$store.commit('m_cadastroEvento4', true), this.progressBar = (100/6)*3
+        return this.$store.commit('m_cadastroEvento3', false), this.$store.commit('m_cadastroEvento4', true), this.progressBar = (100/7)*4
       }
     },  
     nextBtn4 () {
       if (this.event.valorIngresso !== null) {
-        return this.$store.commit('m_cadastroEvento4', false), this.$store.commit('m_cadastroEvento5', true), this.progressBar = (100/6)*4
+        return this.$store.commit('m_cadastroEvento4', false), this.$store.commit('m_cadastroEvento5', true), this.progressBar = (100/7)*5
       }
     },
     nextBtn5 () {
       if (1<2) {
-        return this.$store.commit('m_cadastroEvento5', false), this.$store.commit('m_cadastroEvento6', true), this.progressBar = (100/6)*5
+        return this.$store.commit('m_cadastroEvento5', false), this.$store.commit('m_cadastroEvento6', true), this.progressBar = (100/7)*6
       }
     }  
   },

@@ -3,7 +3,6 @@
     <div class="foobar" v-show="showFoobar">
       <div class="foobar-body">
         
-
         <nuxt-link to="/eventos">
           <div class="foobar-box" @click="onFoobar1=false, onFoobar2=true, onFoobar3=true, onFoobar4=true, onFoobar5=true">
             <img src="../assets/img/eventos.svg" class="__foobar1-icon" :class="{ coloricon: onFoobar1 }">
