@@ -62,7 +62,7 @@ export default {
         subtitle: 'Iremos invadir Escarpas do Lago - MG', 
         img: {
           src: "https://s3.amazonaws.com/sh2-img-eventos/site/20171002182709.png",
-          placeholder: "https://ibb.co/bYbed6"
+          placeholder: "http://i67.tinypic.com/hvcmli.jpg"
           }
         },
         {
