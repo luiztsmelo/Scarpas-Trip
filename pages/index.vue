@@ -28,7 +28,7 @@
             <ul class="carousel-row" :style="'transform: translateX(' + positionCarousel + 'px)'">
               <li class="card" v-for="evento in eventosData">
                 
-                <progressive-img class="__card-img" :src="evento.img" :placeholder="evento.img" alt="" no-ratio />
+                <progressive-img class="__card-img" :src="evento.img.src" :placeholder="evento.img.placeholder" alt="" no-ratio />
                 <h1 class="__card-title">{{ evento.title | snippetTitle }}</h1>
                 <h2 class="__card-subtitle">{{ evento.subtitle | snippetSubtitle }}</h2>
 
@@ -57,9 +57,30 @@ export default {
     return {
       positionCarousel: '',
       eventosData: [
-        {title: 'YDE WEEKEND - ALOK', subtitle: 'Iremos invadir Escarpas do Lago - MG', img: "https://s3.amazonaws.com/sh2-img-eventos/site/20171002182709.png"},
-        {title: 'Show Mr. Catra', subtitle: 'O papai chegou', img: "https://rd1.com.br/wp-content/uploads/2016/01/19_56_29_654_file.jpeg"},
-        {title: 'Mc Catra no Kanto da Ilha', subtitle: 'Curtindo com a galera', img: "https://s3.amazonaws.com/sh2-img-eventos/site/20171002182657.png"}
+        {
+        title: 'YDE Weekend - ALOK', 
+        subtitle: 'Iremos invadir Escarpas do Lago - MG', 
+        img: {
+          src: "https://s3.amazonaws.com/sh2-img-eventos/site/20171002182709.png",
+          placeholder: "https://ibb.co/bYbed6"
+          }
+        },
+        {
+        title: 'Orloff Set', 
+        subtitle: 'Escarpas Session', 
+        img: {
+          src: "https://soubh-imagens.s3.amazonaws.com/media/uploaded_images/eventos/194325_festa-orloff.jpg",
+          placeholder: "http://i64.tinypic.com/309lo9h.jpg"
+          }
+        },
+        {
+        title: 'Show Mr. Catra', 
+        subtitle: 'O papai chegou', 
+        img: {
+          src: "https://rd1.com.br/wp-content/uploads/2016/01/19_56_29_654_file.jpeg",
+          placeholder: "https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif"
+          }
+        },  
       ]
     }
   },

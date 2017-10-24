@@ -27,7 +27,8 @@ module.exports = {
     '~plugins/vue-touch',
     '~plugins/vue-progressive-image',
     '~plugins/vue-google-maps',
-    '~plugins/vue-numeric'
+    '~plugins/vue-numeric',
+    '~plugins/vue-lazyload'
   ],
   /*
   ** Customize the progress-bar color
