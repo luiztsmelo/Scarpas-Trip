@@ -159,7 +159,8 @@
 
       <button type="button" @click="onPickImage" class="__image-input-btn">Adicionar Imagens</button>
       <input type="file" style="display:none" ref="imageInput" accept="image/*" @change="onImagePicked">
-
+      
+      
       <img :src="event.image" class="__preview-img">
 
       <div class="back-next"> 
