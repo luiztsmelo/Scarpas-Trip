@@ -135,8 +135,6 @@
     
       <button type="button" @click="" class="__image-input-btn">Mais lotes?</button>
 
-      
-
     
       <div class="back-next"> 
         <div class="back-next-body">
@@ -157,22 +155,25 @@
 
       <h2 class="__form-subtitle">Banner e vídeo legais farão toda a diferença na hora da divulgação do seu evento</h2>
 
-      <!-- <button type="button" @click="onPickImage" class="__image-input-btn">Adicionar Imagens</button>
-      <input type="file" style="display:none" ref="imageInput" accept="image/*" @change="onImagePicked"> -->
+
+      <button type="button" @click="$refs.myCroppa1.chooseFile()" class="__image-input-btn">Adicionar Imagens</button>
       
-      <croppa 
-      v-model="myCroppa"
+      <croppa
+      ref="myCroppa1"
+      @new-image-drawn="imageChoose1"
+      @image-remove="imageRemove1"
       :width="200"
-      :height="130"
+      :height="135"
       :accept="'image/*'"
       :placeholder="'Escolha uma imagem'"
       :placeholder-font-size="14"
       :placeholder-color="'rgb(72,72,72)'"
       :prevent-white-space="true"
-      :remove-button-color="'rgb(255, 88, 88)'">
+      :remove-button-color="'rgb(255, 88, 88)'"
+      disable-click-to-choose>
       </croppa>
       
-      <img :src="event.image" class="__preview-img">
+      <!-- <img :src="event.image" class="__preview-img"> -->
 
       <div class="back-next"> 
         <div class="back-next-body">
@@ -219,9 +220,8 @@ export default {
   transition: 'opacity',
   data () {
     return {
-      myCroppa: {},
       progressBar: 0,
-      place: '',
+      place: null,
       event: {  
         position: {lat:-20.6141320, lng:-46.0478760},
         title: '',
@@ -229,39 +229,23 @@ export default {
         date: '',
         hour: '',
         valorIngresso: 0,
-        imageURL: '',
+        imageURL1: null,
         image: ''
       }
     }
   },
   methods: {
-    checkboxUnico () {
-      this.$refs.loteUnico.click()
-    },
-    checkboxMultiplo () {
-      this.$refs.loteMultiplo.click()
-    },
     /* ******************** IMAGE INPUT ******************** */
-    onPickImage () {
-      this.$refs.imageInput.click()
-    },
-    onImagePicked (e) {
-      const files = e.target.files || e.dataTransfer.files
-      if (!files.length)
+    imageChoose1 () {
+      let URL1 = this.$refs.myCroppa1.generateDataUrl()
+      if (!URL1) {
+      	alert('Selecione uma imagem para continuar')
         return
-      this.createImage(files[0])
-    },
-    createImage (file) {
-      const image = new Image()
-      const reader = new FileReader()
-
-      reader.onload = (e) => {
-        this.event.image = e.target.result
       }
-      reader.readAsDataURL(file)
+      this.event.imageURL1 = URL1
     },
-    removeImage: function (e) {
-      this.event.image = ''
+    imageRemove1 () {
+      this.event.imageURL1 = null
     },
     /* ******************** GOOGLE MAPS ******************** */
     setPlace (place) {
@@ -299,18 +283,20 @@ export default {
       }
     },
     nextBtn3 () {
-      if (this.place !== null) {
+      if (this.place != null) {
         return this.$store.commit('m_cadastroEvento3', false), this.$store.commit('m_cadastroEvento4', true), this.progressBar = (100/7)*4
       }
     },  
     nextBtn4 () {
-      if (this.event.valorIngresso !== null) {
+      if (this.event.valorIngresso >= 0) {
         return this.$store.commit('m_cadastroEvento4', false), this.$store.commit('m_cadastroEvento5', true), this.progressBar = (100/7)*5
       }
     },
     nextBtn5 () {
-      if (1<2) {
+      if (this.event.imageURL1 !== null) {
         return this.$store.commit('m_cadastroEvento5', false), this.$store.commit('m_cadastroEvento6', true), this.progressBar = (100/7)*6
+      } else {
+        alert('Adicione pelo menos uma imagem')
       }
     }  
   },
@@ -333,7 +319,7 @@ export default {
       }
     },
     mapZoom () {
-      if (this.place !== null) {
+      if (this.place != null) {
         return 15
       } else {
         return 11
@@ -355,12 +341,12 @@ export default {
       }
     },
     form4ok () {
-      if (1<2) {
+      if (this.event.valorIngresso >= 0) {
         return 'background:rgb(255, 88, 88);cursor:pointer'
       }
     },
     form5ok () {
-      if (1<2) {
+      if (this.event.imageURL1 !== null) {
         return 'background:rgb(255, 88, 88);cursor:pointer'
       }
     },
@@ -575,7 +561,7 @@ export default {
       height: auto;
     }
     & canvas {
-      border: 1px solid rgb(172, 172, 172);
+      border: 1px dashed rgb(172, 172, 172);
     }
   }
 }
