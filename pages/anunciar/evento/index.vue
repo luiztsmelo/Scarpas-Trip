@@ -164,7 +164,7 @@
       @new-image-drawn="imageChoose1"
       @image-remove="imageRemove1"
       :width="320"
-      :height="180"
+      :height="214"
       :accept="'image/*'"
       :placeholder="'Escolha uma imagem'"
       :placeholder-font-size="14"
@@ -559,7 +559,7 @@ export default {
     }
     & canvas {
       margin: 1rem 0;
-      border: 2px dashed rgb(122, 122, 122);
+      border-radius: 4px;
     }
   }
 }
