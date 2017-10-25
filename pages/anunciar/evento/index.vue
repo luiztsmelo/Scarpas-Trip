@@ -153,28 +153,33 @@
 
       <h1 class="__form-title">Imagens e Vídeo</h1>
 
-      <h2 class="__form-subtitle">Banner e vídeo legais farão toda a diferença na hora da divulgação do seu evento</h2>
+      <h2 class="__form-subtitle">Imagens e vídeo legais farão toda a diferença na hora da divulgação do seu evento</h2>
 
 
       <button type="button" @click="$refs.myCroppa1.chooseFile()" class="__image-input-btn">Adicionar Imagem</button>
       
-      <croppa
-      ref="myCroppa1"
-      v-show="event.imageURL1"
-      @new-image-drawn="imageChoose1"
-      @image-remove="imageRemove1"
-      :width="320"
-      :height="214"
-      :accept="'image/*'"
-      :placeholder="'Escolha uma imagem'"
-      :placeholder-font-size="14"
-      :placeholder-color="'rgb(72,72,72)'"
-      :prevent-white-space="true"
-      :remove-button-color="'rgb(255, 88, 88)'"
-      disable-click-to-choose>
-      </croppa>
+      <div class="modal-croppa" v-show="event.imageURL1">
+        <div class="modal-croppa-body">
+          <croppa
+          ref="myCroppa1"
+          @new-image-drawn="imageChoose1"
+          @image-remove="imageRemove1"
+          :width="320"
+          :height="214"
+          :accept="'image/*'"
+          :placeholder="'Escolha uma imagem'"
+          :placeholder-font-size="14"
+          :placeholder-color="'rgb(72,72,72)'"
+          :prevent-white-space="true"
+          :remove-button-color="'rgb(255, 88, 88)'"
+          disable-click-to-choose>
+          </croppa>
+        </div>
+      </div>
+
       
-      <!-- <img :src="event.image" class="__preview-img"> -->
+      
+      <img :src="event.imageURL1" class="__preview-img">
 
       <div class="back-next"> 
         <div class="back-next-body">
@@ -449,7 +454,6 @@ export default {
     color: var(--color01);
     height: calc(100vh - 3.3rem);
     padding: 0 7%;
-
     & .__title {
       font-size: 30px;
       font-weight: 600;
@@ -491,6 +495,23 @@ export default {
         border: none;
         border-bottom: 1px solid rgb(210, 210, 210);
         outline: none;
+      }
+    }
+    & .modal-croppa {
+      background: rgba(0, 0, 0, 0.94);
+      width:  100%;
+      height: 100%;
+      position: fixed;
+      top:  0;
+      left: 0;
+      z-index: 10;
+      & .modal-croppa-body {
+        display: flex;
+        flex-flow: column;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translateX(-50%) translateY(-50%);
       }
     }
     & .back-next {
@@ -559,7 +580,7 @@ export default {
     }
     & canvas {
       margin: 1rem 0;
-      border-radius: 4px;
+      border: 1px dashed white;
     }
   }
 }
