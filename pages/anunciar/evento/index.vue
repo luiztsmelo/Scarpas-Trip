@@ -156,14 +156,15 @@
       <h2 class="__form-subtitle">Banner e vídeo legais farão toda a diferença na hora da divulgação do seu evento</h2>
 
 
-      <button type="button" @click="$refs.myCroppa1.chooseFile()" class="__image-input-btn">Adicionar Imagens</button>
+      <button type="button" @click="$refs.myCroppa1.chooseFile()" class="__image-input-btn">Adicionar Imagem</button>
       
       <croppa
       ref="myCroppa1"
+      v-show="event.imageURL1"
       @new-image-drawn="imageChoose1"
       @image-remove="imageRemove1"
-      :width="200"
-      :height="135"
+      :width="320"
+      :height="180"
       :accept="'image/*'"
       :placeholder="'Escolha uma imagem'"
       :placeholder-font-size="14"
@@ -238,10 +239,6 @@ export default {
     /* ******************** IMAGE INPUT ******************** */
     imageChoose1 () {
       let URL1 = this.$refs.myCroppa1.generateDataUrl()
-      if (!URL1) {
-      	alert('Selecione uma imagem para continuar')
-        return
-      }
       this.event.imageURL1 = URL1
     },
     imageRemove1 () {
@@ -561,7 +558,8 @@ export default {
       height: auto;
     }
     & canvas {
-      border: 1px dashed rgb(172, 172, 172);
+      margin: 1rem 0;
+      border: 2px dashed rgb(122, 122, 122);
     }
   }
 }

@@ -203,8 +203,7 @@ export default {
             -webkit-tap-highlight-color: rgba(255, 255, 45, 0);
             & .__card-img {
               width: 100%;
-              min-height: 90px;
-            
+              min-height: 82px;
               border-radius: 3px;
             }
             & .__card-title {
