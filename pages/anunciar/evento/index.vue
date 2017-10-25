@@ -157,9 +157,20 @@
 
       <h2 class="__form-subtitle">Banner e vídeo legais farão toda a diferença na hora da divulgação do seu evento</h2>
 
-      <button type="button" @click="onPickImage" class="__image-input-btn">Adicionar Imagens</button>
-      <input type="file" style="display:none" ref="imageInput" accept="image/*" @change="onImagePicked">
+      <!-- <button type="button" @click="onPickImage" class="__image-input-btn">Adicionar Imagens</button>
+      <input type="file" style="display:none" ref="imageInput" accept="image/*" @change="onImagePicked"> -->
       
+      <croppa 
+      v-model="myCroppa"
+      :width="200"
+      :height="130"
+
+      :placeholder="'Escolha uma imagem'"
+      :placeholder-font-size="14"
+      :placeholder-color="'rgb(72,72,72)'"
+      :prevent-white-space="true"
+      :remove-button-color="'rgb(255, 88, 88)'">
+      </croppa>
       
       <img :src="event.image" class="__preview-img">
 
@@ -208,6 +219,7 @@ export default {
   transition: 'opacity',
   data () {
     return {
+      myCroppa: {},
       progressBar: 0,
       place: '',
       event: {  
@@ -561,6 +573,9 @@ export default {
     & .__preview-img {
       width: 100%;
       height: auto;
+    }
+    & canvas {
+      border: 1px solid rgb(172, 172, 172);
     }
   }
 }
