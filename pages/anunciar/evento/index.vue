@@ -160,6 +160,7 @@
       
       <div class="modal-croppa" v-show="event.imageURL1">
         <div class="modal-croppa-body">
+          <h1>Ajustar tamanho</h1>
           <croppa
           ref="myCroppa1"
           @new-image-drawn="imageChoose1"
@@ -498,7 +499,7 @@ export default {
       }
     }
     & .modal-croppa {
-      background: rgba(0, 0, 0, 0.94);
+      background: rgba(0, 0, 0, 0.92);
       width:  100%;
       height: 100%;
       position: fixed;
@@ -508,10 +509,15 @@ export default {
       & .modal-croppa-body {
         display: flex;
         flex-flow: column;
+        align-items: center;
         position: absolute;
         top: 50%;
         left: 50%;
         transform: translateX(-50%) translateY(-50%);
+        color: white;
+        & h1 {
+          font-weight: 300;
+        }
       }
     }
     & .back-next {
@@ -580,7 +586,7 @@ export default {
     }
     & canvas {
       margin: 1rem 0;
-      border: 1px dashed white;
+      border: 2px dashed white;
     }
   }
 }
