@@ -164,7 +164,7 @@
       v-model="myCroppa"
       :width="200"
       :height="130"
-
+      :accept="'image/*'"
       :placeholder="'Escolha uma imagem'"
       :placeholder-font-size="14"
       :placeholder-color="'rgb(72,72,72)'"
