@@ -164,7 +164,6 @@
           <croppa
           ref="myCroppa1"
           @new-image-drawn="imageChoose1"
-          @image-remove="imageRemove1"
           :width="320"
           :height="214"
           :quality="3"
@@ -173,9 +172,10 @@
           :prevent-white-space="true"
           :show-remove-button="false">
           </croppa>
-          <div class="modal-croppa-btns" style="display:flex;width:100%;justify-content:space-around">
-            <button type="button" @click="$refs.myCroppa1.chooseFile()" class="__image-input-btn" style="background:transparent;border:1px solid rgb(222,222,222)">Escolher outra</button>
+          <div class="modal-croppa-btns" style="display:flex;flex-flow:column;width:100%">
             <button type="button" @click="showCroppaModal1=false" class="__image-input-btn">Confirmar</button>
+            <button type="button" @click="$refs.myCroppa1.chooseFile(), $refs.myCroppa1.remove()" class="__image-input-btn" style="background:transparent;margin-top:.5rem;">Escolher outra</button>
+            <button type="button" @click="$refs.myCroppa1.remove(), removeImage1(), showCroppaModal1=false" class="__image-input-btn" style="background:transparent" v-show="event.imageURL1 !== null">Remover</button>
           </div>
         </div>
       </div>
@@ -186,7 +186,6 @@
           <croppa
           ref="myCroppa2"
           @new-image-drawn="imageChoose2"
-          @image-remove="imageRemove2"
           :width="320"
           :height="214"
           :quality="3"
@@ -195,19 +194,20 @@
           :prevent-white-space="true"
           :show-remove-button="false">
           </croppa>
-          <div class="modal-croppa-btns" style="display:flex;width:100%;justify-content:space-around">
-            <button type="button" @click="$refs.myCroppa2.chooseFile()" class="__image-input-btn" style="background:transparent;border:1px solid rgb(222,222,222)">Escolher outra</button>
+          <div class="modal-croppa-btns" style="display:flex;flex-flow:column;width:100%">
             <button type="button" @click="showCroppaModal2=false" class="__image-input-btn">Confirmar</button>
+            <button type="button" @click="$refs.myCroppa2.chooseFile(), $refs.myCroppa2.remove()" class="__image-input-btn" style="background:transparent;margin-top:.5rem;">Escolher outra</button>
+            <button type="button" @click="$refs.myCroppa2.remove(), removeImage2(), showCroppaModal2=false" class="__image-input-btn" style="background:transparent" v-show="event.imageURL2 !== null">Remover</button>
           </div>
         </div>
       </div>
 
 
       <div class="after-choose-image" v-show="event.imageURL1 !== null">
-        <img :src="event.imageURL1" class="__preview-img">
+        <img :src="event.imageURL1" class="__preview-img" @click="showCroppaModal1=true">
         <div class="image2">
           <img src="./../../../assets/img/add-image.svg" class="__preview-img" v-if="event.imageURL2 === null" @click="$refs.myCroppa2.chooseFile(), showCroppaModal2=true" style="padding:2rem">
-          <img :src="event.imageURL2" class="__preview-img" v-else>
+          <img :src="event.imageURL2" class="__preview-img" @click="showCroppaModal2=true" v-else>
         </div>
         
       </div>
@@ -280,14 +280,14 @@ export default {
       let URL1 = this.$refs.myCroppa1.generateDataUrl()
       this.event.imageURL1 = URL1
     },
-    imageRemove1 () {
+     removeImage1 () {
       this.event.imageURL1 = null
     },
     imageChoose2 () {
       let URL2 = this.$refs.myCroppa2.generateDataUrl()
       this.event.imageURL2 = URL2
     },
-    imageRemove2 () {
+    removeImage2 () {
       this.event.imageURL2 = null
     },
     /* ******************** GOOGLE MAPS ******************** */
