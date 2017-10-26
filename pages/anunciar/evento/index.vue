@@ -155,7 +155,7 @@
 
       <div class="before-choose-image" v-show="event.imageURL1 === null">
         <h2 class="__form-subtitle">Imagens e vídeo legais farão toda a diferença na hora da divulgação do seu evento</h2>
-        <button type="button" @click="$refs.myCroppa1.chooseFile(), showCroppaModal=true" class="__image-input-btn">Adicionar Imagem</button>
+        <button type="button" @click="$refs.myCroppa1.chooseFile(), showCroppaModal1=true" class="__image-input-btn">Adicionar Imagem</button>
       </div>
       
       <div class="modal-croppa" v-show="showCroppaModal1" @click="showCroppaModal1=false">
@@ -616,6 +616,7 @@ export default {
       border-radius: 4px;
     }
     & .after-choose-image {
+      margin-top: 1.5rem;
       display: flex;
       flex-flow: row wrap;
       & .__preview-img {
