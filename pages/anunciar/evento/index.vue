@@ -174,8 +174,11 @@
           :show-remove-button="false">
           </croppa>
 
-          <button type="button" @click="showCroppaModal=false" class="__image-input-btn">Confirmar</button>
-          <button type="button" @click="$refs.myCroppa1.chooseFile()" class="__image-input-btn">Escolher outra</button>
+          <div class="modal-croppa-btns" style="display:flex;width:100%;justify-content:space-around">
+            <button type="button" @click="$refs.myCroppa1.chooseFile()" class="__image-input-btn" style="background:transparent;border:1px solid white">Escolher outra</button>
+            <button type="button" @click="showCroppaModal=false" class="__image-input-btn">Confirmar</button>
+          </div>
+          
 
         </div>
       </div>
@@ -575,7 +578,6 @@ export default {
       margin-top: 1rem;
     }
     & .__image-input-btn {
-      margin-bottom: 1rem;
       font-size: 15px;
       font-weight: 500;
       background: #ff5858;
