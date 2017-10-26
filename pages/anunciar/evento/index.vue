@@ -591,7 +591,7 @@ export default {
       height: auto;
     }
     & canvas {
-      margin: 1rem 0;
+      margin: 2rem 0;
       border: 2px dashed white;
     }
   }
