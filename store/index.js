@@ -27,7 +27,7 @@ const store = () => new Vuex.Store({
       date: '',
       hour: '',
       valorIngresso: 0,
-      imageURL1: null,
+      image1: null,
       imageURL2: null
     },
     eventoProgressBar: 0,
@@ -66,6 +66,9 @@ const store = () => new Vuex.Store({
     /*
     .......... Evento ..........
     */
+    m_eventoProgressBar (state, payload) {
+      state.eventoProgressBar = payload
+    },
     m_cadastroEvento0 (state, payload) {
       state.cadastroEvento0 = payload
     },

@@ -9,12 +9,12 @@
       <div class="pricing-box">
         <h2 class="__pricing-box-title">Selecione um plano:</h2>
 
-        <div class="plano-row casual" @click="$store.commit('m_cadastroEvento1', true), $store.commit('m_cadastroEvento0', false), $store.commit('m_eventoPlanoCasual', true), $store.commit('m_eventoPlanoPro', false), $store.state.eventoProgressBar = (100/7)">
+        <div class="plano-row casual" @click="$store.commit('m_cadastroEvento1', true), $store.commit('m_cadastroEvento0', false), $store.commit('m_eventoPlanoCasual', true), $store.commit('m_eventoPlanoPro', false), $store.commit('m_eventoProgressBar', (100/7))">
           <span class="__plano-valor">R$30</span>
           <span class="__plano-title">CASUAL</span>
         </div>
 
-        <div class="plano-row profissional" @click="$store.commit('m_cadastroEvento1', true), $store.commit('m_cadastroEvento0', false), $store.commit('m_eventoPlanoPro', true), $store.commit('m_eventoPlanoCasual', false), $store.state.eventoProgressBar = (100/7)">
+        <div class="plano-row profissional" @click="$store.commit('m_cadastroEvento1', true), $store.commit('m_cadastroEvento0', false), $store.commit('m_eventoPlanoPro', true), $store.commit('m_eventoPlanoCasual', false), $store.commit('m_eventoProgressBar', (100/7))">
           <span class="__plano-valor">R$100</span>
           <span class="__plano-title">PROFISSIONAL</span>
         </div>
@@ -163,7 +163,6 @@
           <h1>Ajustar imagem</h1>
           <croppa
           ref="myCroppa1"
-          @new-image-drawn="imageChoose1"
           :width="320"
           :height="214"
           :quality="3"
@@ -173,9 +172,9 @@
           :show-remove-button="false">
           </croppa>
           <div class="modal-croppa-btns" style="display:flex;flex-flow:column;width:100%">
-            <button type="button" @click="showCroppaModal1=false" class="__image-input-btn">Confirmar</button>
-            <button type="button" @click="$refs.myCroppa1.chooseFile(), $refs.myCroppa1.remove()" class="__image-input-btn" style="background:transparent;margin-top:.7rem;">Escolher outra</button>
-            <button type="button" @click="$refs.myCroppa1.remove(), removeImage1(), showCroppaModal1=false" class="__image-input-btn" style="background:transparent">Remover</button>
+            <button type="button" @click="showCroppaModal1=false, imageChoose1()" class="__image-input-btn">Confirmar</button>
+            <button type="button" @click="$refs.myCroppa1.chooseFile(), $refs.myCroppa1.remove(), $store.state.eventoData.imageURL1 = null" class="__image-input-btn" style="background:transparent;margin-top:.7rem;">Escolher outra</button>
+            <button type="button" @click="removeImage1()" class="__image-input-btn" style="background:transparent">Remover</button>
           </div>
         </div>
       </div>
@@ -195,9 +194,9 @@
           :show-remove-button="false">
           </croppa>
           <div class="modal-croppa-btns" style="display:flex;flex-flow:column;width:100%">
-            <button type="button" @click="showCroppaModal2=false" class="__image-input-btn">Confirmar</button>
-            <button type="button" @click="$refs.myCroppa2.chooseFile(), $refs.myCroppa2.remove()" class="__image-input-btn" style="background:transparent;margin-top:.7rem;">Escolher outra</button>
-            <button type="button" @click="$refs.myCroppa2.remove(), removeImage2(), showCroppaModal2=false" class="__image-input-btn" style="background:transparent">Remover</button>
+            <button type="button" @click="showCroppaModal2=false, imageChoose2()" class="__image-input-btn">Confirmar</button>
+            <button type="button" @click="$refs.myCroppa2.chooseFile(), $refs.myCroppa2.remove(), $store.state.eventoData.imageURL2 = null" class="__image-input-btn" style="background:transparent;margin-top:.7rem;">Escolher outra</button>
+            <button type="button" @click="removeImage2()" class="__image-input-btn" style="background:transparent">Remover</button>
           </div>
         </div>
       </div>
@@ -265,18 +264,30 @@ export default {
   methods: {
     /* ******************** IMAGE INPUT ******************** */
     imageChoose1 () {
-      let URL1 = this.$refs.myCroppa1.generateDataUrl()
-      this.$store.state.eventoData.imageURL1 = URL1
+      if (this.$store.state.eventoData.imageURL1 !== null) {
+        return
+      } else {
+        let URL1 = this.$refs.myCroppa1.generateDataUrl('image/jpeg')
+        this.$store.state.eventoData.imageURL1 = URL1
+      }
     },
-     removeImage1 () {
+    removeImage1 () {
       this.$store.state.eventoData.imageURL1 = null
+      this.$refs.myCroppa1.remove()
+      this.showCroppaModal1 = false
     },
     imageChoose2 () {
-      let URL2 = this.$refs.myCroppa2.generateDataUrl()
-      this.$store.state.eventoData.imageURL2 = URL2
+      if (this.$store.state.eventoData.imageURL2 !== null) {
+        return
+      } else {
+        let URL2 = this.$refs.myCroppa2.generateDataUrl('image/jpeg')
+        this.$store.state.eventoData.imageURL2 = URL2
+      }
     },
     removeImage2 () {
       this.$store.state.eventoData.imageURL2 = null
+      this.$refs.myCroppa2.remove()
+      this.showCroppaModal2 = false
     },
     /* ******************** GOOGLE MAPS ******************** */
     setPlace (place) {
@@ -305,27 +316,27 @@ export default {
     /* ******************** NEXT BUTTONS ******************** */
     nextBtn1 () {
       if (this.$store.state.eventoData.title.length > 0 && this.$store.state.eventoData.subtitle.length > 0) {
-        return this.$store.commit('m_cadastroEvento1', false), this.$store.commit('m_cadastroEvento2', true), this.$store.state.eventoProgressBar = (100/7)*2
+        return this.$store.commit('m_cadastroEvento1', false), this.$store.commit('m_cadastroEvento2', true), this.$store.commit('m_eventoProgressBar', (100/7)*2)
       }
     },  
     nextBtn2 () {
       if (this.$store.state.eventoData.date.length > 0 && this.$store.state.eventoData.hour.length > 0) {
-        return this.$store.commit('m_cadastroEvento2', false), this.$store.commit('m_cadastroEvento3', true), this.$store.state.eventoProgressBar = (100/7)*3
+        return this.$store.commit('m_cadastroEvento2', false), this.$store.commit('m_cadastroEvento3', true), this.$store.commit('m_eventoProgressBar', (100/7)*3)
       }
     },
     nextBtn3 () {
       if (this.$store.state.place != null) {
-        return this.$store.commit('m_cadastroEvento3', false), this.$store.commit('m_cadastroEvento4', true), this.$store.state.eventoProgressBar = (100/7)*4
+        return this.$store.commit('m_cadastroEvento3', false), this.$store.commit('m_cadastroEvento4', true), this.$store.commit('m_eventoProgressBar', (100/7)*4)
       }
     },  
     nextBtn4 () {
       if (this.$store.state.eventoData.valorIngresso >= 0) {
-        return this.$store.commit('m_cadastroEvento4', false), this.$store.commit('m_cadastroEvento5', true), this.$store.state.eventoProgressBar = (100/7)*5
+        return this.$store.commit('m_cadastroEvento4', false), this.$store.commit('m_cadastroEvento5', true), this.$store.commit('m_eventoProgressBar', (100/7)*5)
       }
     },
     nextBtn5 () {
       if (this.$store.state.eventoData.imageURL1 !== null) {
-        return this.$store.commit('m_cadastroEvento5', false), this.$store.commit('m_cadastroEvento6', true), this.$store.state.eventoProgressBar = (100/7)*6
+        return this.$store.commit('m_cadastroEvento5', false), this.$store.commit('m_cadastroEvento6', true), this.$store.commit('m_eventoProgressBar', (100/7)*6)
       } else {
         alert('Adicione pelo menos uma imagem')
       }
