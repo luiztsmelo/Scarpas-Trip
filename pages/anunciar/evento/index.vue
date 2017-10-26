@@ -169,13 +169,14 @@
           :width="320"
           :height="214"
           :quality="3"
+          :placeholder="'Carregando...'"
           :accept="'image/*'"
           :prevent-white-space="true"
           :show-remove-button="false">
           </croppa>
 
           <div class="modal-croppa-btns" style="display:flex;width:100%;justify-content:space-around">
-            <button type="button" @click="$refs.myCroppa1.chooseFile()" class="__image-input-btn" style="background:transparent;border:1px solid white">Escolher outra</button>
+            <button type="button" @click="$refs.myCroppa1.chooseFile()" class="__image-input-btn" style="background:transparent;border:1px solid rgb(222,222,222)">Escolher outra</button>
             <button type="button" @click="showCroppaModal=false" class="__image-input-btn">Confirmar</button>
           </div>
           
