@@ -623,6 +623,7 @@ export default {
         margin: .2rem;
         width: 145px;
         height: 97px;
+        border-radius: 4px;
       }
     }
     
