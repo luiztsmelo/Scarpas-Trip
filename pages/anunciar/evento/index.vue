@@ -583,7 +583,7 @@ export default {
       font-weight: 500;
       background: #ff5858;
       color: white;
-      padding: .6rem 1.1rem;
+      padding: .7rem 1.2rem;
       border-radius: 4px;
     }
     & .__preview-img {
@@ -591,7 +591,7 @@ export default {
       height: auto;
     }
     & canvas {
-      margin: 2rem 0;
+      margin: 3rem 0 2rem 0;
       border: 2px dashed white;
     }
   }
