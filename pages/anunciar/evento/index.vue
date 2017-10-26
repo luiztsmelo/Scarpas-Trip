@@ -156,25 +156,27 @@
       <h2 class="__form-subtitle">Imagens e vídeo legais farão toda a diferença na hora da divulgação do seu evento</h2>
 
 
-      <button type="button" @click="$refs.myCroppa1.chooseFile()" class="__image-input-btn">Adicionar Imagem</button>
+      <button type="button" @click="$refs.myCroppa1.chooseFile(), showCroppaModal=true" class="__image-input-btn">Adicionar Imagem</button>
       
-      <div class="modal-croppa" v-show="event.imageURL1">
-        <div class="modal-croppa-body">
-          <h1>Ajustar tamanho</h1>
+      <div class="modal-croppa" v-show="showCroppaModal" @click="showCroppaModal=false">
+        <div class="modal-croppa-body" @click.stop>
+          <h1>Ajustar imagem</h1>
+
           <croppa
           ref="myCroppa1"
           @new-image-drawn="imageChoose1"
           @image-remove="imageRemove1"
           :width="320"
           :height="214"
+          :quality="3"
           :accept="'image/*'"
-          :placeholder="'Escolha uma imagem'"
-          :placeholder-font-size="14"
-          :placeholder-color="'rgb(72,72,72)'"
           :prevent-white-space="true"
-          :remove-button-color="'rgb(255, 88, 88)'"
-          disable-click-to-choose>
+          :show-remove-button="false">
           </croppa>
+
+          <button type="button" @click="showCroppaModal=false" class="__image-input-btn">Confirmar</button>
+          <button type="button" @click="$refs.myCroppa1.chooseFile()" class="__image-input-btn">Escolher outra</button>
+
         </div>
       </div>
 
@@ -227,6 +229,7 @@ export default {
   transition: 'opacity',
   data () {
     return {
+      showCroppaModal: false,
       progressBar: 0,
       place: null,
       event: {  
@@ -570,13 +573,13 @@ export default {
     & .lote-box {
       display: flex;
       margin-top: 1rem;
-      
     }
     & .__image-input-btn {
+      margin-bottom: 1rem;
       font-size: 15px;
       font-weight: 500;
+      background: #ff5858;
       color: white;
-      background: rgb(122, 122, 122);
       padding: .6rem 1.1rem;
       border-radius: 4px;
     }
