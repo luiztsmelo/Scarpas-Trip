@@ -5,15 +5,33 @@ import createPersistedState from 'vuex-persistedstate'
 const store = () => new Vuex.Store({
   plugins: [createPersistedState()],
   /*
-  ******************** STATE ********************
+  **************************************** STATE ****************************************
   */
   state: {
+    /*
+    ---------- GERAL ----------
+    */
     showMenu: false,
     showFoobar: true,
     menuIconAnime: false,
     /*
-    ** Anúncios
+    ---------- ANÚNCIOS ----------
     */
+    /*
+    .......... Evento ..........
+    */
+    eventoData: {
+      position: {lat: -20.6141320, lng: -46.0478760},
+      title: '',
+      subtitle: '',
+      date: '',
+      hour: '',
+      valorIngresso: 0,
+      imageURL1: null,
+      imageURL2: null
+    },
+    eventoProgressBar: 0,
+    place: null,
     cadastroEvento0: true,
     cadastroEvento1: false,
     cadastroEvento2: false,
@@ -25,12 +43,12 @@ const store = () => new Vuex.Store({
     eventoPlanoPro: false
   },
   /*
-  ******************** GETTERS ********************
+  **************************************** GETTERS ****************************************
   */
   getters: {
   },
   /*
-  ******************** MUTATIONS ********************
+  **************************************** MUTATIONS ****************************************
   */
   mutations: {
     m_showMenu (state, payload) {
@@ -43,7 +61,10 @@ const store = () => new Vuex.Store({
       state.menuIconAnime = payload
     },
     /*
-    ** Anúncios
+    ---------- ANÚNCIOS ----------
+    */
+    /*
+    .......... Evento ..........
     */
     m_cadastroEvento0 (state, payload) {
       state.cadastroEvento0 = payload
@@ -74,7 +95,7 @@ const store = () => new Vuex.Store({
     }
   },
   /*
-  ******************** ACTIONS ********************
+  **************************************** ACTIONS ****************************************
   */
   actions: {
   }

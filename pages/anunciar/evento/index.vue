@@ -9,12 +9,12 @@
       <div class="pricing-box">
         <h2 class="__pricing-box-title">Selecione um plano:</h2>
 
-        <div class="plano-row casual" @click="$store.commit('m_cadastroEvento1', true), $store.commit('m_cadastroEvento0', false), $store.commit('m_eventoPlanoCasual', true), $store.commit('m_eventoPlanoPro', false), progressBar = (100/7)">
+        <div class="plano-row casual" @click="$store.commit('m_cadastroEvento1', true), $store.commit('m_cadastroEvento0', false), $store.commit('m_eventoPlanoCasual', true), $store.commit('m_eventoPlanoPro', false), $store.state.eventoProgressBar = (100/7)">
           <span class="__plano-valor">R$30</span>
           <span class="__plano-title">CASUAL</span>
         </div>
 
-        <div class="plano-row profissional" @click="$store.commit('m_cadastroEvento1', true), $store.commit('m_cadastroEvento0', false), $store.commit('m_eventoPlanoPro', true), $store.commit('m_eventoPlanoCasual', false), progressBar = (100/7)">
+        <div class="plano-row profissional" @click="$store.commit('m_cadastroEvento1', true), $store.commit('m_cadastroEvento0', false), $store.commit('m_eventoPlanoPro', true), $store.commit('m_eventoPlanoCasual', false), $store.state.eventoProgressBar = (100/7)">
           <span class="__plano-valor">R$100</span>
           <span class="__plano-title">PROFISSIONAL</span>
         </div>
@@ -23,7 +23,7 @@
     </div><!-- PLANO CONTAINER -->
 
 
-    <div class="progress-bar" v-show="!cadastroEvento0" :style="'width:' + progressBar + '%'"></div>
+    <div class="progress-bar" v-show="!cadastroEvento0" :style="'width:' + $store.state.eventoProgressBar + '%'"></div>
 
 
     <!-- ********** CADASTRO EVENTO Pg.1 ********** -->
@@ -39,12 +39,12 @@
 
       <div class="item-form">
         <label>Nome do evento</label>
-        <input type="text" v-model="event.title" required>
+        <input type="text" v-model="$store.state.eventoData.title" required>
       </div>  
 
       <div class="item-form">
         <label>Descrição básica</label>
-        <input type="text" v-model="event.subtitle" required>
+        <input type="text" v-model="$store.state.eventoData.subtitle" required>
       </div>   
 
       <div class="back-next"> 
@@ -66,12 +66,12 @@
 
       <div class="item-form">
         <label>Dia do evento</label>
-        <input type="date" v-model="event.date" :min="today" required>
+        <input type="date" v-model="$store.state.eventoData.date" :min="today" required>
       </div>  
 
       <div class="item-form">
         <label>Horário</label>
-        <input type="time" v-model="event.hour" required>
+        <input type="time" v-model="$store.state.eventoData.hour" required>
       </div>  
 
       <div class="back-next"> 
@@ -98,16 +98,16 @@
       </gmap-autocomplete>
 
       <gmap-map
-      :center="event.position"
+      :center="$store.state.eventoData.position"
       :zoom="mapZoom"
       :options="{styles: styles}"
       style="width: 100%; height: 260px">
         <Gmap-Marker
-        v-if="this.place"
+        v-if="this.$store.state.place"
         :clickable="true"
         :draggable="true"
         animation="4"
-        :position="this.place.geometry.location"
+        :position="this.$store.state.place.geometry.location"
         ></Gmap-Marker>
       </gmap-map>
 
@@ -130,7 +130,7 @@
 
       <div class="item-form">
         <label>1º Lote</label>
-        <vue-numeric class="__vue-numeric" currency="R$" separator="space" :precision="2" v-model="event.valorIngresso" :minus="false"></vue-numeric>
+        <vue-numeric class="__vue-numeric" currency="R$" separator="space" :precision="2" v-model="$store.state.eventoData.valorIngresso" :minus="false"></vue-numeric>
       </div>  
     
       <button type="button" @click="" class="__image-input-btn">Mais lotes?</button>
@@ -153,7 +153,7 @@
 
       <h1 class="__form-title">Imagens e Vídeo</h1>
 
-      <div class="before-choose-image" v-show="event.imageURL1 === null">
+      <div class="before-choose-image" v-show="$store.state.eventoData.imageURL1 === null">
         <h2 class="__form-subtitle">Imagens e vídeo legais farão toda a diferença na hora da divulgação do seu evento</h2>
         <button type="button" @click="$refs.myCroppa1.chooseFile(), showCroppaModal1=true" class="__image-input-btn">Adicionar Imagem</button>
       </div>
@@ -174,8 +174,8 @@
           </croppa>
           <div class="modal-croppa-btns" style="display:flex;flex-flow:column;width:100%">
             <button type="button" @click="showCroppaModal1=false" class="__image-input-btn">Confirmar</button>
-            <button type="button" @click="$refs.myCroppa1.chooseFile(), $refs.myCroppa1.remove()" class="__image-input-btn" style="background:transparent;margin-top:.5rem;">Escolher outra</button>
-            <button type="button" @click="$refs.myCroppa1.remove(), removeImage1(), showCroppaModal1=false" class="__image-input-btn" style="background:transparent" v-show="event.imageURL1 !== null">Remover</button>
+            <button type="button" @click="$refs.myCroppa1.chooseFile(), $refs.myCroppa1.remove()" class="__image-input-btn" style="background:transparent;margin-top:.7rem;">Escolher outra</button>
+            <button type="button" @click="$refs.myCroppa1.remove(), removeImage1(), showCroppaModal1=false" class="__image-input-btn" style="background:transparent">Remover</button>
           </div>
         </div>
       </div>
@@ -196,21 +196,21 @@
           </croppa>
           <div class="modal-croppa-btns" style="display:flex;flex-flow:column;width:100%">
             <button type="button" @click="showCroppaModal2=false" class="__image-input-btn">Confirmar</button>
-            <button type="button" @click="$refs.myCroppa2.chooseFile(), $refs.myCroppa2.remove()" class="__image-input-btn" style="background:transparent;margin-top:.5rem;">Escolher outra</button>
-            <button type="button" @click="$refs.myCroppa2.remove(), removeImage2(), showCroppaModal2=false" class="__image-input-btn" style="background:transparent" v-show="event.imageURL2 !== null">Remover</button>
+            <button type="button" @click="$refs.myCroppa2.chooseFile(), $refs.myCroppa2.remove()" class="__image-input-btn" style="background:transparent;margin-top:.7rem;">Escolher outra</button>
+            <button type="button" @click="$refs.myCroppa2.remove(), removeImage2(), showCroppaModal2=false" class="__image-input-btn" style="background:transparent">Remover</button>
           </div>
         </div>
       </div>
 
-
-      <div class="after-choose-image" v-show="event.imageURL1 !== null">
-        <img :src="event.imageURL1" class="__preview-img" @click="showCroppaModal1=true">
+      <!-- Preview Image -->
+      <div class="after-choose-image" v-show="$store.state.eventoData.imageURL1 !== null">
+        <img :src="$store.state.eventoData.imageURL1" class="__preview-img" @click="showCroppaModal1=true">
         <div class="image2">
-          <img src="./../../../assets/img/add-image.svg" class="__preview-img" v-if="event.imageURL2 === null" @click="$refs.myCroppa2.chooseFile(), showCroppaModal2=true" style="padding:2rem">
-          <img :src="event.imageURL2" class="__preview-img" @click="showCroppaModal2=true" v-else>
+          <img src="./../../../assets/img/add-image.svg" class="__preview-img" v-if="$store.state.eventoData.imageURL2 === null" @click="$refs.myCroppa2.chooseFile(), showCroppaModal2=true" style="padding:2rem">
+          <img :src="$store.state.eventoData.imageURL2" class="__preview-img" @click="showCroppaModal2=true" v-else>
         </div>
         
-      </div>
+      </div><!-- Preview Image -->
       
 
       <div class="back-next"> 
@@ -259,41 +259,29 @@ export default {
   data () {
     return {
       showCroppaModal1: false,
-      showCroppaModal2: false,
-      progressBar: 0,
-      place: null,
-      event: {  
-        position: {lat:-20.6141320, lng:-46.0478760},
-        title: '',
-        subtitle: '',
-        date: '',
-        hour: '',
-        valorIngresso: 0,
-        imageURL1: null,
-        imageURL2: null
-      }
+      showCroppaModal2: false
     }
   },
   methods: {
     /* ******************** IMAGE INPUT ******************** */
     imageChoose1 () {
       let URL1 = this.$refs.myCroppa1.generateDataUrl()
-      this.event.imageURL1 = URL1
+      this.$store.state.eventoData.imageURL1 = URL1
     },
      removeImage1 () {
-      this.event.imageURL1 = null
+      this.$store.state.eventoData.imageURL1 = null
     },
     imageChoose2 () {
       let URL2 = this.$refs.myCroppa2.generateDataUrl()
-      this.event.imageURL2 = URL2
+      this.$store.state.eventoData.imageURL2 = URL2
     },
     removeImage2 () {
-      this.event.imageURL2 = null
+      this.$store.state.eventoData.imageURL2 = null
     },
     /* ******************** GOOGLE MAPS ******************** */
     setPlace (place) {
-      this.place = place
-      this.event.position = this.place.geometry.location
+      this.$store.state.place = place
+      this.$store.state.eventoData.position = this.$store.state.place.geometry.location
     },
     /* ******************** BACK BUTTONS ******************** */
     backBtn1 () {
@@ -316,28 +304,28 @@ export default {
     },
     /* ******************** NEXT BUTTONS ******************** */
     nextBtn1 () {
-      if (this.event.title.length > 0 && this.event.subtitle.length > 0) {
-        return this.$store.commit('m_cadastroEvento1', false), this.$store.commit('m_cadastroEvento2', true), this.progressBar = (100/7)*2
+      if (this.$store.state.eventoData.title.length > 0 && this.$store.state.eventoData.subtitle.length > 0) {
+        return this.$store.commit('m_cadastroEvento1', false), this.$store.commit('m_cadastroEvento2', true), this.$store.state.eventoProgressBar = (100/7)*2
       }
     },  
     nextBtn2 () {
-      if (this.event.date.length > 0 && this.event.hour.length > 0) {
-        return this.$store.commit('m_cadastroEvento2', false), this.$store.commit('m_cadastroEvento3', true), this.progressBar = (100/7)*3
+      if (this.$store.state.eventoData.date.length > 0 && this.$store.state.eventoData.hour.length > 0) {
+        return this.$store.commit('m_cadastroEvento2', false), this.$store.commit('m_cadastroEvento3', true), this.$store.state.eventoProgressBar = (100/7)*3
       }
     },
     nextBtn3 () {
-      if (this.place != null) {
-        return this.$store.commit('m_cadastroEvento3', false), this.$store.commit('m_cadastroEvento4', true), this.progressBar = (100/7)*4
+      if (this.$store.state.place != null) {
+        return this.$store.commit('m_cadastroEvento3', false), this.$store.commit('m_cadastroEvento4', true), this.$store.state.eventoProgressBar = (100/7)*4
       }
     },  
     nextBtn4 () {
-      if (this.event.valorIngresso >= 0) {
-        return this.$store.commit('m_cadastroEvento4', false), this.$store.commit('m_cadastroEvento5', true), this.progressBar = (100/7)*5
+      if (this.$store.state.eventoData.valorIngresso >= 0) {
+        return this.$store.commit('m_cadastroEvento4', false), this.$store.commit('m_cadastroEvento5', true), this.$store.state.eventoProgressBar = (100/7)*5
       }
     },
     nextBtn5 () {
-      if (this.event.imageURL1 !== null) {
-        return this.$store.commit('m_cadastroEvento5', false), this.$store.commit('m_cadastroEvento6', true), this.progressBar = (100/7)*6
+      if (this.$store.state.eventoData.imageURL1 !== null) {
+        return this.$store.commit('m_cadastroEvento5', false), this.$store.commit('m_cadastroEvento6', true), this.$store.state.eventoProgressBar = (100/7)*6
       } else {
         alert('Adicione pelo menos uma imagem')
       }
@@ -357,39 +345,39 @@ export default {
       return yyyy + '-' + mm + '-' + dd
     },
     eventPosition() {
-      if (this.place !== null) {
-        return this.eventPosition = {lat: this.place.geometry.location.lat, lng: this.place.geometry.location.lng}
+      if (this.$store.state.place !== null) {
+        return this.eventPosition = {lat: this.$store.state.place.geometry.location.lat, lng: this.$store.state.place.geometry.location.lng}
       }
     },
     mapZoom () {
-      if (this.place != null) {
+      if (this.$store.state.place != null) {
         return 15
       } else {
         return 11
       }
     },
     form1ok () {
-      if (this.event.title.length > 0 && this.event.subtitle.length > 0) {
+      if (this.$store.state.eventoData.title.length > 0 && this.$store.state.eventoData.subtitle.length > 0) {
         return 'background:rgb(255, 88, 88);cursor:pointer'
       }
     },
     form2ok () {
-      if (this.event.date.length > 0 && this.event.hour.length > 0) {
+      if (this.$store.state.eventoData.date.length > 0 && this.$store.state.eventoData.hour.length > 0) {
         return 'background:rgb(255, 88, 88);cursor:pointer'
       }
     },
     form3ok () {
-      if (this.place !== null) {
+      if (this.$store.state.place !== null) {
         return 'background:rgb(255, 88, 88);cursor:pointer'
       }
     },
     form4ok () {
-      if (this.event.valorIngresso >= 0) {
+      if (this.$store.state.eventoData.valorIngresso >= 0) {
         return 'background:rgb(255, 88, 88);cursor:pointer'
       }
     },
     form5ok () {
-      if (this.event.imageURL1 !== null) {
+      if (this.$store.state.eventoData.imageURL1 !== null) {
         return 'background:rgb(255, 88, 88);cursor:pointer'
       }
     },
@@ -626,7 +614,6 @@ export default {
         border-radius: 4px;
       }
     }
-    
     & canvas {
       margin: 3rem 0 2rem 0;
       border: 2px dashed white;

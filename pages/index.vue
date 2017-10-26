@@ -1,16 +1,9 @@
 <template>
   <div class="home">
 
-    <!-- <div class="heading">
-      <div class="welcome">
-        <h1 class="__title">Visite Escarpas do Lago</h1>
-        <h2 class="__subtitle">O maior balneário de água doce da América Latina</h2>
-      </div>
-    </div> -->
-
     <div class="home-body">
 
-
+      <!-- EVENTOS -->
       <div class="category-container">
 
         <div class="title-row">
@@ -36,10 +29,8 @@
             </ul>
           </v-touch>  
         </div>
-        
 
-      </div>
-      
+      </div><!-- EVENTOS -->
 
     </div>
   </div>
@@ -122,36 +113,6 @@ export default {
   flex-flow: column;
   justify-content: space-between;
   transition: all .222s ease;
-  /* & .heading {
-    height: 15rem;
-    background: url('../assets/img/bgimg3.jpg') no-repeat fixed; 
-    background-size: cover;
-    & .welcome {
-      display: flex;
-      flex-flow: column;
-      text-align: center;
-      justify-content: center;
-      align-items: center;
-      background: linear-gradient(rgba(1, 5, 15, .6) 55%, rgba(255, 255, 255, 1)); 
-      padding: 0 7%;
-      height: 15rem;
-      padding-bottom: 2.7rem;
-      & .__title {
-        font-family: var(--heading-font);
-        color: white;
-        font-size: 34px;
-        font-weight: 400;
-        margin-bottom: .6rem;
-      }
-      & .__subtitle {
-        color: white;
-        font-size: 17px;
-        font-weight: 300;
-        line-height: 22px;
-      }
-    }
-  } */
-
   & .home-body {
     display: flex;
     flex-flow: column;
