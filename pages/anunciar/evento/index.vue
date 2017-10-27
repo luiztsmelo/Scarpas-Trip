@@ -106,7 +106,7 @@
         v-if="this.$store.state.place"
         :clickable="true"
         :draggable="true"
-        animation="4"
+        :animation="4"
         :position="this.$store.state.place.geometry.location"
         ></Gmap-Marker>
       </gmap-map>
@@ -263,12 +263,15 @@ export default {
   },
   methods: {
     /* ******************** IMAGE INPUT ******************** */
-    imageChoose1 () {
+    async imageChoose1 () {
       if (this.$store.state.eventoData.imageURL1 !== null) {
         return
       } else {
-        let URL1 = this.$refs.myCroppa1.generateDataUrl('image/jpeg')
-        this.$store.state.eventoData.imageURL1 = URL1
+        const blob = await this.$refs.myCroppa1.promisedBlob()
+        const fd = new FormData()
+        fd.append('file', blob)
+        let url1 = URL.createObjectURL(blob)
+        this.$store.state.eventoData.imageURL1 = url1
       }
     },
     removeImage1 () {
@@ -276,12 +279,13 @@ export default {
       this.$refs.myCroppa1.remove()
       this.showCroppaModal1 = false
     },
-    imageChoose2 () {
+    async imageChoose2 () {
       if (this.$store.state.eventoData.imageURL2 !== null) {
         return
       } else {
-        let URL2 = this.$refs.myCroppa2.generateDataUrl('image/jpeg')
-        this.$store.state.eventoData.imageURL2 = URL2
+        const blob = await this.$refs.myCroppa2.promisedBlob()
+        let url2 = URL.createObjectURL(blob)
+        this.$store.state.eventoData.imageURL2 = url2
       }
     },
     removeImage2 () {
@@ -321,7 +325,7 @@ export default {
     },  
     nextBtn2 () {
       if (this.$store.state.eventoData.date.length > 0 && this.$store.state.eventoData.hour.length > 0) {
-        return this.$store.commit('m_cadastroEvento2', false), this.$store.commit('m_cadastroEvento3', true), this.$store.commit('m_eventoProgressBar', (100/7)*3)
+        return this.$store.commit('m_cadastroEvento2', false), this.$store.commit('m_cadastroEvento3', true), this.$store.commit('m_eventoProgressBar', (100/7)*3), location.reload()
       }
     },
     nextBtn3 () {
@@ -336,7 +340,7 @@ export default {
     },
     nextBtn5 () {
       if (this.$store.state.eventoData.imageURL1 !== null) {
-        return this.$store.commit('m_cadastroEvento5', false), this.$store.commit('m_cadastroEvento6', true), this.$store.commit('m_eventoProgressBar', (100/7)*6)
+        return this.$store.commit('m_cadastroEvento5', false), this.$store.commit('m_cadastroEvento6', true), this.$store.commit('m_eventoProgressBar', (100/7)*6), this.$store.dispatch('a_uploadEvento')
       } else {
         alert('Adicione pelo menos uma imagem')
       }

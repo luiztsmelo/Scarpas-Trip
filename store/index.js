@@ -1,5 +1,5 @@
 import Vuex from 'vuex'
-/* import * as firebase from 'firebase' */
+import * as firebase from 'firebase'
 import createPersistedState from 'vuex-persistedstate'
 
 const store = () => new Vuex.Store({
@@ -101,6 +101,10 @@ const store = () => new Vuex.Store({
   **************************************** ACTIONS ****************************************
   */
   actions: {
+    a_uploadEvento ({ commit, state }) {
+      const eventoID = Math.floor(Math.random() * (99999 - 10000 + 1) + 10000)
+      firebase.database().ref('eventos/' + eventoID).set(state.eventoData)
+    }
   }
 })
 

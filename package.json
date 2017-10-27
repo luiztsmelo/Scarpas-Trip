@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@nuxtjs/pwa": "latest",
-    "firebase": "^4.5.1",
+    "firebase": "^4.6.0",
     "nuxt": "latest",
     "vue-croppa": "^1.1.0",
     "vue-numeric": "^2.2.4",
