@@ -9,13 +9,13 @@ const store = () => new Vuex.Store({
   */
   state: {
     /*
-    ---------- GERAL ----------
+    -------------------- GERAL --------------------
     */
     showMenu: false,
     showFoobar: true,
     menuIconAnime: false,
     /*
-    ---------- ANÚNCIOS ----------
+    -------------------- ANÚNCIOS --------------------
     */
     /*
     .......... Evento ..........
@@ -27,7 +27,7 @@ const store = () => new Vuex.Store({
       date: '',
       hour: '',
       valorIngresso: 0,
-      image1: null,
+      imageURL1: null,
       imageURL2: null
     },
     eventoProgressBar: 0,
