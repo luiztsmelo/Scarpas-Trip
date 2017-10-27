@@ -512,10 +512,10 @@ export default {
       padding: 3rem 0 1.5rem 0;
     }
     & .__form-subtitle {
-      font-size: 18px;
+      font-size: 19px;
       font-weight: 400;
       padding: 1.5rem 0 1.5rem 0;
-      line-height: 25px;
+      line-height: 27px;
     }
     & .item-form {
       display: flex;
