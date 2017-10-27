@@ -20,6 +20,7 @@ const store = () => new Vuex.Store({
     /*
     .......... Evento ..........
     */
+    eventoID: null,
     eventoData: {
       position: {lat: -20.6141320, lng: -46.0478760},
       title: '',
@@ -66,6 +67,9 @@ const store = () => new Vuex.Store({
     /*
     .......... Evento ..........
     */
+    m_eventoID (state, payload) {
+      state.eventoID = payload
+    },
     m_eventoProgressBar (state, payload) {
       state.eventoProgressBar = payload
     },
@@ -102,8 +106,7 @@ const store = () => new Vuex.Store({
   */
   actions: {
     a_uploadEvento ({ commit, state }) {
-      const eventoID = Math.floor(Math.random() * (99999 - 10000 + 1) + 10000)
-      firebase.database().ref('eventos/' + eventoID).set(state.eventoData)
+      firebase.database().ref('eventos/' + state.eventoID).set(state.eventoData)
     }
   }
 })

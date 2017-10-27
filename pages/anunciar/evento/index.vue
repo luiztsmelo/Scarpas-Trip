@@ -245,6 +245,7 @@
 </template>
 
 <script>
+import * as firebase from 'firebase'
 import { mapstyle } from '../../../mixins/mapstyle'
 
 export default {
@@ -263,15 +264,24 @@ export default {
   },
   methods: {
     /* ******************** IMAGE INPUT ******************** */
-    async imageChoose1 () {
+    imageChoose1 () {
+      const eventoID = Math.floor(Math.random() * (99999 - 10000 + 1) + 10000)
+      this.$store.commit('m_eventoID', eventoID)
       if (this.$store.state.eventoData.imageURL1 !== null) {
         return
       } else {
-        const blob = await this.$refs.myCroppa1.promisedBlob()
-        const fd = new FormData()
-        fd.append('file', blob)
-        let url1 = URL.createObjectURL(blob)
-        this.$store.state.eventoData.imageURL1 = url1
+        this.$refs.myCroppa1.generateBlob((blob) => {
+          let url1 = URL.createObjectURL(blob)
+          this.$store.state.eventoData.imageURL1 = url1
+          firebase.storage().ref().child('eventos/' + eventoID + 'H' + '.jpeg').put(blob).then(function(snapshot) {
+            console.log('Uploaded a HQ blob!')
+          })
+        }, 'image/jpeg')
+        this.$refs.myCroppa1.generateBlob((blob) => {
+          firebase.storage().ref().child('eventos/' + eventoID + 'L' + '.jpeg').put(blob).then(function(snapshot) {
+            console.log('Uploaded a LQ blob!')
+          })
+        }, 'image/jpeg', 0.01)
       }
     },
     removeImage1 () {
@@ -325,7 +335,7 @@ export default {
     },  
     nextBtn2 () {
       if (this.$store.state.eventoData.date.length > 0 && this.$store.state.eventoData.hour.length > 0) {
-        return this.$store.commit('m_cadastroEvento2', false), this.$store.commit('m_cadastroEvento3', true), this.$store.commit('m_eventoProgressBar', (100/7)*3), location.reload()
+        return this.$store.commit('m_cadastroEvento2', false), this.$store.commit('m_cadastroEvento3', true), this.$store.commit('m_eventoProgressBar', (100/7)*3)
       }
     },
     nextBtn3 () {
