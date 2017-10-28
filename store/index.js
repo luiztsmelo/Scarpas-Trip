@@ -74,6 +74,9 @@ const store = () => new Vuex.Store({
       state.eventoID = payload
       state.eventoData.eventoID = payload
     },
+    m_eventoData (state, payload) {
+      state.eventoData = payload
+    },
     m_imgUrlH1 (state, payload) {
       state.eventoData.imgUrlH1 = payload
     },
@@ -121,8 +124,10 @@ const store = () => new Vuex.Store({
   **************************************** ACTIONS ****************************************
   */
   actions: {
-    a_uploadEvento ({ state }) {
-      firebase.database().ref('eventos/' + state.eventoID).set(state.eventoData)
+    a_uploadEvento ({ state, commit }) {
+      firebase.database().ref('eventos/' + state.eventoID).set(state.eventoData)/* .then(() => {
+        commit('m_eventoData', null)
+      }) */
     }
   }
 })
