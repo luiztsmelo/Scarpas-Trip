@@ -167,6 +167,7 @@
           :height="214"
           :quality="3"
           :placeholder="'Carregando...'"
+          :placeholder-color="'rgb(222,222,222)'"
           :accept="'image/*'"
           :prevent-white-space="true"
           :show-remove-button="false"
