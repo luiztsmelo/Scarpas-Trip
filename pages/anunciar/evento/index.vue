@@ -397,6 +397,8 @@ export default {
         }, 'image/jpeg', 0.01)
         if (this.$store.state.eventoData.imgUrlH1 !== null) {
           this.$store.dispatch('a_uploadEvento')
+          this.$router.push('/')
+          this.$store.commit('m_showFoobar', true)
         }
       }
     }

@@ -49,32 +49,6 @@ export default {
   data () {
     return {
       positionCarousel: ''
-      /* eventosData: [
-        {
-        title: 'YDE Weekend - ALOK', 
-        subtitle: 'Iremos invadir Escarpas do Lago - MG', 
-        img: {
-          src: "https://s3.amazonaws.com/sh2-img-eventos/site/20171002182709.png",
-          placeholder: "http://i67.tinypic.com/hvcmli.jpg"
-          }
-        },
-        {
-        title: 'Orloff Set', 
-        subtitle: 'Escarpas Session', 
-        img: {
-          src: "https://soubh-imagens.s3.amazonaws.com/media/uploaded_images/eventos/194325_festa-orloff.jpg",
-          placeholder: "http://i64.tinypic.com/309lo9h.jpg"
-          }
-        },
-        {
-        title: 'Show Mr. Catra', 
-        subtitle: 'O papai chegou', 
-        img: {
-          src: "https://rd1.com.br/wp-content/uploads/2016/01/19_56_29_654_file.jpeg",
-          placeholder: "https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif"
-          }
-        },  
-      ] */
     }
   },
   methods: {
@@ -103,8 +77,8 @@ export default {
       }
     },
     snippetSubtitle (value) {
-      if (value.length > 31) {
-        return value.slice(0, 31) + '...'
+      if (value.length > 27) {
+        return value.slice(0, 27) + '...'
       } else {
         return value.slice(0)
       }
@@ -178,11 +152,11 @@ export default {
             }
             & .__card-title {
               margin: .6rem 0 .3rem 0;
-              font-size: 16px;
+              font-size: 17px;
               font-weight: 600;
             }
             & .__card-subtitle {
-              font-size: 15px;
+              font-size: 16px;
               font-weight: 300;
             }
           }
