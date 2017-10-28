@@ -611,7 +611,7 @@ export default {
       }
     }
     & .modal-croppa {
-      background: rgba(0, 0, 0, 0.8);
+      background: rgba(0, 0, 0, 0.84);
       width:  100%;
       height: 100%;
       position: fixed;
