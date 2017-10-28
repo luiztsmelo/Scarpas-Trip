@@ -153,7 +153,7 @@
 
       <h1 class="__form-title">Imagens e Vídeo</h1>
 
-      <div class="before-choose-image" v-show="$store.state.eventoData.imageURL1 === null">
+      <div class="before-choose-image" v-show="imageURL1 === null">
         <h2 class="__form-subtitle">Imagens e vídeo legais farão toda a diferença na hora da divulgação do seu evento</h2>
         <button type="button" @click="$refs.myCroppa1.chooseFile(), showCroppaModal1=true" class="__image-input-btn">Adicionar Imagem</button>
       </div>
@@ -173,7 +173,7 @@
           </croppa>
           <div class="modal-croppa-btns" style="display:flex;flex-flow:column;width:100%">
             <button type="button" @click="showCroppaModal1=false, imageChoose1()" class="__image-input-btn">Confirmar</button>
-            <button type="button" @click="$refs.myCroppa1.chooseFile(), $refs.myCroppa1.remove(), $store.state.eventoData.imageURL1 = null" class="__image-input-btn" style="background:transparent;margin-top:.7rem;">Escolher outra</button>
+            <button type="button" @click="$refs.myCroppa1.chooseFile(), $refs.myCroppa1.remove(), imageURL1 = null" class="__image-input-btn" style="background:transparent;margin-top:.7rem;">Escolher outra</button>
             <button type="button" @click="removeImage1()" class="__image-input-btn" style="background:transparent">Remover</button>
           </div>
         </div>
@@ -195,18 +195,18 @@
           </croppa>
           <div class="modal-croppa-btns" style="display:flex;flex-flow:column;width:100%">
             <button type="button" @click="showCroppaModal2=false, imageChoose2()" class="__image-input-btn">Confirmar</button>
-            <button type="button" @click="$refs.myCroppa2.chooseFile(), $refs.myCroppa2.remove(), $store.state.eventoData.imageURL2 = null" class="__image-input-btn" style="background:transparent;margin-top:.7rem;">Escolher outra</button>
+            <button type="button" @click="$refs.myCroppa2.chooseFile(), $refs.myCroppa2.remove(), imageURL2 = null" class="__image-input-btn" style="background:transparent;margin-top:.7rem;">Escolher outra</button>
             <button type="button" @click="removeImage2()" class="__image-input-btn" style="background:transparent">Remover</button>
           </div>
         </div>
       </div>
 
       <!-- Preview Image -->
-      <div class="after-choose-image" v-show="$store.state.eventoData.imageURL1 !== null">
-        <img :src="$store.state.eventoData.imageURL1" class="__preview-img" @click="showCroppaModal1=true">
+      <div class="after-choose-image" v-show="imageURL1 !== null">
+        <img :src="imageURL1" class="__preview-img" @click="showCroppaModal1=true">
         <div class="image2">
-          <img src="./../../../assets/img/add-image.svg" class="__preview-img" v-if="$store.state.eventoData.imageURL2 === null" @click="$refs.myCroppa2.chooseFile(), showCroppaModal2=true" style="padding:2rem">
-          <img :src="$store.state.eventoData.imageURL2" class="__preview-img" @click="showCroppaModal2=true" v-else>
+          <img src="./../../../assets/img/add-image.svg" class="__preview-img" v-if="imageURL2 === null" @click="$refs.myCroppa2.chooseFile(), showCroppaModal2=true" style="padding:2rem">
+          <img :src="imageURL2" class="__preview-img" @click="showCroppaModal2=true" v-else>
         </div>
         
       </div><!-- Preview Image -->
@@ -227,7 +227,7 @@
     <!-- ********** CADASTRO EVENTO Pg.6 ********** -->
     <form class="cadastro-evento" v-show="cadastroEvento6">
 
-      <h1 class="__form-title">Investimento</h1>
+      <h1 class="__form-title">Preview</h1>
 
       <div class="back-next"> 
         <div class="back-next-body">
@@ -237,6 +237,23 @@
       </div>
     
     </form><!-- ********** CADASTRO EVENTO Pg.6 ********** -->
+
+
+
+
+    <!-- ********** CADASTRO EVENTO Pg.7 ********** -->
+    <form class="cadastro-evento" v-show="cadastroEvento7">
+
+      <h1 class="__form-title">Investimento</h1>
+
+      <div class="back-next"> 
+        <div class="back-next-body">
+          <button type="button" class="__back" @click="backBtn7">Voltar</button>
+          <button type="button" class="__next" :style="form7ok" @click="finalizar">Finalizar</button>
+        </div>
+      </div>
+    
+    </form><!-- ********** CADASTRO EVENTO Pg.7 ********** -->
   
 
 
@@ -259,38 +276,30 @@ export default {
   data () {
     return {
       showCroppaModal1: false,
-      showCroppaModal2: false
+      showCroppaModal2: false,
+      imageURL1: null,
+      imageURL2: null
     }
   },
   methods: {
     /* ******************** IMAGE INPUT ******************** */
     imageChoose1 () {
-      const eventoID = Math.floor(Math.random() * (99999 - 10000 + 1) + 10000)
-      this.$store.commit('m_eventoID', eventoID)
-      if (this.$store.state.eventoData.imageURL1 !== null) {
+      if (this.imageURL1 !== null) {
         return
       } else {
         this.$refs.myCroppa1.generateBlob((blob) => {
           let url1 = URL.createObjectURL(blob)
-          this.$store.state.eventoData.imageURL1 = url1
-          firebase.storage().ref().child('eventos/' + eventoID + 'H' + '.jpeg').put(blob).then(function(snapshot) {
-            console.log('Uploaded a HQ blob!')
-          })
-        }, 'image/jpeg')
-        this.$refs.myCroppa1.generateBlob((blob) => {
-          firebase.storage().ref().child('eventos/' + eventoID + 'L' + '.jpeg').put(blob).then(function(snapshot) {
-            console.log('Uploaded a LQ blob!')
-          })
-        }, 'image/jpeg', 0.01)
+          this.imageURL1 = url1
+        })
       }
     },
     removeImage1 () {
-      this.$store.state.eventoData.imageURL1 = null
+      this.imageURL1 = null
       this.$refs.myCroppa1.remove()
       this.showCroppaModal1 = false
     },
     async imageChoose2 () {
-      if (this.$store.state.eventoData.imageURL2 !== null) {
+      if (this.imageURL2 !== null) {
         return
       } else {
         const blob = await this.$refs.myCroppa2.promisedBlob()
@@ -299,7 +308,7 @@ export default {
       }
     },
     removeImage2 () {
-      this.$store.state.eventoData.imageURL2 = null
+      this.imageURL2 = null
       this.$refs.myCroppa2.remove()
       this.showCroppaModal2 = false
     },
@@ -327,6 +336,9 @@ export default {
     backBtn6 () {
       return this.$store.commit('m_cadastroEvento6', false), this.$store.commit('m_cadastroEvento5', true)
     },
+    backBtn7 () {
+      return this.$store.commit('m_cadastroEvento7', false), this.$store.commit('m_cadastroEvento6', true)
+    },
     /* ******************** NEXT BUTTONS ******************** */
     nextBtn1 () {
       if (this.$store.state.eventoData.title.length > 0 && this.$store.state.eventoData.subtitle.length > 0) {
@@ -349,12 +361,45 @@ export default {
       }
     },
     nextBtn5 () {
-      if (this.$store.state.eventoData.imageURL1 !== null) {
-        return this.$store.commit('m_cadastroEvento5', false), this.$store.commit('m_cadastroEvento6', true), this.$store.commit('m_eventoProgressBar', (100/7)*6), this.$store.dispatch('a_uploadEvento')
+      if (this.imageURL1 !== null) {
+        return this.$store.commit('m_cadastroEvento5', false), this.$store.commit('m_cadastroEvento6', true), this.$store.commit('m_eventoProgressBar', (100/7)*6)
       } else {
         alert('Adicione pelo menos uma imagem')
       }
-    }  
+    },
+    nextBtn6 () {
+      if (1<2) {
+        return this.$store.commit('m_cadastroEvento6', false), this.$store.commit('m_cadastroEvento7', true), this.$store.commit('m_eventoProgressBar', (100/7)*7)
+      }
+    },
+    finalizar () {
+      if (1<2) {
+        const storageRef = firebase.storage().ref('eventos')
+        const eventoID = Math.floor(Math.random() * (99999 - 10000 + 1) + 10000)
+        this.$store.commit('m_eventoID', eventoID)
+        /* Upload image 1 High Quality */
+        this.$refs.myCroppa1.generateBlob((blob) => {
+          storageRef.child(eventoID + '-' + 'H1' + '.jpeg').put(blob).then(snapshot => {
+            console.log(eventoID + '-' + 'H1' + '.jpeg')
+            storageRef.child(eventoID + '-' + 'H1' + '.jpeg').getDownloadURL().then(url => {
+              this.$store.commit('m_imgUrlH1', url)
+            })
+          })
+        }, 'image/jpeg')
+        /* Upload image 1 Low Quality */
+        this.$refs.myCroppa1.generateBlob((blob) => {
+          firebase.storage().ref('eventos').child(eventoID + '-' + 'L1' + '.jpeg').put(blob).then(snapshot => {
+            console.log(eventoID + '-' + 'L1' + '.jpeg')
+            storageRef.child(eventoID + '-' + 'L1' + '.jpeg').getDownloadURL().then(url => {
+              this.$store.commit('m_imgUrlL1', url)
+            })
+          })
+        }, 'image/jpeg', 0.01)
+        if (this.$store.state.eventoData.imgUrlH1 !== null) {
+          this.$store.dispatch('a_uploadEvento')
+        }
+      }
+    }
   },
   computed: {
     today () {
@@ -402,11 +447,16 @@ export default {
       }
     },
     form5ok () {
-      if (this.$store.state.eventoData.imageURL1 !== null) {
+      if (this.imageURL1 !== null) {
         return 'background:rgb(255, 88, 88);cursor:pointer'
       }
     },
     form6ok () {
+      if (1<2) {
+        return 'background:rgb(255, 88, 88);cursor:pointer'
+      }
+    },
+    form7ok () {
       if (1<2) {
         return 'background:rgb(255, 88, 88);cursor:pointer'
       }
@@ -437,6 +487,9 @@ export default {
     },
     cadastroEvento6 () {
       return this.$store.state.cadastroEvento6
+    },
+    cadastroEvento7 () {
+      return this.$store.state.cadastroEvento7
     }
   }
 }

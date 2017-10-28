@@ -21,15 +21,17 @@ const store = () => new Vuex.Store({
     .......... Evento ..........
     */
     eventoID: null,
+    eventos: null,
     eventoData: {
+      eventoID: null,
       position: {lat: -20.6141320, lng: -46.0478760},
       title: '',
       subtitle: '',
       date: '',
       hour: '',
       valorIngresso: 0,
-      imageURL1: null,
-      imageURL2: null
+      imgUrlH1: null,
+      imgUrlL1: null
     },
     eventoProgressBar: 0,
     place: null,
@@ -40,6 +42,7 @@ const store = () => new Vuex.Store({
     cadastroEvento4: false,
     cadastroEvento5: false,
     cadastroEvento6: false,
+    cadastroEvento7: false,
     eventoPlanoCasual: false,
     eventoPlanoPro: false
   },
@@ -69,6 +72,16 @@ const store = () => new Vuex.Store({
     */
     m_eventoID (state, payload) {
       state.eventoID = payload
+      state.eventoData.eventoID = payload
+    },
+    m_imgUrlH1 (state, payload) {
+      state.eventoData.imgUrlH1 = payload
+    },
+    m_imgUrlL1 (state, payload) {
+      state.eventoData.imgUrlL1 = payload
+    },
+    m_eventos (state, payload) {
+      state.eventos = payload
     },
     m_eventoProgressBar (state, payload) {
       state.eventoProgressBar = payload
@@ -94,6 +107,9 @@ const store = () => new Vuex.Store({
     m_cadastroEvento6 (state, payload) {
       state.cadastroEvento6 = payload
     },
+    m_cadastroEvento7 (state, payload) {
+      state.cadastroEvento7 = payload
+    },
     m_eventoPlanoCasual (state, payload) {
       state.eventoPlanoCasual = payload
     },
@@ -105,7 +121,7 @@ const store = () => new Vuex.Store({
   **************************************** ACTIONS ****************************************
   */
   actions: {
-    a_uploadEvento ({ commit, state }) {
+    a_uploadEvento ({ state }) {
       firebase.database().ref('eventos/' + state.eventoID).set(state.eventoData)
     }
   }

@@ -19,9 +19,9 @@
         <div class="carousel-container">
           <v-touch @panleft="leftCarousel" @panright="rightCarousel" v-bind:pan-options="{ direction: 'horizontal' }">
             <ul class="carousel-row" :style="'transform: translateX(' + positionCarousel + 'px)'">
-              <li class="card" v-for="evento in eventosData">
+              <li class="card" v-for="evento in eventos || $store.state.eventos">
                 
-                <progressive-img class="__card-img" :src="evento.img.src" :placeholder="evento.img.placeholder" alt="" no-ratio />
+                <progressive-img class="__card-img" :src="evento.imgUrlH1" :placeholder="evento.imgUrlL1" alt="" no-ratio />
                 <h1 class="__card-title">{{ evento.title | snippetTitle }}</h1>
                 <h2 class="__card-subtitle">{{ evento.subtitle | snippetSubtitle }}</h2>
 
@@ -37,6 +37,8 @@
 </template>
 
 <script>
+import * as firebase from 'firebase'
+
 export default {
   head () {
     return {
@@ -46,8 +48,8 @@ export default {
   transition: 'slide-right',
   data () {
     return {
-      positionCarousel: '',
-      eventosData: [
+      positionCarousel: ''
+      /* eventosData: [
         {
         title: 'YDE Weekend - ALOK', 
         subtitle: 'Iremos invadir Escarpas do Lago - MG', 
@@ -72,7 +74,7 @@ export default {
           placeholder: "https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif"
           }
         },  
-      ]
+      ] */
     }
   },
   methods: {
@@ -83,6 +85,13 @@ export default {
     rightCarousel (e) {
       this.positionCarousel = e.deltaX 
       console.log(e.deltaX + ' - ' + this.positionCarousel)
+    }
+  },
+  computed: {
+    eventos () {
+      firebase.database().ref('eventos').once('value').then(snapshot => {
+        this.$store.commit('m_eventos', snapshot.val())
+      })
     }
   },
   filters: {
