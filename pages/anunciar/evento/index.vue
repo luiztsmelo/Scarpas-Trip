@@ -155,7 +155,7 @@
 
       <div class="before-choose-image" v-show="imageURL1 === null">
         <h2 class="__form-subtitle">Imagens e vídeo legais farão toda a diferença na hora da divulgação do seu evento</h2>
-        <button type="button" @click="$refs.myCroppa1.chooseFile(), showCroppaModal1=true" class="__image-input-btn">Adicionar Imagem</button>
+        <button type="button" @click="$refs.myCroppa1.chooseFile()" class="__image-input-btn">Adicionar Imagem</button>
       </div>
       
       <div class="modal-croppa" v-show="showCroppaModal1" @click="showCroppaModal1=false">
@@ -169,12 +169,13 @@
           :placeholder="'Carregando...'"
           :accept="'image/*'"
           :prevent-white-space="true"
-          :show-remove-button="false">
+          :show-remove-button="false"
+          @file-choose="fileChoose1">
           </croppa>
           <div class="modal-croppa-btns" style="display:flex;flex-flow:column;width:100%">
             <button type="button" @click="showCroppaModal1=false, imageChoose1()" class="__image-input-btn">Confirmar</button>
-            <button type="button" @click="$refs.myCroppa1.chooseFile(), $refs.myCroppa1.remove(), imageURL1 = null" class="__image-input-btn" style="background:transparent;margin-top:.7rem;">Escolher outra</button>
-            <button type="button" @click="removeImage1()" class="__image-input-btn" style="background:transparent">Remover</button>
+            <button type="button" @click="$refs.myCroppa1.chooseFile(), $refs.myCroppa1.remove(), imageURL1 = null" class="__image-input-btn" style="background:transparent;margin-top:.9rem;">Escolher outra</button>
+            <button type="button" @click="removeImage1()" class="__image-input-btn" style="background:transparent;margin-top:.2rem">Remover</button>
           </div>
         </div>
       </div>
@@ -283,9 +284,12 @@ export default {
   },
   methods: {
     /* ******************** IMAGE INPUT ******************** */
+    fileChoose1 () {
+      this.showCroppaModal1 = true
+    },
     imageChoose1 () {
       if (this.imageURL1 !== null) {
-        return
+        return 
       } else {
         this.$refs.myCroppa1.generateBlob((blob) => {
           let url1 = URL.createObjectURL(blob)
@@ -607,7 +611,7 @@ export default {
       }
     }
     & .modal-croppa {
-      background: rgba(0, 0, 0, 0.92);
+      background: rgba(0, 0, 0, 0.8);
       width:  100%;
       height: 100%;
       position: fixed;
