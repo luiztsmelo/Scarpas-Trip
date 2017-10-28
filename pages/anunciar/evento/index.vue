@@ -169,6 +169,7 @@
           :placeholder="'Carregando...'"
           :placeholder-color="'rgb(222,222,222)'"
           :accept="'image/*'"
+          :zoom-speed="2"
           :prevent-white-space="true"
           :show-remove-button="false"
           @file-choose="fileChoose1">
