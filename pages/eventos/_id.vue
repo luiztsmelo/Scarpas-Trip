@@ -68,7 +68,7 @@ export default {
       position: absolute;
       top: 1.2rem;
       right: 7%;
-      width: 1.3rem;
+      width: 1.4rem;
       height: auto;
     }
   }
