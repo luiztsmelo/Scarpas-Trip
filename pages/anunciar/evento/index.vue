@@ -381,9 +381,9 @@ export default {
     finalizar () {
       if (1<2) {
         this.$store.commit('m_loader', true)
-        const storageRef = firebase.storage().ref('eventos')
         const eventoID = Math.floor(Math.random() * (99999 - 10000 + 1) + 10000)
         this.$store.commit('m_eventoID', eventoID)
+        const storageRef = firebase.storage().ref('eventos/' + eventoID + '/')
         /* Upload image 1 High Quality */
         this.$refs.myCroppa1.generateBlob(blob => {
           storageRef.child(eventoID + '-' + 'H1' + '.jpeg').put(blob)
@@ -402,7 +402,7 @@ export default {
         }, 'image/jpeg')
         /* Upload image 1 Low Quality */
         this.$refs.myCroppa1.generateBlob(blob => {
-          firebase.storage().ref('eventos').child(eventoID + '-' + 'L1' + '.jpeg').put(blob)
+          storageRef.child(eventoID + '-' + 'L1' + '.jpeg').put(blob)
           .then(snapshot => {
             console.log(eventoID + '-' + 'L1' + '.jpeg')
             storageRef.child(eventoID + '-' + 'L1' + '.jpeg').getDownloadURL().then(url => {

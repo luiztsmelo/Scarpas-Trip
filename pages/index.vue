@@ -148,7 +148,7 @@ export default {
             & .__card-img {
               width: 100%;
               min-height: 97px;
-              border-radius: 3px;
+              border-radius: 4px;
             }
             & .__card-title {
               margin: .6rem 0 .3rem 0;
