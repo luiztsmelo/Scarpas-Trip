@@ -23,6 +23,7 @@ const store = () => new Vuex.Store({
     */
     eventoID: null,
     eventos: null,
+    onEvento: null,
     eventoData: {
       eventoID: null,
       position: {lat: -20.6141320, lng: -46.0478760},
@@ -89,6 +90,9 @@ const store = () => new Vuex.Store({
     },
     m_eventos (state, payload) {
       state.eventos = payload
+    },
+    m_onEvento (state, payload) {
+      state.onEvento = payload
     },
     m_eventoProgressBar (state, payload) {
       state.eventoProgressBar = payload

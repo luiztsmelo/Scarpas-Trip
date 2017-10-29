@@ -19,13 +19,15 @@
         <div class="carousel-container">
           <v-touch @panleft="leftCarousel" @panright="rightCarousel" v-bind:pan-options="{ direction: 'horizontal' }">
             <ul class="carousel-row" :style="'transform: translateX(' + positionCarousel + 'px)'">
-              <li class="card" v-for="evento in eventos || $store.state.eventos">
-                
-                <progressive-img class="__card-img" :src="evento.imgUrlH1" :placeholder="evento.imgUrlL1" alt="" no-ratio />
-                <h1 class="__card-title">{{ evento.title | snippetTitle }}</h1>
-                <h2 class="__card-subtitle">{{ evento.subtitle | snippetSubtitle }}</h2>
-
-              </li>
+              
+                <li class="card" v-for="evento in eventos || $store.state.eventos">
+                  <nuxt-link :to="'/eventos/' + evento.eventoID">
+                    <progressive-img class="__card-img" :src="evento.imgUrlH1" :placeholder="evento.imgUrlL1" alt="" no-ratio />
+                    <h1 class="__card-title">{{ evento.title | snippetTitle }}</h1>
+                    <h2 class="__card-subtitle">{{ evento.subtitle | snippetSubtitle }}</h2>
+                  </nuxt-link> 
+                </li>
+              
             </ul>
           </v-touch>  
         </div>

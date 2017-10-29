@@ -24,7 +24,7 @@ export default {
   z-index: 10;
   width:  100%;
   height: 100%;
-  top: 0;
+  top: 3.3rem;
   background: white;
   transition: all .3s ease;
   & .loader-body {
