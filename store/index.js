@@ -14,6 +14,7 @@ const store = () => new Vuex.Store({
     showMenu: false,
     showFoobar: true,
     menuIconAnime: false,
+    loader: false,
     /*
     -------------------- ANÚNCIOS --------------------
     */
@@ -63,6 +64,9 @@ const store = () => new Vuex.Store({
     },
     m_menuIconAnime (state, payload) {
       state.menuIconAnime = payload
+    },
+    m_loader (state, payload) {
+      state.loader = payload
     },
     /*
     ---------- ANÚNCIOS ----------

@@ -172,10 +172,10 @@
           :zoom-speed="2"
           :prevent-white-space="true"
           :show-remove-button="false"
-          @file-choose="fileChoose1">
+          @file-choose="imageChoose1">
           </croppa>
-          <div class="modal-croppa-btns" style="display:flex;flex-flow:column;width:100%">
-            <button type="button" @click="showCroppaModal1=false, imageChoose1()" class="__image-input-btn">Confirmar</button>
+          <div class="modal-croppa-btns">
+            <button type="button" @click="showCroppaModal1=false, imageConfirmed1()" class="__image-input-btn">Confirmar</button>
             <button type="button" @click="$refs.myCroppa1.chooseFile(), $refs.myCroppa1.remove(), imageURL1 = null" class="__image-input-btn" style="background:transparent;margin-top:.9rem;">Escolher outra</button>
             <button type="button" @click="removeImage1()" class="__image-input-btn" style="background:transparent;margin-top:.2rem">Remover</button>
           </div>
@@ -196,7 +196,7 @@
           :prevent-white-space="true"
           :show-remove-button="false">
           </croppa>
-          <div class="modal-croppa-btns" style="display:flex;flex-flow:column;width:100%">
+          <div class="modal-croppa-btns">
             <button type="button" @click="showCroppaModal2=false, imageChoose2()" class="__image-input-btn">Confirmar</button>
             <button type="button" @click="$refs.myCroppa2.chooseFile(), $refs.myCroppa2.remove(), imageURL2 = null" class="__image-input-btn" style="background:transparent;margin-top:.7rem;">Escolher outra</button>
             <button type="button" @click="removeImage2()" class="__image-input-btn" style="background:transparent">Remover</button>
@@ -286,10 +286,10 @@ export default {
   },
   methods: {
     /* ******************** IMAGE INPUT ******************** */
-    fileChoose1 () {
+    imageChoose1 () {
       this.showCroppaModal1 = true
     },
-    imageChoose1 () {
+    imageConfirmed1 () {
       if (this.imageURL1 !== null) {
         return 
       } else {
@@ -380,32 +380,36 @@ export default {
     },
     finalizar () {
       if (1<2) {
+        this.$store.commit('m_loader', true)
         const storageRef = firebase.storage().ref('eventos')
         const eventoID = Math.floor(Math.random() * (99999 - 10000 + 1) + 10000)
         this.$store.commit('m_eventoID', eventoID)
         /* Upload image 1 High Quality */
-        this.$refs.myCroppa1.generateBlob((blob) => {
-          storageRef.child(eventoID + '-' + 'H1' + '.jpeg').put(blob).then(snapshot => {
+        this.$refs.myCroppa1.generateBlob(blob => {
+          storageRef.child(eventoID + '-' + 'H1' + '.jpeg').put(blob)
+          .then(snapshot => {
             console.log(eventoID + '-' + 'H1' + '.jpeg')
             storageRef.child(eventoID + '-' + 'H1' + '.jpeg').getDownloadURL().then(url => {
               this.$store.commit('m_imgUrlH1', url)
             })
           })
+          .then(result => {
+            this.$store.commit('m_loader', false)
+            this.$store.dispatch('a_uploadEvento')
+            this.$router.push('/')
+            this.$store.commit('m_showFoobar', true)
+          })
         }, 'image/jpeg')
         /* Upload image 1 Low Quality */
-        this.$refs.myCroppa1.generateBlob((blob) => {
-          firebase.storage().ref('eventos').child(eventoID + '-' + 'L1' + '.jpeg').put(blob).then(snapshot => {
+        this.$refs.myCroppa1.generateBlob(blob => {
+          firebase.storage().ref('eventos').child(eventoID + '-' + 'L1' + '.jpeg').put(blob)
+          .then(snapshot => {
             console.log(eventoID + '-' + 'L1' + '.jpeg')
             storageRef.child(eventoID + '-' + 'L1' + '.jpeg').getDownloadURL().then(url => {
               this.$store.commit('m_imgUrlL1', url)
             })
           })
         }, 'image/jpeg', 0.01)
-        if (this.$store.state.eventoData.imgUrlH1 !== null) {
-          this.$store.dispatch('a_uploadEvento')
-          this.$router.push('/')
-          this.$store.commit('m_showFoobar', true)
-        }
       }
     }
   },
@@ -631,6 +635,11 @@ export default {
         color: white;
         & h1 {
           font-weight: 300;
+        }
+        & .modal-croppa-btns {
+          display: flex;
+          flex-flow: column;
+          width: 100%
         }
       }
     }
