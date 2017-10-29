@@ -47,7 +47,7 @@ export default {
       title: 'Escarpas Trip'
     }
   },
-  transition: 'slide-right',
+  transition: 'opacity',
   data () {
     return {
       positionCarousel: ''

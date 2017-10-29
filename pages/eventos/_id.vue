@@ -1,6 +1,12 @@
 <template>
   <div class="eventos_id">
-    <h1>{{ onEvento.title }}</h1>
+    <div class="image-box">
+      <img class="image1" :src="evento.imgUrlH1" alt="">
+      <nuxt-link to="/">
+        <img class="__back-btn" src="../../assets/img/back.svg" alt="" @click="$store.commit('m_showNavbar', true), $store.commit('m_showFoobar', true)">
+      </nuxt-link>
+    </div>
+    <h1>{{ evento.title }}</h1>
   </div>
 </template>
 
@@ -10,18 +16,21 @@ import * as firebase from 'firebase'
 export default {
   head () {
     return {
-      title: this.onEvento.title + ' ‒ ' + 'Escarpas Trip'
+      title: this.evento.title + ' ‒ ' + 'Escarpas Trip'
     }
   },
+  transition: 'evento',
   fetch ({ store, params }) {
     return firebase.database().ref('eventos/' + params.id).once('value')
     .then(snapshot => {
-      store.commit('m_onEvento', snapshot.val())
+      store.commit('m_evento', snapshot.val())
+      store.commit('m_showNavbar', false)
+      store.commit('m_showFoobar', false)
     })
   },
   computed: {
-    onEvento () {
-      return this.$store.state.onEvento
+    evento () {
+      return this.$store.state.evento
     }
   },
 }
@@ -31,10 +40,23 @@ export default {
 @import url('../../assets/css/main.css');
 
 .eventos_id {
-  margin-top: 3.3rem;
   display: flex;
   flex-flow: column;
-  padding: 3rem 7%;
-  transition: all .222s ease;
+  transition: all .3s ease;
+  & .image-box {
+    position: relative;
+    & .image1 {
+      width: 100%;
+      height: auto;
+    }
+    & .__back-btn {
+      cursor: pointer;
+      position: absolute;
+      top: 1.2rem;
+      left: 1.2rem;
+      width: 1.2rem;
+      height: auto;
+    }
+  }
 }
 </style>

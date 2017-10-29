@@ -11,7 +11,6 @@ export default {
       title: 'Eventos em Escarpas do Lago ‒ Escarpas Trip'
     }
   },
-  transition: 'slide-left',
   data () {
     return {
     }

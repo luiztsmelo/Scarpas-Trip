@@ -11,6 +11,7 @@ const store = () => new Vuex.Store({
     /*
     -------------------- GERAL --------------------
     */
+    showNavbar: true,
     showMenu: false,
     showFoobar: true,
     menuIconAnime: false,
@@ -23,7 +24,7 @@ const store = () => new Vuex.Store({
     */
     eventoID: null,
     eventos: null,
-    onEvento: null,
+    evento: null,
     eventoData: {
       eventoID: null,
       position: {lat: -20.6141320, lng: -46.0478760},
@@ -57,6 +58,9 @@ const store = () => new Vuex.Store({
   **************************************** MUTATIONS ****************************************
   */
   mutations: {
+    m_showNavbar (state, payload) {
+      state.showNavbar = payload
+    },
     m_showMenu (state, payload) {
       state.showMenu = payload
     },
@@ -91,8 +95,8 @@ const store = () => new Vuex.Store({
     m_eventos (state, payload) {
       state.eventos = payload
     },
-    m_onEvento (state, payload) {
-      state.onEvento = payload
+    m_evento (state, payload) {
+      state.evento = payload
     },
     m_eventoProgressBar (state, payload) {
       state.eventoProgressBar = payload

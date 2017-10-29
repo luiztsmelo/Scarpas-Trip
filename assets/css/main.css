@@ -82,6 +82,13 @@ a a:hover, a:visited, a:link, a:active
   opacity: 0;
 }
 
+.evento-leave-active,
+.evento-enter 
+{ 
+  opacity: 0;
+  transform: translateY(3.3rem) scale(0.95);
+}
+
 /* ******* TEXT HIGHLIGHT COLOR ******* */
 ::-moz-selection { /* Firefox */
   color: white;

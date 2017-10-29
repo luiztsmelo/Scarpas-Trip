@@ -1,25 +1,30 @@
 <template>
-  <div class="navbar">
-    <div class="navbar-body">
+  <transition name="navbar-animation">
+    <div class="navbar" v-show="showNavbar">
+      <div class="navbar-body">
 
-      <nuxt-link to="/"><span class="__brand-name" @click="$store.commit('m_showMenu', false), $store.commit('m_menuIconAnime', false), $store.commit('m_showFoobar', true)">Escarpas Trip</span></nuxt-link>
-      
+        <nuxt-link to="/"><span class="__brand-name" @click="$store.commit('m_showMenu', false), $store.commit('m_menuIconAnime', false), $store.commit('m_showFoobar', true)">Escarpas Trip</span></nuxt-link>
+        
 
-      <nav class="nav">
-        <div class="__menu" @click="$store.commit('m_showMenu', !showMenu), $store.commit('m_menuIconAnime', !menuIconAnime)">
-          <div class="bar" :class="{ menuIconAnime1: menuIconAnime }"></div>
-          <div class="bar" :class="{ menuIconAnime2: menuIconAnime }"></div>
-          <div class="bar" :class="{ menuIconAnime3: menuIconAnime }"></div>
-        </div>
-      </nav>
+        <nav class="nav">
+          <div class="__menu" @click="$store.commit('m_showMenu', !showMenu), $store.commit('m_menuIconAnime', !menuIconAnime)">
+            <div class="bar" :class="{ menuIconAnime1: menuIconAnime }"></div>
+            <div class="bar" :class="{ menuIconAnime2: menuIconAnime }"></div>
+            <div class="bar" :class="{ menuIconAnime3: menuIconAnime }"></div>
+          </div>
+        </nav>
 
+      </div>
     </div>
-  </div>
+  </transition>
 </template>
 
 <script>
 export default {
   computed: {
+    showNavbar () {
+      return this.$store.state.showNavbar
+    },
     showMenu () {
       return this.$store.state.showMenu
     },
@@ -41,7 +46,7 @@ export default {
   height: 3.3rem;
   width:  100%;
   background: white;
-  transition: all .222s ease;
+  transition: all .3s ease;
   padding: 0 7%;
   box-shadow: 0px 1px 1px 0px rgba(0,0,0,0.15);
   & .navbar-body {
@@ -80,6 +85,10 @@ export default {
 
 /* TRANSITIONS */
 
+.navbar-animation-enter,
+.navbar-animation-leave-active {
+  transform: translateY(-100%);
+}
 
 .menuIconAnime1 {
   transform: rotate(-45deg) translate(-4px, 4px);
