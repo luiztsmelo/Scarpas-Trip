@@ -391,12 +391,12 @@ export default {
             console.log(eventoID + '-' + 'H1' + '.jpeg')
             storageRef.child(eventoID + '-' + 'H1' + '.jpeg').getDownloadURL().then(url => {
               this.$store.commit('m_imgUrlH1', url)
+              this.$store.commit('m_eventos', null) /* Para não bugar as imagens */
             })
             .then(() => {
               this.$store.dispatch('a_uploadEvento')
               this.$router.push('/')
               this.$store.commit('m_showFoobar', true)
-              this.$store.commit('m_loader', false)
             })
           })
         }, 'image/jpeg')

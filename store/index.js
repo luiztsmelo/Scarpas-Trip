@@ -129,9 +129,22 @@ const store = () => new Vuex.Store({
   */
   actions: {
     a_uploadEvento ({ state, commit }) {
-      firebase.database().ref('eventos/' + state.eventoID).set(state.eventoData)/* .then(() => {
-        commit('m_eventoData', null)
-      }) */
+      firebase.database().ref('eventos/' + state.eventoID).set(state.eventoData).then(() => {
+        commit('m_eventoData', {
+          eventoID: null,
+          position: {lat: -20.6141320, lng: -46.0478760},
+          title: '',
+          subtitle: '',
+          date: '',
+          hour: '',
+          valorIngresso: 0,
+          imgUrlH1: null,
+          imgUrlL1: null
+        })
+        commit('m_cadastroEvento7', false)
+        commit('m_cadastroEvento0', true)
+        commit('m_loader', false)
+      })
     }
   }
 })
