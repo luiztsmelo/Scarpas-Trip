@@ -12,7 +12,15 @@ export default {
       title: 'Anunciar Passeio em Escarpas do Lago ‒ Escarpas Trip'
     }
   },
-  transition: 'opacity'
+  transition: 'opacity',
+  beforeRouteLeave (to, from, next) {
+    if (this.$store.state.showFoobar === false) {
+      this.$store.commit('m_showFoobar', true)
+      next()
+    } else {
+      next(false)
+    }
+  }
 }
 </script>
 

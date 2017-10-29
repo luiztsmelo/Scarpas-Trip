@@ -503,6 +503,14 @@ export default {
     cadastroEvento7 () {
       return this.$store.state.cadastroEvento7
     }
+  },
+  beforeRouteLeave (to, from, next) {
+    if (this.$store.state.showFoobar === false) {
+      this.$store.commit('m_showFoobar', true)
+      next()
+    } else {
+      next(false)
+    }
   }
 }
 </script>

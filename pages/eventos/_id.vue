@@ -57,7 +57,7 @@ export default {
 .eventos_id {
   display: flex;
   flex-flow: column;
-  transition: all .3s ease;
+  transition: all .3s cubic-bezier(.15,.97,.43,.93);
   & .image-box {
     position: relative;
     & .__image1 {
