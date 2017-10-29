@@ -84,6 +84,7 @@ export default {
   & .heading {
     padding: 1rem 7%;
     & .__title {
+      font-size: 36px;
       font-weight: 600;
     }
   }
