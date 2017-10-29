@@ -4,7 +4,7 @@
     <div class="image-box">
       <img class="__image1" :src="evento.imgUrlH1" alt="">
       <nuxt-link to="/">
-        <img class="__back-btn" src="../../assets/img/back.svg" alt="voltar" @click="$store.commit('m_showNavbar', true), $store.commit('m_showFoobar', true)">
+        <img class="__back-btn" src="../../assets/img/back.svg" alt="voltar">
       </nuxt-link>
       <img class="__share-btn" src="../../assets/img/share.svg" alt="compartilhar">
     </div>
@@ -39,6 +39,15 @@ export default {
       return this.$store.state.evento
     }
   },
+  beforeRouteLeave (to, from, next) {
+    if (this.$store.state.showNavbar === false && this.$store.state.showFoobar === false) {
+      this.$store.commit('m_showNavbar', true)
+      this.$store.commit('m_showFoobar', true)
+      next()
+    } else {
+      next(false)
+    }
+  }
 }
 </script>
 

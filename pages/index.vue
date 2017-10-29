@@ -23,8 +23,8 @@
                 <li class="card" v-for="evento in eventos || $store.state.eventos">
                   <nuxt-link :to="'/eventos/' + evento.eventoID">
                     <progressive-img class="__card-img" :src="evento.imgUrlH1" :placeholder="evento.imgUrlL1" alt="" no-ratio />
-                    <h1 class="__card-title">{{ evento.title | snippetTitle }}</h1>
-                    <h2 class="__card-subtitle">{{ evento.subtitle | snippetSubtitle }}</h2>
+                    <h1 class="__card-title">{{ evento.title | truncateTitle }}</h1>
+                    <h2 class="__card-subtitle">{{ evento.subtitle | truncateSubtitle }}</h2>
                   </nuxt-link> 
                 </li>
               
@@ -71,14 +71,14 @@ export default {
     }
   },
   filters: {
-    snippetTitle (value) {
+    truncateTitle (value) {
       if (value.length > 27) {
         return value.slice(0, 27) + '...'
       } else {
         return value.slice(0)
       }
     },
-    snippetSubtitle (value) {
+    truncateSubtitle (value) {
       if (value.length > 27) {
         return value.slice(0, 27) + '...'
       } else {
