@@ -392,12 +392,12 @@ export default {
             storageRef.child(eventoID + '-' + 'H1' + '.jpeg').getDownloadURL().then(url => {
               this.$store.commit('m_imgUrlH1', url)
             })
-          })
-          .then(result => {
-            this.$store.commit('m_loader', false)
-            this.$store.dispatch('a_uploadEvento')
-            this.$router.push('/')
-            this.$store.commit('m_showFoobar', true)
+            .then(() => {
+              this.$store.dispatch('a_uploadEvento')
+              this.$router.push('/')
+              this.$store.commit('m_showFoobar', true)
+              this.$store.commit('m_loader', false)
+            })
           })
         }, 'image/jpeg')
         /* Upload image 1 Low Quality */
