@@ -86,7 +86,7 @@ a a:hover, a:visited, a:link, a:active
 .evento-enter 
 { 
   opacity: 0;
-  transform: translateY(3.3rem) scale(0.95);
+  transform: translateY(3.3rem) scale(0.94);
 }
 
 /* ******* TEXT HIGHLIGHT COLOR ******* */

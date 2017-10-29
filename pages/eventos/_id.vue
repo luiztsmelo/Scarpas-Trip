@@ -1,12 +1,18 @@
 <template>
   <div class="eventos_id">
+
     <div class="image-box">
-      <img class="image1" :src="evento.imgUrlH1" alt="">
+      <img class="__image1" :src="evento.imgUrlH1" alt="">
       <nuxt-link to="/">
-        <img class="__back-btn" src="../../assets/img/back.svg" alt="" @click="$store.commit('m_showNavbar', true), $store.commit('m_showFoobar', true)">
+        <img class="__back-btn" src="../../assets/img/back.svg" alt="voltar" @click="$store.commit('m_showNavbar', true), $store.commit('m_showFoobar', true)">
       </nuxt-link>
+      <img class="__share-btn" src="../../assets/img/share.svg" alt="compartilhar">
     </div>
-    <h1>{{ evento.title }}</h1>
+
+    <div class="heading">
+      <h1 class="__title">{{ evento.title }}</h1>
+    </div>
+    
   </div>
 </template>
 
@@ -45,7 +51,7 @@ export default {
   transition: all .3s ease;
   & .image-box {
     position: relative;
-    & .image1 {
+    & .__image1 {
       width: 100%;
       height: auto;
     }
@@ -53,9 +59,23 @@ export default {
       cursor: pointer;
       position: absolute;
       top: 1.2rem;
-      left: 1.2rem;
+      left: 7%;
       width: 1.2rem;
       height: auto;
+    }
+    & .__share-btn {
+      cursor: pointer;
+      position: absolute;
+      top: 1.2rem;
+      right: 7%;
+      width: 1.3rem;
+      height: auto;
+    }
+  }
+  & .heading {
+    padding: 1rem 7%;
+    & .__title {
+      font-weight: 600;
     }
   }
 }
