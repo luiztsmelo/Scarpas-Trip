@@ -72,15 +72,15 @@ export default {
   },
   filters: {
     truncateTitle (value) {
-      if (value.length > 27) {
-        return value.slice(0, 27) + '...'
+      if (value.length > 31) {
+        return value.slice(0, 31) + '...'
       } else {
         return value.slice(0)
       }
     },
     truncateSubtitle (value) {
-      if (value.length > 27) {
-        return value.slice(0, 27) + '...'
+      if (value.length > 31) {
+        return value.slice(0, 31) + '...'
       } else {
         return value.slice(0)
       }
