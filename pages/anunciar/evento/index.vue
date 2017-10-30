@@ -66,7 +66,7 @@
 
       <div class="item-form">
         <label>Dia do evento</label>
-        <input type="date" v-model="$store.state.eventoData.date" :min="today" required>
+        <input type="date" v-model="date" :min="today" required pattern="[0-9]{2}-[0-9]{2}-[0-9]{4}">
       </div>  
 
       <div class="item-form">
@@ -280,8 +280,22 @@ export default {
     return {
       showCroppaModal1: false,
       showCroppaModal2: false,
+      date: null,
       imageURL1: null,
       imageURL2: null
+    }
+  },
+  watch: {
+    date (value) {
+      if (value !== null) {
+        const y = value.slice(0, 4)
+        console.log(y)
+        const m = value.slice(5, 7)
+        console.log(m)
+        const d = value.slice(8, 10)
+        console.log(d)
+        this.$store.state.eventoData.date = d + '-' + m + '-' + y
+      }
     }
   },
   methods: {

@@ -2,7 +2,7 @@
   <transition name="share-animation">
     <div class="share" v-show="showShare" @click="$store.commit('m_showShare', false)">
       <div class="share-body">
-        <h1>Compartilhe</h1>
+        <h1>Compartilhar</h1>
 
       </div> 
     </div>
@@ -35,7 +35,7 @@ export default {
     display: flex;
     flex-flow: column;
     text-align: center;
-    padding: 2rem 7%;
+    padding: 1rem 7% 0 7%;
     height: 100%;
   }
 }
