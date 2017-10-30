@@ -9,7 +9,7 @@
       <img class="__share-btn" src="../../assets/img/share.svg" alt="compartilhar" @click="$store.commit('m_showShare', true)">
     </div>
 
-    <div class="heading" >
+    <div class="heading-box" >
       <h1 class="__title">{{ evento.title }}</h1>
       <h1 class="__subtitle">{{ evento.subtitle }}</h1>
     </div>
@@ -97,16 +97,16 @@ export default {
       -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
     }
   }
-  & .heading {
+  & .heading-box {
     padding: 0 7%;
     & .__title {
-      margin: 1rem 0;
+      margin: 1rem 0 2rem 0;
       font-size: 35px;
       font-weight: 600;
     }
     & .__subtitle {
       font-size: 20px;
-      font-weight: 400;
+      font-weight: 300;
     }
   }
 }
