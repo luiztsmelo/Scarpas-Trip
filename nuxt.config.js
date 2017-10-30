@@ -18,7 +18,7 @@ module.exports = {
       { hid: 'main-desc', property: 'og:url', content: 'http://escarpas-trip.herokuapp.com/' },
       { hid: 'main-desc', property: 'og:title', content: 'Escarpas Trip' },
       { hid: 'main-desc', property: 'og:description', content: 'Planeje sua viagem para Escarpas do Lago de forma simples, agradável e segura!' },
-      { hid: 'main-desc', property: 'og:image', content: 'http://www.hotelengenhodaserra.com.br/upload/imagens/fotos/HOTEL-EM-CAPITOLIO-MAR-DE-MINAS_421639_2013_10_18_50_18_86082.jpg' },
+      { hid: 'main-desc', property: 'og:image', content: 'https://firebasestorage.googleapis.com/v0/b/escarpas-trip.appspot.com/o/eventos%2F63511%2F63511-H1.jpeg?alt=media&token=b36a0d39-a37d-4ac7-8ab0-ecca10bbf9e9' },
       { hid: 'main-desc', property: 'og:locale', content: 'pt_BR' }
     ],
     link: [
