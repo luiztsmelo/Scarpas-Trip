@@ -11,6 +11,7 @@
 
     <div class="heading" >
       <h1 class="__title">{{ evento.title }}</h1>
+      <h1 class="__subtitle">{{ evento.subtitle }}</h1>
     </div>
     
   </div>
@@ -24,7 +25,7 @@ export default {
     return {
       title: this.evento.title + ' ‒ ' + 'Escarpas Trip',
       meta: [
-        { hid: 'evento-desc', name: 'description', content: this.evento.subtitle },
+        { hid: 'description', name: 'description', content: this.evento.subtitle },
         { property: 'og:url', content: 'http://escarpas-trip.herokuapp.com/eventos/' + this.$route.params.id },
         { property: 'og:title', content: this.evento.title },
         { property: 'og:description', content: this.evento.subtitle },
@@ -97,10 +98,15 @@ export default {
     }
   }
   & .heading {
-    padding: 1rem 7%;
+    padding: 0 7%;
     & .__title {
+      margin: 1rem 0;
       font-size: 35px;
       font-weight: 600;
+    }
+    & .__subtitle {
+      font-size: 20px;
+      font-weight: 400;
     }
   }
 }
