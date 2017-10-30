@@ -23,6 +23,7 @@
                 <li class="card" v-for="evento in eventos || $store.state.eventos">
                   <nuxt-link :to="'/eventos/' + evento.eventoID">
                     <progressive-img class="__card-img" :src="evento.imgUrlH1" :placeholder="evento.imgUrlL1" alt="" no-ratio />
+                    <span class="__card-date">{{ evento.date }}</span>
                     <h1 class="__card-title">{{ evento.title | truncateTitle }}</h1>
                     <h2 class="__card-subtitle">{{ evento.subtitle | truncateSubtitle }}</h2>
                   </nuxt-link> 
@@ -148,12 +149,18 @@ export default {
             margin-right: .8rem;
             -webkit-tap-highlight-color: rgba(255, 255, 45, 0);
             & .__card-img {
+              margin-bottom: .2rem;
               width: 100%;
               min-height: 97px;
               border-radius: 4px;
             }
+            & .__card-date {
+              font-size: 12px;
+              font-weight: 600;
+              color: #ff5858;
+            }
             & .__card-title {
-              margin: .6rem 0 .3rem 0;
+              margin: .2rem 0;
               font-size: 17px;
               font-weight: 600;
             }
