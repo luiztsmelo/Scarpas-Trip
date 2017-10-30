@@ -13,13 +13,7 @@ module.exports = {
   head: {
     meta: [
       { name: 'viewport', content: 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' },
-      { hid: 'main-desc', name: 'description', content: 'Planeje sua viagem para Escarpas do Lago de forma simples, agradável e segura!' },
-      { hid: 'main-desc', property: 'og:type', content: 'article' },
-      { hid: 'main-desc', property: 'og:url', content: 'http://escarpas-trip.herokuapp.com/' },
-      { hid: 'main-desc', property: 'og:title', content: 'Escarpas Trip' },
-      { hid: 'main-desc', property: 'og:description', content: 'Planeje sua viagem para Escarpas do Lago de forma simples, agradável e segura!' },
-      { hid: 'main-desc', property: 'og:image', content: 'https://firebasestorage.googleapis.com/v0/b/escarpas-trip.appspot.com/o/eventos%2F63511%2F63511-H1.jpeg?alt=media&token=b36a0d39-a37d-4ac7-8ab0-ecca10bbf9e9' },
-      { hid: 'main-desc', property: 'og:locale', content: 'pt_BR' }
+      { hid: 'main-desc', name: 'description', content: 'Planeje sua viagem para Escarpas do Lago de forma simples, agradável e segura.' }
     ],
     link: [
       { rel: 'icon', type: 'image/png', sizes: '24x24', href: '/brand.png' },

@@ -25,11 +25,11 @@ export default {
       title: this.evento.title + ' ‒ ' + 'Escarpas Trip',
       meta: [
         { hid: 'evento-desc', name: 'description', content: this.evento.subtitle },
-        { hid: 'evento-desc', property: 'og:type', content: 'article' },
-        { hid: 'evento-desc', property: 'og:url', content: 'http://escarpas-trip.herokuapp.com/eventos/' + this.$route.params.id },
-        { hid: 'evento-desc', property: 'og:title', content: this.evento.title },
-        { hid: 'evento-desc', property: 'og:description', content: this.evento.subtitle },
-        { hid: 'evento-desc', property: 'og:image', content: this.evento.imgUrlH1 }
+        { property: 'og:type', content: 'article' },
+        { property: 'og:url', content: 'http://escarpas-trip.herokuapp.com/eventos/' + this.$route.params.id },
+        { property: 'og:title', content: this.evento.title },
+        { property: 'og:description', content: this.evento.subtitle },
+        { property: 'og:image', content: this.evento.imgUrlH1 }
       ]
     }
   },

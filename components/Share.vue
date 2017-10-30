@@ -4,9 +4,9 @@
       <div class="share-body">
         <h1 class="__title">Compartilhar</h1>
 
-        <a href="fb-messenger://share/?link= https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fsharing%2Freference%2Fsend-dialog&app_id=123456789">Messenger</a>
+        <a :href="'fb-messenger://share/?link= http://escarpas-trip.herokuapp.com/eventos/' + this.$route.params.id">Messenger</a>
 
-        <a :href="'whatsapp://send?text= http://escarpas-trip.herokuapp.com/eventos/' + this.$route.params.id ">Whatsapp</a>
+        <a :href="'whatsapp://send?text= http://escarpas-trip.herokuapp.com/eventos/' + this.$route.params.id">Whatsapp</a>
 
       </div> 
     </div>
