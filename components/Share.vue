@@ -8,6 +8,8 @@
 
         <a :href="'whatsapp://send?text= http://escarpas-trip.herokuapp.com/eventos/' + this.$route.params.id ">Whatsapp</a>
 
+        <a @click="whatsappShare">Whatsapp Chrome</a>
+
       </div> 
     </div>
   </transition>
@@ -15,6 +17,19 @@
 
 <script>
 export default {
+  methods: {
+    whatsappShare () {
+      if (navigator.share) {
+        navigator.share({
+            title: 'Web Fundamentals',
+            text: 'Check out Web Fundamentals — it rocks!',
+            url: 'https://developers.google.com/web',
+        })
+          .then(() => console.log('Successful share'))
+          .catch((error) => console.log('Error sharing', error));
+      }
+    }
+  },
   computed: {
     showShare () {
       return this.$store.state.showShare
