@@ -28,8 +28,7 @@ module.exports = {
     '~plugins/vue-progressive-image',
     '~plugins/vue-google-maps',
     '~plugins/vue-numeric',
-    '~plugins/vue-croppa',
-    '~plugins/vue-social-sharing'
+    '~plugins/vue-croppa'
   ],
   /*
   ** Customize the progress-bar color

@@ -22,7 +22,15 @@ import * as firebase from 'firebase'
 export default {
   head () {
     return {
-      title: this.evento.title + ' ‒ ' + 'Escarpas Trip'
+      title: this.evento.title + ' ‒ ' + 'Escarpas Trip',
+      meta: [
+        { hid: 'description', name: 'description', content: this.evento.subtitle },
+        { property: 'og:url', content: 'http://escarpas-trip.herokuapp.com/eventos/' + this.$route.params.id },
+        { property: 'og:title', content: this.evento.title },
+        { property: 'og:description', content: this.evento.subtitle },
+        { property: 'og:image', content: this.evento.imgUrlH1 },
+        { property: 'og:locale', content: 'pt_BR' }
+      ]
     }
   },
   transition: 'evento',
