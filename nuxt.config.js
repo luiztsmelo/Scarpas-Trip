@@ -13,12 +13,12 @@ module.exports = {
   head: {
     meta: [
       { name: 'viewport', content: 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' },
-      { vmid: 'main-desc', name: 'description', content: 'Planeje sua viagem para Escarpas do Lago de forma simples, agradável e segura!' },
-      { vmid: 'main-desc', property: 'og:url', content: 'http://escarpas-trip.herokuapp.com/' },
-      { vmid: 'main-desc', property: 'og:title', content: 'Escarpas Trip' },
-      { vmid: 'main-desc', property: 'og:description', content: 'Planeje sua viagem para Escarpas do Lago de forma simples, agradável e segura!' },
-      /* { vmid: 'main-desc', property: 'og:image', content: '' }, */
-      { vmid: 'main-desc', property: 'og:locale', content: 'pt_BR' }
+      { hid: 'main-desc', name: 'description', content: 'Planeje sua viagem para Escarpas do Lago de forma simples, agradável e segura!' },
+      { hid: 'main-desc', property: 'og:url', content: 'http://escarpas-trip.herokuapp.com/' },
+      { hid: 'main-desc', property: 'og:title', content: 'Escarpas Trip' },
+      { hid: 'main-desc', property: 'og:description', content: 'Planeje sua viagem para Escarpas do Lago de forma simples, agradável e segura!' },
+      /* { hid: 'main-desc', property: 'og:image', content: '' }, */
+      { hid: 'main-desc', property: 'og:locale', content: 'pt_BR' }
     ],
     link: [
       { rel: 'icon', type: 'image/png', sizes: '24x24', href: '/brand.png' },

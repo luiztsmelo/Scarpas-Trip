@@ -45,7 +45,16 @@ import * as firebase from 'firebase'
 export default {
   head () {
     return {
-      title: 'Escarpas Trip'
+      title: 'Escarpas Trip',
+      meta: [
+        { name: 'viewport', content: 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' },
+        { hid: 'home-desc', name: 'description', content: 'Planeje sua viagem para Escarpas do Lago de forma simples, agradável e segura!' },
+        { hid: 'home-desc', property: 'og:url', content: 'http://escarpas-trip.herokuapp.com/' },
+        { hid: 'home-desc', property: 'og:title', content: 'Escarpas Trip' },
+        { hid: 'home-desc', property: 'og:description', content: 'Planeje sua viagem para Escarpas do Lago de forma simples, agradável e segura!' },
+        /* { hid: 'home-desc', property: 'og:image', content: '' }, */
+        { hid: 'home-desc', property: 'og:locale', content: 'pt_BR' }
+      ]
     }
   },
   transition: 'opacity',
