@@ -289,11 +289,8 @@ export default {
     date (value) {
       if (value !== null) {
         const y = value.slice(0, 4)
-        console.log(y)
         const m = value.slice(5, 7)
-        console.log(m)
         const d = value.slice(8, 10)
-        console.log(d)
         this.$store.state.eventoData.date = d + '-' + m + '-' + y
       }
     }

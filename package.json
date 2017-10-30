@@ -16,6 +16,7 @@
     "vue-croppa": "^1.1.0",
     "vue-numeric": "^2.2.4",
     "vue-progressive-image": "^2.3.1",
+    "vue-social-sharing": "^2.2.10",
     "vue-touch": "^2.0.0-beta.4",
     "vue2-google-maps": "^0.8.4",
     "vuex-persistedstate": "^2.0.0"

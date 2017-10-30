@@ -2,7 +2,34 @@
   <transition name="share-animation">
     <div class="share" v-show="showShare" @click="$store.commit('m_showShare', false)">
       <div class="share-body">
-        <h1>Compartilhar</h1>
+        <h1 class="__title">Compartilhar</h1>
+
+        <social-sharing 
+          url="https://vuejs.org/" 
+          title="The Progressive JavaScript Framework"
+          description="Intuitive, Fast and Composable MVVM for building interactive interfaces."
+          quote="Vue is a progressive framework for building user interfaces."
+          hashtags="vuejs,javascript,framework"
+          twitter-user="vuejs"
+          inline-template>
+          <ul class="share-box">
+            <li class="__share-item">
+              <network network="whatsapp">
+                Whatsapp
+              </network>
+            </li>
+            <li class="__share-item">
+              <network network="facebook">
+                Facebook
+              </network>
+            </li>
+            <li class="__share-item">
+              <network network="twitter">
+                Twitter
+              </network>
+            </li>
+          </ul>
+        </social-sharing>
 
       </div> 
     </div>
@@ -35,8 +62,21 @@ export default {
     display: flex;
     flex-flow: column;
     text-align: center;
-    padding: 1rem 7% 0 7%;
+    padding: 2rem 7% 0 7%;
     height: 100%;
+    & .__title {
+      font-weight: 600;
+    }
+    & .share-box {
+      padding: 0;
+      display: flex;
+      flex-flow: column;
+      margin: 2rem 0;
+      & .__share-item {
+        padding: 1rem 0;
+        font-size: 20px;
+      }
+    }
   }
 }
 
