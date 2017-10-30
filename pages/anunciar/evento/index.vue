@@ -395,7 +395,21 @@ export default {
         const eventoID = Math.floor(Math.random() * (99999 - 10000 + 1) + 10000)
         this.$store.commit('m_eventoID', eventoID)
         const storageRef = firebase.storage().ref('eventos/' + eventoID + '/')
-        /* Upload image 1 High Quality */
+        /* 
+        Upload image 1 Low Quality 
+        */
+        this.$refs.myCroppa1.generateBlob(blob => {
+          storageRef.child(eventoID + '-' + 'L1' + '.jpeg').put(blob)
+          .then(snapshot => {
+            console.log(eventoID + '-' + 'L1' + '.jpeg')
+            storageRef.child(eventoID + '-' + 'L1' + '.jpeg').getDownloadURL().then(url => {
+              this.$store.commit('m_imgUrlL1', url)
+            })
+          })
+        }, 'image/jpeg', 0.01)
+        /* 
+        Upload image 1 High Quality 
+        */
         this.$refs.myCroppa1.generateBlob(blob => {
           storageRef.child(eventoID + '-' + 'H1' + '.jpeg').put(blob)
           .then(snapshot => {
@@ -411,16 +425,6 @@ export default {
             })
           })
         }, 'image/jpeg')
-        /* Upload image 1 Low Quality */
-        this.$refs.myCroppa1.generateBlob(blob => {
-          storageRef.child(eventoID + '-' + 'L1' + '.jpeg').put(blob)
-          .then(snapshot => {
-            console.log(eventoID + '-' + 'L1' + '.jpeg')
-            storageRef.child(eventoID + '-' + 'L1' + '.jpeg').getDownloadURL().then(url => {
-              this.$store.commit('m_imgUrlL1', url)
-            })
-          })
-        }, 'image/jpeg', 0.01)
       }
     }
   },
