@@ -14,6 +14,7 @@ module.exports = {
     meta: [
       { name: 'viewport', content: 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' },
       { hid: 'main-desc', name: 'description', content: 'Planeje sua viagem para Escarpas do Lago de forma simples, agradável e segura!' },
+      { hid: 'main-desc', property: 'og:type', content: 'article' },
       { hid: 'main-desc', property: 'og:url', content: 'http://escarpas-trip.herokuapp.com/' },
       { hid: 'main-desc', property: 'og:title', content: 'Escarpas Trip' },
       { hid: 'main-desc', property: 'og:description', content: 'Planeje sua viagem para Escarpas do Lago de forma simples, agradável e segura!' },
