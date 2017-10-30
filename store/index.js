@@ -14,6 +14,7 @@ const store = () => new Vuex.Store({
     showNavbar: true,
     showMenu: false,
     showFoobar: true,
+    showShare: false,
     menuIconAnime: false,
     loader: false,
     /*
@@ -66,6 +67,9 @@ const store = () => new Vuex.Store({
     },
     m_showFoobar (state, payload) {
       state.showFoobar = payload
+    },
+    m_showShare (state, payload) {
+      state.showShare = payload
     },
     m_menuIconAnime (state, payload) {
       state.menuIconAnime = payload

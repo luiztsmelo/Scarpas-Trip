@@ -57,7 +57,7 @@ a a:hover, a:visited, a:link, a:active
   color: var(--color01);
   outline: none !important;
   user-select: none;  
-  -webkit-tap-highlight-color: rgba(255, 255, 45, 0);
+  -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
 }
 
 

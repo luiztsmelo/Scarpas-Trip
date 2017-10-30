@@ -1,15 +1,15 @@
 <template>
-  <div class="eventos_id">
+  <div class="eventos_id" :class="{ onShare: showShare }">
 
     <div class="image-box">
       <img class="__image1" :src="evento.imgUrlH1" alt="">
       <nuxt-link to="/">
         <img class="__back-btn" src="../../assets/img/back.svg" alt="voltar">
       </nuxt-link>
-      <img class="__share-btn" src="../../assets/img/share.svg" alt="compartilhar">
+      <img class="__share-btn" src="../../assets/img/share.svg" alt="compartilhar" @click="$store.commit('m_showShare', true)">
     </div>
 
-    <div class="heading">
+    <div class="heading" >
       <h1 class="__title">{{ evento.title }}</h1>
     </div>
     
@@ -37,6 +37,9 @@ export default {
   computed: {
     evento () {
       return this.$store.state.evento
+    },
+    showShare () {
+      return this.$store.state.showShare
     }
   },
   beforeRouteLeave (to, from, next) {
@@ -57,7 +60,9 @@ export default {
 .eventos_id {
   display: flex;
   flex-flow: column;
+  background-color: white;
   transition: all .3s cubic-bezier(.15,.97,.43,.93);
+  height: 100vh;
   & .image-box {
     position: relative;
     & .__image1 {
@@ -79,6 +84,7 @@ export default {
       right: 7%;
       width: 1.4rem;
       height: auto;
+      -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
     }
   }
   & .heading {
@@ -88,5 +94,9 @@ export default {
       font-weight: 600;
     }
   }
+}
+
+.onShare {
+  filter: brightness(30%);
 }
 </style>
