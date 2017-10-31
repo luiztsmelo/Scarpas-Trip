@@ -21,7 +21,7 @@
     </div>
 
 
-    <h1 class="__box-title">Local</h1>
+    <h1 class="box-title">Local</h1>
 
     <div class="local-box" >
       <gmap-map
@@ -100,11 +100,11 @@ export default {
     top: 0;
     left: 0;
     z-index: 5;
-    height: 3rem;
+    height: 3.1rem;
     width:  100%;
     background: transparent;
     transition: all .3s ease;
-    padding: 0 7%;
+    padding: 0 6%;
     & .backbar-body {
       display: flex;
       justify-content: space-between;
@@ -125,10 +125,10 @@ export default {
       }
     }
   }
-  & .__box-title {
+  & .box-title {
     font-weight: 500;
     font-size: 25px;
-    padding: 2rem 7% 1rem 7%;
+    padding: 2rem 6% 1rem 6%;
   }
   & .image-box {
     position: relative;
@@ -138,7 +138,7 @@ export default {
     }
   }
   & .heading-box {
-    padding: 0 7%;
+    padding: 0 6%;
     & .__title {
       margin: 1rem 0 2rem 0;
       font-size: 35px;
