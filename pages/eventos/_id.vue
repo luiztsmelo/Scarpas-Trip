@@ -1,6 +1,7 @@
 <template>
   <div class="eventos_id" :class="{ onShare: showShare }">
 
+
     <div class="image-box">
       <img class="__image1" :src="evento.imgUrlH1" alt="">
       <nuxt-link to="/">
@@ -9,18 +10,36 @@
       <img class="__share-btn" src="../../assets/img/share.svg" alt="compartilhar" @click="$store.commit('m_showShare', true)">
     </div>
 
+
     <div class="heading-box" >
       <h1 class="__title">{{ evento.title }}</h1>
       <h1 class="__subtitle">{{ evento.subtitle }}</h1>
+    </div>
+
+
+    <h1 class="__box-title">Local</h1>
+
+    <div class="local-box" >
+      <gmap-map
+      :center="evento.position"
+      :zoom="15"
+      :options="{styles: styles}"
+      style="width: 100%; height: 220px">
+        <Gmap-Marker
+        :position="evento.position"
+        ></Gmap-Marker>
+      </gmap-map>
     </div>
     
   </div>
 </template>
 
 <script>
+import { mapstyle } from '../../mixins/mapstyle'
 import * as firebase from 'firebase'
 
 export default {
+  mixins: [mapstyle],
   head () {
     return {
       title: this.evento.title + ' ‒ ' + 'Escarpas Trip',
@@ -72,6 +91,10 @@ export default {
   background-color: white;
   transition: all .3s cubic-bezier(.15,.97,.43,.93);
   height: 100vh;
+  & .__box-title {
+    font-size: 26px;
+    padding: 2rem 7% 1rem 7%;
+  }
   & .image-box {
     position: relative;
     & .__image1 {
