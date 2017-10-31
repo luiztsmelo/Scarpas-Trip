@@ -50,12 +50,12 @@ export default {
   padding: 0 7%;
   box-shadow: 0px 1px 1px 0px rgba(0,0,0,0.15);
   & .navbar-body {
-    position: relative;
-    top: 50%;
-    transform: translateY(-50%);
     display: flex;
     justify-content: space-between;
     align-items: center;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
     & .__brand-name {
       font-family: var(--brand-font);
       font-size: 25px;

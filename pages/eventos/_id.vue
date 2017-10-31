@@ -1,13 +1,17 @@
 <template>
   <div class="eventos_id" :class="{ onShare: showShare }">
 
+    <div class="topbar">
+      <div class="topbar-body">
+        <nuxt-link to="/">
+        <img class="__back-btn" src="../../assets/img/back.svg" alt="voltar">
+        </nuxt-link>
+        <img class="__share-btn" src="../../assets/img/share.svg" alt="compartilhar" @click="$store.commit('m_showShare', true)">
+      </div>
+    </div>
 
     <div class="image-box">
       <img class="__image1" :src="evento.imgUrlH1" alt="">
-      <nuxt-link to="/">
-        <img class="__back-btn" src="../../assets/img/back.svg" alt="voltar">
-      </nuxt-link>
-      <img class="__share-btn" src="../../assets/img/share.svg" alt="compartilhar" @click="$store.commit('m_showShare', true)">
     </div>
 
 
@@ -91,8 +95,40 @@ export default {
   background-color: white;
   transition: all .3s cubic-bezier(.15,.97,.43,.93);
   height: 100vh;
+  & .topbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 5;
+    height: 3rem;
+    width:  100%;
+    background: transparent;
+    transition: all .3s ease;
+    padding: 0 7%;
+    box-shadow: 0px 1px 1px 0px rgba(0,0,0,0.15);
+    & .topbar-body {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+      top: 50%;
+      transform: translateY(-50%);
+      & .__back-btn {
+        cursor: pointer;
+        width: 1.2rem;
+        height: auto;
+      }
+      & .__share-btn {
+        cursor: pointer;
+        width: 1.4rem;
+        height: auto;
+        -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+      }
+    }
+  }
   & .__box-title {
-    font-size: 26px;
+    font-weight: 500;
+    font-size: 25px;
     padding: 2rem 7% 1rem 7%;
   }
   & .image-box {
@@ -100,23 +136,6 @@ export default {
     & .__image1 {
       width: 100%;
       height: auto;
-    }
-    & .__back-btn {
-      cursor: pointer;
-      position: absolute;
-      top: 1.2rem;
-      left: 7%;
-      width: 1.2rem;
-      height: auto;
-    }
-    & .__share-btn {
-      cursor: pointer;
-      position: absolute;
-      top: 1.2rem;
-      right: 7%;
-      width: 1.4rem;
-      height: auto;
-      -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
     }
   }
   & .heading-box {
