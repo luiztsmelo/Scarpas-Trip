@@ -4,9 +4,16 @@
       <div class="share-body">
         <h1 class="__title">Compartilhar</h1>
 
-        <a :href="'fb-messenger://share/?link= http://escarpas-trip.herokuapp.com/eventos/' + this.$route.params.id">Messenger</a>
+        <div class="share-item">
+          <img class="__img whatsapp" src="../assets/img/whatsapp.svg" alt="">
+          <a class="__text" :href="'whatsapp://send?text= http://escarpas-trip.herokuapp.com/eventos/' + this.$route.params.id">Whatsapp</a>
+        </div>
 
-        <a :href="'whatsapp://send?text= http://escarpas-trip.herokuapp.com/eventos/' + this.$route.params.id">Whatsapp</a>
+        <div class="share-item">
+          <img class="__img messenger" src="../assets/img/messenger.svg" alt="">
+          <a class="__text" :href="'fb-messenger://share/?link= http://escarpas-trip.herokuapp.com/eventos/' + this.$route.params.id">Messenger</a>
+        </div>
+
 
       </div> 
     </div>
@@ -38,20 +45,30 @@ export default {
   & .share-body {
     display: flex;
     flex-flow: column;
-    text-align: center;
-    padding: 2rem 7% 0 7%;
+    padding: 0 7%;
     height: 100%;
     & .__title {
+      text-align: center;
+      margin: 2rem 0 1rem 0;
       font-weight: 600;
     }
-    & .share-box {
-      padding: 0;
+    & .share-item { 
       display: flex;
-      flex-flow: column;
-      margin: 2rem 0;
-      & .__share-item {
-        padding: 1rem 0;
-        font-size: 20px;
+      flex-flow: row;
+      align-items: center;
+      padding: 1rem 0;
+      border-bottom: 1px solid rgb(210, 210, 210);
+      & .__img {
+        margin-right: 1rem;
+        width: 1.7rem;
+        height: auto;
+      }
+      & .whatsapp {
+        transform: scale(1.17);
+      }
+      & .__text {
+        font-size: 18px;
+        font-weight: 300;
       }
     }
   }
