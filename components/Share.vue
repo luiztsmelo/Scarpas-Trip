@@ -41,6 +41,7 @@ export default {
   top: 42%;
   background: white;
   overflow: hidden;
+  box-shadow: 0px -2px 22px 0px rgba(0,0,0,1);
   transition: all .3s ease;
   & .share-body {
     display: flex;
