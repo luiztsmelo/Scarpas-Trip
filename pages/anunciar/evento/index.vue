@@ -98,16 +98,17 @@
       </gmap-autocomplete>
 
       <gmap-map
+      v-if="cadastroEvento3"
       :center="$store.state.eventoData.position"
       :zoom="mapZoom"
       :options="{styles: styles}"
       style="width: 100%; height: 260px">
         <Gmap-Marker
-        v-if="this.$store.state.place"
+        v-if="$store.state.place"
         :clickable="true"
         :draggable="true"
         :animation="4"
-        :position="this.$store.state.place.geometry.location"
+        :position="$store.state.place.geometry.location"
         ></Gmap-Marker>
       </gmap-map>
 

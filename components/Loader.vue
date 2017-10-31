@@ -32,7 +32,7 @@ export default {
     display: flex;
     align-items: center;
     justify-content: center;
-    top: 50%;
+    top: calc(50% -3.3rem);
     transform: translateY(-50%);
   }
 }

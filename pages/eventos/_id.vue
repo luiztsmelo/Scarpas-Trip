@@ -1,8 +1,8 @@
 <template>
   <div class="eventos_id" :class="{ onShare: showShare }">
 
-    <div class="topbar">
-      <div class="topbar-body">
+    <div class="backbar">
+      <div class="backbar-body">
         <nuxt-link to="/">
         <img class="__back-btn" src="../../assets/img/back.svg" alt="voltar">
         </nuxt-link>
@@ -95,7 +95,7 @@ export default {
   background-color: white;
   transition: all .3s cubic-bezier(.15,.97,.43,.93);
   height: 100vh;
-  & .topbar {
+  & .backbar {
     position: fixed;
     top: 0;
     left: 0;
@@ -105,8 +105,7 @@ export default {
     background: transparent;
     transition: all .3s ease;
     padding: 0 7%;
-    box-shadow: 0px 1px 1px 0px rgba(0,0,0,0.15);
-    & .topbar-body {
+    & .backbar-body {
       display: flex;
       justify-content: space-between;
       align-items: center;

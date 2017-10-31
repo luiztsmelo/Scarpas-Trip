@@ -28,11 +28,13 @@ const store = () => new Vuex.Store({
     evento: null,
     eventoData: {
       eventoID: null,
-      position: {lat: -20.6141320, lng: -46.0478760},
+      planoCasual: false,
+      planoPro: false,
       title: '',
       subtitle: '',
       date: '',
       hour: '',
+      position: {lat: -20.6141320, lng: -46.0478760},
       valorIngresso: 0,
       imgUrlH1: null,
       imgUrlL1: null

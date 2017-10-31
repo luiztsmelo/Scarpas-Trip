@@ -118,6 +118,7 @@ export default {
           font-weight: 700;
         }
         & .see-all {
+          width: 4.5rem;
           cursor: pointer;
           & .__see-all-text {
             font-size: 13px;
