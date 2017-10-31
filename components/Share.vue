@@ -4,14 +4,14 @@
       <div class="share-body">
         <h1 class="__title">Compartilhar</h1>
 
-        <div class="share-item">
+        <div class="share-item" @click="whatsappShare">
           <img class="__img whatsapp" src="../assets/img/whatsapp.svg" alt="">
-          <a class="__text" :href="'whatsapp://send?text= http://escarpas-trip.herokuapp.com/eventos/' + this.$route.params.id">Whatsapp</a>
+          <a class="__text" ref="whatsapp" :href="'whatsapp://send?text= http://escarpas-trip.herokuapp.com/eventos/' + this.$route.params.id">Whatsapp</a>
         </div>
 
-        <div class="share-item">
+        <div class="share-item" @click="messengerShare">
           <img class="__img messenger" src="../assets/img/messenger.svg" alt="">
-          <a class="__text" :href="'fb-messenger://share/?link= http://escarpas-trip.herokuapp.com/eventos/' + this.$route.params.id">Messenger</a>
+          <a class="__text" ref="messenger" :href="'fb-messenger://share/?link= http://escarpas-trip.herokuapp.com/eventos/' + this.$route.params.id">Messenger</a>
         </div>
 
 
@@ -22,6 +22,14 @@
 
 <script>
 export default {
+  methods: {
+    whatsappShare () {
+      this.$refs.whatsapp.click()
+    },
+    messengerShare () {
+      this.$refs.messenger.click()
+    }
+  },
   computed: {
     showShare () {
       return this.$store.state.showShare
