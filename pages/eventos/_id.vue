@@ -31,7 +31,6 @@ export default {
         { property: 'og:description', content: this.evento.subtitle },
         { property: 'og:image', content: this.evento.imgUrlH1 },
         { property: 'og:site_name', content: 'Escarpas Trip' }
-        
       ]
     }
   },
