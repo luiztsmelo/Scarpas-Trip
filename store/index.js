@@ -26,7 +26,7 @@ const store = () => new Vuex.Store({
     eventoID: null,
     eventos: null,
     evento: null,
-    eventoData: {
+    eventoData: {/* Lembrar de atualizar a action */
       eventoID: null,
       planoCasual: false,
       planoPro: false,
@@ -36,8 +36,8 @@ const store = () => new Vuex.Store({
       hour: '',
       position: {lat: -20.6141320, lng: -46.0478760},
       valorIngresso: 0,
-      imgUrlH1: null,
-      imgUrlL1: null
+      imageH1: null,
+      imageL1: null
     },
     eventoProgressBar: 0,
     place: null,
@@ -48,9 +48,7 @@ const store = () => new Vuex.Store({
     cadastroEvento4: false,
     cadastroEvento5: false,
     cadastroEvento6: false,
-    cadastroEvento7: false,
-    eventoPlanoCasual: false,
-    eventoPlanoPro: false
+    cadastroEvento7: false
   },
   /*
   **************************************** GETTERS ****************************************
@@ -92,11 +90,11 @@ const store = () => new Vuex.Store({
     m_eventoData (state, payload) {
       state.eventoData = payload
     },
-    m_imgUrlH1 (state, payload) {
-      state.eventoData.imgUrlH1 = payload
+    m_imageH1 (state, payload) {
+      state.eventoData.imageH1 = payload
     },
-    m_imgUrlL1 (state, payload) {
-      state.eventoData.imgUrlL1 = payload
+    m_imageL1 (state, payload) {
+      state.eventoData.imageL1 = payload
     },
     m_eventos (state, payload) {
       state.eventos = payload
@@ -131,11 +129,11 @@ const store = () => new Vuex.Store({
     m_cadastroEvento7 (state, payload) {
       state.cadastroEvento7 = payload
     },
-    m_eventoPlanoCasual (state, payload) {
-      state.eventoPlanoCasual = payload
+    m_planoCasual (state, payload) {
+      state.eventoData.planoCasual = payload
     },
-    m_eventoPlanoPro (state, payload) {
-      state.eventoPlanoPro = payload
+    m_planoPro (state, payload) {
+      state.eventoData.planoPro = payload
     }
   },
   /*
@@ -152,8 +150,8 @@ const store = () => new Vuex.Store({
           date: '',
           hour: '',
           valorIngresso: 0,
-          imgUrlH1: null,
-          imgUrlL1: null
+          imageH1: null,
+          imageL1: null
         })
         commit('m_cadastroEvento7', false)
         commit('m_cadastroEvento0', true)

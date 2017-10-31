@@ -9,12 +9,12 @@
       <div class="pricing-box">
         <h2 class="__pricing-box-title">Selecione um plano:</h2>
 
-        <div class="plano-row casual" @click="$store.commit('m_cadastroEvento1', true), $store.commit('m_cadastroEvento0', false), $store.commit('m_eventoPlanoCasual', true), $store.commit('m_eventoPlanoPro', false), $store.commit('m_eventoProgressBar', (100/7))">
+        <div class="plano-row casual" @click="$store.commit('m_cadastroEvento1', true), $store.commit('m_cadastroEvento0', false), $store.commit('m_planoCasual', true), $store.commit('m_planoPro', false), $store.commit('m_eventoProgressBar', (100/7))">
           <span class="__plano-valor">R$30</span>
           <span class="__plano-title">CASUAL</span>
         </div>
 
-        <div class="plano-row profissional" @click="$store.commit('m_cadastroEvento1', true), $store.commit('m_cadastroEvento0', false), $store.commit('m_eventoPlanoPro', true), $store.commit('m_eventoPlanoCasual', false), $store.commit('m_eventoProgressBar', (100/7))">
+        <div class="plano-row profissional" @click="$store.commit('m_cadastroEvento1', true), $store.commit('m_cadastroEvento0', false), $store.commit('m_planoPro', true), $store.commit('m_planoCasual', false), $store.commit('m_eventoProgressBar', (100/7))">
           <span class="__plano-valor">R$100</span>
           <span class="__plano-title">PROFISSIONAL</span>
         </div>
@@ -29,13 +29,7 @@
     <!-- ********** CADASTRO EVENTO Pg.1 ********** -->
     <form class="cadastro-evento" v-show="cadastroEvento1">
 
-      <h1 class="__form-title">Informações básicas</h1>
-
-      <div class="item-form">
-        <label>Plano</label>
-        <span class="__plano-selecionado" v-show="eventoPlanoCasual">Casual</span>
-        <span class="__plano-selecionado" v-show="eventoPlanoPro">Profissional</span>
-      </div>  
+      <h1 class="__form-title">Informações básicas</h1>  
 
       <div class="item-form">
         <label>Nome do evento</label>
@@ -404,7 +398,7 @@ export default {
           .then(snapshot => {
             console.log(eventoID + '-' + 'L1' + '.jpeg')
             storageRef.child(eventoID + '-' + 'L1' + '.jpeg').getDownloadURL().then(url => {
-              this.$store.commit('m_imgUrlL1', url)
+              this.$store.commit('m_imageL1', url)
             })
           })
         }, 'image/jpeg', 0.01)
@@ -416,7 +410,7 @@ export default {
           .then(snapshot => {
             console.log(eventoID + '-' + 'H1' + '.jpeg')
             storageRef.child(eventoID + '-' + 'H1' + '.jpeg').getDownloadURL().then(url => {
-              this.$store.commit('m_imgUrlH1', url)
+              this.$store.commit('m_imageH1', url)
               this.$store.commit('m_eventos', null) /* Para não bugar as imagens */
             })
             .then(() => {
@@ -488,12 +482,6 @@ export default {
       if (1<2) {
         return 'background:rgb(255, 88, 88);cursor:pointer'
       }
-    },
-    eventoPlanoCasual () {
-      return this.$store.state.eventoPlanoCasual
-    },
-    eventoPlanoPro () {
-      return this.$store.state.eventoPlanoPro
     },
     cadastroEvento0 () {
       return this.$store.state.cadastroEvento0
@@ -601,13 +589,6 @@ export default {
       font-size: 30px;
       font-weight: 600;
       padding-top: 3rem;
-    }
-    & .__plano-selecionado {
-      font-size: 19px;
-      font-weight: 300;
-      padding: .4rem 0 .6rem 0;
-      color: rgb(92, 92, 92);
-      border-bottom: 1px solid rgb(210, 210, 210);
     }
     & .__form-title {
       font-size: 29px;

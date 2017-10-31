@@ -11,7 +11,7 @@
     </div>
 
     <div class="image-box">
-      <img class="__image1" :src="evento.imgUrlH1" alt="">
+      <img class="__image1" :src="evento.imageH1" alt="">
     </div>
 
 
@@ -52,7 +52,7 @@ export default {
         { property: 'og:url', content: 'http://escarpas-trip.herokuapp.com/eventos/' + this.$route.params.id },
         { property: 'og:title', content: this.evento.title },
         { property: 'og:description', content: this.evento.subtitle },
-        { property: 'og:image', content: this.evento.imgUrlH1 },
+        { property: 'og:image', content: this.evento.imageH1 },
         { property: 'og:site_name', content: 'Escarpas Trip' }
       ]
     }
@@ -99,7 +99,7 @@ export default {
     position: fixed;
     top: 0;
     left: 0;
-    z-index: 5;
+    z-index: 2;
     height: 3.1rem;
     width:  100%;
     background: transparent;
@@ -119,7 +119,7 @@ export default {
       }
       & .__share-btn {
         cursor: pointer;
-        width: 1.4rem;
+        width: 1.5rem;
         height: auto;
         -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
       }

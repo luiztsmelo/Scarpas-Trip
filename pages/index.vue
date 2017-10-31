@@ -22,7 +22,7 @@
               
                 <li class="card" v-for="evento in eventos || $store.state.eventos">
                   <nuxt-link :to="'/eventos/' + evento.eventoID">
-                    <progressive-img class="__card-img" :src="evento.imgUrlH1" :placeholder="evento.imgUrlL1" alt="" no-ratio />
+                    <progressive-img class="__card-img" :src="evento.imageH1" :placeholder="evento.imageL1" alt="" no-ratio />
                     <span class="__card-date">{{ evento.date }}</span>
                     <h1 class="__card-title">{{ evento.title | truncateTitle }}</h1>
                     <h2 class="__card-subtitle">{{ evento.subtitle | truncateSubtitle }}</h2>
