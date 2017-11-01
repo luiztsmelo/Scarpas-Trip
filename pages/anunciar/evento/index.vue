@@ -202,11 +202,10 @@
     <form class="cadastro-evento" v-show="cadastroEvento5">
 
       <h1 class="__form-title">Dê um Título legal</h1>  
+      
+      <textarea class="__textarea-title" v-model="$store.state.eventoData.title" maxlength="40"></textarea>
 
-      <div class="item-form">
-        <label>Nome do evento</label>
-        <input type="text" v-model="$store.state.eventoData.title" required>
-      </div>     
+      <span class="__lenght-calc">{{ titleLength }}</span>
 
       <div class="back-next"> 
         <div class="back-next-body">
@@ -426,6 +425,9 @@ export default {
     }
   },
   computed: {
+    titleLength () {
+      return 40 - this.$store.state.eventoData.title.length
+    },
     today () {
       let dd = new Date().getDate()
       let mm = new Date().getMonth() + 1
@@ -587,12 +589,8 @@ export default {
     color: var(--color01);
     height: calc(100vh - 3.3rem);
     padding: 0 7%;
-    & .__title {
-      font-size: 30px;
-      font-weight: 600;
-      padding-top: 3rem;
-    }
     & .__form-title {
+      line-height: 35px;
       font-size: 29px;
       font-weight: 600;
       padding: 3rem 0 1.5rem 0;
@@ -602,6 +600,20 @@ export default {
       font-weight: 300;
       padding: 1.5rem 0 1.5rem 0;
       line-height: 27px;
+    }
+    & .__textarea-title {
+      width: 100%;
+      font-size: 20px;
+      font-weight: 300;
+      background: white;
+      color: rgb(92, 92, 92);
+      border: none;
+      outline: none;
+    }
+    & .__lenght-calc {
+      font-size: 20px;
+      font-weight: 600;
+      color: rgb(92, 92, 92);
     }
     & .item-form {
       display: flex;
