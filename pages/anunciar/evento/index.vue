@@ -602,7 +602,7 @@ export default {
     background: white;
     color: var(--color01);
     height: calc(100vh - 3.3rem);
-    padding: 0 7%;
+    padding: 0 7% 3rem 7%;
     & .__form-title {
       line-height: 35px;
       font-size: 29px;
