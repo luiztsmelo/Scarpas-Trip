@@ -394,10 +394,10 @@ export default {
         Upload image 1 Low Quality 
         */
         this.$refs.myCroppa1.generateBlob(blob => {
-          storageRef.child(eventoID + '-' + 'L1' + '.jpeg').put(blob)
+          storageRef.child('imageL1.jpeg').put(blob)
           .then(snapshot => {
             console.log(eventoID + '-' + 'L1' + '.jpeg')
-            storageRef.child(eventoID + '-' + 'L1' + '.jpeg').getDownloadURL().then(url => {
+            storageRef.child('imageL1.jpeg').getDownloadURL().then(url => {
               this.$store.commit('m_imageL1', url)
             })
           })
@@ -406,17 +406,16 @@ export default {
         Upload image 1 High Quality 
         */
         this.$refs.myCroppa1.generateBlob(blob => {
-          storageRef.child(eventoID + '-' + 'H1' + '.jpeg').put(blob)
+          storageRef.child('imageH1.jpeg').put(blob)
           .then(snapshot => {
-            console.log(eventoID + '-' + 'H1' + '.jpeg')
-            storageRef.child(eventoID + '-' + 'H1' + '.jpeg').getDownloadURL().then(url => {
+            console.log(eventoID + 'H1' + '.jpeg')
+            storageRef.child('imageH1.jpeg').getDownloadURL().then(url => {
               this.$store.commit('m_imageH1', url)
               this.$store.commit('m_eventos', null) /* Para não bugar as imagens */
             })
             .then(() => {
               this.$store.dispatch('a_uploadEvento')
               this.$router.push('/')
-              this.$store.commit('m_showFoobar', true)
             })
           })
         }, 'image/jpeg')

@@ -144,11 +144,13 @@ const store = () => new Vuex.Store({
       firebase.database().ref('eventos/' + state.eventoID).set(state.eventoData).then(() => {
         commit('m_eventoData', {
           eventoID: null,
-          position: {lat: -20.6141320, lng: -46.0478760},
+          planoCasual: false,
+          planoPro: false,
           title: '',
           subtitle: '',
           date: '',
           hour: '',
+          position: {lat: -20.6141320, lng: -46.0478760},
           valorIngresso: 0,
           imageH1: null,
           imageL1: null
