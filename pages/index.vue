@@ -114,8 +114,8 @@ export default {
         align-items: center;
         padding: 0 7% 1.5rem 7%;
         & .__title {
-          font-size: 25px;
-          font-weight: 700;
+          font-size: 26px;
+          font-weight: 600;
         }
         & .see-all {
           width: 4.5rem;
