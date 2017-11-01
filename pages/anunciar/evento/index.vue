@@ -26,40 +26,16 @@
     <div class="progress-bar" v-show="!cadastroEvento0" :style="'width:' + $store.state.eventoProgressBar + '%'"></div>
 
 
+    
+
+
     <!-- ********** CADASTRO EVENTO Pg.1 ********** -->
     <form class="cadastro-evento" v-show="cadastroEvento1">
 
-      <h1 class="__form-title">Informações básicas</h1>  
+      <h1 class="__form-title">Qual será a Data e Horário do evento?</h1>
 
       <div class="item-form">
-        <label>Nome do evento</label>
-        <input type="text" v-model="$store.state.eventoData.title" required>
-      </div>  
-
-      <div class="item-form">
-        <label>Descrição básica</label>
-        <input type="text" v-model="$store.state.eventoData.subtitle" required>
-      </div>   
-
-      <div class="back-next"> 
-        <div class="back-next-body">
-          <button type="button" class="__back" @click="backBtn1">Voltar</button>
-          <button type="button" class="__next" :style="form1ok" @click="nextBtn1">Próximo</button>
-        </div>
-      </div> 
-
-    </form> <!-- ********** CADASTRO EVENTO Pg.1 ********** -->
-  
-
-
-
-    <!-- ********** CADASTRO EVENTO Pg.2 ********** -->
-    <form class="cadastro-evento" v-show="cadastroEvento2">
-
-      <h1 class="__form-title">Data e Horário</h1>
-
-      <div class="item-form">
-        <label>Dia do evento</label>
+        <label>Data</label>
         <input type="date" v-model="date" :min="today" required pattern="[0-9]{2}-[0-9]{2}-[0-9]{4}">
       </div>  
 
@@ -67,6 +43,44 @@
         <label>Horário</label>
         <input type="time" v-model="$store.state.eventoData.hour" required>
       </div>  
+
+      <div class="back-next"> 
+        <div class="back-next-body">
+          <button type="button" class="__back" @click="backBtn1">Voltar</button>
+          <button type="button" class="__next" :style="form1ok" @click="nextBtn1">Próximo</button>
+        </div>
+      </div> 
+    
+    </form><!-- ********** CADASTRO EVENTO Pg.1 ********** -->
+
+
+
+
+    <!-- ********** CADASTRO EVENTO Pg.2 ********** -->
+    <form class="cadastro-evento" v-show="cadastroEvento2">
+
+      <h1 class="__form-title">Qual será o Local?</h1>
+
+      <gmap-autocomplete class="__gmap-autocomplete"
+      type="search"
+      placeholder="Digite o endereço aqui"
+      @place_changed="setPlace">
+      </gmap-autocomplete>
+
+      <gmap-map
+      v-if="cadastroEvento2"
+      :center="$store.state.eventoData.position"
+      :zoom="mapZoom"
+      :options="{styles: styles}"
+      style="width: 100%; height: 260px">
+        <Gmap-Marker
+        v-if="$store.state.place"
+        :clickable="true"
+        :draggable="true"
+        :animation="4"
+        :position="$store.state.place.geometry.location"
+        ></Gmap-Marker>
+      </gmap-map>
 
       <div class="back-next"> 
         <div class="back-next-body">
@@ -83,29 +97,16 @@
     <!-- ********** CADASTRO EVENTO Pg.3 ********** -->
     <form class="cadastro-evento" v-show="cadastroEvento3">
 
-      <h1 class="__form-title">Local</h1>
+      <h1 class="__form-title">Qual será o Valor do Ingresso?</h1>
 
-      <gmap-autocomplete class="__gmap-autocomplete"
-      type="search"
-      placeholder="Digite o endereço aqui"
-      @place_changed="setPlace">
-      </gmap-autocomplete>
+      <div class="item-form">
+        <label>1º Lote</label>
+        <vue-numeric class="__vue-numeric" currency="R$" separator="space" :precision="2" v-model="$store.state.eventoData.valorIngresso" :minus="false"></vue-numeric>
+      </div>  
+    
+      <button type="button" @click="" class="__image-input-btn">Mais lotes?</button>
 
-      <gmap-map
-      v-if="cadastroEvento3"
-      :center="$store.state.eventoData.position"
-      :zoom="mapZoom"
-      :options="{styles: styles}"
-      style="width: 100%; height: 260px">
-        <Gmap-Marker
-        v-if="$store.state.place"
-        :clickable="true"
-        :draggable="true"
-        :animation="4"
-        :position="$store.state.place.geometry.location"
-        ></Gmap-Marker>
-      </gmap-map>
-
+    
       <div class="back-next"> 
         <div class="back-next-body">
           <button type="button" class="__back" @click="backBtn3">Voltar</button>
@@ -121,32 +122,7 @@
     <!-- ********** CADASTRO EVENTO Pg.4 ********** -->
     <form class="cadastro-evento" v-show="cadastroEvento4">
 
-      <h1 class="__form-title">Valor do Ingresso</h1>
-
-      <div class="item-form">
-        <label>1º Lote</label>
-        <vue-numeric class="__vue-numeric" currency="R$" separator="space" :precision="2" v-model="$store.state.eventoData.valorIngresso" :minus="false"></vue-numeric>
-      </div>  
-    
-      <button type="button" @click="" class="__image-input-btn">Mais lotes?</button>
-
-    
-      <div class="back-next"> 
-        <div class="back-next-body">
-          <button type="button" class="__back" @click="backBtn4">Voltar</button>
-          <button type="button" class="__next" :style="form4ok" @click="nextBtn4">Próximo</button>
-        </div>
-      </div> 
-    
-    </form><!-- ********** CADASTRO EVENTO Pg.4 ********** -->
-
-
-
-
-    <!-- ********** CADASTRO EVENTO Pg.5 ********** -->
-    <form class="cadastro-evento" v-show="cadastroEvento5">
-
-      <h1 class="__form-title">Imagens e Vídeo</h1>
+      <h1 class="__form-title">Adicione Imagens e Vídeo</h1>
 
       <div class="before-choose-image" v-show="imageURL1 === null">
         <h2 class="__form-subtitle">Imagens e vídeo legais farão toda a diferença na hora da divulgação do seu evento</h2>
@@ -212,12 +188,34 @@
 
       <div class="back-next"> 
         <div class="back-next-body">
+          <button type="button" class="__back" @click="backBtn4">Voltar</button>
+          <button type="button" class="__next" :style="form4ok" @click="nextBtn4">Próximo</button>
+        </div>
+      </div> 
+    
+    </form><!-- ********** CADASTRO EVENTO Pg.4 ********** -->
+
+
+
+
+    <!-- ********** CADASTRO EVENTO Pg.5 ********** -->
+    <form class="cadastro-evento" v-show="cadastroEvento5">
+
+      <h1 class="__form-title">Dê um Título legal</h1>  
+
+      <div class="item-form">
+        <label>Nome do evento</label>
+        <input type="text" v-model="$store.state.eventoData.title" required>
+      </div>     
+
+      <div class="back-next"> 
+        <div class="back-next-body">
           <button type="button" class="__back" @click="backBtn5">Voltar</button>
           <button type="button" class="__next" :style="form5ok" @click="nextBtn5">Próximo</button>
         </div>
       </div> 
-    
-    </form><!-- ********** CADASTRO EVENTO Pg.5 ********** -->
+
+    </form> <!-- ********** CADASTRO EVENTO Pg.5 ********** -->
 
 
 
@@ -225,16 +223,21 @@
     <!-- ********** CADASTRO EVENTO Pg.6 ********** -->
     <form class="cadastro-evento" v-show="cadastroEvento6">
 
-      <h1 class="__form-title">Preview</h1>
+      <h1 class="__form-title">Descreva seu evento</h1>   
+
+      <div class="item-form">
+        <label>Descrição básica</label>
+        <input type="text" v-model="$store.state.eventoData.subtitle" required>
+      </div>   
 
       <div class="back-next"> 
         <div class="back-next-body">
           <button type="button" class="__back" @click="backBtn6">Voltar</button>
           <button type="button" class="__next" :style="form6ok" @click="nextBtn6">Próximo</button>
         </div>
-      </div>
-    
-    </form><!-- ********** CADASTRO EVENTO Pg.6 ********** -->
+      </div> 
+
+    </form> <!-- ********** CADASTRO EVENTO Pg.6 ********** -->
 
 
 
@@ -353,34 +356,34 @@ export default {
     },
     /* ******************** NEXT BUTTONS ******************** */
     nextBtn1 () {
-      if (this.$store.state.eventoData.title.length > 0 && this.$store.state.eventoData.subtitle.length > 0) {
+      if (this.$store.state.eventoData.date.length > 0 && this.$store.state.eventoData.hour.length > 0) {
         return this.$store.commit('m_cadastroEvento1', false), this.$store.commit('m_cadastroEvento2', true), this.$store.commit('m_eventoProgressBar', (100/7)*2)
       }
     },  
     nextBtn2 () {
-      if (this.$store.state.eventoData.date.length > 0 && this.$store.state.eventoData.hour.length > 0) {
+      if (this.$store.state.place != null) {
         return this.$store.commit('m_cadastroEvento2', false), this.$store.commit('m_cadastroEvento3', true), this.$store.commit('m_eventoProgressBar', (100/7)*3)
       }
     },
     nextBtn3 () {
-      if (this.$store.state.place != null) {
+      if (this.$store.state.eventoData.valorIngresso >= 0) {
         return this.$store.commit('m_cadastroEvento3', false), this.$store.commit('m_cadastroEvento4', true), this.$store.commit('m_eventoProgressBar', (100/7)*4)
       }
     },  
     nextBtn4 () {
-      if (this.$store.state.eventoData.valorIngresso >= 0) {
-        return this.$store.commit('m_cadastroEvento4', false), this.$store.commit('m_cadastroEvento5', true), this.$store.commit('m_eventoProgressBar', (100/7)*5)
-      }
-    },
-    nextBtn5 () {
       if (this.imageURL1 !== null) {
-        return this.$store.commit('m_cadastroEvento5', false), this.$store.commit('m_cadastroEvento6', true), this.$store.commit('m_eventoProgressBar', (100/7)*6)
+        return this.$store.commit('m_cadastroEvento4', false), this.$store.commit('m_cadastroEvento5', true), this.$store.commit('m_eventoProgressBar', (100/7)*5)
       } else {
         alert('Adicione pelo menos uma imagem')
       }
     },
+    nextBtn5 () {
+      if (this.$store.state.eventoData.title.length > 0) {
+        return this.$store.commit('m_cadastroEvento5', false), this.$store.commit('m_cadastroEvento6', true), this.$store.commit('m_eventoProgressBar', (100/7)*6)
+      }
+    },
     nextBtn6 () {
-      if (1<2) {
+      if (this.$store.state.eventoData.subtitle.length > 0) {
         return this.$store.commit('m_cadastroEvento6', false), this.$store.commit('m_cadastroEvento7', true), this.$store.commit('m_eventoProgressBar', (100/7)*7)
       }
     },
@@ -448,32 +451,32 @@ export default {
       }
     },
     form1ok () {
-      if (this.$store.state.eventoData.title.length > 0 && this.$store.state.eventoData.subtitle.length > 0) {
-        return 'background:rgb(255, 88, 88);cursor:pointer'
-      }
-    },
-    form2ok () {
       if (this.$store.state.eventoData.date.length > 0 && this.$store.state.eventoData.hour.length > 0) {
         return 'background:rgb(255, 88, 88);cursor:pointer'
       }
     },
-    form3ok () {
+    form2ok () {
       if (this.$store.state.place !== null) {
         return 'background:rgb(255, 88, 88);cursor:pointer'
       }
     },
-    form4ok () {
+    form3ok () {
       if (this.$store.state.eventoData.valorIngresso >= 0) {
         return 'background:rgb(255, 88, 88);cursor:pointer'
       }
     },
-    form5ok () {
+    form4ok () {
       if (this.imageURL1 !== null) {
         return 'background:rgb(255, 88, 88);cursor:pointer'
       }
     },
+    form5ok () {
+      if (this.$store.state.eventoData.title.length > 0) {
+        return 'background:rgb(255, 88, 88);cursor:pointer'
+      }
+    },
     form6ok () {
-      if (1<2) {
+      if (this.$store.state.eventoData.subtitle.length > 0) {
         return 'background:rgb(255, 88, 88);cursor:pointer'
       }
     },
@@ -596,7 +599,7 @@ export default {
     }
     & .__form-subtitle {
       font-size: 19px;
-      font-weight: 400;
+      font-weight: 300;
       padding: 1.5rem 0 1.5rem 0;
       line-height: 27px;
     }
