@@ -203,7 +203,13 @@
 
       <h1 class="__form-title">Dê um Título legal</h1>  
       
-      <textarea class="__textarea-title" v-model="$store.state.eventoData.title" maxlength="40"></textarea>
+      <textarea 
+      v-model="$store.state.eventoData.title"
+      v-autosize="title"
+      maxlength="40"
+      placeholder="ex: Show Jorge e Mateus em Escarpas do Lago"
+      required>
+      {{title}}</textarea>
 
       <span class="__lenght-calc">{{ titleLength }}</span>
 
@@ -224,10 +230,15 @@
 
       <h1 class="__form-title">Descreva seu evento</h1>   
 
-      <div class="item-form">
-        <label>Descrição básica</label>
-        <input type="text" v-model="$store.state.eventoData.subtitle" required>
-      </div>   
+      <textarea 
+      v-model="$store.state.eventoData.subtitle"
+      v-autosize="subtitle"
+      maxlength="400"
+      placeholder="Coloque informações importantes sobre seu evento aqui"
+      required>
+      {{subtitle}}</textarea>
+
+      <span class="__lenght-calc">{{ subtitleLength }}</span> 
 
       <div class="back-next"> 
         <div class="back-next-body">
@@ -428,6 +439,9 @@ export default {
     titleLength () {
       return 40 - this.$store.state.eventoData.title.length
     },
+    subtitleLength () {
+      return 400 - this.$store.state.eventoData.subtitle.length
+    },
     today () {
       let dd = new Date().getDate()
       let mm = new Date().getMonth() + 1
@@ -594,6 +608,7 @@ export default {
       font-size: 29px;
       font-weight: 600;
       padding: 3rem 0 1.5rem 0;
+      z-index: 999;
     }
     & .__form-subtitle {
       font-size: 19px;
@@ -601,7 +616,8 @@ export default {
       padding: 1.5rem 0 1.5rem 0;
       line-height: 27px;
     }
-    & .__textarea-title {
+    & textarea {
+      margin-bottom: .5rem;
       width: 100%;
       font-size: 20px;
       font-weight: 300;
@@ -609,11 +625,13 @@ export default {
       color: rgb(92, 92, 92);
       border: none;
       outline: none;
+      resize: none;
     }
     & .__lenght-calc {
+      z-index: 999;
       font-size: 20px;
       font-weight: 600;
-      color: rgb(92, 92, 92);
+      color: rgb(112, 112, 112);
     }
     & .item-form {
       display: flex;

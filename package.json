@@ -13,6 +13,7 @@
     "axios": "^0.17.0",
     "firebase": "^4.6.0",
     "nuxt": "latest",
+    "vue-autosize": "^1.0.2",
     "vue-croppa": "^1.1.0",
     "vue-numeric": "^2.2.4",
     "vue-progressive-image": "^2.3.1",
