@@ -286,6 +286,8 @@ export default {
   transition: 'opacity',
   data () {
     return {
+      title: '',/* Vue Autosize */
+      subtitle: '',/* Vue Autosize */
       showCroppaModal1: false,
       showCroppaModal2: false,
       date: null,
