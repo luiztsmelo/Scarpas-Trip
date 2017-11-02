@@ -26,6 +26,7 @@ const store = () => new Vuex.Store({
     eventoID: null,
     eventos: null,
     evento: null,
+    eventoMap: null,
     eventoData: {/* Lembrar de atualizar a action */
       eventoID: null,
       planoCasual: false,
@@ -89,6 +90,9 @@ const store = () => new Vuex.Store({
     },
     m_eventoData (state, payload) {
       state.eventoData = payload
+    },
+    m_eventoMap (state, payload) {
+      state.eventoMap = payload
     },
     m_imageH1 (state, payload) {
       state.eventoData.imageH1 = payload

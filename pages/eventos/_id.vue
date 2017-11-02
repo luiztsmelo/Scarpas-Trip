@@ -28,7 +28,8 @@
       :center="evento.position"
       :zoom="15"
       :options="{styles: styles, draggable:false, fullscreenControl:false, zoomControl:false, mapTypeControl:false, streetViewControl:false}"
-      style="width: 100%; height: 220px">
+      style="width: 100%; height: 220px"
+      @click="$store.commit('m_eventoMap', evento)">
         <Gmap-Marker
         :position="evento.position"
         ></Gmap-Marker>
