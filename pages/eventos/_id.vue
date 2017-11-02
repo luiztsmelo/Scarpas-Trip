@@ -114,7 +114,7 @@ export default {
     position: fixed;
     top: 0;
     left: 0;
-    z-index: 2;
+    z-index: 3;
     height: 3.1rem;
     width:  100%;
     background: transparent;
@@ -128,8 +128,9 @@ export default {
       top: 50%;
       transform: translateY(-50%);
       & .__back-btn {
+        transform: translateY(1px);/* A imagem ta errada */
         cursor: pointer;
-        width: 1.2rem;
+        width: 1.3rem;
         height: auto;
       }
       & .__share-btn {
