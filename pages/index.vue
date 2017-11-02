@@ -140,7 +140,6 @@ export default {
           flex-flow: row nowrap;
           height: 14rem;
           padding: 0;
-          transition: all ease .1s;
           transform: translateX(7%);
           & .card {
             max-width: 145px;
