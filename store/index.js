@@ -42,6 +42,7 @@ const store = () => new Vuex.Store({
     },
     eventoProgressBar: 0,
     place: null,
+    fullscreen: false,
     cadastroEvento0: true,
     cadastroEvento1: false,
     cadastroEvento2: false,
@@ -102,6 +103,9 @@ const store = () => new Vuex.Store({
     },
     m_eventos (state, payload) {
       state.eventos = payload
+    },
+    m_fullscreen (state, payload) {
+      state.fullscreen = payload
     },
     m_evento (state, payload) {
       state.evento = payload

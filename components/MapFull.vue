@@ -1,11 +1,11 @@
 <template>
   <div class="mapfull" v-if="eventoMap">
-    <img class="__exit" src="../assets/img/exit.svg" @click="$store.commit('m_eventoMap', null)">
+    <img class="__exit" src="../assets/img/exit.svg" @click="$store.commit('m_eventoMap', null), fullscreen()">
     <gmap-map
       v-if="eventoMap"
       :center="eventoMap.position"
       :zoom="15"
-      :options="{styles: styles, fullscreenControl:false, zoomControl:false, mapTypeControl:false}"
+      :options="{styles: styles, draggable:true, fullscreenControl:false, zoomControl:false, mapTypeControl:false}"
       style="width: 100%; height: 100%">
       <Gmap-Marker
       :position="eventoMap.position"
@@ -18,6 +18,28 @@
 import { mapstyle } from '../mixins/mapstyle'
 export default {
   mixins: [mapstyle],
+  methods: {
+    fullscreen () {
+      if ((document.fullScreenElement && document.fullScreenElement !== null) ||
+        (!document.mozFullScreen && !document.webkitIsFullScreen)) {
+        if (document.documentElement.requestFullScreen) {
+            document.documentElement.requestFullScreen();
+        } else if (document.documentElement.mozRequestFullScreen) {
+            document.documentElement.mozRequestFullScreen();
+        } else if (document.documentElement.webkitRequestFullScreen) {
+            document.documentElement.webkitRequestFullScreen(Element.ALLOW_KEYBOARD_INPUT);
+        }
+      } else {
+        if (document.cancelFullScreen) {
+            document.cancelFullScreen();
+        } else if (document.mozCancelFullScreen) {
+            document.mozCancelFullScreen();
+        } else if (document.webkitCancelFullScreen) {
+            document.webkitCancelFullScreen();
+        }
+      }
+    }
+  },
   computed: {
     eventoMap () {
       return this.$store.state.eventoMap
