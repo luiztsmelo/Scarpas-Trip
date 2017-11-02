@@ -11,7 +11,7 @@
     </div>
 
     <div class="image-box">
-      <img class="__image1" :src="evento.imageH1" alt="">
+      <img class="__image1" :src="imageH(evento)">
     </div>
 
 
@@ -40,6 +40,7 @@
 </template>
 
 <script>
+import supportsWebP from 'supports-webp'
 import { mapstyle } from '../../mixins/mapstyle'
 import * as firebase from 'firebase'
 
@@ -68,6 +69,13 @@ export default {
     })
   },
   methods: {
+    imageH (evento) {
+      if (supportsWebP) {
+        return evento.imageH1W
+      } else {
+        return evento.imageH1J
+      }
+    },
     enterFullscreen () {
       if ((document.fullScreenElement && document.fullScreenElement !== null) ||
         (!document.mozFullScreen && !document.webkitIsFullScreen)) {

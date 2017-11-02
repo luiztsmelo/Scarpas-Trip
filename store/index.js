@@ -37,8 +37,10 @@ const store = () => new Vuex.Store({
       hour: '',
       position: {lat: -20.6141320, lng: -46.0478760},
       valorIngresso: 0,
-      imageH1: null,
-      imageL1: null
+      imageH1J: null,
+      imageL1J: null,
+      imageH1W: null,
+      imageL1W: null
     },
     eventoProgressBar: 0,
     place: null,
@@ -95,11 +97,17 @@ const store = () => new Vuex.Store({
     m_eventoMap (state, payload) {
       state.eventoMap = payload
     },
-    m_imageH1 (state, payload) {
-      state.eventoData.imageH1 = payload
+    m_imageH1J (state, payload) {
+      state.eventoData.imageH1J = payload
     },
-    m_imageL1 (state, payload) {
-      state.eventoData.imageL1 = payload
+    m_imageL1J (state, payload) {
+      state.eventoData.imageL1J = payload
+    },
+    m_imageH1W (state, payload) {
+      state.eventoData.imageH1W = payload
+    },
+    m_imageL1W (state, payload) {
+      state.eventoData.imageL1W = payload
     },
     m_eventos (state, payload) {
       state.eventos = payload
@@ -160,8 +168,10 @@ const store = () => new Vuex.Store({
           hour: '',
           position: {lat: -20.6141320, lng: -46.0478760},
           valorIngresso: 0,
-          imageH1: null,
-          imageL1: null
+          imageH1J: null,
+          imageL1J: null,
+          imageH1W: null,
+          imageL1W: null
         })
         commit('m_cadastroEvento7', false)
         commit('m_cadastroEvento0', true)

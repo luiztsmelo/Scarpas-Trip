@@ -20,9 +20,9 @@
           <v-touch @panleft="leftCarousel" @panright="rightCarousel" v-bind:pan-options="{ direction: 'horizontal' }">
             <ul class="carousel-row" :style="'transform: translateX(' + positionCarousel + 'px)'">
               
-                <li class="card" v-for="evento in eventos || $store.state.eventos">
+                <li class="card" v-for="evento in $store.state.eventos" :key="evento.eventoID">
                   <nuxt-link :to="'/eventos/' + evento.eventoID">
-                    <progressive-img class="__card-img" :src="evento.imageH1" :placeholder="evento.imageL1" alt="" no-ratio />
+                    <progressive-img class="__card-img" :src="imageH(evento)" :placeholder="imageL(evento)" alt="" no-ratio />
                     <span class="__card-date">{{ evento.date }}</span>
                     <h1 class="__card-title">{{ evento.title | truncateTitle }}</h1>
                     <h2 class="__card-subtitle">{{ evento.subtitle | truncateSubtitle }}</h2>
@@ -40,6 +40,7 @@
 </template>
 
 <script>
+import supportsWebP from 'supports-webp'
 import * as firebase from 'firebase'
 
 export default {
@@ -55,6 +56,20 @@ export default {
     }
   },
   methods: {
+    imageH (evento) {
+      if (supportsWebP) {
+        return evento.imageH1W
+      } else {
+        return evento.imageH1J
+      }
+    },
+    imageL (evento) {
+      if (supportsWebP) {
+        return evento.imageL1W
+      } else {
+        return evento.imageL1J
+      }
+    },
     leftCarousel (e) {
       this.positionCarousel = e.deltaX 
       console.log(e.deltaX + ' - ' + this.positionCarousel)
@@ -64,12 +79,11 @@ export default {
       console.log(e.deltaX + ' - ' + this.positionCarousel)
     }
   },
-  computed: {
-    eventos () {
-      firebase.database().ref('eventos').once('value').then(snapshot => {
-        this.$store.commit('m_eventos', snapshot.val())
-      })
-    }
+  fetch ({ store }) {
+    return firebase.database().ref('eventos').once('value')
+    .then(snapshot => {
+      store.commit('m_eventos', snapshot.val())
+    })
   },
   filters: {
     truncateTitle (value) {

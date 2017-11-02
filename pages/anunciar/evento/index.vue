@@ -406,26 +406,50 @@ export default {
         this.$store.commit('m_eventoID', eventoID)
         const storageRef = firebase.storage().ref('eventos/' + eventoID + '/')
         /* 
-        Upload image 1 Low Quality 
+        Upload image 1 LQ WEBP
         */
         this.$refs.myCroppa1.generateBlob(blob => {
-          storageRef.child('imageL1.webp').put(blob)
+          storageRef.child('imageL1W.webp').put(blob)
           .then(snapshot => {
-            console.log(eventoID + 'L1' + '.webp')
-            storageRef.child('imageL1.webp').getDownloadURL().then(url => {
-              this.$store.commit('m_imageL1', url)
+            console.log(eventoID + 'L1W' + '.webp')
+            storageRef.child('imageL1W.webp').getDownloadURL().then(url => {
+              this.$store.commit('m_imageL1W', url)
             })
           })
         }, 'image/webp', 0.01)
         /* 
-        Upload image 1 High Quality 
+        Upload image 1 LQ JPEG
         */
         this.$refs.myCroppa1.generateBlob(blob => {
-          storageRef.child('imageH1.webp').put(blob)
+          storageRef.child('imageL1J.jpeg').put(blob)
           .then(snapshot => {
-            console.log(eventoID + 'H1' + '.webp')
-            storageRef.child('imageH1.webp').getDownloadURL().then(url => {
-              this.$store.commit('m_imageH1', url)
+            console.log(eventoID + 'L1J' + '.jpeg')
+            storageRef.child('imageL1J.jpeg').getDownloadURL().then(url => {
+              this.$store.commit('m_imageL1J', url)
+            })
+          })
+        }, 'image/jpeg', 0.01)
+        /* 
+        Upload image 1 HQ WEBP 
+        */
+        this.$refs.myCroppa1.generateBlob(blob => {
+          storageRef.child('imageH1W.webp').put(blob)
+          .then(snapshot => {
+            console.log(eventoID + 'H1W' + '.webp')
+            storageRef.child('imageH1W.webp').getDownloadURL().then(url => {
+              this.$store.commit('m_imageH1W', url)
+            })
+          })
+        }, 'image/webp')
+        /* 
+        Upload image 1 HQ JPEG 
+        */
+        this.$refs.myCroppa1.generateBlob(blob => {
+          storageRef.child('imageH1J.jpeg').put(blob)
+          .then(snapshot => {
+            console.log(eventoID + 'H1J' + '.jpeg')
+            storageRef.child('imageH1J.jpeg').getDownloadURL().then(url => {
+              this.$store.commit('m_imageH1J', url)
               this.$store.commit('m_eventos', null) /* Para não bugar as imagens */
             })
             .then(() => {
@@ -433,7 +457,7 @@ export default {
               this.$router.push('/')
             })
           })
-        }, 'image/webp')
+        }, 'image/jpeg')
       }
     }
   },
