@@ -206,7 +206,7 @@
       <textarea 
       v-model="$store.state.eventoData.title"
       v-autosize="title"
-      maxlength="40"
+      maxlength="50"
       placeholder="ex: Show Jorge e Mateus em Escarpas do Lago"
       required>
       {{title}}</textarea>
@@ -233,7 +233,7 @@
       <textarea 
       v-model="$store.state.eventoData.subtitle"
       v-autosize="subtitle"
-      maxlength="400"
+      maxlength="500"
       placeholder="Coloque informações importantes sobre seu evento aqui"
       required>
       {{subtitle}}</textarea>
@@ -257,7 +257,7 @@
 
       <h1 class="__form-title">Investimento</h1>
 
-      <div class="back-next"> 
+      <div class="back-next">
         <div class="back-next-body">
           <button type="button" class="__back" @click="backBtn7">Voltar</button>
           <button type="button" class="__next" :style="form7ok" @click="finalizar">Finalizar</button>
@@ -409,22 +409,22 @@ export default {
         Upload image 1 Low Quality 
         */
         this.$refs.myCroppa1.generateBlob(blob => {
-          storageRef.child('imageL1.jpeg').put(blob)
+          storageRef.child('imageL1.webp').put(blob)
           .then(snapshot => {
-            console.log(eventoID + '-' + 'L1' + '.jpeg')
-            storageRef.child('imageL1.jpeg').getDownloadURL().then(url => {
+            console.log(eventoID + 'L1' + '.webp')
+            storageRef.child('imageL1.webp').getDownloadURL().then(url => {
               this.$store.commit('m_imageL1', url)
             })
           })
-        }, 'image/jpeg', 0.01)
+        }, 'image/webp', 0.01)
         /* 
         Upload image 1 High Quality 
         */
         this.$refs.myCroppa1.generateBlob(blob => {
-          storageRef.child('imageH1.jpeg').put(blob)
+          storageRef.child('imageH1.webp').put(blob)
           .then(snapshot => {
-            console.log(eventoID + 'H1' + '.jpeg')
-            storageRef.child('imageH1.jpeg').getDownloadURL().then(url => {
+            console.log(eventoID + 'H1' + '.webp')
+            storageRef.child('imageH1.webp').getDownloadURL().then(url => {
               this.$store.commit('m_imageH1', url)
               this.$store.commit('m_eventos', null) /* Para não bugar as imagens */
             })
@@ -433,16 +433,16 @@ export default {
               this.$router.push('/')
             })
           })
-        }, 'image/jpeg')
+        }, 'image/webp')
       }
     }
   },
   computed: {
     titleLength () {
-      return 40 - this.$store.state.eventoData.title.length
+      return 50 - this.$store.state.eventoData.title.length
     },
     subtitleLength () {
-      return 400 - this.$store.state.eventoData.subtitle.length
+      return 500 - this.$store.state.eventoData.subtitle.length
     },
     today () {
       let dd = new Date().getDate()
@@ -621,8 +621,9 @@ export default {
     & textarea {
       margin-bottom: .5rem;
       width: 100%;
-      font-size: 20px;
+      font-size: 19px;
       font-weight: 300;
+      line-height: 26px;
       background: white;
       color: rgb(92, 92, 92);
       border: none;
