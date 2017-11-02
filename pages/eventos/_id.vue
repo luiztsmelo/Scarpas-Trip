@@ -156,11 +156,11 @@ export default {
     padding: 0 6%;
     & .__title {
       margin: 1rem 0 2rem 0;
-      font-size: 35px;
+      font-size: 34px;
       font-weight: 600;
     }
     & .__subtitle {
-      font-size: 20px;
+      font-size: 19px;
       font-weight: 300;
     }
   }
