@@ -27,7 +27,7 @@
       <gmap-map
       :center="evento.position"
       :zoom="15"
-      :options="{styles: styles}"
+      :options="{styles: styles, draggable:false, fullscreenControl:false, zoomControl:false, mapTypeControl:false, streetViewControl:false}"
       style="width: 100%; height: 220px">
         <Gmap-Marker
         :position="evento.position"
