@@ -3,12 +3,12 @@
     <img class="__exit" src="../assets/img/exit.svg" @click="$store.commit('m_eventoMap', null), exitFullscreen()">
     <gmap-map
       v-if="eventoMap"
-      :center="eventoMap.position"
+      :center="{lat: eventoMap.positionLAT, lng: eventoMap.positionLNG}"
       :zoom="15"
-      :options="{styles: styles, draggable:true, fullscreenControl:false, zoomControl:false, mapTypeControl:false, backgroundColor:'white'}"
+      :options="{styles: styles, fullscreenControl:false, zoomControl:false, mapTypeControl:false, backgroundColor:'white'}"
       style="width: 100%; height: 100%">
       <Gmap-Marker
-      :position="eventoMap.position"
+      :position="{lat: eventoMap.positionLAT, lng: eventoMap.positionLNG}"
       ></Gmap-Marker>
     </gmap-map>
   </div>  

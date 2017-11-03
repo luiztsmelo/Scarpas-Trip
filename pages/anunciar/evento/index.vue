@@ -342,7 +342,6 @@ export default {
     /* ******************** GOOGLE MAPS ******************** */
     setPlace (place) {
       this.$store.commit('m_eventoPlace', place)
-      console.log(place)
       this.$store.state.eventoData.positionLAT = this.$store.state.eventoPlace.geometry.location.lat()
       this.$store.state.eventoData.positionLNG = this.$store.state.eventoPlace.geometry.location.lng()
     },
