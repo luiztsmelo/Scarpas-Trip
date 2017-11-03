@@ -26,6 +26,7 @@ const store = () => new Vuex.Store({
     eventoID: null,
     eventos: null,
     evento: null,
+    getEventoID: null,
     eventoMap: null,
     eventoData: {/* Lembrar de atualizar a action */
       eventoID: null,
@@ -44,7 +45,6 @@ const store = () => new Vuex.Store({
     },
     eventoProgressBar: 0,
     place: null,
-    fullscreen: false,
     cadastroEvento0: true,
     cadastroEvento1: false,
     cadastroEvento2: false,
@@ -112,11 +112,11 @@ const store = () => new Vuex.Store({
     m_eventos (state, payload) {
       state.eventos = payload
     },
-    m_fullscreen (state, payload) {
-      state.fullscreen = payload
-    },
     m_evento (state, payload) {
       state.evento = payload
+    },
+    m_getEventoID (state, payload) {
+      state.getEventoID = payload
     },
     m_eventoProgressBar (state, payload) {
       state.eventoProgressBar = payload

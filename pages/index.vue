@@ -20,7 +20,7 @@
           <v-touch @panleft="leftCarousel" @panright="rightCarousel" v-bind:pan-options="{ direction: 'horizontal' }">
             <ul class="carousel-row" :style="'transform: translateX(' + positionCarousel + 'px)'">
               
-                <li class="card" v-for="evento in $store.state.eventos" :key="evento.eventoID">
+                <li class="card" v-for="evento in $store.state.eventos" :key="evento.eventoID" @click="getEventoID(evento)">
                   <nuxt-link :to="'/eventos/' + evento.eventoID">
                     <progressive-img class="__card-img" :src="imageH(evento)" :placeholder="imageL(evento)" alt="" no-ratio />
                     <span class="__card-date">{{ evento.date }}</span>
@@ -49,13 +49,16 @@ export default {
       title: 'Escarpas Trip'
     }
   },
-  /* transition: 'slide-left', */
+  transition: 'opacity',
   data () {
     return {
       positionCarousel: ''
     }
   },
   methods: {
+    getEventoID (evento) {
+      this.$store.commit('m_getEventoID', evento.eventoID)
+    },
     imageH (evento) {
       if (supportsWebP) {
         return evento.imageH1W
@@ -80,14 +83,14 @@ export default {
     }
   },
   fetch ({ store }) {
-    /* if (store.state.eventos === null) { */
+    if (store.state.eventos === null) {
       return firebase.database().ref('eventos').once('value')
       .then(snapshot => {
         store.commit('m_eventos', snapshot.val())
       })
-    /* } else {
-      return console.log('eventos já populado')
-    } */
+    } else {
+      return console.log('Já carregado')
+    }
   },
   filters: {
     truncateTitle (value) {
