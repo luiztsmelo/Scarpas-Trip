@@ -94,8 +94,8 @@ export default {
       }
     },
     truncateSubtitle (value) {
-      if (value.length > 31) {
-        return value.slice(0, 31) + '...'
+      if (value.length > 30) {
+        return value.slice(0, 30) + '...'
       } else {
         return value.slice(0)
       }

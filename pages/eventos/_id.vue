@@ -115,15 +115,14 @@ export default {
 .eventos_id {
   display: flex;
   flex-flow: column;
-  z-index: 10;
   background-color: white;
-  transition: all .32s ease;
+  transition: all .31s ease;
   height: 100vh;
   & .backbar {
     position: fixed;
     top: 0;
     left: 0;
-    z-index: 15;
+    z-index: 2;
     height: 3.1rem;
     width:  100%;
     background: transparent;
