@@ -89,7 +89,7 @@ export default {
         store.commit('m_eventos', snapshot.val())
       })
     } else {
-      return console.log('Já carregado')
+      return console.log('Eventos já carregados')
     }
   },
   filters: {

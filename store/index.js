@@ -3,7 +3,7 @@ import * as firebase from 'firebase'
 import createPersistedState from 'vuex-persistedstate'
 
 const store = () => new Vuex.Store({
-  plugins: [createPersistedState()],
+  plugins: [createPersistedState({ storage: window.sessionStorage })],
   /*
   **************************************** STATE ****************************************
   */
@@ -36,7 +36,8 @@ const store = () => new Vuex.Store({
       subtitle: '',
       date: '',
       hour: '',
-      position: {lat: -20.6141320, lng: -46.0478760},
+      positionLAT: -20.6141320,
+      positionLNG: -46.0478760,
       valorIngresso: 0,
       imageH1J: null,
       imageL1J: null,
@@ -44,7 +45,7 @@ const store = () => new Vuex.Store({
       imageL1W: null
     },
     eventoProgressBar: 0,
-    place: null,
+    eventoPlace: null,
     cadastroEvento0: true,
     cadastroEvento1: false,
     cadastroEvento2: false,
@@ -63,6 +64,9 @@ const store = () => new Vuex.Store({
   **************************************** MUTATIONS ****************************************
   */
   mutations: {
+    /*
+    -------------------- GERAL --------------------
+    */
     m_showNavbar (state, payload) {
       state.showNavbar = payload
     },
@@ -82,7 +86,7 @@ const store = () => new Vuex.Store({
       state.loader = payload
     },
     /*
-    ---------- ANÚNCIOS ----------
+    -------------------- ANÚNCIOS --------------------
     */
     /*
     .......... Evento ..........
@@ -93,6 +97,9 @@ const store = () => new Vuex.Store({
     },
     m_eventoData (state, payload) {
       state.eventoData = payload
+    },
+    m_eventoPlace (state, payload) {
+      state.eventoPlace = payload
     },
     m_eventoMap (state, payload) {
       state.eventoMap = payload
@@ -166,7 +173,8 @@ const store = () => new Vuex.Store({
           subtitle: '',
           date: '',
           hour: '',
-          position: {lat: -20.6141320, lng: -46.0478760},
+          positionLAT: -20.6141320,
+          positionLNG: -46.0478760,
           valorIngresso: 0,
           imageH1J: null,
           imageL1J: null,

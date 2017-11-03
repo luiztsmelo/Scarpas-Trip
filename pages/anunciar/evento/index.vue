@@ -69,16 +69,16 @@
 
       <gmap-map
       v-if="cadastroEvento2"
-      :center="$store.state.eventoData.position"
+      :center="{lat: $store.state.eventoData.positionLAT, lng: $store.state.eventoData.positionLNG}"
       :zoom="mapZoom"
       :options="{styles: styles}"
       style="width: 100%; height: 260px">
         <Gmap-Marker
-        v-if="$store.state.place"
+        v-if="$store.state.eventoPlace"
         :clickable="true"
         :draggable="true"
         :animation="4"
-        :position="$store.state.place.geometry.location"
+        :position="{lat: $store.state.eventoData.positionLAT, lng: $store.state.eventoData.positionLNG}"
         ></Gmap-Marker>
       </gmap-map>
 
@@ -341,8 +341,10 @@ export default {
     },
     /* ******************** GOOGLE MAPS ******************** */
     setPlace (place) {
-      this.$store.state.place = place
-      this.$store.state.eventoData.position = this.$store.state.place.geometry.location
+      this.$store.commit('m_eventoPlace', place)
+      console.log(place)
+      this.$store.state.eventoData.positionLAT = this.$store.state.eventoPlace.geometry.location.lat()
+      this.$store.state.eventoData.positionLNG = this.$store.state.eventoPlace.geometry.location.lng()
     },
     /* ******************** BACK BUTTONS ******************** */
     backBtn1 () {
@@ -373,7 +375,7 @@ export default {
       }
     },  
     nextBtn2 () {
-      if (this.$store.state.place != null) {
+      if (this.$store.state.eventoPlace !== null) {
         return this.$store.commit('m_cadastroEvento2', false), this.$store.commit('m_cadastroEvento3', true), this.$store.commit('m_eventoProgressBar', (100/7)*3)
       }
     },
@@ -480,13 +482,8 @@ export default {
       } 
       return yyyy + '-' + mm + '-' + dd
     },
-    eventPosition() {
-      if (this.$store.state.place !== null) {
-        return this.eventPosition = {lat: this.$store.state.place.geometry.location.lat, lng: this.$store.state.place.geometry.location.lng}
-      }
-    },
     mapZoom () {
-      if (this.$store.state.place != null) {
+      if (this.$store.state.eventoPlace !== null) {
         return 15
       } else {
         return 11
@@ -498,7 +495,7 @@ export default {
       }
     },
     form2ok () {
-      if (this.$store.state.place !== null) {
+      if (this.$store.state.eventoPlace !== null) {
         return 'background:rgb(255, 88, 88);cursor:pointer'
       }
     },
