@@ -49,7 +49,7 @@ export default {
       title: 'Escarpas Trip'
     }
   },
-  transition: 'slide-left',
+  /* transition: 'slide-left', */
   data () {
     return {
       positionCarousel: ''
@@ -80,10 +80,14 @@ export default {
     }
   },
   fetch ({ store }) {
-    return firebase.database().ref('eventos').once('value')
-    .then(snapshot => {
-      store.commit('m_eventos', snapshot.val())
-    })
+    /* if (store.state.eventos === null) { */
+      return firebase.database().ref('eventos').once('value')
+      .then(snapshot => {
+        store.commit('m_eventos', snapshot.val())
+      })
+    /* } else {
+      return console.log('eventos já populado')
+    } */
   },
   filters: {
     truncateTitle (value) {

@@ -5,8 +5,8 @@
   "author": "Tarcisio Melo <luiztsmelo@gmail.com>",
   "private": true,
   "engines": {
-    "node": "8.4.0",
-    "npm": "5.3.0"
+    "node": ">= 4.0.0",
+    "npm": ">= 3.0.0"
   },
   "dependencies": {
     "@nuxtjs/pwa": "latest",

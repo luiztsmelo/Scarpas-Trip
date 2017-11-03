@@ -72,8 +72,8 @@ a a:hover, a:visited, a:link, a:active
 .slide-left-leave-active,
 .slide-right-enter 
 {
-  opacity: 1;
-  transform: translateX(100%);
+  opacity: 0;
+  transform: translateX(.95);
 }
 
 .opacity-leave-active,
@@ -86,7 +86,7 @@ a a:hover, a:visited, a:link, a:active
 .evento-enter 
 { 
   opacity: 0;
-  transform: translateY(2.4rem);
+  transform: translateY(2.7rem);
 }
 
 /* ******* TEXT HIGHLIGHT COLOR ******* */
