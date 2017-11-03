@@ -40,6 +40,7 @@
 </template>
 
 <script>
+/* import _ from 'lodash' */
 import supportsWebP from 'supports-webp'
 import { mapstyle } from '../../mixins/mapstyle'
 import * as firebase from 'firebase'
@@ -61,12 +62,17 @@ export default {
   },
   transition: 'evento',
   fetch ({ store, params }) {
-    return firebase.database().ref('eventos/' + params.id).once('value')
-    .then(snapshot => {
-      store.commit('m_evento', snapshot.val())
-      store.commit('m_showNavbar', false)
-      store.commit('m_showFoobar', false)
-    })
+    /* if (store.state.eventos !== null) {
+      const eventodata = _.pick(store.state.eventos, [store.state.eventos.eventoID = store.state.getEventoID])
+      store.commit('m_evento', evento)
+    } else { */
+      return firebase.database().ref('eventos/' + params.id).once('value')
+      .then(snapshot => {
+        store.commit('m_evento', snapshot.val())
+        store.commit('m_showNavbar', false)
+        store.commit('m_showFoobar', false)
+      })
+    /* } */
   },
   methods: {
     imageH (evento) {

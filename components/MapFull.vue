@@ -44,7 +44,7 @@ export default {
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 100;
+  z-index: 998;
   width:  100%;
   height: 100%;
   & .__exit {
@@ -53,7 +53,7 @@ export default {
     position: fixed;
     top: 1.2rem;
     right: 7%;
-    z-index: 101;
+    z-index: 999;
   }
 }
 

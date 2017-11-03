@@ -10,8 +10,8 @@
   },
   "dependencies": {
     "@nuxtjs/pwa": "latest",
-    "axios": "^0.17.0",
     "firebase": "^4.6.0",
+    "lodash": "^4.17.4",
     "nuxt": "latest",
     "supports-webp": "^1.0.5",
     "vue-autosize": "^1.0.2",
