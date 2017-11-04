@@ -16,8 +16,7 @@ module.exports = {
       { hid: 'main-desc', name: 'description', content: 'Planeje sua viagem para Escarpas do Lago de forma simples, agradável e segura.' }
     ],
     link: [
-      { rel: 'icon', type: 'image/png', sizes: '24x24', href: '/brand.png' },
-      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Work+Sans:300,400,500,600,700|Damion' }
+      { rel: 'icon', type: 'image/png', sizes: '24x24', href: '/brand.png' }
     ]
   },
   /*
@@ -30,7 +29,8 @@ module.exports = {
     '~plugins/vue-google-maps',
     '~plugins/vue-numeric',
     '~plugins/vue-croppa',
-    '~plugins/vue-autosize'
+    '~plugins/vue-autosize',
+    '~plugins/webfontloader'
   ],
   /*
   ** Customize the progress-bar color
