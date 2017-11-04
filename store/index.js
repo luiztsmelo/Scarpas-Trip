@@ -181,9 +181,10 @@ const store = () => new Vuex.Store({
           imageH1W: null,
           imageL1W: null
         })
+        commit('m_loader', false)
         commit('m_cadastroEvento7', false)
         commit('m_cadastroEvento0', true)
-        commit('m_loader', false)
+        commit('m_eventoPlace', null)
       })
     }
   }

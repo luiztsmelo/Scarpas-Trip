@@ -24,13 +24,13 @@ module.exports = {
   */
   plugins: [
     '~/plugins/firebase',
-    '~plugins/vue-touch',
     '~plugins/vue-progressive-image',
     '~plugins/vue-google-maps',
     '~plugins/vue-numeric',
     '~plugins/vue-croppa',
     '~plugins/vue-autosize',
-    '~plugins/webfontloader'
+    '~plugins/webfontloader',
+    '~plugins/vue-awesome-swiper'
   ],
   /*
   ** Customize the progress-bar color

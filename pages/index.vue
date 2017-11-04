@@ -16,24 +16,25 @@
           </nuxt-link>  
         </div>
 
-        <div class="carousel-container">
-          <v-touch @panleft="leftCarousel" @panright="rightCarousel" v-bind:pan-options="{ direction: 'horizontal' }">
-            <ul class="carousel-row" :style="'transform: translateX(' + positionCarousel + 'px)'">
+ 
+          
+            <swiper :options="swiperOption" ref="eventosSwiper">
               
-                <li class="card" v-for="evento in $store.state.eventos" :key="evento.eventoID" @click="getEventoID(evento)">
+                <swiper-slide class="card" v-for="evento in $store.state.eventos" :key="evento.eventoID" @click="getEventoID(evento)">
                   <nuxt-link :to="'/eventos/' + evento.eventoID">
                     <progressive-img class="__card-img" :src="imageH(evento)" :placeholder="imageL(evento)" alt="" no-ratio />
                     <span class="__card-date">{{ evento.date }}</span>
                     <h1 class="__card-title">{{ evento.title | truncateTitle }}</h1>
                     <h2 class="__card-subtitle">{{ evento.subtitle | truncateSubtitle }}</h2>
                   </nuxt-link> 
-                </li>
+                </swiper-slide>
               
-            </ul>
-          </v-touch>  
-        </div>
+            </swiper>
+ 
+
 
       </div><!-- EVENTOS -->
+
 
     </div>
   </div>
@@ -52,7 +53,10 @@ export default {
   transition: 'opacity',
   data () {
     return {
-      positionCarousel: ''
+      swiperOption: {
+        slidesPerView: 2,
+        spaceBetween: 14,
+      }
     }
   },
   methods: {
@@ -154,20 +158,14 @@ export default {
           }
         }
       }
-      & .carousel-container {
-        overflow-x: hidden;
-        & .carousel-row {
+      & .swiper-container {
+        & .swiper-wrapper {
           display: flex;
-          flex-flow: row nowrap;
-          height: 14rem;
-          padding: 0;
-          transform: translateX(7%);
+          padding-left: 7%;
           & .card {
             max-width: 145px;
             min-width: 145px;
             cursor: pointer;
-            list-style-type: none;
-            margin-right: .8rem;
             -webkit-tap-highlight-color: rgba(255, 255, 45, 0);
             & .__card-img {
               margin-bottom: .2rem;
