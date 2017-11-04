@@ -21,7 +21,7 @@ export default {
 
 .loader {
   position: fixed;
-  z-index: 10;
+  z-index: 9999;
   width:  100%;
   height: 100%;
   top: 3.3rem;
@@ -37,29 +37,22 @@ export default {
   }
 }
 .spinner {
-  width: 40px;
-  height: 40px;
-  margin: 40px auto;
-  background-color: #0D0D0D;
-  border-radius: 100%;
-  -webkit-animation: sk-pulseScaleOut 1s infinite ease-in-out;
-          animation: sk-pulseScaleOut 1s infinite ease-in-out; }
-
-@-webkit-keyframes sk-pulseScaleOut {
-  0% {
-    -webkit-transform: scale(0);
-            transform: scale(0); }
-  100% {
-    -webkit-transform: scale(1);
-            transform: scale(1);
-    opacity: 0; } }
-
-@keyframes sk-pulseScaleOut {
-  0% {
-    -webkit-transform: scale(0);
-            transform: scale(0); }
-  100% {
-    -webkit-transform: scale(1);
-            transform: scale(1);
-    opacity: 0; } }
+    width: 4.2rem;
+    height: 4.2rem;
+    background-image: url('../static/brand3.svg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    animation-name: spin;
+    animation-duration: 3s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+    opacity: .2;
+  }
+  @keyframes spin { 
+      from { 
+          transform: rotate(0deg); 
+      } to { 
+          transform: rotate(360deg); 
+      }
+  }
 </style>
