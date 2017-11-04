@@ -48,11 +48,12 @@ export default {
   width:  100%;
   height: 100%;
   & .__exit {
-    width:  1.3rem;
+    width:  1.4rem;
     height: auto;
     position: fixed;
-    top: 1.2rem;
-    right: 7%;
+    margin: 1.2rem 7%;
+    top: 0;
+    right: 0;
     z-index: 999;
   }
 }
