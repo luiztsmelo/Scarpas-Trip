@@ -56,6 +56,7 @@ export default {
       swiperOption: {
         slidesPerView: 2,
         spaceBetween: 14,
+        speed: 250
       }
     }
   },
@@ -163,10 +164,9 @@ export default {
           display: flex;
           padding-left: 7%;
           & .card {
-            max-width: 145px;
             min-width: 145px;
             cursor: pointer;
-            -webkit-tap-highlight-color: rgba(255, 255, 45, 0);
+            -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
             & .__card-img {
               margin-bottom: .2rem;
               width: 100%;
