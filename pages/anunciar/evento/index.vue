@@ -407,26 +407,14 @@ export default {
         this.$store.commit('m_eventoID', eventoID)
         const storageRef = firebase.storage().ref('eventos/' + eventoID + '/')
         /* 
-        Upload image 1 LQ WEBP
-        */
-        this.$refs.myCroppa1.generateBlob(blob => {
-          storageRef.child('imageL1W.webp').put(blob)
-          .then(snapshot => {
-            console.log(eventoID + 'L1W' + '.webp')
-            storageRef.child('imageL1W.webp').getDownloadURL().then(url => {
-              this.$store.commit('m_imageL1W', url)
-            })
-          })
-        }, 'image/webp', 0.01)
-        /* 
         Upload image 1 LQ JPEG
         */
         this.$refs.myCroppa1.generateBlob(blob => {
-          storageRef.child('imageL1J.jpeg').put(blob)
+          storageRef.child('imageL1.jpeg').put(blob)
           .then(snapshot => {
-            console.log(eventoID + 'L1J' + '.jpeg')
-            storageRef.child('imageL1J.jpeg').getDownloadURL().then(url => {
-              this.$store.commit('m_imageL1J', url)
+            console.log(eventoID + 'L1' + '.jpeg')
+            storageRef.child('imageL1.jpeg').getDownloadURL().then(url => {
+              this.$store.commit('m_imageL1', url)
             })
           })
         }, 'image/jpeg', 0.01)

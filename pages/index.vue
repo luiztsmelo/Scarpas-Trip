@@ -15,23 +15,17 @@
             </div>
           </nuxt-link>  
         </div>
-
- 
           
-            <swiper :options="swiperOption" ref="eventosSwiper">
-              
-                <swiper-slide class="card" v-for="evento in $store.state.eventos" :key="evento.eventoID" @click="getEventoID(evento)">
-                  <nuxt-link :to="'/eventos/' + evento.eventoID">
-                    <progressive-img class="__card-img" :src="imageH(evento)" :placeholder="imageL(evento)" alt="" no-ratio />
-                    <span class="__card-date">{{ evento.date }}</span>
-                    <h1 class="__card-title">{{ evento.title | truncateTitle }}</h1>
-                    <h2 class="__card-subtitle">{{ evento.subtitle | truncateSubtitle }}</h2>
-                  </nuxt-link> 
-                </swiper-slide>
-              
-            </swiper>
- 
-
+        <swiper :options="swiperOption" ref="eventosSwiper">
+          <swiper-slide class="card" v-for="evento in $store.state.eventos" :key="evento.eventoID" @click="getEventoID(evento)">
+            <nuxt-link :to="'/eventos/' + evento.eventoID">
+              <progressive-img class="__card-img" :src="imageH(evento)" :placeholder="evento.imageL1" no-ratio />
+              <span class="__card-date">{{ evento.date }}</span>
+              <h1 class="__card-title">{{ evento.title | truncateTitle }}</h1>
+              <h2 class="__card-subtitle">{{ evento.subtitle | truncateSubtitle }}</h2>
+            </nuxt-link> 
+          </swiper-slide>
+        </swiper>
 
       </div><!-- EVENTOS -->
 
@@ -69,13 +63,6 @@ export default {
         return evento.imageH1W
       } else {
         return evento.imageH1J
-      }
-    },
-    imageL (evento) {
-      if (supportsWebP) {
-        return evento.imageL1W
-      } else {
-        return evento.imageL1J
       }
     },
     leftCarousel (e) {
