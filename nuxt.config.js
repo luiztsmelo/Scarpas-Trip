@@ -45,8 +45,12 @@ module.exports = {
   */
   manifest: {
     name: 'Escarpas Trip',
+    ogTitle: 'Escarpas Trip',
+    description: 'Planeje sua viagem para Escarpas do Lago de forma simples, agradável e segura.',
+    ogDescription: 'Planeje sua viagem para Escarpas do Lago de forma simples, agradável e segura.',
     display: 'fullscreen',
-    lang: 'pt-br'
+    lang: 'pt-br',
+    iconSrc: './static/brand.png'
   },
   /*
   ** Modules
