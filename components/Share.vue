@@ -6,12 +6,12 @@
 
         <div class="share-item" @click="whatsappShare">
           <img class="__img whatsapp" src="../assets/img/whatsapp.svg" alt="">
-          <a class="__text" ref="whatsapp" :href="'whatsapp://send?text= http://escarpas-trip.herokuapp.com/eventos/' + this.$route.params.id">Whatsapp</a>
+          <a class="__text" ref="whatsapp" :href="'whatsapp://send?text= https://www.escarpastrip.com/' + this.$route.params.id">Whatsapp</a>
         </div>
 
         <div class="share-item" @click="messengerShare">
           <img class="__img messenger" src="../assets/img/messenger.svg" alt="">
-          <a class="__text" ref="messenger" :href="'fb-messenger://share/?link= http://escarpas-trip.herokuapp.com/eventos/' + this.$route.params.id">Messenger</a>
+          <a class="__text" ref="messenger" :href="'fb-messenger://share/?link= https://www.escarpastrip.com/' + this.$route.params.id">Messenger</a>
         </div>
 
 
