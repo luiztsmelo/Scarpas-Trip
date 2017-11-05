@@ -49,13 +49,13 @@ export default {
   mixins: [mapstyle],
   head () {
     return {
-      title: this.evento.title + ' ‒ ' + 'Escarpas Trip',
+      title: this.$store.state.evento.title + ' ‒ ' + 'Escarpas Trip',
       meta: [
-        { hid: 'description', name: 'description', content: this.evento.subtitle },
+        { hid: 'description', name: 'description', content: this.$store.state.evento.subtitle },
         { property: 'og:url', content: 'http://escarpas-trip.herokuapp.com/eventos/' + this.$route.params.id },
-        { property: 'og:title', content: this.evento.title },
-        { property: 'og:description', content: this.evento.subtitle },
-        { property: 'og:image', content: this.evento.imageH1J },
+        { property: 'og:title', content: this.$store.state.evento.title },
+        { property: 'og:description', content: this.$store.state.evento.subtitle },
+        { property: 'og:image', content: this.$store.state.evento.imageH1J },
         { property: 'og:site_name', content: 'Escarpas Trip' }
       ]
     }
