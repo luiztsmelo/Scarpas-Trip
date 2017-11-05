@@ -2,8 +2,6 @@
   <transition name="foobar-animation">  
     <div class="foobar" v-show="showFoobar">
       <div class="foobar-body">
-        
-        
 
           <nuxt-link to="/estadia">
           <div class="foobar-box" @click="onFoobar1=false, onFoobar2=true, onFoobar3=true, onFoobar4=true, onFoobar5=true">
@@ -122,6 +120,12 @@ export default {
         transform: scale(1);
       }
     }
+  }
+}
+
+@media (min-width: 1281px) {
+  .foobar {
+    display: none;
   }
 }
 

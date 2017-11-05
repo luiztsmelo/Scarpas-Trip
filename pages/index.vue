@@ -56,7 +56,7 @@ export default {
       swiperOption: {
         slidesPerView: 2,
         spaceBetween: 14,
-        speed: 250
+        speed: 300
       }
     }
   },
@@ -165,13 +165,14 @@ export default {
           padding-left: 7%;
           & .card {
             min-width: 145px;
+            max-width: 145px;
             cursor: pointer;
             -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
             & .__card-img {
               margin-bottom: .2rem;
               width: 100%;
               min-height: 97px;
-              border-radius: 4px;
+              border-radius: 3px;
             }
             & .__card-date {
               font-size: 12px;
@@ -187,6 +188,26 @@ export default {
               font-size: 16px;
               font-weight: 300;
             }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: 1281px) {
+  .home {
+    & .home-body {
+      & .category-container {
+        & .title-row {
+          padding: 0 12% 1.5rem 12%;
+          & .__title {
+            font-size: 29px;
+          }
+        }
+        & .swiper-container {
+          & .swiper-wrapper {
+            padding-left: 12%;
           }
         }
       }
