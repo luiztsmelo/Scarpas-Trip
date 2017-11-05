@@ -55,7 +55,7 @@ export default {
         { property: 'og:url', content: 'http://escarpas-trip.herokuapp.com/eventos/' + this.$route.params.id },
         { property: 'og:title', content: this.evento.title },
         { property: 'og:description', content: this.evento.subtitle },
-        { property: 'og:image', content: this.evento.imageH1 },
+        { property: 'og:image', content: this.evento.imageH1J },
         { property: 'og:site_name', content: 'Escarpas Trip' }
       ]
     }

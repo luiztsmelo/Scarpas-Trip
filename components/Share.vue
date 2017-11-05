@@ -5,12 +5,12 @@
         <h1 class="__title">Compartilhar</h1>
 
         <div class="share-item" @click="whatsappShare">
-          <img class="__img whatsapp" src="../assets/img/whatsapp.svg" alt="">
+          <img class="__img whatsapp" src="../assets/img/whatsapp.svg">
           <a class="__text" ref="whatsapp" :href="'whatsapp://send?text= https://www.escarpastrip.com/' + this.$route.params.id">Whatsapp</a>
         </div>
 
         <div class="share-item" @click="messengerShare">
-          <img class="__img messenger" src="../assets/img/messenger.svg" alt="">
+          <img class="__img messenger" src="../assets/img/messenger.svg">
           <a class="__text" ref="messenger" :href="'fb-messenger://share/?link= https://www.escarpastrip.com/' + this.$route.params.id">Messenger</a>
         </div>
 
