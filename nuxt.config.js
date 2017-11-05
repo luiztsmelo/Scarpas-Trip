@@ -13,7 +13,7 @@ module.exports = {
   head: {
     meta: [
       { name: 'viewport', content: 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' },
-      { hid: 'main-desc', name: 'description', content: 'Planeje sua viagem para Escarpas do Lago de forma simples, agradável e segura.' }
+      { hid: 'description', name: 'description', content: 'Planeje sua viagem para Escarpas do Lago de forma simples, agradável e segura.' }
     ],
     link: [
       { rel: 'icon', type: 'image/png', sizes: '24x24', href: '/brand.png' }

@@ -89,7 +89,7 @@ export default {
     padding: 0 12%;
     & .navbar-body {
       & .__brand-name {
-        font-size: 28px;
+        font-size: 29px;
       }
     }
   }
