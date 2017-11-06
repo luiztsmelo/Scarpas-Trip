@@ -95,11 +95,9 @@ export default {
   data () {
     return {
       markerIcon: {
-        /* url: 'https://firebasestorage.googleapis.com/v0/b/escarpas-trip.appspot.com/o/utils%2FmarkerEvento.svg?alt=media&token=a99c12a3-0843-411e-b7a7-0d3ccfcf9070', */
-        url: 'https://firebasestorage.googleapis.com/v0/b/escarpas-trip.appspot.com/o/utils%2Fmarker.png?alt=media&token=a1a735a0-a6a7-4537-9ae2-8c06f9b71ec5',
-        // This marker is 20 pixels wide by 32 pixels high.
-        size: new google.maps.Size(38, 38),
-   
+        url: 'https://firebasestorage.googleapis.com/v0/b/escarpas-trip.appspot.com/o/utils%2Fflag.png?alt=media&token=af890359-bc6c-45d9-a9c2-83a9e4eab353',
+        size: new google.maps.Size(37, 37),
+        anchor: new google.maps.Point(3, 37)
       }
     }
   },
