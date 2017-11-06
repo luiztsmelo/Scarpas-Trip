@@ -12,10 +12,12 @@
 
 
 
+
     <!-- ####### IMAGE ####### -->
     <div class="image-box">
       <img class="__image1" :src="imageH(evento)">
     </div><!-- ####### IMAGE ####### -->
+
 
 
 
@@ -24,6 +26,7 @@
       <h1 class="__title">{{ evento.title }}</h1>
       <h1 class="__subtitle">{{ evento.subtitle }}</h1>
     </div><!-- ####### HEADING ####### -->
+
 
 
 
@@ -44,16 +47,17 @@
     <div class="ingresso-box">
 
       <div class="gender-box">
-        <img class="__img" src="../../assets/img/woman2.svg">
+        <img class="__img" src="../../assets/img/woman.svg">
         <h1 class="__valor-ingresso">R${{ evento.valorIngresso }}</h1>
       </div>
 
       <div class="gender-box">
-        <img class="__img" src="../../assets/img/man2.svg">
+        <img class="__img" src="../../assets/img/man.svg">
         <h1 class="__valor-ingresso">R${{ evento.valorIngresso }}</h1>
       </div>
       
     </div><!-- ####### VALOR DO INGRESSO ####### -->
+
 
 
 
@@ -69,9 +73,12 @@
       @click="$store.commit('m_eventoMap', evento), enterFullscreen()">
         <Gmap-Marker
         :position="{lat: evento.positionLAT, lng: evento.positionLNG}"
+        :icon="markerIcon"
         ></Gmap-Marker>
       </gmap-map>
     </div><!-- ####### LOCAL ####### -->
+    
+
     
 
   </div>
@@ -85,6 +92,17 @@ import * as firebase from 'firebase'
 
 export default {
   mixins: [mapstyle],
+  data () {
+    return {
+      markerIcon: {
+        /* url: 'https://firebasestorage.googleapis.com/v0/b/escarpas-trip.appspot.com/o/utils%2FmarkerEvento.svg?alt=media&token=a99c12a3-0843-411e-b7a7-0d3ccfcf9070', */
+        url: 'https://firebasestorage.googleapis.com/v0/b/escarpas-trip.appspot.com/o/utils%2Fmarker.png?alt=media&token=a1a735a0-a6a7-4537-9ae2-8c06f9b71ec5',
+        // This marker is 20 pixels wide by 32 pixels high.
+        size: new google.maps.Size(38, 38),
+   
+      }
+    }
+  },
   head () {
     return {
       title: this.$store.state.evento.title + ' ‒ ' + 'Escarpas Trip',
