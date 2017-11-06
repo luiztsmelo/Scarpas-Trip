@@ -245,11 +245,11 @@ export default {
     flex-flow: row;
     padding: 0 6%;
     & .gender-box {
-      padding: 0 4% 0 0;
+      padding: 0 5% 0 0;
       display: flex;
       align-items: center;
       & .__img {
-        margin-right: .4rem;
+        margin-right: .3rem;
         width: 1.7rem;
         height: auto;
       }
