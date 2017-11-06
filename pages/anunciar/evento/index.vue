@@ -29,7 +29,7 @@
     
 
 
-    <!-- ********** CADASTRO EVENTO Pg.1 ********** -->
+    <!-- ########## CADASTRO EVENTO Pg.1 ########## -->
     <form class="cadastro-evento" v-show="cadastroEvento1">
 
       <h1 class="__form-title">Qual será a Data e Horário do evento?</h1>
@@ -51,18 +51,19 @@
         </div>
       </div> 
     
-    </form><!-- ********** CADASTRO EVENTO Pg.1 ********** -->
+    </form><!-- ########## CADASTRO EVENTO Pg.1 ########## -->
 
 
 
 
-    <!-- ********** CADASTRO EVENTO Pg.2 ********** -->
+    <!-- ########## CADASTRO EVENTO Pg.2 ########## -->
     <form class="cadastro-evento" v-show="cadastroEvento2">
 
       <h1 class="__form-title">Qual será o Local?</h1>
 
-      <gmap-autocomplete class="__gmap-autocomplete"
-      type="search"
+      <gmap-autocomplete 
+      v-if="cadastroEvento2"
+      class="__gmap-autocomplete"
       placeholder="Digite o endereço aqui"
       @place_changed="setPlace">
       </gmap-autocomplete>
@@ -89,19 +90,19 @@
         </div>
       </div> 
     
-    </form><!-- ********** CADASTRO EVENTO Pg.2 ********** -->
+    </form><!-- ########## CADASTRO EVENTO Pg.2 ########## -->
 
 
 
 
-    <!-- ********** CADASTRO EVENTO Pg.3 ********** -->
+    <!-- ########## CADASTRO EVENTO Pg.3 ########## -->
     <form class="cadastro-evento" v-show="cadastroEvento3">
 
       <h1 class="__form-title">Qual será o Valor do Ingresso?</h1>
 
       <div class="item-form">
         <label>1º Lote</label>
-        <money v-model="$store.state.eventoData.valorIngresso" v-bind="money"></money>
+        <money v-model="$store.state.eventoData.valorIngresso"></money>
       </div>  
     
       <button type="button" @click="" class="__image-input-btn">Mais lotes?</button>
@@ -114,12 +115,12 @@
         </div>
       </div> 
     
-    </form><!-- ********** CADASTRO EVENTO Pg.3 ********** -->
+    </form><!-- ########## CADASTRO EVENTO Pg.3 ########## -->
 
 
 
 
-    <!-- ********** CADASTRO EVENTO Pg.4 ********** -->
+    <!-- ########## CADASTRO EVENTO Pg.4 ########## -->
     <form class="cadastro-evento" v-show="cadastroEvento4">
 
       <h1 class="__form-title">Adicione Imagens e Vídeo</h1>
@@ -193,12 +194,12 @@
         </div>
       </div> 
     
-    </form><!-- ********** CADASTRO EVENTO Pg.4 ********** -->
+    </form><!-- ########## CADASTRO EVENTO Pg.4 ########## -->
 
 
 
 
-    <!-- ********** CADASTRO EVENTO Pg.5 ********** -->
+    <!-- ########## CADASTRO EVENTO Pg.5 ########## -->
     <form class="cadastro-evento" v-show="cadastroEvento5">
 
       <h1 class="__form-title">Dê um Título legal</h1>  
@@ -220,12 +221,12 @@
         </div>
       </div> 
 
-    </form> <!-- ********** CADASTRO EVENTO Pg.5 ********** -->
+    </form> <!-- ########## CADASTRO EVENTO Pg.5 ########## -->
 
 
 
 
-    <!-- ********** CADASTRO EVENTO Pg.6 ********** -->
+    <!-- ########## CADASTRO EVENTO Pg.6 ########## -->
     <form class="cadastro-evento" v-show="cadastroEvento6">
 
       <h1 class="__form-title">Descreva seu evento</h1>   
@@ -247,12 +248,12 @@
         </div>
       </div> 
 
-    </form> <!-- ********** CADASTRO EVENTO Pg.6 ********** -->
+    </form> <!-- ########## CADASTRO EVENTO Pg.6 ########## -->
 
 
 
 
-    <!-- ********** CADASTRO EVENTO Pg.7 ********** -->
+    <!-- ########## CADASTRO EVENTO Pg.7 ########## -->
     <form class="cadastro-evento" v-show="cadastroEvento7">
 
       <h1 class="__form-title">Investimento</h1>
@@ -264,7 +265,7 @@
         </div>
       </div>
     
-    </form><!-- ********** CADASTRO EVENTO Pg.7 ********** -->
+    </form><!-- ########## CADASTRO EVENTO Pg.7 ########## -->
   
 
 
