@@ -95,9 +95,8 @@ export default {
   data () {
     return {
       markerIcon: {
-        url: 'https://firebasestorage.googleapis.com/v0/b/escarpas-trip.appspot.com/o/utils%2Fflag.png?alt=media&token=af890359-bc6c-45d9-a9c2-83a9e4eab353',
-        size: new google.maps.Size(37, 37),
-        anchor: new google.maps.Point(3, 37)
+        url: 'https://firebasestorage.googleapis.com/v0/b/escarpas-trip.appspot.com/o/utils%2Fmarker.svg?alt=media&token=2473df5b-9928-46f0-b603-22fb4673d285',
+        scaledSize: new google.maps.Size(37, 37)
       }
     }
   },
