@@ -60,10 +60,6 @@ module.exports = {
     hostname: 'https://www.escarpastrip.com',
     cacheTime: 1000 * 60 * 15,
     generate: true, // Enable me when using nuxt generate
-    exclude: [
-      '/secret',
-      '/admin/**'
-    ],
     routes: [
       '/eventos/',
       '/eventos/:id',
