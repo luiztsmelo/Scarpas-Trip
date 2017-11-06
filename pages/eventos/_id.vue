@@ -31,7 +31,7 @@
     <h1 class="box-title">Data e Horário</h1>
 
     <div class="date-hour-box">
-      <h1 class="__date-hour">{{ evento.date }} - </h1>
+      <h1 class="__date-hour">{{ evento.date}}&#160;-&#160;</h1>
       <h1 class="__date-hour">{{ evento.hour }}</h1>
     </div>
     
@@ -180,7 +180,7 @@ export default {
   }
   & .box-title {
     font-weight: 500;
-    font-size: 22px;
+    font-size: 20px;
     padding: 3rem 6% 1rem 6%;
   }
   & .image-box {
@@ -214,5 +214,11 @@ export default {
 
 .onShare {
   filter: brightness(30%);
+}
+
+@media (min-width: 1281px) {
+  .eventos_id {
+    /* padding: 0 12%; */
+  }
 }
 </style>

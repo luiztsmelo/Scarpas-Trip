@@ -301,7 +301,7 @@ export default {
         const y = value.slice(0, 4)
         const m = value.slice(5, 7)
         const d = value.slice(8, 10)
-        this.$store.state.eventoData.date = d + '-' + m + '-' + y
+        this.$store.state.eventoData.date = d + '/' + m + '/' + y
       }
     }
   },
