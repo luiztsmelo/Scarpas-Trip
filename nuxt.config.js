@@ -59,7 +59,7 @@ module.exports = {
     path: '/sitemap.xml',
     hostname: 'https://www.escarpastrip.com',
     cacheTime: 1000 * 60 * 15,
-    generate: false, // Enable me when using nuxt generate
+    generate: true, // Enable me when using nuxt generate
     exclude: [
       '/secret',
       '/admin/**'
