@@ -11,20 +11,40 @@
     </div>
 
 
+
+    <!-- ####### IMAGE ####### -->
     <div class="image-box">
       <img class="__image1" :src="imageH(evento)">
-    </div>
+    </div><!-- ####### IMAGE ####### -->
 
 
+
+    <!-- ####### HEADING ####### -->
     <div class="heading-box">
       <h1 class="__title">{{ evento.title }}</h1>
       <h1 class="__subtitle">{{ evento.subtitle }}</h1>
+    </div><!-- ####### HEADING ####### -->
+
+
+
+    <!-- ####### DATA E HORÁRIO ####### -->
+    <h1 class="box-title">Data e Horário</h1>
+
+    <div class="date-hour-box">
+      <h1 class="__date-hour">{{ evento.date }} - </h1>
+      <h1 class="__date-hour">{{ evento.hour }}</h1>
     </div>
+    
 
-    <h1 class="box-title">Horário</h1>
 
+
+    <!-- ####### VALOR DO INGRESSO ####### -->
     <h1 class="box-title">Valor do Ingresso</h1>
 
+
+
+
+    <!-- ####### LOCAL ####### -->
     <h1 class="box-title">Local</h1>
 
     <div class="local-box" >
@@ -38,8 +58,9 @@
         :position="{lat: evento.positionLAT, lng: evento.positionLNG}"
         ></Gmap-Marker>
       </gmap-map>
-    </div>
+    </div><!-- ####### LOCAL ####### -->
     
+
   </div>
 </template>
 
@@ -127,7 +148,6 @@ export default {
   flex-flow: column;
   background-color: white;
   transition: all .3s cubic-bezier(.15,.97,.43,.93);
-  height: 100vh;
   & .backbar {
     position: fixed;
     top: 0;
@@ -178,6 +198,14 @@ export default {
       font-weight: 600;
     }
     & .__subtitle {
+      font-size: 19px;
+      font-weight: 300;
+    }
+  }
+  & .date-hour-box {
+    display: flex;
+    padding: 0 6%;
+    & .__date-hour {
       font-size: 19px;
       font-weight: 300;
     }
