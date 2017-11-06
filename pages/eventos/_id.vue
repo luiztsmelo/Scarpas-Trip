@@ -33,7 +33,7 @@
     <div class="date-hour-box">
       <h1 class="__date-hour">{{ evento.date}}&#160;-&#160;</h1>
       <h1 class="__date-hour">{{ evento.hour }}</h1>
-    </div>
+    </div><!-- ####### DATA E HORÁRIO ####### -->
     
 
 
@@ -41,6 +41,19 @@
     <!-- ####### VALOR DO INGRESSO ####### -->
     <h1 class="box-title">Valor do Ingresso</h1>
 
+    <div class="ingresso-box">
+
+      <div class="gender-box">
+        <img class="__img" src="../../assets/img/woman.svg">
+        <h1 class="__valor-ingresso">R${{ evento.valorIngresso }}</h1>
+      </div>
+
+      <div class="gender-box">
+        <img class="__img" src="../../assets/img/man.svg">
+        <h1 class="__valor-ingresso">R${{ evento.valorIngresso }}</h1>
+      </div>
+      
+    </div><!-- ####### VALOR DO INGRESSO ####### -->
 
 
 
@@ -148,6 +161,9 @@ export default {
   flex-flow: column;
   background-color: white;
   transition: all .3s cubic-bezier(.15,.97,.43,.93);
+
+
+  /* ####### BACKBAR ####### */
   & .backbar {
     position: fixed;
     top: 0;
@@ -177,19 +193,27 @@ export default {
         -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
       }
     }
-  }
+  }/* ####### BACKBAR ####### */
+
+
   & .box-title {
     font-weight: 500;
     font-size: 20px;
     padding: 3rem 6% 1rem 6%;
   }
+
+
+  /* ####### IMAGE BOX ####### */
   & .image-box {
     position: relative;
     & .__image1 {
       width: 100%;
       height: auto;
     }
-  }
+  }/* ####### IMAGE BOX ####### */
+
+
+  /* ####### HEADING BOX ####### */
   & .heading-box {
     padding: 0 6%;
     & .__title {
@@ -201,7 +225,10 @@ export default {
       font-size: 19px;
       font-weight: 300;
     }
-  }
+  }/* ####### HEADING BOX ####### */
+
+
+  /* ####### DATA E HORÁRIO ####### */
   & .date-hour-box {
     display: flex;
     padding: 0 6%;
@@ -209,7 +236,32 @@ export default {
       font-size: 19px;
       font-weight: 300;
     }
-  }
+  }/* ####### DATA E HORÁRIO ####### */
+
+
+  /* ####### VALOR INGRESSO ####### */
+  & .ingresso-box {
+    display: flex;
+    flex-flow: row;
+    padding: 0 6%;
+    & .gender-box {
+      padding: 0 4% 0 0;
+      display: flex;
+      align-items: center;
+      & .__img {
+        margin-right: .4rem;
+        width: 1.7rem;
+        height: auto;
+      }
+      & .__valor-ingresso {
+        font-size: 19px;
+        font-weight: 300;
+      }
+    }
+    
+  }/* ####### VALOR INGRESSO ####### */
+
+
 }
 
 .onShare {

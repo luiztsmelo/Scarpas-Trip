@@ -3,7 +3,7 @@
 
     <div class="home-body">
 
-      <!-- EVENTOS -->
+      <!-- ####### EVENTOS ####### -->
       <div class="category-container">
 
         <div class="title-row">
@@ -27,7 +27,7 @@
           </swiper-slide>
         </swiper>
 
-      </div><!-- EVENTOS -->
+      </div><!-- ####### EVENTOS ####### -->
 
 
     </div>
