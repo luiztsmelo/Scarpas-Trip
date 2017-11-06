@@ -181,7 +181,7 @@ export default {
   & .box-title {
     font-weight: 500;
     font-size: 22px;
-    padding: 2rem 6% 1rem 6%;
+    padding: 3rem 6% 1rem 6%;
   }
   & .image-box {
     position: relative;
