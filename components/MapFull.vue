@@ -46,8 +46,8 @@ export default {
   top: 0;
   left: 0;
   z-index: 998;
-  width:  100vh;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   & .__exit {
     width:  1.4rem;
     height: auto;

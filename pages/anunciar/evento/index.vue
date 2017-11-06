@@ -2,7 +2,7 @@
   <div class="anunciar-evento">
 
     <!-- PLANO EVENTO -->
-    <div class="plano-evento" v-show="cadastroEvento0">
+    <div class="plano-evento" v-show="$store.state.cadastroEvento0">
       
       <h1 class="__title">Divulgação: a chave para o sucesso do seu evento!</h1>
 
@@ -23,14 +23,13 @@
     </div><!-- PLANO CONTAINER -->
 
 
-    <div class="progress-bar" v-show="!cadastroEvento0" :style="'width:' + $store.state.eventoProgressBar + '%'"></div>
+    <div class="progress-bar" v-show="!$store.state.cadastroEvento0" :style="'width:' + $store.state.eventoProgressBar + '%'"></div>
 
 
     
 
-
-    <!-- ########## CADASTRO EVENTO Pg.1 ########## -->
-    <form class="cadastro-evento" v-show="cadastroEvento1">
+    <!-- ########## DATA E HORÁRIO PG.1 ########## -->
+    <form class="cadastro-evento" v-show="$store.state.cadastroEvento1">
 
       <h1 class="__form-title">Qual será a Data e Horário do evento?</h1>
 
@@ -51,28 +50,27 @@
         </div>
       </div> 
     
-    </form><!-- ########## CADASTRO EVENTO Pg.1 ########## -->
+    </form><!-- ########## DATA E HORÁRIO PG.1 ########## -->
 
 
 
 
-    <!-- ########## CADASTRO EVENTO Pg.2 ########## -->
-    <form class="cadastro-evento" v-show="cadastroEvento2">
+    <!-- ########## LOCAL PG.2 ########## -->
+    <form class="cadastro-evento" v-show="$store.state.cadastroEvento2">
 
       <h1 class="__form-title">Qual será o Local?</h1>
 
       <gmap-autocomplete 
-      v-if="cadastroEvento2"
       class="__gmap-autocomplete"
       placeholder="Digite o endereço aqui"
       @place_changed="setPlace">
       </gmap-autocomplete>
 
       <gmap-map
-      v-if="cadastroEvento2"
+      v-if="$store.state.cadastroEvento2"
       :center="{lat: $store.state.eventoData.positionLAT, lng: $store.state.eventoData.positionLNG}"
       :zoom="mapZoom"
-      :options="{styles: styles}"
+      :options="{styles: styles, mapTypeControl:false, streetViewControl:false}"
       style="width: 100%; height: 260px">
         <Gmap-Marker
         v-if="$store.state.eventoPlace"
@@ -90,13 +88,13 @@
         </div>
       </div> 
     
-    </form><!-- ########## CADASTRO EVENTO Pg.2 ########## -->
+    </form><!-- ########## LOCAL PG.2 ########## -->
 
 
 
 
-    <!-- ########## CADASTRO EVENTO Pg.3 ########## -->
-    <form class="cadastro-evento" v-show="cadastroEvento3">
+    <!-- ########## VALOR DO INGRESSO PG.3 ########## -->
+    <form class="cadastro-evento" v-show="$store.state.cadastroEvento3">
 
       <h1 class="__form-title">Qual será o Valor do Ingresso?</h1>
 
@@ -115,13 +113,13 @@
         </div>
       </div> 
     
-    </form><!-- ########## CADASTRO EVENTO Pg.3 ########## -->
+    </form><!-- ########## VALOR DO INGRESSO PG.3 ########## -->
 
 
 
 
-    <!-- ########## CADASTRO EVENTO Pg.4 ########## -->
-    <form class="cadastro-evento" v-show="cadastroEvento4">
+    <!-- ########## IMAGEM E VÍDEOS PG.4 ########## -->
+    <form class="cadastro-evento" v-show="$store.state.cadastroEvento4">
 
       <h1 class="__form-title">Adicione Imagens e Vídeo</h1>
 
@@ -194,13 +192,13 @@
         </div>
       </div> 
     
-    </form><!-- ########## CADASTRO EVENTO Pg.4 ########## -->
+    </form><!-- ########## IMAGEM E VÍDEOS PG.4 ########## -->
 
 
 
 
-    <!-- ########## CADASTRO EVENTO Pg.5 ########## -->
-    <form class="cadastro-evento" v-show="cadastroEvento5">
+    <!-- ########## TÍTULO PG.5 ########## -->
+    <form class="cadastro-evento" v-show="$store.state.cadastroEvento5">
 
       <h1 class="__form-title">Dê um Título legal</h1>  
       
@@ -221,13 +219,13 @@
         </div>
       </div> 
 
-    </form> <!-- ########## CADASTRO EVENTO Pg.5 ########## -->
+    </form><!-- ########## TÍTULO PG.5 ########## -->
 
 
 
 
-    <!-- ########## CADASTRO EVENTO Pg.6 ########## -->
-    <form class="cadastro-evento" v-show="cadastroEvento6">
+    <!-- ########## DESCRIÇÃO PG.6 ########## -->
+    <form class="cadastro-evento" v-show="$store.state.cadastroEvento6">
 
       <h1 class="__form-title">Descreva seu evento</h1>   
 
@@ -248,13 +246,13 @@
         </div>
       </div> 
 
-    </form> <!-- ########## CADASTRO EVENTO Pg.6 ########## -->
+    </form><!-- ########## DESCRIÇÃO PG.6 ########## -->
 
 
 
 
-    <!-- ########## CADASTRO EVENTO Pg.7 ########## -->
-    <form class="cadastro-evento" v-show="cadastroEvento7">
+    <!-- ########## INVESTIMENTO PG.7 ########## -->
+    <form class="cadastro-evento" v-show="$store.state.cadastroEvento7">
 
       <h1 class="__form-title">Investimento</h1>
 
@@ -265,7 +263,7 @@
         </div>
       </div>
     
-    </form><!-- ########## CADASTRO EVENTO Pg.7 ########## -->
+    </form><!-- ########## INVESTIMENTO PG.7 ########## -->
   
 
 
@@ -511,30 +509,6 @@ export default {
       if (1<2) {
         return 'background:rgb(255, 88, 88);cursor:pointer'
       }
-    },
-    cadastroEvento0 () {
-      return this.$store.state.cadastroEvento0
-    },
-    cadastroEvento1 () {
-      return this.$store.state.cadastroEvento1
-    },
-    cadastroEvento2 () {
-      return this.$store.state.cadastroEvento2
-    },
-    cadastroEvento3 () {
-      return this.$store.state.cadastroEvento3
-    },
-    cadastroEvento4 () {
-      return this.$store.state.cadastroEvento4
-    },
-    cadastroEvento5 () {
-      return this.$store.state.cadastroEvento5
-    },
-    cadastroEvento6 () {
-      return this.$store.state.cadastroEvento6
-    },
-    cadastroEvento7 () {
-      return this.$store.state.cadastroEvento7
     }
   },
   beforeRouteLeave (to, from, next) {
@@ -765,17 +739,4 @@ export default {
   }
 }
 
-/* TRANSITIONS */
-
-.cadastro-evento-animation-enter-active, .cadastro-evento-animation-leave-active {
-  transition: all .3s ease;
-}
-.cadastro-evento-animation-enter {
-  opacity: 0;
-  transform: translateY(100%);
-}
-.cadastro-evento-animation-leave-to {
-  opacity: 1;
-  transform: translateY(-100%);
-}
 </style>
