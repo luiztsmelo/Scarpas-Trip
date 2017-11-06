@@ -11,6 +11,7 @@ module.exports = {
   ** Common headers are already provided by @nuxtjs/pwa preset
   */
   head: {
+    title: 'Escarpas Trip: Imóveis, Passeios, Atrações, Restaurantes e Eventos em Escarpas do Lago',
     meta: [
       { name: 'viewport', content: 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' },
       { hid: 'description', name: 'description', content: 'Planeje sua viagem para Escarpas do Lago de forma simples, agradável e segura.' },

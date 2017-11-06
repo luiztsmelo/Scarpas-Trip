@@ -41,7 +41,6 @@ import * as firebase from 'firebase'
 export default {
   head () {
     return {
-      title: 'Escarpas Trip',
       meta: [
         { hid: 'description', name: 'description', content: 'Planeje sua viagem para Escarpas do Lago de forma simples, agradável e segura.' }
       ]

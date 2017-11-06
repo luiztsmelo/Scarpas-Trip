@@ -10,16 +10,20 @@
       </div>
     </div>
 
+
     <div class="image-box">
       <img class="__image1" :src="imageH(evento)">
     </div>
 
 
-    <div class="heading-box" >
+    <div class="heading-box">
       <h1 class="__title">{{ evento.title }}</h1>
       <h1 class="__subtitle">{{ evento.subtitle }}</h1>
     </div>
 
+    <h1 class="box-title">Horário</h1>
+
+    <h1 class="box-title">Valor do Ingresso</h1>
 
     <h1 class="box-title">Local</h1>
 
@@ -156,7 +160,7 @@ export default {
   }
   & .box-title {
     font-weight: 500;
-    font-size: 25px;
+    font-size: 22px;
     padding: 2rem 6% 1rem 6%;
   }
   & .image-box {
