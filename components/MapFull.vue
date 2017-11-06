@@ -9,6 +9,7 @@
       style="width: 100%; height: 100%">
       <Gmap-Marker
       :position="{lat: eventoMap.positionLAT, lng: eventoMap.positionLNG}"
+      :icon="markerIcon"
       ></Gmap-Marker>
     </gmap-map>
   </div>  
@@ -18,6 +19,14 @@
 import { mapstyle } from '../mixins/mapstyle'
 export default {
   mixins: [mapstyle],
+  data () {
+    return {
+      markerIcon: {
+        url: 'https://firebasestorage.googleapis.com/v0/b/escarpas-trip.appspot.com/o/utils%2Fmarker.svg?alt=media&token=2473df5b-9928-46f0-b603-22fb4673d285',
+        scaledSize: new google.maps.Size(37, 37)
+      }
+    }
+  },
   methods: {
     exitFullscreen () {
       if (document.cancelFullScreen) {
@@ -49,7 +58,7 @@ export default {
   width: 100%;
   height: 100%;
   & .__exit {
-    width:  1.4rem;
+    width:  1.3rem;
     height: auto;
     position: fixed;
     margin: 1.2rem 7%;

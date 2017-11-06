@@ -78,6 +78,7 @@
         :draggable="true"
         :animation="4"
         :position="{lat: $store.state.eventoData.positionLAT, lng: $store.state.eventoData.positionLNG}"
+        :icon="markerIcon"
         ></Gmap-Marker>
       </gmap-map>
 
@@ -287,6 +288,10 @@ export default {
     return {
       title: '',/* Vue Autosize */
       subtitle: '',/* Vue Autosize */
+      markerIcon: {
+        url: 'https://firebasestorage.googleapis.com/v0/b/escarpas-trip.appspot.com/o/utils%2Fmarker.svg?alt=media&token=2473df5b-9928-46f0-b603-22fb4673d285',
+        scaledSize: new google.maps.Size(37, 37)
+      },
       showCroppaModal1: false,
       showCroppaModal2: false,
       date: null,

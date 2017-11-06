@@ -48,7 +48,7 @@
 
       <div class="gender-box">
         <img class="__img" src="../../assets/img/woman.svg">
-        <h1 class="__valor-ingresso">R${{ evento.valorIngresso }}</h1>
+        <h1 class="__valor-ingresso" style="transform:translateX(2px)">R${{ evento.valorIngresso }}</h1>
       </div>
 
       <div class="gender-box">
@@ -260,7 +260,7 @@ export default {
     flex-flow: row;
     padding: 0 6%;
     & .gender-box {
-      padding: 0 1.3rem 0 0;
+      padding: 0 1.4rem 0 0;
       display: flex;
       align-items: center;
       & .__img {
