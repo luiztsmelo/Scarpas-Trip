@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@nuxtjs/pwa": "latest",
+    "@nuxtjs/sitemap": "0.0.3",
     "firebase": "^4.6.0",
     "lodash": "^4.17.4",
     "nuxt": "latest",

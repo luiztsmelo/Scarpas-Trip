@@ -52,10 +52,34 @@ module.exports = {
     lang: 'pt-br',
     iconSrc: './static/brand.png'
   },
+ /*
+  ** Sitemap
+  */
+  sitemap: {
+    path: '/sitemap.xml',
+    hostname: 'https://www.escarpastrip.com',
+    cacheTime: 1000 * 60 * 15,
+    generate: false, // Enable me when using nuxt generate
+    exclude: [
+      '/secret',
+      '/admin/**'
+    ],
+    routes: [
+      '/eventos/',
+      '/eventos/:id',
+      {
+        url: '/page/2',
+        changefreq: 'daily',
+        priority: 1,
+        lastmodISO: '2017-06-30T13:30:00.000Z'
+      }
+    ]
+  },
   /*
   ** Modules
   */
   modules: [
-    '@nuxtjs/pwa'
+    '@nuxtjs/pwa',
+    '@nuxtjs/sitemap'
   ]
 }
