@@ -101,7 +101,7 @@
 
       <div class="item-form">
         <label>1º Lote</label>
-        <vue-numeric class="__vue-numeric" currency="R$" separator="space" :precision="2" v-model="$store.state.eventoData.valorIngresso" :minus="false"></vue-numeric>
+        <money v-model="$store.state.eventoData.valorIngresso" v-bind="money"></money>
       </div>  
     
       <button type="button" @click="" class="__image-input-btn">Mais lotes?</button>

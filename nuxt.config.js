@@ -28,11 +28,11 @@ module.exports = {
     '~/plugins/firebase',
     '~plugins/vue-progressive-image',
     '~plugins/vue-google-maps',
-    '~plugins/vue-numeric',
     '~plugins/vue-croppa',
     '~plugins/vue-autosize',
     '~plugins/webfontloader',
-    '~plugins/vue-awesome-swiper'
+    '~plugins/vue-awesome-swiper',
+    '~plugins/v-money'
   ],
   /*
   ** Customize the progress-bar color

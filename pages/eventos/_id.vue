@@ -245,7 +245,7 @@ export default {
     flex-flow: row;
     padding: 0 6%;
     & .gender-box {
-      padding: 0 5% 0 0;
+      padding: 0 1.3rem 0 0;
       display: flex;
       align-items: center;
       & .__img {
