@@ -44,12 +44,12 @@
     <div class="ingresso-box">
 
       <div class="gender-box">
-        <img class="__img" src="../../assets/img/woman.svg">
+        <img class="__img" src="../../assets/img/woman2.svg">
         <h1 class="__valor-ingresso">R${{ evento.valorIngresso }}</h1>
       </div>
 
       <div class="gender-box">
-        <img class="__img" src="../../assets/img/man.svg">
+        <img class="__img" src="../../assets/img/man2.svg">
         <h1 class="__valor-ingresso">R${{ evento.valorIngresso }}</h1>
       </div>
       
