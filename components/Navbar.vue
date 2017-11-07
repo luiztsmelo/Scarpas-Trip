@@ -48,7 +48,7 @@ export default {
   background: white;
   transition: all .3s ease;
   padding: 0 7%;
-  box-shadow: 0px 1px 1px 0px rgba(0,0,0,0.15);
+  box-shadow: 0px 1px 1px 0px rgba(0,0,0,0.1);
   & .navbar-body {
     display: flex;
     justify-content: space-between;
