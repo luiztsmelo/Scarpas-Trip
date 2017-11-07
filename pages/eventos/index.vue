@@ -95,11 +95,11 @@ export default {
       }
       & .__card-title {
         margin: .2rem 0;
-        font-size: 24px;
+        font-size: 23px;
         font-weight: 600;
       }
       & .__card-subtitle {
-        font-size: 19px;
+        font-size: 18px;
         font-weight: 300;
       }
     }
