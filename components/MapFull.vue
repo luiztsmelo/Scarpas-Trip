@@ -23,7 +23,7 @@ export default {
     return {
       markerIcon: {
         url: 'https://firebasestorage.googleapis.com/v0/b/escarpas-trip.appspot.com/o/utils%2Fmarker.svg?alt=media&token=2473df5b-9928-46f0-b603-22fb4673d285',
-        scaledSize: new google.maps.Size(37, 37)
+        scaledSize: new google.maps.Size(38, 38)
       }
     }
   },
