@@ -24,7 +24,7 @@
     <!-- ####### HEADING ####### -->
     <div class="heading-box">
       <h1 class="__title">{{ evento.title }}</h1>
-      <h1 class="__subtitle">{{ evento.subtitle }}</h1>
+      <h3>{{ evento.subtitle }}</h3>
     </div><!-- ####### HEADING ####### -->
 
 
@@ -34,8 +34,8 @@
     <h1 class="box-title">Data e Horário</h1>
 
     <div class="date-hour-box">
-      <h1 class="__date-hour">{{ evento.date}}&#160;-&#160;</h1>
-      <h1 class="__date-hour">{{ evento.hour }}</h1>
+      <h3>{{ evento.date}}&#160;-&#160;</h3>
+      <h3>{{ evento.hour }}</h3>
     </div><!-- ####### DATA E HORÁRIO ####### -->
     
 
@@ -63,8 +63,10 @@
 
     <!-- ####### LOCAL ####### -->
     <h1 class="box-title">Local</h1>
-
+    
     <div class="local-box" >
+      <h3 class="__adress">{{ evento.address }}</h3>
+
       <gmap-map
       :center="{lat: evento.positionLAT, lng: evento.positionLNG}"
       :zoom="15"
@@ -214,7 +216,7 @@ export default {
   & .box-title {
     font-weight: 500;
     font-size: 20px;
-    padding: 3rem 7% 1rem 7%;
+    padding: 3rem 7% .5rem 7%;
   }
 
 
@@ -237,9 +239,6 @@ export default {
       font-weight: 600;
     }
     & .__subtitle {
-      font-size: 19px;
-      font-weight: 300;
-      line-height: 28px;
     }
   }/* ####### HEADING BOX ####### */
 
@@ -249,8 +248,6 @@ export default {
     display: flex;
     padding: 0 7%;
     & .__date-hour {
-      font-size: 19px;
-      font-weight: 300;
     }
   }/* ####### DATA E HORÁRIO ####### */
 
@@ -276,6 +273,14 @@ export default {
     }
     
   }/* ####### VALOR INGRESSO ####### */
+
+
+  /* ####### LOCAL ####### */
+  & .local-box {
+    & .__adress {
+      padding: 0 7% .5rem 7%;
+    }
+  }/* ####### LOCAL ####### */
 
 
 }

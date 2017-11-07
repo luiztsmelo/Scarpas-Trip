@@ -348,6 +348,7 @@ export default {
       this.$store.commit('m_eventoPlace', place)
       this.$store.state.eventoData.positionLAT = this.$store.state.eventoPlace.geometry.location.lat()
       this.$store.state.eventoData.positionLNG = this.$store.state.eventoPlace.geometry.location.lng()
+      this.$store.state.eventoData.address = this.$store.state.eventoPlace.vicinity
     },
     /* ******************** BACK BUTTONS ******************** */
     backBtn1 () {
