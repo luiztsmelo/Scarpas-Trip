@@ -289,7 +289,7 @@ export default {
       title: '',/* Vue Autosize */
       subtitle: '',/* Vue Autosize */
       markerIcon: {
-        url: 'https://firebasestorage.googleapis.com/v0/b/escarpas-trip.appspot.com/o/utils%2Fmarker.svg?alt=media&token=2473df5b-9928-46f0-b603-22fb4673d285',
+        url: 'https://firebasestorage.googleapis.com/v0/b/escarpas-trip.appspot.com/o/utils%2Fmarker.svg?alt=media&token=fcbfd76e-ee93-41e8-a816-98906e19859b',
         scaledSize: new google.maps.Size(38, 38)
       },
       showCroppaModal1: false,

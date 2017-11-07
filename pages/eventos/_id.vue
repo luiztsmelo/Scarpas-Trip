@@ -48,12 +48,12 @@
 
       <div class="gender-box">
         <img class="__img" src="../../assets/img/woman.svg">
-        <h1 class="__valor-ingresso" style="transform:translateX(2px)">R${{ evento.valorIngresso }}</h1>
+        <h3 style="transform:translateX(2px)">R${{ evento.valorIngresso }}</h3>
       </div>
 
       <div class="gender-box">
         <img class="__img" src="../../assets/img/man.svg">
-        <h1 class="__valor-ingresso">R${{ evento.valorIngresso }}</h1>
+        <h3>R${{ evento.valorIngresso }}</h3>
       </div>
       
     </div><!-- ####### VALOR DO INGRESSO ####### -->
@@ -97,7 +97,7 @@ export default {
   data () {
     return {
       markerIcon: {
-        url: 'https://firebasestorage.googleapis.com/v0/b/escarpas-trip.appspot.com/o/utils%2Fmarker.svg?alt=media&token=2473df5b-9928-46f0-b603-22fb4673d285',
+        url: 'https://firebasestorage.googleapis.com/v0/b/escarpas-trip.appspot.com/o/utils%2Fmarker.svg?alt=media&token=fcbfd76e-ee93-41e8-a816-98906e19859b',
         scaledSize: new google.maps.Size(38, 38)
       }
     }
@@ -215,7 +215,7 @@ export default {
 
   & .box-title {
     font-weight: 500;
-    font-size: 20px;
+    font-size: 19px;
     padding: 3rem 7% .5rem 7%;
   }
 
@@ -247,8 +247,6 @@ export default {
   & .date-hour-box {
     display: flex;
     padding: 0 7%;
-    & .__date-hour {
-    }
   }/* ####### DATA E HORÁRIO ####### */
 
 
@@ -263,12 +261,8 @@ export default {
       align-items: center;
       & .__img {
         margin-right: .3rem;
-        width: 1.7rem;
+        width: 1.6rem;
         height: auto;
-      }
-      & .__valor-ingresso {
-        font-size: 19px;
-        font-weight: 300;
       }
     }
     
