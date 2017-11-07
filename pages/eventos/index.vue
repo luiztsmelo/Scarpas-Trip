@@ -81,11 +81,12 @@ export default {
     flex-flow: column;
     & .card {
       width: 100%;
-      padding-bottom: 3rem;
+      padding-bottom: 2rem;
       & .__card-img {
         margin-bottom: .2rem;
         width: 100%;
         height: auto;
+        border-radius: 3px;
       }
       & .__card-date {
         font-size: 14px;
@@ -98,7 +99,7 @@ export default {
         font-weight: 600;
       }
       & .__card-subtitle {
-        font-size: 20px;
+        font-size: 19px;
         font-weight: 300;
       }
     }
