@@ -6,7 +6,7 @@
           <img class="__card-img" :src="imageH(evento)" />
           <span class="__card-date">{{ evento.date }}</span>
           <h1 class="__card-title">{{ evento.title | truncateTitle }}</h1>
-          <h2 class="__card-subtitle">{{ evento.subtitle | truncateSubtitle }}</h2>
+          <h3>{{ evento.subtitle | truncateSubtitle }}</h3>
         </nuxt-link> 
       </li>
     </ul>
@@ -99,8 +99,6 @@ export default {
         font-weight: 600;
       }
       & .__card-subtitle {
-        font-size: 18px;
-        font-weight: 300;
       }
     }
   }
