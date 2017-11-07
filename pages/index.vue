@@ -113,7 +113,7 @@ export default {
   display: flex;
   flex-flow: column;
   justify-content: space-between;
-  transition: all .222s ease-in-out;
+  transition: var(--main-transition);
   & .home-body {
     display: flex;
     flex-flow: column;

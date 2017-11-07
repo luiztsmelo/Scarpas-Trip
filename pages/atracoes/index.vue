@@ -23,6 +23,6 @@ export default {
   display: flex;
   flex-flow: column;
   padding: 3rem 7%;
-  transition: all .222s ease-in-out;
+  transition: var(--main-transition);
 }
 </style>

@@ -10,6 +10,8 @@
   --color01: rgb(72, 72, 72);
   --color02: rgb(243, 110, 95);
   --color03: rgb(252, 86, 86);
+  /* ******* MAIN TRANSITION ******* */
+  --main-transition: all .2s ease-in-out;
 }
 
 html 

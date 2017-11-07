@@ -537,7 +537,7 @@ export default {
   flex-flow: column;
   background: linear-gradient(40deg,#f857a6, #ff5858);
   color: white;
-  transition: all .222s ease-in-out;
+  transition: var(--main-transition);
   height: calc(100vh - 3.3rem);
   & .progress-bar {
     position: fixed;
