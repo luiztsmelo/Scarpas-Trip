@@ -23,7 +23,7 @@ export default {
       title: 'Eventos em Escarpas do Lago ‒ Escarpas Trip'
     }
   },
-  transition: 'slide-left',
+  transition: 'opacity',
   data () {
     return {
     }
@@ -74,7 +74,7 @@ export default {
   display: flex;
   flex-flow: column;
   padding: 3rem 7%;
-  transition: all .222s ease;
+  transition: all .222s ease-in-out;
   & .eventos-container {
     padding: 0;
     display: flex;

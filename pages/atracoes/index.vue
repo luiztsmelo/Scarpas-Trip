@@ -11,7 +11,7 @@ export default {
       title: 'Atrações em Escarpas do Lago ‒ Escarpas Trip'
     }
   },
-  transition: 'slide-left'
+  transition: 'opacity'
 }
 </script>
 
@@ -23,6 +23,6 @@ export default {
   display: flex;
   flex-flow: column;
   padding: 3rem 7%;
-  transition: all .222s ease;
+  transition: all .222s ease-in-out;
 }
 </style>

@@ -33,7 +33,7 @@ export default {
   flex-flow: column;
   background: linear-gradient(40deg, #B2FEFA, #0ED2F7);
   color: white;
-  transition: all .222s ease;
+  transition: all .222s ease-in-out;
   height: calc(100vh - 3.3rem);
   & .__title {
     font-size: 29px;
