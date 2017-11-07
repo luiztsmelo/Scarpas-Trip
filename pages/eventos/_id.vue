@@ -239,6 +239,7 @@ export default {
     & .__subtitle {
       font-size: 19px;
       font-weight: 300;
+      line-height: 27px;
     }
   }/* ####### HEADING BOX ####### */
 
