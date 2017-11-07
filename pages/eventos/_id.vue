@@ -214,7 +214,7 @@ export default {
   & .box-title {
     font-weight: 500;
     font-size: 20px;
-    padding: 3rem 6% 1rem 6%;
+    padding: 3rem 7% 1rem 7%;
   }
 
 
@@ -230,7 +230,7 @@ export default {
 
   /* ####### HEADING BOX ####### */
   & .heading-box {
-    padding: 0 6%;
+    padding: 0 7%;
     & .__title {
       margin: 1rem 0 2rem 0;
       font-size: 34px;
@@ -239,7 +239,7 @@ export default {
     & .__subtitle {
       font-size: 19px;
       font-weight: 300;
-      line-height: 27px;
+      line-height: 28px;
     }
   }/* ####### HEADING BOX ####### */
 
@@ -247,7 +247,7 @@ export default {
   /* ####### DATA E HORÁRIO ####### */
   & .date-hour-box {
     display: flex;
-    padding: 0 6%;
+    padding: 0 7%;
     & .__date-hour {
       font-size: 19px;
       font-weight: 300;
@@ -259,7 +259,7 @@ export default {
   & .ingresso-box {
     display: flex;
     flex-flow: row;
-    padding: 0 6%;
+    padding: 0 7%;
     & .gender-box {
       padding: 0 1.4rem 0 0;
       display: flex;
