@@ -3,6 +3,10 @@
 
     <div class="home-body">
 
+      <div class="roteiro-box">
+        <h1 class="__roteiro-title">Crie um roteiro para sua viagem à Escarpas do Lago gratuitamente</h1>
+      </div>
+
       <!-- ####### EVENTOS ####### -->
       <div class="category-container">
 
@@ -117,9 +121,20 @@ export default {
   & .home-body {
     display: flex;
     flex-flow: column;
-    padding: 3rem 0;
     margin-bottom: 100rem;
+    & .roteiro-box {
+      width: 100%;
+      height: 12rem;
+      background: linear-gradient(250deg, #93EDC7, #1CD8D2);
+      & .__roteiro-title {
+        padding: 1rem 7%;
+        color: white;
+        font-size: 25px;
+        font-weight: 600;
+      }
+    }
     & .category-container {
+      padding: 2rem 0;
       display: flex;
       flex-flow: column;
       overflow-x: hidden;
