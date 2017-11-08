@@ -4,7 +4,7 @@
     <div class="home-body">
 
       <div class="roteiro-box">
-        <h1 class="__roteiro-title">Crie um roteiro para sua viagem à Escarpas do Lago gratuitamente</h1>
+        <h1 class="__roteiro-title">Crie um roteiro para sua viagem à Escarpas do Lago gratuitamente!</h1>
       </div>
 
       <!-- ####### EVENTOS ####### -->
@@ -124,12 +124,12 @@ export default {
     margin-bottom: 100rem;
     & .roteiro-box {
       width: 100%;
-      height: 12rem;
-      background: linear-gradient(250deg, #93EDC7, #1CD8D2);
+      height: 13rem;
+      background: linear-gradient(280deg, #93EDC7, #1CD8D2);
       & .__roteiro-title {
         padding: 1rem 7%;
         color: white;
-        font-size: 25px;
+        font-size: 26px;
         font-weight: 600;
       }
     }
