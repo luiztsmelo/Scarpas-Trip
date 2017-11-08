@@ -3,10 +3,21 @@
 
     <div class="home-body">
 
+
+
+      <!-- ####### ROTEIRO ####### -->
       <div class="roteiro-box">
+
         <h1 class="__title">Crie um roteiro grátis para sua viagem à Escarpas do Lago!</h1>
-        <input class="__input-ida" type="date" v-model="date" :min="today" required pattern="[0-9]{2}-[0-9]{2}-[0-9]{4}" placeholder="Dia de ida">
-      </div>
+
+        <div class="check-in-out">
+          <h3>Chegada</h3>
+          <h3>Partida</h3>
+        </div>
+
+      </div><!-- ####### ROTEIRO ####### -->
+
+
 
       <!-- ####### EVENTOS ####### -->
       <div class="category-container">
@@ -139,23 +150,26 @@ export default {
     margin-bottom: 100rem;
     & .roteiro-box {
       width: 100%;
-      background: linear-gradient(290deg, #C3F9E2, #00CFC8);
+      background: linear-gradient(290deg, #C3F9E2, #00A8A1);
       & .__title {
         padding: 2rem 7% 0 7%;
         color: white;
         font-size: 26px;
         font-weight: 600;
       }
-      & .__input-ida {
-        margin: 2rem 0 2rem 7%;
-        font-size: 17px;
-        font-weight: 300;
+      & .check-in-out {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        margin: 2rem 7%;
         background: rgba(0, 0, 0, .1);
-        color: white;
         border-radius: 3px;
-        padding: .5rem .2rem;
-        border: none;
-        outline: none;
+        height: 2.5rem;
+        & h3 {
+          font-size: 16px;
+          font-weight: 500;
+          color: white;
+        }
       }
     }
     & .category-container {
