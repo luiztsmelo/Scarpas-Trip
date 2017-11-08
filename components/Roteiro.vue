@@ -1,7 +1,7 @@
 <template>
   <div class="roteiro">
 
-    <h1 class="__title">Crie um roteiro grátis para sua viagem à Escarpas do Lago!</h1>
+    <h1 class="__title">Crie um roteiro gratuito para sua viagem à Escarpas do Lago!</h1>
 
     <div class="check-in-out">
       <img src="../assets/img/calendar.svg">
