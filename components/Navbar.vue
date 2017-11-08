@@ -62,7 +62,7 @@ export default {
       line-height: 0;
       user-select: none;
       font-weight: 400;
-      color: rgb(77, 77, 77);
+      color: var(--color01);
     }
     & .nav {
       display: flex;

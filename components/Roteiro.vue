@@ -52,7 +52,7 @@ export default {
       height: auto;
     }
     & .__calendar-confirm {
-      transform: scale(1.07);
+      transform: scale(1.08);
     }
   }
 }
