@@ -4,7 +4,8 @@
     <div class="home-body">
 
       <div class="roteiro-box">
-        <h1 class="__roteiro-title">Crie um roteiro para sua viagem à Escarpas do Lago gratuitamente!</h1>
+        <h1 class="__title">Crie um roteiro para sua viagem à Escarpas do Lago gratuitamente!</h1>
+        <input class="__input-ida" type="text" v-model="date" :min="today" onfocus="(this.type='date')" required pattern="[0-9]{2}-[0-9]{2}-[0-9]{4}" placeholder="Dia de ida">
       </div>
 
       <!-- ####### EVENTOS ####### -->
@@ -90,6 +91,20 @@ export default {
       return console.log('Eventos já carregados')
     }
   },
+  computed: {
+    today () {
+      let dd = new Date().getDate()
+      let mm = new Date().getMonth() + 1
+      let yyyy = new Date().getFullYear()
+      if (dd < 10) {
+        dd = '0' + dd
+      } 
+      if (mm < 10) {
+        mm = '0' + mm
+      } 
+      return yyyy + '-' + mm + '-' + dd
+    }
+  },
   filters: {
     truncateTitle (value) {
       if (value.length > 31) {
@@ -126,11 +141,22 @@ export default {
       width: 100%;
       height: 13rem;
       background: linear-gradient(280deg, #93EDC7, #1CD8D2);
-      & .__roteiro-title {
+      & .__title {
         padding: 1rem 7%;
         color: white;
-        font-size: 26px;
+        font-size: 25px;
         font-weight: 600;
+      }
+      & .__input-ida {
+        margin: 1rem 7%;
+        font-size: 17px;
+        font-weight: 300;
+        background: rgba(0, 0, 0, .1);
+        color: white;
+        border-radius: 3px;
+        padding: .4rem .2rem;
+        border: none;
+        outline: none;
       }
     }
     & .category-container {
