@@ -31,7 +31,7 @@
     <!-- ########## DATA E HORÁRIO PG.1 ########## -->
     <form class="cadastro-evento" v-show="$store.state.cadastroEvento1">
 
-      <h1 class="__form-title">Qual será a Data e Horário do evento?</h1>
+      <h1 class="__form-title">Quando será o evento?</h1>
 
       <div class="item-form">
         <label>Data</label>
@@ -377,11 +377,11 @@ export default {
       if (this.$store.state.eventoData.date.length > 0 && this.$store.state.eventoData.hour.length > 0) {
         return this.$store.commit('m_cadastroEvento1', false), this.$store.commit('m_cadastroEvento2', true), this.$store.commit('m_eventoProgressBar', (100/7)*2)
       } else if (this.$store.state.eventoData.date.length > 0 && this.$store.state.eventoData.hour.length === 0) {
-        alert('Adicione um horário')
+        alert('Adicione o horário')
       } else if (this.$store.state.eventoData.date.length === 0 && this.$store.state.eventoData.hour.length > 0) {
-        alert('Adicione uma data')
+        alert('Adicione a data')
       } else {
-        alert('Adicione a data e o horário')
+        alert('Adicione uma data e horário')
       }
     },  
     nextBtn2 () {

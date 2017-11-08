@@ -4,7 +4,7 @@
     <div class="home-body">
 
       <div class="roteiro-box">
-        <h1 class="__title">Crie um roteiro para sua viagem à Escarpas do Lago gratuitamente!</h1>
+        <h1 class="__title">Crie um roteiro grátis para sua viagem à Escarpas do Lago!</h1>
         <input class="__input-ida" type="date" v-model="date" :min="today" required pattern="[0-9]{2}-[0-9]{2}-[0-9]{4}" placeholder="Dia de ida">
       </div>
 
