@@ -376,11 +376,19 @@ export default {
     nextBtn1 () {
       if (this.$store.state.eventoData.date.length > 0 && this.$store.state.eventoData.hour.length > 0) {
         return this.$store.commit('m_cadastroEvento1', false), this.$store.commit('m_cadastroEvento2', true), this.$store.commit('m_eventoProgressBar', (100/7)*2)
+      } else if (this.$store.state.eventoData.date.length > 0 && this.$store.state.eventoData.hour.length === 0) {
+        alert('Adicione um horário')
+      } else if (this.$store.state.eventoData.date.length === 0 && this.$store.state.eventoData.hour.length > 0) {
+        alert('Adicione uma data')
+      } else {
+        alert('Adicione a data e o horário')
       }
     },  
     nextBtn2 () {
       if (this.$store.state.eventoPlace !== null) {
         return this.$store.commit('m_cadastroEvento2', false), this.$store.commit('m_cadastroEvento3', true), this.$store.commit('m_eventoProgressBar', (100/7)*3)
+      } else {
+        alert('Adicione um endereço')
       }
     },
     nextBtn3 () {
