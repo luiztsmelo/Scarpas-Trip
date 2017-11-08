@@ -21,24 +21,28 @@
 
 
 
-    <!-- ####### HEADING ####### -->
-    <div class="heading-box">
-      <h1 class="__title">{{ evento.title }}</h1>
-      <h3>{{ evento.subtitle }}</h3>
-    </div><!-- ####### HEADING ####### -->
+    <h1 class="__event-title">{{ evento.title }}</h1>
 
 
 
 
     <!-- ####### DATA E HORÁRIO ####### -->
-    <h1 class="box-title">Data e Horário</h1>
-
     <div class="date-hour-box">
-      <h3>{{ evento.date}}&#160;-&#160;</h3>
-      <h3>{{ evento.hour }}</h3>
+      <h3 class="__date">{{ date }}&#160;-&#160;</h3>
+      <h3 class="__hour">{{ evento.hour }}</h3>
     </div><!-- ####### DATA E HORÁRIO ####### -->
-    
 
+
+
+
+    <!-- ####### SOBRE ####### -->
+    <h1 class="box-title">Sobre</h1>
+
+    <div class="sobre-box">
+      <h3>{{ evento.subtitle }}</h3>
+    </div><!-- ####### SOBRE ####### -->
+
+    
 
 
     <!-- ####### VALOR DO INGRESSO ####### -->
@@ -151,6 +155,19 @@ export default {
     }
   },
   computed: {
+    date () {
+      const eventoDate = this.$store.state.evento.date
+      let d = eventoDate.slice(0, 2)
+      let m = eventoDate.slice(3, 5)
+      let y = eventoDate.slice(6, 10)
+      let dateStr = m + '/' + d + '/' + y
+      let date = new Date(dateStr)
+      let longWeekday = date.toLocaleDateString('pt-BR', { weekday: 'long' })
+      let shortWeekday = longWeekday.substring(0, longWeekday.lastIndexOf('-'))
+      let shortWeekdayUppercase = shortWeekday.charAt(0).toUpperCase() + shortWeekday.slice(1)
+      let month = date.toLocaleString('pt-BR', { month: "short" });
+      return shortWeekdayUppercase + ', ' + d + ' ' + month
+    },
     evento () {
       return this.$store.state.evento
     },
@@ -219,6 +236,14 @@ export default {
     padding: 3rem 7% .5rem 7%;
   }
 
+  & .__event-title {
+      padding: 0 7%;
+      margin: 1rem 0 2rem 0;
+      font-size: 34px;
+      font-weight: 600;
+    }
+
+
 
   /* ####### IMAGE BOX ####### */
   & .image-box {
@@ -230,24 +255,30 @@ export default {
   }/* ####### IMAGE BOX ####### */
 
 
-  /* ####### HEADING BOX ####### */
-  & .heading-box {
-    padding: 0 7%;
-    & .__title {
-      margin: 1rem 0 2rem 0;
-      font-size: 34px;
-      font-weight: 600;
-    }
-    & .__subtitle {
-    }
-  }/* ####### HEADING BOX ####### */
-
 
   /* ####### DATA E HORÁRIO ####### */
   & .date-hour-box {
     display: flex;
     padding: 0 7%;
+    & .__date {
+      font-size: 23px;
+      font-weight: 300;
+    }
+    & .__hour {
+      font-size: 23px;
+      font-weight: 300;
+    }
   }/* ####### DATA E HORÁRIO ####### */
+
+
+
+  /* ####### SOBRE BOX ####### */
+  & .sobre-box {
+    padding: 0 7%;
+    & .__subtitle {
+    }
+  }/* ####### SOBRE BOX ####### */
+
 
 
   /* ####### VALOR INGRESSO ####### */
@@ -267,6 +298,7 @@ export default {
     }
     
   }/* ####### VALOR INGRESSO ####### */
+
 
 
   /* ####### LOCAL ####### */
