@@ -28,7 +28,7 @@
 
     <!-- ####### DATA E HORÁRIO ####### -->
     <div class="date-hour-box">
-      <h3 class="__date">{{ date }}&#160;-&#160;</h3>
+      <h3 class="__date">{{ date }}&#160;&#8231;&#160;</h3>
       <h3 class="__hour">{{ evento.hour }}</h3>
     </div><!-- ####### DATA E HORÁRIO ####### -->
 
@@ -261,12 +261,14 @@ export default {
     display: flex;
     padding: 0 7%;
     & .__date {
-      font-size: 23px;
-      font-weight: 300;
+      font-size: 22px;
+      font-weight: 400;
+      color: #ff5858;
     }
     & .__hour {
-      font-size: 23px;
-      font-weight: 300;
+      font-size: 22px;
+      font-weight: 400;
+      color: #ff5858;
     }
   }/* ####### DATA E HORÁRIO ####### */
 
