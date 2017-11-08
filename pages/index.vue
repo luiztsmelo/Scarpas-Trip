@@ -165,7 +165,7 @@ export default {
         align-items: center;
         justify-content: space-around;
         margin: 2rem 7%;
-        background: rgba(0, 0, 0, .15);
+        background: rgba(0, 0, 0, .12);
         border-radius: 4px;
         height: 2.7rem;
         & h3 {
