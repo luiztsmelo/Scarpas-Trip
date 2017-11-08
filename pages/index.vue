@@ -4,22 +4,7 @@
     <div class="home-body">
 
 
-
-      <!-- ####### ROTEIRO ####### -->
-      <div class="roteiro-box">
-
-        <h1 class="__title">Crie um roteiro grátis para sua viagem à Escarpas do Lago!</h1>
-
-        <div class="check-in-out">
-          <img src="../assets/img/calendar.svg">
-          <h3>Chegada</h3>
-          <img src="../assets/img/calendar-arrow.svg">
-          <h3>Partida</h3>
-          <img src="../assets/img/calendar-confirm.svg">
-        </div>
-
-      </div><!-- ####### ROTEIRO ####### -->
-
+      <roteiro/><!-- ####### ROTEIRO ####### -->
 
 
       <!-- ####### EVENTOS ####### -->
@@ -56,8 +41,12 @@
 <script>
 import supportsWebP from 'supports-webp'
 import * as firebase from 'firebase'
+import Roteiro from '../components/Roteiro'
 
 export default {
+  components: {
+    Roteiro
+  },
   head () {
     return {
       meta: [
@@ -85,14 +74,6 @@ export default {
       } else {
         return evento.imageH1J
       }
-    },
-    leftCarousel (e) {
-      this.positionCarousel = e.deltaX 
-      console.log(e.deltaX + ' - ' + this.positionCarousel)
-    },
-    rightCarousel (e) {
-      this.positionCarousel = e.deltaX 
-      console.log(e.deltaX + ' - ' + this.positionCarousel)
     }
   },
   fetch ({ store }) {
@@ -151,34 +132,6 @@ export default {
     display: flex;
     flex-flow: column;
     margin-bottom: 100rem;
-    & .roteiro-box {
-      width: 100%;
-      background: linear-gradient(290deg, #C3F9E2, #00A8A1);
-      & .__title {
-        padding: 2rem 7% 0 7%;
-        color: white;
-        font-size: 26px;
-        font-weight: 600;
-      }
-      & .check-in-out {
-        display: flex;
-        align-items: center;
-        justify-content: space-around;
-        margin: 2rem 7%;
-        background: rgba(0, 0, 0, .12);
-        border-radius: 4px;
-        height: 2.7rem;
-        & h3 {
-          font-size: 17px;
-          font-weight: 400;
-          color: white;
-        }
-        & img {
-          width: 1.25rem;
-          height: auto;
-        }
-      }
-    }
     & .category-container {
       padding: 2rem 0;
       display: flex;
@@ -248,6 +201,20 @@ export default {
 @media (min-width: 1281px) {
   .home {
     & .home-body {
+      & .roteiro-box {
+        & .__title {
+          padding: 2rem 12% 0 12%;
+        }
+        & .check-in-out {
+          margin: 2rem 12%;
+          & h3 {
+          }
+          & img {
+            width: 1.25rem;
+            height: auto;
+          }
+        }
+      }
       & .category-container {
         & .title-row {
           padding: 0 12% 1.5rem 12%;
