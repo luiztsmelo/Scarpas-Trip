@@ -167,14 +167,14 @@ export default {
         margin: 2rem 7%;
         background: rgba(0, 0, 0, .15);
         border-radius: 4px;
-        height: 2.8rem;
+        height: 2.7rem;
         & h3 {
           font-size: 17px;
           font-weight: 400;
           color: white;
         }
         & img {
-          width: 1.3rem;
+          width: 1.25rem;
           height: auto;
         }
       }
