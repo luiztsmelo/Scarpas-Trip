@@ -143,7 +143,7 @@ export default {
       & .__title {
         padding: 2rem 7% 0 7%;
         color: white;
-        font-size: 25px;
+        font-size: 26px;
         font-weight: 600;
       }
       & .__input-ida {

@@ -73,7 +73,7 @@ export default {
   margin-top: 3.3rem;
   display: flex;
   flex-flow: column;
-  padding: 3rem 7%;
+  padding: 2rem 7%;
   transition: all .222s ease-in-out;
   & .eventos-container {
     padding: 0;
