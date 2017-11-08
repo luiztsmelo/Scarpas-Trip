@@ -17,6 +17,8 @@
 
 <script>
 import { mapstyle } from '../mixins/mapstyle'
+import * as VueGoogleMaps from '~/node_modules/vue2-google-maps/src/main'
+
 export default {
   mixins: [mapstyle],
   data () {

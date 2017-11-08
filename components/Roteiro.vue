@@ -6,9 +6,9 @@
     <div class="check-in-out">
       <img src="../assets/img/calendar.svg">
       <h3>Chegada</h3>
-      <div class="__slash"></div>
+      <img src="../assets/img/calendar-arrow.svg">
       <h3>Partida</h3>
-      <div class="__confirm"></div>
+      <img class="__calendar-confirm" src="../assets/img/calendar-confirm.svg">
     </div>
 
   </div>     
@@ -48,23 +48,11 @@ export default {
       color: white;
     }
     & img {
-      width: 1.2rem;
+      width: 1.25rem;
       height: auto;
     }
-    & .__slash {
-      background: white;
-      height: 19px;
-      width: 2px;
-      transform: rotate(27deg);
-      border-radius: 5px;
-    }
-    & .__confirm {
-      background: transparent;
-      border-top: 2px solid white;
-      border-right: 2px solid white;
-      height: 14px;
-      width: 14px;
-      transform: rotate(45deg);
+    & .__calendar-confirm {
+      transform: scale(1.07);
     }
   }
 }
