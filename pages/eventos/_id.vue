@@ -232,16 +232,16 @@ export default {
 
   & .box-title {
     font-weight: 500;
-    font-size: 19px;
+    font-size: 20px;
     padding: 3rem 7% .5rem 7%;
   }
 
   & .__event-title {
-      padding: 0 7%;
-      margin: 1rem 0 2rem 0;
-      font-size: 34px;
-      font-weight: 600;
-    }
+    padding: 0 7%;
+    margin: 1rem 0 2rem 0;
+    font-size: 34px;
+    font-weight: 600;
+  }
 
 
 
