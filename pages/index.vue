@@ -139,7 +139,7 @@ export default {
     margin-bottom: 100rem;
     & .roteiro-box {
       width: 100%;
-      background: linear-gradient(280deg, #93EDC7, #1CD8D2);
+      background: linear-gradient(290deg, #C3F9E2, #00CFC8);
       & .__title {
         padding: 2rem 7% 0 7%;
         color: white;
