@@ -166,15 +166,15 @@ export default {
         justify-content: space-around;
         margin: 2rem 7%;
         background: rgba(0, 0, 0, .15);
-        border-radius: 3px;
-        height: 2.5rem;
+        border-radius: 4px;
+        height: 2.8rem;
         & h3 {
-          font-size: 16px;
+          font-size: 17px;
           font-weight: 400;
           color: white;
         }
         & img {
-          width: 1.2rem;
+          width: 1.3rem;
           height: auto;
         }
       }
