@@ -261,14 +261,14 @@ export default {
     display: flex;
     padding: 0 7%;
     & .__date {
-      font-size: 22px;
-      font-weight: 400;
-      color: #ff5858;
+      font-size: 23px;
+      font-weight: 300;
+      /* color: #ff5858; */
     }
     & .__hour {
-      font-size: 22px;
-      font-weight: 400;
-      color: #ff5858;
+      font-size: 23px;
+      font-weight: 300;
+      /* color: #ff5858; */
     }
   }/* ####### DATA E HORÁRIO ####### */
 
