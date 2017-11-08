@@ -139,16 +139,15 @@ export default {
     margin-bottom: 100rem;
     & .roteiro-box {
       width: 100%;
-      height: 13rem;
       background: linear-gradient(280deg, #93EDC7, #1CD8D2);
       & .__title {
-        padding: 1rem 7%;
+        padding: 2rem 7% 0 7%;
         color: white;
         font-size: 25px;
         font-weight: 600;
       }
       & .__input-ida {
-        margin: 1rem 7%;
+        margin: 2rem 0 2rem 7%;
         font-size: 17px;
         font-weight: 300;
         background: rgba(0, 0, 0, .1);
