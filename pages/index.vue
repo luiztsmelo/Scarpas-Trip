@@ -11,8 +11,11 @@
         <h1 class="__title">Crie um roteiro grátis para sua viagem à Escarpas do Lago!</h1>
 
         <div class="check-in-out">
+          <img src="../assets/img/calendar.svg">
           <h3>Chegada</h3>
+          <img src="../assets/img/calendar-arrow.svg">
           <h3>Partida</h3>
+          <img src="../assets/img/calendar-confirm.svg">
         </div>
 
       </div><!-- ####### ROTEIRO ####### -->
@@ -162,13 +165,17 @@ export default {
         align-items: center;
         justify-content: space-around;
         margin: 2rem 7%;
-        background: rgba(0, 0, 0, .1);
+        background: rgba(0, 0, 0, .15);
         border-radius: 3px;
         height: 2.5rem;
         & h3 {
           font-size: 16px;
-          font-weight: 500;
+          font-weight: 400;
           color: white;
+        }
+        & img {
+          width: 1.2rem;
+          height: auto;
         }
       }
     }
