@@ -4,6 +4,8 @@
     <!-- PLANO EVENTO -->
     <div class="plano-evento" v-show="$store.state.cadastroEvento0">
       
+      <img class="__img-header" src="../../../assets/img/anuncio-evento.svg">
+
       <h1 class="__title">Divulgação: a chave para o sucesso do seu evento!</h1>
 
       <div class="pricing-box">
@@ -549,7 +551,6 @@ export default {
   background: linear-gradient(40deg,#f857a6, #ff5858);
   color: white;
   transition: var(--main-transition);
-  height: calc(100vh - 3.3rem);
   & .progress-bar {
     position: fixed;
     top: 3.3rem;
@@ -559,15 +560,25 @@ export default {
   }
   /* ******************** PLANO EVENTO ******************** */
   & .plano-evento {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    height: calc(100vh);
+    & .__img-header {
+      margin: 2rem 0;
+      width: 6rem;
+      height: auto;
+    }
     & .__title {
-      font-size: 29px;
-      font-weight: 600;
-      padding: 3rem 7% 0 7%;
+      font-size: 27px;
+      font-weight: 500;
+      padding: 0 7%;
     }
     & .pricing-box {
       display: flex;
       flex-flow: column;
-      padding: 3rem 7% 0 7%;
+      align-self: stretch;
+      padding: 3rem 7% 3rem 7%;
       & .__pricing-box-title {
         font-size: 20px;
         font-weight: 400;
