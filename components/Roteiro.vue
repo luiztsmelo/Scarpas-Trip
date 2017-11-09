@@ -9,18 +9,16 @@
 
       <div class="chegada-partida-input">
         <h3 v-if="!chegadaDate">Chegada</h3>
-        <h3 v-else>{{ chegadaDate }}</h3>
-        <input type="date" ref="inputChegada" v-model="chegadaDate">
+        <h3 v-else>{{ chegadaDateFormatted }}</h3>
+        <input type="date" ref="inputChegada" v-model="chegadaDate" :min="today">
       </div>
       
-      
-
       <img src="../assets/img/calendar-arrow.svg">
 
       <div class="chegada-partida-input">
         <h3 v-if="!partidaDate">Partida</h3>
-        <h3 v-else>{{ partidaDate }}</h3>
-        <input type="date" ref="inputChegada" v-model="partidaDate">
+        <h3 v-else>{{ partidaDateFormatted }}</h3>
+        <input type="date" ref="inputChegada" v-model="partidaDate" :min="today">
       </div>
 
       <img class="__calendar-confirm" src="../assets/img/calendar-confirm.svg">
@@ -36,6 +34,34 @@ export default {
     return {
       chegadaDate: null,
       partidaDate: null
+    }
+  },
+  computed: {
+    chegadaDateFormatted () {
+      let y = this.chegadaDate.slice(0, 4)
+      let m = this.chegadaDate.slice(5, 7)
+      let d = this.chegadaDate.slice(8, 10)
+      let shortYear = y.slice(2, 4)
+      return d + '/' + m + '/' + shortYear
+    },
+    partidaDateFormatted () {
+      let y = this.partidaDate.slice(0, 4)
+      let m = this.partidaDate.slice(5, 7)
+      let d = this.partidaDate.slice(8, 10)
+      let shortYear = y.slice(2, 4)
+      return d + '/' + m + '/' + shortYear
+    },
+    today () {
+      let dd = new Date().getDate()
+      let mm = new Date().getMonth() + 1
+      let yyyy = new Date().getFullYear()
+      if (dd < 10) {
+        dd = '0' + dd
+      } 
+      if (mm < 10) {
+        mm = '0' + mm
+      } 
+      return yyyy + '-' + mm + '-' + dd
     }
   }
 }
@@ -65,9 +91,9 @@ export default {
     height: 2.7rem;
     & .chegada-partida-input {
       position: relative;
-      width: 5.5rem;
+      width: 5rem;
       & h3 {
-        font-size: 17px;
+        font-size: 16px;
         font-weight: 400;
         color: white;
         position: absolute;
