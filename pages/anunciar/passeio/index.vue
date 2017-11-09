@@ -4,7 +4,9 @@
     <!-- PLANO PASSEIO -->
     <div class="plano-passeio" v-show="$store.state.cadastroEvento0">
       
-      <h1 class="__title">Amplie seus ganhos anunciando seu passeio de lancha ou 4x4 com a gente!</h1>
+      <img class="__img-header" src="../../../assets/img/anuncio-passeio.svg">
+
+      <h1 class="__title">Amplie seus ganhos anunciando seu passeio com a gente!</h1>
 
       <div class="pricing-box">
         <h2 class="__pricing-box-title">Selecione um plano:</h2>
@@ -60,21 +62,29 @@ export default {
   background: linear-gradient(40deg, #B5D9F0, #49A5FC);
   color: white;
   transition: var(--main-transition);
-  height: calc(100vh - 3.3rem);
   /* ******************** PLANO PASSEIO ******************** */
   & .plano-passeio {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    & .__img-header {
+      margin: 2rem 0;
+      width: 7rem;
+      height: auto;
+    }
     & .__title {
-      font-size: 29px;
-      font-weight: 600;
-      padding: 3rem 7% 0 7%;
+      font-size: 28px;
+      font-weight: 300;
+      padding: 0 7%;
     }
     & .pricing-box {
       display: flex;
       flex-flow: column;
-      padding: 3rem 7% 0 7%;
+      align-self: stretch;
+      padding: 2rem 7% 3rem 7%;
       & .__pricing-box-title {
-        font-size: 20px;
-        font-weight: 400;
+        font-size: 21px;
+        font-weight: 300;
         padding-bottom: .5rem;
       }
       & .plano-row {
