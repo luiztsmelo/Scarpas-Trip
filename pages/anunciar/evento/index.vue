@@ -20,7 +20,7 @@
         </div>
 
       </div>
-    </div><!-- PLANO CONTAINER -->
+    </div><!-- PLANO EVENTO -->
 
 
     <div class="progress-bar" v-show="!$store.state.cadastroEvento0" :style="'width:' + $store.state.eventoProgressBar + '%'"></div>
