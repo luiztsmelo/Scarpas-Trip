@@ -93,7 +93,7 @@ export default {
         color: var(--color01);
       }
       & .profissional {
-        background: black;
+        background: linear-gradient(90deg, #000000, #434343);
       }
     }
   }
