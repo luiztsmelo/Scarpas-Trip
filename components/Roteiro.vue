@@ -78,7 +78,7 @@ export default {
     padding: 2rem 7% 0 7%;
     color: white;
     font-size: 26px;
-    font-weight: 600;
+    font-weight: 500;
   }
   & .chegada-partida-container {
     display: flex;
@@ -88,7 +88,7 @@ export default {
     margin: 2rem 7%;
     background: rgba(0, 0, 0, .12);
     border-radius: 4px;
-    height: 2.7rem;
+    height: 2.8rem;
     & .chegada-partida-input {
       position: relative;
       width: 5.2rem;
