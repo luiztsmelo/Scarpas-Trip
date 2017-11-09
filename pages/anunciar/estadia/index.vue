@@ -72,7 +72,7 @@ export default {
       height: auto;
     }
     & .__title {
-      font-size: 27px;
+      font-size: 26px;
       font-weight: 500;
       padding: 0 7%;
     }
