@@ -201,30 +201,16 @@ export default {
 @media (min-width: 1281px) {
   .home {
     & .home-body {
-      & .roteiro-box {
-        & .__title {
-          padding: 2rem 12% 0 12%;
-        }
-        & .check-in-out {
-          margin: 2rem 12%;
-          & h3 {
-          }
-          & img {
-            width: 1.25rem;
-            height: auto;
-          }
-        }
-      }
       & .category-container {
         & .title-row {
-          padding: 0 12% 1.5rem 12%;
+          padding: 0 13% 1.5rem 13%;
           & .__title {
             font-size: 29px;
           }
         }
         & .swiper-container {
           & .swiper-wrapper {
-            padding-left: 12%;
+            padding-left: 13%;
           }
         }
       }

@@ -319,7 +319,7 @@ export default {
 
 @media (min-width: 1281px) {
   .eventos_id {
-    /* padding: 0 12%; */
+    /* padding: 0 13%; */
   }
 }
 </style>

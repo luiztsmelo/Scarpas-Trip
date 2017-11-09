@@ -11,11 +11,13 @@
 
         <div class="plano-row casual">
           <span class="__plano-valor">R$50</span>
+          <span class="__plano-valor-mes">/mês</span>
           <span class="__plano-title">AVANÇADO</span>
         </div>
 
         <div class="plano-row profissional">
           <span class="__plano-valor">R$100</span>
+          <span class="__plano-valor-mes">/mês</span>
           <span class="__plano-title">PROFISSIONAL</span>
         </div>
 
@@ -81,7 +83,13 @@ export default {
         & .__plano-valor {
           font-size: 23px;
           font-weight: 300;
-          padding: 0 .7rem;
+          padding-left: .7rem;
+        }
+        & .__plano-valor-mes {
+          transform: translateY(2px);
+          font-size: 15px;
+          font-weight: 300;
+          padding-right: .8rem;
         }
         & .__plano-title {
           font-size: 14px;
@@ -93,7 +101,7 @@ export default {
         color: var(--color01);
       }
       & .profissional {
-        background: linear-gradient(90deg, #000000, #434343);
+        background: rgb(13, 13, 13);
       }
     }
   }

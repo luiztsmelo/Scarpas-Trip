@@ -115,11 +115,56 @@ export default {
   }
 }
 
-input {
+input {  
+  cursor: pointer;
   opacity: 0;
   width: 100%;
 }
 [type="date"]::-webkit-calendar-picker-indicator {
   width: 100%;
+}
+
+@media (min-width: 1281px) {
+  .roteiro {
+    width: 100%;
+    background: linear-gradient(290deg, #C3F9E2, #00A8A1);
+    & .__title {
+      font-size: 32px;
+      padding: 4rem 13% 0 13%;
+    }
+    & .chegada-partida-container {
+      display: flex;
+      align-items: center;
+      text-align: center;
+      justify-content: space-around;
+      margin: 3rem 13% 4rem 13%;
+      background: rgba(0, 0, 0, .12);
+      border-radius: 4px;
+      height: 2.7rem;
+      & .chegada-partida-input {
+        position: relative;
+        width: 5.2rem;
+        & h3 {
+          font-size: 17px;
+          font-weight: 400;
+          color: white;
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          width: auto;
+          height: auto;
+        }
+      }
+      & img {
+        width: 1.25rem;
+        height: auto;
+      }
+      & .__calendar-confirm {
+        transform: scale(1.08);
+      }
+    }
+  }
 }
 </style>

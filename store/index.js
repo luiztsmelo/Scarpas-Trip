@@ -30,7 +30,7 @@ const store = () => new Vuex.Store({
     evento: null,
     getEventoID: null,
     eventoMap: null,
-    eventoData: {/* Lembrar de atualizar a action */
+    eventoData: {/* Atualizar a action */
       eventoID: null,
       planoCasual: false,
       planoPro: false,
@@ -59,7 +59,7 @@ const store = () => new Vuex.Store({
     /*
     ########## Passeio ##########
     */
-    passeioData: {/* Lembrar de atualizar a action */
+    passeioData: {/* Atualizar a action */
       passeioID: null,
       planoCasual: false,
       planoPro: false,

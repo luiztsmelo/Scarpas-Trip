@@ -86,7 +86,7 @@ export default {
 @media (min-width: 1281px) {
   .navbar {
     height: 3.7rem;
-    padding: 0 12%;
+    padding: 0 13%;
     & .navbar-body {
       & .__brand-name {
         font-size: 29px;
