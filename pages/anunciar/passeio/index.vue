@@ -67,6 +67,7 @@ export default {
     display: flex;
     flex-flow: column;
     align-items: center;
+    height: calc(100vh);
     & .__img-header {
       margin: 2rem 0;
       width: 6rem;
@@ -74,7 +75,7 @@ export default {
     }
     & .__title {
       font-size: 27px;
-      font-weight: 400;
+      font-weight: 500;
       padding: 0 7%;
     }
     & .pricing-box {
