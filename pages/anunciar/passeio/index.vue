@@ -69,22 +69,22 @@ export default {
     align-items: center;
     & .__img-header {
       margin: 2rem 0;
-      width: 7rem;
+      width: 6rem;
       height: auto;
     }
     & .__title {
-      font-size: 28px;
-      font-weight: 300;
+      font-size: 27px;
+      font-weight: 400;
       padding: 0 7%;
     }
     & .pricing-box {
       display: flex;
       flex-flow: column;
       align-self: stretch;
-      padding: 2rem 7% 3rem 7%;
+      padding: 3rem 7% 3rem 7%;
       & .__pricing-box-title {
-        font-size: 21px;
-        font-weight: 300;
+        font-size: 20px;
+        font-weight: 400;
         padding-bottom: .5rem;
       }
       & .plano-row {
