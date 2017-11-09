@@ -550,6 +550,7 @@ export default {
   flex-flow: column;
   background: linear-gradient(40deg,#f857a6, #ff5858);
   color: white;
+  height: calc(100vh - 3.3rem);
   transition: var(--main-transition);
   & .progress-bar {
     position: fixed;
@@ -563,7 +564,6 @@ export default {
     display: flex;
     flex-flow: column;
     align-items: center;
-    height: calc(100vh);
     & .__img-header {
       margin: 2rem 0;
       width: 6rem;
@@ -578,7 +578,7 @@ export default {
       display: flex;
       flex-flow: column;
       align-self: stretch;
-      padding: 3rem 7% 3rem 7%;
+      padding: 3rem 7% 0 7%;
       & .__pricing-box-title {
         font-size: 20px;
         font-weight: 400;
