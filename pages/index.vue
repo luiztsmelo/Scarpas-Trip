@@ -60,8 +60,7 @@ export default {
       swiperOption: {
         slidesPerView: 2,
         spaceBetween: 14,
-        speed: 300,
-        freeMode: true
+        speed: 300
       }
     }
   },
