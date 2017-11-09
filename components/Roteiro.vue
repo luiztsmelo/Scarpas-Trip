@@ -4,11 +4,27 @@
     <h1 class="__title">Crie um roteiro gratuito para sua viagem à Escarpas do Lago!</h1>
 
     <div class="check-in-out">
+
       <img src="../assets/img/calendar.svg">
-      <h3>Chegada</h3>
+
+      <div class="chegada-partida">
+        <h3 v-if="!chegadaDate">Chegada</h3>
+        <h3 v-else>{{ chegadaDate }}</h3>
+        <input type="date" ref="inputChegada" v-model="chegadaDate">
+      </div>
+      
+      
+
       <img src="../assets/img/calendar-arrow.svg">
-      <h3>Partida</h3>
+
+      <div class="chegada-partida">
+        <h3 v-if="!partidaDate">Partida</h3>
+        <h3 v-else>{{ partidaDate }}</h3>
+        <input type="date" ref="inputChegada" v-model="partidaDate">
+      </div>
+
       <img class="__calendar-confirm" src="../assets/img/calendar-confirm.svg">
+
     </div>
 
   </div>     
@@ -16,12 +32,18 @@
 
 <script>
 export default {
-  
+  data() {
+    return {
+      chegadaDate: null,
+      partidaDate: null
+    }
+  }
 }
 </script>
 
 <style scoped>
 @import url('../assets/css/main.css');
+
 
 .roteiro {
   width: 100%;
@@ -41,11 +63,21 @@ export default {
     background: rgba(0, 0, 0, .12);
     border-radius: 4px;
     height: 2.7rem;
-    & h3 {
-      width: 5rem;
-      font-size: 17px;
-      font-weight: 400;
-      color: white;
+    & .chegada-partida {
+      position: relative;
+      width: 5.5rem;
+      & h3 {
+        font-size: 17px;
+        font-weight: 400;
+        color: white;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: auto;
+        height: auto;
+      }
     }
     & img {
       width: 1.25rem;
@@ -57,4 +89,11 @@ export default {
   }
 }
 
+input {
+  opacity: 0;
+  width: 100%;
+}
+[type="date"]::-webkit-calendar-picker-indicator {
+  width: 100%;
+}
 </style>
