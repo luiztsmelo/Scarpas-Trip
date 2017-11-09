@@ -43,7 +43,7 @@ export default {
     background-repeat: no-repeat;
     background-size: cover;
     animation-name: spin;
-    animation-duration: 3s;
+    animation-duration: 2.5s;
     animation-iteration-count: infinite;
     animation-timing-function: linear;
     opacity: .2;
