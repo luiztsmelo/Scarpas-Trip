@@ -2,7 +2,7 @@
   <div class="anunciar-passeio">
 
     <!-- PLANO PASSEIO -->
-    <div class="plano-evento" v-show="cadastroPasseio0">
+    <div class="plano-evento" v-show="$store.state.cadastroEvento0">
       
       <h1 class="__title">Amplie seus ganhos anunciando seu passeio de lancha ou 4x4 com a gente!</h1>
 
@@ -34,11 +34,6 @@ export default {
     }
   },
   transition: 'opacity',
-  computed: {
-    cadastroPasseio0 () {
-      return this.$store.state.passeios.cadastroPasseio0
-    }
-  },
   beforeRouteLeave (to, from, next) {
     if (this.$store.state.showFoobar === false) {
       this.$store.commit('m_showFoobar', true)
