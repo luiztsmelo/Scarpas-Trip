@@ -3,11 +3,11 @@
 
     <h1 class="__title">Crie um roteiro gratuito para sua viagem à Escarpas do Lago!</h1>
 
-    <div class="check-in-out">
+    <div class="chegada-partida-container">
 
       <img src="../assets/img/calendar.svg">
 
-      <div class="chegada-partida">
+      <div class="chegada-partida-input">
         <h3 v-if="!chegadaDate">Chegada</h3>
         <h3 v-else>{{ chegadaDate }}</h3>
         <input type="date" ref="inputChegada" v-model="chegadaDate">
@@ -17,7 +17,7 @@
 
       <img src="../assets/img/calendar-arrow.svg">
 
-      <div class="chegada-partida">
+      <div class="chegada-partida-input">
         <h3 v-if="!partidaDate">Partida</h3>
         <h3 v-else>{{ partidaDate }}</h3>
         <input type="date" ref="inputChegada" v-model="partidaDate">
@@ -32,7 +32,7 @@
 
 <script>
 export default {
-  data() {
+  data () {
     return {
       chegadaDate: null,
       partidaDate: null
@@ -54,7 +54,7 @@ export default {
     font-size: 26px;
     font-weight: 600;
   }
-  & .check-in-out {
+  & .chegada-partida-container {
     display: flex;
     align-items: center;
     text-align: center;
@@ -63,7 +63,7 @@ export default {
     background: rgba(0, 0, 0, .12);
     border-radius: 4px;
     height: 2.7rem;
-    & .chegada-partida {
+    & .chegada-partida-input {
       position: relative;
       width: 5.5rem;
       & h3 {
