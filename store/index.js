@@ -5,7 +5,9 @@ import createPersistedState from 'vuex-persistedstate'
 const store = () => new Vuex.Store({
   plugins: [createPersistedState({ storage: window.sessionStorage })],
   /*
+  ***************************************************************************************
   **************************************** STATE ****************************************
+  ***************************************************************************************
   */
   state: {
     /*
@@ -21,7 +23,7 @@ const store = () => new Vuex.Store({
     -------------------- ANÚNCIOS --------------------
     */
     /*
-    .......... Evento ..........
+    ########## Evento ##########
     */
     eventoID: null,
     eventos: null,
@@ -53,15 +55,33 @@ const store = () => new Vuex.Store({
     cadastroEvento4: false,
     cadastroEvento5: false,
     cadastroEvento6: false,
-    cadastroEvento7: false
+    cadastroEvento7: false,
+    /*
+    ########## Passeio ##########
+    */
+    passeioData: {/* Lembrar de atualizar a action */
+      passeioID: null,
+      planoCasual: false,
+      planoPro: false,
+      title: '',
+      subtitle: '',
+      valorPasseio: 0,
+      imageH1W: null,
+      imageH1J: null,
+      imageL1: null
+    }
   },
   /*
+  *****************************************************************************************
   **************************************** GETTERS ****************************************
+  *****************************************************************************************
   */
   getters: {
   },
   /*
+  *******************************************************************************************
   **************************************** MUTATIONS ****************************************
+  *******************************************************************************************
   */
   mutations: {
     /*
@@ -89,7 +109,7 @@ const store = () => new Vuex.Store({
     -------------------- ANÚNCIOS --------------------
     */
     /*
-    .......... Evento ..........
+    ########## Evento ##########
     */
     m_eventoID (state, payload) {
       state.eventoID = payload
@@ -155,11 +175,19 @@ const store = () => new Vuex.Store({
     m_planoPro (state, payload) {
       state.eventoData.planoPro = payload
     }
+    /*
+    ########## Passeio ##########
+    */
   },
   /*
+  *****************************************************************************************
   **************************************** ACTIONS ****************************************
+  *****************************************************************************************
   */
   actions: {
+    /*
+    ########## Evento ##########
+    */
     a_uploadEvento ({ state, commit }) {
       firebase.database().ref('eventos/' + state.eventoID).set(state.eventoData).then(() => {
         commit('m_eventoData', {
