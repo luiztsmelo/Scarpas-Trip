@@ -91,9 +91,9 @@ export default {
     height: 2.7rem;
     & .chegada-partida-input {
       position: relative;
-      width: 5rem;
+      width: 5.2rem;
       & h3 {
-        font-size: 16px;
+        font-size: 17px;
         font-weight: 400;
         color: white;
         position: absolute;
