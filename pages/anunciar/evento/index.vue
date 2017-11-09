@@ -12,11 +12,13 @@
         <div class="plano-row casual" @click="$store.commit('m_cadastroEvento1', true), $store.commit('m_cadastroEvento0', false), $store.commit('m_planoCasual', true), $store.commit('m_planoPro', false), $store.commit('m_eventoProgressBar', (100/7))">
           <span class="__plano-valor">R$30</span>
           <span class="__plano-title">CASUAL</span>
+          <div class="__arrow-down-black"></div>
         </div>
 
         <div class="plano-row profissional" @click="$store.commit('m_cadastroEvento1', true), $store.commit('m_cadastroEvento0', false), $store.commit('m_planoPro', true), $store.commit('m_planoCasual', false), $store.commit('m_eventoProgressBar', (100/7))">
           <span class="__plano-valor">R$100</span>
           <span class="__plano-title">PROFISSIONAL</span>
+          <div class="__arrow-down-white"></div>
         </div>
 
       </div>
@@ -538,6 +540,7 @@ export default {
 
 <style scope>
 @import url('../../../assets/css/main.css');
+@import url('../../../assets/css/illustrations.css');
 
 .anunciar-evento {
   margin-top: 3.3rem;
@@ -571,6 +574,7 @@ export default {
         padding-bottom: .5rem;
       }
       & .plano-row {
+        position: relative;
         cursor: pointer;
         display: flex;
         align-items: center;

@@ -1,0 +1,22 @@
+
+/* ******* ARROW DOWN ******* */
+.__arrow-down-white {
+  position: absolute;
+  right: 1.2rem;
+  width: 11px;
+  height: 11px;
+  background: transparent;
+  border-left: 2px solid white;
+  border-bottom: 2px solid white;
+  transform: rotate(-45deg) translateY(-4px);
+}
+.__arrow-down-black {
+  position: absolute;
+  right: 1.2rem;
+  width: 11px;
+  height: 11px;
+  background: transparent;
+  border-left: 2px solid rgb(42, 42, 42);
+  border-bottom: 2px solid rgb(42, 42, 42);
+  transform: rotate(-45deg) translateY(-4px);
+}

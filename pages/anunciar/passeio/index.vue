@@ -2,7 +2,7 @@
   <div class="anunciar-passeio">
 
     <!-- PLANO PASSEIO -->
-    <div class="plano-evento" v-show="$store.state.cadastroEvento0">
+    <div class="plano-passeio" v-show="$store.state.cadastroEvento0">
       
       <h1 class="__title">Amplie seus ganhos anunciando seu passeio de lancha ou 4x4 com a gente!</h1>
 
@@ -13,14 +13,14 @@
           <span class="__plano-valor">R$50</span>
           <span class="__plano-valor-mes">/mês</span>
           <span class="__plano-title">AVANÇADO</span>
-          <div class="__arrow-down black"></div>
+          <div class="__arrow-down-black"></div>
         </div>
 
         <div class="plano-row profissional">
           <span class="__plano-valor">R$100</span>
           <span class="__plano-valor-mes">/mês</span>
           <span class="__plano-title">PROFISSIONAL</span>
-          <div class="__arrow-down white"></div>
+          <div class="__arrow-down-white"></div>
         </div>
 
       </div>
@@ -51,6 +51,7 @@ export default {
 
 <style scope>
 @import url('../../../assets/css/main.css');
+@import url('../../../assets/css/illustrations.css');
 
 .anunciar-passeio {
   margin-top: 3.3rem;
@@ -60,7 +61,8 @@ export default {
   color: white;
   transition: var(--main-transition);
   height: calc(100vh - 3.3rem);
-  & .plano-evento {
+  /* ******************** PLANO PASSEIO ******************** */
+  & .plano-passeio {
     & .__title {
       font-size: 29px;
       font-weight: 600;
@@ -97,22 +99,6 @@ export default {
         & .__plano-title {
           font-size: 14px;
           font-weight: 500;
-        }
-        & .__arrow-down {
-          position: absolute;
-          right: 1.2rem;
-          width: 11px;
-          height: 11px;
-          background: transparent;
-          transform: rotate(-45deg) translateY(-4px);
-        }
-        & .white {
-          border-left: 2px solid white;
-          border-bottom: 2px solid white;
-        }
-        & .black {
-          border-left: 2px solid black;
-          border-bottom: 2px solid black;
         }
       }
       & .casual {
