@@ -1,8 +1,8 @@
 <template>
   <div class="roteiro">
     
-    <progressive-img class="__img"
-    no-ratio 
+    <progressive-background class="__img"
+    no-ratio
     src="https://firebasestorage.googleapis.com/v0/b/escarpas-trip.appspot.com/o/utils%2FescarpasH.jpg?alt=media&token=2ea18e03-653a-43b6-ae07-6597a58585ab" placeholder="https://firebasestorage.googleapis.com/v0/b/escarpas-trip.appspot.com/o/utils%2FescarpasL.jpg?alt=media&token=e3b6b83a-4ad9-4da9-8f61-09c18d14ed76" />
     
     <div class="chegada-partida-container">
@@ -83,13 +83,12 @@ export default {
   background: var(--color01);
   & .__img {
     min-height: 14rem;
-    max-height: 17rem;
   }
   & .chegada-partida-container {
     position: absolute;
     top: 0; bottom: 0;
     z-index: 2;
-    background: rgba(0, 0, 0, .25);
+    background: rgba(0, 0, 0, .15);
     height: 100%;
     width: 100%;
     & .__title {
@@ -147,41 +146,36 @@ input {
 
 @media (min-width: 1281px) {
   .roteiro {
-    & .background-overlay {
+    & .__img {
+      height: 23rem;
+    }
+    & .chegada-partida-container {
+      height: 23rem;
+      background: rgba(0, 0, 0, .1);
       & .__title {
-        font-size: 32px;
-        padding: 4rem 13% 0 13%;
+        font-size: 36px;
+        padding: 7rem 13% 0 13%;
       }
-      & .chegada-partida-container {
+      & .chegada-partida-box {
         display: flex;
         align-items: center;
         text-align: center;
         justify-content: space-around;
-        margin: 3rem 13% 4rem 13%;
+        margin: 4rem 13% 4rem 13%;
         border-radius: 4px;
-        height: 2.7rem;
+        width: 35%;
+        height: 3.2rem;
         & .chegada-partida-input {
           position: relative;
           width: 5.2rem;
           & h3 {
             font-size: 17px;
             font-weight: 400;
-            color: white;
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            width: auto;
-            height: auto;
           }
         }
         & img {
           width: 1.25rem;
           height: auto;
-        }
-        & .__calendar-confirm {
-          transform: scale(1.08);
         }
       }
     }
