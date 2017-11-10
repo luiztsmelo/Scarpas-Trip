@@ -73,12 +73,15 @@ export default {
 
 .roteiro {
   width: 100%;
-  background: linear-gradient(-30deg, #C3F9E2, #00A8A1);
+  background-image: url('https://firebasestorage.googleapis.com/v0/b/escarpas-trip.appspot.com/o/utils%2Fescarpas.jpg?alt=media&token=c1c2ddfa-4665-4433-ae54-095fcd916b65');
+  background-size: cover;
+  background-repeat: no-repeat;
   & .__title {
+    background: rgba(0, 0, 0, .3);
     padding: 2rem 7% 0 7%;
     color: white;
-    font-size: 24px;
-    font-weight: 500;
+    font-size: 25px;
+    font-weight: 600;
   }
   & .chegada-partida-container {
     display: flex;
@@ -86,7 +89,7 @@ export default {
     text-align: center;
     justify-content: space-around;
     margin: 2rem 7%;
-    background: rgba(0, 0, 0, .12);
+    background: rgba(0, 0, 0, .3);
     border-radius: 4px;
     height: 2.8rem;
     & .chegada-partida-input {
