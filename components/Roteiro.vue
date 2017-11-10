@@ -103,9 +103,8 @@ export default {
       text-align: center;
       justify-content: space-around;
       margin: 2rem 7%;
-      background: rgba(0, 0, 0, .3);
-      border-radius: 4px;
-      height: 2.8rem;
+      border-bottom: 1px solid white;
+      height: 2.7rem;
       & .chegada-partida-input {
         position: relative;
         width: 5.2rem;
