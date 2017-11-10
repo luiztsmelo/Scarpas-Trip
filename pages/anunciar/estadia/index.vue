@@ -4,7 +4,7 @@
     <!-- PLANO ESTADIA -->
     <div class="plano-estadia" v-show="$store.state.cadastroEvento0">
       
-      <img class="__img-header" src="../../../assets/img/estadia.svg">
+      <img class="__img-header" src="../../../assets/img/anuncio-estadia.svg">
 
       <h1 class="__title">Amplie seus ganhos anunciando seu imóvel com a gente!</h1>
 

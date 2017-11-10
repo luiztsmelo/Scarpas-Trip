@@ -81,7 +81,7 @@ export default {
   background-size: cover;
   background-repeat: no-repeat;
   & .background-overlay {
-    background: rgba(0, 0, 0, .3);
+    background: rgba(0, 0, 0, .25);
     height: 100%;
     & .__title {
       padding: 2rem 7% 0 7%;

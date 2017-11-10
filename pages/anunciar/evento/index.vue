@@ -4,7 +4,7 @@
     <!-- PLANO EVENTO -->
     <div class="plano-evento" v-show="$store.state.cadastroEvento0">
       
-      <img class="__img-header" src="../../../assets/img/eventos.svg">
+      <img class="__img-header" src="../../../assets/img/anuncio-evento.svg">
 
       <h1 class="__title">Divulgação: a chave para o sucesso do seu evento!</h1>
 
@@ -18,7 +18,7 @@
         </div>
 
         <div class="plano-row profissional" @click="$store.commit('m_cadastroEvento1', true), $store.commit('m_cadastroEvento0', false), $store.commit('m_planoPro', true), $store.commit('m_planoCasual', false), $store.commit('m_eventoProgressBar', (100/7))">
-          <span class="__plano-valor">R$100</span>
+          <span class="__plano-valor">R$80</span>
           <span class="__plano-title">PROFISSIONAL</span>
           <div class="__arrow-down-white"></div>
         </div>
