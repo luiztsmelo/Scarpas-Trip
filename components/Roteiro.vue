@@ -84,10 +84,9 @@ export default {
     background: rgba(0, 0, 0, .3);
     height: 100%;
     & .__title {
-      
       padding: 2rem 7% 0 7%;
       color: white;
-      font-size: 25px;
+      font-size: 26px;
       font-weight: 600;
     }
     & .chegada-partida-container {
