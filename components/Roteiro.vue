@@ -1,11 +1,14 @@
 <template>
   <div class="roteiro">
-
-    <div class="background-overlay">
-
+    
+    <progressive-img class="__img" 
+    src="https://firebasestorage.googleapis.com/v0/b/escarpas-trip.appspot.com/o/utils%2FescarpasH.jpg?alt=media&token=2ea18e03-653a-43b6-ae07-6597a58585ab" placeholder="https://firebasestorage.googleapis.com/v0/b/escarpas-trip.appspot.com/o/utils%2FescarpasL.jpg?alt=media&token=e3b6b83a-4ad9-4da9-8f61-09c18d14ed76" />
+    
+    <div class="chegada-partida-container">
+      
       <h1 class="__title">Planeje sua viagem à Escarpas do Lago gratuitamente!</h1>
 
-      <div class="chegada-partida-container">
+      <div class="chegada-partida-box">
 
         <img src="../assets/img/calendar.svg">
 
@@ -76,20 +79,26 @@ export default {
 
 
 .roteiro {
+  position: relative;
   width: 100%;
-  background-image: url('https://firebasestorage.googleapis.com/v0/b/escarpas-trip.appspot.com/o/utils%2Fescarpas.jpg?alt=media&token=c1c2ddfa-4665-4433-ae54-095fcd916b65');
-  background-size: cover;
-  background-repeat: no-repeat;
-  & .background-overlay {
+  & .__img {
+    max-height: 17rem;
+    background-color: white;
+  }
+  & .chegada-partida-container {
+    position: absolute;
+    top: 0; bottom: 0;
+    z-index: 2;
     background: rgba(0, 0, 0, .25);
     height: 100%;
+    width: 100%;
     & .__title {
       padding: 2rem 7% 0 7%;
       color: white;
       font-size: 26px;
       font-weight: 600;
     }
-    & .chegada-partida-container {
+    & .chegada-partida-box {
       display: flex;
       align-items: center;
       text-align: center;
