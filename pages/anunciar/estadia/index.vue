@@ -4,7 +4,7 @@
     <!-- PLANO ESTADIA -->
     <div class="plano-estadia" v-show="$store.state.cadastroEvento0">
       
-      <img class="__img-header" src="../../../assets/img/anuncio-estadia.svg">
+      <img class="__img-header" src="../../../assets/img/estadia.svg">
 
       <h1 class="__title">Amplie seus ganhos anunciando seu imóvel com a gente!</h1>
 
@@ -70,6 +70,7 @@ export default {
       margin: 2rem 0;
       width: 6rem;
       height: auto;
+      filter: grayscale(100%) brightness(200%);
     }
     & .__title {
       font-size: 26px;

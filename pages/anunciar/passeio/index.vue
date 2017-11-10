@@ -4,7 +4,7 @@
     <!-- PLANO PASSEIO -->
     <div class="plano-passeio" v-show="$store.state.cadastroEvento0">
       
-      <img class="__img-header" src="../../../assets/img/anuncio-passeio.svg">
+      <img class="__img-header" src="../../../assets/img/passeios.svg">
 
       <h1 class="__title">Amplie seus ganhos anunciando seu passeio com a gente!</h1>
 
@@ -72,6 +72,7 @@ export default {
       margin: 2rem 0;
       width: 6rem;
       height: auto;
+      filter: grayscale(100%) brightness(200%);
     }
     & .__title {
       font-size: 26px;

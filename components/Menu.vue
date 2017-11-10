@@ -101,7 +101,7 @@ export default {
     }
     & .anuncio-box {
       padding-bottom: 1.1rem;
-      border-bottom: 1px solid rgb(222, 222, 222);
+      border-bottom: 1px solid rgb(210, 210, 210);
     }
     & .info-box {
       padding: 1.1rem 0;

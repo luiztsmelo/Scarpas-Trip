@@ -4,7 +4,7 @@
     <!-- PLANO ESTADIA -->
     <div class="plano-restaurante" v-show="$store.state.cadastroEvento0">
       
-      <img class="__img-header" src="../../../assets/img/anuncio-restaurante.svg">
+      <img class="__img-header" src="../../../assets/img/comidas.svg">
 
       <h1 class="__title">A melhor maneira de encontrar o seu cliente é ser encontrado por ele.</h1>
 
@@ -70,6 +70,7 @@ export default {
       margin: 2rem 0;
       width: 6rem;
       height: auto;
+      filter: grayscale(100%) brightness(200%);
     }
     & .__title {
       font-size: 26px;

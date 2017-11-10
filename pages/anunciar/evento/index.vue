@@ -4,7 +4,7 @@
     <!-- PLANO EVENTO -->
     <div class="plano-evento" v-show="$store.state.cadastroEvento0">
       
-      <img class="__img-header" src="../../../assets/img/anuncio-evento.svg">
+      <img class="__img-header" src="../../../assets/img/eventos.svg">
 
       <h1 class="__title">Divulgação: a chave para o sucesso do seu evento!</h1>
 
@@ -568,6 +568,7 @@ export default {
       margin: 2rem 0;
       width: 6rem;
       height: auto;
+      filter: grayscale(100%) brightness(200%);
     }
     & .__title {
       font-size: 26px;
@@ -664,7 +665,7 @@ export default {
         color: rgb(92, 92, 92);
         padding: .5rem 0 .6rem 0;
         border: none;
-        border-bottom: 1px solid rgb(222, 222, 222);
+        border-bottom: 1px solid rgb(210, 210, 210);
         outline: none;
       }
     }
@@ -727,7 +728,7 @@ export default {
       color: rgb(92, 92, 92);
       width: 100%;
       border: none;
-      border-bottom: 1px solid rgb(222, 222, 222);
+      border-bottom: 1px solid rgb(210, 210, 210);
       margin: 1.5rem 0 1rem 0;
       padding: .5rem 0 .6rem 0;
       outline: none;
@@ -739,7 +740,7 @@ export default {
       width: 100%;
       padding: .5rem 0 .6rem 0;
       border: none;
-      border-bottom: 1px solid rgb(222, 222, 222);
+      border-bottom: 1px solid rgb(210, 210, 210);
       outline: none;
     }
     & .__image-input-btn {
