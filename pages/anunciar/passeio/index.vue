@@ -11,19 +11,41 @@
       <div class="pricing-box">
         <h2 class="__pricing-box-title">Selecione seu plano:</h2>
 
-        <div class="plano-row casual">
+        <!-- Plano Casual -->
+        <div class="plano-row casual" @click="planoCasualExpanded = !planoCasualExpanded">
           <span class="__plano-valor">R$50</span>
           <span class="__plano-valor-mes">/mês</span>
           <span class="__plano-title">AVANÇADO</span>
           <div class="__arrow-down-black"></div>
         </div>
 
-        <div class="plano-row profissional">
+        <transition name="plano-row-expanded-animation">
+          <div class="plano-row-expanded casual" v-show="planoCasualExpanded">
+            <ul>
+              <li class="__item">Máximo 3 imagens</li>
+              <li class="__item">Benefício 2</li>
+            </ul>
+          </div>
+        </transition><!-- Plano Casual -->
+
+
+        <!-- Plano Pro -->
+        <div class="plano-row profissional" @click="planoProExpanded = !planoProExpanded">
           <span class="__plano-valor">R$100</span>
           <span class="__plano-valor-mes">/mês</span>
           <span class="__plano-title">PROFISSIONAL</span>
           <div class="__arrow-down-white"></div>
         </div>
+
+        <transition name="plano-row-expanded-animation">
+          <div class="plano-row-expanded profissional" v-show="planoProExpanded" style="background:rgb(32,32,32)">
+            <ul>
+              <li class="__item">Ganhe um maior destaque</li>
+              <li class="__item">Venda seu ingresso conosco</li>
+            </ul>
+          </div>
+        </transition><!-- Plano Pro -->
+
 
       </div>
     </div><!-- PLANO PASSEIO -->
@@ -40,6 +62,12 @@ export default {
     }
   },
   transition: 'opacity',
+  data() {
+    return {
+      planoCasualExpanded: false,
+      planoProExpanded: false
+    }
+  },
   beforeRouteLeave (to, from, next) {
     if (this.$store.state.showFoobar === false) {
       this.$store.commit('m_showFoobar', true)
@@ -61,7 +89,7 @@ export default {
   flex-flow: column;
   background: linear-gradient(40deg, #B5D9F0, #49A5FC);
   color: white;
-  height: calc(100vh - 3.3rem);
+  height: 100vh;
   transition: var(--main-transition);
   /* ******************** PLANO PASSEIO ******************** */
   & .plano-passeio {
@@ -87,16 +115,19 @@ export default {
       & .__pricing-box-title {
         font-size: 20px;
         font-weight: 400;
-        padding-bottom: .5rem;
       }
       & .plano-row {
         position: relative;
+        z-index: 3;
+        margin-top: 1rem;
         cursor: pointer;
         display: flex;
         align-items: center;
         height: 3.3rem;
-        margin: .5rem 0;
-        border-radius: 3px;
+        border-radius: 4px;
+        box-shadow: 1px 1px 10px 0px rgba(0,0,0,0.3);
+        -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+        transition: all .2s ease;
         & .__plano-valor {
           font-size: 23px;
           font-weight: 300;
@@ -113,6 +144,19 @@ export default {
           font-weight: 500;
         }
       }
+      & .plano-row-expanded {
+        z-index: 2;
+        width: 100%;
+        margin-bottom: .5rem;
+        border-radius: 0 0 4px 4px;
+        overflow: hidden;
+        transition: all .2s ease;
+        & .__item {
+          font-size: 16px;
+          font-weight: 300;
+          margin: .5rem 0;
+        }
+      }
       & .casual {
         background: white;
         color: var(--color01);
@@ -122,5 +166,11 @@ export default {
       }
     }
   }
+}
+
+.plano-row-expanded-animation-enter,
+.plano-row-expanded-animation-leave-active {
+  transform: translateY(-100%);
+  opacity: 0;
 }
 </style>
