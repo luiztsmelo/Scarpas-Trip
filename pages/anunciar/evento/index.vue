@@ -264,7 +264,7 @@
       <div class="back-next">
         <div class="back-next-body">
           <button type="button" class="__back" @click="backBtn7">Voltar</button>
-          <button type="button" class="__next" :style="form7ok" @click="finalizar">Finalizar</button>
+          <button type="button" class="__next" :style="form7ok" @click="concluir">Concluir</button>
         </div>
       </div>
     
@@ -417,7 +417,7 @@ export default {
         return this.$store.commit('m_cadastroEvento6', false), this.$store.commit('m_cadastroEvento7', true), this.$store.commit('m_eventoProgressBar', (100/7)*7)
       }
     },
-    finalizar () {
+    concluir () {
       if (1<2) {
         this.$store.commit('m_loader', true)
         const eventoID = Math.floor(Math.random() * (99999 - 10000 + 1) + 10000)

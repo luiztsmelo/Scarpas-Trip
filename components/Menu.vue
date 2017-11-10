@@ -42,6 +42,13 @@
               <span class="__item-text">Contato</span>
             </nuxt-link>
           </div>
+
+          <div @click="$store.commit('m_showMenu', false), $store.commit('m_menuIconAnime', false), $store.commit('m_showFoobar', false)">
+            <nuxt-link to="/anunciar" class="menu-item">
+              <img src="../assets/img/sobre.svg" alt="" class="__item-img">
+              <span class="__item-text">Sobre</span>
+            </nuxt-link>
+          </div>
         </div>
 
         <span class="tmstudio">Desenvolvido por <strong>TMstudio</strong></span>
