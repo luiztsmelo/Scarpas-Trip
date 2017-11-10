@@ -94,7 +94,7 @@ export default {
         width: 1.4rem;
         height: auto;
         margin-right: 1rem;
-        filter: grayscale(100%) brightness(80%);
+        filter: grayscale(100%) brightness(110%);
       }
       & .__item-img {
         width: 1.4rem;

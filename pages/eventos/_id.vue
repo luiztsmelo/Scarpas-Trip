@@ -224,7 +224,6 @@ export default {
         cursor: pointer;
         width: 1.5rem;
         height: auto;
-        -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
       }
     }
   }/* ####### BACKBAR ####### */

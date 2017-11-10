@@ -568,7 +568,6 @@ export default {
       margin: 2rem 0;
       width: 6rem;
       height: auto;
-      filter: grayscale(100%) brightness(200%);
     }
     & .__title {
       font-size: 26px;

@@ -170,7 +170,6 @@ export default {
             min-width: 145px;
             max-width: 145px;
             cursor: pointer;
-            -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
             & .__card-img {
               margin-bottom: .2rem;
               width: 100%;

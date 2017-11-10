@@ -70,7 +70,6 @@ export default {
       & .__menu {
         display: inline-block;
         cursor: pointer;
-        -webkit-tap-highlight-color: rgba(255, 255, 45, 0);
         & .bar {
           transition: all .3s ease;
           width: 24px;
