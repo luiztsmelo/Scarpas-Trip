@@ -1,7 +1,7 @@
 <template>
   <div class="roteiro">
 
-    <h1 class="__title">Crie um roteiro gratuito para sua viagem à Escarpas do Lago!</h1>
+    <h1 class="__title">Crie hoje um roteiro gratuito para sua viagem à Escarpas do Lago!</h1>
 
     <div class="chegada-partida-container">
 
@@ -77,7 +77,7 @@ export default {
   & .__title {
     padding: 2rem 7% 0 7%;
     color: white;
-    font-size: 26px;
+    font-size: 24px;
     font-weight: 500;
   }
   & .chegada-partida-container {

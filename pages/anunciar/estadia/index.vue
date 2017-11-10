@@ -80,7 +80,7 @@ export default {
       display: flex;
       flex-flow: column;
       align-self: stretch;
-      padding: 3rem 7% 0 7%;
+      padding: 2rem 7% 0 7%;
       & .__pricing-box-title {
         font-size: 20px;
         font-weight: 400;
