@@ -73,7 +73,7 @@ export default {
 
 .roteiro {
   width: 100%;
-  background: linear-gradient(290deg, #C3F9E2, #00A8A1);
+  background: linear-gradient(-30deg, #C3F9E2, #00A8A1);
   & .__title {
     padding: 2rem 7% 0 7%;
     color: white;
