@@ -1,27 +1,31 @@
 <template>
   <div class="roteiro">
 
-    <h1 class="__title">Planeje sua viagem à Escarpas do Lago gratuitamente!</h1>
+    <div class="background-overlay">
 
-    <div class="chegada-partida-container">
+      <h1 class="__title">Planeje sua viagem à Escarpas do Lago gratuitamente!</h1>
 
-      <img src="../assets/img/calendar.svg">
+      <div class="chegada-partida-container">
 
-      <div class="chegada-partida-input">
-        <h3 v-if="!chegadaDate">Chegada</h3>
-        <h3 v-else>{{ chegadaDateFormatted }}</h3>
-        <input type="date" ref="inputChegada" v-model="chegadaDate" :min="today">
+        <img src="../assets/img/calendar.svg">
+
+        <div class="chegada-partida-input">
+          <h3 v-if="!chegadaDate">Chegada</h3>
+          <h3 v-else>{{ chegadaDateFormatted }}</h3>
+          <input type="date" ref="inputChegada" v-model="chegadaDate" :min="today">
+        </div>
+        
+        <img src="../assets/img/calendar-arrow.svg">
+
+        <div class="chegada-partida-input">
+          <h3 v-if="!partidaDate">Partida</h3>
+          <h3 v-else>{{ partidaDateFormatted }}</h3>
+          <input type="date" ref="inputChegada" v-model="partidaDate" :min="today">
+        </div>
+
+        <img class="__calendar-confirm" src="../assets/img/calendar-confirm.svg">
+
       </div>
-      
-      <img src="../assets/img/calendar-arrow.svg">
-
-      <div class="chegada-partida-input">
-        <h3 v-if="!partidaDate">Partida</h3>
-        <h3 v-else>{{ partidaDateFormatted }}</h3>
-        <input type="date" ref="inputChegada" v-model="partidaDate" :min="today">
-      </div>
-
-      <img class="__calendar-confirm" src="../assets/img/calendar-confirm.svg">
 
     </div>
 
@@ -76,74 +80,25 @@ export default {
   background-image: url('https://firebasestorage.googleapis.com/v0/b/escarpas-trip.appspot.com/o/utils%2Fescarpas.jpg?alt=media&token=c1c2ddfa-4665-4433-ae54-095fcd916b65');
   background-size: cover;
   background-repeat: no-repeat;
-  & .__title {
+  & .background-overlay {
     background: rgba(0, 0, 0, .3);
-    padding: 2rem 7% 0 7%;
-    color: white;
-    font-size: 25px;
-    font-weight: 600;
-  }
-  & .chegada-partida-container {
-    display: flex;
-    align-items: center;
-    text-align: center;
-    justify-content: space-around;
-    margin: 2rem 7%;
-    background: rgba(0, 0, 0, .3);
-    border-radius: 4px;
-    height: 2.8rem;
-    & .chegada-partida-input {
-      position: relative;
-      width: 5.2rem;
-      & h3 {
-        font-size: 17px;
-        font-weight: 400;
-        color: white;
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        width: auto;
-        height: auto;
-      }
-    }
-    & img {
-      width: 1.25rem;
-      height: auto;
-    }
-    & .__calendar-confirm {
-      transform: scale(1.09);
-    }
-  }
-}
-
-input {  
-  cursor: pointer;
-  opacity: 0;
-  width: 100%;
-}
-[type="date"]::-webkit-calendar-picker-indicator {
-  width: 100%;
-}
-
-@media (min-width: 1281px) {
-  .roteiro {
-    width: 100%;
-    background: linear-gradient(290deg, #C3F9E2, #00A8A1);
+    height: 100%;
     & .__title {
-      font-size: 32px;
-      padding: 4rem 13% 0 13%;
+      
+      padding: 2rem 7% 0 7%;
+      color: white;
+      font-size: 25px;
+      font-weight: 600;
     }
     & .chegada-partida-container {
       display: flex;
       align-items: center;
       text-align: center;
       justify-content: space-around;
-      margin: 3rem 13% 4rem 13%;
-      background: rgba(0, 0, 0, .12);
+      margin: 2rem 7%;
+      background: rgba(0, 0, 0, .3);
       border-radius: 4px;
-      height: 2.7rem;
+      height: 2.8rem;
       & .chegada-partida-input {
         position: relative;
         width: 5.2rem;
@@ -165,9 +120,62 @@ input {
         height: auto;
       }
       & .__calendar-confirm {
-        transform: scale(1.08);
+        transform: scale(1.09);
       }
     }
   }
+}
+
+input {  
+  cursor: pointer;
+  opacity: 0;
+  width: 100%;
+}
+[type="date"]::-webkit-calendar-picker-indicator {
+  width: 100%;
+}
+
+@media (min-width: 1281px) {
+  .roteiro {
+    width: 100%;
+    & .background-overlay {
+      & .__title {
+        font-size: 32px;
+        padding: 4rem 13% 0 13%;
+      }
+      & .chegada-partida-container {
+        display: flex;
+        align-items: center;
+        text-align: center;
+        justify-content: space-around;
+        margin: 3rem 13% 4rem 13%;
+        border-radius: 4px;
+        height: 2.7rem;
+        & .chegada-partida-input {
+          position: relative;
+          width: 5.2rem;
+          & h3 {
+            font-size: 17px;
+            font-weight: 400;
+            color: white;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            width: auto;
+            height: auto;
+          }
+        }
+        & img {
+          width: 1.25rem;
+          height: auto;
+        }
+        & .__calendar-confirm {
+          transform: scale(1.08);
+        }
+      }
+    }
+  }  
 }
 </style>
