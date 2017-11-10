@@ -123,7 +123,7 @@ export default {
         }
       }
       & img {
-        width: 1.25rem;
+        width: 1.1rem;
         height: auto;
       }
       & .__calendar-confirm {

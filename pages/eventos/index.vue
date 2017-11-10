@@ -1,15 +1,17 @@
 <template>
   <div class="eventos">
+
     <ul class="eventos-container">
       <li class="card" v-for="evento in $store.state.eventos" :key="evento.eventoID">
         <nuxt-link :to="'/eventos/' + evento.eventoID">
           <img class="__card-img" :src="imageH(evento)" />
           <span class="__card-date">{{ evento.date }}</span>
           <h1 class="__card-title">{{ evento.title | truncateTitle }}</h1>
-          <h3>{{ evento.subtitle | truncateSubtitle }}</h3>
+          <h3 class="__card-subtitle">{{ evento.subtitle | truncateSubtitle }}</h3>
         </nuxt-link> 
       </li>
     </ul>
+
   </div>
 </template>
 
@@ -73,7 +75,7 @@ export default {
   margin-top: 3.3rem;
   display: flex;
   flex-flow: column;
-  padding: 2rem 7%;
+  
   transition: all .222s ease-in-out;
   & .eventos-container {
     padding: 0;
@@ -81,7 +83,7 @@ export default {
     flex-flow: column;
     & .card {
       width: 100%;
-      padding-bottom: 2rem;
+      padding-bottom: 3rem;
       & .__card-img {
         margin-bottom: .2rem;
         width: 100%;
@@ -89,16 +91,18 @@ export default {
         border-radius: 3px;
       }
       & .__card-date {
+        padding: 2rem 7%;
         font-size: 14px;
         font-weight: 600;
         color: #ff5858;
       }
       & .__card-title {
-        margin: .2rem 0;
+        padding: .2rem 7%;
         font-size: 23px;
         font-weight: 600;
       }
       & .__card-subtitle {
+        padding: 0 7%;
       }
     }
   }
