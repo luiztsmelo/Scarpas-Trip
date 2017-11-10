@@ -1,7 +1,8 @@
 <template>
   <div class="roteiro">
     
-    <progressive-img class="__img" 
+    <progressive-img class="__img"
+    no-ratio 
     src="https://firebasestorage.googleapis.com/v0/b/escarpas-trip.appspot.com/o/utils%2FescarpasH.jpg?alt=media&token=2ea18e03-653a-43b6-ae07-6597a58585ab" placeholder="https://firebasestorage.googleapis.com/v0/b/escarpas-trip.appspot.com/o/utils%2FescarpasL.jpg?alt=media&token=e3b6b83a-4ad9-4da9-8f61-09c18d14ed76" />
     
     <div class="chegada-partida-container">
@@ -76,14 +77,14 @@ export default {
 
 <style scoped>
 @import url('../assets/css/main.css');
-
-
 .roteiro {
   position: relative;
   width: 100%;
+  background-color: black;
   & .__img {
+    min-height: 14rem;
     max-height: 17rem;
-    background-color: white;
+    
   }
   & .chegada-partida-container {
     position: absolute;
@@ -133,7 +134,6 @@ export default {
     }
   }
 }
-
 input {  
   cursor: pointer;
   opacity: 0;
@@ -142,7 +142,6 @@ input {
 [type="date"]::-webkit-calendar-picker-indicator {
   width: 100%;
 }
-
 @media (min-width: 1281px) {
   .roteiro {
     width: 100%;
