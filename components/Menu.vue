@@ -94,12 +94,13 @@ export default {
         width: 1.4rem;
         height: auto;
         margin-right: 1rem;
-        filter: grayscale(100%) brightness(110%);
+        filter: grayscale(100%) brightness(100%);
       }
       & .__item-img {
         width: 1.4rem;
         height: auto;
         margin-right: 1rem;
+        filter: brightness(90%);
       }
       & .__item-text {
         font-size: 19px;
