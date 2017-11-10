@@ -80,11 +80,10 @@ export default {
 .roteiro {
   position: relative;
   width: 100%;
-  background-color: black;
+  background: var(--color01);
   & .__img {
     min-height: 14rem;
     max-height: 17rem;
-    
   }
   & .chegada-partida-container {
     position: absolute;
@@ -134,6 +133,8 @@ export default {
     }
   }
 }
+
+
 input {  
   cursor: pointer;
   opacity: 0;
@@ -142,9 +143,10 @@ input {
 [type="date"]::-webkit-calendar-picker-indicator {
   width: 100%;
 }
+
+
 @media (min-width: 1281px) {
   .roteiro {
-    width: 100%;
     & .background-overlay {
       & .__title {
         font-size: 32px;
