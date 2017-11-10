@@ -9,7 +9,7 @@
       <h1 class="__title">Amplie seus ganhos anunciando seu passeio com a gente!</h1>
 
       <div class="pricing-box">
-        <h2 class="__pricing-box-title">Selecione um plano:</h2>
+        <h2 class="__pricing-box-title">Selecione seu plano:</h2>
 
         <div class="plano-row casual">
           <span class="__plano-valor">R$50</span>
