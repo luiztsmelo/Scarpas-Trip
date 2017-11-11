@@ -11,7 +11,7 @@
 
       <div class="chegada-partida-box">
 
-        <img src="../assets/img/calendar.svg">
+        <img src="../assets/img/roteiro-calendar.svg">
 
         <div class="chegada-partida-input">
           <h3 v-if="!chegadaDate">Chegada</h3>
@@ -19,7 +19,7 @@
           <input type="date" ref="inputChegada" v-model="chegadaDate" :min="today">
         </div>
         
-        <img src="../assets/img/calendar-arrow.svg">
+        <img src="../assets/img/roteiro-arrow.svg">
 
         <div class="chegada-partida-input">
           <h3 v-if="!partidaDate">Partida</h3>
@@ -27,7 +27,7 @@
           <input type="date" ref="inputChegada" v-model="partidaDate" :min="today">
         </div>
 
-        <img class="__calendar-confirm" src="../assets/img/roteiro-confirm.svg">
+        <img class="__roteiro-confirm" src="../assets/img/roteiro-confirm.svg">
 
       </div>
 
@@ -125,7 +125,7 @@ export default {
         width: 1.1rem;
         height: auto;
       }
-      & .__calendar-confirm {
+      & .__roteiro-confirm {
         transform: scale(1.11);
       }
     }
