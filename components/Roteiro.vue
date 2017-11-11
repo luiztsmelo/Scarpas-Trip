@@ -47,7 +47,7 @@ export default {
   computed: {
     onRoteiro () {
       if (this.chegadaDate !== null && this.partidaDate !== null) {
-        return 'transform: scale(1.4); filter: initial;'
+        return 'transform: scale(1.3); filter: initial;'
       }
     },
     chegadaDateFormatted () {

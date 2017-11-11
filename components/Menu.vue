@@ -8,7 +8,7 @@
           <div @click="$store.commit('m_showMenu', false), $store.commit('m_menuIconAnime', false), $store.commit('m_showFoobar', false)">
             <nuxt-link to="/anunciar/estadia" class="menu-item">
               <img src="../assets/img/estadia.svg" alt="" class="__item-img-color">
-              <span class="__item-text" >Anunciar Estadia</span>
+              <span class="__item-text" >Anunciar Casa</span>
             </nuxt-link>
           </div>
 

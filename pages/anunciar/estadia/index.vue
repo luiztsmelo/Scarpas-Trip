@@ -6,20 +6,20 @@
       
       <img class="__img-header" src="../../../assets/img/anuncio-estadia.svg">
 
-      <h1 class="__title">Amplie seus ganhos anunciando seu imóvel com a gente!</h1>
+      <h1 class="__title">Amplie seus ganhos anunciando sua casa com a gente!</h1>
 
       <div class="pricing-box">
         <h2 class="__pricing-box-title">Selecione seu plano:</h2>
 
         <div class="plano-row casual">
-          <span class="__plano-valor">R$50</span>
+          <span class="__plano-valor">R$59</span>
           <span class="__plano-valor-mes">/mês</span>
           <span class="__plano-title">AVANÇADO</span>
           <div class="__arrow-down-black"></div>
         </div>
 
         <div class="plano-row profissional">
-          <span class="__plano-valor">R$100</span>
+          <span class="__plano-valor">R$97</span>
           <span class="__plano-valor-mes">/mês</span>
           <span class="__plano-title">PROFISSIONAL</span>
           <div class="__arrow-down-white"></div>
