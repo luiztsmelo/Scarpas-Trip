@@ -619,8 +619,8 @@ export default {
   /* ******************** CADASTRO EVENTO ******************** */
   & .cadastro-evento-container {
     transition: all .3s ease;
+    will-change: transform;
     & .cadastro-evento {
-      position: relative;
       background: white;
       color: var(--color01);
       height: calc(100vh - 3.2rem);
@@ -704,7 +704,7 @@ export default {
         }
       }
       & .back-next {
-        position: absolute;
+        position: fixed;
         z-index: 777;
         bottom: 0;
         left: 0;
