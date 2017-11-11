@@ -133,7 +133,7 @@ export default {
       & .__roteiro-confirm {
         transform: scale(1.11);
         filter: grayscale(100%) brightness(200%);
-        transition: all .2s ease;
+        transition: all .3s ease;
       }
     }
   }
