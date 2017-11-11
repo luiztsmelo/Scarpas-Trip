@@ -19,7 +19,7 @@ export default {
 @import url('../../assets/css/main.css');
 
 .atracoes {
-  margin-top: 3.3rem;
+  margin-top: 3.2rem;
   display: flex;
   flex-flow: column;
   padding: 3rem 7%;

@@ -43,7 +43,7 @@ export default {
   top: 0;
   left: 0;
   z-index: 5;
-  height: 3.3rem;
+  height: 3.2rem;
   width:  100%;
   background: white;
   transition: all .3s ease;

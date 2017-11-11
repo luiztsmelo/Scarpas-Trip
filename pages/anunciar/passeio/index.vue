@@ -56,12 +56,12 @@ export default {
 @import url('../../../assets/css/illustrations.css');
 
 .anunciar-passeio {
-  margin-top: 3.3rem;
+  margin-top: 3.2rem;
   display: flex;
   flex-flow: column;
   background: linear-gradient(40deg, #B5D9F0, #49A5FC);
   color: white;
-  height: calc(100vh - 3.3rem);
+  height: calc(100vh - 3.2rem);
   transition: var(--main-transition);
   /* ******************** PLANO PASSEIO ******************** */
   & .plano-passeio {
@@ -93,7 +93,7 @@ export default {
         cursor: pointer;
         display: flex;
         align-items: center;
-        height: 3.3rem;
+        height: 3.2rem;
         margin: .5rem 0;
         border-radius: 3px;
         & .__plano-valor {

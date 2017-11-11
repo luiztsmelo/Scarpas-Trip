@@ -123,7 +123,7 @@ export default {
 @import url('../assets/css/main.css');
 
 .home {
-  margin-top: 3.3rem;
+  margin-top: 3.2rem;
   display: flex;
   flex-flow: column;
   justify-content: space-between;

@@ -24,7 +24,7 @@ export default {
   z-index: 9999;
   width:  100%;
   height: 100%;
-  top: 3.3rem;
+  top: 3.2rem;
   background: white;
   transition: all .3s ease;
   & .loader-body {
@@ -32,7 +32,7 @@ export default {
     display: flex;
     align-items: center;
     justify-content: center;
-    top: calc(50% -3.3rem);
+    top: calc(50% -3.2rem);
     transform: translateY(-50%);
   }
 }
@@ -43,7 +43,7 @@ export default {
     background-repeat: no-repeat;
     background-size: cover;
     animation-name: spin;
-    animation-duration: 2.5s;
+    animation-duration: 2.3s;
     animation-iteration-count: infinite;
     animation-timing-function: linear;
     opacity: .2;
