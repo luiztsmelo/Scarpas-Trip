@@ -27,7 +27,7 @@
           <input type="date" ref="inputChegada" v-model="partidaDate" :min="today">
         </div>
 
-        <img class="__roteiro-confirm" src="../assets/img/roteiro-confirm.svg">
+        <img class="__roteiro-confirm" :style="onRoteiro" src="../assets/img/roteiro-confirm.svg">
 
       </div>
 
@@ -45,6 +45,11 @@ export default {
     }
   },
   computed: {
+    onRoteiro () {
+      if (this.chegadaDate !== null && this.partidaDate !== null) {
+        return 'transform: scale(1.4); filter: initial;'
+      }
+    },
     chegadaDateFormatted () {
       let y = this.chegadaDate.slice(0, 4)
       let m = this.chegadaDate.slice(5, 7)
@@ -127,11 +132,12 @@ export default {
       }
       & .__roteiro-confirm {
         transform: scale(1.11);
+        filter: grayscale(100%) brightness(200%);
+        transition: all .2s ease;
       }
     }
   }
 }
-
 
 input {  
   cursor: pointer;
