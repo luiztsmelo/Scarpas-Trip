@@ -560,6 +560,7 @@ export default {
     position: fixed;
     top: 3.2rem;
     height: 3px;
+    z-index: 8888;
     background: linear-gradient(80deg, #f857a6, #ff5858);
     transition: all .3s ease;
   }
@@ -619,6 +620,7 @@ export default {
   & .cadastro-evento-container {
     transition: all .3s ease;
     & .cadastro-evento {
+      position: relative;
       background: white;
       color: var(--color01);
       height: calc(100vh - 3.2rem);
@@ -702,7 +704,7 @@ export default {
         }
       }
       & .back-next {
-        position: fixed;
+        position: absolute;
         z-index: 777;
         bottom: 0;
         left: 0;
