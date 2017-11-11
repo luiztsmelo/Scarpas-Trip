@@ -14,7 +14,7 @@ module.exports = {
     title: 'Escarpas Trip: Casas, Passeios, Atrações, Eventos e Restaurantes em Escarpas do Lago',
     meta: [
       { name: 'viewport', content: 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' },
-      { hid: 'description', name: 'description', content: 'Planeje sua viagem à Escarpas do Lago de forma simples, agradável e segura.' },
+      { hid: 'description', name: 'description', content: 'Planeje sua viagem à Capitólio e região de forma simples, agradável e segura.' },
       { name: 'google-site-verification', content: 'IavBb3pz5krBr8BWBDH8LcwCr2IOEwOifb6h7n3d2jU' }
     ],
     link: [

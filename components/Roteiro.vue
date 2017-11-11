@@ -7,7 +7,7 @@
     
     <div class="chegada-partida-container">
       
-      <h1 class="__title">Planeje sua viagem à Escarpas do Lago gratuitamente!</h1>
+      <h1 class="__title">Planeje sua viagem à Capitólio e região gratuitamente!</h1>
 
       <div class="chegada-partida-box">
 
