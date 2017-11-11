@@ -27,7 +27,7 @@
           <input type="date" ref="inputChegada" v-model="partidaDate" :min="today">
         </div>
 
-        <img class="__calendar-confirm" src="../assets/img/calendar-confirm.svg">
+        <img class="__calendar-confirm" src="../assets/img/roteiro-confirm.svg">
 
       </div>
 
