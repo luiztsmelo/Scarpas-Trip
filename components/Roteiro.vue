@@ -126,7 +126,7 @@ export default {
         height: auto;
       }
       & .__calendar-confirm {
-        transform: scale(1.1);
+        transform: scale(1.11);
       }
     }
   }
