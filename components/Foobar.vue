@@ -84,7 +84,7 @@ export default {
     justify-content: space-around;
     align-items: center;
     & .foobar-box {
-      transform: translateY(2px);
+      transform: translateY(3px);
       width: 3.5rem;
       display: flex;
       flex-flow: column;
@@ -100,7 +100,7 @@ export default {
         color: rgb(51, 51, 51);
       }
       & img {
-        margin-bottom: 8px;
+        margin-bottom: 7px;
         width: 1.3rem;
         height: auto;
       }

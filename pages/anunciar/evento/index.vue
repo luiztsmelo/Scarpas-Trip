@@ -27,257 +27,256 @@
     </div><!-- PLANO EVENTO -->
 
 
+
     <div class="progress-bar" v-show="!$store.state.cadastroEvento0" :style="'width:' + $store.state.eventoProgressBar + '%'"></div>
 
 
-    <!-- CADASTRO EVENTO -->
-    <transition name="anuncio-evento">  
-      <div class="cadastro-evento-container" v-show="$store.state.cadastroEvento0 === false">
-
-
-
-        <!-- ########## DATA E HORÁRIO PG.1 ########## -->
-        
-          <form class="cadastro-evento" v-show="$store.state.cadastroEvento1">
-
-            <h1 class="__form-title">Quando será o evento?</h1>
-
-            <div class="item-form">
-              <label>Data</label>
-              <input type="date" v-model="date" :min="today" required pattern="[0-9]{2}-[0-9]{2}-[0-9]{4}">
-            </div>  
-
-            <div class="item-form">
-              <label>Horário</label>
-              <input type="time" v-model="$store.state.eventoData.hour" required>
-            </div>  
-
-            <div class="back-next"> 
-              <div class="back-next-body">
-                <button type="button" class="__back" @click="backBtn1">Voltar</button>
-                <button type="button" class="__next" :style="form1ok" @click="nextBtn1">Próximo</button>
-              </div>
-            </div> 
-          
-          </form>
-        <!-- ########## DATA E HORÁRIO PG.1 ########## -->
-
-
-
-
-        <!-- ########## LOCAL PG.2 ########## -->
-        <form class="cadastro-evento" v-show="$store.state.cadastroEvento2">
-
-          <h1 class="__form-title">Qual será o Local?</h1>
-
-          <gmap-autocomplete 
-          class="__gmap-autocomplete"
-          placeholder="Digite o endereço aqui"
-          @place_changed="setPlace">
-          </gmap-autocomplete>
-
-          <gmap-map
-          v-if="$store.state.cadastroEvento2"
-          :center="{lat: $store.state.eventoData.positionLAT, lng: $store.state.eventoData.positionLNG}"
-          :zoom="mapZoom"
-          :options="{styles: styles, mapTypeControl:false, streetViewControl:false}"
-          style="width: 100%; height: 260px">
-            <Gmap-Marker
-            v-if="$store.state.eventoPlace"
-            :clickable="true"
-            :draggable="true"
-            :animation="4"
-            :position="{lat: $store.state.eventoData.positionLAT, lng: $store.state.eventoData.positionLNG}"
-            :icon="markerIcon"
-            ></Gmap-Marker>
-          </gmap-map>
-
-          <div class="back-next"> 
-            <div class="back-next-body">
-              <button type="button" class="__back" @click="backBtn2">Voltar</button>
-              <button type="button" class="__next" :style="form2ok" @click="nextBtn2">Próximo</button>
-            </div>
-          </div> 
-        
-        </form><!-- ########## LOCAL PG.2 ########## -->
-
-
-
-
-        <!-- ########## VALOR DO INGRESSO PG.3 ########## -->
-        <form class="cadastro-evento" v-show="$store.state.cadastroEvento3">
-
-          <h1 class="__form-title">Qual será o Valor do Ingresso?</h1>
-
-          <div class="item-form">
-            <label>1º Lote</label>
-            <money v-model="$store.state.eventoData.valorIngresso"></money>
-          </div>  
-        
-          <button type="button" @click="" class="__image-input-btn">Mais lotes?</button>
-
-        
-          <div class="back-next"> 
-            <div class="back-next-body">
-              <button type="button" class="__back" @click="backBtn3">Voltar</button>
-              <button type="button" class="__next" :style="form3ok" @click="nextBtn3">Próximo</button>
-            </div>
-          </div> 
-        
-        </form><!-- ########## VALOR DO INGRESSO PG.3 ########## -->
-
-
-
-
-        <!-- ########## IMAGEM E VÍDEOS PG.4 ########## -->
-        <form class="cadastro-evento" v-show="$store.state.cadastroEvento4">
-
-          <h1 class="__form-title">Adicione Imagens e Vídeo</h1>
-
-          <div class="before-choose-image" v-show="imageURL1 === null">
-            <h2 class="__form-subtitle">Imagens e vídeo legais farão toda a diferença na hora da divulgação do seu evento</h2>
-            <button type="button" @click="$refs.myCroppa1.chooseFile()" class="__image-input-btn">Adicionar Imagem</button>
-          </div>
-          
-          <div class="modal-croppa" v-show="showCroppaModal1" @click="showCroppaModal1=false">
-            <div class="modal-croppa-body" @click.stop>
-              <h1>Ajustar imagem</h1>
-              <croppa
-              ref="myCroppa1"
-              :width="320"
-              :height="214"
-              :quality="3"
-              :placeholder="'Carregando...'"
-              :placeholder-color="'rgb(222,222,222)'"
-              :accept="'image/*'"
-              :zoom-speed="2"
-              :prevent-white-space="true"
-              :show-remove-button="false"
-              @file-choose="imageChoose1">
-              </croppa>
-              <div class="modal-croppa-btns">
-                <button type="button" @click="showCroppaModal1=false, imageConfirmed1()" class="__image-input-btn">Confirmar</button>
-                <button type="button" @click="$refs.myCroppa1.chooseFile(), $refs.myCroppa1.remove(), imageURL1 = null" class="__image-input-btn" style="background:transparent;margin-top:.9rem;">Escolher outra</button>
-                <button type="button" @click="removeImage1()" class="__image-input-btn" style="background:transparent;margin-top:.2rem">Remover</button>
-              </div>
-            </div>
-          </div>
-
-          <div class="modal-croppa" v-show="showCroppaModal2" @click="showCroppaModal2=false">
-            <div class="modal-croppa-body" @click.stop>
-              <h1>Ajustar imagem</h1>
-              <croppa
-              ref="myCroppa2"
-              @new-image-drawn="imageChoose2"
-              :width="320"
-              :height="214"
-              :quality="3"
-              :placeholder="'Carregando...'"
-              :accept="'image/*'"
-              :prevent-white-space="true"
-              :show-remove-button="false">
-              </croppa>
-              <div class="modal-croppa-btns">
-                <button type="button" @click="showCroppaModal2=false, imageChoose2()" class="__image-input-btn">Confirmar</button>
-                <button type="button" @click="$refs.myCroppa2.chooseFile(), $refs.myCroppa2.remove(), imageURL2 = null" class="__image-input-btn" style="background:transparent;margin-top:.7rem;">Escolher outra</button>
-                <button type="button" @click="removeImage2()" class="__image-input-btn" style="background:transparent">Remover</button>
-              </div>
-            </div>
-          </div>
-
-          <!-- Preview Image -->
-          <div class="after-choose-image" v-show="imageURL1 !== null">
-            <img :src="imageURL1" class="__preview-img" @click="showCroppaModal1=true">
-            <div class="image2">
-              <img src="./../../../assets/img/add-image.svg" class="__preview-img" v-if="imageURL2 === null" @click="$refs.myCroppa2.chooseFile(), showCroppaModal2=true" style="padding:2rem">
-              <img :src="imageURL2" class="__preview-img" @click="showCroppaModal2=true" v-else>
-            </div>
-            
-          </div><!-- Preview Image -->
-          
-
-          <div class="back-next"> 
-            <div class="back-next-body">
-              <button type="button" class="__back" @click="backBtn4">Voltar</button>
-              <button type="button" class="__next" :style="form4ok" @click="nextBtn4">Próximo</button>
-            </div>
-          </div> 
-        
-        </form><!-- ########## IMAGEM E VÍDEOS PG.4 ########## -->
-
-
-
-
-        <!-- ########## TÍTULO PG.5 ########## -->
-        <form class="cadastro-evento" v-show="$store.state.cadastroEvento5">
-
-          <h1 class="__form-title">Dê um Título legal</h1>  
-          
-          <textarea 
-          v-model="$store.state.eventoData.title"
-          v-autosize="title"
-          maxlength="50"
-          placeholder="ex: Show Jorge e Mateus em Escarpas do Lago"
-          required>
-          {{title}}</textarea>
-
-          <span class="__lenght-calc">{{ titleLength }}</span>
-
-          <div class="back-next"> 
-            <div class="back-next-body">
-              <button type="button" class="__back" @click="backBtn5">Voltar</button>
-              <button type="button" class="__next" :style="form5ok" @click="nextBtn5">Próximo</button>
-            </div>
-          </div> 
-
-        </form><!-- ########## TÍTULO PG.5 ########## -->
-
-
-
-
-        <!-- ########## DESCRIÇÃO PG.6 ########## -->
-        <form class="cadastro-evento" v-show="$store.state.cadastroEvento6">
-
-          <h1 class="__form-title">Descreva seu evento</h1>   
-
-          <textarea 
-          v-model="$store.state.eventoData.subtitle"
-          v-autosize="subtitle"
-          maxlength="500"
-          placeholder="Coloque informações importantes sobre seu evento aqui"
-          required>
-          {{subtitle}}</textarea>
-
-          <span class="__lenght-calc">{{ subtitleLength }}</span> 
-
-          <div class="back-next"> 
-            <div class="back-next-body">
-              <button type="button" class="__back" @click="backBtn6">Voltar</button>
-              <button type="button" class="__next" :style="form6ok" @click="nextBtn6">Próximo</button>
-            </div>
-          </div> 
-
-        </form><!-- ########## DESCRIÇÃO PG.6 ########## -->
-
-
-
-
-        <!-- ########## INVESTIMENTO PG.7 ########## -->
-        <form class="cadastro-evento" v-show="$store.state.cadastroEvento7">
-
-          <h1 class="__form-title">Investimento</h1>
-
-          <div class="back-next">
-            <div class="back-next-body">
-              <button type="button" class="__back" @click="backBtn7">Voltar</button>
-              <button type="button" class="__next" :style="form7ok" @click="concluir">Concluir</button>
-            </div>
-          </div>
-        
-        </form><!-- ########## INVESTIMENTO PG.7 ########## -->
     
+    <!-- CADASTRO EVENTO -->
+
+
+
+
+    <!-- ########## DATA E HORÁRIO PG.1 ########## -->
+    <form class="cadastro-evento" v-show="$store.state.cadastroEvento1">
+
+      <h1 class="__form-title">Quando será o evento?</h1>
+
+      <div class="item-form">
+        <label>Data</label>
+        <input type="date" v-model="date" :min="today" required pattern="[0-9]{2}-[0-9]{2}-[0-9]{4}">
+      </div>  
+
+      <div class="item-form">
+        <label>Horário</label>
+        <input type="time" v-model="$store.state.eventoData.hour" required>
+      </div>  
+
+      <div class="back-next"> 
+        <div class="back-next-body">
+          <button type="button" class="__back" @click="backBtn1">Voltar</button>
+          <button type="button" class="__next" :style="form1ok" @click="nextBtn1">Próximo</button>
+        </div>
+      </div> 
+    
+    </form><!-- ########## DATA E HORÁRIO PG.1 ########## -->
+    
+
+
+
+
+    <!-- ########## LOCAL PG.2 ########## -->
+    <form class="cadastro-evento" v-show="$store.state.cadastroEvento2">
+
+      <h1 class="__form-title">Qual será o Local?</h1>
+
+      <gmap-autocomplete 
+      class="__gmap-autocomplete"
+      placeholder="Digite o endereço aqui"
+      @place_changed="setPlace">
+      </gmap-autocomplete>
+
+      <gmap-map
+      v-if="$store.state.cadastroEvento2"
+      :center="{lat: $store.state.eventoData.positionLAT, lng: $store.state.eventoData.positionLNG}"
+      :zoom="mapZoom"
+      :options="{styles: styles, mapTypeControl:false, streetViewControl:false}"
+      style="width: 100%; height: 260px">
+        <Gmap-Marker
+        v-if="$store.state.eventoPlace"
+        :clickable="true"
+        :draggable="true"
+        :animation="4"
+        :position="{lat: $store.state.eventoData.positionLAT, lng: $store.state.eventoData.positionLNG}"
+        :icon="markerIcon"
+        ></Gmap-Marker>
+      </gmap-map>
+
+      <div class="back-next"> 
+        <div class="back-next-body">
+          <button type="button" class="__back" @click="backBtn2">Voltar</button>
+          <button type="button" class="__next" :style="form2ok" @click="nextBtn2">Próximo</button>
+        </div>
+      </div> 
+    
+    </form><!-- ########## LOCAL PG.2 ########## -->
+
+
+
+
+    <!-- ########## VALOR DO INGRESSO PG.3 ########## -->
+    <form class="cadastro-evento" v-show="$store.state.cadastroEvento3">
+
+      <h1 class="__form-title">Qual será o Valor do Ingresso?</h1>
+
+      <div class="item-form">
+        <label>1º Lote</label>
+        <money v-model="$store.state.eventoData.valorIngresso"></money>
+      </div>  
+    
+      <button type="button" @click="" class="__image-input-btn">Mais lotes?</button>
+
+    
+      <div class="back-next"> 
+        <div class="back-next-body">
+          <button type="button" class="__back" @click="backBtn3">Voltar</button>
+          <button type="button" class="__next" :style="form3ok" @click="nextBtn3">Próximo</button>
+        </div>
+      </div> 
+    
+    </form><!-- ########## VALOR DO INGRESSO PG.3 ########## -->
+
+
+
+
+    <!-- ########## IMAGEM E VÍDEOS PG.4 ########## -->
+    <form class="cadastro-evento" v-show="$store.state.cadastroEvento4">
+
+      <h1 class="__form-title">Adicione Imagens e Vídeo</h1>
+
+      <div class="before-choose-image" v-show="imageURL1 === null">
+        <h2 class="__form-subtitle">Imagens e vídeo legais farão toda a diferença na hora da divulgação do seu evento</h2>
+        <button type="button" @click="$refs.myCroppa1.chooseFile()" class="__image-input-btn">Adicionar Imagem</button>
       </div>
-    </transition><!-- CADASTRO EVENTO -->
+      
+      <div class="modal-croppa" v-show="showCroppaModal1" @click="showCroppaModal1=false">
+        <div class="modal-croppa-body" @click.stop>
+          <h1>Ajustar imagem</h1>
+          <croppa
+          ref="myCroppa1"
+          :width="320"
+          :height="214"
+          :quality="3"
+          :placeholder="'Carregando...'"
+          :placeholder-color="'rgb(222,222,222)'"
+          :accept="'image/*'"
+          :zoom-speed="2"
+          :prevent-white-space="true"
+          :show-remove-button="false"
+          @file-choose="imageChoose1">
+          </croppa>
+          <div class="modal-croppa-btns">
+            <button type="button" @click="showCroppaModal1=false, imageConfirmed1()" class="__image-input-btn">Confirmar</button>
+            <button type="button" @click="$refs.myCroppa1.chooseFile(), $refs.myCroppa1.remove(), imageURL1 = null" class="__image-input-btn" style="background:transparent;margin-top:.9rem;">Escolher outra</button>
+            <button type="button" @click="removeImage1()" class="__image-input-btn" style="background:transparent;margin-top:.2rem">Remover</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-croppa" v-show="showCroppaModal2" @click="showCroppaModal2=false">
+        <div class="modal-croppa-body" @click.stop>
+          <h1>Ajustar imagem</h1>
+          <croppa
+          ref="myCroppa2"
+          @new-image-drawn="imageChoose2"
+          :width="320"
+          :height="214"
+          :quality="3"
+          :placeholder="'Carregando...'"
+          :accept="'image/*'"
+          :prevent-white-space="true"
+          :show-remove-button="false">
+          </croppa>
+          <div class="modal-croppa-btns">
+            <button type="button" @click="showCroppaModal2=false, imageChoose2()" class="__image-input-btn">Confirmar</button>
+            <button type="button" @click="$refs.myCroppa2.chooseFile(), $refs.myCroppa2.remove(), imageURL2 = null" class="__image-input-btn" style="background:transparent;margin-top:.7rem;">Escolher outra</button>
+            <button type="button" @click="removeImage2()" class="__image-input-btn" style="background:transparent">Remover</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Preview Image -->
+      <div class="after-choose-image" v-show="imageURL1 !== null">
+        <img :src="imageURL1" class="__preview-img" @click="showCroppaModal1=true">
+        <div class="image2">
+          <img src="./../../../assets/img/add-image.svg" class="__preview-img" v-if="imageURL2 === null" @click="$refs.myCroppa2.chooseFile(), showCroppaModal2=true" style="padding:2rem">
+          <img :src="imageURL2" class="__preview-img" @click="showCroppaModal2=true" v-else>
+        </div>
+        
+      </div><!-- Preview Image -->
+      
+
+      <div class="back-next"> 
+        <div class="back-next-body">
+          <button type="button" class="__back" @click="backBtn4">Voltar</button>
+          <button type="button" class="__next" :style="form4ok" @click="nextBtn4">Próximo</button>
+        </div>
+      </div> 
+    
+    </form><!-- ########## IMAGEM E VÍDEOS PG.4 ########## -->
+
+
+
+
+    <!-- ########## TÍTULO PG.5 ########## -->
+    <form class="cadastro-evento" v-show="$store.state.cadastroEvento5">
+
+      <h1 class="__form-title">Dê um Título legal</h1>  
+      
+      <textarea 
+      v-model="$store.state.eventoData.title"
+      v-autosize="title"
+      maxlength="50"
+      placeholder="ex: Show Jorge e Mateus em Escarpas do Lago"
+      required>
+      {{title}}</textarea>
+
+      <span class="__lenght-calc">{{ titleLength }}</span>
+
+      <div class="back-next"> 
+        <div class="back-next-body">
+          <button type="button" class="__back" @click="backBtn5">Voltar</button>
+          <button type="button" class="__next" :style="form5ok" @click="nextBtn5">Próximo</button>
+        </div>
+      </div> 
+
+    </form><!-- ########## TÍTULO PG.5 ########## -->
+
+
+
+
+    <!-- ########## DESCRIÇÃO PG.6 ########## -->
+    <form class="cadastro-evento" v-show="$store.state.cadastroEvento6">
+
+      <h1 class="__form-title">Descreva seu evento</h1>   
+
+      <textarea 
+      v-model="$store.state.eventoData.subtitle"
+      v-autosize="subtitle"
+      maxlength="500"
+      placeholder="Coloque informações importantes sobre seu evento aqui"
+      required>
+      {{subtitle}}</textarea>
+
+      <span class="__lenght-calc">{{ subtitleLength }}</span> 
+
+      <div class="back-next"> 
+        <div class="back-next-body">
+          <button type="button" class="__back" @click="backBtn6">Voltar</button>
+          <button type="button" class="__next" :style="form6ok" @click="nextBtn6">Próximo</button>
+        </div>
+      </div> 
+
+    </form><!-- ########## DESCRIÇÃO PG.6 ########## -->
+
+
+
+
+    <!-- ########## INVESTIMENTO PG.7 ########## -->
+    <form class="cadastro-evento" v-show="$store.state.cadastroEvento7">
+
+      <h1 class="__form-title">Investimento</h1>
+
+      <div class="back-next">
+        <div class="back-next-body">
+          <button type="button" class="__back" @click="backBtn7">Voltar</button>
+          <button type="button" class="__next" :style="form7ok" @click="concluir">Concluir</button>
+        </div>
+      </div>
+    
+    </form><!-- ########## INVESTIMENTO PG.7 ########## -->
+  
+
 
   </div>
 </template>
@@ -617,155 +616,151 @@ export default {
     }
   }
   /* ******************** CADASTRO EVENTO ******************** */
-  & .cadastro-evento-container {
+  & .cadastro-evento {
     height: 100%;
-    transition: all .3s ease;
-    will-change: transform;
-    & .cadastro-evento {
-      height: 100%;
+    background: white;
+    color: var(--color01);
+    padding: 0 7% 3rem 7%;
+    & .__form-title {
+      line-height: 35px;
+      font-size: 29px;
+      font-weight: 600;
+      padding: 3rem 0 1.5rem 0;
+      z-index: 999;
+    }
+    & .__form-subtitle {
+      font-size: 19px;
+      font-weight: 300;
+      padding: 1.5rem 0 1.5rem 0;
+      line-height: 27px;
+    }
+    & textarea {
+      margin-bottom: .5rem;
+      width: 100%;
+      font-size: 19px;
+      font-weight: 300;
+      line-height: 26px;
       background: white;
-      color: var(--color01);
-      padding: 0 7% 3rem 7%;
-      & .__form-title {
-        line-height: 35px;
-        font-size: 29px;
-        font-weight: 600;
-        padding: 3rem 0 1.5rem 0;
-        z-index: 999;
+      color: rgb(92, 92, 92);
+      border: none;
+      outline: none;
+      resize: none;
+    }
+    & .__lenght-calc {
+      z-index: 999;
+      font-size: 20px;
+      font-weight: 600;
+      color: rgb(112, 112, 112);
+    }
+    & .item-form {
+      display: flex;
+      flex-flow: column;
+      margin: 1.7rem 0;
+      & label {
+        font-size: 18px;
+        font-weight: 500;
       }
-      & .__form-subtitle {
-        font-size: 19px;
-        font-weight: 300;
-        padding: 1.5rem 0 1.5rem 0;
-        line-height: 27px;
-      }
-      & textarea {
-        margin-bottom: .5rem;
+      & input {
         width: 100%;
-        font-size: 19px;
-        font-weight: 300;
-        line-height: 26px;
-        background: white;
-        color: rgb(92, 92, 92);
-        border: none;
-        outline: none;
-        resize: none;
-      }
-      & .__lenght-calc {
-        z-index: 999;
-        font-size: 20px;
-        font-weight: 600;
-        color: rgb(112, 112, 112);
-      }
-      & .item-form {
-        display: flex;
-        flex-flow: column;
-        margin: 1.7rem 0;
-        & label {
-          font-size: 18px;
-          font-weight: 500;
-        }
-        & input {
-          width: 100%;
-          font-size: 20px;
-          font-weight: 300;
-          background: white;
-          color: rgb(92, 92, 92);
-          padding: .5rem 0 .6rem 0;
-          border: none;
-          border-bottom: 1px solid rgb(210, 210, 210);
-          outline: none;
-        }
-      }
-      & .modal-croppa {
-        background: rgba(0, 0, 0, 0.84);
-        width:  100%;
-        height: 100%;
-        position: fixed;
-        top:  0;
-        left: 0;
-        z-index: 9999;
-        & .modal-croppa-body {
-          display: flex;
-          flex-flow: column;
-          align-items: center;
-          position: absolute;
-          top: 50%;
-          left: 50%;
-          transform: translateX(-50%) translateY(-50%);
-          color: white;
-          & h1 {
-            font-weight: 300;
-          }
-          & .modal-croppa-btns {
-            display: flex;
-            flex-flow: column;
-            width: 100%
-          }
-        }
-      }
-      & .back-next {
-        position: fixed;
-        z-index: 3;
-        bottom: 0;
-        left: 0;
-        height: 3rem;
-        width: 100%;
-        background: white;
-        box-shadow: 0px -1px 1px 0px rgba(0,0,0,0.15);
-        & .back-next-body {
-          display: flex;
-          & button {
-            width: 50%;
-            height: 3rem;
-          }
-          & .__back {
-            cursor: pointer;
-            background: white;
-          }
-          & .__next {
-            cursor: no-drop;
-            background:rgb(255, 167, 167);
-            color: white;
-          }
-        }
-      }
-      & .__gmap-autocomplete {
         font-size: 20px;
         font-weight: 300;
+        background: white;
         color: rgb(92, 92, 92);
-        width: 100%;
+        padding: .5rem 0 .6rem 0;
         border: none;
         border-bottom: 1px solid rgb(210, 210, 210);
-        margin: 1.5rem 0 1rem 0;
-        padding: .5rem 0 .6rem 0;
         outline: none;
       }
-      & .__image-input-btn {
-        font-size: 15px;
-        font-weight: 500;
-        background: #ff5858;
-        color: white;
-        padding: .7rem 1.2rem;
-        border-radius: 4px;
-      }
-      & .after-choose-image {
-        margin-top: 1.5rem;
+    }
+    & .modal-croppa {
+      background: rgba(0, 0, 0, 0.84);
+      width:  100%;
+      height: 100%;
+      position: fixed;
+      top:  0;
+      left: 0;
+      z-index: 9999;
+      & .modal-croppa-body {
         display: flex;
-        flex-flow: row wrap;
-        & .__preview-img {
-          margin: .2rem;
-          width: 145px;
-          height: 97px;
-          border-radius: 4px;
+        flex-flow: column;
+        align-items: center;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translateX(-50%) translateY(-50%);
+        color: white;
+        & h1 {
+          font-weight: 300;
+        }
+        & .modal-croppa-btns {
+          display: flex;
+          flex-flow: column;
+          width: 100%
         }
       }
-      & canvas {
-        margin: 3rem 0 2rem 0;
-        border: 2px dashed white;
+    }
+    & .back-next {
+      position: fixed;
+      z-index: 3;
+      bottom: 0;
+      left: 0;
+      height: 3rem;
+      width: 100%;
+      background: white;
+      box-shadow: 0px -1px 1px 0px rgba(0,0,0,0.15);
+      & .back-next-body {
+        display: flex;
+        & button {
+          width: 50%;
+          height: 3rem;
+        }
+        & .__back {
+          cursor: pointer;
+          background: white;
+        }
+        & .__next {
+          cursor: no-drop;
+          background:rgb(255, 167, 167);
+          color: white;
+        }
       }
     }
+    & .__gmap-autocomplete {
+      font-size: 20px;
+      font-weight: 300;
+      color: rgb(92, 92, 92);
+      width: 100%;
+      border: none;
+      border-bottom: 1px solid rgb(210, 210, 210);
+      margin: 1.5rem 0 1rem 0;
+      padding: .5rem 0 .6rem 0;
+      outline: none;
+    }
+    & .__image-input-btn {
+      font-size: 15px;
+      font-weight: 500;
+      background: #ff5858;
+      color: white;
+      padding: .7rem 1.2rem;
+      border-radius: 4px;
+    }
+    & .after-choose-image {
+      margin-top: 1.5rem;
+      display: flex;
+      flex-flow: row wrap;
+      & .__preview-img {
+        margin: .2rem;
+        width: 145px;
+        height: 97px;
+        border-radius: 4px;
+      }
+    }
+    & canvas {
+      margin: 3rem 0 2rem 0;
+      border: 2px dashed white;
+    }
   }
+
 }
 
 /* TRANSITIONS */

@@ -84,7 +84,7 @@ export default {
     display: flex;
     flex-flow: column;
     text-align: center;
-    padding: 3rem 7%;
+    padding: 2rem 7%;
     height: 100%;
     & .menu-item {
       display: flex;
