@@ -47,7 +47,7 @@ export default {
   computed: {
     onRoteiro () {
       if (this.chegadaDate !== null && this.partidaDate !== null) {
-        return 'transform: scale(1.3); filter: initial;'
+        return 'transform: scale(1.35)'
       }
     },
     chegadaDateFormatted () {
@@ -132,8 +132,7 @@ export default {
       }
       & .__roteiro-confirm {
         transform: scale(1.11);
-        filter: grayscale(100%) brightness(200%);
-        transition: all .2s cubic-bezier(.29,.97,.78,1.39);
+        transition: all .3s cubic-bezier(.29,.97,.78,1.39);
       }
     }
   }

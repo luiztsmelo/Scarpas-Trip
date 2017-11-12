@@ -703,7 +703,32 @@ export default {
           }
         }
       }
-      
+      & .back-next {
+        position: fixed;
+        z-index: 777;
+        bottom: 0;
+        left: 0;
+        height: 3rem;
+        width: 100%;
+        background: white;
+        box-shadow: 0px -1px 1px 0px rgba(0,0,0,0.15);
+        & .back-next-body {
+          display: flex;
+          & button {
+            width: 50%;
+            height: 3rem;
+          }
+          & .__back {
+            cursor: pointer;
+            background: white;
+          }
+          & .__next {
+            cursor: no-drop;
+            background:rgb(255, 167, 167);
+            color: white;
+          }
+        }
+      }
       & .__gmap-autocomplete {
         font-size: 20px;
         font-weight: 300;
@@ -749,32 +774,6 @@ export default {
         border: 2px dashed white;
       }
     }
-    & .back-next {
-        position: fixed;
-        z-index: 777;
-        bottom: 0;
-        left: 0;
-        height: 3rem;
-        width: 100%;
-        background: white;
-        box-shadow: 0px -1px 1px 0px rgba(0,0,0,0.15);
-        & .back-next-body {
-          display: flex;
-          & button {
-            width: 50%;
-            height: 3rem;
-          }
-          & .__back {
-            cursor: pointer;
-            background: white;
-          }
-          & .__next {
-            cursor: no-drop;
-            background:rgb(255, 167, 167);
-            color: white;
-          }
-        }
-      }
   }
 }
 
