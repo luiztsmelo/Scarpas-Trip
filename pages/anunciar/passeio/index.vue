@@ -12,14 +12,14 @@
         <h2 class="__pricing-box-title">Selecione seu plano:</h2>
 
         <div class="plano-row casual">
-          <span class="__plano-valor">R$59</span>
+          <span class="__plano-valor">R$49</span>
           <span class="__plano-valor-mes">/mês</span>
           <span class="__plano-title">AVANÇADO</span>
           <div class="__arrow-down-black"></div>
         </div>
 
         <div class="plano-row profissional">
-          <span class="__plano-valor">R$97</span>
+          <span class="__plano-valor">R$79</span>
           <span class="__plano-valor-mes">/mês</span>
           <span class="__plano-title">PROFISSIONAL</span>
           <div class="__arrow-down-white"></div>

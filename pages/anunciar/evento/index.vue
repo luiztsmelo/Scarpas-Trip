@@ -705,7 +705,7 @@ export default {
       }
       & .back-next {
         position: fixed;
-        z-index: 777;
+        z-index: 3;
         bottom: 0;
         left: 0;
         height: 3rem;
@@ -740,16 +740,6 @@ export default {
         padding: .5rem 0 .6rem 0;
         outline: none;
       }
-      & .__vue-numeric {
-        font-size: 20px;
-        font-weight: 300;
-        color: rgb(92, 92, 92);
-        width: 100%;
-        padding: .5rem 0 .6rem 0;
-        border: none;
-        border-bottom: 1px solid rgb(210, 210, 210);
-        outline: none;
-      }
       & .__image-input-btn {
         font-size: 15px;
         font-weight: 500;
@@ -780,6 +770,9 @@ export default {
 /* TRANSITIONS */
 .anuncio-evento-enter {
   transform: translateX(100%);
+}
+.anuncio-evento-leave-active {
+  transform: translateX(0%);
 }
 
 </style>
