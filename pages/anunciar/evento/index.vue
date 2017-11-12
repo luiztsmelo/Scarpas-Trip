@@ -618,12 +618,13 @@ export default {
   }
   /* ******************** CADASTRO EVENTO ******************** */
   & .cadastro-evento-container {
+    height: 100%;
     transition: all .3s ease;
     will-change: transform;
     & .cadastro-evento {
+      height: 100%;
       background: white;
       color: var(--color01);
-      height: calc(100vh - 3.2rem);
       padding: 0 7% 3rem 7%;
       & .__form-title {
         line-height: 35px;
