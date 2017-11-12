@@ -99,8 +99,9 @@ export default {
     & .__title {
       padding: 2rem 7% 0 7%;
       color: white;
-      font-size: 26px;
+      font-size: 25px;
       font-weight: 600;
+      line-height: 29px;
     }
     & .chegada-partida-box {
       display: flex;
