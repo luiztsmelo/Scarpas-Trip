@@ -550,7 +550,7 @@ export default {
 
 .anunciar-evento {
   margin-top: 3.2rem;
-  background: linear-gradient(40deg,#f857a6, #ff5858);
+  background: linear-gradient( #ff5858,#f857a6);
   color: white;
   height: calc(100vh - 3.2rem);
   transition: var(--main-transition);
