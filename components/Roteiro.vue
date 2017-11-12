@@ -1,5 +1,5 @@
 <template>
-  <div class="roteiro">
+  <div class="roteiro-home">
     
     <progressive-background class="__img"
     no-ratio
@@ -27,7 +27,9 @@
           <input type="date" ref="inputChegada" v-model="partidaDate" :min="today">
         </div>
 
-        <img class="__roteiro-confirm" :style="onRoteiro" src="../assets/img/roteiro-confirm.svg">
+        <nuxt-link :to="roteiroRoute">
+          <img class="__roteiro-confirm" :style="onRoteiro" src="../assets/img/roteiro-confirm.svg">
+        </nuxt-link>
 
       </div>
 
@@ -45,6 +47,13 @@ export default {
     }
   },
   computed: {
+    roteiroRoute () {
+      if (this.chegadaDate !== null && this.partidaDate !== null) {
+        return '/roteiro'
+      } else {
+        return '/'
+      }
+    },
     onRoteiro () {
       if (this.chegadaDate !== null && this.partidaDate !== null) {
         return 'transform: scale(1.45)'
@@ -82,7 +91,7 @@ export default {
 
 <style scoped>
 @import url('../assets/css/main.css');
-.roteiro {
+.roteiro-home {
   position: relative;
   width: 100%;
   background: var(--color01);

@@ -51,7 +51,7 @@ export default {
 }
 </script>
 
-<style scope>
+<style scoped>
 @import url('../../../assets/css/main.css');
 @import url('../../../assets/css/illustrations.css');
 

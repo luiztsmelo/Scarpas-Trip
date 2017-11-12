@@ -15,7 +15,7 @@ export default {
 }
 </script>
 
-<style scope>
+<style scoped>
 @import url('../../assets/css/main.css');
 
 .passeios {

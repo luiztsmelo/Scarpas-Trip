@@ -115,11 +115,21 @@ export default {
         return value.slice(0)
       }
     }
+  },
+  beforeRouteEnter (to, from, next) {
+    next(vm => {
+      if (vm.$store.state.showFoobar === false) {
+        vm.$store.commit('m_showFoobar', true)
+      }
+      if (vm.$store.state.showNavbar === false) {
+        vm.$store.commit('m_showNavbar', true)
+      }
+    })
   }
 }
 </script>
 
-<style scope>
+<style>
 @import url('../assets/css/main.css');
 
 .home {

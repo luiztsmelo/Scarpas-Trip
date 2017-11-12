@@ -534,18 +534,17 @@ export default {
       }
     }
   },
-  beforeRouteLeave (to, from, next) {
-    if (this.$store.state.showFoobar === false) {
-      this.$store.commit('m_showFoobar', true)
-      next()
-    } else {
-      next(false)
-    }
+  beforeRouteEnter (to, from, next) {
+    next(vm => {
+      if (vm.$store.state.showFoobar === true) {
+        vm.$store.commit('m_showFoobar', false)
+      }
+    })
   }
 }
 </script>
 
-<style scope>
+<style scoped>
 @import url('../../../assets/css/main.css');
 @import url('../../../assets/css/illustrations.css');
 
