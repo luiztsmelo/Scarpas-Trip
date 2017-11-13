@@ -43,22 +43,22 @@
 
       <h1 class="__form-title">Qual tipo de passeio você quer anunciar?</h1>
 
-      <div class="form-checkbox" v-ripple="'rgba(0, 0, 0, 0.07)'">
+      <div class="form-checkbox" v-ripple="'rgba(0,0,0,.05)'">
         <h3>Lancha</h3>
         <input type="checkbox">
       </div> 
-      
-      <div class="form-checkbox" v-ripple="'rgba(0, 0, 0, 0.07)'">
+
+      <div class="form-checkbox" v-ripple="'rgba(0,0,0,.05)'">
         <h3>Veículo 4x4</h3>
         <input type="checkbox">
       </div> 
 
-      <div class="form-checkbox" v-ripple="'rgba(0, 0, 0, 0.07)'">
+      <div class="form-checkbox" v-ripple="'rgba(0,0,0,.05)'">
         <h3>Buggy</h3>
         <input type="checkbox">
       </div> 
 
-      <div class="form-checkbox" style="border-bottom:none" v-ripple="'rgba(0, 0, 0, 0.07)'">
+      <div class="form-checkbox" style="border-bottom:none" v-ripple="'rgba(0,0,0,.05)'">
         <h3>Helicóptero</h3>
         <input type="checkbox">
       </div> 
