@@ -1,5 +1,4 @@
 @import url('normalize.css');
-@import url('checkbox.css');
 
 :root {
   /* ******* FONTS ******* */
@@ -64,6 +63,17 @@ a a:hover, a:visited, a:link, a:active
   color: var(--color01);
   outline: none !important;
   user-select: none;  
+}
+
+
+/* ******* CHECKBOX ******* */
+input[type="checkbox"] {
+  all: initial;
+  width: 1.6rem;
+  height: 1.6rem;
+  background: rgb(242, 242, 242);
+  border-radius: 50%;
+  border: 2px solid rgb(227, 227, 227);
 }
 
 

@@ -43,10 +43,24 @@
 
       <h1 class="__form-title">Qual será o tipo de passeio?</h1>
 
-      <div class="item-form">
-        <label>Data</label>
-        <input type="date" required pattern="[0-9]{2}-[0-9]{2}-[0-9]{4}">
-      </div>  
+      <div class="form-checkbox">
+        <h3>Lancha</h3>
+        <input type="checkbox">
+      </div> 
+      <div class="form-checkbox">
+        <h3>Veículo 4x4</h3>
+        <input type="checkbox">
+      </div> 
+      <div class="form-checkbox">
+        <h3>Buggy</h3>
+        <input type="checkbox">
+      </div> 
+      <div class="form-checkbox">
+        <h3>Helicóptero</h3>
+        <input type="checkbox">
+      </div> 
+
+
 
       <div class="back-next"> 
         <div class="back-next-body">
@@ -140,7 +154,7 @@ export default {
         height: auto;
       }
       & .__img-jeep {
-        transform: translateY(-5px) rotate(-17deg);
+        transform: translateY(-5px) rotate(-20deg);
         margin: 2rem 0;
         width: 5.5rem;
         height: auto;
@@ -194,6 +208,8 @@ export default {
       }
     }
   }
+
+
   /* ******************** CADASTRO PASSEIO ******************** */
   & .cadastro-passeio {
     height: 100%;
@@ -206,6 +222,12 @@ export default {
       font-weight: 600;
       padding: 3rem 0 1.5rem 0;
       z-index: 999;
+    }
+    & .form-checkbox {
+      display: flex;
+      flex-flow: row;
+      justify-content: space-between;
+      padding: 1rem 0;
     }
     & .back-next {
       position: fixed;
