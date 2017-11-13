@@ -61,15 +61,31 @@ const store = () => new Vuex.Store({
     */
     passeioData: {/* Atualizar a action */
       passeioID: null,
-      planoCasual: false,
-      planoPro: false,
+      planoAvancadoPasseio: false,
+      planoProPasseio: false,
+      tipoPasseio: null,
+      isAluguel: false,
       title: '',
       subtitle: '',
       valorPasseio: 0,
+      lotacao: null,
+      pontosVisitados: null,
       imageH1W: null,
       imageH1J: null,
       imageL1: null
-    }
+    },
+    cadastroPasseio0: true,
+    cadastroPasseio1: false,
+    cadastroPasseio2: false,
+    cadastroPasseio3: false,
+    cadastroPasseio4: false,
+    cadastroPasseio5: false,
+    cadastroPasseio6: false,
+    cadastroPasseio7: false,
+    cadastroPasseio8: false,
+    cadastroPasseio9: false,
+    cadastroPasseio10: false
+
   },
   /*
   *****************************************************************************************
@@ -174,10 +190,25 @@ const store = () => new Vuex.Store({
     },
     m_planoPro (state, payload) {
       state.eventoData.planoPro = payload
-    }
+    },
     /*
     ########## Passeio ##########
     */
+    m_passeioProgressBar (state, payload) {
+      state.passeioProgressBar = payload
+    },
+    m_cadastroPasseio0 (state, payload) {
+      state.cadastroPasseio0 = payload
+    },
+    m_cadastroPasseio1 (state, payload) {
+      state.cadastroPasseio1 = payload
+    },
+    m_planoAvancadoPasseio (state, payload) {
+      state.passeioData.planoAvancadoPasseio = payload
+    },
+    m_planoProPasseio (state, payload) {
+      state.passeioData.planoProPasseio = payload
+    }
   },
   /*
   *****************************************************************************************
