@@ -145,6 +145,14 @@ export default {
           width: auto;
           height: auto;
         }
+        & input {  
+          cursor: pointer;
+          opacity: 0;
+          width: 100%;
+        }
+        & [type="date"]::-webkit-calendar-picker-indicator {
+          width: 100%;
+        }
       }
       & img {
         width: 1.1rem;
@@ -158,14 +166,7 @@ export default {
   }
 }
 
-input {  
-  cursor: pointer;
-  opacity: 0;
-  width: 100%;
-}
-[type="date"]::-webkit-calendar-picker-indicator {
-  width: 100%;
-}
+
 
 
 @media (min-width: 1281px) {

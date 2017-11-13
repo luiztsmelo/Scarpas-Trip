@@ -43,7 +43,10 @@
 
       <h1 class="__form-title">Qual será o tipo de passeio?</h1>
 
-
+      <div class="item-form">
+        <label>Data</label>
+        <input type="date" required pattern="[0-9]{2}-[0-9]{2}-[0-9]{4}">
+      </div>  
 
       <div class="back-next"> 
         <div class="back-next-body">
