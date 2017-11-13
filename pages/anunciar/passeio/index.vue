@@ -157,9 +157,9 @@ export default {
         height: auto;
       }
       & .__img-jeep {
-        transform: translateY(-5px) rotate(-20deg);
+        transform: translateY(-4px) rotate(-20deg);
         margin: 2rem 0;
-        width: 5.5rem;
+        width: 5.3rem;
         height: auto;
       }
     }
