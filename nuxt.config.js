@@ -32,7 +32,8 @@ module.exports = {
     '~plugins/vue-autosize',
     '~plugins/webfontloader',
     '~plugins/vue-awesome-swiper',
-    '~plugins/v-money'
+    '~plugins/v-money',
+    '~plugins/vue-ripple-directive'
   ],
   /*
   ** Customize the progress-bar color

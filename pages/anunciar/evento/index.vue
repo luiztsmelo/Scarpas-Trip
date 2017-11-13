@@ -135,7 +135,6 @@
       <h1 class="__form-title">Adicione Imagens e Vídeo</h1>
 
       <div class="before-choose-image" v-show="imageURL1 === null">
-        <h2 class="__form-subtitle">Imagens e vídeo legais farão toda a diferença na hora da divulgação do seu evento</h2>
         <button type="button" @click="$refs.myCroppa1.chooseFile()" class="__image-input-btn">Adicionar Imagem</button>
       </div>
       
@@ -736,6 +735,7 @@ export default {
       outline: none;
     }
     & .__image-input-btn {
+      margin: 1rem 0;
       font-size: 15px;
       font-weight: 500;
       background: #ff5858;

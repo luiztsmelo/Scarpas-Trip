@@ -41,21 +41,24 @@
     <!-- ########## TIPO DE PASSEIO PG.1 ########## -->
     <form class="cadastro-passeio" v-show="$store.state.cadastroPasseio1">
 
-      <h1 class="__form-title">Qual será o tipo de passeio?</h1>
+      <h1 class="__form-title">Qual tipo de passeio você quer anunciar?</h1>
 
-      <div class="form-checkbox">
+      <div class="form-checkbox" v-ripple="'rgba(0, 0, 0, 0.07)'">
         <h3>Lancha</h3>
         <input type="checkbox">
       </div> 
-      <div class="form-checkbox">
+      
+      <div class="form-checkbox" v-ripple="'rgba(0, 0, 0, 0.07)'">
         <h3>Veículo 4x4</h3>
         <input type="checkbox">
       </div> 
-      <div class="form-checkbox">
+
+      <div class="form-checkbox" v-ripple="'rgba(0, 0, 0, 0.07)'">
         <h3>Buggy</h3>
         <input type="checkbox">
       </div> 
-      <div class="form-checkbox" style="border-bottom:none">
+
+      <div class="form-checkbox" style="border-bottom:none" v-ripple="'rgba(0, 0, 0, 0.07)'">
         <h3>Helicóptero</h3>
         <input type="checkbox">
       </div> 
@@ -215,19 +218,19 @@ export default {
     height: 100%;
     background: white;
     color: var(--color01);
-    padding: 0 7% 3rem 7%;
+    padding: 0 0 3rem 0;
     & .__form-title {
+      padding: 3rem 7% 1.5rem 7%;
       line-height: 35px;
       font-size: 29px;
       font-weight: 600;
-      padding: 3rem 0 1.5rem 0;
       z-index: 999;
     }
     & .form-checkbox {
+      padding: 1rem 7%;
       display: flex;
       flex-flow: row;
       justify-content: space-between;
-      padding: 1rem 0;
       border-bottom: 1px solid rgb(222, 222, 222);
     }
     & .back-next {
