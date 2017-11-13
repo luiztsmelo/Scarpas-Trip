@@ -83,7 +83,7 @@ export default {
         height: auto;
       }
       & .__img-jeep {
-        transform: translateY(-3px) rotate(-17deg);
+        transform: translateY(-4px) rotate(-17deg);
         margin: 2rem 0;
         width: 5.7rem;
         height: auto;
