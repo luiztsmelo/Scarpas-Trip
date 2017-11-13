@@ -21,7 +21,7 @@
         </div>
           
         <swiper :options="swiperOption" ref="eventosSwiper">
-          <swiper-slide class="card" v-for="evento in $store.state.eventos" :key="evento.eventoID" @click="getEventoID(evento)">
+          <swiper-slide class="card" v-for="evento in $store.state.eventos" :key="evento.eventoID" @click="getEventoID(evento)" v-ripple="'rgba(0,0,0,.02)'">
             <nuxt-link :to="'/eventos/' + evento.eventoID">
               <progressive-img class="__card-img" :src="imageH(evento)" :placeholder="evento.imageL1" no-ratio />
               <span class="__card-date">{{ evento.date }}</span>
