@@ -7,7 +7,7 @@
     
     <div class="chegada-partida-container">
       
-      <h1 class="__title">Planeje sua viagem a Capitólio:</h1>
+      <h1 class="__title">Planeje sua viagem a Capitólio e região gratuitamente:</h1>
 
       <div class="chegada-partida-box">
 
@@ -116,9 +116,9 @@ export default {
     height: 100%;
     width: 100%;
     & .__title {
-      padding: 3rem 7% 0 7%;
+      padding: 2rem 7% 0 7%;
       color: white;
-      font-size: 26px;
+      font-size: 25px;
       font-weight: 600;
       line-height: 29px;
     }
