@@ -90,6 +90,7 @@ export default {
     & .foobar-box {
       margin-top: 2px;
       width: 3.8rem;
+      border-radius: 40%;
       height: 100%;
       display: flex;
       flex-flow: column;
