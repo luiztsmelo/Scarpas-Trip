@@ -68,7 +68,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
 @import url('../../assets/css/main.css');
 
 .eventos {

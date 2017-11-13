@@ -28,7 +28,7 @@
         </div>
 
         <nuxt-link :to="roteiroRoute">
-          <img class="__roteiro-confirm" :style="onRoteiro" src="../assets/img/roteiro-confirm.svg">
+          <img class="__roteiro-confirm" :style="onRoteiro" src="../assets/img/roteiro-confirm.svg" @click="hideFoobar()">
         </nuxt-link>
 
       </div>
@@ -44,6 +44,15 @@ export default {
     return {
       chegadaDate: null,
       partidaDate: null
+    }
+  },
+  methods: {
+    hideFoobar () {
+      if (this.chegadaDate !== null && this.partidaDate !== null) {
+        this.$store.commit('m_showFoobar', false)
+      } else {
+        this.$store.commit('m_showFoobar', true)
+      }
     }
   },
   computed: {
@@ -89,8 +98,9 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
 @import url('../assets/css/main.css');
+
 .roteiro-home {
   position: relative;
   width: 100%;

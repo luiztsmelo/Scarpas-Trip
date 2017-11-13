@@ -544,7 +544,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
 @import url('../../../assets/css/main.css');
 @import url('../../../assets/css/illustrations.css');
 
