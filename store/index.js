@@ -30,6 +30,8 @@ const store = () => new Vuex.Store({
     evento: null,
     getEventoID: null,
     eventoMap: null,
+    eventoProgressBar: 0,
+    eventoPlace: null,
     eventoData: {/* Atualizar a action */
       eventoID: null,
       planoCasual: false,
@@ -46,8 +48,6 @@ const store = () => new Vuex.Store({
       imageH1J: null,
       imageL1: null
     },
-    eventoProgressBar: 0,
-    eventoPlace: null,
     cadastroEvento0: true,
     cadastroEvento1: false,
     cadastroEvento2: false,
@@ -59,6 +59,7 @@ const store = () => new Vuex.Store({
     /*
     ########## Passeio ##########
     */
+    passeioProgressBar: 0,
     passeioData: {/* Atualizar a action */
       passeioID: null,
       planoAvancadoPasseio: false,
@@ -85,7 +86,6 @@ const store = () => new Vuex.Store({
     cadastroPasseio8: false,
     cadastroPasseio9: false,
     cadastroPasseio10: false
-
   },
   /*
   *****************************************************************************************

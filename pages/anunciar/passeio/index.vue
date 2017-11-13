@@ -77,8 +77,10 @@ export default {
     },
     backBtn2 () {
       return this.$store.commit('m_cadastroPasseio2', false), this.$store.commit('m_cadastroPasseio1', true)
-    }
+    },
     /* ******************** NEXT BUTTONS ******************** */
+    nextBtn1 () {
+    }
   },
   computed: {
     form1ok () {
