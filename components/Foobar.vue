@@ -86,10 +86,10 @@ export default {
     align-items: center;
     & a {
       height: 100%;
+      width: 45%;
     }
     & .foobar-box {
       margin-top: 2px;
-      width: 3.8rem;
       border-radius: 40%;
       height: 100%;
       display: flex;
