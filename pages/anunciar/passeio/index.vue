@@ -72,7 +72,7 @@ export default {
     flex-flow: column;
     align-items: center;
     & .imgs-header {
-      width: 70%;
+      width: 65%;
       display: flex;
       flex-flow: row;
       justify-content: space-around;
@@ -83,9 +83,9 @@ export default {
         height: auto;
       }
       & .__img-jeep {
-        transform: translateY(-4px) rotate(-17deg);
+        transform: translateY(-5px) rotate(-17deg);
         margin: 2rem 0;
-        width: 5.7rem;
+        width: 5.5rem;
         height: auto;
       }
     }
