@@ -94,19 +94,18 @@ export default {
       & .__foobar-title {
         font-size: 9px;
         font-weight: 500;
-        color: rgb(31, 31, 31);
+        color: #ff5858;
       }
       & .colortitle {
-        color: rgb(110, 110, 110);
+        color: var(--color01);
       }
       & img {
         margin-bottom: 7px;
         width: 1.3rem;
         height: auto;
-        filter: grayscale(100%) brightness(20%);
       }
       & .coloricon {
-        filter: grayscale(100%) brightness(115%);
+        filter: grayscale(100%) brightness(65%);
       }
       & .__foobar1-icon {
         transform: scale(1);
