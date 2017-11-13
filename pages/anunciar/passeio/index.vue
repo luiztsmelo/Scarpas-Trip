@@ -65,7 +65,7 @@
       </div> 
 
       <div class="form-checkbox" v-ripple="'rgba(0,0,0,.03)'">
-        <div class="form-checkbox-body">
+        <div class="form-checkbox-body" style="border-bottom:none">
           <h3>Helicóptero</h3>
           <input type="checkbox">
         </div>
