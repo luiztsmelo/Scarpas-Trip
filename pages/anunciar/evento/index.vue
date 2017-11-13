@@ -9,7 +9,7 @@
       <h1 class="__title">Divulgação: a chave para o sucesso do seu evento!</h1>
 
       <div class="pricing-box">
-        <h2 class="__pricing-box-title">Selecione seu plano:</h2>
+        <h2 class="__pricing-box-title">Escolha seu plano:</h2>
 
         <div class="plano-row casual" @click="$store.commit('m_cadastroEvento1', true), $store.commit('m_cadastroEvento0', false), $store.commit('m_planoCasual', true), $store.commit('m_planoPro', false), $store.commit('m_eventoProgressBar', (100/7))">
           <span class="__plano-valor">R$35</span>

@@ -9,7 +9,7 @@
       <h1 class="__title">A melhor maneira de encontrar o seu cliente é ser encontrado por ele.</h1>
 
       <div class="pricing-box">
-        <h2 class="__pricing-box-title">Selecione seu plano:</h2>
+        <h2 class="__pricing-box-title">Escolha seu plano:</h2>
 
         <div class="plano-row casual">
           <span class="__plano-valor">R$50</span>
