@@ -44,24 +44,33 @@
       <h1 class="__form-title">Qual tipo de passeio você quer anunciar?</h1>
 
       <div class="form-checkbox" v-ripple="'rgba(0,0,0,.03)'">
-        <h3>Lancha</h3>
-        <input type="checkbox">
+        <div class="form-checkbox-body">
+          <h3>Lancha</h3>
+          <input type="checkbox">
+        </div>
       </div> 
 
       <div class="form-checkbox" v-ripple="'rgba(0,0,0,.03)'">
-        <h3>Veículo 4x4</h3>
-        <input type="checkbox">
+        <div class="form-checkbox-body">
+          <h3>Veículo 4x4</h3>
+          <input type="checkbox">
+        </div>
       </div> 
 
       <div class="form-checkbox" v-ripple="'rgba(0,0,0,.03)'">
-        <h3>Buggy</h3>
-        <input type="checkbox">
+        <div class="form-checkbox-body">
+          <h3>Buggy</h3>
+          <input type="checkbox">
+        </div>
       </div> 
 
-      <div class="form-checkbox" style="border-bottom:none" v-ripple="'rgba(0,0,0,.03)'">
-        <h3>Helicóptero</h3>
-        <input type="checkbox">
+      <div class="form-checkbox" v-ripple="'rgba(0,0,0,.03)'">
+        <div class="form-checkbox-body">
+          <h3>Helicóptero</h3>
+          <input type="checkbox">
+        </div>
       </div> 
+
 
 
 
@@ -227,11 +236,15 @@ export default {
       z-index: 999;
     }
     & .form-checkbox {
-      padding: 1rem 7%;
-      display: flex;
-      flex-flow: row;
-      justify-content: space-between;
-      border-bottom: 1px solid rgb(222, 222, 222);
+      padding: 0 7%;
+      & .form-checkbox-body {
+        padding: 1rem 0;
+        width: 100%;
+        display: flex;
+        flex-flow: row;
+        justify-content: space-between;
+        border-bottom: 1px solid rgb(222, 222, 222);
+      }
     }
     & .back-next {
       position: fixed;
