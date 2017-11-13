@@ -55,7 +55,7 @@
         <h3>Buggy</h3>
         <input type="checkbox">
       </div> 
-      <div class="form-checkbox">
+      <div class="form-checkbox" style="border-bottom:none">
         <h3>Helicóptero</h3>
         <input type="checkbox">
       </div> 
@@ -228,6 +228,7 @@ export default {
       flex-flow: row;
       justify-content: space-between;
       padding: 1rem 0;
+      border-bottom: 1px solid rgb(222, 222, 222);
     }
     & .back-next {
       position: fixed;

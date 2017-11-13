@@ -667,7 +667,7 @@ export default {
         color: rgb(92, 92, 92);
         padding: .5rem 0 .6rem 0;
         border: none;
-        border-bottom: 1px solid rgb(210, 210, 210);
+        border-bottom: 1px solid rgb(222, 222, 222);
         outline: none;
       }
     }
@@ -730,7 +730,7 @@ export default {
       color: rgb(92, 92, 92);
       width: 100%;
       border: none;
-      border-bottom: 1px solid rgb(210, 210, 210);
+      border-bottom: 1px solid rgb(222, 222, 222);
       margin: 1.5rem 0 1rem 0;
       padding: .5rem 0 .6rem 0;
       outline: none;
