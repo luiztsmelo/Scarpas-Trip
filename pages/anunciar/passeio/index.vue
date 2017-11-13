@@ -4,10 +4,13 @@
     <!-- PLANO PASSEIO -->
     <div class="plano-passeio" v-show="$store.state.cadastroEvento0">
       
-      <img class="__img-header" src="../../../assets/img/anuncio-passeio.svg">
-
+      <div class="imgs-header">
+        <img class="__img-boat" src="../../../assets/img/anuncio-passeio.svg">
+        <img class="__img-jeep" src="../../../assets/img/anuncio-passeio2.svg">
+      </div>
+      
       <h1 class="__title">Amplie seus ganhos anunciando seu passeio com a gente!</h1>
-
+      
       <div class="pricing-box">
         <h2 class="__pricing-box-title">Escolha seu plano:</h2>
 
@@ -68,11 +71,25 @@ export default {
     display: flex;
     flex-flow: column;
     align-items: center;
-    & .__img-header {
-      margin: 2rem 0;
-      width: 6rem;
-      height: auto;
+    & .imgs-header {
+      width: 70%;
+      display: flex;
+      flex-flow: row;
+      justify-content: space-around;
+      align-items: center;
+      & .__img-boat {
+        margin: 2rem 0;
+        width: 5.7rem;
+        height: auto;
+      }
+      & .__img-jeep {
+        transform: translateY(-3px) rotate(-17deg);
+        margin: 2rem 0;
+        width: 5.7rem;
+        height: auto;
+      }
     }
+    
     & .__title {
       font-size: 26px;
       font-weight: 500;
