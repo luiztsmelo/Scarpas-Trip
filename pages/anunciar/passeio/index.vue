@@ -43,31 +43,31 @@
 
       <h1 class="__form-title">Que tipo de passeio deseja anunciar?</h1>
 
-      <div class="form-radio" v-ripple="'rgba(0,0,0,.03)'">
+      <div class="form-radio" v-ripple="'rgba(0,0,0,.03)'" @click="isLancha()">
         <div class="form-radio-body">
           <h3>Lancha</h3>
-          <input type="radio" value="lancha" v-model="$store.state.passeioData.tipoPasseio">
+          <input type="radio" value="lancha" v-model="$store.state.passeioData.tipoPasseio" ref="lancha">
         </div>
       </div> 
 
-      <div class="form-radio" v-ripple="'rgba(0,0,0,.03)'">
+      <div class="form-radio" v-ripple="'rgba(0,0,0,.03)'" @click="is4x4()">
         <div class="form-radio-body">
           <h3>4x4</h3>
-          <input type="radio" value="4x4" v-model="$store.state.passeioData.tipoPasseio">
+          <input type="radio" value="4x4" v-model="$store.state.passeioData.tipoPasseio" ref="jeep">
         </div>
       </div> 
 
-      <div class="form-radio" v-ripple="'rgba(0,0,0,.03)'">
+      <div class="form-radio" v-ripple="'rgba(0,0,0,.03)'" @click="isBuggy()">
         <div class="form-radio-body">
           <h3>Buggy</h3>
-          <input type="radio" value="buggy" v-model="$store.state.passeioData.tipoPasseio">
+          <input type="radio" value="buggy" v-model="$store.state.passeioData.tipoPasseio" ref="buggy">
         </div>
       </div> 
 
       <div class="form-radio" v-ripple="'rgba(0,0,0,.03)'">
-        <div class="form-radio-body" style="border-bottom:none">
+        <div class="form-radio-body" style="border-bottom:none" @click="isHelicoptero()">
           <h3>Helicóptero</h3>
-          <input type="radio" value="helicoptero" v-model="$store.state.passeioData.tipoPasseio">
+          <input type="radio" value="helicoptero" v-model="$store.state.passeioData.tipoPasseio" ref="helicoptero">
         </div>
       </div> 
 
@@ -104,6 +104,18 @@ export default {
     }
   },
   methods: {
+    isLancha () {
+      this.$refs.lancha.click()
+    },
+    is4x4 () {
+      this.$refs.jeep.click()
+    },
+    isBuggy () {
+      this.$refs.buggy.click()
+    },
+    isHelicoptero () {
+      this.$refs.helicoptero.click()
+    },
     /* ******************** BACK BUTTONS ******************** */
     backBtn1 () {
       return this.$store.commit('m_cadastroPasseio1', false), this.$store.commit('m_cadastroPasseio0', true)
@@ -256,10 +268,11 @@ export default {
         width: 1.6rem;
         height: 1.6rem;
         border-radius: 50%;
+        
       }
       & input[type=radio]:checked {
-        background: linear-gradient(101deg, #B5D9F0, #49A5FC);
-        background: linear-gradient(101deg, #B5D9F0, #49A5FC);
+        background: linear-gradient(122deg, #B5D9F0, #49A5FC);
+        border-color: linear-gradient(122deg, #B5D9F0, #49A5FC);
       }
     }
     & .back-next {
