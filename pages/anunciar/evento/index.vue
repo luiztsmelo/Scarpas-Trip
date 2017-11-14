@@ -210,7 +210,7 @@
     <!-- ########## TÍTULO PG.5 ########## -->
     <form class="cadastro-evento" v-show="$store.state.cadastroEvento5">
 
-      <h1 class="__form-title">Dê um Título legal</h1>  
+      <h1 class="__form-title">Dê um nome para seu evento</h1>  
       
       <textarea 
       v-model="$store.state.eventoData.title"

@@ -172,6 +172,98 @@
 
 
 
+    <!-- ########## VALOR PASSEIO PG.6 ########## -->
+    <form class="cadastro-passeio" v-show="$store.state.cadastroPasseio6">
+
+      <h1 class="__form-title">Qual o valor por pessoa?</h1>
+
+ 
+
+      <div class="back-next"> 
+        <div class="back-next-body">
+          <button type="button" class="__back" @click="backBtn6">Voltar</button>
+          <button type="button" class="__next" :style="form6ok" @click="nextBtn6">Próximo</button>
+        </div>
+      </div> 
+    
+    </form><!-- ########## VALOR PASSEIO PG.6 ########## -->
+
+
+
+
+    <!-- ########## IMAGENS E VÍDEO PG.7 ########## -->
+    <form class="cadastro-passeio" v-show="$store.state.cadastroPasseio7">
+
+      <h1 class="__form-title">Adicione imagens e vídeo</h1>
+
+ 
+
+      <div class="back-next"> 
+        <div class="back-next-body">
+          <button type="button" class="__back" @click="backBtn7">Voltar</button>
+          <button type="button" class="__next" :style="form7ok" @click="nextBtn7">Próximo</button>
+        </div>
+      </div> 
+    
+    </form><!-- ########## IMAGENS E VÍDEO PG.7 ########## -->
+
+
+
+
+    <!-- ########## TÍTULO PG.8 ########## -->
+    <form class="cadastro-passeio" v-show="$store.state.cadastroPasseio8">
+
+      <h1 class="__form-title">Dê um nome para seu passeio</h1>
+
+      <textarea 
+      v-model="$store.state.passeioData.title"
+      v-autosize="title"
+      maxlength="50"
+      placeholder="ex: Show Jorge e Mateus em Escarpas do Lago"
+      required>
+      {{title}}</textarea>
+
+      <span class="__lenght-calc">{{ titleLength }}</span>
+
+      <div class="back-next"> 
+        <div class="back-next-body">
+          <button type="button" class="__back" @click="backBtn8">Voltar</button>
+          <button type="button" class="__next" :style="form8ok" @click="nextBtn8">Próximo</button>
+        </div>
+      </div> 
+    
+    </form><!-- ########## TÍTULO PG.8 ########## -->
+
+
+
+
+    <!-- ########## DESCRIÇÃO PG.9 ########## -->
+    <form class="cadastro-passeio" v-show="$store.state.cadastroPasseio9">
+
+      <h1 class="__form-title">Descreva seu passeio</h1>   
+
+      <textarea 
+      v-model="$store.state.passeioData.subtitle"
+      v-autosize="subtitle"
+      maxlength="400"
+      placeholder="Coloque informações importantes sobre seu passeio aqui"
+      required>
+      {{subtitle}}</textarea>
+
+      <span class="__lenght-calc">{{ subtitleLength }}</span> 
+
+      <div class="back-next"> 
+        <div class="back-next-body">
+          <button type="button" class="__back" @click="backBtn9">Voltar</button>
+          <button type="button" class="__next" :style="form9ok" @click="nextBtn9">Próximo</button>
+        </div>
+      </div> 
+    
+    </form><!-- ########## DESCRIÇÃO PG.9 ########## -->
+
+
+
+
     <!-- CADASTRO EVENTO -->
 
   </div>
@@ -189,6 +281,8 @@ export default {
   transition: 'opacity',
   data() {
     return {
+      title: '',/* Vue Autosize */
+      subtitle: '',/* Vue Autosize */
     }
   },
   methods: {
@@ -220,6 +314,18 @@ export default {
     backBtn5 () {
       return this.$store.commit('m_cadastroPasseio5', false), this.$store.commit('m_cadastroPasseio4', true)
     },
+    backBtn6 () {
+      return this.$store.commit('m_cadastroPasseio6', false), this.$store.commit('m_cadastroPasseio5', true)
+    },
+    backBtn7 () {
+      return this.$store.commit('m_cadastroPasseio7', false), this.$store.commit('m_cadastroPasseio6', true)
+    },
+    backBtn8 () {
+      return this.$store.commit('m_cadastroPasseio8', false), this.$store.commit('m_cadastroPasseio7', true)
+    },
+    backBtn9 () {
+      return this.$store.commit('m_cadastroPasseio9', false), this.$store.commit('m_cadastroPasseio8', true)
+    },
     /* ******************** NEXT BUTTONS ******************** */
     nextBtn1 () {
       if (this.$store.state.passeioData.tipoPasseio !== null) {
@@ -240,6 +346,31 @@ export default {
       if (1<2) {
         return this.$store.commit('m_cadastroPasseio4', false), this.$store.commit('m_cadastroPasseio5', true), this.$store.commit('m_passeioProgressBar', (100/10)*5)
       }
+    },
+    nextBtn5 () {
+      if (1<2) {
+        return this.$store.commit('m_cadastroPasseio5', false), this.$store.commit('m_cadastroPasseio6', true), this.$store.commit('m_passeioProgressBar', (100/10)*6)
+      }
+    },
+    nextBtn6 () {
+      if (1<2) {
+        return this.$store.commit('m_cadastroPasseio6', false), this.$store.commit('m_cadastroPasseio7', true), this.$store.commit('m_passeioProgressBar', (100/10)*7)
+      }
+    },
+    nextBtn7 () {
+      if (1<2) {
+        return this.$store.commit('m_cadastroPasseio7', false), this.$store.commit('m_cadastroPasseio8', true), this.$store.commit('m_passeioProgressBar', (100/10)*8)
+      }
+    },
+    nextBtn8 () {
+      if (this.$store.state.passeioData.title !== '') {
+        return this.$store.commit('m_cadastroPasseio8', false), this.$store.commit('m_cadastroPasseio9', true), this.$store.commit('m_passeioProgressBar', (100/10)*9)
+      }
+    },
+    nextBtn9 () {
+      if (this.$store.state.passeioData.subtitle !== '') {
+        return this.$store.commit('m_cadastroPasseio9', false), this.$store.commit('m_cadastroPasseio10', true), this.$store.commit('m_passeioProgressBar', (100/10)*10)
+      }
     }
   },
   computed: {
@@ -247,6 +378,12 @@ export default {
       if (this.$store.state.passeioData.tipoPasseio !== null) {
         return this.$store.state.passeioData.tipoPasseio.toLowerCase()
       }
+    },
+    titleLength () {
+      return 50 - this.$store.state.passeioData.title.length
+    },
+    subtitleLength () {
+      return 400 - this.$store.state.passeioData.subtitle.length
     },
     form1ok () {
       if (this.$store.state.passeioData.tipoPasseio !== null) {
@@ -265,6 +402,31 @@ export default {
     },
     form4ok () {
       if (1<2) {
+        return 'background:#49A5FC;cursor:pointer'
+      }
+    },
+    form5ok () {
+      if (1<2) {
+        return 'background:#49A5FC;cursor:pointer'
+      }
+    },
+    form6ok () {
+      if (1<2) {
+        return 'background:#49A5FC;cursor:pointer'
+      }
+    },
+    form7ok () {
+      if (1<2) {
+        return 'background:#49A5FC;cursor:pointer'
+      }
+    },
+    form8ok () {
+      if (this.$store.state.passeioData.title !== '') {
+        return 'background:#49A5FC;cursor:pointer'
+      }
+    },
+    form9ok () {
+      if (this.$store.state.passeioData.subtitle !== '') {
         return 'background:#49A5FC;cursor:pointer'
       }
     },
@@ -383,6 +545,27 @@ export default {
       font-size: 29px;
       font-weight: 600;
       z-index: 999;
+    }
+    & textarea {
+      padding: 0 7%;
+      margin-bottom: .5rem;
+      width: 100%;
+      font-size: 19px;
+      font-weight: 300;
+      line-height: 26px;
+      background: white;
+      color: rgb(92, 92, 92);
+      border: none;
+      outline: none;
+      resize: none;
+    }
+    & .__lenght-calc {
+      padding: 0 7%;
+      padding-bottom: 5rem;
+      z-index: 999;
+      font-size: 20px;
+      font-weight: 600;
+      color: rgb(112, 112, 112);
     }
     & .item-form {
       padding: 0 7%;

@@ -215,6 +215,24 @@ const store = () => new Vuex.Store({
     m_cadastroPasseio5 (state, payload) {
       state.cadastroPasseio5 = payload
     },
+    m_cadastroPasseio6 (state, payload) {
+      state.cadastroPasseio6 = payload
+    },
+    m_cadastroPasseio7 (state, payload) {
+      state.cadastroPasseio7 = payload
+    },
+    m_cadastroPasseio8 (state, payload) {
+      state.cadastroPasseio8 = payload
+    },
+    m_cadastroPasseio9 (state, payload) {
+      state.cadastroPasseio9 = payload
+    },
+    m_cadastroPasseio10 (state, payload) {
+      state.cadastroPasseio10 = payload
+    },
+    m_cadastroPasseio11 (state, payload) {
+      state.cadastroPasseio11 = payload
+    },
     m_planoAvancadoPasseio (state, payload) {
       state.passeioData.planoAvancadoPasseio = payload
     },
