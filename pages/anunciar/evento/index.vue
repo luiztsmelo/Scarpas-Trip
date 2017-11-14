@@ -178,7 +178,7 @@
           </croppa>
           <div class="modal-croppa-btns">
             <button type="button" @click="showCroppaModal2=false, imageChoose2()" class="__image-input-btn">Confirmar</button>
-            <button type="button" @click="$refs.myCroppa2.chooseFile(), $refs.myCroppa2.remove(), imageURL2 = null" class="__image-input-btn" style="background:transparent;margin-top:.7rem;">Escolher outra</button>
+            <button type="button" @click="$refs.myCroppa2.chooseFile(), $refs.myCroppa2.remove(), imageURL2 = null" class="__image-input-btn" style="background:transparent;">Escolher outra</button>
             <button type="button" @click="removeImage2()" class="__image-input-btn" style="background:transparent">Remover</button>
           </div>
         </div>
@@ -242,7 +242,7 @@
       <textarea 
       v-model="$store.state.eventoData.subtitle"
       v-autosize="subtitle"
-      maxlength="500"
+      maxlength="400"
       placeholder="Coloque informações importantes sobre seu evento aqui"
       required>
       {{subtitle}}</textarea>
@@ -476,7 +476,7 @@ export default {
       return 50 - this.$store.state.eventoData.title.length
     },
     subtitleLength () {
-      return 500 - this.$store.state.eventoData.subtitle.length
+      return 400 - this.$store.state.eventoData.subtitle.length
     },
     today () {
       let dd = new Date().getDate()
@@ -551,7 +551,6 @@ export default {
   margin-top: 3.2rem;
   background: linear-gradient(40deg,#f857a6, #ff5858);
   color: white;
-  height: calc(100vh - 3.2rem);
   transition: var(--main-transition);
   & .progress-bar {
     position: fixed;
@@ -566,6 +565,7 @@ export default {
     display: flex;
     flex-flow: column;
     align-items: center;
+    padding-bottom: 5rem;
     & .__img-header {
       margin: 2rem 0;
       width: 6rem;
@@ -645,6 +645,7 @@ export default {
       resize: none;
     }
     & .__lenght-calc {
+      padding-bottom: 5rem;
       z-index: 999;
       font-size: 20px;
       font-weight: 600;
@@ -690,6 +691,10 @@ export default {
         & h1 {
           font-weight: 300;
         }
+        & canvas {
+          margin: 2rem 0 1rem 0;
+          border: 2px dashed white;
+        }
         & .modal-croppa-btns {
           display: flex;
           flex-flow: column;
@@ -717,6 +722,7 @@ export default {
           background: white;
         }
         & .__next {
+          transition: all .3s ease;
           cursor: no-drop;
           background:rgb(222, 222, 222);
           color: white;
@@ -754,10 +760,7 @@ export default {
         border-radius: 4px;
       }
     }
-    & canvas {
-      margin: 3rem 0 2rem 0;
-      border: 2px dashed white;
-    }
+    
   }
 
 }

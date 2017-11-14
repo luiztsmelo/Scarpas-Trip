@@ -266,6 +266,7 @@ export default {
           background: white;
         }
         & .__next {
+          transition: all .3s ease;
           cursor: no-drop;
           background: rgb(222, 222, 222);
           color: white;
