@@ -43,31 +43,31 @@
 
       <h1 class="__form-title">Que tipo de passeio deseja anunciar?</h1>
 
-      <div class="form-checkbox" v-ripple="'rgba(0,0,0,.03)'">
-        <div class="form-checkbox-body">
+      <div class="form-radio" v-ripple="'rgba(0,0,0,.03)'">
+        <div class="form-radio-body">
           <h3>Lancha</h3>
-          <input type="checkbox">
+          <input type="radio" value="lancha" v-model="$store.state.passeioData.tipoPasseio">
         </div>
       </div> 
 
-      <div class="form-checkbox" v-ripple="'rgba(0,0,0,.03)'">
-        <div class="form-checkbox-body">
+      <div class="form-radio" v-ripple="'rgba(0,0,0,.03)'">
+        <div class="form-radio-body">
           <h3>4x4</h3>
-          <input type="checkbox">
+          <input type="radio" value="4x4" v-model="$store.state.passeioData.tipoPasseio">
         </div>
       </div> 
 
-      <div class="form-checkbox" v-ripple="'rgba(0,0,0,.03)'">
-        <div class="form-checkbox-body">
+      <div class="form-radio" v-ripple="'rgba(0,0,0,.03)'">
+        <div class="form-radio-body">
           <h3>Buggy</h3>
-          <input type="checkbox">
+          <input type="radio" value="buggy" v-model="$store.state.passeioData.tipoPasseio">
         </div>
       </div> 
 
-      <div class="form-checkbox" v-ripple="'rgba(0,0,0,.03)'">
-        <div class="form-checkbox-body" style="border-bottom:none">
+      <div class="form-radio" v-ripple="'rgba(0,0,0,.03)'">
+        <div class="form-radio-body" style="border-bottom:none">
           <h3>Helicóptero</h3>
-          <input type="checkbox">
+          <input type="radio" value="helicoptero" v-model="$store.state.passeioData.tipoPasseio">
         </div>
       </div> 
 
@@ -99,6 +99,10 @@ export default {
     }
   },
   transition: 'opacity',
+  data() {
+    return {
+    }
+  },
   methods: {
     /* ******************** BACK BUTTONS ******************** */
     backBtn1 () {
@@ -113,7 +117,7 @@ export default {
   },
   computed: {
     form1ok () {
-      if (1>2) {
+      if (this.$store.state.passeioData.tipoPasseio !== null) {
         return 'background:#49A5FC;cursor:pointer'
       }
     },
@@ -235,15 +239,27 @@ export default {
       font-weight: 600;
       z-index: 999;
     }
-    & .form-checkbox {
+    & .form-radio {
       padding: 0 7%;
-      & .form-checkbox-body {
+      & .form-radio-body {
         padding: 1rem 0;
         width: 100%;
         display: flex;
         flex-flow: row;
         justify-content: space-between;
         border-bottom: 1px solid rgb(222, 222, 222);
+      }
+      & input[type="radio"] {
+        all: initial;
+        background: rgb(237, 237, 237);
+        border: 1px solid rgb(222, 222, 222);
+        width: 1.6rem;
+        height: 1.6rem;
+        border-radius: 50%;
+      }
+      & input[type=radio]:checked {
+        background: linear-gradient(101deg, #B5D9F0, #49A5FC);
+        background: linear-gradient(101deg, #B5D9F0, #49A5FC);
       }
     }
     & .back-next {

@@ -65,7 +65,6 @@ const store = () => new Vuex.Store({
       planoAvancadoPasseio: false,
       planoProPasseio: false,
       tipoPasseio: null,
-      isAluguel: false,
       title: '',
       subtitle: '',
       valorPasseio: 0,
