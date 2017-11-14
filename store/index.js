@@ -85,7 +85,8 @@ const store = () => new Vuex.Store({
     cadastroPasseio7: false,
     cadastroPasseio8: false,
     cadastroPasseio9: false,
-    cadastroPasseio10: false
+    cadastroPasseio10: false,
+    cadastroPasseio11: false
   },
   /*
   *****************************************************************************************

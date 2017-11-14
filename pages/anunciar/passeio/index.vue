@@ -14,14 +14,14 @@
       <div class="pricing-box">
         <h2 class="__pricing-box-title">Escolha seu plano:</h2>
 
-        <div class="plano-row avancado" @click="$store.commit('m_cadastroPasseio1', true), $store.commit('m_cadastroPasseio0', false), $store.commit('m_planoAvancadoPasseio', true), $store.commit('m_planoProPasseio', false), $store.commit('m_passeioProgressBar', (100/10))">
+        <div class="plano-row avancado" @click="$store.commit('m_cadastroPasseio1', true), $store.commit('m_cadastroPasseio0', false), $store.commit('m_planoAvancadoPasseio', true), $store.commit('m_planoProPasseio', false), $store.commit('m_passeioProgressBar', (100/11))">
           <span class="__plano-valor">R$49</span>
           <span class="__plano-valor-mes">/mês</span>
           <span class="__plano-title">AVANÇADO</span>
           <div class="__arrow-down-black"></div>
         </div>
 
-        <div class="plano-row profissional" @click="$store.commit('m_cadastroPasseio1', true), $store.commit('m_cadastroPasseio0', false), $store.commit('m_planoAvancadoPasseio', false), $store.commit('m_planoProPasseio', true), $store.commit('m_passeioProgressBar', (100/10))">
+        <div class="plano-row profissional" @click="$store.commit('m_cadastroPasseio1', true), $store.commit('m_cadastroPasseio0', false), $store.commit('m_planoAvancadoPasseio', false), $store.commit('m_planoProPasseio', true), $store.commit('m_passeioProgressBar', (100/11))">
           <span class="__plano-valor">R$79</span>
           <span class="__plano-valor-mes">/mês</span>
           <span class="__plano-title">PROFISSIONAL</span>
@@ -219,7 +219,7 @@
       v-model="$store.state.passeioData.title"
       v-autosize="title"
       maxlength="50"
-      placeholder="ex: Show Jorge e Mateus em Escarpas do Lago"
+      placeholder="ex: Passeio de Lancha no Lago de Furnas"
       required>
       {{title}}</textarea>
 
@@ -260,6 +260,42 @@
       </div> 
     
     </form><!-- ########## DESCRIÇÃO PG.9 ########## -->
+
+
+
+
+    <!-- ########## IDENTIFICAÇÃO PG.10 ########## -->
+    <form class="cadastro-passeio" v-show="$store.state.cadastroPasseio10">
+
+      <h1 class="__form-title">Sua identificação</h1>   
+
+
+      <div class="back-next"> 
+        <div class="back-next-body">
+          <button type="button" class="__back" @click="backBtn10">Voltar</button>
+          <button type="button" class="__next" :style="form10ok" @click="nextBtn10">Próximo</button>
+        </div>
+      </div> 
+    
+    </form><!-- ########## IDENTIFICAÇÃO PG.10 ########## -->
+
+
+
+
+    <!-- ########## INVESTIMENTO PG.11 ########## -->
+    <form class="cadastro-passeio" v-show="$store.state.cadastroPasseio11">
+
+      <h1 class="__form-title">Investimento</h1>   
+
+
+      <div class="back-next"> 
+        <div class="back-next-body">
+          <button type="button" class="__back" @click="backBtn11">Voltar</button>
+          <button type="button" class="__next" :style="form11ok" @click="concluir">Concluir</button>
+        </div>
+      </div> 
+    
+    </form><!-- ########## INVESTIMENTO PG.11 ########## -->
 
 
 
@@ -326,51 +362,64 @@ export default {
     backBtn9 () {
       return this.$store.commit('m_cadastroPasseio9', false), this.$store.commit('m_cadastroPasseio8', true)
     },
+    backBtn10 () {
+      return this.$store.commit('m_cadastroPasseio10', false), this.$store.commit('m_cadastroPasseio9', true)
+    },
+    backBtn11 () {
+      return this.$store.commit('m_cadastroPasseio11', false), this.$store.commit('m_cadastroPasseio10', true)
+    },
     /* ******************** NEXT BUTTONS ******************** */
     nextBtn1 () {
       if (this.$store.state.passeioData.tipoPasseio !== null) {
-        return this.$store.commit('m_cadastroPasseio1', false), this.$store.commit('m_cadastroPasseio2', true), this.$store.commit('m_passeioProgressBar', (100/10)*2)
+        return this.$store.commit('m_cadastroPasseio1', false), this.$store.commit('m_cadastroPasseio2', true), this.$store.commit('m_passeioProgressBar', (100/11)*2)
       }
     },
     nextBtn2 () {
       if (this.$store.state.passeioData.lotacao !== null) {
-        return this.$store.commit('m_cadastroPasseio2', false), this.$store.commit('m_cadastroPasseio3', true), this.$store.commit('m_passeioProgressBar', (100/10)*3)
+        return this.$store.commit('m_cadastroPasseio2', false), this.$store.commit('m_cadastroPasseio3', true), this.$store.commit('m_passeioProgressBar', (100/11)*3)
       }
     },
     nextBtn3 () {
       if (this.$store.state.passeioData.duracao !== null) {
-        return this.$store.commit('m_cadastroPasseio3', false), this.$store.commit('m_cadastroPasseio4', true), this.$store.commit('m_passeioProgressBar', (100/10)*4)
+        return this.$store.commit('m_cadastroPasseio3', false), this.$store.commit('m_cadastroPasseio4', true), this.$store.commit('m_passeioProgressBar', (100/11)*4)
       }
     },
     nextBtn4 () {
       if (1<2) {
-        return this.$store.commit('m_cadastroPasseio4', false), this.$store.commit('m_cadastroPasseio5', true), this.$store.commit('m_passeioProgressBar', (100/10)*5)
+        return this.$store.commit('m_cadastroPasseio4', false), this.$store.commit('m_cadastroPasseio5', true), this.$store.commit('m_passeioProgressBar', (100/11)*5)
       }
     },
     nextBtn5 () {
       if (1<2) {
-        return this.$store.commit('m_cadastroPasseio5', false), this.$store.commit('m_cadastroPasseio6', true), this.$store.commit('m_passeioProgressBar', (100/10)*6)
+        return this.$store.commit('m_cadastroPasseio5', false), this.$store.commit('m_cadastroPasseio6', true), this.$store.commit('m_passeioProgressBar', (100/11)*6)
       }
     },
     nextBtn6 () {
       if (1<2) {
-        return this.$store.commit('m_cadastroPasseio6', false), this.$store.commit('m_cadastroPasseio7', true), this.$store.commit('m_passeioProgressBar', (100/10)*7)
+        return this.$store.commit('m_cadastroPasseio6', false), this.$store.commit('m_cadastroPasseio7', true), this.$store.commit('m_passeioProgressBar', (100/11)*7)
       }
     },
     nextBtn7 () {
       if (1<2) {
-        return this.$store.commit('m_cadastroPasseio7', false), this.$store.commit('m_cadastroPasseio8', true), this.$store.commit('m_passeioProgressBar', (100/10)*8)
+        return this.$store.commit('m_cadastroPasseio7', false), this.$store.commit('m_cadastroPasseio8', true), this.$store.commit('m_passeioProgressBar', (100/11)*8)
       }
     },
     nextBtn8 () {
       if (this.$store.state.passeioData.title !== '') {
-        return this.$store.commit('m_cadastroPasseio8', false), this.$store.commit('m_cadastroPasseio9', true), this.$store.commit('m_passeioProgressBar', (100/10)*9)
+        return this.$store.commit('m_cadastroPasseio8', false), this.$store.commit('m_cadastroPasseio9', true), this.$store.commit('m_passeioProgressBar', (100/11)*9)
       }
     },
     nextBtn9 () {
       if (this.$store.state.passeioData.subtitle !== '') {
-        return this.$store.commit('m_cadastroPasseio9', false), this.$store.commit('m_cadastroPasseio10', true), this.$store.commit('m_passeioProgressBar', (100/10)*10)
+        return this.$store.commit('m_cadastroPasseio9', false), this.$store.commit('m_cadastroPasseio10', true), this.$store.commit('m_passeioProgressBar', (100/11)*10)
       }
+    },
+    nextBtn10 () {
+      if (1<2) {
+        return this.$store.commit('m_cadastroPasseio10', false), this.$store.commit('m_cadastroPasseio11', true), this.$store.commit('m_passeioProgressBar', (100/11)*11)
+      }
+    },
+    concluir () {
     }
   },
   computed: {
@@ -430,6 +479,11 @@ export default {
         return 'background:#49A5FC;cursor:pointer'
       }
     },
+    form10ok () {
+      if (1<2) {
+        return 'background:#49A5FC;cursor:pointer'
+      }
+    }
   },
   beforeRouteLeave (to, from, next) {
     if (this.$store.state.showFoobar === false) {
