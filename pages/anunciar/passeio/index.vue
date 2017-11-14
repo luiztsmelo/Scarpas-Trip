@@ -150,7 +150,9 @@ export default {
   },
   computed: {
     tipoPasseioTitle () {
-      return this.$store.state.passeioData.tipoPasseio.toLowerCase()
+      if (this.$store.state.passeioData.tipoPasseio !== null) {
+        return this.$store.state.passeioData.tipoPasseio.toLowerCase()
+      }
     },
     form1ok () {
       if (this.$store.state.passeioData.tipoPasseio !== null) {
