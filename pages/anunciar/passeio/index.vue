@@ -86,9 +86,17 @@
     <!-- ########## LOTAÇÃO PG.2 ########## -->
     <form class="cadastro-passeio" v-show="$store.state.cadastroPasseio2">
 
-      <h1 class="__form-title">Passeio de {{ tipoPasseioTitle }} para quantas pessoas?</h1>
+      <h1 class="__form-title">Passeio de {{ tipoPasseioTitle }} para até quantas pessoas?</h1>
 
-
+      <div class="item-form">
+        <label>Lotação</label>
+        <select v-model="$store.state.passeioData.lotacao">
+          <option disabled value="">0</option>
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+        </select>
+      </div> 
 
       <div class="back-next"> 
         <div class="back-next-body">
@@ -276,6 +284,38 @@ export default {
       font-size: 29px;
       font-weight: 600;
       z-index: 999;
+    }
+    & .item-form {
+      padding: 0 7%;
+      display: flex;
+      flex-flow: column;
+      margin: 1.7rem 0;
+      & label {
+        font-size: 18px;
+        font-weight: 500;
+      }
+      & input {
+        width: 100%;
+        font-size: 19px;
+        font-weight: 300;
+        background: white;
+        color: rgb(92, 92, 92);
+        padding: .5rem 0 .6rem 0;
+        border: none;
+        border-bottom: 1px solid rgb(222, 222, 222);
+        outline: none;
+      }
+      & select {
+        width: 100%;
+        font-size: 19px;
+        font-weight: 300;
+        background: white;
+        color: rgb(92, 92, 92);
+        padding: .5rem 0 .6rem 0;
+        border: none;
+        border-bottom: 1px solid rgb(222, 222, 222);
+        outline: none;
+      }
     }
     & .form-radio {
       padding: 0 7%;

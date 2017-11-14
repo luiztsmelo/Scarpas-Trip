@@ -661,7 +661,7 @@ export default {
       }
       & input {
         width: 100%;
-        font-size: 20px;
+        font-size: 19px;
         font-weight: 300;
         background: white;
         color: rgb(92, 92, 92);
