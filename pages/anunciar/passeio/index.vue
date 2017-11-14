@@ -46,7 +46,7 @@
       <div class="form-radio" v-ripple="'rgba(0,0,0,.03)'" @click="isLancha()">
         <div class="form-radio-body">
           <h3>Lancha</h3>
-          <input type="radio" value="lancha" v-model="$store.state.passeioData.tipoPasseio" ref="lancha">
+          <input type="radio" value="Lancha" v-model="$store.state.passeioData.tipoPasseio" ref="lancha">
         </div>
       </div> 
 
@@ -60,18 +60,16 @@
       <div class="form-radio" v-ripple="'rgba(0,0,0,.03)'" @click="isBuggy()">
         <div class="form-radio-body">
           <h3>Buggy</h3>
-          <input type="radio" value="buggy" v-model="$store.state.passeioData.tipoPasseio" ref="buggy">
+          <input type="radio" value="Buggy" v-model="$store.state.passeioData.tipoPasseio" ref="buggy">
         </div>
       </div> 
 
       <div class="form-radio" v-ripple="'rgba(0,0,0,.03)'">
         <div class="form-radio-body" style="border-bottom:none" @click="isHelicoptero()">
           <h3>Helicóptero</h3>
-          <input type="radio" value="helicoptero" v-model="$store.state.passeioData.tipoPasseio" ref="helicoptero">
+          <input type="radio" value="Helicóptero" v-model="$store.state.passeioData.tipoPasseio" ref="helicoptero">
         </div>
       </div> 
-
-
 
 
       <div class="back-next"> 
@@ -82,6 +80,26 @@
       </div> 
     
     </form><!-- ########## TIPO DE PASSEIO PG.1 ########## -->
+
+
+
+    <!-- ########## LOTAÇÃO PG.2 ########## -->
+    <form class="cadastro-passeio" v-show="$store.state.cadastroPasseio2">
+
+      <h1 class="__form-title">Passeio de {{ tipoPasseioTitle }} para quantas pessoas?</h1>
+
+
+
+      <div class="back-next"> 
+        <div class="back-next-body">
+          <button type="button" class="__back" @click="backBtn2">Voltar</button>
+          <button type="button" class="__next" :style="form2ok" @click="nextBtn2">Próximo</button>
+        </div>
+      </div> 
+    
+    </form><!-- ########## LOTAÇÃO PG.2 ########## -->
+
+
 
 
     <!-- CADASTRO EVENTO -->
@@ -125,9 +143,15 @@ export default {
     },
     /* ******************** NEXT BUTTONS ******************** */
     nextBtn1 () {
+      if (this.$store.state.passeioData.tipoPasseio !== null) {
+        return this.$store.commit('m_cadastroPasseio1', false), this.$store.commit('m_cadastroPasseio2', true), this.$store.commit('m_passeioProgressBar', (100/10)*2)
+      }
     }
   },
   computed: {
+    tipoPasseioTitle () {
+      return this.$store.state.passeioData.tipoPasseio.toLowerCase()
+    },
     form1ok () {
       if (this.$store.state.passeioData.tipoPasseio !== null) {
         return 'background:#49A5FC;cursor:pointer'
