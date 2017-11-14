@@ -464,7 +464,7 @@ export default {
             })
             .then(() => {
               this.$store.dispatch('a_uploadEvento')
-              this.$router.push('/')
+              this.$router.push('/eventos/' + eventoID)
             })
           })
         }, 'image/jpeg')
