@@ -73,7 +73,7 @@ export default {
 
 .menu {
   position: fixed;
-  z-index: 9999;
+  z-index: 9998;
   width:  100%;
   height: 100%;
   top: 3.2rem;
@@ -94,13 +94,13 @@ export default {
         width: 1.4rem;
         height: auto;
         margin-right: 1rem;
-        filter: grayscale(100%) brightness(90%);
+        filter: grayscale(100%) brightness(100%);
       }
       & .__item-img {
         width: 1.4rem;
         height: auto;
         margin-right: 1rem;
-        filter: brightness(80%);
+        filter: brightness(90%);
       }
       & .__item-text {
         font-size: 19px;
