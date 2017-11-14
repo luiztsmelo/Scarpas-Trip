@@ -17,14 +17,14 @@
         <div class="plano-row avancado" @click="$store.commit('m_cadastroPasseio1', true), $store.commit('m_cadastroPasseio0', false), $store.commit('m_planoAvancadoPasseio', true), $store.commit('m_planoProPasseio', false), $store.commit('m_passeioProgressBar', (100/11))">
           <span class="__plano-valor">R$49</span>
           <span class="__plano-valor-mes">/mês</span>
-          <span class="__plano-title">AVANÇADO</span>
+          <span class="__plano-title">MARINHEIRO</span>
           <div class="__arrow-down-black"></div>
         </div>
 
         <div class="plano-row profissional" @click="$store.commit('m_cadastroPasseio1', true), $store.commit('m_cadastroPasseio0', false), $store.commit('m_planoAvancadoPasseio', false), $store.commit('m_planoProPasseio', true), $store.commit('m_passeioProgressBar', (100/11))">
           <span class="__plano-valor">R$79</span>
           <span class="__plano-valor-mes">/mês</span>
-          <span class="__plano-title">PROFISSIONAL</span>
+          <span class="__plano-title">CAPITÃO</span>
           <div class="__arrow-down-white"></div>
         </div>
 
