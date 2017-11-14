@@ -69,6 +69,7 @@ const store = () => new Vuex.Store({
       subtitle: '',
       valorPasseio: 0,
       lotacao: null,
+      duracao: null,
       pontosVisitados: null,
       imageH1W: null,
       imageH1J: null,
@@ -210,6 +211,9 @@ const store = () => new Vuex.Store({
     },
     m_cadastroPasseio4 (state, payload) {
       state.cadastroPasseio4 = payload
+    },
+    m_cadastroPasseio5 (state, payload) {
+      state.cadastroPasseio5 = payload
     },
     m_planoAvancadoPasseio (state, payload) {
       state.passeioData.planoAvancadoPasseio = payload

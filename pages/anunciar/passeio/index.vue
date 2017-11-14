@@ -32,10 +32,14 @@
     </div><!-- PLANO PASSEIO -->
 
 
+
     <div class="progress-bar" v-show="!$store.state.cadastroPasseio0" :style="'width:' + $store.state.passeioProgressBar + '%'"></div>
 
 
+
+
     <!-- CADASTRO EVENTO -->
+
 
 
     <!-- ########## TIPO DE PASSEIO PG.1 ########## -->
@@ -83,6 +87,7 @@
 
 
 
+
     <!-- ########## LOTAÇÃO PG.2 ########## -->
     <form class="cadastro-passeio" v-show="$store.state.cadastroPasseio2">
 
@@ -103,6 +108,66 @@
       </div> 
     
     </form><!-- ########## LOTAÇÃO PG.2 ########## -->
+
+
+
+
+    <!-- ########## DURAÇÃO PG.3 ########## -->
+    <form class="cadastro-passeio" v-show="$store.state.cadastroPasseio3">
+
+      <h1 class="__form-title">Quanto tempo de passeio?</h1>
+
+      <div class="item-form">
+        <label>Duração</label>
+        <input type="time" v-model="$store.state.passeioData.duracao" required>
+      </div> 
+
+      <div class="back-next"> 
+        <div class="back-next-body">
+          <button type="button" class="__back" @click="backBtn3">Voltar</button>
+          <button type="button" class="__next" :style="form3ok" @click="nextBtn3">Próximo</button>
+        </div>
+      </div> 
+    
+    </form><!-- ########## DURAÇÃO PG.3 ########## -->
+
+
+
+
+    <!-- ########## LOCAL DE SAÍDA PG.4 ########## -->
+    <form class="cadastro-passeio" v-show="$store.state.cadastroPasseio4">
+
+      <h1 class="__form-title">O passeio sairá de onde?</h1>
+
+ 
+
+      <div class="back-next"> 
+        <div class="back-next-body">
+          <button type="button" class="__back" @click="backBtn4">Voltar</button>
+          <button type="button" class="__next" :style="form4ok" @click="nextBtn4">Próximo</button>
+        </div>
+      </div> 
+    
+    </form><!-- ########## LOCAL DE SAÍDA PG.4 ########## -->
+
+
+
+
+    <!-- ########## PONTOS VISITADOS PG.5 ########## -->
+    <form class="cadastro-passeio" v-show="$store.state.cadastroPasseio5">
+
+      <h1 class="__form-title">Quais serão os pontos visitados?</h1>
+
+ 
+
+      <div class="back-next"> 
+        <div class="back-next-body">
+          <button type="button" class="__back" @click="backBtn5">Voltar</button>
+          <button type="button" class="__next" :style="form5ok" @click="nextBtn5">Próximo</button>
+        </div>
+      </div> 
+    
+    </form><!-- ########## PONTOS VISITADOS PG.5 ########## -->
 
 
 
@@ -146,10 +211,34 @@ export default {
     backBtn2 () {
       return this.$store.commit('m_cadastroPasseio2', false), this.$store.commit('m_cadastroPasseio1', true)
     },
+    backBtn3 () {
+      return this.$store.commit('m_cadastroPasseio3', false), this.$store.commit('m_cadastroPasseio2', true)
+    },
+    backBtn4 () {
+      return this.$store.commit('m_cadastroPasseio4', false), this.$store.commit('m_cadastroPasseio3', true)
+    },
+    backBtn5 () {
+      return this.$store.commit('m_cadastroPasseio5', false), this.$store.commit('m_cadastroPasseio4', true)
+    },
     /* ******************** NEXT BUTTONS ******************** */
     nextBtn1 () {
       if (this.$store.state.passeioData.tipoPasseio !== null) {
         return this.$store.commit('m_cadastroPasseio1', false), this.$store.commit('m_cadastroPasseio2', true), this.$store.commit('m_passeioProgressBar', (100/10)*2)
+      }
+    },
+    nextBtn2 () {
+      if (this.$store.state.passeioData.lotacao !== null) {
+        return this.$store.commit('m_cadastroPasseio2', false), this.$store.commit('m_cadastroPasseio3', true), this.$store.commit('m_passeioProgressBar', (100/10)*3)
+      }
+    },
+    nextBtn3 () {
+      if (this.$store.state.passeioData.duracao !== null) {
+        return this.$store.commit('m_cadastroPasseio3', false), this.$store.commit('m_cadastroPasseio4', true), this.$store.commit('m_passeioProgressBar', (100/10)*4)
+      }
+    },
+    nextBtn4 () {
+      if (1<2) {
+        return this.$store.commit('m_cadastroPasseio4', false), this.$store.commit('m_cadastroPasseio5', true), this.$store.commit('m_passeioProgressBar', (100/10)*5)
       }
     }
   },
@@ -161,6 +250,21 @@ export default {
     },
     form1ok () {
       if (this.$store.state.passeioData.tipoPasseio !== null) {
+        return 'background:#49A5FC;cursor:pointer'
+      }
+    },
+    form2ok () {
+      if (this.$store.state.passeioData.lotacao !== null) {
+        return 'background:#49A5FC;cursor:pointer'
+      }
+    },
+    form3ok () {
+      if (this.$store.state.passeioData.duracao !== null) {
+        return 'background:#49A5FC;cursor:pointer'
+      }
+    },
+    form4ok () {
+      if (1<2) {
         return 'background:#49A5FC;cursor:pointer'
       }
     },
@@ -182,8 +286,6 @@ export default {
 
 .anunciar-passeio {
   margin-top: 3.2rem;
-  display: flex;
-  flex-flow: column;
   background: linear-gradient(40deg, #B5D9F0, #49A5FC);
   color: white;
   height: calc(100vh - 3.2rem);
