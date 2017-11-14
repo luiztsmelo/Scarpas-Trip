@@ -41,7 +41,7 @@
     <!-- ########## TIPO DE PASSEIO PG.1 ########## -->
     <form class="cadastro-passeio" v-show="$store.state.cadastroPasseio1">
 
-      <h1 class="__form-title">Qual tipo de passeio você quer anunciar?</h1>
+      <h1 class="__form-title">Qual tipo de passeio deseja anunciar?</h1>
 
       <div class="form-checkbox" v-ripple="'rgba(0,0,0,.03)'">
         <div class="form-checkbox-body">
@@ -52,7 +52,7 @@
 
       <div class="form-checkbox" v-ripple="'rgba(0,0,0,.03)'">
         <div class="form-checkbox-body">
-          <h3>Veículo 4x4</h3>
+          <h3>4x4</h3>
           <input type="checkbox">
         </div>
       </div> 
@@ -267,7 +267,7 @@ export default {
         }
         & .__next {
           cursor: no-drop;
-          background: #A0CFFD;
+          background: rgb(222, 222, 222);
           color: white;
         }
       }

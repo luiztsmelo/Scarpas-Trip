@@ -718,7 +718,7 @@ export default {
         }
         & .__next {
           cursor: no-drop;
-          background:rgb(255, 167, 167);
+          background:rgb(222, 222, 222);
           color: white;
         }
       }
