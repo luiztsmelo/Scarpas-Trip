@@ -271,8 +271,8 @@ export default {
         
       }
       & input[type=radio]:checked {
-        background: linear-gradient(142deg, #B5D9F0, #49A5FC);
-        border: 1px solid #B5D9F0;
+        background: #49A5FC;
+        border: 1px solid #49A5FC;
       }
     }
     & .back-next {
