@@ -272,7 +272,7 @@ export default {
       }
       & input[type=radio]:checked {
         background: linear-gradient(122deg, #B5D9F0, #49A5FC);
-        border-color: linear-gradient(122deg, #B5D9F0, #49A5FC);
+        border-color: transparent;
       }
     }
     & .back-next {
