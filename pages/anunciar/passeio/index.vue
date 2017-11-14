@@ -91,10 +91,7 @@
       <div class="item-form">
         <label>Lotação</label>
         <select v-model="$store.state.passeioData.lotacao">
-          <option disabled value="">0</option>
-          <option>1</option>
-          <option>2</option>
-          <option>3</option>
+          <option v-for="n in 20">{{ n }} pessoas</option>
         </select>
       </div> 
 
