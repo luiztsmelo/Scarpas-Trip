@@ -41,7 +41,7 @@
     <!-- ########## TIPO DE PASSEIO PG.1 ########## -->
     <form class="cadastro-passeio" v-show="$store.state.cadastroPasseio1">
 
-      <h1 class="__form-title">Qual tipo de passeio deseja anunciar?</h1>
+      <h1 class="__form-title">Que tipo de passeio deseja anunciar?</h1>
 
       <div class="form-checkbox" v-ripple="'rgba(0,0,0,.03)'">
         <div class="form-checkbox-body">
