@@ -141,14 +141,14 @@
 
       <div class="item-form">
         <label>Local</label>
-        <select @input="localSaida" v-if="$store.state.passeioData.localSaida !== 'Outro'">
+        <select @input="setLocalSaida" v-if="$store.state.passeioData.localSaida !== 'Outro'">
           <option>Clube Campestre Escarpas do Lago</option>
           <option>Ponte do Turvo</option>
           <option>Barragem do Dique</option>
           <option>Kanto da Ilha</option>
           <option>Outro</option>
         </select>
-        <textarea class="__local-saida-text" v-model.lazy="$store.state.passeioData.localSaida" rows="1" v-if="$store.state.passeioData.localSaida === 'Outro'" autofocus></textarea>
+        <textarea class="__local-saida-text" v-model="localSaida" rows="1" v-if="$store.state.passeioData.localSaida === 'Outro'" autofocus></textarea>
       </div> 
 
 
@@ -335,10 +335,11 @@ export default {
     return {
       title: '',/* Vue Autosize */
       subtitle: '',/* Vue Autosize */
+      localSaida: ''
     }
   },
   methods: {
-    localSaida (e) {
+    setLocalSaida (e) {
       this.$store.commit('m_localSaida', e.target.value)
     },
     isLancha () {
@@ -406,6 +407,8 @@ export default {
     nextBtn4 () {
       if (this.$store.state.passeioData.localSaida !== null && this.$store.state.passeioData.localSaida !== 'Outro') {
         return this.$store.commit('m_cadastroPasseio4', false), this.$store.commit('m_cadastroPasseio5', true), this.$store.commit('m_passeioProgressBar', (100/11)*5)
+      } else if (this.localSaida !== '') {
+        return this.$store.commit('m_cadastroPasseio4', false), this.$store.commit('m_cadastroPasseio5', true), this.$store.commit('m_passeioProgressBar', (100/11)*5), this.$store.commit('m_localSaida', this.localSaida)
       }
     },
     nextBtn5 () {
@@ -478,6 +481,8 @@ export default {
     },
     form4ok () {
       if (this.$store.state.passeioData.localSaida !== null && this.$store.state.passeioData.localSaida !== 'Outro') {
+        return 'background:#49A5FC;cursor:pointer'
+      } else if (this.localSaida !== '') {
         return 'background:#49A5FC;cursor:pointer'
       }
     },
