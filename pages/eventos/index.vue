@@ -124,7 +124,7 @@ export default {
     width: 30%;
     background: white;
     transition: all .3s ease;
-    box-shadow: 2px 2px 7px 1px rgba(0,0,0,0.3);
+    box-shadow: 2px 2px 6px 1px rgba(0,0,0,0.27);
     border-radius: 17px;
     & .filtrar-body {
       height: 100%;
