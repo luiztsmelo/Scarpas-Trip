@@ -12,6 +12,13 @@
       </li>
     </ul>
 
+    <div class="filtrar">
+      <div class="filtrar-body">
+        <span class="__filtrar-text">Filtrar</span>
+        <img class="__filtrar-img" src="../../assets/img/filter.svg">
+      </div>
+    </div>
+
   </div>
 </template>
 
@@ -75,7 +82,6 @@ export default {
   margin-top: 3.2rem;
   display: flex;
   flex-flow: column;
-  
   transition: all .222s ease-in-out;
   & .eventos-container {
     padding: 0;
@@ -104,6 +110,38 @@ export default {
       & .__card-subtitle {
         font-size: 19px;
         padding: 0 7%;
+      }
+    }
+  }
+  & .filtrar {
+    position: fixed;
+    z-index: 8888;
+    bottom: 4.2rem;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    height: 2rem;
+    width: 30%;
+    background: white;
+    transition: all .3s ease;
+    box-shadow: 2px 2px 6px 1px rgba(0,0,0,0.3);
+    border-radius: 15px;
+    & .filtrar-body {
+      height: 100%;
+      position: relative;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      padding: 0 .5rem;
+      justify-content: space-around;
+      align-items: center;
+      & .__filtrar-text {
+        font-size: 16px;
+        font-weight: 500;
+      }
+      & .__filtrar-img {
+        width: 1.2rem;
+        height: auto;
       }
     }
   }

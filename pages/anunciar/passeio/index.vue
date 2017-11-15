@@ -147,7 +147,7 @@
           <option>Ponte do Turvo</option>
           <option>Barragem do Dique</option>
           <option>Kanto da Ilha</option>
-          <option>Outro?</option>
+          <option>Outro</option>
         </select>
       </div> 
 
