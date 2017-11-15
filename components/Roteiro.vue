@@ -1,9 +1,9 @@
 <template>
   <div class="roteiro-home">
     
-    <progressive-background class="__img"
+    <!-- <progressive-background class="__img"
     no-ratio
-    src="https://firebasestorage.googleapis.com/v0/b/escarpas-trip.appspot.com/o/utils%2FescarpasH.jpg?alt=media&token=2ea18e03-653a-43b6-ae07-6597a58585ab" placeholder="https://firebasestorage.googleapis.com/v0/b/escarpas-trip.appspot.com/o/utils%2FescarpasL.jpg?alt=media&token=e3b6b83a-4ad9-4da9-8f61-09c18d14ed76" />
+    src="https://firebasestorage.googleapis.com/v0/b/escarpas-trip.appspot.com/o/utils%2FescarpasH.jpg?alt=media&token=2ea18e03-653a-43b6-ae07-6597a58585ab" placeholder="https://firebasestorage.googleapis.com/v0/b/escarpas-trip.appspot.com/o/utils%2FescarpasL.jpg?alt=media&token=e3b6b83a-4ad9-4da9-8f61-09c18d14ed76" /> -->
     
     <div class="chegada-partida-container">
       
@@ -104,6 +104,7 @@ export default {
 .roteiro-home {
   position: relative;
   width: 100%;
+  height: 14rem;
   background: var(--color01);
   & .__img {
     min-height: 14rem;
@@ -112,12 +113,12 @@ export default {
     position: absolute;
     top: 0; bottom: 0;
     z-index: 2;
-    background: rgba(0, 0, 0, .15);
-    height: 100%;
+    background: white;
+    height: 14rem;
     width: 100%;
     & .__title {
       padding: 2rem 7% 0 7%;
-      color: white;
+      color: var(--color01);
       font-size: 25px;
       font-weight: 600;
       line-height: 29px;
@@ -128,7 +129,7 @@ export default {
       text-align: center;
       justify-content: space-around;
       margin: 2rem 7%;
-      border-bottom: 1px solid white;
+      border-bottom: 1px solid var(--color01);
       height: 2.7rem;
       & .chegada-partida-input {
         position: relative;
@@ -136,7 +137,7 @@ export default {
         & h3 {
           font-size: 17px;
           font-weight: 400;
-          color: white;
+          color: var(--color01);
           position: absolute;
           top: 0;
           left: 0;
