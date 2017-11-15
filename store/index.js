@@ -62,9 +62,11 @@ const store = () => new Vuex.Store({
     passeioProgressBar: 0,
     passeioData: {/* Atualizar a action */
       passeioID: null,
-      planoAvancadoPasseio: false,
-      planoProPasseio: false,
+      planoMarinheiro: false,
+      planoCapitao: false,
       tipoPasseio: null,
+      positionLAT: -20.6141320,
+      positionLNG: -46.0478760,
       title: '',
       subtitle: '',
       valorPasseio: 0,
@@ -234,11 +236,11 @@ const store = () => new Vuex.Store({
     m_cadastroPasseio11 (state, payload) {
       state.cadastroPasseio11 = payload
     },
-    m_planoAvancadoPasseio (state, payload) {
-      state.passeioData.planoAvancadoPasseio = payload
+    m_planoMarinheiro (state, payload) {
+      state.passeioData.planoMarinheiro = payload
     },
-    m_planoProPasseio (state, payload) {
-      state.passeioData.planoProPasseio = payload
+    m_planoCapitao (state, payload) {
+      state.passeioData.planoCapitao = payload
     }
   },
   /*
@@ -254,8 +256,8 @@ const store = () => new Vuex.Store({
       firebase.database().ref('eventos/' + state.eventoID).set(state.eventoData).then(() => {
         commit('m_eventoData', {
           eventoID: null,
-          planoCasual: false,
-          planoPro: false,
+          planoMarinheiro: false,
+          planoCapitao: false,
           title: '',
           subtitle: '',
           date: '',

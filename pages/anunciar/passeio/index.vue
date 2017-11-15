@@ -14,14 +14,14 @@
       <div class="pricing-box">
         <h2 class="__pricing-box-title">Escolha seu plano:</h2>
 
-        <div class="plano-row avancado" @click="$store.commit('m_cadastroPasseio1', true), $store.commit('m_cadastroPasseio0', false), $store.commit('m_planoAvancadoPasseio', true), $store.commit('m_planoProPasseio', false), $store.commit('m_passeioProgressBar', (100/11))">
+        <div class="plano-row avancado" @click="$store.commit('m_cadastroPasseio1', true), $store.commit('m_cadastroPasseio0', false), $store.commit('m_planoMarinheiro', true), $store.commit('m_planoCapitao', false), $store.commit('m_passeioProgressBar', (100/11))">
           <span class="__plano-valor">R$49</span>
           <span class="__plano-valor-mes">/mês</span>
           <span class="__plano-title">MARINHEIRO</span>
           <div class="__arrow-down-black"></div>
         </div>
 
-        <div class="plano-row profissional" @click="$store.commit('m_cadastroPasseio1', true), $store.commit('m_cadastroPasseio0', false), $store.commit('m_planoAvancadoPasseio', false), $store.commit('m_planoProPasseio', true), $store.commit('m_passeioProgressBar', (100/11))">
+        <div class="plano-row profissional" @click="$store.commit('m_cadastroPasseio1', true), $store.commit('m_cadastroPasseio0', false), $store.commit('m_planoMarinheiro', false), $store.commit('m_planoCapitao', true), $store.commit('m_passeioProgressBar', (100/11))">
           <span class="__plano-valor">R$79</span>
           <span class="__plano-valor-mes">/mês</span>
           <span class="__plano-title">CAPITÃO</span>
@@ -139,7 +139,19 @@
 
       <h1 class="__form-title">O passeio sairá de onde?</h1>
 
- 
+      <div class="item-form">
+        <label>Local</label>
+        <select v-model="$store.state.passeioData.localSaida">
+          <option>Clube Campestre Escarpas do Lago</option>
+          <option>Heliponto Escarpas do Lago</option>
+          <option>Ponte do Turvo</option>
+          <option>Barragem do Dique</option>
+          <option>Kanto da Ilha</option>
+          <option>Outro?</option>
+        </select>
+      </div> 
+
+
 
       <div class="back-next"> 
         <div class="back-next-body">
@@ -175,7 +187,7 @@
     <!-- ########## VALOR PASSEIO PG.6 ########## -->
     <form class="cadastro-passeio" v-show="$store.state.cadastroPasseio6">
 
-      <h1 class="__form-title">Qual o valor por pessoa?</h1>
+      <h1 class="__form-title">Qual será o valor por pessoa?</h1>
 
  
 
@@ -267,7 +279,7 @@
     <!-- ########## IDENTIFICAÇÃO PG.10 ########## -->
     <form class="cadastro-passeio" v-show="$store.state.cadastroPasseio10">
 
-      <h1 class="__form-title">Sua identificação</h1>   
+      <h1 class="__form-title">Identifique-se {{ planoEscolhido }}</h1>   
 
 
       <div class="back-next"> 
@@ -433,6 +445,14 @@ export default {
     },
     subtitleLength () {
       return 400 - this.$store.state.passeioData.subtitle.length
+    },
+    planoEscolhido () {
+      if (this.$store.state.passeioData.planoMarinheiro === true) {
+        return 'marinheiro'
+      }
+      if (this.$store.state.passeioData.planoCapitao === true) {
+        return 'capitão'
+      }
     },
     form1ok () {
       if (this.$store.state.passeioData.tipoPasseio !== null) {
