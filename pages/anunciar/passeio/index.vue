@@ -148,7 +148,7 @@
           <option>Kanto da Ilha</option>
           <option>Outro</option>
         </select>
-        <textarea class="__local-saida-text" rows="1" v-if="$store.state.passeioData.localSaida === 'Outro'" autofocus></textarea>
+        <textarea class="__local-saida-text" v-model.lazy="$store.state.passeioData.localSaida" rows="1" v-if="$store.state.passeioData.localSaida === 'Outro'" autofocus></textarea>
       </div> 
 
 
@@ -404,7 +404,7 @@ export default {
       }
     },
     nextBtn4 () {
-      if (1<2) {
+      if (this.$store.state.passeioData.localSaida !== null && this.$store.state.passeioData.localSaida !== 'Outro') {
         return this.$store.commit('m_cadastroPasseio4', false), this.$store.commit('m_cadastroPasseio5', true), this.$store.commit('m_passeioProgressBar', (100/11)*5)
       }
     },
@@ -477,7 +477,7 @@ export default {
       }
     },
     form4ok () {
-      if (1<2) {
+      if (this.$store.state.passeioData.localSaida !== null && this.$store.state.passeioData.localSaida !== 'Outro') {
         return 'background:#49A5FC;cursor:pointer'
       }
     },
