@@ -114,7 +114,7 @@
         <money v-model="$store.state.eventoData.valorIngresso"></money>
       </div>  
     
-      <button type="button" @click="" class="__image-input-btn">Mais lotes?</button>
+      <button class="__input-btn" type="button" @click="">Mais lotes?</button>
 
     
       <div class="back-next"> 
@@ -135,7 +135,7 @@
       <h1 class="__form-title">Adicione Imagens e Vídeo</h1>
 
       <div class="before-choose-image" v-show="imageURL1 === null">
-        <button type="button" @click="$refs.myCroppa1.chooseFile()" class="__image-input-btn">Adicionar Imagem</button>
+        <button class="__input-btn" type="button" @click="$refs.myCroppa1.chooseFile()">Adicionar Imagem</button>
       </div>
       
       <div class="modal-croppa" v-show="showCroppaModal1" @click="showCroppaModal1=false">
@@ -155,9 +155,9 @@
           @file-choose="imageChoose1">
           </croppa>
           <div class="modal-croppa-btns">
-            <button type="button" @click="showCroppaModal1=false, imageConfirmed1()" class="__image-input-btn">Confirmar</button>
-            <button type="button" @click="$refs.myCroppa1.chooseFile(), $refs.myCroppa1.remove(), imageURL1 = null" class="__image-input-btn" style="background:transparent;margin-top:.9rem;">Escolher outra</button>
-            <button type="button" @click="removeImage1()" class="__image-input-btn" style="background:transparent;margin-top:.2rem">Remover</button>
+            <button class="__croppa-btn" type="button" @click="showCroppaModal1=false, imageConfirmed1()">Confirmar</button>
+            <button class="__croppa-btn"type="button" @click="$refs.myCroppa1.chooseFile(), $refs.myCroppa1.remove(), imageURL1 = null"  style="background:transparent">Escolher outra</button>
+            <button class="__croppa-btn" type="button" @click="removeImage1()" style="background:transparent">Remover</button>
           </div>
         </div>
       </div>
@@ -174,12 +174,13 @@
           :placeholder="'Carregando...'"
           :accept="'image/*'"
           :prevent-white-space="true"
-          :show-remove-button="false">
+          :show-remove-button="false"
+          @file-choose="imageChoose2">
           </croppa>
           <div class="modal-croppa-btns">
-            <button type="button" @click="showCroppaModal2=false, imageChoose2()" class="__image-input-btn">Confirmar</button>
-            <button type="button" @click="$refs.myCroppa2.chooseFile(), $refs.myCroppa2.remove(), imageURL2 = null" class="__image-input-btn" style="background:transparent;">Escolher outra</button>
-            <button type="button" @click="removeImage2()" class="__image-input-btn" style="background:transparent">Remover</button>
+            <button class="__croppa-btn" type="button" @click="showCroppaModal2=false, imageConfirmed2()">Confirmar</button>
+            <button class="__croppa-btn"type="button" @click="$refs.myCroppa2.chooseFile(), $refs.myCroppa2.remove(), imageURL2 = null"  style="background:transparent">Escolher outra</button>
+            <button class="__croppa-btn" type="button" @click="removeImage2()" style="background:transparent">Remover</button>
           </div>
         </div>
       </div>
@@ -191,7 +192,6 @@
           <img src="./../../../assets/img/add-image.svg" class="__preview-img" v-if="imageURL2 === null" @click="$refs.myCroppa2.chooseFile(), showCroppaModal2=true" style="padding:2rem">
           <img :src="imageURL2" class="__preview-img" @click="showCroppaModal2=true" v-else>
         </div>
-        
       </div><!-- Preview Image -->
       
 
@@ -339,13 +339,17 @@ export default {
       this.$refs.myCroppa1.remove()
       this.showCroppaModal1 = false
     },
-    async imageChoose2 () {
+    imageChoose2 () {
+      this.showCroppaModal2 = true
+    },
+    imageConfirmed2 () {
       if (this.imageURL2 !== null) {
-        return
+        return 
       } else {
-        const blob = await this.$refs.myCroppa2.promisedBlob()
-        let url2 = URL.createObjectURL(blob)
-        this.$store.state.eventoData.imageURL2 = url2
+        this.$refs.myCroppa2.generateBlob((blob) => {
+          let url2 = URL.createObjectURL(blob)
+          this.imageURL2 = url2
+        })
       }
     },
     removeImage2 () {
@@ -353,6 +357,7 @@ export default {
       this.$refs.myCroppa2.remove()
       this.showCroppaModal2 = false
     },
+
     /* ******************** GOOGLE MAPS ******************** */
     setPlace (place) {
       this.$store.commit('m_eventoPlace', place)
@@ -694,7 +699,7 @@ export default {
           font-weight: 300;
         }
         & canvas {
-          margin: 2rem 0 1rem 0;
+          margin: 3rem 0 1rem 0;
           border: 2px dashed white;
         }
         & .modal-croppa-btns {
@@ -742,8 +747,17 @@ export default {
       padding: .5rem 0 .6rem 0;
       outline: none;
     }
-    & .__image-input-btn {
+    & .__input-btn {
       margin: 1rem 0;
+      font-size: 15px;
+      font-weight: 500;
+      background: #ff5858;
+      color: white;
+      padding: .7rem 1.2rem;
+      border-radius: 4px;
+    }
+    & .__croppa-btn {
+      margin: .3rem 0;
       font-size: 15px;
       font-weight: 500;
       background: #ff5858;
@@ -753,18 +767,17 @@ export default {
     }
     & .after-choose-image {
       margin-top: 1.5rem;
+      padding: 0 calc(7% - .3rem);
       display: flex;
       flex-flow: row wrap;
       & .__preview-img {
-        margin: .2rem;
+        margin: 0 .3rem;
         width: 145px;
         height: 97px;
         border-radius: 4px;
       }
     }
-    
   }
-
 }
 
 /* TRANSITIONS */

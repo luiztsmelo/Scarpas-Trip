@@ -212,7 +212,67 @@
 
       <h1 class="__form-title">Adicione imagens e vídeo</h1>
 
- 
+      <div class="before-choose-image" v-show="imageURL1 === null">
+        <button class="__input-btn" type="button" @click="$refs.myCroppa1.chooseFile()">Adicionar Imagem</button>
+      </div>
+      
+      <div class="modal-croppa" v-show="showCroppaModal1" @click="showCroppaModal1=false">
+        <div class="modal-croppa-body" @click.stop>
+          <h1>Ajustar imagem</h1>
+          <croppa
+          ref="myCroppa1"
+          :width="320"
+          :height="214"
+          :quality="3"
+          :placeholder="'Carregando...'"
+          :placeholder-color="'rgb(222,222,222)'"
+          :accept="'image/*'"
+          :zoom-speed="2"
+          :prevent-white-space="true"
+          :show-remove-button="false"
+          @file-choose="imageChoose1">
+          </croppa>
+          <div class="modal-croppa-btns">
+            <button class="__croppa-btn" type="button" @click="showCroppaModal1=false, imageConfirmed1()">Confirmar</button>
+            <button class="__croppa-btn"type="button" @click="$refs.myCroppa1.chooseFile(), $refs.myCroppa1.remove(), imageURL1 = null"  style="background:transparent">Escolher outra</button>
+            <button class="__croppa-btn" type="button" @click="removeImage1()" style="background:transparent">Remover</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-croppa" v-show="showCroppaModal2" @click="showCroppaModal2=false">
+        <div class="modal-croppa-body" @click.stop>
+          <h1>Ajustar imagem</h1>
+          <croppa
+          ref="myCroppa2"
+          @new-image-drawn="imageChoose2"
+          :width="320"
+          :height="214"
+          :quality="3"
+          :placeholder="'Carregando...'"
+          :accept="'image/*'"
+          :prevent-white-space="true"
+          :show-remove-button="false"
+          @file-choose="imageChoose2">
+          </croppa>
+          <div class="modal-croppa-btns">
+            <button class="__croppa-btn" type="button" @click="showCroppaModal2=false, imageConfirmed2()">Confirmar</button>
+            <button class="__croppa-btn"type="button" @click="$refs.myCroppa2.chooseFile(), $refs.myCroppa2.remove(), imageURL2 = null"  style="background:transparent">Escolher outra</button>
+            <button class="__croppa-btn" type="button" @click="removeImage2()" style="background:transparent">Remover</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Preview Image -->
+      <div class="after-choose-image" v-show="imageURL1 !== null">
+        <img :src="imageURL1" class="__preview-img" @click="showCroppaModal1=true">
+        <div class="image2">
+          <img src="./../../../assets/img/add-image.svg" class="__preview-img" v-if="imageURL2 === null" @click="$refs.myCroppa2.chooseFile(), showCroppaModal2=true" style="padding:2rem">
+          <img :src="imageURL2" class="__preview-img" @click="showCroppaModal2=true" v-else>
+        </div>
+      </div><!-- Preview Image -->
+
+
 
       <div class="back-next"> 
         <div class="back-next-body">
@@ -337,10 +397,51 @@ export default {
     return {
       title: '',/* Vue Autosize */
       subtitle: '',/* Vue Autosize */
-      localSaida: ''
+      localSaida: '',
+      showCroppaModal1: false,
+      showCroppaModal2: false,
+      imageURL1: null,
+      imageURL2: null
     }
   },
   methods: {
+    /* ******************** IMAGE INPUT ******************** */
+    imageChoose1 () {
+      this.showCroppaModal1 = true
+    },
+    imageConfirmed1 () {
+      if (this.imageURL1 !== null) {
+        return 
+      } else {
+        this.$refs.myCroppa1.generateBlob((blob) => {
+          let url1 = URL.createObjectURL(blob)
+          this.imageURL1 = url1
+        })
+      }
+    },
+    removeImage1 () {
+      this.imageURL1 = null
+      this.$refs.myCroppa1.remove()
+      this.showCroppaModal1 = false
+    },
+    imageChoose2 () {
+      this.showCroppaModal2 = true
+    },
+    imageConfirmed2 () {
+      if (this.imageURL2 !== null) {
+        return 
+      } else {
+        this.$refs.myCroppa2.generateBlob((blob) => {
+          let url2 = URL.createObjectURL(blob)
+          this.imageURL2 = url2
+        })
+      }
+    },
+    removeImage2 () {
+      this.imageURL2 = null
+      this.$refs.myCroppa2.remove()
+      this.showCroppaModal2 = false
+    },
     setLocalSaida (e) {
       this.$store.commit('m_localSaida', e.target.value)
     },
@@ -424,7 +525,7 @@ export default {
       }
     },
     nextBtn7 () {
-      if (1<2) {
+      if (this.imageURL1 !== null) {
         return this.$store.commit('m_cadastroPasseio7', false), this.$store.commit('m_cadastroPasseio8', true), this.$store.commit('m_passeioProgressBar', (100/11)*8)
       }
     },
@@ -499,7 +600,7 @@ export default {
       }
     },
     form7ok () {
-      if (1<2) {
+      if (this.imageURL1 !== null) {
         return 'background:#49A5FC;cursor:pointer'
       }
     },
@@ -713,6 +814,67 @@ export default {
       & input[type=radio]:checked {
         background: #49A5FC;
         border: 1px solid #49A5FC;
+      }
+    }
+    & .modal-croppa {
+      background: rgba(0, 0, 0, 0.84);
+      width:  100%;
+      height: 100%;
+      position: fixed;
+      top:  0;
+      left: 0;
+      z-index: 9999;
+      & .modal-croppa-body {
+        display: flex;
+        flex-flow: column;
+        align-items: center;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translateX(-50%) translateY(-50%);
+        color: white;
+        & h1 {
+          font-weight: 300;
+        }
+        & canvas {
+          margin: 3rem 0 1rem 0;
+          border: 2px dashed white;
+        }
+        & .modal-croppa-btns {
+          display: flex;
+          flex-flow: column;
+          width: 100%
+        }
+      }
+    }
+    & .__input-btn {
+      margin: 1rem 7%;
+      font-size: 15px;
+      font-weight: 500;
+      background: #49A5FC;
+      color: white;
+      padding: .7rem 1.2rem;
+      border-radius: 4px;
+    }
+    & .__croppa-btn {
+      margin: .3rem 0;
+      font-size: 15px;
+      font-weight: 500;
+      background: #49A5FC;
+      color: white;
+      padding: .7rem 1.2rem;
+      border-radius: 4px;
+    }
+    & .after-choose-image {
+      margin-top: 1.5rem;
+      padding: 0 calc(7% - .3rem);
+      display: flex;
+      flex-flow: row wrap;
+      & .__preview-img {
+        margin: 0 .3rem;
+        width: 145px;
+        height: 97px;
+        border-radius: 4px;
       }
     }
     & .back-next {
