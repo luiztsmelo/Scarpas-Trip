@@ -216,6 +216,7 @@
       v-model="$store.state.eventoData.title"
       v-autosize="title"
       maxlength="50"
+      rows="1"
       placeholder="ex: Show Jorge e Mateus em Escarpas do Lago"
       required>
       {{title}}</textarea>
@@ -243,6 +244,7 @@
       v-model="$store.state.eventoData.subtitle"
       v-autosize="subtitle"
       maxlength="400"
+      rows="1"
       placeholder="Coloque informações importantes sobre seu evento aqui"
       required>
       {{subtitle}}</textarea>

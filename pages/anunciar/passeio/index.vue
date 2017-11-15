@@ -235,6 +235,7 @@
       v-model="$store.state.passeioData.title"
       v-autosize="title"
       maxlength="50"
+      rows="1"
       placeholder="ex: Passeio de Lancha no Lago de Furnas"
       required>
       {{title}}</textarea>
@@ -262,6 +263,7 @@
       v-model="$store.state.passeioData.subtitle"
       v-autosize="subtitle"
       maxlength="400"
+      rows="1"
       placeholder="Coloque informações importantes sobre seu passeio aqui"
       required>
       {{subtitle}}</textarea>
@@ -417,7 +419,7 @@ export default {
       }
     },
     nextBtn6 () {
-      if (1<2) {
+      if (this.$store.state.passeioData.valorPasseio !== 0) {
         return this.$store.commit('m_cadastroPasseio6', false), this.$store.commit('m_cadastroPasseio7', true), this.$store.commit('m_passeioProgressBar', (100/11)*7)
       }
     },
@@ -492,7 +494,7 @@ export default {
       }
     },
     form6ok () {
-      if (1<2) {
+      if (this.$store.state.passeioData.valorPasseio !== 0) {
         return 'background:#49A5FC;cursor:pointer'
       }
     },
