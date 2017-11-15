@@ -120,12 +120,12 @@ export default {
     left: 0;
     right: 0;
     margin: 0 auto;
-    height: 2rem;
+    height: 1.9rem;
     width: 30%;
     background: white;
     transition: all .3s ease;
     box-shadow: 2px 2px 7px 1px rgba(0,0,0,0.3);
-    border-radius: 15px;
+    border-radius: 17px;
     & .filtrar-body {
       height: 100%;
       position: relative;
