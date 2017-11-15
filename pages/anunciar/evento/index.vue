@@ -321,6 +321,7 @@ export default {
   },
   methods: {
     /* ******************** IMAGE INPUT ******************** */
+    /* --- Image 1 --- */
     imageChoose1 () {
       this.showCroppaModal1 = true
     },
@@ -339,6 +340,7 @@ export default {
       this.$refs.myCroppa1.remove()
       this.showCroppaModal1 = false
     },
+    /* --- Image 2 --- */
     imageChoose2 () {
       this.showCroppaModal2 = true
     },
@@ -357,7 +359,6 @@ export default {
       this.$refs.myCroppa2.remove()
       this.showCroppaModal2 = false
     },
-
     /* ******************** GOOGLE MAPS ******************** */
     setPlace (place) {
       this.$store.commit('m_eventoPlace', place)
@@ -767,7 +768,7 @@ export default {
     }
     & .after-choose-image {
       margin-top: 1.5rem;
-      padding: 0 calc(7% - .3rem);
+      padding: 0 calc(0% - .3rem);
       display: flex;
       flex-flow: row wrap;
       & .__preview-img {

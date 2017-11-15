@@ -405,7 +405,21 @@ export default {
     }
   },
   methods: {
+    /* ******************** TIPO PASSEIO ******************** */
+    isLancha () {
+      this.$refs.lancha.click()
+    },
+    is4x4 () {
+      this.$refs.jeep.click()
+    },
+    isBuggy () {
+      this.$refs.buggy.click()
+    },
+    isHelicoptero () {
+      this.$refs.helicoptero.click()
+    },
     /* ******************** IMAGE INPUT ******************** */
+    /* --- Image 1 --- */
     imageChoose1 () {
       this.showCroppaModal1 = true
     },
@@ -424,6 +438,7 @@ export default {
       this.$refs.myCroppa1.remove()
       this.showCroppaModal1 = false
     },
+    /* --- Image 2 --- */
     imageChoose2 () {
       this.showCroppaModal2 = true
     },
@@ -442,20 +457,9 @@ export default {
       this.$refs.myCroppa2.remove()
       this.showCroppaModal2 = false
     },
+    /* ******************** LOCAL SAÍDA ******************** */
     setLocalSaida (e) {
       this.$store.commit('m_localSaida', e.target.value)
-    },
-    isLancha () {
-      this.$refs.lancha.click()
-    },
-    is4x4 () {
-      this.$refs.jeep.click()
-    },
-    isBuggy () {
-      this.$refs.buggy.click()
-    },
-    isHelicoptero () {
-      this.$refs.helicoptero.click()
     },
     /* ******************** BACK BUTTONS ******************** */
     backBtn1 () {
