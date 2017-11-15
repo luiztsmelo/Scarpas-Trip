@@ -120,7 +120,7 @@ export default {
     left: 0;
     right: 0;
     margin: 0 auto;
-    height: 1.9rem;
+    height: 2rem;
     width: 30%;
     background: white;
     transition: all .3s ease;
