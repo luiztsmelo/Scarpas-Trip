@@ -189,7 +189,11 @@
 
       <h1 class="__form-title">Qual será o valor por pessoa?</h1>
 
- 
+      <div class="item-form">
+        <label>Valor</label>
+        <money v-model="$store.state.passeioData.valorPasseio"></money>
+      </div>
+
 
       <div class="back-next"> 
         <div class="back-next-body">
