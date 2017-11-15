@@ -1,17 +1,13 @@
 <template>
   <div class="roteiro-home">
     
-    <!-- <progressive-background class="__img"
-    no-ratio
-    src="https://firebasestorage.googleapis.com/v0/b/escarpas-trip.appspot.com/o/utils%2FescarpasH.jpg?alt=media&token=2ea18e03-653a-43b6-ae07-6597a58585ab" placeholder="https://firebasestorage.googleapis.com/v0/b/escarpas-trip.appspot.com/o/utils%2FescarpasL.jpg?alt=media&token=e3b6b83a-4ad9-4da9-8f61-09c18d14ed76" /> -->
-    
     <div class="chegada-partida-container">
       
       <h1 class="__title">Planeje sua viagem a Capitólio e região gratuitamente:</h1>
 
       <div class="chegada-partida-box">
 
-        <img src="../assets/img/roteiro-calendar.svg">
+        <img class="__roteiro-calendar" src="../assets/img/roteiro-calendar.svg">
 
         <div class="chegada-partida-input">
           <h3 v-if="!chegadaDate">Chegada</h3>
@@ -19,7 +15,7 @@
           <input type="date" ref="inputChegada" v-model="chegadaDate" :min="today">
         </div>
         
-        <img src="../assets/img/roteiro-arrow.svg">
+        <img class="__roteiro-arrow" src="../assets/img/roteiro-arrow.svg">
 
         <div class="chegada-partida-input">
           <h3 v-if="!partidaDate">Partida</h3>
@@ -102,23 +98,20 @@ export default {
 @import url('../assets/css/main.css');
 
 .roteiro-home {
-  position: relative;
   width: 100%;
   height: 13rem;
   background: var(--color01);
-  & .__img {
-    min-height: 14rem;
-  }
   & .chegada-partida-container {
-    position: absolute;
-    top: 0; bottom: 0;
+    display: flex;
+    flex-flow: column;
     z-index: 2;
-    background: linear-gradient(40deg, #93EDC7, #1CD8D2);
-    height: 13rem;
+    background: white;
+    height: 100%;
     width: 100%;
     & .__title {
+      display: flex;
       padding: 2rem 7% 0 7%;
-      color: white;
+      color: var(--color01);
       font-size: 25px;
       font-weight: 600;
       line-height: 29px;
@@ -128,8 +121,8 @@ export default {
       align-items: center;
       text-align: center;
       justify-content: space-around;
-      margin: 2rem 7%;
-      border-bottom: 1px solid white;
+      margin: 1rem 7%;
+      border-bottom: 1px solid var(--color01);
       height: 2.7rem;
       & .chegada-partida-input {
         position: relative;
@@ -137,7 +130,7 @@ export default {
         & h3 {
           font-size: 17px;
           font-weight: 400;
-          color: white;
+          color: var(--color01);
           position: absolute;
           top: 0;
           left: 0;
@@ -158,6 +151,7 @@ export default {
       & img {
         width: 1.1rem;
         height: auto;
+        filter: invert(100%);
       }
       & .__roteiro-confirm {
         transform: scale(1.11);
