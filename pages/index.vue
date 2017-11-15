@@ -143,7 +143,7 @@ export default {
     flex-flow: column;
     margin-bottom: 100rem;
     & .category-container {
-      padding: 1rem 0;
+      padding: 2rem 0;
       display: flex;
       flex-flow: column;
       overflow-x: hidden;
