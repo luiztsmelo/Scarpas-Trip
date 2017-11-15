@@ -104,7 +104,7 @@ export default {
 .roteiro-home {
   position: relative;
   width: 100%;
-  height: 14rem;
+  height: 13rem;
   background: var(--color01);
   & .__img {
     min-height: 14rem;
@@ -113,12 +113,12 @@ export default {
     position: absolute;
     top: 0; bottom: 0;
     z-index: 2;
-    background: white;
-    height: 14rem;
+    background: linear-gradient(40deg, #93EDC7, #1CD8D2);
+    height: 13rem;
     width: 100%;
     & .__title {
       padding: 2rem 7% 0 7%;
-      color: var(--color01);
+      color: white;
       font-size: 25px;
       font-weight: 600;
       line-height: 29px;
@@ -129,7 +129,7 @@ export default {
       text-align: center;
       justify-content: space-around;
       margin: 2rem 7%;
-      border-bottom: 1px solid var(--color01);
+      border-bottom: 1px solid white;
       height: 2.7rem;
       & .chegada-partida-input {
         position: relative;
@@ -137,7 +137,7 @@ export default {
         & h3 {
           font-size: 17px;
           font-weight: 400;
-          color: var(--color01);
+          color: white;
           position: absolute;
           top: 0;
           left: 0;
