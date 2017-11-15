@@ -151,7 +151,7 @@ export default {
       & img {
         width: 1.1rem;
         height: auto;
-        filter: invert(100%);
+        filter: invert(80%);
       }
       & .__roteiro-confirm {
         transform: scale(1.11);
