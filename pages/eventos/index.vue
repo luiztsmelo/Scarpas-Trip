@@ -116,7 +116,7 @@ export default {
   & .filtrar {
     position: fixed;
     z-index: 8888;
-    bottom: 4.2rem;
+    bottom: 4rem;
     left: 0;
     right: 0;
     margin: 0 auto;
@@ -124,7 +124,7 @@ export default {
     width: 30%;
     background: white;
     transition: all .3s ease;
-    box-shadow: 2px 2px 6px 1px rgba(0,0,0,0.3);
+    box-shadow: 2px 2px 7px 1px rgba(0,0,0,0.3);
     border-radius: 15px;
     & .filtrar-body {
       height: 100%;
@@ -140,7 +140,7 @@ export default {
         font-weight: 500;
       }
       & .__filtrar-img {
-        width: 1.2rem;
+        width: 1.15rem;
         height: auto;
       }
     }
