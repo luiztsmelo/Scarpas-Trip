@@ -65,6 +65,7 @@ const store = () => new Vuex.Store({
       planoMarinheiro: false,
       planoCapitao: false,
       tipoPasseio: null,
+      localSaida: null,
       positionLAT: -20.6141320,
       positionLNG: -46.0478760,
       title: '',
@@ -197,6 +198,9 @@ const store = () => new Vuex.Store({
     /*
     ########## Passeio ##########
     */
+    m_localSaida (state, payload) {
+      state.passeioData.localSaida = payload
+    },
     m_passeioProgressBar (state, payload) {
       state.passeioProgressBar = payload
     },

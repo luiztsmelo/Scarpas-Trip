@@ -141,14 +141,14 @@
 
       <div class="item-form">
         <label>Local</label>
-        <select v-model="$store.state.passeioData.localSaida">
+        <select @input="localSaida" v-if="$store.state.passeioData.localSaida !== 'Outro'">
           <option>Clube Campestre Escarpas do Lago</option>
-          <option>Heliponto Escarpas do Lago</option>
           <option>Ponte do Turvo</option>
           <option>Barragem do Dique</option>
           <option>Kanto da Ilha</option>
           <option>Outro</option>
         </select>
+        <textarea class="__local-saida-text" rows="1" v-if="$store.state.passeioData.localSaida === 'Outro'" autofocus></textarea>
       </div> 
 
 
@@ -338,6 +338,9 @@ export default {
     }
   },
   methods: {
+    localSaida (e) {
+      this.$store.commit('m_localSaida', e.target.value)
+    },
     isLancha () {
       this.$refs.lancha.click()
     },
@@ -675,6 +678,10 @@ export default {
         border: none;
         border-bottom: 1px solid rgb(222, 222, 222);
         outline: none;
+      }
+      & .__local-saida-text {
+        padding: .5rem 0 .6rem 0;
+        border-bottom: 1px solid rgb(222, 222, 222);
       }
     }
     & .form-radio {
