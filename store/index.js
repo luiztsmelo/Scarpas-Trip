@@ -63,6 +63,9 @@ const store = () => new Vuex.Store({
     ########## Passeio ##########
     */
     passeioProgressBar: 0,
+    blobPasL1: null,
+    blobPasH1J: null,
+    blobPasH1W: null,
     passeioData: {/* Atualizar a action */
       passeioID: null,
       planoMarinheiro: false,

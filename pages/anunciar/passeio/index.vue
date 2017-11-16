@@ -347,6 +347,10 @@
 
       <h1 class="__form-title">Identifique-se {{ planoEscolhido }}</h1>   
 
+      <div class="signin-btns">
+        <button class="facebook-btn" @click="facebookSignIn()">Facebook</button>
+        <button class="google-btn" @click="googleSignIn()">Google</button>
+      </div>
 
       <div class="back-next"> 
         <div class="back-next-body">
@@ -423,15 +427,18 @@ export default {
     imageChoose1 () {
       this.showCroppaModal1 = true
     },
-    imageConfirmed1 () {
+    async imageConfirmed1 () {
       if (this.imageURL1 !== null) {
         return 
       } else {
-        this.$refs.myCroppa1.generateBlob(blob => {
-          let url1 = URL.createObjectURL(blob)
-          this.imageURL1 = url1
-          
-        })
+        const blobPasL1 = await this.$refs.myCroppa1.promisedBlob('image/jpeg', 0.01)
+        const blobPasH1J = await this.$refs.myCroppa1.promisedBlob('image/jpeg')
+        const blobPasH1W = await this.$refs.myCroppa1.promisedBlob('image/webp')
+        let url1 = URL.createObjectURL(blobPasH1J)
+        this.imageURL1 = url1
+        this.$store.state.blobPasL1 = blobPasL1
+        this.$store.state.blobPasH1J = blobPasH1J
+        this.$store.state.blobPasH1W = blobPasH1W
       }
     },
     removeImage1 () {
@@ -854,8 +861,7 @@ export default {
     }
     & .__input-btn {
       margin: 1rem 7%;
-      font-size: 15px;
-      font-weight: 500;
+      font-size: 16px;
       background: #49A5FC;
       color: white;
       padding: .7rem 1.2rem;
@@ -863,8 +869,7 @@ export default {
     }
     & .__croppa-btn {
       margin: .3rem 0;
-      font-size: 15px;
-      font-weight: 500;
+      font-size: 16px;
       background: #49A5FC;
       color: white;
       padding: .7rem 1.2rem;
@@ -881,6 +886,10 @@ export default {
         height: 97px;
         border-radius: 4px;
       }
+    }
+    & .signin-btns {
+      display: flex;
+      padding: 0 7%;
     }
     & .back-next {
       position: fixed;

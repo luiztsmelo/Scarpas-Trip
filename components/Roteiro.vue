@@ -116,7 +116,7 @@ export default {
     background-image: linear-gradient(-20deg, #00cdac 0%, #5FBCB5 100%);
     height: 100%;
     width: 100%;
-    justify-content: space-around;
+    justify-content: center;
     & .__title {
       display: flex;
       padding: 0 7%;
@@ -130,7 +130,7 @@ export default {
       align-items: center;
       text-align: center;
       justify-content: space-around;
-      margin: 0 7%;
+      margin: 1rem 7% 0 7%;
       border-bottom: 1px solid white;
       height: 2.7rem;
       & .chegada-partida-input {

@@ -434,44 +434,42 @@ export default {
       }
     },
     concluir () {
-      this.$store.commit('m_loader', true)
-      const eventoID = Math.floor(Math.random() * (99999 - 10000 + 1) + 10000)
-      this.$store.commit('m_eventoID', eventoID)
-      const storageRef = firebase.storage().ref('eventos/' + eventoID + '/')
-      /* 
-      Upload image 1 LQ JPEG
-      */
-      storageRef.child('imageL1.jpeg').put(this.$store.state.blobEvL1).then(snapshot => {
-        console.log(eventoID + 'L1' + '.jpeg')
-        storageRef.child('imageL1.jpeg').getDownloadURL().then(url => {
-          this.$store.commit('m_imageEvL1', url)
-          this.ifUpload()
+      if (1<2) {/* IF PAGAMENTO CONCLUIDO */
+        this.$store.commit('m_loader', true)
+        const eventoID = Math.floor(Math.random() * (99999 - 10000 + 1) + 10000)
+        this.$store.commit('m_eventoID', eventoID)
+        const storageRef = firebase.storage().ref('eventos/' + eventoID + '/')
+        /* 
+        Upload image 1 LQ JPEG
+        */
+        storageRef.child('imageL1.jpeg').put(this.$store.state.blobEvL1).then(snapshot => {
+          console.log(eventoID + 'L1' + '.jpeg')
+          storageRef.child('imageL1.jpeg').getDownloadURL().then(url => {
+            this.$store.commit('m_imageEvL1', url)
+            this.ifUpload()
+          })
         })
-      })
-      /* 
-      Upload image 1 HQ WEBP
-      */
-      storageRef.child('imageH1W.webp').put(this.$store.state.blobEvH1W).then(snapshot => {
-        console.log(eventoID + 'H1W' + '.webp')
-        storageRef.child('imageH1W.webp').getDownloadURL().then(url => {
-          this.$store.commit('m_imageEvH1W', url)
-          this.ifUpload()
+        /* 
+        Upload image 1 HQ WEBP
+        */
+        storageRef.child('imageH1W.webp').put(this.$store.state.blobEvH1W).then(snapshot => {
+          console.log(eventoID + 'H1W' + '.webp')
+          storageRef.child('imageH1W.webp').getDownloadURL().then(url => {
+            this.$store.commit('m_imageEvH1W', url)
+            this.ifUpload()
+          })
         })
-      })
-      /* 
-      Upload image 1 HQ JPEG 
-      */
-      storageRef.child('imageH1J.jpeg').put(this.$store.state.blobEvH1J).then(snapshot => {
-        console.log(eventoID + 'H1J' + '.jpeg')
-        storageRef.child('imageH1J.jpeg').getDownloadURL().then(url => {
-          this.$store.commit('m_imageEvH1J', url)
-          this.ifUpload()
+        /* 
+        Upload image 1 HQ JPEG 
+        */
+        storageRef.child('imageH1J.jpeg').put(this.$store.state.blobEvH1J).then(snapshot => {
+          console.log(eventoID + 'H1J' + '.jpeg')
+          storageRef.child('imageH1J.jpeg').getDownloadURL().then(url => {
+            this.$store.commit('m_imageEvH1J', url)
+            this.ifUpload()
+          })
         })
-      })
-      /* 
-      Concluindo
-      */
-      
+      }
     },
     ifUpload () {
       if (this.$store.state.eventoData.imageL1 !== null && this.$store.state.eventoData.imageH1J !== null && this.$store.state.eventoData.imageH1W !== null) {
@@ -752,8 +750,7 @@ export default {
     }
     & .__input-btn {
       margin: 1rem 0;
-      font-size: 15px;
-      font-weight: 500;
+      font-size: 16px;
       background: #ff5858;
       color: white;
       padding: .7rem 1.2rem;
@@ -761,8 +758,7 @@ export default {
     }
     & .__croppa-btn {
       margin: .3rem 0;
-      font-size: 15px;
-      font-weight: 500;
+      font-size: 16px;
       background: #ff5858;
       color: white;
       padding: .7rem 1.2rem;

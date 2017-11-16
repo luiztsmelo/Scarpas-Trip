@@ -33,6 +33,7 @@ html
 }
 
 button {
+  font-family: var(--main-font);
   cursor: pointer;
   border: none;
   outline: none !important;
@@ -106,4 +107,40 @@ a a:hover, a:visited, a:link, a:active
 ::selection {
   color: white;
   background: rgb(51, 51, 51);
+}
+
+/* ******* SIGN IN BUTTONS ******* */
+.google-btn {
+  background-image: url('../img/google.svg');
+  background-color: rgb(219, 50, 54);
+  background-position: 8px;
+  background-repeat: no-repeat;
+  background-size: 27px;
+  color: white;
+  margin: 0 0 0 .2rem;
+  padding: .7rem 1.2rem;
+  border-radius: 4px;
+  font-size: 16px;
+  width: 50%;
+}
+.google-btn:hover {
+  background-color: rgb(199, 74, 74);
+}
+
+/* ******* FACEBOOK ******* */
+.facebook-btn {
+  background-image: url('../img/facebook.svg');
+  background-color: rgb(59, 89, 152);
+  background-position: 8px;
+  background-repeat: no-repeat;
+  background-size: 24px;
+  color: white;
+  margin: 0 .2rem 0 0;
+  padding: .7rem 1.2rem;
+  border-radius: 4px;
+  font-size: 16px;
+  width: 50%;
+}
+.facebook-btn:hover {
+  background-color:rgb(75, 91, 127);
 }
