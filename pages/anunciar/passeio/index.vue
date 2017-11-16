@@ -347,10 +347,14 @@
 
       <h1 class="__form-title">Identifique-se {{ planoEscolhido }}</h1>   
 
+      <h3 style="padding: .5rem 7% .4rem 7%;font-weight:400">Obter dados com:</h3>
+
       <div class="signin-btns">
-        <button class="facebook-btn" @click="facebookSignIn()">Facebook</button>
-        <button class="google-btn" @click="googleSignIn()">Google</button>
+        <button type="button" class="facebook-btn" @click="facebookSignIn()">Facebook</button>
+        <button type="button" class="google-btn" @click="googleSignIn()">Google</button>
       </div>
+
+      <h3 style="padding: 1.5rem 7%">Não se preocupe, não plubicaremos nada em seu nome.</h3>
 
       <div class="back-next"> 
         <div class="back-next-body">
