@@ -3,7 +3,7 @@
     
     <div class="chegada-partida-container">
       
-      <h1 class="__title">Planeje sua viagem a Capitólio e região gratuitamente:</h1>
+      <h1 class="__title">Crie um roteiro personalizado para sua viagem a Capitólio:</h1>
 
       <div class="chegada-partida-box">
 
@@ -104,7 +104,7 @@ export default {
     display: flex;
     flex-flow: column;
     z-index: 2;
-    background: linear-gradient(200deg, #93EDC7, #00918C);
+    background: linear-gradient(120deg, #f6d365 0%, #fda085 100%);
     height: 100%;
     width: 100%;
     & .__title {
@@ -120,7 +120,7 @@ export default {
       align-items: center;
       text-align: center;
       justify-content: space-around;
-      margin: 1rem 7%;
+      margin: 2rem 7% 1rem 7%;
       border-bottom: 1px solid white;
       height: 2.7rem;
       & .chegada-partida-input {
