@@ -245,7 +245,6 @@
           <h1>Ajustar imagem</h1>
           <croppa
           ref="myCroppa2"
-          @new-image-drawn="imageChoose2"
           :width="320"
           :height="214"
           :quality="3"
@@ -268,7 +267,7 @@
       <div class="after-choose-image" v-show="imageURL1 !== null">
         <img :src="imageURL1" class="__preview-img" @click="showCroppaModal1=true">
         <div class="image2">
-          <img src="./../../../assets/img/add-image.svg" class="__preview-img" v-if="imageURL2 === null" @click="$refs.myCroppa2.chooseFile(), showCroppaModal2=true" style="padding:2rem">
+          <img src="./../../../assets/img/add-image.svg" class="__preview-img" v-if="imageURL2 === null" @click="$refs.myCroppa2.chooseFile()" style="padding:2rem">
           <img :src="imageURL2" class="__preview-img" @click="showCroppaModal2=true" v-else>
         </div>
       </div><!-- Preview Image -->
@@ -428,9 +427,10 @@ export default {
       if (this.imageURL1 !== null) {
         return 
       } else {
-        this.$refs.myCroppa1.generateBlob((blob) => {
+        this.$refs.myCroppa1.generateBlob(blob => {
           let url1 = URL.createObjectURL(blob)
           this.imageURL1 = url1
+          
         })
       }
     },
@@ -447,7 +447,7 @@ export default {
       if (this.imageURL2 !== null) {
         return 
       } else {
-        this.$refs.myCroppa2.generateBlob((blob) => {
+        this.$refs.myCroppa2.generateBlob(blob => {
           let url2 = URL.createObjectURL(blob)
           this.imageURL2 = url2
         })

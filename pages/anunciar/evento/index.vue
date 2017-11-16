@@ -167,7 +167,6 @@
           <h1>Ajustar imagem</h1>
           <croppa
           ref="myCroppa2"
-          @new-image-drawn="imageChoose2"
           :width="320"
           :height="214"
           :quality="3"
@@ -190,7 +189,7 @@
       <div class="after-choose-image" v-show="imageURL1 !== null">
         <img :src="imageURL1" class="__preview-img" @click="showCroppaModal1=true">
         <div class="image2">
-          <img src="./../../../assets/img/add-image.svg" class="__preview-img" v-if="imageURL2 === null" @click="$refs.myCroppa2.chooseFile(), showCroppaModal2=true" style="padding:2rem">
+          <img src="./../../../assets/img/add-image.svg" class="__preview-img" v-if="imageURL2 === null" @click="$refs.myCroppa2.chooseFile()" style="padding:2rem">
           <img :src="imageURL2" class="__preview-img" @click="showCroppaModal2=true" v-else>
         </div>
       </div><!-- Preview Image -->
@@ -326,14 +325,18 @@ export default {
     imageChoose1 () {
       this.showCroppaModal1 = true
     },
-    imageConfirmed1 () {
+    async imageConfirmed1 () {
       if (this.imageURL1 !== null) {
         return 
       } else {
-        this.$refs.myCroppa1.generateBlob((blob) => {
-          let url1 = URL.createObjectURL(blob)
-          this.imageURL1 = url1
-        })
+        const blobEvL1 = await this.$refs.myCroppa1.promisedBlob('image/jpeg', 0.01)
+        const blobEvH1J = await this.$refs.myCroppa1.promisedBlob('image/jpeg')
+        const blobEvH1W = await this.$refs.myCroppa1.promisedBlob('image/webp')
+        let url1 = URL.createObjectURL(blobEvH1J)
+        this.imageURL1 = url1
+        this.$store.state.blobEvL1 = blobEvL1
+        this.$store.state.blobEvH1J = blobEvH1J
+        this.$store.state.blobEvH1W = blobEvH1W
       }
     },
     removeImage1 () {
@@ -349,7 +352,7 @@ export default {
       if (this.imageURL2 !== null) {
         return 
       } else {
-        this.$refs.myCroppa2.generateBlob((blob) => {
+        this.$refs.myCroppa2.generateBlob(blob => {
           let url2 = URL.createObjectURL(blob)
           this.imageURL2 = url2
         })
@@ -431,52 +434,50 @@ export default {
       }
     },
     concluir () {
-      if (1<2) {
-        this.$store.commit('m_loader', true)
-        const eventoID = Math.floor(Math.random() * (99999 - 10000 + 1) + 10000)
-        this.$store.commit('m_eventoID', eventoID)
-        const storageRef = firebase.storage().ref('eventos/' + eventoID + '/')
-        /* 
-        Upload image 1 LQ JPEG
-        */
-        this.$refs.myCroppa1.generateBlob(blob => {
-          storageRef.child('imageL1.jpeg').put(blob)
-          .then(snapshot => {
-            console.log(eventoID + 'L1' + '.jpeg')
-            storageRef.child('imageL1.jpeg').getDownloadURL().then(url => {
-              this.$store.commit('m_imageL1', url)
-            })
-          })
-        }, 'image/jpeg', 0.01)
-        /* 
-        Upload image 1 HQ WEBP 
-        */
-        this.$refs.myCroppa1.generateBlob(blob => {
-          storageRef.child('imageH1W.webp').put(blob)
-          .then(snapshot => {
-            console.log(eventoID + 'H1W' + '.webp')
-            storageRef.child('imageH1W.webp').getDownloadURL().then(url => {
-              this.$store.commit('m_imageH1W', url)
-            })
-          })
-        }, 'image/webp')
-        /* 
-        Upload image 1 HQ JPEG 
-        */
-        this.$refs.myCroppa1.generateBlob(blob => {
-          storageRef.child('imageH1J.jpeg').put(blob)
-          .then(snapshot => {
-            console.log(eventoID + 'H1J' + '.jpeg')
-            storageRef.child('imageH1J.jpeg').getDownloadURL().then(url => {
-              this.$store.commit('m_imageH1J', url)
-              this.$store.commit('m_eventos', null) /* Para não bugar as imagens */
-            })
-            .then(() => {
-              this.$store.dispatch('a_uploadEvento')
-              this.$router.push('/eventos/' + eventoID)
-            })
-          })
-        }, 'image/jpeg')
+      this.$store.commit('m_loader', true)
+      const eventoID = Math.floor(Math.random() * (99999 - 10000 + 1) + 10000)
+      this.$store.commit('m_eventoID', eventoID)
+      const storageRef = firebase.storage().ref('eventos/' + eventoID + '/')
+      /* 
+      Upload image 1 LQ JPEG
+      */
+      storageRef.child('imageL1.jpeg').put(this.$store.state.blobEvL1).then(snapshot => {
+        console.log(eventoID + 'L1' + '.jpeg')
+        storageRef.child('imageL1.jpeg').getDownloadURL().then(url => {
+          this.$store.commit('m_imageEvL1', url)
+          this.ifUpload()
+        })
+      })
+      /* 
+      Upload image 1 HQ WEBP
+      */
+      storageRef.child('imageH1W.webp').put(this.$store.state.blobEvH1W).then(snapshot => {
+        console.log(eventoID + 'H1W' + '.webp')
+        storageRef.child('imageH1W.webp').getDownloadURL().then(url => {
+          this.$store.commit('m_imageEvH1W', url)
+          this.ifUpload()
+        })
+      })
+      /* 
+      Upload image 1 HQ JPEG 
+      */
+      storageRef.child('imageH1J.jpeg').put(this.$store.state.blobEvH1J).then(snapshot => {
+        console.log(eventoID + 'H1J' + '.jpeg')
+        storageRef.child('imageH1J.jpeg').getDownloadURL().then(url => {
+          this.$store.commit('m_imageEvH1J', url)
+          this.ifUpload()
+        })
+      })
+      /* 
+      Concluindo
+      */
+      
+    },
+    ifUpload () {
+      if (this.$store.state.eventoData.imageL1 !== null && this.$store.state.eventoData.imageH1J !== null && this.$store.state.eventoData.imageH1W !== null) {
+        this.$store.dispatch('a_uploadEvento')
+        this.$store.commit('m_eventos', null) /* Para não bugar as imagens */
+        this.$router.push('/eventos/' + this.$store.state.eventoData.eventoID)
       }
     }
   },

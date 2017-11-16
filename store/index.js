@@ -32,6 +32,9 @@ const store = () => new Vuex.Store({
     eventoMap: null,
     eventoProgressBar: 0,
     eventoPlace: null,
+    blobEvL1: null,
+    blobEvH1J: null,
+    blobEvH1W: null,
     eventoData: {/* Atualizar a action */
       eventoID: null,
       planoCasual: false,
@@ -144,14 +147,14 @@ const store = () => new Vuex.Store({
     m_eventoMap (state, payload) {
       state.eventoMap = payload
     },
-    m_imageH1W (state, payload) {
-      state.eventoData.imageH1W = payload
+    m_imageEvL1 (state, payload) {
+      state.eventoData.imageL1 = payload
     },
-    m_imageH1J (state, payload) {
+    m_imageEvH1J (state, payload) {
       state.eventoData.imageH1J = payload
     },
-    m_imageL1 (state, payload) {
-      state.eventoData.imageL1 = payload
+    m_imageEvH1W (state, payload) {
+      state.eventoData.imageH1W = payload
     },
     m_eventos (state, payload) {
       state.eventos = payload
