@@ -20,7 +20,7 @@
         <div class="chegada-partida-input">
           <h3 v-if="!partidaDate">Partida</h3>
           <h3 v-else>{{ partidaDateFormatted }}</h3>
-          <input type="date" ref="inputChegada" v-model="partidaDate" :min="today">
+          <input type="date" ref="inputChegada" v-model="partidaDate" :min="partidaMin">
         </div>
 
         <nuxt-link :to="roteiroRoute">
@@ -52,6 +52,13 @@ export default {
     }
   },
   computed: {
+    partidaMin () {
+      if (this.chegadaDate !== null) {
+        return this.chegadaDate
+      } else {
+        return this.today
+      }
+    },
     roteiroRoute () {
       if (this.chegadaDate !== null && this.partidaDate !== null) {
         return '/roteiro'
@@ -61,7 +68,7 @@ export default {
     },
     onRoteiro () {
       if (this.chegadaDate !== null && this.partidaDate !== null) {
-        return 'transform: scale(1.45)'
+        return 'transform: scale(1.5)'
       }
     },
     chegadaDateFormatted () {
