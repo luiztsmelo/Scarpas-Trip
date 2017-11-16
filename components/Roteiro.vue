@@ -104,7 +104,7 @@ export default {
     display: flex;
     flex-flow: column;
     z-index: 2;
-    background: linear-gradient(195deg, #93EDC7, #1CD8D2);
+    background: linear-gradient(200deg, #93EDC7, #00918C);
     height: 100%;
     width: 100%;
     & .__title {
