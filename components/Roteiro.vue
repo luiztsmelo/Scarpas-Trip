@@ -101,12 +101,12 @@ export default {
   width: 100%;
   height: 12rem;
   & .chegada-partida-container {
-    padding: .5rem 0;
+    padding: 1rem 0;
     position: relative;
     display: flex;
     flex-flow: column;
     z-index: 2;
-    background-image: linear-gradient(to right, #434343 0%, black 100%);
+    background-image: linear-gradient(to top, #c71d6f 0%, #d09693 100%);
     height: 100%;
     width: 100%;
     justify-content: space-around;
@@ -114,7 +114,7 @@ export default {
       display: flex;
       padding: 0 7%;
       color: white;
-      font-size: 25px;
+      font-size: 24px;
       font-weight: 400;
       line-height: 29px;
     }
