@@ -106,7 +106,7 @@ export default {
     display: flex;
     flex-flow: column;
     z-index: 2;
-    background-image: linear-gradient(-20deg, #00cdac 0%, #8ddad5 100%);
+    background-image: linear-gradient(-20deg, #00cdac 0%, #5FBCB5 100%);
     height: 100%;
     width: 100%;
     justify-content: space-around;
