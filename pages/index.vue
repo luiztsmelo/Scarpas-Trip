@@ -197,7 +197,7 @@ export default {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: 0 7% 1.5rem 7%;
+        padding: 0 7% 1.3rem 7%;
         & .__title {
           font-size: 25px;
           font-weight: 600;
