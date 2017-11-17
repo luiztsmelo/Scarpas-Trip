@@ -11,7 +11,15 @@
       
       <h1 class="__title">Amplie seus ganhos anunciando seu passeio com a gente!</h1>
       
-      <div class="pricing-box">
+      <span class="__subtitle">Ganhe</span>
+      <h3 class="__item">Forte presença nas redes sociais</h3>
+      <h3 class="__item">Transparência</h3>
+      <h3 class="__item">Segurança</h3>
+
+      <span class="__price">R$59</span>
+
+
+      <!-- <div class="pricing-box">
         <h2 class="__pricing-box-title">Escolha seu plano:</h2>
 
         <div class="plano-row avancado" @click="$store.commit('m_cadastroPasseio1', true), $store.commit('m_cadastroPasseio0', false), $store.commit('m_planoMarinheiro', true), $store.commit('m_planoCapitao', false), $store.commit('m_passeioProgressBar', (100/11))">
@@ -28,7 +36,7 @@
           <div class="__arrow-down-white"></div>
         </div>
 
-      </div>
+      </div> -->
     </div><!-- PLANO PASSEIO -->
 
 
@@ -722,7 +730,7 @@ export default {
 
 .anunciar-passeio {
   margin-top: 3.2rem;
-  background: white;
+  background: linear-gradient(80deg, #B5D9F0, #49A5FC);
   color: white;
   height: calc(100vh - 3.2rem);
   transition: var(--main-transition);
@@ -748,24 +756,41 @@ export default {
       
       & .__img-boat {
         margin: 2rem 0;
-        width: 5.4rem;
+        width: 5.1rem;
         height: auto;
-        filter: invert(70%);
       }
       & .__img-jeep {
-        transform: translateY(-4px) rotate(-20deg);
+        transform: translateY(-3px) rotate(-21deg);
         margin: 2rem 0;
-        width: 5rem;
+        width: 4.7rem;
         height: auto;
-        filter: invert(70%);
       }
     }
     & .__title {
       font-size: 26px;
       font-weight: 500;
       padding: 0 7%;
-      color: var(--color01);
       text-align: center;
+    }
+    & .__subtitle {
+      margin: 2rem 0 .5rem 0;
+      font-size: 26px;
+      font-weight: 500;
+      padding: 0 7%;
+      text-align: center;
+    }
+    & .__item {
+      text-transform: uppercase;
+      font-size: 15px;
+      font-weight: 500;
+      margin: 0 0 .2rem 0;
+      color: white;
+    }
+    & .__price {
+      font-family: var(--main-font);
+      margin: 2rem 0;
+      font-size: 45px;
+      font-weight: 300;
     }
     & .pricing-box {
       display: flex;
