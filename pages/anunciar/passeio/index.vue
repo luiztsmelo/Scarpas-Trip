@@ -360,7 +360,7 @@
       <div v-if="$store.state.passeioData.proprietario !== null">
         <div class="item-form">
           <label>Celular</label>
-          <masked-input v-model="$store.state.passeioData.celular" mask="(11) 11111-1111" placeholder="(__) _____-____" />
+          <masked-input type="tel" v-model="$store.state.passeioData.celular" mask="(11) 11111-1111" placeholder="(__) _____-____" />
         </div>
       </div>
 
