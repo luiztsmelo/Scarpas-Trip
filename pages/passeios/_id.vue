@@ -23,6 +23,8 @@
 
 
 
+    
+
 
     <!-- ####### SOBRE ####### -->
     <h1 class="box-title">Sobre</h1>
@@ -32,7 +34,13 @@
     </div><!-- ####### SOBRE ####### -->
 
     
-    
+    <!-- ####### PROPRIETÁRIO ####### -->
+    <h1 class="box-title">Proprietário</h1>
+
+    <div class="proprietario-box">
+      <img class="__proprietario-img" :src="passeio.photoURL" alt="">
+      <h3 class="__proprietario-name">{{ passeio.proprietario }}</h3>
+    </div><!-- ####### PROPRIETÁRIO ####### -->
 
     
 
@@ -168,7 +176,7 @@ export default {
   & .box-title {
     font-weight: 500;
     font-size: 20px;
-    padding: 3rem 7% .5rem 7%;
+    padding: 2rem 7% .5rem 7%;
   }
 
   & .__passeio-title {
@@ -191,7 +199,6 @@ export default {
 
 
 
-
   /* ####### SOBRE BOX ####### */
   & .sobre-box {
     padding: 0 7%;
@@ -201,6 +208,21 @@ export default {
 
 
 
+
+  /* ####### PROPRIETARIO BOX ####### */
+  & .proprietario-box {
+    display: flex;
+    padding: 0 7%;
+    align-items: center;
+    & .__proprietario-img {
+      width: 3rem;
+      height: 3rem;
+      border-radius: 50%;
+    }
+    & .__proprietario-name {
+      padding-left: .5rem;
+    }
+  }/* ####### PROPRIETARIO BOX ####### */
 
 
 }
