@@ -65,6 +65,7 @@ const store = () => new Vuex.Store({
     */
     passeioID: null,
     passeios: null,
+    passeio: null,
     passeioProgressBar: 0,
     blobPasL1: null,
     blobPasH1J: null,
@@ -231,6 +232,9 @@ const store = () => new Vuex.Store({
     },
     m_passeios (state, payload) {
       state.passeios = payload
+    },
+    m_passeio (state, payload) {
+      state.passeio = payload
     },
     m_passeioProgressBar (state, payload) {
       state.passeioProgressBar = payload

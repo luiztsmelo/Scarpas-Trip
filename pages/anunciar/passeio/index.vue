@@ -142,7 +142,7 @@
       <div class="item-form">
         <label>Local</label>
         <select v-model="$store.state.passeioData.localSaida" @input="setLocalSaida" v-if="$store.state.passeioData.localSaida !== 'Outro'">
-          <option>Clube Campestre Escarpas do Lago</option>
+          <option>Escarpas do Lago</option>
           <option>Ponte do Turvo</option>
           <option>Barragem do Dique</option>
           <option>Kanto da Ilha</option>
