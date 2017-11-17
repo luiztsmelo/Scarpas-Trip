@@ -355,12 +355,19 @@
         <button type="button" class="google-btn" @click="googleSignIn()">Google</button>
       </div>
 
-      <h3 style="padding: .5rem 7% 0 7%;font-weight:400" v-if="$store.state.passeioData.proprietario !== null">Ótimo {{ firstName }}! Só mais algumas informações:</h3>
+      <h3 style="padding: .5rem 7% 0 7%" v-if="$store.state.passeioData.proprietario !== null">Ótimo {{ firstName }}! Só mais algumas informações:</h3>
 
       <div v-if="$store.state.passeioData.proprietario !== null">
         <div class="item-form">
           <label>Celular</label>
-          <masked-input type="tel" v-model="$store.state.passeioData.celular" mask="(11) 11111-1111" placeholder="(__) _____-____" />
+          <masked-input
+            type="tel"
+            v-model="$store.state.passeioData.celular"
+            :mask="['(', /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]"
+            :guide="true"
+            placeholderChar="_">
+          </masked-input>
+          <!-- <masked-input type="tel" v-model="$store.state.passeioData.celular" mask="(11) 11111-1111" placeholder="(__) _____-____" /> -->
         </div>
       </div>
 
@@ -403,7 +410,8 @@
 
 <script>
 import * as firebase from 'firebase'
-import MaskedInput from 'vue-masked-input' 
+/* import MaskedInput from 'vue-masked-input' */
+import MaskedInput from 'vue-text-mask'
 
 export default {
   components: { 
