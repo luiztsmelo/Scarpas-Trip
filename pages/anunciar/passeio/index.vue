@@ -580,11 +580,54 @@ export default {
       }
     },
     nextBtn10 () {
-      if (this.$store.state.passeioData.celular !== null) {
+      if (this.$store.state.passeioData.celular.length === 15) {
         return this.$store.commit('m_cadastroPasseio10', false), this.$store.commit('m_cadastroPasseio11', true), this.$store.commit('m_passeioProgressBar', (100/11)*11)
       }
     },
     concluir () {
+      if (1<2) {/* IF PAGAMENTO CONCLUIDO */
+        this.$store.commit('m_loader', true)
+        const passeioID = Math.floor(Math.random() * (99999 - 10000 + 1) + 10000)
+        this.$store.commit('m_passeioID', passeioID)
+        const storageRef = firebase.storage().ref('passeios/' + passeioID + '/')
+        /* 
+        Upload image 1 LQ JPEG
+        */
+        storageRef.child('imageL1.jpeg').put(this.$store.state.blobPasL1).then(snapshot => {
+          console.log(passeioID + 'L1' + '.jpeg')
+          storageRef.child('imageL1.jpeg').getDownloadURL().then(url => {
+            this.$store.commit('m_imagePasL1', url)
+            this.ifUpload()
+          })
+        })
+        /* 
+        Upload image 1 HQ WEBP
+        */
+        storageRef.child('imageH1W.webp').put(this.$store.state.blobPasH1W).then(snapshot => {
+          console.log(passeioID + 'H1W' + '.webp')
+          storageRef.child('imageH1W.webp').getDownloadURL().then(url => {
+            this.$store.commit('m_imagePasH1W', url)
+            this.ifUpload()
+          })
+        })
+        /* 
+        Upload image 1 HQ JPEG 
+        */
+        storageRef.child('imageH1J.jpeg').put(this.$store.state.blobPasH1J).then(snapshot => {
+          console.log(passeioID + 'H1J' + '.jpeg')
+          storageRef.child('imageH1J.jpeg').getDownloadURL().then(url => {
+            this.$store.commit('m_imagePasH1J', url)
+            this.ifUpload()
+          })
+        })
+      }
+    },
+    ifUpload () {
+      if (this.$store.state.passeioData.imageL1 !== null && this.$store.state.passeioData.imageH1J !== null && this.$store.state.passeioData.imageH1W !== null) {
+        this.$store.dispatch('a_uploadPasseio')
+        this.$store.commit('m_passeios', null) /* Para não bugar as imagens */
+        this.$router.push('/passeios/' + this.$store.state.passeioData.passeioID)
+      }
     }
   },
   computed: {
@@ -652,7 +695,12 @@ export default {
       }
     },
     form10ok () {
-      if (this.$store.state.passeioData.celular !== null) {
+      if (this.$store.state.passeioData.celular.length === 15) {
+        return 'background:#49A5FC;cursor:pointer'
+      }
+    },
+    form11ok () {
+      if (1<2) {
         return 'background:#49A5FC;cursor:pointer'
       }
     }

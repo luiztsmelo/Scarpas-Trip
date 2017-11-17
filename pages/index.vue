@@ -23,7 +23,7 @@
         <swiper :options="swiperOption" ref="eventosSwiper">
           <swiper-slide class="card" v-for="evento in $store.state.eventos" :key="evento.eventoID" @click="getEventoID(evento)" v-ripple="'rgba(0,0,0,.02)'">
             <nuxt-link :to="'/eventos/' + evento.eventoID">
-              <progressive-img class="__card-img" :src="imageH(evento)" :placeholder="evento.imageL1" no-ratio />
+              <progressive-img class="__card-img" :src="imageEvH(evento)" :placeholder="evento.imageL1" no-ratio />
               <span class="__card-date">{{ evento.date }}</span>
               <h1 class="__card-title">{{ evento.title | truncateTitle }}</h1>
               <h2 class="__card-subtitle">{{ evento.subtitle | truncateSubtitle }}</h2>
@@ -32,6 +32,35 @@
         </swiper>
 
       </div><!-- ####### EVENTOS ####### -->
+
+
+
+
+      <!-- ####### PASSEIOS ####### -->
+      <div class="category-container">
+
+        <div class="title-row">
+          <h1 class="__title">Passeios</h1>
+          <!-- <nuxt-link to="/eventos">
+            <div class="see-all">
+              <span class="__see-all-text">Ver mais</span>
+              <img class="__see-all-arrow" src="../assets/img/see-all-arrow.svg">
+            </div>
+          </nuxt-link>  --> 
+        </div>
+          
+        <swiper :options="swiperOption" ref="passeiosSwiper">
+          <swiper-slide class="card" v-for="passeio in $store.state.passeios" :key="passeio.passeioID" @click="getPasseioID(passeio)" v-ripple="'rgba(0,0,0,.02)'">
+            <nuxt-link :to="'/passeios/' + passeio.passeioID">
+              <progressive-img class="__card-img" :src="imagePasH(passeio)" :placeholder="passeio.imageL1" no-ratio />
+              <span class="__card-date">{{ passeio.localSaida }}</span>
+              <h1 class="__card-title">{{ passeio.title | truncateTitle }}</h1>
+              <h2 class="__card-subtitle">{{ passeio.subtitle | truncateSubtitle }}</h2>
+            </nuxt-link> 
+          </swiper-slide>
+        </swiper>
+
+      </div><!-- ####### PASSEIOS ####### -->
 
 
     </div>
@@ -68,22 +97,39 @@ export default {
     getEventoID (evento) {
       this.$store.commit('m_getEventoID', evento.eventoID)
     },
-    imageH (evento) {
+    getPasseioID (passeio) {
+      this.$store.commit('m_getPasseioID', passeio.passeioID)
+    },
+    imageEvH (evento) {
       if (supportsWebP) {
         return evento.imageH1W
       } else {
         return evento.imageH1J
       }
+    },
+    imagePasH (passeio) {
+      if (supportsWebP) {
+        return passeio.imageH1W
+      } else {
+        return passeio.imageH1J
+      }
     }
   },
   fetch ({ store }) {
-    if (store.state.eventos === null) {
+    if (store.state.eventos === null && store.state.passeios === null) {
       return firebase.database().ref('eventos').once('value')
       .then(snapshot => {
         store.commit('m_eventos', snapshot.val())
       })
+      .then(() => {
+        return firebase.database().ref('passeios').once('value')
+        .then(snapshot => {
+          store.commit('m_passeios', snapshot.val())
+        })
+      })
+      
     } else {
-      return console.log('Eventos já carregados')
+      return console.log('Eventos e Passeios já carregados')
     }
   },
   computed: {

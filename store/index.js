@@ -63,6 +63,8 @@ const store = () => new Vuex.Store({
     /*
     ########## Passeio ##########
     */
+    passeioID: null,
+    passeios: null,
     passeioProgressBar: 0,
     blobPasL1: null,
     blobPasH1J: null,
@@ -72,14 +74,12 @@ const store = () => new Vuex.Store({
       userID: null,
       proprietario: null,
       email: null,
-      celular: null,
+      celular: '',
       photoURL: null,
       planoMarinheiro: false,
       planoCapitao: false,
       tipoPasseio: null,
       localSaida: null,
-      positionLAT: -20.6141320,
-      positionLNG: -46.0478760,
       title: '',
       subtitle: '',
       valorPasseio: 0,
@@ -213,8 +213,24 @@ const store = () => new Vuex.Store({
     /*
     ########## Passeio ##########
     */
+    m_passeioID (state, payload) {
+      state.passeioID = payload
+      state.passeioData.passeioID = payload
+    },
     m_localSaida (state, payload) {
       state.passeioData.localSaida = payload
+    },
+    m_imagePasL1 (state, payload) {
+      state.passeioData.imageL1 = payload
+    },
+    m_imagePasH1J (state, payload) {
+      state.passeioData.imageH1J = payload
+    },
+    m_imagePasH1W (state, payload) {
+      state.passeioData.imageH1W = payload
+    },
+    m_passeios (state, payload) {
+      state.passeios = payload
     },
     m_passeioProgressBar (state, payload) {
       state.passeioProgressBar = payload
@@ -269,10 +285,11 @@ const store = () => new Vuex.Store({
   */
   actions: {
     /*
-    ########## Evento ##########
+    ########## Eventos ##########
     */
     a_uploadEvento ({ state, commit }) {
       firebase.database().ref('eventos/' + state.eventoID).set(state.eventoData).then(() => {
+        /* Resetar states */
         commit('m_eventoData', {
           eventoID: null,
           planoMarinheiro: false,
@@ -293,6 +310,38 @@ const store = () => new Vuex.Store({
         commit('m_cadastroEvento7', false)
         commit('m_cadastroEvento0', true)
         commit('m_eventoPlace', null)
+      })
+    },
+    /*
+    ########## Passeios ##########
+    */
+    a_uploadPasseio ({ state, commit }) {
+      firebase.database().ref('passeios/' + state.passeioID).set(state.passeioData).then(() => {
+        /* Resetar states */
+        commit('m_passeioData', {
+          passeioID: null,
+          userID: null,
+          proprietario: null,
+          email: null,
+          celular: '',
+          photoURL: null,
+          planoMarinheiro: false,
+          planoCapitao: false,
+          tipoPasseio: null,
+          localSaida: null,
+          title: '',
+          subtitle: '',
+          valorPasseio: 0,
+          lotacao: null,
+          duracao: null,
+          pontosVisitados: null,
+          imageH1W: null,
+          imageH1J: null,
+          imageL1: null
+        })
+        commit('m_loader', false)
+        commit('m_cadastroPasseio7', false)
+        commit('m_cadastroPasseio0', true)
       })
     },
     /*
