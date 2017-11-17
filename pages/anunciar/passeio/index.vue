@@ -775,21 +775,22 @@ export default {
       text-align: center;
     }
     & .__subtitle {
-      margin: 2rem 0 .5rem 0;
-      font-size: 26px;
-      font-weight: 500;
+      text-transform: uppercase;
+      margin: 3rem 0 .5rem 0;
+      font-size: 16px;
+      font-weight: 600;
       padding: 0 7%;
       text-align: center;
     }
     & .__item {
-      text-transform: uppercase;
-      font-size: 15px;
-      font-weight: 500;
+      
+      font-size: 19px;
+      font-weight: 300;
       margin: 0 0 .2rem 0;
       color: white;
     }
     & .__price {
-      font-size: 40px;
+      font-size: 38px;
       font-weight: 300;
     }
     & .pricing-box {
