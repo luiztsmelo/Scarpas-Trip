@@ -410,7 +410,6 @@
 
 <script>
 import * as firebase from 'firebase'
-/* import MaskedInput from 'vue-masked-input' */
 import MaskedInput from 'vue-text-mask'
 
 export default {
