@@ -34,6 +34,16 @@
     </div><!-- ####### SOBRE ####### -->
 
     
+
+    <!-- ####### LOTACAO ####### -->
+    <h1 class="box-title">Lotação</h1>
+
+    <div class="lotacao-box">
+      <h3>{{ passeio.lotacao }}</h3>
+    </div><!-- ####### LOTACAO ####### -->
+
+
+
     <!-- ####### PROPRIETÁRIO ####### -->
     <h1 class="box-title">Proprietário</h1>
 
@@ -207,6 +217,12 @@ export default {
   }/* ####### SOBRE BOX ####### */
 
 
+  /* ####### LOTACAO BOX ####### */
+  & .lotacao-box {
+    padding: 0 7%;
+    & .__subtitle {
+    }
+  }/* ####### LOTACAO BOX ####### */
 
 
   /* ####### PROPRIETARIO BOX ####### */
