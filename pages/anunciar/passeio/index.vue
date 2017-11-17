@@ -365,6 +365,7 @@
             v-model="$store.state.passeioData.celular"
             :mask="['(', /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]"
             :guide="true"
+            placeholder="(__) _____-____"
             placeholderChar="_">
           </masked-input>
         </div>
@@ -579,7 +580,7 @@ export default {
       }
     },
     nextBtn10 () {
-      if (1<2) {
+      if (this.$store.state.passeioData.celular !== null) {
         return this.$store.commit('m_cadastroPasseio10', false), this.$store.commit('m_cadastroPasseio11', true), this.$store.commit('m_passeioProgressBar', (100/11)*11)
       }
     },
@@ -651,7 +652,7 @@ export default {
       }
     },
     form10ok () {
-      if (1<2) {
+      if (this.$store.state.passeioData.celular !== null) {
         return 'background:#49A5FC;cursor:pointer'
       }
     }
