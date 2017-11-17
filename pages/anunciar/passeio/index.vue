@@ -12,6 +12,8 @@
       <h1 class="__title">Amplie seus ganhos anunciando seu passeio com a gente!</h1>
       
       <span class="__subtitle">Como funciona?</span>
+      <h3 class="__item">A Escarpas Trip </h3>
+
 
       <span class="__subtitle">Quais as vantagens?</span>
       <h3 class="__item">Forte presença nas redes sociais</h3>
@@ -20,6 +22,8 @@
       
       <span class="__subtitle">Investimento</span>
       <span class="__price">R$59</span>
+
+      <button class="__anunciar-btn">Anunciar</button>
 
 
       <!-- <div class="pricing-box">
@@ -783,15 +787,23 @@ export default {
       text-align: center;
     }
     & .__item {
-      
+      padding: 0 7%;
       font-size: 19px;
       font-weight: 300;
       margin: 0 0 .2rem 0;
       color: white;
     }
     & .__price {
-      font-size: 38px;
-      font-weight: 300;
+      font-size: 42px;
+      font-weight: 200;
+    }
+    & .__anunciar-btn {
+      width: 60%;
+      background: white;
+      padding: .8rem 1.2rem;
+      border-radius: 100px;
+      margin: 3rem 0 2rem 0;
+      box-shadow: 2px 2px 7px 2px rgba(0,0,0,0.17);
     }
     & .pricing-box {
       display: flex;
