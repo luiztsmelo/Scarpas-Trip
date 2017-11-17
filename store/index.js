@@ -13,6 +13,7 @@ const store = () => new Vuex.Store({
     /*
     -------------------- GERAL --------------------
     */
+    authUser: null,
     showNavbar: true,
     showMenu: false,
     showFoobar: true,
@@ -68,6 +69,11 @@ const store = () => new Vuex.Store({
     blobPasH1W: null,
     passeioData: {/* Atualizar a action */
       passeioID: null,
+      userID: null,
+      proprietario: null,
+      email: null,
+      celular: null,
+      photoURL: null,
       planoMarinheiro: false,
       planoCapitao: false,
       tipoPasseio: null,
@@ -113,6 +119,9 @@ const store = () => new Vuex.Store({
     /*
     -------------------- GERAL --------------------
     */
+    m_authUser (state, payload) {
+      state.authUser = payload
+    },
     m_showNavbar (state, payload) {
       state.showNavbar = payload
     },
@@ -284,6 +293,25 @@ const store = () => new Vuex.Store({
         commit('m_cadastroEvento7', false)
         commit('m_cadastroEvento0', true)
         commit('m_eventoPlace', null)
+      })
+    },
+    /*
+    ########## Google Sign in ##########
+    */
+    a_googleSignIn ({ commit, dispatch }, user) {
+      const provider = new firebase.auth.GoogleAuthProvider()
+      firebase.auth().signInWithPopup(provider)
+        .then().catch(error => {
+          console.log(error)
+        })
+      dispatch('a_authStateObserver')
+    },
+    a_authStateObserver ({ commit, state }) {
+      firebase.auth().onAuthStateChanged(user => {
+        state.passeioData.proprietario = user.displayName
+        state.passeioData.email = user.email
+        state.passeioData.photoURL = user.photoURL
+        state.passeioData.userID = user.uid
       })
     }
   }

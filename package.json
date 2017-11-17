@@ -19,6 +19,7 @@
     "vue-autosize": "^1.0.2",
     "vue-awesome-swiper": "^2.6.7",
     "vue-croppa": "^1.1.0",
+    "vue-masked-input": "^0.5.2",
     "vue-progressive-image": "^2.3.1",
     "vue-ripple-directive": "^1.0.13",
     "vue2-google-maps": "^0.8.4",

@@ -345,13 +345,23 @@
     <!-- ########## IDENTIFICAÇÃO PG.10 ########## -->
     <form class="cadastro-passeio" v-show="$store.state.cadastroPasseio10">
 
-      <h1 class="__form-title">Identifique-se {{ planoEscolhido }}</h1>   
+      <h1 class="__form-title">Seus dados pessoais para contato</h1>   
 
-      <h3 style="padding: .5rem 7% .4rem 7%;font-weight:400">Obter dados com:</h3>
 
-      <div class="signin-btns">
+      <h3 style="padding: .5rem 7% .4rem 7%;font-weight:400" v-if="this.$store.state.passeioData.proprietario === null">Obter dados com:</h3>
+
+      <div class="signin-btns" v-if="$store.state.passeioData.proprietario === null">
         <button type="button" class="facebook-btn" @click="facebookSignIn()">Facebook</button>
         <button type="button" class="google-btn" @click="googleSignIn()">Google</button>
+      </div>
+
+      <h3 style="padding: .5rem 7% 0 7%;font-weight:400" v-if="$store.state.passeioData.proprietario !== null">Ótimo {{ firstName }}! Só mais algumas informações:</h3>
+
+      <div v-if="$store.state.passeioData.proprietario !== null">
+        <div class="item-form">
+          <label>Celular</label>
+          <masked-input v-model="$store.state.passeioData.celular" mask="(11) 11111-1111" placeholder="(__) _____-____" />
+        </div>
       </div>
 
       <!-- <h3 style="padding: .5rem 7%;font-size:16px;line-height:22px">Ao prosseguir você concorda com nossos <span style="color:#49A5FC">Termos de Serviço</span>.</h3> -->
@@ -393,8 +403,12 @@
 
 <script>
 import * as firebase from 'firebase'
+import MaskedInput from 'vue-masked-input' 
 
 export default {
+  components: { 
+    MaskedInput 
+  },
   head () {
     return {
       title: 'Anunciar Passeio em Escarpas do Lago ‒ Escarpas Trip'
@@ -413,6 +427,9 @@ export default {
     }
   },
   methods: {
+    googleSignIn () {
+      this.$store.dispatch('a_googleSignIn')
+    },
     /* ******************** TIPO PASSEIO ******************** */
     isLancha () {
       this.$refs.lancha.click()
@@ -575,13 +592,10 @@ export default {
     subtitleLength () {
       return 400 - this.$store.state.passeioData.subtitle.length
     },
-    planoEscolhido () {
-      if (this.$store.state.passeioData.planoMarinheiro === true) {
-        return 'marinheiro'
-      }
-      if (this.$store.state.passeioData.planoCapitao === true) {
-        return 'capitão'
-      }
+    firstName () {
+      let fullName = this.$store.state.passeioData.proprietario.split(' ')
+      let firstName = fullName[0]
+      return firstName
     },
     form1ok () {
       if (this.$store.state.passeioData.tipoPasseio !== null) {
