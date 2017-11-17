@@ -722,7 +722,7 @@ export default {
 
 .anunciar-passeio {
   margin-top: 3.2rem;
-  background: linear-gradient(40deg, #B5D9F0, #49A5FC);
+  background: white;
   color: white;
   height: calc(100vh - 3.2rem);
   transition: var(--main-transition);
@@ -745,22 +745,27 @@ export default {
       flex-flow: row;
       justify-content: space-around;
       align-items: center;
+      
       & .__img-boat {
         margin: 2rem 0;
-        width: 5.7rem;
+        width: 5.4rem;
         height: auto;
+        filter: invert(70%);
       }
       & .__img-jeep {
         transform: translateY(-4px) rotate(-20deg);
         margin: 2rem 0;
-        width: 5.3rem;
+        width: 5rem;
         height: auto;
+        filter: invert(70%);
       }
     }
     & .__title {
       font-size: 26px;
       font-weight: 500;
       padding: 0 7%;
+      color: var(--color01);
+      text-align: center;
     }
     & .pricing-box {
       display: flex;
