@@ -11,11 +11,14 @@
       
       <h1 class="__title">Amplie seus ganhos anunciando seu passeio com a gente!</h1>
       
-      <span class="__subtitle">Ganhe</span>
+      <span class="__subtitle">Como funciona?</span>
+
+      <span class="__subtitle">Quais as vantagens?</span>
       <h3 class="__item">Forte presença nas redes sociais</h3>
       <h3 class="__item">Transparência</h3>
       <h3 class="__item">Segurança</h3>
-
+      
+      <span class="__subtitle">Investimento</span>
       <span class="__price">R$59</span>
 
 
@@ -732,7 +735,6 @@ export default {
   margin-top: 3.2rem;
   background: linear-gradient(80deg, #B5D9F0, #49A5FC);
   color: white;
-  height: calc(100vh - 3.2rem);
   transition: var(--main-transition);
   & .progress-bar {
     position: fixed;
@@ -787,9 +789,7 @@ export default {
       color: white;
     }
     & .__price {
-      font-family: var(--main-font);
-      margin: 2rem 0;
-      font-size: 45px;
+      font-size: 40px;
       font-weight: 300;
     }
     & .pricing-box {
