@@ -53,7 +53,7 @@
           <swiper-slide class="card" v-for="passeio in $store.state.passeios" :key="passeio.passeioID" @click="getPasseioID(passeio)" v-ripple="'rgba(0,0,0,.02)'">
             <nuxt-link :to="'/passeios/' + passeio.passeioID">
               <progressive-img class="__card-img" :src="imagePasH(passeio)" :placeholder="passeio.imageL1" no-ratio />
-              <span class="__card-localSaida">{{ passeio.localSaida }}</span>
+              <span class="__card-tipoPasseio">{{ passeio.tipoPasseio }}</span>
               <h1 class="__card-title">{{ passeio.title | truncateTitle }}</h1>
               <h2 class="__card-subtitle">{{ passeio.subtitle | truncateSubtitle }}</h2>
             </nuxt-link> 
@@ -237,7 +237,7 @@ export default {
               font-weight: 600;
               color: #ff5858;
             }
-            & .__card-localSaida {
+            & .__card-tipoPasseio {
               text-transform: uppercase;
               font-size: 12px;
               font-weight: 600;
