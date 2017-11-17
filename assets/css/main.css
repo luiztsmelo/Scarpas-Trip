@@ -115,10 +115,10 @@ a a:hover, a:visited, a:link, a:active
   background-color: rgb(219, 50, 54);
   background-position: 8px;
   background-repeat: no-repeat;
-  background-size: 27px;
+  background-size: 24px;
   color: white;
   margin: 0 0 0 .3rem;
-  padding: .7rem 1.2rem;
+  padding: .8rem 1.2rem;
   border-radius: 4px;
   font-size: 16px;
   width: 50%;
@@ -133,10 +133,10 @@ a a:hover, a:visited, a:link, a:active
   background-color: rgb(59, 89, 152);
   background-position: 8px;
   background-repeat: no-repeat;
-  background-size: 24px;
+  background-size: 21px;
   color: white;
   margin: 0 .3rem 0 0;
-  padding: .7rem 1.2rem;
+  padding: .8rem 1.2rem;
   border-radius: 4px;
   font-size: 16px;
   width: 50%;

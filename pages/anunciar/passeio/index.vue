@@ -348,7 +348,7 @@
       <h1 class="__form-title">Seus dados pessoais para contato</h1>   
 
 
-      <h3 style="padding: .5rem 7%;font-weight:400" v-if="this.$store.state.passeioData.proprietario === null">Obter dados com:</h3>
+      <h3 style="padding: .5rem 7% .7rem 7%" v-if="this.$store.state.passeioData.proprietario === null">Obter dados com:</h3>
 
       <div class="signin-btns" v-if="$store.state.passeioData.proprietario === null">
         <button type="button" class="facebook-btn" @click="facebookSignIn()">Facebook</button>
@@ -367,7 +367,6 @@
             :guide="true"
             placeholderChar="_">
           </masked-input>
-          <!-- <masked-input type="tel" v-model="$store.state.passeioData.celular" mask="(11) 11111-1111" placeholder="(__) _____-____" /> -->
         </div>
       </div>
 
