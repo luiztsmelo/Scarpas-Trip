@@ -81,7 +81,7 @@
       :center="{lat: $store.state.eventoData.positionLAT, lng: $store.state.eventoData.positionLNG}"
       :zoom="mapZoom"
       :options="{styles: styles, mapTypeControl:false, streetViewControl:false}"
-      style="width: 100%; height: 260px">
+      style="width: 100%; height: 230px;margin-bottom:2rem">
         <Gmap-Marker
         v-if="$store.state.eventoPlace"
         :clickable="true"
@@ -653,7 +653,7 @@ export default {
       resize: none;
     }
     & .__lenght-calc {
-      padding-bottom: 5rem;
+      padding-bottom: 6rem;
       z-index: 999;
       font-size: 20px;
       font-weight: 600;
@@ -713,26 +713,32 @@ export default {
     & .back-next {
       position: fixed;
       z-index: 3;
-      bottom: 0;
+      bottom: 1rem;
       left: 0;
+      right: 0;
+      margin: auto;
       height: 3rem;
-      width: 100%;
+      width: 86%;
       background: white;
-      box-shadow: 0px -1px 1px 0px rgba(0,0,0,0.15);
+      box-shadow: 2px 2px 7px 2px rgba(0,0,0,0.12);
+      border-radius: 2rem;
       & .back-next-body {
         display: flex;
+        align-items: center;
         & button {
           width: 50%;
           height: 3rem;
         }
         & .__back {
+          border-radius: 2rem 0 0 2rem;
           cursor: pointer;
           background: white;
         }
         & .__next {
+          border-radius: 0 2rem 2rem 0;
           transition: all .3s ease;
           cursor: no-drop;
-          background:rgb(222, 222, 222);
+          background: rgb(222, 222, 222);
           color: white;
         }
       }
@@ -753,16 +759,16 @@ export default {
       font-size: 16px;
       background: #ff5858;
       color: white;
-      padding: .7rem 1.2rem;
-      border-radius: 4px;
+      padding: .8rem 1.2rem;
+      border-radius: 2rem;
     }
     & .__croppa-btn {
       margin: .3rem 0;
       font-size: 16px;
       background: #ff5858;
       color: white;
-      padding: .7rem 1.2rem;
-      border-radius: 4px;
+      padding: .8rem 1.2rem;
+      border-radius: 2rem;
     }
     & .after-choose-image {
       margin-top: 1.5rem;

@@ -107,7 +107,7 @@
     <!-- ########## LOTAÇÃO PG.2 ########## -->
     <form class="cadastro-passeio" v-show="$store.state.cadastroPasseio2">
 
-      <h1 class="__form-title">Passeio de {{ tipoPasseioTitle }} para até quantas pessoas?</h1>
+      <h1 class="__form-title">Passeio para até quantas pessoas?</h1>
 
       <div class="item-form">
         <label>Lotação</label>
@@ -647,11 +647,6 @@ export default {
     }
   },
   computed: {
-    tipoPasseioTitle () {
-      if (this.$store.state.passeioData.tipoPasseio !== null) {
-        return this.$store.state.passeioData.tipoPasseio.toLowerCase()
-      }
-    },
     titleLength () {
       return 50 - this.$store.state.passeioData.title.length
     },
@@ -893,7 +888,7 @@ export default {
     }
     & .__lenght-calc {
       padding: 0 7%;
-      padding-bottom: 5rem;
+      padding-bottom: 6rem;
       z-index: 999;
       font-size: 20px;
       font-weight: 600;
@@ -995,7 +990,7 @@ export default {
       font-size: 16px;
       background: #49A5FC;
       color: white;
-      padding: .7rem 1.2rem;
+      padding: .8rem 1.2rem;
       border-radius: 2rem;
     }
     & .__croppa-btn {
@@ -1025,14 +1020,14 @@ export default {
     & .back-next {
       position: fixed;
       z-index: 3;
-      bottom: .7rem;
+      bottom: 1rem;
       left: 0;
       right: 0;
       margin: auto;
       height: 3rem;
       width: 86%;
       background: white;
-      box-shadow: 2px 2px 7px 2px rgba(0,0,0,0.17);
+      box-shadow: 2px 2px 7px 2px rgba(0,0,0,0.12);
       border-radius: 2rem;
       & .back-next-body {
         display: flex;
