@@ -756,7 +756,7 @@ export default {
     flex-flow: column;
     align-items: center;
     & .imgs-header {
-      width: 55%;
+      width: 47%;
       display: flex;
       flex-flow: row;
       justify-content: space-around;
@@ -764,13 +764,13 @@ export default {
       
       & .__img-boat {
         margin: 2rem 0;
-        width: 5.0rem;
+        width: 4.6rem;
         height: auto;
       }
       & .__img-jeep {
-        transform: translateY(-3px) rotate(-21deg);
+        transform: translateY(-1px) rotate(-21deg);
         margin: 2rem 0;
-        width: 4.6rem;
+        width: 4.2rem;
         height: auto;
       }
     }
