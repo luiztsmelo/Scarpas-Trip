@@ -737,7 +737,7 @@ export default {
 
 .anunciar-passeio {
   margin-top: 3.2rem;
-  background-image: linear-gradient(-20deg, #00cdac 0%, #5FBCB5 100%);
+  background-image: linear-gradient(-20deg, #93EDC7 0%, #1CD8D2 100%);
   color: white;
   transition: var(--main-transition);
   & .progress-bar {
