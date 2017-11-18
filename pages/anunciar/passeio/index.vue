@@ -764,13 +764,13 @@ export default {
       
       & .__img-boat {
         margin: 2rem 0;
-        width: 5.3rem;
+        width: 5.0rem;
         height: auto;
       }
       & .__img-jeep {
         transform: translateY(-3px) rotate(-21deg);
         margin: 2rem 0;
-        width: 4.9rem;
+        width: 4.6rem;
         height: auto;
       }
     }
@@ -790,8 +790,8 @@ export default {
     }
     & .__item {
       padding: 0 7%;
-      font-size: 18px;
-      font-weight: 400;
+      font-size: 19px;
+      font-weight: 300;
       margin: 0 0 .2rem 0;
       color: white;
     }
