@@ -16,7 +16,7 @@
 
 
       <span class="__subtitle">Quais as vantagens?</span>
-      <h3 class="__item">Marketing inteligente</h3>
+      <h3 class="__item">Destaque nas redes sociais</h3>
       <h3 class="__item">Transparência</h3>
       <h3 class="__item">Segurança</h3>
       
@@ -25,7 +25,7 @@
       <h3 class="__subitem">Primeiro mês grátis</h3>
       <h3 class="__subitem">Cancele quando quiser</h3>
 
-      <button class="__anunciar-btn">Anunciar</button>
+      <button class="__anunciar-btn" @click="$store.commit('m_cadastroPasseio1', true), $store.commit('m_cadastroPasseio0', false), $store.commit('m_passeioProgressBar', (100/11))">Anunciar</button>
 
 
       <!-- <div class="pricing-box">
