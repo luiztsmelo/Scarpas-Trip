@@ -20,25 +20,9 @@
       <span class="__subtitle">Investimento</span>
       <span class="__price">R$49</span>
 
-      <button class="__anunciar-btn" @click="$store.commit('m_cadastroPasseio1', true), $store.commit('m_cadastroPasseio0', false), $store.commit('m_passeioProgressBar', (100/11))">Anunciar</button>
+      <button class="__anunciar-btn" @click="$store.commit('m_cadastroEvento1', true), $store.commit('m_cadastroEvento0', false), $store.commit('m_eventoProgressBar', (100/7))">Anunciar</button>
 
 
-      <!-- <div class="pricing-box">
-        <h2 class="__pricing-box-title">Escolha seu plano:</h2>
-
-        <div class="plano-row casual" @click="$store.commit('m_cadastroEvento1', true), $store.commit('m_cadastroEvento0', false), $store.commit('m_planoCasual', true), $store.commit('m_planoPro', false), $store.commit('m_eventoProgressBar', (100/7))">
-          <span class="__plano-valor">R$35</span>
-          <span class="__plano-title">CASUAL</span>
-          <div class="__arrow-down-black"></div>
-        </div>
-
-        <div class="plano-row profissional" @click="$store.commit('m_cadastroEvento1', true), $store.commit('m_cadastroEvento0', false), $store.commit('m_planoPro', true), $store.commit('m_planoCasual', false), $store.commit('m_eventoProgressBar', (100/7))">
-          <span class="__plano-valor">R$75</span>
-          <span class="__plano-title">PROFISSIONAL</span>
-          <div class="__arrow-down-white"></div>
-        </div>
-
-      </div> -->
     </div><!-- PLANO EVENTO -->
 
 
@@ -637,42 +621,6 @@ export default {
       font-weight: 500;
       margin: 3rem 0 2rem 0;
       box-shadow: 2px 2px 7px 2px rgba(0,0,0,0.17);
-    }
-    & .pricing-box {
-      display: flex;
-      flex-flow: column;
-      align-self: stretch;
-      padding: 2rem 7% 0 7%;
-      & .__pricing-box-title {
-        font-size: 20px;
-        font-weight: 400;
-        padding-bottom: .5rem;
-      }
-      & .plano-row {
-        position: relative;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        height: 3.2rem;
-        margin: .5rem 0;
-        border-radius: 3px;
-        & .__plano-valor {
-          font-size: 23px;
-          font-weight: 300;
-          padding: 0 .7rem;
-        }
-        & .__plano-title {
-          font-size: 14px;
-          font-weight: 500;
-        }
-      }
-      & .casual {
-        background: white;
-        color: var(--color01);
-      }
-      & .profissional {
-        background: rgb(13, 13, 13);
-      }
     }
   }
   /* ******************** CADASTRO EVENTO ******************** */

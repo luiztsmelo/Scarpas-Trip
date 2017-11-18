@@ -24,25 +24,6 @@
 
       <button class="__anunciar-btn" @click="$store.commit('m_cadastroPasseio1', true), $store.commit('m_cadastroPasseio0', false), $store.commit('m_passeioProgressBar', (100/11))">Anunciar</button>
 
-
-      <!-- <div class="pricing-box">
-        <h2 class="__pricing-box-title">Escolha seu plano:</h2>
-
-        <div class="plano-row avancado" @click="$store.commit('m_cadastroPasseio1', true), $store.commit('m_cadastroPasseio0', false), $store.commit('m_planoMarinheiro', true), $store.commit('m_planoCapitao', false), $store.commit('m_passeioProgressBar', (100/11))">
-          <span class="__plano-valor">R$49</span>
-          <span class="__plano-valor-mes">/mês</span>
-          <span class="__plano-title">MARINHEIRO</span>
-          <div class="__arrow-down-black"></div>
-        </div>
-
-        <div class="plano-row profissional" @click="$store.commit('m_cadastroPasseio1', true), $store.commit('m_cadastroPasseio0', false), $store.commit('m_planoMarinheiro', false), $store.commit('m_planoCapitao', true), $store.commit('m_passeioProgressBar', (100/11))">
-          <span class="__plano-valor">R$79</span>
-          <span class="__plano-valor-mes">/mês</span>
-          <span class="__plano-title">CAPITÃO</span>
-          <div class="__arrow-down-white"></div>
-        </div>
-
-      </div> -->
     </div><!-- PLANO PASSEIO -->
 
 
@@ -796,48 +777,6 @@ export default {
       font-weight: 500;
       margin: 3rem 0 2rem 0;
       box-shadow: 2px 2px 7px 2px rgba(0,0,0,0.17);
-    }
-    & .pricing-box {
-      display: flex;
-      flex-flow: column;
-      align-self: stretch;
-      padding: 2rem 7% 0 7%;
-      & .__pricing-box-title {
-        font-size: 20px;
-        font-weight: 400;
-        padding-bottom: .5rem;
-      }
-      & .plano-row {
-        position: relative;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        height: 3.2rem;
-        margin: .5rem 0;
-        border-radius: 3px;
-        & .__plano-valor {
-          font-size: 23px;
-          font-weight: 300;
-          padding-left: .7rem;
-        }
-        & .__plano-valor-mes {
-          transform: translateY(2px);
-          font-size: 15px;
-          font-weight: 300;
-          padding-right: .8rem;
-        }
-        & .__plano-title {
-          font-size: 14px;
-          font-weight: 500;
-        }
-      }
-      & .avancado {
-        background: white;
-        color: var(--color01);
-      }
-      & .profissional {
-        background: rgb(13, 13, 13);
-      }
     }
   }
 

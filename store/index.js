@@ -38,8 +38,6 @@ const store = () => new Vuex.Store({
     blobEvH1W: null,
     eventoData: {/* Atualizar a action */
       eventoID: null,
-      planoCasual: false,
-      planoPro: false,
       title: '',
       subtitle: '',
       date: '',
@@ -202,12 +200,6 @@ const store = () => new Vuex.Store({
     },
     m_cadastroEvento7 (state, payload) {
       state.cadastroEvento7 = payload
-    },
-    m_planoCasual (state, payload) {
-      state.eventoData.planoCasual = payload
-    },
-    m_planoPro (state, payload) {
-      state.eventoData.planoPro = payload
     },
     /*
     ########## Passeio ##########
