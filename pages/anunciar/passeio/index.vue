@@ -23,7 +23,7 @@
       <span class="__subtitle">Investimento</span>
       <span class="__price">R$59</span>
 
-      <button class="__anunciar-btn">ANUNCIAR</button>
+      <button class="__anunciar-btn">Anunciar</button>
 
 
       <!-- <div class="pricing-box">
@@ -788,8 +788,8 @@ export default {
     }
     & .__item {
       padding: 0 7%;
-      font-size: 19px;
-      font-weight: 300;
+      font-size: 18px;
+      font-weight: 400;
       margin: 0 0 .2rem 0;
       color: white;
     }
