@@ -17,10 +17,8 @@
       <h3 class="__item">Transparência</h3>
       <h3 class="__item">Segurança</h3>
       
-      <span class="__subtitle">Investimento Mensal</span>
-      <span class="__price">R$59</span>
-      <h3 class="__subitem">Primeiro mês grátis</h3>
-      <h3 class="__subitem">Cancele quando quiser</h3>
+      <span class="__subtitle">Investimento</span>
+      <span class="__price">R$49</span>
 
       <button class="__anunciar-btn" @click="$store.commit('m_cadastroPasseio1', true), $store.commit('m_cadastroPasseio0', false), $store.commit('m_passeioProgressBar', (100/11))">Anunciar</button>
 
