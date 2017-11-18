@@ -22,6 +22,8 @@
       
       <span class="__subtitle">Investimento</span>
       <span class="__price">R$59</span>
+      <h3 class="__subitem">Primeiro mês grátis</h3>
+      <h3 class="__subitem">Cancele quando quiser</h3>
 
       <button class="__anunciar-btn">Anunciar</button>
 
@@ -737,7 +739,7 @@ export default {
 
 .anunciar-passeio {
   margin-top: 3.2rem;
-  background: linear-gradient(70deg, #B5D9F0, #49A5FC);
+  background: linear-gradient(60deg, #B5D9F0, #49A5FC);
   color: white;
   transition: var(--main-transition);
   & .progress-bar {
@@ -793,9 +795,17 @@ export default {
       margin: 0 0 .2rem 0;
       color: white;
     }
+    & .__subitem {
+      padding: 0 7%;
+      font-size: 15px;
+      font-weight: 400;
+      margin: 0 ;
+      color: white;
+    }
     & .__price {
-      font-size: 43px;
-      font-weight: 200;
+      font-size: 45px;
+      font-weight: 300;
+      margin-bottom: .5rem;
     }
     & .__anunciar-btn {
       color: var(--color01);
