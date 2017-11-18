@@ -4,10 +4,8 @@
     <!-- PLANO PASSEIO -->
     <div class="plano-passeio" v-show="$store.state.cadastroPasseio0">
       
- 
-        <img class="__img-boat" src="../../../assets/img/passeios.svg">
+      <img class="__img-header" src="../../../assets/img/anuncio-passeio-boat.svg">
        
-      
       <h1 class="__title">Amplie seus ganhos anunciando seu passeio com a gente!</h1>
       
       <span class="__subtitle">Como funciona?</span>
@@ -749,26 +747,10 @@ export default {
     display: flex;
     flex-flow: column;
     align-items: center;
-    & .imgs-header {
-      width: 47%;
-      display: flex;
-      flex-flow: row;
-      justify-content: space-around;
-      align-items: center;
-      
-      
-      & .__img-jeep {
-        transform: translateY(-1px) rotate(-21deg);
+    & .__img-header {
         margin: 2rem 0;
-        width: 4.2rem;
+        width: 6rem;
         height: auto;
-      }
-    }
-    & .__img-boat {
-        margin: 2rem 0;
-        width: 4.6rem;
-        height: auto;
-        filter: grayscale(100%) brightness(200%);
       }
     & .__title {
       font-size: 26px;

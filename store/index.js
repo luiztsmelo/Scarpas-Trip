@@ -77,8 +77,6 @@ const store = () => new Vuex.Store({
       email: null,
       celular: '',
       photoURL: null,
-      planoMarinheiro: false,
-      planoCapitao: false,
       tipoPasseio: null,
       localSaida: null,
       title: '',
@@ -274,12 +272,6 @@ const store = () => new Vuex.Store({
     },
     m_cadastroPasseio11 (state, payload) {
       state.cadastroPasseio11 = payload
-    },
-    m_planoMarinheiro (state, payload) {
-      state.passeioData.planoMarinheiro = payload
-    },
-    m_planoCapitao (state, payload) {
-      state.passeioData.planoCapitao = payload
     }
   },
   /*
@@ -296,8 +288,6 @@ const store = () => new Vuex.Store({
         /* Resetar states */
         commit('m_eventoData', {
           eventoID: null,
-          planoMarinheiro: false,
-          planoCapitao: false,
           title: '',
           subtitle: '',
           date: '',
@@ -329,8 +319,6 @@ const store = () => new Vuex.Store({
           email: null,
           celular: '',
           photoURL: null,
-          planoMarinheiro: false,
-          planoCapitao: false,
           tipoPasseio: null,
           localSaida: null,
           title: '',
