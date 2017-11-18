@@ -16,7 +16,7 @@
 
 
       <span class="__subtitle">Quais as vantagens?</span>
-      <h3 class="__item">Forte presença nas redes sociais</h3>
+      <h3 class="__item">Marketing inteligente</h3>
       <h3 class="__item">Transparência</h3>
       <h3 class="__item">Segurança</h3>
       
