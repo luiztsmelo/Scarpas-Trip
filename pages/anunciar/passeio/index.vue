@@ -776,7 +776,7 @@ export default {
     }
     & .__title {
       font-size: 26px;
-      font-weight: 500;
+      font-weight: 400;
       padding: 0 7%;
       text-align: center;
     }
