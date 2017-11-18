@@ -20,7 +20,7 @@
       <h3 class="__item">Transparência</h3>
       <h3 class="__item">Segurança</h3>
       
-      <span class="__subtitle">Investimento</span>
+      <span class="__subtitle">Investimento Mensal</span>
       <span class="__price">R$59</span>
       <h3 class="__subitem">Primeiro mês grátis</h3>
       <h3 class="__subitem">Cancele quando quiser</h3>
@@ -776,7 +776,7 @@ export default {
     }
     & .__title {
       font-size: 26px;
-      font-weight: 600;
+      font-weight: 500;
       padding: 0 7%;
       text-align: center;
     }
@@ -801,10 +801,11 @@ export default {
       font-weight: 400;
       margin: 0 ;
       color: white;
+      line-height: 21px;
     }
     & .__price {
-      font-size: 45px;
-      font-weight: 300;
+      font-size: 47px;
+      font-weight: 200;
       margin-bottom: .5rem;
     }
     & .__anunciar-btn {
