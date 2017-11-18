@@ -762,26 +762,26 @@ export default {
       
       & .__img-boat {
         margin: 2rem 0;
-        width: 5.1rem;
+        width: 5.3rem;
         height: auto;
       }
       & .__img-jeep {
         transform: translateY(-3px) rotate(-21deg);
         margin: 2rem 0;
-        width: 4.7rem;
+        width: 4.9rem;
         height: auto;
       }
     }
     & .__title {
       font-size: 26px;
-      font-weight: 500;
+      font-weight: 600;
       padding: 0 7%;
       text-align: center;
     }
     & .__subtitle {
       text-transform: uppercase;
       margin: 3rem 0 .5rem 0;
-      font-size: 16px;
+      font-size: 17px;
       font-weight: 600;
       padding: 0 7%;
       text-align: center;
@@ -803,7 +803,7 @@ export default {
       background: white;
       padding: 1rem 0;
       border-radius: 100px;
-      font-size: 16px;
+      font-size: 17px;
       font-weight: 500;
       margin: 3rem 0 2rem 0;
       box-shadow: 2px 2px 7px 2px rgba(0,0,0,0.17);
