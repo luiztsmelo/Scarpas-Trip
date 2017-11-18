@@ -737,7 +737,7 @@ export default {
 
 .anunciar-passeio {
   margin-top: 3.2rem;
-  background-image: linear-gradient(-20deg, #93EDC7 0%, #1CD8D2 100%);
+  background: linear-gradient(70deg, #B5D9F0, #49A5FC);
   color: white;
   transition: var(--main-transition);
   & .progress-bar {
@@ -754,7 +754,7 @@ export default {
     flex-flow: column;
     align-items: center;
     & .imgs-header {
-      width: 65%;
+      width: 55%;
       display: flex;
       flex-flow: row;
       justify-content: space-around;
@@ -794,12 +794,12 @@ export default {
       color: white;
     }
     & .__price {
-      font-size: 42px;
+      font-size: 43px;
       font-weight: 200;
     }
     & .__anunciar-btn {
       color: var(--color01);
-      width: 60%;
+      width: 65%;
       background: white;
       padding: 1rem 0;
       border-radius: 100px;
