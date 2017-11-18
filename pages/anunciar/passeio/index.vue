@@ -790,7 +790,7 @@ export default {
     }
     & .__item {
       padding: 0 7%;
-      font-size: 19px;
+      font-size: 20px;
       font-weight: 300;
       margin: 0 0 .2rem 0;
       color: white;
@@ -804,7 +804,7 @@ export default {
       line-height: 21px;
     }
     & .__price {
-      font-size: 47px;
+      font-size: 48px;
       font-weight: 200;
       margin-bottom: .5rem;
     }
