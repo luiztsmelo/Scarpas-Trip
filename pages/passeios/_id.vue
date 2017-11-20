@@ -184,8 +184,9 @@ export default {
 
 
   & .box-title {
-    font-weight: 500;
-    font-size: 20px;
+    text-transform: uppercase;
+    font-weight: 600;
+    font-size: 15px;
     padding: 2rem 7% .5rem 7%;
   }
 
