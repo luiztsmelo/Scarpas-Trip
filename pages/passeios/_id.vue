@@ -24,8 +24,6 @@
 
 
     
-
-
     <!-- ####### SOBRE ####### -->
     <h1 class="box-title">Sobre</h1>
 
@@ -213,16 +211,12 @@ export default {
   /* ####### SOBRE BOX ####### */
   & .sobre-box {
     padding: 0 7%;
-    & .__subtitle {
-    }
   }/* ####### SOBRE BOX ####### */
 
 
   /* ####### LOTACAO BOX ####### */
   & .lotacao-box {
     padding: 0 7%;
-    & .__subtitle {
-    }
   }/* ####### LOTACAO BOX ####### */
 
 
