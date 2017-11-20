@@ -55,7 +55,7 @@
               <progressive-img class="__card-img" :src="imagePasH(passeio)" :placeholder="passeio.imageL1" no-ratio />
               <span class="__card-tipoPasseio">{{ passeio.tipoPasseio }}</span>
               <h1 class="__card-title">{{ passeio.title | truncateTitle }}</h1>
-              <h2 class="__card-subtitle">{{ passeio.subtitle | truncateSubtitle }}</h2>
+              <h2 class="__card-valor">R${{ passeio.valorPasseio }} por pessoa</h2>
             </nuxt-link> 
           </swiper-slide>
         </swiper>
@@ -249,6 +249,10 @@ export default {
               font-weight: 600;
             }
             & .__card-subtitle {
+              font-size: 16px;
+              font-weight: 300;
+            }
+            & .__card-valor {
               font-size: 16px;
               font-weight: 300;
             }
