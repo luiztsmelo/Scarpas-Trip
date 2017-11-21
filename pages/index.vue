@@ -115,7 +115,7 @@ export default {
       }
     }
   },
-  fetch ({ store }) {
+  fetch ({ store }) {/* NÃO ESTÁ BOM!!! MELHORAR FETCH (APÓS UPLOAD DÁ PROBLEMA) */
     if (store.state.eventos === null && store.state.passeios === null) {
       return firebase.database().ref('eventos').once('value')
       .then(snapshot => {

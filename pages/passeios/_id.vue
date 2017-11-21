@@ -22,6 +22,12 @@
     <h1 class="__passeio-title">{{ passeio.title }}</h1>
 
 
+    <!-- ####### ANUNCIANTE ####### -->
+
+    <div class="anunciante-box">
+      <img class="__anunciante-img" :src="passeio.photoURL" alt="">
+      <h3 class="__anunciante-name">{{ passeio.proprietario }}</h3>
+    </div><!-- ####### ANUNCIANTE ####### -->
 
     
     <!-- ####### SOBRE ####### -->
@@ -42,13 +48,7 @@
 
 
 
-    <!-- ####### PROPRIETÁRIO ####### -->
-    <h1 class="box-title">Proprietário</h1>
-
-    <div class="proprietario-box">
-      <img class="__proprietario-img" :src="passeio.photoURL" alt="">
-      <h3 class="__proprietario-name">{{ passeio.proprietario }}</h3>
-    </div><!-- ####### PROPRIETÁRIO ####### -->
+    
 
     
 
@@ -190,7 +190,7 @@ export default {
 
   & .__passeio-title {
     padding: 0 7%;
-    margin: 1rem 0 2rem 0;
+    margin: 1rem 0 0 0;
     font-size: 34px;
     font-weight: 600;
   }
@@ -220,20 +220,20 @@ export default {
   }/* ####### LOTACAO BOX ####### */
 
 
-  /* ####### PROPRIETARIO BOX ####### */
-  & .proprietario-box {
+  /* ####### ANUNCIANTE BOX ####### */
+  & .anunciante-box {
     display: flex;
-    padding: 0 7%;
+    padding: 1.5rem 7% 0 7%;
     align-items: center;
-    & .__proprietario-img {
+    & .__anunciante-img {
       width: 3rem;
       height: 3rem;
       border-radius: 50%;
     }
-    & .__proprietario-name {
+    & .__anunciante-name {
       padding-left: .5rem;
     }
-  }/* ####### PROPRIETARIO BOX ####### */
+  }/* ####### ANUNCIANTE BOX ####### */
 
 
 }
