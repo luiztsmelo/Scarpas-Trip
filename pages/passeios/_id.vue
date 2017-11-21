@@ -71,8 +71,6 @@
       :month-labels='monthLabels'
       :weekday-labels='weekdayLabels'
       :theme-styles='themeStyles'
-      :attributes='attributes'
-      weeks-transition="slide-h"
       is-inline
       >
     </v-calendar>
@@ -120,14 +118,17 @@ export default {
           border: '0',
           padding: '6px 9px 0 9px',
           background: 'white',
-          width: '100%',
+          width: '100%'
         },
         header: {
           padding: '0 9px',
         },
+        headerArrows: {
+          fontSize: '1.5rem',
+        },
         headerTitle: {
           fontSize: '19px',
-          fontWeight: '300',
+          fontWeight: '300'
         },
         weekdays: {
           color: 'rgb(72,72,72)',
