@@ -121,6 +121,10 @@ export default {
         header: {
           padding: '0 9px',
         },
+        headerTitle: {
+          fontSize: '19px',
+          fontWeight: '300',
+        },
         weekdays: {
           color: 'rgb(72,72,72)',
           fontWeight: '600',
