@@ -33,7 +33,8 @@ module.exports = {
     '~plugins/webfontloader',
     '~plugins/vue-awesome-swiper',
     '~plugins/v-money',
-    '~plugins/vue-ripple-directive'
+    '~plugins/vue-ripple-directive',
+    '~plugins/v-calendar'
   ],
   /*
   ** Customize the progress-bar color

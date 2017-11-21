@@ -66,9 +66,15 @@
     <!-- ####### DISPONIBILIDADE ####### -->
     <h1 class="box-title">Disponibilidade</h1>
 
-    <div class="disponibilidade-box">
-      <h3>Calendário aqui...</h3>
-    </div><!-- ####### DISPONIBILIDADE ####### -->
+    <v-calendar
+      mode='single'
+      :theme-styles='themeStyles'
+      :attributes='attributes'
+      is-inline
+      >
+    </v-calendar>
+    <!-- ####### DISPONIBILIDADE ####### -->
+
 
 
 
@@ -102,7 +108,24 @@ export default {
       markerIcon: {
         url: 'https://firebasestorage.googleapis.com/v0/b/escarpas-trip.appspot.com/o/utils%2Fmarker.svg?alt=media&token=fcbfd76e-ee93-41e8-a816-98906e19859b',
         scaledSize: new google.maps.Size(42, 42)
-      }
+      },
+      themeStyles: {
+        wrapper: {
+          color: 'rgb(72,72,72)',
+          border: '0',
+          padding: '6px 9px 0 9px',
+          background: 'white',
+          width: '100%',
+        },
+        header: {
+          padding: '0 9px',
+        },
+        weekdays: {
+          color: 'rgb(72,72,72)',
+          fontWeight: '600',
+          padding: '20px 5px 10px 5px',
+        },
+      }  
     }
   },
   head () {
@@ -285,9 +308,6 @@ export default {
 
 
   /* ####### DISPONIBILIDADE ####### */
-  & .disponibilidade-box {
-    padding: 0 7%;
-  }/* ####### DISPONIBILIDADE ####### */
 
 
 
