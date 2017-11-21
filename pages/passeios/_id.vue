@@ -70,6 +70,7 @@
       mode='single'
       :theme-styles='themeStyles'
       :attributes='attributes'
+      weeks-transition="slide-h"
       is-inline
       >
     </v-calendar>
@@ -83,7 +84,7 @@
     <h1 class="box-title">Local de Saída</h1>
 
     <div class="local-saida-box">
-      <h3>Map aqui...</h3>
+      <h3>Mapa aqui...</h3>
     </div><!-- ####### LOCAL SAÍDA ####### -->
 
 
@@ -125,6 +126,10 @@ export default {
           fontWeight: '600',
           padding: '20px 5px 10px 5px',
         },
+        dayContentStyle: {
+          fontWeight: '300',
+          fontSize: '14px',
+        }
       }  
     }
   },
