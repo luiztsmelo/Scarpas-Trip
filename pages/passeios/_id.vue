@@ -247,7 +247,7 @@ export default {
     text-transform: uppercase;
     font-weight: 600;
     font-size: 15px;
-    padding: 2rem 7% .5rem 7%;
+    padding: 3rem 7% .5rem 7%;
   }
 
   & .__passeio-title {
