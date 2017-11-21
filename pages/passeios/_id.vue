@@ -68,6 +68,8 @@
 
     <v-calendar
       mode='single'
+      :month-labels='monthLabels'
+      :weekday-labels='weekdayLabels'
       :theme-styles='themeStyles'
       :attributes='attributes'
       weeks-transition="slide-h"
@@ -110,6 +112,8 @@ export default {
         url: 'https://firebasestorage.googleapis.com/v0/b/escarpas-trip.appspot.com/o/utils%2Fmarker.svg?alt=media&token=fcbfd76e-ee93-41e8-a816-98906e19859b',
         scaledSize: new google.maps.Size(42, 42)
       },
+      monthLabels: ['Janeiro','Favereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
+      weekdayLabels: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'],
       themeStyles: {
         wrapper: {
           color: 'rgb(72,72,72)',
