@@ -22,14 +22,17 @@
     <h1 class="__passeio-title">{{ passeio.title }}</h1>
 
 
-    <!-- ####### ANUNCIANTE ####### -->
 
+
+    <!-- ####### ANUNCIANTE ####### -->
     <div class="anunciante-box">
       <img class="__anunciante-img" :src="passeio.photoURL" alt="">
       <h3 class="__anunciante-name">{{ passeio.proprietario }}</h3>
     </div><!-- ####### ANUNCIANTE ####### -->
 
+
     
+
     <!-- ####### SOBRE ####### -->
     <h1 class="box-title">Sobre</h1>
 
@@ -37,7 +40,8 @@
       <h3>{{ passeio.subtitle }}</h3>
     </div><!-- ####### SOBRE ####### -->
 
-    
+
+
 
     <!-- ####### LOTACAO ####### -->
     <h1 class="box-title">Lotação</h1>
@@ -45,6 +49,36 @@
     <div class="lotacao-box">
       <h3>{{ passeio.lotacao }}</h3>
     </div><!-- ####### LOTACAO ####### -->
+
+
+
+
+    <!-- ####### PONTOS VISITADOS ####### -->
+    <h1 class="box-title">Pontos Visitados</h1>
+
+    <div class="pontos-box">
+      <h3>Pontos aqui...</h3>
+    </div><!-- ####### PONTOS VISITADOS ####### -->
+
+
+
+
+    <!-- ####### DISPONIBILIDADE ####### -->
+    <h1 class="box-title">Disponibilidade</h1>
+
+    <div class="disponibilidade-box">
+      <h3>Calendário aqui...</h3>
+    </div><!-- ####### DISPONIBILIDADE ####### -->
+
+
+
+
+    <!-- ####### LOCAL SAÍDA ####### -->
+    <h1 class="box-title">Local de Saída</h1>
+
+    <div class="local-saida-box">
+      <h3>Map aqui...</h3>
+    </div><!-- ####### LOCAL SAÍDA ####### -->
 
 
 
@@ -207,19 +241,7 @@ export default {
   }/* ####### IMAGE BOX ####### */
 
 
-
-  /* ####### SOBRE BOX ####### */
-  & .sobre-box {
-    padding: 0 7%;
-  }/* ####### SOBRE BOX ####### */
-
-
-  /* ####### LOTACAO BOX ####### */
-  & .lotacao-box {
-    padding: 0 7%;
-  }/* ####### LOTACAO BOX ####### */
-
-
+  
   /* ####### ANUNCIANTE BOX ####### */
   & .anunciante-box {
     display: flex;
@@ -234,6 +256,48 @@ export default {
       padding-left: .5rem;
     }
   }/* ####### ANUNCIANTE BOX ####### */
+
+
+
+
+  /* ####### SOBRE BOX ####### */
+  & .sobre-box {
+    padding: 0 7%;
+  }/* ####### SOBRE BOX ####### */
+
+
+
+
+  /* ####### LOTACAO BOX ####### */
+  & .lotacao-box {
+    padding: 0 7%;
+  }/* ####### LOTACAO BOX ####### */
+
+
+
+
+  /* ####### PONTOS VISITADOS ####### */
+  & .pontos-box {
+    padding: 0 7%;
+  }/* ####### PONTOS VISITADOS ####### */
+
+
+
+
+  /* ####### DISPONIBILIDADE ####### */
+  & .disponibilidade-box {
+    padding: 0 7%;
+  }/* ####### DISPONIBILIDADE ####### */
+
+
+
+
+  /* ####### LOCAL SAÍDA ####### */
+  & .local-saida-box {
+    padding: 0 7%;
+  }/* ####### LOCAL SAÍDA ####### */
+
+
 
 
 }
