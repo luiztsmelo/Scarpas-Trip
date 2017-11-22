@@ -19,7 +19,7 @@
     <div class="image-box">
       <swiper :options="swiperOption">
         <swiper-slide class="slide"><img class="__img" :src="image1H(passeio)"></swiper-slide>
-        <swiper-slide class="slide"><img class="__img" :src="image2H(passeio)"></swiper-slide>
+        <swiper-slide class="slide" v-if="ifImage2"><img class="__img" :src="image2H(passeio)"></swiper-slide>
         <div class="swiper-pagination" slot="pagination"></div>
       </swiper>
     </div> 
@@ -145,8 +145,8 @@ export default {
     return {
       swiperOption: {
         pagination: '.swiper-pagination',
-        loop: true,
-        autoplay: 3000
+ 
+        autoplay: 2500,
       },
       markerIcon: {
         url: 'https://firebasestorage.googleapis.com/v0/b/escarpas-trip.appspot.com/o/utils%2Fmarker.svg?alt=media&token=fcbfd76e-ee93-41e8-a816-98906e19859b',
@@ -242,6 +242,17 @@ export default {
   computed: {
     passeio () {
       return this.$store.state.passeio
+    },
+    ifImage2 () {
+      if (this.passeio.imageH2W === null) {
+        return
+      } else {
+        if (supportsWebP) {
+          return this.passeio.imageH2W
+        } else {
+          return this.passeio.imageH2J
+        }
+      }
     },
     showShare () {
       return this.$store.state.showShare
