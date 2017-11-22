@@ -338,7 +338,7 @@ export default {
     bottom: 0;
     left: 0;
     z-index: 8888;
-    height: 3.1rem;
+    height: 3.2rem;
     width:  100%;
     background: white;
     padding: 0 7%;
@@ -351,13 +351,14 @@ export default {
       top: 50%;
       transform: translateY(-50%);
       & .__reserva-valor {
-        font-size: 22px;
+        font-size: 20px;
+        font-weight: 400;
       }
       & .__reserva-valor-pessoa {
-        font-size: 19px;
+        font-size: 15px;
       }
       & .__reserva-btn {
-        font-size: 15px;
+        font-size: 16px;
         background: #ff5858;
         color: white;
         padding: .5rem 1.2rem;
