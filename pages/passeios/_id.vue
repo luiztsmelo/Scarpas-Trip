@@ -333,6 +333,7 @@ export default {
 
   /* ####### IMAGE BOX ####### */
   & .image-box {
+    overflow: hidden;
     & .swiper-container {
       & .swiper-wrapper {
         display: inline-flex;
