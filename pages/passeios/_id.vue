@@ -98,6 +98,14 @@
 
 
 
+
+
+    <div class="reserva">
+      <div class="reserva-body">
+        <h3 class="__reserva-valor">R${{ passeio.valorPasseio }}</h3>
+        <button class="__reserva-btn">Reservar</button>
+      </div>
+    </div>
     
 
     
@@ -234,11 +242,11 @@ export default {
     position: fixed;
     top: 0;
     left: 0;
-    z-index: 3;
+    z-index: 10;
     height: 3.1rem;
     width:  100%;
     background: transparent;
-    padding: 0 6%;
+    padding: 0 7%;
     & .backbar-body {
       display: flex;
       justify-content: space-between;
@@ -350,7 +358,37 @@ export default {
   }/* ####### AVALIAÇÕES ####### */
 
 
-
+  /* ####### BACKBAR ####### */
+  & .reserva {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 3;
+    height: 3rem;
+    width:  100%;
+    background: white;
+    padding: 0 7%;
+    box-shadow: 0px -1px 1px 0px rgba(0,0,0,0.1);
+    & .reserva-body {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+      top: 50%;
+      transform: translateY(-50%);
+      & .__reserva-valor {
+        color: var(--color01);
+        font-size: 23px;
+      }
+      & .__reserva-btn {
+        font-size: 15px;
+        background: #49A5FC;
+        color: white;
+        padding: .5rem 1.2rem;
+        border-radius: 4px;
+      }
+    }
+  }/* ####### BACKBAR ####### */
 
 }
 
