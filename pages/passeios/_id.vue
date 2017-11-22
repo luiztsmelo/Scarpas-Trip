@@ -155,7 +155,7 @@ export default {
           padding: '0 9px',
         },
         headerArrows: {
-          fontSize: '1.5rem',
+          fontSize: '1.4rem',
         },
         headerTitle: {
           fontSize: '19px',
@@ -166,9 +166,9 @@ export default {
           fontWeight: '600',
           padding: '20px 5px 10px 5px',
         },
-        dayContentStyle: {
+        dayContent: {
           fontWeight: '300',
-          fontSize: '14px',
+          fontSize: '16px',
         }
       }  
     }
@@ -403,16 +403,17 @@ export default {
       top: 50%;
       transform: translateY(-50%);
       & .__reserva-valor {
-        font-size: 22px;
+        font-size: 21px;
+        font-weight: 400;
       }
       & .__reserva-valor-pessoa {
-        font-size: 19px;
+        font-size: 16px;
       }
       & .__reserva-btn {
         font-size: 15px;
         background: #49A5FC;
         color: white;
-        padding: .5rem 1.2rem;
+        padding: .6rem 1.2rem;
         border-radius: 4px;
       }
     }
