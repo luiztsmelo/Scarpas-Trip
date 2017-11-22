@@ -145,7 +145,8 @@ export default {
     return {
       swiperOption: {
         pagination: '.swiper-pagination',
-        slidesPerView: 1,
+        loop: true,
+        autoplay: 3000
       },
       markerIcon: {
         url: 'https://firebasestorage.googleapis.com/v0/b/escarpas-trip.appspot.com/o/utils%2Fmarker.svg?alt=media&token=fcbfd76e-ee93-41e8-a816-98906e19859b',
