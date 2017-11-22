@@ -261,10 +261,12 @@
       <!-- Preview Image -->
       <div class="after-choose-image" v-show="imageURL1 !== null">
         <img :src="imageURL1" class="__preview-img" @click="showCroppaModal1=true">
+
         <div class="image2">
           <img src="./../../../assets/img/add-image.svg" class="__preview-img" v-if="imageURL2 === null" @click="$refs.myCroppa2.chooseFile()" style="padding:2rem">
           <img :src="imageURL2" class="__preview-img" @click="showCroppaModal2=true" v-else>
         </div>
+
       </div><!-- Preview Image -->
 
 
@@ -473,14 +475,18 @@ export default {
     imageChoose2 () {
       this.showCroppaModal2 = true
     },
-    imageConfirmed2 () {
+    async imageConfirmed2 () {
       if (this.imageURL2 !== null) {
         return 
       } else {
-        this.$refs.myCroppa2.generateBlob(blob => {
-          let url2 = URL.createObjectURL(blob)
-          this.imageURL2 = url2
-        })
+        const blobPasL2 = await this.$refs.myCroppa2.promisedBlob('image/jpeg', 0.01)
+        const blobPasH2J = await this.$refs.myCroppa2.promisedBlob('image/jpeg')
+        const blobPasH2W = await this.$refs.myCroppa2.promisedBlob('image/webp')
+        let url2 = URL.createObjectURL(blobPasH2J)
+        this.imageURL2 = url2
+        this.$store.state.blobPasL2 = blobPasL2
+        this.$store.state.blobPasH2J = blobPasH2J
+        this.$store.state.blobPasH2W = blobPasH2W
       }
     },
     removeImage2 () {
@@ -586,8 +592,9 @@ export default {
         this.$store.commit('m_passeioID', passeioID)
         const storageRef = firebase.storage().ref('passeios/' + passeioID + '/')
         /* 
-        Upload image 1 LQ JPEG
+        UPLOAD IMAGE 1 
         */
+        /* imagePasL1 */
         storageRef.child('imageL1.jpeg').put(this.$store.state.blobPasL1).then(snapshot => {
           console.log(passeioID + 'L1' + '.jpeg')
           storageRef.child('imageL1.jpeg').getDownloadURL().then(url => {
@@ -595,9 +602,15 @@ export default {
             this.ifUpload()
           })
         })
-        /* 
-        Upload image 1 HQ WEBP
-        */
+        /* imagePasH1J */
+        storageRef.child('imageH1J.jpeg').put(this.$store.state.blobPasH1J).then(snapshot => {
+          console.log(passeioID + 'H1J' + '.jpeg')
+          storageRef.child('imageH1J.jpeg').getDownloadURL().then(url => {
+            this.$store.commit('m_imagePasH1J', url)
+            this.ifUpload()
+          })
+        })
+        /* imagePasH1W */
         storageRef.child('imageH1W.webp').put(this.$store.state.blobPasH1W).then(snapshot => {
           console.log(passeioID + 'H1W' + '.webp')
           storageRef.child('imageH1W.webp').getDownloadURL().then(url => {
@@ -606,19 +619,36 @@ export default {
           })
         })
         /* 
-        Upload image 1 HQ JPEG 
+        UPLOAD IMAGE 2 
         */
-        storageRef.child('imageH1J.jpeg').put(this.$store.state.blobPasH1J).then(snapshot => {
-          console.log(passeioID + 'H1J' + '.jpeg')
-          storageRef.child('imageH1J.jpeg').getDownloadURL().then(url => {
-            this.$store.commit('m_imagePasH1J', url)
+        /* imagePasL2 */
+        storageRef.child('imageL2.jpeg').put(this.$store.state.blobPasL2).then(snapshot => {
+          console.log(passeioID + 'L2' + '.jpeg')
+          storageRef.child('imageL2.jpeg').getDownloadURL().then(url => {
+            this.$store.commit('m_imagePasL2', url)
+            this.ifUpload()
+          })
+        })
+        /* imagePasH2J */
+        storageRef.child('imageH2J.jpeg').put(this.$store.state.blobPasH2J).then(snapshot => {
+          console.log(passeioID + 'H2J' + '.jpeg')
+          storageRef.child('imageH2J.jpeg').getDownloadURL().then(url => {
+            this.$store.commit('m_imagePasH2J', url)
+            this.ifUpload()
+          })
+        })
+        /* imagePasH2W */
+        storageRef.child('imageH2W.webp').put(this.$store.state.blobPasH2W).then(snapshot => {
+          console.log(passeioID + 'H2W' + '.webp')
+          storageRef.child('imageH2W.webp').getDownloadURL().then(url => {
+            this.$store.commit('m_imagePasH2W', url)
             this.ifUpload()
           })
         })
       }
     },
     ifUpload () {
-      if (this.$store.state.passeioData.imageL1 !== null && this.$store.state.passeioData.imageH1J !== null && this.$store.state.passeioData.imageH1W !== null) {
+      if (this.$store.state.passeioData.imageL1 !== null && this.$store.state.passeioData.imageH1J !== null && this.$store.state.passeioData.imageH1W !== null && this.$store.state.passeioData.imageL2 !== null && this.$store.state.passeioData.imageH2J !== null && this.$store.state.passeioData.imageH2W !== null) {
         this.$store.dispatch('a_uploadPasseio')
         this.$store.commit('m_passeios', null) /* Para não bugar as imagens */
         this.$router.push('/passeios/' + this.$store.state.passeioData.passeioID)

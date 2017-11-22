@@ -68,6 +68,9 @@ const store = () => new Vuex.Store({
     blobPasL1: null,
     blobPasH1J: null,
     blobPasH1W: null,
+    blobPasL2: null,
+    blobPasH2J: null,
+    blobPasH2W: null,
     passeioData: {/* Atualizar a action */
       passeioID: null,
       userID: null,
@@ -83,9 +86,12 @@ const store = () => new Vuex.Store({
       lotacao: null,
       duracao: null,
       pontosVisitados: null,
-      imageH1W: null,
+      imageL1: null,
       imageH1J: null,
-      imageL1: null
+      imageH1W: null,
+      imageL2: null,
+      imageH2J: null,
+      imageH2W: null
     },
     cadastroPasseio0: true,
     cadastroPasseio1: false,
@@ -220,6 +226,15 @@ const store = () => new Vuex.Store({
     m_imagePasH1W (state, payload) {
       state.passeioData.imageH1W = payload
     },
+    m_imagePasL2 (state, payload) {
+      state.passeioData.imageL2 = payload
+    },
+    m_imagePasH2J (state, payload) {
+      state.passeioData.imageH2J = payload
+    },
+    m_imagePasH2W (state, payload) {
+      state.passeioData.imageH2W = payload
+    },
     m_passeios (state, payload) {
       state.passeios = payload
     },
@@ -319,9 +334,12 @@ const store = () => new Vuex.Store({
           lotacao: null,
           duracao: null,
           pontosVisitados: null,
-          imageH1W: null,
+          imageL1: null,
           imageH1J: null,
-          imageL1: null
+          imageH1W: null,
+          imageL2: null,
+          imageH2J: null,
+          imageH2W: null
         })
         commit('m_loader', false)
         commit('m_cadastroPasseio7', false)

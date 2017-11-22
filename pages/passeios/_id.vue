@@ -97,6 +97,7 @@
     <h1 class="box-title">Local de Saída</h1>
 
     <div class="local-saida-box">
+      <h3>{{ passeio.localSaida }}</h3>
       <h3>Mapa aqui...</h3>
     </div><!-- ####### LOCAL SAÍDA ####### -->
 
