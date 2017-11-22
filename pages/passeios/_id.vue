@@ -17,8 +17,13 @@
 
     <!-- ####### IMAGE ####### -->
     <div class="image-box">
-      <img class="__image1" :src="imageH(passeio)">
-    </div><!-- ####### IMAGE ####### -->
+      <swiper :options="swiperOption">
+        <swiper-slide class="slide"><img class="__img" :src="image1H(passeio)"></swiper-slide>
+        <swiper-slide class="slide"><img class="__img" :src="image2H(passeio)"></swiper-slide>
+        <div class="swiper-pagination" slot="pagination"></div>
+      </swiper>
+    </div> 
+    <!-- ####### IMAGE ####### -->
 
 
 
@@ -138,6 +143,10 @@ export default {
   mixins: [mapstyle],
   data () {
     return {
+      swiperOption: {
+        pagination: '.swiper-pagination',
+        slidesPerView: 1,
+      },
       markerIcon: {
         url: 'https://firebasestorage.googleapis.com/v0/b/escarpas-trip.appspot.com/o/utils%2Fmarker.svg?alt=media&token=fcbfd76e-ee93-41e8-a816-98906e19859b',
         scaledSize: new google.maps.Size(42, 42)
@@ -202,11 +211,18 @@ export default {
     /* } */
   },
   methods: {
-    imageH (passeio) {
+    image1H (passeio) {
       if (supportsWebP) {
         return passeio.imageH1W
       } else {
         return passeio.imageH1J
+      }
+    },
+    image2H (passeio) {
+      if (supportsWebP) {
+        return passeio.imageH2W
+      } else {
+        return passeio.imageH2J
       }
     },
     enterFullscreen () {
@@ -305,10 +321,17 @@ export default {
 
   /* ####### IMAGE BOX ####### */
   & .image-box {
-    position: relative;
-    & .__image1 {
-      width: 100%;
-      height: auto;
+    & .swiper-container {
+      & .swiper-wrapper {
+        display: inline-flex;
+        overflow: hidden;
+        & .slide {
+          & .__img {
+            width: 100%;
+            height: auto;
+          }
+        }
+      }
     }
   }/* ####### IMAGE BOX ####### */
 
