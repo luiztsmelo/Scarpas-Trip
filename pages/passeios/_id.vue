@@ -56,6 +56,17 @@
 
 
 
+
+    <!-- ####### DURAÇÃO ####### -->
+    <h1 class="box-title">Duração</h1>
+
+    <div class="duracao-box">
+      <h3>{{ passeio.duracao }}</h3>
+    </div><!-- ####### DURAÇÃO ####### -->
+
+
+
+
     <!-- ####### PONTOS VISITADOS ####### -->
     <h1 class="box-title">Pontos Visitados</h1>
 
@@ -237,7 +248,9 @@ export default {
   display: flex;
   flex-flow: column;
   background-color: white;
+  margin-bottom: 5.1rem;
   transition: all .3s cubic-bezier(.15,.97,.43,.93);
+  
 
 
   /* ####### TOPBAR ####### */
@@ -270,6 +283,7 @@ export default {
       }
     }
   }/* ####### TOPBAR ####### */
+
 
 
   & .box-title {
@@ -329,6 +343,15 @@ export default {
   & .lotacao-box {
     padding: 0 7%;
   }/* ####### LOTACAO BOX ####### */
+
+
+
+
+
+  /* ####### DURAÇÃO ####### */
+  & .duracao-box {
+    padding: 0 7%;
+  }/* ####### DURAÇÃO ####### */
 
 
 
