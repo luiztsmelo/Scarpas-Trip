@@ -102,7 +102,7 @@
 
     <div class="reserva">
       <div class="reserva-body">
-        <h3 class="__reserva-valor">R${{ passeio.valorPasseio }}</h3>
+        <h3 class="__reserva-valor">R${{ passeio.valorPasseio }}<span class="__reserva-valor-pessoa">/pessoa</span></h3>
         <button class="__reserva-btn">Reservar</button>
       </div>
     </div>
@@ -358,7 +358,7 @@ export default {
   }/* ####### AVALIAÇÕES ####### */
 
 
-  /* ####### BACKBAR ####### */
+  /* ####### RESERVA ####### */
   & .reserva {
     position: fixed;
     bottom: 0;
@@ -377,8 +377,10 @@ export default {
       top: 50%;
       transform: translateY(-50%);
       & .__reserva-valor {
-        color: var(--color01);
         font-size: 23px;
+      }
+      & .__reserva-valor-pessoa {
+        font-size: 19px;
       }
       & .__reserva-btn {
         font-size: 15px;
@@ -388,7 +390,7 @@ export default {
         border-radius: 4px;
       }
     }
-  }/* ####### BACKBAR ####### */
+  }/* ####### RESERVA ####### */
 
 }
 
