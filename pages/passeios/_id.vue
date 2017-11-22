@@ -367,7 +367,7 @@ export default {
     bottom: 0;
     left: 0;
     z-index: 8888;
-    height: 3rem;
+    height: 3.1rem;
     width:  100%;
     background: white;
     padding: 0 7%;

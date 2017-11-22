@@ -68,7 +68,7 @@ export default {
 
 .foobar {
   position: fixed;
-  z-index: 3;
+  z-index: 9997;
   bottom: 0;
   left: 0;
   height: 3.2rem;
