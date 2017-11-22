@@ -145,8 +145,7 @@ export default {
     return {
       swiperOption: {
         pagination: '.swiper-pagination',
- 
-        autoplay: 2500,
+        autoplay: 2222
       },
       markerIcon: {
         url: 'https://firebasestorage.googleapis.com/v0/b/escarpas-trip.appspot.com/o/utils%2Fmarker.svg?alt=media&token=fcbfd76e-ee93-41e8-a816-98906e19859b',
@@ -325,7 +324,7 @@ export default {
   & .__passeio-title {
     padding: 0 7%;
     margin: 1rem 0 0 0;
-    font-size: 33px;
+    font-size: 32px;
     font-weight: 600;
   }
 
@@ -343,6 +342,12 @@ export default {
             width: 100%;
             height: auto;
           }
+        }
+      }
+      & .swiper-pagination {
+
+        & .swiper-pagination-bullet {
+
         }
       }
     }
