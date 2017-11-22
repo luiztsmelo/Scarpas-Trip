@@ -1,14 +1,17 @@
 <template>
   <div class="passeios_id" :class="{ onShare: showShare }">
 
-    <div class="backbar">
-      <div class="backbar-body">
+
+    <!-- ####### TOPBAR ####### -->
+    <div class="topbar">
+      <div class="topbar-body">
         <nuxt-link to="/">
         <img class="__back-btn" src="../../assets/img/back.svg" alt="voltar">
         </nuxt-link>
         <img class="__share-btn" src="../../assets/img/share.svg" alt="compartilhar" @click="$store.commit('m_showShare', true)">
       </div>
-    </div>
+    </div><!-- ####### TOPBAR ####### -->
+
 
 
 
@@ -99,13 +102,13 @@
 
 
 
-
+    <!-- ####### RESERVA ####### -->
     <div class="reserva">
       <div class="reserva-body">
         <h3 class="__reserva-valor">R${{ passeio.valorPasseio }}<span class="__reserva-valor-pessoa">/pessoa</span></h3>
         <button class="__reserva-btn">Reservar</button>
       </div>
-    </div>
+    </div><!-- ####### RESERVA ####### -->
     
 
     
@@ -237,8 +240,8 @@ export default {
   transition: all .3s cubic-bezier(.15,.97,.43,.93);
 
 
-  /* ####### BACKBAR ####### */
-  & .backbar {
+  /* ####### TOPBAR ####### */
+  & .topbar {
     position: fixed;
     top: 0;
     left: 0;
@@ -247,7 +250,7 @@ export default {
     width:  100%;
     background: transparent;
     padding: 0 7%;
-    & .backbar-body {
+    & .topbar-body {
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -266,7 +269,7 @@ export default {
         height: auto;
       }
     }
-  }/* ####### BACKBAR ####### */
+  }/* ####### TOPBAR ####### */
 
 
   & .box-title {
@@ -363,7 +366,7 @@ export default {
     position: fixed;
     bottom: 0;
     left: 0;
-    z-index: 3;
+    z-index: 8888;
     height: 3rem;
     width:  100%;
     background: white;
@@ -377,7 +380,7 @@ export default {
       top: 50%;
       transform: translateY(-50%);
       & .__reserva-valor {
-        font-size: 23px;
+        font-size: 22px;
       }
       & .__reserva-valor-pessoa {
         font-size: 19px;

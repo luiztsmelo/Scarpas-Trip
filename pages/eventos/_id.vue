@@ -1,8 +1,8 @@
 <template>
   <div class="eventos_id" :class="{ onShare: showShare }">
 
-    <div class="backbar">
-      <div class="backbar-body">
+    <div class="topbar">
+      <div class="topbar-body">
         <nuxt-link to="/">
         <img class="__back-btn" src="../../assets/img/back.svg" alt="voltar">
         </nuxt-link>
@@ -84,6 +84,16 @@
       </gmap-map>
     </div><!-- ####### LOCAL ####### -->
     
+
+
+    <!-- ####### RESERVA ####### -->
+    <div class="reserva">
+      <div class="reserva-body">
+        <h3 class="__reserva-valor">R${{ evento.valorIngresso }}<span class="__reserva-valor-pessoa">/pessoa</span></h3>
+        <button class="__reserva-btn">Comprar</button>
+      </div>
+    </div><!-- ####### RESERVA ####### -->
+
 
     
 
@@ -197,8 +207,9 @@ export default {
   transition: all .3s cubic-bezier(.15,.97,.43,.93);
 
 
-  /* ####### BACKBAR ####### */
-  & .backbar {
+
+  /* ####### TOPBAR ####### */
+  & .topbar {
     position: fixed;
     top: 0;
     left: 0;
@@ -206,8 +217,8 @@ export default {
     height: 3.1rem;
     width:  100%;
     background: transparent;
-    padding: 0 6%;
-    & .backbar-body {
+    padding: 0 7%;
+    & .topbar-body {
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -226,7 +237,9 @@ export default {
         height: auto;
       }
     }
-  }/* ####### BACKBAR ####### */
+  }/* ####### TOPBAR ####### */
+
+
 
 
   & .box-title {
@@ -245,6 +258,7 @@ export default {
 
 
 
+
   /* ####### IMAGE BOX ####### */
   & .image-box {
     position: relative;
@@ -253,6 +267,7 @@ export default {
       height: auto;
     }
   }/* ####### IMAGE BOX ####### */
+
 
 
 
@@ -274,12 +289,14 @@ export default {
 
 
 
+
   /* ####### SOBRE BOX ####### */
   & .sobre-box {
     padding: 0 7%;
     & .__subtitle {
     }
   }/* ####### SOBRE BOX ####### */
+
 
 
 
@@ -303,6 +320,7 @@ export default {
 
 
 
+
   /* ####### LOCAL ####### */
   & .local-box {
     & .__adress {
@@ -311,6 +329,41 @@ export default {
   }/* ####### LOCAL ####### */
 
 
+
+
+  /* ####### RESERVA ####### */
+  & .reserva {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 8888;
+    height: 3rem;
+    width:  100%;
+    background: white;
+    padding: 0 7%;
+    box-shadow: 0px -1px 1px 0px rgba(0,0,0,0.1);
+    & .reserva-body {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+      top: 50%;
+      transform: translateY(-50%);
+      & .__reserva-valor {
+        font-size: 22px;
+      }
+      & .__reserva-valor-pessoa {
+        font-size: 19px;
+      }
+      & .__reserva-btn {
+        font-size: 15px;
+        background: #ff5858;
+        color: white;
+        padding: .5rem 1.2rem;
+        border-radius: 4px;
+      }
+    }
+  }/* ####### RESERVA ####### */
 }
 
 .onShare {
