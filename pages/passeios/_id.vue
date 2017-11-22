@@ -79,13 +79,22 @@
 
 
 
-
     <!-- ####### LOCAL SAÍDA ####### -->
     <h1 class="box-title">Local de Saída</h1>
 
     <div class="local-saida-box">
       <h3>Mapa aqui...</h3>
     </div><!-- ####### LOCAL SAÍDA ####### -->
+
+
+
+  
+    <!-- ####### AVALIAÇÕES ####### -->
+    <h1 class="box-title">Avaliações</h1>
+
+    <div class="avaliacoes-box">
+      <h3>Comentários aqui...</h3>
+    </div><!-- ####### AVALIAÇÕES ####### -->
 
 
 
@@ -330,6 +339,15 @@ export default {
   & .local-saida-box {
     padding: 0 7%;
   }/* ####### LOCAL SAÍDA ####### */
+
+
+
+
+
+  /* ####### AVALIAÇÕES ####### */
+  & .avaliacoes-box {
+    padding: 0 7%;
+  }/* ####### AVALIAÇÕES ####### */
 
 
 
