@@ -89,7 +89,7 @@
     <!-- ####### RESERVA ####### -->
     <div class="reserva">
       <div class="reserva-body">
-        <h3 class="__reserva-valor">R${{ evento.valorIngresso }}<span class="__reserva-valor-pessoa">/pessoa</span></h3>
+        <h3 class="__reserva-valor">R${{ evento.valorIngresso }}</h3>
         <button class="__reserva-btn">Comprar</button>
       </div>
     </div><!-- ####### RESERVA ####### -->
@@ -338,7 +338,7 @@ export default {
     bottom: 0;
     left: 0;
     z-index: 8888;
-    height: 3.2rem;
+    height: 3.3rem;
     width:  100%;
     background: white;
     padding: 0 7%;
@@ -353,9 +353,6 @@ export default {
       & .__reserva-valor {
         font-size: 20px;
         font-weight: 400;
-      }
-      & .__reserva-valor-pessoa {
-        font-size: 15px;
       }
       & .__reserva-btn {
         font-size: 16px;
