@@ -51,6 +51,14 @@
 
 
 
+    <v-waypoint 
+    @waypoint-in="inHandler"
+    @waypoint-out="outHandler">
+    </v-waypoint>
+    
+
+
+
     <!-- ####### LOTACAO ####### -->
     <h1 class="box-title">Lotação</h1>
 
@@ -120,12 +128,14 @@
 
 
     <!-- ####### RESERVA ####### -->
-    <div class="reserva">
-      <div class="reserva-body">
-        <h3 class="__reserva-valor">R${{ passeio.valorPasseio }}<span class="__reserva-valor-pessoa">/pessoa</span></h3>
-        <button class="__reserva-btn">Reservar</button>
+    <transition name="reserva-animation">  
+      <div class="reserva" v-show="showReserva">
+        <div class="reserva-body">
+          <h3 class="__reserva-valor">R${{ passeio.valorPasseio }}<span class="__reserva-valor-pessoa">/pessoa</span></h3>
+          <button class="__reserva-btn">Reservar</button>
+        </div>
       </div>
-    </div><!-- ####### RESERVA ####### -->
+    </transition><!-- ####### RESERVA ####### -->
     
 
     
@@ -143,6 +153,7 @@ export default {
   mixins: [mapstyle],
   data () {
     return {
+      showReserva: false,
       swiperOption: {
         pagination: '.swiper-pagination',
         autoplay: 2222
@@ -211,6 +222,12 @@ export default {
     /* } */
   },
   methods: {
+    inHandler () {
+      this.showReserva = true
+    },
+    outHandler () {
+      this.showReserva = false
+    },
     image1H (passeio) {
       if (supportsWebP) {
         return passeio.imageH1W
@@ -437,6 +454,7 @@ export default {
     background: white;
     padding: 0 7%;
     box-shadow: 0px -1px 1px 0px rgba(0,0,0,0.1);
+    transition: all .3s ease;
     & .reserva-body {
       display: flex;
       justify-content: space-between;
@@ -471,5 +489,11 @@ export default {
   .eventos_id {
     /* padding: 0 13%; */
   }
+}
+
+/* TRANSITIONS */
+.reserva-animation-enter,
+.reserva-animation-leave-active {
+  transform: translateY(100%);
 }
 </style>

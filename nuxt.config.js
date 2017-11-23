@@ -34,7 +34,8 @@ module.exports = {
     '~plugins/vue-awesome-swiper',
     '~plugins/v-money',
     '~plugins/vue-ripple-directive',
-    '~plugins/v-calendar'
+    '~plugins/v-calendar',
+    '~plugins/vue-waypoint'
   ],
   /*
   ** Customize the progress-bar color

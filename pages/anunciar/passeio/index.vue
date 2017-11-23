@@ -321,7 +321,7 @@
       v-autosize="subtitle"
       maxlength="400"
       rows="1"
-      placeholder="Coloque informações importantes sobre seu passeio aqui"
+      placeholder="Foque em seus diferenciais aqui. Não repita o que já foi perguntado."
       required>
       {{subtitle}}</textarea>
 
