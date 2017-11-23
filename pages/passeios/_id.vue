@@ -481,6 +481,10 @@ export default {
 
 }
 
+.vue-waypoint__waypoint{
+  
+}
+
 .onShare {
   filter: brightness(30%);
 }
