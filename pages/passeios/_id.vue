@@ -488,6 +488,7 @@ export default {
 }
 .topbarBg {
   background: white !important;
+  box-shadow: 0px 1px 1px 0px rgba(0,0,0,0.1);
 }
 .topbarBtn {
   filter: invert(65%);
