@@ -490,7 +490,7 @@ export default {
   background: white !important;
 }
 .topbarBtn {
-  filter: invert(60%);
+  filter: invert(65%);
 }
 
 @media (min-width: 1281px) {
