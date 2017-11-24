@@ -122,7 +122,7 @@
 
     <!-- ####### RESERVA ####### -->
     <transition name="reserva-animation">  
-      <div class="reserva" v-show="showReserva">
+      <div class="reserva">
         <div class="reserva-body">
           <h3 class="__reserva-valor">R${{ passeio.valorPasseio }}<span class="__reserva-valor-pessoa">/pessoa</span></h3>
           <button class="__reserva-btn">Reservar</button>
@@ -304,7 +304,7 @@ export default {
     top: 0;
     left: 0;
     z-index: 10;
-    height: 3.1rem;
+    height: 3rem;
     width:  100%;
     background: transparent;
     padding: 0 7%;
