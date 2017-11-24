@@ -308,7 +308,7 @@ export default {
     width:  100%;
     background: transparent;
     padding: 0 7%;
-    transition: all .3s ease;
+    transition: all .7s ease;
     & .topbar-body {
       display: flex;
       justify-content: space-between;
@@ -319,7 +319,7 @@ export default {
       & .__back-btn {
         transform: translateY(1px);/* A imagem ta errada */
         cursor: pointer;
-        width: 1.25rem;
+        width: 1.2rem;
         height: auto;
       }
       & .__share-btn {
@@ -455,7 +455,7 @@ export default {
     background: white;
     padding: 0 7%;
     box-shadow: 0px -1px 1px 0px rgba(0,0,0,0.1);
-    transition: all .4s ease;
+    transition: all .5s ease;
     & .reserva-body {
       display: flex;
       justify-content: space-between;
