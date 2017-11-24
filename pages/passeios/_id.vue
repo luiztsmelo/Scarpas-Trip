@@ -317,7 +317,7 @@ export default {
       top: 50%;
       transform: translateY(-50%);
       & .__back-btn {
-        transform: translateY(1px);/* A imagem ta errada */
+        transform: translateY(2px);/* A imagem ta errada */
         cursor: pointer;
         width: 1.2rem;
         height: auto;
