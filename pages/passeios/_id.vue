@@ -308,7 +308,7 @@ export default {
     width:  100%;
     background: transparent;
     padding: 0 7%;
-    transition: all .7s ease;
+    transition: all .6s ease;
     & .topbar-body {
       display: flex;
       justify-content: space-between;
