@@ -1,5 +1,5 @@
 <template>
-  <div class="app">
+  <div class="app" @scroll="handleScroll">
 
     <loader/>
 
@@ -25,7 +25,18 @@ import Share from '~/components/Share.vue'
 import MapFull from '~/components/MapFull.vue'
 
 export default {
-  components: { Navbar, Foobar, Menuu, Loader, Share, MapFull }
+  components: { Navbar, Foobar, Menuu, Loader, Share, MapFull },
+   methods: {
+    handleScroll (event) {
+      this.$store.state.scrollTop = event.path[1].scrollY
+    }
+  },
+  created () {
+    window.addEventListener('scroll', this.handleScroll)
+  },
+  destroyed () {
+    window.removeEventListener('scroll', this.handleScroll)
+  }
 }
 </script>
 

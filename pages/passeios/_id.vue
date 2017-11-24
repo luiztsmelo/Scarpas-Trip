@@ -51,13 +51,6 @@
 
 
 
-    <v-waypoint 
-    @waypoint-in="inHandler"
-    @waypoint-out="outHandler">
-    </v-waypoint>
-    
-
-
 
     <!-- ####### LOTACAO ####### -->
     <h1 class="box-title">Lotação</h1>
@@ -222,12 +215,6 @@ export default {
     /* } */
   },
   methods: {
-    inHandler () {
-      this.showReserva = true
-    },
-    outHandler () {
-      this.showReserva = false
-    },
     image1H (passeio) {
       if (supportsWebP) {
         return passeio.imageH1W
@@ -256,6 +243,9 @@ export default {
     }
   },
   computed: {
+    scrollTop () {
+      return this.$store.state.scrollTop
+    },
     passeio () {
       return this.$store.state.passeio
     },
@@ -272,6 +262,15 @@ export default {
     },
     showShare () {
       return this.$store.state.showShare
+    }
+  },
+  watch: {
+    scrollTop(value) {
+      if (value >= 200) {
+        return this.showReserva = true
+      } else {
+        return this.showReserva = false
+      }
     }
   },
   beforeRouteLeave (to, from, next) {

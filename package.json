@@ -23,7 +23,6 @@
     "vue-progressive-image": "^2.3.1",
     "vue-ripple-directive": "^1.0.13",
     "vue-text-mask": "^5.2.0",
-    "vue-waypoint": "^2.5.0",
     "vue2-google-maps": "^0.8.4",
     "vuex-persistedstate": "^2.0.0",
     "webfontloader": "^1.6.28"
