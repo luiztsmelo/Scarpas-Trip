@@ -453,7 +453,7 @@ export default {
     background: white;
     padding: 0 7%;
     box-shadow: 0px -1px 1px 0px rgba(0,0,0,0.1);
-    transition: all .3s ease;
+    transition: all .4s ease;
     & .reserva-body {
       display: flex;
       justify-content: space-between;
@@ -480,10 +480,6 @@ export default {
 
 }
 
-.vue-waypoint__waypoint{
-  
-}
-
 .onShare {
   filter: brightness(30%);
 }
@@ -497,6 +493,6 @@ export default {
 /* TRANSITIONS */
 .reserva-animation-enter,
 .reserva-animation-leave-active {
-  transform: translateY(100%);
+  transform: translateY(100%)
 }
 </style>
