@@ -3,17 +3,14 @@
 
 
     <!-- ####### TOPBAR ####### -->
-    <div class="topbar-wraper">
-      <div class="topbar" :class="{ topbarBg: scrollTopbar }">
-        <div class="topbar-body">
-          <nuxt-link to="/">
-            <img class="__back-btn" :class="{ topbarBtn: scrollTopbar }" src="../../assets/img/back.svg" alt="voltar">
-          </nuxt-link>
-          <img class="__share-btn" :class="{ topbarBtn: scrollTopbar }" src="../../assets/img/share.svg" alt="compartilhar" @click="$store.commit('m_showShare', true)">
-        </div>
+    <div class="topbar" :class="{ topbarBg: scrollTopbar }">
+      <div class="topbar-body">
+        <nuxt-link to="/">
+          <img class="__back-btn" :class="{ topbarBtn: scrollTopbar }" src="../../assets/img/back.svg" alt="voltar">
+        </nuxt-link>
+        <img class="__share-btn" :class="{ topbarBtn: scrollTopbar }" src="../../assets/img/share.svg" alt="compartilhar" @click="$store.commit('m_showShare', true)">
       </div>
     </div><!-- ####### TOPBAR ####### -->
-    
 
 
 
@@ -302,43 +299,36 @@ export default {
 
 
   /* ####### TOPBAR ####### */
-  & .topbar-wraper {
+  & .topbar {
     position: fixed;
-    width: 100%;
-    height: 100%;
-    overflow-x: hidden;
     top: 0;
     left: 0;
-    & .topbar {
-      position: fixed;
-      width: 100%;
-      z-index: 10;
-      height: 3.1rem;
-      background: transparent;
-      padding: 0 7%;
-      transition: all .3s ease;
-      & .topbar-body {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        position: relative;
-        top: 50%;
-        transform: translateY(-50%);
-        & .__back-btn {
-          transform: translateY(1px);/* A imagem ta errada */
-          cursor: pointer;
-          width: 1.3rem;
-          height: auto;
-        }
-        & .__share-btn {
-          cursor: pointer;
-          width: 1.5rem;
-          height: auto;
-        }
+    z-index: 10;
+    height: 3.1rem;
+    width:  100%;
+    background: transparent;
+    padding: 0 7%;
+    transition: all .3s ease;
+    & .topbar-body {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+      top: 50%;
+      transform: translateY(-50%);
+      & .__back-btn {
+        transform: translateY(1px);/* A imagem ta errada */
+        cursor: pointer;
+        width: 1.3rem;
+        height: auto;
+      }
+      & .__share-btn {
+        cursor: pointer;
+        width: 1.5rem;
+        height: auto;
       }
     }
-  }
-  /* ####### TOPBAR ####### */
+  }/* ####### TOPBAR ####### */
 
 
 
@@ -499,7 +489,7 @@ export default {
   background: white !important;
 }
 .topbarBtn {
-  filter: invert(70%);
+  filter: invert(60%);
 }
 
 @media (min-width: 1281px) {
