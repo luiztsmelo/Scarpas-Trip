@@ -301,11 +301,13 @@ export default {
   /* ####### TOPBAR ####### */
   & .topbar {
     position: fixed;
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
     top: 0;
     left: 0;
     z-index: 10;
     height: 3.1rem;
-    width:  100%;
     background: transparent;
     padding: 0 7%;
     transition: all .3s ease;
