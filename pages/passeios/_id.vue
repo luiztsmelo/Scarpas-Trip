@@ -3,12 +3,12 @@
 
 
     <!-- ####### TOPBAR ####### -->
-    <div class="topbar">
+    <div class="topbar" :class="{ topbarBg: scrollTopbar }">
       <div class="topbar-body">
         <nuxt-link to="/">
-        <img class="__back-btn" src="../../assets/img/back.svg" alt="voltar">
+          <img class="__back-btn" :class="{ topbarBtn: scrollTopbar }" src="../../assets/img/back.svg" alt="voltar">
         </nuxt-link>
-        <img class="__share-btn" src="../../assets/img/share.svg" alt="compartilhar" @click="$store.commit('m_showShare', true)">
+        <img class="__share-btn" :class="{ topbarBtn: scrollTopbar }" src="../../assets/img/share.svg" alt="compartilhar" @click="$store.commit('m_showShare', true)">
       </div>
     </div><!-- ####### TOPBAR ####### -->
 
@@ -146,6 +146,7 @@ export default {
   mixins: [mapstyle],
   data () {
     return {
+      scrollTopbar: false,
       showReserva: false,
       swiperOption: {
         pagination: '.swiper-pagination',
@@ -266,10 +267,10 @@ export default {
   },
   watch: {
     scrollTop(value) {
-      if (value >= 200) {
-        return this.showReserva = true
+      if (value >= 250) {
+        return this.showReserva = true, this.scrollTopbar = true
       } else {
-        return this.showReserva = false
+        return this.showReserva = false, this.scrollTopbar = false
       }
     }
   },
@@ -307,6 +308,7 @@ export default {
     width:  100%;
     background: transparent;
     padding: 0 7%;
+    transition: all .3s ease;
     & .topbar-body {
       display: flex;
       justify-content: space-between;
@@ -482,6 +484,12 @@ export default {
 
 .onShare {
   filter: brightness(30%);
+}
+.topbarBg {
+  background: white !important;
+}
+.topbarBtn {
+  filter: invert(70%);
 }
 
 @media (min-width: 1281px) {

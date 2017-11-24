@@ -26,7 +26,7 @@ import MapFull from '~/components/MapFull.vue'
 
 export default {
   components: { Navbar, Foobar, Menuu, Loader, Share, MapFull },
-   methods: {
+  methods: {
     handleScroll (event) {
       this.$store.state.scrollTop = event.path[1].scrollY
     }
