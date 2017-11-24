@@ -266,7 +266,7 @@ export default {
     }
   },
   watch: {
-    scrollTop(value) {
+    scrollTop (value) {
       if (value >= 250) {
         return this.showReserva = true, this.scrollTopbar = true
       } else {
@@ -494,15 +494,16 @@ export default {
   filter: invert(65%);
 }
 
+/* TRANSITIONS */
+.reserva-animation-enter,
+.reserva-animation-leave-active {
+  transform: translateY(100%)
+}
+
 @media (min-width: 1281px) {
   .eventos_id {
     /* padding: 0 13%; */
   }
 }
 
-/* TRANSITIONS */
-.reserva-animation-enter,
-.reserva-animation-leave-active {
-  transform: translateY(100%)
-}
 </style>

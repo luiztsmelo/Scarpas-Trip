@@ -1,14 +1,15 @@
 <template>
   <div class="eventos_id" :class="{ onShare: showShare }">
 
-    <div class="topbar">
+    <!-- ####### TOPBAR ####### -->
+    <div class="topbar" :class="{ topbarBg: scrollTopbar }">
       <div class="topbar-body">
         <nuxt-link to="/">
-        <img class="__back-btn" src="../../assets/img/back.svg" alt="voltar">
+          <img class="__back-btn" :class="{ topbarBtn: scrollTopbar }" src="../../assets/img/back.svg" alt="voltar">
         </nuxt-link>
-        <img class="__share-btn" src="../../assets/img/share.svg" alt="compartilhar" @click="$store.commit('m_showShare', true)">
+        <img class="__share-btn" :class="{ topbarBtn: scrollTopbar }" src="../../assets/img/share.svg" alt="compartilhar" @click="$store.commit('m_showShare', true)">
       </div>
-    </div>
+    </div><!-- ####### TOPBAR ####### -->
 
 
 
@@ -87,12 +88,14 @@
 
 
     <!-- ####### RESERVA ####### -->
-    <div class="reserva">
-      <div class="reserva-body">
-        <h3 class="__reserva-valor">R${{ evento.valorIngresso }}</h3>
-        <button class="__reserva-btn">Comprar</button>
+    <transition name="reserva-animation">  
+      <div class="reserva" v-show="showReserva">
+        <div class="reserva-body">
+          <h3 class="__reserva-valor">R${{ evento.valorIngresso }}</h3>
+          <button class="__reserva-btn">Comprar</button>
+        </div>
       </div>
-    </div><!-- ####### RESERVA ####### -->
+    </transition><!-- ####### RESERVA ####### -->
 
 
     
@@ -110,6 +113,8 @@ export default {
   mixins: [mapstyle],
   data () {
     return {
+      scrollTopbar: false,
+      showReserva: false,
       markerIcon: {
         url: 'https://firebasestorage.googleapis.com/v0/b/escarpas-trip.appspot.com/o/utils%2Fmarker.svg?alt=media&token=fcbfd76e-ee93-41e8-a816-98906e19859b',
         scaledSize: new google.maps.Size(42, 42)
@@ -183,6 +188,18 @@ export default {
     },
     showShare () {
       return this.$store.state.showShare
+    },
+    scrollTop () {
+      return this.$store.state.scrollTop
+    }
+  },
+  watch: {
+    scrollTop (value) {
+      if (value >= 250) {
+        return this.showReserva = true, this.scrollTopbar = true
+      } else {
+        return this.showReserva = false, this.scrollTopbar = false
+      }
     }
   },
   beforeRouteLeave (to, from, next) {
@@ -214,11 +231,12 @@ export default {
     position: fixed;
     top: 0;
     left: 0;
-    z-index: 3;
+    z-index: 10;
     height: 3.1rem;
     width:  100%;
     background: transparent;
     padding: 0 7%;
+    transition: all .6s ease;
     & .topbar-body {
       display: flex;
       justify-content: space-between;
@@ -227,9 +245,9 @@ export default {
       top: 50%;
       transform: translateY(-50%);
       & .__back-btn {
-        transform: translateY(1px);/* A imagem ta errada */
+        transform: translateY(2px);/* A imagem ta errada */
         cursor: pointer;
-        width: 1.3rem;
+        width: 1.2rem;
         height: auto;
       }
       & .__share-btn {
@@ -343,6 +361,7 @@ export default {
     background: white;
     padding: 0 7%;
     box-shadow: 0px -1px 1px 0px rgba(0,0,0,0.1);
+    transition: all .5s ease;
     & .reserva-body {
       display: flex;
       justify-content: space-between;
@@ -367,6 +386,19 @@ export default {
 
 .onShare {
   filter: brightness(30%);
+}
+.topbarBg {
+  background: white !important;
+  box-shadow: 0px 1px 1px 0px rgba(0,0,0,0.1);
+}
+.topbarBtn {
+  filter: invert(65%);
+}
+
+/* TRANSITIONS */
+.reserva-animation-enter,
+.reserva-animation-leave-active {
+  transform: translateY(100%)
 }
 
 @media (min-width: 1281px) {
