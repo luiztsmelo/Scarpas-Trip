@@ -319,7 +319,7 @@ export default {
       & .__back-btn {
         transform: translateY(1px);/* A imagem ta errada */
         cursor: pointer;
-        width: 1.3rem;
+        width: 1.25rem;
         height: auto;
       }
       & .__share-btn {
@@ -464,6 +464,7 @@ export default {
       top: 50%;
       transform: translateY(-50%);
       & .__reserva-valor {
+        color: var(--color01);
         font-size: 20px;
         font-weight: 400;
       }
