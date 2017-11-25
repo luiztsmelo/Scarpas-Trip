@@ -14,7 +14,6 @@ const store = () => new Vuex.Store({
     -------------------- GERAL --------------------
     */
     scrollY: 0,
-    scrollUp: false,
     authUser: null,
     showNavbar: true,
     showMenu: false,

@@ -269,11 +269,11 @@ export default {
   watch: {
     scrollY (value) {
       if (value > 250) {
-        if (this.$store.state.scrollUp === true) {
+        /* if (this.$store.state.scrollUp === true) {
           this.showTopbar = true
         } else {
           this.showTopbar = false
-        }
+        } */
         this.scrollTopbar = true
       } else {
         this.scrollTopbar = false
@@ -290,11 +290,11 @@ export default {
     }
   },
   created () {
-    let lastScrollTop = 0
+    /* let lastScrollTop = 0 */
     window.addEventListener('scroll', event => {
       this.$store.state.scrollY = event.path[1].scrollY
-      lastScrollTop > this.$store.state.scrollY ? this.$store.state.scrollUp = true : this.$store.state.scrollUp = false
-      lastScrollTop = this.$store.state.scrollY
+      /* lastScrollTop > this.$store.state.scrollY ? this.$store.state.scrollUp = true : this.$store.state.scrollUp = false
+      lastScrollTop = this.$store.state.scrollY */
     })
   }
 }
