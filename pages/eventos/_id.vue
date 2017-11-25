@@ -16,8 +16,13 @@
 
     <!-- ####### IMAGE ####### -->
     <div class="image-box">
-      <img class="__image1" :src="imageH(evento)">
-    </div><!-- ####### IMAGE ####### -->
+      <swiper :options="swiperOption">
+        <swiper-slide class="slide"><img class="__img" :src="image1H(evento)"></swiper-slide>
+        <swiper-slide class="slide" v-if="ifImage2"><img class="__img" :src="image2H(evento)"></swiper-slide>
+        <div class="swiper-pagination" slot="pagination"></div>
+      </swiper>
+    </div> 
+    <!-- ####### IMAGE ####### -->
 
 
 
@@ -89,7 +94,7 @@
 
     <!-- ####### RESERVA ####### -->
     <transition name="reserva-animation">  
-      <div class="reserva" v-show="showReserva">
+      <div class="reserva">
         <div class="reserva-body">
           <h3 class="__reserva-valor">R${{ evento.valorIngresso }}</h3>
           <button class="__reserva-btn">Comprar</button>
@@ -114,7 +119,10 @@ export default {
   data () {
     return {
       scrollTopbar: false,
-      showReserva: false,
+      swiperOption: {
+        pagination: '.swiper-pagination',
+        autoplay: 2222
+      },
       markerIcon: {
         url: 'https://firebasestorage.googleapis.com/v0/b/escarpas-trip.appspot.com/o/utils%2Fmarker.svg?alt=media&token=fcbfd76e-ee93-41e8-a816-98906e19859b',
         scaledSize: new google.maps.Size(42, 42)
@@ -149,11 +157,18 @@ export default {
     /* } */
   },
   methods: {
-    imageH (evento) {
+    image1H (evento) {
       if (supportsWebP) {
         return evento.imageH1W
       } else {
         return evento.imageH1J
+      }
+    },
+    image2H (evento) {
+      if (supportsWebP) {
+        return evento.imageH2W
+      } else {
+        return evento.imageH2J
       }
     },
     enterFullscreen () {
@@ -185,6 +200,17 @@ export default {
     },
     evento () {
       return this.$store.state.evento
+    },
+    ifImage2 () {
+      if (this.evento.imageH2W === null) {
+        return
+      } else {
+        if (supportsWebP) {
+          return this.evento.imageH2W
+        } else {
+          return this.evento.imageH2J
+        }
+      }
     },
     showShare () {
       return this.$store.state.showShare
@@ -280,10 +306,24 @@ export default {
 
   /* ####### IMAGE BOX ####### */
   & .image-box {
-    position: relative;
-    & .__image1 {
-      width: 100%;
-      height: auto;
+    overflow: hidden;
+    & .swiper-container {
+      & .swiper-wrapper {
+        display: inline-flex;
+        overflow: hidden;
+        & .slide {
+          & .__img {
+            width: 100%;
+            height: auto;
+          }
+        }
+      }
+      & .swiper-pagination {
+
+        & .swiper-pagination-bullet {
+
+        }
+      }
     }
   }/* ####### IMAGE BOX ####### */
 
