@@ -13,7 +13,8 @@ const store = () => new Vuex.Store({
     /*
     -------------------- GERAL --------------------
     */
-    scrollTop: 0,
+    scrollY: 0,
+    scrollUp: false,
     authUser: null,
     showNavbar: true,
     showMenu: false,

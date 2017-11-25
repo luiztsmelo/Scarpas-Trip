@@ -189,12 +189,12 @@ export default {
     showShare () {
       return this.$store.state.showShare
     },
-    scrollTop () {
-      return this.$store.state.scrollTop
+    scrollY () {
+      return this.$store.state.scrollY
     }
   },
   watch: {
-    scrollTop (value) {
+    scrollY (value) {
       if (value >= 250) {
         return this.showReserva = true, this.scrollTopbar = true
       } else {

@@ -3,14 +3,16 @@
 
 
     <!-- ####### TOPBAR ####### -->
-    <div class="topbar" :class="{ topbarBg: scrollTopbar }">
-      <div class="topbar-body">
-        <nuxt-link to="/">
-          <img class="__back-btn" :class="{ topbarBtn: scrollTopbar }" src="../../assets/img/back.svg" alt="voltar">
-        </nuxt-link>
-        <img class="__share-btn" :class="{ topbarBtn: scrollTopbar }" src="../../assets/img/share.svg" alt="compartilhar" @click="$store.commit('m_showShare', true)">
+    <transition name="topbar-animation">
+      <div class="topbar" :class="{ topbarBg: scrollTopbar }" v-show="showTopbar">
+        <div class="topbar-body">
+          <nuxt-link to="/">
+            <img class="__back-btn" :class="{ topbarBtn: scrollTopbar }" src="../../assets/img/back.svg" alt="voltar">
+          </nuxt-link>
+          <img class="__share-btn" :class="{ topbarBtn: scrollTopbar }" src="../../assets/img/share.svg" alt="compartilhar" @click="$store.commit('m_showShare', true)">
+        </div>
       </div>
-    </div><!-- ####### TOPBAR ####### -->
+    </transition><!-- ####### TOPBAR ####### -->
 
 
 
@@ -120,15 +122,14 @@
 
 
 
-    <!-- ####### RESERVA ####### -->
-    <transition name="reserva-animation">  
-      <div class="reserva">
-        <div class="reserva-body">
-          <h3 class="__reserva-valor">R${{ passeio.valorPasseio }}<span class="__reserva-valor-pessoa">/pessoa</span></h3>
-          <button class="__reserva-btn">Reservar</button>
-        </div>
+    <!-- ####### RESERVA ####### --> 
+    <div class="reserva">
+      <div class="reserva-body">
+        <h3 class="__reserva-valor">R${{ passeio.valorPasseio }}<span class="__reserva-valor-pessoa">/pessoa</span></h3>
+        <button class="__reserva-btn">Reservar</button>
       </div>
-    </transition><!-- ####### RESERVA ####### -->
+    </div>
+    <!-- ####### RESERVA ####### -->
     
 
     
@@ -146,8 +147,8 @@ export default {
   mixins: [mapstyle],
   data () {
     return {
+      showTopbar: true,
       scrollTopbar: false,
-      showReserva: false,
       swiperOption: {
         pagination: '.swiper-pagination',
         autoplay: 2222
@@ -244,8 +245,8 @@ export default {
     }
   },
   computed: {
-    scrollTop () {
-      return this.$store.state.scrollTop
+    scrollY () {
+      return this.$store.state.scrollY
     },
     passeio () {
       return this.$store.state.passeio
@@ -266,11 +267,16 @@ export default {
     }
   },
   watch: {
-    scrollTop (value) {
-      if (value >= 250) {
-        return this.showReserva = true, this.scrollTopbar = true
+    scrollY (value) {
+      if (value > 250) {
+        if (this.$store.state.scrollUp === true) {
+          this.showTopbar = true
+        } else {
+          this.showTopbar = false
+        }
+        this.scrollTopbar = true
       } else {
-        return this.showReserva = false, this.scrollTopbar = false
+        this.scrollTopbar = false
       }
     }
   },
@@ -293,7 +299,7 @@ export default {
   display: flex;
   flex-flow: column;
   background-color: white;
-  margin-bottom: 5.1rem;
+  margin-bottom: 5.3rem;
   transition: all .3s cubic-bezier(.15,.97,.43,.93);
   
 
@@ -308,7 +314,7 @@ export default {
     width:  100%;
     background: transparent;
     padding: 0 7%;
-    transition: all .6s ease;
+    transition: all .5s ease;
     & .topbar-body {
       display: flex;
       justify-content: space-between;
@@ -455,7 +461,6 @@ export default {
     background: white;
     padding: 0 7%;
     box-shadow: 0px -1px 1px 0px rgba(0,0,0,0.1);
-    transition: all .5s ease;
     & .reserva-body {
       display: flex;
       justify-content: space-between;
@@ -495,13 +500,14 @@ export default {
 }
 
 /* TRANSITIONS */
-.reserva-animation-enter,
-.reserva-animation-leave-active {
-  transform: translateY(100%)
+
+.topbar-animation-enter,
+.topbar-animation-leave-active {
+  transform: translateY(-100%);
 }
 
 @media (min-width: 1281px) {
-  .eventos_id {
+  .passeios {
     /* padding: 0 13%; */
   }
 }

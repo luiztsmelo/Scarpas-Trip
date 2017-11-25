@@ -1,5 +1,5 @@
 <template>
-  <div class="app" @scroll="handleScroll">
+  <div class="app">
 
     <loader/>
 
@@ -26,16 +26,18 @@ import MapFull from '~/components/MapFull.vue'
 
 export default {
   components: { Navbar, Foobar, Menuu, Loader, Share, MapFull },
-  methods: {
-    handleScroll (event) {
-      this.$store.state.scrollTop = event.path[1].scrollY
-    }
-  },
   created () {
-    window.addEventListener('scroll', this.handleScroll)
-  },
-  destroyed () {
-    window.removeEventListener('scroll', this.handleScroll)
+    let lastScrollTop = 0
+
+    window.addEventListener('scroll', event => {
+      this.$store.state.scrollY = event.path[1].scrollY
+      if (lastScrollTop > this.$store.state.scrollY) {
+        this.$store.state.scrollUp = true
+      } else {
+        this.$store.state.scrollUp = false
+      }
+      lastScrollTop = this.$store.state.scrollY
+    }, false)
   }
 }
 </script>
