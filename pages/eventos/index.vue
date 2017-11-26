@@ -121,7 +121,7 @@ export default {
     right: 0;
     margin: 0 auto;
     height: 2rem;
-    width: 30%;
+    width: 7rem;
     background: white;
     transition: all .3s ease;
     box-shadow: 2px 2px 6px 1px rgba(0,0,0,0.27);

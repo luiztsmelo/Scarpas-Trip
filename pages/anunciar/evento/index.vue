@@ -347,14 +347,18 @@ export default {
     imageChoose2 () {
       this.showCroppaModal2 = true
     },
-    imageConfirmed2 () {
+    async imageConfirmed2 () {
       if (this.imageURL2 !== null) {
         return 
       } else {
-        this.$refs.myCroppa2.generateBlob(blob => {
-          let url2 = URL.createObjectURL(blob)
-          this.imageURL2 = url2
-        })
+        const blobEvL2 = await this.$refs.myCroppa2.promisedBlob('image/jpeg', 0.01)
+        const blobEvH2J = await this.$refs.myCroppa2.promisedBlob('image/jpeg')
+        const blobEvH2W = await this.$refs.myCroppa2.promisedBlob('image/webp')
+        let url2 = URL.createObjectURL(blobEvH2J)
+        this.imageURL2 = url2
+        this.$store.state.blobEvL2 = blobEvL2
+        this.$store.state.blobEvH2J = blobEvH2J
+        this.$store.state.blobEvH2W = blobEvH2W
       }
     },
     removeImage2 () {
@@ -439,8 +443,9 @@ export default {
         this.$store.commit('m_eventoID', eventoID)
         const storageRef = firebase.storage().ref('eventos/' + eventoID + '/')
         /* 
-        Upload image 1 LQ JPEG
+        UPLOAD IMAGE 1 
         */
+        /* imageEvL1 */
         storageRef.child('imageL1.jpeg').put(this.$store.state.blobEvL1).then(snapshot => {
           console.log(eventoID + 'L1' + '.jpeg')
           storageRef.child('imageL1.jpeg').getDownloadURL().then(url => {
@@ -448,9 +453,15 @@ export default {
             this.ifUpload()
           })
         })
-        /* 
-        Upload image 1 HQ WEBP
-        */
+        /* imageEvH1J */
+        storageRef.child('imageH1J.jpeg').put(this.$store.state.blobEvH1J).then(snapshot => {
+          console.log(eventoID + 'H1J' + '.jpeg')
+          storageRef.child('imageH1J.jpeg').getDownloadURL().then(url => {
+            this.$store.commit('m_imageEvH1J', url)
+            this.ifUpload()
+          })
+        })
+        /* imageEvH1W */
         storageRef.child('imageH1W.webp').put(this.$store.state.blobEvH1W).then(snapshot => {
           console.log(eventoID + 'H1W' + '.webp')
           storageRef.child('imageH1W.webp').getDownloadURL().then(url => {
@@ -459,19 +470,36 @@ export default {
           })
         })
         /* 
-        Upload image 1 HQ JPEG 
+        UPLOAD IMAGE 2 
         */
-        storageRef.child('imageH1J.jpeg').put(this.$store.state.blobEvH1J).then(snapshot => {
-          console.log(eventoID + 'H1J' + '.jpeg')
-          storageRef.child('imageH1J.jpeg').getDownloadURL().then(url => {
-            this.$store.commit('m_imageEvH1J', url)
+        /* imageEvL2 */
+        storageRef.child('imageL2.jpeg').put(this.$store.state.blobEvL2).then(snapshot => {
+          console.log(eventoID + 'L2' + '.jpeg')
+          storageRef.child('imageL2.jpeg').getDownloadURL().then(url => {
+            this.$store.commit('m_imageEvL2', url)
+            this.ifUpload()
+          })
+        })
+        /* imageEvH2J */
+        storageRef.child('imageH2J.jpeg').put(this.$store.state.blobEvH2J).then(snapshot => {
+          console.log(eventoID + 'H2J' + '.jpeg')
+          storageRef.child('imageH2J.jpeg').getDownloadURL().then(url => {
+            this.$store.commit('m_imageEvH2J', url)
+            this.ifUpload()
+          })
+        })
+        /* imageEvH2W */
+        storageRef.child('imageH2W.webp').put(this.$store.state.blobEvH2W).then(snapshot => {
+          console.log(eventoID + 'H2W' + '.webp')
+          storageRef.child('imageH2W.webp').getDownloadURL().then(url => {
+            this.$store.commit('m_imageEvH2W', url)
             this.ifUpload()
           })
         })
       }
     },
     ifUpload () {
-      if (this.$store.state.eventoData.imageL1 !== null && this.$store.state.eventoData.imageH1J !== null && this.$store.state.eventoData.imageH1W !== null) {
+      if (this.$store.state.eventoData.imageL1 !== null && this.$store.state.eventoData.imageH1J !== null && this.$store.state.eventoData.imageH1W !== null && this.$store.state.eventoData.imageL2 !== null && this.$store.state.eventoData.imageH2J !== null && this.$store.state.eventoData.imageH2W !== null) {
         this.$store.dispatch('a_uploadEvento')
         this.$store.commit('m_eventos', null) /* Para não bugar as imagens */
         this.$router.push('/eventos/' + this.$store.state.eventoData.eventoID)

@@ -37,6 +37,9 @@ const store = () => new Vuex.Store({
     blobEvL1: null,
     blobEvH1J: null,
     blobEvH1W: null,
+    blobEvL2: null,
+    blobEvH2J: null,
+    blobEvH2W: null,
     eventoData: {/* Atualizar a action */
       eventoID: null,
       title: '',
@@ -47,9 +50,12 @@ const store = () => new Vuex.Store({
       positionLNG: -46.0478760,
       address: null,
       valorIngresso: 0,
-      imageH1W: null,
+      imageL1: null,
       imageH1J: null,
-      imageL1: null
+      imageH1W: null,
+      imageL2: null,
+      imageH2J: null,
+      imageH2W: null
     },
     cadastroEvento0: true,
     cadastroEvento1: false,
@@ -171,6 +177,15 @@ const store = () => new Vuex.Store({
     },
     m_imageEvH1W (state, payload) {
       state.eventoData.imageH1W = payload
+    },
+    m_imageEvL2 (state, payload) {
+      state.eventoData.imageL2 = payload
+    },
+    m_imageEvH2J (state, payload) {
+      state.eventoData.imageH2J = payload
+    },
+    m_imageEvH2W (state, payload) {
+      state.eventoData.imageH2W = payload
     },
     m_eventos (state, payload) {
       state.eventos = payload
@@ -304,9 +319,12 @@ const store = () => new Vuex.Store({
           positionLNG: -46.0478760,
           address: null,
           valorIngresso: 0,
-          imageH1W: null,
+          imageL1: null,
           imageH1J: null,
-          imageL1: null
+          imageH1W: null,
+          imageL2: null,
+          imageH2J: null,
+          imageH2W: null
         })
         commit('m_loader', false)
         commit('m_cadastroEvento7', false)

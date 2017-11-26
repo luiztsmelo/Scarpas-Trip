@@ -93,14 +93,12 @@
 
 
     <!-- ####### RESERVA ####### -->
-    <transition name="reserva-animation">  
-      <div class="reserva">
-        <div class="reserva-body">
-          <h3 class="__reserva-valor">R${{ evento.valorIngresso }}</h3>
-          <button class="__reserva-btn">Comprar</button>
-        </div>
+    <div class="reserva">
+      <div class="reserva-body">
+        <h3 class="__reserva-valor">R${{ evento.valorIngresso }}</h3>
+        <button class="__reserva-btn">Comprar</button>
       </div>
-    </transition><!-- ####### RESERVA ####### -->
+    </div><!-- ####### RESERVA ####### -->
 
 
     
@@ -435,11 +433,6 @@ export default {
   filter: invert(65%);
 }
 
-/* TRANSITIONS */
-.reserva-animation-enter,
-.reserva-animation-leave-active {
-  transform: translateY(100%)
-}
 
 @media (min-width: 1281px) {
   .eventos_id {
