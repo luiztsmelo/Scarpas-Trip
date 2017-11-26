@@ -417,7 +417,7 @@ export default {
         font-size: 16px;
         background: #ff5858;
         color: white;
-        padding: .5rem 1.2rem;
+        padding: .6rem 1.2rem;
         border-radius: 4px;
       }
     }
