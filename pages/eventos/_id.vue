@@ -273,7 +273,7 @@ export default {
       & .__back-btn {
         transform: translateY(2px);/* A imagem ta errada */
         cursor: pointer;
-        width: 1.2rem;
+        width: 1.1rem;
         height: auto;
       }
       & .__share-btn {
@@ -335,12 +335,12 @@ export default {
     display: flex;
     padding: 0 7%;
     & .__date {
-      font-size: 23px;
+      font-size: 22px;
       font-weight: 300;
       /* color: #ff5858; */
     }
     & .__hour {
-      font-size: 23px;
+      font-size: 22px;
       font-weight: 300;
       /* color: #ff5858; */
     }
@@ -410,7 +410,7 @@ export default {
       top: 50%;
       transform: translateY(-50%);
       & .__reserva-valor {
-        font-size: 20px;
+        font-size: 19px;
         font-weight: 400;
       }
       & .__reserva-btn {

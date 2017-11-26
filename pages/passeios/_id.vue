@@ -325,7 +325,7 @@ export default {
       & .__back-btn {
         transform: translateY(2px);/* A imagem ta errada */
         cursor: pointer;
-        width: 1.2rem;
+        width: 1.1rem;
         height: auto;
       }
       & .__share-btn {
@@ -470,11 +470,11 @@ export default {
       transform: translateY(-50%);
       & .__reserva-valor {
         color: var(--color01);
-        font-size: 20px;
+        font-size: 19px;
         font-weight: 400;
       }
       & .__reserva-valor-pessoa {
-        font-size: 15px;
+        font-size: 14px;
       }
       & .__reserva-btn {
         font-size: 16px;
