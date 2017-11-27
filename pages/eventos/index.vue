@@ -126,6 +126,7 @@ export default {
       padding-bottom: 3rem;
       & .image-box {
         overflow: hidden;
+        margin-bottom: .2rem;
         & .swiper-container {
           & .swiper-wrapper {
             display: inline-flex;

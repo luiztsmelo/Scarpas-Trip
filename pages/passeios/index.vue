@@ -126,6 +126,7 @@ export default {
       padding-bottom: 3rem;
       & .image-box {
         overflow: hidden;
+        margin-bottom: .2rem;
         & .swiper-container {
           & .swiper-wrapper {
             display: inline-flex;
@@ -147,7 +148,7 @@ export default {
       }
       & .__card-tipo-passeio {
         text-transform: uppercase;
-        padding: 2rem 7%;
+        padding: 0 7%;
         font-size: 14px;
         font-weight: 600;
         color: #49A5FC;
