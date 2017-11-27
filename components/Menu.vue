@@ -6,7 +6,7 @@
         <div style="padding-bottom:.9rem" @click="$store.commit('m_showMenu', false), $store.commit('m_menuIconAnime', false), $store.commit('m_showFoobar', false)">
           <nuxt-link to="#" class="menu-item">
             <img src="../assets/img/map.svg" alt="" class="__item-img-color">
-            <span class="__item-text">Mapa da região</span>
+            <h3>Mapa da região</h3>
           </nuxt-link>
         </div>
 
@@ -14,28 +14,28 @@
           <div @click="$store.commit('m_showMenu', false), $store.commit('m_menuIconAnime', false), $store.commit('m_showFoobar', false)">
             <nuxt-link to="/anunciar/estadia" class="menu-item">
               <img src="../assets/img/estadia.svg" alt="" class="__item-img-color">
-              <span class="__item-text">Anunciar Casa</span>
+              <h3>Anunciar Casa</h3>
             </nuxt-link>
           </div>
 
           <div @click="$store.commit('m_showMenu', false), $store.commit('m_menuIconAnime', false), $store.commit('m_showFoobar', false)">
             <nuxt-link to="/anunciar/evento" class="menu-item">
               <img src="../assets/img/eventos.svg" alt="" class="__item-img-color">
-              <span class="__item-text">Anunciar Evento</span>
+              <h3>Anunciar Evento</h3>
             </nuxt-link>
           </div>
           
           <div @click="$store.commit('m_showMenu', false), $store.commit('m_menuIconAnime', false), $store.commit('m_showFoobar', false)">
             <nuxt-link to="/anunciar/passeio" class="menu-item">
               <img src="../assets/img/passeios.svg" alt="" class="__item-img-color">
-              <span class="__item-text">Anunciar Passeio</span>
+              <h3>Anunciar Passeio</h3>
             </nuxt-link>
           </div>
 
           <div @click="$store.commit('m_showMenu', false), $store.commit('m_menuIconAnime', false), $store.commit('m_showFoobar', false)">
             <nuxt-link to="/anunciar/restaurante" class="menu-item">
               <img src="../assets/img/comidas.svg" alt="" class="__item-img-color">
-              <span class="__item-text">Anunciar Restaurante</span>
+              <h3>Anunciar Restaurante</h3>
             </nuxt-link>
           </div>
 
@@ -45,14 +45,14 @@
           <div @click="$store.commit('m_showMenu', false), $store.commit('m_menuIconAnime', false), $store.commit('m_showFoobar', false)">
             <nuxt-link to="/anunciar" class="menu-item">
               <img src="../assets/img/contato.svg" alt="" class="__item-img">
-              <span class="__item-text">Contato</span>
+              <h3>Contato</h3>
             </nuxt-link>
           </div>
 
           <div @click="$store.commit('m_showMenu', false), $store.commit('m_menuIconAnime', false), $store.commit('m_showFoobar', false)">
             <nuxt-link to="/anunciar" class="menu-item">
               <img src="../assets/img/sobre.svg" alt="" class="__item-img">
-              <span class="__item-text">Sobre</span>
+              <h3>Sobre</h3>
             </nuxt-link>
           </div>
         </div>
@@ -95,7 +95,7 @@ export default {
     & .menu-item {
       display: flex;
       align-items: center;
-      padding: 0.9rem 0;
+      padding: 0.8rem 0;
       & .__item-img-color {
         width: 1.3rem;
         height: auto;
@@ -114,12 +114,12 @@ export default {
       }
     }
     & .anuncio-box {
-      padding: 0.9rem 0;
+      padding: 0.8rem 0;
       border-bottom: 1px solid rgb(222, 222, 222);
       border-top: 1px solid rgb(222, 222, 222);
     }
     & .info-box {
-      padding: 0.9rem 0;
+      padding: 0.8rem 0;
     }
     & .tmstudio {
       position: absolute;
