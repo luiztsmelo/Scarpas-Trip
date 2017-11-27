@@ -2,9 +2,17 @@
   <div class="eventos">
 
     <ul class="eventos-container">
-      <li class="card" v-for="evento in $store.state.eventos" :key="evento.eventoID">
+      <li class="card" v-for="evento in eventos" :key="evento.eventoID">
         <nuxt-link :to="'/eventos/' + evento.eventoID">
-          <img class="__card-img" :src="imageH(evento)" />
+
+          <div class="image-box">
+            <swiper :options="swiperOption">
+              <swiper-slide class="slide"><img class="__img" :src="image1H(evento)"></swiper-slide>
+              <swiper-slide class="slide" v-if="ifImage2(evento)"><img class="__img" :src="image2H(evento)"></swiper-slide>
+              <div class="swiper-pagination" slot="pagination"></div>
+            </swiper>
+          </div> 
+
           <span class="__card-date">{{ evento.date }}</span>
           <h1 class="__card-title">{{ evento.title | truncateTitle }}</h1>
           <h3 class="__card-subtitle">{{ evento.subtitle | truncateSubtitle }}</h3>
@@ -35,6 +43,9 @@ export default {
   transition: 'opacity',
   data () {
     return {
+      swiperOption: {
+        pagination: '.swiper-pagination'
+      }
     }
   },
   fetch ({ store }) {
@@ -48,12 +59,35 @@ export default {
     }
   },
   methods: {
-    imageH (evento) {
+    image1H (evento) {
       if (supportsWebP) {
         return evento.imageH1W
       } else {
         return evento.imageH1J
       }
+    },
+    image2H (evento) {
+      if (supportsWebP) {
+        return evento.imageH2W
+      } else {
+        return evento.imageH2J
+      }
+    },
+    ifImage2 (evento) {
+      if (evento.imageH2W === null) {
+        return
+      } else {
+        if (supportsWebP) {
+          return evento.imageH2W
+        } else {
+          return evento.imageH2J
+        }
+      }
+    }
+  },
+  computed: {
+    eventos () {
+      return this.$store.state.eventos
     }
   },
   filters: {
@@ -79,7 +113,7 @@ export default {
 @import url('../../assets/css/main.css');
 
 .eventos {
-  margin-top: 3.2rem;
+  margin: 3.2rem 0 5.2rem 0;
   display: flex;
   flex-flow: column;
   transition: all .222s ease-in-out;
@@ -90,11 +124,26 @@ export default {
     & .card {
       width: 100%;
       padding-bottom: 3rem;
-      & .__card-img {
-        margin-bottom: .2rem;
-        width: 100%;
-        height: auto;
-        border-radius: 3px;
+      & .image-box {
+        overflow: hidden;
+        & .swiper-container {
+          & .swiper-wrapper {
+            display: inline-flex;
+            overflow: hidden;
+            & .slide {
+              & .__img {
+                width: 100%;
+                height: auto;
+              }
+            }
+          }
+          & .swiper-pagination {
+
+            & .swiper-pagination-bullet {
+
+            }
+          }
+        }
       }
       & .__card-date {
         padding: 2rem 7%;
