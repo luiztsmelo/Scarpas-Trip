@@ -978,7 +978,7 @@ export default {
       height: 3rem;
       width: 86%;
       background: white;
-      box-shadow: 2px 2px 7px 2px rgba(0,0,0,0.12);
+      box-shadow: 2px 2px 6px 1px rgba(0,0,0,0.1);
       border-radius: 2rem;
       & .back-next-body {
         display: flex;
