@@ -108,10 +108,6 @@ export default {
         margin-right: 1rem;
         filter: brightness(90%);
       }
-      & .__item-text {
-        font-size: 19px;
-        font-weight: 300;
-      }
     }
     & .anuncio-box {
       padding: 0.8rem 0;
