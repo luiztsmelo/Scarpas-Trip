@@ -4,7 +4,7 @@
       <div class="menu-body">
 
         <div style="padding-bottom:.9rem" @click="$store.commit('m_showMenu', false), $store.commit('m_menuIconAnime', false), $store.commit('m_showFoobar', false)">
-          <nuxt-link to="#" class="menu-item">
+          <nuxt-link to="/" class="menu-item">
             <img src="../assets/img/map.svg" alt="" class="__item-img-color">
             <h3>Mapa da região</h3>
           </nuxt-link>
