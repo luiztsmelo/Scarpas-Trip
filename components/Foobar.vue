@@ -6,7 +6,7 @@
           <nuxt-link to="/estadia">
           <div v-ripple="'rgba(0,0,0,.05)'" class="foobar-box" @click="onFoobar1=false, onFoobar2=true, onFoobar3=true, onFoobar4=true, onFoobar5=true">
             <img src="../assets/img/estadia.svg" class="__foobar1-icon" :class="{ coloricon: onFoobar1 }">
-            <h1 class="__foobar-title" :class="{ colortitle: onFoobar1 }">ACOMODAÇÃO</h1>
+            <h1 class="__foobar-title" :class="{ colortitle: onFoobar1 }">ACOMODAÇÕES</h1>
           </div>
         </nuxt-link>
 
@@ -77,6 +77,7 @@ export default {
   transition: all .3s ease;
   box-shadow: 0px -1px 1px 0px rgba(0,0,0,0.1);
   & .foobar-body {
+    padding: 0 .2rem;
     height: 100%;
     position: relative;
     top: 50%;
