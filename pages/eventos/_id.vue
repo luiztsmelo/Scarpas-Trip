@@ -268,11 +268,16 @@ export default {
       position: relative;
       top: 50%;
       transform: translateY(-50%);
-      & .__back-btn {
-        transform: translateY(2px);/* A imagem ta errada */
-        cursor: pointer;
-        width: 1.1rem;
-        height: auto;
+      & a {
+        /* Aumentar área de contato */
+        padding: 1rem;
+        transform: translateX(-1rem);
+        & .__back-btn {
+          transform: translateY(2px);/* A imagem ta errada */
+          cursor: pointer;
+          width: 1.1rem;
+          height: auto;
+        }
       }
       & .__share-btn {
         cursor: pointer;
