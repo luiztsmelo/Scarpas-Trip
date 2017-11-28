@@ -77,7 +77,7 @@ export default {
   transition: all .3s ease;
   box-shadow: 0px -1px 1px 0px rgba(0,0,0,0.1);
   & .foobar-body {
-    padding: 0 .3rem;
+    padding: 0 .4rem;
     height: 100%;
     position: relative;
     top: 50%;
