@@ -6,7 +6,7 @@
         <div style="padding-bottom:.9rem" @click="$store.commit('m_showMenu', false), $store.commit('m_menuIconAnime', false), $store.commit('m_showFoobar', false)">
           <nuxt-link to="/" class="menu-item">
             <img src="../assets/img/map.svg" alt="" class="__item-img-color">
-            <h3>Mapa da região</h3>
+            <h3>Mapa completo</h3>
           </nuxt-link>
         </div>
 
@@ -14,7 +14,7 @@
           <div @click="$store.commit('m_showMenu', false), $store.commit('m_menuIconAnime', false), $store.commit('m_showFoobar', false)">
             <nuxt-link to="/anunciar/estadia" class="menu-item">
               <img src="../assets/img/estadia.svg" alt="" class="__item-img-color">
-              <h3>Anunciar Casa</h3>
+              <h3>Anunciar Acomodação</h3>
             </nuxt-link>
           </div>
 
