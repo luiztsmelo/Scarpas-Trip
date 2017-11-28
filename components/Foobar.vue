@@ -6,7 +6,7 @@
           <nuxt-link to="/estadia">
           <div v-ripple="'rgba(0,0,0,.05)'" class="foobar-box" @click="onFoobar1=false, onFoobar2=true, onFoobar3=true, onFoobar4=true, onFoobar5=true">
             <img src="../assets/img/estadia.svg" class="__foobar1-icon" :class="{ coloricon: onFoobar1 }">
-            <h1 class="__foobar-title" :class="{ colortitle: onFoobar1 }">CASAS</h1>
+            <h1 class="__foobar-title" :class="{ colortitle: onFoobar1 }">ACOMODAÇÃO</h1>
           </div>
         </nuxt-link>
 
@@ -34,7 +34,7 @@
         <nuxt-link to="/comidas">
           <div v-ripple="'rgba(0,0,0,.05)'" class="foobar-box" @click="onFoobar1=true, onFoobar2=true, onFoobar3=true, onFoobar4=true, onFoobar5=false">
             <img src="../assets/img/comidas.svg" class="__foobar5-icon" :class="{ coloricon: onFoobar5 }">
-            <h1 class="__foobar-title" :class="{ colortitle: onFoobar5 }">COMIDAS</h1>
+            <h1 class="__foobar-title" :class="{ colortitle: onFoobar5 }">RESTAURANTES</h1>
           </div>
         </nuxt-link>
         
