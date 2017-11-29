@@ -72,7 +72,7 @@
       <div class="item-form">
         <label>Capacidade</label>
         <select v-model="$store.state.passeioData.capacidade">
-          <option v-for="n in 20">{{ n }} pessoas</option>
+          <option v-for="n in capacidadeNumbers">{{ n }} pessoas</option>
         </select>
       </div> 
 
@@ -404,6 +404,7 @@ export default {
     return {
       title: '',/* Vue Autosize */
       subtitle: '',/* Vue Autosize */
+      capacidadeNumbers: [2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],
       localSaida: '',
       showCroppaModal1: false,
       showCroppaModal2: false,
