@@ -42,34 +42,15 @@
 
       <h1 class="__form-title">Que tipo de passeio deseja anunciar?</h1>
 
-      <div class="form-radio" v-ripple="'rgba(0,0,0,.03)'" @click="isLancha()">
-        <div class="form-radio-body">
-          <h3>Lancha</h3>
-          <input type="radio" value="Lancha" v-model="$store.state.passeioData.tipoPasseio" ref="lancha">
-        </div>
+      <div class="item-form">
+        <label>Tipo</label>
+        <select v-model="$store.state.passeioData.tipoPasseio">
+          <option>Lancha</option>
+          <option>4x4</option>
+          <option>Buggy</option>
+          <option>Helicóptero</option>
+        </select>
       </div> 
-
-      <div class="form-radio" v-ripple="'rgba(0,0,0,.03)'" @click="is4x4()">
-        <div class="form-radio-body">
-          <h3>4x4</h3>
-          <input type="radio" value="4x4" v-model="$store.state.passeioData.tipoPasseio" ref="jeep">
-        </div>
-      </div> 
-
-      <div class="form-radio" v-ripple="'rgba(0,0,0,.03)'" @click="isBuggy()">
-        <div class="form-radio-body">
-          <h3>Buggy</h3>
-          <input type="radio" value="Buggy" v-model="$store.state.passeioData.tipoPasseio" ref="buggy">
-        </div>
-      </div> 
-
-      <div class="form-radio" v-ripple="'rgba(0,0,0,.03)'">
-        <div class="form-radio-body" style="border-bottom:none" @click="isHelicoptero()">
-          <h3>Helicóptero</h3>
-          <input type="radio" value="Helicóptero" v-model="$store.state.passeioData.tipoPasseio" ref="helicoptero">
-        </div>
-      </div> 
-
 
       <div class="back-next"> 
         <div class="back-next-body">
@@ -83,14 +64,14 @@
 
 
 
-    <!-- ########## LOTAÇÃO PG.2 ########## -->
+    <!-- ########## CAPACIDADE PG.2 ########## -->
     <form class="cadastro-passeio" v-show="$store.state.cadastroPasseio2">
 
       <h1 class="__form-title">Passeio para até quantas pessoas?</h1>
 
       <div class="item-form">
-        <label>Lotação</label>
-        <select v-model="$store.state.passeioData.lotacao">
+        <label>Capacidade</label>
+        <select v-model="$store.state.passeioData.capacidade">
           <option v-for="n in 20">{{ n }} pessoas</option>
         </select>
       </div> 
@@ -102,7 +83,7 @@
         </div>
       </div> 
     
-    </form><!-- ########## LOTAÇÃO PG.2 ########## -->
+    </form><!-- ########## CAPACIDADE PG.2 ########## -->
 
 
 
@@ -539,7 +520,7 @@ export default {
       }
     },
     nextBtn2 () {
-      if (this.$store.state.passeioData.lotacao !== null) {
+      if (this.$store.state.passeioData.capacidade !== null) {
         return this.$store.commit('m_cadastroPasseio2', false), this.$store.commit('m_cadastroPasseio3', true), this.$store.commit('m_passeioProgressBar', (100/11)*3)
       }
     },
@@ -673,7 +654,7 @@ export default {
       }
     },
     form2ok () {
-      if (this.$store.state.passeioData.lotacao !== null) {
+      if (this.$store.state.passeioData.capacidade !== null) {
         return 'background:#49A5FC;cursor:pointer'
       }
     },
@@ -880,30 +861,6 @@ export default {
       & .__local-saida-text {
         padding: .5rem 0 .6rem 0;
         border-bottom: 1px solid rgb(222, 222, 222);
-      }
-    }
-    & .form-radio {
-      padding: 0 7%;
-      & .form-radio-body {
-        padding: 1rem 0;
-        width: 100%;
-        display: flex;
-        flex-flow: row;
-        justify-content: space-between;
-        border-bottom: 1px solid rgb(222, 222, 222);
-      }
-      & input[type="radio"] {
-        all: initial;
-        background: rgb(237, 237, 237);
-        border: 1px solid rgb(222, 222, 222);
-        width: 1.6rem;
-        height: 1.6rem;
-        border-radius: 50%;
-        
-      }
-      & input[type=radio]:checked {
-        background: #49A5FC;
-        border: 1px solid #49A5FC;
       }
     }
     & .modal-croppa {

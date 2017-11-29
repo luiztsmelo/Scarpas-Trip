@@ -54,12 +54,12 @@
 
 
 
-    <!-- ####### LOTACAO ####### -->
-    <h1 class="box-title">Lotação</h1>
+    <!-- ####### CAPACIDADE ####### -->
+    <h1 class="box-title">Capacidade</h1>
 
-    <div class="lotacao-box">
-      <h3>{{ passeio.lotacao }}</h3>
-    </div><!-- ####### LOTACAO ####### -->
+    <div class="capacidade-box">
+      <h3>{{ passeio.capacidade }}</h3>
+    </div><!-- ####### CAPACIDADE ####### -->
 
 
 
@@ -410,10 +410,10 @@ export default {
 
 
 
-  /* ####### LOTACAO BOX ####### */
-  & .lotacao-box {
+  /* ####### CAPACIDADE BOX ####### */
+  & .capacidade-box {
     padding: 0 7%;
-  }/* ####### LOTACAO BOX ####### */
+  }/* ####### CAPACIDADE BOX ####### */
 
 
 
