@@ -659,7 +659,7 @@ export default {
     padding: 0 7% 3rem 7%;
     & .__form-title {
       line-height: 35px;
-      font-size: 29px;
+      font-size: 30px;
       font-weight: 600;
       padding: 3rem 0 1.5rem 0;
       z-index: 999;
@@ -694,8 +694,9 @@ export default {
       flex-flow: column;
       margin: 1.7rem 0;
       & label {
-        font-size: 18px;
-        font-weight: 500;
+        text-transform: uppercase;
+        font-weight: 600;
+        font-size: 15px;
       }
       & input {
         width: 100%;
