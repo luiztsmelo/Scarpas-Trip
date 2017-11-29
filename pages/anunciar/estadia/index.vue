@@ -53,7 +53,7 @@ export default {
 
 .anunciar-estadia {
   margin-top: 3.2rem;
-  background-image: linear-gradient(-20deg, #00cdac 0%, #5FBCB5 100%);
+  background-image: linear-gradient(to top, #37ecba 0%, #72afd3 100%);
   color: white;
   transition: var(--main-transition);
   /* ******************** PLANO ESTADIA ******************** */
