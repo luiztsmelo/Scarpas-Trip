@@ -842,7 +842,7 @@ export default {
         font-size: 19px;
         font-weight: 300;
         background: white;
-        color: rgb(92, 92, 92);
+        color: var(--color01);
         padding: .5rem 0 .6rem 0;
         border: none;
         border-bottom: 1px solid rgb(222, 222, 222);
@@ -853,7 +853,7 @@ export default {
         font-size: 19px;
         font-weight: 300;
         background: white;
-        color: rgb(92, 92, 92);
+        color: var(--color01);
         padding: .5rem 0 .6rem 0;
         border: none;
         border-bottom: 1px solid rgb(222, 222, 222);
