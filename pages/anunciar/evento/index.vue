@@ -677,7 +677,7 @@ export default {
       font-weight: 300;
       line-height: 26px;
       background: white;
-      color: rgb(92, 92, 92);
+      color: var(--color01);
       border: none;
       outline: none;
       resize: none;
@@ -703,7 +703,7 @@ export default {
         font-size: 19px;
         font-weight: 300;
         background: white;
-        color: rgb(92, 92, 92);
+        color: var(--color01);
         padding: .5rem 0 .6rem 0;
         border: none;
         border-bottom: 1px solid rgb(222, 222, 222);
@@ -777,7 +777,7 @@ export default {
     & .__gmap-autocomplete {
       font-size: 20px;
       font-weight: 300;
-      color: rgb(92, 92, 92);
+      color: var(--color01);
       width: 100%;
       border: none;
       border-bottom: 1px solid rgb(222, 222, 222);

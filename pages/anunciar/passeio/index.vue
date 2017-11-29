@@ -814,7 +814,7 @@ export default {
       font-weight: 300;
       line-height: 26px;
       background: white;
-      color: rgb(92, 92, 92);
+      color: var(--color01);
       border: none;
       outline: none;
       resize: none;
