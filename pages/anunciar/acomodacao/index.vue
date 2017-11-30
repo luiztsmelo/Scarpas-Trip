@@ -22,7 +22,7 @@
       <h3 class="__subitem">Primeiro mês grátis</h3>
       <h3 class="__subitem">Cancele quando quiser</h3>
 
-      <button class="__anunciar-btn" @click="$store.commit('m_cadastroAcomod1', true), $store.commit('m_cadastroAcomod0', false), $store.commit('m_AcomodProgressBar', (100/10))">Anunciar</button>
+      <button class="__anunciar-btn" @click="$store.commit('m_cadastroAcomod1', true), $store.commit('m_cadastroAcomod0', false), $store.commit('m_acomodProgressBar', (100/10))">Anunciar</button>
 
     </div><!-- PLANO ACOMODAÇÃO -->
 
@@ -48,6 +48,7 @@
         <select v-model="$store.state.acomodData.tipoAcomod">
           <option>Casa</option>
           <option>Rancho</option>
+          <option>Pousada</option>
           <option>Camping</option>
           <option>Hostel</option>
           <option>Hotel</option>
@@ -94,6 +95,78 @@ export default {
       imageURL1: null,
       imageURL2: null
     }
+  },
+  methods: {
+    googleSignIn () {
+      this.$store.dispatch('a_googleSignIn')
+    },
+    /* ******************** IMAGE INPUT ******************** */
+    /* --- Image 1 --- */
+    imageChoose1 () {
+      this.showCroppaModal1 = true
+    },
+    async imageConfirmed1 () {
+      if (this.imageURL1 !== null) {
+        return 
+      } else {
+        const blobAcL1 = await this.$refs.myCroppa1.promisedBlob('image/jpeg', 0.01)
+        const blobAcH1J = await this.$refs.myCroppa1.promisedBlob('image/jpeg')
+        const blobAcH1W = await this.$refs.myCroppa1.promisedBlob('image/webp')
+        let url1 = URL.createObjectURL(blobAcH1J)
+        this.imageURL1 = url1
+        this.$store.state.blobAcL1 = blobAcL1
+        this.$store.state.blobAcH1J = blobAcH1J
+        this.$store.state.blobAcH1W = blobAcH1W
+      }
+    },
+    removeImage1 () {
+      this.imageURL1 = null
+      this.$refs.myCroppa1.remove()
+      this.showCroppaModal1 = false
+    },
+    /* --- Image 2 --- */
+    imageChoose2 () {
+      this.showCroppaModal2 = true
+    },
+    async imageConfirmed2 () {
+      if (this.imageURL2 !== null) {
+        return 
+      } else {
+        const blobAcL2 = await this.$refs.myCroppa2.promisedBlob('image/jpeg', 0.01)
+        const blobAcH2J = await this.$refs.myCroppa2.promisedBlob('image/jpeg')
+        const blobAcH2W = await this.$refs.myCroppa2.promisedBlob('image/webp')
+        let url2 = URL.createObjectURL(blobAcH2J)
+        this.imageURL2 = url2
+        this.$store.state.blobAcL2 = blobAcL2
+        this.$store.state.blobAcH2J = blobAcH2J
+        this.$store.state.blobAcH2W = blobAcH2W
+      }
+    },
+    removeImage2 () {
+      this.imageURL2 = null
+      this.$refs.myCroppa2.remove()
+      this.showCroppaModal2 = false
+    },
+    /* ******************** BACK BUTTONS ******************** */
+    backBtn1 () {
+      return this.$store.commit('m_cadastroAcomod1', false), this.$store.commit('m_cadastroAcomod0', true)
+    },
+    backBtn2 () {
+      return this.$store.commit('m_cadastroAcomod2', false), this.$store.commit('m_cadastroAcomod1', true)
+    },
+    /* ******************** NEXT BUTTONS ******************** */
+    nextBtn1 () {
+      if (this.$store.state.acomodData.tipoAcomod !== null) {
+        return this.$store.commit('m_cadastroAcomod1', false), this.$store.commit('m_cadastroAcomod2', true), this.$store.commit('m_acomodProgressBar', (100/10)*2)
+      }
+    },
+  },
+  computed: {
+    form1ok () {
+      if (this.$store.state.acomodData.tipoAcomod !== null) {
+        return 'background:#1CD8D2;cursor:pointer'
+      }
+    },
   },
   beforeRouteLeave (to, from, next) {
     if (this.$store.state.showFoobar === false) {
