@@ -3,7 +3,7 @@
     <div class="foobar" v-show="showFoobar">
       <div class="foobar-body">
 
-          <nuxt-link to="/estadia">
+          <nuxt-link to="/acomodacoes">
           <div v-ripple="'rgba(0,0,0,.05)'" class="foobar-box" @click="onFoobar1=false, onFoobar2=true, onFoobar3=true, onFoobar4=true, onFoobar5=true">
             <img src="../assets/img/estadia.svg" class="__foobar1-icon" :class="{ coloricon: onFoobar1 }">
             <h1 class="__foobar-title" :class="{ colortitle: onFoobar1 }">ACOMODAÇÕES</h1>

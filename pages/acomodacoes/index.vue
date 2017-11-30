@@ -1,6 +1,6 @@
 <template>
-  <div class="estadia">
-    <h1>Estadia</h1>
+  <div class="acomodacoes">
+    <h1>Acomodações</h1>
   </div>
 </template>
 
@@ -8,7 +8,7 @@
 export default {
   head () {
     return {
-      title: 'Estadia em Escarpas do Lago ‒ Escarpas Trip'
+      title: 'Acomodações em Escarpas do Lago ‒ Escarpas Trip'
     }
   },
   transition: 'opacity'
@@ -18,7 +18,7 @@ export default {
 <style>
 @import url('../../assets/css/main.css');
 
-.estadia {
+.acomodacoes {
   margin-top: 3.2rem;
   display: flex;
   flex-flow: column;

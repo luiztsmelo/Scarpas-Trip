@@ -12,7 +12,7 @@
 
         <div class="anuncio-box">
           <div @click="$store.commit('m_showMenu', false), $store.commit('m_menuIconAnime', false), $store.commit('m_showFoobar', false)">
-            <nuxt-link to="/anunciar/estadia" class="menu-item">
+            <nuxt-link to="/anunciar/acomodacao" class="menu-item">
               <img src="../assets/img/estadia.svg" alt="" class="__item-img-color">
               <h3>Anunciar Acomodação</h3>
             </nuxt-link>

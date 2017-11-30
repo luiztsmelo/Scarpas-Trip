@@ -416,19 +416,6 @@ export default {
     googleSignIn () {
       this.$store.dispatch('a_googleSignIn')
     },
-    /* ******************** TIPO PASSEIO ******************** */
-    isLancha () {
-      this.$refs.lancha.click()
-    },
-    is4x4 () {
-      this.$refs.jeep.click()
-    },
-    isBuggy () {
-      this.$refs.buggy.click()
-    },
-    isHelicoptero () {
-      this.$refs.helicoptero.click()
-    },
     /* ******************** IMAGE INPUT ******************** */
     /* --- Image 1 --- */
     imageChoose1 () {
