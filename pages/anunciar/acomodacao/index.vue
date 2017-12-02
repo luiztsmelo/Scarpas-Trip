@@ -48,9 +48,9 @@
         <select v-model="$store.state.acomodData.tipoAcomod">
           <option>Casa</option>
           <option>Rancho</option>
-          <option>Pousada</option>
           <option>Camping</option>
           <option>Hostel</option>
+          <option>Pousada</option>
           <option>Hotel</option>
           <option>Fazenda</option>
         </select>
