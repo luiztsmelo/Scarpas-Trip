@@ -22,7 +22,7 @@
       <h3 class="__subitem">Primeiro mês grátis</h3>
       <h3 class="__subitem">Cancele quando quiser</h3>
 
-      <button class="__anunciar-btn" @click="$store.commit('m_cadastroAcomod1', true), $store.commit('m_cadastroAcomod0', false), $store.commit('m_acomodProgressBar', (100/10))">Anunciar</button>
+      <button class="__anunciar-btn" @click="$store.commit('m_cadastroAcomod1', true), $store.commit('m_cadastroAcomod0', false), $store.commit('m_acomodProgressBar', (100/11))">Anunciar</button>
 
     </div><!-- PLANO ACOMODAÇÃO -->
 
@@ -373,47 +373,47 @@ export default {
     /* ******************** NEXT BUTTONS ******************** */
     nextBtn1 () {
       if (this.$store.state.acomodData.tipoAcomod !== null) {
-        return this.$store.commit('m_cadastroAcomod1', false), this.$store.commit('m_cadastroAcomod2', true), this.$store.commit('m_acomodProgressBar', (100/10)*2)
+        return this.$store.commit('m_cadastroAcomod1', false), this.$store.commit('m_cadastroAcomod2', true), this.$store.commit('m_acomodProgressBar', (100/11)*2)
       }
     },
     nextBtn2 () {
       if (this.$store.state.acomodData.totalHospedes !== null) {
-        return this.$store.commit('m_cadastroAcomod2', false), this.$store.commit('m_cadastroAcomod3', true), this.$store.commit('m_acomodProgressBar', (100/10)*3)
+        return this.$store.commit('m_cadastroAcomod2', false), this.$store.commit('m_cadastroAcomod3', true), this.$store.commit('m_acomodProgressBar', (100/11)*3)
       }
     },
     nextBtn3 () {
       if (1<2) {
-        return this.$store.commit('m_cadastroAcomod3', false), this.$store.commit('m_cadastroAcomod4', true), this.$store.commit('m_acomodProgressBar', (100/10)*4)
+        return this.$store.commit('m_cadastroAcomod3', false), this.$store.commit('m_cadastroAcomod4', true), this.$store.commit('m_acomodProgressBar', (100/11)*4)
       }
     },
     nextBtn4 () {
       if (1<2) {
-        return this.$store.commit('m_cadastroAcomod4', false), this.$store.commit('m_cadastroAcomod5', true), this.$store.commit('m_acomodProgressBar', (100/10)*5)
+        return this.$store.commit('m_cadastroAcomod4', false), this.$store.commit('m_cadastroAcomod5', true), this.$store.commit('m_acomodProgressBar', (100/11)*5)
       }
     },
     nextBtn5 () {
       if (1<2) {
-        return this.$store.commit('m_cadastroAcomod5', false), this.$store.commit('m_cadastroAcomod6', true), this.$store.commit('m_acomodProgressBar', (100/10)*6)
+        return this.$store.commit('m_cadastroAcomod5', false), this.$store.commit('m_cadastroAcomod6', true), this.$store.commit('m_acomodProgressBar', (100/11)*6)
       }
     },
     nextBtn6 () {
       if (1<2) {
-        return this.$store.commit('m_cadastroAcomod6', false), this.$store.commit('m_cadastroAcomod7', true), this.$store.commit('m_acomodProgressBar', (100/10)*7)
+        return this.$store.commit('m_cadastroAcomod6', false), this.$store.commit('m_cadastroAcomod7', true), this.$store.commit('m_acomodProgressBar', (100/11)*7)
       }
     },
     nextBtn7 () {
       if (1<2) {
-        return this.$store.commit('m_cadastroAcomod7', false), this.$store.commit('m_cadastroAcomod8', true), this.$store.commit('m_acomodProgressBar', (100/10)*8)
+        return this.$store.commit('m_cadastroAcomod7', false), this.$store.commit('m_cadastroAcomod8', true), this.$store.commit('m_acomodProgressBar', (100/11)*8)
       }
     },
     nextBtn8 () {
       if (1<2) {
-        return this.$store.commit('m_cadastroAcomod8', false), this.$store.commit('m_cadastroAcomod9', true), this.$store.commit('m_acomodProgressBar', (100/10)*9)
+        return this.$store.commit('m_cadastroAcomod8', false), this.$store.commit('m_cadastroAcomod9', true), this.$store.commit('m_acomodProgressBar', (100/11)*9)
       }
     },
     nextBtn9 () {
       if (1<2) {
-        return this.$store.commit('m_cadastroAcomod9', false), this.$store.commit('m_cadastroAcomod10', true), this.$store.commit('m_acomodProgressBar', (100/10)*10)
+        return this.$store.commit('m_cadastroAcomod9', false), this.$store.commit('m_cadastroAcomod10', true), this.$store.commit('m_acomodProgressBar', (100/11)*10)
       }
     },
   },
