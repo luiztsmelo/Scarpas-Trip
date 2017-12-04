@@ -68,7 +68,7 @@
 
 
 
-    <!-- ########## CAPACIDADE PG.2 ########## -->
+    <!-- ########## TOTAL DE HÓSPEDES PG.2 ########## -->
     <form class="cadastro-acomodacao" v-show="$store.state.cadastroAcomod2">
 
       <h1 class="__form-title">Quantas pessoas podem se hospedar?</h1>
@@ -76,7 +76,8 @@
       <div class="item-form">
         <label>Total de Hóspedes</label>
         <select v-model="$store.state.acomodData.totalHospedes">
-          <option v-for="n in totalHospedesNumbers">{{ n }} pessoas</option>
+          <option v-for="n in 20">{{ n }}</option>
+          <option>Mais de 20</option>
         </select>
       </div> 
 
@@ -87,9 +88,41 @@
         </div>
       </div> 
     
-    </form><!-- ########## CAPACIDADE PG.2 ########## -->
+    </form><!-- ########## TOTAL DE HÓSPEDES PG.2 ########## -->
 
 
+
+
+    <!-- ########## CARACTERÍSTICAS PG.3 ########## -->
+    <form class="cadastro-acomodacao" v-show="$store.state.cadastroAcomod3">
+
+      <h1 class="__form-title">Características da sua {{ $store.state.acomodData.tipoAcomod }}</h1>
+
+      <div class="item-form">
+        <label>Nº de Quartos</label>
+        <select v-model="$store.state.acomodData.totalHospedes">
+          <option v-for="n in 10">{{ n }}</option>
+          <option>Mais de 10</option>
+        </select>
+      </div> 
+
+      <div class="item-form">
+        <label>Nº de Banheiros</label>
+        <select v-model="$store.state.acomodData.totalHospedes">
+          <option v-for="n in 10">{{ n }}</option>
+          <option>Mais de 10</option>
+        </select>
+      </div> 
+
+
+      <div class="back-next"> 
+        <div class="back-next-body">
+          <button type="button" class="__back" @click="backBtn3">Voltar</button>
+          <button type="button" class="__next" :style="form3ok" @click="nextBtn3">Próximo</button>
+        </div>
+      </div> 
+    
+    </form><!-- ########## CARACTERÍSTICAS PG.3 ########## -->
 
 
     <!-- CADASTRO ACOMODAÇÃO -->
@@ -116,7 +149,6 @@ export default {
     return {
       title: '',/* Vue Autosize */
       subtitle: '',/* Vue Autosize */
-      totalHospedesNumbers: [2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],
       showCroppaModal1: false,
       showCroppaModal2: false,
       imageURL1: null,
@@ -181,6 +213,18 @@ export default {
     backBtn2 () {
       return this.$store.commit('m_cadastroAcomod2', false), this.$store.commit('m_cadastroAcomod1', true)
     },
+    backBtn3 () {
+      return this.$store.commit('m_cadastroAcomod3', false), this.$store.commit('m_cadastroAcomod2', true)
+    },
+    backBtn4 () {
+      return this.$store.commit('m_cadastroAcomod4', false), this.$store.commit('m_cadastroAcomod3', true)
+    },
+    backBtn5 () {
+      return this.$store.commit('m_cadastroAcomod5', false), this.$store.commit('m_cadastroAcomod4', true)
+    },
+    backBtn6 () {
+      return this.$store.commit('m_cadastroAcomod6', false), this.$store.commit('m_cadastroAcomod5', true)
+    },
     /* ******************** NEXT BUTTONS ******************** */
     nextBtn1 () {
       if (this.$store.state.acomodData.tipoAcomod !== null) {
@@ -192,6 +236,11 @@ export default {
         return this.$store.commit('m_cadastroAcomod2', false), this.$store.commit('m_cadastroAcomod3', true), this.$store.commit('m_acomodProgressBar', (100/10)*3)
       }
     },
+    nextBtn3 () {
+      if (1<2) {
+        return this.$store.commit('m_cadastroAcomod3', false), this.$store.commit('m_cadastroAcomod4', true), this.$store.commit('m_acomodProgressBar', (100/10)*4)
+      }
+    },
   },
   computed: {
     form1ok () {
@@ -201,6 +250,11 @@ export default {
     },
     form2ok () {
       if (this.$store.state.acomodData.totalHospedes !== null) {
+        return 'background:#1CD8D2;cursor:pointer'
+      }
+    },
+    form3ok () {
+      if (1>2) {
         return 'background:#1CD8D2;cursor:pointer'
       }
     },
