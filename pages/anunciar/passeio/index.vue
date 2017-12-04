@@ -302,7 +302,7 @@
       v-autosize="subtitle"
       maxlength="400"
       rows="1"
-      placeholder="Foque em seus diferenciais aqui. Não repita o que já foi perguntado."
+      placeholder="Coloque informações importantes aqui, que não foram perguntadas antes"
       required>
       {{subtitle}}</textarea>
 

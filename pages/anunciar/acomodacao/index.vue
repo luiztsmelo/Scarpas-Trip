@@ -109,8 +109,8 @@
       <div class="item-form">
         <label>Nº de Banheiros</label>
         <select v-model="$store.state.acomodData.totalBanheiros">
-          <option v-for="n in 10">{{ n }}</option>
-          <option>Mais de 10</option>
+          <option v-for="n in 6">{{ n }}</option>
+          <option>Mais de 6</option>
         </select>
       </div> 
 
@@ -130,15 +130,9 @@
     <!-- ########## COMODIDADES PG.4 ########## -->
     <form class="cadastro-acomodacao" v-show="$store.state.cadastroAcomod4">
 
-      <h1 class="__form-title">Quais comodidades serão oferecidas?</h1>
+      <h1 class="__form-title">Quais comodidades são oferecidas?</h1>
 
-      <div class="item-form">
-        <label>Nº de Quartos</label>
-        <select v-model="$store.state.acomodData.totalQuartos">
-          <option v-for="n in 10">{{ n }}</option>
-          <option>Mais de 10</option>
-        </select>
-      </div> 
+      
 
 
       <div class="back-next"> 
@@ -149,6 +143,122 @@
       </div> 
     
     </form><!-- ########## COMODIDADES PG.4 ########## -->
+
+
+
+
+    <!-- ########## LOCAL PG.5 ########## -->
+    <form class="cadastro-acomodacao" v-show="$store.state.cadastroAcomod5">
+
+      <h1 class="__form-title">Qual a localização?</h1>
+
+      
+
+
+      <div class="back-next"> 
+        <div class="back-next-body">
+          <button type="button" class="__back" @click="backBtn5">Voltar</button>
+          <button type="button" class="__next" :style="form5ok" @click="nextBtn5">Próximo</button>
+        </div>
+      </div> 
+    
+    </form><!-- ########## LOCAL PG.5 ########## -->
+
+
+
+
+    <!-- ########## IMAGEM E VÍDEOS PG.6 ########## -->
+    <form class="cadastro-acomodacao" v-show="$store.state.cadastroAcomod6">
+
+      <h1 class="__form-title">Adicione Imagens e Vídeo</h1>
+
+      
+
+
+      <div class="back-next"> 
+        <div class="back-next-body">
+          <button type="button" class="__back" @click="backBtn6">Voltar</button>
+          <button type="button" class="__next" :style="form6ok" @click="nextBtn6">Próximo</button>
+        </div>
+      </div> 
+    
+    </form><!-- ########## IMAGEM E VÍDEOS PG.6 ########## -->
+
+
+
+
+    <!-- ########## VALOR DO ALUGUEL PG.7 ########## -->
+    <form class="cadastro-acomodacao" v-show="$store.state.cadastroAcomod7">
+
+      <h1 class="__form-title">Quanto será cobrado?</h1>
+
+      
+
+
+      <div class="back-next"> 
+        <div class="back-next-body">
+          <button type="button" class="__back" @click="backBtn7">Voltar</button>
+          <button type="button" class="__next" :style="form7ok" @click="nextBtn7">Próximo</button>
+        </div>
+      </div> 
+    
+    </form><!-- ########## VALOR DO ALUGUEL PG.7 ########## -->
+
+
+
+
+    <!-- ########## TÍTULO PG.8 ########## -->
+    <form class="cadastro-acomodacao" v-show="$store.state.cadastroAcomod8">
+
+      <h1 class="__form-title">Dê um nome para seu anúncio</h1>
+
+      <textarea 
+      v-model="$store.state.acomodData.title"
+      v-autosize="title"
+      maxlength="50"
+      rows="1"
+      placeholder="ex: Linda casa em Escarpas do Lago"
+      required>
+      {{title}}</textarea>
+
+      <span class="__lenght-calc">{{ titleLength }}</span>
+
+      <div class="back-next"> 
+        <div class="back-next-body">
+          <button type="button" class="__back" @click="backBtn8">Voltar</button>
+          <button type="button" class="__next" :style="form8ok" @click="nextBtn8">Próximo</button>
+        </div>
+      </div> 
+    
+    </form><!-- ########## TÍTULO PG.8 ########## -->
+
+
+
+
+    <!-- ########## DESCRIÇÃO PG.9 ########## -->
+    <form class="cadastro-acomodacao" v-show="$store.state.cadastroAcomod9">
+
+      <h1 class="__form-title">Descreva melhor seu {{ $store.state.acomodData.tipoAcomod }}</h1>   
+
+      <textarea 
+      v-model="$store.state.acomodData.subtitle"
+      v-autosize="subtitle"
+      maxlength="400"
+      rows="1"
+      placeholder="Coloque informações importantes aqui, que não foram perguntadas antes"
+      required>
+      {{subtitle}}</textarea>
+
+      <span class="__lenght-calc">{{ subtitleLength }}</span> 
+
+      <div class="back-next"> 
+        <div class="back-next-body">
+          <button type="button" class="__back" @click="backBtn9">Voltar</button>
+          <button type="button" class="__next" :style="form9ok" @click="nextBtn9">Próximo</button>
+        </div>
+      </div> 
+    
+    </form><!-- ########## DESCRIÇÃO PG.9 ########## -->
 
 
     <!-- CADASTRO ACOMODAÇÃO -->
@@ -251,6 +361,15 @@ export default {
     backBtn6 () {
       return this.$store.commit('m_cadastroAcomod6', false), this.$store.commit('m_cadastroAcomod5', true)
     },
+    backBtn7 () {
+      return this.$store.commit('m_cadastroAcomod7', false), this.$store.commit('m_cadastroAcomod6', true)
+    },
+    backBtn8 () {
+      return this.$store.commit('m_cadastroAcomod8', false), this.$store.commit('m_cadastroAcomod7', true)
+    },
+    backBtn9 () {
+      return this.$store.commit('m_cadastroAcomod9', false), this.$store.commit('m_cadastroAcomod8', true)
+    },
     /* ******************** NEXT BUTTONS ******************** */
     nextBtn1 () {
       if (this.$store.state.acomodData.tipoAcomod !== null) {
@@ -272,8 +391,39 @@ export default {
         return this.$store.commit('m_cadastroAcomod4', false), this.$store.commit('m_cadastroAcomod5', true), this.$store.commit('m_acomodProgressBar', (100/10)*5)
       }
     },
+    nextBtn5 () {
+      if (1<2) {
+        return this.$store.commit('m_cadastroAcomod5', false), this.$store.commit('m_cadastroAcomod6', true), this.$store.commit('m_acomodProgressBar', (100/10)*6)
+      }
+    },
+    nextBtn6 () {
+      if (1<2) {
+        return this.$store.commit('m_cadastroAcomod6', false), this.$store.commit('m_cadastroAcomod7', true), this.$store.commit('m_acomodProgressBar', (100/10)*7)
+      }
+    },
+    nextBtn7 () {
+      if (1<2) {
+        return this.$store.commit('m_cadastroAcomod7', false), this.$store.commit('m_cadastroAcomod8', true), this.$store.commit('m_acomodProgressBar', (100/10)*8)
+      }
+    },
+    nextBtn8 () {
+      if (1<2) {
+        return this.$store.commit('m_cadastroAcomod8', false), this.$store.commit('m_cadastroAcomod9', true), this.$store.commit('m_acomodProgressBar', (100/10)*9)
+      }
+    },
+    nextBtn9 () {
+      if (1<2) {
+        return this.$store.commit('m_cadastroAcomod9', false), this.$store.commit('m_cadastroAcomod10', true), this.$store.commit('m_acomodProgressBar', (100/10)*10)
+      }
+    },
   },
   computed: {
+    titleLength () {
+      return 50 - this.$store.state.passeioData.title.length
+    },
+    subtitleLength () {
+      return 400 - this.$store.state.passeioData.subtitle.length
+    },
     form1ok () {
       if (this.$store.state.acomodData.tipoAcomod !== null) {
         return 'background:#1CD8D2;cursor:pointer'
@@ -290,6 +440,31 @@ export default {
       }
     },
     form4ok () {
+      if (1<2) {
+        return 'background:#1CD8D2;cursor:pointer'
+      }
+    },
+    form5ok () {
+      if (1<2) {
+        return 'background:#1CD8D2;cursor:pointer'
+      }
+    },
+    form6ok () {
+      if (1<2) {
+        return 'background:#1CD8D2;cursor:pointer'
+      }
+    },
+    form7ok () {
+      if (1<2) {
+        return 'background:#1CD8D2;cursor:pointer'
+      }
+    },
+    form8ok () {
+      if (1<2) {
+        return 'background:#1CD8D2;cursor:pointer'
+      }
+    },
+    form9ok () {
       if (1<2) {
         return 'background:#1CD8D2;cursor:pointer'
       }
