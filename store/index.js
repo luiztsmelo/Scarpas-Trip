@@ -49,7 +49,7 @@ const store = () => new Vuex.Store({
       title: '',
       subtitle: '',
       valorAluguel: 0,
-      capacidade: null,
+      totalHospedes: null,
       duracao: null,
       imageL1: null,
       imageH1J: null,

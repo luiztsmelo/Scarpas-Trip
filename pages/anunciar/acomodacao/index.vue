@@ -41,7 +41,7 @@
     <!-- ########## TIPO DE ACOMODAÇÃO PG.1 ########## -->
     <form class="cadastro-acomodacao" v-show="$store.state.cadastroAcomod1">
 
-      <h1 class="__form-title">Que tipo de acomodação deseja anunciar?</h1>
+      <h1 class="__form-title">Que tipo de propriedade deseja anunciar?</h1>
 
       <div class="item-form">
         <label>Tipo</label>
@@ -64,6 +64,32 @@
       </div> 
     
     </form><!-- ########## TIPO DE ACOMODAÇÃO PG.1 ########## -->
+
+
+
+
+    <!-- ########## CAPACIDADE PG.2 ########## -->
+    <form class="cadastro-acomodacao" v-show="$store.state.cadastroAcomod2">
+
+      <h1 class="__form-title">Quantas pessoas podem se hospedar?</h1>
+
+      <div class="item-form">
+        <label>Total de Hóspedes</label>
+        <select v-model="$store.state.acomodData.totalHospedes">
+          <option v-for="n in totalHospedesNumbers">{{ n }} pessoas</option>
+        </select>
+      </div> 
+
+      <div class="back-next"> 
+        <div class="back-next-body">
+          <button type="button" class="__back" @click="backBtn2">Voltar</button>
+          <button type="button" class="__next" :style="form2ok" @click="nextBtn2">Próximo</button>
+        </div>
+      </div> 
+    
+    </form><!-- ########## CAPACIDADE PG.2 ########## -->
+
+
 
 
     <!-- CADASTRO ACOMODAÇÃO -->
@@ -90,6 +116,7 @@ export default {
     return {
       title: '',/* Vue Autosize */
       subtitle: '',/* Vue Autosize */
+      totalHospedesNumbers: [2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],
       showCroppaModal1: false,
       showCroppaModal2: false,
       imageURL1: null,
@@ -160,10 +187,20 @@ export default {
         return this.$store.commit('m_cadastroAcomod1', false), this.$store.commit('m_cadastroAcomod2', true), this.$store.commit('m_acomodProgressBar', (100/10)*2)
       }
     },
+    nextBtn2 () {
+      if (this.$store.state.acomodData.totalHospedes !== null) {
+        return this.$store.commit('m_cadastroAcomod2', false), this.$store.commit('m_cadastroAcomod3', true), this.$store.commit('m_acomodProgressBar', (100/10)*3)
+      }
+    },
   },
   computed: {
     form1ok () {
       if (this.$store.state.acomodData.tipoAcomod !== null) {
+        return 'background:#1CD8D2;cursor:pointer'
+      }
+    },
+    form2ok () {
+      if (this.$store.state.acomodData.totalHospedes !== null) {
         return 'background:#1CD8D2;cursor:pointer'
       }
     },
