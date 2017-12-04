@@ -100,7 +100,7 @@
 
       <div class="item-form">
         <label>Nº de Quartos</label>
-        <select v-model="$store.state.acomodData.totalHospedes">
+        <select v-model="$store.state.acomodData.totalQuartos">
           <option v-for="n in 10">{{ n }}</option>
           <option>Mais de 10</option>
         </select>
@@ -108,7 +108,7 @@
 
       <div class="item-form">
         <label>Nº de Banheiros</label>
-        <select v-model="$store.state.acomodData.totalHospedes">
+        <select v-model="$store.state.acomodData.totalBanheiros">
           <option v-for="n in 10">{{ n }}</option>
           <option>Mais de 10</option>
         </select>
@@ -123,6 +123,32 @@
       </div> 
     
     </form><!-- ########## CARACTERÍSTICAS PG.3 ########## -->
+
+
+
+
+    <!-- ########## COMODIDADES PG.4 ########## -->
+    <form class="cadastro-acomodacao" v-show="$store.state.cadastroAcomod4">
+
+      <h1 class="__form-title">Quais comodidades serão oferecidas?</h1>
+
+      <div class="item-form">
+        <label>Nº de Quartos</label>
+        <select v-model="$store.state.acomodData.totalQuartos">
+          <option v-for="n in 10">{{ n }}</option>
+          <option>Mais de 10</option>
+        </select>
+      </div> 
+
+
+      <div class="back-next"> 
+        <div class="back-next-body">
+          <button type="button" class="__back" @click="backBtn4">Voltar</button>
+          <button type="button" class="__next" :style="form4ok" @click="nextBtn4">Próximo</button>
+        </div>
+      </div> 
+    
+    </form><!-- ########## COMODIDADES PG.4 ########## -->
 
 
     <!-- CADASTRO ACOMODAÇÃO -->
@@ -241,6 +267,11 @@ export default {
         return this.$store.commit('m_cadastroAcomod3', false), this.$store.commit('m_cadastroAcomod4', true), this.$store.commit('m_acomodProgressBar', (100/10)*4)
       }
     },
+    nextBtn4 () {
+      if (1<2) {
+        return this.$store.commit('m_cadastroAcomod4', false), this.$store.commit('m_cadastroAcomod5', true), this.$store.commit('m_acomodProgressBar', (100/10)*5)
+      }
+    },
   },
   computed: {
     form1ok () {
@@ -254,7 +285,12 @@ export default {
       }
     },
     form3ok () {
-      if (1>2) {
+      if (1<2) {
+        return 'background:#1CD8D2;cursor:pointer'
+      }
+    },
+    form4ok () {
+      if (1<2) {
         return 'background:#1CD8D2;cursor:pointer'
       }
     },
