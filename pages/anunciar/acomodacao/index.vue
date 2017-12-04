@@ -238,7 +238,7 @@
     <!-- ########## DESCRIÇÃO PG.9 ########## -->
     <form class="cadastro-acomodacao" v-show="$store.state.cadastroAcomod9">
 
-      <h1 class="__form-title">Descreva melhor seu {{ $store.state.acomodData.tipoAcomod }}</h1>   
+      <h1 class="__form-title">Descreva melhor seu anúncio</h1>   
 
       <textarea 
       v-model="$store.state.acomodData.subtitle"
