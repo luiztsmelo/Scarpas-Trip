@@ -650,7 +650,7 @@ export default {
     height: 100%;
     background: white;
     color: var(--color01);
-    padding: 0 0 3rem 0;
+    padding: 0 0 5.5rem 0;
     & .__form-title {
       padding: 3rem 7% 1.5rem 7%;
       line-height: 35px;
@@ -718,7 +718,6 @@ export default {
     }
     & .comodidades-box {
       padding: 0 7%;
-      margin-bottom: 2.5rem;
       & .item-form-switches {
         display: flex;
         justify-content: space-between;
