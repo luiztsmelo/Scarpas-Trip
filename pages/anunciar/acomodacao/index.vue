@@ -345,76 +345,76 @@ export default {
     },
     /* ******************** BACK BUTTONS ******************** */
     backBtn1 () {
-      return this.$store.commit('m_cadastroAcomod1', false), this.$store.commit('m_cadastroAcomod0', true)
+      this.$store.commit('m_cadastroAcomod1', false), this.$store.commit('m_cadastroAcomod0', true)
     },
     backBtn2 () {
-      return this.$store.commit('m_cadastroAcomod2', false), this.$store.commit('m_cadastroAcomod1', true)
+      this.$store.commit('m_cadastroAcomod2', false), this.$store.commit('m_cadastroAcomod1', true)
     },
     backBtn3 () {
-      return this.$store.commit('m_cadastroAcomod3', false), this.$store.commit('m_cadastroAcomod2', true)
+      this.$store.commit('m_cadastroAcomod3', false), this.$store.commit('m_cadastroAcomod2', true)
     },
     backBtn4 () {
-      return this.$store.commit('m_cadastroAcomod4', false), this.$store.commit('m_cadastroAcomod3', true)
+      this.$store.commit('m_cadastroAcomod4', false), this.$store.commit('m_cadastroAcomod3', true)
     },
     backBtn5 () {
-      return this.$store.commit('m_cadastroAcomod5', false), this.$store.commit('m_cadastroAcomod4', true)
+      this.$store.commit('m_cadastroAcomod5', false), this.$store.commit('m_cadastroAcomod4', true)
     },
     backBtn6 () {
-      return this.$store.commit('m_cadastroAcomod6', false), this.$store.commit('m_cadastroAcomod5', true)
+      this.$store.commit('m_cadastroAcomod6', false), this.$store.commit('m_cadastroAcomod5', true)
     },
     backBtn7 () {
-      return this.$store.commit('m_cadastroAcomod7', false), this.$store.commit('m_cadastroAcomod6', true)
+      this.$store.commit('m_cadastroAcomod7', false), this.$store.commit('m_cadastroAcomod6', true)
     },
     backBtn8 () {
-      return this.$store.commit('m_cadastroAcomod8', false), this.$store.commit('m_cadastroAcomod7', true)
+      this.$store.commit('m_cadastroAcomod8', false), this.$store.commit('m_cadastroAcomod7', true)
     },
     backBtn9 () {
-      return this.$store.commit('m_cadastroAcomod9', false), this.$store.commit('m_cadastroAcomod8', true)
+      this.$store.commit('m_cadastroAcomod9', false), this.$store.commit('m_cadastroAcomod8', true)
     },
     /* ******************** NEXT BUTTONS ******************** */
     nextBtn1 () {
       if (this.$store.state.acomodData.tipoAcomod !== null) {
-        return this.$store.commit('m_cadastroAcomod1', false), this.$store.commit('m_cadastroAcomod2', true), this.$store.commit('m_acomodProgressBar', (100/11)*2)
+        this.$store.commit('m_cadastroAcomod1', false), this.$store.commit('m_cadastroAcomod2', true), this.$store.commit('m_acomodProgressBar', (100/11)*2)
       }
     },
     nextBtn2 () {
       if (this.$store.state.acomodData.totalHospedes !== null) {
-        return this.$store.commit('m_cadastroAcomod2', false), this.$store.commit('m_cadastroAcomod3', true), this.$store.commit('m_acomodProgressBar', (100/11)*3)
+        this.$store.commit('m_cadastroAcomod2', false), this.$store.commit('m_cadastroAcomod3', true), this.$store.commit('m_acomodProgressBar', (100/11)*3)
       }
     },
     nextBtn3 () {
       if (1<2) {
-        return this.$store.commit('m_cadastroAcomod3', false), this.$store.commit('m_cadastroAcomod4', true), this.$store.commit('m_acomodProgressBar', (100/11)*4)
+        this.$store.commit('m_cadastroAcomod3', false), this.$store.commit('m_cadastroAcomod4', true), this.$store.commit('m_acomodProgressBar', (100/11)*4)
       }
     },
     nextBtn4 () {
       if (1<2) {
-        return this.$store.commit('m_cadastroAcomod4', false), this.$store.commit('m_cadastroAcomod5', true), this.$store.commit('m_acomodProgressBar', (100/11)*5)
+        this.$store.commit('m_cadastroAcomod4', false), this.$store.commit('m_cadastroAcomod5', true), this.$store.commit('m_acomodProgressBar', (100/11)*5)
       }
     },
     nextBtn5 () {
       if (1<2) {
-        return this.$store.commit('m_cadastroAcomod5', false), this.$store.commit('m_cadastroAcomod6', true), this.$store.commit('m_acomodProgressBar', (100/11)*6)
+        this.$store.commit('m_cadastroAcomod5', false), this.$store.commit('m_cadastroAcomod6', true), this.$store.commit('m_acomodProgressBar', (100/11)*6)
       }
     },
     nextBtn6 () {
       if (1<2) {
-        return this.$store.commit('m_cadastroAcomod6', false), this.$store.commit('m_cadastroAcomod7', true), this.$store.commit('m_acomodProgressBar', (100/11)*7)
+        this.$store.commit('m_cadastroAcomod6', false), this.$store.commit('m_cadastroAcomod7', true), this.$store.commit('m_acomodProgressBar', (100/11)*7)
       }
     },
     nextBtn7 () {
       if (1<2) {
-        return this.$store.commit('m_cadastroAcomod7', false), this.$store.commit('m_cadastroAcomod8', true), this.$store.commit('m_acomodProgressBar', (100/11)*8)
+        this.$store.commit('m_cadastroAcomod7', false), this.$store.commit('m_cadastroAcomod8', true), this.$store.commit('m_acomodProgressBar', (100/11)*8)
       }
     },
     nextBtn8 () {
       if (1<2) {
-        return this.$store.commit('m_cadastroAcomod8', false), this.$store.commit('m_cadastroAcomod9', true), this.$store.commit('m_acomodProgressBar', (100/11)*9)
+        this.$store.commit('m_cadastroAcomod8', false), this.$store.commit('m_cadastroAcomod9', true), this.$store.commit('m_acomodProgressBar', (100/11)*9)
       }
     },
     nextBtn9 () {
       if (1<2) {
-        return this.$store.commit('m_cadastroAcomod9', false), this.$store.commit('m_cadastroAcomod10', true), this.$store.commit('m_acomodProgressBar', (100/11)*10)
+        this.$store.commit('m_cadastroAcomod9', false), this.$store.commit('m_cadastroAcomod10', true), this.$store.commit('m_acomodProgressBar', (100/11)*10)
       }
     },
   },

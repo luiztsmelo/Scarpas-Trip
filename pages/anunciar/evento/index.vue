@@ -375,30 +375,30 @@ export default {
     },
     /* ******************** BACK BUTTONS ******************** */
     backBtn1 () {
-      return this.$store.commit('m_cadastroEvento1', false), this.$store.commit('m_cadastroEvento0', true)
+      this.$store.commit('m_cadastroEvento1', false), this.$store.commit('m_cadastroEvento0', true)
     },
     backBtn2 () {
-      return this.$store.commit('m_cadastroEvento2', false), this.$store.commit('m_cadastroEvento1', true)
+      this.$store.commit('m_cadastroEvento2', false), this.$store.commit('m_cadastroEvento1', true)
     },
     backBtn3 () {
-      return this.$store.commit('m_cadastroEvento3', false), this.$store.commit('m_cadastroEvento2', true)
+      this.$store.commit('m_cadastroEvento3', false), this.$store.commit('m_cadastroEvento2', true)
     },
     backBtn4 () {
-      return this.$store.commit('m_cadastroEvento4', false), this.$store.commit('m_cadastroEvento3', true)
+      this.$store.commit('m_cadastroEvento4', false), this.$store.commit('m_cadastroEvento3', true)
     },
     backBtn5 () {
-      return this.$store.commit('m_cadastroEvento5', false), this.$store.commit('m_cadastroEvento4', true)
+      this.$store.commit('m_cadastroEvento5', false), this.$store.commit('m_cadastroEvento4', true)
     },
     backBtn6 () {
-      return this.$store.commit('m_cadastroEvento6', false), this.$store.commit('m_cadastroEvento5', true)
+      this.$store.commit('m_cadastroEvento6', false), this.$store.commit('m_cadastroEvento5', true)
     },
     backBtn7 () {
-      return this.$store.commit('m_cadastroEvento7', false), this.$store.commit('m_cadastroEvento6', true)
+      this.$store.commit('m_cadastroEvento7', false), this.$store.commit('m_cadastroEvento6', true)
     },
     /* ******************** NEXT BUTTONS ******************** */
     nextBtn1 () {
       if (this.$store.state.eventoData.date.length > 0 && this.$store.state.eventoData.hour.length > 0) {
-        return this.$store.commit('m_cadastroEvento1', false), this.$store.commit('m_cadastroEvento2', true), this.$store.commit('m_eventoProgressBar', (100/7)*2)
+        this.$store.commit('m_cadastroEvento1', false), this.$store.commit('m_cadastroEvento2', true), this.$store.commit('m_eventoProgressBar', (100/7)*2)
       } else if (this.$store.state.eventoData.date.length > 0 && this.$store.state.eventoData.hour.length === 0) {
         alert('Adicione o horário')
       } else if (this.$store.state.eventoData.date.length === 0 && this.$store.state.eventoData.hour.length > 0) {
@@ -409,31 +409,31 @@ export default {
     },  
     nextBtn2 () {
       if (this.$store.state.eventoPlace !== null) {
-        return this.$store.commit('m_cadastroEvento2', false), this.$store.commit('m_cadastroEvento3', true), this.$store.commit('m_eventoProgressBar', (100/7)*3)
+        this.$store.commit('m_cadastroEvento2', false), this.$store.commit('m_cadastroEvento3', true), this.$store.commit('m_eventoProgressBar', (100/7)*3)
       } else {
         alert('Adicione um endereço')
       }
     },
     nextBtn3 () {
       if (this.$store.state.eventoData.valorIngresso >= 0) {
-        return this.$store.commit('m_cadastroEvento3', false), this.$store.commit('m_cadastroEvento4', true), this.$store.commit('m_eventoProgressBar', (100/7)*4)
+        this.$store.commit('m_cadastroEvento3', false), this.$store.commit('m_cadastroEvento4', true), this.$store.commit('m_eventoProgressBar', (100/7)*4)
       }
     },  
     nextBtn4 () {
       if (this.imageURL1 !== null) {
-        return this.$store.commit('m_cadastroEvento4', false), this.$store.commit('m_cadastroEvento5', true), this.$store.commit('m_eventoProgressBar', (100/7)*5)
+        this.$store.commit('m_cadastroEvento4', false), this.$store.commit('m_cadastroEvento5', true), this.$store.commit('m_eventoProgressBar', (100/7)*5)
       } else {
         alert('Adicione pelo menos uma imagem')
       }
     },
     nextBtn5 () {
       if (this.$store.state.eventoData.title.length > 0) {
-        return this.$store.commit('m_cadastroEvento5', false), this.$store.commit('m_cadastroEvento6', true), this.$store.commit('m_eventoProgressBar', (100/7)*6)
+        this.$store.commit('m_cadastroEvento5', false), this.$store.commit('m_cadastroEvento6', true), this.$store.commit('m_eventoProgressBar', (100/7)*6)
       }
     },
     nextBtn6 () {
       if (this.$store.state.eventoData.subtitle.length > 0) {
-        return this.$store.commit('m_cadastroEvento6', false), this.$store.commit('m_cadastroEvento7', true), this.$store.commit('m_eventoProgressBar', (100/7)*7)
+        this.$store.commit('m_cadastroEvento6', false), this.$store.commit('m_cadastroEvento7', true), this.$store.commit('m_eventoProgressBar', (100/7)*7)
       }
     },
     concluir () {
@@ -450,7 +450,7 @@ export default {
           console.log(eventoID + 'L1' + '.jpeg')
           storageRef.child('imageL1.jpeg').getDownloadURL().then(url => {
             this.$store.commit('m_imageEvL1', url)
-            this.ifUpload()
+            this.ifUpload1()
           })
         })
         /* imageEvH1J */
@@ -458,7 +458,7 @@ export default {
           console.log(eventoID + 'H1J' + '.jpeg')
           storageRef.child('imageH1J.jpeg').getDownloadURL().then(url => {
             this.$store.commit('m_imageEvH1J', url)
-            this.ifUpload()
+            this.ifUpload1()
           })
         })
         /* imageEvH1W */
@@ -466,39 +466,48 @@ export default {
           console.log(eventoID + 'H1W' + '.webp')
           storageRef.child('imageH1W.webp').getDownloadURL().then(url => {
             this.$store.commit('m_imageEvH1W', url)
-            this.ifUpload()
+            this.ifUpload1()
           })
         })
         /* 
         UPLOAD IMAGE 2 
         */
-        /* imageEvL2 */
-        storageRef.child('imageL2.jpeg').put(this.$store.state.blobEvL2).then(snapshot => {
-          console.log(eventoID + 'L2' + '.jpeg')
-          storageRef.child('imageL2.jpeg').getDownloadURL().then(url => {
-            this.$store.commit('m_imageEvL2', url)
-            this.ifUpload()
+        if (this.$store.state.blobEvH2J !== null) {
+          /* imageEvL2 */
+          storageRef.child('imageL2.jpeg').put(this.$store.state.blobEvL2).then(snapshot => {
+            console.log(eventoID + 'L2' + '.jpeg')
+            storageRef.child('imageL2.jpeg').getDownloadURL().then(url => {
+              this.$store.commit('m_imageEvL2', url)
+              this.ifUpload2()
+            })
           })
-        })
-        /* imageEvH2J */
-        storageRef.child('imageH2J.jpeg').put(this.$store.state.blobEvH2J).then(snapshot => {
-          console.log(eventoID + 'H2J' + '.jpeg')
-          storageRef.child('imageH2J.jpeg').getDownloadURL().then(url => {
-            this.$store.commit('m_imageEvH2J', url)
-            this.ifUpload()
+          /* imageEvH2J */
+          storageRef.child('imageH2J.jpeg').put(this.$store.state.blobEvH2J).then(snapshot => {
+            console.log(eventoID + 'H2J' + '.jpeg')
+            storageRef.child('imageH2J.jpeg').getDownloadURL().then(url => {
+              this.$store.commit('m_imageEvH2J', url)
+              this.ifUpload2()
+            })
           })
-        })
-        /* imageEvH2W */
-        storageRef.child('imageH2W.webp').put(this.$store.state.blobEvH2W).then(snapshot => {
-          console.log(eventoID + 'H2W' + '.webp')
-          storageRef.child('imageH2W.webp').getDownloadURL().then(url => {
-            this.$store.commit('m_imageEvH2W', url)
-            this.ifUpload()
+          /* imageEvH2W */
+          storageRef.child('imageH2W.webp').put(this.$store.state.blobEvH2W).then(snapshot => {
+            console.log(eventoID + 'H2W' + '.webp')
+            storageRef.child('imageH2W.webp').getDownloadURL().then(url => {
+              this.$store.commit('m_imageEvH2W', url)
+              this.ifUpload2()
+            })
           })
-        })
+        }
       }
     },
-    ifUpload () {
+    ifUpload1 () {
+      if (this.$store.state.eventoData.imageL1 !== null && this.$store.state.eventoData.imageH1J !== null && this.$store.state.eventoData.imageH1W !== null) {
+        this.$store.dispatch('a_uploadEvento')
+        this.$store.commit('m_eventos', null) /* Para não bugar as imagens */
+        this.$router.push('/eventos/' + this.$store.state.eventoData.eventoID)
+      }
+    },
+    ifUpload2 () {
       if (this.$store.state.eventoData.imageL1 !== null && this.$store.state.eventoData.imageH1J !== null && this.$store.state.eventoData.imageH1W !== null && this.$store.state.eventoData.imageL2 !== null && this.$store.state.eventoData.imageH2J !== null && this.$store.state.eventoData.imageH2W !== null) {
         this.$store.dispatch('a_uploadEvento')
         this.$store.commit('m_eventos', null) /* Para não bugar as imagens */
