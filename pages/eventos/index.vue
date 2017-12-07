@@ -154,11 +154,11 @@ export default {
       }
       & .__card-title {
         padding: .2rem 7%;
-        font-size: 22px;
+        font-size: 20px;
         font-weight: 600;
       }
       & .__card-subtitle {
-        font-size: 19px;
+        font-size: 17px;
         padding: 0 7%;
       }
     }
