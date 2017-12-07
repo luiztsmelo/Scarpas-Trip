@@ -700,12 +700,13 @@ export default {
     }
     & .comodidades-box {
       padding: 0 7%;
+      margin-bottom: 2.5rem;
       & .item-form-switches {
         display: flex;
         justify-content: space-between;
         align-items: center;
         border-bottom: 1px solid rgb(227, 227, 227);
-        padding: 1rem 0;
+        padding: 1.1rem 0;
       }
     }
     & .modal-croppa {
