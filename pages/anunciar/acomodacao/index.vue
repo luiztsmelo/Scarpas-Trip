@@ -142,6 +142,41 @@
 
       <h1 class="__form-title">Quais comodidades são oferecidas?</h1>
 
+      <div class="comodidades-box">
+        <div class="item-form-switches">
+          <h3>Churrasqueira</h3>
+          <label class="switch">
+            <input type="checkbox" v-model="$store.state.acomodData.hasChurrasqueira">
+            <span class="slider round"></span>
+          </label>
+        </div>
+
+        <div class="item-form-switches">
+          <h3>Piscina</h3>
+          <label class="switch">
+            <input type="checkbox" v-model="$store.state.acomodData.hasPiscina">
+            <span class="slider round"></span>
+          </label>
+        </div>
+
+        <div class="item-form-switches">
+          <h3>Sauna</h3>
+          <label class="switch">
+            <input type="checkbox" v-model="$store.state.acomodData.hasSauna">
+            <span class="slider round"></span>
+          </label>
+        </div>
+
+        <div class="item-form-switches">
+          <h3>Wi-Fi</h3>
+          <label class="switch">
+            <input type="checkbox" v-model="$store.state.acomodData.hasWifi">
+            <span class="slider round"></span>
+          </label>
+        </div>
+
+        
+      </div>
       
 
 
@@ -283,7 +318,7 @@ import MaskedInput from 'vue-text-mask'
 
 export default {
   components: { 
-    MaskedInput 
+    MaskedInput
   },
   head () {
     return {
@@ -505,6 +540,7 @@ export default {
 
 <style>
 @import url('../../../assets/css/main.css');
+@import url('../../../assets/css/switcher.css');
 
 .anunciar-acomodacao {
   margin-top: 3.2rem;
@@ -644,6 +680,16 @@ export default {
       & .__local-saida-text {
         padding: .5rem 0 .6rem 0;
         border-bottom: 1px solid rgb(222, 222, 222);
+      }
+    }
+    & .comodidades-box {
+      padding: 0 7%;
+      & .item-form-switches {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid rgb(222, 222, 222);
+        padding: .5rem 0 .6rem 0;
       }
     }
     & .modal-croppa {
