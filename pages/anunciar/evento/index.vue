@@ -705,7 +705,7 @@ export default {
       & label {
         text-transform: uppercase;
         font-weight: 600;
-        font-size: 15px;
+        font-size: 14px;
       }
       & input {
         width: 100%;
