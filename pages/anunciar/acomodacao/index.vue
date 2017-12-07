@@ -706,7 +706,7 @@ export default {
         justify-content: space-between;
         align-items: center;
         border-bottom: 1px solid rgb(227, 227, 227);
-        padding: 1.1rem 0;
+        padding: 1.2rem 0;
       }
     }
     & .modal-croppa {
