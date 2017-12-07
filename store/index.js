@@ -52,6 +52,8 @@ const store = () => new Vuex.Store({
       totalHospedes: '1',
       totalSuites: '1',
       totalQuartos: '1',
+      totalCamasCasal: '1',
+      totalCamasSolteiro: '1',
       totalBanheiros: '1',
       hasRoupascama: false,
       hasToalhas: false,
