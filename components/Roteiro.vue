@@ -122,7 +122,7 @@ export default {
       padding: 0 7%;
       color: white;
       font-size: 23px;
-      font-weight: 400;
+      font-weight: 500;
       line-height: 29px;
     }
     & .chegada-partida-box {

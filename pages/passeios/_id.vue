@@ -174,7 +174,7 @@ export default {
           fontSize: '1.4rem',
         },
         headerTitle: {
-          fontSize: '19px',
+          fontSize: '18px',
           fontWeight: '300'
         },
         weekdays: {
@@ -475,7 +475,7 @@ export default {
       transform: translateY(-50%);
       & .__reserva-valor {
         color: var(--color01);
-        font-size: 19px;
+        font-size: 18px;
         font-weight: 400;
       }
       & .__reserva-valor-pessoa {

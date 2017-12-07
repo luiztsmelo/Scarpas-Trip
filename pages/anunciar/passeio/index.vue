@@ -806,7 +806,7 @@ export default {
       padding: 0 7%;
       margin-bottom: .5rem;
       width: 100%;
-      font-size: 19px;
+      font-size: 18px;
       font-weight: 300;
       line-height: 26px;
       background: white;
@@ -835,7 +835,7 @@ export default {
       }
       & input {
         width: 100%;
-        font-size: 19px;
+        font-size: 18px;
         font-weight: 300;
         background: white;
         color: var(--color01);
@@ -846,7 +846,7 @@ export default {
       }
       & select {
         width: 100%;
-        font-size: 19px;
+        font-size: 18px;
         font-weight: 300;
         background: white;
         color: var(--color01);

@@ -413,7 +413,7 @@ export default {
       top: 50%;
       transform: translateY(-50%);
       & .__reserva-valor {
-        font-size: 19px;
+        font-size: 18px;
         font-weight: 400;
       }
       & .__reserva-btn {
