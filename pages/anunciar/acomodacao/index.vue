@@ -689,7 +689,7 @@ export default {
         justify-content: space-between;
         align-items: center;
         border-bottom: 1px solid rgb(222, 222, 222);
-        padding: .5rem 0 .6rem 0;
+        padding: .6rem 0;
       }
     }
     & .modal-croppa {
