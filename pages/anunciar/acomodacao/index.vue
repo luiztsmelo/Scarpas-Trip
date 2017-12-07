@@ -100,6 +100,15 @@
       <h1 class="__form-title">Características físicas {{ tipoAcomodText }}</h1>
 
       <div class="item-form">
+        <label>Nº de Suítes</label>
+        <select v-model="$store.state.acomodData.totalSuites">
+          <option>0</option>
+          <option v-for="n in 6">{{ n }}</option>
+          <option>Mais de 6</option>
+        </select>
+      </div> 
+
+      <div class="item-form">
         <label>Nº de Quartos</label>
         <select v-model="$store.state.acomodData.totalQuartos">
           <option v-for="n in 10">{{ n }}</option>
