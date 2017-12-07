@@ -130,7 +130,7 @@
     <!-- ########## COMODIDADES PG.4 ########## -->
     <form class="cadastro-acomodacao" v-show="$store.state.cadastroAcomod4">
 
-      <h1 class="__form-title">Quais comodidades são oferecidas?</h1>
+      <h1 class="__form-title">Quais comodidades serão oferecidas?</h1>
 
       
 

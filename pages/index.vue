@@ -245,15 +245,15 @@ export default {
             }
             & .__card-title {
               margin: .2rem 0;
-              font-size: 17px;
+              font-size: 16px;
               font-weight: 600;
             }
             & .__card-subtitle {
-              font-size: 16px;
+              font-size: 15px;
               font-weight: 300;
             }
             & .__card-valor {
-              font-size: 16px;
+              font-size: 15px;
               font-weight: 300;
             }
           }

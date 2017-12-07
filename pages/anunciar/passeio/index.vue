@@ -568,7 +568,7 @@ export default {
           console.log(passeioID + 'L1' + '.jpeg')
           storageRef.child('imageL1.jpeg').getDownloadURL().then(url => {
             this.$store.commit('m_imagePasL1', url)
-            this.ifUpload()
+            this.ifUpload1()
           })
         })
         /* imagePasH1J */
@@ -576,7 +576,7 @@ export default {
           console.log(passeioID + 'H1J' + '.jpeg')
           storageRef.child('imageH1J.jpeg').getDownloadURL().then(url => {
             this.$store.commit('m_imagePasH1J', url)
-            this.ifUpload()
+            this.ifUpload1()
           })
         })
         /* imagePasH1W */
@@ -584,39 +584,48 @@ export default {
           console.log(passeioID + 'H1W' + '.webp')
           storageRef.child('imageH1W.webp').getDownloadURL().then(url => {
             this.$store.commit('m_imagePasH1W', url)
-            this.ifUpload()
+            this.ifUpload1()
           })
         })
         /* 
         UPLOAD IMAGE 2 
         */
-        /* imagePasL2 */
-        storageRef.child('imageL2.jpeg').put(this.$store.state.blobPasL2).then(snapshot => {
-          console.log(passeioID + 'L2' + '.jpeg')
-          storageRef.child('imageL2.jpeg').getDownloadURL().then(url => {
-            this.$store.commit('m_imagePasL2', url)
-            this.ifUpload()
+        if (this.$store.state.blobPasH2J !== null) {
+          /* imagePasL2 */
+          storageRef.child('imageL2.jpeg').put(this.$store.state.blobPasL2).then(snapshot => {
+            console.log(passeioID + 'L2' + '.jpeg')
+            storageRef.child('imageL2.jpeg').getDownloadURL().then(url => {
+              this.$store.commit('m_imagePasL2', url)
+              this.ifUpload2()
+            })
           })
-        })
-        /* imagePasH2J */
-        storageRef.child('imageH2J.jpeg').put(this.$store.state.blobPasH2J).then(snapshot => {
-          console.log(passeioID + 'H2J' + '.jpeg')
-          storageRef.child('imageH2J.jpeg').getDownloadURL().then(url => {
-            this.$store.commit('m_imagePasH2J', url)
-            this.ifUpload()
+          /* imagePasH2J */
+          storageRef.child('imageH2J.jpeg').put(this.$store.state.blobPasH2J).then(snapshot => {
+            console.log(passeioID + 'H2J' + '.jpeg')
+            storageRef.child('imageH2J.jpeg').getDownloadURL().then(url => {
+              this.$store.commit('m_imagePasH2J', url)
+              this.ifUpload2()
+            })
           })
-        })
-        /* imagePasH2W */
-        storageRef.child('imageH2W.webp').put(this.$store.state.blobPasH2W).then(snapshot => {
-          console.log(passeioID + 'H2W' + '.webp')
-          storageRef.child('imageH2W.webp').getDownloadURL().then(url => {
-            this.$store.commit('m_imagePasH2W', url)
-            this.ifUpload()
+          /* imagePasH2W */
+          storageRef.child('imageH2W.webp').put(this.$store.state.blobPasH2W).then(snapshot => {
+            console.log(passeioID + 'H2W' + '.webp')
+            storageRef.child('imageH2W.webp').getDownloadURL().then(url => {
+              this.$store.commit('m_imagePasH2W', url)
+              this.ifUpload2()
+            })
           })
-        })
+        }
       }
     },
-    ifUpload () {
+    ifUpload1 () {
+      if (this.$store.state.passeioData.imageL1 !== null && this.$store.state.passeioData.imageH1J !== null && this.$store.state.passeioData.imageH1W !== null) {
+        this.$store.dispatch('a_uploadPasseio')
+        this.$store.commit('m_passeios', null) /* Para não bugar as imagens */
+        this.$router.push('/passeios/' + this.$store.state.passeioData.passeioID)
+      }
+    },
+    ifUpload2 () {
       if (this.$store.state.passeioData.imageL1 !== null && this.$store.state.passeioData.imageH1J !== null && this.$store.state.passeioData.imageH1W !== null && this.$store.state.passeioData.imageL2 !== null && this.$store.state.passeioData.imageH2J !== null && this.$store.state.passeioData.imageH2W !== null) {
         this.$store.dispatch('a_uploadPasseio')
         this.$store.commit('m_passeios', null) /* Para não bugar as imagens */
