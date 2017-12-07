@@ -106,7 +106,7 @@ export default {
 
 .roteiro-home {
   width: 100%;
-  height: 12rem;
+  height: 11rem;
   & .chegada-partida-container {
     padding: 1rem 0;
     position: relative;
@@ -121,7 +121,7 @@ export default {
       display: flex;
       padding: 0 7%;
       color: white;
-      font-size: 24px;
+      font-size: 23px;
       font-weight: 600;
       line-height: 29px;
     }
