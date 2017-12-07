@@ -798,7 +798,7 @@ export default {
     & .__form-title {
       padding: 3rem 7% 1.5rem 7%;
       line-height: 35px;
-      font-size: 30px;
+      font-size: 29px;
       font-weight: 600;
       z-index: 999;
     }

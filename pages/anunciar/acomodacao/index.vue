@@ -48,11 +48,12 @@
         <select v-model="$store.state.acomodData.tipoAcomod">
           <option>Casa</option>
           <option>Rancho</option>
-          <option>Camping</option>
-          <option>Hostel</option>
+          <option>Chácara</option>
           <option>Pousada</option>
-          <option>Hotel</option>
+          <option>Camping</option>
+          <option>Sítio</option>
           <option>Fazenda</option>
+          <option>Hostel</option>
         </select>
       </div> 
 
@@ -96,7 +97,7 @@
     <!-- ########## CARACTERÍSTICAS PG.3 ########## -->
     <form class="cadastro-acomodacao" v-show="$store.state.cadastroAcomod3">
 
-      <h1 class="__form-title">Características da sua {{ $store.state.acomodData.tipoAcomod }}</h1>
+      <h1 class="__form-title">Características físicas {{ tipoAcomodText }}</h1>
 
       <div class="item-form">
         <label>Nº de Quartos</label>
@@ -130,7 +131,7 @@
     <!-- ########## COMODIDADES PG.4 ########## -->
     <form class="cadastro-acomodacao" v-show="$store.state.cadastroAcomod4">
 
-      <h1 class="__form-title">Quais comodidades serão oferecidas?</h1>
+      <h1 class="__form-title">Quais comodidades são oferecidas?</h1>
 
       
 
@@ -418,6 +419,18 @@ export default {
     },
   },
   computed: {
+    tipoAcomodText () {
+      const tipoAcomodPath = this.$store.state.acomodData.tipoAcomod
+      return tipoAcomodPath === 'Casa' ? 'da sua casa' 
+           : tipoAcomodPath === 'Rancho' ? 'do seu rancho'
+           : tipoAcomodPath === 'Chácara' ? 'da sua chácara'
+           : tipoAcomodPath === 'Pousada' ? 'da sua pousada'
+           : tipoAcomodPath === 'Camping' ? 'do seu camping'
+           : tipoAcomodPath === 'Sítio' ? 'do seu sítio'
+           : tipoAcomodPath === 'Fazenda' ? 'da sua fazenda'
+           : tipoAcomodPath === 'Hostel' ? 'do seu hostel'
+           : ''
+    },
     titleLength () {
       return 50 - this.$store.state.passeioData.title.length
     },
@@ -503,10 +516,10 @@ export default {
     flex-flow: column;
     align-items: center;
     & .__img-header {
-        margin: 2rem 0;
-        width: 6rem;
-        height: auto;
-      }
+      margin: 2rem 0;
+      width: 6rem;
+      height: auto;
+    }
     & .__title {
       font-size: 26px;
       font-weight: 500;
@@ -562,7 +575,7 @@ export default {
     & .__form-title {
       padding: 3rem 7% 1.5rem 7%;
       line-height: 35px;
-      font-size: 30px;
+      font-size: 29px;
       font-weight: 600;
       z-index: 999;
     }

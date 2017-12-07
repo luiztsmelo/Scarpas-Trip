@@ -659,7 +659,7 @@ export default {
     padding: 0 7% 3rem 7%;
     & .__form-title {
       line-height: 35px;
-      font-size: 30px;
+      font-size: 29px;
       font-weight: 600;
       padding: 3rem 0 1.5rem 0;
       z-index: 999;
