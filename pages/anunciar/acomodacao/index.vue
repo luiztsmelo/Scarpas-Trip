@@ -144,6 +144,22 @@
 
       <div class="comodidades-box">
         <div class="item-form-switches">
+          <h3>Roupas de Cama</h3>
+          <label class="switch">
+            <input type="checkbox" v-model="$store.state.acomodData.hasRoupascama">
+            <span class="slider round"></span>
+          </label>
+        </div>
+
+        <div class="item-form-switches">
+          <h3>Toalhas</h3>
+          <label class="switch">
+            <input type="checkbox" v-model="$store.state.acomodData.hasToalhas">
+            <span class="slider round"></span>
+          </label>
+        </div>
+
+        <div class="item-form-switches">
           <h3>Churrasqueira</h3>
           <label class="switch">
             <input type="checkbox" v-model="$store.state.acomodData.hasChurrasqueira">
@@ -688,8 +704,8 @@ export default {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        border-bottom: 1px solid rgb(222, 222, 222);
-        padding: .6rem 0;
+        border-bottom: 1px solid rgb(227, 227, 227);
+        padding: 1rem 0;
       }
     }
     & .modal-croppa {
