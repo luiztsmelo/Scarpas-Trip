@@ -293,7 +293,7 @@ export default {
   & .box-title {
     text-transform: uppercase;
     font-weight: 600;
-    font-size: 15px;
+    font-size: 14px;
     padding: 3rem 7% .5rem 7%;
   }
 
@@ -338,12 +338,12 @@ export default {
     display: flex;
     padding: 0 7%;
     & .__date {
-      font-size: 22px;
+      font-size: 21px;
       font-weight: 300;
       /* color: #ff5858; */
     }
     & .__hour {
-      font-size: 22px;
+      font-size: 21px;
       font-weight: 300;
       /* color: #ff5858; */
     }
