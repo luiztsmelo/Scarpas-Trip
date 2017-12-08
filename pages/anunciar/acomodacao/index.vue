@@ -142,6 +142,14 @@
         </select>
       </div> 
 
+      <div class="item-form">
+        <label>Lugares na Garagem</label>
+        <select v-model="$store.state.acomodData.totalGaragem">
+          <option v-for="n in 6">{{ n }}</option>
+          <option>Mais de 6</option>
+        </select>
+      </div> 
+
 
       <div class="back-next"> 
         <div class="back-next-body">
@@ -164,7 +172,7 @@
         <div class="item-form-switches">
           <h3>Roupas de Cama</h3>
           <label class="switch">
-            <input type="checkbox" v-model="$store.state.acomodData.hasRoupascama">
+            <input type="checkbox" v-model="$store.state.acomodData.hasRoupasCama">
             <span class="slider round"></span>
           </label>
         </div>
@@ -205,6 +213,14 @@
           <h3>Wi-Fi</h3>
           <label class="switch">
             <input type="checkbox" v-model="$store.state.acomodData.hasWifi">
+            <span class="slider round"></span>
+          </label>
+        </div>
+
+        <div class="item-form-switches">
+          <h3>Ar condicionado</h3>
+          <label class="switch">
+            <input type="checkbox" v-model="$store.state.acomodData.hasArCond">
             <span class="slider round"></span>
           </label>
         </div>
