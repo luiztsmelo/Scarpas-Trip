@@ -217,7 +217,7 @@
           </label>
         </div>
 
-        <div class="item-form-switches">
+        <div class="item-form-switches" style="border:none">
           <h3>Ar condicionado</h3>
           <label class="switch">
             <input type="checkbox" v-model="$store.state.acomodData.hasArCond">
@@ -514,15 +514,15 @@ export default {
   },
   computed: {
     tipoAcomodText () {
-      const tipoAcomodPath = this.$store.state.acomodData.tipoAcomod
-      return tipoAcomodPath === 'Casa' ? 'da sua casa' 
-           : tipoAcomodPath === 'Rancho' ? 'do seu rancho'
-           : tipoAcomodPath === 'Chácara' ? 'da sua chácara'
-           : tipoAcomodPath === 'Pousada' ? 'da sua pousada'
-           : tipoAcomodPath === 'Camping' ? 'do seu camping'
-           : tipoAcomodPath === 'Sítio' ? 'do seu sítio'
-           : tipoAcomodPath === 'Fazenda' ? 'da sua fazenda'
-           : tipoAcomodPath === 'Hostel' ? 'do seu hostel'
+      const path = this.$store.state.acomodData.tipoAcomod
+      return path === 'Casa' ? 'da sua casa' 
+           : path === 'Rancho' ? 'do seu rancho'
+           : path === 'Chácara' ? 'da sua chácara'
+           : path === 'Pousada' ? 'da sua pousada'
+           : path === 'Camping' ? 'do seu camping'
+           : path === 'Sítio' ? 'do seu sítio'
+           : path === 'Fazenda' ? 'da sua fazenda'
+           : path === 'Hostel' ? 'do seu hostel'
            : ''
     },
     titleLength () {
@@ -532,49 +532,31 @@ export default {
       return 400 - this.$store.state.passeioData.subtitle.length
     },
     form1ok () {
-      if (this.$store.state.acomodData.tipoAcomod !== null) {
-        return 'background:#1CD8D2;cursor:pointer'
-      }
+      return this.$store.state.acomodData.tipoAcomod !== null ? 'background:#1CD8D2;cursor:pointer' : ''
     },
     form2ok () {
-      if (this.$store.state.acomodData.totalHospedes !== null) {
-        return 'background:#1CD8D2;cursor:pointer'
-      }
+      return this.$store.state.acomodData.totalHospedes !== null ? 'background:#1CD8D2;cursor:pointer' : ''
     },
     form3ok () {
-      if (1<2) {
-        return 'background:#1CD8D2;cursor:pointer'
-      }
+      return 1<2 ? 'background:#1CD8D2;cursor:pointer' : ''
     },
     form4ok () {
-      if (1<2) {
-        return 'background:#1CD8D2;cursor:pointer'
-      }
+      return 1<2 ? 'background:#1CD8D2;cursor:pointer' : ''
     },
     form5ok () {
-      if (1<2) {
-        return 'background:#1CD8D2;cursor:pointer'
-      }
+      return 1<2 ? 'background:#1CD8D2;cursor:pointer' : ''
     },
     form6ok () {
-      if (1<2) {
-        return 'background:#1CD8D2;cursor:pointer'
-      }
+      return 1<2 ? 'background:#1CD8D2;cursor:pointer' : ''
     },
     form7ok () {
-      if (1<2) {
-        return 'background:#1CD8D2;cursor:pointer'
-      }
+      return 1<2 ? 'background:#1CD8D2;cursor:pointer' : ''
     },
     form8ok () {
-      if (1<2) {
-        return 'background:#1CD8D2;cursor:pointer'
-      }
+      return 1<2 ? 'background:#1CD8D2;cursor:pointer' : ''
     },
     form9ok () {
-      if (1<2) {
-        return 'background:#1CD8D2;cursor:pointer'
-      }
+      return 1<2 ? 'background:#1CD8D2;cursor:pointer' : ''
     },
   },
   beforeRouteLeave (to, from, next) {

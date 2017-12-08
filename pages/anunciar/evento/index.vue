@@ -526,55 +526,33 @@ export default {
       let dd = new Date().getDate()
       let mm = new Date().getMonth() + 1
       let yyyy = new Date().getFullYear()
-      if (dd < 10) {
-        dd = '0' + dd
-      } 
-      if (mm < 10) {
-        mm = '0' + mm
-      } 
+      dd < 10 ? dd = '0' + dd : ''
+      mm < 10 ? mm = '0' + mm : ''
       return yyyy + '-' + mm + '-' + dd
     },
     mapZoom () {
-      if (this.$store.state.eventoPlace !== null) {
-        return 15
-      } else {
-        return 11
-      }
+      return this.$store.state.eventoPlace !== null ? 15 : 11
     },
     form1ok () {
-      if (this.$store.state.eventoData.date.length > 0 && this.$store.state.eventoData.hour.length > 0) {
-        return 'background:rgb(255, 88, 88);cursor:pointer'
-      }
+      return this.$store.state.eventoData.date.length > 0 && this.$store.state.eventoData.hour.length > 0 ? 'background:rgb(255, 88, 88);cursor:pointer' : ''
     },
     form2ok () {
-      if (this.$store.state.eventoPlace !== null) {
-        return 'background:rgb(255, 88, 88);cursor:pointer'
-      }
+      return this.$store.state.eventoPlace !== null ? 'background:rgb(255, 88, 88);cursor:pointer' : ''
     },
     form3ok () {
-      if (this.$store.state.eventoData.valorIngresso >= 0) {
-        return 'background:rgb(255, 88, 88);cursor:pointer'
-      }
+      return this.$store.state.eventoData.valorIngresso >= 0 ? 'background:rgb(255, 88, 88);cursor:pointer' : ''
     },
     form4ok () {
-      if (this.imageURL1 !== null) {
-        return 'background:rgb(255, 88, 88);cursor:pointer'
-      }
+      return this.imageURL1 !== null ? 'background:rgb(255, 88, 88);cursor:pointer' : ''
     },
     form5ok () {
-      if (this.$store.state.eventoData.title.length > 0) {
-        return 'background:rgb(255, 88, 88);cursor:pointer'
-      }
+      return this.$store.state.eventoData.title.length > 0 ? 'background:rgb(255, 88, 88);cursor:pointer' : ''
     },
     form6ok () {
-      if (this.$store.state.eventoData.subtitle.length > 0) {
-        return 'background:rgb(255, 88, 88);cursor:pointer'
-      }
+      return this.$store.state.eventoData.subtitle.length > 0 ? 'background:rgb(255, 88, 88);cursor:pointer' : ''
     },
     form7ok () {
-      if (1<2) {
-        return 'background:rgb(255, 88, 88);cursor:pointer'
-      }
+      return 1<2 ? 'background:rgb(255, 88, 88);cursor:pointer' : ''
     }
   },
   beforeRouteEnter (to, from, next) {

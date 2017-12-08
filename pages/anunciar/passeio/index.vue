@@ -116,7 +116,7 @@
       <h1 class="__form-title">O passeio sairá de onde?</h1>
 
       <div class="item-form">
-        <label>Local</label>
+        <label>Local de Saída</label>
         <select v-model="$store.state.passeioData.localSaida" @input="setLocalSaida" v-if="$store.state.passeioData.localSaida !== 'Outro'">
           <option>Escarpas do Lago</option>
           <option>Ponte do Turvo</option>
@@ -126,8 +126,6 @@
         </select>
         <textarea class="__local-saida-text" v-model="localSaida" rows="1" v-if="$store.state.passeioData.localSaida === 'Outro'" autofocus></textarea>
       </div> 
-
-
 
       <div class="back-next"> 
         <div class="back-next-body">
@@ -646,61 +644,39 @@ export default {
       return firstName
     },
     form1ok () {
-      if (this.$store.state.passeioData.tipoPasseio !== null) {
-        return 'background:#49A5FC;cursor:pointer'
-      }
+      return this.$store.state.passeioData.tipoPasseio !== null ? 'background:#49A5FC;cursor:pointer' : ''
     },
     form2ok () {
-      if (this.$store.state.passeioData.capacidade !== null) {
-        return 'background:#49A5FC;cursor:pointer'
-      }
+      return this.$store.state.passeioData.capacidade !== null ? 'background:#49A5FC;cursor:pointer' : ''
     },
     form3ok () {
-      if (this.$store.state.passeioData.duracao !== null) {
-        return 'background:#49A5FC;cursor:pointer'
-      }
+      return this.$store.state.passeioData.duracao !== null ? 'background:#49A5FC;cursor:pointer' : ''
     },
     form4ok () {
-      if (this.$store.state.passeioData.localSaida !== null && this.$store.state.passeioData.localSaida !== 'Outro') {
-        return 'background:#49A5FC;cursor:pointer'
-      } else if (this.localSaida !== '') {
-        return 'background:#49A5FC;cursor:pointer'
-      }
+      return this.$store.state.passeioData.localSaida !== null && this.$store.state.passeioData.localSaida !== 'Outro' ? 'background:#49A5FC;cursor:pointer'
+      : this.localSaida !== '' ? 'background:#49A5FC;cursor:pointer' 
+      : ''
     },
     form5ok () {
-      if (1<2) {
-        return 'background:#49A5FC;cursor:pointer'
-      }
+      return 1<2 ? 'background:#49A5FC;cursor:pointer' : ''
     },
     form6ok () {
-      if (this.$store.state.passeioData.valorPasseio !== 0) {
-        return 'background:#49A5FC;cursor:pointer'
-      }
+      return this.$store.state.passeioData.valorPasseio !== 0 ? 'background:#49A5FC;cursor:pointer' : ''
     },
     form7ok () {
-      if (this.imageURL1 !== null) {
-        return 'background:#49A5FC;cursor:pointer'
-      }
+      return this.imageURL1 !== null ? 'background:#49A5FC;cursor:pointer' : ''
     },
     form8ok () {
-      if (this.$store.state.passeioData.title !== '') {
-        return 'background:#49A5FC;cursor:pointer'
-      }
+      return this.$store.state.passeioData.title !== '' ? 'background:#49A5FC;cursor:pointer' : ''
     },
     form9ok () {
-      if (this.$store.state.passeioData.subtitle !== '') {
-        return 'background:#49A5FC;cursor:pointer'
-      }
+      return this.$store.state.passeioData.subtitle !== '' ? 'background:#49A5FC;cursor:pointer' : ''
     },
     form10ok () {
-      if (this.$store.state.passeioData.celular.length === 15) {
-        return 'background:#49A5FC;cursor:pointer'
-      }
+      return this.$store.state.passeioData.celular.length === 15 ? 'background:#49A5FC;cursor:pointer' : ''
     },
     form11ok () {
-      if (1<2) {
-        return 'background:#49A5FC;cursor:pointer'
-      }
+      return 1<2 ? 'background:#49A5FC;cursor:pointer' : ''
     }
   },
   beforeRouteLeave (to, from, next) {
