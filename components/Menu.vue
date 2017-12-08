@@ -100,13 +100,13 @@ export default {
         width: 1.3rem;
         height: auto;
         margin-right: 1rem;
-        filter: grayscale(100%) brightness(100%);
+        filter: grayscale(100%) brightness(80%);
       }
       & .__item-img {
         width: 1.3rem;
         height: auto;
         margin-right: 1rem;
-        filter: brightness(90%);
+        filter: brightness(70%);
       }
     }
     & .anuncio-box {
