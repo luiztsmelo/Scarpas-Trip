@@ -399,7 +399,7 @@ export default {
     bottom: 0;
     left: 0;
     z-index: 8888;
-    height: 3.4rem;
+    height: 3.5rem;
     width:  100%;
     background: white;
     padding: 0 7%;
@@ -413,7 +413,7 @@ export default {
       top: 50%;
       transform: translateY(-50%);
       & .__reserva-valor {
-        font-size: 18px;
+        font-size: 19px;
         font-weight: 400;
       }
       & .__reserva-btn {
