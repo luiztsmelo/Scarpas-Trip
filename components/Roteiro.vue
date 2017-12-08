@@ -113,7 +113,7 @@ export default {
     display: flex;
     flex-flow: column;
     z-index: 2;
-    background-image: linear-gradient(-20deg, #00cdac 0%, #5FBCB5 100%);
+    background: linear-gradient(to right, #ff7e5f, #feb47b);
     height: 100%;
     width: 100%;
     justify-content: center;
@@ -122,7 +122,7 @@ export default {
       padding: 0 7%;
       color: white;
       font-size: 22px;
-      font-weight: 600;
+      font-weight: 400;
       line-height: 29px;
     }
     & .chegada-partida-box {
