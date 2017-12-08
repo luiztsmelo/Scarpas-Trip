@@ -83,6 +83,7 @@ const store = () => new Vuex.Store({
     cadastroAcomod8: false,
     cadastroAcomod9: false,
     cadastroAcomod10: false,
+    cadastroAcomod11: false,
     /*
     ########## Evento ##########
     */
@@ -215,7 +216,7 @@ const store = () => new Vuex.Store({
     /*
     ########## Acomodação ##########
     */
-    m_AcomodID (state, payload) {
+    m_acomodID (state, payload) {
       state.acomodID = payload
       state.acomodData.acomodID = payload
     },
@@ -278,6 +279,9 @@ const store = () => new Vuex.Store({
     },
     m_cadastroAcomod10 (state, payload) {
       state.cadastroAcomod10 = payload
+    },
+    m_cadastroAcomod11 (state, payload) {
+      state.cadastroAcomod11 = payload
     },
     /*
     ########## Evento ##########
@@ -442,12 +446,26 @@ const store = () => new Vuex.Store({
           email: null,
           celular: '',
           photoURL: null,
-          tipoAcomod: '',
+          tipoAcomod: 'Casa',
           local: null,
           title: '',
           subtitle: '',
           valorAluguel: 0,
-          capacidade: null,
+          totalHospedes: '1',
+          totalSuites: '1',
+          totalQuartos: '1',
+          totalCamasCasal: '1',
+          totalCamasSolteiro: '1',
+          totalBanheiros: '1',
+          totalGaragem: '1',
+          hasRoupasCama: false,
+          hasToalhas: false,
+          hasChurrasqueira: false,
+          hasPiscina: false,
+          hasSauna: false,
+          hasWifi: false,
+          hasArCond: false,
+          hasMarina: false,
           duracao: null,
           imageL1: null,
           imageH1J: null,
@@ -536,6 +554,10 @@ const store = () => new Vuex.Store({
     },
     a_authStateObserver ({ commit, state }) {
       firebase.auth().onAuthStateChanged(user => {
+        state.acomodData.proprietario = user.displayName
+        state.acomodData.email = user.email
+        state.acomodData.photoURL = user.photoURL
+        state.acomodData.userID = user.uid
         state.passeioData.proprietario = user.displayName
         state.passeioData.email = user.email
         state.passeioData.photoURL = user.photoURL

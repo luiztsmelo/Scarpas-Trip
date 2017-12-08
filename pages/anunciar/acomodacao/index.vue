@@ -275,8 +275,67 @@
 
       <h1 class="__form-title">Adicione Imagens e Vídeo</h1>
 
-      
+      <div class="before-choose-image" v-show="imageURL1 === null">
+        <button class="__input-btn" type="button" @click="$refs.myCroppa1.chooseFile()">Adicionar Imagem</button>
+      </div>
 
+      <div class="modal-croppa" v-show="showCroppaModal1" @click="showCroppaModal1=false">
+        <div class="modal-croppa-body" @click.stop>
+          <h1>Ajustar imagem</h1>
+          <croppa
+          ref="myCroppa1"
+          :width="320"
+          :height="214"
+          :quality="3"
+          :placeholder="'Carregando...'"
+          :placeholder-color="'rgb(232,232,222)'"
+          :accept="'image/*'"
+          :zoom-speed="2"
+          :prevent-white-space="true"
+          :show-remove-button="false"
+          @file-choose="imageChoose1">
+          </croppa>
+          <div class="modal-croppa-btns">
+            <button class="__croppa-btn" type="button" @click="showCroppaModal1=false, imageConfirmed1()">Confirmar</button>
+            <button class="__croppa-btn"type="button" @click="$refs.myCroppa1.chooseFile(), $refs.myCroppa1.remove(), imageURL1 = null"  style="background:transparent">Escolher outra</button>
+            <button class="__croppa-btn" type="button" @click="removeImage1()" style="background:transparent">Remover</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-croppa" v-show="showCroppaModal2" @click="showCroppaModal2=false">
+        <div class="modal-croppa-body" @click.stop>
+          <h1>Ajustar imagem</h1>
+          <croppa
+          ref="myCroppa2"
+          :width="320"
+          :height="214"
+          :quality="3"
+          :placeholder="'Carregando...'"
+          :placeholder-color="'rgb(222,222,222)'"
+          :accept="'image/*'"
+          :prevent-white-space="true"
+          :show-remove-button="false"
+          @file-choose="imageChoose2">
+          </croppa>
+          <div class="modal-croppa-btns">
+            <button class="__croppa-btn" type="button" @click="showCroppaModal2=false, imageConfirmed2()">Confirmar</button>
+            <button class="__croppa-btn"type="button" @click="$refs.myCroppa2.chooseFile(), $refs.myCroppa2.remove(), imageURL2 = null"  style="background:transparent">Escolher outra</button>
+            <button class="__croppa-btn" type="button" @click="removeImage2()" style="background:transparent">Remover</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Preview Image -->
+      <div class="after-choose-image" v-show="imageURL1 !== null">
+        <img :src="imageURL1" class="__preview-img" @click="showCroppaModal1=true">
+
+        <div class="image2">
+          <img src="./../../../assets/img/add-image.svg" class="__preview-img" v-if="imageURL2 === null" @click="$refs.myCroppa2.chooseFile()" style="padding:2rem">
+          <img :src="imageURL2" class="__preview-img" @click="showCroppaModal2=true" v-else>
+        </div>
+
+      </div><!-- Preview Image -->
 
       <div class="back-next"> 
         <div class="back-next-body">
@@ -362,6 +421,69 @@
       </div> 
     
     </form><!-- ########## DESCRIÇÃO PG.9 ########## -->
+
+
+
+
+
+    <!-- ########## IDENTIFICAÇÃO PG.10 ########## -->
+    <form class="cadastro-acomodacao" v-show="$store.state.cadastroAcomod10">
+
+      <h1 class="__form-title">Seus dados pessoais para contato</h1>   
+
+
+      <h3 style="padding: .5rem 7% .7rem 7%" v-if="this.$store.state.acomodData.proprietario === null">Obter dados com:</h3>
+
+      <div class="signin-btns" v-if="$store.state.acomodData.proprietario === null">
+        <button type="button" class="facebook-btn" @click="facebookSignIn()">Facebook</button>
+        <button type="button" class="google-btn" @click="googleSignIn()">Google</button>
+      </div>
+
+      <h3 style="padding: .5rem 7% 0 7%" v-if="$store.state.acomodData.proprietario !== null">Ótimo {{ firstName }}! Só mais algumas informações:</h3>
+
+      <div v-if="$store.state.acomodData.proprietario !== null">
+        <div class="item-form">
+          <label>Celular</label>
+          <masked-input
+            type="tel"
+            v-model="$store.state.acomodData.celular"
+            :mask="['(', /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]"
+            :guide="true"
+            placeholder="(__) _____-____"
+            placeholderChar="_">
+          </masked-input>
+        </div>
+      </div>
+
+      <!-- <h3 style="padding: .5rem 7%;font-size:16px;line-height:22px">Ao prosseguir você concorda com nossos <span style="color:#49A5FC">Termos de Serviço</span>.</h3> -->
+
+      <div class="back-next"> 
+        <div class="back-next-body">
+          <button type="button" class="__back" @click="backBtn10">Voltar</button>
+          <button type="button" class="__next" :style="form10ok" @click="nextBtn10">Próximo</button>
+        </div>
+      </div> 
+    
+    </form><!-- ########## IDENTIFICAÇÃO PG.10 ########## -->
+
+
+
+
+
+    <!-- ########## INVESTIMENTO PG.11 ########## -->
+    <form class="cadastro-acomodacao" v-show="$store.state.cadastroAcomod11">
+
+      <h1 class="__form-title">Investimento</h1>   
+
+
+      <div class="back-next"> 
+        <div class="back-next-body">
+          <button type="button" class="__back" @click="backBtn11">Voltar</button>
+          <button type="button" class="__next" :style="form11ok" @click="concluir">Concluir</button>
+        </div>
+      </div> 
+    
+    </form><!-- ########## INVESTIMENTO PG.11 ########## -->
 
 
     <!-- CADASTRO ACOMODAÇÃO -->
@@ -473,6 +595,12 @@ export default {
     backBtn9 () {
       this.$store.commit('m_cadastroAcomod9', false), this.$store.commit('m_cadastroAcomod8', true)
     },
+    backBtn10 () {
+      this.$store.commit('m_cadastroAcomod10', false), this.$store.commit('m_cadastroAcomod9', true)
+    },
+    backBtn11 () {
+      this.$store.commit('m_cadastroAcomod11', false), this.$store.commit('m_cadastroAcomod10', true)
+    },
     /* ******************** NEXT BUTTONS ******************** */
     nextBtn1 () {
       if (this.$store.state.acomodData.tipoAcomod !== null) {
@@ -500,7 +628,7 @@ export default {
       }
     },
     nextBtn6 () {
-      if (1<2) {
+      if (this.imageURL1 !== null) {
         this.$store.commit('m_cadastroAcomod6', false), this.$store.commit('m_cadastroAcomod7', true), this.$store.commit('m_acomodProgressBar', (100/11)*7)
       }
     },
@@ -510,15 +638,98 @@ export default {
       }
     },
     nextBtn8 () {
-      if (1<2) {
+      if (this.$store.state.acomodData.title !== '') {
         this.$store.commit('m_cadastroAcomod8', false), this.$store.commit('m_cadastroAcomod9', true), this.$store.commit('m_acomodProgressBar', (100/11)*9)
       }
     },
     nextBtn9 () {
-      if (1<2) {
+      if (this.$store.state.acomodData.subtitle !== '') {
         this.$store.commit('m_cadastroAcomod9', false), this.$store.commit('m_cadastroAcomod10', true), this.$store.commit('m_acomodProgressBar', (100/11)*10)
       }
     },
+    nextBtn10 () {
+      if (this.$store.state.acomodData.celular.length === 15) {
+        this.$store.commit('m_cadastroAcomod10', false), this.$store.commit('m_cadastroAcomod11', true), this.$store.commit('m_acomodProgressBar', (100/11)*11)
+      }
+    },
+    concluir () {
+      if (1<2) {/* IF PAGAMENTO CONCLUIDO */
+        this.$store.commit('m_loader', true)
+        const acomodID = Math.floor(Math.random() * (99999 - 10000 + 1) + 10000)
+        this.$store.commit('m_acomodID', acomodID)
+        const storageRef = firebase.storage().ref('acomodacoes/' + acomodID + '/')
+        /* 
+        UPLOAD IMAGE 1 
+        */
+        /* imageAcL1 */
+        storageRef.child('imageL1.jpeg').put(this.$store.state.blobAcL1).then(snapshot => {
+          console.log(acomodID + 'L1' + '.jpeg')
+          storageRef.child('imageL1.jpeg').getDownloadURL().then(url => {
+            this.$store.commit('m_imageAcL1', url)
+            this.ifUpload1()
+          })
+        })
+        /* imageAcH1J */
+        storageRef.child('imageH1J.jpeg').put(this.$store.state.blobAcH1J).then(snapshot => {
+          console.log(acomodID + 'H1J' + '.jpeg')
+          storageRef.child('imageH1J.jpeg').getDownloadURL().then(url => {
+            this.$store.commit('m_imageAcH1J', url)
+            this.ifUpload1()
+          })
+        })
+        /* imageAcH1W */
+        storageRef.child('imageH1W.webp').put(this.$store.state.blobAcH1W).then(snapshot => {
+          console.log(acomodID + 'H1W' + '.webp')
+          storageRef.child('imageH1W.webp').getDownloadURL().then(url => {
+            this.$store.commit('m_imageAcH1W', url)
+            this.ifUpload1()
+          })
+        })
+        /* 
+        UPLOAD IMAGE 2 
+        */
+        if (this.$store.state.blobPasH2J !== null) {
+          /* imageAcL2 */
+          storageRef.child('imageL2.jpeg').put(this.$store.state.blobAcL2).then(snapshot => {
+            console.log(acomodID + 'L2' + '.jpeg')
+            storageRef.child('imageL2.jpeg').getDownloadURL().then(url => {
+              this.$store.commit('m_imageAcL2', url)
+              this.ifUpload2()
+            })
+          })
+          /* imageAcH2J */
+          storageRef.child('imageH2J.jpeg').put(this.$store.state.blobAcH2J).then(snapshot => {
+            console.log(acomodID + 'H2J' + '.jpeg')
+            storageRef.child('imageH2J.jpeg').getDownloadURL().then(url => {
+              this.$store.commit('m_imageAcH2J', url)
+              this.ifUpload2()
+            })
+          })
+          /* imageAcH2W */
+          storageRef.child('imageH2W.webp').put(this.$store.state.blobAcH2W).then(snapshot => {
+            console.log(acomodID + 'H2W' + '.webp')
+            storageRef.child('imageH2W.webp').getDownloadURL().then(url => {
+              this.$store.commit('m_imageAcH2W', url)
+              this.ifUpload2()
+            })
+          })
+        }
+      }
+    },
+    ifUpload1 () {
+      if (this.$store.state.acomodData.imageL1 !== null && this.$store.state.acomodData.imageH1J !== null && this.$store.state.acomodData.imageH1W !== null) {
+        this.$store.dispatch('a_uploadAcomod')
+        this.$store.commit('m_acomods', null) /* Para não bugar as imagens */
+        this.$router.push('/acomodacoes/' + this.$store.state.acomodData.acomodID)
+      }
+    },
+    ifUpload2 () {
+      if (this.$store.state.acomodData.imageL1 !== null && this.$store.state.acomodData.imageH1J !== null && this.$store.state.acomodData.imageH1W !== null && this.$store.state.acomodData.imageL2 !== null && this.$store.state.acomodData.imageH2J !== null && this.$store.state.acomodData.imageH2W !== null) {
+        this.$store.dispatch('a_uploadAcomod')
+        this.$store.commit('m_acomods', null) /* Para não bugar as imagens */
+        this.$router.push('/acomodacoes/' + this.$store.state.acomodData.acomodID)
+      }
+    }
   },
   computed: {
     tipoAcomodText () {
@@ -534,10 +745,15 @@ export default {
            : ''
     },
     titleLength () {
-      return 50 - this.$store.state.passeioData.title.length
+      return 50 - this.$store.state.acomodData.title.length
     },
     subtitleLength () {
-      return 400 - this.$store.state.passeioData.subtitle.length
+      return 400 - this.$store.state.acomodData.subtitle.length
+    },
+    firstName () {
+      let fullName = this.$store.state.acomodData.proprietario.split(' ')
+      let firstName = fullName[0]
+      return firstName
     },
     form1ok () {
       return this.$store.state.acomodData.tipoAcomod !== null ? 'background:#1CD8D2;cursor:pointer' : ''
@@ -555,17 +771,23 @@ export default {
       return 1<2 ? 'background:#1CD8D2;cursor:pointer' : ''
     },
     form6ok () {
-      return 1<2 ? 'background:#1CD8D2;cursor:pointer' : ''
+      return this.imageURL1 !== null ? 'background:#1CD8D2;cursor:pointer' : ''
     },
     form7ok () {
       return 1<2 ? 'background:#1CD8D2;cursor:pointer' : ''
     },
     form8ok () {
-      return 1<2 ? 'background:#1CD8D2;cursor:pointer' : ''
+      return this.$store.state.acomodData.title !== '' ? 'background:#1CD8D2;cursor:pointer' : ''
     },
     form9ok () {
-      return 1<2 ? 'background:#1CD8D2;cursor:pointer' : ''
+      return this.$store.state.acomodData.subtitle !== '' ? 'background:#1CD8D2;cursor:pointer' : ''
     },
+    form10ok () {
+      return this.$store.state.acomodData.celular.length === 15 ? 'background:#1CD8D2;cursor:pointer' : ''
+    },
+    form11ok () {
+      return 1<2 ? 'background:#1CD8D2;cursor:pointer' : ''
+    }
   },
   beforeRouteLeave (to, from, next) {
     if (this.$store.state.showFoobar === false) {
@@ -766,7 +988,7 @@ export default {
     & .__input-btn {
       margin: 1rem 7%;
       font-size: 16px;
-      background: #49A5FC;
+      background: #1CD8D2;
       color: white;
       padding: .8rem 1.2rem;
       border-radius: 2rem;
@@ -774,7 +996,7 @@ export default {
     & .__croppa-btn {
       margin: .3rem 0;
       font-size: 16px;
-      background: #49A5FC;
+      background: #1CD8D2;
       color: white;
       padding: .8rem 1.2rem;
       border-radius: 2rem;

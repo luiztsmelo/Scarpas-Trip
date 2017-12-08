@@ -467,89 +467,89 @@ export default {
     },
     /* ******************** BACK BUTTONS ******************** */
     backBtn1 () {
-      return this.$store.commit('m_cadastroPasseio1', false), this.$store.commit('m_cadastroPasseio0', true)
+      this.$store.commit('m_cadastroPasseio1', false), this.$store.commit('m_cadastroPasseio0', true)
     },
     backBtn2 () {
-      return this.$store.commit('m_cadastroPasseio2', false), this.$store.commit('m_cadastroPasseio1', true)
+      this.$store.commit('m_cadastroPasseio2', false), this.$store.commit('m_cadastroPasseio1', true)
     },
     backBtn3 () {
-      return this.$store.commit('m_cadastroPasseio3', false), this.$store.commit('m_cadastroPasseio2', true)
+      this.$store.commit('m_cadastroPasseio3', false), this.$store.commit('m_cadastroPasseio2', true)
     },
     backBtn4 () {
-      return this.$store.commit('m_cadastroPasseio4', false), this.$store.commit('m_cadastroPasseio3', true)
+      this.$store.commit('m_cadastroPasseio4', false), this.$store.commit('m_cadastroPasseio3', true)
     },
     backBtn5 () {
-      return this.$store.commit('m_cadastroPasseio5', false), this.$store.commit('m_cadastroPasseio4', true)
+      this.$store.commit('m_cadastroPasseio5', false), this.$store.commit('m_cadastroPasseio4', true)
     },
     backBtn6 () {
-      return this.$store.commit('m_cadastroPasseio6', false), this.$store.commit('m_cadastroPasseio5', true)
+      this.$store.commit('m_cadastroPasseio6', false), this.$store.commit('m_cadastroPasseio5', true)
     },
     backBtn7 () {
-      return this.$store.commit('m_cadastroPasseio7', false), this.$store.commit('m_cadastroPasseio6', true)
+      this.$store.commit('m_cadastroPasseio7', false), this.$store.commit('m_cadastroPasseio6', true)
     },
     backBtn8 () {
-      return this.$store.commit('m_cadastroPasseio8', false), this.$store.commit('m_cadastroPasseio7', true)
+      this.$store.commit('m_cadastroPasseio8', false), this.$store.commit('m_cadastroPasseio7', true)
     },
     backBtn9 () {
-      return this.$store.commit('m_cadastroPasseio9', false), this.$store.commit('m_cadastroPasseio8', true)
+      this.$store.commit('m_cadastroPasseio9', false), this.$store.commit('m_cadastroPasseio8', true)
     },
     backBtn10 () {
-      return this.$store.commit('m_cadastroPasseio10', false), this.$store.commit('m_cadastroPasseio9', true)
+      this.$store.commit('m_cadastroPasseio10', false), this.$store.commit('m_cadastroPasseio9', true)
     },
     backBtn11 () {
-      return this.$store.commit('m_cadastroPasseio11', false), this.$store.commit('m_cadastroPasseio10', true)
+      this.$store.commit('m_cadastroPasseio11', false), this.$store.commit('m_cadastroPasseio10', true)
     },
     /* ******************** NEXT BUTTONS ******************** */
     nextBtn1 () {
       if (this.$store.state.passeioData.tipoPasseio !== null) {
-        return this.$store.commit('m_cadastroPasseio1', false), this.$store.commit('m_cadastroPasseio2', true), this.$store.commit('m_passeioProgressBar', (100/11)*2)
+        this.$store.commit('m_cadastroPasseio1', false), this.$store.commit('m_cadastroPasseio2', true), this.$store.commit('m_passeioProgressBar', (100/11)*2)
       }
     },
     nextBtn2 () {
       if (this.$store.state.passeioData.capacidade !== null) {
-        return this.$store.commit('m_cadastroPasseio2', false), this.$store.commit('m_cadastroPasseio3', true), this.$store.commit('m_passeioProgressBar', (100/11)*3)
+        this.$store.commit('m_cadastroPasseio2', false), this.$store.commit('m_cadastroPasseio3', true), this.$store.commit('m_passeioProgressBar', (100/11)*3)
       }
     },
     nextBtn3 () {
       if (this.$store.state.passeioData.duracao !== null) {
-        return this.$store.commit('m_cadastroPasseio3', false), this.$store.commit('m_cadastroPasseio4', true), this.$store.commit('m_passeioProgressBar', (100/11)*4)
+        this.$store.commit('m_cadastroPasseio3', false), this.$store.commit('m_cadastroPasseio4', true), this.$store.commit('m_passeioProgressBar', (100/11)*4)
       }
     },
     nextBtn4 () {
       if (this.$store.state.passeioData.localSaida !== null && this.$store.state.passeioData.localSaida !== 'Outro') {
-        return this.$store.commit('m_cadastroPasseio4', false), this.$store.commit('m_cadastroPasseio5', true), this.$store.commit('m_passeioProgressBar', (100/11)*5)
+        this.$store.commit('m_cadastroPasseio4', false), this.$store.commit('m_cadastroPasseio5', true), this.$store.commit('m_passeioProgressBar', (100/11)*5)
       } else if (this.localSaida !== '') {
-        return this.$store.commit('m_cadastroPasseio4', false), this.$store.commit('m_cadastroPasseio5', true), this.$store.commit('m_passeioProgressBar', (100/11)*5), this.$store.commit('m_localSaida', this.localSaida)
+        this.$store.commit('m_cadastroPasseio4', false), this.$store.commit('m_cadastroPasseio5', true), this.$store.commit('m_passeioProgressBar', (100/11)*5), this.$store.commit('m_localSaida', this.localSaida)
       }
     },
     nextBtn5 () {
       if (1<2) {
-        return this.$store.commit('m_cadastroPasseio5', false), this.$store.commit('m_cadastroPasseio6', true), this.$store.commit('m_passeioProgressBar', (100/11)*6)
+        this.$store.commit('m_cadastroPasseio5', false), this.$store.commit('m_cadastroPasseio6', true), this.$store.commit('m_passeioProgressBar', (100/11)*6)
       }
     },
     nextBtn6 () {
       if (this.$store.state.passeioData.valorPasseio !== 0) {
-        return this.$store.commit('m_cadastroPasseio6', false), this.$store.commit('m_cadastroPasseio7', true), this.$store.commit('m_passeioProgressBar', (100/11)*7)
+        this.$store.commit('m_cadastroPasseio6', false), this.$store.commit('m_cadastroPasseio7', true), this.$store.commit('m_passeioProgressBar', (100/11)*7)
       }
     },
     nextBtn7 () {
       if (this.imageURL1 !== null) {
-        return this.$store.commit('m_cadastroPasseio7', false), this.$store.commit('m_cadastroPasseio8', true), this.$store.commit('m_passeioProgressBar', (100/11)*8)
+        this.$store.commit('m_cadastroPasseio7', false), this.$store.commit('m_cadastroPasseio8', true), this.$store.commit('m_passeioProgressBar', (100/11)*8)
       }
     },
     nextBtn8 () {
       if (this.$store.state.passeioData.title !== '') {
-        return this.$store.commit('m_cadastroPasseio8', false), this.$store.commit('m_cadastroPasseio9', true), this.$store.commit('m_passeioProgressBar', (100/11)*9)
+        this.$store.commit('m_cadastroPasseio8', false), this.$store.commit('m_cadastroPasseio9', true), this.$store.commit('m_passeioProgressBar', (100/11)*9)
       }
     },
     nextBtn9 () {
       if (this.$store.state.passeioData.subtitle !== '') {
-        return this.$store.commit('m_cadastroPasseio9', false), this.$store.commit('m_cadastroPasseio10', true), this.$store.commit('m_passeioProgressBar', (100/11)*10)
+        this.$store.commit('m_cadastroPasseio9', false), this.$store.commit('m_cadastroPasseio10', true), this.$store.commit('m_passeioProgressBar', (100/11)*10)
       }
     },
     nextBtn10 () {
       if (this.$store.state.passeioData.celular.length === 15) {
-        return this.$store.commit('m_cadastroPasseio10', false), this.$store.commit('m_cadastroPasseio11', true), this.$store.commit('m_passeioProgressBar', (100/11)*11)
+        this.$store.commit('m_cadastroPasseio10', false), this.$store.commit('m_cadastroPasseio11', true), this.$store.commit('m_passeioProgressBar', (100/11)*11)
       }
     },
     concluir () {
