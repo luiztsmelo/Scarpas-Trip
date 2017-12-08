@@ -217,10 +217,18 @@
           </label>
         </div>
 
-        <div class="item-form-switches" style="border:none">
+        <div class="item-form-switches">
           <h3>Ar condicionado</h3>
           <label class="switch">
             <input type="checkbox" v-model="$store.state.acomodData.hasArCond">
+            <span class="slider round"></span>
+          </label>
+        </div>
+
+        <div class="item-form-switches" style="border:none">
+          <h3>Marina</h3>
+          <label class="switch">
+            <input type="checkbox" v-model="$store.state.acomodData.hasMarina">
             <span class="slider round"></span>
           </label>
         </div>

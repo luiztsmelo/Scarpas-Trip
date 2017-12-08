@@ -63,6 +63,7 @@ const store = () => new Vuex.Store({
       hasSauna: false,
       hasWifi: false,
       hasArCond: false,
+      hasMarina: false,
       duracao: null,
       imageL1: null,
       imageH1J: null,
