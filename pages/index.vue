@@ -5,7 +5,9 @@
 
 
 
+
       <roteiro/><!-- ####### ROTEIRO ####### -->
+
 
 
 
@@ -14,16 +16,17 @@
 
         <div class="title-row">
           <h1 class="__title">Próximos Eventos</h1>
-          <!-- <nuxt-link to="/eventos">
+
+          <nuxt-link to="/eventos">
             <div class="see-all">
               <span class="__see-all-text">Ver mais</span>
               <img class="__see-all-arrow" src="../assets/img/see-all-arrow.svg">
             </div>
-          </nuxt-link>  --> 
+          </nuxt-link>
         </div>
           
         <swiper :options="swiperOption" ref="eventosSwiper">
-          <swiper-slide class="card" v-for="evento in $store.state.eventos" :key="evento.eventoID" @click="getEventoID(evento)">
+          <swiper-slide class="card" v-for="evento in $store.state.eventos" :key="evento.eventoID">
             <nuxt-link :to="'/eventos/' + evento.eventoID">
               <progressive-img class="__card-img" :src="imageEvH(evento)" :placeholder="evento.imageL1" no-ratio />
               <span class="__card-date">{{ evento.date }}</span>
@@ -38,21 +41,54 @@
 
 
 
+
+      <!-- ####### ACOMODAÇÕES ####### -->
+      <div class="category-container">
+
+        <div class="title-row">
+          <h1 class="__title">Acomodações</h1>
+
+          <nuxt-link to="/acomodacoes">
+            <div class="see-all">
+              <span class="__see-all-text">Ver mais</span>
+              <img class="__see-all-arrow" src="../assets/img/see-all-arrow.svg">
+            </div>
+          </nuxt-link> 
+        </div>
+          
+        <swiper :options="swiperOption" ref="passeiosSwiper">
+          <swiper-slide class="card" v-for="acomod in $store.state.acomods" :key="acomod.acomodID">
+            <nuxt-link :to="'/acomodacoes/' + acomod.acomodID">
+              <progressive-img class="__card-img" :src="imageAcH(acomod)" :placeholder="acomod.imageL1" no-ratio />
+              <span class="__card-tipoPasseio">{{ acomod.tipoAcomod }}</span>
+              <h1 class="__card-title">{{ acomod.title | truncateTitle }}</h1>
+              <!-- <h2 class="__card-valor">R${{ acomod.subtitle }}</h2> -->
+            </nuxt-link> 
+          </swiper-slide>
+        </swiper>
+
+      </div><!-- ####### ACOMODAÇÕES ####### -->
+
+
+
+
+
       <!-- ####### PASSEIOS ####### -->
       <div class="category-container">
 
         <div class="title-row">
           <h1 class="__title">Passeios</h1>
-          <!-- <nuxt-link to="/eventos">
+
+          <nuxt-link to="/passeios">
             <div class="see-all">
               <span class="__see-all-text">Ver mais</span>
               <img class="__see-all-arrow" src="../assets/img/see-all-arrow.svg">
             </div>
-          </nuxt-link>  --> 
+          </nuxt-link> 
         </div>
           
         <swiper :options="swiperOption" ref="passeiosSwiper">
-          <swiper-slide class="card" v-for="passeio in $store.state.passeios" :key="passeio.passeioID" @click="getPasseioID(passeio)">
+          <swiper-slide class="card" v-for="passeio in $store.state.passeios" :key="passeio.passeioID">
             <nuxt-link :to="'/passeios/' + passeio.passeioID">
               <progressive-img class="__card-img" :src="imagePasH(passeio)" :placeholder="passeio.imageL1" no-ratio />
               <span class="__card-tipoPasseio">{{ passeio.tipoPasseio }}</span>
@@ -96,17 +132,18 @@ export default {
     }
   },
   methods: {
-    getEventoID (evento) {
-      this.$store.commit('m_getEventoID', evento.eventoID)
-    },
-    getPasseioID (passeio) {
-      this.$store.commit('m_getPasseioID', passeio.passeioID)
-    },
     imageEvH (evento) {
       if (supportsWebP) {
         return evento.imageH1W
       } else {
         return evento.imageH1J
+      }
+    },
+    imageAcH (acomod) {
+      if (supportsWebP) {
+        return acomod.imageH1W
+      } else {
+        return acomod.imageH1J
       }
     },
     imagePasH (passeio) {
@@ -121,6 +158,9 @@ export default {
     return firebase.database().ref('eventos').on('value', function(snapshot) {
       store.commit('m_eventos', snapshot.val())
     }) 
+    && firebase.database().ref('acomodacoes').on('value', function(snapshot) {
+      store.commit('m_acomods', snapshot.val())
+    })
     && firebase.database().ref('passeios').on('value', function(snapshot) {
       store.commit('m_passeios', snapshot.val())
     })
@@ -168,7 +208,7 @@ export default {
     flex-flow: column;
     margin-bottom: 100rem;
     & .category-container {
-      padding: 2rem 0;
+      padding: 2.5rem 0 2rem 0;
       display: flex;
       flex-flow: column;
       overflow-x: hidden;
@@ -184,6 +224,7 @@ export default {
         & .see-all {
           width: 4.5rem;
           cursor: pointer;
+          text-align: end;
           & .__see-all-text {
             font-size: 13px;
             font-weight: 500;

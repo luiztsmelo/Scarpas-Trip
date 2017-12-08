@@ -48,7 +48,7 @@ const store = () => new Vuex.Store({
       local: null,
       title: '',
       subtitle: '',
-      valorAluguel: 0,
+      valorDiaria: 0,
       totalHospedes: '1',
       totalSuites: '1',
       totalQuartos: '1',
@@ -90,7 +90,6 @@ const store = () => new Vuex.Store({
     eventoID: null,
     eventos: null,
     evento: null,
-    getEventoID: null,
     eventoMap: null,
     eventoProgressBar: 0,
     eventoPlace: null,
@@ -322,9 +321,6 @@ const store = () => new Vuex.Store({
     },
     m_evento (state, payload) {
       state.evento = payload
-    },
-    m_getEventoID (state, payload) {
-      state.getEventoID = payload
     },
     m_eventoProgressBar (state, payload) {
       state.eventoProgressBar = payload
