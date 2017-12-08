@@ -117,7 +117,7 @@ export default {
       }
     }
   },
-  fetch ({ store }) {/* NÃO ESTÁ BOM!!! MELHORAR FETCH (APÓS UPLOAD DÁ PROBLEMA) */
+  fetch ({ store }) {
     return firebase.database().ref('eventos').on('value', function(snapshot) {
       store.commit('m_eventos', snapshot.val())
     }) 

@@ -85,7 +85,7 @@ export default {
   top: 3.2rem;
   background: white;
   overflow: hidden;
-  transition: all .3s ease;
+  transition: var(--main-transition);
   & .menu-body {
     display: flex;
     flex-flow: column;
