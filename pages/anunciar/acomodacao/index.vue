@@ -47,6 +47,7 @@
         <label>Tipo</label>
         <select v-model="$store.state.acomodData.tipoAcomod">
           <option>Casa</option>
+          <option>Apartamento</option>
           <option>Rancho</option>
           <option>Chácara</option>
           <option>Pousada</option>
@@ -736,6 +737,7 @@ export default {
     tipoAcomodText () {
       const path = this.$store.state.acomodData.tipoAcomod
       return path === 'Casa' ? 'da sua casa' 
+           : path === 'Apartamento' ? 'do seu apartamento'
            : path === 'Rancho' ? 'do seu rancho'
            : path === 'Chácara' ? 'da sua chácara'
            : path === 'Pousada' ? 'da sua pousada'
