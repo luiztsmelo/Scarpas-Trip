@@ -246,7 +246,7 @@ export default {
   flex-flow: column;
   background-color: white;
   margin-bottom: 3.1rem;
-  transition: all .3s cubic-bezier(.15,.97,.43,.93);
+  transition: all .27s cubic-bezier(.15,.97,.43,.93);
 
 
 
