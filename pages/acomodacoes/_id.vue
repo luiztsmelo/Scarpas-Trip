@@ -44,11 +44,24 @@
     
 
     <!-- ####### SOBRE ####### -->
-    <h1 class="box-title">Sobre</h1>
+    <h1 class="box-title">Sobre {{ tipoAcomodText }}</h1>
 
     <div class="sobre-box">
       <h3>{{ acomod.subtitle }}</h3>
     </div><!-- ####### SOBRE ####### -->
+
+
+
+
+
+    <!-- ####### COMODIDADES ####### -->
+    <h1 class="box-title">Comodidades</h1>
+
+    <div class="comodidades-box">
+      <img class="__img-comodidade" src="../../assets/img/hasWifi.svg">
+      <img class="__img-comodidade" src="../../assets/img/hasPiscina.svg">
+      <img class="__img-comodidade" src="../../assets/img/hasChurrasqueira.svg">
+    </div><!-- ####### COMODIDADES ####### -->
 
 
 
@@ -219,6 +232,19 @@ export default {
     }
   },
   computed: {
+    tipoAcomodText () {
+      const path = this.$store.state.acomodData.tipoAcomod
+      return path === 'Casa' ? 'a casa' 
+           : path === 'Apartamento' ? 'o apartamento'
+           : path === 'Rancho' ? 'o rancho'
+           : path === 'Chácara' ? 'a chácara'
+           : path === 'Pousada' ? 'a pousada'
+           : path === 'Camping' ? 'o camping'
+           : path === 'Sítio' ? 'o sítio'
+           : path === 'Fazenda' ? 'a fazenda'
+           : path === 'Hostel' ? 'o hostel'
+           : ''
+    },
     scrollY () {
       return this.$store.state.scrollY
     },
@@ -375,6 +401,20 @@ export default {
   & .sobre-box {
     padding: 0 7%;
   }/* ####### SOBRE BOX ####### */
+
+
+
+
+
+  /* ####### COMODIDADES ####### */
+  & .comodidades-box {
+    padding: 0 7%;
+    & .__img-comodidade {
+      width: 1.7rem;
+      height: auto;
+      margin: 0 .6rem;
+    }
+  }/* ####### COMODIDADES ####### */
 
 
 
