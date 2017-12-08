@@ -60,7 +60,7 @@
           <swiper-slide class="card" v-for="acomod in $store.state.acomods" :key="acomod.acomodID">
             <nuxt-link :to="'/acomodacoes/' + acomod.acomodID">
               <progressive-img class="__card-img" :src="imageAcH(acomod)" :placeholder="acomod.imageL1" no-ratio />
-              <span class="__card-tipoPasseio">{{ acomod.tipoAcomod }}</span>
+              <span class="__card-tipoAcomod">{{ acomod.tipoAcomod }}</span>
               <h1 class="__card-title">{{ acomod.title | truncateTitle }}</h1>
               <!-- <h2 class="__card-valor">R${{ acomod.subtitle }}</h2> -->
             </nuxt-link> 
@@ -261,6 +261,12 @@ export default {
               font-size: 12px;
               font-weight: 600;
               color: #ff5858;
+            }
+            & .__card-tipoAcomod {
+              text-transform: uppercase;
+              font-size: 12px;
+              font-weight: 600;
+              color: #1CD8D2;
             }
             & .__card-tipoPasseio {
               text-transform: uppercase;

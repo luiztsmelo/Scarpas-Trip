@@ -146,7 +146,7 @@ export default {
         padding: 0 7%;
         font-size: 14px;
         font-weight: 600;
-        color: #49A5FC;
+        color: #1CD8D2;
       }
       & .__card-title {
         padding: .2rem 7%;
