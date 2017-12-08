@@ -23,7 +23,7 @@
         </div>
           
         <swiper :options="swiperOption" ref="eventosSwiper">
-          <swiper-slide class="card" v-for="evento in $store.state.eventos" :key="evento.eventoID" @click="getEventoID(evento)" v-ripple="'rgba(0,0,0,.02)'">
+          <swiper-slide class="card" v-for="evento in $store.state.eventos" :key="evento.eventoID" @click="getEventoID(evento)">
             <nuxt-link :to="'/eventos/' + evento.eventoID">
               <progressive-img class="__card-img" :src="imageEvH(evento)" :placeholder="evento.imageL1" no-ratio />
               <span class="__card-date">{{ evento.date }}</span>
@@ -52,7 +52,7 @@
         </div>
           
         <swiper :options="swiperOption" ref="passeiosSwiper">
-          <swiper-slide class="card" v-for="passeio in $store.state.passeios" :key="passeio.passeioID" @click="getPasseioID(passeio)" v-ripple="'rgba(0,0,0,.02)'">
+          <swiper-slide class="card" v-for="passeio in $store.state.passeios" :key="passeio.passeioID" @click="getPasseioID(passeio)">
             <nuxt-link :to="'/passeios/' + passeio.passeioID">
               <progressive-img class="__card-img" :src="imagePasH(passeio)" :placeholder="passeio.imageL1" no-ratio />
               <span class="__card-tipoPasseio">{{ passeio.tipoPasseio }}</span>
