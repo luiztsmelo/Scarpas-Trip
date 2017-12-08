@@ -100,6 +100,15 @@ export default {
         return value.slice(0)
       }
     }
+  },
+  beforeRouteEnter (to, from, next) {
+    next(vm => {
+      vm.$store.state.offFoobar1 = true
+      vm.$store.state.offFoobar2 = false
+      vm.$store.state.offFoobar3 = true
+      vm.$store.state.offFoobar4 = true
+      vm.$store.state.offFoobar5 = true
+    })
   }
 }
 </script>
