@@ -266,7 +266,7 @@ export default {
               text-transform: uppercase;
               font-size: 12px;
               font-weight: 600;
-              color: #1CD8D2;
+              color: #00CFC7;
             }
             & .__card-tipoPasseio {
               text-transform: uppercase;
