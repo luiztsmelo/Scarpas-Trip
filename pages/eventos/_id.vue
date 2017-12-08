@@ -142,17 +142,12 @@ export default {
   },
   transition: 'evento',
   fetch ({ store, params }) {
-    /* if (store.state.eventos !== null) {
-      const eventodata = _.pick(store.state.eventos, [store.state.eventos.eventoID = store.state.getEventoID])
-      store.commit('m_evento', evento)
-    } else { */
-      return firebase.database().ref('eventos/' + params.id).once('value')
-      .then(snapshot => {
-        store.commit('m_evento', snapshot.val())
-        store.commit('m_showNavbar', false)
-        store.commit('m_showFoobar', false)
-      })
-    /* } */
+    return firebase.database().ref('eventos/' + params.id).once('value')
+    .then(snapshot => {
+      store.commit('m_evento', snapshot.val())
+      store.commit('m_showNavbar', false)
+      store.commit('m_showFoobar', false)
+    })
   },
   methods: {
     image1H (evento) {
@@ -219,10 +214,10 @@ export default {
   },
   watch: {
     scrollY (value) {
-      if (value >= 250) {
-        return this.showReserva = true, this.scrollTopbar = true
+      if (value > 250) {
+        this.scrollTopbar = true
       } else {
-        return this.showReserva = false, this.scrollTopbar = false
+        this.scrollTopbar = false
       }
     }
   },

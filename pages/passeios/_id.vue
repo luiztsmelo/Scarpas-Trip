@@ -204,17 +204,12 @@ export default {
   },
   transition: 'evento',
   fetch ({ store, params }) {
-    /* if (store.state.eventos !== null) {
-      const eventodata = _.pick(store.state.eventos, [store.state.eventos.eventoID = store.state.getEventoID])
-      store.commit('m_evento', evento)
-    } else { */
-      return firebase.database().ref('passeios/' + params.id).once('value')
-      .then(snapshot => {
-        store.commit('m_passeio', snapshot.val())
-        store.commit('m_showNavbar', false)
-        store.commit('m_showFoobar', false)
-      })
-    /* } */
+    return firebase.database().ref('passeios/' + params.id).once('value')
+    .then(snapshot => {
+      store.commit('m_passeio', snapshot.val())
+      store.commit('m_showNavbar', false)
+      store.commit('m_showFoobar', false)
+    })
   },
   methods: {
     image1H (passeio) {
@@ -269,11 +264,6 @@ export default {
   watch: {
     scrollY (value) {
       if (value > 250) {
-        /* if (this.$store.state.scrollUp === true) {
-          this.showTopbar = true
-        } else {
-          this.showTopbar = false
-        } */
         this.scrollTopbar = true
       } else {
         this.scrollTopbar = false

@@ -49,14 +49,9 @@ export default {
     }
   },
   fetch ({ store }) {
-    if (store.state.passeios === null) {
-      return firebase.database().ref('passeios').once('value')
-      .then(snapshot => {
-        store.commit('m_passeios', snapshot.val())
-      })
-    } else {
-      return console.log('Passeios já carregados')
-    }
+    return firebase.database().ref('passeios').on('value', function(snapshot) {
+      store.commit('m_passeios', snapshot.val())
+    })
   },
   methods: {
     image1H (passeio) {

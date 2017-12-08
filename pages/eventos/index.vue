@@ -49,14 +49,9 @@ export default {
     }
   },
   fetch ({ store }) {
-    if (store.state.eventos === null) {
-      return firebase.database().ref('eventos').once('value')
-      .then(snapshot => {
-        store.commit('m_eventos', snapshot.val())
-      })
-    } else {
-      return console.log('Eventos já carregados')
-    }
+    return firebase.database().ref('eventos').on('value', function(snapshot) {
+      store.commit('m_eventos', snapshot.val())
+    })
   },
   methods: {
     image1H (evento) {
