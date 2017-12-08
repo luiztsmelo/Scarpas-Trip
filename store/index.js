@@ -21,6 +21,11 @@ const store = () => new Vuex.Store({
     showShare: false,
     menuIconAnime: false,
     loader: false,
+    offFoobar1: true,
+    offFoobar2: true,
+    offFoobar3: true,
+    offFoobar4: true,
+    offFoobar5: true,
     /*
     -------------------- ANÚNCIOS --------------------
     */

@@ -183,6 +183,11 @@ export default {
   },
   beforeRouteEnter (to, from, next) {
     next(vm => {
+      vm.$store.state.offFoobar1 = true
+      vm.$store.state.offFoobar2 = true
+      vm.$store.state.offFoobar3 = true
+      vm.$store.state.offFoobar4 = true
+      vm.$store.state.offFoobar5 = true
       if (vm.$store.state.showFoobar === false) {
         vm.$store.commit('m_showFoobar', true)
       }
