@@ -295,7 +295,7 @@ export default {
   & .__event-title {
     padding: 0 7%;
     margin: 1rem 0 2rem 0;
-    font-size: 32px;
+    font-size: 31px;
     font-weight: 600;
   }
 

@@ -689,7 +689,7 @@ export default {
         /* 
         UPLOAD IMAGE 2 
         */
-        if (this.$store.state.blobPasH2J !== null) {
+        if (this.$store.state.blobAcH2J !== null) {
           /* imageAcL2 */
           storageRef.child('imageL2.jpeg').put(this.$store.state.blobAcL2).then(snapshot => {
             console.log(acomodID + 'L2' + '.jpeg')
