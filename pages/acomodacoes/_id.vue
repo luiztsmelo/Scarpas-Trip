@@ -436,7 +436,7 @@ export default {
       }
       & .__reserva-btn {
         font-size: 16px;
-        background: #1CD8D2;
+        background: #00CFC7;
         color: white;
         padding: .6rem 1.2rem;
         border-radius: 4px;
