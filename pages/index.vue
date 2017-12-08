@@ -4,7 +4,9 @@
     <div class="home-body">
 
 
+
       <roteiro/><!-- ####### ROTEIRO ####### -->
+
 
 
       <!-- ####### EVENTOS ####### -->
@@ -116,35 +118,12 @@ export default {
     }
   },
   fetch ({ store }) {/* NÃO ESTÁ BOM!!! MELHORAR FETCH (APÓS UPLOAD DÁ PROBLEMA) */
-    if (store.state.eventos === null && store.state.passeios === null) {
-      return firebase.database().ref('eventos').once('value')
-      .then(snapshot => {
-        store.commit('m_eventos', snapshot.val())
-      })
-      .then(() => {
-        return firebase.database().ref('passeios').once('value')
-        .then(snapshot => {
-          store.commit('m_passeios', snapshot.val())
-        })
-      })
-      
-    } else {
-      return console.log('Eventos e Passeios já carregados')
-    }
-  },
-  computed: {
-    today () {
-      let dd = new Date().getDate()
-      let mm = new Date().getMonth() + 1
-      let yyyy = new Date().getFullYear()
-      if (dd < 10) {
-        dd = '0' + dd
-      } 
-      if (mm < 10) {
-        mm = '0' + mm
-      } 
-      return yyyy + '-' + mm + '-' + dd
-    }
+    return firebase.database().ref('eventos').on('value', function(snapshot) {
+      store.commit('m_eventos', snapshot.val())
+    }) 
+    && firebase.database().ref('passeios').on('value', function(snapshot) {
+      store.commit('m_passeios', snapshot.val())
+    })
   },
   filters: {
     truncateTitle (value) {
