@@ -196,14 +196,6 @@
         </div>
 
         <div class="item-form-switches">
-          <h3>Sauna</h3>
-          <label class="switch">
-            <input type="checkbox" v-model="$store.state.acomodData.hasSauna">
-            <span class="slider round"></span>
-          </label>
-        </div>
-
-        <div class="item-form-switches">
           <h3>Wi-Fi</h3>
           <label class="switch">
             <input type="checkbox" v-model="$store.state.acomodData.hasWifi">
@@ -228,9 +220,9 @@
         </div>
 
         <div class="item-form-switches" style="border:none">
-          <h3>Marina</h3>
+          <h3>Pier</h3>
           <label class="switch">
-            <input type="checkbox" v-model="$store.state.acomodData.hasMarina">
+            <input type="checkbox" v-model="$store.state.acomodData.hasPier">
             <span class="slider round"></span>
           </label>
         </div>

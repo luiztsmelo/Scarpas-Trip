@@ -58,12 +58,13 @@
     <h1 class="box-title">Comodidades</h1>
 
     <div class="comodidades-box">
-      <img class="__img-comodidade" src="../../assets/img/hasRoupasCama.svg">
-      <img class="__img-comodidade" src="../../assets/img/hasPiscina.svg">
-      <img class="__img-comodidade" src="../../assets/img/hasChurrasqueira.svg">
-      <img class="__img-comodidade" src="../../assets/img/hasWifi.svg">
-      <img class="__img-comodidade" src="../../assets/img/hasArCond.svg">
-      <img class="__img-comodidade" src="../../assets/img/hasCaixaSom.svg">
+      <img class="__img-comodidade" v-if="acomod.hasRoupasCama" src="../../assets/img/hasRoupasCama.svg">
+      <img class="__img-comodidade" v-if="acomod.hasPiscina" src="../../assets/img/hasPiscina.svg">
+      <img class="__img-comodidade" v-if="acomod.hasChurrasqueira" src="../../assets/img/hasChurrasqueira.svg">
+      <img class="__img-comodidade" v-if="acomod.hasWifi" src="../../assets/img/hasWifi.svg">
+      <img class="__img-comodidade" v-if="acomod.hasArCond" src="../../assets/img/hasArCond.svg">
+      <img class="__img-comodidade" v-if="acomod.hasCaixaSom" src="../../assets/img/hasCaixaSom.svg">
+      <img class="__img-comodidade" v-if="acomod.hasPier" src="../../assets/img/hasPier.svg">
     </div><!-- ####### COMODIDADES ####### -->
 
 
@@ -411,9 +412,10 @@ export default {
 
   /* ####### COMODIDADES ####### */
   & .comodidades-box {
+    transform: translateX(-.6rem);
     padding: 0 7%;
     & .__img-comodidade {
-      width: 1.75rem;
+      width: 1.7rem;
       height: auto;
       margin: 0 .6rem;
     }
