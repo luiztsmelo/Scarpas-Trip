@@ -167,8 +167,8 @@ export default {
   },
   filters: {
     truncateTitle (value) {
-      if (value.length > 30) {
-        return value.slice(0, 30) + '...'
+      if (value.length > 29) {
+        return value.slice(0, 29) + '...'
       } else {
         return value.slice(0)
       }
