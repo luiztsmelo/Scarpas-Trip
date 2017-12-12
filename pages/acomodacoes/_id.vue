@@ -58,9 +58,10 @@
     <h1 class="box-title">Comodidades</h1>
 
     <div class="comodidades-box">
-      <img class="__img-comodidade" src="../../assets/img/hasWifi.svg">
+      <img class="__img-comodidade" src="../../assets/img/hasRoupasCama.svg">
       <img class="__img-comodidade" src="../../assets/img/hasPiscina.svg">
       <img class="__img-comodidade" src="../../assets/img/hasChurrasqueira.svg">
+      <img class="__img-comodidade" src="../../assets/img/hasWifi.svg">
     </div><!-- ####### COMODIDADES ####### -->
 
 
