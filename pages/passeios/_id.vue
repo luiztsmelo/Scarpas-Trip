@@ -1,5 +1,5 @@
 <template>
-  <div class="passeios_id" :class="{ onShare: showShare }">
+  <div class="passeios_id">
 
 
     <!-- ####### TOPBAR ####### -->
@@ -319,7 +319,7 @@ export default {
         & .__back-btn {
           transform: translateY(2px);/* A imagem ta errada */
           cursor: pointer;
-          width: 1.1rem;
+          width: 1.05rem;
           height: auto;
         }
       }
@@ -483,9 +483,6 @@ export default {
 
 }
 
-.onShare {
-  filter: brightness(30%);
-}
 .topbarBg {
   background: white !important;
   box-shadow: 0px 1px 1px 0px rgba(0,0,0,0.1);

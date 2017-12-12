@@ -1,7 +1,12 @@
 <template>
   <transition name="share-animation">
-    <div class="share" v-show="showShare" @click="$store.commit('m_showShare', false)">
+    <div class="share" v-show="showShare">
       <div class="share-body">
+
+        <div class="back-box">
+          <img class="__back-btn" src="../assets/img/back.svg" alt="voltar" @click="$store.commit('m_showShare', false)">
+        </div>
+
         <h1 class="__title">Compartilhar</h1>
 
         <div class="share-item" @click="whatsappShare">
@@ -43,33 +48,45 @@ export default {
 
 .share {
   position: fixed;
-  z-index: 4;
+  z-index: 9999;
   width:  100%;
   height: 100%;
-  top: 42%;
+  top: 0;
   background: white;
   overflow: hidden;
-  box-shadow: 0px -2px 22px 0px rgba(0,0,0,1);
-  transition: all .3s ease;
+  transition: var(--menus-transition);
   & .share-body {
     display: flex;
     flex-flow: column;
     padding: 0 7%;
     height: 100%;
+    & .back-box {
+      display: flex;
+      height: 3rem;
+      width:  100%;
+      & .__back-btn {
+        align-items: center;
+        transform: translateY(2px);/* A imagem ta errada */
+        cursor: pointer;
+        width: 1.05rem;
+        height: auto;
+        filter: invert(75%);
+      }
+    }
     & .__title {
-      text-align: center;
-      margin: 2rem 0 1rem 0;
+      margin: 1rem 0 1rem 0;
+      font-size: 31px;
       font-weight: 600;
     }
     & .share-item { 
       display: flex;
       flex-flow: row;
       align-items: center;
-      padding: 1rem 0;
+      padding: 1.1rem 0;
       border-bottom: 1px solid rgb(222, 222, 222);
       & .__img {
         margin-right: 1rem;
-        width: 1.7rem;
+        width: 1.5rem;
         height: auto;
       }
       & .whatsapp {
@@ -84,8 +101,10 @@ export default {
 }
 
 /* TRANSITIONS */
-.share-animation-enter,
-.share-animation-leave-active {
+.share-animation-enter {
   transform: translateY(100%);
+}
+.share-animation-leave-active {
+  transform: translateX(100%);
 }
 </style>
