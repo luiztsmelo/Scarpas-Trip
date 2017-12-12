@@ -171,8 +171,8 @@ export default {
       if (value.length > 30) {
         return value.slice(0, 30) + '...'
 =======
-      if (value.length > 31) {
-        return value.slice(0, 31) + '...'
+      if (value.length > 30) {
+        return value.slice(0, 30) + '...'
 >>>>>>> 45467c4404001e76555f4e9f0d63ca2ccc6a301d
       } else {
         return value.slice(0)
