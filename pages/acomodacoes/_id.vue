@@ -62,6 +62,8 @@
       <img class="__img-comodidade" src="../../assets/img/hasPiscina.svg">
       <img class="__img-comodidade" src="../../assets/img/hasChurrasqueira.svg">
       <img class="__img-comodidade" src="../../assets/img/hasWifi.svg">
+      <img class="__img-comodidade" src="../../assets/img/hasArCond.svg">
+      <img class="__img-comodidade" src="../../assets/img/hasCaixaSom.svg">
     </div><!-- ####### COMODIDADES ####### -->
 
 

@@ -172,17 +172,9 @@
 
       <div class="comodidades-box">
         <div class="item-form-switches">
-          <h3>Roupas de Cama</h3>
+          <h3>Roupas de Cama e Toalhas</h3>
           <label class="switch">
             <input type="checkbox" v-model="$store.state.acomodData.hasRoupasCama">
-            <span class="slider round"></span>
-          </label>
-        </div>
-
-        <div class="item-form-switches">
-          <h3>Toalhas</h3>
-          <label class="switch">
-            <input type="checkbox" v-model="$store.state.acomodData.hasToalhas">
             <span class="slider round"></span>
           </label>
         </div>
@@ -223,6 +215,14 @@
           <h3>Ar condicionado</h3>
           <label class="switch">
             <input type="checkbox" v-model="$store.state.acomodData.hasArCond">
+            <span class="slider round"></span>
+          </label>
+        </div>
+
+        <div class="item-form-switches">
+          <h3>Caixa de Som</h3>
+          <label class="switch">
+            <input type="checkbox" v-model="$store.state.acomodData.hasCaixaSom">
             <span class="slider round"></span>
           </label>
         </div>
