@@ -1,0 +1,140 @@
+<template>
+  <transition name="menu-animation">
+    <div class="menu" v-show="showMenu">
+      <div class="menu-body">
+
+        <div style="padding-bottom:.9rem" @click="$store.commit('m_showMenu', false), $store.commit('m_menuIconAnime', false), $store.commit('m_showFoobar', false)">
+          <nuxt-link to="/" class="menu-item">
+            <img src="../assets/img/map.svg" alt="" class="__item-img-color">
+            <h3>Mapa completo</h3>
+          </nuxt-link>
+        </div>
+
+        <div class="anuncio-box">
+          <div @click="$store.commit('m_showMenu', false), $store.commit('m_menuIconAnime', false), $store.commit('m_showFoobar', false)">
+            <nuxt-link to="/anunciar/acomodacao" class="menu-item">
+              <img src="../assets/img/estadia.svg" alt="" class="__item-img-color">
+              <h3>Anunciar Acomodação</h3>
+            </nuxt-link>
+          </div>
+
+          <div @click="$store.commit('m_showMenu', false), $store.commit('m_menuIconAnime', false), $store.commit('m_showFoobar', false)">
+            <nuxt-link to="/anunciar/evento" class="menu-item">
+              <img src="../assets/img/eventos.svg" alt="" class="__item-img-color">
+              <h3>Anunciar Evento</h3>
+            </nuxt-link>
+          </div>
+          
+          <div @click="$store.commit('m_showMenu', false), $store.commit('m_menuIconAnime', false), $store.commit('m_showFoobar', false)">
+            <nuxt-link to="/anunciar/passeio" class="menu-item">
+              <img src="../assets/img/passeios.svg" alt="" class="__item-img-color">
+              <h3>Anunciar Passeio</h3>
+            </nuxt-link>
+          </div>
+
+          <div @click="$store.commit('m_showMenu', false), $store.commit('m_menuIconAnime', false), $store.commit('m_showFoobar', false)">
+            <nuxt-link to="/anunciar/restaurante" class="menu-item">
+              <img src="../assets/img/comidas.svg" alt="" class="__item-img-color">
+              <h3>Anunciar Restaurante</h3>
+            </nuxt-link>
+          </div>
+
+        </div>
+
+        <div class="info-box">
+          <div @click="$store.commit('m_showMenu', false), $store.commit('m_menuIconAnime', false), $store.commit('m_showFoobar', false)">
+            <nuxt-link to="/anunciar" class="menu-item">
+              <img src="../assets/img/contato.svg" alt="" class="__item-img">
+              <h3>Contato</h3>
+            </nuxt-link>
+          </div>
+
+          <div @click="$store.commit('m_showMenu', false), $store.commit('m_menuIconAnime', false), $store.commit('m_showFoobar', false)">
+            <nuxt-link to="/anunciar" class="menu-item">
+              <img src="../assets/img/sobre.svg" alt="" class="__item-img">
+              <h3>Sobre</h3>
+            </nuxt-link>
+          </div>
+        </div>
+
+        <span class="tmstudio">Desenvolvido por <strong>TMstudio</strong></span>
+
+      </div> 
+    </div>
+  </transition>
+</template>
+
+<script>
+export default {
+  computed: {
+    showMenu () {
+      return this.$store.state.showMenu
+    }
+  }
+}
+</script>
+
+<style>
+@import url('../assets/css/main.css');
+
+.menu {
+  position: fixed;
+  z-index: 9998;
+  width:  100%;
+  height: 100%;
+  top: 3.2rem;
+  background: white;
+  overflow: hidden;
+  transition: var(--main-transition);
+  & .menu-body {
+    display: flex;
+    flex-flow: column;
+    text-align: center;
+    padding: 2rem 7%;
+    height: 100%;
+    & .menu-item {
+      display: flex;
+      align-items: center;
+      padding: 0.8rem 0;
+      & .__item-img-color {
+        width: 1.3rem;
+        height: auto;
+        margin-right: 1rem;
+        filter: grayscale(100%) brightness(80%);
+      }
+      & .__item-img {
+        width: 1.3rem;
+        height: auto;
+        margin-right: 1rem;
+        filter: brightness(70%);
+      }
+    }
+    & .anuncio-box {
+      padding: 0.8rem 0;
+      border-bottom: 1px solid rgb(222, 222, 222);
+      border-top: 1px solid rgb(222, 222, 222);
+    }
+    & .info-box {
+      padding: 0.8rem 0;
+    }
+    & .tmstudio {
+      position: absolute;
+      bottom: 3.7rem;
+      left: 0;
+      right: 0;
+      margin: 0 auto;
+      font-size: 13px;
+      font-weight: 300;
+      & strong {
+        font-weight: 400;
+      }
+    }
+  }
+}
+
+/* TRANSITIONS */
+.menu-animation-enter,
+.menu-animation-leave-active {
+  transform: translateY(100%);
+}
+</style>

@@ -1,0 +1,37 @@
+<div class="logo"></div>
+
+<style>
+  body, html, #__nuxt {
+    background-color: white;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+  }
+  .logo {
+    width: 4.2rem;
+    height: 4.2rem;
+    background-image: url('./brand3.svg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    animation-name: spin;
+    animation-duration: 2.3s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+    opacity: .2;
+  }
+  @keyframes spin { 
+      from { 
+          transform: rotate(0deg); 
+      } to { 
+          transform: rotate(360deg); 
+      }
+  }
+  </style>
+  
+ 
+  

@@ -1,0 +1,150 @@
+<template>
+  <transition name="foobar-animation">  
+    <div class="foobar" v-show="showFoobar">
+      <div class="foobar-body">
+
+          <nuxt-link to="/acomodacoes">
+          <div v-ripple="'rgba(0,0,0,.05)'" class="foobar-box" @click="$store.state.offFoobar1=false, $store.state.offFoobar2=true, $store.state.offFoobar3=true, $store.state.offFoobar4=true, $store.state.offFoobar5=true">
+            <img src="../assets/img/estadia.svg" class="__foobar1-icon" :class="{ coloricon: offFoobar1 }">
+            <h1 class="__foobar-title" :class="{ colortitle: offFoobar1 }">ACOMODAÇÕES</h1>
+          </div>
+        </nuxt-link>
+
+        <nuxt-link to="/eventos">
+          <div v-ripple="'rgba(0,0,0,.05)'" class="foobar-box" @click="$store.state.offFoobar1=true, $store.state.offFoobar2=false, $store.state.offFoobar3=true, $store.state.offFoobar4=true, $store.state.offFoobar5=true">
+            <img src="../assets/img/eventos.svg" class="__foobar2-icon" :class="{ coloricon: offFoobar2 }">
+            <h1 class="__foobar-title" :class="{ colortitle: offFoobar2 }">EVENTOS</h1>
+          </div>
+        </nuxt-link>
+
+        <nuxt-link to="/atracoes">
+          <div v-ripple="'rgba(0,0,0,.05)'" class="foobar-box" @click="$store.state.offFoobar1=true, $store.state.offFoobar2=true, $store.state.offFoobar3=false, $store.state.offFoobar4=true, $store.state.offFoobar5=true">
+            <img src="../assets/img/atracoes.svg" class="__foobar3-icon" :class="{ coloricon: offFoobar3 }">
+            <h1 class="__foobar-title" :class="{ colortitle: offFoobar3 }">ATRAÇÕES</h1>
+          </div>
+        </nuxt-link>
+
+        <nuxt-link to="/passeios">
+          <div v-ripple="'rgba(0,0,0,.05)'" class="foobar-box" @click="$store.state.offFoobar1=true, $store.state.offFoobar2=true, $store.state.offFoobar3=true, $store.state.offFoobar4=false, $store.state.offFoobar5=true">
+            <img src="../assets/img/passeios.svg" class="__foobar4-icon" :class="{ coloricon: offFoobar4 }">
+            <h1 class="__foobar-title" :class="{ colortitle: offFoobar4 }">PASSEIOS</h1>
+          </div>
+        </nuxt-link>
+
+        <nuxt-link to="/comidas">
+          <div v-ripple="'rgba(0,0,0,.05)'" class="foobar-box" @click="$store.state.offFoobar1=true, $store.state.offFoobar2=true, $store.state.offFoobar3=true, $store.state.offFoobar4=true, $store.state.offFoobar5=false">
+            <img src="../assets/img/comidas.svg" class="__foobar5-icon" :class="{ coloricon: offFoobar5 }">
+            <h1 class="__foobar-title" :class="{ colortitle: offFoobar5 }">RESTAURANTES</h1>
+          </div>
+        </nuxt-link>
+        
+
+      </div>
+    </div>
+  </transition>
+</template>
+
+<script>
+export default {
+  computed: {
+    showFoobar () {
+      return this.$store.state.showFoobar
+    },
+    offFoobar1 () {
+      return this.$store.state.offFoobar1
+    },
+    offFoobar2 () {
+      return this.$store.state.offFoobar2
+    },
+    offFoobar3 () {
+      return this.$store.state.offFoobar3
+    },
+    offFoobar4 () {
+      return this.$store.state.offFoobar4
+    },
+    offFoobar5 () {
+      return this.$store.state.offFoobar5
+    }
+  }
+}
+</script>
+
+<style>
+@import url('../assets/css/main.css');
+
+.foobar {
+  position: fixed;
+  z-index: 9997;
+  bottom: 0;
+  left: 0;
+  height: 3.2rem;
+  width: 100%;
+  background: white;
+  transition: all .3s ease;
+  box-shadow: 0px -1px 1px 0px rgba(0,0,0,0.1);
+  & .foobar-body {
+    padding: 0 .5rem;
+    height: 100%;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    & a {
+      height: 100%;
+      width: 45%;
+    }
+    & .foobar-box {
+      margin-top: 2px;
+      border-radius: 40%;
+      height: 100%;
+      display: flex;
+      flex-flow: column;
+      text-align: center;
+      justify-content: center;
+      align-items: center;
+      & .__foobar-title {
+        font-size: 9px;
+        font-weight: 500;
+        color: #ff5858;
+      }
+      & .colortitle {
+        color: var(--color01);
+      }
+      & img {
+        margin-bottom: 7px;
+        width: 1.3rem;
+        height: auto;
+      }
+      & .coloricon {
+        filter: grayscale(100%) brightness(45%);
+      }
+      & .__foobar1-icon {
+        transform: scale(1);
+      }
+      & .__foobar2-icon {
+        transform: scale(1);
+      }
+      & .__foobar3-icon {
+        transform: scale(1);
+      }
+      & .__foobar4-icon {
+        transform: scale(1);
+      }
+    }
+  }
+}
+
+@media (min-width: 1281px) {
+  .foobar {
+    display: none;
+  }
+}
+
+/* TRANSITIONS */
+.foobar-animation-enter,
+.foobar-animation-leave-active {
+  transform: translateY(100%);
+}
+</style>

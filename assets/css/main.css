@@ -1,0 +1,146 @@
+@import url('normalize.css');
+
+:root {
+  /* ******* FONTS ******* */
+  --brand-font: 'Damion' !important;
+  --main-font: 'Work Sans', sans-serif !important;
+  /* ******* COLOR PALETTE ******* */
+  --color01: rgb(42, 42, 42);
+  --color02: rgb(243, 110, 95);
+  --color03: rgb(252, 86, 86);
+  /* ******* MAIN TRANSITION ******* */
+  --main-transition: all .2s ease-in-out;
+}
+
+html 
+{
+  font-family: var(--main-font);
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  box-sizing: border-box;
+  color: var(--color01);
+  height: 100%;
+  width: 100%;
+  -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+}
+
+*, *:before, *:after 
+{
+  box-sizing: border-box;
+  margin: 0;
+}
+
+button {
+  font-family: var(--main-font);
+  cursor: pointer;
+  border: none;
+  outline: none !important;
+  user-select: none;
+}
+
+h3 {
+  font-size: 18px;
+  font-weight: 300;
+  line-height: 26px;
+  color: rgb(42, 42, 42);
+}
+
+p {
+  font-family: var(--main-font);
+  font-size: 18px;
+  line-height: 31px;
+  margin-bottom: 20px;
+}
+
+li {
+  list-style: none;
+}
+
+a a:hover, a:visited, a:link, a:active
+{
+  text-decoration: none;
+  color: var(--color01);
+  outline: none !important;
+  user-select: none;  
+}
+
+
+/* ******* CHECKBOX ******* */
+
+
+
+/* ******* PAGE TRANSITIONS ******* */
+.slide-left-enter,
+.slide-right-leave-active 
+{
+  opacity: 0;
+  transform: scale(1.05);
+}
+
+.slide-left-leave-active,
+.slide-right-enter 
+{
+  opacity: 0;
+  transform: translateX(.95);
+}
+
+.opacity-leave-active,
+.opacity-enter 
+{
+  opacity: 0;
+}
+
+.evento-leave-active,
+.evento-enter 
+{ 
+  opacity: 0;
+  transform: translateY(1.8rem);
+}
+
+/* ******* TEXT HIGHLIGHT COLOR ******* */
+::-moz-selection { /* Firefox */
+  color: white;
+  background: rgb(255, 193, 7);
+}
+::selection {
+  color: white;
+  background: rgb(51, 51, 51);
+}
+
+/* ******* SIGN IN BUTTONS ******* */
+.google-btn {
+  background-image: url('../img/google.svg');
+  background-color: rgb(219, 50, 54);
+  background-position: 8px;
+  background-repeat: no-repeat;
+  background-size: 24px;
+  color: white;
+  margin: 0 0 0 .3rem;
+  padding: .8rem 1.2rem;
+  border-radius: 4px;
+  font-size: 16px;
+  width: 50%;
+}
+.google-btn:hover {
+  background-color: rgb(199, 74, 74);
+}
+
+/* ******* FACEBOOK ******* */
+.facebook-btn {
+  background-image: url('../img/facebook.svg');
+  background-color: rgb(59, 89, 152);
+  background-position: 8px;
+  background-repeat: no-repeat;
+  background-size: 21px;
+  color: white;
+  margin: 0 .3rem 0 0;
+  padding: .8rem 1.2rem;
+  border-radius: 4px;
+  font-size: 16px;
+  width: 50%;
+}
+.facebook-btn:hover {
+  background-color:rgb(75, 91, 127);
+}

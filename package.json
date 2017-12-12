@@ -1,0 +1,53 @@
+{
+  "name": "escarpas-trip",
+  "version": "1.0.0",
+  "description": "Nuxt.js project",
+  "author": "Tarcisio Melo <luiztsmelo@gmail.com>",
+  "private": true,
+  "engines": {
+    "node": "8.9.0",
+    "npm": "5.5.1"
+  },
+  "dependencies": {
+    "@nuxtjs/icon": "^2.0.1",
+    "@nuxtjs/manifest": "^2.1.0",
+    "@nuxtjs/meta": "^2.0.1",
+    "@nuxtjs/pwa": "latest",
+    "@nuxtjs/sitemap": "0.0.3",
+    "@nuxtjs/workbox": "^2.1.1",
+    "firebase": "^4.6.0",
+    "lodash": "^4.17.4",
+    "nuxt": "latest",
+    "supports-webp": "^1.0.5",
+    "v-calendar": "^0.3.2",
+    "v-money": "^0.8.1",
+    "vue-autosize": "^1.0.2",
+    "vue-awesome-swiper": "^2.6.7",
+    "vue-croppa": "^1.1.4",
+    "vue-progressive-image": "^2.3.1",
+    "vue-ripple-directive": "^1.0.13",
+    "vue-text-mask": "^5.2.0",
+    "vue2-google-maps": "^0.8.4",
+    "vuex-persistedstate": "^2.0.0",
+    "webfontloader": "^1.6.28"
+  },
+  "scripts": {
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate",
+    "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
+    "precommit": "npm run lint",
+    "heroku-postbuild": "npm run build",
+    "deploy": "git push heroku master"
+  },
+  "devDependencies": {
+    "babel-eslint": "^7.1.1",
+    "eslint": "^3.15.0",
+    "eslint-config-standard": "^6.2.1",
+    "eslint-loader": "^1.6.1",
+    "eslint-plugin-html": "^2.0.0",
+    "eslint-plugin-promise": "^3.4.1",
+    "eslint-plugin-standard": "^2.0.1"
+  }
+}
