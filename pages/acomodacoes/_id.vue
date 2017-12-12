@@ -412,7 +412,6 @@ export default {
 
   /* ####### COMODIDADES ####### */
   & .comodidades-box {
-
     padding: 0 5%;
     & .__img-comodidade {
       width: 1.7rem;
