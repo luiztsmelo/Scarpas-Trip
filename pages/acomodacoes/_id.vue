@@ -413,7 +413,7 @@ export default {
   & .comodidades-box {
     padding: 0 7%;
     & .__img-comodidade {
-      width: 1.7rem;
+      width: 1.75rem;
       height: auto;
       margin: 0 .6rem;
     }
