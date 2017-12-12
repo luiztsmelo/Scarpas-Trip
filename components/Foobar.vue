@@ -96,7 +96,7 @@ export default {
       width: 45%;
     }
     & .foobar-box {
-      margin-top: 2px;
+      margin-top: 3px;
       border-radius: 40%;
       height: 100%;
       display: flex;
