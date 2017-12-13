@@ -255,7 +255,7 @@ export default {
               margin-bottom: .2rem;
               width: 100%;
               min-height: 97px;
-              border-radius: 4px;
+              border-radius: 3px;
             }
             & .__card-date {
               font-size: 12px;
