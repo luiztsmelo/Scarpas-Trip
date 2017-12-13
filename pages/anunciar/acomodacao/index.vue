@@ -751,37 +751,37 @@ export default {
       return firstName
     },
     form1ok () {
-      return this.$store.state.acomodData.tipoAcomod !== null ? 'background:#1CD8D2;cursor:pointer' : ''
+      return this.$store.state.acomodData.tipoAcomod !== null ? 'background:#00CFC7;cursor:pointer' : ''
     },
     form2ok () {
-      return this.$store.state.acomodData.totalHospedes !== null ? 'background:#1CD8D2;cursor:pointer' : ''
+      return this.$store.state.acomodData.totalHospedes !== null ? 'background:#00CFC7;cursor:pointer' : ''
     },
     form3ok () {
-      return 1<2 ? 'background:#1CD8D2;cursor:pointer' : ''
+      return 1<2 ? 'background:#00CFC7;cursor:pointer' : ''
     },
     form4ok () {
-      return 1<2 ? 'background:#1CD8D2;cursor:pointer' : ''
+      return 1<2 ? 'background:#00CFC7;cursor:pointer' : ''
     },
     form5ok () {
-      return 1<2 ? 'background:#1CD8D2;cursor:pointer' : ''
+      return 1<2 ? 'background:#00CFC7;cursor:pointer' : ''
     },
     form6ok () {
-      return this.imageURL1 !== null ? 'background:#1CD8D2;cursor:pointer' : ''
+      return this.imageURL1 !== null ? 'background:#00CFC7;cursor:pointer' : ''
     },
     form7ok () {
-      return 1<2 ? 'background:#1CD8D2;cursor:pointer' : ''
+      return 1<2 ? 'background:#00CFC7;cursor:pointer' : ''
     },
     form8ok () {
-      return this.$store.state.acomodData.title !== '' ? 'background:#1CD8D2;cursor:pointer' : ''
+      return this.$store.state.acomodData.title !== '' ? 'background:#00CFC7;cursor:pointer' : ''
     },
     form9ok () {
-      return this.$store.state.acomodData.subtitle !== '' ? 'background:#1CD8D2;cursor:pointer' : ''
+      return this.$store.state.acomodData.subtitle !== '' ? 'background:#00CFC7;cursor:pointer' : ''
     },
     form10ok () {
-      return this.$store.state.acomodData.celular.length === 15 ? 'background:#1CD8D2;cursor:pointer' : ''
+      return this.$store.state.acomodData.celular.length === 15 ? 'background:#00CFC7;cursor:pointer' : ''
     },
     form11ok () {
-      return 1<2 ? 'background:#1CD8D2;cursor:pointer' : ''
+      return 1<2 ? 'background:#00CFC7;cursor:pointer' : ''
     }
   },
   beforeRouteLeave (to, from, next) {
@@ -801,7 +801,7 @@ export default {
 
 .anunciar-acomodacao {
   margin-top: 3.2rem;
-  background: linear-gradient(45deg, #93EDC7, #1CD8D2);
+  background: linear-gradient(45deg, #93EDC7, #00CFC7);
   color: white;
   transition: var(--main-transition);
   & .progress-bar {
@@ -809,7 +809,7 @@ export default {
     top: 3.2rem;
     height: 3px;
     z-index: 8888;
-    background: linear-gradient(80deg, #93EDC7, #1CD8D2);
+    background: linear-gradient(80deg, #93EDC7, #00CFC7);
     transition: all .3s ease;
   }
   /* ******************** PLANO ACOMODAÇÃO ******************** */
@@ -983,7 +983,7 @@ export default {
     & .__input-btn {
       margin: 1rem 7%;
       font-size: 16px;
-      background: #1CD8D2;
+      background: #00CFC7;
       color: white;
       padding: .8rem 1.2rem;
       border-radius: 2rem;
@@ -991,7 +991,7 @@ export default {
     & .__croppa-btn {
       margin: .3rem 0;
       font-size: 16px;
-      background: #1CD8D2;
+      background: #00CFC7;
       color: white;
       padding: .8rem 1.2rem;
       border-radius: 2rem;
