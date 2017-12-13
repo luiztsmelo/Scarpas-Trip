@@ -42,7 +42,7 @@
 
 
     <!-- ####### SOBRE ####### -->
-    <h1 class="box-title">Sobre</h1>
+    <h1 class="box-title">Sobre o Evento</h1>
 
     <div class="sobre-box">
       <h3>{{ evento.subtitle }}</h3>
