@@ -93,7 +93,7 @@ export default {
         transform: scale(1.17);
       }
       & .__text {
-        font-size: 18px;
+        font-size: 19px;
         font-weight: 300;
       }
     }

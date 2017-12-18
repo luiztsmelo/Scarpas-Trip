@@ -57,7 +57,7 @@
     <!-- ####### COMODIDADES ####### -->
     <h1 class="box-title">Comodidades</h1>
 
-    <div class="comodidades-box">
+    <div class="comodidades-box" @click="showComods = true">
       <img class="__img-comodidade" v-if="acomod.hasRoupasCama" src="../../assets/img/hasRoupasCama.svg">
       <img class="__img-comodidade" v-if="acomod.hasPiscina" src="../../assets/img/hasPiscina.svg">
       <img class="__img-comodidade" v-if="acomod.hasChurrasqueira" src="../../assets/img/hasChurrasqueira.svg">
@@ -65,7 +65,24 @@
       <img class="__img-comodidade" v-if="acomod.hasArCond" src="../../assets/img/hasArCond.svg">
       <img class="__img-comodidade" v-if="acomod.hasCaixaSom" src="../../assets/img/hasCaixaSom.svg">
       <img class="__img-comodidade" v-if="acomod.hasPier" src="../../assets/img/hasPier.svg">
-    </div><!-- ####### COMODIDADES ####### -->
+    </div>
+
+    <transition name="comods-animation">
+      <div class="comods-details" v-show="showComods">
+        <div class="comods-body">
+  
+          <div class="back-box">
+            <img class="__back-btn" src="../../assets/img/back.svg" alt="voltar" @click="showComods = false">
+          </div>
+  
+          <h1 class="__title">Comodidades</h1>
+
+          
+
+
+        </div> 
+      </div>
+    </transition><!-- ####### COMODIDADES ####### -->
 
 
 
@@ -143,6 +160,7 @@ export default {
   mixins: [mapstyle],
   data () {
     return {
+      showComods: false,
       showTopbar: true,
       scrollTopbar: false,
       swiperOption: {
@@ -418,7 +436,54 @@ export default {
       height: auto;
       margin: 0 .6rem;
     }
-  }/* ####### COMODIDADES ####### */
+  }
+  & .comods-details {
+  position: fixed;
+  z-index: 9999;
+  width:  100%;
+  height: 100%;
+  top: 0;
+  background: white;
+  overflow: hidden;
+  transition: var(--menus-transition);
+  & .comods-body {
+    display: flex;
+    flex-flow: column;
+    padding: 0 7%;
+    height: 100%;
+    & .back-box {
+      display: flex;
+      height: 3rem;
+      width:  100%;
+      & .__back-btn {
+        align-items: center;
+        transform: translateY(2px);/* A imagem ta errada */
+        cursor: pointer;
+        width: 1.05rem;
+        height: auto;
+        filter: invert(75%);
+      }
+    }
+    & .__title {
+      margin: 2rem 0 1rem 0;
+      font-size: 31px;
+      font-weight: 600;
+    }
+    & .comods-item { 
+      display: flex;
+      flex-flow: row;
+      align-items: center;
+      padding: 1.1rem 0;
+      border-bottom: 1px solid rgb(222, 222, 222);
+      & .__img {
+        margin-right: 1rem;
+        width: 1.5rem;
+        height: auto;
+      }
+
+    }
+  }
+}/* ####### COMODIDADES ####### */
 
 
 
@@ -504,6 +569,14 @@ export default {
 .topbar-animation-leave-active {
   transform: translateY(-100%);
 }
+
+.comods-animation-enter {
+  transform: translateY(100%);
+}
+.comods-animation-leave-active {
+  transform: translateX(100%);
+}
+
 
 @media (min-width: 1281px) {
 }
