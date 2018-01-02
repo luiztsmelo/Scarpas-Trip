@@ -472,13 +472,10 @@ export default {
   height: 100%;
   top: 0;
   background: white;
-  overflow: hidden;
+  overflow-y: auto;
   transition: var(--menus-transition);
   & .comods-body {
-    display: flex;
-    flex-flow: column;
-    padding: 0 7%;
-    height: 100%;
+    padding: 0 7% 2rem 7%;
     & .back-box {
       display: flex;
       height: 3rem;
@@ -505,7 +502,7 @@ export default {
       border-bottom: 1px solid rgb(222, 222, 222);
       & .__img {
         margin-right: 1rem;
-        width: 1.7rem;
+        width: 1.6rem;
         height: auto;
       }
 
