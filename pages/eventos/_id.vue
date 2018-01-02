@@ -1,5 +1,5 @@
 <template>
-  <div class="eventos_id">
+  <div class="eventos-id">
 
     <!-- ####### TOPBAR ####### -->
     <div class="topbar" :class="{ topbarBg: scrollTopbar }">
@@ -236,11 +236,11 @@ export default {
 <style>
 @import url('../../assets/css/main.css');
 
-.eventos_id {
+.eventos-id {
   display: flex;
   flex-flow: column;
   background-color: white;
-  margin-bottom: 3.1rem;
+  margin-bottom: 3.5rem;
   transition: all .27s cubic-bezier(.15,.97,.43,.93);
 
 
