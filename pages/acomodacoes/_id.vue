@@ -475,7 +475,7 @@ export default {
   overflow-y: auto;
   transition: var(--menus-transition);
   & .comods-body {
-    padding: 0 7% 2rem 7%;
+    padding: 0 7% 3rem 7%;
     & .back-box {
       display: flex;
       height: 3rem;
