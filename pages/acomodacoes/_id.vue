@@ -1,5 +1,5 @@
 <template>
-  <div class="acomods_id">
+  <div class="acomods-id">
 
 
     <!-- ####### TOPBAR ####### -->
@@ -77,7 +77,34 @@
   
           <h1 class="__title">Comodidades</h1>
 
-          
+          <div class="comods-item" v-if="acomod.hasRoupasCama">
+            <img src="../../assets/img/hasRoupasCama.svg" class="__img">
+            <h3>Roupas de Cama e Toalhas</h3>
+          </div>
+          <div class="comods-item" v-if="acomod.hasPiscina">
+            <img src="../../assets/img/hasPiscina.svg" class="__img">
+            <h3>Piscina</h3>
+          </div>
+          <div class="comods-item" v-if="acomod.hasChurrasqueira">
+            <img src="../../assets/img/hasChurrasqueira.svg" class="__img">
+            <h3>Churrasqueira</h3>
+          </div>
+          <div class="comods-item" v-if="acomod.hasWifi">
+            <img src="../../assets/img/hasWifi.svg" class="__img">
+            <h3>WiFi</h3>
+          </div>
+          <div class="comods-item" v-if="acomod.hasArCond">
+            <img src="../../assets/img/hasArCond.svg" class="__img">
+            <h3>Ar Condicionado</h3>
+          </div>
+          <div class="comods-item" v-if="acomod.hasCaixaSom">
+            <img src="../../assets/img/hasCaixaSom.svg" class="__img">
+            <h3>Caixa de Som</h3>
+          </div>
+          <div class="comods-item" v-if="acomod.hasPier">
+            <img src="../../assets/img/hasPier.svg" class="__img">
+            <h3>Pier</h3>
+          </div>
 
 
         </div> 
@@ -312,7 +339,7 @@ export default {
 <style>
 @import url('../../assets/css/main.css');
 
-.acomods_id {
+.acomods-id {
   display: flex;
   flex-flow: column;
   background-color: white;
@@ -437,6 +464,7 @@ export default {
       margin: 0 .6rem;
     }
   }
+  
   & .comods-details {
   position: fixed;
   z-index: 9999;
@@ -477,7 +505,7 @@ export default {
       border-bottom: 1px solid rgb(222, 222, 222);
       & .__img {
         margin-right: 1rem;
-        width: 1.5rem;
+        width: 1.7rem;
         height: auto;
       }
 
