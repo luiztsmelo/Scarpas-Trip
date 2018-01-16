@@ -120,7 +120,7 @@ export default {
   margin: 3.2rem 0 5.2rem 0;
   display: flex;
   flex-flow: column;
-  transition: all .222s ease-in-out;
+  transition: all .2s ease-in-out;
   & .passeios-container {
     padding: 0;
     display: flex;
