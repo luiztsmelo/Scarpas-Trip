@@ -514,6 +514,10 @@ export default {
     googleSignIn () {
       this.$store.dispatch('a_googleSignIn')
     },
+    scrollTop () {
+      document.body.scrollTop = 0; // For Safari
+      document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+    },
     /* ******************** IMAGE INPUT ******************** */
     /* --- Image 1 --- */
     imageChoose1 () {
@@ -608,7 +612,7 @@ export default {
     },
     nextBtn3 () {
       if (1<2) {
-        this.$store.commit('m_cadastroAcomod3', false), this.$store.commit('m_cadastroAcomod4', true), this.$store.commit('m_acomodProgressBar', (100/11)*4)
+        this.$store.commit('m_cadastroAcomod3', false), this.$store.commit('m_cadastroAcomod4', true), this.$store.commit('m_acomodProgressBar', (100/11)*4), this.scrollTop()
       }
     },
     nextBtn4 () {
