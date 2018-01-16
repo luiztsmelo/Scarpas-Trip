@@ -208,7 +208,7 @@
           </croppa>
           <div class="modal-croppa-btns">
             <button class="__croppa-btn" type="button" @click="showCroppaModal1=false, imageConfirmed1()">Confirmar</button>
-            <button class="__croppa-btn"type="button" @click="$refs.myCroppa1.chooseFile(), $refs.myCroppa1.remove(), imageURL1 = null"  style="background:transparent">Escolher outra</button>
+            <button class="__croppa-btn" type="button" @click="$refs.myCroppa1.chooseFile(), $refs.myCroppa1.remove(), imageURL1 = null"  style="background:transparent">Escolher outra</button>
             <button class="__croppa-btn" type="button" @click="removeImage1()" style="background:transparent">Remover</button>
           </div>
         </div>
@@ -231,7 +231,7 @@
           </croppa>
           <div class="modal-croppa-btns">
             <button class="__croppa-btn" type="button" @click="showCroppaModal2=false, imageConfirmed2()">Confirmar</button>
-            <button class="__croppa-btn"type="button" @click="$refs.myCroppa2.chooseFile(), $refs.myCroppa2.remove(), imageURL2 = null"  style="background:transparent">Escolher outra</button>
+            <button class="__croppa-btn" type="button" @click="$refs.myCroppa2.chooseFile(), $refs.myCroppa2.remove(), imageURL2 = null"  style="background:transparent">Escolher outra</button>
             <button class="__croppa-btn" type="button" @click="removeImage2()" style="background:transparent">Remover</button>
           </div>
         </div>
