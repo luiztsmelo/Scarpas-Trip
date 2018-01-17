@@ -37,8 +37,8 @@ export default {
   }
 }
 .spinner {
-    width: 4.2rem;
-    height: 4.2rem;
+    width: 4.3rem;
+    height: 4.3rem;
     background-image: url('../static/brand3.svg');
     background-repeat: no-repeat;
     background-size: cover;

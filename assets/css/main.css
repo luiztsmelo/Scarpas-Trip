@@ -97,7 +97,7 @@ a a:hover, a:visited, a:link, a:active
 .evento-enter 
 { 
   opacity: 0;
-  transform: translateY(1.8rem);
+  transform: translateY(1.5rem);
 }
 
 /* ******* TEXT HIGHLIGHT COLOR ******* */
