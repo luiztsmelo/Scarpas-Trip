@@ -827,8 +827,8 @@ export default {
       height: auto;
     }
     & .__title {
-      font-size: 26px;
-      font-weight: 500;
+      font-size: 25px;
+      font-weight: 600;
       padding: 0 7%;
       text-align: center;
     }
@@ -842,7 +842,7 @@ export default {
     }
     & .__item {
       padding: 0 7%;
-      font-size: 20px;
+      font-size: 19px;
       font-weight: 300;
       margin: 0 0 .2rem 0;
       color: white;
