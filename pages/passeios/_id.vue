@@ -451,7 +451,7 @@ export default {
     bottom: 0;
     left: 0;
     z-index: 8888;
-    height: 3.7rem;
+    height: 3.8rem;
     width:  100%;
     background: white;
     padding: 0 7%;
