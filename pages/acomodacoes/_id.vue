@@ -397,7 +397,7 @@ export default {
   & .__acomod-title {
     padding: 0 7%;
     margin: 1rem 0 0 0;
-    font-size: 31px;
+    font-size: 30px;
     font-weight: 600;
   }
 
