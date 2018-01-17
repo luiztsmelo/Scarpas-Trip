@@ -126,7 +126,7 @@
     <div class="reserva">
       <div class="reserva-body">
         <h3 class="__reserva-valor">R${{ passeio.valorPasseio }}<span class="__reserva-valor-pessoa">/pessoa</span></h3>
-        <button class="__reserva-btn">Reservar</button>
+        <button class="__reserva-btn">Reservar Passeio</button>
       </div>
     </div>
     <!-- ####### RESERVA ####### -->
@@ -451,7 +451,7 @@ export default {
     bottom: 0;
     left: 0;
     z-index: 8888;
-    height: 3.6rem;
+    height: 3.7rem;
     width:  100%;
     background: white;
     padding: 0 7%;
@@ -476,7 +476,7 @@ export default {
         font-weight: 500;
         background: #49A5FC;
         color: white;
-        padding: .7rem 1.4rem;
+        padding: .7rem 1.1rem;
         border-radius: 4px;
       }
     }

@@ -96,7 +96,7 @@
     <div class="reserva">
       <div class="reserva-body">
         <h3 class="__reserva-valor">R${{ evento.valorIngresso }}</h3>
-        <button class="__reserva-btn">Comprar ingresso</button>
+        <button class="__reserva-btn">Comprar Ingresso</button>
       </div>
     </div><!-- ####### RESERVA ####### -->
 
@@ -416,7 +416,7 @@ export default {
         font-weight: 500;
         background: #ff5858;
         color: white;
-        padding: .7rem 1.2rem;
+        padding: .7rem 1.1rem;
         border-radius: 4px;
       }
     }
