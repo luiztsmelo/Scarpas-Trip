@@ -211,7 +211,7 @@ export default {
   & .home-body {
     display: flex;
     flex-flow: column;
-    margin-bottom: 100rem;
+    margin-bottom: 5.2rem;
     & .category-container {
       padding: 2.5rem 0;
       display: flex;
