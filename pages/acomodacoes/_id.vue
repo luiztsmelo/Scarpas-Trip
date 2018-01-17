@@ -573,7 +573,7 @@ export default {
         font-weight: 500;
         background: #00CFC7;
         color: white;
-        padding: .7rem 1.3rem;
+        padding: .7rem 1.4rem;
         border-radius: 4px;
       }
     }
