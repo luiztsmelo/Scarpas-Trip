@@ -10,7 +10,7 @@
   --color03: rgb(252, 86, 86);
   /* ******* MAIN TRANSITION ******* */
   --main-transition: all .2s ease;
-  --menus-transition: all .24s ease;
+  --menus-transition: all .26s ease;
 }
 
 html 

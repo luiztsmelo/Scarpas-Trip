@@ -548,7 +548,7 @@ export default {
     bottom: 0;
     left: 0;
     z-index: 8888;
-    height: 3.5rem;
+    height: 3.6rem;
     width:  100%;
     background: white;
     padding: 0 7%;
@@ -570,9 +570,10 @@ export default {
       }
       & .__reserva-btn {
         font-size: 16px;
+        font-weight: 500;
         background: #00CFC7;
         color: white;
-        padding: .6rem 1.2rem;
+        padding: .7rem 1.3rem;
         border-radius: 4px;
       }
     }
