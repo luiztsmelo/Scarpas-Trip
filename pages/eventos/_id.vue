@@ -394,7 +394,7 @@ export default {
     bottom: 0;
     left: 0;
     z-index: 8888;
-    height: 3.6rem;
+    height: 3.7rem;
     width:  100%;
     background: white;
     padding: 0 7%;
@@ -416,7 +416,7 @@ export default {
         font-weight: 500;
         background: #ff5858;
         color: white;
-        padding: .7rem 1.3rem;
+        padding: .7rem 1.2rem;
         border-radius: 4px;
       }
     }
