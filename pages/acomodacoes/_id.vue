@@ -69,11 +69,14 @@
 
     <transition name="comods-animation">
       <div class="comods-details" v-show="showComods">
-        <div class="comods-body">
-  
-          <div class="back-box">
+
+        <div class="back-box">
+          <div class="back-body">
             <img class="__back-btn" src="../../assets/img/back.svg" alt="voltar" @click="showComods = false">
           </div>
+        </div>
+
+        <div class="comods-body">
   
           <h1 class="__title">Comodidades</h1>
 
@@ -474,12 +477,13 @@ export default {
   background: white;
   overflow-y: auto;
   transition: var(--menus-transition);
-  & .comods-body {
-    padding: 0 7% 3rem 7%;
-    & .back-box {
+  & .back-box {
+    position: fixed;
+    background: white;
+    width:  100%;
+    & .back-body {
       display: flex;
       height: 3rem;
-      width:  100%;
       & .__back-btn {
         align-items: center;
         transform: translateY(2px);/* A imagem ta errada */
@@ -487,10 +491,14 @@ export default {
         width: 1.05rem;
         height: auto;
         filter: invert(75%);
+        margin-left: 7%;
       }
     }
+  }
+  & .comods-body {
+    padding: 0 7% 3rem 7%;
     & .__title {
-      margin: 2rem 0;
+      margin: 5rem 0 2rem 0;
       font-size: 31px;
       font-weight: 600;
     }
