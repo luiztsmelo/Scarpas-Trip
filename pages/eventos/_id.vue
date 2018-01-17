@@ -333,12 +333,12 @@ export default {
     display: flex;
     padding: 0 7%;
     & .__date {
-      font-size: 21px;
+      font-size: 20px;
       font-weight: 300;
       /* color: #ff5858; */
     }
     & .__hour {
-      font-size: 21px;
+      font-size: 20px;
       font-weight: 300;
       /* color: #ff5858; */
     }
