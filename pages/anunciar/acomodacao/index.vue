@@ -381,10 +381,10 @@
 
       <div class="item-form">
         <label>Baixa Temporada</label>
-        <input type="text" placeholder="Diária" @click="diariaBaixaOn" v-if="diariaBaixaOff">
-        <money v-model="$store.state.acomodData.valorDiariaBaixa" v-else></money>
-        <input type="text" placeholder="Final de Semana" @click="fdsBaixaOn" v-if="fdsBaixaOff">
-        <money v-model="$store.state.acomodData.valorFdsBaixa" v-else></money>
+        <input type="text" placeholder="Diária (R$)" @click="diariaBaixaOn" v-if="diariaBaixaOff">
+        <money v-model="$store.state.acomodData.valorDiariaBaixa" ref="diariaBaixa" v-else></money>
+        <input type="text" placeholder="Final de Semana (R$)" @click="fdsBaixaOn" v-if="fdsBaixaOff">
+        <money v-model="$store.state.acomodData.valorFdsBaixa" ref="fdsBaixa" v-else></money>
       </div> 
 
       <div class="item-form">
@@ -563,9 +563,11 @@ export default {
   methods: {
     diariaBaixaOn () {
       this.diariaBaixaOff = false
+      this.$refs.diariaBaixa.click()
     },
     fdsBaixaOn () {
       this.fdsBaixaOff = false
+      this.$refs.fdsBaixa.click()
     },
     googleSignIn () {
       this.$store.dispatch('a_googleSignIn')
