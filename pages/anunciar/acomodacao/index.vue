@@ -171,57 +171,58 @@
       <h1 class="__form-title">Quais comodidades são oferecidas?</h1>
 
       <div class="comodidades-box">
-        <div class="item-form-switches">
+
+        <div class="item-form-switches" @click="sliderRoupasCama">
           <h3>Roupas de Cama e Toalhas</h3>
-          <label class="switch">
+          <label class="switch" ref="sliderRoupasCama" @click="sliderRoupasCama">
             <input type="checkbox" v-model="$store.state.acomodData.hasRoupasCama">
             <span class="slider round"></span>
           </label>
         </div>
 
-        <div class="item-form-switches">
+        <div class="item-form-switches" @click="sliderChurrasqueira">
           <h3>Churrasqueira</h3>
-          <label class="switch">
+          <label class="switch" ref="sliderChurrasqueira" @click="sliderChurrasqueira">
             <input type="checkbox" v-model="$store.state.acomodData.hasChurrasqueira">
             <span class="slider round"></span>
           </label>
         </div>
 
-        <div class="item-form-switches">
+        <div class="item-form-switches" @click="sliderPiscina">
           <h3>Piscina</h3>
-          <label class="switch">
+          <label class="switch" ref="sliderPiscina" @click="sliderPiscina">
             <input type="checkbox" v-model="$store.state.acomodData.hasPiscina">
             <span class="slider round"></span>
           </label>
         </div>
 
-        <div class="item-form-switches">
+        <div class="item-form-switches" @click="sliderWifi">
           <h3>Wi-Fi</h3>
-          <label class="switch">
+          <label class="switch" ref="sliderWifi" @click="sliderWifi">
             <input type="checkbox" v-model="$store.state.acomodData.hasWifi">
             <span class="slider round"></span>
           </label>
         </div>
 
-        <div class="item-form-switches">
+        <div class="item-form-switches" @click="sliderArCond">
           <h3>Ar condicionado</h3>
-          <label class="switch">
+          <label class="switch" ref="sliderArCond" @click="sliderArCond">
             <input type="checkbox" v-model="$store.state.acomodData.hasArCond">
             <span class="slider round"></span>
           </label>
         </div>
 
-        <div class="item-form-switches">
+        <div class="item-form-switches" @click="sliderCaixaSom">
           <h3>Caixa de Som</h3>
-          <label class="switch">
+          <label class="switch" ref="sliderCaixaSom" @click="sliderCaixaSom">
             <input type="checkbox" v-model="$store.state.acomodData.hasCaixaSom">
             <span class="slider round"></span>
           </label>
         </div>
 
-        <div class="item-form-switches" style="border:none">
+        <div class="item-form-switches" @click="sliderPier" style="border:none">
           <h3>Pier</h3>
-          <label class="switch">
+          <label class="switch" ref="sliderPier" @click="sliderPier">
             <input type="checkbox" v-model="$store.state.acomodData.hasPier">
             <span class="slider round"></span>
           </label>
@@ -249,7 +250,29 @@
 
       <h1 class="__form-title">Qual a localização?</h1>
 
-      
+      <div class="gmap-autocomplete-box">
+        <gmap-autocomplete 
+        class="__gmap-autocomplete"
+        placeholder="Digite o endereço aqui"
+        @place_changed="setPlace">
+        </gmap-autocomplete>
+      </div>
+
+      <gmap-map
+      v-if="$store.state.cadastroAcomod5"
+      :center="{lat: $store.state.acomodData.positionLAT, lng: $store.state.acomodData.positionLNG}"
+      :zoom="mapZoom"
+      :options="{styles: styles, mapTypeControl:false, streetViewControl:false}"
+      style="width: 100%; height: 230px">
+        <Gmap-Marker
+        v-if="$store.state.acomodPlace"
+        :clickable="true"
+        :draggable="true"
+        :animation="4"
+        :position="{lat: $store.state.acomodData.positionLAT, lng: $store.state.acomodData.positionLNG}"
+        :icon="markerIcon"
+        ></Gmap-Marker>
+      </gmap-map>
 
 
       <div class="back-next"> 
@@ -489,11 +512,13 @@
 <script>
 import * as firebase from 'firebase'
 import MaskedInput from 'vue-text-mask'
+import { mapstyle } from '../../../mixins/mapstyle'
 
 export default {
   components: { 
     MaskedInput
   },
+  mixins: [mapstyle],
   head () {
     return {
       title: 'Anunciar Acomodação em Escarpas do Lago ‒ Escarpas Trip'
@@ -504,6 +529,10 @@ export default {
     return {
       title: '',/* Vue Autosize */
       subtitle: '',/* Vue Autosize */
+      markerIcon: {
+        url: 'https://firebasestorage.googleapis.com/v0/b/escarpas-trip.appspot.com/o/utils%2Fmarker.svg?alt=media&token=fcbfd76e-ee93-41e8-a816-98906e19859b',
+        scaledSize: new google.maps.Size(42, 42)
+      },
       showCroppaModal1: false,
       showCroppaModal2: false,
       imageURL1: null,
@@ -565,6 +594,22 @@ export default {
       this.$refs.myCroppa2.remove()
       this.showCroppaModal2 = false
     },
+    /* ******************** GOOGLE MAPS ******************** */
+    setPlace (place) {
+      this.$store.commit('m_acomodPlace', place)
+      this.$store.state.acomodData.positionLAT = this.$store.state.acomodPlace.geometry.location.lat()
+      this.$store.state.acomodData.positionLNG = this.$store.state.acomodPlace.geometry.location.lng()
+      this.$store.state.acomodData.address = this.$store.state.acomodPlace.name
+    },
+    /* ******************** COMODIDADES ******************** */
+    sliderRoupasCama () { this.$refs.sliderRoupasCama.click() },
+    sliderChurrasqueira () { this.$refs.sliderChurrasqueira.click() },
+    sliderPiscina () { this.$refs.sliderPiscina.click() },
+    sliderWifi () { this.$refs.sliderWifi.click() },
+    sliderArCond () { this.$refs.sliderArCond.click() },
+    sliderCaixaSom () { this.$refs.sliderCaixaSom.click() },
+    sliderPier () { this.$refs.sliderPier.click() },
+    
     /* ******************** BACK BUTTONS ******************** */
     backBtn1 () {
       this.$store.commit('m_cadastroAcomod1', false), this.$store.commit('m_cadastroAcomod0', true)
@@ -621,13 +666,17 @@ export default {
       }
     },
     nextBtn5 () {
-      if (1<2) {
+      if (this.$store.state.acomodPlace !== null) {
         this.$store.commit('m_cadastroAcomod5', false), this.$store.commit('m_cadastroAcomod6', true), this.$store.commit('m_acomodProgressBar', (100/11)*6)
+      } else {
+        alert('Adicione um endereço')
       }
     },
     nextBtn6 () {
       if (this.imageURL1 !== null) {
         this.$store.commit('m_cadastroAcomod6', false), this.$store.commit('m_cadastroAcomod7', true), this.$store.commit('m_acomodProgressBar', (100/11)*7)
+      } else {
+        alert('Adicione pelo menos uma imagem')
       }
     },
     nextBtn7 () {
@@ -754,6 +803,9 @@ export default {
       let firstName = fullName[0]
       return firstName
     },
+    mapZoom () {
+      return this.$store.state.acomodPlace !== null ? 16 : 12
+    },
     form1ok () {
       return this.$store.state.acomodData.tipoAcomod !== null ? 'background:#00CFC7;cursor:pointer' : ''
     },
@@ -767,7 +819,7 @@ export default {
       return 1<2 ? 'background:#00CFC7;cursor:pointer' : ''
     },
     form5ok () {
-      return 1<2 ? 'background:#00CFC7;cursor:pointer' : ''
+      return this.$store.state.acomodPlace !== null ? 'background:#00CFC7;cursor:pointer' : ''
     },
     form6ok () {
       return this.imageURL1 !== null ? 'background:#00CFC7;cursor:pointer' : ''
@@ -1047,6 +1099,19 @@ export default {
           background: rgb(222, 222, 222);
           color: white;
         }
+      }
+    }
+    & .gmap-autocomplete-box {
+      margin: 1.5rem 7% 1rem 7%;
+      & .__gmap-autocomplete {
+        font-size: 18px;
+        font-weight: 300;
+        color: var(--color01);
+        width: 100%;
+        border: none;
+        border-bottom: 1px solid rgb(222, 222, 222);
+        padding: .5rem 0 .6rem 0;
+        outline: none;
       }
     }
   }

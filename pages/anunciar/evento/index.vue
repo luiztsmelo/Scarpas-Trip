@@ -531,7 +531,7 @@ export default {
       return yyyy + '-' + mm + '-' + dd
     },
     mapZoom () {
-      return this.$store.state.eventoPlace !== null ? 15 : 11
+      return this.$store.state.eventoPlace !== null ? 16 : 12
     },
     form1ok () {
       return this.$store.state.eventoData.date.length > 0 && this.$store.state.eventoData.hour.length > 0 ? 'background:rgb(255, 88, 88);cursor:pointer' : ''
@@ -762,7 +762,7 @@ export default {
       }
     }
     & .__gmap-autocomplete {
-      font-size: 20px;
+      font-size: 18px;
       font-weight: 300;
       color: var(--color01);
       width: 100%;

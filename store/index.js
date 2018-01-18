@@ -36,6 +36,7 @@ const store = () => new Vuex.Store({
     acomods: null,
     acomod: null,
     acomodProgressBar: 0,
+    acomodPlace: null,
     blobAcL1: null,
     blobAcH1J: null,
     blobAcH1W: null,
@@ -68,6 +69,9 @@ const store = () => new Vuex.Store({
       hasArCond: false,
       hasCaixaSom: false,
       hasPier: false,
+      positionLAT: -20.6141320,
+      positionLNG: -46.0478760,
+      address: null,
       duracao: null,
       imageL1: null,
       imageH1J: null,
@@ -241,6 +245,9 @@ const store = () => new Vuex.Store({
     m_imageAcH2W (state, payload) {
       state.acomodData.imageH2W = payload
     },
+    m_acomodPlace (state, payload) {
+      state.acomodPlace = payload
+    },
     m_acomods (state, payload) {
       state.acomods = payload
     },
@@ -296,9 +303,6 @@ const store = () => new Vuex.Store({
     m_eventoData (state, payload) {
       state.eventoData = payload
     },
-    m_eventoPlace (state, payload) {
-      state.eventoPlace = payload
-    },
     m_eventoMap (state, payload) {
       state.eventoMap = payload
     },
@@ -319,6 +323,9 @@ const store = () => new Vuex.Store({
     },
     m_imageEvH2W (state, payload) {
       state.eventoData.imageH2W = payload
+    },
+    m_eventoPlace (state, payload) {
+      state.eventoPlace = payload
     },
     m_eventos (state, payload) {
       state.eventos = payload
