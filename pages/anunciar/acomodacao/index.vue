@@ -374,12 +374,23 @@
 
 
 
-    <!-- ########## VALOR DO ALUGUEL PG.7 ########## -->
+    <!-- ########## VALOR DA ESTADIA PG.7 ########## -->
     <form class="cadastro-acomodacao" v-show="$store.state.cadastroAcomod7">
 
-      <h1 class="__form-title">Quanto será cobrado?</h1>
+      <h1 class="__form-title">Qual será o valor da estadia?</h1>
 
-      
+      <div class="item-form">
+        <label>Baixa Temporada</label>
+        <input type="text" placeholder="Diária" @click="diariaBaixaOn" v-if="diariaBaixaOff">
+        <money v-model="$store.state.acomodData.valorDiariaBaixa" v-else></money>
+        <input type="text" placeholder="Final de Semana" @click="fdsBaixaOn" v-if="fdsBaixaOff">
+        <money v-model="$store.state.acomodData.valorFdsBaixa" v-else></money>
+      </div> 
+
+      <div class="item-form">
+        <label>Alta Temporada</label>
+        
+      </div> 
 
 
       <div class="back-next"> 
@@ -389,7 +400,7 @@
         </div>
       </div> 
     
-    </form><!-- ########## VALOR DO ALUGUEL PG.7 ########## -->
+    </form><!-- ########## VALOR DA ESTADIA PG.7 ########## -->
 
 
 
@@ -544,10 +555,18 @@ export default {
       showCroppaModal1: false,
       showCroppaModal2: false,
       imageURL1: null,
-      imageURL2: null
+      imageURL2: null,
+      diariaBaixaOff: true,
+      fdsBaixaOff: true
     }
   },
   methods: {
+    diariaBaixaOn () {
+      this.diariaBaixaOff = false
+    },
+    fdsBaixaOn () {
+      this.fdsBaixaOff = false
+    },
     googleSignIn () {
       this.$store.dispatch('a_googleSignIn')
     },
