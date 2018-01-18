@@ -469,7 +469,7 @@ export default {
     & .__img-comodidade {
       width: 1.7rem;
       height: auto;
-      margin: 0 .6rem;
+      margin: .3rem .6rem 0 .6rem;
     }
   }
   
