@@ -209,7 +209,7 @@
     <!-- ########## TÍTULO PG.5 ########## -->
     <form class="cadastro-evento" v-show="$store.state.cadastroEvento5">
 
-      <h1 class="__form-title">Dê um nome para seu evento</h1>  
+      <h1 class="__form-title">Dê um título para seu evento</h1>  
       
       <textarea 
       v-model="$store.state.eventoData.title"
@@ -270,7 +270,7 @@
       <div class="back-next">
         <div class="back-next-body">
           <button type="button" class="__back" @click="backBtn7">Voltar</button>
-          <button type="button" class="__next" :style="form7ok" @click="concluir">Concluir</button>
+          <button type="button" class="__next" :style="form7ok" @click="concluir">Anunciar</button>
         </div>
       </div>
     
