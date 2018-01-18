@@ -381,10 +381,10 @@
 
       <div class="item-form">
         <label>Baixa Temporada</label>
-        <input type="text" placeholder="Diária (R$)" @click="diariaBaixaOn" v-if="diariaBaixaOff">
-        <money v-model="$store.state.acomodData.valorDiariaBaixa" ref="diariaBaixa" v-else></money>
-        <input type="text" placeholder="Final de Semana (R$)" @click="fdsBaixaOn" v-if="fdsBaixaOff">
-        <money v-model="$store.state.acomodData.valorFdsBaixa" ref="fdsBaixa" v-else></money>
+        <input type="text" placeholder="Diária (R$)" @click="diariaBaixaOn" v-show="diariaBaixaOff">
+        <money v-model="$store.state.acomodData.valorDiariaBaixa" ref="diariaBaixa" v-show="!diariaBaixaOff"></money>
+        <input type="text" placeholder="Final de Semana (R$)" @click="fdsBaixaOn" v-show="fdsBaixaOff">
+        <money v-model="$store.state.acomodData.valorFdsBaixa" ref="fdsBaixa" v-show="!fdsBaixaOff"></money>
       </div> 
 
       <div class="item-form">
@@ -562,12 +562,10 @@ export default {
   },
   methods: {
     diariaBaixaOn () {
-      this.diariaBaixaOff = false
-      this.$refs.diariaBaixa.click()
+      this.diariaBaixaOff = false, this.$refs.diariaBaixa.click()
     },
     fdsBaixaOn () {
-      this.fdsBaixaOff = false
-      this.$refs.fdsBaixa.click()
+      this.fdsBaixaOff = false, this.$refs.fdsBaixa.click()
     },
     googleSignIn () {
       this.$store.dispatch('a_googleSignIn')
