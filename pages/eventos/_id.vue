@@ -240,7 +240,7 @@ export default {
   display: flex;
   flex-flow: column;
   background-color: white;
-  margin-bottom: 3.5rem;
+  margin-bottom: 3.8rem;
   transition: all .27s cubic-bezier(.15,.97,.43,.93);
 
 
