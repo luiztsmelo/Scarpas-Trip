@@ -64,6 +64,7 @@
       <img class="__img-comodidade" v-if="acomod.hasWifi" src="../../assets/img/hasWifi.svg">
       <img class="__img-comodidade" v-if="acomod.hasArCond" src="../../assets/img/hasArCond.svg">
       <img class="__img-comodidade" v-if="acomod.hasCaixaSom" src="../../assets/img/hasCaixaSom.svg">
+      <img class="__img-comodidade" v-if="acomod.hasBarracas" src="../../assets/img/hasBarracas.svg" style="transform: scale(1.1)">
       <img class="__img-comodidade" v-if="acomod.hasPier" src="../../assets/img/hasPier.svg">
     </div>
 
@@ -103,6 +104,10 @@
           <div class="comods-item" v-if="acomod.hasCaixaSom">
             <img src="../../assets/img/hasCaixaSom.svg" class="__img">
             <h3>Caixa de Som</h3>
+          </div>
+          <div class="comods-item" v-if="acomod.hasBarracas">
+            <img src="../../assets/img/hasBarracas.svg" class="__img" style="transform: scale(1.1)">
+            <h3>Barracas</h3>
           </div>
           <div class="comods-item" v-if="acomod.hasPier">
             <img src="../../assets/img/hasPier.svg" class="__img">

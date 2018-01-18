@@ -220,6 +220,14 @@
           </label>
         </div>
 
+        <div class="item-form-switches" @click="sliderBarracas">
+          <h3>Barracas</h3>
+          <label class="switch" ref="sliderBarracas" @click="sliderBarracas">
+            <input type="checkbox" v-model="$store.state.acomodData.hasBarracas">
+            <span class="slider round"></span>
+          </label>
+        </div>
+
         <div class="item-form-switches" @click="sliderPier" style="border:none">
           <h3>Pier</h3>
           <label class="switch" ref="sliderPier" @click="sliderPier">
@@ -608,6 +616,7 @@ export default {
     sliderWifi () { this.$refs.sliderWifi.click() },
     sliderArCond () { this.$refs.sliderArCond.click() },
     sliderCaixaSom () { this.$refs.sliderCaixaSom.click() },
+    sliderBarracas () { this.$refs.sliderBarracas.click() },
     sliderPier () { this.$refs.sliderPier.click() },
     
     /* ******************** BACK BUTTONS ******************** */

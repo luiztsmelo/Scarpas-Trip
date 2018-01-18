@@ -68,6 +68,7 @@ const store = () => new Vuex.Store({
       hasWifi: false,
       hasArCond: false,
       hasCaixaSom: false,
+      hasBarracas: false,
       hasPier: false,
       positionLAT: -20.6141320,
       positionLNG: -46.0478760,
