@@ -380,8 +380,8 @@ export default {
     padding: 1.5rem 7% 0 7%;
     align-items: center;
     & .__anunciante-img {
-      width: 3rem;
-      height: 3rem;
+      width: 3.1rem;
+      height: 3.1rem;
       border-radius: 50%;
     }
     & .__anunciante-name {
