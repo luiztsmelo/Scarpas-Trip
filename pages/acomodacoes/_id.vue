@@ -65,7 +65,7 @@
       </div>
 
       <div class="__item-caracteristica">
-        <img class="__img-caracteristica" src="../../assets/img/banheiro.svg">
+        <img class="__img-caracteristica" src="../../assets/img/banheiro.svg" style="transform: scale(1.08)">
         <h3>{{ acomod.totalBanheiros }} banheiros</h3>
       </div>
 
@@ -520,7 +520,7 @@ export default {
       align-items: center;
       margin-top: .8rem;
       & .__img-caracteristica {
-        width: 1.7rem;
+        width: 1.65rem;
         height: auto;
         margin-right: .7rem;
       }
