@@ -30,7 +30,12 @@
         
 
       </div>
-      <v-date-picker></v-date-picker>
+      <v-date-picker
+      mode='range'
+      input-placeholder='Chegada - Partida'
+      popover-expanded='true'
+      popover-align='top'>
+      </v-date-picker>
     </div>
 
   </div>     
