@@ -86,7 +86,7 @@ export default {
       border-bottom: 1px solid rgb(222, 222, 222);
       & .__img {
         margin-right: 1rem;
-        width: 1.8rem;
+        width: 1.85rem;
         height: auto;
       }
       & .__text {

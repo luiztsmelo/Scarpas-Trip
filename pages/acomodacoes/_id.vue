@@ -54,6 +54,29 @@
 
 
 
+    <!-- ####### CARACTERÍSTICAS ####### -->
+    <h1 class="box-title">Características</h1>
+
+    <div class="capacidade-box">
+      
+    </div><!-- ####### CARACTERÍSTICAS ####### -->
+
+
+
+
+
+
+    <!-- ####### CAPACIDADE ####### -->
+    <h1 class="box-title">Capacidade</h1>
+
+    <div class="capacidade-box">
+      <h3>{{ acomod.totalHospedes }} pessoas</h3>
+    </div><!-- ####### CAPACIDADE ####### -->
+
+
+
+
+
     <!-- ####### COMODIDADES ####### -->
     <h1 class="box-title">Comodidades</h1>
 
@@ -123,17 +146,6 @@
         </div> 
       </div>
     </transition><!-- ####### COMODIDADES ####### -->
-
-
-
-
-
-    <!-- ####### CAPACIDADE ####### -->
-    <h1 class="box-title">Capacidade</h1>
-
-    <div class="capacidade-box">
-      <h3>{{ acomod.totalHospedes }} pessoas</h3>
-    </div><!-- ####### CAPACIDADE ####### -->
 
 
 

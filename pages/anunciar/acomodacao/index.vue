@@ -103,14 +103,13 @@
       <div class="item-form">
         <label>Nº de Quartos</label>
         <select v-model="$store.state.acomodData.totalQuartos">
-          <option>0</option>
           <option v-for="n in 10">{{ n }}</option>
           <option>Mais de 10</option>
         </select>
       </div> 
 
       <div class="item-form">
-        <label>Nº de Suítes</label>
+        <label>Quantos são Suítes?</label>
         <select v-model="$store.state.acomodData.totalSuites">
           <option>0</option>
           <option v-for="n in 7">{{ n }}</option>
