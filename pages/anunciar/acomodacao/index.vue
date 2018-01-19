@@ -180,6 +180,14 @@
           </label>
         </div>
 
+        <div class="item-form-switches" @click="sliderPiscina">
+          <h3>Piscina</h3>
+          <label class="switch" ref="sliderPiscina" @click="sliderPiscina">
+            <input type="checkbox" v-model="$store.state.acomodData.hasPiscina">
+            <span class="slider round"></span>
+          </label>
+        </div>
+
         <div class="item-form-switches" @click="sliderChurrasqueira">
           <h3>Churrasqueira</h3>
           <label class="switch" ref="sliderChurrasqueira" @click="sliderChurrasqueira">
@@ -188,10 +196,10 @@
           </label>
         </div>
 
-        <div class="item-form-switches" @click="sliderPiscina">
-          <h3>Piscina</h3>
-          <label class="switch" ref="sliderPiscina" @click="sliderPiscina">
-            <input type="checkbox" v-model="$store.state.acomodData.hasPiscina">
+        <div class="item-form-switches" @click="sliderCozinha">
+          <h3>Cozinha Preparada</h3>
+          <label class="switch" ref="sliderCozinha" @click="sliderCozinha">
+            <input type="checkbox" v-model="$store.state.acomodData.hasCozinha">
             <span class="slider round"></span>
           </label>
         </div>
@@ -619,8 +627,9 @@ export default {
     },
     /* ******************** COMODIDADES ******************** */
     sliderRoupasCama () { this.$refs.sliderRoupasCama.click() },
-    sliderChurrasqueira () { this.$refs.sliderChurrasqueira.click() },
     sliderPiscina () { this.$refs.sliderPiscina.click() },
+    sliderChurrasqueira () { this.$refs.sliderChurrasqueira.click() },
+    sliderCozinha () { this.$refs.sliderCozinha.click() },
     sliderWifi () { this.$refs.sliderWifi.click() },
     sliderArCond () { this.$refs.sliderArCond.click() },
     sliderCaixaSom () { this.$refs.sliderCaixaSom.click() },

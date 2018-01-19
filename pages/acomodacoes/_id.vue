@@ -61,6 +61,7 @@
       <img class="__img-comodidade" v-if="acomod.hasRoupasCama" src="../../assets/img/hasRoupasCama.svg">
       <img class="__img-comodidade" v-if="acomod.hasPiscina" src="../../assets/img/hasPiscina.svg">
       <img class="__img-comodidade" v-if="acomod.hasChurrasqueira" src="../../assets/img/hasChurrasqueira.svg">
+      <img class="__img-comodidade" v-if="acomod.hasCozinha" src="../../assets/img/hasCozinha.svg">
       <img class="__img-comodidade" v-if="acomod.hasWifi" src="../../assets/img/hasWifi.svg">
       <img class="__img-comodidade" v-if="acomod.hasArCond" src="../../assets/img/hasArCond.svg">
       <img class="__img-comodidade" v-if="acomod.hasCaixaSom" src="../../assets/img/hasCaixaSom.svg">
@@ -92,6 +93,10 @@
           <div class="comods-item" v-if="acomod.hasChurrasqueira">
             <img src="../../assets/img/hasChurrasqueira.svg" class="__img">
             <h3>Churrasqueira</h3>
+          </div>
+          <div class="comods-item" v-if="acomod.hasCozinha">
+            <img src="../../assets/img/hasCozinha.svg" class="__img">
+            <h3>Cozinha Preparada</h3>
           </div>
           <div class="comods-item" v-if="acomod.hasWifi">
             <img src="../../assets/img/hasWifi.svg" class="__img">
@@ -515,7 +520,7 @@ export default {
       border-bottom: 1px solid rgb(222, 222, 222);
       & .__img {
         margin-right: 1rem;
-        width: 1.7rem;
+        width: 1.75rem;
         height: auto;
       }
 
