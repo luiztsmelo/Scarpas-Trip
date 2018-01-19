@@ -57,8 +57,18 @@
     <!-- ####### CARACTERÍSTICAS ####### -->
     <h1 class="box-title">Características</h1>
 
-    <div class="capacidade-box">
+    <div class="caracteristicas-box">
       
+      <div class="__item-caracteristica">
+        <img class="__img-caracteristica" src="../../assets/img/quarto.svg">
+        <h3>{{ acomod.totalQuartos }} quartos ({{ acomod.totalSuites }} suítes)</h3>
+      </div>
+
+      <div class="__item-caracteristica">
+        <img class="__img-caracteristica" src="../../assets/img/banheiro.svg">
+        <h3>{{ acomod.totalBanheiros }} banheiros</h3>
+      </div>
+
     </div><!-- ####### CARACTERÍSTICAS ####### -->
 
 
@@ -452,6 +462,7 @@ export default {
   }/* ####### IMAGE BOX ####### */
 
 
+
   
   /* ####### ANUNCIANTE BOX ####### */
   & .anunciante-box {
@@ -471,10 +482,41 @@ export default {
 
 
 
+
   /* ####### SOBRE BOX ####### */
   & .sobre-box {
     padding: 0 7%;
   }/* ####### SOBRE BOX ####### */
+
+
+
+
+
+  /* ####### CARACTERÍSTICAS BOX ####### */
+  & .caracteristicas-box {
+    padding: 0 7%;
+    transform: translateY(-.3rem);
+    & .__item-caracteristica {
+      display: flex;
+      flex-flow: row;
+      align-items: center;
+      margin-top: 1rem;
+      & .__img-caracteristica {
+        width: 1.8rem;
+        height: auto;
+        margin-right: .7rem;
+      }
+    }
+  }/* ####### CARACTERÍSTICAS BOX ####### */
+
+
+
+
+
+  /* ####### CAPACIDADE BOX ####### */
+  & .capacidade-box {
+    padding: 0 7%;
+  }/* ####### CAPACIDADE BOX ####### */
 
 
 
@@ -536,18 +578,9 @@ export default {
         width: 1.8rem;
         height: auto;
       }
-
     }
   }
 }/* ####### COMODIDADES ####### */
-
-
-
-
-  /* ####### CAPACIDADE BOX ####### */
-  & .capacidade-box {
-    padding: 0 7%;
-  }/* ####### CAPACIDADE BOX ####### */
 
 
 
