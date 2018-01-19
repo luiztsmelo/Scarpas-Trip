@@ -473,7 +473,7 @@ export default {
       }
       & .__reserva-btn {
         font-size: 16px;
-        font-weight: 500;
+        font-weight: 600;
         background: #49A5FC;
         color: white;
         padding: .7rem 1.1rem;

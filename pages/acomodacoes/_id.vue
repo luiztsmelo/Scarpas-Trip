@@ -127,7 +127,7 @@
     <h1 class="box-title">Capacidade</h1>
 
     <div class="capacidade-box">
-      <h3>{{ acomod.totalHospedes }} hóspedes</h3>
+      <h3>{{ acomod.totalHospedes }} pessoas</h3>
     </div><!-- ####### CAPACIDADE ####### -->
 
 
@@ -467,9 +467,9 @@ export default {
   & .comodidades-box {
     padding: 0 5%;
     & .__img-comodidade {
-      width: 1.7rem;
+      width: 1.75rem;
       height: auto;
-      margin: .4rem .7rem 0 .7rem;
+      margin: .5rem .7rem 0 .7rem;
     }
   }
   
@@ -515,7 +515,7 @@ export default {
       border-bottom: 1px solid rgb(222, 222, 222);
       & .__img {
         margin-right: 1rem;
-        width: 1.6rem;
+        width: 1.7rem;
         height: auto;
       }
 
