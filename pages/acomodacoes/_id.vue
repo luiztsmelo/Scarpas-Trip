@@ -71,7 +71,7 @@
 
       <div class="__item-caracteristica">
         <img class="__img-caracteristica" src="../../assets/img/garagem.svg">
-        <h3>{{ acomod.totalGaragem }} vagas garagem</h3>
+        <h3>{{ acomod.totalGaragem }} vagas na garagem</h3>
       </div>
 
     </div><!-- ####### CARACTERÍSTICAS ####### -->
@@ -505,9 +505,9 @@ export default {
       display: flex;
       flex-flow: row;
       align-items: center;
-      margin-top: 1rem;
+      margin-top: .8rem;
       & .__img-caracteristica {
-        width: 1.8rem;
+        width: 1.7rem;
         height: auto;
         margin-right: .7rem;
       }
