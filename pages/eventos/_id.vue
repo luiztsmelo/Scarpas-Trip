@@ -75,13 +75,14 @@
     <h1 class="box-title">Local</h1>
     
     <div class="local-box" >
+
       <h3 class="__adress">{{ evento.address }}</h3>
 
       <gmap-map
       :center="{lat: evento.positionLAT, lng: evento.positionLNG}"
       :zoom="15"
       :options="{styles: styles, draggable:false, fullscreenControl:false, zoomControl:false, mapTypeControl:false, streetViewControl:false}"
-      style="width: 100%; height: 220px"
+      style="width: 100%; height: 250px"
       @click="$store.commit('m_eventoMap', evento), enterFullscreen()">
         <Gmap-Marker
         :position="{lat: evento.positionLAT, lng: evento.positionLNG}"
@@ -381,7 +382,7 @@ export default {
   /* ####### LOCAL ####### */
   & .local-box {
     & .__adress {
-      padding: 0 7% .5rem 7%;
+      padding: 0 7% .6rem 7%;
     }
   }/* ####### LOCAL ####### */
 

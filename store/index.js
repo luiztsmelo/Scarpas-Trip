@@ -35,6 +35,7 @@ const store = () => new Vuex.Store({
     acomodID: null,
     acomods: null,
     acomod: null,
+    acomodMap: null,
     acomodProgressBar: 0,
     acomodPlace: null,
     blobAcL1: null,
@@ -256,6 +257,9 @@ const store = () => new Vuex.Store({
     },
     m_acomod (state, payload) {
       state.acomod = payload
+    },
+    m_acomodMap (state, payload) {
+      state.acomodMap = payload
     },
     m_acomodProgressBar (state, payload) {
       state.acomodProgressBar = payload

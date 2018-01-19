@@ -186,7 +186,20 @@
     <h1 class="box-title">Local</h1>
 
     <div class="local-box">
-      <h3>Mapa aqui...</h3>
+
+      <h3 class="__adress">{{ acomod.address }}</h3>
+
+      <gmap-map
+      :center="{lat: acomod.positionLAT, lng: acomod.positionLNG}"
+      :zoom="15"
+      :options="{styles: styles, draggable:false, fullscreenControl:false, zoomControl:false, mapTypeControl:false, streetViewControl:false}"
+      style="width: 100%; height: 250px"
+      @click="$store.commit('m_acomodMap', acomod), enterFullscreen()">
+        <Gmap-Marker
+        :position="{lat: acomod.positionLAT, lng: acomod.positionLNG}"
+        :icon="markerIcon"
+        ></Gmap-Marker>
+      </gmap-map>
     </div><!-- ####### LOCALIZAÇÃO ####### -->
 
 
@@ -598,7 +611,9 @@ export default {
 
   /* ####### LOCAL ####### */
   & .local-box {
-    padding: 0 7%;
+    & .__adress {
+      padding: 0 7% .6rem 7%;
+    }
   }/* ####### LOCAL ####### */
 
 
