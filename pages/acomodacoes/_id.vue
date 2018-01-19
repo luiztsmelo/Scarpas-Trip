@@ -61,10 +61,10 @@
       <img class="__img-comodidade" v-if="acomod.hasRoupasCama" src="../../assets/img/hasRoupasCama.svg">
       <img class="__img-comodidade" v-if="acomod.hasPiscina" src="../../assets/img/hasPiscina.svg">
       <img class="__img-comodidade" v-if="acomod.hasChurrasqueira" src="../../assets/img/hasChurrasqueira.svg">
-      <img class="__img-comodidade" v-if="acomod.hasCozinha" src="../../assets/img/hasCozinha.svg">
-      <img class="__img-comodidade" v-if="acomod.hasWifi" src="../../assets/img/hasWifi.svg">
+      <img class="__img-comodidade" v-if="acomod.hasCozinha" src="../../assets/img/hasCozinha.svg" style="transform: scale(1.07)">
+      <img class="__img-comodidade" v-if="acomod.hasWifi" src="../../assets/img/hasWifi.svg" style="transform: scale(.98)">
       <img class="__img-comodidade" v-if="acomod.hasArCond" src="../../assets/img/hasArCond.svg">
-      <img class="__img-comodidade" v-if="acomod.hasCaixaSom" src="../../assets/img/hasCaixaSom.svg">
+      <img class="__img-comodidade" v-if="acomod.hasCaixaSom" src="../../assets/img/hasCaixaSom.svg" style="transform: scale(.92)">
       <img class="__img-comodidade" v-if="acomod.hasBarracas" src="../../assets/img/hasBarracas.svg" style="transform: scale(1.1)">
       <img class="__img-comodidade" v-if="acomod.hasPier" src="../../assets/img/hasPier.svg">
     </div>
@@ -95,11 +95,11 @@
             <h3>Churrasqueira</h3>
           </div>
           <div class="comods-item" v-if="acomod.hasCozinha">
-            <img src="../../assets/img/hasCozinha.svg" class="__img">
+            <img src="../../assets/img/hasCozinha.svg" class="__img" style="transform: scale(1.07)">
             <h3>Cozinha Preparada</h3>
           </div>
           <div class="comods-item" v-if="acomod.hasWifi">
-            <img src="../../assets/img/hasWifi.svg" class="__img">
+            <img src="../../assets/img/hasWifi.svg" class="__img" style="transform: scale(.98)">
             <h3>WiFi</h3>
           </div>
           <div class="comods-item" v-if="acomod.hasArCond">
@@ -107,7 +107,7 @@
             <h3>Ar Condicionado</h3>
           </div>
           <div class="comods-item" v-if="acomod.hasCaixaSom">
-            <img src="../../assets/img/hasCaixaSom.svg" class="__img">
+            <img src="../../assets/img/hasCaixaSom.svg" class="__img" style="transform: scale(.92)">
             <h3>Caixa de Som</h3>
           </div>
           <div class="comods-item" v-if="acomod.hasBarracas">
@@ -472,9 +472,9 @@ export default {
   & .comodidades-box {
     padding: 0 5%;
     & .__img-comodidade {
-      width: 1.75rem;
+      width: 1.8rem;
       height: auto;
-      margin: .5rem .7rem 0 .7rem;
+      margin: .6rem .8rem 0 .8rem;
     }
   }
   
@@ -520,7 +520,7 @@ export default {
       border-bottom: 1px solid rgb(222, 222, 222);
       & .__img {
         margin-right: 1rem;
-        width: 1.75rem;
+        width: 1.8rem;
         height: auto;
       }
 
