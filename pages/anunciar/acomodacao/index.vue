@@ -118,24 +118,6 @@
       </div>
 
       <div class="item-form">
-        <label>Nº de Camas Casal</label>
-        <select v-model="$store.state.acomodData.totalCamasCasal">
-          <option>0</option>
-          <option v-for="n in 10">{{ n }}</option>
-          <option>Mais de 10</option>
-        </select>
-      </div> 
-
-      <div class="item-form">
-        <label>Nº de Camas Solteiro</label>
-        <select v-model="$store.state.acomodData.totalCamasSolteiro">
-          <option>0</option>
-          <option v-for="n in 10">{{ n }}</option>
-          <option>Mais de 10</option>
-        </select>
-      </div> 
-
-      <div class="item-form">
         <label>Nº de Banheiros</label>
         <select v-model="$store.state.acomodData.totalBanheiros">
           <option v-for="n in 7">{{ n }}</option>

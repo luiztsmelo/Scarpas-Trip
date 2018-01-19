@@ -96,7 +96,7 @@
     <h1 class="box-title">Comodidades</h1>
 
     <div class="comodidades-box" @click="showComods = true">
-      <img class="__img-comodidade" v-if="acomod.hasRoupasCama" src="../../assets/img/hasRoupasCama.svg">
+      <img class="__img-comodidade" v-if="acomod.hasRoupasCama" src="../../assets/img/hasRoupasCama.svg" style="transform: scale(1.01)">
       <img class="__img-comodidade" v-if="acomod.hasPiscina" src="../../assets/img/hasPiscina.svg">
       <img class="__img-comodidade" v-if="acomod.hasChurrasqueira" src="../../assets/img/hasChurrasqueira.svg">
       <img class="__img-comodidade" v-if="acomod.hasCozinha" src="../../assets/img/hasCozinha.svg" style="transform: scale(1.07)">
@@ -121,7 +121,7 @@
           <h1 class="__title">Comodidades</h1>
 
           <div class="comods-item" v-if="acomod.hasRoupasCama">
-            <img src="../../assets/img/hasRoupasCama.svg" class="__img">
+            <img src="../../assets/img/hasRoupasCama.svg" class="__img" style="transform: scale(1.01)">
             <h3>Roupas de Cama e Toalhas</h3>
           </div>
           <div class="comods-item" v-if="acomod.hasPiscina">
@@ -520,7 +520,7 @@ export default {
       align-items: center;
       margin-top: .8rem;
       & .__img-caracteristica {
-        width: 1.65rem;
+        width: 1.6rem;
         height: auto;
         margin-right: .7rem;
       }
