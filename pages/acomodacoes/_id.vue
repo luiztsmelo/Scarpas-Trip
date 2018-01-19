@@ -470,11 +470,12 @@ export default {
 
   /* ####### COMODIDADES ####### */
   & .comodidades-box {
-    padding: 0 5%;
+    padding: 0 4.5%;
+    transform: translateY(-.2rem);
     & .__img-comodidade {
       width: 1.8rem;
       height: auto;
-      margin: .6rem .8rem 0 .8rem;
+      margin: .7rem .8rem 0 .8rem;
     }
   }
   
