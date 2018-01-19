@@ -26,9 +26,11 @@
         <nuxt-link :to="roteiroRoute">
           <img class="__roteiro-confirm" :style="onRoteiro" src="../assets/img/roteiro-confirm.svg" @click="hideFoobar()">
         </nuxt-link>
+        
+        
 
       </div>
-
+      <v-date-picker></v-date-picker>
     </div>
 
   </div>     
