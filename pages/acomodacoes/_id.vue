@@ -510,7 +510,7 @@ export default {
     padding: 0 7% 3rem 7%;
     & .__title {
       margin: 5rem 0 2rem 0;
-      font-size: 31px;
+      font-size: 32px;
       font-weight: 600;
     }
     & .comods-item { 

@@ -74,8 +74,8 @@ export default {
       }
     }
     & .__title {
-      margin: 2rem 0 1rem 0;
-      font-size: 31px;
+      margin: 2rem 0 2rem 0;
+      font-size: 32px;
       font-weight: 600;
     }
     & .share-item { 
@@ -86,14 +86,11 @@ export default {
       border-bottom: 1px solid rgb(222, 222, 222);
       & .__img {
         margin-right: 1rem;
-        width: 1.5rem;
+        width: 1.8rem;
         height: auto;
       }
-      & .whatsapp {
-        transform: scale(1.17);
-      }
       & .__text {
-        font-size: 19px;
+        font-size: 18px;
         font-weight: 300;
       }
     }
