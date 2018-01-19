@@ -69,6 +69,11 @@
         <h3>{{ acomod.totalBanheiros }} banheiros</h3>
       </div>
 
+      <div class="__item-caracteristica">
+        <img class="__img-caracteristica" src="../../assets/img/garagem.svg">
+        <h3>{{ acomod.totalGaragem }} vagas garagem</h3>
+      </div>
+
     </div><!-- ####### CARACTERÍSTICAS ####### -->
 
 
