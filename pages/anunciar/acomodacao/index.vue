@@ -377,19 +377,16 @@
     <!-- ########## VALOR DA ESTADIA PG.7 ########## -->
     <form class="cadastro-acomodacao" v-show="$store.state.cadastroAcomod7">
 
-      <h1 class="__form-title">Qual será o valor da estadia?</h1>
+      <h1 class="__form-title">Qual será o valor da diária?</h1>
 
       <div class="item-form">
-        <label>Baixa Temporada</label>
-        <input type="text" placeholder="Diária (R$)" @click="diariaBaixaOn" v-show="diariaBaixaOff">
-        <money v-model="$store.state.acomodData.valorDiariaBaixa" placeholder="Diária" ref="diariaBaixa" v-show="!diariaBaixaOff"></money>
-        <input type="text" placeholder="Final de Semana (R$)" @click="fdsBaixaOn" v-show="fdsBaixaOff">
-        <money v-model="$store.state.acomodData.valorFdsBaixa" ref="fdsBaixa" v-show="!fdsBaixaOff"></money>
+        <label>Em dias normais</label>
+        <money v-model="$store.state.acomodData.valorDiariaNormal"></money>
       </div> 
 
       <div class="item-form">
-        <label>Alta Temporada</label>
-        
+        <label>Nos feriados</label>
+        <money v-model="$store.state.acomodData.valorDiariaFeriado"></money>
       </div> 
 
 
@@ -555,18 +552,10 @@ export default {
       showCroppaModal1: false,
       showCroppaModal2: false,
       imageURL1: null,
-      imageURL2: null,
-      diariaBaixaOff: true,
-      fdsBaixaOff: true
+      imageURL2: null
     }
   },
   methods: {
-    diariaBaixaOn () {
-      this.diariaBaixaOff = false, this.$refs.diariaBaixa.click()
-    },
-    fdsBaixaOn () {
-      this.fdsBaixaOff = false, this.$refs.fdsBaixa.click()
-    },
     googleSignIn () {
       this.$store.dispatch('a_googleSignIn')
     },
