@@ -173,7 +173,7 @@
     <!-- ####### RESERVA ####### --> 
     <div class="reserva">
       <div class="reserva-body">
-        <h3 class="__reserva-valor">R${{ acomod.valorDiaria }}<span class="__reserva-valor-pessoa">/pessoa</span></h3>
+        <h3 class="__reserva-valor">R${{ acomod.valorDiariaNormal }}<span class="__reserva-valor-pessoa">/dia</span></h3>
         <button class="__reserva-btn">Reservar Estadia</button>
       </div>
     </div>
