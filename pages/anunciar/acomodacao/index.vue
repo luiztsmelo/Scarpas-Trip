@@ -101,15 +101,6 @@
       <h1 class="__form-title">Características físicas {{ tipoAcomodText }}</h1>
 
       <div class="item-form">
-        <label>Nº de Suítes</label>
-        <select v-model="$store.state.acomodData.totalSuites">
-          <option>0</option>
-          <option v-for="n in 6">{{ n }}</option>
-          <option>Mais de 6</option>
-        </select>
-      </div> 
-
-      <div class="item-form">
         <label>Nº de Quartos</label>
         <select v-model="$store.state.acomodData.totalQuartos">
           <option>0</option>
@@ -117,6 +108,15 @@
           <option>Mais de 10</option>
         </select>
       </div> 
+
+      <div class="item-form">
+        <label>Nº de Suítes</label>
+        <select v-model="$store.state.acomodData.totalSuites">
+          <option>0</option>
+          <option v-for="n in 7">{{ n }}</option>
+          <option>Mais de 7</option>
+        </select>
+      </div>
 
       <div class="item-form">
         <label>Nº de Camas Casal</label>
@@ -139,16 +139,16 @@
       <div class="item-form">
         <label>Nº de Banheiros</label>
         <select v-model="$store.state.acomodData.totalBanheiros">
-          <option v-for="n in 6">{{ n }}</option>
-          <option>Mais de 6</option>
+          <option v-for="n in 7">{{ n }}</option>
+          <option>Mais de 7</option>
         </select>
       </div> 
 
       <div class="item-form">
         <label>Lugares na Garagem</label>
         <select v-model="$store.state.acomodData.totalGaragem">
-          <option v-for="n in 6">{{ n }}</option>
-          <option>Mais de 6</option>
+          <option v-for="n in 7">{{ n }}</option>
+          <option>Mais de 7</option>
         </select>
       </div> 
 
