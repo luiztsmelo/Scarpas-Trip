@@ -382,7 +382,7 @@
       <div class="item-form">
         <label>Baixa Temporada</label>
         <input type="text" placeholder="Diária (R$)" @click="diariaBaixaOn" v-show="diariaBaixaOff">
-        <money v-model="$store.state.acomodData.valorDiariaBaixa" ref="diariaBaixa" v-show="!diariaBaixaOff"></money>
+        <money v-model="$store.state.acomodData.valorDiariaBaixa" placeholder="Diária" ref="diariaBaixa" v-show="!diariaBaixaOff"></money>
         <input type="text" placeholder="Final de Semana (R$)" @click="fdsBaixaOn" v-show="fdsBaixaOff">
         <money v-model="$store.state.acomodData.valorFdsBaixa" ref="fdsBaixa" v-show="!fdsBaixaOff"></money>
       </div> 

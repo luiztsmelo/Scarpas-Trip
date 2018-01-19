@@ -469,7 +469,7 @@ export default {
     & .__img-comodidade {
       width: 1.7rem;
       height: auto;
-      margin: .3rem .6rem 0 .6rem;
+      margin: .4rem .7rem 0 .7rem;
     }
   }
   
@@ -583,7 +583,7 @@ export default {
       }
       & .__reserva-btn {
         font-size: 16px;
-        font-weight: 500;
+        font-weight: 600;
         background: #00CFC7;
         color: white;
         padding: .7rem 1.1rem;
