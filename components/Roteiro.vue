@@ -3,11 +3,11 @@
     
     <div class="chegada-partida-container">
       
-      <h1 class="__title">Tudo para sua viagem a Capitólio e região! Crie um roteiro gratuito:</h1>
+      <h1 class="__title">Tudo para sua viagem a Capitólio e região. Crie um roteiro gratuito:</h1>
 
       <div class="chegada-partida-box">
 
-        <img class="__roteiro-calendar" src="../assets/img/roteiro-calendar.svg">
+        <img class="__roteiro-calendar" src="../assets/img/roteiro-calendar.svg" style="transform:scale(1.03)translateY(-.05rem)">
 
         <div class="chegada-partida-input">
           <h3 v-if="!chegadaDate">Chegada</h3>
@@ -121,7 +121,7 @@ export default {
       display: flex;
       padding: 0 7%;
       color: white;
-      font-size: 22px;
+      font-size: 21px;
       font-weight: 400;
       line-height: 29px;
     }
