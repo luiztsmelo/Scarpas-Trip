@@ -335,7 +335,7 @@ export default {
   },
   computed: {
     tipoAcomodText () {
-      const path = this.$store.state.acomodData.tipoAcomod
+      const path = this.acomod.tipoAcomod
       return path === 'Casa' ? 'a casa' 
            : path === 'Apartamento' ? 'o apartamento'
            : path === 'Rancho' ? 'o rancho'

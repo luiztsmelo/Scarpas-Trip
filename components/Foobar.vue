@@ -120,18 +120,6 @@ export default {
       & .coloricon {
         filter: grayscale(100%) brightness(10%);
       }
-      & .__foobar1-icon {
-        transform: scale(1);
-      }
-      & .__foobar2-icon {
-        transform: scale(1);
-      }
-      & .__foobar3-icon {
-        transform: scale(1);
-      }
-      & .__foobar4-icon {
-        transform: scale(1);
-      }
     }
   }
 }
