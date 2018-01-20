@@ -409,12 +409,12 @@ export default {
       top: 50%;
       transform: translateY(-50%);
       & .__reserva-valor {
-        font-size: 19px;
+        font-size: 18px;
         font-weight: 400;
       }
       & .__reserva-btn {
-        font-size: 16px;
-        font-weight: 600;
+        font-size: 17px;
+        font-weight: 500;
         background: #ff5858;
         color: white;
         padding: .7rem 1.1rem;

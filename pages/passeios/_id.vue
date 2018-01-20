@@ -465,15 +465,15 @@ export default {
       transform: translateY(-50%);
       & .__reserva-valor {
         color: var(--color01);
-        font-size: 19px;
+        font-size: 18px;
         font-weight: 400;
       }
       & .__reserva-valor-pessoa {
         font-size: 15px;
       }
       & .__reserva-btn {
-        font-size: 16px;
-        font-weight: 600;
+        font-size: 17px;
+        font-weight: 500;
         background: #49A5FC;
         color: white;
         padding: .7rem 1.1rem;
