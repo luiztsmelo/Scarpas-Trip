@@ -122,7 +122,7 @@ export default {
       padding: 0 7%;
       color: white;
       font-size: 21px;
-      font-weight: 400;
+      font-weight: 500;
       line-height: 28px;
     }
     & .chegada-partida-box {
@@ -138,7 +138,7 @@ export default {
         width: 5.2rem;
         & h3 {
           font-size: 18px;
-          font-weight: 300;
+          font-weight: 400;
           color: white;
           position: absolute;
           top: 0;
@@ -158,7 +158,7 @@ export default {
         }
       }
       & img {
-        width: 1.02rem;
+        width: 1.1rem;
         height: auto;
         /* filter: invert(80%); */
       }
