@@ -3,7 +3,7 @@
     
     <div class="chegada-partida-container">
       
-      <h1 class="__title">Tudo para sua viagem a Capitólio e região. Crie um roteiro gratuito:</h1>
+      <h1 class="__title">Tudo para sua viagem a Capitólio e região! Crie um roteiro gratuito:</h1>
 
       <div class="chegada-partida-box">
 
