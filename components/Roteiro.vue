@@ -26,16 +26,9 @@
         <nuxt-link :to="roteiroRoute">
           <img class="__roteiro-confirm" :style="onRoteiro" src="../assets/img/roteiro-confirm.svg" @click="hideFoobar()">
         </nuxt-link>
-        
-        
 
       </div>
-      <v-date-picker
-      mode='range'
-      input-placeholder='Chegada - Partida'
-      popover-expanded='true'
-      popover-align='top'>
-      </v-date-picker>
+  
     </div>
 
   </div>     
@@ -114,7 +107,7 @@ export default {
 .roteiro-home {
   width: 100%;
   height: 11rem;
-  background-image: url('../assets/img/bg.gif');
+  background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);
   & .chegada-partida-container {
     padding: 1rem 0;
     position: relative;
@@ -128,8 +121,8 @@ export default {
       display: flex;
       padding: 0 7%;
       color: white;
-      font-size: 23px;
-      font-weight: 600;
+      font-size: 22px;
+      font-weight: 500;
       line-height: 29px;
     }
     & .chegada-partida-box {
