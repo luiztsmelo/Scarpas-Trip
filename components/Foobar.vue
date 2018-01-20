@@ -118,7 +118,7 @@ export default {
         height: auto;
       }
       & .coloricon {
-        filter: grayscale(100%) brightness(10%);
+        filter: grayscale(100%) brightness(35%);
       }
     }
   }
