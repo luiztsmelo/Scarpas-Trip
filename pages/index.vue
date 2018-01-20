@@ -272,7 +272,7 @@ export default {
               text-transform: uppercase;
               font-size: 12px;
               font-weight: 600;
-              color: #49A5FC;
+              color: #097FF1;
             }
             & .__card-title {
               margin: .2rem 0;
