@@ -7,7 +7,7 @@
 
       <div class="chegada-partida-box">
 
-        <img class="__roteiro-calendar" src="../assets/img/roteiro-calendar.svg" style="transform:scale(1.03)translateY(-.05rem)">
+        <img class="__roteiro-calendar" src="../assets/img/roteiro-calendar.svg" style="transform:scale(1.04)translateY(-.05rem)">
 
         <div class="chegada-partida-input">
           <h3 v-if="!chegadaDate">Chegada</h3>
@@ -158,7 +158,7 @@ export default {
         }
       }
       & img {
-        width: 1.1rem;
+        width: 1.02rem;
         height: auto;
         /* filter: invert(80%); */
       }

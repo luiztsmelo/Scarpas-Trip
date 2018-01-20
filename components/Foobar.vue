@@ -118,7 +118,7 @@ export default {
         height: auto;
       }
       & .coloricon {
-        filter: grayscale(100%) brightness(45%);
+        filter: grayscale(100%) brightness(15%);
       }
       & .__foobar1-icon {
         transform: scale(1);
