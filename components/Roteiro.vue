@@ -138,7 +138,7 @@ export default {
         width: 5.2rem;
         & h3 {
           font-size: 18px;
-          font-weight: 400;
+          font-weight: 300;
           color: white;
           position: absolute;
           top: 0;
