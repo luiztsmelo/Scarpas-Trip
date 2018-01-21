@@ -65,7 +65,7 @@
       </div>
 
       <div class="__item-caracteristica">
-        <img class="__img-caracteristica" src="../../assets/img/banheiro.svg" style="transform: scale(1.08)">
+        <img class="__img-caracteristica" src="../../assets/img/banheiro.svg" style="transform: scale(1.06)">
         <h3>{{ acomod.totalBanheiros }} banheiros</h3>
       </div>
 
