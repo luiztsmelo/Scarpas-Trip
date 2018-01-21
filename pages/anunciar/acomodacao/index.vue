@@ -4,7 +4,7 @@
     <!-- PLANO ACOMODAÇÃO -->
     <div class="plano-acomodacao" v-show="$store.state.cadastroAcomod0">
       
-      <img class="__img-header" src="../../../assets/img/anuncio-estadia.svg">
+      <img class="__img-header" src="../../../assets/img/anuncio-acomod.svg">
        
       <h1 class="__title">Amplie seus ganhos anunciando sua casa com a gente!</h1>
       

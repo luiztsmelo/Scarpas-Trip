@@ -10,9 +10,9 @@
 
         <nav class="nav">
           <div class="__menu" @click="$store.commit('m_showMenu', !showMenu), $store.commit('m_menuIconAnime', !menuIconAnime)">
-            <div class="bar" :class="{ menuIconAnime1: menuIconAnime }"></div>
-            <div class="bar" :class="{ menuIconAnime2: menuIconAnime }"></div>
-            <div class="bar" :class="{ menuIconAnime3: menuIconAnime }"></div>
+            <div class="__bar" :class="{ menuIconAnime1: menuIconAnime }"></div>
+            <div class="__bar" :class="{ menuIconAnime2: menuIconAnime }"></div>
+            <div class="__bar" :class="{ menuIconAnime3: menuIconAnime }"></div>
           </div>
         </nav>
 
@@ -72,7 +72,7 @@ export default {
       & .__menu {
         display: inline-block;
         cursor: pointer;
-        & .bar {
+        & .__bar {
           transition: all .3s ease;
           width: 24px;
           height: 1px;

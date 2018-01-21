@@ -593,8 +593,8 @@ export default {
       height: auto;
     }
     & .__title {
-      font-size: 25px;
-      font-weight: 600;
+      font-size: 26px;
+      font-weight: 500;
       padding: 0 7%;
       text-align: center;
     }
@@ -622,7 +622,7 @@ export default {
       line-height: 21px;
     }
     & .__price {
-      font-size: 48px;
+      font-size: 50px;
       font-weight: 200;
       margin-bottom: .5rem;
     }
@@ -635,7 +635,7 @@ export default {
       font-size: 17px;
       font-weight: 500;
       margin: 3rem 0 2rem 0;
-      box-shadow: 2px 2px 7px 2px rgba(0,0,0,0.17);
+      box-shadow: 2px 2px 9px 4px rgba(0,0,0,0.13);
     }
   }
   /* ******************** CADASTRO EVENTO ******************** */
