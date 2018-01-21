@@ -70,7 +70,7 @@
       </div>
 
       <div class="__item-caracteristica">
-        <img class="__img-caracteristica" src="../../assets/img/garagem.svg">
+        <img class="__img-caracteristica" src="../../assets/img/garagem.svg" style="transform: scale(1.01)">
         <h3>{{ acomod.totalGaragem }} vagas na garagem</h3>
       </div>
 
