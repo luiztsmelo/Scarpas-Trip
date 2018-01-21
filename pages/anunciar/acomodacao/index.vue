@@ -864,7 +864,7 @@ export default {
 
 .anunciar-acomodacao {
   margin-top: 3.2rem;
-  background: linear-gradient(45deg, #93EDC7, #00CFC7);
+  background: #00D8C7;
   color: white;
   transition: var(--main-transition);
   & .progress-bar {
