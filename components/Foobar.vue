@@ -31,9 +31,9 @@
           </div>
         </nuxt-link>
 
-        <nuxt-link to="/comidas">
+        <nuxt-link to="/restaurantes">
           <div class="foobar-box" @click="$store.state.offFoobar1=true, $store.state.offFoobar2=true, $store.state.offFoobar3=true, $store.state.offFoobar4=true, $store.state.offFoobar5=false">
-            <img src="../assets/img/comidas.svg" class="__foobar5-icon" :class="{ coloricon: offFoobar5 }">
+            <img src="../assets/img/restaurantes.svg" class="__foobar5-icon" :class="{ coloricon: offFoobar5 }">
             <h1 class="__foobar-title" :class="{ colortitle: offFoobar5 }">RESTAURANTES</h1>
           </div>
         </nuxt-link>

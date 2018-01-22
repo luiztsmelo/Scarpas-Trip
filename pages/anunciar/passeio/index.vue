@@ -692,7 +692,6 @@ export default {
 
 <style>
 @import url('../../../assets/css/main.css');
-@import url('../../../assets/css/illustrations.css');
 
 .anunciar-passeio {
   margin-top: 3.2rem;

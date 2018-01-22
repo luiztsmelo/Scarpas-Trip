@@ -1,32 +1,32 @@
 <template>
   <div class="anunciar-restaurante">
 
-    <!-- PLANO ESTADIA -->
-    <div class="plano-restaurante" v-show="$store.state.cadastroEvento0">
+    <!-- PLANO RESTAURANTE -->
+    <div class="plano-restaurante">
       
       <img class="__img-header" src="../../../assets/img/anuncio-restaurante.svg">
-
+       
       <h1 class="__title">A melhor maneira de encontrar o seu cliente é ser encontrado por ele.</h1>
+      
+      <span class="__subtitle">Como funciona?</span>
+      <h3 class="__item">A Escarpas Trip </h3>
 
-      <div class="pricing-box">
-        <h2 class="__pricing-box-title">Escolha seu plano:</h2>
 
-        <div class="plano-row casual">
-          <span class="__plano-valor">R$50</span>
-          <span class="__plano-valor-mes">/mês</span>
-          <span class="__plano-title">AVANÇADO</span>
-          <div class="__arrow-down-black"></div>
-        </div>
+      <span class="__subtitle">Quais as vantagens?</span>
+      <h3 class="__item">Destaque nas redes sociais</h3>
+      <h3 class="__item">Transparência</h3>
+      <h3 class="__item">Segurança</h3>
+      
+      <span class="__subtitle">Investimento Mensal</span>
+      <span class="__price">R$39</span>
+      <h3 class="__subitem">Primeiro mês grátis</h3>
+      <h3 class="__subitem">Cancele quando quiser</h3>
 
-        <div class="plano-row profissional">
-          <span class="__plano-valor">R$100</span>
-          <span class="__plano-valor-mes">/mês</span>
-          <span class="__plano-title">PROFISSIONAL</span>
-          <div class="__arrow-down-white"></div>
-        </div>
+      <button class="__anunciar-btn" @click="$store.commit('m_cadastroPasseio1', true), $store.commit('m_cadastroPasseio0', false), $store.commit('m_passeioProgressBar', (100/11))">Anunciar</button>
 
-      </div>
-    </div><!-- PLANO ESTADIA -->
+    </div><!-- PLANO RESTAURANTE -->
+
+
 
   </div>
 </template>
@@ -55,68 +55,72 @@ export default {
 
 .anunciar-restaurante {
   margin-top: 3.2rem;
-  display: flex;
-  flex-flow: column;
   background: linear-gradient(40deg, #feb47b, #ff7e5f);
   color: white;
-  height: calc(100vh - 3.2rem);
   transition: var(--main-transition);
-  /* ******************** PLANO PASSEIO ******************** */
+  & .progress-bar {
+    position: fixed;
+    top: 3.2rem;
+    height: 3px;
+    z-index: 8888;
+    background: linear-gradient(80deg, #feb47b, #ff7e5f);
+    transition: all .3s ease;
+  }
+  
+  /* ******************** PLANO RESTAURANTE ******************** */
   & .plano-restaurante {
     display: flex;
     flex-flow: column;
     align-items: center;
     & .__img-header {
-      margin: 2rem 0;
-      width: 6rem;
-      height: auto;
-    }
+        margin: 2rem 0;
+        width: 6rem;
+        height: auto;
+      }
     & .__title {
       font-size: 26px;
       font-weight: 500;
       padding: 0 7%;
+      text-align: center;
     }
-    & .pricing-box {
-      display: flex;
-      flex-flow: column;
-      align-self: stretch;
-      padding: 2rem 7% 0 7%;
-      & .__pricing-box-title {
-        font-size: 20px;
-        font-weight: 400;
-        padding-bottom: .5rem;
-      }
-      & .plano-row {
-        position: relative;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        height: 3.2rem;
-        margin: .5rem 0;
-        border-radius: 3px;
-        & .__plano-valor {
-          font-size: 23px;
-          font-weight: 300;
-          padding-left: .7rem;
-        }
-        & .__plano-valor-mes {
-          transform: translateY(2px);
-          font-size: 15px;
-          font-weight: 300;
-          padding-right: .8rem;
-        }
-        & .__plano-title {
-          font-size: 14px;
-          font-weight: 500;
-        }
-      }
-      & .casual {
-        background: white;
-        color: var(--color01);
-      }
-      & .profissional {
-        background: rgb(13, 13, 13);
-      }
+    & .__subtitle {
+      text-transform: uppercase;
+      margin: 3rem 0 .5rem 0;
+      font-size: 17px;
+      font-weight: 600;
+      padding: 0 7%;
+      text-align: center;
+    }
+    & .__item {
+      padding: 0 7%;
+      font-size: 19px;
+      font-weight: 300;
+      margin: 0 0 .2rem 0;
+      color: white;
+    }
+    & .__subitem {
+      padding: 0 7%;
+      font-size: 15px;
+      font-weight: 400;
+      margin: 0 ;
+      color: white;
+      line-height: 21px;
+    }
+    & .__price {
+      font-size: 50px;
+      font-weight: 200;
+      margin-bottom: .5rem;
+    }
+    & .__anunciar-btn {
+      color: var(--color01);
+      width: 65%;
+      background: white;
+      padding: 1rem 0;
+      border-radius: 100px;
+      font-size: 17px;
+      font-weight: 500;
+      margin: 3rem 0 2rem 0;
+      box-shadow: 2px 2px 9px 4px rgba(0,0,0,0.13);
     }
   }
 }
