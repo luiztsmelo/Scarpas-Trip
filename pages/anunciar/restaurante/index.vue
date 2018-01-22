@@ -4,7 +4,7 @@
     <!-- PLANO RESTAURANTE -->
     <div class="plano-restaurante">
       
-      <img class="__img-header" src="../../../assets/img/anuncio-restaurante.svg">
+      <img class="__img-header" src="../../../assets/img/anuncio-restaurante.svg" style="transform: scale(1.06)">
        
       <h1 class="__title">A melhor maneira de encontrar o seu cliente é ser encontrado por ele.</h1>
       
