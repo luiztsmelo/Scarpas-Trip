@@ -477,7 +477,7 @@ export default {
         display: flex;
         justify-content: center;
         align-items: center;
-        bottom: .4rem;
+        bottom: .5rem;
         left: 50%;
         transform: translateX(-50%);
         width: 7rem;
