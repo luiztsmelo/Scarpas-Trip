@@ -164,6 +164,8 @@ export default {
               opacity: 0.2;
             }
             & .swiper-pagination-bullet-active {
+              transition: all .18s ease-in;
+              transform: scale(1.16);
               background: #fff;
               opacity: 0.8;
             }
