@@ -148,12 +148,12 @@ export default {
             position: absolute;
             display: flex;
             justify-content: center;
-            bottom: .3rem;
+            align-items: center;
+            bottom: .4rem;
             left: 50%;
             transform: translateX(-50%);
-            width: 6rem;
+            width: 7rem;
             height: 1rem;
-            transition: .3s ease;
             & .swiper-pagination-bullet {
               width: 7px;
               height: 7px;
