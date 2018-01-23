@@ -815,37 +815,37 @@ export default {
       return this.$store.state.acomodPlace !== null ? 16 : 12
     },
     form1ok () {
-      return this.$store.state.acomodData.tipoAcomod !== null ? 'background:#00CFC7;cursor:pointer' : ''
+      return this.$store.state.acomodData.tipoAcomod !== null ? 'background:#00D8C7;cursor:pointer' : ''
     },
     form2ok () {
-      return this.$store.state.acomodData.totalHospedes !== null ? 'background:#00CFC7;cursor:pointer' : ''
+      return this.$store.state.acomodData.totalHospedes !== null ? 'background:#00D8C7;cursor:pointer' : ''
     },
     form3ok () {
-      return 1<2 ? 'background:#00CFC7;cursor:pointer' : ''
+      return 1<2 ? 'background:#00D8C7;cursor:pointer' : ''
     },
     form4ok () {
-      return 1<2 ? 'background:#00CFC7;cursor:pointer' : ''
+      return 1<2 ? 'background:#00D8C7;cursor:pointer' : ''
     },
     form5ok () {
-      return this.$store.state.acomodPlace !== null ? 'background:#00CFC7;cursor:pointer' : ''
+      return this.$store.state.acomodPlace !== null ? 'background:#00D8C7;cursor:pointer' : ''
     },
     form6ok () {
-      return this.imageURL1 !== null ? 'background:#00CFC7;cursor:pointer' : ''
+      return this.imageURL1 !== null ? 'background:#00D8C7;cursor:pointer' : ''
     },
     form7ok () {
-      return 1<2 ? 'background:#00CFC7;cursor:pointer' : ''
+      return 1<2 ? 'background:#00D8C7;cursor:pointer' : ''
     },
     form8ok () {
-      return this.$store.state.acomodData.title !== '' ? 'background:#00CFC7;cursor:pointer' : ''
+      return this.$store.state.acomodData.title !== '' ? 'background:#00D8C7;cursor:pointer' : ''
     },
     form9ok () {
-      return this.$store.state.acomodData.subtitle !== '' ? 'background:#00CFC7;cursor:pointer' : ''
+      return this.$store.state.acomodData.subtitle !== '' ? 'background:#00D8C7;cursor:pointer' : ''
     },
     form10ok () {
-      return this.$store.state.acomodData.celular.length === 15 ? 'background:#00CFC7;cursor:pointer' : ''
+      return this.$store.state.acomodData.celular.length === 15 ? 'background:#00D8C7;cursor:pointer' : ''
     },
     form11ok () {
-      return 1<2 ? 'background:#00CFC7;cursor:pointer' : ''
+      return 1<2 ? 'background:#00D8C7;cursor:pointer' : ''
     }
   },
   beforeRouteLeave (to, from, next) {
@@ -873,7 +873,7 @@ export default {
     top: 3.2rem;
     height: 3px;
     z-index: 8888;
-    background: linear-gradient(80deg, #93EDC7, #00CFC7);
+    background: #00D8C7;
     transition: all .3s ease;
   }
   /* ******************** PLANO ACOMODAÇÃO ******************** */
@@ -1047,7 +1047,7 @@ export default {
     & .__input-btn {
       margin: 1rem 7%;
       font-size: 16px;
-      background: #00CFC7;
+      background: #00D8C7;
       color: white;
       padding: .8rem 1.2rem;
       border-radius: 2rem;
@@ -1055,7 +1055,7 @@ export default {
     & .__croppa-btn {
       margin: .3rem 0;
       font-size: 16px;
-      background: #00CFC7;
+      background: #00D8C7;
       color: white;
       padding: .8rem 1.2rem;
       border-radius: 2rem;
