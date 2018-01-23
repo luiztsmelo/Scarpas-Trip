@@ -654,6 +654,7 @@ export default {
     bottom: 0;
     left: 0;
     z-index: 8888;
+    overflow: hidden;
     height: 3.8rem;
     width:  100%;
     background: white;

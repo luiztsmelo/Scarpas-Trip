@@ -49,11 +49,11 @@ export default {
 .share {
   position: fixed;
   z-index: 9999;
+  overflow: hidden;
   width:  100%;
   height: 100%;
   top: 0;
   background: white;
-  overflow: hidden;
   transition: var(--menus-transition);
   & .share-body {
     display: flex;
