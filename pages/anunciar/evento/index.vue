@@ -503,14 +503,12 @@ export default {
     ifUpload1 () {
       if (this.$store.state.eventoData.imageL1 !== null && this.$store.state.eventoData.imageH1J !== null && this.$store.state.eventoData.imageH1W !== null) {
         this.$store.dispatch('a_uploadEvento')
-        this.$store.commit('m_eventos', null) /* Para não bugar as imagens */
         this.$router.push('/eventos/' + this.$store.state.eventoData.eventoID)
       }
     },
     ifUpload2 () {
       if (this.$store.state.eventoData.imageL1 !== null && this.$store.state.eventoData.imageH1J !== null && this.$store.state.eventoData.imageH1W !== null && this.$store.state.eventoData.imageL2 !== null && this.$store.state.eventoData.imageH2J !== null && this.$store.state.eventoData.imageH2W !== null) {
         this.$store.dispatch('a_uploadEvento')
-        this.$store.commit('m_eventos', null) /* Para não bugar as imagens */
         this.$router.push('/eventos/' + this.$store.state.eventoData.eventoID)
       }
     }

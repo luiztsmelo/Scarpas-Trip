@@ -451,10 +451,10 @@
     <!-- ########## IDENTIFICAÇÃO PG.10 ########## -->
     <form class="cadastro-acomodacao" v-show="$store.state.cadastroAcomod10">
 
-      <h1 class="__form-title">Seus dados pessoais para contato</h1>   
+      <h1 class="__form-title">Dados pessoais básicos para exibição do anúncio e contato</h1>   
 
 
-      <h3 style="padding: .5rem 7% .7rem 7%" v-if="this.$store.state.acomodData.proprietario === null">Obter dados com:</h3>
+      <h3 style="padding: .5rem 7% .7rem 7%" v-if="this.$store.state.acomodData.proprietario === null">Continuar com:</h3>
 
       <div class="signin-btns" v-if="$store.state.acomodData.proprietario === null">
         <button type="button" class="facebook-btn" @click="facebookSignIn()">Facebook</button>
@@ -547,6 +547,9 @@ export default {
   methods: {
     googleSignIn () {
       this.$store.dispatch('a_googleSignIn')
+    },
+    facebookSignIn () {
+      this.$store.dispatch('a_facebookSignIn')
     },
     scrollTop () {
       document.body.scrollTop = 0; // For Safari
@@ -773,14 +776,12 @@ export default {
     ifUpload1 () {
       if (this.$store.state.acomodData.imageL1 !== null && this.$store.state.acomodData.imageH1J !== null && this.$store.state.acomodData.imageH1W !== null) {
         this.$store.dispatch('a_uploadAcomod')
-        this.$store.commit('m_acomods', null) /* Para não bugar as imagens */
         this.$router.push('/acomodacoes/' + this.$store.state.acomodData.acomodID)
       }
     },
     ifUpload2 () {
       if (this.$store.state.acomodData.imageL1 !== null && this.$store.state.acomodData.imageH1J !== null && this.$store.state.acomodData.imageH1W !== null && this.$store.state.acomodData.imageL2 !== null && this.$store.state.acomodData.imageH2J !== null && this.$store.state.acomodData.imageH2W !== null) {
         this.$store.dispatch('a_uploadAcomod')
-        this.$store.commit('m_acomods', null) /* Para não bugar as imagens */
         this.$router.push('/acomodacoes/' + this.$store.state.acomodData.acomodID)
       }
     }

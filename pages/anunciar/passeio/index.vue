@@ -72,7 +72,8 @@
       <div class="item-form">
         <label>Capacidade</label>
         <select v-model="$store.state.passeioData.capacidade">
-          <option v-for="n in capacidadeNumbers">{{ n }} pessoas</option>
+          <option v-for="n in 20">{{ n }}</option>
+          <option>Mais de 20</option>
         </select>
       </div> 
 
@@ -402,7 +403,6 @@ export default {
     return {
       title: '',/* Vue Autosize */
       subtitle: '',/* Vue Autosize */
-      capacidadeNumbers: [2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],
       localSaida: '',
       showCroppaModal1: false,
       showCroppaModal2: false,
@@ -413,6 +413,9 @@ export default {
   methods: {
     googleSignIn () {
       this.$store.dispatch('a_googleSignIn')
+    },
+    facebookSignIn () {
+      this.$store.dispatch('a_facebookSignIn')
     },
     /* ******************** IMAGE INPUT ******************** */
     /* --- Image 1 --- */
@@ -619,14 +622,12 @@ export default {
     ifUpload1 () {
       if (this.$store.state.passeioData.imageL1 !== null && this.$store.state.passeioData.imageH1J !== null && this.$store.state.passeioData.imageH1W !== null) {
         this.$store.dispatch('a_uploadPasseio')
-        this.$store.commit('m_passeios', null) /* Para não bugar as imagens */
         this.$router.push('/passeios/' + this.$store.state.passeioData.passeioID)
       }
     },
     ifUpload2 () {
       if (this.$store.state.passeioData.imageL1 !== null && this.$store.state.passeioData.imageH1J !== null && this.$store.state.passeioData.imageH1W !== null && this.$store.state.passeioData.imageL2 !== null && this.$store.state.passeioData.imageH2J !== null && this.$store.state.passeioData.imageH2W !== null) {
         this.$store.dispatch('a_uploadPasseio')
-        this.$store.commit('m_passeios', null) /* Para não bugar as imagens */
         this.$router.push('/passeios/' + this.$store.state.passeioData.passeioID)
       }
     }

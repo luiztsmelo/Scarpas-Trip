@@ -159,7 +159,7 @@ const store = () => new Vuex.Store({
       title: '',
       subtitle: '',
       valorPasseio: 0,
-      capacidade: null,
+      capacidade: '1',
       duracao: null,
       pontosVisitados: null,
       imageL1: null,
@@ -228,6 +228,9 @@ const store = () => new Vuex.Store({
     m_acomodID (state, payload) {
       state.acomodID = payload
       state.acomodData.acomodID = payload
+    },
+    m_acomodData (state, payload) {
+      state.acomodData = payload
     },
     m_imageAcL1 (state, payload) {
       state.acomodData.imageL1 = payload
@@ -372,6 +375,9 @@ const store = () => new Vuex.Store({
       state.passeioID = payload
       state.passeioData.passeioID = payload
     },
+    m_passeioData (state, payload) {
+      state.passeioData = payload
+    },
     m_localSaida (state, payload) {
       state.passeioData.localSaida = payload
     },
@@ -465,10 +471,8 @@ const store = () => new Vuex.Store({
           valorDiariaNormal: 0,
           valorDiariaFeriado: 0,
           totalHospedes: '1',
-          totalSuites: '1',
           totalQuartos: '1',
-          totalCamasCasal: '1',
-          totalCamasSolteiro: '1',
+          totalSuites: '1',
           totalBanheiros: '1',
           totalGaragem: '1',
           hasRoupasCama: false,
@@ -492,7 +496,7 @@ const store = () => new Vuex.Store({
           imageH2W: null
         })
         commit('m_loader', false)
-        commit('m_cadastroAcomod10', false)
+        commit('m_cadastroAcomod11', false)
         commit('m_cadastroAcomod0', true)
       })
     },
@@ -543,7 +547,7 @@ const store = () => new Vuex.Store({
           title: '',
           subtitle: '',
           valorPasseio: 0,
-          capacidade: null,
+          capacidade: '1',
           duracao: null,
           pontosVisitados: null,
           imageL1: null,
@@ -559,7 +563,7 @@ const store = () => new Vuex.Store({
       })
     },
     /*
-    ########## Google Sign in ##########
+    ########## GOOGLE SIGN IN ##########
     */
     a_googleSignIn ({ commit, dispatch }, user) {
       const provider = new firebase.auth.GoogleAuthProvider()
@@ -580,6 +584,17 @@ const store = () => new Vuex.Store({
         state.passeioData.photoURL = user.photoURL
         state.passeioData.userID = user.uid
       })
+    },
+    /*
+    ########## FACEBOOK SIGN IN ##########
+    */
+    a_facebookSignIn ({ commit, dispatch }, user) {
+      const provider = new firebase.auth.FacebookAuthProvider()
+      firebase.auth().signInWithPopup(provider)
+        .then().catch(error => {
+          console.log(error)
+        })
+      dispatch('a_authStateObserver')
     }
   }
 })
