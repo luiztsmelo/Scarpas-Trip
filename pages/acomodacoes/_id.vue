@@ -492,7 +492,9 @@ export default {
           opacity: 0.2;
         }
         & .swiper-pagination-bullet-active {
-          opacity: 1;
+          transition: all .2s ease-in;
+          width: 8px;
+          height: 8px;
           background: #fff;
           opacity: 0.8;
         }
