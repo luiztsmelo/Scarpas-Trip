@@ -151,6 +151,7 @@ export default {
       scrollTopbar: false,
       swiperOption: {
         pagination: '.swiper-pagination',
+        dynamicBullets: true,
         autoplay: 2222
       },
       markerIcon: {
@@ -353,6 +354,7 @@ export default {
   & .image-box {
     overflow: hidden;
     & .swiper-container {
+      position: relative;
       & .swiper-wrapper {
         display: inline-flex;
         overflow: hidden;
@@ -364,9 +366,29 @@ export default {
         }
       }
       & .swiper-pagination {
-
+        position: absolute;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        bottom: .5rem;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 7rem;
+        height: 1rem;
         & .swiper-pagination-bullet {
-
+          width: 7px;
+          height: 7px;
+          margin: 0 .1rem;
+          display: inline-block;
+          border-radius: 100%;
+          background: #fff;
+          opacity: 0.25;
+        }
+        & .swiper-pagination-bullet-active {
+          transition: all .18s ease-in;
+          transform: scale(1.16);
+          background: #fff;
+          opacity: 0.9;
         }
       }
     }
@@ -473,7 +495,7 @@ export default {
       }
       & .__reserva-btn {
         font-size: 17px;
-        font-weight: 600;
+        font-weight: 500;
         background: #49A5FC;
         color: white;
         padding: .7rem 1.1rem;

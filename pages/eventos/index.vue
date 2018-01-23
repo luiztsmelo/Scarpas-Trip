@@ -161,13 +161,13 @@ export default {
               display: inline-block;
               border-radius: 100%;
               background: #fff;
-              opacity: 0.2;
+              opacity: 0.25;
             }
             & .swiper-pagination-bullet-active {
               transition: all .18s ease-in;
               transform: scale(1.16);
               background: #fff;
-              opacity: 0.8;
+              opacity: 0.9;
             }
           }
         }
