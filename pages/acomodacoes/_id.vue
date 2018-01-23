@@ -245,6 +245,7 @@ export default {
       scrollTopbar: false,
       swiperOption: {
         pagination: '.swiper-pagination',
+        dynamicBullets: true,
         autoplay: 2222
       },
       markerIcon: {
@@ -460,6 +461,7 @@ export default {
   & .image-box {
     overflow: hidden;
     & .swiper-container {
+      position: relative;
       & .swiper-wrapper {
         display: inline-flex;
         overflow: hidden;
@@ -471,9 +473,28 @@ export default {
         }
       }
       & .swiper-pagination {
-
+        position: absolute;
+        display: flex;
+        justify-content: center;
+        bottom: .3rem;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 6rem;
+        height: 1rem;
+        transition: .3s ease;
         & .swiper-pagination-bullet {
-
+          width: 7px;
+          height: 7px;
+          margin: 0 .1rem;
+          display: inline-block;
+          border-radius: 100%;
+          background: #fff;
+          opacity: 0.2;
+        }
+        & .swiper-pagination-bullet-active {
+          opacity: 1;
+          background: #fff;
+          opacity: 0.8;
         }
       }
     }
