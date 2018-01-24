@@ -11,7 +11,7 @@
 
 
       <div class="reserva-acomod-body">
-        <h1>Quando pretende viajar?</h1>
+        <h1 class="__title">Qual será o período da reserva?</h1>
       </div>
 
     </div>
@@ -64,6 +64,11 @@ export default {
     flex-flow: column;
     padding: 5rem 7% 0 7%;
     height: 100%;
+    & .__title {
+      line-height: 35px;
+      font-size: 29px;
+      font-weight: 600;
+    }
   }
 }
 
