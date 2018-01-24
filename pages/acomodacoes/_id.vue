@@ -486,8 +486,7 @@ export default {
           width: 7px;
           height: 7px;
           margin: 0 .12rem;
-          display: inline-block;
-          border-radius: 100%;
+          border-radius: 50%;
           background: #fff;
           opacity: 0.3;
         }

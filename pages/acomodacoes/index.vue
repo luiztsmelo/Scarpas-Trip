@@ -157,16 +157,14 @@ export default {
             & .swiper-pagination-bullet {
               width: 7px;
               height: 7px;
-              margin: 0 .13rem;
-              display: inline-block;
-              border-radius: 100%;
+              margin: 0 .12rem;
+              border-radius: 50%;
               background: #fff;
               opacity: 0.3;
             }
             & .swiper-pagination-bullet-active {
-              transition: all .13s ease-in;
-              width: 8px;
-              height: 8px;
+              transition: all .17s ease-in;
+              transform: scale(1.1);
               background: #fff;
               opacity: 0.9;
             }
