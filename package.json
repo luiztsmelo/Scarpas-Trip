@@ -19,7 +19,7 @@
     "lodash": "^4.17.4",
     "nuxt": "^1.1.1",
     "supports-webp": "^1.0.5",
-    "v-calendar": "^0.3.2",
+    "v-calendar": "^0.5.5",
     "v-money": "^0.8.1",
     "vue": "^2.5.13",
     "vue-autosize": "^1.0.2",

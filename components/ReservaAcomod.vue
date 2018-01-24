@@ -13,14 +13,18 @@
       <div class="reserva-acomod-body">
         <h1 class="__title">Qual será o período da reserva?</h1>
 
-        <v-calendar
-        mode='single'
-        :month-labels='monthLabels'
-        :weekday-labels='weekdayLabels'
-        :theme-styles='themeStyles'
-        is-inline
-        >
-        </v-calendar>
+        <v-date-picker
+          mode='range'
+          is-inline='true'
+          v-model='dataReservaAcomod'
+          :available-dates='{start: new Date(), end: null}'
+          :month-labels='monthLabels'
+          :weekday-labels='weekdayLabels'
+          :theme-styles='themeStyles'
+          drag-color='#00D8C7'
+          
+          >
+        </v-date-picker>
 
       </div>
 
@@ -32,6 +36,7 @@
 export default {
   data() {
     return {
+      dataReservaAcomod: null,
       monthLabels: ['Janeiro','Favereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
       weekdayLabels: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'],
       themeStyles: {
@@ -63,6 +68,9 @@ export default {
         }
       } 
     }
+  },
+  methods: {
+    
   },
   computed: {
     showReservaAcomod () {
