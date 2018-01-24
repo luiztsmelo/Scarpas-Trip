@@ -55,7 +55,7 @@ export default {
 
 .anunciar-restaurante {
   margin-top: 3.2rem;
-  background: linear-gradient(40deg, #feb47b, #ff7e5f);
+  background: #feb47b;
   color: white;
   transition: var(--main-transition);
   & .progress-bar {

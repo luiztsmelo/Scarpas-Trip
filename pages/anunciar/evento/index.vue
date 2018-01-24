@@ -569,7 +569,7 @@ export default {
 
 .anunciar-evento {
   margin-top: 3.2rem;
-  background: #ff5858;
+  background: #FF646B;
   color: white;
   transition: var(--main-transition);
   & .progress-bar {
@@ -577,7 +577,7 @@ export default {
     top: 3.2rem;
     height: 3px;
     z-index: 8888;
-    background: #ff5858;
+    background: #FF646B;
     transition: all .3s ease;
   }
   /* ******************** PLANO EVENTO ******************** */
@@ -773,7 +773,7 @@ export default {
     & .__input-btn {
       margin: 1rem 0;
       font-size: 16px;
-      background: #ff5858;
+      background: #FF646B;
       color: white;
       padding: .8rem 1.2rem;
       border-radius: 2rem;
@@ -781,7 +781,7 @@ export default {
     & .__croppa-btn {
       margin: .3rem 0;
       font-size: 16px;
-      background: #ff5858;
+      background: #FF646B;
       color: white;
       padding: .8rem 1.2rem;
       border-radius: 2rem;

@@ -358,12 +358,10 @@ export default {
     & .__date {
       font-size: 20px;
       font-weight: 300;
-      /* color: #ff5858; */
     }
     & .__hour {
       font-size: 20px;
       font-weight: 300;
-      /* color: #ff5858; */
     }
   }/* ####### DATA E HORÁRIO ####### */
 
@@ -437,7 +435,7 @@ export default {
       & .__reserva-btn {
         font-size: 17px;
         font-weight: 500;
-        background: #ff5858;
+        background: #FF646B;
         color: white;
         padding: .7rem 1.1rem;
         border-radius: 4px;

@@ -260,7 +260,7 @@ export default {
             & .__card-date {
               font-size: 12px;
               font-weight: 600;
-              color: #ff5858;
+              color: #FF646B;
             }
             & .__card-tipoAcomod {
               text-transform: uppercase;
