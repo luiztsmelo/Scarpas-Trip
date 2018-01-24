@@ -696,7 +696,7 @@ export default {
 
 .anunciar-passeio {
   margin-top: 3.2rem;
-  background: linear-gradient(60deg, #B5D9F0, #49A5FC);
+  background: #00B8FC;
   color: white;
   transition: var(--main-transition);
   & .progress-bar {
@@ -704,7 +704,7 @@ export default {
     top: 3.2rem;
     height: 3px;
     z-index: 8888;
-    background: linear-gradient(80deg, #B5D9F0, #49A5FC);
+    background: #00B8FC;
     transition: all .3s ease;
   }
   /* ******************** PLANO PASSEIO ******************** */
@@ -870,7 +870,7 @@ export default {
     & .__input-btn {
       margin: 1rem 7%;
       font-size: 16px;
-      background: #49A5FC;
+      background: #00B8FC;
       color: white;
       padding: .8rem 1.2rem;
       border-radius: 2rem;
@@ -878,7 +878,7 @@ export default {
     & .__croppa-btn {
       margin: .3rem 0;
       font-size: 16px;
-      background: #49A5FC;
+      background: #00B8FC;
       color: white;
       padding: .8rem 1.2rem;
       border-radius: 2rem;
