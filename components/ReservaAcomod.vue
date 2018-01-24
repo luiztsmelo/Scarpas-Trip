@@ -11,7 +11,7 @@
 
 
       <div class="reserva-acomod-body">
-        <h1>Reservar Estadia</h1>
+        <h1>Quando pretende viajar?</h1>
       </div>
 
     </div>
@@ -70,7 +70,7 @@ export default {
 
 /* TRANSITIONS */
 .reserva-animation-enter {
-  transform: translateY(100%);
+  transform: translateX(100%);
 }
 .reserva-animation-leave-active {
   transform: translateX(100%);
