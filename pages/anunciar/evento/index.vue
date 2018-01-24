@@ -569,7 +569,7 @@ export default {
 
 .anunciar-evento {
   margin-top: 3.2rem;
-  background: linear-gradient(40deg,#f857a6, #ff5858);
+  background: #ff5858;
   color: white;
   transition: var(--main-transition);
   & .progress-bar {
@@ -577,7 +577,7 @@ export default {
     top: 3.2rem;
     height: 3px;
     z-index: 8888;
-    background: linear-gradient(80deg, #f857a6, #ff5858);
+    background: #ff5858;
     transition: all .3s ease;
   }
   /* ******************** PLANO EVENTO ******************** */
