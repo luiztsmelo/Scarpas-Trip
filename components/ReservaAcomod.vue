@@ -14,15 +14,15 @@
         <h1 class="__title">Qual será o período da reserva?</h1>
 
         <v-date-picker
+          is-inline
           mode='range'
-          is-inline='true'
           v-model='dataReservaAcomod'
           :available-dates='{start: new Date(), end: null}'
           :month-labels='monthLabels'
           :weekday-labels='weekdayLabels'
           :theme-styles='themeStyles'
-          drag-color='#00D8C7'
-          
+          select-color='#00D8C7'
+          show-caps
           >
         </v-date-picker>
 
@@ -65,6 +65,11 @@ export default {
         dayContent: {
           fontWeight: '300',
           fontSize: '16px',
+        },
+        dayPopoverContent: {
+          background: '#00D8C7',
+          color: 'white',
+          border: 'none'
         }
       } 
     }
