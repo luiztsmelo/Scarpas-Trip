@@ -19,9 +19,6 @@ export const mapstyle = {
             "elementType": "geometry.fill",
             "stylers": [
                 {
-                    "visibility": "on"
-                },
-                {
                     "hue": "#ffb400"
                 }
             ]
@@ -43,7 +40,7 @@ export const mapstyle = {
                     "visibility": "on"
                 },
                 {
-                    "color": "#f0ede3"
+                    "color": "#eeede6"
                 }
             ]
         },
@@ -64,7 +61,7 @@ export const mapstyle = {
                     "visibility": "on"
                 },
                 {
-                    "color": "#cbf6cf"
+                    "color": "#cbf0cf"
                 }
             ]
         },
