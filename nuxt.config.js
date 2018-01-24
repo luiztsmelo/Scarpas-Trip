@@ -18,11 +18,11 @@ module.exports = {
       { name: 'google-site-verification', content: 'IavBb3pz5krBr8BWBDH8LcwCr2IOEwOifb6h7n3d2jU' },
       // MOBILE THEMES
       // Chrome, Firefox OS and Opera
-      { name: 'theme-color', content: '#202020' },
+      { name: 'theme-color', content: '#2a2a2a' },
       // Windows Phone
-      { name: 'msapplication-navbutton-color', content: '#202020' },
+      { name: 'msapplication-navbutton-color', content: '#2a2a2a' },
       // iOS Safari
-      { name: 'apple-mobile-web-app-status-bar-style', content: '#202020' }
+      { name: 'apple-mobile-web-app-status-bar-style', content: '#2a2a2a' }
     ],
     link: [
       { rel: 'icon', type: 'image/png', sizes: '24x24', href: '/brand.png' }
