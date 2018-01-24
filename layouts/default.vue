@@ -3,15 +3,17 @@
 
     <loader/>
 
-    <menuu/>
+    <share/>
 
+    <menuu/>
+    
     <navbar/>
     <nuxt/>
     <foobar/>
 
     <map-full/>
 
-    <share/>
+    <reserva-acomod/>
 
   </div>
 </template>
@@ -22,10 +24,11 @@ import Foobar from '~/components/Foobar.vue'
 import Menuu from '~/components/Menu.vue'
 import Loader from '~/components/Loader.vue'
 import Share from '~/components/Share.vue'
+import ReservaAcomod from '~/components/ReservaAcomod.vue'
 import MapFull from '~/components/MapFull.vue'
 
 export default {
-  components: { Navbar, Foobar, Menuu, Loader, Share, MapFull },
+  components: { Navbar, Foobar, Menuu, Loader, Share, ReservaAcomod, MapFull },
   created () {
     /* let lastScrollTop = 0 */
     window.addEventListener('scroll', event => {
