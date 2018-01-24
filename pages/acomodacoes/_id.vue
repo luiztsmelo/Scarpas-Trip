@@ -706,7 +706,7 @@ export default {
   transform: translateY(100%);
 }
 .comods-animation-leave-active {
-  transform: translateX(100%);
+  transform: translateY(100%);
 }
 
 

@@ -12,6 +12,16 @@
 
       <div class="reserva-acomod-body">
         <h1 class="__title">Qual será o período da reserva?</h1>
+
+        <v-calendar
+        mode='single'
+        :month-labels='monthLabels'
+        :weekday-labels='weekdayLabels'
+        :theme-styles='themeStyles'
+        is-inline
+        >
+        </v-calendar>
+
       </div>
 
     </div>
@@ -20,6 +30,40 @@
 
 <script>
 export default {
+  data() {
+    return {
+      monthLabels: ['Janeiro','Favereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
+      weekdayLabels: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'],
+      themeStyles: {
+        wrapper: {
+          color: 'rgb(72,72,72)',
+          border: '0',
+          padding: '6px 9px 0 9px',
+          background: 'white',
+          width: '100%'
+        },
+        header: {
+          padding: '0 9px',
+        },
+        headerArrows: {
+          fontSize: '1.4rem',
+        },
+        headerTitle: {
+          fontSize: '18px',
+          fontWeight: '300'
+        },
+        weekdays: {
+          color: 'rgb(72,72,72)',
+          fontWeight: '600',
+          padding: '20px 5px 10px 5px',
+        },
+        dayContent: {
+          fontWeight: '300',
+          fontSize: '16px',
+        }
+      } 
+    }
+  },
   computed: {
     showReservaAcomod () {
       return this.$store.state.showReservaAcomod
@@ -62,9 +106,10 @@ export default {
   & .reserva-acomod-body {
     display: flex;
     flex-flow: column;
-    padding: 5rem 7% 0 7%;
+    padding-top: 5rem;
     height: 100%;
     & .__title {
+      padding: 0 7% 2rem 7%;
       line-height: 35px;
       font-size: 29px;
       font-weight: 600;
