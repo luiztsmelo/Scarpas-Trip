@@ -341,7 +341,7 @@ export default {
         // Today attribute
         {
           contentStyle: {
-            fontWeight: '500',
+            fontWeight: '400',
           },
           dates: new Date(),
         },
