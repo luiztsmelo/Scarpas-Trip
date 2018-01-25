@@ -25,12 +25,12 @@ export default {
 <style>
 
 .valor-diaria {
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 500;
   text-align: center;
 }
 .valor-diaria-dividido {
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 300;
   text-align: center;
 }
