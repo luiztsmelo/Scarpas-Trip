@@ -40,7 +40,7 @@ export const mapstyle = {
                     "visibility": "on"
                 },
                 {
-                    "color": "#eeede8"
+                    "color": "#edede9"
                 }
             ]
         },

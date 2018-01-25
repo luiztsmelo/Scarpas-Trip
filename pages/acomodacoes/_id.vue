@@ -171,7 +171,6 @@
 
     <v-calendar
       mode='single'
-      :attributes='attributes'
       :month-labels='monthLabels'
       :weekday-labels='weekdayLabels'
       :theme-styles='themeStyles'
@@ -336,17 +335,6 @@ export default {
     }
   },
   computed: {
-    attributes () {
-      return [
-        // Today attribute
-        {
-          contentStyle: {
-            fontWeight: '400',
-          },
-          dates: new Date(),
-        },
-      ]
-    },
     tipoAcomodText () {
       const path = this.acomod.tipoAcomod
       return path === 'Casa' ? 'a casa' 
