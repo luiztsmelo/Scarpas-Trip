@@ -15,7 +15,7 @@
         <h1 class="__title">Quantas pessoas irão se hospedar?</h1>
 
         <div class="__item">
-          <select>
+          <select v-model="$store.state.reservaAcomod.totalHospedes">
             <option v-for="n in 20">{{ n }}</option>
             <option>Mais de 20</option>
           </select>

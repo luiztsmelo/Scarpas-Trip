@@ -1,6 +1,7 @@
 <template>
   <div>
     <h1 class="valor-diaria">R${{ valorDiaria }}</h1>
+    <h1 class="valor-diaria-dividido">R${{ valorDiariaDividido }}/pessoa</h1>
   </div>
 </template>
 
@@ -13,6 +14,9 @@ export default {
     },
     valorDiaria () {
       return this.acomod.valorDiariaNormal * (this.attribute.targetDate.daySpan + 1)
+    },
+    valorDiariaDividido () {
+      return this.valorDiaria / this.$store.state.reservaAcomod.totalHospedes
     }
   }
 }
@@ -21,7 +25,15 @@ export default {
 <style>
 
 .valor-diaria {
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 500;
+  text-align: center;
 }
+.valor-diaria-dividido {
+  font-size: 14px;
+  font-weight: 300;
+  text-align: center;
+}
+
+
 </style>

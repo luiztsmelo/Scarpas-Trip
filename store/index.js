@@ -84,6 +84,9 @@ const store = () => new Vuex.Store({
       imageH2J: null,
       imageH2W: null
     },
+    reservaAcomod: {
+      totalHospedes: '1'
+    },
     cadastroAcomod0: true,
     cadastroAcomod1: false,
     cadastroAcomod2: false,
