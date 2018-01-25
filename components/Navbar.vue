@@ -60,7 +60,7 @@ export default {
     transform: translateY(-50%);
     & .__brand-name {
       font-family: var(--brand-font);
-      font-size: 26px;
+      font-size: 27px;
       line-height: 0;
       user-select: none;
       font-weight: 400;

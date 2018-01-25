@@ -11,12 +11,25 @@
 
 
       <div class="reserva-acomod-body">
+
+        <h1 class="__title">Quantas pessoas irão se hospedar?</h1>
+
+        <div class="__item">
+          <select>
+            <option v-for="n in 20">{{ n }}</option>
+            <option>Mais de 20</option>
+          </select>
+        </div>
+        
+
         <h1 class="__title">Qual será o período da reserva?</h1>
 
         <v-date-picker
           is-inline
           mode='range'
           v-model='dataReservaAcomod'
+          :drag-attribute='myAttribute'
+          :select-attribute='myAttribute'
           :available-dates='{start: new Date(), end: null}'
           :month-labels='monthLabels'
           :weekday-labels='weekdayLabels'
@@ -33,10 +46,18 @@
 </template>
 
 <script>
+import PopoverReservaAcomod from '~/components/PopoverReservaAcomod.vue'
+
 export default {
   data() {
     return {
       dataReservaAcomod: null,
+      myAttribute: {
+        popover: {
+          hideIndicator: true,
+          component: PopoverReservaAcomod
+        }
+      },
       monthLabels: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
       weekdayLabels: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'],
       themeStyles: {
@@ -75,7 +96,6 @@ export default {
     }
   },
   methods: {
-    
   },
   computed: {
     showReservaAcomod () {
@@ -91,7 +111,7 @@ export default {
 .reserva-acomod {
   position: fixed;
   z-index: 9999;
-  overflow: hidden;
+  overflow-y: auto;
   width:  100%;
   height: 100%;
   top: 0;
@@ -119,13 +139,27 @@ export default {
   & .reserva-acomod-body {
     display: flex;
     flex-flow: column;
-    padding-top: 5rem;
+    margin: 1.5rem 0 6rem 0;
     height: 100%;
     & .__title {
-      padding: 0 7% 2rem 7%;
+      padding: 3.5rem 7% 1.5rem 7%;
       line-height: 35px;
       font-size: 29px;
       font-weight: 600;
+    }
+    & .__item {
+      padding: 0 7%;
+      & select {
+        width: 100%;
+        font-size: 18px;
+        font-weight: 300;
+        background: white;
+        color: var(--color01);
+        padding: .5rem 0 .6rem 0;
+        border: none;
+        border-bottom: 1px solid rgb(222, 222, 222);
+        outline: none;
+      }
     }
   }
 }
