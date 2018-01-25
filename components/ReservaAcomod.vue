@@ -36,6 +36,7 @@
           :theme-styles='themeStyles'
           select-color='#00D8C7'
           show-caps
+          drag-color='#00D8C7'
           >
         </v-date-picker>
 
@@ -56,7 +57,7 @@ export default {
         popover: {
           hideIndicator: true,
           component: PopoverReservaAcomod
-        }
+        },
       },
       monthLabels: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
       weekdayLabels: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'],
@@ -91,7 +92,7 @@ export default {
           background: '#00D8C7',
           color: 'white',
           border: 'none'
-        }
+        },
       } 
     }
   },
