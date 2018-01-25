@@ -37,11 +37,11 @@ export default {
   data() {
     return {
       dataReservaAcomod: null,
-      monthLabels: ['Janeiro','Favereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
+      monthLabels: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
       weekdayLabels: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'],
       themeStyles: {
         wrapper: {
-          color: 'rgb(72,72,72)',
+          color: 'rgb(52, 52, 52)',
           border: '0',
           padding: '6px 9px 0 9px',
           background: 'white',
@@ -58,7 +58,7 @@ export default {
           fontWeight: '300'
         },
         weekdays: {
-          color: 'rgb(72,72,72)',
+          color: 'rgb(52, 52, 52)',
           fontWeight: '600',
           padding: '20px 5px 10px 5px',
         },
