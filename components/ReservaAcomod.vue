@@ -67,7 +67,8 @@ export default {
           border: '0',
           padding: '6px 9px 0 9px',
           background: 'white',
-          width: '100%'
+          width: '100%',
+          minHeight: '300px'
         },
         header: {
           padding: '0 9px',
@@ -140,7 +141,7 @@ export default {
   & .reserva-acomod-body {
     display: flex;
     flex-flow: column;
-    margin: 1rem 0 7rem 0;
+    margin: 1rem 0 10rem 0;
     height: 100%;
     & .__title {
       padding: 4rem 7% 1rem 7%;
