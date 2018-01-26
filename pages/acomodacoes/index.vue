@@ -57,8 +57,7 @@ export default {
   data () {
     return {
       swiperOption: {
-        pagination: '.swiper-pagination',
-        dynamicBullets: true
+        pagination: '.swiper-pagination'
       }
     }
   },
@@ -158,13 +157,13 @@ export default {
               margin: 0 .12rem;
               border-radius: 50%;
               background: #fff;
-              opacity: 0.25;
+              opacity: 0.27;
             }
             & .swiper-pagination-bullet-active {
               transition: all .17s ease-in;
               transform: scale(1.22);
               background: #fff;
-              opacity: 0.9;
+              opacity: 0.85;
             }
           }
         }
