@@ -285,6 +285,7 @@ export default {
 
 <style>
 @import url('../../assets/css/main.css');
+@import url('../../assets/css/pagination.css');
 
 .passeios_id {
   display: flex;
@@ -363,31 +364,6 @@ export default {
             width: 100%;
             height: auto;
           }
-        }
-      }
-      & .swiper-pagination {
-        position: absolute;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        bottom: .5rem;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 7rem;
-        height: 1rem;
-        & .swiper-pagination-bullet {
-          width: 7px;
-          height: 7px;
-          margin: 0 .12rem;
-          border-radius: 50%;
-          background: #fff;
-          opacity: 0.3;
-        }
-        & .swiper-pagination-bullet-active {
-          transition: all .17s ease-in;
-          transform: scale(1.1);
-          background: #fff;
-          opacity: 0.9;
         }
       }
     }

@@ -13,9 +13,12 @@
             </swiper>
           </div> 
 
-          <span class="__card-tipo-passeio">{{ passeio.tipoPasseio }}</span>
-          <h1 class="__card-title">{{ passeio.title | truncateTitle }}</h1>
-          <h3 class="__card-subtitle">{{ passeio.subtitle | truncateSubtitle }}</h3>
+          <div class="card-details">
+            <span class="__card-tipo-passeio">{{ passeio.tipoPasseio }}</span>
+            <span class="__card-title">{{ passeio.title }}</span>
+            <span class="__card-valor">R${{ passeio.valorPasseio }}/pessoa</span>
+          </div>
+          
         </nuxt-link> 
       </li>
     </ul>
@@ -44,8 +47,7 @@ export default {
   data () {
     return {
       swiperOption: {
-        pagination: '.swiper-pagination',
-        dynamicBullets: true
+        pagination: '.swiper-pagination'
       }
     }
   },
@@ -116,6 +118,7 @@ export default {
 
 <style>
 @import url('../../assets/css/main.css');
+@import url('../../assets/css/pagination.css');
 
 .passeios {
   margin: 3.2rem 0 5.2rem 0;
@@ -124,14 +127,15 @@ export default {
   transition: all .2s ease-in-out;
   & .passeios-container {
     padding: 0;
+    margin-bottom: 1rem;
     display: flex;
     flex-flow: column;
     & .card {
-      width: 100%;
-      padding-bottom: 3rem;
+      width: 93%;
+      padding: 7% 0 1rem 7%;
       & .image-box {
         overflow: hidden;
-        margin-bottom: .2rem;
+        margin-bottom: .3rem;
         & .swiper-container {
           position: relative;
           & .swiper-wrapper {
@@ -144,48 +148,27 @@ export default {
               }
             }
           }
-          & .swiper-pagination {
-            position: absolute;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            bottom: .5rem;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 7rem;
-            height: 1rem;
-            & .swiper-pagination-bullet {
-              width: 7px;
-              height: 7px;
-              margin: 0 .12rem;
-              border-radius: 50%;
-              background: #fff;
-              opacity: 0.3;
-            }
-            & .swiper-pagination-bullet-active {
-              transition: all .17s ease-in;
-              transform: scale(1.1);
-              background: #fff;
-              opacity: 0.9;
-            }
-          }
         }
       }
-      & .__card-tipo-passeio {
-        text-transform: uppercase;
-        padding: 0 7%;
-        font-size: 14px;
-        font-weight: 600;
-        color: #097FF1;
-      }
-      & .__card-title {
-        padding: .2rem 7%;
-        font-size: 20px;
-        font-weight: 600;
-      }
-      & .__card-subtitle {
-        font-size: 17px;
-        padding: 0 7%;
+      & .card-details {
+        display: flex;
+        flex-flow: column;
+        & .__card-tipo-passeio {
+          padding-top: .2rem;
+          text-transform: uppercase;
+          font-size: 13px;
+          font-weight: 600;
+          color: #097FF1;
+        }
+        & .__card-title {
+          padding: .3rem 0;
+          font-size: 21px;
+          font-weight: 600;
+        }
+        & .__card-valor {
+          font-size: 17px;
+          font-weight: 300;
+        }
       }
     }
   }

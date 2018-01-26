@@ -13,9 +13,11 @@
             </swiper>
           </div> 
 
-          <span class="__card-date">{{ evento.date }}</span>
-          <h1 class="__card-title">{{ evento.title | truncateTitle }}</h1>
-          <h3 class="__card-subtitle">{{ evento.subtitle | truncateSubtitle }}</h3>
+          <div class="card-details">
+            <span class="__card-date">{{ evento.date }}</span>
+            <span class="__card-title">{{ evento.title }}</span>
+          </div>
+
         </nuxt-link> 
       </li>
     </ul>
@@ -44,8 +46,7 @@ export default {
   data () {
     return {
       swiperOption: {
-        pagination: '.swiper-pagination',
-        dynamicBullets: true
+        pagination: '.swiper-pagination'
       }
     }
   },
@@ -86,22 +87,6 @@ export default {
       return this.$store.state.eventos
     }
   },
-  filters: {
-    truncateTitle (value) {
-      if (value.length > 31) {
-        return value.slice(0, 31) + '...'
-      } else {
-        return value.slice(0)
-      }
-    },
-    truncateSubtitle (value) {
-      if (value.length > 26) {
-        return value.slice(0, 26) + '...'
-      } else {
-        return value.slice(0)
-      }
-    }
-  },
   beforeRouteEnter (to, from, next) {
     next(vm => {
       vm.$store.state.offFoobar1 = true
@@ -116,6 +101,7 @@ export default {
 
 <style>
 @import url('../../assets/css/main.css');
+@import url('../../assets/css/pagination.css');
 
 .eventos {
   margin: 3.2rem 0 5.2rem 0;
@@ -124,14 +110,15 @@ export default {
   transition: all .2s ease-in-out;
   & .eventos-container {
     padding: 0;
+    margin-bottom: 1rem;
     display: flex;
     flex-flow: column;
     & .card {
-      width: 100%;
-      padding-bottom: 3rem;
+      width: 93%;
+      padding: 7% 0 1rem 7%;
       & .image-box {
         overflow: hidden;
-        margin-bottom: .2rem;
+        margin-bottom: .3rem;
         & .swiper-container {
           position: relative;
           & .swiper-wrapper {
@@ -144,47 +131,23 @@ export default {
               }
             }
           }
-          & .swiper-pagination {
-            position: absolute;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            bottom: .5rem;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 7rem;
-            height: 1rem;
-            & .swiper-pagination-bullet {
-              width: 7px;
-              height: 7px;
-              margin: 0 .12rem;
-              border-radius: 50%;
-              background: #fff;
-              opacity: 0.3;
-            }
-            & .swiper-pagination-bullet-active {
-              transition: all .17s ease-in;
-              transform: scale(1.1);
-              background: #fff;
-              opacity: 0.9;
-            }
-          }
         }
       }
-      & .__card-date {
-        padding: 2rem 7%;
-        font-size: 14px;
-        font-weight: 600;
-        color: #FF7D6C;
-      }
-      & .__card-title {
-        padding: .2rem 7%;
-        font-size: 20px;
-        font-weight: 600;
-      }
-      & .__card-subtitle {
-        font-size: 17px;
-        padding: 0 7%;
+      & .card-details {
+        display: flex;
+        flex-flow: column;
+        & .__card-date {
+          padding-top: .2rem;
+          text-transform: uppercase;
+          font-size: 13px;
+          font-weight: 600;
+          color: #FF7D6C;
+        }
+        & .__card-title {
+          padding: .3rem 0;
+          font-size: 21px;
+          font-weight: 600;
+        }
       }
     }
   }

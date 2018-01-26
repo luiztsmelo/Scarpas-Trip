@@ -9,16 +9,6 @@
             <swiper :options="swiperOption">
               <swiper-slide class="slide"><img class="__img" :src="image1H(acomod)"></swiper-slide>
               <swiper-slide class="slide" v-if="ifImage2(acomod)"><img class="__img" :src="image2H(acomod)"></swiper-slide>
-
-              <!-- REMOVE REMOVE REMOVE REMOVE REMOVE REMOVE REMOVE  -->
-              <swiper-slide class="slide" v-if="ifImage2(acomod)"><img class="__img" :src="image2H(acomod)"></swiper-slide>
-              <swiper-slide class="slide" v-if="ifImage2(acomod)"><img class="__img" :src="image2H(acomod)"></swiper-slide>
-              <swiper-slide class="slide" v-if="ifImage2(acomod)"><img class="__img" :src="image2H(acomod)"></swiper-slide>
-              <swiper-slide class="slide" v-if="ifImage2(acomod)"><img class="__img" :src="image2H(acomod)"></swiper-slide>
-              <swiper-slide class="slide" v-if="ifImage2(acomod)"><img class="__img" :src="image2H(acomod)"></swiper-slide>
-              <swiper-slide class="slide" v-if="ifImage2(acomod)"><img class="__img" :src="image2H(acomod)"></swiper-slide>
-              <!-- REMOVE REMOVE REMOVE REMOVE REMOVE REMOVE REMOVE  -->
-
               <div class="swiper-pagination" slot="pagination"></div>
             </swiper>
           </div>
@@ -112,6 +102,7 @@ export default {
 
 <style>
 @import url('../../assets/css/main.css');
+@import url('../../assets/css/pagination.css');
 
 .acomods {
   margin: 3.2rem 0 5.2rem 0;
@@ -139,31 +130,6 @@ export default {
                 width: 100%;
                 height: auto;
               }
-            }
-          }
-          & .swiper-pagination {
-            position: absolute;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            bottom: .5rem;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 7rem;
-            height: 1rem;
-            & .swiper-pagination-bullet {
-              width: 6px;
-              height: 6px;
-              margin: 0 .12rem;
-              border-radius: 50%;
-              background: #fff;
-              opacity: 0.27;
-            }
-            & .swiper-pagination-bullet-active {
-              transition: all .17s ease-in;
-              transform: scale(1.21);
-              background: #fff;
-              opacity: 0.85;
             }
           }
         }
