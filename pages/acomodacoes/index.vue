@@ -23,12 +23,10 @@
             </swiper>
           </div>
 
-          <div class="valor-indicator">
-            <h1 class="__valor">R${{ acomod.valorDiariaNormal }}/dia</h1>
-          </div>
-
-          <span class="__card-tipo-acomod">{{ acomod.tipoAcomod }}</span>
+          <h3 class="__card-tipo-acomod">{{ acomod.tipoAcomod }}</h3>
           <h1 class="__card-title">{{ acomod.title }}</h1>
+          <h3 class="__card-valor">R${{ acomod.valorDiariaNormal }}/dia</h3>
+
         </nuxt-link> 
       </li>
     </ul>
@@ -125,8 +123,7 @@ export default {
     flex-flow: column;
     & .card {
       width: 93%;
-      padding: 7% 0 2rem 7%;
-      position: relative;
+      padding: 7% 0 1rem 7%;
       & .image-box {
         overflow: hidden;
         margin-bottom: .3rem;
@@ -153,8 +150,8 @@ export default {
             width: 7rem;
             height: 1rem;
             & .swiper-pagination-bullet {
-              width: 7px;
-              height: 7px;
+              width: 6px;
+              height: 6px;
               margin: 0 .12rem;
               border-radius: 50%;
               background: #fff;
@@ -162,21 +159,11 @@ export default {
             }
             & .swiper-pagination-bullet-active {
               transition: all .17s ease-in;
-              transform: scale(1.1);
+              transform: scale(1.2);
               background: #fff;
               opacity: 0.9;
             }
           }
-        }
-      }
-      & .valor-indicator {
-        position: absolute;
-        top: 2.5rem;
-        left: 2.5rem;
-        & .__valor {
-          font-size: 15px;
-          font-weight: 600;
-          color: white;
         }
       }
       & .__card-tipo-acomod {
@@ -186,9 +173,13 @@ export default {
         color: #007B77;
       }
       & .__card-title {
-        padding: .2rem 0;
+        padding: .1rem 0;
         font-size: 21px;
         font-weight: 600;
+      }
+      & .__card-valor {
+        font-size: 17px;
+        font-weight: 300;
       }
     }
   }
