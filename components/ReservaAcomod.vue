@@ -140,12 +140,12 @@ export default {
   & .reserva-acomod-body {
     display: flex;
     flex-flow: column;
-    margin: 1.5rem 0 6rem 0;
+    margin: 1rem 0 7rem 0;
     height: 100%;
     & .__title {
-      padding: 3.5rem 7% 1.5rem 7%;
+      padding: 4rem 7% 1rem 7%;
       line-height: 35px;
-      font-size: 29px;
+      font-size: 25px;
       font-weight: 600;
     }
     & .__item {
