@@ -161,7 +161,7 @@ export default {
             }
             & .swiper-pagination-bullet-active {
               transition: all .17s ease-in;
-              transform: scale(1.22);
+              transform: scale(1.21);
               background: #fff;
               opacity: 0.85;
             }
