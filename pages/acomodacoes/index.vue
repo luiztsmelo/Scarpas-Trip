@@ -114,7 +114,7 @@ export default {
       padding: 7% 0 2rem 7%;
       & .image-box {
         overflow: hidden;
-        margin-bottom: .4rem;
+        margin-bottom: .3rem;
         & .swiper-container {
           position: relative;
           & .swiper-wrapper {
