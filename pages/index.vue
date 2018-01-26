@@ -284,13 +284,13 @@ export default {
               font-weight: 300;
             }
             & .__card-valor {
-              font-size: 15px;
+              font-size: 16px;
               font-weight: 300;
               & .__card-valor-dia {
-                font-size: 14px;
+                font-size: 15px;
               }
               & .__card-valor-pessoa {
-                font-size: 14px;
+                font-size: 15px;
               }
             }
           }
