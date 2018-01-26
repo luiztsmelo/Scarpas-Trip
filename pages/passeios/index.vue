@@ -16,7 +16,7 @@
           <div class="card-details">
             <span class="__card-tipo-passeio">{{ passeio.tipoPasseio }}</span>
             <span class="__card-title">{{ passeio.title }}</span>
-            <span class="__card-valor">R${{ passeio.valorPasseio }}/pessoa</span>
+            <span class="__card-valor">R${{ passeio.valorPasseio }}<span class="__card-valor-pessoa"> por pessoa</span></span>
           </div>
           
         </nuxt-link> 
@@ -166,8 +166,11 @@ export default {
           font-weight: 600;
         }
         & .__card-valor {
-          font-size: 17px;
+          font-size: 18px;
           font-weight: 300;
+          & .__card-valor-pessoa {
+            font-size: 16px;
+          }
         }
       }
     }

@@ -16,7 +16,7 @@
           <div class="card-details">
             <span class="__card-tipo-acomod">{{ acomod.tipoAcomod }}</span>
             <span class="__card-title">{{ acomod.title }}</span>
-            <span class="__card-valor">R${{ acomod.valorDiariaNormal }}/dia</span>
+            <span class="__card-valor">R${{ acomod.valorDiariaNormal }}<span class="__card-valor-dia"> por dia</span></span>
           </div>
           
         </nuxt-link> 
@@ -150,8 +150,11 @@ export default {
           font-weight: 600;
         }
         & .__card-valor {
-          font-size: 17px;
+          font-size: 18px;
           font-weight: 300;
+          & .__card-valor-dia {
+            font-size: 16px;
+          }
         }
       }
     }
