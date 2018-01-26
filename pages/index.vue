@@ -62,7 +62,7 @@
               <progressive-img class="__card-img" :src="imageAcH(acomod)" :placeholder="acomod.imageL1" no-ratio />
               <span class="__card-tipoAcomod">{{ acomod.tipoAcomod }}</span>
               <h1 class="__card-title">{{ acomod.title | truncateTitle }}</h1>
-              <!-- <h2 class="__card-valor">R${{ acomod.subtitle }}</h2> -->
+              <span class="__card-valor">R${{ acomod.valorDiariaNormal }}<span class="__card-valor-dia"> por dia</span></span>
             </nuxt-link> 
           </swiper-slide>
         </swiper>
@@ -93,7 +93,7 @@
               <progressive-img class="__card-img" :src="imagePasH(passeio)" :placeholder="passeio.imageL1" no-ratio />
               <span class="__card-tipoPasseio">{{ passeio.tipoPasseio }}</span>
               <h1 class="__card-title">{{ passeio.title | truncateTitle }}</h1>
-              <h2 class="__card-valor">R${{ passeio.valorPasseio }} por pessoa</h2>
+              <span class="__card-valor">R${{ passeio.valorPasseio }}<span class="__card-valor-pessoa"> por pessoa</span></span>
             </nuxt-link> 
           </swiper-slide>
         </swiper>
@@ -258,19 +258,19 @@ export default {
               border-radius: 3px;
             }
             & .__card-date {
-              font-size: 12px;
+              font-size: 11px;
               font-weight: 600;
               color: #FF7D6C;
             }
             & .__card-tipoAcomod {
               text-transform: uppercase;
-              font-size: 12px;
+              font-size: 11px;
               font-weight: 600;
               color: #007B77;
             }
             & .__card-tipoPasseio {
               text-transform: uppercase;
-              font-size: 12px;
+              font-size: 11px;
               font-weight: 600;
               color: #097FF1;
             }
@@ -286,6 +286,12 @@ export default {
             & .__card-valor {
               font-size: 15px;
               font-weight: 300;
+              & .__card-valor-dia {
+                font-size: 14px;
+              }
+              & .__card-valor-pessoa {
+                font-size: 14px;
+              }
             }
           }
         }
