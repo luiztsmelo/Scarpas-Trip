@@ -9,9 +9,23 @@
             <swiper :options="swiperOption">
               <swiper-slide class="slide"><img class="__img" :src="image1H(acomod)"></swiper-slide>
               <swiper-slide class="slide" v-if="ifImage2(acomod)"><img class="__img" :src="image2H(acomod)"></swiper-slide>
+
+              <!-- REMOVE REMOVE REMOVE REMOVE REMOVE REMOVE REMOVE  -->
+              <swiper-slide class="slide" v-if="ifImage2(acomod)"><img class="__img" :src="image2H(acomod)"></swiper-slide>
+              <swiper-slide class="slide" v-if="ifImage2(acomod)"><img class="__img" :src="image2H(acomod)"></swiper-slide>
+              <swiper-slide class="slide" v-if="ifImage2(acomod)"><img class="__img" :src="image2H(acomod)"></swiper-slide>
+              <swiper-slide class="slide" v-if="ifImage2(acomod)"><img class="__img" :src="image2H(acomod)"></swiper-slide>
+              <swiper-slide class="slide" v-if="ifImage2(acomod)"><img class="__img" :src="image2H(acomod)"></swiper-slide>
+              <swiper-slide class="slide" v-if="ifImage2(acomod)"><img class="__img" :src="image2H(acomod)"></swiper-slide>
+              <!-- REMOVE REMOVE REMOVE REMOVE REMOVE REMOVE REMOVE  -->
+
               <div class="swiper-pagination" slot="pagination"></div>
             </swiper>
-          </div> 
+          </div>
+
+          <div class="valor-indicator">
+            <h1 class="__valor">R${{ acomod.valorDiariaNormal }}/dia</h1>
+          </div>
 
           <span class="__card-tipo-acomod">{{ acomod.tipoAcomod }}</span>
           <h1 class="__card-title">{{ acomod.title }}</h1>
@@ -112,6 +126,7 @@ export default {
     & .card {
       width: 93%;
       padding: 7% 0 2rem 7%;
+      position: relative;
       & .image-box {
         overflow: hidden;
         margin-bottom: .3rem;
@@ -152,6 +167,16 @@ export default {
               opacity: 0.9;
             }
           }
+        }
+      }
+      & .valor-indicator {
+        position: absolute;
+        top: 2.5rem;
+        left: 2.5rem;
+        & .__valor {
+          font-size: 15px;
+          font-weight: 600;
+          color: white;
         }
       }
       & .__card-tipo-acomod {
