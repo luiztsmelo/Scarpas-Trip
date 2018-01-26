@@ -23,10 +23,12 @@
             </swiper>
           </div>
 
-          <h3 class="__card-tipo-acomod">{{ acomod.tipoAcomod }}</h3>
-          <h1 class="__card-title">{{ acomod.title }}</h1>
-          <h3 class="__card-valor">R${{ acomod.valorDiariaNormal }}/dia</h3>
-
+          <div class="card-details">
+            <span class="__card-tipo-acomod">{{ acomod.tipoAcomod }}</span>
+            <span class="__card-title">{{ acomod.title }}</span>
+            <span class="__card-valor">R${{ acomod.valorDiariaNormal }}/dia</span>
+          </div>
+          
         </nuxt-link> 
       </li>
     </ul>
@@ -160,27 +162,32 @@ export default {
             }
             & .swiper-pagination-bullet-active {
               transition: all .17s ease-in;
-              transform: scale(1.25);
+              transform: scale(1.22);
               background: #fff;
               opacity: 0.9;
             }
           }
         }
       }
-      & .__card-tipo-acomod {
-        text-transform: uppercase;
-        font-size: 13px;
-        font-weight: 600;
-        color: #007B77;
-      }
-      & .__card-title {
-        padding: 0 0 .1rem 0;
-        font-size: 21px;
-        font-weight: 600;
-      }
-      & .__card-valor {
-        font-size: 17px;
-        font-weight: 300;
+      & .card-details {
+        display: flex;
+        flex-flow: column;
+        & .__card-tipo-acomod {
+          padding-top: .2rem;
+          text-transform: uppercase;
+          font-size: 13px;
+          font-weight: 600;
+          color: #007B77;
+        }
+        & .__card-title {
+          padding: .3rem 0;
+          font-size: 21px;
+          font-weight: 600;
+        }
+        & .__card-valor {
+          font-size: 17px;
+          font-weight: 300;
+        }
       }
     }
   }
