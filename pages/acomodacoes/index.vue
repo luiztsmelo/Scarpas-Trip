@@ -119,6 +119,7 @@ export default {
   transition: all .2s ease-in-out;
   & .acomods-container {
     padding: 0;
+    margin-bottom: 1rem;
     display: flex;
     flex-flow: column;
     & .card {
@@ -155,11 +156,11 @@ export default {
               margin: 0 .12rem;
               border-radius: 50%;
               background: #fff;
-              opacity: 0.3;
+              opacity: 0.25;
             }
             & .swiper-pagination-bullet-active {
               transition: all .17s ease-in;
-              transform: scale(1.2);
+              transform: scale(1.25);
               background: #fff;
               opacity: 0.9;
             }
@@ -173,7 +174,7 @@ export default {
         color: #007B77;
       }
       & .__card-title {
-        padding: .1rem 0;
+        padding: 0 0 .1rem 0;
         font-size: 21px;
         font-weight: 600;
       }
