@@ -14,8 +14,7 @@
           </div> 
 
           <span class="__card-tipo-acomod">{{ acomod.tipoAcomod }}</span>
-          <h1 class="__card-title">{{ acomod.title | truncateTitle }}</h1>
-          <h3 class="__card-subtitle">{{ acomod.subtitle | truncateSubtitle }}</h3>
+          <h1 class="__card-title">{{ acomod.title }}</h1>
         </nuxt-link> 
       </li>
     </ul>
@@ -86,22 +85,6 @@ export default {
       return this.$store.state.acomods
     }
   },
-  filters: {
-    truncateTitle (value) {
-      if (value.length > 31) {
-        return value.slice(0, 31) + '...'
-      } else {
-        return value.slice(0)
-      }
-    },
-    truncateSubtitle (value) {
-      if (value.length > 26) {
-        return value.slice(0, 26) + '...'
-      } else {
-        return value.slice(0)
-      }
-    }
-  },
   beforeRouteEnter (to, from, next) {
     next(vm => {
       vm.$store.state.offFoobar1 = false
@@ -127,11 +110,11 @@ export default {
     display: flex;
     flex-flow: column;
     & .card {
-      width: 100%;
-      padding-bottom: 3rem;
+      width: 93%;
+      padding: 7% 0 2rem 7%;
       & .image-box {
         overflow: hidden;
-        margin-bottom: .2rem;
+        margin-bottom: .4rem;
         & .swiper-container {
           position: relative;
           & .swiper-wrapper {
@@ -173,19 +156,14 @@ export default {
       }
       & .__card-tipo-acomod {
         text-transform: uppercase;
-        padding: 0 7%;
-        font-size: 14px;
+        font-size: 13px;
         font-weight: 600;
         color: #007B77;
       }
       & .__card-title {
-        padding: .2rem 7%;
-        font-size: 20px;
+        padding: .2rem 0;
+        font-size: 21px;
         font-weight: 600;
-      }
-      & .__card-subtitle {
-        font-size: 17px;
-        padding: 0 7%;
       }
     }
   }
