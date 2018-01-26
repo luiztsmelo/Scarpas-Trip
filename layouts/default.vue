@@ -8,7 +8,7 @@
     <menuu/>
     
     <navbar/>
-    <nuxt/>
+    <nuxt keep-alive/>
     <foobar/>
 
     <map-full/>
