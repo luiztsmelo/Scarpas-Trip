@@ -115,7 +115,7 @@ export default {
     flex-flow: column;
     & .card {
       width: 93%;
-      padding: 7% 0 1.5rem 7%;#64B5F6
+      padding: 7% 0 1.5rem 7%;
       & .image-box {
         overflow: hidden;
         margin-bottom: .3rem;
