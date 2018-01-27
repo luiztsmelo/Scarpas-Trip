@@ -29,9 +29,9 @@
           <swiper-slide class="card" v-for="evento in $store.state.eventos" :key="evento.eventoID">
             <nuxt-link :to="'/eventos/' + evento.eventoID">
               <progressive-img class="__card-img" :src="imageEvH(evento)" :placeholder="evento.imageL1" no-ratio />
-              <span class="__card-date">{{ evento.date }}</span>
+              <span class="__card-date">{{ evento.date }}&#160;&#8231;&#160;{{ evento.hour }}</span>
               <h1 class="__card-title">{{ evento.title | truncateTitle }}</h1>
-              <h2 class="__card-subtitle">{{ evento.subtitle | truncateSubtitle }}</h2>
+              <span class="__card-subtitle">{{ evento.subtitle | truncateSubtitle }}</span>
             </nuxt-link> 
           </swiper-slide>
         </swiper>

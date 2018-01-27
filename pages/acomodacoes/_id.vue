@@ -222,6 +222,9 @@
         <button class="__reserva-btn" @click="$store.commit('m_showReservaAcomod', true), $store.commit('m_openAcomod', acomod)">Reservar Estadia</button>
       </div>
     </div>
+
+    <reserva-acomod/>
+
     <!-- ####### RESERVA ####### -->
     
 
@@ -231,12 +234,13 @@
 </template>
 
 <script>
-/* import _ from 'lodash' */
+import ReservaAcomod from '../../components/ReservaAcomod'
 import supportsWebP from 'supports-webp'
 import { mapstyle } from '../../mixins/mapstyle'
 import * as firebase from 'firebase'
 
 export default {
+  components: { ReservaAcomod },
   mixins: [mapstyle],
   data () {
     return {
@@ -629,7 +633,6 @@ export default {
     bottom: 0;
     left: 0;
     z-index: 8888;
-    overflow: hidden;
     height: 3.8rem;
     width:  100%;
     background: white;
