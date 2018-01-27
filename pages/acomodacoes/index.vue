@@ -162,11 +162,11 @@ export default {
   & .filtrar {
     position: fixed;
     z-index: 8888;
-    bottom: 4rem;
+    bottom: 4.1rem;
     left: 0;
     right: 0;
     margin: 0 auto;
-    height: 2rem;
+    height: 2.1rem;
     width: 7rem;
     background: white;
     transition: all .3s ease;
@@ -182,8 +182,9 @@ export default {
       justify-content: space-around;
       align-items: center;
       & .__filtrar-text {
-        font-size: 16px;
-        font-weight: 500;
+        text-transform: uppercase;
+        font-size: 13px;
+        font-weight: 600;
       }
       & .__filtrar-img {
         width: 1.15rem;
