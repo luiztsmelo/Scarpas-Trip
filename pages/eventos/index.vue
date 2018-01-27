@@ -14,7 +14,7 @@
           </div> 
 
           <div class="card-details">
-            <span class="__card-date">{{ evento.date }}</span>
+            <span class="__card-date">{{ evento.date }}&#160;&#8231;&#160;{{ evento.hour }}</span>
             <span class="__card-title">{{ evento.title }}</span>
           </div>
 
