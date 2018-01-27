@@ -162,7 +162,7 @@ export default {
   & .filtrar {
     position: fixed;
     z-index: 8888;
-    bottom: 4.1rem;
+    bottom: 4rem;
     left: 0;
     right: 0;
     margin: 0 auto;
