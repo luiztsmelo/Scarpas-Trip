@@ -132,7 +132,7 @@ export default {
     flex-flow: column;
     & .card {
       width: 93%;
-      padding: 7% 0 1rem 7%;
+      padding: 7% 0 1.5rem 7%;
       & .image-box {
         overflow: hidden;
         margin-bottom: .3rem;
@@ -158,18 +158,18 @@ export default {
           text-transform: uppercase;
           font-size: 13px;
           font-weight: 600;
-          color: #097FF1;
+          color: #42A5F5;
         }
         & .__card-title {
           padding: .3rem 0;
-          font-size: 21px;
+          font-size: 20px;
           font-weight: 600;
         }
         & .__card-valor {
-          font-size: 18px;
+          font-size: 17px;
           font-weight: 300;
           & .__card-valor-pessoa {
-            font-size: 16px;
+            font-size: 15px;
           }
         }
       }

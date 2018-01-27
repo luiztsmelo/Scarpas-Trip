@@ -255,7 +255,7 @@ export default {
               margin-bottom: .2rem;
               width: 100%;
               min-height: 97px;
-              border-radius: 3px;
+              border-radius: 2px;
             }
             & .__card-date {
               font-size: 11px;
@@ -272,7 +272,7 @@ export default {
               text-transform: uppercase;
               font-size: 11px;
               font-weight: 600;
-              color: #097FF1;
+              color: #42A5F5;
             }
             & .__card-title {
               margin: .2rem 0;
@@ -284,13 +284,13 @@ export default {
               font-weight: 300;
             }
             & .__card-valor {
-              font-size: 16px;
+              font-size: 15px;
               font-weight: 300;
               & .__card-valor-dia {
-                font-size: 15px;
+                font-size: 14px;
               }
               & .__card-valor-pessoa {
-                font-size: 15px;
+                font-size: 14px;
               }
             }
           }

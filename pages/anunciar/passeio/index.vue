@@ -348,7 +348,7 @@
         </div>
       </div>
 
-      <!-- <h3 style="padding: .5rem 7%;font-size:16px;line-height:22px">Ao prosseguir você concorda com nossos <span style="color:#49A5FC">Termos de Serviço</span>.</h3> -->
+      <!-- <h3 style="padding: .5rem 7%;font-size:16px;line-height:22px">Ao prosseguir você concorda com nossos <span style="color:#42A5F5">Termos de Serviço</span>.</h3> -->
 
       <div class="back-next"> 
         <div class="back-next-body">
@@ -645,39 +645,39 @@ export default {
       return firstName
     },
     form1ok () {
-      return this.$store.state.passeioData.tipoPasseio !== null ? 'background:#49A5FC;cursor:pointer' : ''
+      return this.$store.state.passeioData.tipoPasseio !== null ? 'background:#42A5F5;cursor:pointer' : ''
     },
     form2ok () {
-      return this.$store.state.passeioData.capacidade !== null ? 'background:#49A5FC;cursor:pointer' : ''
+      return this.$store.state.passeioData.capacidade !== null ? 'background:#42A5F5;cursor:pointer' : ''
     },
     form3ok () {
-      return this.$store.state.passeioData.duracao !== null ? 'background:#49A5FC;cursor:pointer' : ''
+      return this.$store.state.passeioData.duracao !== null ? 'background:#42A5F5;cursor:pointer' : ''
     },
     form4ok () {
-      return this.$store.state.passeioData.localSaida !== null && this.$store.state.passeioData.localSaida !== 'Outro' ? 'background:#49A5FC;cursor:pointer'
-      : this.localSaida !== '' ? 'background:#49A5FC;cursor:pointer' 
+      return this.$store.state.passeioData.localSaida !== null && this.$store.state.passeioData.localSaida !== 'Outro' ? 'background:#42A5F5;cursor:pointer'
+      : this.localSaida !== '' ? 'background:#42A5F5;cursor:pointer' 
       : ''
     },
     form5ok () {
-      return 1<2 ? 'background:#49A5FC;cursor:pointer' : ''
+      return 1<2 ? 'background:#42A5F5;cursor:pointer' : ''
     },
     form6ok () {
-      return this.$store.state.passeioData.valorPasseio !== 0 ? 'background:#49A5FC;cursor:pointer' : ''
+      return this.$store.state.passeioData.valorPasseio !== 0 ? 'background:#42A5F5;cursor:pointer' : ''
     },
     form7ok () {
-      return this.imageURL1 !== null ? 'background:#49A5FC;cursor:pointer' : ''
+      return this.imageURL1 !== null ? 'background:#42A5F5;cursor:pointer' : ''
     },
     form8ok () {
-      return this.$store.state.passeioData.title !== '' ? 'background:#49A5FC;cursor:pointer' : ''
+      return this.$store.state.passeioData.title !== '' ? 'background:#42A5F5;cursor:pointer' : ''
     },
     form9ok () {
-      return this.$store.state.passeioData.subtitle !== '' ? 'background:#49A5FC;cursor:pointer' : ''
+      return this.$store.state.passeioData.subtitle !== '' ? 'background:#42A5F5;cursor:pointer' : ''
     },
     form10ok () {
-      return this.$store.state.passeioData.celular.length === 15 ? 'background:#49A5FC;cursor:pointer' : ''
+      return this.$store.state.passeioData.celular.length === 15 ? 'background:#42A5F5;cursor:pointer' : ''
     },
     form11ok () {
-      return 1<2 ? 'background:#49A5FC;cursor:pointer' : ''
+      return 1<2 ? 'background:#42A5F5;cursor:pointer' : ''
     }
   },
   beforeRouteLeave (to, from, next) {
@@ -696,7 +696,7 @@ export default {
 
 .anunciar-passeio {
   margin-top: 3.2rem;
-  background: #00B8FC;
+  background: #42A5F5;
   color: white;
   transition: var(--main-transition);
   & .progress-bar {
@@ -704,7 +704,7 @@ export default {
     top: 3.2rem;
     height: 3px;
     z-index: 8888;
-    background: #00B8FC;
+    background: #42A5F5;
     transition: all .3s ease;
   }
   /* ******************** PLANO PASSEIO ******************** */
@@ -870,7 +870,7 @@ export default {
     & .__input-btn {
       margin: 1rem 7%;
       font-size: 16px;
-      background: #00B8FC;
+      background: #42A5F5;
       color: white;
       padding: .8rem 1.2rem;
       border-radius: 2rem;
@@ -878,7 +878,7 @@ export default {
     & .__croppa-btn {
       margin: .3rem 0;
       font-size: 16px;
-      background: #00B8FC;
+      background: #42A5F5;
       color: white;
       padding: .8rem 1.2rem;
       border-radius: 2rem;

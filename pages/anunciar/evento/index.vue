@@ -532,25 +532,25 @@ export default {
       return this.$store.state.eventoPlace !== null ? 16 : 12
     },
     form1ok () {
-      return this.$store.state.eventoData.date.length > 0 && this.$store.state.eventoData.hour.length > 0 ? 'background:rgb(255, 88, 88);cursor:pointer' : ''
+      return this.$store.state.eventoData.date.length > 0 && this.$store.state.eventoData.hour.length > 0 ? 'background:#FF7D6C;cursor:pointer' : ''
     },
     form2ok () {
-      return this.$store.state.eventoPlace !== null ? 'background:rgb(255, 88, 88);cursor:pointer' : ''
+      return this.$store.state.eventoPlace !== null ? 'background:#FF7D6C;cursor:pointer' : ''
     },
     form3ok () {
-      return this.$store.state.eventoData.valorIngresso >= 0 ? 'background:rgb(255, 88, 88);cursor:pointer' : ''
+      return this.$store.state.eventoData.valorIngresso >= 0 ? 'background:#FF7D6C;cursor:pointer' : ''
     },
     form4ok () {
-      return this.imageURL1 !== null ? 'background:rgb(255, 88, 88);cursor:pointer' : ''
+      return this.imageURL1 !== null ? 'background:#FF7D6C;cursor:pointer' : ''
     },
     form5ok () {
-      return this.$store.state.eventoData.title.length > 0 ? 'background:rgb(255, 88, 88);cursor:pointer' : ''
+      return this.$store.state.eventoData.title.length > 0 ? 'background:#FF7D6C;cursor:pointer' : ''
     },
     form6ok () {
-      return this.$store.state.eventoData.subtitle.length > 0 ? 'background:rgb(255, 88, 88);cursor:pointer' : ''
+      return this.$store.state.eventoData.subtitle.length > 0 ? 'background:#FF7D6C;cursor:pointer' : ''
     },
     form7ok () {
-      return 1<2 ? 'background:rgb(255, 88, 88);cursor:pointer' : ''
+      return 1<2 ? 'background:#FF7D6C;cursor:pointer' : ''
     }
   },
   beforeRouteEnter (to, from, next) {

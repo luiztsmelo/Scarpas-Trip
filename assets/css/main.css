@@ -6,8 +6,11 @@
   --main-font: 'Work Sans', sans-serif !important;
   /* ******* COLOR PALETTE ******* */
   --color01: rgb(52, 52, 52);
-  --color02: rgb(243, 110, 95);
-  --color03: rgb(252, 86, 86);
+  --colorAcomod: #00D8C7;
+  --colorPasseio: rgb(252, 86, 86);
+  --colorEvento: #FF7D6C;
+  --colorRestaurante: rgb(252, 86, 86);
+  --colorAtracao: rgb(252, 86, 86);
   /* ******* MAIN TRANSITION ******* */
   --main-transition: all .22s ease;
   --menus-transition: all .26s ease;
