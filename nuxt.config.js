@@ -4,7 +4,8 @@ module.exports = {
   ** Build configuration
   */
   build: {
-    vendor: ['firebase']
+    vendor: ['firebase'],
+    maxChunkSize: 300000
   },
   /*
   ** Headers
