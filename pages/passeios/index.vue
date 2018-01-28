@@ -161,7 +161,7 @@ export default {
           color: #64B5F6;
         }
         & .__card-title {
-          padding: .3rem 0;
+          padding: .2rem 0;
           font-size: 20px;
           font-weight: 600;
         }
