@@ -448,7 +448,7 @@ export default {
 
   & .box-title {
     text-transform: uppercase;
-    font-weight: 700;
+    font-weight: 600;
     font-size: 13px;
     padding: 3rem 7% .5rem 7%;
   }
@@ -457,7 +457,7 @@ export default {
     padding: 0 7%;
     margin: 1rem 0 0 0;
     font-size: 28px;
-    font-weight: 700;
+    font-weight: 600;
   }
 
 

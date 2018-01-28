@@ -299,7 +299,7 @@ export default {
     padding: 0 7%;
     margin: 1rem 0;
     font-size: 28px;
-    font-weight: 700;
+    font-weight: 600;
   }
 
 
