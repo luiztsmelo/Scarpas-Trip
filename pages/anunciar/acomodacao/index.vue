@@ -887,8 +887,8 @@ export default {
       height: auto;
     }
     & .__title {
-      font-size: 25px;
-      font-weight: 700;
+      font-size: 26px;
+      font-weight: 600;
       padding: 0 7%;
       text-align: center;
     }
@@ -916,7 +916,7 @@ export default {
       line-height: 21px;
     }
     & .__price {
-      font-size: 50px;
+      font-size: 52px;
       font-weight: 100;
       margin-bottom: .5rem;
     }
@@ -962,8 +962,8 @@ export default {
       padding: 0 7%;
       padding-bottom: 6rem;
       z-index: 999;
-      font-size: 19px;
-      font-weight: 700;
+      font-size: 17px;
+      font-weight: 600;
       color: rgb(112, 112, 112);
     }
     & .item-form {
