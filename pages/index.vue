@@ -231,8 +231,8 @@ export default {
           cursor: pointer;
           text-align: end;
           & .__see-all-text {
-            font-size: 13px;
-            font-weight: 500;
+            font-size: 12px;
+            font-weight: 600;
             color: rgb(122, 122, 122);
             padding-right: 2px;
           }

@@ -121,8 +121,8 @@ export default {
       display: flex;
       padding: 0 7%;
       color: white;
-      font-size: 21px;
-      font-weight: 500;
+      font-size: 20px;
+      font-weight: 600;
       line-height: 28px;
     }
     & .chegada-partida-box {
@@ -137,7 +137,7 @@ export default {
         position: relative;
         width: 5.2rem;
         & h3 {
-          font-size: 18px;
+          font-size: 17px;
           font-weight: 400;
           color: white;
           position: absolute;
