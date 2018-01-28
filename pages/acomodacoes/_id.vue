@@ -448,8 +448,8 @@ export default {
 
   & .box-title {
     text-transform: uppercase;
-    font-weight: 600;
-    font-size: 13px;
+    font-weight: 700;
+    font-size: 12px;
     padding: 3rem 7% .5rem 7%;
   }
 
@@ -583,8 +583,8 @@ export default {
     padding: 0 7% 3rem 7%;
     & .__title {
       margin: 5rem 0 2rem 0;
-      font-size: 32px;
-      font-weight: 600;
+      font-size: 31px;
+      font-weight: 700;
     }
     & .comods-item { 
       display: flex;

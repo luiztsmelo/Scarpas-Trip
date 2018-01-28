@@ -75,8 +75,8 @@ export default {
     }
     & .__title {
       margin: 2rem 0 2rem 0;
-      font-size: 32px;
-      font-weight: 600;
+      font-size: 31px;
+      font-weight: 700;
     }
     & .share-item { 
       display: flex;
@@ -86,7 +86,7 @@ export default {
       border-bottom: 1px solid rgb(222, 222, 222);
       & .__img {
         margin-right: 1rem;
-        width: 1.85rem;
+        width: 1.8rem;
         height: auto;
       }
       & .__text {

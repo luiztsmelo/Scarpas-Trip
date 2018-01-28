@@ -139,14 +139,14 @@ export default {
         & .__card-date {
           padding-top: .2rem;
           text-transform: uppercase;
-          font-size: 13px;
-          font-weight: 600;
+          font-size: 12px;
+          font-weight: 700;
           color: #FF7D6C;
         }
         & .__card-title {
           padding: .2rem 0;
-          font-size: 20px;
-          font-weight: 600;
+          font-size: 19px;
+          font-weight: 700;
         }
       }
     }

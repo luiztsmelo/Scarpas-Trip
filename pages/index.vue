@@ -232,7 +232,7 @@ export default {
           text-align: end;
           & .__see-all-text {
             font-size: 12px;
-            font-weight: 600;
+            font-weight: 500;
             color: rgb(122, 122, 122);
             padding-right: 2px;
           }

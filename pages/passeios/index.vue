@@ -156,20 +156,20 @@ export default {
         & .__card-tipo-passeio {
           padding-top: .2rem;
           text-transform: uppercase;
-          font-size: 13px;
-          font-weight: 600;
+          font-size: 12px;
+          font-weight: 700;
           color: #64B5F6;
         }
         & .__card-title {
           padding: .2rem 0;
-          font-size: 20px;
-          font-weight: 600;
+          font-size: 19px;
+          font-weight: 700;
         }
         & .__card-valor {
-          font-size: 17px;
+          font-size: 16px;
           font-weight: 300;
           & .__card-valor-pessoa {
-            font-size: 15px;
+            font-size: 14px;
           }
         }
       }

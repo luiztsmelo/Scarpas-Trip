@@ -290,8 +290,8 @@ export default {
 
   & .box-title {
     text-transform: uppercase;
-    font-weight: 600;
-    font-size: 13px;
+    font-weight: 700;
+    font-size: 12px;
     padding: 3rem 7% .5rem 7%;
   }
 
@@ -332,11 +332,11 @@ export default {
     padding: 0 7%;
     & .__date {
       font-size: 19px;
-      font-weight: 300;
+      font-weight: 400;
     }
     & .__hour {
       font-size: 19px;
-      font-weight: 300;
+      font-weight: 400;
     }
   }/* ####### DATA E HORÁRIO ####### */
 
