@@ -146,7 +146,7 @@ export default {
         }
         & .__card-title {
           padding: .2rem 0;
-          font-size: 19px;
+          font-size: 20px;
           font-weight: 700;
         }
         & .__card-valor {
@@ -178,16 +178,16 @@ export default {
       top: 50%;
       transform: translateY(-50%);
       display: flex;
-      padding: 0 .5rem;
+      padding: 0 .7rem;
       justify-content: space-around;
       align-items: center;
       & .__filtrar-text {
         text-transform: uppercase;
-        font-size: 13px;
-        font-weight: 600;
+        font-size: 12px;
+        font-weight: 700;
       }
       & .__filtrar-img {
-        width: 1.15rem;
+        width: 1.05rem;
         height: auto;
       }
     }

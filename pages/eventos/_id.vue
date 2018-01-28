@@ -291,7 +291,7 @@ export default {
   & .box-title {
     text-transform: uppercase;
     font-weight: 700;
-    font-size: 12px;
+    font-size: 13px;
     padding: 3rem 7% .5rem 7%;
   }
 
