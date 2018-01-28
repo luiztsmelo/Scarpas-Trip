@@ -277,7 +277,7 @@ export default {
             & .__card-title {
               margin: .2rem 0;
               font-size: 15px;
-              font-weight: 700;
+              font-weight: 600;
             }
             & .__card-subtitle {
               font-size: 14px;
