@@ -223,8 +223,8 @@ export default {
         align-items: center;
         padding: 0 7% 1.3rem 7%;
         & .__title {
-          font-size: 25px;
-          font-weight: 600;
+          font-size: 24px;
+          font-weight: 700;
         }
         & .see-all {
           width: 4.5rem;
@@ -276,8 +276,8 @@ export default {
             }
             & .__card-title {
               margin: .2rem 0;
-              font-size: 16px;
-              font-weight: 600;
+              font-size: 15px;
+              font-weight: 700;
             }
             & .__card-subtitle {
               font-size: 15px;
