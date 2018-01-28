@@ -291,15 +291,15 @@ export default {
   & .box-title {
     text-transform: uppercase;
     font-weight: 600;
-    font-size: 14px;
+    font-size: 13px;
     padding: 3rem 7% .5rem 7%;
   }
 
   & .__event-title {
     padding: 0 7%;
     margin: 1rem 0;
-    font-size: 30px;
-    font-weight: 600;
+    font-size: 28px;
+    font-weight: 700;
   }
 
 
@@ -331,11 +331,11 @@ export default {
     display: flex;
     padding: 0 7%;
     & .__date {
-      font-size: 20px;
+      font-size: 19px;
       font-weight: 300;
     }
     & .__hour {
-      font-size: 20px;
+      font-size: 19px;
       font-weight: 300;
     }
   }/* ####### DATA E HORÁRIO ####### */
@@ -404,12 +404,12 @@ export default {
       top: 50%;
       transform: translateY(-50%);
       & .__reserva-valor {
-        font-size: 19px;
+        font-size: 18px;
         font-weight: 400;
       }
       & .__reserva-btn {
-        font-size: 17px;
-        font-weight: 500;
+        font-size: 16px;
+        font-weight: 600;
         background: #FF7D6C;
         color: white;
         padding: .7rem 1.1rem;

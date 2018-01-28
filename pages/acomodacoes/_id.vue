@@ -449,15 +449,15 @@ export default {
   & .box-title {
     text-transform: uppercase;
     font-weight: 600;
-    font-size: 14px;
+    font-size: 13px;
     padding: 3rem 7% .5rem 7%;
   }
 
   & .__acomod-title {
     padding: 0 7%;
     margin: 1rem 0 0 0;
-    font-size: 30px;
-    font-weight: 600;
+    font-size: 28px;
+    font-weight: 700;
   }
 
 
@@ -646,16 +646,15 @@ export default {
       top: 50%;
       transform: translateY(-50%);
       & .__reserva-valor {
-        color: var(--color01);
-        font-size: 19px;
+        font-size: 18px;
         font-weight: 400;
       }
       & .__reserva-valor-pessoa {
         font-size: 15px;
       }
       & .__reserva-btn {
-        font-size: 17px;
-        font-weight: 500;
+        font-size: 16px;
+        font-weight: 600;
         background: #08C8C1;
         color: white;
         padding: .7rem 1.1rem;

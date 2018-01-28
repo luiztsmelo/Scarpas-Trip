@@ -258,20 +258,20 @@ export default {
               border-radius: 2px;
             }
             & .__card-date {
-              font-size: 11px;
-              font-weight: 600;
+              font-size: 10px;
+              font-weight: 700;
               color: #FF7D6C;
             }
             & .__card-tipoAcomod {
               text-transform: uppercase;
-              font-size: 11px;
-              font-weight: 600;
+              font-size: 10px;
+              font-weight: 700;
               color: #007B77;
             }
             & .__card-tipoPasseio {
               text-transform: uppercase;
-              font-size: 11px;
-              font-weight: 600;
+              font-size: 10px;
+              font-weight: 700;
               color: #64B5F6;
             }
             & .__card-title {
@@ -280,17 +280,17 @@ export default {
               font-weight: 700;
             }
             & .__card-subtitle {
-              font-size: 15px;
+              font-size: 14px;
               font-weight: 300;
             }
             & .__card-valor {
-              font-size: 15px;
+              font-size: 14px;
               font-weight: 300;
               & .__card-valor-dia {
-                font-size: 14px;
+                font-size: 13px;
               }
               & .__card-valor-pessoa {
-                font-size: 14px;
+                font-size: 13px;
               }
             }
           }

@@ -45,7 +45,7 @@ button {
 }
 
 h3 {
-  font-size: 18px;
+  font-size: 17px;
   font-weight: 300;
   line-height: 26px;
   color: rgb(42, 42, 42);
@@ -53,7 +53,7 @@ h3 {
 
 p {
   font-family: var(--main-font);
-  font-size: 18px;
+  font-size: 17px;
   line-height: 31px;
   margin-bottom: 20px;
 }
