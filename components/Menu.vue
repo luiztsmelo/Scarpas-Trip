@@ -39,6 +39,13 @@
             </nuxt-link>
           </div>
 
+          <div style="display:none">
+            <nuxt-link to="/anunciar/atracao" class="menu-item">
+              <img src="../assets/img/restaurantes.svg" alt="" class="__item-img-color">
+              <h3>Anunciar Atração</h3>
+            </nuxt-link>
+          </div>
+
         </div>
 
         <div class="info-box">
