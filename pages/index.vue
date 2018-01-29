@@ -25,7 +25,7 @@
           </nuxt-link>
         </div>
           
-        <swiper :options="swiperOption" ref="eventosSwiper">
+        <swiper :options="swiperOption">
           <swiper-slide class="card" v-for="evento in $store.state.eventos" :key="evento.eventoID">
             <nuxt-link :to="'/eventos/' + evento.eventoID">
               <progressive-img class="__card-img" :src="imageEvH(evento)" :placeholder="evento.imageL1" no-ratio />
@@ -56,7 +56,7 @@
           </nuxt-link> 
         </div>
           
-        <swiper :options="swiperOption" ref="passeiosSwiper">
+        <swiper :options="swiperOption">
           <swiper-slide class="card" v-for="acomod in $store.state.acomods" :key="acomod.acomodID">
             <nuxt-link :to="'/acomodacoes/' + acomod.acomodID">
               <progressive-img class="__card-img" :src="imageAcH(acomod)" :placeholder="acomod.imageL1" no-ratio />
@@ -87,7 +87,7 @@
           </nuxt-link> 
         </div>
           
-        <swiper :options="swiperOption" ref="passeiosSwiper">
+        <swiper :options="swiperOption">
           <swiper-slide class="card" v-for="passeio in $store.state.passeios" :key="passeio.passeioID">
             <nuxt-link :to="'/passeios/' + passeio.passeioID">
               <progressive-img class="__card-img" :src="imagePasH(passeio)" :placeholder="passeio.imageL1" no-ratio />
@@ -99,6 +99,36 @@
         </swiper>
 
       </div><!-- ####### PASSEIOS ####### -->
+
+
+
+
+
+      <!-- ####### ATRAÇÕES ####### -->
+      <div class="category-container">
+
+        <div class="title-row">
+          <h1 class="__title">Atrações</h1>
+
+          <nuxt-link to="/atracoes">
+            <div class="see-all">
+              <span class="__see-all-text">Ver mais</span>
+              <img class="__see-all-arrow" src="../assets/img/see-all-arrow.svg">
+            </div>
+          </nuxt-link> 
+        </div>
+          
+        <swiper :options="swiperOption">
+          <swiper-slide class="card" v-for="atracao in $store.state.atracoes" :key="atracao.atracaoID">
+            <nuxt-link :to="'/atracoes/' + atracao.atracaoID">
+              <progressive-img class="__card-img" :src="imageAtH(atracao)" :placeholder="atracao.imageL1" no-ratio />
+              <span class="__card-tipoAtracao">{{ atracao.tipoAtracao }}</span>
+              <h1 class="__card-title">{{ atracao.title | truncateTitle }}</h1>
+            </nuxt-link> 
+          </swiper-slide>
+        </swiper>
+
+      </div><!-- ####### ATRAÇÕES ####### -->
 
 
     </div>
@@ -152,6 +182,13 @@ export default {
       } else {
         return passeio.imageH1J
       }
+    },
+    imageAtH (atracao) {
+      if (supportsWebP) {
+        return atracao.imageH1W
+      } else {
+        return atracao.imageH1J
+      }
     }
   },
   fetch ({ store }) {
@@ -163,6 +200,9 @@ export default {
     })
     && firebase.database().ref('passeios').on('value', function(snapshot) {
       store.commit('m_passeios', snapshot.val())
+    })
+    && firebase.database().ref('atracoes').on('value', function(snapshot) {
+      store.commit('m_atracoes', snapshot.val())
     })
   },
   filters: {
@@ -273,6 +313,12 @@ export default {
               font-size: 10px;
               font-weight: 700;
               color: #64B5F6;
+            }
+            & .__card-tipoAtracao {
+              text-transform: uppercase;
+              font-size: 10px;
+              font-weight: 700;
+              color: #9CCC65;
             }
             & .__card-title {
               margin: .2rem 0;

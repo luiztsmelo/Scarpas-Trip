@@ -185,7 +185,40 @@ const store = () => new Vuex.Store({
     cadastroPasseio8: false,
     cadastroPasseio9: false,
     cadastroPasseio10: false,
-    cadastroPasseio11: false
+    cadastroPasseio11: false,
+    /*
+    ########## Atração ##########
+    */
+    atracaoID: null,
+    atracoes: null,
+    atracao: null,
+    atracaoProgressBar: 16.6666,
+    blobAtL1: null,
+    blobAtH1J: null,
+    blobAtH1W: null,
+    blobAtL2: null,
+    blobAtH2J: null,
+    blobAtH2W: null,
+    atracaoData: {/* Atualizar a action */
+      atracaoID: null,
+      email: null,
+      tipoAtracao: 'Cachoeira',
+      localAtracao: null,
+      title: '',
+      subtitle: '',
+      imageL1: null,
+      imageH1J: null,
+      imageH1W: null,
+      imageL2: null,
+      imageH2J: null,
+      imageH2W: null
+    },
+    cadastroAtracao1: true,
+    cadastroAtracao2: false,
+    cadastroAtracao3: false,
+    cadastroAtracao4: false,
+    cadastroAtracao5: false,
+    cadastroAtracao6: false
   },
   /*
   *****************************************************************************************
@@ -454,6 +487,64 @@ const store = () => new Vuex.Store({
     },
     m_cadastroPasseio11 (state, payload) {
       state.cadastroPasseio11 = payload
+    },
+    /*
+    ########## Atração ##########
+    */
+    m_atracaoID (state, payload) {
+      state.atracaoID = payload
+      state.atracaoData.atracaoID = payload
+    },
+    m_atracaoData (state, payload) {
+      state.atracaoData = payload
+    },
+    m_localAtracao (state, payload) {
+      state.atracaoData.localAtracao = payload
+    },
+    m_imageAtL1 (state, payload) {
+      state.atracaoData.imageL1 = payload
+    },
+    m_imageAtH1J (state, payload) {
+      state.atracaoData.imageH1J = payload
+    },
+    m_imageAtH1W (state, payload) {
+      state.atracaoData.imageH1W = payload
+    },
+    m_imageAtL2 (state, payload) {
+      state.atracaoData.imageL2 = payload
+    },
+    m_imageAtH2J (state, payload) {
+      state.atracaoData.imageH2J = payload
+    },
+    m_imageAtH2W (state, payload) {
+      state.atracaoData.imageH2W = payload
+    },
+    m_atracoes (state, payload) {
+      state.atracoes = payload
+    },
+    m_atracao (state, payload) {
+      state.atracao = payload
+    },
+    m_atracaoProgressBar (state, payload) {
+      state.atracaoProgressBar = payload
+    },
+    m_cadastroAtracao1 (state, payload) {
+      state.cadastroAtracao1 = payload
+    },
+    m_cadastroAtracao2 (state, payload) {
+      state.cadastroAtracao2 = payload
+    },
+    m_cadastroAtracao3 (state, payload) {
+      state.cadastroAtracao3 = payload
+    },
+    m_cadastroAtracao4 (state, payload) {
+      state.cadastroAtracao4 = payload
+    },
+    m_cadastroAtracao5 (state, payload) {
+      state.cadastroAtracao5 = payload
+    },
+    m_cadastroAtracao6 (state, payload) {
+      state.cadastroAtracao6 = payload
     }
   },
   /*
@@ -574,6 +665,32 @@ const store = () => new Vuex.Store({
       })
     },
     /*
+    ########## Atracões ##########
+    */
+    a_uploadAtracao ({ state, commit }) {
+      firebase.database().ref('atracoes/' + state.atracaoID).set(state.atracaoData).then(() => {
+        /* Resetar states */
+        commit('m_atracaoData', {
+          atracaoID: null,
+          email: null,
+          tipoAtracao: 'Cachoeira',
+          localAtracao: null,
+          title: '',
+          subtitle: '',
+          imageL1: null,
+          imageH1J: null,
+          imageH1W: null,
+          imageL2: null,
+          imageH2J: null,
+          imageH2W: null
+        })
+        commit('m_loader', false)
+        commit('m_cadastroAtracao6', false)
+        commit('m_cadastroAtracao1', true)
+        commit('m_atracaoProgressBar', 16.6666)
+      })
+    },
+    /*
     ########## GOOGLE SIGN IN ##########
     */
     a_googleSignIn ({ commit, dispatch }, user) {
@@ -583,18 +700,6 @@ const store = () => new Vuex.Store({
           console.log(error)
         })
       dispatch('a_authStateObserver')
-    },
-    a_authStateObserver ({ commit, state }) {
-      firebase.auth().onAuthStateChanged(user => {
-        state.acomodData.proprietario = user.displayName
-        state.acomodData.email = user.email
-        state.acomodData.photoURL = user.photoURL
-        state.acomodData.userID = user.uid
-        state.passeioData.proprietario = user.displayName
-        state.passeioData.email = user.email
-        state.passeioData.photoURL = user.photoURL
-        state.passeioData.userID = user.uid
-      })
     },
     /*
     ########## FACEBOOK SIGN IN ##########
@@ -606,6 +711,22 @@ const store = () => new Vuex.Store({
           console.log(error)
         })
       dispatch('a_authStateObserver')
+    },
+    /*
+    ########## AUTH STATE OBSERVER ##########
+    */
+    a_authStateObserver ({ commit, state }) {
+      firebase.auth().onAuthStateChanged(user => {
+        state.acomodData.proprietario = user.displayName
+        state.acomodData.email = user.email
+        state.acomodData.photoURL = user.photoURL
+        state.acomodData.userID = user.uid
+        state.passeioData.proprietario = user.displayName
+        state.passeioData.email = user.email
+        state.passeioData.photoURL = user.photoURL
+        state.passeioData.userID = user.uid
+        state.atracaoData.email = user.email
+      })
     }
   }
 })

@@ -998,10 +998,6 @@ export default {
         border-bottom: 1px solid rgb(222, 222, 222);
         outline: none;
       }
-      & .__local-saida-text {
-        padding: .5rem 0 .6rem 0;
-        border-bottom: 1px solid rgb(222, 222, 222);
-      }
     }
     & .comodidades-box {
       padding: 0 7%;
