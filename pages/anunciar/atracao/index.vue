@@ -13,6 +13,7 @@
         <label>Tipo</label>
         <select v-model="$store.state.atracaoData.tipoAtracao">
           <option>Cachoeira</option>
+          <option>Perto d'água</option>
         </select>
       </div> 
 

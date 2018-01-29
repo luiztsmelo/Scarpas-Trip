@@ -34,7 +34,7 @@
 
 
     <!-- ####### SOBRE ####### -->
-    <h1 class="box-title">Sobre {{ tipoAtracaoText }}</h1>
+    <h1 class="box-title">Sobre</h1>
 
     <div class="sobre-box">
       <h3>{{ atracao.subtitle }}</h3>
@@ -151,11 +151,6 @@ export default {
     }
   },
   computed: {
-    tipoAtracaoText () {
-      const path = this.atracao.tipoAtracao
-      return path === 'Cachoeira' ? 'a cachoeira' 
-           : ''
-    },
     scrollY () {
       return this.$store.state.scrollY
     },
