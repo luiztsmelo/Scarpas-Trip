@@ -322,12 +322,12 @@ export default {
     },
     nextBtn3 () {
       if (1<2) {
-        this.$store.commit('m_cadastroAtracao3', false), this.$store.commit('m_cadastroAtracao4', true), this.$store.commit('m_atracaoProgressBar', (100/6)*4), this.scrollTop()
+        this.$store.commit('m_cadastroAtracao3', false), this.$store.commit('m_cadastroAtracao4', true), this.$store.commit('m_atracaoProgressBar', (100/6)*4)
       }
     },
     nextBtn4 () {
       if (1<2) {
-        this.$store.commit('m_cadastroAtracao4', false), this.$store.commit('m_cadastroAtracao5', true), this.$store.commit('m_atracaoProgressBar', (100/6)*5), this.scrollTop()
+        this.$store.commit('m_cadastroAtracao4', false), this.$store.commit('m_cadastroAtracao5', true), this.$store.commit('m_atracaoProgressBar', (100/6)*5)
       }
     },
     nextBtn5 () {
