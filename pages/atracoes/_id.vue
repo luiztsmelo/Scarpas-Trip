@@ -105,7 +105,7 @@ export default {
       title: this.$store.state.atracao.title + ' ‒ ' + 'Escarpas Trip',
       meta: [
         { hid: 'description', name: 'description', content: this.$store.state.atracao.subtitle },
-        { property: 'og:url', content: 'https://escarpastrip.com/atracoes/' + this.$route.params.id },
+        { property: 'og:url', content: 'https://www.escarpastrip.com/atracoes/' + this.$route.params.id },
         { property: 'og:title', content: this.$store.state.atracao.title },
         { property: 'og:description', content: this.$store.state.atracao.subtitle },
         { property: 'og:image', content: this.$store.state.atracao.imageH1J },
