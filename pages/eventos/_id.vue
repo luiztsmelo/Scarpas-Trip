@@ -187,11 +187,20 @@ export default {
       let y = eventoDate.slice(6, 10)
       let dateStr = m + '/' + d + '/' + y
       let date = new Date(dateStr)
+      /* longWeekday = segunda-feira */
       let longWeekday = date.toLocaleDateString('pt-BR', { weekday: 'long' })
+      /* shortWeekday = segunda */
       let shortWeekday = longWeekday.substring(0, longWeekday.lastIndexOf('-'))
+      /* shortWeekdayUppercase = Segunda */
       let shortWeekdayUppercase = shortWeekday.charAt(0).toUpperCase() + shortWeekday.slice(1)
       let month = date.toLocaleString('pt-BR', { month: "short" });
-      return shortWeekdayUppercase + ', ' + d + ' ' + month
+      if (longWeekday !== 'sábado' && longWeekday !== 'domingo') {
+        return shortWeekdayUppercase + ', ' + d + ' ' + month
+      } else {
+        let fdsUppercase = longWeekday.charAt(0).toUpperCase() + longWeekday.slice(1)
+        return fdsUppercase + ', ' + d + ' ' + month
+      }
+      
     },
     evento () {
       return this.$store.state.evento
