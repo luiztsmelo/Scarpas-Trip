@@ -147,7 +147,7 @@ export default {
   head () {
     return {
       meta: [
-        { hid: 'description', name: 'description', content: 'Planeje sua viagem para Escarpas do Lago de forma simples, agradável e segura.' }
+        { hid: 'description', name: 'description', content: 'Planeje sua viagem para Capitólio de forma simples, agradável e segura.' }
       ]
     }
   },

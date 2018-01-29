@@ -119,7 +119,7 @@
       <div class="item-form">
         <label>Local de Saída</label>
         <select v-model="$store.state.passeioData.localSaida" @input="setLocalSaida" v-if="$store.state.passeioData.localSaida !== 'Outro'">
-          <option>Escarpas do Lago</option>
+          <option>Capitólio</option>
           <option>Ponte do Turvo</option>
           <option>Barragem do Dique</option>
           <option>Kanto da Ilha</option>
@@ -395,7 +395,7 @@ export default {
   },
   head () {
     return {
-      title: 'Anunciar Passeio em Escarpas do Lago ‒ Escarpas Trip'
+      title: 'Anunciar Passeio em Capitólio ‒ Escarpas Trip'
     }
   },
   transition: 'opacity',

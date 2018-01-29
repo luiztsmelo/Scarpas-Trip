@@ -35,7 +35,7 @@
 export default {
   head () {
     return {
-      title: 'Anunciar Restaurante em Escarpas do Lago ‒ Escarpas Trip'
+      title: 'Anunciar Restaurante em Capitólio ‒ Escarpas Trip'
     }
   },
   transition: 'opacity',

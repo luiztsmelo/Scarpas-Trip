@@ -8,7 +8,7 @@
 export default {
   head () {
     return {
-      title: 'Restaurantes em Escarpas do Lago ‒ Escarpas Trip'
+      title: 'Restaurantes em Capitólio ‒ Escarpas Trip'
     }
   },
   transition: 'opacity'

@@ -401,7 +401,7 @@
       v-autosize="title"
       maxlength="50"
       rows="1"
-      placeholder="ex: Linda casa em Escarpas do Lago"
+      placeholder="ex: Linda casa em Capitólio"
       required>
       {{title}}</textarea>
 
@@ -526,7 +526,7 @@ export default {
   mixins: [mapstyle],
   head () {
     return {
-      title: 'Anunciar Acomodação em Escarpas do Lago ‒ Escarpas Trip'
+      title: 'Anunciar Acomodação em Capitólio ‒ Escarpas Trip'
     }
   },
   transition: 'opacity',

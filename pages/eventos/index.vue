@@ -39,7 +39,7 @@ import * as firebase from 'firebase'
 export default {
   head () {
     return {
-      title: 'Eventos em Escarpas do Lago ‒ Escarpas Trip'
+      title: 'Eventos em Capitólio ‒ Escarpas Trip'
     }
   },
   transition: 'opacity',

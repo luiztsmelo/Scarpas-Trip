@@ -11,7 +11,7 @@ module.exports = {
   ** Common headers are already provided by @nuxtjs/pwa preset
   */
   head: {
-    title: 'Escarpas Trip: Casas, Passeios, Atrações, Eventos e Restaurantes em Escarpas do Lago',
+    title: 'Escarpas Trip: Casas, Passeios, Atrações, Eventos e Restaurantes em Capitólio e Região',
     meta: [
       { name: 'viewport', content: 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' },
       { hid: 'description', name: 'description', content: 'Planeje sua viagem a Capitólio e região de forma simples, agradável e segura.' },
@@ -55,8 +55,8 @@ module.exports = {
   manifest: {
     name: 'Escarpas Trip',
     ogTitle: 'Escarpas Trip',
-    description: 'Planeje sua viagem para Escarpas do Lago de forma simples, agradável e segura.',
-    ogDescription: 'Planeje sua viagem para Escarpas do Lago de forma simples, agradável e segura.',
+    description: 'Planeje sua viagem para Capitólio de forma simples, agradável e segura.',
+    ogDescription: 'Planeje sua viagem para Capitólio de forma simples, agradável e segura.',
     display: 'fullscreen',
     lang: 'pt-br',
     iconSrc: './static/brand.png'

@@ -216,7 +216,7 @@
       v-autosize="title"
       maxlength="50"
       rows="1"
-      placeholder="ex: Show Jorge e Mateus em Escarpas do Lago"
+      placeholder="ex: Show Jorge e Mateus em Capitólio"
       required>
       {{title}}</textarea>
 
@@ -289,7 +289,7 @@ export default {
   mixins: [mapstyle],
   head () {
     return {
-      title: 'Anunciar Evento em Escarpas do Lago ‒ Escarpas Trip'
+      title: 'Anunciar Evento em Capitólio ‒ Escarpas Trip'
     }
   },
   transition: 'opacity',
