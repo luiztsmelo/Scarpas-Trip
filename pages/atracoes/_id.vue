@@ -333,7 +333,8 @@ export default {
         font-weight: 600;
         background: #81C784;
         color: white;
-        padding: .7rem 1.1rem;
+        padding: .7rem 0;
+        width:  11rem;
         border-radius: 4px;
       }
     }
