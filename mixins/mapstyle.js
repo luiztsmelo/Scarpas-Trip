@@ -61,7 +61,7 @@ export const mapstyle = {
                     "visibility": "on"
                 },
                 {
-                    "color": "#DCEDC8"
+                    "color": "#cbf0cf"
                 }
             ]
         },
@@ -82,7 +82,7 @@ export const mapstyle = {
                     "visibility": "on"
                 },
                 {
-                    "color": "#BBDEFB"
+                    "color": "#87e6fa"
                 }
             ]
         }

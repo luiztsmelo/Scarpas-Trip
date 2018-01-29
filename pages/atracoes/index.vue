@@ -137,14 +137,13 @@ export default {
         display: flex;
         flex-flow: column;
         & .__card-tipo-atracao {
-          padding-top: .2rem;
           text-transform: uppercase;
-          font-size: 12px;
+          font-size: 11px;
           font-weight: 700;
-          color: #8BC34A;
+          color: #81C784;
         }
         & .__card-title {
-          padding: .2rem 0;
+          padding: .3rem 0;
           font-size: 20px;
           font-weight: 700;
         }

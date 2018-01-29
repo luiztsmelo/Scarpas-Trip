@@ -154,14 +154,13 @@ export default {
         display: flex;
         flex-flow: column;
         & .__card-tipo-passeio {
-          padding-top: .2rem;
           text-transform: uppercase;
-          font-size: 12px;
+          font-size: 11px;
           font-weight: 700;
           color: #64B5F6;
         }
         & .__card-title {
-          padding: .2rem 0;
+          padding: .3rem 0;
           font-size: 20px;
           font-weight: 700;
         }

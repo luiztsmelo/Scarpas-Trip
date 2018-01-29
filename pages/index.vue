@@ -318,7 +318,7 @@ export default {
               text-transform: uppercase;
               font-size: 10px;
               font-weight: 700;
-              color: #9CCC65;
+              color: #81C784;
             }
             & .__card-title {
               margin: .2rem 0;

@@ -425,22 +425,22 @@ export default {
       return this.$store.state.atracaoPlace !== null ? 16 : 12
     },
     form1ok () {
-      return 1<2 ? 'background:#9CCC65;cursor:pointer' : ''
+      return 1<2 ? 'background:#81C784;cursor:pointer' : ''
     },
     form2ok () {
-      return 1<2 ? 'background:#8BC34A;cursor:pointer' : ''
+      return 1<2 ? 'background:#81C784;cursor:pointer' : ''
     },
     form3ok () {
-      return 1<2 ? 'background:#8BC34A;cursor:pointer' : ''
+      return 1<2 ? 'background:#81C784;cursor:pointer' : ''
     },
     form4ok () {
-      return 1<2 ? 'background:#8BC34A;cursor:pointer' : ''
+      return 1<2 ? 'background:#81C784;cursor:pointer' : ''
     },
     form5ok () {
-      return 1<2 !== null ? 'background:#8BC34A;cursor:pointer' : ''
+      return 1<2 !== null ? 'background:#81C784;cursor:pointer' : ''
     },
     form6ok () {
-      return this.$store.state.atracaoData.email === 'luiztsmelo@gmail.com' ? 'background:#8BC34A;cursor:pointer' : ''
+      return this.$store.state.atracaoData.email === 'luiztsmelo@gmail.com' ? 'background:#81C784;cursor:pointer' : ''
     }
   },
   beforeRouteLeave (to, from, next) {
@@ -472,7 +472,7 @@ export default {
     top: 3.2rem;
     height: 3px;
     z-index: 8888;
-    background: #8BC34A;
+    background: #81C784;
     transition: all .3s ease;
   }
   & .cadastro-atracao {
@@ -576,7 +576,7 @@ export default {
       margin: 1rem 7%;
       font-size: 15px;
       font-weight: 600;
-      background: #9CCC65;
+      background: #81C784;
       color: white;
       padding: .8rem 1.2rem;
       border-radius: 2rem;
@@ -585,7 +585,7 @@ export default {
       margin: .3rem 0;
       font-size: 15px;
       font-weight: 500;
-      background: #9CCC65;
+      background: #81C784;
       color: white;
       padding: .8rem 1.2rem;
       border-radius: 2rem;
