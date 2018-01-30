@@ -40,26 +40,29 @@
       :center="{lat: $store.state.atracaoData.positionLAT, lng: $store.state.atracaoData.positionLNG}"
       :zoom="15"
       :options="{styles: styles, mapTypeControl:false, streetViewControl:false}"
-      style="width: 100%; height: 290px"
-      @click="addPointToPath">
+      style="width: 100%; height: 280px"
+      @click="addPointRota">
         <!-- Rota -->
         <gmap-polyline 
-        :path="paths"
+        :path="$store.state.atracaoData.rota"
         :options="polylineOptions">
         </gmap-polyline>
         <!-- Marcador partida -->
         <gmap-marker
-        v-if="paths !== {}"
-        :position="paths[0]"
+        v-if="$store.state.atracaoData.rota !== {}"
+        :position="$store.state.atracaoData.rota[0]"
         :icon="markerIconPartida"
         ></gmap-marker>
         <!-- Marcador chegada -->
         <gmap-marker
-        v-if="paths !== {}"
-        :position="paths.slice(-1)[0]"
+        v-if="$store.state.atracaoData.rota !== {}"
+        :position="$store.state.atracaoData.rota.slice(-1)[0]"
         :icon="markerIconChegada"
         ></gmap-marker>
       </gmap-map>
+
+      <button class="__map-btn-reset" type="button" @click="resetRota">Reset</button>
+      <button class="__map-btn-remove" type="button" @click="removePointRota">Remove last</button>
 
       <div class="back-next"> 
         <div class="back-next-body">
@@ -253,15 +256,15 @@ export default {
       subtitle: '',/* Vue Autosize */
       markerIconPartida: {
         url: 'https://firebasestorage.googleapis.com/v0/b/escarpas-trip.appspot.com/o/utils%2Fmarker-partida.svg?alt=media&token=bd41c89e-33ea-4899-bb5a-4f2fc2d936cb',
-        scaledSize: new google.maps.Size(42, 42)
+        scaledSize: new google.maps.Size(36, 36)
       },
       markerIconChegada: {
         url: 'https://firebasestorage.googleapis.com/v0/b/escarpas-trip.appspot.com/o/utils%2Fmarker-chegada.svg?alt=media&token=b5b52bc5-a65f-4136-9c31-57830b969067',
-        scaledSize: new google.maps.Size(42, 42)
+        scaledSize: new google.maps.Size(36, 36)
       },
-      paths: [],
       polylineOptions: {
-        strokeOpacity: 0.5
+        strokeColor: '#1F875A',
+        strokeOpacity: 0.7
       },
       showCroppaModal1: false,
       showCroppaModal2: false,
@@ -324,8 +327,14 @@ export default {
       this.showCroppaModal2 = false
     },
     /* ******************** GOOGLE MAPS ******************** */
-    addPointToPath (event) {
-      this.paths.push({lat: event.latLng.lat(), lng: event.latLng.lng()})
+    addPointRota (event) {
+      this.$store.commit('m_addRota', {lat: event.latLng.lat(), lng: event.latLng.lng()})
+    }, 
+    resetRota () {
+      this.$store.commit('m_resetRota', [])
+    }, 
+    removePointRota () {
+      this.$store.commit('m_removePointRota')
     }, 
     /* ******************** BACK BUTTONS ******************** */
     backBtn2 () {
@@ -606,6 +615,18 @@ export default {
           width: 100%
         }
       }
+    }
+    & .__map-btn-reset {
+      width: 30%;
+      height: 1.8rem;
+      color: white;
+      background: #3e3e3e;
+    }
+    & .__map-btn-remove {
+      width: 70%;
+      height: 1.8rem;
+      color: white;
+      background: #FF7D6C;
     }
     & .__input-btn {
       margin: 1rem 7%;

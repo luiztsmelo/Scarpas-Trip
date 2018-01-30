@@ -205,7 +205,7 @@ const store = () => new Vuex.Store({
       tipoAtracao: 'Cachoeira',
       positionLAT: -20.6141320,
       positionLNG: -46.0478760,
-      localAtracao: null,
+      rota: [],
       title: '',
       subtitle: '',
       imageL1: null,
@@ -500,8 +500,14 @@ const store = () => new Vuex.Store({
     m_atracaoData (state, payload) {
       state.atracaoData = payload
     },
-    m_localAtracao (state, payload) {
-      state.atracaoData.localAtracao = payload
+    m_addRota (state, payload) {
+      state.atracaoData.rota.push(payload)
+    },
+    m_resetRota (state, payload) {
+      state.atracaoData.rota = payload
+    },
+    m_removePointRota (state) {
+      state.atracaoData.rota.splice(-1, 1)
     },
     m_imageAtL1 (state, payload) {
       state.atracaoData.imageL1 = payload
@@ -676,7 +682,9 @@ const store = () => new Vuex.Store({
           atracaoID: null,
           email: null,
           tipoAtracao: 'Cachoeira',
-          localAtracao: null,
+          positionLAT: -20.6141320,
+          positionLNG: -46.0478760,
+          rota: [],
           title: '',
           subtitle: '',
           imageL1: null,

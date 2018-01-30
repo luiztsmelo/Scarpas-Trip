@@ -47,7 +47,29 @@
     <h1 class="box-title">Local</h1>
 
     <div class="local-box">
-      <h3>Mapa aqui...</h3>
+      <gmap-map
+      :center="{lat: atracao.rota.slice(-1)[0].lat, lng: atracao.rota.slice(-1)[0].lng}"
+      :zoom="12"
+      :options="{styles: styles, mapTypeControl:false, streetViewControl:false}"
+      style="width: 100%; height: 280px">
+        <!-- Rota -->
+        <gmap-polyline 
+        :path="atracao.rota"
+        :options="polylineOptions">
+        </gmap-polyline>
+        <!-- Marcador partida -->
+        <gmap-marker
+        v-if="atracao.rota !== {}"
+        :position="atracao.rota[0]"
+        :icon="markerIconPartida"
+        ></gmap-marker>
+        <!-- Marcador chegada -->
+        <gmap-marker
+        v-if="atracao.rota !== {}"
+        :position="atracao.rota.slice(-1)[0]"
+        :icon="markerIconChegada"
+        ></gmap-marker>
+      </gmap-map>
     </div><!-- ####### LOCALIZAÇÃO ####### -->
 
 
@@ -94,10 +116,18 @@ export default {
         dynamicBullets: true,
         autoplay: 2222
       },
-      markerIcon: {
-        url: 'https://firebasestorage.googleapis.com/v0/b/escarpas-trip.appspot.com/o/utils%2Fmarker.svg?alt=media&token=fcbfd76e-ee93-41e8-a816-98906e19859b',
-        scaledSize: new google.maps.Size(42, 42)
-      }
+      markerIconPartida: {
+        url: 'https://firebasestorage.googleapis.com/v0/b/escarpas-trip.appspot.com/o/utils%2Fmarker-partida.svg?alt=media&token=bd41c89e-33ea-4899-bb5a-4f2fc2d936cb',
+        scaledSize: new google.maps.Size(36, 36)
+      },
+      markerIconChegada: {
+        url: 'https://firebasestorage.googleapis.com/v0/b/escarpas-trip.appspot.com/o/utils%2Fmarker-chegada.svg?alt=media&token=b5b52bc5-a65f-4136-9c31-57830b969067',
+        scaledSize: new google.maps.Size(36, 36)
+      },
+      polylineOptions: {
+        strokeColor: '#1F875A',
+        strokeOpacity: 0.7
+      },
     }
   },
   head () {
@@ -293,7 +323,7 @@ export default {
 
   /* ####### LOCAL ####### */
   & .local-box {
-    padding: 0 7% .6rem 7%;
+    margin-top: .5rem;
   }/* ####### LOCAL ####### */
 
 
