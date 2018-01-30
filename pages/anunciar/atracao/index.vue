@@ -13,7 +13,8 @@
         <label>Tipo</label>
         <select v-model="$store.state.atracaoData.tipoAtracao">
           <option>Cachoeira</option>
-          <option>Perto d'água</option>
+          <option>Lagoa</option>
+          <option>Montanha</option>
         </select>
       </div> 
 
@@ -34,7 +35,31 @@
 
       <h1 class="__form-title">Qual a localização?</h1>
 
-    
+      <gmap-map
+      v-if="$store.state.cadastroAtracao2"
+      :center="{lat: $store.state.atracaoData.positionLAT, lng: $store.state.atracaoData.positionLNG}"
+      :zoom="15"
+      :options="{styles: styles, mapTypeControl:false, streetViewControl:false}"
+      style="width: 100%; height: 290px"
+      @click="addPointToPath">
+        <!-- Rota -->
+        <gmap-polyline 
+        :path="paths"
+        :options="polylineOptions">
+        </gmap-polyline>
+        <!-- Marcador partida -->
+        <gmap-marker
+        v-if="paths !== {}"
+        :position="paths[0]"
+        :icon="markerIconPartida"
+        ></gmap-marker>
+        <!-- Marcador chegada -->
+        <gmap-marker
+        v-if="paths !== {}"
+        :position="paths.slice(-1)[0]"
+        :icon="markerIconChegada"
+        ></gmap-marker>
+      </gmap-map>
 
       <div class="back-next"> 
         <div class="back-next-body">
@@ -226,9 +251,17 @@ export default {
     return {
       title: '',/* Vue Autosize */
       subtitle: '',/* Vue Autosize */
-      markerIcon: {
-        url: 'https://firebasestorage.googleapis.com/v0/b/escarpas-trip.appspot.com/o/utils%2Fmarker.svg?alt=media&token=fcbfd76e-ee93-41e8-a816-98906e19859b',
+      markerIconPartida: {
+        url: 'https://firebasestorage.googleapis.com/v0/b/escarpas-trip.appspot.com/o/utils%2Fmarker-partida.svg?alt=media&token=bd41c89e-33ea-4899-bb5a-4f2fc2d936cb',
         scaledSize: new google.maps.Size(42, 42)
+      },
+      markerIconChegada: {
+        url: 'https://firebasestorage.googleapis.com/v0/b/escarpas-trip.appspot.com/o/utils%2Fmarker-chegada.svg?alt=media&token=b5b52bc5-a65f-4136-9c31-57830b969067',
+        scaledSize: new google.maps.Size(42, 42)
+      },
+      paths: [],
+      polylineOptions: {
+        strokeOpacity: 0.5
       },
       showCroppaModal1: false,
       showCroppaModal2: false,
@@ -291,8 +324,9 @@ export default {
       this.showCroppaModal2 = false
     },
     /* ******************** GOOGLE MAPS ******************** */
-
-    
+    addPointToPath (event) {
+      this.paths.push({lat: event.latLng.lat(), lng: event.latLng.lng()})
+    }, 
     /* ******************** BACK BUTTONS ******************** */
     backBtn2 () {
       this.$store.commit('m_cadastroAtracao2', false), this.$store.commit('m_cadastroAtracao1', true)

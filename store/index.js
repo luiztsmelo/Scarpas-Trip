@@ -203,6 +203,8 @@ const store = () => new Vuex.Store({
       atracaoID: null,
       email: null,
       tipoAtracao: 'Cachoeira',
+      positionLAT: -20.6141320,
+      positionLNG: -46.0478760,
       localAtracao: null,
       title: '',
       subtitle: '',
