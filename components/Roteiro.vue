@@ -122,7 +122,7 @@ export default {
       padding: 0 7%;
   
       font-size: 22px;
-      font-weight: 700;
+      font-weight: 400;
       line-height: 27px;
     }
     & .chegada-partida-box {
@@ -132,13 +132,13 @@ export default {
       justify-content: space-around;
       margin: 1rem 7% 0 7%;
       border-bottom: 1px solid #3e3e3e;
-      height: 2.7rem;
+      height: 2.4rem;
       & .chegada-partida-input {
         position: relative;
         width: 5.2rem;
         & h3 {
-          font-size: 16px;
-          font-weight: 500;
+          font-size: 17px;
+          font-weight: 300;
    
           position: absolute;
           top: 0;
@@ -160,7 +160,7 @@ export default {
       & img {
         width: 1.1rem;
         height: auto;
-        filter: invert(80%);
+        filter: invert(60%);
       }
       & .__roteiro-confirm {
         transform: scale(1.11);
