@@ -345,7 +345,7 @@ export default {
   & .__passeio-title {
     padding: 0 7%;
     margin: 1rem 0 0 0;
-    font-size: 28px;
+    font-size: 27px;
     font-weight: 700;
   }
 

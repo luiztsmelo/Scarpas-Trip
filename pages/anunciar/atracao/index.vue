@@ -256,15 +256,16 @@ export default {
       subtitle: '',/* Vue Autosize */
       markerIconPartida: {
         url: 'https://firebasestorage.googleapis.com/v0/b/escarpas-trip.appspot.com/o/utils%2Fmarker-partida.svg?alt=media&token=bd41c89e-33ea-4899-bb5a-4f2fc2d936cb',
-        scaledSize: new google.maps.Size(36, 36)
+        scaledSize: new google.maps.Size(34, 34)
       },
       markerIconChegada: {
         url: 'https://firebasestorage.googleapis.com/v0/b/escarpas-trip.appspot.com/o/utils%2Fmarker-chegada.svg?alt=media&token=b5b52bc5-a65f-4136-9c31-57830b969067',
-        scaledSize: new google.maps.Size(36, 36)
+        scaledSize: new google.maps.Size(34, 34)
       },
       polylineOptions: {
-        strokeColor: '#1F875A',
-        strokeOpacity: 0.7
+        strokeColor: '#3e3e3e',
+        strokeOpacity: 1,
+        strokeWeight: 2
       },
       showCroppaModal1: false,
       showCroppaModal2: false,
@@ -618,13 +619,13 @@ export default {
     }
     & .__map-btn-reset {
       width: 30%;
-      height: 1.8rem;
+      height: 2rem;
       color: white;
       background: #3e3e3e;
     }
     & .__map-btn-remove {
       width: 70%;
-      height: 1.8rem;
+      height: 2rem;
       color: white;
       background: #FF7D6C;
     }
