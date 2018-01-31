@@ -7,7 +7,7 @@
 
       <div class="chegada-partida-box">
 
-        <img class="__roteiro-calendar" src="../assets/img/time.svg" style="transform:scale(1.04)translateY(-.06rem)">
+        <img class="__roteiro-calendar" src="../assets/img/time.svg" style="transform:scale(1.05)translateY(-.06rem)">
 
         <div class="chegada-partida-input">
           <h3 v-if="!chegadaDate">Chegada</h3>
@@ -24,7 +24,7 @@
         </div>
 
         <nuxt-link :to="roteiroRoute">
-          <img class="__roteiro-confirm" :style="onRoteiro" src="../assets/img/send.svg" @click="hideFoobar()">
+          <img class="__roteiro-confirm" :style="onRoteiro" src="../assets/img/send.svg" style="transform:translateY(.06rem)" @click="hideFoobar()">
         </nuxt-link>
 
       </div>
@@ -122,7 +122,7 @@ export default {
       padding: 0 7%;
       color: white;
       font-size: 20px;
-      font-weight: 600;
+      font-weight: 700;
       line-height: 27px;
     }
     & .chegada-partida-box {
