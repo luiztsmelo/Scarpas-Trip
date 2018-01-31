@@ -7,7 +7,7 @@
 
       <div class="chegada-partida-box">
 
-        <img class="__roteiro-calendar" src="../assets/img/time.svg" style="transform:scale(1.05)translateY(-.06rem)">
+        <img class="__roteiro-calendar" src="../assets/img/time.svg" style="transform:scale(1.0)translateY(-.06rem)">
 
         <div class="chegada-partida-input">
           <h3 v-if="!chegadaDate">Chegada</h3>
@@ -15,7 +15,7 @@
           <input type="date" ref="inputChegada" v-model="chegadaDate" :min="today">
         </div>
         
-        <img class="__roteiro-arrow" src="../assets/img/right.svg" style="transform:scale(0.92)">
+        <img class="__roteiro-arrow" src="../assets/img/right.svg" style="transform:scale(0.86)">
 
         <div class="chegada-partida-input">
           <h3 v-if="!partidaDate">Partida</h3>
@@ -24,7 +24,7 @@
         </div>
 
         <nuxt-link :to="roteiroRoute">
-          <img class="__roteiro-confirm" :style="onRoteiro" src="../assets/img/send.svg" style="transform:translateY(.06rem)" @click="hideFoobar()">
+          <img class="__roteiro-confirm" :style="onRoteiro" src="../assets/img/send.svg" style="transform:translateY(.1rem)" @click="hideFoobar()">
         </nuxt-link>
 
       </div>
@@ -158,7 +158,7 @@ export default {
         }
       }
       & img {
-        width: 1.05rem;
+        width: 1.1rem;
         height: auto;
         /* filter: invert(80%); */
       }
