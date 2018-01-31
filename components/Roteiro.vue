@@ -107,7 +107,7 @@ export default {
 .roteiro-home {
   width: 100%;
   height: 10rem;
-  background-image: linear-gradient(-20deg, #00cdac 0%, #5FBCB5 100%);
+  
   & .chegada-partida-container {
     padding: 1rem 0;
     position: relative;
@@ -120,8 +120,8 @@ export default {
     & .__title {
       display: flex;
       padding: 0 7%;
-      color: white;
-      font-size: 20px;
+  
+      font-size: 22px;
       font-weight: 700;
       line-height: 27px;
     }
@@ -131,7 +131,7 @@ export default {
       text-align: center;
       justify-content: space-around;
       margin: 1rem 7% 0 7%;
-      border-bottom: 1px solid white;
+      border-bottom: 1px solid #3e3e3e;
       height: 2.7rem;
       & .chegada-partida-input {
         position: relative;
@@ -139,7 +139,7 @@ export default {
         & h3 {
           font-size: 16px;
           font-weight: 500;
-          color: white;
+   
           position: absolute;
           top: 0;
           left: 0;
@@ -160,7 +160,7 @@ export default {
       & img {
         width: 1.1rem;
         height: auto;
-        /* filter: invert(80%); */
+        filter: invert(80%);
       }
       & .__roteiro-confirm {
         transform: scale(1.11);
