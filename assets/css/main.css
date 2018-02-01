@@ -6,7 +6,7 @@
   --main-font: 'Montserrat', sans-serif !important;
   /* ******* COLOR PALETTE ******* */
   --color01: rgb(62, 62, 62);
-  --colorText: rgb(32, 32, 32);
+  --colorText: rgb(62, 62, 62);
   --colorAcomod: #00D8C7;
   --colorPasseio: rgb(252, 86, 86);
   --colorEvento: #FF7D6C;
@@ -46,9 +46,9 @@ button {
 }
 
 h3 {
-  font-size: 17px;
-  font-weight: 300;
-  line-height: 26px;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 27px;
   color: var(--colorText);
 }
 

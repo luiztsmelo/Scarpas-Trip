@@ -7,7 +7,7 @@
 
       <div class="chegada-partida-box">
 
-        <img class="__roteiro-calendar" src="../assets/img/time.svg" style="transform:scale(1.0)translateY(-.06rem)">
+        <img class="__roteiro-calendar" src="../assets/img/time.svg" style="transform:scale(0.97)translateY(-.06rem)">
 
         <div class="chegada-partida-input">
           <h3 v-if="!chegadaDate">Chegada</h3>
@@ -15,7 +15,7 @@
           <input type="date" ref="inputChegada" v-model="chegadaDate" :min="today">
         </div>
         
-        <img class="__roteiro-arrow" src="../assets/img/right.svg" style="transform:scale(0.86)">
+        <img class="__roteiro-arrow" src="../assets/img/right.svg" style="transform:scale(0.83)">
 
         <div class="chegada-partida-input">
           <h3 v-if="!partidaDate">Partida</h3>
@@ -68,7 +68,7 @@ export default {
     },
     onRoteiro () {
       if (this.chegadaDate !== null && this.partidaDate !== null) {
-        return 'transform: scale(1.5)'
+        return 'transform: scale(1.3)'
       }
     },
     chegadaDateFormatted () {
@@ -158,13 +158,13 @@ export default {
         }
       }
       & img {
-        width: 1.1rem;
+        width: 1.13rem;
         height: auto;
         /* filter: invert(80%); */
       }
       & .__roteiro-confirm {
-        transform: scale(1.11);
-        transition: all .25s ease-in-out;
+        transform: scale(1.1);
+        transition: all .2s ease;
       }
     }
   }
