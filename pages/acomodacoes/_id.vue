@@ -344,15 +344,15 @@ export default {
   computed: {
     tipoAcomodText () {
       const path = this.acomod.tipoAcomod
-      return path === 'Casa' ? 'a casa' 
-           : path === 'Apartamento' ? 'o apartamento'
-           : path === 'Rancho' ? 'o rancho'
-           : path === 'Chácara' ? 'a chácara'
-           : path === 'Pousada' ? 'a pousada'
-           : path === 'Camping' ? 'o camping'
-           : path === 'Sítio' ? 'o sítio'
-           : path === 'Fazenda' ? 'a fazenda'
-           : path === 'Hostel' ? 'o hostel'
+      return path === 'Casa' ? 'a Casa' 
+           : path === 'Apartamento' ? 'o Apartamento'
+           : path === 'Rancho' ? 'o Rancho'
+           : path === 'Chácara' ? 'a Chácara'
+           : path === 'Pousada' ? 'a Pousada'
+           : path === 'Camping' ? 'o Camping'
+           : path === 'Sítio' ? 'o Sítio'
+           : path === 'Fazenda' ? 'a Fazenda'
+           : path === 'Hostel' ? 'o Hostel'
            : ''
     },
     scrollY () {

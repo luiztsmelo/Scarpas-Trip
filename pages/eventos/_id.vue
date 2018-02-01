@@ -339,12 +339,12 @@ export default {
     display: flex;
     padding: 0 7%;
     & .__date {
-      font-size: 18px;
-      font-weight: 500;
+      font-size: 19px;
+      font-weight: 400;
     }
     & .__hour {
-      font-size: 18px;
-      font-weight: 500;
+      font-size: 19px;
+      font-weight: 400;
     }
   }/* ####### DATA E HORÁRIO ####### */
 

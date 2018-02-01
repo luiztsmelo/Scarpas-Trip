@@ -166,7 +166,7 @@ export default {
         }
         & .__card-valor {
           font-size: 16px;
-          font-weight: 300;
+          font-weight: 400;
           & .__card-valor-pessoa {
             font-size: 14px;
           }

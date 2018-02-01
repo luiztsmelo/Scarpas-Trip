@@ -216,7 +216,7 @@
       v-autosize="title"
       maxlength="50"
       rows="1"
-      placeholder="ex: Show Jorge e Mateus em Capitólio"
+      placeholder="Ex: Show Jorge e Mateus em Capitólio"
       required>
       {{title}}</textarea>
 
@@ -606,8 +606,8 @@ export default {
     }
     & .__item {
       padding: 0 7%;
-      font-size: 18px;
-      font-weight: 300;
+      font-size: 17px;
+      font-weight: 400;
       margin: 0 0 .2rem 0;
       color: white;
     }
@@ -652,8 +652,8 @@ export default {
     & textarea {
       margin-bottom: .5rem;
       width: 100%;
-      font-size: 17px;
-      font-weight: 300;
+      font-size: 16px;
+      font-weight: 400;
       line-height: 26px;
       background: white;
       color: var(--color01);
@@ -673,14 +673,13 @@ export default {
       flex-flow: column;
       margin: 1.7rem 0;
       & label {
-        text-transform: uppercase;
         font-weight: 700;
-        font-size: 13px;
+        font-size: 15px;
       }
       & input {
         width: 100%;
-        font-size: 17px;
-        font-weight: 300;
+        font-size: 16px;
+        font-weight: 400;
         background: white;
         color: var(--color01);
         padding: .5rem 0 .6rem 0;
@@ -758,8 +757,8 @@ export default {
       }
     }
     & .__gmap-autocomplete {
-      font-size: 18px;
-      font-weight: 300;
+      font-size: 17px;
+      font-weight: 400;
       color: var(--color01);
       width: 100%;
       border: none;
