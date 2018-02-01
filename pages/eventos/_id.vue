@@ -298,9 +298,8 @@ export default {
 
 
   & .box-title {
-    text-transform: uppercase;
     font-weight: 700;
-    font-size: 13px;
+    font-size: 15px;
     padding: 3rem 7% .5rem 7%;
   }
 
@@ -413,8 +412,8 @@ export default {
       top: 50%;
       transform: translateY(-50%);
       & .__reserva-valor {
-        font-size: 18px;
-        font-weight: 400;
+        font-size: 17px;
+        font-weight: 500;
       }
       & .__reserva-btn {
         font-size: 16px;

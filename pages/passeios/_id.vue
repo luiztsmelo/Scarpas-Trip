@@ -162,7 +162,7 @@ export default {
       weekdayLabels: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'],
       themeStyles: {
         wrapper: {
-          color: 'rgb(52,52,52)',
+          color: 'rgb(62, 62, 62)',
           border: '0',
           padding: '6px 9px 0 9px',
           background: 'white',
@@ -175,17 +175,20 @@ export default {
           fontSize: '1.4rem',
         },
         headerTitle: {
-          fontSize: '18px',
-          fontWeight: '300'
+          fontSize: '16px',
+          fontWeight: '400'
         },
         weekdays: {
-          color: 'rgb(52,52,52)',
+          color: 'rgb(62, 62, 62)',
           fontWeight: '700',
-          padding: '20px 5px 10px 5px',
+          padding: '15px 5px 8px 5px',
+        },
+        dayCell: {
+          height: '30px'
         },
         dayContent: {
-          fontWeight: '300',
-          fontSize: '16px',
+          fontWeight: '400',
+          fontSize: '15px',
         }
       }  
     }
@@ -336,9 +339,8 @@ export default {
 
 
   & .box-title {
-    text-transform: uppercase;
     font-weight: 700;
-    font-size: 13px;
+    font-size: 15px;
     padding: 3rem 7% .5rem 7%;
   }
 
@@ -461,12 +463,11 @@ export default {
       top: 50%;
       transform: translateY(-50%);
       & .__reserva-valor {
-        color: var(--color01);
-        font-size: 18px;
-        font-weight: 400;
+        font-size: 17px;
+        font-weight: 500;
       }
       & .__reserva-valor-pessoa {
-        font-size: 15px;
+        font-size: 14px;
       }
       & .__reserva-btn {
         font-size: 16px;
