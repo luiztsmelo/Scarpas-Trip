@@ -279,7 +279,10 @@ export default {
         weekdays: {
           color: 'rgb(62, 62, 62)',
           fontWeight: '700',
-          padding: '15px 5px 10px 5px',
+          padding: '15px 5px 8px 5px',
+        },
+        dayCell: {
+          height: '30px'
         },
         dayContent: {
           fontWeight: '400',
@@ -447,9 +450,9 @@ export default {
 
 
   & .box-title {
-    text-transform: uppercase;
+    /* text-transform: uppercase; */
     font-weight: 700;
-    font-size: 13px;
+    font-size: 15px;
     padding: 3rem 7% .5rem 7%;
   }
 
