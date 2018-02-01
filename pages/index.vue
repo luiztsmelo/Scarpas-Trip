@@ -327,13 +327,11 @@ export default {
             }
             & .__card-subtitle {
               font-size: 14px;
-              font-weight: 300;
-              color: var(--colorText);
+              font-weight: 400;
             }
             & .__card-valor {
               font-size: 14px;
-              font-weight: 300;
-              color: var(--colorText);
+              font-weight: 400;
               & .__card-valor-dia {
                 font-size: 13px;
               }
