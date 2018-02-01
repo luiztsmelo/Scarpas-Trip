@@ -4,6 +4,7 @@
   /* ******* FONTS ******* */
   --brand-font: 'Damion' !important;
   --main-font: 'Montserrat', sans-serif !important;
+  --fontSizeAnuncioText: 17px;
   /* ******* COLOR PALETTE ******* */
   --color01: rgb(62, 62, 62);
   --colorAcomod: #00D8C7;
@@ -52,7 +53,7 @@ h3 {
 
 p {
   font-family: var(--main-font);
-  font-size: 17px;
+  font-size: 16px;
   line-height: 31px;
   margin-bottom: 20px;
 }

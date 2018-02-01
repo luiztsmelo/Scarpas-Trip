@@ -902,7 +902,7 @@ export default {
     }
     & .__item {
       padding: 0 7%;
-      font-size: 17px;
+      font-size: 18px;
       font-weight: 400;
       margin: 0 0 .2rem 0;
       color: white;
@@ -926,7 +926,7 @@ export default {
       background: white;
       padding: 1rem 0;
       border-radius: 100px;
-      font-size: 16px;
+      font-size: var(--fontSizeAnuncioText);
       font-weight: 600;
       margin: 3rem 0 2rem 0;
       box-shadow: 2px 2px 9px 4px rgba(0,0,0,0.13);
@@ -945,11 +945,14 @@ export default {
       font-weight: 700;
       z-index: 999;
     }
+    & h3 {
+      font-size: var(--fontSizeAnuncioText);
+    }
     & textarea {
       padding: 0 7%;
       margin-bottom: .5rem;
       width: 100%;
-      font-size: 16px;
+      font-size: var(--fontSizeAnuncioText);
       font-weight: 400;
       line-height: 26px;
       background: white;
@@ -962,9 +965,9 @@ export default {
       padding: 0 7%;
       padding-bottom: 6rem;
       z-index: 999;
-      font-size: 17px;
+      font-size: var(--fontSizeAnuncioText);
       font-weight: 600;
-      color: rgb(112, 112, 112);
+      color: rgb(90, 90, 90);
     }
     & .item-form {
       padding: 0 7%;
@@ -977,7 +980,7 @@ export default {
       }
       & input {
         width: 100%;
-        font-size: 16px;
+        font-size: var(--fontSizeAnuncioText);
         font-weight: 400;
         background: white;
         color: var(--color01);
@@ -988,7 +991,7 @@ export default {
       }
       & select {
         width: 100%;
-        font-size: 16px;
+        font-size: var(--fontSizeAnuncioText);
         font-weight: 400;
         background: white;
         color: var(--color01);
@@ -1006,6 +1009,9 @@ export default {
         align-items: center;
         border-bottom: 1px solid rgb(227, 227, 227);
         padding: 1.2rem 0;
+        & h3 {
+          font-size: var(--fontSizeAnuncioText);
+        }
       }
     }
     & .modal-croppa {
@@ -1093,14 +1099,14 @@ export default {
           height: 3rem;
         }
         & .__back {
-          font-size: 16px;
+          font-size: var(--fontSizeAnuncioText);
           font-weight: 500;
           border-radius: 2rem 0 0 2rem;
           cursor: pointer;
           background: white;
         }
         & .__next {
-          font-size: 16px;
+          font-size: var(--fontSizeAnuncioText);
           font-weight: 500;
           border-radius: 0 2rem 2rem 0;
           transition: all .3s ease;
@@ -1113,7 +1119,7 @@ export default {
     & .gmap-autocomplete-box {
       margin: 1.5rem 7% 1rem 7%;
       & .__gmap-autocomplete {
-        font-size: 17px;
+        font-size: calc(var(--fontSizeAnuncioText) + 1px);
         font-weight: 400;
         color: var(--color01);
         width: 100%;

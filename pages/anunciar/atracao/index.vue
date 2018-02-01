@@ -536,7 +536,7 @@ export default {
       padding: 0 7%;
       margin-bottom: .5rem;
       width: 100%;
-      font-size: 16px;
+      font-size: var(--fontSizeAnuncioText);
       font-weight: 400;
       line-height: 26px;
       background: white;
@@ -549,9 +549,9 @@ export default {
       padding: 0 7%;
       padding-bottom: 6rem;
       z-index: 999;
-      font-size: 17px;
+      font-size: var(--fontSizeAnuncioText);
       font-weight: 600;
-      color: rgb(112, 112, 112);
+      color: rgb(90, 90, 90);
     }
     & .item-form {
       padding: 0 7%;
@@ -564,7 +564,7 @@ export default {
       }
       & input {
         width: 100%;
-        font-size: 16px;
+        font-size: var(--fontSizeAnuncioText);
         font-weight: 400;
         background: white;
         color: var(--color01);
@@ -575,7 +575,7 @@ export default {
       }
       & select {
         width: 100%;
-        font-size: 16px;
+        font-size: var(--fontSizeAnuncioText);
         font-weight: 400;
         background: white;
         color: var(--color01);
@@ -682,14 +682,14 @@ export default {
           height: 3rem;
         }
         & .__back {
-          font-size: 16px;
+          font-size: var(--fontSizeAnuncioText);
           font-weight: 500;
           border-radius: 2rem 0 0 2rem;
           cursor: pointer;
           background: white;
         }
         & .__next {
-          font-size: 16px;
+          font-size: var(--fontSizeAnuncioText);
           font-weight: 500;
           border-radius: 0 2rem 2rem 0;
           transition: all .3s ease;
