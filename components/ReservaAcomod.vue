@@ -17,7 +17,7 @@
         <!-- ########## DICAS INICIAIS PG.0 ########## -->
         <div class="etapa-reserva-box" v-show="$store.state.reservaAcomod0">
 
-          <h1 class="__title">Antes de continuar, algumas dicas importantes:</h1>
+          <h1 class="__title">Antes de continuar, algumas informações importantes:</h1>
 
           <button type="button" class="__next-btn" @click="nextBtn0">Continuar</button>
       
@@ -35,6 +35,9 @@
               <option>Mais de 20</option>
             </select>
           </div>
+
+          <button type="button" class="__next-btn" @click="nextBtn1">Continuar</button>
+
         </div><!-- ########## HÓSPEDES PG.1 ########## -->
         
 
@@ -58,6 +61,9 @@
             drag-color='#00D8C7'
             >
           </v-date-picker>
+
+          <button type="button" class="__next-btn" @click="nextBtn2">Continuar</button>
+
         </div><!-- ########## DATA PG.2 ########## -->
 
 
@@ -135,11 +141,24 @@ export default {
         this.$store.commit('m_reservaAcomod2', false)
         this.$store.commit('m_reservaAcomod1', true)
       }
-      
+      if (this.$store.state.reservaAcomod3 === true) {
+        this.$store.commit('m_reservaAcomod3', false)
+        this.$store.commit('m_reservaAcomod2', true)
+      }
     },
     nextBtn0 () {
       if (1<2) {
         this.$store.commit('m_reservaAcomod0', false), this.$store.commit('m_reservaAcomod1', true)
+      }
+    },
+    nextBtn1 () {
+      if (1<2) {
+        this.$store.commit('m_reservaAcomod1', false), this.$store.commit('m_reservaAcomod2', true)
+      }
+    },
+    nextBtn2 () {
+      if (1<2) {
+        this.$store.commit('m_reservaAcomod2', false), this.$store.commit('m_reservaAcomod3', true)
       }
     },
   },
@@ -189,7 +208,7 @@ export default {
     height: 100%;
     & .etapa-reserva-box {
         & .__title {
-        padding: 4rem 7% 1rem 7%;
+        padding: 4rem 7% 2rem 7%;
         line-height: 35px;
         font-size: 27px;
         font-weight: 700;
@@ -210,7 +229,7 @@ export default {
       }
       & .__next-btn {
         position: fixed;
-        bottom: 1rem;
+        bottom: 1.3rem;
         right: 7%;
         font-size: 16px;
         font-weight: 600;
