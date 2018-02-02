@@ -21,9 +21,19 @@
 
           <h1 class="__title">Antes de continuar, algumas informações importantes:</h1>
 
+
           <div class="info-box">
-            <span class="__info-number">1</span>
-            <h3 class="__info">Somente fazemos a reserva. O pagamento deverá ser feito diretamente com o proprietário.</h3>
+            
+            <div class="info-item">
+              <span class="__info-number">1</span>
+              <h3 class="__info-text">Somente fazemos a reserva. O pagamento deverá ser feito diretamente com o proprietário.</h3>
+            </div>
+        
+            <div class="info-item">
+              <span class="__info-number">2</span>
+              <h3 class="__info-text">Informação relevante...</h3>
+            </div>
+
           </div>
           
 
@@ -40,12 +50,14 @@
 
           <h1 class="__title">Quantas pessoas irão se hospedar?</h1>
 
+
           <div class="__item">
             <select v-model="$store.state.reservaAcomod.totalHospedes">
               <option v-for="n in 20">{{ n }}</option>
               <option>Mais de 20</option>
             </select>
           </div>
+
 
           <button type="button" class="__next-btn" @click="nextBtn1">Continuar</button>
 
@@ -59,6 +71,7 @@
           <h3 class="etapas">{{ etapa }} de 5 etapas</h3>
 
           <h1 class="__title">Qual será o período da reserva?</h1>
+
 
           <v-date-picker
             is-inline
@@ -75,6 +88,7 @@
             drag-color='#00D8C7'
             >
           </v-date-picker>
+
 
           <button type="button" class="__next-btn" @click="nextBtn2">Continuar</button>
 
@@ -241,18 +255,22 @@ export default {
       }
       & .info-box {
         display: flex;
+        flex-flow: column;
         padding: 0 7%;
-        & .__info-number {
-          font-size: 28px;
-          font-weight: 600;
-          color: #00D8C7;
-          margin-right: .6rem;
-        }
-        & .__info {
-          font-size: 17px;
-          font-weight: 400;
-          line-height: 24px;
-          
+        & .info-item {
+          display: flex;
+          margin-bottom: 1rem;
+          & .__info-number {
+            font-size: 27px;
+            font-weight: 600;
+            color: #00D8C7;
+            margin-right: .6rem;
+          }
+          & .__info-text {
+            font-size: 17px;
+            font-weight: 400;
+            line-height: 24px;
+          }
         }
       }
       
