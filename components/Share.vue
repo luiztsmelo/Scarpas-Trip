@@ -90,8 +90,8 @@ export default {
         height: auto;
       }
       & .__text {
-        font-size: 18px;
-        font-weight: 300;
+        font-size: 16px;
+        font-weight: 400;
       }
     }
   }

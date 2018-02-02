@@ -260,7 +260,7 @@ export default {
     height: 100%;
     & .etapa-reserva-box {
       & .etapas {
-        padding: 2.5rem 7% .5rem 7%;
+        padding: 2.8rem 7% 0.2rem 7%;
         font-size: 13px;
         font-weight: 600;
         color: rgb(160, 160, 160);
