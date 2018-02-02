@@ -17,11 +17,13 @@
         <!-- ########## DICAS INICIAIS PG.0 ########## -->
         <div class="etapa-reserva-box" v-show="$store.state.reservaAcomod0">
 
+          <h3 class="etapas">{{ etapa }} de 5 etapas</h3>
+
           <h1 class="__title">Antes de continuar, algumas informações importantes:</h1>
 
           <div class="info-box">
             <span class="__info-number">1</span>
-            <h3 class="__info">Somente fazemos a reserva. O pagamento deverá ser feito diretamento com o proprietário.</h3>
+            <h3 class="__info">Somente fazemos a reserva. O pagamento deverá ser feito diretamente com o proprietário.</h3>
           </div>
           
 
@@ -33,6 +35,9 @@
 
         <!-- ########## HÓSPEDES PG.1 ########## -->
         <div class="etapa-reserva-box" v-show="$store.state.reservaAcomod1">
+
+          <h3 class="etapas">{{ etapa }} de 5 etapas</h3>
+
           <h1 class="__title">Quantas pessoas irão se hospedar?</h1>
 
           <div class="__item">
@@ -50,6 +55,9 @@
 
         <!-- ########## DATA PG.2 ########## -->
         <div class="etapa-reserva-box" v-show="$store.state.reservaAcomod2">
+
+          <h3 class="etapas">{{ etapa }} de 5 etapas</h3>
+
           <h1 class="__title">Qual será o período da reserva?</h1>
 
           <v-date-picker
@@ -171,6 +179,12 @@ export default {
   computed: {
     showReservaAcomod () {
       return this.$store.state.showReservaAcomod
+    },
+    etapa () {
+      return this.$store.state.reservaAcomod0 === true ? '1' :
+             this.$store.state.reservaAcomod1 === true ? '2' :
+             this.$store.state.reservaAcomod2 === true ? '3' :
+             ''
     }
   }
 }
@@ -213,8 +227,14 @@ export default {
     margin: 1rem 0 0 0;
     height: 100%;
     & .etapa-reserva-box {
+      & .etapas {
+        padding: 2.5rem 7% .5rem 7%;
+        font-size: 13px;
+        font-weight: 600;
+        color: rgb(160, 160, 160);
+      }
       & .__title {
-        padding: 4rem 7% 2rem 7%;
+        padding: 0 7% 2rem 7%;
         line-height: 35px;
         font-size: 27px;
         font-weight: 700;
