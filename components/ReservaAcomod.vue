@@ -19,6 +19,12 @@
 
           <h1 class="__title">Antes de continuar, algumas informações importantes:</h1>
 
+          <div class="info-box">
+            <span class="__info-number">1</span>
+            <h3 class="__info">Somente fazemos a reserva. O pagamento deverá ser feito diretamento com o proprietário.</h3>
+          </div>
+          
+
           <button type="button" class="__next-btn" @click="nextBtn0">Continuar</button>
       
         </div><!-- ########## DICAS INICIAIS PG.0 ########## -->
@@ -207,18 +213,35 @@ export default {
     margin: 1rem 0 0 0;
     height: 100%;
     & .etapa-reserva-box {
-        & .__title {
+      & .__title {
         padding: 4rem 7% 2rem 7%;
         line-height: 35px;
         font-size: 27px;
         font-weight: 700;
       }
+      & .info-box {
+        display: flex;
+        padding: 0 7%;
+        & .__info-number {
+          font-size: 28px;
+          font-weight: 600;
+          color: #00D8C7;
+          margin-right: .6rem;
+        }
+        & .__info {
+          font-size: 17px;
+          font-weight: 400;
+          line-height: 24px;
+          
+        }
+      }
+      
       & .__item {
         padding: 0 7%;
         & select {
           width: 100%;
-          font-size: 18px;
-          font-weight: 300;
+          font-size: 17px;
+          font-weight: 400;
           background: white;
           color: var(--color01);
           padding: .5rem 0 .6rem 0;
