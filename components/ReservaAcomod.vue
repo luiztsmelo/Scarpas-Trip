@@ -5,7 +5,7 @@
       <!-- BACK BUTTON -->
       <div class="back-box">
         <div class="back-body">
-          <img class="__back-btn" src="../assets/img/back.svg" alt="voltar" @click="$store.commit('m_showReservaAcomod', false)">
+          <img class="__back-btn" src="../assets/img/back.svg" alt="voltar" @click="backBtn">
         </div>
       </div><!-- BACK BUTTON -->
 
@@ -19,6 +19,8 @@
 
           <h1 class="__title">Antes de continuar, algumas dicas importantes:</h1>
 
+          <button type="button" class="__next-btn" @click="nextBtn0">Continuar</button>
+      
         </div><!-- ########## DICAS INICIAIS PG.0 ########## -->
 
 
@@ -121,6 +123,25 @@ export default {
     }
   },
   methods: {
+    backBtn () {
+      if (this.$store.state.reservaAcomod0 === true) {
+        this.$store.commit('m_showReservaAcomod', false)
+      }
+      if (this.$store.state.reservaAcomod1 === true) {
+        this.$store.commit('m_reservaAcomod1', false)
+        this.$store.commit('m_reservaAcomod0', true)
+      }
+      if (this.$store.state.reservaAcomod2 === true) {
+        this.$store.commit('m_reservaAcomod2', false)
+        this.$store.commit('m_reservaAcomod1', true)
+      }
+      
+    },
+    nextBtn0 () {
+      if (1<2) {
+        this.$store.commit('m_reservaAcomod0', false), this.$store.commit('m_reservaAcomod1', true)
+      }
+    },
   },
   computed: {
     showReservaAcomod () {
@@ -164,26 +185,40 @@ export default {
   & .reserva-acomod-body {
     display: flex;
     flex-flow: column;
-    margin: 1rem 0 10rem 0;
+    margin: 1rem 0 0 0;
     height: 100%;
-    & .__title {
-      padding: 4rem 7% 1rem 7%;
-      line-height: 35px;
-      font-size: 26px;
-      font-weight: 700;
-    }
-    & .__item {
-      padding: 0 7%;
-      & select {
-        width: 100%;
-        font-size: 18px;
-        font-weight: 300;
-        background: white;
-        color: var(--color01);
-        padding: .5rem 0 .6rem 0;
-        border: none;
-        border-bottom: 1px solid rgb(222, 222, 222);
-        outline: none;
+    & .etapa-reserva-box {
+        & .__title {
+        padding: 4rem 7% 1rem 7%;
+        line-height: 35px;
+        font-size: 27px;
+        font-weight: 700;
+      }
+      & .__item {
+        padding: 0 7%;
+        & select {
+          width: 100%;
+          font-size: 18px;
+          font-weight: 300;
+          background: white;
+          color: var(--color01);
+          padding: .5rem 0 .6rem 0;
+          border: none;
+          border-bottom: 1px solid rgb(222, 222, 222);
+          outline: none;
+        }
+      }
+      & .__next-btn {
+        position: fixed;
+        bottom: 1rem;
+        right: 7%;
+        font-size: 16px;
+        font-weight: 600;
+        background: #08C8C1;
+        color: white;
+        padding: .7rem 0;
+        width:  9rem;
+        border-radius: 4px;
       }
     }
   }
