@@ -11,34 +11,54 @@
 
 
       <div class="reserva-acomod-body">
-
-        <h1 class="__title">Quantas pessoas irão se hospedar?</h1>
-
-        <div class="__item">
-          <select v-model="$store.state.reservaAcomod.totalHospedes">
-            <option v-for="n in 20">{{ n }}</option>
-            <option>Mais de 20</option>
-          </select>
-        </div>
         
 
-        <h1 class="__title">Qual será o período da reserva?</h1>
 
-        <v-date-picker
-          is-inline
-          mode='range'
-          v-model='dataReservaAcomod'
-          :drag-attribute='myAttribute'
-          :select-attribute='myAttribute'
-          :available-dates='{start: new Date(), end: null}'
-          :month-labels='monthLabels'
-          :weekday-labels='weekdayLabels'
-          :theme-styles='themeStyles'
-          select-color='#00D8C7'
-          show-caps
-          drag-color='#00D8C7'
-          >
-        </v-date-picker>
+        <!-- ########## DICAS INICIAIS PG.0 ########## -->
+        <div class="etapa-reserva-box" v-show="$store.state.reservaAcomod0">
+
+          <h1 class="__title">Antes de continuar, algumas dicas importantes:</h1>
+
+        </div><!-- ########## DICAS INICIAIS PG.0 ########## -->
+
+
+
+        <!-- ########## HÓSPEDES PG.1 ########## -->
+        <div class="etapa-reserva-box" v-show="$store.state.reservaAcomod1">
+          <h1 class="__title">Quantas pessoas irão se hospedar?</h1>
+
+          <div class="__item">
+            <select v-model="$store.state.reservaAcomod.totalHospedes">
+              <option v-for="n in 20">{{ n }}</option>
+              <option>Mais de 20</option>
+            </select>
+          </div>
+        </div><!-- ########## HÓSPEDES PG.1 ########## -->
+        
+
+
+        <!-- ########## DATA PG.2 ########## -->
+        <div class="etapa-reserva-box" v-show="$store.state.reservaAcomod2">
+          <h1 class="__title">Qual será o período da reserva?</h1>
+
+          <v-date-picker
+            is-inline
+            mode='range'
+            v-model='dataReservaAcomod'
+            :drag-attribute='myAttribute'
+            :select-attribute='myAttribute'
+            :available-dates='{start: new Date(), end: null}'
+            :month-labels='monthLabels'
+            :weekday-labels='weekdayLabels'
+            :theme-styles='themeStyles'
+            select-color='#00D8C7'
+            show-caps
+            drag-color='#00D8C7'
+            >
+          </v-date-picker>
+        </div><!-- ########## DATA PG.2 ########## -->
+
+
 
       </div>
 
@@ -63,7 +83,7 @@ export default {
       weekdayLabels: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'],
       themeStyles: {
         wrapper: {
-          color: 'rgb(52, 52, 52)',
+          color: 'rgb(62, 62, 62)',
           border: '0',
           padding: '6px 9px 0 9px',
           background: 'white',
@@ -77,17 +97,20 @@ export default {
           fontSize: '1.4rem',
         },
         headerTitle: {
-          fontSize: '18px',
-          fontWeight: '300'
+          fontSize: '16px',
+          fontWeight: '400'
         },
         weekdays: {
-          color: 'rgb(52, 52, 52)',
-          fontWeight: '600',
-          padding: '20px 5px 10px 5px',
+          color: 'rgb(62, 62, 62)',
+          fontWeight: '700',
+          padding: '15px 5px 8px 5px',
+        },
+        dayCell: {
+          height: '30px'
         },
         dayContent: {
-          fontWeight: '300',
-          fontSize: '16px',
+          fontWeight: '400',
+          fontSize: '15px',
         },
         dayPopoverContent: {
           background: '#00D8C7',
@@ -146,8 +169,8 @@ export default {
     & .__title {
       padding: 4rem 7% 1rem 7%;
       line-height: 35px;
-      font-size: 25px;
-      font-weight: 600;
+      font-size: 26px;
+      font-weight: 700;
     }
     & .__item {
       padding: 0 7%;

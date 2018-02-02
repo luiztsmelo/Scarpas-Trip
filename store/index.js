@@ -99,6 +99,11 @@ const store = () => new Vuex.Store({
     cadastroAcomod9: false,
     cadastroAcomod10: false,
     cadastroAcomod11: false,
+    reservaAcomod0: true,
+    reservaAcomod1: false,
+    reservaAcomod2: false,
+    reservaAcomod3: false,
+    reservaAcomod4: false,
     /*
     ########## Evento ##########
     */
@@ -346,6 +351,21 @@ const store = () => new Vuex.Store({
     },
     m_cadastroAcomod11 (state, payload) {
       state.cadastroAcomod11 = payload
+    },
+    m_reservaAcomod0 (state, payload) {
+      state.reservaAcomod0 = payload
+    },
+    m_reservaAcomod1 (state, payload) {
+      state.reservaAcomod1 = payload
+    },
+    m_reservaAcomod2 (state, payload) {
+      state.reservaAcomod2 = payload
+    },
+    m_reservaAcomod3 (state, payload) {
+      state.reservaAcomod3 = payload
+    },
+    m_reservaAcomod4 (state, payload) {
+      state.reservaAcomod4 = payload
     },
     /*
     ########## Evento ##########
