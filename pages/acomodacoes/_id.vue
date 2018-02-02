@@ -219,7 +219,7 @@
     <div class="reserva">
       <div class="reserva-body">
         <h3 class="__reserva-valor">R${{ acomod.valorDiariaNormal }}<span class="__reserva-valor-pessoa">/dia</span></h3>
-        <button class="__reserva-btn" @click="$store.commit('m_showReservaAcomod', true), $store.commit('m_openAcomod', acomod)">Reservar Estadia</button>
+        <button class="__reserva-btn" @click="$store.commit('m_showReservaAcomod', true), $store.commit('m_openAcomod', acomod)">Checar disponibilidade</button>
       </div>
     </div>
 
@@ -581,7 +581,7 @@ export default {
     bottom: 0;
     left: 0;
     z-index: 8888;
-    height: 3.8rem;
+    height: 4rem;
     width:  100%;
     background: white;
     padding: 0 7%;
@@ -603,9 +603,10 @@ export default {
       & .__reserva-btn {
         font-size: 16px;
         font-weight: 600;
+        line-height: 20px;
         background: #08C8C1;
         color: white;
-        padding: .7rem 0;
+        padding: .3rem 0;
         width:  11rem;
         border-radius: 4px;
       }
