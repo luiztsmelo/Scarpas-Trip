@@ -281,7 +281,7 @@ export default {
           & .__info-number {
             font-size: 27px;
             font-weight: 600;
-            line-height: 29px;
+            line-height: 28px;
             color: #00D8C7;
             margin-right: .6rem;
           }
