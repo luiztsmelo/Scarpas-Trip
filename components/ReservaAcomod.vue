@@ -26,7 +26,7 @@
             
             <div class="info-item">
               <span class="__info-number">1</span>
-              <h3 class="__info-text">Somente fazemos a reserva. O pagamento deverá ser feito diretamente com o proprietário.</h3>
+              <h3 class="__info-text">A Escarpas Trip somente faz a reserva. O pagamento deverá ser feito diretamente com o proprietário.</h3>
             </div>
         
             <div class="info-item">
@@ -281,6 +281,7 @@ export default {
           & .__info-number {
             font-size: 27px;
             font-weight: 600;
+            line-height: 29px;
             color: #00D8C7;
             margin-right: .6rem;
           }
