@@ -27,7 +27,7 @@
 
 
 
-    <h1 class="__event-title">{{ evento.title }}</h1>
+    <h1 class="id-title">{{ evento.title }}</h1>
 
 
 
@@ -42,7 +42,7 @@
 
 
     <!-- ####### SOBRE ####### -->
-    <h1 class="box-title">Sobre o Evento</h1>
+    <h1 class="item-title">Sobre o Evento</h1>
 
     <div class="sobre-box">
       <h3>{{ evento.subtitle }}</h3>
@@ -52,7 +52,7 @@
 
 
     <!-- ####### VALOR DO INGRESSO ####### -->
-    <h1 class="box-title">Valor do Ingresso</h1>
+    <h1 class="item-title">Valor do Ingresso</h1>
 
     <div class="ingresso-box">
 
@@ -72,7 +72,7 @@
 
 
     <!-- ####### LOCAL ####### -->
-    <h1 class="box-title">Local</h1>
+    <h1 class="item-title">Local</h1>
     
     <div class="local-box" >
 
@@ -256,63 +256,6 @@ export default {
   transition: all .27s cubic-bezier(.15,.97,.43,.93);
 
 
-
-  /* ####### TOPBAR ####### */
-  & .topbar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 10;
-    height: 3.1rem;
-    width:  100%;
-    background: transparent;
-    padding: 0 7%;
-    transition: all .6s ease;
-    & .topbar-body {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      position: relative;
-      top: 50%;
-      transform: translateY(-50%);
-      & a {
-        /* Aumentar área de contato */
-        padding: 1rem;
-        transform: translateX(-1rem);
-        & .__back-btn {
-          transform: translateY(2px);/* A imagem ta errada */
-          cursor: pointer;
-          width: 1.05rem;
-          height: auto;
-        }
-      }
-      & .__share-btn {
-        cursor: pointer;
-        width: 1.5rem;
-        height: auto;
-      }
-    }
-  }/* ####### TOPBAR ####### */
-
-
-
-
-  & .box-title {
-    font-weight: 700;
-    font-size: 15px;
-    padding: 3rem 7% .5rem 7%;
-  }
-
-  & .__event-title {
-    padding: 0 7%;
-    margin: 1rem 0;
-    font-size: 27px;
-    font-weight: 700;
-  }
-
-
-
-
   /* ####### IMAGE BOX ####### */
   & .image-box {
     overflow: hidden;
@@ -338,6 +281,7 @@ export default {
   & .date-hour-box {
     display: flex;
     padding: 0 7%;
+    margin-top: 1rem;
     & .__date {
       font-size: 19px;
       font-weight: 400;
@@ -426,14 +370,6 @@ export default {
       }
     }
   }/* ####### RESERVA ####### */
-}
-
-.topbarBg {
-  background: white !important;
-  box-shadow: 0px 1px 1px 0px rgba(0,0,0,0.1);
-}
-.topbarBtn {
-  filter: invert(75%);
 }
 
 

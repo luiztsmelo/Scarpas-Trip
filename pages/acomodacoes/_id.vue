@@ -29,7 +29,7 @@
 
 
 
-    <h1 class="__acomod-title">{{ acomod.title }}</h1>
+    <h1 class="id-title">{{ acomod.title }}</h1>
 
 
 
@@ -44,7 +44,7 @@
     
 
     <!-- ####### SOBRE ####### -->
-    <h1 class="box-title">Sobre {{ tipoAcomodText }}</h1>
+    <h1 class="item-title">Sobre {{ tipoAcomodText }}</h1>
 
     <div class="sobre-box">
       <h3>{{ acomod.subtitle }}</h3>
@@ -55,7 +55,7 @@
 
 
     <!-- ####### CARACTERÍSTICAS ####### -->
-    <h1 class="box-title">Características</h1>
+    <h1 class="item-title">Características</h1>
 
     <div class="caracteristicas-box">
       
@@ -82,7 +82,7 @@
 
 
     <!-- ####### CAPACIDADE ####### -->
-    <h1 class="box-title">Capacidade</h1>
+    <h1 class="item-title">Capacidade</h1>
 
     <div class="capacidade-box">
       <h3>{{ acomod.totalHospedes }} pessoas</h3>
@@ -93,7 +93,7 @@
 
 
     <!-- ####### COMODIDADES ####### -->
-    <h1 class="box-title">Comodidades</h1>
+    <h1 class="item-title">Comodidades</h1>
 
     <div class="comodidades-box" @click="showComods = true">
       <img class="__img-comodidade" v-if="acomod.hasRoupasCama" src="../../assets/img/hasRoupasCama.svg" style="transform: scale(1.01)">
@@ -167,7 +167,7 @@
 
 
     <!-- ####### DISPONIBILIDADE ####### -->
-    <h1 class="box-title">Disponibilidade</h1>
+    <h1 class="item-title">Disponibilidade</h1>
 
     <v-calendar
       mode='single'
@@ -183,7 +183,7 @@
 
 
     <!-- ####### LOCALIZAÇÃO ####### -->
-    <h1 class="box-title">Local</h1>
+    <h1 class="item-title">Local</h1>
 
     <div class="local-box">
 
@@ -206,7 +206,7 @@
 
   
     <!-- ####### AVALIAÇÕES ####### -->
-    <h1 class="box-title">Avaliações</h1>
+    <h1 class="item-title">Avaliações</h1>
 
     <div class="avaliacoes-box">
       <h3>Comentários aqui...</h3>
@@ -400,6 +400,7 @@ export default {
 <style>
 @import url('../../assets/css/main.css');
 @import url('../../assets/css/pagination.css');
+@import url('../../assets/css/_id.css');
 
 .acomods-id {
   display: flex;
@@ -408,61 +409,6 @@ export default {
   margin-bottom: 5.3rem;
   transition: all .27s cubic-bezier(.15,.97,.43,.93);
   
-
-
-  /* ####### TOPBAR ####### */
-  & .topbar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 10;
-    height: 3rem;
-    width:  100%;
-    background: transparent;
-    padding: 0 7%;
-    transition: all .5s ease;
-    & .topbar-body {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      position: relative;
-      top: 50%;
-      transform: translateY(-50%);
-      & a {
-        /* Aumentar área de contato */
-        padding: 1rem;
-        transform: translateX(-1rem);
-        & .__back-btn {
-          transform: translateY(2px);/* A imagem ta errada */
-          cursor: pointer;
-          width: 1.05rem;
-          height: auto;
-        }
-      }
-      & .__share-btn {
-        cursor: pointer;
-        width: 1.5rem;
-        height: auto;
-      }
-    }
-  }/* ####### TOPBAR ####### */
-
-
-
-  & .box-title {
-    font-weight: 700;
-    font-size: 15px;
-    padding: 3rem 7% .5rem 7%;
-  }
-
-  & .__acomod-title {
-    padding: 0 7%;
-    margin: 1rem 0 0 0;
-    font-size: 27px;
-    font-weight: 700;
-  }
-
-
 
   /* ####### IMAGE BOX ####### */
   & .image-box {
@@ -665,23 +611,10 @@ export default {
       }
     }
   }/* ####### RESERVA ####### */
-
 }
 
-.topbarBg {
-  background: white !important;
-  box-shadow: 0px 1px 1px 0px rgba(0,0,0,0.1);
-}
-.topbarBtn {
-  filter: invert(75%);
-}
 
 /* TRANSITIONS */
-
-.topbar-animation-enter,
-.topbar-animation-leave-active {
-  transform: translateY(-100%);
-}
 
 .comods-animation-enter {
   transform: translateY(100%);

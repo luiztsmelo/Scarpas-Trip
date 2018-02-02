@@ -37,13 +37,7 @@ html
   margin: 0;
 }
 
-button {
-  font-family: var(--main-font);
-  cursor: pointer;
-  border: none;
-  outline: none !important;
-  user-select: none;
-}
+/* ******* TEXT ******* */
 
 h3 {
   font-size: 16px;
@@ -52,10 +46,18 @@ h3 {
 }
 
 p {
-  font-family: var(--main-font);
   font-size: 16px;
-  line-height: 31px;
-  margin-bottom: 20px;
+  font-weight: 400;
+  line-height: 27px;
+}
+/* ******* TEXT ******* */
+
+button {
+  font-family: var(--main-font);
+  cursor: pointer;
+  border: none;
+  outline: none !important;
+  user-select: none;
 }
 
 li {
