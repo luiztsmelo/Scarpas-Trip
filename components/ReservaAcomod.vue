@@ -17,7 +17,7 @@
         <!-- ########## DICAS INICIAIS PG.0 ########## -->
         <div class="etapa-reserva-box" v-show="$store.state.reservaAcomod0">
 
-          <h3 class="etapas">{{ etapa }} de 5 etapas</h3>
+          <h3 class="etapas">1 de 5 etapas</h3>
 
           <h1 class="__title">Antes de continuar, algumas informações importantes:</h1>
 
@@ -31,7 +31,7 @@
         
             <div class="info-item">
               <span class="__info-number">2</span>
-              <h3 class="__info-text">Informação relevante...</h3>
+              <h3 class="__info-text">Alguma informação relevante...</h3>
             </div>
 
           </div>
@@ -46,7 +46,7 @@
         <!-- ########## HÓSPEDES PG.1 ########## -->
         <div class="etapa-reserva-box" v-show="$store.state.reservaAcomod1">
 
-          <h3 class="etapas">{{ etapa }} de 5 etapas</h3>
+          <h3 class="etapas">2 de 5 etapas</h3>
 
           <h1 class="__title">Quantas pessoas irão se hospedar?</h1>
 
@@ -68,7 +68,7 @@
         <!-- ########## DATA PG.2 ########## -->
         <div class="etapa-reserva-box" v-show="$store.state.reservaAcomod2">
 
-          <h3 class="etapas">{{ etapa }} de 5 etapas</h3>
+          <h3 class="etapas">3 de 5 etapas</h3>
 
           <h1 class="__title">Qual será o período da reserva?</h1>
 
@@ -93,6 +93,21 @@
           <button type="button" class="__next-btn" @click="nextBtn2">Continuar</button>
 
         </div><!-- ########## DATA PG.2 ########## -->
+
+
+
+        <!-- ########## IDENTIFICAÇÃO PG.3 ########## -->
+        <div class="etapa-reserva-box" v-show="$store.state.reservaAcomod3">
+
+          <h3 class="etapas">4 de 5 etapas</h3>
+
+          <h1 class="__title">Sua identificação</h1>
+
+
+
+          <button type="button" class="__next-btn" @click="nextBtn3">Continuar</button>
+
+        </div><!-- ########## IDENTIFICAÇÃO PG.3 ########## -->
 
 
 
@@ -173,6 +188,10 @@ export default {
         this.$store.commit('m_reservaAcomod3', false)
         this.$store.commit('m_reservaAcomod2', true)
       }
+      if (this.$store.state.reservaAcomod4 === true) {
+        this.$store.commit('m_reservaAcomod4', false)
+        this.$store.commit('m_reservaAcomod3', true)
+      }
     },
     nextBtn0 () {
       if (1<2) {
@@ -189,16 +208,15 @@ export default {
         this.$store.commit('m_reservaAcomod2', false), this.$store.commit('m_reservaAcomod3', true)
       }
     },
+    nextBtn3 () {
+      if (1<2) {
+        this.$store.commit('m_reservaAcomod3', false), this.$store.commit('m_reservaAcomod4', true)
+      }
+    },
   },
   computed: {
     showReservaAcomod () {
       return this.$store.state.showReservaAcomod
-    },
-    etapa () {
-      return this.$store.state.reservaAcomod0 === true ? '1' :
-             this.$store.state.reservaAcomod1 === true ? '2' :
-             this.$store.state.reservaAcomod2 === true ? '3' :
-             ''
     }
   }
 }
