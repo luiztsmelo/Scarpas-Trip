@@ -53,8 +53,7 @@
 
           <div class="__item">
             <select v-model="$store.state.reservaAcomod.totalHospedes">
-              <option v-for="n in 20">{{ n }}</option>
-              <option>Mais de 20</option>
+              <option v-for="n in totalHospedesArray">{{ n }}</option>
             </select>
           </div>
 
@@ -220,6 +219,9 @@ export default {
     },
     showReservaAcomod () {
       return this.$store.state.showReservaAcomod
+    },
+    totalHospedesArray () {
+      return Array.from({length: this.acomod.totalHospedes}, (v, k) => k+1)
     }
   }
 }
