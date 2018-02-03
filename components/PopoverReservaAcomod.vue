@@ -10,7 +10,7 @@ export default {
   props: ['attribute'],
   computed: {
     acomod () {
-      return this.$store.state.openAcomod
+      return this.$store.state.acomod
     },
     valorDiaria () {
       return this.acomod.valorDiariaNormal * (this.attribute.targetDate.daySpan + 1)

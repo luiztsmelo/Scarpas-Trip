@@ -216,7 +216,7 @@ export default {
   },
   computed: {
     acomod () {
-      return this.$store.state.openAcomod
+      return this.$store.state.acomod
     },
     showReservaAcomod () {
       return this.$store.state.showReservaAcomod
