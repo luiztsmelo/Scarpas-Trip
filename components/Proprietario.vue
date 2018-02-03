@@ -114,7 +114,7 @@ export default {
         width: 7rem;
         height: 7rem;
         border-radius: 50%;
-        margin-top: 4rem;
+        margin-top: 3.5rem;
         text-align: center;
       }
       & .__name {
@@ -129,10 +129,12 @@ export default {
         padding-top: .5rem;
       }
       & .__email {
+        font-size: 17px;
         color: #00BAAC;
         user-select: none;
       }
       & .__celular {
+        font-size: 16px;
         color: #00BAAC;
         user-select: none;
       }
