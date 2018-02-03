@@ -20,7 +20,7 @@
           <h3 class="__email"><a :href="emailHREF" class="__email">{{ email }}</a></h3>
 
           <h2 class="info-title">Celular</h2>
-          <h3><a :href="celularHREF" class="__celular">{{ celular }}</a></h3>
+          <h3><a href="https://api.whatsapp.com/send?phone=5534991410085" class="__celular">{{ celular }}</a></h3>
         </div>
 
       </div>
