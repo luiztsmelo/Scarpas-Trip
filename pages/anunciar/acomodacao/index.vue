@@ -422,7 +422,7 @@
     <!-- ########## DESCRIÇÃO PG.9 ########## -->
     <form class="cadastro-acomodacao" v-show="$store.state.cadastroAcomod9">
 
-      <h1 class="__form-title">Descreva melhor seu anúncio</h1>   
+      <h1 class="__form-title">Descreva seu anúncio</h1>   
 
       <textarea 
       v-model="$store.state.acomodData.subtitle"
@@ -451,7 +451,7 @@
     <!-- ########## IDENTIFICAÇÃO PG.10 ########## -->
     <form class="cadastro-acomodacao" v-show="$store.state.cadastroAcomod10">
 
-      <h1 class="__form-title">Dados pessoais básicos para exibição do anúncio e contato</h1>   
+      <h1 class="__form-title">Sua identificação</h1>   
 
 
       <h3 style="padding: .5rem 7% .7rem 7%" v-if="this.$store.state.acomodData.proprietario === null">Continuar com:</h3>
