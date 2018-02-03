@@ -178,11 +178,13 @@ export default {
       }
       if (this.$store.state.reservaAcomod1 === true) {
         window.history.back(1)
+        window.location.hash = "reserva1"
         this.$store.commit('m_reservaAcomod1', false)
         this.$store.commit('m_reservaAcomod0', true)
       }
       if (this.$store.state.reservaAcomod2 === true) {
         window.history.back(1)
+        window.location.hash = "reserva2"
         this.$store.commit('m_reservaAcomod2', false)
         this.$store.commit('m_reservaAcomod1', true)
       }
