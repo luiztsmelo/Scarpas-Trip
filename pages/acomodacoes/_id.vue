@@ -222,7 +222,7 @@
     <div class="reserva">
       <div class="reserva-body">
         <h3 class="__reserva-valor">R${{ acomod.valorDiariaNormal }}<span class="__reserva-valor-pessoa">/dia</span></h3>
-        <button class="__reserva-btn" @click="$store.commit('m_showReservaAcomod', true)">Reservar Estadia</button>
+        <button class="__reserva-btn" @click="$store.commit('m_showReservaAcomod', true), hash()">Reservar Estadia</button>
       </div>
     </div>
 
@@ -318,6 +318,9 @@ export default {
     })
   },
   methods: {
+    hash () {
+       window.location.hash = "reserva1"
+    },
     image1H (acomod) {
       if (supportsWebP) {
         return acomod.imageH1W

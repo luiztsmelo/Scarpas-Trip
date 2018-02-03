@@ -173,9 +173,11 @@ export default {
   methods: {
     backBtn () {
       if (this.$store.state.reservaAcomod0 === true) {
+        window.location.hash = ""
         this.$store.commit('m_showReservaAcomod', false)
       }
       if (this.$store.state.reservaAcomod1 === true) {
+        window.location.hash = "reserva1"
         this.$store.commit('m_reservaAcomod1', false)
         this.$store.commit('m_reservaAcomod0', true)
       }
@@ -194,7 +196,7 @@ export default {
     },
     nextBtn0 () {
       if (1<2) {
-        this.$store.commit('m_reservaAcomod0', false), this.$store.commit('m_reservaAcomod1', true)
+        this.$store.commit('m_reservaAcomod0', false), this.$store.commit('m_reservaAcomod1', true), window.location.hash = "reserva2"
       }
     },
     nextBtn1 () {
