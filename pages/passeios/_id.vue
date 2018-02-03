@@ -35,7 +35,7 @@
 
 
     <!-- ####### ANUNCIANTE ####### -->
-    <div class="anunciante-box">
+    <div class="anunciante-box" @click="$store.state.showProprietario = true">
       <img class="__anunciante-img" :src="passeio.photoURL" alt="">
       <div class="box-flex-column">
         <h3>Guiado por</h3>
@@ -134,19 +134,19 @@
     </div>
     <!-- ####### RESERVA ####### -->
     
-
+    <proprietario/>
     
-
   </div>
 </template>
 
 <script>
-/* import _ from 'lodash' */
+import Proprietario from '../../components/Proprietario'
 import supportsWebP from 'supports-webp'
 import { mapstyle } from '../../mixins/mapstyle'
 import * as firebase from 'firebase'
 
 export default {
+  components: { Proprietario },
   mixins: [mapstyle],
   data () {
     return {

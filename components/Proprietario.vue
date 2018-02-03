@@ -10,8 +10,8 @@
           </div>
         </div><!-- BACK BUTTON -->
 
-        <img class="__img" :src="acomod.photoURL">
-        <h1 class="__name">{{ acomod.proprietario }}</h1>
+        <img class="__img" :src="photoURL">
+        <h1 class="__name">{{ name }}</h1>
 
       </div>
     </div>
@@ -23,6 +23,19 @@ export default {
   computed: {
     acomod () {
       return this.$store.state.acomod
+    },
+    passeio () {
+      return this.$store.state.passeio
+    },
+    photoURL () {
+      return this.$route.name === 'acomodacoes-id' ? this.acomod.photoURL 
+           : this.$route.name === 'passeios-id' ? this.passeio.photoURL
+           : ''
+    },
+    name () {
+      return this.$route.name === 'acomodacoes-id' ? this.acomod.proprietario 
+           : this.$route.name === 'passeios-id' ? this.passeio.proprietario
+           : ''
     }
   }
 }

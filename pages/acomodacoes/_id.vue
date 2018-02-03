@@ -227,11 +227,10 @@
     </div>
 
     <reserva-acomod/>
-    <proprietario/>
-
+    
     <!-- ####### RESERVA ####### -->
     
-
+    <proprietario/>
     
 
   </div>
