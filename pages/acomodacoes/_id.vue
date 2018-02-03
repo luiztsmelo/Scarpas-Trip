@@ -605,7 +605,7 @@ export default {
         font-weight: 600;
         background: #08C8C1;
         color: white;
-        padding: .8rem 0;
+        padding: .7rem 0;
         width:  11rem;
         border-radius: 4px;
       }

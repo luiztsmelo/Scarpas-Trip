@@ -19,6 +19,7 @@ const store = () => new Vuex.Store({
     showMenu: false,
     showFoobar: true,
     showShare: false,
+    showProprietario: true,
     menuIconAnime: false,
     loader: false,
     offFoobar1: true,
