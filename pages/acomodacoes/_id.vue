@@ -37,7 +37,10 @@
     <!-- ####### ANUNCIANTE ####### -->
     <div class="anunciante-box" @click="$store.state.showProprietario = true">
       <img class="__anunciante-img" :src="acomod.photoURL" alt="">
-      <a class="__anunciante-name">{{ acomod.proprietario }}</a>
+      <div class="box-flex-column">
+        <h3>Hospedado por</h3>
+        <a class="__anunciante-name">{{ acomod.proprietario }}</a>
+      </div>
     </div><!-- ####### ANUNCIANTE ####### -->
 
 
@@ -443,9 +446,9 @@ export default {
       height: 3.2rem;
       border-radius: 50%;
       user-select: none;
+      margin-right: .6rem;
     }
     & .__anunciante-name {
-      padding-left: .5rem;
       color: #008379;
       user-select: none;
     }

@@ -37,6 +37,11 @@ html
   margin: 0;
 }
 
+.box-flex-column {
+  display: flex;
+  flex-flow: column;
+}
+
 /* ******* TEXT ******* */
 
 h3 {
