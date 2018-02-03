@@ -31,7 +31,7 @@
         
             <div class="info-item">
               <span class="__info-number">2</span>
-              <h3 class="__info-text">Alguma informação relevante...</h3>
+              <h3 class="__info-text">Caso haja alguma dúvida, entre em contato com o proprietário, <span class="proprietario-highlight">{{ acomod.proprietario }}</span>.</h3>
             </div>
 
           </div>
@@ -215,6 +215,9 @@ export default {
     },
   },
   computed: {
+    acomod () {
+      return this.$store.state.openAcomod
+    },
     showReservaAcomod () {
       return this.$store.state.showReservaAcomod
     }
@@ -289,6 +292,9 @@ export default {
             font-size: 17px;
             font-weight: 400;
             line-height: 24px;
+          }
+          & .proprietario-highlight {
+            color: #0000EE;
           }
         }
       }
