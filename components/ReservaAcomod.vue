@@ -173,23 +173,26 @@ export default {
   methods: {
     backBtn () {
       if (this.$store.state.reservaAcomod0 === true) {
-        window.location.hash = ""
+        window.history.back(1)
         this.$store.commit('m_showReservaAcomod', false)
       }
       if (this.$store.state.reservaAcomod1 === true) {
-        window.location.hash = "reserva1"
+        window.history.back(1)
         this.$store.commit('m_reservaAcomod1', false)
         this.$store.commit('m_reservaAcomod0', true)
       }
       if (this.$store.state.reservaAcomod2 === true) {
+        window.history.back(1)
         this.$store.commit('m_reservaAcomod2', false)
         this.$store.commit('m_reservaAcomod1', true)
       }
       if (this.$store.state.reservaAcomod3 === true) {
+        window.history.back(1)
         this.$store.commit('m_reservaAcomod3', false)
         this.$store.commit('m_reservaAcomod2', true)
       }
       if (this.$store.state.reservaAcomod4 === true) {
+        window.history.back(1)
         this.$store.commit('m_reservaAcomod4', false)
         this.$store.commit('m_reservaAcomod3', true)
       }
@@ -201,17 +204,17 @@ export default {
     },
     nextBtn1 () {
       if (1<2) {
-        this.$store.commit('m_reservaAcomod1', false), this.$store.commit('m_reservaAcomod2', true)
+        this.$store.commit('m_reservaAcomod1', false), this.$store.commit('m_reservaAcomod2', true), window.location.hash = "reserva3"
       }
     },
     nextBtn2 () {
       if (1<2) {
-        this.$store.commit('m_reservaAcomod2', false), this.$store.commit('m_reservaAcomod3', true)
+        this.$store.commit('m_reservaAcomod2', false), this.$store.commit('m_reservaAcomod3', true), window.location.hash = "reserva4"
       }
     },
     nextBtn3 () {
       if (1<2) {
-        this.$store.commit('m_reservaAcomod3', false), this.$store.commit('m_reservaAcomod4', true)
+        this.$store.commit('m_reservaAcomod3', false), this.$store.commit('m_reservaAcomod4', true), window.location.hash = "reserva5"
       }
     },
   },
@@ -224,6 +227,49 @@ export default {
     },
     totalHospedesArray () {
       return Array.from({length: this.acomod.totalHospedes}, (v, k) => k+1)
+    },
+    hash () {
+      return this.$route.hash
+    }
+  },
+  watch: {
+    hash (value) {
+      if (value === undefined) {
+        this.$store.commit('m_showReservaAcomod', false)
+        this.$store.commit('m_reservaAcomod0', false)
+        this.$store.commit('m_reservaAcomod1', false)
+        this.$store.commit('m_reservaAcomod2', false)
+        this.$store.commit('m_reservaAcomod3', false)
+        this.$store.commit('m_reservaAcomod4', false)
+      } 
+      if (value === '#reserva1') {
+        this.$store.commit('m_reservaAcomod0', true)
+        this.$store.commit('m_reservaAcomod1', false)
+        this.$store.commit('m_reservaAcomod2', false)
+        this.$store.commit('m_reservaAcomod3', false)
+        this.$store.commit('m_reservaAcomod4', false)
+      } 
+      if (value === '#reserva2') {
+        this.$store.commit('m_reservaAcomod0', false)
+        this.$store.commit('m_reservaAcomod1', true)
+        this.$store.commit('m_reservaAcomod2', false)
+        this.$store.commit('m_reservaAcomod3', false)
+        this.$store.commit('m_reservaAcomod4', false)
+      } 
+      if (value === '#reserva3') {
+        this.$store.commit('m_reservaAcomod0', false)
+        this.$store.commit('m_reservaAcomod1', false)
+        this.$store.commit('m_reservaAcomod2', true)
+        this.$store.commit('m_reservaAcomod3', false)
+        this.$store.commit('m_reservaAcomod4', false)
+      } 
+      if (value === '#reserva4') {
+        this.$store.commit('m_reservaAcomod0', false)
+        this.$store.commit('m_reservaAcomod1', false)
+        this.$store.commit('m_reservaAcomod2', false)
+        this.$store.commit('m_reservaAcomod3', true)
+        this.$store.commit('m_reservaAcomod4', false)
+      } 
     }
   }
 }

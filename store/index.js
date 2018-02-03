@@ -99,7 +99,7 @@ const store = () => new Vuex.Store({
     cadastroAcomod9: false,
     cadastroAcomod10: false,
     cadastroAcomod11: false,
-    reservaAcomod0: true,
+    reservaAcomod0: false,
     reservaAcomod1: false,
     reservaAcomod2: false,
     reservaAcomod3: false,
