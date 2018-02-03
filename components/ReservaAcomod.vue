@@ -31,7 +31,7 @@
         
             <div class="info-item">
               <span class="__info-number">2</span>
-              <h3 class="__info-text">Caso haja alguma dúvida sobre a reserva, entre em contato com o proprietário, <span class="proprietario-highlight" @click="$store.state.showProprietario = true">{{ acomod.proprietario }}</span>.</h3>
+              <h3 class="__info-text">Caso haja alguma dúvida sobre a reserva, entre em contato com o proprietário, <a class="proprietario-highlight" @click="$store.state.showProprietario = true">{{ acomod.proprietario }}</a>.</h3>
             </div>
 
           </div>
