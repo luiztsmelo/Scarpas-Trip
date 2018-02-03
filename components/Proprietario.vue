@@ -147,7 +147,7 @@ export default {
       padding: 0 7%;
       & .info-title {
         font-size: 15px;
-        padding-top: .7rem;
+        padding-top: .8rem;
       }
       & .__email {
         font-size: 17px;
