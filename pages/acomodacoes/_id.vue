@@ -442,10 +442,12 @@ export default {
       width: 3.1rem;
       height: 3.1rem;
       border-radius: 50%;
+      user-select: none;
     }
     & .__anunciante-name {
       padding-left: .5rem;
       color: #00BAAC;
+      user-select: none;
     }
   }/* ####### ANUNCIANTE BOX ####### */
 
