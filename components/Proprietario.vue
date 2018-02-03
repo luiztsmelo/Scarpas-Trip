@@ -17,7 +17,7 @@
 
         <div class="info-contato">
           <h2 class="info-title">E-mail</h2>
-          <h3 class="__email">{{ email }}</h3>
+          <h3 class="__email"><a :href="emailHREF" class="__email">{{ email }}</a></h3>
 
           <h2 class="info-title">Celular</h2>
           <h3><a :href="celularHREF" class="__celular">{{ celular }}</a></h3>
@@ -50,6 +50,11 @@ export default {
     email () {
       return this.$route.name === 'acomodacoes-id' ? this.acomod.email 
            : this.$route.name === 'passeios-id' ? this.passeio.email
+           : ''
+    },
+    emailHREF () {
+      return this.$route.name === 'acomodacoes-id' ? 'mailto:' + this.acomod.email 
+           : this.$route.name === 'passeios-id' ? 'mailto:' + this.passeio.email
            : ''
     },
     celular () {
@@ -122,6 +127,10 @@ export default {
       & .info-title {
         font-size: 15px;
         padding-top: .5rem;
+      }
+      & .__email {
+        color: #00BAAC;
+        user-select: none;
       }
       & .__celular {
         color: #00BAAC;
