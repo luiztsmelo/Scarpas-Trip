@@ -442,14 +442,14 @@ export default {
     padding: 1.5rem 7% 0 7%;
     align-items: center;
     & .__anunciante-img {
-      width: 3.2rem;
-      height: 3.2rem;
+      width: 3.3rem;
+      height: 3.3rem;
       border-radius: 50%;
       user-select: none;
       margin-right: .6rem;
     }
     & .__anunciante-name {
-      color: #008379;
+      color: #00BAAC;
       user-select: none;
     }
   }/* ####### ANUNCIANTE BOX ####### */
