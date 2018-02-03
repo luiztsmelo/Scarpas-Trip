@@ -19,8 +19,11 @@
           <h2 class="info-title">E-mail</h2>
           <h3 class="__email"><a :href="emailHREF" class="__email">{{ email }}</a></h3>
 
-          <h2 class="info-title">Celular</h2>
-          <h3><a href="https://api.whatsapp.com/send?phone=5534991410085" class="__celular">{{ celular }}</a></h3>
+          <h2 class="info-title">Ligar no Celular</h2>
+          <h3><a :href="celularHREF" class="__celular">{{ celular }}</a></h3>
+
+          <h2 class="info-title">WhatsApp</h2>
+          <h3><a :href="whatsAppHREF" class="__celular">{{ celular }}</a></h3>
         </div>
 
       </div>
@@ -66,6 +69,24 @@ export default {
       return this.$route.name === 'acomodacoes-id' ? 'tel:' + this.acomod.celular 
            : this.$route.name === 'passeios-id' ? 'tel:' + this.passeio.celular
            : ''
+    },
+    whatsAppHREF () {
+      if (this.$route.name === 'acomodacoes-id') {
+        let tel = this.acomod.celular
+        let DDD = tel.slice(1, 3)
+        let firstNumber = tel.slice(5,10)
+        let lastNumber = tel.slice(11,15)
+        let whatsAppTelFormat = '+55' + DDD + firstNumber + lastNumber
+        return 'https://api.whatsapp.com/send?phone=' + whatsAppTelFormat
+      }
+      if (this.$route.name === 'passeios-id') {
+        let tel = this.passeio.celular
+        let DDD = tel.slice(1, 3)
+        let firstNumber = tel.slice(5,10)
+        let lastNumber = tel.slice(11,15)
+        let whatsAppTelFormat = '+55' + DDD + firstNumber + lastNumber
+        return 'https://api.whatsapp.com/send?phone=' + whatsAppTelFormat
+      }
     }
   }
 }
@@ -126,7 +147,7 @@ export default {
       padding: 0 7%;
       & .info-title {
         font-size: 15px;
-        padding-top: .5rem;
+        padding-top: .6rem;
       }
       & .__email {
         font-size: 17px;
