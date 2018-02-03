@@ -37,7 +37,10 @@
     <!-- ####### ANUNCIANTE ####### -->
     <div class="anunciante-box">
       <img class="__anunciante-img" :src="passeio.photoURL" alt="">
-      <h3 class="__anunciante-name">{{ passeio.proprietario }}</h3>
+      <div class="box-flex-column">
+        <h3>Guiado por</h3>
+        <a class="__anunciante-name">{{ passeio.proprietario }}</a>
+      </div>
     </div><!-- ####### ANUNCIANTE ####### -->
 
 
@@ -326,12 +329,15 @@ export default {
     padding: 1.5rem 7% 0 7%;
     align-items: center;
     & .__anunciante-img {
-      width: 3.1rem;
-      height: 3.1rem;
+      width: 3.3rem;
+      height: 3.3rem;
       border-radius: 50%;
+      user-select: none;
+      margin-right: .6rem;
     }
     & .__anunciante-name {
-      padding-left: .5rem;
+      color: #00BAAC;
+      user-select: none;
     }
   }/* ####### ANUNCIANTE BOX ####### */
 
