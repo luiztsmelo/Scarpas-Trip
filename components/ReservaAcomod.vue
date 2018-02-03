@@ -294,7 +294,7 @@ export default {
             line-height: 24px;
           }
           & .highlight {
-            color: #00D8C7;
+            color: #00BAAC;
           }
         }
       }

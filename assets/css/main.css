@@ -70,6 +70,9 @@ a a:hover, a:visited, a:link, a:active
   color: var(--color01);
   outline: none !important;
   user-select: none;  
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 27px;
 }
 
 

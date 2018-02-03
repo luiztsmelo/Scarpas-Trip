@@ -35,9 +35,9 @@
 
 
     <!-- ####### ANUNCIANTE ####### -->
-    <div class="anunciante-box">
+    <div class="anunciante-box" @click="$store.state.showProprietario = true">
       <img class="__anunciante-img" :src="acomod.photoURL" alt="">
-      <h3 class="__anunciante-name">{{ acomod.proprietario }}</h3>
+      <a class="__anunciante-name">{{ acomod.proprietario }}</a>
     </div><!-- ####### ANUNCIANTE ####### -->
 
 
@@ -445,6 +445,7 @@ export default {
     }
     & .__anunciante-name {
       padding-left: .5rem;
+      color: #00BAAC;
     }
   }/* ####### ANUNCIANTE BOX ####### */
 
