@@ -16,13 +16,13 @@
         </div>
 
         <div class="info-contato">
-          <h2 class="info-title">E-mail</h2>
+          <h2 class="info-title">Mandar E-mail</h2>
           <h3 class="__email"><a :href="emailHREF" class="__email">{{ email }}</a></h3>
 
           <h2 class="info-title">Ligar no Celular</h2>
           <h3><a :href="celularHREF" class="__celular">{{ celular }}</a></h3>
 
-          <h2 class="info-title">WhatsApp</h2>
+          <h2 class="info-title">Chamar no WhatsApp</h2>
           <h3><a :href="whatsAppHREF" class="__celular">{{ celular }}</a></h3>
         </div>
 
