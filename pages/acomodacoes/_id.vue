@@ -224,6 +224,7 @@
     </div>
 
     <reserva-acomod/>
+    <proprietario/>
 
     <!-- ####### RESERVA ####### -->
     
@@ -235,12 +236,13 @@
 
 <script>
 import ReservaAcomod from '../../components/ReservaAcomod'
+import Proprietario from '../../components/Proprietario'
 import supportsWebP from 'supports-webp'
 import { mapstyle } from '../../mixins/mapstyle'
 import * as firebase from 'firebase'
 
 export default {
-  components: { ReservaAcomod },
+  components: { ReservaAcomod, Proprietario },
   mixins: [mapstyle],
   data () {
     return {

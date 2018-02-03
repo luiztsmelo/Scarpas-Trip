@@ -13,8 +13,6 @@
 
     <map-full/>
 
-    <proprietario/>
-
   </div>
 </template>
 
@@ -25,10 +23,9 @@ import Menuu from '~/components/Menu.vue'
 import Loader from '~/components/Loader.vue'
 import Share from '~/components/Share.vue'
 import MapFull from '~/components/MapFull.vue'
-import Proprietario from '~/components/Proprietario.vue'
 
 export default {
-  components: { Navbar, Foobar, Menuu, Loader, Share, MapFull, Proprietario },
+  components: { Navbar, Foobar, Menuu, Loader, Share, MapFull },
   created () {
     /* let lastScrollTop = 0 */
     window.addEventListener('scroll', event => {
