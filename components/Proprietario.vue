@@ -10,8 +10,18 @@
           </div>
         </div><!-- BACK BUTTON -->
 
-        <img class="__img" :src="photoURL">
-        <h1 class="__name">{{ name }}</h1>
+        <div class="info-header">
+          <img class="__img" :src="photoURL">
+          <h1 class="__name">{{ name }}</h1>
+        </div>
+
+        <div class="info-contato">
+          <h2 class="info-title">E-mail</h2>
+          <h3 class="__email">{{ email }}</h3>
+
+          <h2 class="info-title">Celular</h2>
+          <h3><a :href="celularHREF" class="__celular">{{ celular }}</a></h3>
+        </div>
 
       </div>
     </div>
@@ -35,6 +45,21 @@ export default {
     name () {
       return this.$route.name === 'acomodacoes-id' ? this.acomod.proprietario 
            : this.$route.name === 'passeios-id' ? this.passeio.proprietario
+           : ''
+    },
+    email () {
+      return this.$route.name === 'acomodacoes-id' ? this.acomod.email 
+           : this.$route.name === 'passeios-id' ? this.passeio.email
+           : ''
+    },
+    celular () {
+      return this.$route.name === 'acomodacoes-id' ? this.acomod.celular 
+           : this.$route.name === 'passeios-id' ? this.passeio.celular
+           : ''
+    },
+    celularHREF () {
+      return this.$route.name === 'acomodacoes-id' ? 'tel:' + this.acomod.celular 
+           : this.$route.name === 'passeios-id' ? 'tel:' + this.passeio.celular
            : ''
     }
   }
@@ -75,17 +100,33 @@ export default {
   & .proprietario-body {
     display: flex;
     flex-flow: column;
-    align-items: center;
     height: 100%;
-    & .__img {
-      width: 7rem;
-      height: 7rem;
-      border-radius: 50%;
-      margin-top: 4rem;
+    & .info-header {
+      display: flex;
+    flex-flow: column;
+    align-items: center;
+      & .__img {
+        width: 7rem;
+        height: 7rem;
+        border-radius: 50%;
+        margin-top: 4rem;
+        text-align: center;
+      }
+      & .__name {
+        font-size: 27px;
+        padding: 1rem 0 2rem 0;
+      }
     }
-    & .__name {
-      font-size: 27px;
-      padding: 1rem 0;
+    & .info-contato {
+      padding: 0 7%;
+      & .info-title {
+        font-size: 15px;
+        padding-top: .5rem;
+      }
+      & .__celular {
+        color: #00BAAC;
+        user-select: none;
+      }
     }
   }
 }
