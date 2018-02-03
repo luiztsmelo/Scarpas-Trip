@@ -302,8 +302,8 @@ export default {
       top: 50%;
       transform: translateY(-50%);
       & .__reserva-km {
-        font-size: 18px;
-        font-weight: 400;
+        font-size: 17px;
+        font-weight: 500;
       }
       & .__reserva-btn {
         font-size: 16px;
