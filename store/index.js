@@ -19,7 +19,6 @@ const store = () => new Vuex.Store({
     showMenu: false,
     showFoobar: true,
     showShare: false,
-    showProprietario: true,
     menuIconAnime: false,
     loader: false,
     offFoobar1: true,
@@ -34,6 +33,7 @@ const store = () => new Vuex.Store({
     ########## Acomodação ##########
     */
     showReservaAcomod: false,
+    showProprietario: false,
     acomodID: null,
     acomods: null,
     acomod: null,
