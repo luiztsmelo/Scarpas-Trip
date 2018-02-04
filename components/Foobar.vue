@@ -96,7 +96,7 @@ export default {
       width: 45%;
     }
     & .foobar-box {
-      margin-top: 3px;
+      margin-top: 2px;
       border-radius: 40%;
       height: 100%;
       display: flex;
@@ -113,8 +113,8 @@ export default {
         color: var(--color01);
       }
       & img {
-        margin-bottom: 6px;
-        width: 1.3rem;
+        margin-bottom: 5px;
+        width: 1.31rem;
         height: auto;
       }
       & .coloricon {
