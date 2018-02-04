@@ -11,7 +11,7 @@
             <img class="__back-btn" :class="{ topbarBtn: scrollTopbar }" src="../../assets/img/back.svg" alt="voltar">
           </div>
           
-          <div class="share-box" @click="$store.commit('m_showShare', true)">
+          <div class="share-box" @click="$store.commit('m_showShare', true), hashShare()">
             <img class="__share-btn" :class="{ topbarBtn: scrollTopbar }" src="../../assets/img/share.svg" alt="compartilhar" >
           </div>
           
@@ -118,7 +118,7 @@
     <transition name="comods-animation">
       <div class="comods-details" v-show="showComods">
 
-        <div class="topbar">
+        <div class="back-bar">
           <div class="back-box" @click="backBtn">
             <img class="__back-btn" src="../../assets/img/back.svg" alt="voltar">
           </div>
@@ -339,6 +339,9 @@ export default {
     hashComods () {
        window.location.hash = "comodidades"
     },
+    hashShare () {
+       window.location.hash = "compartilhar"
+    },
     image1H (acomod) {
       if (supportsWebP) {
         return acomod.imageH1W
@@ -545,7 +548,7 @@ export default {
   background: white;
   overflow-y: auto;
   transition: var(--menus-transition);
-  & .topbar {
+  & .back-bar {
     position: fixed;
     top: 0;
     left: 0;

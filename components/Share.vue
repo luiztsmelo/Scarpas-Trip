@@ -3,8 +3,8 @@
     <div class="share" v-show="showShare">
       <div class="share-body">
 
-        <div class="topbar">
-          <img class="__back-btn" src="../assets/img/back.svg" alt="voltar" @click="$store.commit('m_showShare', false)">
+        <div class="back-bar">
+          <img class="__back-btn" src="../assets/img/back.svg" alt="voltar" @click="backBtn">
         </div>
 
         <h1 class="__title">Compartilhar</h1>
@@ -28,6 +28,10 @@
 <script>
 export default {
   methods: {
+    backBtn () {
+      this.$store.commit('m_showShare', false)
+      window.history.back(1)
+    },
     whatsappShare () {
       this.$refs.whatsapp.click()
     },
@@ -36,8 +40,18 @@ export default {
     }
   },
   computed: {
+    hash () {
+      return this.$route.hash
+    },
     showShare () {
       return this.$store.state.showShare
+    }
+  },
+  watch: {
+    hash (value) {
+      if (value === '') {
+        this.$store.commit('m_showShare', false)
+      }
     }
   }
 }
@@ -60,7 +74,7 @@ export default {
     flex-flow: column;
     padding: 0 7%;
     height: 100%;
-    & .topbar {
+    & .back-bar {
       display: flex;
       height: 3rem;
       width:  100%;
@@ -102,6 +116,6 @@ export default {
   transform: translateY(100%);
 }
 .share-animation-leave-active {
-  transform: translateX(100%);
+  transform: translateY(100%);
 }
 </style>

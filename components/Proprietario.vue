@@ -4,7 +4,7 @@
       <div class="proprietario-body">
 
         <!-- BACK BUTTON -->
-        <div class="topbar">
+        <div class="back-bar">
           <div class="back-box" @click="backBtn">
             <img class="__back-btn" src="../assets/img/back.svg" alt="voltar">
           </div>
@@ -121,7 +121,7 @@ export default {
   left: 0;
   background: white;
   transition: var(--menus-transition);
-  & .topbar {
+  & .back-bar {
     position: fixed;
     top: 0;
     left: 0;

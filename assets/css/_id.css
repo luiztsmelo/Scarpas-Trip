@@ -16,7 +16,7 @@
     top: 50%;
     transform: translateY(-50%);
     & .back-box {
-      padding: .7rem .7rem .7rem 7%;
+      padding: .8rem 7% .8rem 7%;
       & .__back-btn {
         display: block;
         margin: auto;
@@ -26,7 +26,7 @@
       }
     }
     & .share-box {
-      padding: .7rem 7% .7rem .7rem;
+      padding: .7rem 7% .7rem 7%;
       & .__share-btn {
         display: block;
         margin: auto;
