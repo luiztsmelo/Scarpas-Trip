@@ -31,7 +31,7 @@
         
             <div class="info-item">
               <span class="__info-number">2</span>
-              <h3 class="__info-text">Caso haja alguma dúvida sobre a reserva, entre em contato com o proprietário, <a class="highlight" @click="$store.state.showProprietario = true">{{ acomod.proprietario }}</a>.</h3>
+              <h3 class="__info-text">Caso haja alguma dúvida sobre a reserva, entre em contato com o proprietário, <a class="highlight" @click="$store.commit('m_showProprietario', true), hashProprietario()">{{ acomod.proprietario }}</a>.</h3>
             </div>
 
           </div>
@@ -171,6 +171,9 @@ export default {
     }
   },
   methods: {
+    hashProprietario () {
+       window.location.hash = "contato"
+    },
     backBtn () {
       if (this.$store.state.reservaAcomod0 === true) {
         window.history.back(1)
@@ -245,6 +248,7 @@ export default {
         this.$store.commit('m_reservaAcomod4', false)
       } 
       if (value === '#reserva1') {
+        this.$store.commit('m_showProprietario', false)
         this.$store.commit('m_reservaAcomod0', true)
         this.$store.commit('m_reservaAcomod1', false)
         this.$store.commit('m_reservaAcomod2', false)

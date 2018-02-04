@@ -40,7 +40,7 @@
 
 
     <!-- ####### ANUNCIANTE ####### -->
-    <div class="anunciante-box" @click="$store.state.showProprietario = true">
+    <div class="anunciante-box" @click="$store.commit('m_showProprietario', true), hashProprietario()">
       <img class="__anunciante-img" :src="passeio.photoURL" alt="">
       <div class="box-flex-column">
         <h3>Guiado por</h3>
@@ -226,6 +226,9 @@ export default {
   methods: {
     backBtn () {
       window.history.back(1)
+    },
+    hashProprietario () {
+       window.location.hash = "contato"
     },
     hashShare () {
        window.location.hash = "compartilhar"
