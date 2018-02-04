@@ -283,7 +283,6 @@ export default {
 .reserva-acomod {
   position: fixed;
   z-index: 9999;
-  overflow-y: auto;
   width:  100%;
   height: 100%;
   top: 0;
