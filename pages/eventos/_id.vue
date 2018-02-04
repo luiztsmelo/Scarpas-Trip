@@ -4,10 +4,11 @@
     <!-- ####### TOPBAR ####### -->
     <div class="topbar" :class="{ topbarBg: scrollTopbar }">
       <div class="topbar-body">
-        <nuxt-link to="/">
-          <img class="__back-btn" :class="{ topbarBtn: scrollTopbar }" src="../../assets/img/back.svg" alt="voltar">
-        </nuxt-link>
+
+        <img class="__back-btn" :class="{ topbarBtn: scrollTopbar }" src="../../assets/img/back.svg" alt="voltar" @click="backBtn">
+
         <img class="__share-btn" :class="{ topbarBtn: scrollTopbar }" src="../../assets/img/share.svg" alt="compartilhar" @click="$store.commit('m_showShare', true)">
+
       </div>
     </div><!-- ####### TOPBAR ####### -->
 
@@ -152,6 +153,9 @@ export default {
     })
   },
   methods: {
+    backBtn () {
+      window.history.back(1)
+    },
     image1H (evento) {
       if (supportsWebP) {
         return evento.imageH1W
@@ -247,6 +251,7 @@ export default {
 <style>
 @import url('../../assets/css/main.css');
 @import url('../../assets/css/pagination.css');
+@import url('../../assets/css/_id.css');
 
 .eventos-id {
   display: flex;

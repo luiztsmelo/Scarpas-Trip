@@ -6,10 +6,11 @@
     <transition name="topbar-animation">
       <div class="topbar" :class="{ topbarBg: scrollTopbar }" v-show="showTopbar">
         <div class="topbar-body">
-          <nuxt-link to="/">
-            <img class="__back-btn" :class="{ topbarBtn: scrollTopbar }" src="../../assets/img/back.svg" alt="voltar">
-          </nuxt-link>
+
+          <img class="__back-btn" :class="{ topbarBtn: scrollTopbar }" src="../../assets/img/back.svg" alt="voltar" @click="backBtn">
+
           <img class="__share-btn" :class="{ topbarBtn: scrollTopbar }" src="../../assets/img/share.svg" alt="compartilhar" @click="$store.commit('m_showShare', true)">
+
         </div>
       </div>
     </transition><!-- ####### TOPBAR ####### -->
@@ -219,6 +220,9 @@ export default {
     })
   },
   methods: {
+    backBtn () {
+      window.history.back(1)
+    },
     image1H (passeio) {
       if (supportsWebP) {
         return passeio.imageH1W

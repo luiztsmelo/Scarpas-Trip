@@ -16,16 +16,10 @@
     position: relative;
     top: 50%;
     transform: translateY(-50%);
-    & a {
-      /* Aumentar área de contato */
-      padding: 1rem;
-      transform: translateX(-1rem);
-      & .__back-btn {
-        transform: translateY(2px);/* A imagem ta errada */
-        cursor: pointer;
-        width: 1.05rem;
-        height: auto;
-      }
+    & .__back-btn {
+      cursor: pointer;
+      width: 1.05rem;
+      height: auto;
     }
     & .__share-btn {
       cursor: pointer;

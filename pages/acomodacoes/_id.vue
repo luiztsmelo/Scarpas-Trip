@@ -6,10 +6,11 @@
     <transition name="topbar-animation">
       <div class="topbar" :class="{ topbarBg: scrollTopbar }" v-show="showTopbar">
         <div class="topbar-body">
-          <nuxt-link to="/">
-            <img class="__back-btn" :class="{ topbarBtn: scrollTopbar }" src="../../assets/img/back.svg" alt="voltar">
-          </nuxt-link>
+
+          <img class="__back-btn" :class="{ topbarBtn: scrollTopbar }" src="../../assets/img/back.svg" alt="voltar" @click="backBtn">
+
           <img class="__share-btn" :class="{ topbarBtn: scrollTopbar }" src="../../assets/img/share.svg" alt="compartilhar" @click="$store.commit('m_showShare', true)">
+
         </div>
       </div>
     </transition><!-- ####### TOPBAR ####### -->
@@ -98,7 +99,7 @@
     <!-- ####### COMODIDADES ####### -->
     <h1 class="item-title">Comodidades</h1>
 
-    <div class="comodidades-box" @click="showComods = true">
+    <div class="comodidades-box" @click="showComods = true, hashComods()">
       <img class="__img-comodidade" v-if="acomod.hasRoupasCama" src="../../assets/img/hasRoupasCama.svg" style="transform: scale(1.01)">
       <img class="__img-comodidade" v-if="acomod.hasPiscina" src="../../assets/img/hasPiscina.svg">
       <img class="__img-comodidade" v-if="acomod.hasChurrasqueira" src="../../assets/img/hasChurrasqueira.svg">
@@ -115,7 +116,7 @@
 
         <div class="back-box">
           <div class="back-body">
-            <img class="__back-btn" src="../../assets/img/back.svg" alt="voltar" @click="showComods = false">
+            <img class="__back-btn" src="../../assets/img/back.svg" alt="voltar" @click="closeComods">
           </div>
         </div>
 
@@ -318,11 +319,21 @@ export default {
     })
   },
   methods: {
+    backBtn () {
+      window.history.back(1)
+    },
+    closeComods () {
+      this.showComods = false
+      window.history.back(1)
+    },
     hashReserva () {
        window.location.hash = "reserva1"
     },
     hashProprietario () {
        window.location.hash = "contato"
+    },
+    hashComods () {
+       window.location.hash = "comodidades"
     },
     image1H (acomod) {
       if (supportsWebP) {
@@ -384,6 +395,9 @@ export default {
     },
     showShare () {
       return this.$store.state.showShare
+    },
+    hash () {
+      return this.$route.hash
     }
   },
   watch: {
@@ -392,6 +406,11 @@ export default {
         this.scrollTopbar = true
       } else {
         this.scrollTopbar = false
+      }
+    },
+    hash (value) {
+      if (value === '') {
+        this.showComods = false
       }
     }
   },
