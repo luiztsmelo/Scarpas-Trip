@@ -43,7 +43,7 @@
     <div class="anunciante-box" @click="$store.commit('m_showProprietario', true), hashProprietario()">
       <img class="__anunciante-img" :src="acomod.photoURL" alt="">
       <div class="box-flex-column">
-        <h3>Hospedado por</h3>
+        <h3 style="user-select:none">Hospedado por</h3>
         <a class="__anunciante-name">{{ acomod.proprietario }}</a>
       </div>
     </div><!-- ####### ANUNCIANTE ####### -->
