@@ -7,10 +7,14 @@
       <div class="topbar" :class="{ topbarBg: scrollTopbar }" v-show="showTopbar">
         <div class="topbar-body">
 
-          <img class="__back-btn" :class="{ topbarBtn: scrollTopbar }" src="../../assets/img/back.svg" alt="voltar" @click="backBtn">
-
-          <img class="__share-btn" :class="{ topbarBtn: scrollTopbar }" src="../../assets/img/share.svg" alt="compartilhar" @click="$store.commit('m_showShare', true)">
-
+          <div class="back-box" @click="backBtn">
+            <img class="__back-btn" :class="{ topbarBtn: scrollTopbar }" src="../../assets/img/back.svg" alt="voltar">
+          </div>
+          
+          <div class="share-box" @click="$store.commit('m_showShare', true)">
+            <img class="__share-btn" :class="{ topbarBtn: scrollTopbar }" src="../../assets/img/share.svg" alt="compartilhar" >
+          </div>
+          
         </div>
       </div>
     </transition><!-- ####### TOPBAR ####### -->
@@ -114,9 +118,9 @@
     <transition name="comods-animation">
       <div class="comods-details" v-show="showComods">
 
-        <div class="back-box">
-          <div class="back-body">
-            <img class="__back-btn" src="../../assets/img/back.svg" alt="voltar" @click="closeComods">
+        <div class="topbar">
+          <div class="back-box" @click="backBtn">
+            <img class="__back-btn" src="../../assets/img/back.svg" alt="voltar">
           </div>
         </div>
 
@@ -541,21 +545,23 @@ export default {
   background: white;
   overflow-y: auto;
   transition: var(--menus-transition);
-  & .back-box {
+  & .topbar {
     position: fixed;
-    background: white;
+    top: 0;
+    left: 0;
     width:  100%;
-    & .back-body {
-      display: flex;
-      height: 3rem;
+    height: 3rem;
+    background: white;
+    & .back-box {
+      display: inline-flex;
+      align-items: center;
+      height: 100%;
+      padding: 0 7%;
       & .__back-btn {
-        align-items: center;
-        transform: translateY(2px);/* A imagem ta errada */
         cursor: pointer;
-        width: 1.05rem;
+        width: 1.07rem;
         height: auto;
         filter: invert(75%);
-        margin-left: 7%;
       }
     }
   }

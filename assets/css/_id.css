@@ -7,7 +7,6 @@
   height: 3rem;
   width:  100%;
   background: transparent;
-  padding: 0 7%;
   transition: all .5s ease;
   & .topbar-body {
     display: flex;
@@ -16,15 +15,25 @@
     position: relative;
     top: 50%;
     transform: translateY(-50%);
-    & .__back-btn {
-      cursor: pointer;
-      width: 1.05rem;
-      height: auto;
+    & .back-box {
+      padding: .7rem .7rem .7rem 7%;
+      & .__back-btn {
+        display: block;
+        margin: auto;
+        cursor: pointer;
+        width: 1.05rem;
+        height: auto;
+      }
     }
-    & .__share-btn {
-      cursor: pointer;
-      width: 1.5rem;
-      height: auto;
+    & .share-box {
+      padding: .7rem 7% .7rem .7rem;
+      & .__share-btn {
+        display: block;
+        margin: auto;
+        cursor: pointer;
+        width: 1.5rem;
+        height: auto;
+      }
     }
   }
 }

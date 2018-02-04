@@ -4,9 +4,9 @@
       <div class="proprietario-body">
 
         <!-- BACK BUTTON -->
-        <div class="back-box">
-          <div class="back-body">
-            <img class="__back-btn" src="../assets/img/back.svg" alt="voltar" @click="backBtn">
+        <div class="topbar">
+          <div class="back-box" @click="backBtn">
+            <img class="__back-btn" src="../assets/img/back.svg" alt="voltar">
           </div>
         </div><!-- BACK BUTTON -->
 
@@ -121,21 +121,23 @@ export default {
   left: 0;
   background: white;
   transition: var(--menus-transition);
-  & .back-box {
+  & .topbar {
     position: fixed;
-    background: white;
+    top: 0;
+    left: 0;
     width:  100%;
-    & .back-body {
-      display: flex;
-      height: 3rem;
+    height: 3rem;
+    background: white;
+    & .back-box {
+      display: inline-flex;
+      align-items: center;
+      height: 100%;
+      padding: 0 7%;
       & .__back-btn {
-        align-items: center;
-        transform: translateY(2px);/* A imagem ta errada */
         cursor: pointer;
-        width: 1.05rem;
+        width: 1.07rem;
         height: auto;
         filter: invert(75%);
-        margin-left: 7%;
       }
     }
   }

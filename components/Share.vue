@@ -3,7 +3,7 @@
     <div class="share" v-show="showShare">
       <div class="share-body">
 
-        <div class="back-box">
+        <div class="topbar">
           <img class="__back-btn" src="../assets/img/back.svg" alt="voltar" @click="$store.commit('m_showShare', false)">
         </div>
 
@@ -60,7 +60,7 @@ export default {
     flex-flow: column;
     padding: 0 7%;
     height: 100%;
-    & .back-box {
+    & .topbar {
       display: flex;
       height: 3rem;
       width:  100%;

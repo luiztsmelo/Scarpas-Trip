@@ -7,9 +7,13 @@
       <div class="topbar" :class="{ topbarBg: scrollTopbar }" v-show="showTopbar">
         <div class="topbar-body">
 
-          <img class="__back-btn" :class="{ topbarBtn: scrollTopbar }" src="../../assets/img/back.svg" alt="voltar" @click="backBtn">
-
-          <img class="__share-btn" :class="{ topbarBtn: scrollTopbar }" src="../../assets/img/share.svg" alt="compartilhar" @click="$store.commit('m_showShare', true)">
+          <div class="back-box" @click="backBtn">
+            <img class="__back-btn" :class="{ topbarBtn: scrollTopbar }" src="../../assets/img/back.svg" alt="voltar">
+          </div>
+          
+          <div class="share-box" @click="$store.commit('m_showShare', true)">
+            <img class="__share-btn" :class="{ topbarBtn: scrollTopbar }" src="../../assets/img/share.svg" alt="compartilhar" >
+          </div>
 
         </div>
       </div>
