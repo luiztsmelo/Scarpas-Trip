@@ -236,7 +236,7 @@ export default {
   },
   watch: {
     hash (value) {
-      if (value === undefined) {
+      if (value === '') {
         this.$store.commit('m_showReservaAcomod', false)
         this.$store.commit('m_reservaAcomod0', false)
         this.$store.commit('m_reservaAcomod1', false)
