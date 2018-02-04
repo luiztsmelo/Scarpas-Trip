@@ -43,7 +43,7 @@
     <div class="anunciante-box" @click="$store.commit('m_showProprietario', true), hashProprietario()">
       <img class="__anunciante-img" :src="passeio.photoURL" alt="">
       <div class="box-flex-column">
-        <h3>Guiado por</h3>
+        <h3 style="user-select:none">Guiado por</h3>
         <a class="__anunciante-name">{{ passeio.proprietario }}</a>
       </div>
     </div><!-- ####### ANUNCIANTE ####### -->
@@ -422,6 +422,7 @@ export default {
     background: white;
     padding: 0 7%;
     box-shadow: 0px -1px 1px 0px rgba(0,0,0,0.1);
+    user-select: none;
     & .reserva-body {
       display: flex;
       justify-content: space-between;
