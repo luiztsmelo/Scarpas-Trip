@@ -35,7 +35,7 @@
 
 
     <!-- ####### ANUNCIANTE ####### -->
-    <div class="anunciante-box" @click="$store.state.showProprietario = true">
+    <div class="anunciante-box" @click="$store.commit('m_showProprietario', true), hashProprietario()">
       <img class="__anunciante-img" :src="acomod.photoURL" alt="">
       <div class="box-flex-column">
         <h3>Hospedado por</h3>
@@ -222,7 +222,7 @@
     <div class="reserva">
       <div class="reserva-body">
         <h3 class="__reserva-valor">R${{ acomod.valorDiariaNormal }}<span class="__reserva-valor-pessoa">/dia</span></h3>
-        <button class="__reserva-btn" @click="$store.commit('m_showReservaAcomod', true), hash()">Reservar Estadia</button>
+        <button class="__reserva-btn" @click="$store.commit('m_showReservaAcomod', true), hashReserva()">Reservar Estadia</button>
       </div>
     </div>
 
@@ -318,8 +318,11 @@ export default {
     })
   },
   methods: {
-    hash () {
+    hashReserva () {
        window.location.hash = "reserva1"
+    },
+    hashProprietario () {
+       window.location.hash = "contato"
     },
     image1H (acomod) {
       if (supportsWebP) {

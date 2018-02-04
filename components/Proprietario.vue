@@ -6,7 +6,7 @@
         <!-- BACK BUTTON -->
         <div class="back-box">
           <div class="back-body">
-            <img class="__back-btn" src="../assets/img/back.svg" alt="voltar" @click="$store.state.showProprietario = false">
+            <img class="__back-btn" src="../assets/img/back.svg" alt="voltar" @click="backBtn">
           </div>
         </div><!-- BACK BUTTON -->
 
@@ -33,7 +33,16 @@
 
 <script>
 export default {
+  methods: {
+    backBtn () {
+      this.$store.commit('m_showProprietario', false)
+      window.history.back(1)
+    }
+  },
   computed: {
+    hash () {
+      return this.$route.hash
+    },
     acomod () {
       return this.$store.state.acomod
     },
@@ -86,6 +95,13 @@ export default {
         let lastNumber = tel.slice(11,15)
         let whatsAppTelFormat = '+55' + DDD + firstNumber + lastNumber
         return 'https://api.whatsapp.com/send?phone=' + whatsAppTelFormat
+      }
+    }
+  }, 
+  watch: {
+    hash (value) {
+      if (value === '') {
+        this.$store.commit('m_showProprietario', false)
       }
     }
   }
