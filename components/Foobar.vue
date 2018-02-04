@@ -106,14 +106,14 @@ export default {
       align-items: center;
       & .__foobar-title {
         font-size: 10px;
-        font-weight: 600;
+        font-weight: 500;
         color: #ff5858;
       }
       & .colortitle {
         color: var(--color01);
       }
       & img {
-        margin-bottom: 7px;
+        margin-bottom: 6px;
         width: 1.3rem;
         height: auto;
       }
