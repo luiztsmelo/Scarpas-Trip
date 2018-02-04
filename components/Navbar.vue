@@ -9,7 +9,7 @@
         
 
         <nav class="nav">
-          <div class="__menu" @click="$store.commit('m_showMenu', !showMenu), $store.commit('m_menuIconAnime', !menuIconAnime)">
+          <div class="__menu" @click="showMenu()">
             <div class="__bar" :class="{ menuIconAnime1: menuIconAnime }"></div>
             <div class="__bar" :class="{ menuIconAnime2: menuIconAnime }"></div>
             <div class="__bar" :class="{ menuIconAnime3: menuIconAnime }"></div>
@@ -23,15 +23,36 @@
 
 <script>
 export default {
+  methods: {
+    showMenu () {
+      if (this.$store.state.showMenu === false) {
+        this.$store.commit('m_showMenu', true)
+        window.location.hash = 'menu'
+        this.$store.commit('m_menuIconAnime', true)
+      } else {
+        this.$store.commit('m_showMenu', false)
+        window.history.back(1)
+        this.$store.commit('m_menuIconAnime', false)
+      }
+    }
+  },
   computed: {
+    hash () {
+      return this.$route.hash
+    },
     showNavbar () {
       return this.$store.state.showNavbar
     },
-    showMenu () {
-      return this.$store.state.showMenu
-    },
     menuIconAnime () {
       return this.$store.state.menuIconAnime
+    }
+  },
+  watch: {
+    hash (value) {
+      if (value === '') {
+        this.$store.commit('m_showMenu', false)
+        this.$store.commit('m_menuIconAnime', false)
+      }
     }
   }
 }

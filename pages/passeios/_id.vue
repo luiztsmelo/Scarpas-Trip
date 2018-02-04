@@ -11,7 +11,7 @@
             <img class="__back-btn" :class="{ topbarBtn: scrollTopbar }" src="../../assets/img/back.svg" alt="voltar">
           </div>
           
-          <div class="share-box" @click="$store.commit('m_showShare', true)">
+          <div class="share-box" @click="$store.commit('m_showShare', true), hashShare()">
             <img class="__share-btn" :class="{ topbarBtn: scrollTopbar }" src="../../assets/img/share.svg" alt="compartilhar" >
           </div>
 
@@ -226,6 +226,9 @@ export default {
   methods: {
     backBtn () {
       window.history.back(1)
+    },
+    hashShare () {
+       window.location.hash = "compartilhar"
     },
     image1H (passeio) {
       if (supportsWebP) {
