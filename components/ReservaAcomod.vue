@@ -318,7 +318,7 @@ export default {
         padding: 2.8rem 7% 0.2rem 7%;
         font-size: 13px;
         font-weight: 600;
-        color: rgb(160, 160, 160);
+        color: rgb(140, 140, 140);
       }
       & .__title {
         padding: 0 7% 2rem 7%;
