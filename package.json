@@ -9,6 +9,7 @@
     "npm": "5.5.1"
   },
   "dependencies": {
+    "@nuxtjs/component-cache": "^1.1.1",
     "@nuxtjs/icon": "^2.0.1",
     "@nuxtjs/manifest": "^2.1.0",
     "@nuxtjs/meta": "^2.0.1",
