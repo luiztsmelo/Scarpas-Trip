@@ -158,14 +158,14 @@ export default {
       }
       & .__name {
         font-size: 27px;
-        padding: 1rem 0 2rem 0;
+        padding: 1rem 0 1.8rem 0;
       }
     }
     & .info-contato {
       padding: 0 7%;
       & .info-title {
         font-size: 15px;
-        padding-top: 1rem;
+        padding-top: 1.2rem;
       }
       & .__email {
         font-size: 17px;
