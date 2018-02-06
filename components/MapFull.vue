@@ -16,6 +16,7 @@
 </template>
 
 <script>
+import { loaded } from '~/node_modules/vue2-google-maps/src/manager'
 import { mapstyle } from '../mixins/mapstyle'
 import * as VueGoogleMaps from '~/node_modules/vue2-google-maps/src/main'
 
@@ -23,9 +24,10 @@ export default {
   mixins: [mapstyle],
   data () {
     return {
+      googleMapsInitialized: false,
       markerIcon: {
         url: 'https://firebasestorage.googleapis.com/v0/b/escarpas-trip.appspot.com/o/utils%2Fmarker.svg?alt=media&token=fcbfd76e-ee93-41e8-a816-98906e19859b',
-        /* scaledSize: new google.maps.Size(42, 42) */
+        scaledSize: new google.maps.Size(42, 42)
       }
     }
   },
@@ -41,9 +43,18 @@ export default {
     }
   },
   computed: {
+    markerSize () {
+      if (!this.googleMapsInitialized) return null
+      return new window.google.maps.Size(MapConstants.MARKER_SIZE, MapConstants.MARKER_SIZE)
+    },
     eventoMap () {
       return this.$store.state.eventoMap
     }
+  },
+  async mounted () {
+    loaded.then(() => {
+      this.googleMapsInitialized = true
+    })
   }
 }
 </script>

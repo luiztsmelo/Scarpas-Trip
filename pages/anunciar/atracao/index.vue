@@ -239,6 +239,7 @@
 </template>
 
 <script>
+import { loaded } from '~/node_modules/vue2-google-maps/src/manager'
 import * as firebase from 'firebase'
 import { mapstyle } from '../../../mixins/mapstyle'
 
@@ -254,13 +255,14 @@ export default {
     return {
       title: '',/* Vue Autosize */
       subtitle: '',/* Vue Autosize */
+      googleMapsInitialized: false,
       markerIconPartida: {
         url: 'https://firebasestorage.googleapis.com/v0/b/escarpas-trip.appspot.com/o/utils%2Fmarker-partida.svg?alt=media&token=bd41c89e-33ea-4899-bb5a-4f2fc2d936cb',
-        /* scaledSize: new google.maps.Size(34, 34) */
+        scaledSize: new google.maps.Size(34, 34)
       },
       markerIconChegada: {
         url: 'https://firebasestorage.googleapis.com/v0/b/escarpas-trip.appspot.com/o/utils%2Fmarker-chegada.svg?alt=media&token=b5b52bc5-a65f-4136-9c31-57830b969067',
-        /* scaledSize: new google.maps.Size(34, 34) */
+        scaledSize: new google.maps.Size(34, 34)
       },
       polylineOptions: {
         strokeColor: '#3e3e3e',
@@ -459,7 +461,16 @@ export default {
       }
     }
   },
+  async mounted () {
+    loaded.then(() => {
+      this.googleMapsInitialized = true
+    })
+  },
   computed: {
+    markerSize () {
+      if (!this.googleMapsInitialized) return null
+      return new window.google.maps.Size(MapConstants.MARKER_SIZE, MapConstants.MARKER_SIZE)
+    },
     titleLength () {
       return 50 - this.$store.state.atracaoData.title.length
     },

@@ -515,6 +515,7 @@
 </template>
 
 <script>
+import { loaded } from '~/node_modules/vue2-google-maps/src/manager'
 import * as firebase from 'firebase'
 import MaskedInput from 'vue-text-mask'
 import { mapstyle } from '../../../mixins/mapstyle'
@@ -534,9 +535,10 @@ export default {
     return {
       title: '',/* Vue Autosize */
       subtitle: '',/* Vue Autosize */
+      googleMapsInitialized: false,
       markerIcon: {
         url: 'https://firebasestorage.googleapis.com/v0/b/escarpas-trip.appspot.com/o/utils%2Fmarker.svg?alt=media&token=fcbfd76e-ee93-41e8-a816-98906e19859b',
-        /* scaledSize: new google.maps.Size(42, 42) */
+        scaledSize: new google.maps.Size(42, 42)
       },
       showCroppaModal1: false,
       showCroppaModal2: false,
@@ -786,7 +788,16 @@ export default {
       }
     }
   },
+  async mounted () {
+    loaded.then(() => {
+      this.googleMapsInitialized = true
+    })
+  },
   computed: {
+    markerSize () {
+      if (!this.googleMapsInitialized) return null
+      return new window.google.maps.Size(MapConstants.MARKER_SIZE, MapConstants.MARKER_SIZE)
+    },
     tipoAcomodText () {
       const path = this.$store.state.acomodData.tipoAcomod
       return path === 'Casa' ? 'da sua casa' 
