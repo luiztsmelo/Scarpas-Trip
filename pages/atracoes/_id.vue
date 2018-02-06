@@ -106,6 +106,7 @@
 </template>
 
 <script>
+import { loaded } from '~/node_modules/vue2-google-maps/src/manager'
 import supportsWebP from 'supports-webp'
 import { mapstyle } from '../../mixins/mapstyle'
 import * as firebase from 'firebase'
@@ -133,7 +134,8 @@ export default {
         strokeColor: '#3e3e3e',
         strokeOpacity: 1,
         strokeWeight: 2
-      }
+      },
+      googleMapsInitialized: false
     }
   },
   head () {
@@ -192,7 +194,16 @@ export default {
       }
     }
   },
+  async mounted () {
+    loaded.then(() => {
+      this.googleMapsInitialized = true
+    })
+  },
   computed: {
+    markerSize () {
+      if (!this.googleMapsInitialized) return null
+      return new window.google.maps.Size(MapConstants.MARKER_SIZE, MapConstants.MARKER_SIZE)
+    },
     scrollY () {
       return this.$store.state.scrollY
     },
