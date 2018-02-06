@@ -9,7 +9,7 @@
       style="width: 100%; height: 100%">
       <Gmap-Marker
       :position="{lat: eventoMap.positionLAT, lng: eventoMap.positionLNG}"
-      :icon="markerIcon"
+      :icon="{url: markerUrl, scaledSize: markerSize}"
       ></Gmap-Marker>
     </gmap-map>
   </div>  
@@ -24,11 +24,7 @@ export default {
   mixins: [mapstyle],
   data () {
     return {
-      googleMapsInitialized: false,
-      markerIcon: {
-        url: 'https://firebasestorage.googleapis.com/v0/b/escarpas-trip.appspot.com/o/utils%2Fmarker.svg?alt=media&token=fcbfd76e-ee93-41e8-a816-98906e19859b',
-        scaledSize: new google.maps.Size(42, 42)
-      }
+      googleMapsInitialized: false
     }
   },
   methods: {
@@ -43,9 +39,12 @@ export default {
     }
   },
   computed: {
+    markerUrl () {
+      return 'https://firebasestorage.googleapis.com/v0/b/escarpas-trip.appspot.com/o/utils%2Fmarker.svg?alt=media&token=fcbfd76e-ee93-41e8-a816-98906e19859b'
+    },
     markerSize () {
       if (!this.googleMapsInitialized) return null
-      return new window.google.maps.Size(MapConstants.MARKER_SIZE, MapConstants.MARKER_SIZE)
+      return new window.google.maps.Size(38, 38)
     },
     eventoMap () {
       return this.$store.state.eventoMap

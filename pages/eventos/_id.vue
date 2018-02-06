@@ -91,7 +91,7 @@
       @click="$store.commit('m_eventoMap', evento), enterFullscreen()">
         <Gmap-Marker
         :position="{lat: evento.positionLAT, lng: evento.positionLNG}"
-        :icon="markerIcon"
+        :icon="{url: markerUrl, scaledSize: markerSize}"
         ></Gmap-Marker>
       </gmap-map>
     </div><!-- ####### LOCAL ####### -->
@@ -128,10 +128,6 @@ export default {
         pagination: '.swiper-pagination',
         dynamicBullets: true,
         autoplay: 2222
-      },
-      markerIcon: {
-        url: 'https://firebasestorage.googleapis.com/v0/b/escarpas-trip.appspot.com/o/utils%2Fmarker.svg?alt=media&token=fcbfd76e-ee93-41e8-a816-98906e19859b',
-        scaledSize: new google.maps.Size(42, 42)
       }
     }
   },
@@ -197,9 +193,12 @@ export default {
     })
   },
   computed: {
+    markerUrl () {
+      return 'https://firebasestorage.googleapis.com/v0/b/escarpas-trip.appspot.com/o/utils%2Fmarker.svg?alt=media&token=fcbfd76e-ee93-41e8-a816-98906e19859b'
+    },
     markerSize () {
       if (!this.googleMapsInitialized) return null
-      return new window.google.maps.Size(MapConstants.MARKER_SIZE, MapConstants.MARKER_SIZE)
+      return new window.google.maps.Size(38, 38)
     },
     date () {
       const eventoDate = this.$store.state.evento.date

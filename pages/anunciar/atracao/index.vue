@@ -51,13 +51,13 @@
         <gmap-marker
         v-if="$store.state.atracaoData.rota !== {}"
         :position="$store.state.atracaoData.rota[0]"
-        :icon="markerIconPartida"
+        :icon="{url: markerUrlPartida, scaledSize: markerSizePartida}"
         ></gmap-marker>
         <!-- Marcador chegada -->
         <gmap-marker
         v-if="$store.state.atracaoData.rota !== {}"
         :position="$store.state.atracaoData.rota.slice(-1)[0]"
-        :icon="markerIconChegada"
+        :icon="{url: markerUrlChegada, scaledSize: markerSizeChegada}"
         ></gmap-marker>
       </gmap-map>
 
@@ -256,14 +256,6 @@ export default {
       title: '',/* Vue Autosize */
       subtitle: '',/* Vue Autosize */
       googleMapsInitialized: false,
-      markerIconPartida: {
-        url: 'https://firebasestorage.googleapis.com/v0/b/escarpas-trip.appspot.com/o/utils%2Fmarker-partida.svg?alt=media&token=bd41c89e-33ea-4899-bb5a-4f2fc2d936cb',
-        scaledSize: new google.maps.Size(34, 34)
-      },
-      markerIconChegada: {
-        url: 'https://firebasestorage.googleapis.com/v0/b/escarpas-trip.appspot.com/o/utils%2Fmarker-chegada.svg?alt=media&token=b5b52bc5-a65f-4136-9c31-57830b969067',
-        scaledSize: new google.maps.Size(34, 34)
-      },
       polylineOptions: {
         strokeColor: '#3e3e3e',
         strokeOpacity: 1,
@@ -467,9 +459,19 @@ export default {
     })
   },
   computed: {
-    markerSize () {
+    markerUrlPartida () {
+      return 'https://firebasestorage.googleapis.com/v0/b/escarpas-trip.appspot.com/o/utils%2Fmarker-partida.svg?alt=media&token=bd41c89e-33ea-4899-bb5a-4f2fc2d936cb'
+    },
+    markerSizePartida () {
       if (!this.googleMapsInitialized) return null
-      return new window.google.maps.Size(MapConstants.MARKER_SIZE, MapConstants.MARKER_SIZE)
+      return new window.google.maps.Size(34, 34)
+    },
+    markerUrlChegada () {
+      return 'https://firebasestorage.googleapis.com/v0/b/escarpas-trip.appspot.com/o/utils%2Fmarker-chegada.svg?alt=media&token=b5b52bc5-a65f-4136-9c31-57830b969067'
+    },
+    markerSizeChegada () {
+      if (!this.googleMapsInitialized) return null
+      return new window.google.maps.Size(34, 34)
     },
     titleLength () {
       return 50 - this.$store.state.atracaoData.title.length
