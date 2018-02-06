@@ -122,6 +122,7 @@ export default {
         dynamicBullets: true,
         autoplay: 2222
       },
+      googleMapsInitialized: false,
       markerIconPartida: {
         url: 'https://firebasestorage.googleapis.com/v0/b/escarpas-trip.appspot.com/o/utils%2Fmarker-partida.svg?alt=media&token=bd41c89e-33ea-4899-bb5a-4f2fc2d936cb',
         scaledSize: new google.maps.Size(34, 34)
@@ -134,8 +135,7 @@ export default {
         strokeColor: '#3e3e3e',
         strokeOpacity: 1,
         strokeWeight: 2
-      },
-      googleMapsInitialized: false
+      }
     }
   },
   head () {
