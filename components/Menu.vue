@@ -4,9 +4,9 @@
       <div class="menu-body">
 
         <div style="border-bottom:1px solid rgb(222,222,222);padding-bottom:.6rem" @click="$store.commit('m_showMenu', false), $store.commit('m_menuIconAnime', false), $store.commit('m_showFoobar', false)">
-          <nuxt-link to="/" class="menu-item">
+          <nuxt-link to="/login" class="menu-item">
             <img src="../assets/img/social.svg" class="__item-img-color">
-            <h3>Gerenciar seus Anúncios</h3>
+            <h3>Minha Conta</h3>
           </nuxt-link>
         </div>
 
