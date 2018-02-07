@@ -24,8 +24,8 @@ export default {
   align-items: center;
   transition: var(--main-transition);
   & .__img-header {
-    margin: 3rem 0 .7rem 0;
-    width: 5.2rem;
+    margin: 3.2rem 0 .7rem 0;
+    width: 5.1rem;
     height: auto;
   }
   & .__title {
@@ -35,7 +35,7 @@ export default {
     text-align: center;
   }
   & .__subtitle {
-    font-size: 20px;
+    font-size: 19px;
     font-weight: 400;
   }
 }
