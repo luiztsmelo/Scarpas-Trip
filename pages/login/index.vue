@@ -24,19 +24,19 @@ export default {
   align-items: center;
   transition: var(--main-transition);
   & .__img-header {
-    margin: 2.7rem 0 .7rem 0;
-    width: 5.5rem;
+    margin: 2.8rem 0 .7rem 0;
+    width: 5.4rem;
     height: auto;
   }
   & .__title {
     padding-top: 2.5rem;
-    font-size: 28px;
+    font-size: 29px;
     font-weight: 700;
     text-align: center;
   }
   & .__subtitle {
     font-size: 21px;
-    font-weight: 600;
+    font-weight: 500;
   }
 }
 </style>
