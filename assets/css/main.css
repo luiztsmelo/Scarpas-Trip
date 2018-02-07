@@ -13,7 +13,7 @@
   --colorRestaurante: rgb(252, 86, 86);
   --colorAtracao: rgb(252, 86, 86);
   /* ******* MAIN TRANSITION ******* */
-  --main-transition: all .22s ease;
+  --main-transition: all .18s ease;
   --menus-transition: all .26s ease;
 }
 
