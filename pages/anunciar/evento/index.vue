@@ -4,7 +4,7 @@
     <!-- PLANO EVENTO -->
     <div class="plano-evento" v-show="$store.state.cadastroEvento0">
       
-      <img class="__img-header" src="../../../assets/img/anuncio-evento.svg">
+      <img class="__img-header" src="../../../assets/img/eventos.svg">
 
       <h1 class="__title">Divulgação: a chave para o sucesso do seu evento!</h1>
 
@@ -599,10 +599,11 @@ export default {
       margin: 2rem 0;
       width: 6rem;
       height: auto;
+      filter: grayscale(100%) brightness(250%);
     }
     & .__title {
       font-size: 26px;
-      font-weight: 600;
+      font-weight: 700;
       padding: 0 7%;
       text-align: center;
     }

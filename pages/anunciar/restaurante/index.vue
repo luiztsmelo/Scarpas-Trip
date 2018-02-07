@@ -4,7 +4,7 @@
     <!-- PLANO RESTAURANTE -->
     <div class="plano-restaurante">
       
-      <img class="__img-header" src="../../../assets/img/anuncio-restaurante.svg" style="transform: scale(1.06)">
+      <img class="__img-header" src="../../../assets/img/restaurantes.svg" style="transform: scale(1.06)">
        
       <h1 class="__title">A melhor maneira de encontrar o seu cliente é ser encontrado por ele.</h1>
       
@@ -76,39 +76,40 @@ export default {
         margin: 2rem 0;
         width: 6rem;
         height: auto;
+        filter: grayscale(100%) brightness(250%);
       }
     & .__title {
       font-size: 26px;
-      font-weight: 500;
+      font-weight: 700;
       padding: 0 7%;
       text-align: center;
     }
     & .__subtitle {
       text-transform: uppercase;
       margin: 3rem 0 .5rem 0;
-      font-size: 17px;
-      font-weight: 600;
+      font-size: 15px;
+      font-weight: 700;
       padding: 0 7%;
       text-align: center;
     }
     & .__item {
       padding: 0 7%;
-      font-size: 19px;
-      font-weight: 300;
+      font-size: 18px;
+      font-weight: 400;
       margin: 0 0 .2rem 0;
       color: white;
     }
     & .__subitem {
       padding: 0 7%;
-      font-size: 15px;
+      font-size: 14px;
       font-weight: 400;
       margin: 0 ;
       color: white;
       line-height: 21px;
     }
     & .__price {
-      font-size: 50px;
-      font-weight: 200;
+      font-size: 52px;
+      font-weight: 100;
       margin-bottom: .5rem;
     }
     & .__anunciar-btn {
@@ -117,8 +118,8 @@ export default {
       background: white;
       padding: 1rem 0;
       border-radius: 100px;
-      font-size: 17px;
-      font-weight: 500;
+      font-size: var(--fontSizeAnuncioText);
+      font-weight: 600;
       margin: 3rem 0 2rem 0;
       box-shadow: 2px 2px 9px 4px rgba(0,0,0,0.13);
     }
