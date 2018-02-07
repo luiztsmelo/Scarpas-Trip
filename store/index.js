@@ -28,6 +28,15 @@ const store = () => new Vuex.Store({
     offFoobar4: true,
     offFoobar5: true,
     /*
+    -------------------- USER --------------------
+    */
+    user: {
+      userID: null,
+      username: null,
+      email: null,
+      photoURL: null
+    },
+    /*
     -------------------- ANÚNCIOS --------------------
     */
     /*
@@ -747,6 +756,10 @@ const store = () => new Vuex.Store({
     */
     a_authStateObserver ({ commit, state }) {
       firebase.auth().onAuthStateChanged(user => {
+        state.user.username = user.displayName
+        state.user.userID = user.uid
+        state.user.email = user.email
+        state.user.photoURL = user.photoURL
         state.acomodData.proprietario = user.displayName
         state.acomodData.email = user.email
         state.acomodData.photoURL = user.photoURL

@@ -2,7 +2,7 @@
   <div class="login">
 
     <img src="../../assets/img/login.svg" class="__img-header">
-    <h1 class="__title">Continuar com sua conta:</h1>
+    <h1 class="__title">Entrar usando sua conta:</h1>
 
     <div class="signin-btns">
       <button type="button" class="facebook-btn" @click="facebookSignIn()">Facebook</button>
@@ -14,7 +14,28 @@
 
 <script>
 export default {
-  transition: 'opacity'
+  transition: 'opacity',
+  methods: {
+    googleSignIn () {
+      this.$store.dispatch('a_googleSignIn')
+    },
+    facebookSignIn () {
+      this.$store.dispatch('a_facebookSignIn')
+    }
+  },
+  computed: {
+    userEmail () {
+      return this.$store.state.user.email 
+    }
+  },
+  watch: {
+    userEmail (value) {
+      if (value !== null) {
+        let shortEmail = this.userEmail.substring(0, this.userEmail.indexOf("@"))
+        return this.$router.push('/@' + shortEmail)
+      }
+    }
+  }
 }
 </script>
 
@@ -33,7 +54,7 @@ export default {
     height: auto;
   }
   & .__title {
-    font-size: 26px;
+    font-size: 27px;
     font-weight: 700;
     padding: 0 7%;
     text-align: center;
