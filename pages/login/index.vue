@@ -1,7 +1,10 @@
 <template>
   <div class="login">
-    <img src="../../assets/img/login.svg" class="__img-header">
     <h1 class="__title">Continuar como:</h1>
+    <img src="../../assets/img/anunciante.svg" class="__img-header">
+    <h2 class="__subtitle">Anunciante</h2>
+    <img src="../../assets/img/turista.svg" class="__img-header">
+    <h2 class="__subtitle">Turista</h2>
   </div>
 </template>
 
@@ -21,13 +24,19 @@ export default {
   align-items: center;
   transition: var(--main-transition);
   & .__img-header {
-    margin: 2rem 0;
-    width: 6rem;
+    margin: 2.7rem 0 .7rem 0;
+    width: 5.5rem;
     height: auto;
   }
   & .__title {
+    padding-top: 2.5rem;
     font-size: 28px;
     font-weight: 700;
+    text-align: center;
+  }
+  & .__subtitle {
+    font-size: 21px;
+    font-weight: 600;
   }
 }
 </style>
