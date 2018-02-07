@@ -25,7 +25,7 @@ export default {
   transition: var(--main-transition);
   & .__img-header {
     margin: 3.2rem 0 .7rem 0;
-    width: 5.1rem;
+    width: 5rem;
     height: auto;
   }
   & .__title {
@@ -35,7 +35,7 @@ export default {
     text-align: center;
   }
   & .__subtitle {
-    font-size: 19px;
+    font-size: 18px;
     font-weight: 400;
   }
 }
