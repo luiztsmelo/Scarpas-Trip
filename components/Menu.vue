@@ -3,66 +3,62 @@
     <div class="menu" v-show="showMenu">
       <div class="menu-body">
 
-        <div style="padding-bottom:.9rem" @click="$store.commit('m_showMenu', false), $store.commit('m_menuIconAnime', false), $store.commit('m_showFoobar', false)">
+        <div style="border-bottom:1px solid rgb(222,222,222);padding-bottom:.6rem" @click="$store.commit('m_showMenu', false), $store.commit('m_menuIconAnime', false), $store.commit('m_showFoobar', false)">
           <nuxt-link to="/" class="menu-item">
-            <img src="../assets/img/map.svg" alt="" class="__item-img-color">
-            <h3>Mapa completo</h3>
+            <img src="../assets/img/social.svg" class="__item-img-color">
+            <h3>Gerenciar seus Anúncios</h3>
           </nuxt-link>
         </div>
 
-        <div class="anuncio-box">
-          <div @click="$store.commit('m_showMenu', false), $store.commit('m_menuIconAnime', false), $store.commit('m_showFoobar', false)">
-            <nuxt-link to="/anunciar/acomodacao" class="menu-item">
-              <img src="../assets/img/estadia.svg" alt="" class="__item-img-color">
-              <h3>Anunciar Acomodação</h3>
-            </nuxt-link>
-          </div>
-
-          <div @click="$store.commit('m_showMenu', false), $store.commit('m_menuIconAnime', false), $store.commit('m_showFoobar', false)">
-            <nuxt-link to="/anunciar/evento" class="menu-item">
-              <img src="../assets/img/eventos.svg" alt="" class="__item-img-color">
-              <h3>Anunciar Evento</h3>
-            </nuxt-link>
-          </div>
-          
-          <div @click="$store.commit('m_showMenu', false), $store.commit('m_menuIconAnime', false), $store.commit('m_showFoobar', false)">
-            <nuxt-link to="/anunciar/passeio" class="menu-item">
-              <img src="../assets/img/passeios.svg" alt="" class="__item-img-color">
-              <h3>Anunciar Passeio</h3>
-            </nuxt-link>
-          </div>
-
-          <div @click="$store.commit('m_showMenu', false), $store.commit('m_menuIconAnime', false), $store.commit('m_showFoobar', false)">
-            <nuxt-link to="/anunciar/restaurante" class="menu-item">
-              <img src="../assets/img/restaurantes.svg" alt="" class="__item-img-color">
-              <h3>Anunciar Restaurante</h3>
-            </nuxt-link>
-          </div>
-
-          <div style="display:none">
-            <nuxt-link to="/anunciar/atracao" class="menu-item">
-              <img src="../assets/img/restaurantes.svg" alt="" class="__item-img-color">
-              <h3>Anunciar Atração</h3>
-            </nuxt-link>
-          </div>
-
+        <div style="padding-top:.6rem" @click="$store.commit('m_showMenu', false), $store.commit('m_menuIconAnime', false), $store.commit('m_showFoobar', false)">
+          <nuxt-link to="/anunciar/acomodacao" class="menu-item">
+            <img src="../assets/img/estadia.svg" class="__item-img-color">
+            <h3>Anunciar Acomodação</h3>
+          </nuxt-link>
         </div>
 
-        <div class="info-box">
-          <div @click="$store.commit('m_showMenu', false), $store.commit('m_menuIconAnime', false), $store.commit('m_showFoobar', false)">
-            <nuxt-link to="/anunciar" class="menu-item">
-              <img src="../assets/img/contato.svg" alt="" class="__item-img">
-              <h3>Contato</h3>
-            </nuxt-link>
-          </div>
-
-          <div @click="$store.commit('m_showMenu', false), $store.commit('m_menuIconAnime', false), $store.commit('m_showFoobar', false)">
-            <nuxt-link to="/anunciar" class="menu-item">
-              <img src="../assets/img/sobre.svg" alt="" class="__item-img">
-              <h3>Sobre</h3>
-            </nuxt-link>
-          </div>
+        <div @click="$store.commit('m_showMenu', false), $store.commit('m_menuIconAnime', false), $store.commit('m_showFoobar', false)">
+          <nuxt-link to="/anunciar/evento" class="menu-item">
+            <img src="../assets/img/eventos.svg" class="__item-img-color">
+            <h3>Anunciar Evento</h3>
+          </nuxt-link>
         </div>
+        
+        <div @click="$store.commit('m_showMenu', false), $store.commit('m_menuIconAnime', false), $store.commit('m_showFoobar', false)">
+          <nuxt-link to="/anunciar/passeio" class="menu-item">
+            <img src="../assets/img/passeios.svg" class="__item-img-color">
+            <h3>Anunciar Passeio</h3>
+          </nuxt-link>
+        </div>
+
+        <div style="border-bottom:1px solid rgb(222,222,222);padding-bottom:.6rem" @click="$store.commit('m_showMenu', false), $store.commit('m_menuIconAnime', false), $store.commit('m_showFoobar', false)">
+          <nuxt-link to="/anunciar/restaurante" class="menu-item">
+            <img src="../assets/img/restaurantes.svg" class="__item-img-color">
+            <h3>Anunciar Restaurante</h3>
+          </nuxt-link>
+        </div>
+
+        <div style="display:none">
+          <nuxt-link to="/anunciar/atracao" class="menu-item">
+            <img src="../assets/img/restaurantes.svg" class="__item-img-color">
+            <h3>Anunciar Atração</h3>
+          </nuxt-link>
+        </div>
+
+        <div style="padding-top:.6rem" @click="$store.commit('m_showMenu', false), $store.commit('m_menuIconAnime', false), $store.commit('m_showFoobar', false)">
+          <nuxt-link to="/anunciar" class="menu-item">
+            <img src="../assets/img/contato.svg" class="__item-img">
+            <h3>Contato</h3>
+          </nuxt-link>
+        </div>
+
+        <div @click="$store.commit('m_showMenu', false), $store.commit('m_menuIconAnime', false), $store.commit('m_showFoobar', false)">
+          <nuxt-link to="/anunciar" class="menu-item">
+            <img src="../assets/img/sobre.svg" class="__item-img">
+            <h3>Sobre</h3>
+          </nuxt-link>
+        </div>
+ 
 
         <span class="tmstudio">Desenvolvido por <strong>TMstudio</strong></span>
 
@@ -102,7 +98,7 @@ export default {
     & .menu-item {
       display: flex;
       align-items: center;
-      padding: 0.8rem 0;
+      padding: 0.7rem 0;
       & .__item-img-color {
         width: 1.3rem;
         height: auto;
@@ -116,24 +112,16 @@ export default {
         filter: brightness(70%);
       }
     }
-    & .anuncio-box {
-      padding: 0.8rem 0;
-      border-bottom: 1px solid rgb(222, 222, 222);
-      border-top: 1px solid rgb(222, 222, 222);
-    }
-    & .info-box {
-      padding: 0.8rem 0;
-    }
     & .tmstudio {
       position: absolute;
       bottom: 3.7rem;
       left: 0;
       right: 0;
       margin: 0 auto;
-      font-size: 13px;
-      font-weight: 300;
+      font-size: 11px;
+      font-weight: 400;
       & strong {
-        font-weight: 400;
+        font-weight: 500;
       }
     }
   }
