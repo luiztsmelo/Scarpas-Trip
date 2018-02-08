@@ -35,6 +35,13 @@ export default {
         return this.$router.push('/@' + shortEmail)
       }
     }
+  },
+  beforeRouteEnter (to, from, next) {
+    next(vm => {
+      if (vm.$store.state.user.email !== null) {
+        vm.$router.push('/')
+      }
+    })
   }
 }
 </script>
