@@ -20,7 +20,9 @@
 
     <div class="anuncios-box">
 
-      <div class="acomod-card" v-for="acomod in acomods">
+      <h3 v-if="filteredAcomods.length === 0">Nenhum anúncio encontrado. Deseja anunciar?</h3>
+
+      <div class="acomod-card" v-for="acomod in filteredAcomods" v-if="filteredAcomods.length !== 0">
         <img class="__card-img" :src="image1H(acomod)">
         <h3 class="__card-title">{{ acomod.title }}</h3>
       </div>
@@ -38,6 +40,7 @@
 import supportsWebP from 'supports-webp'
 
 export default {
+  transition: 'opacity',
   head () {
     return {
       title: this.user.username + ' ‒ ' + 'Escarpas Trip',
@@ -64,11 +67,11 @@ export default {
       let firstName = fullName[0]
       return firstName
     },
-    acomods () {
+    filteredAcomods () {
       let acomods = this.$store.state.acomods
       let acomodsValues = Object.values(acomods)
-      let findAcomod = acomodsValues.filter(acomod => acomod.email === this.user.email)
-      return findAcomod
+      let filteredAcomods = acomodsValues.filter(acomod => acomod.email === this.user.email)
+      return filteredAcomods
     }
   },
   beforeRouteEnter (to, from, next) {
@@ -96,6 +99,7 @@ export default {
   margin-top: 3.2rem;
   display: flex;
   flex-flow: column;
+  transition: var(--main-transition);
 
   & .back-bar {
     position: fixed;
