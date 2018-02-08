@@ -18,7 +18,7 @@
       <h3 class="__item">Segurança</h3>
       
       <span class="__subtitle">Investimento Mensal</span>
-      <span class="__price">R$39</span>
+      <span class="__price">R$49</span>
       <h3 class="__subitem">Primeiro mês grátis</h3>
       <h3 class="__subitem">Cancele quando quiser</h3>
 
