@@ -147,11 +147,11 @@ export default {
     height: 100%;
     & .info-header {
       display: flex;
-    flex-flow: column;
-    align-items: center;
+      flex-flow: column;
+      align-items: center;
       & .__img {
-        width: 7rem;
-        height: 7rem;
+        width: 6.5rem;
+        height: auto;
         border-radius: 50%;
         margin-top: 3.5rem;
         text-align: center;
@@ -163,9 +163,12 @@ export default {
     }
     & .info-contato {
       padding: 0 7%;
+      display: flex;
+      flex-flow: column;
+      align-items: center;
       & .info-title {
         font-size: 15px;
-        padding-top: 1.2rem;
+        padding-top: 1.4rem;
       }
       & .__email {
         font-size: 17px;
