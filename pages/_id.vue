@@ -21,11 +21,16 @@
       
       <h1 class="__title">Seus Anúncios</h1>
 
-      <h3 v-if="filteredAcomods.length === 0">Nenhum anúncio encontrado. Deseja anunciar?</h3>
+      <h3 v-if="filteredAcomods.length === 0 && filteredPasseios.length === 0">Nenhum anúncio encontrado.</h3>
 
-      <div class="acomod-card" v-for="acomod in filteredAcomods" v-if="filteredAcomods.length !== 0">
+      <div class="card" v-for="acomod in filteredAcomods" v-if="filteredAcomods.length !== 0">
         <img class="__card-img" :src="image1H(acomod)">
         <h3 class="__card-title">{{ acomod.title }}</h3>
+      </div>
+
+      <div class="card" v-for="passeio in filteredPasseios" v-if="filteredPasseios.length !== 0">
+        <img class="__card-img" :src="image1H(passeio)">
+        <h3 class="__card-title">{{ passeio.title }}</h3>
       </div>
 
     </div>
@@ -63,6 +68,13 @@ export default {
         return acomod.imageH1J
       }
     },
+    image1H (passeio) {
+      if (supportsWebP) {
+        return passeio.imageH1W
+      } else {
+        return passeio.imageH1J
+      }
+    },
   },
   computed: {
     user () {
@@ -78,6 +90,12 @@ export default {
       let acomodsValues = Object.values(acomods)
       let filteredAcomods = acomodsValues.filter(acomod => acomod.email === this.user.email)
       return filteredAcomods
+    },
+    filteredPasseios () {
+      let passeios = this.$store.state.passeios
+      let passeiosValues = Object.values(passeios)
+      let filteredPasseios = passeiosValues.filter(passeio => passeio.email === this.user.email)
+      return filteredPasseios
     }
   },
   beforeRouteEnter (to, from, next) {
@@ -102,7 +120,7 @@ export default {
 @import url('../assets/css/main.css');
 
 .profile {
-  margin-top: 3.2rem;
+  margin: 3.2rem 0 5rem 0;
   display: flex;
   flex-flow: column;
   transition: var(--main-transition);
@@ -161,7 +179,7 @@ export default {
     display: flex;
     flex-flow: column;
     padding: 0 7%;
-    & .acomod-card {
+    & .card {
       display: inline-flex;
       align-items: center;
       margin: .5rem 0;
@@ -172,7 +190,7 @@ export default {
         border-radius: 2px;
       }
       & .__card-title {
-        padding-left: 1rem;
+        padding-left: .9rem;
         line-height: 20px;
       }
     }
