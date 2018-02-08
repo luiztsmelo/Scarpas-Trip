@@ -1,5 +1,5 @@
 <template>
-  <div class="profile">
+  <div class="profile" v-if="user.email !== null">
 
     <div class="user-box">
       <div class="welcome">
