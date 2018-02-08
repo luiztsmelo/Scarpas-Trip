@@ -132,7 +132,7 @@ export default {
       display: flex;
       flex-flow: column;
       & .__username {
-        font-size: 27px;
+        font-size: 28px;
       }
       & .__edit {
         color: #00BAAC;
@@ -140,23 +140,26 @@ export default {
     }
     & .__img {
       border-radius: 50%;
-      width: 3.7rem;
+      width: 3.8rem;
       height: auto;
     }
   }
 
   & .__title {
     padding: 3rem 7% 1rem 7%;
-    font-size: 24px;
+    font-size: 25px;
   }
 
   /* ******* ANÚNCIOS BOX ******* */
   & .anuncios-box {
+    display: flex;
+    flex-flow: column;
     padding: 0 7%;
     & .acomod-card {
       display: inline-flex;
       align-items: center;
       margin: .5rem 0;
+      user-select: none;
       & .__card-img {
         width: auto;
         height: 4rem;
