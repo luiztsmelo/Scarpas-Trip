@@ -16,9 +16,10 @@
       <img class="__img" :src="user.photoURL">
     </div>
     
-    <h1 class="__title">Seus Anúncios</h1>
-
+  
     <div class="anuncios-box">
+      
+      <h1 class="__title">Seus Anúncios</h1>
 
       <h3 v-if="filteredAcomods.length === 0">Nenhum anúncio encontrado. Deseja anunciar?</h3>
 
@@ -29,9 +30,14 @@
 
     </div>
 
-    <h1 class="__title">Seus Roteiros</h1>
-    
-    
+
+    <div class="reservas-box">
+
+      <h1 class="__title">Suas Reservas</h1>
+
+      <h3>Nenhuma reserva encontrada.</h3>
+
+    </div>
 
   </div>
 </template>
@@ -146,8 +152,8 @@ export default {
   }
 
   & .__title {
-    padding: 3rem 7% 1rem 7%;
-    font-size: 25px;
+    padding: 3rem 0 1rem 0;
+    font-size: 24px;
   }
 
   /* ******* ANÚNCIOS BOX ******* */
@@ -170,6 +176,13 @@ export default {
         line-height: 20px;
       }
     }
+  }
+
+  /* ******* RESERVAS BOX ******* */
+  & .reservas-box {
+    display: flex;
+    flex-flow: column;
+    padding: 0 7%;
   }
 }
 
