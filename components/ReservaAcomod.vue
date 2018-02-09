@@ -69,7 +69,7 @@
 
 
         <!-- ########## DATA PG.2 ########## -->
-        <div class="etapa-reserva-box" v-if="$store.state.reservaAcomod2">
+        <div class="etapa-reserva-box" v-show="$store.state.reservaAcomod2">
 
           <h3 class="etapas">3 de 5 etapas</h3>
 
