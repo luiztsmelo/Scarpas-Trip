@@ -21,7 +21,7 @@
       
       <h1 class="__title">Seus Anúncios</h1>
 
-      <h3 v-if="filteredAcomods.length === 0 && filteredPasseios.length === 0">Nenhum anúncio encontrado.</h3>
+      <h3 v-if="filteredAcomods.length === 0 && filteredPasseios.length === 0 && filteredEventos.length === 0">Nenhum anúncio encontrado.</h3>
 
       <div class="card" v-for="acomod in filteredAcomods" v-if="filteredAcomods.length !== 0">
         <img class="__card-img" :src="image1H(acomod)">
@@ -31,6 +31,11 @@
       <div class="card" v-for="passeio in filteredPasseios" v-if="filteredPasseios.length !== 0">
         <img class="__card-img" :src="image1H(passeio)">
         <h3 class="__card-title">{{ passeio.title }}</h3>
+      </div>
+
+      <div class="card" v-for="evento in filteredEventos" v-if="filteredEventos.length !== 0">
+        <img class="__card-img" :src="image1H(evento)">
+        <h3 class="__card-title">{{ evento.title }}</h3>
       </div>
 
     </div>
@@ -96,6 +101,12 @@ export default {
       let passeiosValues = Object.values(passeios)
       let filteredPasseios = passeiosValues.filter(passeio => passeio.email === this.user.email)
       return filteredPasseios
+    },
+    filteredEventos () {
+      let eventos = this.$store.state.eventos
+      let eventosValues = Object.values(eventos)
+      let filteredEventos = eventosValues.filter(evento => evento.email === this.user.email)
+      return filteredEventos
     }
   },
   beforeRouteEnter (to, from, next) {

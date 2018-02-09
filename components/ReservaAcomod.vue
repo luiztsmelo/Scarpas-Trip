@@ -78,6 +78,7 @@
             v-model='dataReservaAcomod'
             :drag-attribute='myAttribute'
             :select-attribute='myAttribute'
+            :disabled-attribute='myAttribute'
             :available-dates='{start: new Date(), end: null}'
             :month-labels='monthLabels'
             :weekday-labels='weekdayLabels'
