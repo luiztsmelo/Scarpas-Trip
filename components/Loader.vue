@@ -39,11 +39,11 @@ export default {
 .spinner {
     width: 4.3rem;
     height: 4.3rem;
-    background-image: url('../static/brand3.svg');
+    background-image: url('../static/loaderb.svg');
     background-repeat: no-repeat;
     background-size: cover;
     animation-name: spin;
-    animation-duration: 2.3s;
+    animation-duration: 2.2s;
     animation-iteration-count: infinite;
     animation-timing-function: linear;
     opacity: .2;

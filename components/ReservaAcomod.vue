@@ -15,7 +15,7 @@
 
 
         <!-- ########## DICAS INICIAIS PG.0 ########## -->
-        <div class="etapa-reserva-box" v-show="$store.state.reservaAcomod0">
+        <div class="etapa-reserva-box" v-if="$store.state.reservaAcomod0">
 
           <h3 class="etapas">1 de 5 etapas</h3>
 
@@ -44,7 +44,7 @@
 
 
         <!-- ########## HÓSPEDES PG.1 ########## -->
-        <div class="etapa-reserva-box" v-show="$store.state.reservaAcomod1">
+        <div class="etapa-reserva-box" v-if="$store.state.reservaAcomod1">
 
           <h3 class="etapas">2 de 5 etapas</h3>
 
@@ -58,14 +58,18 @@
           </div>
 
 
-          <button type="button" class="__next-btn" @click="nextBtn1">Continuar</button>
+          <button type="button" class="__next-btn" @click="nextBtn1" v-if="loadingBtns.loader2 === false">Continuar</button>
+
+          <button type="button" class="__next-btn" v-else>
+            <div class="spinner"></div>
+          </button>
 
         </div><!-- ########## HÓSPEDES PG.1 ########## -->
         
 
 
         <!-- ########## DATA PG.2 ########## -->
-        <div class="etapa-reserva-box" v-show="$store.state.reservaAcomod2">
+        <div class="etapa-reserva-box" v-if="$store.state.reservaAcomod2">
 
           <h3 class="etapas">3 de 5 etapas</h3>
 
@@ -97,7 +101,7 @@
 
 
         <!-- ########## IDENTIFICAÇÃO PG.3 ########## -->
-        <div class="etapa-reserva-box" v-show="$store.state.reservaAcomod3">
+        <div class="etapa-reserva-box" v-if="$store.state.reservaAcomod3">
 
           <h3 class="etapas">4 de 5 etapas</h3>
 
@@ -123,6 +127,12 @@ import PopoverReservaAcomod from '~/components/PopoverReservaAcomod.vue'
 export default {
   data() {
     return {
+      loadingBtns: {
+        loader1: false,
+        loader2: false,
+        loader3: false,
+        loader4: false,
+      },
       dataReservaAcomod: null,
       myAttribute: {
         popover: {
@@ -187,6 +197,7 @@ export default {
         this.$store.commit('m_reservaAcomod0', true)
       }
       if (this.$store.state.reservaAcomod2 === true) {
+        this.loadingBtns.loader2 = false
         window.history.back(1)
         window.location.hash = "reserva2"
         this.$store.commit('m_reservaAcomod2', false)
@@ -209,6 +220,7 @@ export default {
       }
     },
     nextBtn1 () {
+      this.loadingBtns.loader2 = true
       if (1<2) {
         this.$store.commit('m_reservaAcomod1', false), this.$store.commit('m_reservaAcomod2', true), window.location.hash = "reserva3"
       }
@@ -379,15 +391,36 @@ export default {
         font-weight: 600;
         background: #08C8C1;
         color: white;
-        padding: .7rem 0;
+        height: 2.5rem;
         width:  9rem;
         border-radius: 4px;
+        & .spinner {
+          margin: auto;
+          width: 2rem;
+          height: 2rem;
+          background-image: url('../static/loaderw.svg');
+          background-repeat: no-repeat;
+          background-size: cover;
+          animation-name: spin;
+          animation-duration: 1.6s;
+          animation-iteration-count: infinite;
+          animation-timing-function: linear;
+          opacity: 1;
+        }
       }
     }
   }
 }
 
 
+
+@keyframes spin { 
+  from { 
+    transform: rotate(0deg); 
+  } to { 
+    transform: rotate(360deg); 
+  }
+}
 /* TRANSITIONS */
 .reserva-animation-enter {
   transform: translateX(100%);
