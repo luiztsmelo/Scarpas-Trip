@@ -15,7 +15,7 @@
 
 
         <!-- ########## DICAS INICIAIS PG.0 ########## -->
-        <div class="etapa-reserva-box" v-show="$store.state.reservaAcomod0">
+        <div class="etapa-reserva-box" v-if="$store.state.reservaAcomod0">
 
           <h3 class="etapas">1 de 5 etapas</h3>
 
@@ -44,7 +44,7 @@
 
 
         <!-- ########## HÓSPEDES PG.1 ########## -->
-        <div class="etapa-reserva-box" v-show="$store.state.reservaAcomod1">
+        <div class="etapa-reserva-box" v-if="$store.state.reservaAcomod1">
 
           <h3 class="etapas">2 de 5 etapas</h3>
 
@@ -101,7 +101,7 @@
 
 
         <!-- ########## IDENTIFICAÇÃO PG.3 ########## -->
-        <div class="etapa-reserva-box" v-show="$store.state.reservaAcomod3">
+        <div class="etapa-reserva-box" v-if="$store.state.reservaAcomod3">
 
           <h3 class="etapas">4 de 5 etapas</h3>
 
