@@ -15,7 +15,7 @@
 
 
         <!-- ########## DICAS INICIAIS PG.0 ########## -->
-        <div class="etapa-reserva-box" v-if="$store.state.reservaAcomod0">
+        <div class="etapa-reserva-box" v-show="$store.state.reservaAcomod0">
 
           <h3 class="etapas">1 de 5 etapas</h3>
 
@@ -44,7 +44,7 @@
 
 
         <!-- ########## HÓSPEDES PG.1 ########## -->
-        <div class="etapa-reserva-box" v-if="$store.state.reservaAcomod1">
+        <div class="etapa-reserva-box" v-show="$store.state.reservaAcomod1">
 
           <h3 class="etapas">2 de 5 etapas</h3>
 
@@ -58,11 +58,11 @@
           </div>
 
 
-          <button type="button" class="__next-btn" @click="nextBtn1" v-if="loadingBtns.loader2 === false">Continuar</button>
+          <button type="button" class="__next-btn" @click="nextBtn1">Continuar</button>
 
-          <button type="button" class="__next-btn" v-else>
+          <!-- <button type="button" class="__next-btn" v-else>
             <div class="spinner"></div>
-          </button>
+          </button> -->
 
         </div><!-- ########## HÓSPEDES PG.1 ########## -->
         
@@ -101,7 +101,7 @@
 
 
         <!-- ########## IDENTIFICAÇÃO PG.3 ########## -->
-        <div class="etapa-reserva-box" v-if="$store.state.reservaAcomod3">
+        <div class="etapa-reserva-box" v-show="$store.state.reservaAcomod3">
 
           <h3 class="etapas">4 de 5 etapas</h3>
 
@@ -197,7 +197,6 @@ export default {
         this.$store.commit('m_reservaAcomod0', true)
       }
       if (this.$store.state.reservaAcomod2 === true) {
-        this.loadingBtns.loader2 = false
         window.history.back(1)
         window.location.hash = "reserva2"
         this.$store.commit('m_reservaAcomod2', false)
@@ -220,7 +219,6 @@ export default {
       }
     },
     nextBtn1 () {
-      this.loadingBtns.loader2 = true
       if (1<2) {
         this.$store.commit('m_reservaAcomod1', false), this.$store.commit('m_reservaAcomod2', true), window.location.hash = "reserva3"
       }
