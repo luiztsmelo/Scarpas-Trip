@@ -78,17 +78,16 @@
 
           <v-date-picker
             is-inline
+            is-required
             mode='range'
             v-model='dataReservaAcomod'
             :drag-attribute='myAttribute'
             :select-attribute='myAttribute'
-            :available-dates='{start: new Date(), end: null}'
             :month-labels='monthLabels'
             :weekday-labels='weekdayLabels'
             :theme-styles='themeStyles'
-            select-color='#00D8C7'
+            tint-color='#00D8C7'
             show-caps
-            drag-color='#00D8C7'
             >
           </v-date-picker>
 
@@ -137,7 +136,7 @@ export default {
         popover: {
           hideIndicator: true,
           component: PopoverReservaAcomod
-        },
+        }
       },
       monthLabels: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
       weekdayLabels: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'],
