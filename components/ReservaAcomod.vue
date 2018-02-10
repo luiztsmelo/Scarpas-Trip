@@ -81,6 +81,7 @@
             is-required
             mode='range'
             v-model='dataReservaAcomod'
+            :available-dates='availableDates'
             :drag-attribute='myAttribute'
             :select-attribute='myAttribute'
             :month-labels='monthLabels'
@@ -244,6 +245,9 @@ export default {
     },
     hash () {
       return this.$route.hash
+    },
+    availableDates () {
+      return {start: new Date(), end: null}
     }
   },
   watch: {
