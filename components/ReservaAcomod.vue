@@ -140,9 +140,17 @@ export default {
           component: PopoverReservaAcomod
         }
       },
-      /* disabledAttribute: {
-
-      }, */
+      disabledAttribute: {
+        contentStyle: {
+          textDecoration: 'line-through',
+          opacity: 0.5
+        },
+        // We need to override the default `dayContentHover` theme style set by `v-date-picker`
+        contentHoverStyle: {
+          cursor: 'default',
+          backgroundColor: 'transparent',
+        },
+      },
       monthLabels: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
       weekdayLabels: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'],
       themeStyles: {
@@ -175,6 +183,9 @@ export default {
         dayContent: {
           fontWeight: '400',
           fontSize: '15px',
+        },
+        dayCellNotInMonth: {
+          opacity: 0.3,
         },
         dayPopoverContent: {
           background: '#00D8C7',
