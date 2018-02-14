@@ -94,7 +94,13 @@ const store = () => new Vuex.Store({
       imageH2W: null
     },
     reservaAcomod: {
-      totalHospedes: '1'
+      totalHospedes: '1',
+      periodoReserva: null,
+      userID: null,
+      reservante: null,
+      email: null,
+      photoURL: null,
+      celular: null
     },
     cadastroAcomod0: true,
     cadastroAcomod1: false,
@@ -768,6 +774,10 @@ const store = () => new Vuex.Store({
         state.passeioData.email = user.email
         state.passeioData.photoURL = user.photoURL
         state.passeioData.userID = user.uid
+        state.reservaAcomod.reservante = user.displayName
+        state.reservaAcomod.email = user.email
+        state.reservaAcomod.photoURL = user.photoURL
+        state.reservaAcomod.userID = user.uid
         state.atracaoData.email = user.email
       })
     }

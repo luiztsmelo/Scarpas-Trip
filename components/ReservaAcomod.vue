@@ -80,7 +80,7 @@
             is-inline
             is-required
             mode='range'
-            v-model='dataReservaAcomod'
+            v-model='$store.state.reservaAcomod.periodoReserva'
             :min-date='today'
             :disabled-dates='disabledDates'
             :drag-attribute='myAttribute'
@@ -108,6 +108,30 @@
 
           <h1 class="__title">Sua identificação</h1>
 
+          <h3 style="padding: 0 7% .5rem 7%" v-if="this.$store.state.reservaAcomod.reservante === null">Obter dados com:</h3>
+
+          <div class="signin-btns" v-if="$store.state.reservaAcomod.reservante === null">
+            <button type="button" class="facebook-btn" @click="facebookSignIn()">Facebook</button>
+            <button type="button" class="google-btn" @click="googleSignIn()">Google</button>
+          </div>
+
+          <h3 style="padding: 1rem 7% 0 7%" v-if="this.$store.state.reservaAcomod.reservante === null">Não se preocupe, só obteremos seu nome e e-mail.</h3>
+
+          <h3 style="padding: 0 7% 0 7%" v-if="$store.state.reservaAcomod.reservante !== null">Ótimo {{ firstName }}! Só mais algumas informações:</h3>
+
+          <div v-if="$store.state.reservaAcomod.reservante !== null">
+            <div class="item-form">
+              <label>Celular</label>
+              <masked-input
+                type="tel"
+                v-model="$store.state.reservaAcomod.celular"
+                :mask="['(', /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]"
+                :guide="true"
+                placeholder="(__) _____-____"
+                placeholderChar="_">
+              </masked-input>
+            </div>
+          </div>
 
 
           <button type="button" class="__next-btn" @click="nextBtn3">Continuar</button>
@@ -124,8 +148,12 @@
 
 <script>
 import PopoverReservaAcomod from '~/components/PopoverReservaAcomod.vue'
+import MaskedInput from 'vue-text-mask'
 
 export default {
+  components: { 
+    MaskedInput
+  },
   data() {
     return {
       loadingBtns: {
@@ -134,7 +162,6 @@ export default {
         loader3: false,
         loader4: false,
       },
-      dataReservaAcomod: null,
       myAttribute: {
         popover: {
           hideIndicator: true,
@@ -197,6 +224,12 @@ export default {
     }
   },
   methods: {
+    googleSignIn () {
+      this.$store.dispatch('a_googleSignIn')
+    },
+    facebookSignIn () {
+      this.$store.dispatch('a_facebookSignIn')
+    },
     hashProprietario () {
        window.location.hash = "contato"
     },
@@ -255,6 +288,11 @@ export default {
     },
     showReservaAcomod () {
       return this.$store.state.showReservaAcomod
+    },
+    firstName () {
+      let fullName = this.$store.state.reservaAcomod.reservante.split(' ')
+      let firstName = fullName[0]
+      return firstName
     },
     totalHospedesArray () {
       return Array.from({length: this.acomod.totalHospedes}, (v, k) => k+1)
@@ -408,6 +446,34 @@ export default {
           outline: none;
         }
       }
+
+      & .item-form {
+      padding: 0 7%;
+      display: flex;
+      flex-flow: column;
+      margin: 1.7rem 0;
+        & label {
+          font-weight: 700;
+          font-size: 15px;
+        }
+        & input {
+          width: 100%;
+          font-size: var(--fontSizeAnuncioText);
+          font-weight: 400;
+          background: white;
+          color: var(--color01);
+          padding: .6rem 0 .4rem 0;
+          border: none;
+          border-bottom: 1px solid rgb(222, 222, 222);
+          outline: none;
+        }
+      }
+
+      & .signin-btns {
+        display: flex;
+        padding: 0 7%;
+      }
+
       & .__next-btn {
         position: fixed;
         bottom: 1.3rem;
@@ -419,19 +485,6 @@ export default {
         height: 2.5rem;
         width:  9rem;
         border-radius: 4px;
-        & .spinner {
-          margin: auto;
-          width: 2rem;
-          height: 2rem;
-          background-image: url('../static/loaderw.svg');
-          background-repeat: no-repeat;
-          background-size: cover;
-          animation-name: spin;
-          animation-duration: 1.6s;
-          animation-iteration-count: infinite;
-          animation-timing-function: linear;
-          opacity: 1;
-        }
       }
     }
   }
