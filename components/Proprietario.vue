@@ -150,7 +150,7 @@ export default {
       flex-flow: column;
       align-items: center;
       & .__img {
-        width: 6.5rem;
+        width: 7rem;
         height: auto;
         border-radius: 50%;
         margin-top: 3.5rem;
@@ -168,7 +168,7 @@ export default {
       align-items: center;
       & .info-title {
         font-size: 15px;
-        padding-top: 1.4rem;
+        padding: 1.5rem 0 .1rem 0;
       }
       & .__email {
         font-size: 17px;
