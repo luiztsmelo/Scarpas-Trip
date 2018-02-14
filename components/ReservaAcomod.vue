@@ -84,6 +84,7 @@
             :available-dates='availableDates'
             :drag-attribute='myAttribute'
             :select-attribute='myAttribute'
+            :disabled-attribute='disabledAttribute'
             :month-labels='monthLabels'
             :weekday-labels='weekdayLabels'
             :theme-styles='themeStyles'
@@ -139,6 +140,9 @@ export default {
           component: PopoverReservaAcomod
         }
       },
+      /* disabledAttribute: {
+
+      }, */
       monthLabels: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
       weekdayLabels: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'],
       themeStyles: {
@@ -341,7 +345,7 @@ export default {
       & .__title {
         padding: 0 7% 2rem 7%;
         line-height: 35px;
-        font-size: 27px;
+        font-size: 26px;
         font-weight: 700;
       }
       & .info-box {
@@ -350,7 +354,7 @@ export default {
         padding: 0 7%;
         & .info-item {
           display: flex;
-          margin-bottom: 1rem;
+          margin-bottom: 1.5rem;
           & .__info-number {
             font-size: 27px;
             font-weight: 600;
@@ -359,8 +363,6 @@ export default {
             margin-right: .6rem;
           }
           & .__info-text {
-            font-size: 17px;
-            font-weight: 400;
             line-height: 24px;
           }
           & .highlight {

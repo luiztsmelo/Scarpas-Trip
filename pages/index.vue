@@ -263,7 +263,7 @@ export default {
         align-items: center;
         padding: 0 7% 1.3rem 7%;
         & .__title {
-          font-size: 24px;
+          font-size: 23px;
           font-weight: 700;
         }
         & .see-all {
