@@ -81,7 +81,8 @@
             is-required
             mode='range'
             v-model='dataReservaAcomod'
-            :available-dates='availableDates'
+            :min-date='today'
+            :disabled-dates='disabledDates'
             :drag-attribute='myAttribute'
             :select-attribute='myAttribute'
             :disabled-attribute='disabledAttribute'
@@ -261,8 +262,20 @@ export default {
     hash () {
       return this.$route.hash
     },
-    availableDates () {
-      return {start: new Date(), end: null}
+    today () {
+      let dd = new Date().getDate()
+      let mm = new Date().getMonth() + 1
+      let yyyy = new Date().getFullYear()
+      if (dd < 10) {
+        dd = '0' + dd
+      } 
+      if (mm < 10) {
+        mm = '0' + mm
+      } 
+      return yyyy + '-' + mm + '-' + dd
+    },
+    disabledDates () {
+      return 
     }
   },
   watch: {
