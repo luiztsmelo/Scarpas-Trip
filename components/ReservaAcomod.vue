@@ -143,7 +143,7 @@ export default {
       disabledAttribute: {
         contentStyle: {
           textDecoration: 'line-through',
-          opacity: 0.5
+          color: '#DADADA'
         },
         // We need to override the default `dayContentHover` theme style set by `v-date-picker`
         contentHoverStyle: {
@@ -185,7 +185,7 @@ export default {
           fontSize: '15px',
         },
         dayCellNotInMonth: {
-          opacity: 0.3,
+          color: '#DADADA'
         },
         dayPopoverContent: {
           background: '#00D8C7',
