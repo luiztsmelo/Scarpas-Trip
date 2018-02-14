@@ -345,7 +345,7 @@ export default {
       & .__title {
         padding: 0 7% 2rem 7%;
         line-height: 35px;
-        font-size: 26px;
+        font-size: 27px;
         font-weight: 700;
       }
       & .info-box {
@@ -363,7 +363,6 @@ export default {
             margin-right: .6rem;
           }
           & .__info-text {
-            line-height: 24px;
           }
           & .highlight {
             color: #00BAAC;
