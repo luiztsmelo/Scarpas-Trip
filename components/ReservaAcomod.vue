@@ -115,9 +115,9 @@
             <button type="button" class="google-btn" @click="googleSignIn()">Google</button>
           </div>
 
-          <h3 style="padding: 1rem 7% 0 7%" v-if="this.$store.state.reservaAcomod.reservante === null">Não se preocupe, só obteremos seu nome e e-mail.</h3>
+          <h3 style="padding: 1rem 7% 0 7%" v-if="this.$store.state.reservaAcomod.reservante === null">Não se preocupe, somente obteremos seu nome e e-mail.</h3>
 
-          <h3 style="padding: 0 7% 0 7%" v-if="$store.state.reservaAcomod.reservante !== null">Ótimo {{ firstName }}! Só mais algumas informações:</h3>
+          <h3 style="padding: 0 7% 0 7%" v-if="$store.state.reservaAcomod.reservante !== null">Só mais algumas informações importantes:</h3>
 
           <div v-if="$store.state.reservaAcomod.reservante !== null">
             <div class="item-form">
@@ -137,6 +137,22 @@
           <button type="button" class="__next-btn" @click="nextBtn3">Continuar</button>
 
         </div><!-- ########## IDENTIFICAÇÃO PG.3 ########## -->
+
+
+
+        <!-- ########## FINALIZAR PG.4 ########## -->
+        <div class="etapa-reserva-box" v-if="$store.state.reservaAcomod4">
+
+          <h3 class="etapas">5 de 5 etapas</h3>
+
+          <h1 class="__title">Excelente escolha {{ firstName }}! Veja se está tudo certo:</h1>
+
+        
+
+
+          <button type="button" class="__next-btn" @click="concluirReserva">Fechar Reserva</button>
+
+        </div><!-- ########## FINALIZAR PG.4 ########## -->
 
 
 
@@ -281,6 +297,9 @@ export default {
         this.$store.commit('m_reservaAcomod3', false), this.$store.commit('m_reservaAcomod4', true), window.location.hash = "reserva5"
       }
     },
+    concluirReserva () {
+
+    }
   },
   computed: {
     acomod () {
@@ -301,16 +320,7 @@ export default {
       return this.$route.hash
     },
     today () {
-      let dd = new Date().getDate()
-      let mm = new Date().getMonth() + 1
-      let yyyy = new Date().getFullYear()
-      if (dd < 10) {
-        dd = '0' + dd
-      } 
-      if (mm < 10) {
-        mm = '0' + mm
-      } 
-      return yyyy + '-' + mm + '-' + dd
+      return new Date().getTime()
     },
     disabledDates () {
       return 

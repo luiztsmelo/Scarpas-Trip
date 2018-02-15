@@ -33,6 +33,7 @@ module.exports = {
   */
   plugins: [
     '~/plugins/firebase',
+    '~/plugins/pagarme',
     '~plugins/vue-progressive-image',
     '~plugins/vue-google-maps',
     '~plugins/vue-croppa',
