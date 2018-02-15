@@ -324,6 +324,7 @@ export default {
   methods: {
     backBtn () {
       window.history.back(1)
+      console.log(window.history)
     },
     closeComods () {
       this.showComods = false

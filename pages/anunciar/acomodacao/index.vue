@@ -22,14 +22,20 @@
       <h3 class="__subitem">Primeiro mês grátis</h3>
       <h3 class="__subitem">Cancele quando quiser</h3>
 
-      <button class="__anunciar-btn" @click="$store.commit('m_cadastroAcomod1', true), $store.commit('m_cadastroAcomod0', false), $store.commit('m_acomodProgressBar', (100/11))">Anunciar</button>
+      <button class="__anunciar-btn" @click="$store.commit('m_cadastroAcomod1', true), $store.commit('m_cadastroAcomod0', false), $store.commit('m_acomodProgressBar', (100/11)), hashAcomod()">Anunciar</button>
 
     </div><!-- PLANO ACOMODAÇÃO -->
 
 
-
-
     <div class="progress-bar" v-show="!$store.state.cadastroAcomod0" :style="'width:' + $store.state.acomodProgressBar + '%'"></div>
+
+
+    <!-- BACK BUTTON -->
+    <div class="back-bar" :style="backBarPage0">
+      <div class="back-box" @click="backBtn">
+        <img class="__back-btn" :style="backBtnPage0" src="../../../assets/img/back.svg" alt="voltar">
+      </div>
+    </div><!-- BACK BUTTON -->
 
 
 
@@ -58,12 +64,14 @@
         </select>
       </div> 
 
-      <div class="back-next"> 
+      <!-- <div class="back-next"> 
         <div class="back-next-body">
           <button type="button" class="__back" @click="backBtn1">Voltar</button>
           <button type="button" class="__next" :style="form1ok" @click="nextBtn1">Próximo</button>
         </div>
-      </div> 
+      </div> -->
+
+      <button type="button" class="__next-btn" :style="form1ok" @click="nextBtn1">Próximo</button>
     
     </form><!-- ########## TIPO DE ACOMODAÇÃO PG.1 ########## -->
 
@@ -83,13 +91,15 @@
         </select>
       </div> 
 
-      <div class="back-next"> 
+      <!-- <div class="back-next"> 
         <div class="back-next-body">
           <button type="button" class="__back" @click="backBtn2">Voltar</button>
           <button type="button" class="__next" :style="form2ok" @click="nextBtn2">Próximo</button>
         </div>
-      </div> 
-    
+      </div>  -->
+
+      <button type="button" class="__next-btn" :style="form2ok" @click="nextBtn2">Próximo</button>
+
     </form><!-- ########## TOTAL DE HÓSPEDES PG.2 ########## -->
 
 
@@ -134,12 +144,14 @@
       </div> 
 
 
-      <div class="back-next"> 
+      <!-- <div class="back-next"> 
         <div class="back-next-body">
           <button type="button" class="__back" @click="backBtn3">Voltar</button>
           <button type="button" class="__next" :style="form3ok" @click="nextBtn3">Próximo</button>
         </div>
-      </div> 
+      </div>  -->
+
+      <button type="button" class="__next-btn" :style="form3ok" @click="nextBtn3">Próximo</button>
     
     </form><!-- ########## CARACTERÍSTICAS PG.3 ########## -->
 
@@ -230,12 +242,14 @@
       
 
 
-      <div class="back-next"> 
+      <!-- <div class="back-next"> 
         <div class="back-next-body">
           <button type="button" class="__back" @click="backBtn4">Voltar</button>
           <button type="button" class="__next" :style="form4ok" @click="nextBtn4">Próximo</button>
         </div>
-      </div> 
+      </div>  -->
+
+      <button type="button" class="__next-btn" :style="form4ok" @click="nextBtn4">Próximo</button>
     
     </form><!-- ########## COMODIDADES PG.4 ########## -->
 
@@ -272,12 +286,14 @@
       </gmap-map>
 
 
-      <div class="back-next"> 
+      <!-- <div class="back-next"> 
         <div class="back-next-body">
           <button type="button" class="__back" @click="backBtn5">Voltar</button>
           <button type="button" class="__next" :style="form5ok" @click="nextBtn5">Próximo</button>
         </div>
-      </div> 
+      </div>  -->
+
+      <button type="button" class="__next-btn" :style="form5ok" @click="nextBtn5">Próximo</button>
     
     </form><!-- ########## LOCAL PG.5 ########## -->
 
@@ -342,21 +358,26 @@
 
       <!-- Preview Image -->
       <div class="after-choose-image" v-show="imageURL1 !== null">
-        <img :src="imageURL1" class="__preview-img" @click="showCroppaModal1=true">
-
-        <div class="image2">
+        <div class="image-box">
+          <div class="__foto-principal">Imagem principal</div>
+          <img :src="imageURL1" class="__preview-img" @click="showCroppaModal1=true">
+        </div>
+        
+        <div class="image-box">
           <img src="./../../../assets/img/add-image.svg" class="__preview-img" v-if="imageURL2 === null" @click="$refs.myCroppa2.chooseFile()" style="padding:2rem">
           <img :src="imageURL2" class="__preview-img" @click="showCroppaModal2=true" v-else>
         </div>
 
       </div><!-- Preview Image -->
 
-      <div class="back-next"> 
+     <!--  <div class="back-next"> 
         <div class="back-next-body">
           <button type="button" class="__back" @click="backBtn6">Voltar</button>
           <button type="button" class="__next" :style="form6ok" @click="nextBtn6">Próximo</button>
         </div>
-      </div> 
+      </div>  -->
+
+      <button type="button" class="__next-btn" :style="form6ok" @click="nextBtn6">Próximo</button>
     
     </form><!-- ########## IMAGEM E VÍDEOS PG.6 ########## -->
 
@@ -379,12 +400,14 @@
       </div> 
 
 
-      <div class="back-next"> 
+      <!-- <div class="back-next"> 
         <div class="back-next-body">
           <button type="button" class="__back" @click="backBtn7">Voltar</button>
           <button type="button" class="__next" :style="form7ok" @click="nextBtn7">Próximo</button>
         </div>
-      </div> 
+      </div>  -->
+
+      <button type="button" class="__next-btn" :style="form7ok" @click="nextBtn7">Próximo</button>
     
     </form><!-- ########## VALOR DA ESTADIA PG.7 ########## -->
 
@@ -407,12 +430,14 @@
 
       <span class="__lenght-calc">{{ titleLength }}</span>
 
-      <div class="back-next"> 
+      <!-- <div class="back-next"> 
         <div class="back-next-body">
           <button type="button" class="__back" @click="backBtn8">Voltar</button>
           <button type="button" class="__next" :style="form8ok" @click="nextBtn8">Próximo</button>
         </div>
-      </div> 
+      </div>  -->
+
+      <button type="button" class="__next-btn" :style="form8ok" @click="nextBtn8">Próximo</button>
     
     </form><!-- ########## TÍTULO PG.8 ########## -->
 
@@ -435,12 +460,14 @@
 
       <span class="__lenght-calc">{{ subtitleLength }}</span> 
 
-      <div class="back-next"> 
+      <!-- <div class="back-next"> 
         <div class="back-next-body">
           <button type="button" class="__back" @click="backBtn9">Voltar</button>
           <button type="button" class="__next" :style="form9ok" @click="nextBtn9">Próximo</button>
         </div>
-      </div> 
+      </div>  -->
+
+      <button type="button" class="__next-btn" :style="form9ok" @click="nextBtn9">Próximo</button>
     
     </form><!-- ########## DESCRIÇÃO PG.9 ########## -->
 
@@ -479,12 +506,14 @@
 
       <!-- <h3 style="padding: .5rem 7%;font-size:16px;line-height:22px">Ao prosseguir você concorda com nossos <span style="color:#64B5F6">Termos de Serviço</span>.</h3> -->
 
-      <div class="back-next"> 
+      <!-- <div class="back-next"> 
         <div class="back-next-body">
           <button type="button" class="__back" @click="backBtn10">Voltar</button>
           <button type="button" class="__next" :style="form10ok" @click="nextBtn10">Próximo</button>
         </div>
-      </div> 
+      </div>  -->
+
+      <button type="button" class="__next-btn" :style="form10ok" @click="nextBtn10">Próximo</button>
     
     </form><!-- ########## IDENTIFICAÇÃO PG.10 ########## -->
 
@@ -497,15 +526,20 @@
 
       <h1 class="__form-title">Investimento</h1>   
 
-      
+      <div class="item-form">
+        <label>Detalhes da Transação</label>
+        <h3>Será cobrada uma taxa mensal de R$49,00.</h3>
+      </div> 
 
 
-      <div class="back-next"> 
+      <!-- <div class="back-next"> 
         <div class="back-next-body">
           <button type="button" class="__back" @click="backBtn11">Voltar</button>
           <button type="button" class="__next" :style="form11ok" @click="concluir">Anunciar</button>
         </div>
-      </div> 
+      </div>  -->
+
+      <button type="button" class="__next-btn" :style="form11ok" @click="concluir">Concluir</button>
     
     </form><!-- ########## INVESTIMENTO PG.11 ########## -->
 
@@ -620,93 +654,124 @@ export default {
     sliderBarracas () { this.$refs.sliderBarracas.click() },
     sliderPier () { this.$refs.sliderPier.click() },
     
-    /* ******************** BACK BUTTONS ******************** */
-    backBtn1 () {
-      this.$store.commit('m_cadastroAcomod1', false), this.$store.commit('m_cadastroAcomod0', true)
-    },
-    backBtn2 () {
-      this.$store.commit('m_cadastroAcomod2', false), this.$store.commit('m_cadastroAcomod1', true)
-    },
-    backBtn3 () {
-      this.$store.commit('m_cadastroAcomod3', false), this.$store.commit('m_cadastroAcomod2', true)
-    },
-    backBtn4 () {
-      this.$store.commit('m_cadastroAcomod4', false), this.$store.commit('m_cadastroAcomod3', true)
-    },
-    backBtn5 () {
-      this.$store.commit('m_cadastroAcomod5', false), this.$store.commit('m_cadastroAcomod4', true)
-    },
-    backBtn6 () {
-      this.$store.commit('m_cadastroAcomod6', false), this.$store.commit('m_cadastroAcomod5', true)
-    },
-    backBtn7 () {
-      this.$store.commit('m_cadastroAcomod7', false), this.$store.commit('m_cadastroAcomod6', true)
-    },
-    backBtn8 () {
-      this.$store.commit('m_cadastroAcomod8', false), this.$store.commit('m_cadastroAcomod7', true)
-    },
-    backBtn9 () {
-      this.$store.commit('m_cadastroAcomod9', false), this.$store.commit('m_cadastroAcomod8', true)
-    },
-    backBtn10 () {
-      this.$store.commit('m_cadastroAcomod10', false), this.$store.commit('m_cadastroAcomod9', true)
-    },
-    backBtn11 () {
-      this.$store.commit('m_cadastroAcomod11', false), this.$store.commit('m_cadastroAcomod10', true)
+    /* ******************** BACK BUTTON ******************** */
+    backBtn () {
+      if (this.$store.state.cadastroAcomod0 === true) {
+        window.history.back(1)
+        this.$store.commit('m_cadastroAcomod0', false)
+      }
+      if (this.$store.state.cadastroAcomod1 === true) {
+        window.history.back(1)
+        this.$store.commit('m_cadastroAcomod1', false)
+        this.$store.commit('m_cadastroAcomod0', true)
+      }
+      if (this.$store.state.cadastroAcomod2 === true) {
+        window.history.back(1)
+        this.$store.commit('m_cadastroAcomod2', false)
+        this.$store.commit('m_cadastroAcomod1', true)
+      }
+      if (this.$store.state.cadastroAcomod3 === true) {
+        window.history.back(1)
+        this.$store.commit('m_cadastroAcomod3', false)
+        this.$store.commit('m_cadastroAcomod2', true)
+      }
+      if (this.$store.state.cadastroAcomod4 === true) {
+        window.history.back(1)
+        this.$store.commit('m_cadastroAcomod4', false)
+        this.$store.commit('m_cadastroAcomod3', true)
+      }
+      if (this.$store.state.cadastroAcomod5 === true) {
+        window.history.back(1)
+        this.$store.commit('m_cadastroAcomod5', false)
+        this.$store.commit('m_cadastroAcomod4', true)
+      }
+      if (this.$store.state.cadastroAcomod6 === true) {
+        window.history.back(1)
+        this.$store.commit('m_cadastroAcomod6', false)
+        this.$store.commit('m_cadastroAcomod5', true)
+      }
+      if (this.$store.state.cadastroAcomod7 === true) {
+        window.history.back(1)
+        this.$store.commit('m_cadastroAcomod7', false)
+        this.$store.commit('m_cadastroAcomod6', true)
+      }
+      if (this.$store.state.cadastroAcomod8 === true) {
+        window.history.back(1)
+        this.$store.commit('m_cadastroAcomod8', false)
+        this.$store.commit('m_cadastroAcomod7', true)
+      }
+      if (this.$store.state.cadastroAcomod9 === true) {
+        window.history.back(1)
+        this.$store.commit('m_cadastroAcomod9', false)
+        this.$store.commit('m_cadastroAcomod8', true)
+      }
+      if (this.$store.state.cadastroAcomod10 === true) {
+        window.history.back(1)
+        this.$store.commit('m_cadastroAcomod10', false)
+        this.$store.commit('m_cadastroAcomod9', true)
+      }
+      if (this.$store.state.cadastroAcomod11 === true) {
+        window.history.back(1)
+        this.$store.commit('m_cadastroAcomod11', false)
+        this.$store.commit('m_cadastroAcomod10', true)
+      }
     },
     /* ******************** NEXT BUTTONS ******************** */
+    hashAcomod () {
+      window.location.hash = "cad1"
+    },
     nextBtn1 () {
       if (this.$store.state.acomodData.tipoAcomod !== null) {
-        this.$store.commit('m_cadastroAcomod1', false), this.$store.commit('m_cadastroAcomod2', true), this.$store.commit('m_acomodProgressBar', (100/11)*2)
+        this.$store.commit('m_cadastroAcomod1', false), this.$store.commit('m_cadastroAcomod2', true), this.$store.commit('m_acomodProgressBar', (100/11)*2), window.location.hash = "cad2"
       }
     },
     nextBtn2 () {
       if (this.$store.state.acomodData.totalHospedes !== null) {
-        this.$store.commit('m_cadastroAcomod2', false), this.$store.commit('m_cadastroAcomod3', true), this.$store.commit('m_acomodProgressBar', (100/11)*3)
+        this.$store.commit('m_cadastroAcomod2', false), this.$store.commit('m_cadastroAcomod3', true), this.$store.commit('m_acomodProgressBar', (100/11)*3), window.location.hash = "cad3"
       }
     },
     nextBtn3 () {
       if (1<2) {
-        this.$store.commit('m_cadastroAcomod3', false), this.$store.commit('m_cadastroAcomod4', true), this.$store.commit('m_acomodProgressBar', (100/11)*4), this.scrollTop()
+        this.$store.commit('m_cadastroAcomod3', false), this.$store.commit('m_cadastroAcomod4', true), this.$store.commit('m_acomodProgressBar', (100/11)*4), this.scrollTop(), window.location.hash = "cad4"
       }
     },
     nextBtn4 () {
       if (1<2) {
-        this.$store.commit('m_cadastroAcomod4', false), this.$store.commit('m_cadastroAcomod5', true), this.$store.commit('m_acomodProgressBar', (100/11)*5), this.scrollTop()
+        this.$store.commit('m_cadastroAcomod4', false), this.$store.commit('m_cadastroAcomod5', true), this.$store.commit('m_acomodProgressBar', (100/11)*5), this.scrollTop(), window.location.hash = "cad5"
       }
     },
     nextBtn5 () {
       if (this.$store.state.acomodPlace !== null) {
-        this.$store.commit('m_cadastroAcomod5', false), this.$store.commit('m_cadastroAcomod6', true), this.$store.commit('m_acomodProgressBar', (100/11)*6)
+        this.$store.commit('m_cadastroAcomod5', false), this.$store.commit('m_cadastroAcomod6', true), this.$store.commit('m_acomodProgressBar', (100/11)*6), window.location.hash = "cad6"
       } else {
         alert('Adicione um endereço')
       }
     },
     nextBtn6 () {
       if (this.imageURL1 !== null) {
-        this.$store.commit('m_cadastroAcomod6', false), this.$store.commit('m_cadastroAcomod7', true), this.$store.commit('m_acomodProgressBar', (100/11)*7)
+        this.$store.commit('m_cadastroAcomod6', false), this.$store.commit('m_cadastroAcomod7', true), this.$store.commit('m_acomodProgressBar', (100/11)*7), window.location.hash = "cad7"
       } else {
         alert('Adicione pelo menos uma imagem')
       }
     },
     nextBtn7 () {
       if (1<2) {
-        this.$store.commit('m_cadastroAcomod7', false), this.$store.commit('m_cadastroAcomod8', true), this.$store.commit('m_acomodProgressBar', (100/11)*8)
+        this.$store.commit('m_cadastroAcomod7', false), this.$store.commit('m_cadastroAcomod8', true), this.$store.commit('m_acomodProgressBar', (100/11)*8), window.location.hash = "cad8"
       }
     },
     nextBtn8 () {
       if (this.$store.state.acomodData.title !== '') {
-        this.$store.commit('m_cadastroAcomod8', false), this.$store.commit('m_cadastroAcomod9', true), this.$store.commit('m_acomodProgressBar', (100/11)*9)
+        this.$store.commit('m_cadastroAcomod8', false), this.$store.commit('m_cadastroAcomod9', true), this.$store.commit('m_acomodProgressBar', (100/11)*9), window.location.hash = "cad9"
       }
     },
     nextBtn9 () {
       if (this.$store.state.acomodData.subtitle !== '') {
-        this.$store.commit('m_cadastroAcomod9', false), this.$store.commit('m_cadastroAcomod10', true), this.$store.commit('m_acomodProgressBar', (100/11)*10)
+        this.$store.commit('m_cadastroAcomod9', false), this.$store.commit('m_cadastroAcomod10', true), this.$store.commit('m_acomodProgressBar', (100/11)*10), window.location.hash = "cad10"
       }
     },
     nextBtn10 () {
       if (this.$store.state.acomodData.celular.length === 15) {
-        this.$store.commit('m_cadastroAcomod10', false), this.$store.commit('m_cadastroAcomod11', true), this.$store.commit('m_acomodProgressBar', (100/11)*11)
+        this.$store.commit('m_cadastroAcomod10', false), this.$store.commit('m_cadastroAcomod11', true), this.$store.commit('m_acomodProgressBar', (100/11)*11), window.location.hash = "cad11"
       }
     },
     concluir () {
@@ -792,6 +857,15 @@ export default {
     })
   },
   computed: {
+    hash () {
+      return this.$route.hash
+    },
+    backBarPage0 () {
+      return this.$store.state.cadastroAcomod0 === true ? 'background: transparent' : 'background: white'
+    },
+    backBtnPage0 () {
+      return this.$store.state.cadastroAcomod0 === true ? 'filter: invert(0%)' : ''
+    },
     markerUrl () {
       return 'https://firebasestorage.googleapis.com/v0/b/escarpas-trip.appspot.com/o/utils%2Fmarker.svg?alt=media&token=fcbfd76e-ee93-41e8-a816-98906e19859b'
     },
@@ -860,6 +934,68 @@ export default {
       return 1<2 ? 'background:#00D8C7;cursor:pointer' : ''
     }
   },
+  watch: {
+    hash (value) {
+      if (value === '') {
+        this.$store.commit('m_cadastroAcomod0', true)
+        this.$store.commit('m_cadastroAcomod1', false)
+      } 
+      if (value === '#cad1') {
+        this.$store.commit('m_cadastroAcomod0', false)
+        this.$store.commit('m_cadastroAcomod1', true)
+        this.$store.commit('m_cadastroAcomod2', false)
+      } 
+      if (value === '#cad2') {
+        this.$store.commit('m_cadastroAcomod1', false)
+        this.$store.commit('m_cadastroAcomod2', true)
+        this.$store.commit('m_cadastroAcomod3', false)
+      } 
+      if (value === '#cad3') {
+        this.$store.commit('m_cadastroAcomod2', false)
+        this.$store.commit('m_cadastroAcomod3', true)
+        this.$store.commit('m_cadastroAcomod4', false)
+      } 
+      if (value === '#cad4') {
+        this.$store.commit('m_cadastroAcomod3', false)
+        this.$store.commit('m_cadastroAcomod4', true)
+        this.$store.commit('m_cadastroAcomod5', false)
+      } 
+      if (value === '#cad5') {
+        this.$store.commit('m_cadastroAcomod4', false)
+        this.$store.commit('m_cadastroAcomod5', true)
+        this.$store.commit('m_cadastroAcomod6', false)
+      } 
+      if (value === '#cad6') {
+        this.$store.commit('m_cadastroAcomod5', false)
+        this.$store.commit('m_cadastroAcomod6', true)
+        this.$store.commit('m_cadastroAcomod7', false)
+      } 
+      if (value === '#cad7') {
+        this.$store.commit('m_cadastroAcomod6', false)
+        this.$store.commit('m_cadastroAcomod7', true)
+        this.$store.commit('m_cadastroAcomod8', false)
+      } 
+      if (value === '#cad8') {
+        this.$store.commit('m_cadastroAcomod7', false)
+        this.$store.commit('m_cadastroAcomod8', true)
+        this.$store.commit('m_cadastroAcomod9', false)
+      } 
+      if (value === '#cad9') {
+        this.$store.commit('m_cadastroAcomod8', false)
+        this.$store.commit('m_cadastroAcomod9', true)
+        this.$store.commit('m_cadastroAcomod10', false)
+      } 
+      if (value === '#cad10') {
+        this.$store.commit('m_cadastroAcomod9', false)
+        this.$store.commit('m_cadastroAcomod10', true)
+        this.$store.commit('m_cadastroAcomod11', false)
+      } 
+      if (value === '#cad11') {
+        this.$store.commit('m_cadastroAcomod10', false)
+        this.$store.commit('m_cadastroAcomod11', true)
+      } 
+    }
+  },
   beforeRouteLeave (to, from, next) {
     if (this.$store.state.showFoobar === false) {
       this.$store.commit('m_showFoobar', true)
@@ -876,17 +1012,35 @@ export default {
 @import url('../../../assets/css/switcher.css');
 
 .anunciar-acomodacao {
-  margin-top: 3.2rem;
   background: #00D8C7;
   color: white;
   transition: var(--main-transition);
   & .progress-bar {
     position: fixed;
-    top: 3.2rem;
+    top: 0;
     height: 3px;
     z-index: 8888;
     background: #00D8C7;
     transition: all .3s ease;
+  }
+  & .back-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width:  100%;
+    height: 3rem;
+    & .back-box {
+      display: inline-flex;
+      align-items: center;
+      height: 100%;
+      padding: 0 7%;
+      & .__back-btn {
+        cursor: pointer;
+        width: 1.07rem;
+        height: auto;
+        filter: invert(75%);
+      }
+    }
   }
   /* ******************** PLANO ACOMODAÇÃO ******************** */
   & .plano-acomodacao {
@@ -894,7 +1048,7 @@ export default {
     flex-flow: column;
     align-items: center;
     & .__img-header {
-      margin: 2rem 0;
+      margin: 4rem 0 2rem 0;
       width: 6rem;
       height: auto;
       filter: grayscale(100%) brightness(250%);
@@ -952,15 +1106,13 @@ export default {
     color: var(--color01);
     padding: 0 0 5.5rem 0;
     & .__form-title {
-      padding: 3rem 7% 1.5rem 7%;
+      padding: 4rem 7% 1.5rem 7%;
       line-height: 35px;
       font-size: 28px;
       font-weight: 700;
       z-index: 999;
     }
-    & h3 {
-      font-size: var(--fontSizeAnuncioText);
-    }
+
     & textarea {
       padding: 0 7%;
       margin-bottom: .5rem;
@@ -1081,18 +1233,58 @@ export default {
       padding: 0 calc(7% - .3rem);
       display: flex;
       flex-flow: row wrap;
-      & .__preview-img {
+      & .image-box {
+        position: relative;
         margin: 0 .3rem;
         width: 145px;
         height: 97px;
-        border-radius: 2px;
+        & .__foto-principal {
+          position: absolute;
+          color: white;
+          background: rgba(0, 0, 0, 0.4);
+          font-size: 12px;
+          padding: .2rem 0;
+          width: 100%;
+          text-align: center;
+        }
+        & .__preview-img {
+          width: 100%;
+          height: 100%;
+          border-radius: 2px;
+        }
+      }
+      
+    }
+    & .gmap-autocomplete-box {
+      margin: 1.5rem 7% 1rem 7%;
+      & .__gmap-autocomplete {
+        font-size: calc(var(--fontSizeAnuncioText) + 1px);
+        font-weight: 400;
+        color: var(--color01);
+        width: 100%;
+        border: none;
+        border-bottom: 1px solid rgb(222, 222, 222);
+        padding: .5rem 0 .6rem 0;
+        outline: none;
       }
     }
     & .signin-btns {
       display: flex;
       padding: 0 7%;
     }
-    & .back-next {
+    & .__next-btn {
+      position: fixed;
+      bottom: 1.3rem;
+      right: 7%;
+      font-size: 16px;
+      font-weight: 600;
+      background: rgb(222, 222, 222);
+      color: white;
+      height: 2.5rem;
+      width:  9rem;
+      border-radius: 4px;
+    }
+    /* & .back-next {
       position: fixed;
       z-index: 3;
       bottom: 1rem;
@@ -1112,14 +1304,14 @@ export default {
           height: 3rem;
         }
         & .__back {
-          font-size: var(--fontSizeAnuncioText);
+          font-size: 16px;
           font-weight: 500;
           border-radius: 2rem 0 0 2rem;
           cursor: pointer;
           background: white;
         }
         & .__next {
-          font-size: var(--fontSizeAnuncioText);
+          font-size: 16px;
           font-weight: 500;
           border-radius: 0 2rem 2rem 0;
           transition: all .3s ease;
@@ -1128,20 +1320,7 @@ export default {
           color: white;
         }
       }
-    }
-    & .gmap-autocomplete-box {
-      margin: 1.5rem 7% 1rem 7%;
-      & .__gmap-autocomplete {
-        font-size: calc(var(--fontSizeAnuncioText) + 1px);
-        font-weight: 400;
-        color: var(--color01);
-        width: 100%;
-        border: none;
-        border-bottom: 1px solid rgb(222, 222, 222);
-        padding: .5rem 0 .6rem 0;
-        outline: none;
-      }
-    }
+    } */
   }
 }
 

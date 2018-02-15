@@ -111,6 +111,12 @@ export default {
       vm.$store.state.offFoobar3 = true
       vm.$store.state.offFoobar4 = false
       vm.$store.state.offFoobar5 = true
+      if (vm.$store.state.showFoobar === false) {
+        vm.$store.commit('m_showFoobar', true)
+      }
+      if (vm.$store.state.showNavbar === false) {
+        vm.$store.commit('m_showNavbar', true)
+      }
     })
   }
 }

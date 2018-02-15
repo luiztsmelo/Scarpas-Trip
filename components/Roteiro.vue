@@ -158,7 +158,7 @@ export default {
         }
       }
       & img {
-        width: 1.13rem;
+        width: 1.12rem;
         height: auto;
         /* filter: invert(80%); */
       }
