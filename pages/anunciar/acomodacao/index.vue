@@ -526,31 +526,35 @@
 
       <h1 class="__form-title">Investimento</h1>   
 
-      <h3 style="padding: 0 7%">{{ firstName }}, cobraremos um valor mensal de R$49,00. O primeiro será gratuito e não haverá multa caso queira cancelar. Pagar com:</h3>
+      <h3 style="padding: 0 7%">{{ firstName }}, cobraremos um valor mensal de R$49,00. O primeiro mês será gratuito e não haverá multa caso queira cancelar. Pagar com:</h3>
 
       <div class="payment-box">
-        <div class="item-form-payment">
+        <div class="item-form-payment" @click="showCreditCard = true">
           <span class="__payment-type">Cartão de Crédito</span>
           <img class="__payment-img" src="../../../assets/img/credit-card.svg">
         </div>
+
+        <transition name="payment-animation">
+          <div class="credit-card" v-show="showCreditCard" @click="showCreditCard = false">
+            <div class="credit-card-body" @click.stop="">
+              <div class="item-form">
+                <label>Número do Cartão</label>
+                <masked-input
+                  type="tel"
+                  :mask="[/\d/, /\d/, /\d/, /\d/, ' ', /\d/, /\d/, /\d/, /\d/, ' ', /\d/, /\d/, /\d/, /\d/, ' ', /\d/, /\d/, /\d/, /\d/]"
+                  :guide="false">
+                </masked-input>
+              </div>
+            </div>
+          </div>
+        </transition>
+
         <div class="item-form-payment" style="border:none">
           <span class="__payment-type">Boleto</span>
           <img class="__payment-img" src="../../../assets/img/boleto.svg">
         </div>
+
       </div>
-      
-
-
-      <!-- <div class="credit-card">
-        <div class="item-form">
-          <label>Número do Cartão</label>
-          <masked-input
-            type="tel"
-            :mask="[/\d/, /\d/, /\d/, /\d/, ' ', /\d/, /\d/, /\d/, /\d/, ' ', /\d/, /\d/, /\d/, /\d/, ' ', /\d/, /\d/, /\d/, /\d/]"
-            :guide="false">
-          </masked-input>
-        </div>
-      </div> -->
 
 
       <!-- <div class="back-next"> 
@@ -595,6 +599,7 @@ export default {
       googleMapsInitialized: false,
       showCroppaModal1: false,
       showCroppaModal2: false,
+      showCreditCard: false,
       imageURL1: null,
       imageURL2: null
     }
@@ -952,7 +957,7 @@ export default {
       return this.$store.state.acomodData.celular.length === 15 ? 'background:#00D8C7;cursor:pointer' : ''
     },
     form11ok () {
-      return 1<2 ? 'background:#00D8C7;cursor:pointer' : ''
+      return 1>2 ? 'background:#00D8C7;cursor:pointer' : ''
     }
   },
   watch: {
@@ -1216,6 +1221,31 @@ export default {
           height: auto;
         }
       }
+      & .credit-card {
+        position: fixed;
+        z-index: 9999;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0);
+        transition: all .3s ease;
+        & .credit-card-body {
+          position: relative;
+          top: 50%;
+          transform: translateY(-50%);
+          display: flex;
+          flex-flow: column;
+          background: #FF7D6C;
+          color: white;
+          border-radius: 10px;
+          margin: 1rem 0 0 0;
+          width:  90%;
+          height: 42%;
+          margin-left: 5%;
+          box-shadow: 3px 3px 10px 3px rgba(0,0,0,0.2);
+        }
+      }
     }
     & .modal-croppa {
       background: rgba(0, 0, 0, 0.84);
@@ -1359,5 +1389,11 @@ export default {
       }
     } */
   }
+}
+
+/* TRANSITIONS */
+.payment-animation-enter,
+.payment-animation-leave-active {
+  transform: scale(0.1);
 }
 </style>
