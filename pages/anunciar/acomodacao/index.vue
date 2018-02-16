@@ -1208,11 +1208,11 @@ export default {
         border-bottom: 1px solid rgb(227, 227, 227);
         padding: 1rem 0;
         & .__payment-type {
-          font-size: 17px;
+          font-size: 18px;
           font-weight: 700;
         }
         & .__payment-img {
-          width: 1.6rem;
+          width: 1.7rem;
           height: auto;
         }
       }
