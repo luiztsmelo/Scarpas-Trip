@@ -1200,13 +1200,13 @@ export default {
       }
     }
     & .payment-box {
-      padding: 0 7%;
+      padding: 1rem 7% 0 7%;
       & .item-form-payment {
         display: flex;
         justify-content: space-between;
         align-items: center;
         border-bottom: 1px solid rgb(227, 227, 227);
-        padding: 1.2rem 0;
+        padding: 1rem 0;
         & .__payment-type {
           font-size: 17px;
           font-weight: 700;
