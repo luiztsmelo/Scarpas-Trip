@@ -1243,7 +1243,7 @@ export default {
           width:  90%;
           height: 42%;
           margin-left: 5%;
-          box-shadow: 3px 3px 10px 3px rgba(0,0,0,0.2);
+          box-shadow: 3px 3px 20px 2px rgba(0,0,0,0.3);
         }
       }
     }
@@ -1394,6 +1394,6 @@ export default {
 /* TRANSITIONS */
 .payment-animation-enter,
 .payment-animation-leave-active {
-  transform: scale(0.1);
+  transform: scale(0);
 }
 </style>
