@@ -488,7 +488,7 @@
         <button type="button" class="google-btn" @click="googleSignIn()">Google</button>
       </div>
 
-      <h3 style="padding: .5rem 7% 0 7%" v-if="$store.state.acomodData.proprietario !== null">Ótimo {{ firstName }}! Só mais algumas informações:</h3>
+      <h3 style="padding: 0 7%" v-if="$store.state.acomodData.proprietario !== null">Ótimo {{ firstName }}! Só mais algumas informações:</h3>
 
       <div v-if="$store.state.acomodData.proprietario !== null">
         <div class="item-form">
@@ -526,11 +526,17 @@
 
       <h1 class="__form-title">Investimento</h1>   
 
-      <div class="item-form">
-        <label>Detalhes da Transação</label>
-        <h3>Será cobrada uma taxa mensal de R$49,00.</h3>
-      </div> 
+      <h3 style="padding: 0 7%">{{ firstName }}, cobraremos um valor mensal de R$49,00. O primeiro será gratuito e não haverá multa caso queira cancelar. Pagar com:</h3>
 
+      <div class="item-form">
+        <label>Cartão de Crédito</label>
+        <!-- <h3>Número do Cartão</h3> -->
+        <masked-input
+          type="tel"
+          :mask="[/\d/, /\d/, /\d/, /\d/, ' ', /\d/, /\d/, /\d/, /\d/, ' ', /\d/, /\d/, /\d/, /\d/, ' ', /\d/, /\d/, /\d/, /\d/]"
+          :guide="false">
+        </masked-input>
+        </div>
 
       <!-- <div class="back-next"> 
         <div class="back-next-body">
@@ -1112,7 +1118,6 @@ export default {
       font-weight: 700;
       z-index: 999;
     }
-
     & textarea {
       padding: 0 7%;
       margin-bottom: .5rem;
@@ -1253,7 +1258,6 @@ export default {
           border-radius: 2px;
         }
       }
-      
     }
     & .gmap-autocomplete-box {
       margin: 1.5rem 7% 1rem 7%;
