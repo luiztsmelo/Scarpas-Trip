@@ -528,15 +528,30 @@
 
       <h3 style="padding: 0 7%">{{ firstName }}, cobraremos um valor mensal de R$49,00. O primeiro será gratuito e não haverá multa caso queira cancelar. Pagar com:</h3>
 
-      <div class="item-form">
-        <label>Cartão de Crédito</label>
-        <!-- <h3>Número do Cartão</h3> -->
-        <masked-input
-          type="tel"
-          :mask="[/\d/, /\d/, /\d/, /\d/, ' ', /\d/, /\d/, /\d/, /\d/, ' ', /\d/, /\d/, /\d/, /\d/, ' ', /\d/, /\d/, /\d/, /\d/]"
-          :guide="false">
-        </masked-input>
+      <div class="payment-box">
+        <div class="item-form-payment">
+          <span class="__payment-type">Cartão de Crédito</span>
+          <img class="__payment-img" src="../../../assets/img/credit-card.svg">
         </div>
+        <div class="item-form-payment" style="border:none">
+          <span class="__payment-type">Boleto</span>
+          <img class="__payment-img" src="../../../assets/img/boleto.svg">
+        </div>
+      </div>
+      
+
+
+      <!-- <div class="credit-card">
+        <div class="item-form">
+          <label>Número do Cartão</label>
+          <masked-input
+            type="tel"
+            :mask="[/\d/, /\d/, /\d/, /\d/, ' ', /\d/, /\d/, /\d/, /\d/, ' ', /\d/, /\d/, /\d/, /\d/, ' ', /\d/, /\d/, /\d/, /\d/]"
+            :guide="false">
+          </masked-input>
+        </div>
+      </div> -->
+
 
       <!-- <div class="back-next"> 
         <div class="back-next-body">
@@ -1024,7 +1039,7 @@ export default {
   & .progress-bar {
     position: fixed;
     top: 0;
-    height: 3px;
+    height: 4px;
     z-index: 8888;
     background: #00D8C7;
     transition: all .3s ease;
@@ -1184,6 +1199,24 @@ export default {
         }
       }
     }
+    & .payment-box {
+      padding: 0 7%;
+      & .item-form-payment {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid rgb(227, 227, 227);
+        padding: 1.2rem 0;
+        & .__payment-type {
+          font-size: 17px;
+          font-weight: 700;
+        }
+        & .__payment-img {
+          width: 1.6rem;
+          height: auto;
+        }
+      }
+    }
     & .modal-croppa {
       background: rgba(0, 0, 0, 0.84);
       width:  100%;
@@ -1327,5 +1360,4 @@ export default {
     } */
   }
 }
-
 </style>
