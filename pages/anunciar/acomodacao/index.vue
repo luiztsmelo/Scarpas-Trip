@@ -45,7 +45,7 @@
 
 
     <!-- ########## TIPO DE ACOMODAÇÃO PG.1 ########## -->
-    <form class="cadastro-acomodacao" v-show="$store.state.cadastroAcomod1">
+    <form class="cadastro-acomodacao" v-if="$store.state.cadastroAcomod1">
 
       <h1 class="__form-title">Que tipo de propriedade deseja anunciar?</h1>
 
@@ -79,7 +79,7 @@
 
 
     <!-- ########## TOTAL DE HÓSPEDES PG.2 ########## -->
-    <form class="cadastro-acomodacao" v-show="$store.state.cadastroAcomod2">
+    <form class="cadastro-acomodacao" v-if="$store.state.cadastroAcomod2">
 
       <h1 class="__form-title">Quantas pessoas podem se hospedar?</h1>
 
@@ -106,7 +106,7 @@
 
 
     <!-- ########## CARACTERÍSTICAS PG.3 ########## -->
-    <form class="cadastro-acomodacao" v-show="$store.state.cadastroAcomod3">
+    <form class="cadastro-acomodacao" v-if="$store.state.cadastroAcomod3">
 
       <h1 class="__form-title">Características físicas {{ tipoAcomodText }}</h1>
 
@@ -159,7 +159,7 @@
 
 
     <!-- ########## COMODIDADES PG.4 ########## -->
-    <form class="cadastro-acomodacao" v-show="$store.state.cadastroAcomod4">
+    <form class="cadastro-acomodacao" v-if="$store.state.cadastroAcomod4">
 
       <h1 class="__form-title">Quais comodidades são oferecidas?</h1>
 
@@ -257,7 +257,7 @@
 
 
     <!-- ########## LOCAL PG.5 ########## -->
-    <form class="cadastro-acomodacao" v-show="$store.state.cadastroAcomod5">
+    <form class="cadastro-acomodacao" v-if="$store.state.cadastroAcomod5">
 
       <h1 class="__form-title">Qual a localização?</h1>
 
@@ -301,7 +301,7 @@
 
 
     <!-- ########## IMAGEM E VÍDEOS PG.6 ########## -->
-    <form class="cadastro-acomodacao" v-show="$store.state.cadastroAcomod6">
+    <form class="cadastro-acomodacao" v-if="$store.state.cadastroAcomod6">
 
       <h1 class="__form-title">Adicione Imagens e Vídeo</h1>
 
@@ -385,7 +385,7 @@
 
 
     <!-- ########## VALOR DA ESTADIA PG.7 ########## -->
-    <form class="cadastro-acomodacao" v-show="$store.state.cadastroAcomod7">
+    <form class="cadastro-acomodacao" v-if="$store.state.cadastroAcomod7">
 
       <h1 class="__form-title">Qual será o valor da diária?</h1>
 
@@ -415,7 +415,7 @@
 
 
     <!-- ########## TÍTULO PG.8 ########## -->
-    <form class="cadastro-acomodacao" v-show="$store.state.cadastroAcomod8">
+    <form class="cadastro-acomodacao" v-if="$store.state.cadastroAcomod8">
 
       <h1 class="__form-title">Dê um título para seu anúncio</h1>
 
@@ -445,7 +445,7 @@
 
 
     <!-- ########## DESCRIÇÃO PG.9 ########## -->
-    <form class="cadastro-acomodacao" v-show="$store.state.cadastroAcomod9">
+    <form class="cadastro-acomodacao" v-if="$store.state.cadastroAcomod9">
 
       <h1 class="__form-title">Descreva seu anúncio</h1>   
 
@@ -476,7 +476,7 @@
 
 
     <!-- ########## IDENTIFICAÇÃO PG.10 ########## -->
-    <form class="cadastro-acomodacao" v-show="$store.state.cadastroAcomod10">
+    <form class="cadastro-acomodacao" v-if="$store.state.cadastroAcomod10">
 
       <h1 class="__form-title">Sua identificação</h1>   
 
@@ -522,7 +522,7 @@
 
 
     <!-- ########## INVESTIMENTO PG.11 ########## -->
-    <form class="cadastro-acomodacao" v-show="$store.state.cadastroAcomod11">
+    <form class="cadastro-acomodacao" v-if="$store.state.cadastroAcomod11">
 
       <h1 class="__form-title">Investimento</h1>   
 
