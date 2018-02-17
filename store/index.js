@@ -56,6 +56,12 @@ const store = () => new Vuex.Store({
     blobAcH2J: null,
     blobAcH2W: null,
     acomodData: {/* Atualizar a action */
+      creditCard: {
+        cardNumber: null,
+        cardHolderName: null,
+        cardExpirationDate: null,
+        cardCVV: null
+      },
       acomodID: null,
       userID: null,
       proprietario: null,

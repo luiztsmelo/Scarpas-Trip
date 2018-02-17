@@ -539,6 +539,7 @@
             <label>Número do Cartão</label>
             <masked-input
               type="tel"
+              v-model="$store.state.acomodData.creditCard.cardNumber"
               :mask="[/\d/, /\d/, /\d/, /\d/, ' ', /\d/, /\d/, /\d/, /\d/, ' ', /\d/, /\d/, /\d/, /\d/, ' ', /\d/, /\d/, /\d/, /\d/]"
               :guide="false">
             </masked-input>
@@ -546,7 +547,7 @@
 
           <div class="item-form">
             <label>Seu nome no Cartão</label>
-            <input type="text" pattern="[A-Za-z]">
+            <input type="text" pattern="[A-Za-z]" v-model="$store.state.acomodData.creditCard.cardHolderName">
           </div>
 
           <div class="flex-row" style="display: flex; transform: translateY(-1.7rem)">
@@ -554,6 +555,7 @@
               <label>Validade</label>
               <masked-input
                 type="tel"
+                v-model="$store.state.acomodData.creditCard.cardExpirationDate"
                 :mask="[/\d/, /\d/, '/', /\d/, /\d/]"
                 :guide="false">
               </masked-input>
@@ -562,6 +564,7 @@
               <label>CVV*</label>
               <masked-input
                 type="tel"
+                v-model="$store.state.acomodData.creditCard.cardCVV"
                 :mask="[/\d/, /\d/, /\d/]"
                 :guide="false">
               </masked-input>
