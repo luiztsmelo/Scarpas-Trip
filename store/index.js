@@ -57,6 +57,7 @@ const store = () => new Vuex.Store({
     blobAcH2W: null,
     acomodData: {/* Atualizar a action */
       creditCard: {
+        amount: 4990,
         cardNumber: null,
         cardHolderName: null,
         cardExpirationDate: null,

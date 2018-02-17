@@ -538,6 +538,7 @@
           <div class="item-form">
             <label>Número do Cartão</label>
             <masked-input
+              class="cardNumberInput"
               type="tel"
               v-model="$store.state.acomodData.creditCard.cardNumber"
               :mask="[/\d/, /\d/, /\d/, /\d/, ' ', /\d/, /\d/, /\d/, /\d/, ' ', /\d/, /\d/, /\d/, /\d/, ' ', /\d/, /\d/, /\d/, /\d/]"
@@ -546,7 +547,7 @@
           </div>
 
           <div class="item-form">
-            <label>Seu nome no Cartão</label>
+            <label>Nome impresso no Cartão</label>
             <input type="text" pattern="[A-Za-z]" v-model="$store.state.acomodData.creditCard.cardHolderName">
           </div>
 
@@ -561,7 +562,7 @@
               </masked-input>
             </div>
             <div class="item-form">
-              <label>CVV*</label>
+              <label>CVC*</label>
               <masked-input
                 type="tel"
                 v-model="$store.state.acomodData.creditCard.cardCVV"
@@ -1193,6 +1194,7 @@ export default {
         font-size: 15px;
       }
       & input {
+        position: relative;
         width: 100%;
         font-size: var(--fontSizeAnuncioText);
         font-weight: 400;
@@ -1237,11 +1239,11 @@ export default {
         align-items: center;
         padding: 1rem 0 0 0;
         & .__payment-type {
-          font-size: 18px;
+          font-size: 21px;
           font-weight: 700;
         }
         & .__payment-img {
-          width: 1.7rem;
+          width: 1.75rem;
           height: auto;
         }
       }
