@@ -497,9 +497,8 @@
             type="tel"
             v-model="$store.state.acomodData.celular"
             :mask="['(', /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]"
-            :guide="true"
-            placeholder="(__) _____-____"
-            placeholderChar="_">
+            :guide="false"
+            placeholder="(  )      -    ">
           </masked-input>
         </div>
       </div>
@@ -534,28 +533,51 @@
           <img class="__payment-img" src="../../../assets/img/credit-card.svg">
         </div>
 
-        <transition name="payment-animation">
-          <div class="credit-card" v-show="showCreditCard" @click="showCreditCard = false">
-            <div class="credit-card-body" @click.stop="">
-              <div class="item-form">
-                <label>Número do Cartão</label>
-                <masked-input
-                  type="tel"
-                  :mask="[/\d/, /\d/, /\d/, /\d/, ' ', /\d/, /\d/, /\d/, /\d/, ' ', /\d/, /\d/, /\d/, /\d/, ' ', /\d/, /\d/, /\d/, /\d/]"
-                  :guide="false">
-                </masked-input>
-              </div>
+        <div class="credit-card">
+
+          <div class="item-form">
+            <label>Número do Cartão</label>
+            <masked-input
+              type="tel"
+              :mask="[/\d/, /\d/, /\d/, /\d/, ' ', /\d/, /\d/, /\d/, /\d/, ' ', /\d/, /\d/, /\d/, /\d/, ' ', /\d/, /\d/, /\d/, /\d/]"
+              :guide="false">
+            </masked-input>
+          </div>
+
+          <div class="item-form">
+            <label>Seu nome no Cartão</label>
+            <input type="text" pattern="[A-Za-z]">
+          </div>
+
+          <div class="flex-row" style="display: flex; transform: translateY(-1.7rem)">
+            <div class="item-form">
+              <label>Validade</label>
+              <masked-input
+                type="tel"
+                :mask="[/\d/, /\d/, '/', /\d/, /\d/]"
+                :guide="false">
+              </masked-input>
+            </div>
+            <div class="item-form">
+              <label>CVV*</label>
+              <masked-input
+                type="tel"
+                :mask="[/\d/, /\d/, /\d/]"
+                :guide="false">
+              </masked-input>
             </div>
           </div>
-        </transition>
 
-        <div class="item-form-payment" style="border:none">
+        </div>
+
+        <!-- <div class="item-form-payment">
           <span class="__payment-type">Boleto</span>
           <img class="__payment-img" src="../../../assets/img/boleto.svg">
-        </div>
+        </div> -->
 
       </div>
 
+      
 
       <!-- <div class="back-next"> 
         <div class="back-next-body">
@@ -599,7 +621,6 @@ export default {
       googleMapsInitialized: false,
       showCroppaModal1: false,
       showCroppaModal2: false,
-      showCreditCard: false,
       imageURL1: null,
       imageURL2: null
     }
@@ -1205,13 +1226,13 @@ export default {
       }
     }
     & .payment-box {
-      padding: 1rem 7% 0 7%;
+      padding-top: 1rem;
       & .item-form-payment {
+        margin: 0 7%;
         display: flex;
         justify-content: space-between;
         align-items: center;
-        border-bottom: 1px solid rgb(227, 227, 227);
-        padding: 1rem 0;
+        padding: 1rem 0 0 0;
         & .__payment-type {
           font-size: 18px;
           font-weight: 700;
@@ -1222,29 +1243,6 @@ export default {
         }
       }
       & .credit-card {
-        position: fixed;
-        z-index: 9999;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: rgba(0, 0, 0, 0);
-        transition: all .3s ease;
-        & .credit-card-body {
-          position: relative;
-          top: 50%;
-          transform: translateY(-50%);
-          display: flex;
-          flex-flow: column;
-          background: #FF7D6C;
-          color: white;
-          border-radius: 10px;
-          margin: 1rem 0 0 0;
-          width:  90%;
-          height: 42%;
-          margin-left: 5%;
-          box-shadow: 3px 3px 20px 2px rgba(0,0,0,0.3);
-        }
       }
     }
     & .modal-croppa {
@@ -1347,7 +1345,7 @@ export default {
       font-weight: 600;
       background: rgb(222, 222, 222);
       color: white;
-      height: 2.5rem;
+      height: 2.7rem;
       width:  9rem;
       border-radius: 4px;
     }
