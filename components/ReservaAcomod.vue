@@ -490,6 +490,7 @@ export default {
         font-weight: 600;
         background: rgb(222, 222, 222);
         color: white;
+        line-height: 2.6rem;
         height: 2.7rem;
         width:  9rem;
         border-radius: 4px;

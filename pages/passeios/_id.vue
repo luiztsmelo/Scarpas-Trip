@@ -452,6 +452,7 @@ export default {
         font-weight: 600;
         background: #64B5F6;
         color: white;
+        line-height: 2.6rem;
         height: 2.7rem;
         width:  11rem;
         border-radius: 4px;

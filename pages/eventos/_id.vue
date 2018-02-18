@@ -385,6 +385,7 @@ export default {
         font-weight: 600;
         background: #FF7D6C;
         color: white;
+        line-height: 2.6rem;
         height: 2.7rem;
         width:  11rem;
         border-radius: 4px;

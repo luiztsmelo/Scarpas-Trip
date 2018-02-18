@@ -657,6 +657,7 @@ export default {
         font-size: 16px;
         font-weight: 600;
         background: #08C8C1;
+        line-height: 2.6rem;
         color: white;
         height: 2.7rem;
         width:  11rem;
