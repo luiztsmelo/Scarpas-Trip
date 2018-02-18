@@ -156,7 +156,7 @@ export default {
     return {
       swiperOption: {
         slidesPerView: 2,
-        spaceBetween: 13,
+        spaceBetween: 14,
         speed: 300
       }
     }
@@ -288,13 +288,13 @@ export default {
           display: flex;
           padding-left: 7%;
           & .card {
-            min-width: 145px;
-            max-width: 145px;
+            min-width: 153px;
+            max-width: 153px;
             cursor: pointer;
             & .__card-img {
               margin-bottom: .2rem;
               width: 100%;
-              min-height: 97px;
+              min-height: 101px;
               border-radius: 2px;
             }
             & .__card-date {
