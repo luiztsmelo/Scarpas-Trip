@@ -1059,7 +1059,12 @@ export default {
       return this.$store.state.acomodData.celular.length === 15 ? 'background:#00D8C7;cursor:pointer' : ''
     },
     form11ok () {
-      return 1>2 ? 'background:#00D8C7;cursor:pointer' : ''
+      const cardNumber = this.$store.state.acomodData.creditCard.cardNumber
+      const cardHolderName = this.$store.state.acomodData.creditCard.cardHolderName
+      const cardExpirationMonth = this.$store.state.acomodData.creditCard.cardExpirationMonth
+      const cardExpirationYear = this.$store.state.acomodData.creditCard.cardExpirationYear
+      const cardCVV = this.$store.state.acomodData.creditCard.cardCVV
+      return cardNumber.length === 19 && cardHolderName !== '' && cardExpirationMonth !== 'MM' && cardExpirationYear !== 'AA' && cardCVV.length === 3 ? 'background:#00D8C7;cursor:pointer' : ''
     }
   },
   watch: {
@@ -1540,6 +1545,7 @@ export default {
       height: 2.7rem;
       width:  9rem;
       border-radius: 4px;
+      transition: all .3s ease;
     }
     /* & .back-next {
       position: fixed;
