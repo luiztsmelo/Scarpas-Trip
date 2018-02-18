@@ -1545,6 +1545,7 @@ export default {
       height: 2.7rem;
       width:  9rem;
       border-radius: 4px;
+      cursor: no-drop;
       transition: all .3s ease;
     }
     /* & .back-next {

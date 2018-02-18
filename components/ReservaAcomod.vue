@@ -37,7 +37,7 @@
           </div>
           
 
-          <button type="button" class="__next-btn" @click="nextBtn0">Continuar</button>
+          <button type="button" class="__next-btn" :style="form0ok" @click="nextBtn0">Continuar</button>
       
         </div><!-- ########## DICAS INICIAIS PG.0 ########## -->
 
@@ -58,7 +58,7 @@
           </div>
 
 
-          <button type="button" class="__next-btn" @click="nextBtn1">Continuar</button>
+          <button type="button" class="__next-btn" :style="form1ok" @click="nextBtn1">Continuar</button>
 
           <!-- <button type="button" class="__next-btn" v-else>
             <div class="spinner"></div>
@@ -95,7 +95,7 @@
           </v-date-picker>
 
 
-          <button type="button" class="__next-btn" @click="nextBtn2">Continuar</button>
+          <button type="button" class="__next-btn" :style="form2ok" @click="nextBtn2">Continuar</button>
 
         </div><!-- ########## DATA PG.2 ########## -->
 
@@ -134,7 +134,7 @@
           </div>
 
 
-          <button type="button" class="__next-btn" @click="nextBtn3">Continuar</button>
+          <button type="button" class="__next-btn" :style="form3ok" @click="nextBtn3">Continuar</button>
 
         </div><!-- ########## IDENTIFICAÇÃO PG.3 ########## -->
 
@@ -150,7 +150,7 @@
         
 
 
-          <button type="button" class="__next-btn" @click="concluirReserva">Fechar Reserva</button>
+          <button type="button" class="__next-btn" :style="form4ok" @click="concluirReserva">Fechar Reserva</button>
 
         </div><!-- ########## FINALIZAR PG.4 ########## -->
 
@@ -322,7 +322,16 @@ export default {
     },
     disabledDates () {
       return 
-    }
+    },
+    form0ok () {
+      return 1<2 ? 'background:#08C8C1;cursor:pointer' : ''
+    },
+    form1ok () {
+      return 1<2 ? 'background:#08C8C1;cursor:pointer' : ''
+    },
+    form2ok () {
+      return this.$store.state.reservaAcomod.periodoReserva !== null ? 'background:#08C8C1;cursor:pointer' : ''
+    },
   },
   watch: {
     hash (value) {
@@ -479,11 +488,13 @@ export default {
         right: 7%;
         font-size: 16px;
         font-weight: 600;
-        background: #08C8C1;
+        background: rgb(222, 222, 222);
         color: white;
-        height: 2.5rem;
+        height: 2.7rem;
         width:  9rem;
         border-radius: 4px;
+        cursor: no-drop;
+        transition: all .3s ease;
       }
     }
   }
