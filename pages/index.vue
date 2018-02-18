@@ -253,7 +253,7 @@ export default {
     flex-flow: column;
     margin-bottom: 5.2rem;
     & .category-container {
-      padding: 2rem 0;
+      padding: 2.2rem 0;
       display: flex;
       flex-flow: column;
       overflow-x: hidden;
@@ -261,7 +261,7 @@ export default {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: 0 7% 1.3rem 7%;
+        padding: 0 7% 1.5rem 7%;
         & .__title {
           font-size: 22px;
           font-weight: 700;
