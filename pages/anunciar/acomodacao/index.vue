@@ -551,17 +551,28 @@
             <input type="text" pattern="[A-Za-z]" v-model="$store.state.acomodData.creditCard.cardHolderName">
           </div>
 
-          <div class="flex-row" style="display: flex; transform: translateY(-1.7rem)">
-            <div class="item-form">
+          <div style="display: flex; transform: translateY(-1.7rem)">
+            <div class="item-form" style="flex-basis: 50%">
               <label>Validade</label>
-              <masked-input
+              <div style="display: flex">
+                <select v-model="$store.state.acomodData.creditCard.cardExpirationMonth">
+                  <option value="MM" disabled selected>MM</option>
+                  <option v-for="n in monthsPermitted">{{ n }}</option>
+                </select>
+                <select v-model="$store.state.acomodData.creditCard.cardExpirationYear">
+                  <option value="AA" disabled selected>AA</option>
+                  <option v-for="n in yearsPermitted">{{ n }}</option>
+                </select>
+              </div>
+              <!-- <masked-input
                 type="tel"
                 v-model="$store.state.acomodData.creditCard.cardExpirationDate"
                 :mask="[/\d/, /\d/, '/', /\d/, /\d/]"
                 :guide="false">
-              </masked-input>
+              </masked-input> -->
             </div>
-            <div class="item-form">
+
+            <div class="item-form" style="flex-basis: 50%">
               <label>CVC*</label>
               <masked-input
                 type="tel"
@@ -572,6 +583,8 @@
             </div>
           </div>
 
+          <button type="button" @click="subscription">subscription</button>
+          
         </div>
 
         <!-- <div class="item-form-payment">
@@ -602,6 +615,7 @@
 </template>
 
 <script>
+import pagarme from 'pagarme'
 import { loaded } from '~/node_modules/vue2-google-maps/src/manager'
 import * as firebase from 'firebase'
 import MaskedInput from 'vue-text-mask'
@@ -626,10 +640,57 @@ export default {
       showCroppaModal1: false,
       showCroppaModal2: false,
       imageURL1: null,
-      imageURL2: null
+      imageURL2: null,
+      monthsPermitted: ['01','02','03','04','05','06','07','08','09','10','11','12']
     }
   },
   methods: {
+    subscription () {
+      /* ** Corrigir valores ** */
+      const creditCardPath = this.$store.state.acomodData.creditCard
+      /* Card Number */
+      let cardNumberPath = creditCardPath.cardNumber
+      let cardNumber1 = cardNumberPath.slice(0,4)
+      let cardNumber2 = cardNumberPath.slice(5,9)
+      let cardNumber3 = cardNumberPath.slice(10,14)
+      let cardNumber4 = cardNumberPath.slice(15,19)
+      let cardNumber = cardNumber1 + cardNumber2 + cardNumber3 + cardNumber4
+      /* Expiration Date */
+      let cardExpirationDate = creditCardPath.cardExpirationMonth.concat(creditCardPath.cardExpirationYear)
+      console.log(cardExpirationDate)
+      /* Celular */
+      const celularPath = this.$store.state.acomodData.celular
+      let celularDDD = celularPath.slice(1,3)
+      let celularFirstNumber = celularPath.slice(5,10)
+      let celularSecondNumber = celularPath.slice(11,15)
+      let celularNumber = celularFirstNumber + celularSecondNumber
+      /* ** Criar card hash ** */
+      pagarme.client.connect({ encryption_key: 'ek_test_Ei5tdKAXeTsyLqQsqQuclfuLMk1apX' })
+        .then(client => {
+          return client.security.encrypt({
+            card_number: cardNumber,
+            card_holder_name: this.$store.state.acomodData.creditCard.cardHolderName,
+            card_expiration_date: cardExpirationDate,
+            card_cvv: this.$store.state.acomodData.creditCard.cardCVV
+          })
+        })
+        .then(card_hash => {
+          /* ** Criar assinatura ** */
+          pagarme.client.connect({ api_key: 'ak_test_E3I46o4e7guZDqwRnSY9sW8o8HrL9D' })
+          .then(client => client.subscriptions.create({
+            plan_id: 274065,
+            card_hash: card_hash,
+            payment_method: 'credit_card',
+            customer: {
+              email: this.$store.state.acomodData.email,
+              name: this.$store.state.acomodData.proprietario,
+              phone: { ddd: celularDDD, number: celularNumber }
+            }
+          }))
+          .then(subscription => console.log(subscription))
+          .catch(error => alert('Cartão inválido'))
+        })
+    },
     googleSignIn () {
       this.$store.dispatch('a_googleSignIn')
     },
@@ -951,6 +1012,22 @@ export default {
     mapZoom () {
       return this.$store.state.acomodPlace !== null ? 16 : 12
     },
+    yearsPermitted () {
+      let year = new Date().getFullYear().toString()
+      let shortYear = Number(year.slice(-2))
+      let n1 = shortYear + 1
+      let n2 = shortYear + 2
+      let n3 = shortYear + 3
+      let n4 = shortYear + 4
+      let n5 = shortYear + 5
+      let n6 = shortYear + 6
+      let n7 = shortYear + 7
+      let n8 = shortYear + 8
+      let n9 = shortYear + 9
+      let n10 = shortYear + 10
+      let yearsPermitted = [shortYear, n1, n2, n3, n4, n5, n6, n7, n8, n9, n10]
+      return yearsPermitted
+    },
     form1ok () {
       return this.$store.state.acomodData.tipoAcomod !== null ? 'background:#00D8C7;cursor:pointer' : ''
     },
@@ -990,58 +1067,168 @@ export default {
       if (value === '') {
         this.$store.commit('m_cadastroAcomod0', true)
         this.$store.commit('m_cadastroAcomod1', false)
+        this.$store.commit('m_cadastroAcomod2', false)
+        this.$store.commit('m_cadastroAcomod3', false)
+        this.$store.commit('m_cadastroAcomod4', false)
+        this.$store.commit('m_cadastroAcomod5', false)
+        this.$store.commit('m_cadastroAcomod6', false)
+        this.$store.commit('m_cadastroAcomod7', false)
+        this.$store.commit('m_cadastroAcomod8', false)
+        this.$store.commit('m_cadastroAcomod9', false)
+        this.$store.commit('m_cadastroAcomod10', false)
+        this.$store.commit('m_cadastroAcomod11', false)
       } 
       if (value === '#cad1') {
         this.$store.commit('m_cadastroAcomod0', false)
         this.$store.commit('m_cadastroAcomod1', true)
         this.$store.commit('m_cadastroAcomod2', false)
+        this.$store.commit('m_cadastroAcomod3', false)
+        this.$store.commit('m_cadastroAcomod4', false)
+        this.$store.commit('m_cadastroAcomod5', false)
+        this.$store.commit('m_cadastroAcomod6', false)
+        this.$store.commit('m_cadastroAcomod7', false)
+        this.$store.commit('m_cadastroAcomod8', false)
+        this.$store.commit('m_cadastroAcomod9', false)
+        this.$store.commit('m_cadastroAcomod10', false)
+        this.$store.commit('m_cadastroAcomod11', false)
       } 
       if (value === '#cad2') {
+        this.$store.commit('m_cadastroAcomod0', false)
         this.$store.commit('m_cadastroAcomod1', false)
         this.$store.commit('m_cadastroAcomod2', true)
         this.$store.commit('m_cadastroAcomod3', false)
+        this.$store.commit('m_cadastroAcomod4', false)
+        this.$store.commit('m_cadastroAcomod5', false)
+        this.$store.commit('m_cadastroAcomod6', false)
+        this.$store.commit('m_cadastroAcomod7', false)
+        this.$store.commit('m_cadastroAcomod8', false)
+        this.$store.commit('m_cadastroAcomod9', false)
+        this.$store.commit('m_cadastroAcomod10', false)
+        this.$store.commit('m_cadastroAcomod11', false)
       } 
       if (value === '#cad3') {
+        this.$store.commit('m_cadastroAcomod0', false)
+        this.$store.commit('m_cadastroAcomod1', false)
         this.$store.commit('m_cadastroAcomod2', false)
         this.$store.commit('m_cadastroAcomod3', true)
         this.$store.commit('m_cadastroAcomod4', false)
+        this.$store.commit('m_cadastroAcomod5', false)
+        this.$store.commit('m_cadastroAcomod6', false)
+        this.$store.commit('m_cadastroAcomod7', false)
+        this.$store.commit('m_cadastroAcomod8', false)
+        this.$store.commit('m_cadastroAcomod9', false)
+        this.$store.commit('m_cadastroAcomod10', false)
+        this.$store.commit('m_cadastroAcomod11', false)
       } 
       if (value === '#cad4') {
+        this.$store.commit('m_cadastroAcomod0', false)
+        this.$store.commit('m_cadastroAcomod1', false)
+        this.$store.commit('m_cadastroAcomod2', false)
         this.$store.commit('m_cadastroAcomod3', false)
         this.$store.commit('m_cadastroAcomod4', true)
         this.$store.commit('m_cadastroAcomod5', false)
+        this.$store.commit('m_cadastroAcomod6', false)
+        this.$store.commit('m_cadastroAcomod7', false)
+        this.$store.commit('m_cadastroAcomod8', false)
+        this.$store.commit('m_cadastroAcomod9', false)
+        this.$store.commit('m_cadastroAcomod10', false)
+        this.$store.commit('m_cadastroAcomod11', false)
       } 
       if (value === '#cad5') {
+        this.$store.commit('m_cadastroAcomod0', false)
+        this.$store.commit('m_cadastroAcomod1', false)
+        this.$store.commit('m_cadastroAcomod2', false)
+        this.$store.commit('m_cadastroAcomod3', false)
         this.$store.commit('m_cadastroAcomod4', false)
         this.$store.commit('m_cadastroAcomod5', true)
         this.$store.commit('m_cadastroAcomod6', false)
+        this.$store.commit('m_cadastroAcomod7', false)
+        this.$store.commit('m_cadastroAcomod8', false)
+        this.$store.commit('m_cadastroAcomod9', false)
+        this.$store.commit('m_cadastroAcomod10', false)
+        this.$store.commit('m_cadastroAcomod11', false)
       } 
       if (value === '#cad6') {
+        this.$store.commit('m_cadastroAcomod0', false)
+        this.$store.commit('m_cadastroAcomod1', false)
+        this.$store.commit('m_cadastroAcomod2', false)
+        this.$store.commit('m_cadastroAcomod3', false)
+        this.$store.commit('m_cadastroAcomod4', false)
         this.$store.commit('m_cadastroAcomod5', false)
         this.$store.commit('m_cadastroAcomod6', true)
         this.$store.commit('m_cadastroAcomod7', false)
+        this.$store.commit('m_cadastroAcomod8', false)
+        this.$store.commit('m_cadastroAcomod9', false)
+        this.$store.commit('m_cadastroAcomod10', false)
+        this.$store.commit('m_cadastroAcomod11', false)
       } 
       if (value === '#cad7') {
+        this.$store.commit('m_cadastroAcomod0', false)
+        this.$store.commit('m_cadastroAcomod1', false)
+        this.$store.commit('m_cadastroAcomod2', false)
+        this.$store.commit('m_cadastroAcomod3', false)
+        this.$store.commit('m_cadastroAcomod4', false)
+        this.$store.commit('m_cadastroAcomod5', false)
         this.$store.commit('m_cadastroAcomod6', false)
         this.$store.commit('m_cadastroAcomod7', true)
         this.$store.commit('m_cadastroAcomod8', false)
+        this.$store.commit('m_cadastroAcomod9', false)
+        this.$store.commit('m_cadastroAcomod10', false)
+        this.$store.commit('m_cadastroAcomod11', false)
       } 
       if (value === '#cad8') {
+        this.$store.commit('m_cadastroAcomod0', false)
+        this.$store.commit('m_cadastroAcomod1', false)
+        this.$store.commit('m_cadastroAcomod2', false)
+        this.$store.commit('m_cadastroAcomod3', false)
+        this.$store.commit('m_cadastroAcomod4', false)
+        this.$store.commit('m_cadastroAcomod5', false)
+        this.$store.commit('m_cadastroAcomod6', false)
         this.$store.commit('m_cadastroAcomod7', false)
         this.$store.commit('m_cadastroAcomod8', true)
         this.$store.commit('m_cadastroAcomod9', false)
+        this.$store.commit('m_cadastroAcomod10', false)
+        this.$store.commit('m_cadastroAcomod11', false)
       } 
       if (value === '#cad9') {
+        this.$store.commit('m_cadastroAcomod0', false)
+        this.$store.commit('m_cadastroAcomod1', false)
+        this.$store.commit('m_cadastroAcomod2', false)
+        this.$store.commit('m_cadastroAcomod3', false)
+        this.$store.commit('m_cadastroAcomod4', false)
+        this.$store.commit('m_cadastroAcomod5', false)
+        this.$store.commit('m_cadastroAcomod6', false)
+        this.$store.commit('m_cadastroAcomod7', false)
         this.$store.commit('m_cadastroAcomod8', false)
         this.$store.commit('m_cadastroAcomod9', true)
         this.$store.commit('m_cadastroAcomod10', false)
+        this.$store.commit('m_cadastroAcomod11', false)
       } 
       if (value === '#cad10') {
+        this.$store.commit('m_cadastroAcomod0', false)
+        this.$store.commit('m_cadastroAcomod1', false)
+        this.$store.commit('m_cadastroAcomod2', false)
+        this.$store.commit('m_cadastroAcomod3', false)
+        this.$store.commit('m_cadastroAcomod4', false)
+        this.$store.commit('m_cadastroAcomod5', false)
+        this.$store.commit('m_cadastroAcomod6', false)
+        this.$store.commit('m_cadastroAcomod7', false)
+        this.$store.commit('m_cadastroAcomod8', false)
         this.$store.commit('m_cadastroAcomod9', false)
         this.$store.commit('m_cadastroAcomod10', true)
         this.$store.commit('m_cadastroAcomod11', false)
       } 
       if (value === '#cad11') {
+        this.$store.commit('m_cadastroAcomod0', false)
+        this.$store.commit('m_cadastroAcomod1', false)
+        this.$store.commit('m_cadastroAcomod2', false)
+        this.$store.commit('m_cadastroAcomod3', false)
+        this.$store.commit('m_cadastroAcomod4', false)
+        this.$store.commit('m_cadastroAcomod5', false)
+        this.$store.commit('m_cadastroAcomod6', false)
+        this.$store.commit('m_cadastroAcomod7', false)
+        this.$store.commit('m_cadastroAcomod8', false)
+        this.$store.commit('m_cadastroAcomod9', false)
         this.$store.commit('m_cadastroAcomod10', false)
         this.$store.commit('m_cadastroAcomod11', true)
       } 
