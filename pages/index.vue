@@ -288,13 +288,13 @@ export default {
           display: flex;
           padding-left: 7%;
           & .card {
-            min-width: 153px;
-            max-width: 153px;
+            min-width: 150px;
+            max-width: 150px;
             cursor: pointer;
             & .__card-img {
               margin-bottom: .2rem;
               width: 100%;
-              min-height: 101px;
+              min-height: 100px;
               border-radius: 2px;
             }
             & .__card-date {
