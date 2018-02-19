@@ -156,7 +156,7 @@ export default {
     return {
       swiperOption: {
         slidesPerView: 2,
-        spaceBetween: 14,
+        spaceBetween: 13,
         speed: 300
       }
     }

@@ -582,8 +582,6 @@
               </masked-input>
             </div>
           </div>
-
-          <button type="button" @click="subscription">subscription</button>
           
         </div>
 
@@ -645,52 +643,6 @@ export default {
     }
   },
   methods: {
-    subscription () {
-      /* ** Corrigir valores ** */
-      const creditCardPath = this.$store.state.acomodData.creditCard
-      /* Card Number */
-      let cardNumberPath = creditCardPath.cardNumber
-      let cardNumber1 = cardNumberPath.slice(0,4)
-      let cardNumber2 = cardNumberPath.slice(5,9)
-      let cardNumber3 = cardNumberPath.slice(10,14)
-      let cardNumber4 = cardNumberPath.slice(15,19)
-      let cardNumber = cardNumber1 + cardNumber2 + cardNumber3 + cardNumber4
-      /* Expiration Date */
-      let cardExpirationDate = creditCardPath.cardExpirationMonth.concat(creditCardPath.cardExpirationYear)
-      console.log(cardExpirationDate)
-      /* Celular */
-      const celularPath = this.$store.state.acomodData.celular
-      let celularDDD = celularPath.slice(1,3)
-      let celularFirstNumber = celularPath.slice(5,10)
-      let celularSecondNumber = celularPath.slice(11,15)
-      let celularNumber = celularFirstNumber + celularSecondNumber
-      /* ** Criar card hash ** */
-      pagarme.client.connect({ encryption_key: 'ek_test_Ei5tdKAXeTsyLqQsqQuclfuLMk1apX' })
-        .then(client => {
-          return client.security.encrypt({
-            card_number: cardNumber,
-            card_holder_name: this.$store.state.acomodData.creditCard.cardHolderName,
-            card_expiration_date: cardExpirationDate,
-            card_cvv: this.$store.state.acomodData.creditCard.cardCVV
-          })
-        })
-        .then(card_hash => {
-          /* ** Criar assinatura ** */
-          pagarme.client.connect({ api_key: 'ak_test_E3I46o4e7guZDqwRnSY9sW8o8HrL9D' })
-          .then(client => client.subscriptions.create({
-            plan_id: 274065,
-            card_hash: card_hash,
-            payment_method: 'credit_card',
-            customer: {
-              email: this.$store.state.acomodData.email,
-              name: this.$store.state.acomodData.proprietario,
-              phone: { ddd: celularDDD, number: celularNumber }
-            }
-          }))
-          .then(subscription => console.log(subscription))
-          .catch(error => alert('Cartão inválido'))
-        })
-    },
     googleSignIn () {
       this.$store.dispatch('a_googleSignIn')
     },
@@ -887,67 +839,130 @@ export default {
       }
     },
     concluir () {
-      if (1<2) {/* IF PAGAMENTO CONCLUIDO */
+      const cardNumber = this.$store.state.acomodData.creditCard.cardNumber
+      const cardHolderName = this.$store.state.acomodData.creditCard.cardHolderName
+      const cardExpirationMonth = this.$store.state.acomodData.creditCard.cardExpirationMonth
+      const cardExpirationYear = this.$store.state.acomodData.creditCard.cardExpirationYear
+      const cardCVV = this.$store.state.acomodData.creditCard.cardCVV
+      if (cardNumber.length === 19 && cardHolderName !== '' && cardExpirationMonth !== 'MM' && cardExpirationYear !== 'AA' && cardCVV.length === 3) {
         this.$store.commit('m_loader', true)
         const acomodID = Math.floor(Math.random() * (99999 - 10000 + 1) + 10000)
         this.$store.commit('m_acomodID', acomodID)
         const storageRef = firebase.storage().ref('acomodacoes/' + acomodID + '/')
         /* 
-        UPLOAD IMAGE 1 
+        CORRIGIR VALORES 
         */
-        /* imageAcL1 */
-        storageRef.child('imageL1.jpeg').put(this.$store.state.blobAcL1).then(snapshot => {
-          console.log(acomodID + 'L1' + '.jpeg')
-          storageRef.child('imageL1.jpeg').getDownloadURL().then(url => {
-            this.$store.commit('m_imageAcL1', url)
-            this.ifUpload1()
-          })
-        })
-        /* imageAcH1J */
-        storageRef.child('imageH1J.jpeg').put(this.$store.state.blobAcH1J).then(snapshot => {
-          console.log(acomodID + 'H1J' + '.jpeg')
-          storageRef.child('imageH1J.jpeg').getDownloadURL().then(url => {
-            this.$store.commit('m_imageAcH1J', url)
-            this.ifUpload1()
-          })
-        })
-        /* imageAcH1W */
-        storageRef.child('imageH1W.webp').put(this.$store.state.blobAcH1W).then(snapshot => {
-          console.log(acomodID + 'H1W' + '.webp')
-          storageRef.child('imageH1W.webp').getDownloadURL().then(url => {
-            this.$store.commit('m_imageAcH1W', url)
-            this.ifUpload1()
-          })
-        })
+        const creditCardPath = this.$store.state.acomodData.creditCard
+        /* Card Number */
+        let cardNumberPath = creditCardPath.cardNumber
+        let cardNumber1 = cardNumberPath.slice(0,4)
+        let cardNumber2 = cardNumberPath.slice(5,9)
+        let cardNumber3 = cardNumberPath.slice(10,14)
+        let cardNumber4 = cardNumberPath.slice(15,19)
+        let cardNumber = cardNumber1 + cardNumber2 + cardNumber3 + cardNumber4
+        /* Expiration Date */
+        let cardExpirationDate = creditCardPath.cardExpirationMonth.concat(creditCardPath.cardExpirationYear)
+        console.log(cardExpirationDate)
+        /* Celular */
+        const celularPath = this.$store.state.acomodData.celular
+        let celularDDD = celularPath.slice(1,3)
+        let celularFirstNumber = celularPath.slice(5,10)
+        let celularSecondNumber = celularPath.slice(11,15)
+        let celularNumber = celularFirstNumber + celularSecondNumber
         /* 
-        UPLOAD IMAGE 2 
+        CRIAR CARD HASH
         */
-        if (this.$store.state.blobAcH2J !== null) {
-          /* imageAcL2 */
-          storageRef.child('imageL2.jpeg').put(this.$store.state.blobAcL2).then(snapshot => {
-            console.log(acomodID + 'L2' + '.jpeg')
-            storageRef.child('imageL2.jpeg').getDownloadURL().then(url => {
-              this.$store.commit('m_imageAcL2', url)
-              this.ifUpload2()
+        pagarme.client.connect({ encryption_key: 'ek_test_Ei5tdKAXeTsyLqQsqQuclfuLMk1apX' })
+          .then(client => {
+            return client.security.encrypt({
+              card_number: cardNumber,
+              card_holder_name: this.$store.state.acomodData.creditCard.cardHolderName,
+              card_expiration_date: cardExpirationDate,
+              card_cvv: this.$store.state.acomodData.creditCard.cardCVV
             })
           })
-          /* imageAcH2J */
-          storageRef.child('imageH2J.jpeg').put(this.$store.state.blobAcH2J).then(snapshot => {
-            console.log(acomodID + 'H2J' + '.jpeg')
-            storageRef.child('imageH2J.jpeg').getDownloadURL().then(url => {
-              this.$store.commit('m_imageAcH2J', url)
-              this.ifUpload2()
+          .then(card_hash => {
+            /* 
+            CRIAR ASSINATURA 
+            */
+            pagarme.client.connect({ api_key: 'ak_test_E3I46o4e7guZDqwRnSY9sW8o8HrL9D' })
+            .then(client => client.subscriptions.create({
+              plan_id: 274065,
+              card_hash: card_hash,
+              payment_method: 'credit_card',
+              customer: {
+                email: this.$store.state.acomodData.email,
+                name: this.$store.state.acomodData.proprietario,
+                phone: { ddd: celularDDD, number: celularNumber }
+              }
+            }))
+            .then(subscription => {
+              console.log(subscription)
+              /* 
+              UPLOAD IMAGE 1 
+              */
+              /* imageAcL1 */
+              storageRef.child('imageL1.jpeg').put(this.$store.state.blobAcL1).then(snapshot => {
+                console.log(acomodID + 'L1' + '.jpeg')
+                storageRef.child('imageL1.jpeg').getDownloadURL().then(url => {
+                  this.$store.commit('m_imageAcL1', url)
+                  this.ifUpload1()
+                })
+              })
+              /* imageAcH1J */
+              storageRef.child('imageH1J.jpeg').put(this.$store.state.blobAcH1J).then(snapshot => {
+                console.log(acomodID + 'H1J' + '.jpeg')
+                storageRef.child('imageH1J.jpeg').getDownloadURL().then(url => {
+                  this.$store.commit('m_imageAcH1J', url)
+                  this.ifUpload1()
+                })
+              })
+              /* imageAcH1W */
+              storageRef.child('imageH1W.webp').put(this.$store.state.blobAcH1W).then(snapshot => {
+                console.log(acomodID + 'H1W' + '.webp')
+                storageRef.child('imageH1W.webp').getDownloadURL().then(url => {
+                  this.$store.commit('m_imageAcH1W', url)
+                  this.ifUpload1()
+                })
+              })
+              /* 
+              UPLOAD IMAGE 2 
+              */
+              if (this.$store.state.blobAcH2J !== null) {
+                /* imageAcL2 */
+                storageRef.child('imageL2.jpeg').put(this.$store.state.blobAcL2).then(snapshot => {
+                  console.log(acomodID + 'L2' + '.jpeg')
+                  storageRef.child('imageL2.jpeg').getDownloadURL().then(url => {
+                    this.$store.commit('m_imageAcL2', url)
+                    this.ifUpload2()
+                  })
+                })
+                /* imageAcH2J */
+                storageRef.child('imageH2J.jpeg').put(this.$store.state.blobAcH2J).then(snapshot => {
+                  console.log(acomodID + 'H2J' + '.jpeg')
+                  storageRef.child('imageH2J.jpeg').getDownloadURL().then(url => {
+                    this.$store.commit('m_imageAcH2J', url)
+                    this.ifUpload2()
+                  })
+                })
+                /* imageAcH2W */
+                storageRef.child('imageH2W.webp').put(this.$store.state.blobAcH2W).then(snapshot => {
+                  console.log(acomodID + 'H2W' + '.webp')
+                  storageRef.child('imageH2W.webp').getDownloadURL().then(url => {
+                    this.$store.commit('m_imageAcH2W', url)
+                    this.ifUpload2()
+                  })
+                })
+              }
+              this.$store.commit('m_acomodCreated', true)
+            })
+            .catch(error => {
+              if (error) {
+                alert('Cartão inválido')
+                this.$store.commit('m_loader', false)
+              }
             })
           })
-          /* imageAcH2W */
-          storageRef.child('imageH2W.webp').put(this.$store.state.blobAcH2W).then(snapshot => {
-            console.log(acomodID + 'H2W' + '.webp')
-            storageRef.child('imageH2W.webp').getDownloadURL().then(url => {
-              this.$store.commit('m_imageAcH2W', url)
-              this.ifUpload2()
-            })
-          })
-        }
       }
     },
     ifUpload1 () {
@@ -1065,9 +1080,17 @@ export default {
       const cardExpirationYear = this.$store.state.acomodData.creditCard.cardExpirationYear
       const cardCVV = this.$store.state.acomodData.creditCard.cardCVV
       return cardNumber.length === 19 && cardHolderName !== '' && cardExpirationMonth !== 'MM' && cardExpirationYear !== 'AA' && cardCVV.length === 3 ? 'background:#00D8C7;cursor:pointer' : ''
+    },
+    acomodCreated () {
+      return this.$store.state.acomodCreated
     }
   },
   watch: {
+    acomodCreated (value) {
+      if (value === true) {
+        this.$router.push('/')
+      }
+    },
     hash (value) {
       if (value === '') {
         this.$store.commit('m_cadastroAcomod0', true)
