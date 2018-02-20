@@ -173,16 +173,17 @@ export default {
 
 
 
-@media (min-width: 1281px) {
+@media (min-width: 1024px) {
   .roteiro-home {
     height: 15rem;
+    background: rgb(62,62,62);
     & .chegada-partida-container {
       & .__title {
         font-size: 28px;
-        padding: 2rem 8%;
+        padding: 2rem 9%;
       }
       & .chegada-partida-box {
-        margin: 0 8%;
+        margin: 0 9%;
         border-radius: 4px;
         width: 35%;
         height: 3.2rem;

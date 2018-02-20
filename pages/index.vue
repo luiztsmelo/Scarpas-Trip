@@ -15,7 +15,7 @@
       <div class="category-container">
 
         <div class="title-row">
-          <h1 class="__title">Próximos Eventos</h1>
+          <h1 class="__title" id="eventos">Próximos Eventos</h1>
 
           <nuxt-link to="/eventos">
             <div class="see-all">
@@ -46,7 +46,7 @@
       <div class="category-container">
 
         <div class="title-row">
-          <h1 class="__title">Acomodações</h1>
+          <h1 class="__title" id="acomods">Acomodações</h1>
 
           <nuxt-link to="/acomodacoes">
             <div class="see-all">
@@ -77,7 +77,7 @@
       <div class="category-container">
 
         <div class="title-row">
-          <h1 class="__title">Passeios</h1>
+          <h1 class="__title" id="passeios">Passeios</h1>
 
           <nuxt-link to="/passeios">
             <div class="see-all">
@@ -108,7 +108,7 @@
       <div class="category-container">
 
         <div class="title-row">
-          <h1 class="__title">Atrações</h1>
+          <h1 class="__title" id="atracoes">Atrações</h1>
 
           <nuxt-link to="/atracoes">
             <div class="see-all">
@@ -312,8 +312,13 @@ export default {
         & .title-row {
           padding: 0 9% 1.5rem 9%;
           & .__title {
-            font-size: 27px;
+            padding-left: .3rem;
+            font-size: 28px;
           }
+          & #eventos { border-left: 6px solid #FF7D6C }
+          & #acomods { border-left: 6px solid #08C8C1 }
+          & #passeios { border-left: 6px solid #64B5F6 }
+          & #atracoes { border-left: 6px solid #81C784 }
         }
         & .cards-container {
           padding: 0 8%;
