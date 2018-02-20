@@ -540,7 +540,7 @@
             <masked-input
               class="cardNumberInput"
               type="tel"
-              v-model="$store.state.acomodData.creditCard.cardNumber"
+              v-model="$store.state.creditCard.cardNumber"
               :mask="[/\d/, /\d/, /\d/, /\d/, ' ', /\d/, /\d/, /\d/, /\d/, ' ', /\d/, /\d/, /\d/, /\d/, ' ', /\d/, /\d/, /\d/, /\d/]"
               :guide="false">
             </masked-input>
@@ -548,35 +548,29 @@
 
           <div class="item-form">
             <label>Nome impresso no Cartão</label>
-            <input type="text" pattern="[A-Za-z]" v-model="$store.state.acomodData.creditCard.cardHolderName">
+            <input type="text" pattern="[A-Za-z]" v-model="$store.state.creditCard.cardHolderName">
           </div>
 
           <div style="display: flex; transform: translateY(-1.7rem)">
             <div class="item-form" style="flex-basis: 50%">
               <label>Validade</label>
               <div style="display: flex">
-                <select v-model="$store.state.acomodData.creditCard.cardExpirationMonth">
+                <select v-model="$store.state.creditCard.cardExpirationMonth">
                   <option value="MM" disabled selected>MM</option>
                   <option v-for="n in monthsPermitted">{{ n }}</option>
                 </select>
-                <select v-model="$store.state.acomodData.creditCard.cardExpirationYear">
+                <select v-model="$store.state.creditCard.cardExpirationYear">
                   <option value="AA" disabled selected>AA</option>
                   <option v-for="n in yearsPermitted">{{ n }}</option>
                 </select>
               </div>
-              <!-- <masked-input
-                type="tel"
-                v-model="$store.state.acomodData.creditCard.cardExpirationDate"
-                :mask="[/\d/, /\d/, '/', /\d/, /\d/]"
-                :guide="false">
-              </masked-input> -->
             </div>
 
             <div class="item-form" style="flex-basis: 50%">
               <label>CVC*</label>
               <masked-input
                 type="tel"
-                v-model="$store.state.acomodData.creditCard.cardCVV"
+                v-model="$store.state.creditCard.cardCVV"
                 :mask="[/\d/, /\d/, /\d/]"
                 :guide="false">
               </masked-input>
@@ -839,11 +833,11 @@ export default {
       }
     },
     concluir () {
-      const cardNumber = this.$store.state.acomodData.creditCard.cardNumber
-      const cardHolderName = this.$store.state.acomodData.creditCard.cardHolderName
-      const cardExpirationMonth = this.$store.state.acomodData.creditCard.cardExpirationMonth
-      const cardExpirationYear = this.$store.state.acomodData.creditCard.cardExpirationYear
-      const cardCVV = this.$store.state.acomodData.creditCard.cardCVV
+      const cardNumber = this.$store.state.creditCard.cardNumber
+      const cardHolderName = this.$store.state.creditCard.cardHolderName
+      const cardExpirationMonth = this.$store.state.creditCard.cardExpirationMonth
+      const cardExpirationYear = this.$store.state.creditCard.cardExpirationYear
+      const cardCVV = this.$store.state.creditCard.cardCVV
       if (cardNumber.length === 19 && cardHolderName !== '' && cardExpirationMonth !== 'MM' && cardExpirationYear !== 'AA' && cardCVV.length === 3) {
         this.$store.commit('m_loader', true)
         const acomodID = Math.floor(Math.random() * (99999 - 10000 + 1) + 10000)
@@ -852,7 +846,7 @@ export default {
         /* 
         CORRIGIR VALORES 
         */
-        const creditCardPath = this.$store.state.acomodData.creditCard
+        const creditCardPath = this.$store.state.creditCard
         /* Card Number */
         let cardNumberPath = creditCardPath.cardNumber
         let cardNumber1 = cardNumberPath.slice(0,4)
@@ -876,9 +870,9 @@ export default {
           .then(client => {
             return client.security.encrypt({
               card_number: cardNumber,
-              card_holder_name: this.$store.state.acomodData.creditCard.cardHolderName,
+              card_holder_name: this.$store.state.creditCard.cardHolderName,
               card_expiration_date: cardExpirationDate,
-              card_cvv: this.$store.state.acomodData.creditCard.cardCVV
+              card_cvv: this.$store.state.creditCard.cardCVV
             })
           })
           .then(card_hash => {
@@ -1074,11 +1068,11 @@ export default {
       return this.$store.state.acomodData.celular.length === 15 ? 'background:#00D8C7;cursor:pointer' : ''
     },
     form11ok () {
-      const cardNumber = this.$store.state.acomodData.creditCard.cardNumber
-      const cardHolderName = this.$store.state.acomodData.creditCard.cardHolderName
-      const cardExpirationMonth = this.$store.state.acomodData.creditCard.cardExpirationMonth
-      const cardExpirationYear = this.$store.state.acomodData.creditCard.cardExpirationYear
-      const cardCVV = this.$store.state.acomodData.creditCard.cardCVV
+      const cardNumber = this.$store.state.creditCard.cardNumber
+      const cardHolderName = this.$store.state.creditCard.cardHolderName
+      const cardExpirationMonth = this.$store.state.creditCard.cardExpirationMonth
+      const cardExpirationYear = this.$store.state.creditCard.cardExpirationYear
+      const cardCVV = this.$store.state.creditCard.cardCVV
       return cardNumber.length === 19 && cardHolderName !== '' && cardExpirationMonth !== 'MM' && cardExpirationYear !== 'AA' && cardCVV.length === 3 ? 'background:#00D8C7;cursor:pointer' : ''
     },
     acomodCreated () {
@@ -1261,6 +1255,16 @@ export default {
         this.$store.commit('m_cadastroAcomod11', true)
       } 
     }
+  },
+  beforeRouteEnter (to, from, next) {
+    next(vm => {
+      if (vm.$store.state.showFoobar === true) {
+        vm.$store.commit('m_showFoobar', false)
+      }
+      if (vm.$store.state.showNavbar === true) {
+        vm.$store.commit('m_showNavbar', false)
+      }
+    })
   },
   beforeRouteLeave (to, from, next) {
     if (this.$store.state.showFoobar === false) {

@@ -22,10 +22,9 @@ export default {
 .loader {
   position: fixed;
   z-index: 9999;
-  overflow: hidden;
+  overflow: hidden !important;
   width: 100%;
   height: 100%;
-  top: 3.2rem;
   background: white;
   transition: all .3s ease;
   & .loader-body {

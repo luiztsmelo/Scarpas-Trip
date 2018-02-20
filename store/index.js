@@ -56,14 +56,14 @@ const store = () => new Vuex.Store({
     blobAcL2: null,
     blobAcH2J: null,
     blobAcH2W: null,
+    creditCard: {
+      cardNumber: '',
+      cardHolderName: '',
+      cardExpirationMonth: 'MM',
+      cardExpirationYear: 'AA',
+      cardCVV: ''
+    },
     acomodData: {/* Atualizar a action */
-      creditCard: {
-        cardNumber: '',
-        cardHolderName: '',
-        cardExpirationMonth: 'MM',
-        cardExpirationYear: 'AA',
-        cardCVV: ''
-      },
       acomodID: null,
       userID: null,
       proprietario: null,
@@ -304,6 +304,9 @@ const store = () => new Vuex.Store({
     m_acomodID (state, payload) {
       state.acomodID = payload
       state.acomodData.acomodID = payload
+    },
+    m_creditCard (state, payload) {
+      state.creditCard = payload
     },
     m_acomodData (state, payload) {
       state.acomodData = payload
@@ -612,6 +615,13 @@ const store = () => new Vuex.Store({
     a_uploadAcomod ({ state, commit }) {
       firebase.database().ref('acomodacoes/' + state.acomodID).set(state.acomodData).then(() => {
         /* Resetar states */
+        commit('m_creditCard', {
+          cardNumber: '',
+          cardHolderName: '',
+          cardExpirationMonth: 'MM',
+          cardExpirationYear: 'AA',
+          cardCVV: ''
+        })
         commit('m_acomodData', {
           acomodID: null,
           userID: null,
@@ -642,7 +652,6 @@ const store = () => new Vuex.Store({
           positionLAT: -20.6141320,
           positionLNG: -46.0478760,
           address: null,
-          duracao: null,
           imageL1: null,
           imageH1J: null,
           imageH1W: null,

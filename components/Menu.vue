@@ -10,7 +10,7 @@
           </nuxt-link>
         </div>
 
-        <div style="padding-top:.6rem" @click="$store.commit('m_showMenu', false), $store.commit('m_menuIconAnime', false), $store.commit('m_showFoobar', false), $store.commit('m_showNavbar', false), $store.commit('m_cadastroAcomod0', true)">
+        <div style="padding-top:.6rem" @click="$store.commit('m_showMenu', false), $store.commit('m_menuIconAnime', false), $store.commit('m_cadastroAcomod0', true)">
           <nuxt-link to="/anunciar/acomodacao" class="menu-item">
             <img src="../assets/img/estadia.svg" class="__item-img-color">
             <h3>Anunciar Acomodação</h3>
