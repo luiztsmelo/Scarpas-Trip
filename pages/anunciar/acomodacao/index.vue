@@ -856,7 +856,6 @@ export default {
         let cardNumber = cardNumber1 + cardNumber2 + cardNumber3 + cardNumber4
         /* Expiration Date */
         let cardExpirationDate = creditCardPath.cardExpirationMonth.concat(creditCardPath.cardExpirationYear)
-        console.log(cardExpirationDate)
         /* Celular */
         const celularPath = this.$store.state.acomodData.celular
         let celularDDD = celularPath.slice(1,3)
@@ -952,8 +951,8 @@ export default {
             })
             .catch(error => {
               if (error) {
-                alert('Cartão inválido')
                 this.$store.commit('m_loader', false)
+                alert('Cartão inválido')
               }
             })
           })
