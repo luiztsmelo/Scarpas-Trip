@@ -30,8 +30,8 @@
             <nuxt-link :to="'/eventos/' + evento.eventoID">
               <progressive-img class="__card-img" :src="imageEvH(evento)" :placeholder="evento.imageL1" :aspect-ratio="0.67"/>
               <span class="__card-info" style="color: #FF7D6C">{{ evento.date }}&#160;&#8231;&#160;{{ evento.hour }}</span>
-              <h1 class="__card-title">{{ evento.title | truncateTitle }}</h1>
-              <span class="__card-subtitle">{{ evento.subtitle | truncateSubtitle }}</span>
+              <h1 class="__card-title">{{ evento.title }}</h1>
+              <span class="__card-subtitle">{{ evento.subtitle }}</span>
             </nuxt-link> 
           </div>
         </div>
@@ -61,7 +61,7 @@
             <nuxt-link :to="'/acomodacoes/' + acomod.acomodID">
               <progressive-img class="__card-img" :src="imageAcH(acomod)" :placeholder="acomod.imageL1" :aspect-ratio="0.67"/>
               <span class="__card-info" style="color: #007B77">{{ acomod.tipoAcomod }}</span>
-              <h1 class="__card-title">{{ acomod.title | truncateTitle }}</h1>
+              <h1 class="__card-title">{{ acomod.title }}</h1>
               <span class="__card-subtitle">R${{ acomod.valorDiariaNormal }}<span class="__card-valor-dia"> por dia</span></span>
             </nuxt-link> 
           </div>
@@ -92,7 +92,7 @@
             <nuxt-link :to="'/passeios/' + passeio.passeioID">
               <progressive-img class="__card-img" :src="imagePasH(passeio)" :placeholder="passeio.imageL1" :aspect-ratio="0.67"/>
               <span class="__card-info" style="color: #64B5F6">{{ passeio.tipoPasseio }}</span>
-              <h1 class="__card-title">{{ passeio.title | truncateTitle }}</h1>
+              <h1 class="__card-title">{{ passeio.title }}</h1>
               <span class="__card-subtitle">R${{ passeio.valorPasseio }}<span class="__card-valor-pessoa"> por pessoa</span></span>
             </nuxt-link> 
           </div>
@@ -123,7 +123,7 @@
             <nuxt-link :to="'/atracoes/' + atracao.atracaoID">
               <progressive-img class="__card-img" :src="imageAtH(atracao)" :placeholder="atracao.imageL1" :aspect-ratio="0.67"/>
               <span class="__card-info" style="color: #81C784">{{ atracao.tipoAtracao }}</span>
-              <h1 class="__card-title">{{ atracao.title | truncateTitle }}</h1>
+              <h1 class="__card-title">{{ atracao.title }}</h1>
             </nuxt-link> 
           </div>
         </div>
@@ -205,22 +205,6 @@ export default {
       store.commit('m_atracoes', snapshot.val())
     })
   },
-  filters: {
-    truncateTitle (value) {
-      if (value.length > 29) {
-        return value.slice(0, 29) + '...'
-      } else {
-        return value.slice(0)
-      }
-    },
-    truncateSubtitle (value) {
-      if (value.length > 25) {
-        return value.slice(0, 25) + '...'
-      } else {
-        return value.slice(0)
-      }
-    }
-  },
   beforeRouteEnter (to, from, next) {
     next(vm => {
       vm.$store.state.offFoobar1 = true
@@ -288,7 +272,7 @@ export default {
         display: flex;
         flex-flow: row wrap;
         & .card {
-          margin: .6rem 1.8%;
+          margin: .7rem 1.8%;
           flex: 0 1 46%;
           & .__card-img {
             width: 100%; 
@@ -311,7 +295,7 @@ export default {
             font-size: 14px;
             font-weight: 400;
             & .__card-valor-dia {
-              font-size: 13px;
+              font-size: 12px;
             }
           }
         }
@@ -324,18 +308,18 @@ export default {
   .home {
     & .home-body {
       & .category-container {
-        padding: 2.5rem 0;
+        padding: 2.7rem 0;
         & .title-row {
-          padding: 0 8% 1.3rem 8%;
+          padding: 0 9% 1.5rem 9%;
           & .__title {
-            font-size: 28px;
+            font-size: 27px;
           }
         }
         & .cards-container {
-          padding: 0 6.9%;
+          padding: 0 8%;
           & .card {
-            margin: 1.1%;
-            flex: 0 1 22.7%;
+            margin: 1.2rem .8%;
+            flex: 0 1 23.2%;
             & .__card-img {
               border-radius: 3px;
             }
@@ -345,14 +329,14 @@ export default {
               font-weight: 700;
             }
             & .__card-title {
-              font-size: 17px;
+              font-size: 16px;
               font-weight: 700;
             }
             & .__card-subtitle {
-              font-size: 16px;
+              font-size: 15px;
               font-weight: 400;
               & .__card-valor-dia {
-                font-size: 14px;
+                font-size: 13px;
               }
             }
           }

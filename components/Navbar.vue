@@ -8,12 +8,33 @@
         </nuxt-link>
         
 
-        <nav class="nav">
+        <nav class="nav-mobile">
           <div class="__menu" @click="showMenu()">
             <div class="__bar" :class="{ menuIconAnime1: menuIconAnime }"></div>
             <div class="__bar" :class="{ menuIconAnime2: menuIconAnime }"></div>
             <div class="__bar" :class="{ menuIconAnime3: menuIconAnime }"></div>
           </div>
+        </nav>
+
+        <nav class="nav-desktop">
+          <nuxt-link to="/acomodacoes">
+            <span class="__nav-item">Acomodações</span>
+          </nuxt-link>
+          <nuxt-link to="/eventos">
+            <span class="__nav-item">Eventos</span>
+          </nuxt-link>
+          <nuxt-link to="/passeios">
+            <span class="__nav-item">Passeios</span>
+          </nuxt-link>
+          <nuxt-link to="/atracoes">
+            <span class="__nav-item">Atrações</span>
+          </nuxt-link>
+          <nuxt-link to="/restaurantes">
+            <span class="__nav-item">Restaurantes</span>
+          </nuxt-link>
+          <nuxt-link to="/acomodacoes">
+            <span class="__nav-item" >Anunciar</span>
+          </nuxt-link>
         </nav>
 
       </div>
@@ -87,7 +108,7 @@ export default {
       font-weight: 400;
       color: var(--color01);
     }
-    & .nav {
+    & .nav-mobile {
       display: flex;
       align-items: center;
       & .__menu {
@@ -102,16 +123,43 @@ export default {
         }
       }
     }
+    & .nav-desktop {
+      display: flex;
+      align-items: center;
+      height: 100%;
+      & .__nav-item {
+        margin: auto .7rem;
+        line-height: 3.6rem;
+        font-size: 14px;
+        font-weight: 600;
+        user-select: none;
+      }
+    }
   }
 }
-
-@media (min-width: 1281px) {
+@media (max-width: 1023px) {
+   .navbar {
+    & .navbar-body {
+      & .nav-desktop {
+        display: none;
+      }
+    }
+  }
+}
+@media (min-width: 1024px) {
   .navbar {
-    height: 3.7rem;
-    padding: 0 8%;
+    height: 3.6rem;
+    padding: 0 9%;
     & .navbar-body {
       & .__brand-name {
-        font-size: 29px;
+        font-size: 31px;
+      }
+      & .nav-mobile {
+        display: none;
+        & .__menu {
+          & .__bar {
+          }
+        }
       }
     }
   }
