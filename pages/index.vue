@@ -316,65 +316,6 @@ export default {
           }
         }
       }
-      /* & .swiper-container {
-        & .swiper-wrapper {
-          display: flex;
-          padding-left: 7%;
-          & .card {
-            min-width: 150px;
-            max-width: 150px;
-            cursor: pointer;
-            & .__card-img {
-              margin-bottom: .2rem;
-              width: 100%;
-              min-height: 100px;
-              border-radius: 2px;
-            }
-            & .__card-date {
-              font-size: 10px;
-              font-weight: 700;
-              color: #FF7D6C;
-            }
-            & .__card-tipoAcomod {
-              text-transform: uppercase;
-              font-size: 10px;
-              font-weight: 700;
-              color: #007B77;
-            }
-            & .__card-tipoPasseio {
-              text-transform: uppercase;
-              font-size: 10px;
-              font-weight: 700;
-              color: #64B5F6;
-            }
-            & .__card-tipoAtracao {
-              text-transform: uppercase;
-              font-size: 10px;
-              font-weight: 700;
-              color: #81C784;
-            }
-            & .__card-title {
-              margin: .2rem 0;
-              font-size: 14px;
-              font-weight: 700;
-            }
-            & .__card-subtitle {
-              font-size: 14px;
-              font-weight: 400;
-            }
-            & .__card-valor {
-              font-size: 14px;
-              font-weight: 400;
-              & .__card-valor-dia {
-                font-size: 13px;
-              }
-              & .__card-valor-pessoa {
-                font-size: 13px;
-              }
-            }
-          }
-        }
-      } */
     }
   }
 }
