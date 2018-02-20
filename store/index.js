@@ -659,9 +659,9 @@ const store = () => new Vuex.Store({
           imageH2J: null,
           imageH2W: null
         })
-        commit('m_loader', false)
         commit('m_cadastroAcomod11', false)
         commit('m_cadastroAcomod0', true)
+        commit('m_loader', false)
       })
     },
     /*

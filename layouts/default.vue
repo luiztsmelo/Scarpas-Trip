@@ -39,5 +39,7 @@ export default {
 
 <style>
 .app {
+  display: flex;
+  flex-flow: column;
 }
 </style>

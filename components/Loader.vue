@@ -22,7 +22,6 @@ export default {
 .loader {
   position: fixed;
   z-index: 9999;
-  overflow: hidden !important;
   width: 100%;
   height: 100%;
   background: white;
@@ -32,7 +31,7 @@ export default {
     display: flex;
     align-items: center;
     justify-content: center;
-    top: calc(50% -3.2rem);
+    top: calc(50%);
     transform: translateY(-50%);
   }
 }
