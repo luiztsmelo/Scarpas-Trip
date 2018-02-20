@@ -287,7 +287,7 @@ export default {
             color: #007B77;
           }
           & .__card-title {
-            margin: .2rem 0;
+            margin: .1rem 0 .2rem 0;
             font-size: 14px;
             font-weight: 700;
           }
@@ -318,8 +318,8 @@ export default {
         & .cards-container {
           padding: 0 8%;
           & .card {
-            margin: 1.2rem .8%;
-            flex: 0 1 23.2%;
+            margin: 1.3rem 1%;
+            flex: 0 1 22.9%;
             & .__card-img {
               border-radius: 3px;
             }
@@ -329,7 +329,8 @@ export default {
               font-weight: 700;
             }
             & .__card-title {
-              font-size: 16px;
+              margin: .1rem 0 .2rem 0;
+              font-size: 15px;
               font-weight: 700;
             }
             & .__card-subtitle {
