@@ -28,24 +28,13 @@
         <div class="cards-container">
           <div class="card" v-for="evento in $store.state.eventos" :key="evento.eventoID">
             <nuxt-link :to="'/eventos/' + evento.eventoID">
-              <img class="__card-img" :src="imageEvH(evento)">
-              <span class="__card-info">{{ evento.date }}&#160;&#8231;&#160;{{ evento.hour }}</span>
-              <h1 class="__card-title">{{ evento.title | truncateTitle }}</h1>
-              <span class="__card-valor">{{ evento.subtitle | truncateSubtitle }}</span>
-            </nuxt-link> 
-          </div>
-        </div>
-
-        <!-- <swiper :options="swiperOption">
-          <swiper-slide class="card" v-for="evento in $store.state.eventos" :key="evento.eventoID">
-            <nuxt-link :to="'/eventos/' + evento.eventoID">
-              <progressive-img class="__card-img" :src="imageEvH(evento)" :placeholder="evento.imageL1" no-ratio />
-              <span class="__card-date">{{ evento.date }}&#160;&#8231;&#160;{{ evento.hour }}</span>
+              <progressive-img class="__card-img" :src="imageEvH(evento)" :placeholder="evento.imageL1" :aspect-ratio="0.67"/>
+              <span class="__card-info" style="color: #FF7D6C">{{ evento.date }}&#160;&#8231;&#160;{{ evento.hour }}</span>
               <h1 class="__card-title">{{ evento.title | truncateTitle }}</h1>
               <span class="__card-subtitle">{{ evento.subtitle | truncateSubtitle }}</span>
             </nuxt-link> 
-          </swiper-slide>
-        </swiper> -->
+          </div>
+        </div>
 
       </div><!-- ####### EVENTOS ####### -->
 
@@ -70,25 +59,13 @@
         <div class="cards-container">
           <div class="card" v-for="acomod in $store.state.acomods" :key="acomod.acomodID">
             <nuxt-link :to="'/acomodacoes/' + acomod.acomodID">
-              <img class="__card-img" :src="imageAcH(acomod)">
-              <!-- <progressive-img class="__card-img" :src="imageAcH(acomod)" :placeholder="acomod.imageL1" no-ratio /> -->
-              <span class="__card-info">{{ acomod.tipoAcomod }}</span>
+              <progressive-img class="__card-img" :src="imageAcH(acomod)" :placeholder="acomod.imageL1" :aspect-ratio="0.67"/>
+              <span class="__card-info" style="color: #007B77">{{ acomod.tipoAcomod }}</span>
               <h1 class="__card-title">{{ acomod.title | truncateTitle }}</h1>
               <span class="__card-subtitle">R${{ acomod.valorDiariaNormal }}<span class="__card-valor-dia"> por dia</span></span>
             </nuxt-link> 
           </div>
         </div>
-
-        <!-- <swiper :options="swiperOption">
-          <swiper-slide class="card" v-for="acomod in $store.state.acomods" :key="acomod.acomodID">
-            <nuxt-link :to="'/acomodacoes/' + acomod.acomodID">
-              <progressive-img class="__card-img" :src="imageAcH(acomod)" :placeholder="acomod.imageL1" no-ratio />
-              <span class="__card-tipoAcomod">{{ acomod.tipoAcomod }}</span>
-              <h1 class="__card-title">{{ acomod.title | truncateTitle }}</h1>
-              <span class="__card-valor">R${{ acomod.valorDiariaNormal }}<span class="__card-valor-dia"> por dia</span></span>
-            </nuxt-link> 
-          </swiper-slide>
-        </swiper> -->
 
       </div><!-- ####### ACOMODAÇÕES ####### -->
 
@@ -113,24 +90,13 @@
         <div class="cards-container">
           <div class="card" v-for="passeio in $store.state.passeios" :key="passeio.passeioID">
             <nuxt-link :to="'/passeios/' + passeio.passeioID">
-              <img class="__card-img" :src="imagePasH(passeio)">
-              <span class="__card-info">{{ passeio.tipoPasseio }}</span>
+              <progressive-img class="__card-img" :src="imagePasH(passeio)" :placeholder="passeio.imageL1" :aspect-ratio="0.67"/>
+              <span class="__card-info" style="color: #64B5F6">{{ passeio.tipoPasseio }}</span>
               <h1 class="__card-title">{{ passeio.title | truncateTitle }}</h1>
               <span class="__card-subtitle">R${{ passeio.valorPasseio }}<span class="__card-valor-pessoa"> por pessoa</span></span>
             </nuxt-link> 
           </div>
         </div>
-
-        <!-- <swiper :options="swiperOption">
-          <swiper-slide class="card" v-for="passeio in $store.state.passeios" :key="passeio.passeioID">
-            <nuxt-link :to="'/passeios/' + passeio.passeioID">
-              <progressive-img class="__card-img" :src="imagePasH(passeio)" :placeholder="passeio.imageL1" no-ratio />
-              <span class="__card-tipoPasseio">{{ passeio.tipoPasseio }}</span>
-              <h1 class="__card-title">{{ passeio.title | truncateTitle }}</h1>
-              <span class="__card-valor">R${{ passeio.valorPasseio }}<span class="__card-valor-pessoa"> por pessoa</span></span>
-            </nuxt-link> 
-          </swiper-slide>
-        </swiper> -->
 
       </div><!-- ####### PASSEIOS ####### -->
 
@@ -155,22 +121,12 @@
         <div class="cards-container">
           <div class="card" v-for="atracao in $store.state.atracoes" :key="atracao.atracaoID">
             <nuxt-link :to="'/atracoes/' + atracao.atracaoID">
-              <img class="__card-img" :src="imageAtH(atracao)">
-              <span class="__card-info">{{ atracao.tipoAtracao }}</span>
+              <progressive-img class="__card-img" :src="imageAtH(atracao)" :placeholder="atracao.imageL1" :aspect-ratio="0.67"/>
+              <span class="__card-info" style="color: #81C784">{{ atracao.tipoAtracao }}</span>
               <h1 class="__card-title">{{ atracao.title | truncateTitle }}</h1>
             </nuxt-link> 
           </div>
         </div>
-
-        <!-- <swiper :options="swiperOption">
-          <swiper-slide class="card" v-for="atracao in $store.state.atracoes" :key="atracao.atracaoID">
-            <nuxt-link :to="'/atracoes/' + atracao.atracaoID">
-              <progressive-img class="__card-img" :src="imageAtH(atracao)" :placeholder="atracao.imageL1" no-ratio />
-              <span class="__card-tipoAtracao">{{ atracao.tipoAtracao }}</span>
-              <h1 class="__card-title">{{ atracao.title | truncateTitle }}</h1>
-            </nuxt-link> 
-          </swiper-slide>
-        </swiper> -->
 
       </div><!-- ####### ATRAÇÕES ####### -->
 
@@ -338,6 +294,7 @@ export default {
             width: 100%; 
             height: auto;
             border-radius: 2px;
+            margin-bottom: .2rem;
           }
           & .__card-info {
             text-transform: uppercase;
@@ -346,7 +303,7 @@ export default {
             color: #007B77;
           }
           & .__card-title {
-            margin: .2rem 0 .3rem 0;
+            margin: .2rem 0;
             font-size: 14px;
             font-weight: 700;
           }
@@ -445,7 +402,6 @@ export default {
               text-transform: uppercase;
               font-size: 12px;
               font-weight: 700;
-              color: #007B77;
             }
             & .__card-title {
               font-size: 17px;

@@ -25,8 +25,15 @@
     <!-- ####### IMAGE ####### -->
     <div class="image-box">
       <swiper :options="swiperOption">
-        <swiper-slide class="slide"><img class="__img" :src="image1H(passeio)"></swiper-slide>
-        <swiper-slide class="slide" v-if="ifImage2"><img class="__img" :src="image2H(passeio)"></swiper-slide>
+
+        <swiper-slide class="slide">
+          <progressive-img class="__img" :src="image1H(passeio)" :placeholder="passeio.imageL1" :aspect-ratio="0.67"/>
+        </swiper-slide>
+
+        <swiper-slide class="slide" v-if="ifImage2">
+          <progressive-img class="__img" :src="image2H(passeio)" :placeholder="passeio.imageL1" :aspect-ratio="0.67"/>
+        </swiper-slide>
+
         <div class="swiper-pagination" slot="pagination"></div>
       </swiper>
     </div> 
