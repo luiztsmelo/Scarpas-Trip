@@ -24,8 +24,19 @@
             </div>
           </nuxt-link>
         </div>
-          
-        <swiper :options="swiperOption">
+        
+        <div class="cards-container">
+          <div class="card" v-for="evento in $store.state.eventos" :key="evento.eventoID">
+            <nuxt-link :to="'/eventos/' + evento.eventoID">
+              <img class="__card-img" :src="imageEvH(evento)">
+              <span class="__card-info">{{ evento.date }}&#160;&#8231;&#160;{{ evento.hour }}</span>
+              <h1 class="__card-title">{{ evento.title | truncateTitle }}</h1>
+              <span class="__card-valor">{{ evento.subtitle | truncateSubtitle }}</span>
+            </nuxt-link> 
+          </div>
+        </div>
+
+        <!-- <swiper :options="swiperOption">
           <swiper-slide class="card" v-for="evento in $store.state.eventos" :key="evento.eventoID">
             <nuxt-link :to="'/eventos/' + evento.eventoID">
               <progressive-img class="__card-img" :src="imageEvH(evento)" :placeholder="evento.imageL1" no-ratio />
@@ -34,7 +45,7 @@
               <span class="__card-subtitle">{{ evento.subtitle | truncateSubtitle }}</span>
             </nuxt-link> 
           </swiper-slide>
-        </swiper>
+        </swiper> -->
 
       </div><!-- ####### EVENTOS ####### -->
 
@@ -55,8 +66,20 @@
             </div>
           </nuxt-link> 
         </div>
-          
-        <swiper :options="swiperOption">
+        
+        <div class="cards-container">
+          <div class="card" v-for="acomod in $store.state.acomods" :key="acomod.acomodID">
+            <nuxt-link :to="'/acomodacoes/' + acomod.acomodID">
+              <img class="__card-img" :src="imageAcH(acomod)">
+              <!-- <progressive-img class="__card-img" :src="imageAcH(acomod)" :placeholder="acomod.imageL1" no-ratio /> -->
+              <span class="__card-info">{{ acomod.tipoAcomod }}</span>
+              <h1 class="__card-title">{{ acomod.title | truncateTitle }}</h1>
+              <span class="__card-subtitle">R${{ acomod.valorDiariaNormal }}<span class="__card-valor-dia"> por dia</span></span>
+            </nuxt-link> 
+          </div>
+        </div>
+
+        <!-- <swiper :options="swiperOption">
           <swiper-slide class="card" v-for="acomod in $store.state.acomods" :key="acomod.acomodID">
             <nuxt-link :to="'/acomodacoes/' + acomod.acomodID">
               <progressive-img class="__card-img" :src="imageAcH(acomod)" :placeholder="acomod.imageL1" no-ratio />
@@ -65,7 +88,7 @@
               <span class="__card-valor">R${{ acomod.valorDiariaNormal }}<span class="__card-valor-dia"> por dia</span></span>
             </nuxt-link> 
           </swiper-slide>
-        </swiper>
+        </swiper> -->
 
       </div><!-- ####### ACOMODAÇÕES ####### -->
 
@@ -86,8 +109,19 @@
             </div>
           </nuxt-link> 
         </div>
-          
-        <swiper :options="swiperOption">
+        
+        <div class="cards-container">
+          <div class="card" v-for="passeio in $store.state.passeios" :key="passeio.passeioID">
+            <nuxt-link :to="'/passeios/' + passeio.passeioID">
+              <img class="__card-img" :src="imagePasH(passeio)">
+              <span class="__card-info">{{ passeio.tipoPasseio }}</span>
+              <h1 class="__card-title">{{ passeio.title | truncateTitle }}</h1>
+              <span class="__card-subtitle">R${{ passeio.valorPasseio }}<span class="__card-valor-pessoa"> por pessoa</span></span>
+            </nuxt-link> 
+          </div>
+        </div>
+
+        <!-- <swiper :options="swiperOption">
           <swiper-slide class="card" v-for="passeio in $store.state.passeios" :key="passeio.passeioID">
             <nuxt-link :to="'/passeios/' + passeio.passeioID">
               <progressive-img class="__card-img" :src="imagePasH(passeio)" :placeholder="passeio.imageL1" no-ratio />
@@ -96,7 +130,7 @@
               <span class="__card-valor">R${{ passeio.valorPasseio }}<span class="__card-valor-pessoa"> por pessoa</span></span>
             </nuxt-link> 
           </swiper-slide>
-        </swiper>
+        </swiper> -->
 
       </div><!-- ####### PASSEIOS ####### -->
 
@@ -117,8 +151,18 @@
             </div>
           </nuxt-link> 
         </div>
-          
-        <swiper :options="swiperOption">
+        
+        <div class="cards-container">
+          <div class="card" v-for="atracao in $store.state.atracoes" :key="atracao.atracaoID">
+            <nuxt-link :to="'/atracoes/' + atracao.atracaoID">
+              <img class="__card-img" :src="imageAtH(atracao)">
+              <span class="__card-info">{{ atracao.tipoAtracao }}</span>
+              <h1 class="__card-title">{{ atracao.title | truncateTitle }}</h1>
+            </nuxt-link> 
+          </div>
+        </div>
+
+        <!-- <swiper :options="swiperOption">
           <swiper-slide class="card" v-for="atracao in $store.state.atracoes" :key="atracao.atracaoID">
             <nuxt-link :to="'/atracoes/' + atracao.atracaoID">
               <progressive-img class="__card-img" :src="imageAtH(atracao)" :placeholder="atracao.imageL1" no-ratio />
@@ -126,7 +170,7 @@
               <h1 class="__card-title">{{ atracao.title | truncateTitle }}</h1>
             </nuxt-link> 
           </swiper-slide>
-        </swiper>
+        </swiper> -->
 
       </div><!-- ####### ATRAÇÕES ####### -->
 
@@ -253,7 +297,7 @@ export default {
     flex-flow: column;
     margin-bottom: 5.2rem;
     & .category-container {
-      padding: 2.5rem 0;
+      padding: 2.2rem 0;
       display: flex;
       flex-flow: column;
       overflow-x: hidden;
@@ -261,7 +305,7 @@ export default {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: 0 7% 1.5rem 7%;
+        padding: 0 7% 1.3rem 7%;
         & .__title {
           font-size: 22px;
           font-weight: 700;
@@ -283,7 +327,39 @@ export default {
           }
         }
       }
-      & .swiper-container {
+      & .cards-container {
+        padding: 0 5%;
+        display: flex;
+        flex-flow: row wrap;
+        & .card {
+          margin: .6rem 1.8%;
+          flex: 0 1 46%;
+          & .__card-img {
+            width: 100%; 
+            height: auto;
+            border-radius: 2px;
+          }
+          & .__card-info {
+            text-transform: uppercase;
+            font-size: 10px;
+            font-weight: 700;
+            color: #007B77;
+          }
+          & .__card-title {
+            margin: .2rem 0 .3rem 0;
+            font-size: 14px;
+            font-weight: 700;
+          }
+          & .__card-subtitle {
+            font-size: 14px;
+            font-weight: 400;
+            & .__card-valor-dia {
+              font-size: 13px;
+            }
+          }
+        }
+      }
+      /* & .swiper-container {
         & .swiper-wrapper {
           display: flex;
           padding-left: 7%;
@@ -341,24 +417,47 @@ export default {
             }
           }
         }
-      }
+      } */
     }
   }
 }
 
-@media (min-width: 1281px) {
+@media (min-width: 1024px) {
   .home {
     & .home-body {
       & .category-container {
+        padding: 2.5rem 0;
         & .title-row {
-          padding: 0 13% 1.5rem 13%;
+          padding: 0 8% 1.3rem 8%;
           & .__title {
-            font-size: 29px;
+            font-size: 28px;
           }
         }
-        & .swiper-container {
-          & .swiper-wrapper {
-            padding-left: 13%;
+        & .cards-container {
+          padding: 0 6.9%;
+          & .card {
+            margin: 1.1%;
+            flex: 0 1 22.7%;
+            & .__card-img {
+              border-radius: 3px;
+            }
+            & .__card-info {
+              text-transform: uppercase;
+              font-size: 12px;
+              font-weight: 700;
+              color: #007B77;
+            }
+            & .__card-title {
+              font-size: 17px;
+              font-weight: 700;
+            }
+            & .__card-subtitle {
+              font-size: 16px;
+              font-weight: 400;
+              & .__card-valor-dia {
+                font-size: 14px;
+              }
+            }
           }
         }
       }

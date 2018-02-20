@@ -178,11 +178,11 @@ export default {
     height: 15rem;
     & .chegada-partida-container {
       & .__title {
-        font-size: 31px;
-        padding: 2rem 13% 0 13%;
+        font-size: 28px;
+        padding: 2rem 8%;
       }
       & .chegada-partida-box {
-        margin: 0 13%;
+        margin: 0 8%;
         border-radius: 4px;
         width: 35%;
         height: 3.2rem;
