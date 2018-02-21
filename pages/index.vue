@@ -247,22 +247,27 @@ export default {
         align-items: center;
         padding: 0 7% 1.3rem 7%;
         & .__title {
+          padding-left: .3rem;
           font-size: 22px;
           font-weight: 700;
         }
+        & #eventos { border-left: 5px solid #FF7D6C }
+        & #acomods { border-left: 5px solid #08C8C1 }
+        & #passeios { border-left: 5px solid #64B5F6 }
+        & #atracoes { border-left: 5px solid #81C784 }
         & .see-all {
-          width: 4.5rem;
+          width: 6rem;
           cursor: pointer;
           text-align: end;
           & .__see-all-text {
-            font-size: 12px;
+            font-size: 16px;
             font-weight: 500;
             color: rgb(122, 122, 122);
-            padding-right: 2px;
+            padding-right: 3px;
           }
           & .__see-all-arrow {
             opacity: .5;
-            width: .5rem;
+            width: .7rem;
             height: auto;
           }
         }
@@ -303,7 +308,17 @@ export default {
     }
   }
 }
-
+@media (max-width: 1023px) {
+  .home {
+    & .home-body {
+      & .category-container {
+        & .see-all {
+          display: none;
+        }
+      }
+    }
+  }
+}
 @media (min-width: 1024px) {
   .home {
     & .home-body {
@@ -312,7 +327,6 @@ export default {
         & .title-row {
           padding: 0 9% 1.5rem 9%;
           & .__title {
-            padding-left: .3rem;
             font-size: 28px;
           }
           & #eventos { border-left: 6px solid #FF7D6C }
