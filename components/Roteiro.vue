@@ -3,7 +3,7 @@
     
     <div class="chegada-partida-container">
       
-      <h1 class="__title">Tudo para sua viagem a Capitólio e região! Crie um roteiro gratuito:</h1>
+      <h1 class="__title">Tudo para sua viagem a Capitólio e região! <span>Crie um roteiro gratuito:</span></h1>
 
       <div class="chegada-partida-box">
 
@@ -120,11 +120,15 @@ export default {
     justify-content: center;
     & .__title {
       display: flex;
+      flex-flow: column;
       padding: 0 7%;
       color: white;
       font-size: 20px;
       font-weight: 600;
       line-height: 27px;
+      & span {
+        font-weight: 600;
+      }
     }
     & .chegada-partida-box {
       display: flex;
@@ -183,29 +187,33 @@ export default {
     background-size: cover;
     /* background-position: center; */
     & .chegada-partida-container {
-      background: rgba(0,0,0,.3);
+      background: rgba(0,0,0,.1);
       & .__title {
-        width: 78%;
-        font-size: 35px;
-        font-weight: 800;
-        line-height: 47px;
-        padding: 0 9% 2rem 9%;
+        width: 100%;
+        font-size: 45px;
+        font-weight: 900;
+        line-height: 65px;
+        padding: 0 9% 1.5rem 9%;
+        & span {
+          font-size: 36px;
+          font-weight: 400;
+        }
       }
       & .chegada-partida-box {
         margin: 0 9%;
-        width: 35%;
+        width: 32%;
         height: 3.2rem;
         border-bottom: 2px solid white;
         & .chegada-partida-input {
           position: relative;
           width: 5.2rem;
           & h3 {
-            font-size: 17px;
+            font-size: 18px;
             font-weight: 400;
           }
         }
         & img {
-          width: 1.25rem;
+          width: 1.35rem;
           height: auto;
         }
       }
