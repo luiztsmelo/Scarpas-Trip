@@ -107,7 +107,8 @@ export default {
 .roteiro-home {
   width: 100%;
   height: 10rem;
-  background-image: linear-gradient(-20deg, #00cdac 0%, #5FBCB5 100%);
+  background: rgb(52, 52, 52);
+  /* background-image: linear-gradient(-20deg, #00cdac 0%, #5FBCB5 100%); */
   & .chegada-partida-container {
     padding: 1rem 0;
     position: relative;
@@ -175,18 +176,26 @@ export default {
 
 @media (min-width: 1024px) {
   .roteiro-home {
-    height: 15rem;
-    background: rgb(62,62,62);
+    height: 30rem;
+    background-image: url('../assets/img/bgimg.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    /* background-position: center; */
     & .chegada-partida-container {
+      background: rgba(0,0,0,.5);
       & .__title {
-        font-size: 28px;
-        padding: 2rem 9%;
+        width: 78%;
+        font-size: 35px;
+        font-weight: 800;
+        line-height: 47px;
+        padding: 0 9% 2rem 9%;
       }
       & .chegada-partida-box {
         margin: 0 9%;
-        border-radius: 4px;
         width: 35%;
         height: 3.2rem;
+        border-bottom: 2px solid white;
         & .chegada-partida-input {
           position: relative;
           width: 5.2rem;

@@ -260,13 +260,12 @@ export default {
           cursor: pointer;
           text-align: end;
           & .__see-all-text {
-            font-size: 15px;
+            font-size: 14px;
             font-weight: 600;
-            color: rgb(142, 142, 142);
             padding-right: 3px;
           }
           & .__see-all-arrow {
-            opacity: .5;
+            opacity: .6;
             width: .7rem;
             height: auto;
           }
@@ -327,7 +326,7 @@ export default {
         & .title-row {
           padding: 0 9% 1.5rem 9%;
           & .__title {
-            font-size: 28px;
+            font-size: 27px;
           }
           & #eventos { border-left: 6px solid #FF7D6C }
           & #acomods { border-left: 6px solid #08C8C1 }
