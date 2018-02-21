@@ -33,7 +33,7 @@
             <span class="__nav-item">Restaurantes</span>
           </nuxt-link>
           <nuxt-link to="/acomodacoes">
-            <span class="__nav-item" >Anunciar</span>
+            <span class="__nav-item" style="color: #FF7D6C">Anunciar</span>
           </nuxt-link>
         </nav>
 
@@ -86,7 +86,7 @@ export default {
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 9997;
+  z-index: 9999;
   height: 3.2rem;
   width:  100%;
   background: white;
@@ -129,7 +129,7 @@ export default {
       height: 100%;
       & .__nav-item {
         margin: auto .7rem;
-        line-height: 3.6rem;
+        line-height: 3.7rem;
         font-size: 14px;
         font-weight: 600;
         user-select: none;

@@ -13,6 +13,7 @@ const store = () => new Vuex.Store({
     /*
     -------------------- GERAL --------------------
     */
+    isMobile: false,
     scrollY: 0,
     authUser: null,
     showNavbar: true,
@@ -265,6 +266,9 @@ const store = () => new Vuex.Store({
     /*
     -------------------- GERAL --------------------
     */
+    m_isMobile (state, payload) {
+      state.isMobile = payload
+    },
     m_authUser (state, payload) {
       state.authUser = payload
     },

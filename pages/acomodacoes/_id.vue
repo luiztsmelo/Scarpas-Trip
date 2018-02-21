@@ -264,11 +264,7 @@ export default {
       showComods: false,
       showTopbar: true,
       scrollTopbar: false,
-      swiperOption: {
-        pagination: '.swiper-pagination',
-        dynamicBullets: true,
-        autoplay: 2222
-      },
+      
       googleMapsInitialized: false,
    
       monthLabels: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
@@ -324,8 +320,10 @@ export default {
     return firebase.database().ref('acomodacoes/' + params.id).once('value')
     .then(snapshot => {
       store.commit('m_acomod', snapshot.val())
-      store.commit('m_showNavbar', false)
-      store.commit('m_showFoobar', false)
+      if (store.state.isMobile === true) {
+        store.commit('m_showNavbar', false)
+        store.commit('m_showFoobar', false)
+      }
     })
   },
   methods: {
@@ -381,6 +379,23 @@ export default {
     })
   },
   computed: {
+    swiperOption () {
+      if (this.$store.state.isMobile === true) {
+        return {
+          pagination: '.swiper-pagination',
+          dynamicBullets: true,
+          autoplay: 2300
+        }
+      } else {
+        return {
+          slidesPerView: 2.3,
+          spaceBetween: 7,
+          pagination: '',
+          dynamicBullets: true,
+          freeMode: true
+        }
+      }
+    },
     markerUrl () {
       return 'https://firebasestorage.googleapis.com/v0/b/escarpas-trip.appspot.com/o/utils%2Fmarker.svg?alt=media&token=fcbfd76e-ee93-41e8-a816-98906e19859b'
     },
@@ -457,8 +472,7 @@ export default {
 @import url('../../assets/css/_id.css');
 
 .acomods-id {
-  display: flex;
-  flex-flow: column;
+
   background-color: white;
   margin-bottom: 5.3rem;
   transition: all .27s cubic-bezier(.15,.97,.43,.93);
@@ -685,7 +699,173 @@ export default {
 }
 
 
-@media (min-width: 1281px) {
+@media (min-width: 1024px) {
+  .acomods-id {
+    margin-top: 3.6rem;
+
+    /* ####### IMAGE BOX ####### */
+    & .image-box {
+      cursor: grab;
+      overflow: hidden;
+      & .swiper-container {
+        position: relative;
+        & .swiper-wrapper {
+          display: inline-flex;
+          overflow: hidden;
+          & .slide {
+            & .__img {
+              width: 100%;
+              height: auto;
+            }
+          }
+        }
+      }
+    }/* ####### IMAGE BOX ####### */
+    
+    /* ####### ANUNCIANTE BOX ####### */
+    & .anunciante-box {
+      padding: 1.5rem 9% 0 9%;
+      & .__anunciante-img {
+        width: 3.5rem;
+        height: 3.5rem;
+        margin-right: .6rem;
+      }
+      & .__anunciante-name {
+        color: #00BAAC;
+        user-select: none;
+      }
+    }/* ####### ANUNCIANTE BOX ####### */
+
+
+    /* ####### SOBRE BOX ####### */
+    & .sobre-box {
+      padding: 0 9%;
+    }/* ####### SOBRE BOX ####### */
+
+
+    /* ####### CARACTERÍSTICAS BOX ####### */
+    & .caracteristicas-box {
+      padding: 0 9%;
+      & .__item-caracteristica {
+        display: flex;
+        flex-flow: row;
+        align-items: center;
+        margin-top: .8rem;
+        & .__img-caracteristica {
+          width: 1.8rem;
+          height: auto;
+          margin-right: .7rem;
+        }
+      }
+    }/* ####### CARACTERÍSTICAS BOX ####### */
+
+
+    /* ####### CAPACIDADE BOX ####### */
+    & .capacidade-box {
+      padding: 0 9%;
+    }/* ####### CAPACIDADE BOX ####### */
+
+
+    /* ####### COMODIDADES ####### */
+    & .comodidades-box {
+      padding: 0 8.2%;
+      & .__img-comodidade {
+        width: 2rem;
+        height: auto;
+        margin: .7rem .8rem 0 .8rem;
+      }
+    }
+    & .comods-details {
+    position: fixed;
+    z-index: 9999;
+    width:  100%;
+    height: 100%;
+    top: 0;
+    background: white;
+    overflow-y: auto;
+    transition: var(--menus-transition);
+    & .back-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width:  100%;
+      height: 3rem;
+      background: white;
+      & .back-box {
+        display: inline-flex;
+        align-items: center;
+        height: 100%;
+        padding: 0 7%;
+        & .__back-btn {
+          cursor: pointer;
+          width: 1.07rem;
+          height: auto;
+          filter: invert(75%);
+        }
+      }
+    }
+    & .comods-body {
+      padding: 0 7% 3rem 7%;
+      & .__title {
+        margin: 5rem 0 2rem 0;
+        font-size: 27px;
+        font-weight: 700;
+      }
+      & .comods-item { 
+        display: flex;
+        flex-flow: row;
+        align-items: center;
+        padding: 1.1rem 0;
+        border-bottom: 1px solid rgb(222, 222, 222);
+        & .__img {
+          margin-right: 1rem;
+          width: 1.8rem;
+          height: auto;
+        }
+      }
+    }
+  }/* ####### COMODIDADES ####### */
+
+
+    /* ####### DISPONIBILIDADE ####### */
+
+
+    /* ####### LOCAL ####### */
+    & .local-box {
+      & .__adress {
+        padding: 0 9% .6rem 9%;
+      }
+    }/* ####### LOCAL ####### */
+
+
+    /* ####### AVALIAÇÕES ####### */
+    & .avaliacoes-box {
+      padding: 0 9%;
+    }/* ####### AVALIAÇÕES ####### */
+
+
+    /* ####### RESERVA ####### */
+    & .reserva {
+      height: 4.1rem;
+      padding: 0 9%;
+      & .reserva-body {
+        & .__reserva-valor {
+          font-size: 20px;
+          font-weight: 500;
+        }
+        & .__reserva-valor-pessoa {
+          font-size: 16px;
+        }
+        & .__reserva-btn {
+          font-size: 18px;
+          font-weight: 600;
+          height: 2.7rem;
+          width:  12rem;
+          border-radius: 4px;
+        }
+      }
+    }/* ####### RESERVA ####### */
+  }
 }
 
 </style>

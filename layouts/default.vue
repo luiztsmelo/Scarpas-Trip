@@ -27,12 +27,23 @@ import MapFull from '~/components/MapFull.vue'
 export default {
   components: { Navbar, Foobar, Menuu, Loader, Share, MapFull },
   created () {
-    /* let lastScrollTop = 0 */
+    /* 
+    DETECT SCROLL POSITION
+    */
     window.addEventListener('scroll', event => {
       this.$store.state.scrollY = event.path[1].scrollY
-      /* lastScrollTop > this.$store.state.scrollY ? this.$store.state.scrollUp = true : this.$store.state.scrollUp = false
-      lastScrollTop = this.$store.state.scrollY */
     })
+  },
+  beforeCreate () {
+    /* 
+    DETECT DEVICE
+    */
+    const userAgent = navigator.userAgent.toLowerCase()
+    if (/mobi/i.test(userAgent)) {
+      this.$store.commit('m_isMobile', true)
+    } else {
+      this.$store.commit('m_isMobile', false)
+    }
   }
 }
 </script>

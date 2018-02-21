@@ -263,6 +263,7 @@ export default {
             font-size: 14px;
             font-weight: 600;
             padding-right: 3px;
+            color: rgb(100,100,100);
           }
           & .__see-all-arrow {
             opacity: .6;
