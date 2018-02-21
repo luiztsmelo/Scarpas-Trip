@@ -57,6 +57,9 @@ const store = () => new Vuex.Store({
     blobAcL2: null,
     blobAcH2J: null,
     blobAcH2W: null,
+    blobAcL3: null,
+    blobAcH3J: null,
+    blobAcH3W: null,
     creditCard: {
       cardNumber: '',
       cardHolderName: '',

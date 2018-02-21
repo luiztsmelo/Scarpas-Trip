@@ -481,7 +481,7 @@
       <textarea 
       v-model="$store.state.acomodData.subtitle"
       v-autosize="subtitle"
-      maxlength="400"
+      maxlength="500"
       rows="1"
       placeholder="Coloque informações importantes aqui, que não foram perguntadas antes"
       required>
@@ -1099,7 +1099,7 @@ export default {
       return 50 - this.$store.state.acomodData.title.length
     },
     subtitleLength () {
-      return 400 - this.$store.state.acomodData.subtitle.length
+      return 500 - this.$store.state.acomodData.subtitle.length
     },
     firstName () {
       let fullName = this.$store.state.acomodData.proprietario.split(' ')
