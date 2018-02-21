@@ -99,7 +99,10 @@ const store = () => new Vuex.Store({
       imageH1W: null,
       imageL2: null,
       imageH2J: null,
-      imageH2W: null
+      imageH2W: null,
+      imageL3: null,
+      imageH3J: null,
+      imageH3W: null
     },
     reservaAcomod: {
       totalHospedes: '1',
@@ -332,6 +335,15 @@ const store = () => new Vuex.Store({
     },
     m_imageAcH2W (state, payload) {
       state.acomodData.imageH2W = payload
+    },
+    m_imageAcL3 (state, payload) {
+      state.acomodData.imageL3 = payload
+    },
+    m_imageAcH3J (state, payload) {
+      state.acomodData.imageH3J = payload
+    },
+    m_imageAcH3W (state, payload) {
+      state.acomodData.imageH3W = payload
     },
     m_acomodPlace (state, payload) {
       state.acomodPlace = payload
@@ -661,7 +673,10 @@ const store = () => new Vuex.Store({
           imageH1W: null,
           imageL2: null,
           imageH2J: null,
-          imageH2W: null
+          imageH2W: null,
+          imageL3: null,
+          imageH3J: null,
+          imageH3W: null
         })
         commit('m_cadastroAcomod11', false)
         commit('m_cadastroAcomod0', true)

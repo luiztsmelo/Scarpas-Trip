@@ -318,7 +318,7 @@
           :height="214"
           :quality="3"
           :placeholder="'Carregando...'"
-          :placeholder-color="'rgb(232,232,222)'"
+          :placeholder-color="'white'"
           :accept="'image/*'"
           :zoom-speed="2"
           :prevent-white-space="true"
@@ -342,7 +342,7 @@
           :height="214"
           :quality="3"
           :placeholder="'Carregando...'"
-          :placeholder-color="'rgb(222,222,222)'"
+          :placeholder-color="'white'"
           :accept="'image/*'"
           :prevent-white-space="true"
           :show-remove-button="false"
@@ -356,8 +356,32 @@
         </div>
       </div>
 
+      <div class="modal-croppa" v-show="showCroppaModal3" @click="showCroppaModal3=false">
+        <div class="modal-croppa-body" @click.stop>
+          <h1>Ajustar imagem</h1>
+          <croppa
+          ref="myCroppa3"
+          :width="320"
+          :height="214"
+          :quality="3"
+          :placeholder="'Carregando...'"
+          :placeholder-color="'white'"
+          :accept="'image/*'"
+          :prevent-white-space="true"
+          :show-remove-button="false"
+          @file-choose="imageChoose3">
+          </croppa>
+          <div class="modal-croppa-btns">
+            <button class="__croppa-btn" type="button" @click="showCroppaModal3=false, imageConfirmed3()">Confirmar</button>
+            <button class="__croppa-btn" type="button" @click="$refs.myCroppa3.chooseFile(), $refs.myCroppa3.remove(), imageURL3 = null"  style="background:transparent">Escolher outra</button>
+            <button class="__croppa-btn" type="button" @click="removeImage3()" style="background:transparent">Remover</button>
+          </div>
+        </div>
+      </div>
+
       <!-- Preview Image -->
       <div class="after-choose-image" v-show="imageURL1 !== null">
+
         <div class="image-box">
           <div class="__foto-principal">Imagem principal</div>
           <img :src="imageURL1" class="__preview-img" @click="showCroppaModal1=true">
@@ -366,6 +390,11 @@
         <div class="image-box">
           <img src="./../../../assets/img/add-image.svg" class="__preview-img" v-if="imageURL2 === null" @click="$refs.myCroppa2.chooseFile()" style="padding:2rem">
           <img :src="imageURL2" class="__preview-img" @click="showCroppaModal2=true" v-else>
+        </div>
+
+        <div class="image-box" v-if="imageURL2 !== null">
+          <img src="./../../../assets/img/add-image.svg" class="__preview-img" v-if="imageURL3 === null" @click="$refs.myCroppa3.chooseFile()" style="padding:2rem">
+          <img :src="imageURL3" class="__preview-img" @click="showCroppaModal3=true" v-else>
         </div>
 
       </div><!-- Preview Image -->
@@ -631,8 +660,10 @@ export default {
       googleMapsInitialized: false,
       showCroppaModal1: false,
       showCroppaModal2: false,
+      showCroppaModal3: false,
       imageURL1: null,
       imageURL2: null,
+      imageURL3: null,
       monthsPermitted: ['01','02','03','04','05','06','07','08','09','10','11','12']
     }
   },
@@ -693,6 +724,29 @@ export default {
       this.imageURL2 = null
       this.$refs.myCroppa2.remove()
       this.showCroppaModal2 = false
+    },
+    /* --- Image 3 --- */
+    imageChoose3 () {
+      this.showCroppaModal3 = true
+    },
+    async imageConfirmed3 () {
+      if (this.imageURL3 !== null) {
+        return 
+      } else {
+        const blobAcL3 = await this.$refs.myCroppa3.promisedBlob('image/jpeg', 0.01)
+        const blobAcH3J = await this.$refs.myCroppa3.promisedBlob('image/jpeg')
+        const blobAcH3W = await this.$refs.myCroppa3.promisedBlob('image/webp')
+        let url3 = URL.createObjectURL(blobAcH3J)
+        this.imageURL3 = url3
+        this.$store.state.blobAcL3 = blobAcL3
+        this.$store.state.blobAcH3J = blobAcH3J
+        this.$store.state.blobAcH3W = blobAcH3W
+      }
+    },
+    removeImage3 () {
+      this.imageURL3 = null
+      this.$refs.myCroppa3.remove()
+      this.showCroppaModal3 = false
     },
     /* ******************** GOOGLE MAPS ******************** */
     setPlace (place) {
@@ -947,6 +1001,35 @@ export default {
                   })
                 })
               }
+              /* 
+              UPLOAD IMAGE 3 
+              */
+              if (this.$store.state.blobAcH3J !== null) {
+                /* imageAcL3 */
+                storageRef.child('imageL3.jpeg').put(this.$store.state.blobAcL3).then(snapshot => {
+                  console.log(acomodID + 'L3' + '.jpeg')
+                  storageRef.child('imageL3.jpeg').getDownloadURL().then(url => {
+                    this.$store.commit('m_imageAcL3', url)
+                    this.ifUpload3()
+                  })
+                })
+                /* imageAcH3J */
+                storageRef.child('imageH3J.jpeg').put(this.$store.state.blobAcH3J).then(snapshot => {
+                  console.log(acomodID + 'H3J' + '.jpeg')
+                  storageRef.child('imageH3J.jpeg').getDownloadURL().then(url => {
+                    this.$store.commit('m_imageAcH3J', url)
+                    this.ifUpload3()
+                  })
+                })
+                /* imageAcH3W */
+                storageRef.child('imageH3W.webp').put(this.$store.state.blobAcH3W).then(snapshot => {
+                  console.log(acomodID + 'H3W' + '.webp')
+                  storageRef.child('imageH3W.webp').getDownloadURL().then(url => {
+                    this.$store.commit('m_imageAcH3W', url)
+                    this.ifUpload3()
+                  })
+                })
+              }
               this.$store.commit('m_acomodCreated', true)
             })
             .catch(error => {
@@ -966,6 +1049,12 @@ export default {
     },
     ifUpload2 () {
       if (this.$store.state.acomodData.imageL1 !== null && this.$store.state.acomodData.imageH1J !== null && this.$store.state.acomodData.imageH1W !== null && this.$store.state.acomodData.imageL2 !== null && this.$store.state.acomodData.imageH2J !== null && this.$store.state.acomodData.imageH2W !== null) {
+        this.$store.dispatch('a_uploadAcomod')
+        this.$router.push('/acomodacoes/' + this.$store.state.acomodData.acomodID)
+      }
+    },
+    ifUpload3 () {
+      if (this.$store.state.acomodData.imageL1 !== null && this.$store.state.acomodData.imageH1J !== null && this.$store.state.acomodData.imageH1W !== null && this.$store.state.acomodData.imageL2 !== null && this.$store.state.acomodData.imageH2J !== null && this.$store.state.acomodData.imageH2W !== null && this.$store.state.acomodData.imageL3 !== null && this.$store.state.acomodData.imageH3J !== null && this.$store.state.acomodData.imageH3W !== null) {
         this.$store.dispatch('a_uploadAcomod')
         this.$router.push('/acomodacoes/' + this.$store.state.acomodData.acomodID)
       }
@@ -1506,7 +1595,7 @@ export default {
       background: #00D8C7;
       color: white;
       padding: .8rem 1.2rem;
-      border-radius: 2rem;
+      border-radius: 3px;
     }
     & .__croppa-btn {
       margin: .3rem 0;
@@ -1515,7 +1604,7 @@ export default {
       background: #00D8C7;
       color: white;
       padding: .8rem 1.2rem;
-      border-radius: 2rem;
+      border-radius: 3px;
     }
     & .after-choose-image {
       margin-top: 1.5rem;
@@ -1523,8 +1612,9 @@ export default {
       display: flex;
       flex-flow: row wrap;
       & .image-box {
+        cursor: pointer;
         position: relative;
-        margin: 0 .3rem;
+        margin: .3rem;
         width: 145px;
         height: 97px;
         & .__foto-principal {

@@ -34,6 +34,10 @@
           <progressive-img class="__img" :src="image2H(acomod)" :placeholder="acomod.imageL1" :aspect-ratio="0.67"/>
         </swiper-slide>
 
+        <swiper-slide class="slide" v-if="ifImage3">
+          <progressive-img class="__img" :src="image3H(acomod)" :placeholder="acomod.imageL3" :aspect-ratio="0.67"/>
+        </swiper-slide>
+
         <div class="swiper-pagination" slot="pagination"></div>
       </swiper>
     </div> 
@@ -360,6 +364,13 @@ export default {
         return acomod.imageH2J
       }
     },
+    image3H (acomod) {
+      if (supportsWebP) {
+        return acomod.imageH3W
+      } else {
+        return acomod.imageH3J
+      }
+    },
     enterFullscreen () {
       if ((document.fullScreenElement && document.fullScreenElement !== null) ||
         (!document.mozFullScreen && !document.webkitIsFullScreen)) {
@@ -388,7 +399,7 @@ export default {
         }
       } else {
         return {
-          slidesPerView: 2.3,
+          slidesPerView: 2.4,
           spaceBetween: 7,
           pagination: '',
           dynamicBullets: true,
@@ -430,6 +441,17 @@ export default {
           return this.acomod.imageH2W
         } else {
           return this.acomod.imageH2J
+        }
+      }
+    },
+    ifImage3 () {
+      if (this.acomod.imageH3W === null) {
+        return
+      } else {
+        if (supportsWebP) {
+          return this.acomod.imageH3W
+        } else {
+          return this.acomod.imageH3J
         }
       }
     },
@@ -850,17 +872,17 @@ export default {
       padding: 0 9%;
       & .reserva-body {
         & .__reserva-valor {
-          font-size: 20px;
+          font-size: 19px;
           font-weight: 500;
         }
         & .__reserva-valor-pessoa {
           font-size: 16px;
         }
         & .__reserva-btn {
-          font-size: 18px;
+          font-size: 17px;
           font-weight: 600;
           height: 2.7rem;
-          width:  12rem;
+          width:  11rem;
           border-radius: 4px;
         }
       }
