@@ -124,7 +124,7 @@ export default {
   }
 }
 
-@media (min-width: 1281px) {
+@media (min-width: 1024px) {
   .foobar {
     display: none;
   }

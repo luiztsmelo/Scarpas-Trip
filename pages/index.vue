@@ -247,14 +247,9 @@ export default {
         align-items: center;
         padding: 0 7% 1.3rem 7%;
         & .__title {
-          /* padding-left: .3rem; */
           font-size: 22px;
           font-weight: 700;
         }
-        /* & #eventos { border-left: 4px solid #FF7D6C }
-        & #acomods { border-left: 4px solid #08C8C1 }
-        & #passeios { border-left: 4px solid #64B5F6 }
-        & #atracoes { border-left: 4px solid #81C784 } */
         & .see-all {
           width: 6rem;
           cursor: pointer;
@@ -330,10 +325,6 @@ export default {
             font-size: 27px;
             font-weight: 800;
           }
-          /* & #eventos { border-left: 6px solid #FF7D6C }
-          & #acomods { border-left: 6px solid #08C8C1 }
-          & #passeios { border-left: 6px solid #64B5F6 }
-          & #atracoes { border-left: 6px solid #81C784 } */
         }
         & .cards-container {
           padding: 0 8%;
