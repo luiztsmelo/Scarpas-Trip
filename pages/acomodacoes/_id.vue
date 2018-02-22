@@ -476,6 +476,14 @@ export default {
       }
     }
   },
+  beforeRouteEnter (to, from, next) {
+    next(vm => {
+      if (vm.$store.state.isMobile === true) {
+        vm.$store.commit('m_showNavbar', false)
+        vm.$store.commit('m_showFoobar', false)
+      }
+    })
+  },
   beforeRouteLeave (to, from, next) {
     if (this.$store.state.showNavbar === false && this.$store.state.showFoobar === false) {
       this.$store.commit('m_showNavbar', true)
@@ -699,7 +707,7 @@ export default {
       & .__reserva-btn {
         font-size: 16px;
         font-weight: 600;
-        background: #08C8C1;
+        background: #00D8C7;
         line-height: 2.6rem;
         color: white;
         height: 2.7rem;

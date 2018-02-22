@@ -191,17 +191,17 @@ export default {
       & .__title {
         width: 100%;
         font-size: 45px;
-        font-weight: 900;
-        line-height: 65px;
-        padding: 0 9% 1.5rem 9%;
+        font-weight: 800;
+        line-height: 70px;
+        padding: 0 9% 1.2rem 9%;
         & span {
-          font-size: 36px;
+          font-size: 34px;
           font-weight: 400;
         }
       }
       & .chegada-partida-box {
         margin: 0 9%;
-        width: 32%;
+        width: 31%;
         height: 3.2rem;
         border-bottom: 2px solid white;
         & .chegada-partida-input {
