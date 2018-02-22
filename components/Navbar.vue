@@ -127,8 +127,9 @@ export default {
       display: flex;
       align-items: center;
       height: 100%;
+      transform: translateX(.7rem);
       & .__nav-item {
-        margin: auto .7rem;
+        margin: 0 .7rem;
         line-height: 3.7rem;
         font-size: 14px;
         font-weight: 600;

@@ -765,7 +765,7 @@ export default {
               font-size: 36px;
               font-weight: 300;
               & .__valor-dia {
-                font-size: 16px;
+                font-size: 17px;
                 font-weight: 400;
               }
             }
@@ -779,8 +779,8 @@ export default {
         & .anunciante-box {
           padding: 1.5rem 0 0 0;
           & .__anunciante-img {
-            width: 3.5rem;
-            height: 3.5rem;
+            width: 3.7rem;
+            height: 3.7rem;
             margin-right: .6rem;
           }
           & .__anunciante-name {
@@ -815,13 +815,13 @@ export default {
 
         /* ####### CAPACIDADE BOX ####### */
         & .capacidade-box {
-          padding: 0 9%;
+          padding: 0;
         }/* ####### CAPACIDADE BOX ####### */
 
 
         /* ####### COMODIDADES ####### */
         & .comodidades-box {
-          padding: 0 8.2%;
+          padding: 0;
           & .__img-comodidade {
             width: 2rem;
             height: auto;
@@ -883,14 +883,14 @@ export default {
         /* ####### LOCAL ####### */
         & .local-box {
           & .__adress {
-            padding: 0 9% .6rem 9%;
+            padding: 0 0 .6rem 0;
           }
         }/* ####### LOCAL ####### */
 
 
         /* ####### AVALIAÇÕES ####### */
         & .avaliacoes-box {
-          padding: 0 9%;
+          padding: 0;
         }/* ####### AVALIAÇÕES ####### */
       }
     }

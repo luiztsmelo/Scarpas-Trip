@@ -190,7 +190,7 @@ export default {
       background: rgba(0,0,0,.1);
       & .__title {
         width: 100%;
-        font-size: 45px;
+        font-size: 43px;
         font-weight: 800;
         line-height: 70px;
         padding: 0 9% 1.2rem 9%;

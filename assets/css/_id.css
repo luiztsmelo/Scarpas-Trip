@@ -74,13 +74,14 @@
     display: none;
   }
   .id-title {
-    font-size: 35px;
+    font-size: 36px;
     padding: 0;
     margin: .4rem 0 1rem 0;
   }
   .item-title {
-    font-size: 16px;
-    padding: 3rem 0 .5rem 0;
+    font-size: 18px;
+    font-weight: 600;
+    padding: 4rem 0 .5rem 0;
     user-select: none;
   }
 }

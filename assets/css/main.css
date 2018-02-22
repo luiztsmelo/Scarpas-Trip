@@ -50,11 +50,6 @@ h3 {
   line-height: 27px;
 }
 
-p {
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 27px;
-}
 /* ******* TEXT ******* */
 
 button {
@@ -154,4 +149,12 @@ a a:hover, a:visited, a:link, a:active
 }
 .facebook-btn:hover {
   background-color:rgb(75, 91, 127);
+}
+
+
+@media (min-width: 1024px) {
+  h3 {
+    font-size: 17px;
+    line-height: 31px;
+  }
 }
