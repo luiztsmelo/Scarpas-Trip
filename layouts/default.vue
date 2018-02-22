@@ -27,12 +27,26 @@ import MapFull from '~/components/MapFull.vue'
 
 export default {
   components: { Navbar, Foobar, Menuu, Loader, Share, MapFull },
-  created () {
+  methods: {
+    scrollY () {
+      this.$store.state.scrollY = scrollY
+    }
+  },
+  mounted () {
     /* 
     DETECT SCROLL POSITION
     */
-    window.addEventListener('scroll', event => {
-      this.$store.state.scrollY = event.path[1].scrollY
+    let lastScrollPosition = 0
+    let ticking = false
+    window.addEventListener('scroll', e => {
+      lastScrollPosition = window.scrollY
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          this.scrollY(lastScrollPosition)
+          ticking = false
+        })
+        ticking = true
+      }
     })
   },
   beforeCreate () {
