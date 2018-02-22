@@ -460,6 +460,9 @@ export default {
     },
     hash () {
       return this.$route.hash
+    },
+    isMobile () {
+      return this.$store.state.isMobile
     }
   },
   watch: {
@@ -474,15 +477,13 @@ export default {
       if (value === '') {
         this.showComods = false
       }
-    }
-  },
-  beforeRouteEnter (to, from, next) {
-    next(vm => {
-      if (vm.$store.state.isMobile === true) {
-        vm.$store.commit('m_showNavbar', false)
-        vm.$store.commit('m_showFoobar', false)
+    },
+    isMobile (value) {
+      if (value === true) {
+        this.$store.commit('m_showNavbar', false)
+        this.$store.commit('m_showFoobar', false)
       }
-    })
+    }
   },
   beforeRouteLeave (to, from, next) {
     if (this.$store.state.showNavbar === false && this.$store.state.showFoobar === false) {
