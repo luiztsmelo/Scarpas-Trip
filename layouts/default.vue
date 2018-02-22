@@ -17,6 +17,7 @@
 </template>
 
 <script>
+import isMobile from 'ismobilejs'
 import Navbar from '~/components/Navbar.vue'
 import Foobar from '~/components/Foobar.vue'
 import Menuu from '~/components/Menu.vue'
@@ -38,8 +39,7 @@ export default {
     /* 
     DETECT DEVICE
     */
-    const userAgent = navigator.userAgent.toLowerCase()
-    if (/mobi/i.test(userAgent)) {
+    if (isMobile.any) {
       this.$store.commit('m_isMobile', true)
     } else {
       this.$store.commit('m_isMobile', false)
