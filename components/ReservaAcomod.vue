@@ -324,13 +324,13 @@ export default {
       return 
     },
     form0ok () {
-      return 1<2 ? 'background:#08C8C1;cursor:pointer' : ''
+      return 1<2 ? 'background:#00D8C7;cursor:pointer' : ''
     },
     form1ok () {
-      return 1<2 ? 'background:#08C8C1;cursor:pointer' : ''
+      return 1<2 ? 'background:#00D8C7;cursor:pointer' : ''
     },
     form2ok () {
-      return this.$store.state.reservaAcomod.periodoReserva !== null ? 'background:#08C8C1;cursor:pointer' : ''
+      return this.$store.state.reservaAcomod.periodoReserva !== null ? 'background:#00D8C7;cursor:pointer' : ''
     },
   },
   watch: {
@@ -476,12 +476,10 @@ export default {
           outline: none;
         }
       }
-
       & .signin-btns {
         display: flex;
         padding: 0 7%;
       }
-
       & .__next-btn {
         position: fixed;
         bottom: 1.3rem;
@@ -502,14 +500,6 @@ export default {
 }
 
 
-
-@keyframes spin { 
-  from { 
-    transform: rotate(0deg); 
-  } to { 
-    transform: rotate(360deg); 
-  }
-}
 /* TRANSITIONS */
 .reserva-animation-enter {
   transform: translateX(100%);

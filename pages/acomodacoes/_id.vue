@@ -460,9 +460,6 @@ export default {
     },
     hash () {
       return this.$route.hash
-    },
-    isMobile () {
-      return this.$store.state.isMobile
     }
   },
   watch: {
@@ -476,12 +473,6 @@ export default {
     hash (value) {
       if (value === '') {
         this.showComods = false
-      }
-    },
-    isMobile (value) {
-      if (value === true) {
-        this.$store.commit('m_showNavbar', false)
-        this.$store.commit('m_showFoobar', false)
       }
     }
   },
