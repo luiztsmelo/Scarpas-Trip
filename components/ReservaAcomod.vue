@@ -189,7 +189,6 @@ export default {
           textDecoration: 'line-through',
           color: '#DADADA'
         },
-        // We need to override the default `dayContentHover` theme style set by `v-date-picker`
         contentHoverStyle: {
           cursor: 'default',
           backgroundColor: 'transparent',

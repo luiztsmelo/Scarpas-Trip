@@ -223,12 +223,42 @@
       </div><!-- Desktop View Info -->
 
       <div class="reserva-desktop">
-        <div class="reserva-desktop-body">
+        <form class="reserva-desktop-form">
+
           <div class="valor-box">
             <h1 class="__valor">R${{ acomod.valorDiariaNormal }}<span class="__valor-dia"> por dia</span></h1>
-            
           </div>
-        </div>  
+
+          <div class="item-form">
+            <select v-model="$store.state.reservaAcomod.totalHospedes">
+              <option :value="n" v-for="n in totalHospedesArray">{{ n }} {{ n===1 ? 'hóspede' : 'hóspedes' }}</option>
+            </select>
+          </div>
+
+          <div class="item-form">
+            <v-date-picker
+              is-required
+              mode='range'
+              v-model='$store.state.reservaAcomod.periodoReserva'
+              :min-date='today'
+              :disabled-dates='disabledDates'
+              :drag-attribute='myAttribute'
+              :select-attribute='myAttribute'
+              :disabled-attribute='disabledAttribute'
+              :month-labels='monthLabels'
+              :weekday-labels='weekdayLabels'
+              :theme-styles='themeStyles'
+              tint-color='#00D8C7'
+              show-caps
+              >
+            </v-date-picker>
+          </div>
+
+          <button class="__reserva-desktop-btn" type="button">Reservar Estadia</button>
+
+          <h4 class="__info">O pagamento será feito diretamente com o proprietário.</h4>
+
+        </form>  
       </div>
 
     </div><!-- Desktop View -->
@@ -248,6 +278,7 @@
 </template>
 
 <script>
+import PopoverReservaAcomod from '../../components/PopoverReservaAcomod'
 import { loaded } from '~/node_modules/vue2-google-maps/src/manager'
 import ReservaAcomod from '../../components/ReservaAcomod'
 import Proprietario from '../../components/Proprietario'
@@ -268,9 +299,25 @@ export default {
    
       monthLabels: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
       weekdayLabels: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'],
+      myAttribute: {
+        popover: {
+          hideIndicator: true,
+          component: PopoverReservaAcomod
+        }
+      },
+      disabledAttribute: {
+        contentStyle: {
+          textDecoration: 'line-through',
+          color: '#DADADA'
+        },
+        contentHoverStyle: {
+          cursor: 'default',
+          backgroundColor: 'transparent',
+        },
+      },
       themeStyles: {
         wrapper: {
-          color: 'rgb(62, 62, 62)',
+          color: 'rgb(52, 52, 52)',
           border: '0',
           padding: '6px 9px 0 9px',
           background: 'white',
@@ -287,7 +334,7 @@ export default {
           fontWeight: '400'
         },
         weekdays: {
-          color: 'rgb(62, 62, 62)',
+          color: 'rgb(52, 52, 52)',
           fontWeight: '700',
           padding: '15px 5px 8px 5px',
         },
@@ -385,6 +432,15 @@ export default {
     })
   },
   computed: {
+    today () {
+      return new Date().getTime()
+    },
+    totalHospedesArray () {
+      return Array.from({length: this.acomod.totalHospedes}, (v, k) => k+1)
+    },
+    disabledDates () {
+      return 
+    },
     swiperOption () {
       if (this.$store.state.isMobile === true) {
         return {
@@ -755,25 +811,77 @@ export default {
     }/* ####### IMAGE BOX ####### */
     & .desktop-view {
       display: flex;
-      margin: 1.8rem 9% 0 9%;
+      margin: 1.7rem 9% 0 9%;
       & .reserva-desktop {
         flex-basis: 30%;
-        background: #CFCED3;
-        max-height: 20rem;
-        & .reserva-desktop-body {
-          padding: .6rem;
+        border: 1px solid rgb(232,232,232);
+        max-height: 22rem;
+        & .reserva-desktop-form {
+          padding: 1rem;
           & .valor-box {
             display: flex;
             align-items: flex-end;
+            padding-bottom: 1.2rem;
             & .__valor {
               font-size: 37px;
               font-weight: 400;
-              color: white;
+       
               & .__valor-dia {
                 font-size: 17px;
                 font-weight: 400;
               }
             }
+          }
+          & .item-form {
+            display: flex;
+            flex-flow: column;
+            margin: 1.5rem 0;
+            & label {
+              font-weight: 600;
+              font-size: 17px;
+              color: white;
+            }
+            & input {
+              cursor: pointer;
+              width: 100%;
+              font-size: 17px;
+              font-weight: 400;
+              padding: .6rem;
+              color: #8B8B8C;
+              border: 1px solid rgb(232,232,232);
+              outline: none;
+            }
+            & select {
+              cursor: pointer;
+              width: 100%;
+              font-size: 17px;
+              font-weight: 400;
+              padding: .6rem;
+              color: #8B8B8C;
+              border: 1px solid rgb(232,232,232);
+              outline: none;
+              & option {
+                background: white;
+                color: #8B8B8C;
+              }
+            }
+          }
+          & .__reserva-desktop-btn {
+            font-size: 19px;
+            font-weight: 600;
+            line-height: 3rem;
+            background: #00D8C7;
+            color: white;
+            height: 3.1rem;
+            width:  100%;
+            border-radius: 5px;
+          }
+          & .__info {
+            margin: .7rem 0;
+            text-align: center;
+            font-size: 13px;
+            font-weight: 400;
+            line-height: 17px;
           }
         }
       }
@@ -803,16 +911,18 @@ export default {
 
         /* ####### CARACTERÍSTICAS BOX ####### */
         & .caracteristicas-box {
-          padding: 0;
+          padding: 0; 
+          display: flex;
+          justify-content: space-between;
           & .__item-caracteristica {
             display: flex;
-            flex-flow: row;
+            flex-flow: column;
             align-items: center;
             margin-top: .8rem;
             & .__img-caracteristica {
-              width: 1.8rem;
+              width: 2.3rem;
               height: auto;
-              margin-right: .7rem;
+              margin-bottom: .7rem;
             }
           }
         }/* ####### CARACTERÍSTICAS BOX ####### */
@@ -827,10 +937,13 @@ export default {
         /* ####### COMODIDADES ####### */
         & .comodidades-box {
           padding: 0;
+          display: flex;
+          height: 4rem;
+          justify-content: space-between;
           & .__img-comodidade {
-            width: 2rem;
+            width: 2.4rem;
             height: auto;
-            margin: .7rem .8rem 0 .8rem;
+            margin: 0;
           }
         }
         & .comods-details {

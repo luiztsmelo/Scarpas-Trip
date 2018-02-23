@@ -190,18 +190,18 @@ export default {
       background: rgba(0,0,0,.1);
       & .__title {
         width: 100%;
-        font-size: 43px;
+        font-size: 42px;
         font-weight: 800;
         line-height: 70px;
         padding: 0 9% 1.2rem 9%;
         & span {
-          font-size: 34px;
+          font-size: 33px;
           font-weight: 400;
         }
       }
       & .chegada-partida-box {
         margin: 0 9%;
-        width: 31%;
+        width: 29%;
         height: 3.2rem;
         border-bottom: 2px solid white;
         & .chegada-partida-input {
