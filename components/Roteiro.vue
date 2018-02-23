@@ -107,7 +107,7 @@ export default {
 .roteiro-home {
   width: 100%;
   height: 10rem;
-  background: #CFCED3;
+  background: rgb(62, 62, 62);
   /* background-image: linear-gradient(-20deg, #00cdac 0%, #5FBCB5 100%); */
   & .chegada-partida-container {
     padding: 1rem 0;
