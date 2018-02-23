@@ -762,7 +762,7 @@ export default {
             display: flex;
             align-items: flex-end;
             & .__valor {
-              font-size: 36px;
+              font-size: 34px;
               font-weight: 300;
               & .__valor-dia {
                 font-size: 17px;
