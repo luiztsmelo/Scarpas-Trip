@@ -726,7 +726,11 @@ export default {
   transform: translateY(100%);
 }
 
-
+@media (max-width: 1023px) {
+  .reserva-desktop {
+    display: none;
+  }
+}
 @media (min-width: 1024px) {
   .acomods-id {
     margin-top: 3.6rem;
@@ -754,16 +758,17 @@ export default {
       margin: 1.8rem 9% 0 9%;
       & .reserva-desktop {
         flex-basis: 30%;
-        border: 1px solid #E4E4E4;
+        background: #CFCED3;
         max-height: 20rem;
         & .reserva-desktop-body {
-          padding: .5rem;
+          padding: .6rem;
           & .valor-box {
             display: flex;
             align-items: flex-end;
             & .__valor {
-              font-size: 34px;
-              font-weight: 300;
+              font-size: 37px;
+              font-weight: 400;
+              color: white;
               & .__valor-dia {
                 font-size: 17px;
                 font-weight: 400;

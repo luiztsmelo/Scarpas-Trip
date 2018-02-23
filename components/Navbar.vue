@@ -153,7 +153,7 @@ export default {
     padding: 0 9%;
     & .navbar-body {
       & .__brand-name {
-        font-size: 29px;
+        font-size: 32px;
       }
       & .nav-mobile {
         display: none;
