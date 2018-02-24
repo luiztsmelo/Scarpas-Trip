@@ -107,9 +107,13 @@ export default {
 .roteiro-home {
   width: 100%;
   height: 10rem;
-  background: rgb(62, 62, 62);
+  /* background: rgb(62, 62, 62); */
   /* background-image: linear-gradient(-20deg, #00cdac 0%, #5FBCB5 100%); */
+  background-image: url('../assets/img/bgimg.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
   & .chegada-partida-container {
+    background: rgba(0,0,0,.4);
     padding: 1rem 0;
     position: relative;
     display: flex;

@@ -102,7 +102,7 @@ export default {
     transform: translateY(-50%);
     & .__brand-name {
       font-family: var(--brand-font);
-      font-size: 23px;
+      font-size: 25px;
       line-height: 3.3rem;
       user-select: none;
     }
