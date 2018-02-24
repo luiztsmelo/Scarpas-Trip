@@ -22,7 +22,7 @@
 
     
     <!-- ####### IMAGE ####### -->
-    <div class="image-box">
+    <div class="image-box" ref="imageBox">
       <swiper :options="swiperOption">
         
         <swiper-slide class="slide">
@@ -300,6 +300,7 @@ export default {
       showComods: false,
       showTopbar: true,
       scrollTopbar: false,
+      heightImageBox: null,
       
       googleMapsInitialized: false,
    
@@ -324,7 +325,6 @@ export default {
       themeStyles: {
         wrapper: {
           color: 'rgb(52, 52, 52)',
-          border: '1px solid rgb(232,232,232)',
           margin: '10px 0px 0 0px',
           padding: '10px 0px 0 0px',
           background: 'white',
@@ -482,6 +482,8 @@ export default {
     loaded.then(() => {
       this.googleMapsInitialized = true
     })
+    let heightImageBox = this.$refs.imageBox.scrollHeight
+    this.heightImageBox = heightImageBox
   },
   computed: {
     today () {
@@ -567,7 +569,7 @@ export default {
   },
   watch: {
     scrollY (value) {
-      if (value > 250) {
+      if (value > this.heightImageBox) {
         this.scrollTopbar = true
       } else {
         this.scrollTopbar = false
