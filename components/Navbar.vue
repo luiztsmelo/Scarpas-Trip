@@ -2,7 +2,7 @@
   <transition name="navbar-animation">
     <div class="navbar" v-show="showNavbar">
       <div class="navbar-body">
-
+      
         <nuxt-link to="/">
           <span class="__brand-name" @click="$store.commit('m_showMenu', false), $store.commit('m_menuIconAnime', false)">Escarpas Trip</span>
         </nuxt-link>
@@ -137,7 +137,7 @@ export default {
   }
 }
 @media (max-width: 1023px) {
-   .navbar {
+  .navbar {
     & .navbar-body {
       & .nav-desktop {
         display: none;
@@ -151,7 +151,7 @@ export default {
     padding: 0 9%;
     & .navbar-body {
       & .__brand-name {
-        font-size: 27px;
+        font-size: 30px;
         line-height: 3.7rem;
       }
       & .nav-mobile {

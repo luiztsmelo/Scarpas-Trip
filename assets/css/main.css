@@ -2,7 +2,7 @@
 
 :root {
   /* ******* FONTS ******* */
-  --brand-font: 'Quicksand' !important;
+  --brand-font: 'Yesteryear' !important;
   --main-font: 'Montserrat', sans-serif !important;
   --fontSizeAnuncioText: 17px;
   /* ******* COLOR PALETTE ******* */
@@ -154,6 +154,6 @@ a a:hover, a:visited, a:link, a:active
 @media (min-width: 1024px) {
   h3 {
     font-size: 17px;
-    line-height: 31px;
+    line-height: 30px;
   }
 }

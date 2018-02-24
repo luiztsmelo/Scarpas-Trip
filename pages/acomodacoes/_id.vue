@@ -180,11 +180,13 @@
         <h1 class="item-title">Disponibilidade</h1>
 
         <v-calendar
+          is-inline
+          is-double-paned
+          is-expanded
           mode='single'
           :month-labels='monthLabels'
           :weekday-labels='weekdayLabels'
           :theme-styles='themeStyles'
-          is-inline
           >
         </v-calendar>
         <!-- ####### DISPONIBILIDADE ####### -->
@@ -259,7 +261,7 @@
           <button class="__reserva-desktop-btn" type="button">Reservar Estadia</button>
 
           <h4 class="__info">A Escarpas Trip não faz a intermediação financeira. O pagamento deverá ser feito diretamente com 
-            <span style="color:#00BAAC;cursor:pointer">{{ acomod.proprietario }}</span>.
+            <span style="color:#00BAAC;cursor:pointer" @click="$store.commit('m_showProprietario', true), hashProprietario()">{{ acomod.proprietario }}</span>.
           </h4>
 
         </form>  
@@ -322,32 +324,37 @@ export default {
       themeStyles: {
         wrapper: {
           color: 'rgb(52, 52, 52)',
-          border: '0',
-          padding: '6px 9px 0 9px',
+          border: '1px solid rgb(232,232,232)',
+          margin: '10px 0px 0 0px',
+          padding: '10px 0px 0 0px',
           background: 'white',
           width: '100%'
+        },
+        verticalDivider: {
+          borderLeft: '1px solid rgb(232,232,232)',
         },
         header: {
           padding: '0 9px',
         },
         headerArrows: {
-          fontSize: '1.4rem',
+          fontSize: '1.5rem',
         },
         headerTitle: {
-          fontSize: '16px',
+          fontSize: '17px',
           fontWeight: '400'
         },
         weekdays: {
           color: 'rgb(52, 52, 52)',
+          fontSize: '17px',
           fontWeight: '700',
-          padding: '15px 5px 8px 5px',
+          padding: '15px 0px 8px 0px',
         },
         dayCell: {
           height: '30px'
         },
         dayContent: {
           fontWeight: '400',
-          fontSize: '15px',
+          fontSize: '16px',
         },
         dayCellNotInMonth: {
           color: '#DADADA'
@@ -358,8 +365,7 @@ export default {
           color: 'rgb(52, 52, 52)',
           border: '0',
           padding: '6px 9px 0 9px',
-          background: 'white',
-          width: '100%'
+          background: 'white'
         },
         header: {
           padding: '0 9px',
@@ -381,8 +387,7 @@ export default {
         },
         dayContent: {
           fontWeight: '400',
-          fontSize: '15px',
-          color: '#8B8B8C'
+          fontSize: '15px'
         },
         dayCellNotInMonth: {
           color: '#DADADA'
@@ -883,11 +888,6 @@ export default {
             display: flex;
             flex-flow: column;
             margin: 1.5rem 0;
-            & label {
-              font-weight: 600;
-              font-size: 17px;
-              color: white;
-            }
             & input {
               cursor: pointer;
               width: 100%;
@@ -897,6 +897,7 @@ export default {
               color: #8B8B8C;
               border: 1px solid rgb(232,232,232);
               outline: none;
+              background: white;
             }
             & select {
               cursor: pointer;
@@ -907,6 +908,7 @@ export default {
               color: #8B8B8C;
               border: 1px solid rgb(232,232,232);
               outline: none;
+              background: white;
               & option {
                 background: white;
                 color: #8B8B8C;
@@ -939,9 +941,9 @@ export default {
         & .anunciante-box {
           padding: 1.5rem 0 0 0;
           & .__anunciante-img {
-            width: 3.7rem;
-            height: 3.7rem;
-            margin-right: .6rem;
+            width: 4rem;
+            height: 4rem;
+            margin-right: .7rem;
           }
           & .__anunciante-name {
             color: #00BAAC;
@@ -994,55 +996,55 @@ export default {
           }
         }
         & .comods-details {
-        position: fixed;
-        z-index: 9999;
-        width:  100%;
-        height: 100%;
-        top: 0;
-        background: white;
-        overflow-y: auto;
-        transition: var(--main-transition);
-        & .back-bar {
           position: fixed;
-          top: 0;
-          left: 0;
+          z-index: 9999;
           width:  100%;
-          height: 3rem;
+          height: 100%;
+          top: 0;
           background: white;
-          & .back-box {
-            display: inline-flex;
-            align-items: center;
-            height: 100%;
-            padding: 0 7%;
-            & .__back-btn {
-              cursor: pointer;
-              width: 1.07rem;
-              height: auto;
-              filter: invert(75%);
+          overflow-y: auto;
+          transition: var(--main-transition);
+          & .back-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width:  100%;
+            height: 3rem;
+            background: white;
+            & .back-box {
+              display: inline-flex;
+              align-items: center;
+              height: 100%;
+              padding: 0 7%;
+              & .__back-btn {
+                cursor: pointer;
+                width: 1.07rem;
+                height: auto;
+                filter: invert(75%);
+              }
             }
           }
-        }
-        & .comods-body {
-          padding: 0 7% 3rem 7%;
-          & .__title {
-            margin: 5rem 0 2rem 0;
-            font-size: 27px;
-            font-weight: 700;
-          }
-          & .comods-item { 
-            display: flex;
-            flex-flow: row;
-            align-items: center;
-            padding: 1.1rem 0;
-            border-bottom: 1px solid rgb(222, 222, 222);
-            & .__img {
-              margin-right: 1rem;
-              width: 1.8rem;
-              height: auto;
+          & .comods-body {
+            padding: 0 7% 3rem 7%;
+            & .__title {
+              margin: 5rem 0 2rem 0;
+              font-size: 27px;
+              font-weight: 700;
+            }
+            & .comods-item { 
+              display: flex;
+              flex-flow: row;
+              align-items: center;
+              padding: 1.1rem 0;
+              border-bottom: 1px solid rgb(222, 222, 222);
+              & .__img {
+                margin-right: 1rem;
+                width: 1.8rem;
+                height: auto;
+              }
             }
           }
-        }
-      }/* ####### COMODIDADES ####### */
+        }/* ####### COMODIDADES ####### */
 
 
         /* ####### LOCAL ####### */
