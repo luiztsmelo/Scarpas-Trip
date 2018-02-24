@@ -663,7 +663,7 @@ export default {
   top: 0;
   background: white;
   overflow-y: auto;
-  transition: var(--menus-transition);
+  transition: var(--main-transition);
   & .back-bar {
     position: fixed;
     top: 0;
@@ -954,7 +954,7 @@ export default {
         top: 0;
         background: white;
         overflow-y: auto;
-        transition: var(--menus-transition);
+        transition: var(--main-transition);
         & .back-bar {
           position: fixed;
           top: 0;

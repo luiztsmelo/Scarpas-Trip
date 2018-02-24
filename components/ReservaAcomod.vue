@@ -378,7 +378,7 @@ export default {
   top: 0;
   left: 0;
   background: white;
-  transition: var(--menus-transition);
+  transition: var(--main-transition);
   & .back-bar {
     position: fixed;
     top: 0;

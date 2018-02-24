@@ -14,7 +14,6 @@
   --colorAtracao: rgb(252, 86, 86);
   /* ******* MAIN TRANSITION ******* */
   --main-transition: cubic-bezier(0.190, 1.000, 0.220, 1.000) all .7s;
-  --menus-transition: cubic-bezier(0.190, 1.000, 0.220, 1.000) all .7s;
 }
 
 html 

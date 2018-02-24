@@ -68,7 +68,7 @@ export default {
   height: 100%;
   top: 0;
   background: white;
-  transition: var(--menus-transition);
+  transition: var(--main-transition);
   & .share-body {
     display: flex;
     flex-flow: column;
