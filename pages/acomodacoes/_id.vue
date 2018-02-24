@@ -256,7 +256,7 @@
 
           <button class="__reserva-desktop-btn" type="button">Reservar Estadia</button>
 
-          <h4 class="__info">O pagamento será feito diretamente com o proprietário.</h4>
+          <h4 class="__info">A Escarpas Trip não faz a intermediação financeira. O pagamento deverá ser feito diretamente com o proprietário.</h4>
 
         </form>  
       </div>
@@ -815,7 +815,7 @@ export default {
       & .reserva-desktop {
         flex-basis: 30%;
         border: 1px solid rgb(232,232,232);
-        max-height: 22rem;
+        max-height: 23rem;
         & .reserva-desktop-form {
           padding: 1rem;
           & .valor-box {
