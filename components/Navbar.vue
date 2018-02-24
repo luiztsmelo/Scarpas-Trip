@@ -102,11 +102,9 @@ export default {
     transform: translateY(-50%);
     & .__brand-name {
       font-family: var(--brand-font);
-      font-size: 27px;
-      line-height: 0;
+      font-size: 24px;
+      line-height: 3.3rem;
       user-select: none;
-      font-weight: 400;
-      color: var(--color01);
     }
     & .nav-mobile {
       display: flex;
@@ -153,7 +151,8 @@ export default {
     padding: 0 9%;
     & .navbar-body {
       & .__brand-name {
-        font-size: 32px;
+        font-size: 28px;
+        line-height: 3.7rem;
       }
       & .nav-mobile {
         display: none;

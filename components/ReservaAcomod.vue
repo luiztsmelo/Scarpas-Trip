@@ -198,7 +198,7 @@ export default {
       weekdayLabels: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'],
       themeStyles: {
         wrapper: {
-          color: 'rgb(62, 62, 62)',
+          color: 'rgb(52, 52, 52)',
           border: '0',
           padding: '6px 9px 0 9px',
           background: 'white',
@@ -216,7 +216,7 @@ export default {
           fontWeight: '400'
         },
         weekdays: {
-          color: 'rgb(62, 62, 62)',
+          color: 'rgb(52, 52, 52)',
           fontWeight: '700',
           padding: '15px 5px 8px 5px',
         },
@@ -234,7 +234,7 @@ export default {
           background: '#00D8C7',
           color: 'white',
           border: 'none'
-        },
+        }
       } 
     }
   },

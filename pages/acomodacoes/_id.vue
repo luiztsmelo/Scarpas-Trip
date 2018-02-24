@@ -241,13 +241,15 @@
               mode='range'
               v-model='$store.state.reservaAcomod.periodoReserva'
               :min-date='today'
+              :pane-width='285'
               :disabled-dates='disabledDates'
               :drag-attribute='myAttribute'
               :select-attribute='myAttribute'
               :disabled-attribute='disabledAttribute'
               :month-labels='monthLabels'
               :weekday-labels='weekdayLabels'
-              :theme-styles='themeStyles'
+              :theme-styles='themeStylesDesktop'
+              :input-props='{ placeholder: "Chegada - Partida" }'
               tint-color='#00D8C7'
               show-caps
               >
@@ -313,7 +315,7 @@ export default {
         contentHoverStyle: {
           cursor: 'default',
           backgroundColor: 'transparent',
-        },
+        }
       },
       themeStyles: {
         wrapper: {
@@ -344,6 +346,49 @@ export default {
         dayContent: {
           fontWeight: '400',
           fontSize: '15px',
+        },
+        dayCellNotInMonth: {
+          color: '#DADADA'
+        }
+      },
+      themeStylesDesktop: {
+        wrapper: {
+          color: 'rgb(52, 52, 52)',
+          border: '0',
+          padding: '6px 9px 0 9px',
+          background: 'white',
+          width: '100%'
+        },
+        header: {
+          padding: '0 9px',
+        },
+        headerArrows: {
+          fontSize: '1.4rem',
+        },
+        headerTitle: {
+          fontSize: '16px',
+          fontWeight: '400'
+        },
+        weekdays: {
+          color: 'rgb(52, 52, 52)',
+          fontWeight: '700',
+          padding: '15px 5px 8px 5px',
+        },
+        dayCell: {
+          height: '30px'
+        },
+        dayContent: {
+          fontWeight: '400',
+          fontSize: '15px',
+          color: '#8B8B8C'
+        },
+        dayCellNotInMonth: {
+          color: '#DADADA'
+        },
+        dayPopoverContent: {
+          background: '#00D8C7',
+          color: 'white',
+          border: 'none'
         }
       }  
     }

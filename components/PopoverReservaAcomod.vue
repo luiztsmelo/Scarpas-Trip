@@ -35,5 +35,15 @@ export default {
   text-align: center;
 }
 
+@media (min-width: 1024px) {
+  .valor-diaria {
+    font-size: 18px;
+    font-weight: 500;
+  }
+  .valor-diaria-dividido {
+    font-size: 17px;
+    font-weight: 300;
+  }
+}
 
 </style>

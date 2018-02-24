@@ -230,7 +230,6 @@ export default {
   margin-top: 3.2rem;
   display: flex;
   flex-flow: column;
-  justify-content: space-between;
   transition: var(--main-transition);
   & .home-body {
     display: flex;
@@ -318,12 +317,12 @@ export default {
   .home {
     & .home-body {
       & .category-container {
-        padding: 2.7rem 0;
+        padding: 2.9rem 0;
         & .title-row {
           padding: 0 9% 1.5rem 9%;
           & .__title {
-            font-size: 27px;
-            font-weight: 800;
+            font-size: 28px;
+            font-weight: 700;
           }
         }
         & .cards-container {
