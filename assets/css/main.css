@@ -107,11 +107,11 @@ a a:hover, a:visited, a:link, a:active
 /* ******* TEXT HIGHLIGHT COLOR ******* */
 ::-moz-selection { /* Firefox */
   color: white;
-  background: rgb(62, 62, 62);
+  background: rgb(72, 72, 72);
 }
 ::selection {
   color: white;
-  background: rgb(62, 62, 62);
+  background: rgb(72, 72, 72);
 }
 
 /* ******* SIGN IN BUTTONS ******* */

@@ -258,7 +258,9 @@
 
           <button class="__reserva-desktop-btn" type="button">Reservar Estadia</button>
 
-          <h4 class="__info">A Escarpas Trip não faz a intermediação financeira. O pagamento deverá ser feito diretamente com o proprietário.</h4>
+          <h4 class="__info">A Escarpas Trip não faz a intermediação financeira. O pagamento deverá ser feito diretamente com 
+            <span style="color:#00BAAC;cursor:pointer">{{ acomod.proprietario }}</span>.
+          </h4>
 
         </form>  
       </div>

@@ -102,7 +102,7 @@ export default {
     transform: translateY(-50%);
     & .__brand-name {
       font-family: var(--brand-font);
-      font-size: 24px;
+      font-size: 23px;
       line-height: 3.3rem;
       user-select: none;
     }
@@ -151,7 +151,7 @@ export default {
     padding: 0 9%;
     & .navbar-body {
       & .__brand-name {
-        font-size: 28px;
+        font-size: 27px;
         line-height: 3.7rem;
       }
       & .nav-mobile {

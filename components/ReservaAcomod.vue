@@ -31,7 +31,7 @@
         
             <div class="info-item">
               <span class="__info-number">2</span>
-              <h3 class="__info-text">Caso haja alguma dúvida sobre a reserva, entre em contato com o proprietário, <a class="highlight" @click="$store.commit('m_showProprietario', true), hashProprietario()">{{ acomod.proprietario }}</a>.</h3>
+              <h3 class="__info-text">Caso haja alguma dúvida sobre a reserva, entre em contato com o proprietário, <span class="highlight" @click="$store.commit('m_showProprietario', true), hashProprietario()">{{ acomod.proprietario }}</span>.</h3>
             </div>
 
           </div>
@@ -372,7 +372,7 @@ export default {
 
 .reserva-acomod {
   position: fixed;
-  z-index: 9999;
+  z-index: 9998;
   width:  100%;
   height: 100%;
   top: 0;
