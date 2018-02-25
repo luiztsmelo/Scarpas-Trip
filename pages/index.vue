@@ -317,7 +317,7 @@ export default {
   .home {
     & .home-body {
       & .category-container {
-        padding: 2.9rem 0;
+        padding: 3.2rem 0;
         & .title-row {
           padding: 0 9% 1.5rem 9%;
           & .__title {
@@ -339,7 +339,7 @@ export default {
               font-weight: 700;
             }
             & .__card-title {
-              margin: .1rem 0 .2rem 0;
+              margin: .2rem 0 .3rem 0;
               font-size: 15px;
               font-weight: 700;
             }

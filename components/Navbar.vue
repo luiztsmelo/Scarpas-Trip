@@ -33,7 +33,7 @@
             <span class="__nav-item">Restaurantes</span>
           </nuxt-link>
           <nuxt-link to="/acomodacoes">
-            <span class="__nav-item" style="color: #FF7D6C">Anunciar</span>
+            <span class="__nav-item">Anunciar</span>
           </nuxt-link>
         </nav>
 

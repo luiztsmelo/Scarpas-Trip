@@ -1,34 +1,53 @@
 <template>
   <div class="acomods">
 
-    <ul class="acomods-container">
-      <li class="card" v-for="acomod in acomods" :key="acomod.acomodID">
-        <nuxt-link :to="'/acomodacoes/' + acomod.acomodID">
+      <ul class="acomods-container">
+        <li class="card" v-for="acomod in acomods" :key="acomod.acomodID">
+          <nuxt-link :to="'/acomodacoes/' + acomod.acomodID">
 
-          <div class="image-box">
-            <swiper :options="swiperOption">
-              <swiper-slide class="slide"><img class="__img" :src="image1H(acomod)"></swiper-slide>
-              <swiper-slide class="slide" v-if="ifImage2(acomod)"><img class="__img" :src="image2H(acomod)"></swiper-slide>
-              <div class="swiper-pagination" slot="pagination"></div>
-            </swiper>
-          </div>
+            <div class="image-box">
+              <swiper :options="swiperOption">
 
-          <div class="card-details">
-            <span class="__card-tipo-acomod">{{ acomod.tipoAcomod }}</span>
-            <span class="__card-title">{{ acomod.title }}</span>
-            <span class="__card-valor">R${{ acomod.valorDiariaNormal }}<span class="__card-valor-dia"> por dia</span></span>
-          </div>
-          
-        </nuxt-link> 
-      </li>
-    </ul>
+                <swiper-slide class="slide">
+                  <progressive-img class="__img" :src="image1H(acomod)" :placeholder="acomod.imageL1" :aspect-ratio="0.67"/>
+                </swiper-slide>
 
-    <div class="filtrar">
+                <swiper-slide class="slide" v-if="ifImage2(acomod)">
+                  <progressive-img class="__img" :src="image2H(acomod)" :placeholder="acomod.imageL2" :aspect-ratio="0.67"/>
+                </swiper-slide>
+
+                <swiper-slide class="slide" v-if="ifImage3(acomod)">
+                  <progressive-img class="__img" :src="image3H(acomod)" :placeholder="acomod.imageL3" :aspect-ratio="0.67"/>
+                </swiper-slide>
+
+                <div class="swiper-pagination" slot="pagination"></div>
+              </swiper>
+            </div>
+
+            <div class="card-details">
+              <span class="__card-tipo-acomod">{{ acomod.tipoAcomod }}</span>
+              <span class="__card-title">{{ acomod.title }}</span>
+              <span class="__card-valor">R${{ acomod.valorDiariaNormal }}<span class="__card-valor-dia"> por dia</span></span>
+            </div>
+            
+          </nuxt-link> 
+        </li>
+      </ul>
+
+      <div class="filtrar-desktop">
+        <form class="filtrar-desktop-form">
+          <h1>Filtrar</h1>
+        </form>
+      </div>
+
+
+    <div class="filtrar-mobile">
       <div class="filtrar-body">
         <span class="__filtrar-text">Filtrar</span>
         <img class="__filtrar-img" src="../../assets/img/filter.svg">
       </div>
     </div>
+
 
   </div>
 </template>
@@ -47,6 +66,7 @@ export default {
   data () {
     return {
       swiperOption: {
+        slidesPerView: 1,
         pagination: '.swiper-pagination'
       }
     }
@@ -71,6 +91,13 @@ export default {
         return acomod.imageH2J
       }
     },
+    image3H (acomod) {
+      if (supportsWebP) {
+        return acomod.imageH3W
+      } else {
+        return acomod.imageH3J
+      }
+    },
     ifImage2 (acomod) {
       if (acomod.imageH2W === null) {
         return
@@ -79,6 +106,17 @@ export default {
           return acomod.imageH2W
         } else {
           return acomod.imageH2J
+        }
+      }
+    },
+    ifImage3 (acomod) {
+      if (acomod.imageH3W === null) {
+        return
+      } else {
+        if (supportsWebP) {
+          return acomod.imageH3W
+        } else {
+          return acomod.imageH3J
         }
       }
     }
@@ -114,7 +152,7 @@ export default {
   margin: 3.2rem 0 5.2rem 0;
   display: flex;
   flex-flow: column;
-  transition: all .2s ease-in-out;
+  transition: var(--main-transition);
   & .acomods-container {
     padding: 0;
     margin-bottom: 1rem;
@@ -164,7 +202,7 @@ export default {
       }
     }
   }
-  & .filtrar {
+  & .filtrar-mobile {
     position: fixed;
     z-index: 8888;
     bottom: 4rem;
@@ -195,6 +233,88 @@ export default {
         width: 1.05rem;
         height: auto;
       }
+    }
+  }
+}
+
+@media (max-width: 1023px) {
+  .filtrar-desktop {
+    display: none;
+  }
+}
+@media (min-width: 1024px) {
+  .acomods {
+    margin: 0;
+    display: flex;
+    flex-flow: column;
+    & .acomods-container {
+      margin-top: 6.5rem;
+      max-width: 67%;
+      padding-left: 9%;
+      display: flex;
+      flex-flow: row wrap;
+      justify-content: space-between;
+      & .card {
+        width: 49.2%;
+        min-height: 20rem;
+        padding: 0;
+        margin-bottom: 1.5rem;
+        & .image-box {
+          overflow: hidden;
+          margin-bottom: .3rem;
+          & .swiper-container {
+            position: relative;
+            & .swiper-wrapper {
+              display: inline-flex;
+              overflow: hidden;
+              & .slide {
+                & .__img {
+                  width: 100%;
+                  height: auto;
+                }
+              }
+            }
+          }
+        }
+        & .card-details {
+          display: flex;
+          flex-flow: column;
+          & .__card-tipo-acomod {
+            text-transform: uppercase;
+            font-size: 11px;
+            font-weight: 700;
+            color: #007B77;
+          }
+          & .__card-title {
+            padding: .3rem 0;
+            font-size: 17px;
+            font-weight: 700;
+          }
+          & .__card-valor {
+            font-size: 16px;
+            font-weight: 400;
+            & .__card-valor-dia {
+              font-size: 14px;
+            }
+          }
+        }
+      }
+    }
+    & .filtrar-desktop {
+      position: fixed;
+      width: 23%;
+      top: 3.6rem;
+      bottom: 0;
+      right: 9%;
+      border-left: 1px solid rgb(232,232,232);
+      border-right: 1px solid rgb(232,232,232);
+      & .filtrar-desktop-form {
+        padding: 2.5rem 1rem;
+      }
+    }
+
+    & .filtrar-mobile {
+      display: none;
     }
   }
 }

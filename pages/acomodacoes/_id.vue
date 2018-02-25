@@ -204,7 +204,6 @@
           :center="{lat: acomod.positionLAT, lng: acomod.positionLNG}"
           :zoom="15"
           :options="{styles: styles, draggable:false, fullscreenControl:false, zoomControl:false, mapTypeControl:false, streetViewControl:false}"
-          style="width: 100%; height: 250px"
           @click="$store.commit('m_acomodMap', acomod), enterFullscreen()">
             <Gmap-Marker
             :position="{lat: acomod.positionLAT, lng: acomod.positionLNG}"
@@ -504,11 +503,13 @@ export default {
         }
       } else {
         return {
-          slidesPerView: 2.4,
+          slidesPerView: 2.34,
           spaceBetween: 7,
           pagination: '',
           dynamicBullets: true,
-          freeMode: true
+          freeMode: true,
+          autoplay: 2300,
+          speed: 8000
         }
       }
     },
@@ -774,6 +775,10 @@ export default {
     & .__adress {
       padding: 0 7% .6rem 7%;
     }
+    & .vue-map-container {
+      width: 100%; 
+      height: 250px;
+    }
   }/* ####### LOCAL ####### */
 
 
@@ -877,7 +882,7 @@ export default {
             align-items: flex-end;
             padding-bottom: 1.2rem;
             & .__valor {
-              font-size: 37px;
+              font-size: 36px;
               font-weight: 400;
        
               & .__valor-dia {
@@ -1053,6 +1058,9 @@ export default {
         & .local-box {
           & .__adress {
             padding: 0 0 .6rem 0;
+          }
+          & .vue-map-container {
+            height: 400px;
           }
         }/* ####### LOCAL ####### */
 
