@@ -870,13 +870,13 @@ export default {
     }/* ####### IMAGE BOX ####### */
     & .desktop-view {
       display: flex;
-      margin: 1.7rem 9% 0 9%;
+      margin: 1.7rem 8% 0 8%;
       & .reserva-desktop {
         flex-basis: 30%;
         border: 1px solid rgb(232,232,232);
         max-height: 23rem;
         & .reserva-desktop-form {
-          padding: 1rem;
+          padding: 1rem 1.4rem;
           & .valor-box {
             display: flex;
             align-items: flex-end;

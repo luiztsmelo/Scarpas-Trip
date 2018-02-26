@@ -81,7 +81,7 @@ export default {
   width: 100%;
   background: white;
   transition: var(--main-transition);
-  box-shadow: 0px -1px 1px 0px rgba(0,0,0,0.1);
+  border-top: 1px solid rgb(232,232,232);
   & .foobar-body {
     padding: 0 .5rem;
     height: 100%;

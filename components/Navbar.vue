@@ -92,7 +92,7 @@ export default {
   background: white;
   transition: var(--main-transition);
   padding: 0 7%;
-  box-shadow: 0px 1px 1px 0px rgba(0,0,0,0.1);
+  border-bottom: 1px solid rgb(232,232,232);
   & .navbar-body {
     display: flex;
     justify-content: space-between;
@@ -103,7 +103,7 @@ export default {
     & .__brand-name {
       font-family: var(--main-font);
       font-size: 18px;
-      font-weight: 700;
+      font-weight: 600;
       line-height: 3.3rem;
       user-select: none;
     }
@@ -149,10 +149,10 @@ export default {
 @media (min-width: 1024px) {
   .navbar {
     height: 3.6rem;
-    padding: 0 9%;
+    padding: 0 8%;
     & .navbar-body {
       & .__brand-name {
-        font-size: 23px;
+        font-size: 22px;
         font-weight: 600;
         line-height: 3.7rem;
       }

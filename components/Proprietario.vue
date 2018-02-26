@@ -150,7 +150,7 @@ export default {
       flex-flow: column;
       align-items: center;
       & .__img {
-        width: 7rem;
+        width: 6.8rem;
         height: auto;
         border-radius: 50%;
         margin-top: 3.5rem;

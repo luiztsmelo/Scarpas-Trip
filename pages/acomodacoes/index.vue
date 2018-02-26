@@ -368,15 +368,15 @@ export default {
     & .acomods-container {
       margin-top: 6.5rem;
       width: 66.8%;
-      padding-left: 9%;
+      padding-left: 8%;
       display: flex;
       flex-flow: row wrap;
       justify-content: space-between;
       & .card {
-        width: 49%;
+        width: 48.6%;
         min-height: 21rem;
         padding: 0;
-        margin-bottom: 1.5rem;
+        margin-bottom: 1.7rem;
         & .image-box {
           overflow: hidden;
           margin-bottom: .3rem;
@@ -405,8 +405,8 @@ export default {
             color: #007B77;
           }
           & .__card-title {
-            padding: .3rem 0;
-            font-size: 17px;
+            padding: .4rem 0;
+            font-size: 16px;
             font-weight: 700;
           }
           & .__card-valor {
@@ -421,14 +421,14 @@ export default {
     }
     & .filtrar-desktop {
       position: fixed;
-      width: 23%;
+      width: 23.5%;
       top: 3.6rem;
       bottom: 0;
-      right: 9%;
+      right: 8%;
       border-left: 1px solid rgb(232,232,232);
       border-right: 1px solid rgb(232,232,232);
       & .filtrar-desktop-form {
-        padding: 2.5rem 1rem;
+        padding: 2.9rem 1.4rem;
         & .item-form {
           display: flex;
           flex-flow: column;
@@ -437,11 +437,12 @@ export default {
             cursor: pointer;
             width: 100%;
             font-size: 15px;
+            font-weight: 500;
             padding: .6rem;
             border: 1px solid rgb(232,232,232);
             outline: none;
             background: white;
-            color: var(--color01);
+            color: #757575;
           }
           & .multiselect {
             cursor: pointer;
@@ -454,6 +455,8 @@ export default {
               }
               & .multiselect__single {
                 font-size: 15px;
+                font-weight: 500;
+                color: #757575;
               }
             }
             & .multiselect__content-wrapper {

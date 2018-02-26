@@ -236,7 +236,7 @@ export default {
     flex-flow: column;
     margin-bottom: 5.2rem;
     & .category-container {
-      padding: 2.2rem 0;
+      padding: 2.3rem 0;
       display: flex;
       flex-flow: column;
       overflow-x: hidden;
@@ -317,19 +317,19 @@ export default {
   .home {
     & .home-body {
       & .category-container {
-        padding: 3.2rem 0;
+        padding: 3.3rem 0;
         & .title-row {
-          padding: 0 9% 1.5rem 9%;
+          padding: 0 8% 1.5rem 8%;
           & .__title {
             font-size: 28px;
             font-weight: 700;
           }
         }
         & .cards-container {
-          padding: 0 8%;
+          padding: 0 7.4%;
           & .card {
-            margin: 1.3rem 1%;
-            flex: 0 1 22.9%;
+            margin: 1.3rem .8%;
+            flex: 0 1 23.4%;
             & .__card-img {
               border-radius: 3px;
             }

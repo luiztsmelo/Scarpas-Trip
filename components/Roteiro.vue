@@ -195,14 +195,14 @@ export default {
         font-size: 42px;
         font-weight: 800;
         line-height: 70px;
-        padding: 0 9% 1.2rem 9%;
+        padding: 0 8% 1.2rem 8%;
         & span {
           font-size: 30px;
           font-weight: 400;
         }
       }
       & .chegada-partida-box {
-        margin: 0 9%;
+        margin: 0 8%;
         width: 27%;
         height: 3.2rem;
         border-bottom: 2px solid white;
