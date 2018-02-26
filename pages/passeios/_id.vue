@@ -27,11 +27,11 @@
       <swiper :options="swiperOption">
 
         <swiper-slide class="slide">
-          <progressive-img class="__img" :src="image1H(passeio)" :placeholder="passeio.imageL1" :aspect-ratio="0.67"/>
+          <progressive-img class="__img" :src="image1H(passeio)" :placeholder="passeio.imageL1" :aspect-ratio="0.66"/>
         </swiper-slide>
 
         <swiper-slide class="slide" v-if="ifImage2">
-          <progressive-img class="__img" :src="image2H(passeio)" :placeholder="passeio.imageL1" :aspect-ratio="0.67"/>
+          <progressive-img class="__img" :src="image2H(passeio)" :placeholder="passeio.imageL1" :aspect-ratio="0.66"/>
         </swiper-slide>
 
         <div class="swiper-pagination" slot="pagination"></div>
@@ -457,7 +457,7 @@ export default {
       & .__reserva-btn {
         font-size: 16px;
         font-weight: 600;
-        background: #64B5F6;
+        background: #0696E8;
         color: white;
         line-height: 2.6rem;
         height: 2.7rem;

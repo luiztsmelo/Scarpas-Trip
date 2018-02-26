@@ -28,7 +28,7 @@
         <div class="cards-container">
           <div class="card" v-for="evento in $store.state.eventos" :key="evento.eventoID">
             <nuxt-link :to="'/eventos/' + evento.eventoID">
-              <progressive-img class="__card-img" :src="imageEvH(evento)" :placeholder="evento.imageL1" :aspect-ratio="0.67"/>
+              <progressive-img class="__card-img" :src="imageEvH(evento)" :placeholder="evento.imageL1" :aspect-ratio="0.66"/>
               <span class="__card-info" style="color: #FF7D6C">{{ evento.date }}&#160;&#8231;&#160;{{ evento.hour }}</span>
               <h1 class="__card-title">{{ evento.title }}</h1>
               <span class="__card-subtitle">{{ evento.subtitle }}</span>
@@ -59,7 +59,7 @@
         <div class="cards-container">
           <div class="card" v-for="acomod in $store.state.acomods" :key="acomod.acomodID">
             <nuxt-link :to="'/acomodacoes/' + acomod.acomodID">
-              <progressive-img class="__card-img" :src="imageAcH(acomod)" :placeholder="acomod.imageL1" :aspect-ratio="0.67"/>
+              <progressive-img class="__card-img" :src="imageAcH(acomod)" :placeholder="acomod.imageL1" :aspect-ratio="0.66"/>
               <span class="__card-info" style="color: #007B77">{{ acomod.tipoAcomod }}</span>
               <h1 class="__card-title">{{ acomod.title }}</h1>
               <span class="__card-subtitle">R${{ acomod.valorDiariaNormal }}<span class="__card-valor-dia"> por dia</span></span>
@@ -90,8 +90,8 @@
         <div class="cards-container">
           <div class="card" v-for="passeio in $store.state.passeios" :key="passeio.passeioID">
             <nuxt-link :to="'/passeios/' + passeio.passeioID">
-              <progressive-img class="__card-img" :src="imagePasH(passeio)" :placeholder="passeio.imageL1" :aspect-ratio="0.67"/>
-              <span class="__card-info" style="color: #64B5F6">{{ passeio.tipoPasseio }}</span>
+              <progressive-img class="__card-img" :src="imagePasH(passeio)" :placeholder="passeio.imageL1" :aspect-ratio="0.66"/>
+              <span class="__card-info" style="color: #0696E8">{{ passeio.tipoPasseio }}</span>
               <h1 class="__card-title">{{ passeio.title }}</h1>
               <span class="__card-subtitle">R${{ passeio.valorPasseio }}<span class="__card-valor-pessoa"> por pessoa</span></span>
             </nuxt-link> 
@@ -121,7 +121,7 @@
         <div class="cards-container">
           <div class="card" v-for="atracao in $store.state.atracoes" :key="atracao.atracaoID">
             <nuxt-link :to="'/atracoes/' + atracao.atracaoID">
-              <progressive-img class="__card-img" :src="imageAtH(atracao)" :placeholder="atracao.imageL1" :aspect-ratio="0.67"/>
+              <progressive-img class="__card-img" :src="imageAtH(atracao)" :placeholder="atracao.imageL1" :aspect-ratio="0.66"/>
               <span class="__card-info" style="color: #81C784">{{ atracao.tipoAtracao }}</span>
               <h1 class="__card-title">{{ atracao.title }}</h1>
             </nuxt-link> 

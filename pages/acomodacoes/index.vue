@@ -9,15 +9,15 @@
               <swiper :options="swiperOption">
 
                 <swiper-slide class="slide">
-                  <progressive-img class="__img" :src="image1H(acomod)" :placeholder="acomod.imageL1" :aspect-ratio="0.67"/>
+                  <progressive-img class="__img" :src="image1H(acomod)" :placeholder="acomod.imageL1" :aspect-ratio="0.66"/>
                 </swiper-slide>
 
                 <swiper-slide class="slide" v-if="ifImage2(acomod)">
-                  <progressive-img class="__img" :src="image2H(acomod)" :placeholder="acomod.imageL2" :aspect-ratio="0.67"/>
+                  <progressive-img class="__img" :src="image2H(acomod)" :placeholder="acomod.imageL2" :aspect-ratio="0.66"/>
                 </swiper-slide>
 
                 <swiper-slide class="slide" v-if="ifImage3(acomod)">
-                  <progressive-img class="__img" :src="image3H(acomod)" :placeholder="acomod.imageL3" :aspect-ratio="0.67"/>
+                  <progressive-img class="__img" :src="image3H(acomod)" :placeholder="acomod.imageL3" :aspect-ratio="0.66"/>
                 </swiper-slide>
 
                 <div class="swiper-pagination" slot="pagination"></div>
@@ -36,7 +36,53 @@
 
       <div class="filtrar-desktop">
         <form class="filtrar-desktop-form">
-          <h1>Filtrar</h1>
+          
+          <div class="item-form">
+            <v-date-picker
+              is-required
+              mode='range'
+              v-model='filter.date'
+              :show-popover='false'
+              :min-date='today'
+              :pane-width='280'
+              :disabled-dates='disabledDates'
+              :disabled-attribute='disabledAttribute'
+              :month-labels='monthLabels'
+              :weekday-labels='weekdayLabels'
+              :theme-styles='themeStylesDesktop'
+              :input-props='{ placeholder: "Chegada - Partida" }'
+              tint-color='#00D8C7'
+              show-caps
+              >
+            </v-date-picker>
+          </div>
+
+          <div class="item-form">
+            <multiselect
+              v-model="filter.tipoAcomod"
+              :multiple="true"
+              :options="tiposAcomods"
+              :hide-selected="true"
+              :preserve-search="false"
+              :searchable="false" 
+              :show-labels="false" 
+              placeholder="Tipo de Acomodação">
+            </multiselect>
+          </div>
+
+          <div class="item-form">
+            <multiselect
+              v-model="filter.local"
+              :multiple="true"
+              :options="localidades"
+              :hide-selected="true"
+              :preserve-search="false"
+              :searchable="false" 
+              :show-labels="false" 
+              placeholder="Localidade">
+            </multiselect>
+          </div>
+
         </form>
       </div>
 
@@ -53,10 +99,12 @@
 </template>
 
 <script>
+import Multiselect from 'vue-multiselect'
 import supportsWebP from 'supports-webp'
 import * as firebase from 'firebase'
 
 export default {
+  components: { Multiselect },
   head () {
     return {
       title: 'Acomodações em Capitólio ‒ Escarpas Trip'
@@ -65,9 +113,72 @@ export default {
   transition: 'opacity',
   data () {
     return {
+      filter: {
+        date: null,
+        tipoAcomod: null,
+        local: null
+      },
+      tiposAcomods: [
+        'Casa',
+        'Rancho'
+      ],
+      localidades: [
+        'Escarpas do Lago',
+        'Capitólio'
+      ],
       swiperOption: {
         slidesPerView: 1,
         pagination: '.swiper-pagination'
+      },
+      monthLabels: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
+      weekdayLabels: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'],
+      disabledAttribute: {
+        contentStyle: {
+          textDecoration: 'line-through',
+          color: '#DADADA'
+        },
+        contentHoverStyle: {
+          cursor: 'default',
+          backgroundColor: 'transparent',
+        }
+      },
+      themeStylesDesktop: {
+        wrapper: {
+          color: 'rgb(52, 52, 52)',
+          border: '0',
+          padding: '6px 9px 0 9px',
+          background: 'white'
+        },
+        header: {
+          padding: '0 9px',
+        },
+        headerArrows: {
+          fontSize: '1.4rem',
+        },
+        headerTitle: {
+          fontSize: '16px',
+          fontWeight: '400'
+        },
+        weekdays: {
+          color: 'rgb(52, 52, 52)',
+          fontWeight: '700',
+          padding: '15px 5px 8px 5px',
+        },
+        dayCell: {
+          height: '30px'
+        },
+        dayContent: {
+          fontWeight: '400',
+          fontSize: '15px'
+        },
+        dayCellNotInMonth: {
+          color: '#DADADA'
+        },
+        dayPopoverContent: {
+          background: '#00D8C7',
+          color: 'white',
+          border: 'none'
+        }
       }
     }
   },
@@ -124,6 +235,12 @@ export default {
   computed: {
     acomods () {
       return this.$store.state.acomods
+    },
+    today () {
+      return new Date().getTime()
+    },
+    disabledDates () {
+      return 
     }
   },
   beforeRouteEnter (to, from, next) {
@@ -147,6 +264,7 @@ export default {
 <style>
 @import url('../../assets/css/main.css');
 @import url('../../assets/css/pagination.css');
+@import url('../../node_modules/vue-multiselect/dist/vue-multiselect.min.css');
 
 .acomods {
   margin: 3.2rem 0 5.2rem 0;
@@ -246,17 +364,17 @@ export default {
   .acomods {
     margin: 0;
     display: flex;
-    flex-flow: column;
+    flex-flow: row;
     & .acomods-container {
       margin-top: 6.5rem;
-      max-width: 67%;
+      width: 66.8%;
       padding-left: 9%;
       display: flex;
       flex-flow: row wrap;
       justify-content: space-between;
       & .card {
-        width: 49.2%;
-        min-height: 20rem;
+        width: 49%;
+        min-height: 21rem;
         padding: 0;
         margin-bottom: 1.5rem;
         & .image-box {
@@ -271,6 +389,7 @@ export default {
                 & .__img {
                   width: 100%;
                   height: auto;
+                  border-radius: 4px;
                 }
               }
             }
@@ -310,9 +429,46 @@ export default {
       border-right: 1px solid rgb(232,232,232);
       & .filtrar-desktop-form {
         padding: 2.5rem 1rem;
+        & .item-form {
+          display: flex;
+          flex-flow: column;
+          margin: 0 0 1.5rem 0;
+          & input {
+            cursor: pointer;
+            width: 100%;
+            font-size: 15px;
+            padding: .6rem;
+            border: 1px solid rgb(232,232,232);
+            outline: none;
+            background: white;
+            color: var(--color01);
+          }
+          & .multiselect {
+            cursor: pointer;
+            & .multiselect__tags {
+              & .multiselect__tags-wrap {
+                & .multiselect__tag {
+                  background: #00D8C7;
+                  font-weight: 600;
+                }
+              }
+              & .multiselect__single {
+                font-size: 15px;
+              }
+            }
+            & .multiselect__content-wrapper {
+              & .multiselect__content {
+                & .multiselect__element {
+                  & .multiselect__option--highlight {
+                    background: #00D8C7;
+                  }
+                }
+              }
+            }
+          }
+        }
       }
     }
-
     & .filtrar-mobile {
       display: none;
     }

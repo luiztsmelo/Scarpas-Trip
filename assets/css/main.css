@@ -2,11 +2,10 @@
 
 :root {
   /* ******* FONTS ******* */
-  --brand-font: 'Yesteryear' !important;
   --main-font: 'Montserrat', sans-serif !important;
   --fontSizeAnuncioText: 17px;
   /* ******* COLOR PALETTE ******* */
-  --color01: rgb(52, 52, 52);
+  --color01: rgb(42, 42, 42);
   --colorAcomod: #00D8C7;
   --colorPasseio: rgb(252, 86, 86);
   --colorEvento: #FF7D6C;
@@ -71,6 +70,9 @@ a a:hover, a:visited, a:link, a:active
   user-select: none;
 }
 
+input {
+  font-family: var(--main-font);
+}
 
 /* ******* CHECKBOX ******* */
 

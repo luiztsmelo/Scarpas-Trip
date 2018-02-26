@@ -101,8 +101,9 @@ export default {
     top: 50%;
     transform: translateY(-50%);
     & .__brand-name {
-      font-family: var(--brand-font);
-      font-size: 25px;
+      font-family: var(--main-font);
+      font-size: 18px;
+      font-weight: 700;
       line-height: 3.3rem;
       user-select: none;
     }
@@ -151,7 +152,8 @@ export default {
     padding: 0 9%;
     & .navbar-body {
       & .__brand-name {
-        font-size: 30px;
+        font-size: 23px;
+        font-weight: 600;
         line-height: 3.7rem;
       }
       & .nav-mobile {

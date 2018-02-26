@@ -24,11 +24,11 @@
       <swiper :options="swiperOption">
 
         <swiper-slide class="slide">
-          <progressive-img class="__img" :src="image1H(evento)" :placeholder="evento.imageL1" :aspect-ratio="0.67"/>
+          <progressive-img class="__img" :src="image1H(evento)" :placeholder="evento.imageL1" :aspect-ratio="0.66"/>
         </swiper-slide>
 
         <swiper-slide class="slide" v-if="ifImage2">
-          <progressive-img class="__img" :src="image2H(evento)" :placeholder="evento.imageL1" :aspect-ratio="0.67"/>
+          <progressive-img class="__img" :src="image2H(evento)" :placeholder="evento.imageL1" :aspect-ratio="0.66"/>
         </swiper-slide>
 
         <div class="swiper-pagination" slot="pagination"></div>

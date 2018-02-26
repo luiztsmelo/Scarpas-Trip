@@ -197,25 +197,25 @@ export default {
         line-height: 70px;
         padding: 0 9% 1.2rem 9%;
         & span {
-          font-size: 33px;
+          font-size: 30px;
           font-weight: 400;
         }
       }
       & .chegada-partida-box {
         margin: 0 9%;
-        width: 29%;
+        width: 27%;
         height: 3.2rem;
         border-bottom: 2px solid white;
         & .chegada-partida-input {
           position: relative;
           width: 5.2rem;
           & h3 {
-            font-size: 18px;
+            font-size: 17px;
             font-weight: 400;
           }
         }
         & img {
-          width: 1.35rem;
+          width: 1.25rem;
           height: auto;
         }
       }

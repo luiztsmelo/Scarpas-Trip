@@ -26,15 +26,15 @@
       <swiper :options="swiperOption">
         
         <swiper-slide class="slide">
-          <progressive-img class="__img" :src="image1H(acomod)" :placeholder="acomod.imageL1" :aspect-ratio="0.67"/>
+          <progressive-img class="__img" :src="image1H(acomod)" :placeholder="acomod.imageL1" :aspect-ratio="0.66"/>
         </swiper-slide>
 
         <swiper-slide class="slide" v-if="ifImage2">
-          <progressive-img class="__img" :src="image2H(acomod)" :placeholder="acomod.imageL1" :aspect-ratio="0.67"/>
+          <progressive-img class="__img" :src="image2H(acomod)" :placeholder="acomod.imageL1" :aspect-ratio="0.66"/>
         </swiper-slide>
 
         <swiper-slide class="slide" v-if="ifImage3">
-          <progressive-img class="__img" :src="image3H(acomod)" :placeholder="acomod.imageL3" :aspect-ratio="0.67"/>
+          <progressive-img class="__img" :src="image3H(acomod)" :placeholder="acomod.imageL3" :aspect-ratio="0.66"/>
         </swiper-slide>
 
         <div class="swiper-pagination" slot="pagination"></div>
@@ -53,11 +53,11 @@
 
 
         <!-- ####### ANUNCIANTE ####### -->
-        <div class="anunciante-box" @click="$store.commit('m_showProprietario', true), hashProprietario()">
-          <img class="__anunciante-img" :src="acomod.photoURL" alt="">
+        <div class="anunciante-box">
+          <img class="__anunciante-img" :src="acomod.photoURL" @click="$store.commit('m_showProprietario', true), hashProprietario()">
           <div class="box-flex-column">
             <h3 style="user-select:none">Hospedado por</h3>
-            <a class="__anunciante-name">{{ acomod.proprietario }}</a>
+            <a class="__anunciante-name" @click="$store.commit('m_showProprietario', true), hashProprietario()">{{ acomod.proprietario }}</a>
           </div>
         </div><!-- ####### ANUNCIANTE ####### -->
 
@@ -503,7 +503,7 @@ export default {
         }
       } else {
         return {
-          slidesPerView: 2.34,
+          slidesPerView: 2.33,
           spaceBetween: 7,
           pagination: '',
           dynamicBullets: true,

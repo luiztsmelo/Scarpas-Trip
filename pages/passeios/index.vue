@@ -163,7 +163,7 @@ export default {
           text-transform: uppercase;
           font-size: 11px;
           font-weight: 700;
-          color: #64B5F6;
+          color: #0696E8;
         }
         & .__card-title {
           padding: .3rem 0;
