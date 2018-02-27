@@ -437,8 +437,8 @@ export default {
           & input {
             cursor: pointer;
             width: 100%;
-            font-size: 15px;
-            font-weight: 400;
+            font-size: 14px;
+            font-weight: 500;
             padding: .6rem;
             border: 1px solid rgb(232,232,232);
             outline: none;
@@ -456,14 +456,16 @@ export default {
                 }
               }
               & .multiselect__single {
-                font-size: 15px;
-                font-weight: 400;
+                font-size: 14px;
+                font-weight: 500;
                 color: var(--color01);
               }
             }
             & .multiselect__content-wrapper {
               & .multiselect__content {
                 & .multiselect__element {
+                  font-size: 14px;
+                  font-weight: 500;
                   & .multiselect__option--highlight {
                     background: #00D8C7;
                   }

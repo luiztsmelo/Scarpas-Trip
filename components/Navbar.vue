@@ -136,7 +136,7 @@ export default {
       & .__nav-item {
         align-self: center;
         font-size: 14px;
-        font-weight: 500;
+        font-weight: 600;
         user-select: none;
       }
       & .__nav-item:hover {
