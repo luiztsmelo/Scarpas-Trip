@@ -39,6 +39,7 @@
           
           <div class="item-form">
             <v-date-picker
+              is-double-paned
               is-required
               mode='range'
               v-model='filter.date'
@@ -79,7 +80,7 @@
               :preserve-search="false"
               :searchable="false" 
               :show-labels="false" 
-              placeholder="Localidade">
+              placeholder="Local">
             </multiselect>
           </div>
 
@@ -169,7 +170,7 @@ export default {
         },
         dayContent: {
           fontWeight: '400',
-          fontSize: '15px'
+          fontSize: '14px'
         },
         dayCellNotInMonth: {
           color: '#DADADA'
@@ -376,7 +377,7 @@ export default {
         width: 48.6%;
         min-height: 21rem;
         padding: 0;
-        margin-bottom: 1.7rem;
+        margin-bottom: 2rem;
         & .image-box {
           overflow: hidden;
           margin-bottom: .3rem;
@@ -422,7 +423,7 @@ export default {
     & .filtrar-desktop {
       position: fixed;
       width: 23.5%;
-      top: 3.6rem;
+      top: 3.8rem;
       bottom: 0;
       right: 8%;
       border-left: 1px solid rgb(232,232,232);
@@ -437,7 +438,7 @@ export default {
             cursor: pointer;
             width: 100%;
             font-size: 15px;
-            font-weight: 500;
+            font-weight: 400;
             padding: .6rem;
             border: 1px solid rgb(232,232,232);
             outline: none;
@@ -450,13 +451,14 @@ export default {
               & .multiselect__tags-wrap {
                 & .multiselect__tag {
                   background: #00D8C7;
+                  font-size: 14px;
                   font-weight: 600;
                 }
               }
               & .multiselect__single {
                 font-size: 15px;
-                font-weight: 500;
-                color: #757575;
+                font-weight: 400;
+                color: var(--color01);
               }
             }
             & .multiselect__content-wrapper {

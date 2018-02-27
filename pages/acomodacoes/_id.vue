@@ -848,7 +848,7 @@ export default {
 }
 @media (min-width: 1024px) {
   .acomods-id {
-    margin-top: 3.6rem;
+    margin-top: 3.8rem;
 
     /* ####### IMAGE BOX ####### */
     & .image-box {
@@ -942,7 +942,7 @@ export default {
         }
       }
       & .desktop-view-info {
-        margin-right: 4%;
+        margin-right: 5%;
         flex-basis: 70%;
         /* ####### ANUNCIANTE BOX ####### */
         & .anunciante-box {

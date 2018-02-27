@@ -18,22 +18,22 @@
 
         <nav class="nav-desktop">
           <nuxt-link to="/acomodacoes">
-            <span class="__nav-item">Acomodações</span>
+            <li class="__nav-item">Acomodações</li>
           </nuxt-link>
           <nuxt-link to="/eventos">
-            <span class="__nav-item">Eventos</span>
+            <li class="__nav-item">Eventos</li>
           </nuxt-link>
           <nuxt-link to="/passeios">
-            <span class="__nav-item">Passeios</span>
+            <li class="__nav-item">Passeios</li>
           </nuxt-link>
           <nuxt-link to="/atracoes">
-            <span class="__nav-item">Atrações</span>
+            <li class="__nav-item">Atrações</li>
           </nuxt-link>
           <nuxt-link to="/restaurantes">
-            <span class="__nav-item">Restaurantes</span>
+            <li class="__nav-item">Restaurantes</li>
           </nuxt-link>
           <nuxt-link to="/acomodacoes">
-            <span class="__nav-item">Anunciar</span>
+            <li class="__nav-item">Anunciar</li>
           </nuxt-link>
         </nav>
 
@@ -96,10 +96,8 @@ export default {
   & .navbar-body {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: stretch;
     position: relative;
-    top: 50%;
-    transform: translateY(-50%);
     & .__brand-name {
       font-family: var(--main-font);
       font-size: 18px;
@@ -123,16 +121,25 @@ export default {
       }
     }
     & .nav-desktop {
-      display: flex;
-      align-items: center;
-      height: 100%;
+      width: 50%;
+      display: inline-flex;
+      align-items: stretch;
+      justify-content: space-around;
       transform: translateX(.7rem);
+      & a {
+        display: flex;
+        align-items: stretch;
+      }
+      & a:hover {
+        border-bottom: 1px solid var(--color01);
+      }
       & .__nav-item {
-        margin: 0 .7rem;
-        line-height: 3.7rem;
+        align-self: center;
         font-size: 14px;
-        font-weight: 600;
+        font-weight: 500;
         user-select: none;
+      }
+      & .__nav-item:hover {
       }
     }
   }
@@ -148,13 +155,13 @@ export default {
 }
 @media (min-width: 1024px) {
   .navbar {
-    height: 3.6rem;
+    height: 3.8rem;
     padding: 0 8%;
     & .navbar-body {
       & .__brand-name {
         font-size: 22px;
         font-weight: 600;
-        line-height: 3.7rem;
+        line-height: 3.8rem;
       }
       & .nav-mobile {
         display: none;
