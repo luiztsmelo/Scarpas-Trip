@@ -111,7 +111,7 @@ export default {
   background-repeat: no-repeat;
   background-size: cover;
   & .chegada-partida-container {
-    background: rgba(0,0,0,.4);
+    background: rgba(0,0,0,.6);
     padding: 1rem 0;
     position: relative;
     display: flex;
