@@ -37,12 +37,12 @@ export default {
 }
 
 .spinner {
-  width: 3.3rem;
-  height: 3.3rem;
+  width: 3.7rem;
+  height: 3.7rem;
   background-image: url('../static/brand.svg');
   background-repeat: no-repeat;
   background-size: cover;
-  animation: spin 1s cubic-bezier(.08,.8,.78,.03) infinite;
+  animation: spin 2.5s cubic-bezier(.28,1.91,.3,.39) infinite;
   opacity: 1;
 }
 
@@ -50,7 +50,7 @@ export default {
     from { 
         transform: rotate(0deg); 
     } to { 
-        transform: rotate(360deg); 
+        transform: rotate(720deg); 
     }
 }
 

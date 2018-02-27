@@ -308,7 +308,7 @@ export default {
           key: 'disabledDates',
           contentStyle: {
             textDecoration: 'line-through',
-            opacity: .3
+            opacity: .2
           },
           dates: {
             start: null, // From the beginning of time

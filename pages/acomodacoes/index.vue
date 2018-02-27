@@ -54,9 +54,9 @@
               :input-props='{  }'
               tint-color='#00D8C7'
               show-caps
+              style="width:100%"
               >
               <input 
-                type='text' 
                 slot-scope='{ inputValue, updateValue }' 
                 :value='inputValue'
                 @change.native='updateValue($event.target.value)'
@@ -91,6 +91,24 @@
             </multiselect>
           </div>
 
+          <div class="item-form" >
+            <vue-slider
+              v-model='filter.valorDiaria'
+              style="margin-top:2rem"
+              width='90%'
+              tooltip='always'
+              formatter='R${value}'
+              :interval='20'
+              :min='0'
+              :max='2000'
+              :disabled='false'
+              :lazy='true'
+              :tooltipStyle='{ "backgroundColor": "#00D8C7", "borderColor": "#00D8C7", "fontWeight": "500", "padding": "5px" }'
+              :bgStyle='{ "backgroundColor": "rgb(232,232,232)" }'
+              :processStyle='{ "backgroundColor": "transparent" }'>
+            </vue-slider>
+          </div>
+
         </form>
       </div>
 
@@ -107,12 +125,13 @@
 </template>
 
 <script>
+import vueSlider from 'vue-slider-component'
 import Multiselect from 'vue-multiselect'
 import supportsWebP from 'supports-webp'
 import * as firebase from 'firebase'
 
 export default {
-  components: { Multiselect },
+  components: { Multiselect, vueSlider },
   head () {
     return {
       title: 'Acomodações em Capitólio ‒ Escarpas Trip'
@@ -124,7 +143,8 @@ export default {
       filter: {
         date: null,
         tipoAcomod: null,
-        local: null
+        local: null,
+        valorDiaria: [0, 2000]
       },
       tiposAcomods: [
         'Casa',
@@ -437,6 +457,7 @@ export default {
         & .item-form {
           display: flex;
           flex-flow: column;
+          align-items: center;
           margin: 0 0 1.5rem 0;
           & input {
             cursor: pointer;
@@ -452,21 +473,26 @@ export default {
           & .multiselect {
             cursor: pointer;
             & .multiselect__tags {
+              
               & .multiselect__tags-wrap {
                 & .multiselect__tag {
                   background: #00D8C7;
                   font-size: 14px;
                   font-weight: 600;
                 }
+                
               }
               & .multiselect__single {
                 font-size: 14px;
                 font-weight: 500;
                 color: var(--color01);
               }
+              
             }
+            
             & .multiselect__content-wrapper {
               & .multiselect__content {
+                
                 & .multiselect__element {
                   font-size: 14px;
                   font-weight: 500;
@@ -476,6 +502,9 @@ export default {
                 }
               }
             }
+          }
+          & .multiselect--active {
+            z-index: 100;
           }
         }
       }

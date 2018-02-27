@@ -3,7 +3,7 @@
     <div class="navbar" v-show="showNavbar">
       <div class="navbar-body">
         
-        
+
         <nuxt-link to="/" class="brand" @click="$store.commit('m_showMenu', false), $store.commit('m_menuIconAnime', false)">
           <img class="__brand-img" src="../assets/img/brand.svg">
           <span class="__brand-name">Escarpas Trip</span>
@@ -105,7 +105,7 @@ export default {
       display: flex;
       align-items: center;
       & .__brand-img {
-        width: 1.6rem;
+        width: 1.5rem;
         height: auto;
         margin-right: .4rem;
       }
@@ -133,20 +133,16 @@ export default {
       }
     }
     & .nav-desktop {
-      width: 50%;
       display: inline-flex;
       align-items: stretch;
-      justify-content: space-around;
       transform: translateX(.7rem);
       & a {
-        display: flex;
-        align-items: stretch;
+        margin: 0 .7rem;
       }
       & a:hover {
         border-bottom: 1px solid var(--color01);
       }
       & .__nav-item {
-        align-self: center;
         font-size: 14px;
         font-weight: 600;
         user-select: none;
@@ -174,7 +170,6 @@ export default {
         & .__brand-img {
           width: 2rem;
           height: auto;
-
         }
         & .__brand-name {
           font-size: 22px;
