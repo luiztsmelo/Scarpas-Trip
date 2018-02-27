@@ -44,17 +44,24 @@
               mode='range'
               v-model='filter.date'
               :show-popover='false'
-              :min-date='today'
+              :min-date='new Date().getTime()'
               :pane-width='280'
               :disabled-dates='disabledDates'
               :disabled-attribute='disabledAttribute'
               :month-labels='monthLabels'
               :weekday-labels='weekdayLabels'
               :theme-styles='themeStylesDesktop'
-              :input-props='{ placeholder: "Chegada - Partida" }'
+              :input-props='{  }'
               tint-color='#00D8C7'
               show-caps
               >
+              <input 
+                type='text' 
+                slot-scope='{ inputValue, updateValue }' 
+                :value='inputValue'
+                @change.native='updateValue($event.target.value)'
+                placeholder='Chegada - Partida'
+                >
             </v-date-picker>
           </div>
 
@@ -236,9 +243,6 @@ export default {
   computed: {
     acomods () {
       return this.$store.state.acomods
-    },
-    today () {
-      return new Date().getTime()
     },
     disabledDates () {
       return 

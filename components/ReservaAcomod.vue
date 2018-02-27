@@ -81,7 +81,7 @@
             is-required
             mode='range'
             v-model='$store.state.reservaAcomod.periodoReserva'
-            :min-date='today'
+            :min-date='new Date().getTime()'
             :disabled-dates='disabledDates'
             :drag-attribute='myAttribute'
             :select-attribute='myAttribute'
@@ -315,9 +315,6 @@ export default {
     },
     hash () {
       return this.$route.hash
-    },
-    today () {
-      return new Date().getTime()
     },
     disabledDates () {
       return 

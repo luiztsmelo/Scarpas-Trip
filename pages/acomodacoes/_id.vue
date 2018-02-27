@@ -187,6 +187,7 @@
           :month-labels='monthLabels'
           :weekday-labels='weekdayLabels'
           :theme-styles='themeStyles'
+          :attributes='attributes'
           >
         </v-calendar>
         <!-- ####### DISPONIBILIDADE ####### -->
@@ -241,7 +242,7 @@
               is-required
               mode='range'
               v-model='$store.state.reservaAcomod.periodoReserva'
-              :min-date='today'
+              :min-date='new Date().getTime()'
               :pane-width='285'
               :disabled-dates='disabledDates'
               :drag-attribute='myAttribute'
@@ -302,7 +303,19 @@ export default {
       heightImageBox: null,
       
       googleMapsInitialized: false,
-   
+      attributes: [
+        {
+          key: 'disabledDates',
+          contentStyle: {
+            textDecoration: 'line-through',
+            opacity: .3
+          },
+          dates: {
+            start: null, // From the beginning of time
+            end: new Date().setDate(new Date().getDate() - 1) // Until yesterday
+          }
+        }
+      ],
       monthLabels: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
       weekdayLabels: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'],
       myAttribute: {
@@ -485,9 +498,6 @@ export default {
     this.heightImageBox = heightImageBox
   },
   computed: {
-    today () {
-      return new Date().getTime()
-    },
     totalHospedesArray () {
       return Array.from({length: this.acomod.totalHospedes}, (v, k) => k+1)
     },

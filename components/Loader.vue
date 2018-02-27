@@ -35,23 +35,29 @@ export default {
     transform: translateY(-50%);
   }
 }
+
 .spinner {
+  width: 3.3rem;
+  height: 3.3rem;
+  background-image: url('../static/brand.svg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  animation: spin 1s cubic-bezier(.08,.8,.78,.03) infinite;
+  opacity: 1;
+}
+
+@keyframes spin { 
+    from { 
+        transform: rotate(0deg); 
+    } to { 
+        transform: rotate(360deg); 
+    }
+}
+
+@media (min-width: 1024px) {
+  .logo {
     width: 4.3rem;
     height: 4.3rem;
-    background-image: url('../static/loaderb.svg');
-    background-repeat: no-repeat;
-    background-size: cover;
-    animation-name: spin;
-    animation-duration: 2.2s;
-    animation-iteration-count: infinite;
-    animation-timing-function: linear;
-    opacity: .2;
   }
-  @keyframes spin { 
-      from { 
-          transform: rotate(0deg); 
-      } to { 
-          transform: rotate(360deg); 
-      }
-  }
+}
 </style>

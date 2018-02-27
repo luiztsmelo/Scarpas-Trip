@@ -2,9 +2,11 @@
   <transition name="navbar-animation">
     <div class="navbar" v-show="showNavbar">
       <div class="navbar-body">
-      
-        <nuxt-link to="/">
-          <span class="__brand-name" @click="$store.commit('m_showMenu', false), $store.commit('m_menuIconAnime', false)">Escarpas Trip</span>
+        
+        
+        <nuxt-link to="/" class="brand" @click="$store.commit('m_showMenu', false), $store.commit('m_menuIconAnime', false)">
+          <img class="__brand-img" src="../assets/img/brand.svg">
+          <span class="__brand-name">Escarpas Trip</span>
         </nuxt-link>
         
 
@@ -96,14 +98,24 @@ export default {
   & .navbar-body {
     display: flex;
     justify-content: space-between;
-    align-items: stretch;
+    align-items: center;
     position: relative;
-    & .__brand-name {
-      font-family: var(--main-font);
-      font-size: 18px;
-      font-weight: 600;
-      line-height: 3.3rem;
-      user-select: none;
+    & .brand {
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      & .__brand-img {
+        width: 1.6rem;
+        height: auto;
+        margin-right: .4rem;
+      }
+      & .__brand-name {
+        font-family: var(--main-font);
+        font-size: 18px;
+        font-weight: 600;
+        line-height: 3.3rem;
+        user-select: none;
+      }
     }
     & .nav-mobile {
       display: flex;
@@ -158,10 +170,17 @@ export default {
     height: 3.8rem;
     padding: 0 8%;
     & .navbar-body {
-      & .__brand-name {
-        font-size: 22px;
-        font-weight: 600;
-        line-height: 3.8rem;
+      & .brand {
+        & .__brand-img {
+          width: 2rem;
+          height: auto;
+
+        }
+        & .__brand-name {
+          font-size: 22px;
+          font-weight: 600;
+          line-height: 3.8rem;
+        }
       }
       & .nav-mobile {
         display: none;
