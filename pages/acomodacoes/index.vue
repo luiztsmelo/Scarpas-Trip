@@ -51,17 +51,12 @@
               :month-labels='monthLabels'
               :weekday-labels='weekdayLabels'
               :theme-styles='themeStylesDesktop'
-              :input-props='{  }'
+              :input-props='{ placeholder: "Chegada - Partida" }'
               tint-color='#00D8C7'
               show-caps
-              style="width:100%"
+              style='width:100%'
+              :formats='formats'
               >
-              <input 
-                slot-scope='{ inputValue, updateValue }' 
-                :value='inputValue'
-                @change.native='updateValue($event.target.value)'
-                placeholder='Chegada - Partida'
-                >
             </v-date-picker>
           </div>
 
@@ -158,6 +153,9 @@ export default {
         slidesPerView: 1,
         pagination: '.swiper-pagination'
       },
+      formats: {
+        input: ['D MMM', 'D MMM']
+      },
       monthLabels: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
       weekdayLabels: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'],
       disabledAttribute: {
@@ -172,13 +170,13 @@ export default {
       },
       themeStylesDesktop: {
         wrapper: {
-          color: 'rgb(52, 52, 52)',
+          color: 'rgb(62, 62, 62)',
           border: '0',
-          padding: '6px 9px 0 9px',
-          background: 'white'
+          background: 'white',
+          boxShadow: '1px 1px 25px 2px rgba(0,0,0,0.1)'
         },
         header: {
-          padding: '0 9px',
+          padding: '10px 9px 0px 9px',
         },
         headerArrows: {
           fontSize: '1.4rem',
@@ -188,8 +186,8 @@ export default {
           fontWeight: '400'
         },
         weekdays: {
-          color: 'rgb(52, 52, 52)',
-          fontWeight: '700',
+          color: 'rgb(62, 62, 62)',
+          fontWeight: '600',
           padding: '15px 5px 8px 5px',
         },
         dayCell: {
@@ -206,6 +204,9 @@ export default {
           background: '#00D8C7',
           color: 'white',
           border: 'none'
+        },
+        verticalDivider: {
+          borderLeft: 'none'
         }
       }
     }

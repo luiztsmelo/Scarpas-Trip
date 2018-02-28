@@ -239,6 +239,7 @@
 
           <div class="item-form">
             <v-date-picker
+              is-double-paned
               is-required
               mode='range'
               v-model='$store.state.reservaAcomod.periodoReserva'

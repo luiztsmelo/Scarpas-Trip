@@ -182,14 +182,14 @@ export default {
 
 @media (min-width: 1024px) {
   .roteiro-home {
-    height: 30rem;
+    height: 29rem;
     background-image: url('../assets/img/bgimg.jpg');
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
     /* background-position: center; */
     & .chegada-partida-container {
-      background: rgba(0,0,0,.1);
+      background: rgba(0,0,0,.2);
       & .__title {
         width: 100%;
         font-size: 42px;
