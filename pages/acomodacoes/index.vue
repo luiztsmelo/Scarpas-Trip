@@ -98,7 +98,7 @@
               width='90%'
               tooltip='always'
               formatter='R${value}'
-              :interval='20'
+              :interval='50'
               :min='0'
               :max='2000'
               :disabled='false'
