@@ -186,7 +186,7 @@
           mode='single'
           :month-labels='monthLabels'
           :weekday-labels='weekdayLabels'
-          :theme-styles='themeStyles'
+          :theme-styles='themeStylesDesktop'
           :attributes='attributes'
           >
         </v-calendar>
@@ -249,19 +249,20 @@
               :drag-attribute='myAttribute'
               :select-attribute='myAttribute'
               :disabled-attribute='disabledAttribute'
-              :month-labels='monthLabels'
-              :weekday-labels='weekdayLabels'
-              :theme-styles='themeStylesDesktop'
+              :theme-styles='themeStylesReserva'
               :input-props='{ placeholder: "Chegada - Partida" }'
               tint-color='#00D8C7'
               show-caps
+              :formats='formats'
+              popover-align='right'
+              popover-visibility='focus'
               >
             </v-date-picker>
           </div>
 
           <button class="__reserva-desktop-btn" type="button">Reservar Estadia</button>
 
-          <h4 class="__info">A Escarpas Trip não faz a intermediação financeira. O pagamento deverá ser feito diretamente com 
+          <h4 class="__info">A Escarpas Trip somente faz a reserva. O pagamento deverá ser feito diretamente com 
             <span style="color:#00BAAC;cursor:pointer" @click="$store.commit('m_showProprietario', true), hashProprietario()">{{ acomod.proprietario }}</span>.
           </h4>
 
@@ -308,8 +309,7 @@ export default {
         {
           key: 'disabledDates',
           contentStyle: {
-            textDecoration: 'line-through',
-            opacity: .2
+            opacity: .3
           },
           dates: {
             start: null, // From the beginning of time
@@ -325,19 +325,21 @@ export default {
           component: PopoverReservaAcomod
         }
       },
+      formats: {
+        input: ['D MMM', 'D MMM']
+      },
       disabledAttribute: {
         contentStyle: {
-          textDecoration: 'line-through',
-          color: '#DADADA'
+          opacity: .3
         },
         contentHoverStyle: {
           cursor: 'default',
           backgroundColor: 'transparent',
         }
       },
-      themeStyles: {
+      themeStylesDesktop: {
         wrapper: {
-          color: 'rgb(52, 52, 52)',
+          color: 'rgb(62, 62, 62)',
           margin: '10px 0px 0 0px',
           padding: '10px 0px 0 0px',
           background: 'white',
@@ -357,31 +359,34 @@ export default {
           fontWeight: '400'
         },
         weekdays: {
-          color: 'rgb(52, 52, 52)',
+          color: 'rgb(62, 62, 62)',
           fontSize: '17px',
-          fontWeight: '700',
-          padding: '15px 0px 8px 0px',
+          fontWeight: '600',
+          padding: '14px 5px 6px 5px',
         },
         dayCell: {
-          height: '30px'
+          height: '32px'
         },
         dayContent: {
           fontWeight: '400',
           fontSize: '16px',
         },
         dayCellNotInMonth: {
-          color: '#DADADA'
+          opacity: 0
+        },
+        verticalDivider: {
+          borderLeft: 'none'
         }
       },
-      themeStylesDesktop: {
+      themeStylesReserva: {
         wrapper: {
-          color: 'rgb(52, 52, 52)',
+          color: 'rgb(62, 62, 62)',
           border: '0',
-          padding: '6px 9px 0 9px',
-          background: 'white'
+          background: 'white',
+          boxShadow: '1px 1px 25px 2px rgba(0,0,0,0.1)'
         },
         header: {
-          padding: '0 9px',
+          padding: '10px 9px 0px 9px',
         },
         headerArrows: {
           fontSize: '1.4rem',
@@ -391,26 +396,29 @@ export default {
           fontWeight: '400'
         },
         weekdays: {
-          color: 'rgb(52, 52, 52)',
-          fontWeight: '700',
-          padding: '15px 5px 8px 5px',
+          color: 'rgb(62, 62, 62)',
+          fontWeight: '600',
+          padding: '14px 5px 6px 5px',
         },
         dayCell: {
-          height: '30px'
+          height: '32px'
         },
         dayContent: {
           fontWeight: '400',
-          fontSize: '15px'
+          fontSize: '14px'
         },
         dayCellNotInMonth: {
-          color: '#DADADA'
+          opacity: 0
         },
         dayPopoverContent: {
           background: '#00D8C7',
           color: 'white',
           border: 'none'
+        },
+        verticalDivider: {
+          borderLeft: 'none'
         }
-      }  
+      } 
     }
   },
   head () {
@@ -909,7 +917,7 @@ export default {
             & input {
               cursor: pointer;
               width: 100%;
-              font-size: 17px;
+              font-size: 16px;
               font-weight: 400;
               padding: .6rem;
               color: #8B8B8C;

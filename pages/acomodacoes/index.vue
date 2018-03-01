@@ -40,7 +40,6 @@
           <div class="item-form">
             <v-date-picker
               is-double-paned
-              is-required
               mode='range'
               v-model='filter.date'
               :show-popover='false'
@@ -48,14 +47,14 @@
               :pane-width='280'
               :disabled-dates='disabledDates'
               :disabled-attribute='disabledAttribute'
-              :month-labels='monthLabels'
-              :weekday-labels='weekdayLabels'
               :theme-styles='themeStylesDesktop'
               :input-props='{ placeholder: "Chegada - Partida" }'
               tint-color='#00D8C7'
               show-caps
               style='width:100%'
               :formats='formats'
+              popover-align='right'
+              popover-visibility='focus'
               >
             </v-date-picker>
           </div>
@@ -89,7 +88,7 @@
           <div class="item-form" >
             <vue-slider
               v-model='filter.valorDiaria'
-              style="margin-top:2rem"
+              style="margin-top:2.2rem"
               width='90%'
               tooltip='always'
               formatter='R${value}'
@@ -99,7 +98,7 @@
               :disabled='false'
               :lazy='true'
               :tooltipStyle='{ "backgroundColor": "#00D8C7", "borderColor": "#00D8C7", "fontWeight": "500", "padding": "5px" }'
-              :bgStyle='{ "backgroundColor": "rgb(232,232,232)" }'
+              :bgStyle='{ "backgroundColor": "rgb(237,237,237)" }'
               :processStyle='{ "backgroundColor": "transparent" }'>
             </vue-slider>
           </div>
@@ -156,12 +155,9 @@ export default {
       formats: {
         input: ['D MMM', 'D MMM']
       },
-      monthLabels: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
-      weekdayLabels: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'],
       disabledAttribute: {
         contentStyle: {
-          textDecoration: 'line-through',
-          color: '#DADADA'
+          opacity: .3
         },
         contentHoverStyle: {
           cursor: 'default',
@@ -176,7 +172,7 @@ export default {
           boxShadow: '1px 1px 25px 2px rgba(0,0,0,0.1)'
         },
         header: {
-          padding: '10px 9px 0px 9px',
+          padding: '12px 9px 0px 9px',
         },
         headerArrows: {
           fontSize: '1.4rem',
@@ -188,17 +184,17 @@ export default {
         weekdays: {
           color: 'rgb(62, 62, 62)',
           fontWeight: '600',
-          padding: '15px 5px 8px 5px',
+          padding: '14px 5px 6px 5px',
         },
         dayCell: {
-          height: '30px'
+          height: '32px'
         },
         dayContent: {
           fontWeight: '400',
           fontSize: '14px'
         },
         dayCellNotInMonth: {
-          color: '#DADADA'
+          opacity: 0
         },
         dayPopoverContent: {
           background: '#00D8C7',
