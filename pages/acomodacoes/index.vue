@@ -444,7 +444,7 @@ export default {
     & .filtrar-desktop {
       position: fixed;
       width: 23.5%;
-      top: 3.8rem;
+      top: 3.9rem;
       bottom: 0;
       right: 8%;
       border-left: 1px solid rgb(232,232,232);

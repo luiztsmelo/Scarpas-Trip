@@ -867,7 +867,7 @@ export default {
 }
 @media (min-width: 1024px) {
   .acomods-id {
-    margin-top: 3.8rem;
+    margin-top: 3.9rem;
 
     /* ####### IMAGE BOX ####### */
     & .image-box {

@@ -105,7 +105,7 @@ export default {
       display: flex;
       align-items: center;
       & .__brand-img {
-        width: 1.6rem;
+        width: 1.7rem;
         height: auto;
         margin-right: .4rem;
       }
@@ -163,7 +163,7 @@ export default {
 }
 @media (min-width: 1024px) {
   .navbar {
-    height: 3.8rem;
+    height: 3.9rem;
     padding: 0 8%;
     & .navbar-body {
       & .brand {
@@ -174,7 +174,7 @@ export default {
         & .__brand-name {
           font-size: 20px;
           font-weight: 600;
-          line-height: 3.8rem;
+          line-height: 3.9rem;
         }
       }
       & .nav-mobile {
