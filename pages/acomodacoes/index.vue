@@ -44,17 +44,22 @@
               v-model='filter.date'
               :show-popover='false'
               :min-date='new Date().getTime()'
-              :pane-width='280'
+              :pane-width='275'
               :disabled-dates='disabledDates'
               :disabled-attribute='disabledAttribute'
               :theme-styles='themeStylesDesktop'
-              :input-props='{ placeholder: "Chegada - Partida" }'
               tint-color='#00D8C7'
               show-caps
               style='width:100%'
               :formats='formats'
               popover-align='right'
               popover-visibility='focus'
+              >
+              <input
+                slot-scope='{ inputValue, updateValue }'
+                placeholder='Chegada - Partida'
+                :value='inputValue'
+                @change.native='updateValue($event.target.value)'
               >
             </v-date-picker>
           </div>
@@ -74,6 +79,7 @@
 
           <div class="item-form">
             <multiselect
+              :type='Array'
               v-model="filter.local"
               :multiple="true"
               :options="localidades"
@@ -136,8 +142,8 @@ export default {
     return {
       filter: {
         date: null,
-        tipoAcomod: null,
-        local: null,
+        tipoAcomod: [],
+        local: [],
         valorDiaria: [0, 2000]
       },
       tiposAcomods: [
@@ -167,7 +173,10 @@ export default {
       themeStylesDesktop: {
         wrapper: {
           color: 'rgb(62, 62, 62)',
-          border: '0',
+          borderTop: '10px solid white',
+          borderBottom: '10px solid white',
+          borderLeft: '15px solid white',
+          borderRight: '15px solid white',
           background: 'white',
           boxShadow: '1px 1px 25px 2px rgba(0,0,0,0.1)'
         },
@@ -261,6 +270,16 @@ export default {
     acomods () {
       return this.$store.state.acomods
     },
+    /* filteredAcomods () {
+      let acomods = this.$store.state.acomods
+      let acomodsArray = Object.values(acomods)
+      if (this.filter.tipoAcomod !== null) {
+        let filteredByTipo = acomodsArray.filter(acomod => acomod.tipoAcomod === this.filter.tipoAcomod[0])
+        return filteredByTipo
+      } else {
+        return acomods
+      }
+    }, */
     disabledDates () {
       return 
     }
@@ -465,7 +484,8 @@ export default {
             border: 1px solid rgb(232,232,232);
             outline: none;
             background: white;
-            color: #757575;
+            color: var(--color01);
+            border-radius: 5px
           }
           & .multiselect {
             cursor: pointer;
@@ -501,7 +521,7 @@ export default {
             }
           }
           & .multiselect--active {
-            z-index: 100;
+            z-index: 9900;
           }
         }
       }

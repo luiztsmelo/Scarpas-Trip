@@ -168,7 +168,7 @@ export default {
     & .navbar-body {
       & .brand {
         & .__brand-img {
-          width: 2.1rem;
+          width: 2.2rem;
           height: auto;
         }
         & .__brand-name {

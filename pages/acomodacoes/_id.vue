@@ -244,7 +244,7 @@
               mode='range'
               v-model='$store.state.reservaAcomod.periodoReserva'
               :min-date='new Date().getTime()'
-              :pane-width='285'
+              :pane-width='275'
               :disabled-dates='disabledDates'
               :drag-attribute='myAttribute'
               :select-attribute='myAttribute'
@@ -262,9 +262,7 @@
 
           <button class="__reserva-desktop-btn" type="button">Reservar Estadia</button>
 
-          <h4 class="__info">A Escarpas Trip somente faz a reserva. O pagamento deverá ser feito diretamente com 
-            <span style="color:#00BAAC;cursor:pointer" @click="$store.commit('m_showProprietario', true), hashProprietario()">{{ acomod.proprietario }}</span>.
-          </h4>
+          <h4 class="__info">Não se preocupe, você ainda não será cobrado.</h4>
 
         </form>  
       </div>
@@ -345,9 +343,6 @@ export default {
           background: 'white',
           width: '100%'
         },
-        verticalDivider: {
-          borderLeft: '1px solid rgb(232,232,232)',
-        },
         header: {
           padding: '0 9px',
         },
@@ -381,7 +376,10 @@ export default {
       themeStylesReserva: {
         wrapper: {
           color: 'rgb(62, 62, 62)',
-          border: '0',
+          borderTop: '10px solid white',
+          borderBottom: '10px solid white',
+          borderLeft: '15px solid white',
+          borderRight: '15px solid white',
           background: 'white',
           boxShadow: '1px 1px 25px 2px rgba(0,0,0,0.1)'
         },
@@ -893,7 +891,7 @@ export default {
       & .reserva-desktop {
         flex-basis: 30%;
         border: 1px solid rgb(232,232,232);
-        max-height: 23rem;
+        max-height: 22rem;
         & .reserva-desktop-form {
           padding: 1rem 1.4rem;
           & .valor-box {
@@ -903,7 +901,6 @@ export default {
             & .__valor {
               font-size: 36px;
               font-weight: 400;
-       
               & .__valor-dia {
                 font-size: 17px;
                 font-weight: 400;
