@@ -315,6 +315,7 @@ export default {
 }
 @media (min-width: 1024px) {
   .home {
+    margin-top: 4rem;
     & .home-body {
       & .category-container {
         padding: 3.3rem 0;

@@ -110,6 +110,7 @@ const store = () => new Vuex.Store({
     reservaAcomod: {
       totalHospedes: '1',
       periodoReserva: null,
+      daySpan: null,
       userID: null,
       reservante: null,
       email: null,
@@ -413,6 +414,9 @@ const store = () => new Vuex.Store({
     },
     m_reservaAcomod4 (state, payload) {
       state.reservaAcomod4 = payload
+    },
+    m_daySpan (state, payload) {
+      state.reservaAcomod.daySpan = payload
     },
     /*
     ########## Evento ##########

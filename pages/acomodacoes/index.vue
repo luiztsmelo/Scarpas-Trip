@@ -41,6 +41,7 @@
             <v-date-picker
               is-double-paned
               mode='range'
+              @drag='drag = $event'
               v-model='filter.date'
               :show-popover='false'
               :min-date='new Date().getTime()'
@@ -53,14 +54,21 @@
               style='width:100%'
               :formats='formats'
               popover-align='right'
-              popover-visibility='focus'
-              >
-              <input
-                slot-scope='{ inputValue, updateValue }'
-                placeholder='Chegada - Partida'
-                :value='inputValue'
-                @change.native='updateValue($event.target.value)'
-              >
+              popover-visibility='focus'>
+              <div
+                slot-scope='{ inputValue, updateValue }'>
+                <div>
+                  <input
+                    type='text'
+                    placeholder='Chegada - Partida'
+                    :class='["input", { isDrag: !!drag }]'
+                    :value="inputValue"
+                    @change='updateValue($event.target.value)' />
+                  <span class='day-span'>
+                    {{ daySpan }}
+                  </span>
+                </div>
+              </div>
             </v-date-picker>
           </div>
 
@@ -140,6 +148,7 @@ export default {
   transition: 'opacity',
   data () {
     return {
+      drag: null,
       filter: {
         date: null,
         tipoAcomod: [],
@@ -222,6 +231,11 @@ export default {
     })
   },
   methods: {
+    getDaySpan(range) {
+      const msInDay = 1000*60*60*24
+      if (!range) return 0
+      return (range.end - range.start)/msInDay
+    },
     image1H (acomod) {
       if (supportsWebP) {
         return acomod.imageH1W
@@ -269,6 +283,10 @@ export default {
   computed: {
     acomods () {
       return this.$store.state.acomods
+    },
+    daySpan() {
+      const span = this.getDaySpan(this.drag || this.filter.date)
+      return (span && `${span} noites`) || ''
     },
     /* filteredAcomods () {
       let acomods = this.$store.state.acomods
@@ -463,7 +481,7 @@ export default {
     & .filtrar-desktop {
       position: fixed;
       width: 23.5%;
-      top: 3.9rem;
+      top: 4rem;
       bottom: 0;
       right: 8%;
       border-left: 1px solid rgb(232,232,232);
@@ -531,4 +549,16 @@ export default {
     }
   }
 }
+
+.isDrag {
+  color: #999999 !important;
+}
+.day-span {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #999999;
+}
+
 </style>

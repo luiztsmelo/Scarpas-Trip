@@ -175,7 +175,7 @@ export default {
     }
     & .__img {
       border-radius: 50%;
-      width: 3.9rem;
+      width: 4rem;
       height: auto;
     }
   }

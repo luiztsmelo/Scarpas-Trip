@@ -189,7 +189,7 @@ export default {
     background-size: cover;
     /* background-position: center; */
     & .chegada-partida-container {
-      background: rgba(0,0,0,.2);
+      background: rgba(0,0,0,.1);
       & .__title {
         width: 100%;
         font-size: 42px;

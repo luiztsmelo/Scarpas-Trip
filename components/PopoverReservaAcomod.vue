@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1 class="valor-diaria">R${{ valorDiaria }}</h1>
-    <h1 class="valor-diaria-dividido">R${{ valorDiariaDividido }}/pessoa</h1>
+    <h1 class="valor-diaria-dividido">R${{ valorDiariaDividido }}/hóspede</h1>
   </div>
 </template>
 
@@ -13,7 +13,8 @@ export default {
       return this.$store.state.acomod
     },
     valorDiaria () {
-      return this.acomod.valorDiariaNormal * (this.attribute.targetDate.daySpan + 1)
+      this.$store.commit('m_daySpan', this.attribute.targetDate.daySpan)
+      return this.acomod.valorDiariaNormal * (this.attribute.targetDate.daySpan)
     },
     valorDiariaDividido () {
       return Math.trunc(this.valorDiaria / this.$store.state.reservaAcomod.totalHospedes)

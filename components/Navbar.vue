@@ -163,7 +163,7 @@ export default {
 }
 @media (min-width: 1024px) {
   .navbar {
-    height: 3.9rem;
+    height: 4rem;
     padding: 0 8%;
     & .navbar-body {
       & .brand {
@@ -174,7 +174,7 @@ export default {
         & .__brand-name {
           font-size: 20px;
           font-weight: 600;
-          line-height: 3.9rem;
+          line-height: 4rem;
         }
       }
       & .nav-mobile {

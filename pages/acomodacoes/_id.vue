@@ -228,7 +228,7 @@
         <form class="reserva-desktop-form">
 
           <div class="valor-box">
-            <h1 class="__valor">R${{ acomod.valorDiariaNormal }}<span class="__valor-dia"> por dia</span></h1>
+            <h1 class="__valor">R${{ acomod.valorDiariaNormal }}<span class="__valor-dia"> por noite</span></h1>
           </div>
 
           <div class="item-form">
@@ -250,14 +250,43 @@
               :select-attribute='myAttribute'
               :disabled-attribute='disabledAttribute'
               :theme-styles='themeStylesReserva'
-              :input-props='{ placeholder: "Chegada - Partida" }'
               tint-color='#00D8C7'
               show-caps
               :formats='formats'
               popover-align='right'
-              popover-visibility='focus'
-              >
+              popover-visibility='focus'>
             </v-date-picker>
+          </div>
+
+          <div class="reserva-info" v-if="this.$store.state.reservaAcomod.periodoReserva !== null">
+            
+            <div class="info-item">
+              <h3>R${{ acomod.valorDiariaNormal }} x {{ this.$store.state.reservaAcomod.daySpan }} noites</h3>
+              <h3 id="valor">
+                R${{ acomod.valorDiariaNormal*this.$store.state.reservaAcomod.daySpan }}
+              </h3>
+            </div>
+
+            <div class="info-item" style="padding-bottom: .3rem">
+              <div style="display:flex;flex:row;align-items:center">
+                <h3>Taxa de serviço</h3>
+                <img 
+                  src="../../assets/img/info.svg" 
+                  style="width:.95rem;height:auto;margin-left:.3rem;cursor:pointer"
+                >
+              </div>
+              <h3>
+                R${{ acomod.valorDiariaNormal*this.$store.state.reservaAcomod.daySpan*0.02 }}
+              </h3>
+            </div>
+
+            <div class="info-total" style="padding-top: .3rem">
+              <h3>Total</h3>
+              <h3>
+                R${{ (acomod.valorDiariaNormal*this.$store.state.reservaAcomod.daySpan) + acomod.valorDiariaNormal*this.$store.state.reservaAcomod.daySpan*0.02 }}
+              </h3>
+            </div>
+
           </div>
 
           <button class="__reserva-desktop-btn" type="button">Reservar Estadia</button>
@@ -273,7 +302,7 @@
     <!-- ####### RESERVA ####### --> 
     <div class="reserva">
       <div class="reserva-body">
-        <h3 class="__reserva-valor">R${{ acomod.valorDiariaNormal }}<span class="__reserva-valor-pessoa">/dia</span></h3>
+        <h3 class="__reserva-valor">R${{ acomod.valorDiariaNormal }}<span class="__reserva-valor-pessoa">/noite</span></h3>
         <button class="__reserva-btn" @click="$store.commit('m_showReservaAcomod', true), hashReserva()">Reservar Estadia</button>
       </div>
     </div>
@@ -303,6 +332,7 @@ export default {
       heightImageBox: null,
       
       googleMapsInitialized: false,
+
       attributes: [
         {
           key: 'disabledDates',
@@ -865,7 +895,7 @@ export default {
 }
 @media (min-width: 1024px) {
   .acomods-id {
-    margin-top: 3.9rem;
+    margin-top: 4rem;
 
     /* ####### IMAGE BOX ####### */
     & .image-box {
@@ -891,7 +921,7 @@ export default {
       & .reserva-desktop {
         flex-basis: 30%;
         border: 1px solid rgb(232,232,232);
-        max-height: 22rem;
+        align-self: flex-start;
         & .reserva-desktop-form {
           padding: 1rem 1.4rem;
           & .valor-box {
@@ -899,7 +929,7 @@ export default {
             align-items: flex-end;
             padding-bottom: 1.2rem;
             & .__valor {
-              font-size: 36px;
+              font-size: 35px;
               font-weight: 400;
               & .__valor-dia {
                 font-size: 17px;
@@ -910,7 +940,7 @@ export default {
           & .item-form {
             display: flex;
             flex-flow: column;
-            margin: 1.5rem 0;
+            margin-top: 1.2rem;
             & input {
               cursor: pointer;
               width: 100%;
@@ -938,7 +968,28 @@ export default {
               }
             }
           }
+          & .reserva-info {
+            margin-top: .8rem;
+            & .info-item {
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              & h3 {
+                font-size: 15px;
+              }
+            }
+            & .info-total {
+              display: flex;
+              justify-content: space-between;
+              border-top: 1px solid rgb(232,232,232);
+              & h3 {
+                font-size: 16px;
+                font-weight: 500;
+              }
+            }
+          }
           & .__reserva-desktop-btn {
+            margin-top: 1.2rem;
             font-size: 19px;
             font-weight: 600;
             line-height: 3rem;
