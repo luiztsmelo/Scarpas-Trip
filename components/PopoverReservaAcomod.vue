@@ -13,7 +13,7 @@ export default {
       return this.$store.state.acomod
     },
     valorDiaria () {
-      this.$store.commit('m_daySpan', this.attribute.targetDate.daySpan)
+      this.$store.state.reservaAcomod.daySpan = this.attribute.targetDate.daySpan
       return this.acomod.valorDiariaNormal * (this.attribute.targetDate.daySpan)
     },
     valorDiariaDividido () {

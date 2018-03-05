@@ -61,7 +61,7 @@
                   <input
                     type='text'
                     placeholder='Chegada - Partida'
-                    :class='["input", { isDrag: !!drag }]'
+                    :class='["input", { "is-drag": !!drag }]'
                     :value="inputValue"
                     @change='updateValue($event.target.value)' />
                   <span class='day-span'>
@@ -550,12 +550,13 @@ export default {
   }
 }
 
-.isDrag {
+.is-drag {
   color: #999999 !important;
 }
 .day-span {
+  font-size: 14px;
   position: absolute;
-  right: 10px;
+  right: 5%;
   top: 50%;
   transform: translateY(-50%);
   color: #999999;

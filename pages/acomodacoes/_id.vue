@@ -250,6 +250,7 @@
               :select-attribute='myAttribute'
               :disabled-attribute='disabledAttribute'
               :theme-styles='themeStylesReserva'
+              :input-props='{ placeholder:"Chegada - Partida" }'
               tint-color='#00D8C7'
               show-caps
               :formats='formats'

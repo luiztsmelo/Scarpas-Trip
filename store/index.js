@@ -415,9 +415,6 @@ const store = () => new Vuex.Store({
     m_reservaAcomod4 (state, payload) {
       state.reservaAcomod4 = payload
     },
-    m_daySpan (state, payload) {
-      state.reservaAcomod.daySpan = payload
-    },
     /*
     ########## Evento ##########
     */
