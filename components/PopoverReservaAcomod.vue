@@ -43,7 +43,7 @@ export default {
   }
   .valor-diaria-dividido {
     font-size: 15px;
-    font-weight: 300;
+    font-weight: 400;
   }
 }
 

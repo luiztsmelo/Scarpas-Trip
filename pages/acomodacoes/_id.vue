@@ -239,23 +239,36 @@
 
           <div class="item-form">
             <v-date-picker
-              is-double-paned
               is-required
               mode='range'
               v-model='$store.state.reservaAcomod.periodoReserva'
               :min-date='new Date().getTime()'
-              :pane-width='275'
+              :pane-width='280'
               :disabled-dates='disabledDates'
               :drag-attribute='myAttribute'
               :select-attribute='myAttribute'
               :disabled-attribute='disabledAttribute'
               :theme-styles='themeStylesReserva'
-              :input-props='{ placeholder:"Chegada - Partida" }'
-              tint-color='#00D8C7'
-              show-caps
               :formats='formats'
-              popover-align='right'
               popover-visibility='focus'>
+              <div
+                slot-scope='{ inputValue, updateValue }'>
+                <div>
+                  <input
+                    type='text'
+                    placeholder='Chegada - Partida'
+                    :value="inputValue"
+                    @change='updateValue($event.target.value)' 
+                    class="reserva-input-date"
+                  />
+                  <img 
+                    src="../../assets/img/exit.svg"
+                    v-if="$store.state.reservaAcomod.periodoReserva !== null"
+                    class="reserva-close-date"
+                    @click='$store.state.reservaAcomod.periodoReserva = null'
+                  >
+                </div>
+              </div>
             </v-date-picker>
           </div>
 
@@ -290,7 +303,7 @@
 
           </div>
 
-          <button class="__reserva-desktop-btn" type="button">Reservar Estadia</button>
+          <button class="__reserva-desktop-btn" type="button" @click="$modal.show('modal-reserva-desktop')">Reservar Estadia</button>
 
           <h4 class="__info">Não se preocupe, você ainda não será cobrado.</h4>
 
@@ -309,6 +322,8 @@
     </div>
 
     <reserva-acomod/><!-- ####### RESERVA ####### -->
+
+    <reserva-acomod-desktop/><!-- ####### RESERVA DESKTOP ####### -->
     
   </div>
 </template>
@@ -317,13 +332,14 @@
 import PopoverReservaAcomod from '../../components/PopoverReservaAcomod'
 import { loaded } from '~/node_modules/vue2-google-maps/src/manager'
 import ReservaAcomod from '../../components/ReservaAcomod'
+import ReservaAcomodDesktop from '../../components/ReservaAcomodDesktop'
 import Proprietario from '../../components/Proprietario'
 import supportsWebP from 'supports-webp'
 import { mapstyle } from '../../mixins/mapstyle'
 import * as firebase from 'firebase'
 
 export default {
-  components: { ReservaAcomod, Proprietario },
+  components: { ReservaAcomod, ReservaAcomodDesktop, Proprietario },
   mixins: [mapstyle],
   data () {
     return {
@@ -352,6 +368,18 @@ export default {
         popover: {
           hideIndicator: true,
           component: PopoverReservaAcomod
+        },
+        contentStyle: {
+          backgroundColor: '#00D8C7',
+          color: 'white'
+        },
+        contentHoverStyle: {
+          backgroundColor: '#00D8C7',
+          color: 'white'
+        },
+        highlight: {
+          backgroundColor: '#00D8C7',
+          color: 'white'
         }
       },
       formats: {
@@ -395,7 +423,7 @@ export default {
         },
         dayContent: {
           fontWeight: '400',
-          fontSize: '16px',
+          fontSize: '16px'
         },
         dayCellNotInMonth: {
           opacity: 0
@@ -418,23 +446,23 @@ export default {
           padding: '10px 9px 0px 9px',
         },
         headerArrows: {
-          fontSize: '1.4rem',
+          fontSize: '1.45rem',
         },
         headerTitle: {
-          fontSize: '16px',
+          fontSize: '17px',
           fontWeight: '400'
         },
         weekdays: {
           color: 'rgb(62, 62, 62)',
           fontWeight: '600',
-          padding: '14px 5px 6px 5px',
+          padding: '21px 5px 6px 5px',
         },
         dayCell: {
-          height: '32px'
+          height: '34px'
         },
         dayContent: {
           fontWeight: '400',
-          fontSize: '14px'
+          fontSize: '15px'
         },
         dayCellNotInMonth: {
           opacity: 0
@@ -443,9 +471,6 @@ export default {
           background: '#00D8C7',
           color: 'white',
           border: 'none'
-        },
-        verticalDivider: {
-          borderLeft: 'none'
         }
       } 
     }
@@ -957,16 +982,29 @@ export default {
               cursor: pointer;
               width: 100%;
               font-size: 17px;
-              font-weight: 400;
               padding: .6rem;
-              color: #8B8B8C;
+              color: #989898;
               border: 1px solid rgb(232,232,232);
               outline: none;
               background: white;
               & option {
                 background: white;
-                color: #8B8B8C;
+                color: #989898;
               }
+            }
+            & .reserva-input-date {
+              padding-left: .9rem;
+              color: var(--color01);
+              font-size: 15px;
+            }
+            & .reserva-close-date {
+              width: .65rem;
+              height: auto;
+              position: absolute;
+              right: 3%;
+              top: 50%;
+              transform: translateY(-50%);
+              cursor: pointer;
             }
           }
           & .reserva-info {

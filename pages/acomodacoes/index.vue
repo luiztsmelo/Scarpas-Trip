@@ -111,7 +111,7 @@
               :max='2000'
               :disabled='false'
               :lazy='true'
-              :tooltipStyle='{ "backgroundColor": "#00D8C7", "borderColor": "#00D8C7", "fontWeight": "500", "padding": "5px" }'
+              :tooltipStyle='{ "backgroundColor": "white", "color": "#7E7E7E", "borderColor": "white", "fontWeight": "600", "fontSize": "15px" }'
               :bgStyle='{ "backgroundColor": "rgb(237,237,237)" }'
               :processStyle='{ "backgroundColor": "transparent" }'>
             </vue-slider>

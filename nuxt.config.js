@@ -40,7 +40,8 @@ module.exports = {
     '~plugins/webfontloader',
     '~plugins/vue-awesome-swiper',
     '~plugins/v-money',
-    '~plugins/v-calendar'
+    '~plugins/v-calendar',
+    '~plugins/vue-js-modal'
   ],
   /*
   ** Customize the progress-bar color
