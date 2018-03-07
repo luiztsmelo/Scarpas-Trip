@@ -11,7 +11,11 @@
 
 <script>
 export default {
-  
+  computed: {
+    acomod () {
+      return this.$store.state.acomod
+    }
+  },
 }
 </script>
 
@@ -22,7 +26,4 @@ export default {
   z-index: 10000;
 }
 
-.v--modal-overlay {
-  background: rgb(0,0,0,.6);
-}
 </style>
