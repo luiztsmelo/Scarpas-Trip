@@ -1,11 +1,11 @@
 <template>
   <modal
-    name="modal-reserva-desktop"
-    class="modal-reserva-desktop"
+    name="ask-acomod"
+    class="ask-acomod"
     width="50%"
     height="70%"
     >
-    
+    Pergunta
   </modal>
 </template>
 
@@ -19,11 +19,17 @@ export default {
 }
 </script>
 
-<style>
-@import url('../assets/css/main.css');
+<style scoped>
+@import url('../../assets/css/main.css');
 
-.modal-reserva-desktop {
-  z-index: 10000;
+.v--modal {
+  border-radius: 5px;
 }
+
+.ask-acomod {
+  z-index: 10000;
+  
+}
+
 
 </style>

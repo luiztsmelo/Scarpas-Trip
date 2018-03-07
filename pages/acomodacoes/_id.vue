@@ -285,9 +285,11 @@
               <div style="display:flex;flex:row;align-items:center">
                 <h3>Taxa de serviço</h3>
                 <img 
-                  src="../../assets/img/info.svg" 
+                  src="../../assets/img/info.svg"
                   style="width:.95rem;height:auto;margin-left:.3rem;cursor:pointer"
+                  @click="serviceFeeDialog"
                 >
+                <v-dialog id="service-fee" style="z-index:10000"/>
               </div>
               <h3>
                 R${{ acomod.valorDiariaNormal*this.$store.state.reservaAcomod.daySpan*0.02 }}
@@ -303,9 +305,13 @@
 
           </div>
 
-          <button class="__reserva-desktop-btn" type="button" @click="$modal.show('modal-reserva-desktop')">Reservar Estadia</button>
+          <button class="__reserva-desktop-btn" type="button" @click="$modal.show('reserva-desktop')">Reservar Estadia</button>
+          <reserva-acomod-desktop/>
 
           <h4 class="__info">Não se preocupe, você ainda não será cobrado.</h4>
+
+          <button class="__reserva-desktop-btn-ask" type="button" @click="$modal.show('ask-acomod')">Fazer uma Pergunta</button>
+          <ask-acomod/>
 
         </form>  
       </div>
@@ -320,26 +326,25 @@
         <button class="__reserva-btn" @click="$store.commit('m_showReservaAcomod', true), hashReserva()">Reservar Estadia</button>
       </div>
     </div>
-
     <reserva-acomod/><!-- ####### RESERVA ####### -->
 
-    <reserva-acomod-desktop/><!-- ####### RESERVA DESKTOP ####### -->
     
   </div>
 </template>
 
 <script>
-import PopoverReservaAcomod from '../../components/PopoverReservaAcomod'
+import AskAcomod from '../../components/reserva-acomod/AskAcomod'
+import PopoverCalendar from '../../components/reserva-acomod/PopoverCalendar'
 import { loaded } from '~/node_modules/vue2-google-maps/src/manager'
 import ReservaAcomod from '../../components/ReservaAcomod'
-import ReservaAcomodDesktop from '../../components/ReservaAcomodDesktop'
+import ReservaAcomodDesktop from '../../components/reserva-acomod/ReservaAcomodDesktop'
 import Proprietario from '../../components/Proprietario'
 import supportsWebP from 'supports-webp'
 import { mapstyle } from '../../mixins/mapstyle'
 import * as firebase from 'firebase'
 
 export default {
-  components: { ReservaAcomod, ReservaAcomodDesktop, Proprietario },
+  components: { ReservaAcomod, ReservaAcomodDesktop, Proprietario, AskAcomod },
   mixins: [mapstyle],
   data () {
     return {
@@ -367,7 +372,7 @@ export default {
       myAttribute: {
         popover: {
           hideIndicator: true,
-          component: PopoverReservaAcomod
+          component: PopoverCalendar
         },
         contentStyle: {
           backgroundColor: '#00D8C7',
@@ -500,6 +505,17 @@ export default {
     })
   },
   methods: {
+    serviceFeeDialog () {
+      this.$modal.show('dialog', {
+        title: 'Taxa de Serviço',
+        text: 'Taxa para manter a plataforma e garantir a total segurança em sua viagem, como reembolso em caso de problemas com sua reserva.',
+        buttons: [
+          {
+            title: 'Fechar'
+          }
+      ]
+      })
+    },
     backBtn () {
       window.history.back(1)
     },
@@ -1038,8 +1054,16 @@ export default {
             width:  100%;
             border-radius: 5px;
           }
+          & .__reserva-desktop-btn-ask {
+            font-size: 17px;
+            font-weight: 600;
+            background: transparent;
+            color: #00D8C7;
+            height: 2.2rem;
+            width:  100%;
+          }
           & .__info {
-            margin: .7rem 0;
+            margin: .6rem 0;
             text-align: center;
             font-size: 13px;
             font-weight: 400;

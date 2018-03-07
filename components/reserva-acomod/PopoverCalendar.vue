@@ -23,7 +23,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 
 .valor-diaria {
   font-size: 16px;

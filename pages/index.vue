@@ -91,7 +91,7 @@
           <div class="card" v-for="passeio in $store.state.passeios" :key="passeio.passeioID">
             <nuxt-link :to="'/passeios/' + passeio.passeioID">
               <progressive-img class="__card-img" :src="imagePasH(passeio)" :placeholder="passeio.imageL1" :aspect-ratio="0.66"/>
-              <span class="__card-info" style="color: #0696E8">{{ passeio.tipoPasseio }}</span>
+              <span class="__card-info" style="color: #198CFE">{{ passeio.tipoPasseio }}</span>
               <h1 class="__card-title">{{ passeio.title }}</h1>
               <span class="__card-subtitle">R${{ passeio.valorPasseio }}<span class="__card-valor-pessoa"> por pessoa</span></span>
             </nuxt-link> 

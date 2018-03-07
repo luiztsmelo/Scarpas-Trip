@@ -163,7 +163,7 @@
 </template>
 
 <script>
-import PopoverReservaAcomod from '~/components/PopoverReservaAcomod.vue'
+import PopoverCalendar from '~/components/reserva-acomod/PopoverCalendar.vue'
 import MaskedInput from 'vue-text-mask'
 
 export default {
@@ -181,7 +181,7 @@ export default {
       myAttribute: {
         popover: {
           hideIndicator: true,
-          component: PopoverReservaAcomod
+          component: PopoverCalendar
         }
       },
       disabledAttribute: {
