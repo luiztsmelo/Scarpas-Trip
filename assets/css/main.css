@@ -158,3 +158,16 @@ input {
     line-height: 30px;
   }
 }
+
+.v--modal {
+  border-radius: 6px;
+}
+.dialog-c-title {
+  font-size: 17px !important;
+}
+.dialog-c-text {
+  line-height: 23px !important;
+}
+.vue-dialog-button {
+  font-size: 14px !important;
+}

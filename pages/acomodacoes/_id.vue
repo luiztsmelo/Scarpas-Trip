@@ -250,7 +250,7 @@
               :disabled-attribute='disabledAttribute'
               :theme-styles='themeStylesReserva'
               :formats='formats'
-              popover-visibility='focus'>
+              :popover-visibility='datePickerVisibility'>
               <div
                 slot-scope='{ inputValue, updateValue }'>
                 <div>
@@ -305,12 +305,12 @@
 
           </div>
 
-          <button class="__reserva-desktop-btn" type="button" @click="$modal.show('reserva-desktop')">Reservar Estadia</button>
+          <button class="__reserva-desktop-btn" type="button" @click="openReservaModal">Reservar Estadia</button>
           <reserva-acomod-desktop/>
 
           <h4 class="__info">Não se preocupe, você ainda não será cobrado.</h4>
 
-          <button class="__reserva-desktop-btn-ask" type="button" @click="$modal.show('ask-acomod')">Fazer uma Pergunta</button>
+          <button class="__reserva-desktop-btn-ask" type="button" @click="$modal.show('ask-acomod-modal')">Fazer uma Pergunta</button>
           <ask-acomod/>
 
         </form>  
@@ -355,6 +355,7 @@ export default {
       
       googleMapsInitialized: false,
 
+      datePickerVisibility: 'focus',
       attributes: [
         {
           key: 'disabledDates',
@@ -505,6 +506,16 @@ export default {
     })
   },
   methods: {
+    openReservaModal () {
+      if (this.$store.state.reservaAcomod.periodoReserva === null) {
+        this.datePickerVisibility = 'visible'
+        this.$nextTick(() => {
+          this.datePickerVisibility = 'hover'
+        })
+      } else {
+        this.$modal.show('reserva-desktop')
+      }
+    },
     serviceFeeDialog () {
       this.$modal.show('dialog', {
         title: 'Taxa de Serviço',
@@ -1059,7 +1070,7 @@ export default {
             font-weight: 600;
             background: transparent;
             color: #00D8C7;
-            height: 2.2rem;
+            height: 2rem;
             width:  100%;
           }
           & .__info {
