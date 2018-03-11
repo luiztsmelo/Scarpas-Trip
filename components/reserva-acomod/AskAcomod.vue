@@ -86,27 +86,27 @@ export default {
 
     /* LEFT CONTAINER */
     & .left-container {
-      flex-basis: 45%;
+      flex-basis: 44%;
       padding: 2.5rem 3rem 2.5rem 3rem;
       background: #00D8C7;
       & .__title {
         font-size: 40px;
-        padding-bottom: 2rem;
+        padding-bottom: 1.5rem;
         color: white;
       } 
       & .__subtitle {
         font-size: 17px;
         font-weight: 500;
-        padding-bottom: 1rem;
+        padding: .5rem 0;
         color: white;
-        line-height: 27px;
+        line-height: 26px;
       } 
     }/* LEFT CONTAINER */
 
 
     /* RIGHT CONTAINER */
     & .right-container {
-      flex-basis: 55%;
+      flex-basis: 56%;
       padding: 3rem;
       & .item-form {
         display: flex;

@@ -510,7 +510,7 @@ export default {
       if (this.$store.state.reservaAcomod.periodoReserva === null) {
         this.datePickerVisibility = 'visible'
         this.$nextTick(() => {
-          this.datePickerVisibility = 'hover'
+          this.datePickerVisibility = 'focus'
         })
       } else {
         this.$modal.show('reserva-desktop')
