@@ -292,14 +292,14 @@
                 <v-dialog id="service-fee" style="z-index:10000"/>
               </div>
               <h3>
-                R${{ acomod.valorDiariaNormal*this.$store.state.reservaAcomod.daySpan*0.02 }}
+                R${{ acomod.valorDiariaNormal*this.$store.state.reservaAcomod.daySpan*0.025 }}
               </h3>
             </div>
 
             <div class="info-total" style="padding-top: .3rem">
               <h3>Total</h3>
               <h3>
-                R${{ (acomod.valorDiariaNormal*this.$store.state.reservaAcomod.daySpan) + acomod.valorDiariaNormal*this.$store.state.reservaAcomod.daySpan*0.02 }}
+                R${{ (acomod.valorDiariaNormal*this.$store.state.reservaAcomod.daySpan) + acomod.valorDiariaNormal*this.$store.state.reservaAcomod.daySpan*0.025 }}
               </h3>
             </div>
 
@@ -310,7 +310,7 @@
 
           <h4 class="__info">Não se preocupe, você ainda não será cobrado.</h4>
 
-          <button class="__reserva-desktop-btn-ask" type="button" @click="$modal.show('ask-acomod-modal')">Fazer uma Pergunta</button>
+          <button class="__reserva-desktop-btn-ask" type="button" @click="$store.state.user.email === null ? $modal.show('sign-in-modal') : $modal.show('ask-acomod-modal'), $store.state.clickedAskAcomod = true">Fazer uma Pergunta</button>
           <ask-acomod/>
 
         </form>  

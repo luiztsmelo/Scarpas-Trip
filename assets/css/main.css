@@ -119,37 +119,31 @@ input {
 /* ******* SIGN IN BUTTONS ******* */
 .google-btn {
   background-image: url('../img/google.svg');
-  background-color: rgb(219, 50, 54);
-  background-position: 8px;
+  background-position: 15px;
   background-repeat: no-repeat;
-  background-size: 24px;
-  color: white;
-  margin: 0 0 0 .3rem;
+  background-size: 21px;
+  background-color: white;
+  border: 1px solid rgb(232,232,232);
   height: 2.5rem;
-  border-radius: 4px;
-  font-size: 16px;
+  border-radius: 5px;
+  font-size: 15px;
+  font-weight: 600;
   width: 50%;
-}
-.google-btn:hover {
-  background-color: rgb(199, 74, 74);
 }
 
 /* ******* FACEBOOK ******* */
 .facebook-btn {
   background-image: url('../img/facebook.svg');
-  background-color: rgb(59, 89, 152);
-  background-position: 8px;
+  background-position: 15px;
   background-repeat: no-repeat;
   background-size: 21px;
-  color: white;
-  margin: 0 .3rem 0 0;
+  background-color: white;
+  border: 1px solid rgb(232,232,232);
   height: 2.5rem;
-  border-radius: 4px;
-  font-size: 16px;
+  border-radius: 5px;
+  font-size: 15px;
+  font-weight: 600;
   width: 50%;
-}
-.facebook-btn:hover {
-  background-color:rgb(75, 91, 127);
 }
 
 @media (min-width: 1024px) {
@@ -163,7 +157,7 @@ input {
   border-radius: 6px;
 }
 .v--modal-overlay {
-  background: rgba(0, 0, 0, .5);
+  background: rgba(0, 0, 0, .3);
 }
 .dialog-c-title {
   font-size: 17px !important;

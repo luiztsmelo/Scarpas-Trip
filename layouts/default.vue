@@ -1,17 +1,19 @@
 <template>
   <div class="app">
 
-    <loader/>
+    <Loader/>
 
-    <share/>
+    <Share/>
 
-    <menuu/>
+    <Menuu/>
     
-    <navbar/>
+    <Navbar/>
     <nuxt keep-alive/>
-    <foobar/>
+    <Foobar/>
 
-    <map-full/>
+    <MapFull/>
+
+    <SignIn/>
 
   </div>
 </template>
@@ -21,13 +23,14 @@ import isMobile from 'ismobilejs'
 
 import Navbar from '~/components/Navbar.vue'
 import Foobar from '~/components/Foobar.vue'
+import SignIn from '~/components/SignIn.vue'
 import Menuu from '~/components/Menu.vue'
 import Loader from '~/components/Loader.vue'
 import Share from '~/components/Share.vue'
 import MapFull from '~/components/MapFull.vue'
 
 export default {
-  components: { Navbar, Foobar, Menuu, Loader, Share, MapFull },
+  components: { Navbar, Foobar, SignIn, Menuu, Loader, Share, MapFull },
   mounted () {
     /* 
     DETECT SCROLL POSITION

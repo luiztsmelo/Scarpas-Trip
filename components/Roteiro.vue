@@ -3,7 +3,7 @@
     
     <div class="chegada-partida-container">
       
-      <h1 class="__title">Simplesmente tudo para sua viagem a Capitólio. <span>Crie um roteiro gratuito:</span></h1>
+      <h1 class="__title">Tudo para sua viagem a Capitólio. <span>Crie um roteiro gratuito:</span></h1>
 
       <div class="chegada-partida-box">
 
@@ -192,7 +192,7 @@ export default {
       background: rgba(0,0,0,.1);
       & .__title {
         width: 100%;
-        font-size: 42px;
+        font-size: 46px;
         font-weight: 800;
         line-height: 70px;
         padding: 0 8% 1.2rem 8%;

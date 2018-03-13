@@ -117,6 +117,7 @@ const store = () => new Vuex.Store({
       photoURL: null,
       celular: null
     },
+    clickedAskAcomod: false,
     cadastroAcomod0: true,
     cadastroAcomod1: false,
     cadastroAcomod2: false,
