@@ -276,9 +276,7 @@
             
             <div class="info-item">
               <h3>R${{ acomod.valorDiariaNormal }} x {{ this.$store.state.reservaAcomod.daySpan }} noites</h3>
-              <h3 id="valor">
-                R${{ acomod.valorDiariaNormal*this.$store.state.reservaAcomod.daySpan }}
-              </h3>
+              <h3 id="valor">R${{ acomod.valorDiariaNormal*this.$store.state.reservaAcomod.daySpan }}</h3>
             </div>
 
             <div class="info-item" style="padding-bottom: .3rem">
@@ -291,16 +289,12 @@
                 >
                 <v-dialog id="service-fee" style="z-index:10000"/>
               </div>
-              <h3>
-                R${{ acomod.valorDiariaNormal*this.$store.state.reservaAcomod.daySpan*0.025 }}
-              </h3>
+              <h3>{{ serviceFeeTotal }}</h3>
             </div>
 
             <div class="info-total" style="padding-top: .3rem">
               <h3>Total</h3>
-              <h3>
-                R${{ (acomod.valorDiariaNormal*this.$store.state.reservaAcomod.daySpan) + acomod.valorDiariaNormal*this.$store.state.reservaAcomod.daySpan*0.025 }}
-              </h3>
+              <h3>{{ valorReservaTotal }}</h3>
             </div>
 
           </div>
@@ -588,6 +582,12 @@ export default {
     this.heightImageBox = heightImageBox
   },
   computed: {
+    serviceFeeTotal () {
+      return 'R$' + Math.trunc(this.acomod.valorDiariaNormal * this.$store.state.reservaAcomod.daySpan * this.$store.state.serviceFeeAcomod)
+    },
+    valorReservaTotal () {
+      return 'R$' + Math.trunc((this.acomod.valorDiariaNormal * this.$store.state.reservaAcomod.daySpan) + this.acomod.valorDiariaNormal * this.$store.state.reservaAcomod.daySpan * this.$store.state.serviceFeeAcomod)
+    },
     totalHospedesArray () {
       return Array.from({length: this.acomod.totalHospedes}, (v, k) => k+1)
     },

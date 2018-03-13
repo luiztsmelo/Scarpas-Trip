@@ -14,6 +14,7 @@
 
       <button type="button" class="facebook-btn" @click="facebookSignIn()">Cadastrar com Facebook</button>
       <button type="button" class="google-btn" @click="googleSignIn()">Cadastrar com Google</button>
+      <button type="button" class="email-btn" @click="emailSignIn()">Cadastrar com E-mail</button>
 
       <h3 class="if-have-account">Já possui uma conta? <span class="underline">Entrar</span></h3>
       
@@ -85,20 +86,27 @@ export default {
     }
     & .facebook-btn {
       width: 18rem;
-      margin: .6rem 0;
+      margin: .4rem 0;
       height: 3.1rem;
       text-align: start;
       padding-left: 50px;
     }
     & .google-btn {
       width: 18rem;
-      margin: .6rem 0;
+      margin: .4rem 0;
+      height: 3.1rem;
+      text-align: start;
+      padding-left: 50px;
+    }
+    & .email-btn {
+      width: 18rem;
+      margin: .4rem 0;
       height: 3.1rem;
       text-align: start;
       padding-left: 50px;
     }
     & .if-have-account {
-      padding-top: 1rem;
+      padding-top: .6rem;
       font-size: 15px;
       & .underline {
         text-decoration: underline;
@@ -106,7 +114,7 @@ export default {
       }
     }
     & .terms-of-service {
-      padding-top: 1rem;
+      padding-top: .8rem;
       text-decoration: underline;
       font-size: 15px;
     }

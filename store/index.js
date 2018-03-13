@@ -38,6 +38,10 @@ const store = () => new Vuex.Store({
       photoURL: null
     },
     /*
+    -------------------- CONFIGS --------------------
+    */
+    serviceFeeAcomod: 0.025, /* 2,5% */
+    /*
     -------------------- ANÚNCIOS --------------------
     */
     /*
