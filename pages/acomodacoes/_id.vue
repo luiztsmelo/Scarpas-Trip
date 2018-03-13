@@ -307,7 +307,7 @@
           <button class="__reserva-desktop-btn-ask" type="button" @click="$store.state.user.email === null ? $modal.show('sign-in-modal') : $modal.show('ask-acomod-modal'), $store.state.clickedAskAcomod = true">Fazer uma Pergunta</button>
           <ask-acomod/>
 
-        </form>  
+        </form>
       </div>
 
     </div><!-- Desktop View -->

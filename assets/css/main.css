@@ -172,7 +172,7 @@ input {
   border-radius: 6px;
 }
 .v--modal-overlay {
-  background: rgba(0, 0, 0, .3);
+  background: rgba(0, 0, 0, .15);
 }
 .dialog-c-title {
   font-size: 17px !important;
