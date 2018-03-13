@@ -6,7 +6,7 @@
 
 
 
-      <roteiro/><!-- ####### ROTEIRO ####### -->
+      <Roteiro/>
 
 
 
@@ -131,6 +131,8 @@
       </div><!-- ####### ATRAÇÕES ####### -->
 
 
+      <Footer/>
+
     </div>
   </div>
 </template>
@@ -139,10 +141,11 @@
 import supportsWebP from 'supports-webp'
 import * as firebase from 'firebase'
 import Roteiro from '../components/Roteiro'
+import Footer from '../components/Footer'
 
 export default {
   components: {
-    Roteiro
+    Roteiro, Footer
   },
   head () {
     return {
@@ -317,6 +320,7 @@ export default {
   .home {
     margin-top: 4rem;
     & .home-body {
+      margin-bottom: 0;
       & .category-container {
         padding: 3.3rem 0;
         & .title-row {

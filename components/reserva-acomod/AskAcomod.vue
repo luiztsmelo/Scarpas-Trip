@@ -2,12 +2,18 @@
   <modal
     name="ask-acomod-modal"
     class="ask-acomod-modal"
-    width="76%"
-    height="87%">
+    :width="modalWidth"
+    :height="modalHeight">
 
-    <div class="ask-acomod-body">
+    <img src="../../assets/img/close-modal.svg" class="close-btn" @click="$modal.hide('ask-acomod-modal')">
 
-      <img src="../../assets/img/close-modal.svg" class="close-btn" @click="$modal.hide('ask-acomod-modal')">
+    <div class="sign-up" v-if="$store.state.user.username === null">
+      <img class="__img" src="../../static/brand.svg">
+      <h1 class="__title">Ainda não possui uma conta? Crie uma agora:</h1>
+    </div>
+
+
+    <div class="ask-acomod-body" v-else>
 
       <!-- LEFT CONTAINER -->
       <div class="left-container">
@@ -37,7 +43,12 @@
 
         <div class="item-form">
           <label>Mensagem:</label>
-          <textarea name="" id="" rows="6"></textarea>
+          <textarea rows="6" maxlength="2000"></textarea>
+        </div>
+
+        <div class="btns">
+          <button type="button" class="__book-btn">Reservar</button>
+          <button type="button" class="__send-btn">Enviar Mensagem</button>
         </div>
 
       </form><!-- RIGHT CONTAINER -->
@@ -61,6 +72,12 @@ export default {
     },
     totalHospedesArray () {
       return Array.from({length: this.acomod.totalHospedes}, (v, k) => k+1)
+    },
+    modalWidth () {
+      return this.$store.state.user.username === null ? '38%' : '76%'
+    },
+    modalHeight () {
+      return this.$store.state.user.username === null ? '88%' : '88%'
     }
   },
 }
@@ -71,34 +88,47 @@ export default {
 
 .ask-acomod-modal {
   z-index: 10000;
+
+  & .close-btn {
+    cursor: pointer;
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: 1rem;
+    height: auto;
+  }
+
+  & .sign-up {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    padding: 3rem;
+    & .__img {
+      width: 5.4rem;
+      height: auto;
+    }
+    & .__title {
+      font-size: 34px;
+      text-align: center;
+      padding: 1.6rem 0;
+    }
+  }
+
   & .ask-acomod-body {
     display: flex;
     height: 100%;
-    & .close-btn {
-      cursor: pointer;
-      position: absolute;
-      top: 1rem;
-      right: 1rem;
-      width: 1rem;
-      height: auto;
-    }
-
-
+    
     /* LEFT CONTAINER */
     & .left-container {
       flex-basis: 44%;
+      min-width: 44%;
       padding: 2.5rem 3rem 2.5rem 3rem;
-      background: #00D8C7;
       & .__title {
         font-size: 40px;
         padding-bottom: 1.5rem;
-        color: white;
       } 
       & .__subtitle {
-        font-size: 17px;
-        font-weight: 500;
         padding: .5rem 0;
-        color: white;
         line-height: 26px;
       } 
     }/* LEFT CONTAINER */
@@ -107,13 +137,14 @@ export default {
     /* RIGHT CONTAINER */
     & .right-container {
       flex-basis: 56%;
+      max-width: 56%;
       padding: 3rem;
       & .item-form {
         display: flex;
         flex-flow: column;
-        margin: 1rem 0 2.2rem 0;
+        margin: 1rem 0 1.8rem 0;
         & label {
-          padding-bottom: .7rem;
+          padding-bottom: .6rem;
           font-weight: 700;
           font-size: 16px;
         }
@@ -130,13 +161,42 @@ export default {
         }
         & textarea {
           width: 100%;
+          min-width: 100%;
+          max-width: 100%;
           font-size: 17px;
           font-weight: 400;
           line-height: 26px;
           background: white;
-          color: var(--color01);
+          color: rgb(82, 82, 82);
+          padding: 1rem;
           border: 1px solid rgb(232,232,232);
           outline: none;
+          resize: none;
+        }
+      }
+      & .btns {
+        display: flex;
+        justify-content: flex-end;
+        height: 2.8rem;
+        & .__book-btn {
+          padding: 0 .9rem;
+          margin-right: 1rem;
+          font-size: 16px;
+          font-weight: 600;
+          background: transparent;
+          color: #00D8C7;
+          border: 1px solid #00D8C7;
+          border-radius: 5px;
+          line-height: 2.7rem;
+        }
+        & .__send-btn {
+          padding: 0 .9rem;
+          font-size: 16px;
+          font-weight: 600;
+          background: #00D8C7;
+          color: white;
+          border-radius: 5px;
+          line-height: 2.7rem;
         }
       }
     }/* RIGHT CONTAINER */

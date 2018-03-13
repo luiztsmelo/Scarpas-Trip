@@ -18,6 +18,7 @@
 
 <script>
 import isMobile from 'ismobilejs'
+
 import Navbar from '~/components/Navbar.vue'
 import Foobar from '~/components/Foobar.vue'
 import Menuu from '~/components/Menu.vue'
