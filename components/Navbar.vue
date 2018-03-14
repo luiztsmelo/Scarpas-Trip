@@ -41,9 +41,20 @@
 
           <li class="__sign-in" @click="$modal.show('sign-in-modal')" v-if="$store.state.user.email === null">Entrar</li>
 
-          <li><img class="__user-img" :src="$store.state.user.photoURL" :alt="$store.state.user.username" @click="signOut" v-if="$store.state.user.email !== null"></li>
+          <li><img class="__user-img" :src="$store.state.user.photoURL" :alt="$store.state.user.username" @click="userBox = !userBox" v-if="$store.state.user.email !== null"></li>
 
         </nav>
+
+        <div class="user-box" v-show="userBox === true" @click="userBox = !userBox">
+          <div class="user-box-body">
+            <ul>
+              <li>Anunciar</li>
+              <li>Gerenciar anúncios</li>
+              <li>Editar perfil</li>
+              <li @click="signOut()">Sair</li>
+            </ul>
+          </div>
+        </div>
 
       </div>
     </div>
@@ -52,6 +63,11 @@
 
 <script>
 export default {
+  data() {
+    return {
+      userBox: false
+    }
+  },
   methods: {
     showMenu () {
       if (this.$store.state.showMenu === false) {
@@ -144,7 +160,7 @@ export default {
     & .nav-desktop {
       display: inline-flex;
       align-items: stretch;
-      transform: translateX(.7rem);
+      transform: translateX(.6rem);
       align-items: center;
       & a {
         margin: 0 .6rem;
@@ -173,6 +189,38 @@ export default {
         width: 2.1rem;
         height: auto;
         border-radius: 50%;
+      }
+    }
+    & .user-box {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width:  100%;
+      height: 100%;
+      background: transparent;
+      & .user-box-body {
+        position: fixed;
+        top: 4rem;
+        right: 7%;
+        background: white;
+        width: auto;
+        height: auto;
+        box-shadow: 1px 1px 5px 0px rgba(0,0,0,0.2);
+        & ul {
+          padding: .6rem 1.3rem;
+          & li {
+            padding: .9rem 0;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            user-select: none;
+            height: 2.6rem;
+            border-bottom: 1px solid rgb(232,232,232);
+          }
+          & li:hover {
+            border-bottom: 1px solid var(--color01);
+          }
+        }
       }
     }
   }
