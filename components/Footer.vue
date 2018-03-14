@@ -39,20 +39,21 @@
       <div class="trust">
         <img class="__img-lock" src="../assets/img/lock.svg">
         <div class="trust-text">
-          <h2>Compra 100% segura</h2>
+          <h2>Reserva 100% segura</h2>
           <h3>Seus dados protegidos</h3>
         </div>
       </div>
     </div>
 
-    <h3 class="copyright">Copyright &copy {{ new Date().getFullYear() }} Escarpas Trip. Todos os direitos reservados. CNPJ: 99.999.999/9999-99.</h3>
+    <h3 class="copyright">
+      Copyright &copy {{ new Date().getFullYear() }} Escarpas Trip. Todos os direitos reservados. CNPJ: 99.999.999/9999-99. Capitólio/MG - Brasil.
+    </h3>
 
   </div>
 </template>
 
 <script>
 export default {
-  
 }
 </script>
 
@@ -65,22 +66,22 @@ export default {
   margin-top: 4.3rem;
   width: 100%;
   height: 18rem;
-  /* border-top: 1px solid rgb(232,232,232); */
-  background: #EAEAEC;
+  border-top: 1px solid rgb(232,232,232);
+  /* background: #EAEAEC; */
   padding: 3.2rem 9%;
   & .__img {
     width: 8.6rem;
     height: auto;
     margin-right: 2.5rem;
     align-self: flex-start;
-    filter: invert(100%) brightness(60%);
+    filter: invert(100%) brightness(70%);
   }
   & .box {
     margin: 0 2rem;
     & .__title {
       font-size: 16px;
       padding-bottom: .5rem;
-      color: #747474;
+      color: #878787;
     }
     & .__subtitle {
       font-size: 15px;
@@ -93,13 +94,14 @@ export default {
         width: 2.2rem;
         height: auto;
         margin-right: .5rem;
-        filter: invert(100%) brightness(60%);
+        filter: invert(100%) brightness(70%);
       }
       & .trust-text {
         & h2 {
           font-size: 15px;
           font-weight: 700;
           line-height: 17px;
+          color: #878787;
         }
         & h3 {
           font-size: 13px;
@@ -126,16 +128,16 @@ export default {
         width: 1.6rem;
         height: auto;
         margin-right: 1.8rem;
-        filter: invert(100%) brightness(60%);
+        filter: invert(100%) brightness(70%);
       }
     }
   }
   & .copyright {
     position: absolute;
     text-align: center;
-    bottom: 1rem;
+    bottom: 1.1rem;
     left: 9%;
-    font-size: 13px;
+    font-size: 14px;
 
   }
 }

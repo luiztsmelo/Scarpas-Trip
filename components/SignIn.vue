@@ -82,25 +82,25 @@ export default {
     & .__title {
       font-size: 34px;
       text-align: center;
-      padding: 1.6rem 0;
+      padding: 1.3rem 0;
     }
     & .facebook-btn {
       width: 18rem;
-      margin: .4rem 0;
+      margin: .5rem 0;
       height: 3.1rem;
       text-align: start;
       padding-left: 50px;
     }
     & .google-btn {
       width: 18rem;
-      margin: .4rem 0;
+      margin: .5rem 0;
       height: 3.1rem;
       text-align: start;
       padding-left: 50px;
     }
     & .email-btn {
       width: 18rem;
-      margin: .4rem 0;
+      margin: .5rem 0;
       height: 3.1rem;
       text-align: start;
       padding-left: 50px;
