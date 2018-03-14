@@ -21,28 +21,27 @@
     </div>
 
     <div class="box" style="margin-left: 4rem">
+      <div class="follow">
+        <a href="https://www.instagram.com/escarpastrip/"><img class="__img-follow" src="../assets/img/instagram.svg"></a>
+        <a href="https://www.facebook.com/escarpastrip/"><img class="__img-follow" src="../assets/img/facebookb.svg"></a>
+        <a href=""><img class="__img-follow" src="../assets/img/pinterest.svg" style="transform: scale(.98)"></a>
+      </div>
+
+      <div class="imgs-payment">
+        <img class="__img-payment" src="../assets/img/mastercard.svg" style="transform: scale(.8)">
+        <img class="__img-payment" src="../assets/img/visa.svg">
+        <img class="__img-payment" src="../assets/img/hipercard.svg">
+        <img class="__img-payment" src="../assets/img/amex.svg" style="transform: scale(.5)">
+        <img class="__img-payment" src="../assets/img/elo.svg" style="transform: scale(1.18)">
+        <img class="__img-payment" src="../assets/img/boleto.png" style="transform: scale(.69)">
+      </div>
+
       <div class="trust">
         <img class="__img-lock" src="../assets/img/lock.svg">
         <div class="trust-text">
           <h2>Compra 100% segura</h2>
           <h3>Seus dados protegidos</h3>
         </div>
-      </div>
-
-      <div class="imgs-payment">
-        <img class="__img-payment" src="../assets/img/boleto.png" style="width: 2.1rem">
-        <img class="__img-payment" src="../assets/img/mastercard.svg" style="width: 2.3rem">
-        <img class="__img-payment" src="../assets/img/visa.svg">
-        <img class="__img-payment" src="../assets/img/hipercard.svg">
-        <img class="__img-payment" src="../assets/img/amex.svg" style="width: 1.5rem">
-        <img class="__img-payment" src="../assets/img/elo.svg" style="width: 3.4rem">
-      </div>
-
-      <div class="follow">
-        <a href="https://www.instagram.com/escarpastrip/"><img class="__img-follow" src="../assets/img/instagram.svg"></a>
-        <a href="https://www.facebook.com/escarpastrip/"><img class="__img-follow" src="../assets/img/facebookb.svg"></a>
-        <a href=""><img class="__img-follow" src="../assets/img/pinterest.svg"></a>
-        <a href="https://www.linkedin.com/company/escarpastrip/"><img class="__img-follow" src="../assets/img/linkedin.svg"></a>
       </div>
     </div>
 
@@ -70,16 +69,18 @@ export default {
   background: #EAEAEC;
   padding: 3.2rem 9%;
   & .__img {
-    width: 7.5rem;
+    width: 8.6rem;
     height: auto;
     margin-right: 2.5rem;
     align-self: flex-start;
+    filter: invert(100%) brightness(60%);
   }
   & .box {
     margin: 0 2rem;
     & .__title {
       font-size: 16px;
       padding-bottom: .5rem;
+      color: #747474;
     }
     & .__subtitle {
       font-size: 15px;
@@ -91,7 +92,8 @@ export default {
       & .__img-lock {
         width: 2.2rem;
         height: auto;
-        margin-right: .4rem;
+        margin-right: .5rem;
+        filter: invert(100%) brightness(60%);
       }
       & .trust-text {
         & h2 {
@@ -109,9 +111,10 @@ export default {
     & .imgs-payment {
       display: flex;
       align-items: center;
-      margin: .4rem 0 2.5rem 0;
+      margin: 1rem 0;
+      transform: translateX(-0.3rem);
       & .__img-payment {
-        width: 3rem;
+        width: 2.6rem;
         height: auto;
         margin-right: .6rem;
       }
@@ -120,9 +123,10 @@ export default {
       display: flex;
       align-items: center;
       & .__img-follow {
-        width: 1.8rem;
+        width: 1.6rem;
         height: auto;
         margin-right: 1.8rem;
+        filter: invert(100%) brightness(60%);
       }
     }
   }
