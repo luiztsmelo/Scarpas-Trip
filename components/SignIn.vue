@@ -3,9 +3,10 @@
     name="sign-in-modal"
     class="sign-in-modal"
     width="36%"
-    height="auto">
+    height="auto"
+    @closed="closedModal">
 
-    <img src="../assets/img/close-modal.svg" class="close-btn" @click="$modal.hide('sign-in-modal')" @closed="closedModal">
+    <img src="../assets/img/close-modal.svg" class="close-btn" @click="$modal.hide('sign-in-modal')">
 
     <div class="sign-in-body">
       <img class="__img" src="../static/brand.svg">
@@ -35,8 +36,7 @@ export default {
     facebookSignIn () {
       this.$store.dispatch('a_facebookSignIn')
     },
-    closedModal (event) {
-      console.log(event)
+    closedModal () {
       this.$store.state.clickedAskAcomod = false
     }
   },
@@ -93,22 +93,22 @@ export default {
     }
     & .facebook-btn {
       width: 18rem;
-      margin: .5rem 0;
-      height: 3rem;
+      margin: .6rem 0;
+      height: 2.9rem;
       text-align: start;
       padding-left: 50px;
     }
     & .google-btn {
       width: 18rem;
-      margin: .5rem 0;
-      height: 3rem;
+      margin: .6rem 0;
+      height: 2.9rem;
       text-align: start;
       padding-left: 50px;
     }
     & .email-btn {
       width: 18rem;
-      margin: .5rem 0;
-      height: 3rem;
+      margin: .6rem 0;
+      height: 2.9rem;
       text-align: start;
       padding-left: 50px;
     }

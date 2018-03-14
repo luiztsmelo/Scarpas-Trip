@@ -4,7 +4,8 @@
     class="ask-acomod-modal"
     width="75%"
     height="auto"
-    :scrollable="true">
+    :scrollable="true"
+    @closed="closedModal">
 
     <img src="../../assets/img/close-modal.svg" class="close-btn" @click="$modal.hide('ask-acomod-modal')">
 
@@ -56,6 +57,11 @@
 
 <script>
 export default {
+  methods: {
+    closedModal () {
+      this.$store.state.clickedAskAcomod = false
+    }
+  },
   computed: {
     acomod () {
       return this.$store.state.acomod
