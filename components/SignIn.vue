@@ -3,14 +3,14 @@
     name="sign-in-modal"
     class="sign-in-modal"
     width="36%"
-    height="88%">
+    height="auto">
 
-    <img src="../assets/img/close-modal.svg" class="close-btn" @click="$modal.hide('sign-in-modal')">
+    <img src="../assets/img/close-modal.svg" class="close-btn" @click="$modal.hide('sign-in-modal')" @closed="closedModal">
 
     <div class="sign-in-body">
       <img class="__img" src="../static/brand.svg">
 
-      <h1 class="__title">Antes, você precisa criar uma conta:</h1>
+      <h1 class="__title">{{ titleSignIn }}</h1>
 
       <button type="button" class="facebook-btn" @click="facebookSignIn()">Cadastrar com Facebook</button>
       <button type="button" class="google-btn" @click="googleSignIn()">Cadastrar com Google</button>
@@ -34,11 +34,18 @@ export default {
     },
     facebookSignIn () {
       this.$store.dispatch('a_facebookSignIn')
+    },
+    closedModal (event) {
+      console.log(event)
+      this.$store.state.clickedAskAcomod = false
     }
   },
   computed: {
     user () {
       return this.$store.state.user.email
+    },
+    titleSignIn () {
+      return this.$store.state.clickedAskAcomod === true ? 'Antes, você precisa criar uma conta:' : 'Entrar'
     }
   },
   watch: {
@@ -87,21 +94,21 @@ export default {
     & .facebook-btn {
       width: 18rem;
       margin: .5rem 0;
-      height: 3.1rem;
+      height: 3rem;
       text-align: start;
       padding-left: 50px;
     }
     & .google-btn {
       width: 18rem;
       margin: .5rem 0;
-      height: 3.1rem;
+      height: 3rem;
       text-align: start;
       padding-left: 50px;
     }
     & .email-btn {
       width: 18rem;
       margin: .5rem 0;
-      height: 3.1rem;
+      height: 3rem;
       text-align: start;
       padding-left: 50px;
     }

@@ -189,20 +189,20 @@ export default {
     background-size: cover;
     /* background-position: center; */
     & .chegada-partida-container {
-      background: rgba(0,0,0,.1);
+      background: rgba(0,0,0,0);
       & .__title {
         width: 100%;
         font-size: 46px;
         font-weight: 800;
         line-height: 70px;
-        padding: 0 8% 1.2rem 8%;
+        padding: 0 7% 1.2rem 7%;
         & span {
           font-size: 30px;
           font-weight: 400;
         }
       }
       & .chegada-partida-box {
-        margin: 0 8%;
+        margin: 0 7%;
         width: 27%;
         height: 3.2rem;
         border-bottom: 2px solid white;

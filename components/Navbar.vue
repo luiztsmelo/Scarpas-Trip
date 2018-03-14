@@ -22,11 +22,11 @@
           <nuxt-link to="/acomodacoes">
             <li class="__nav-item">Acomodações</li>
           </nuxt-link>
-          <nuxt-link to="/eventos">
-            <li class="__nav-item">Eventos</li>
-          </nuxt-link>
           <nuxt-link to="/passeios">
             <li class="__nav-item">Passeios</li>
+          </nuxt-link>
+          <nuxt-link to="/eventos">
+            <li class="__nav-item">Eventos</li>
           </nuxt-link>
           <nuxt-link to="/atracoes">
             <li class="__nav-item">Atrações</li>
@@ -34,9 +34,15 @@
           <nuxt-link to="/restaurantes">
             <li class="__nav-item">Restaurantes</li>
           </nuxt-link>
-          <nuxt-link to="/acomodacoes">
+          
+          <nuxt-link to="/acomodacoes" v-if="$store.state.user.email === null">
             <li class="__nav-item">Anunciar</li>
           </nuxt-link>
+
+          <li class="__sign-in" @click="$modal.show('sign-in-modal')" v-if="$store.state.user.email === null">Entrar</li>
+
+          <li><img class="__user-img" :src="$store.state.user.photoURL" :alt="$store.state.user.username" @click="signOut" v-if="$store.state.user.email !== null"></li>
+
         </nav>
 
       </div>
@@ -57,6 +63,9 @@ export default {
         window.history.back(1)
         this.$store.commit('m_menuIconAnime', false)
       }
+    },
+    signOut () {
+      this.$store.dispatch('a_signOut')
     }
   },
   computed: {
@@ -136,8 +145,9 @@ export default {
       display: inline-flex;
       align-items: stretch;
       transform: translateX(.7rem);
+      align-items: center;
       & a {
-        margin: 0 .7rem;
+        margin: 0 .6rem;
       }
       & a:hover {
         border-bottom: 1px solid var(--color01);
@@ -147,7 +157,22 @@ export default {
         font-weight: 600;
         user-select: none;
       }
-      & .__nav-item:hover {
+      & .__sign-in {
+        margin: 0 .6rem;
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: 600;
+        user-select: none;
+      }
+      & .__sign-in:hover {
+        border-bottom: 1px solid var(--color01);
+      }
+      & .__user-img {
+        cursor: pointer;
+        margin: 0 .8rem;
+        width: 2.1rem;
+        height: auto;
+        border-radius: 50%;
       }
     }
   }
@@ -164,7 +189,7 @@ export default {
 @media (min-width: 1024px) {
   .navbar {
     height: 4rem;
-    padding: 0 8%;
+    padding: 0 7%;
     & .navbar-body {
       & .brand {
         & .__brand-img {

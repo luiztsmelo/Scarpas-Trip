@@ -827,6 +827,17 @@ const store = () => new Vuex.Store({
         state.reservaAcomod.userID = user.uid
         state.atracaoData.email = user.email
       })
+    },
+    /*
+    ########## SIGN OUT ##########
+    */
+    a_signOut ({ state }) {
+      firebase.auth().signOut().then(() => {
+        state.user.userID = null
+        state.user.username = null
+        state.user.email = null
+        state.user.photoURL = null
+      })
     }
   }
 })

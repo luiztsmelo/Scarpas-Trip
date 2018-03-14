@@ -3,7 +3,8 @@
     name="ask-acomod-modal"
     class="ask-acomod-modal"
     width="75%"
-    height="88%">
+    height="auto"
+    :scrollable="true">
 
     <img src="../../assets/img/close-modal.svg" class="close-btn" @click="$modal.hide('ask-acomod-modal')">
 
@@ -92,6 +93,7 @@ export default {
     
     /* LEFT CONTAINER */
     & .left-container {
+      min-width: 44%;
       flex-basis: 44%;
       padding: 2.5rem 3rem 2.5rem 3rem;
       & .__title {
@@ -108,6 +110,7 @@ export default {
     /* RIGHT CONTAINER */
     & .right-container {
       flex-basis: 56%;
+      max-width: 56%;
       padding: 3rem;
       & .item-form {
         display: flex;
@@ -131,6 +134,8 @@ export default {
         }
         & textarea {
           width: 100%;
+          min-width: 100%;
+          max-width: 100%;
           font-size: 17px;
           font-weight: 400;
           line-height: 26px;
@@ -139,7 +144,6 @@ export default {
           padding: 1rem;
           border: 1px solid rgb(232,232,232);
           outline: none;
-          resize: none;
         }
       }
       & .btns {

@@ -426,13 +426,13 @@ export default {
     flex-flow: row;
     & .acomods-container {
       margin-top: 6.5rem;
-      width: 66.8%;
-      padding-left: 8%;
+      width: 67.3%;
+      padding-left: 7%;
       display: flex;
       flex-flow: row wrap;
       justify-content: space-between;
       & .card {
-        width: 48.6%;
+        width: 48.7%;
         min-height: 21rem;
         padding: 0;
         margin-bottom: 2rem;
@@ -480,10 +480,10 @@ export default {
     }
     & .filtrar-desktop {
       position: fixed;
-      width: 23.5%;
+      width: 24%;
       top: 4rem;
       bottom: 0;
-      right: 8%;
+      right: 7%;
       border-left: 1px solid rgb(232,232,232);
       border-right: 1px solid rgb(232,232,232);
       & .filtrar-desktop-form {

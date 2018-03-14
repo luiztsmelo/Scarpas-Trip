@@ -68,20 +68,20 @@ export default {
   height: 18rem;
   border-top: 1px solid rgb(232,232,232);
   /* background: #EAEAEC; */
-  padding: 3.2rem 9%;
+  padding: 3.2rem 7%;
   & .__img {
     width: 8.6rem;
     height: auto;
     margin-right: 2.5rem;
     align-self: flex-start;
-    filter: invert(100%) brightness(70%);
+    filter: invert(100%) brightness(80%);
   }
   & .box {
     margin: 0 2rem;
     & .__title {
       font-size: 16px;
       padding-bottom: .5rem;
-      color: #878787;
+      color: #9A9A9A;
     }
     & .__subtitle {
       font-size: 15px;
@@ -91,20 +91,20 @@ export default {
       display: flex;
       align-items: center;
       & .__img-lock {
-        width: 2.2rem;
+        width: 2.1rem;
         height: auto;
         margin-right: .5rem;
-        filter: invert(100%) brightness(70%);
+        filter: invert(100%) brightness(80%);
       }
       & .trust-text {
         & h2 {
-          font-size: 15px;
+          font-size: 14px;
           font-weight: 700;
           line-height: 17px;
-          color: #878787;
+          color: #9A9A9A;
         }
         & h3 {
-          font-size: 13px;
+          font-size: 12px;
           font-weight: 400;
           line-height: 17px;
         }
@@ -116,7 +116,7 @@ export default {
       margin: 1rem 0;
       transform: translateX(-0.3rem);
       & .__img-payment {
-        width: 2.6rem;
+        width: 2.5rem;
         height: auto;
         margin-right: .6rem;
       }
@@ -128,7 +128,7 @@ export default {
         width: 1.6rem;
         height: auto;
         margin-right: 1.8rem;
-        filter: invert(100%) brightness(70%);
+        filter: invert(100%) brightness(80%);
       }
     }
   }
@@ -136,8 +136,8 @@ export default {
     position: absolute;
     text-align: center;
     bottom: 1.1rem;
-    left: 9%;
-    font-size: 14px;
+    left: 7%;
+    font-size: 13px;
 
   }
 }

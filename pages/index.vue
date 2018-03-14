@@ -260,7 +260,7 @@ export default {
             font-size: 14px;
             font-weight: 600;
             padding-right: 3px;
-            color: rgb(132,132,132);
+            color: rgb(142,142,142);
           }
           & .__see-all-arrow {
             opacity: .6;
@@ -322,25 +322,26 @@ export default {
     & .home-body {
       margin-bottom: 0;
       & .category-container {
-        padding: 3.3rem 0;
+        padding-bottom: 8rem;
         & .title-row {
-          padding: 0 8% 1.5rem 8%;
+          padding: 0 7% 1.5rem 7%;
           & .__title {
             font-size: 28px;
             font-weight: 700;
           }
         }
         & .cards-container {
-          padding: 0 7.4%;
+          padding: 0 6.5%;
           & .card {
             margin: 1.3rem .8%;
             flex: 0 1 23.4%;
             & .__card-img {
+              margin-bottom: .3rem;
               border-radius: 3px;
             }
             & .__card-info {
               text-transform: uppercase;
-              font-size: 12px;
+              font-size: 11px;
               font-weight: 700;
             }
             & .__card-title {
