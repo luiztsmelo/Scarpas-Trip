@@ -65,23 +65,23 @@ export default {
   display: flex;
   margin-top: 4.3rem;
   width: 100%;
-  height: 18rem;
+  height: 19rem;
   border-top: 1px solid rgb(232,232,232);
   /* background: #EAEAEC; */
   padding: 3.2rem 7%;
   & .__img {
-    width: 8.6rem;
+    width: 6.6rem;
     height: auto;
     margin-right: 2.5rem;
     align-self: flex-start;
-    filter: invert(100%) brightness(80%);
+
   }
   & .box {
-    margin: 0 2rem;
+    margin: 0 2.2rem;
     & .__title {
       font-size: 16px;
       padding-bottom: .5rem;
-      color: #9A9A9A;
+
     }
     & .__subtitle {
       font-size: 15px;
@@ -94,14 +94,14 @@ export default {
         width: 2.1rem;
         height: auto;
         margin-right: .5rem;
-        filter: invert(100%) brightness(80%);
+
       }
       & .trust-text {
         & h2 {
           font-size: 14px;
           font-weight: 700;
           line-height: 17px;
-          color: #9A9A9A;
+
         }
         & h3 {
           font-size: 12px;
@@ -113,7 +113,7 @@ export default {
     & .imgs-payment {
       display: flex;
       align-items: center;
-      margin: 1rem 0;
+      margin: 1.2rem 0;
       transform: translateX(-0.3rem);
       & .__img-payment {
         width: 2.5rem;
@@ -128,7 +128,7 @@ export default {
         width: 1.6rem;
         height: auto;
         margin-right: 1.8rem;
-        filter: invert(100%) brightness(80%);
+
       }
     }
   }

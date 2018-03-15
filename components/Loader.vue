@@ -43,7 +43,7 @@ export default {
   background-repeat: no-repeat;
   background-size: cover;
   animation: spin 2.7s cubic-bezier(.28,1.91,.3,.39) infinite;
-  opacity: .5;
+  opacity: 1;
 }
 
 @keyframes spin { 

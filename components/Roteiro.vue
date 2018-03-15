@@ -111,7 +111,7 @@ export default {
   background-repeat: no-repeat;
   background-size: cover;
   & .chegada-partida-container {
-    background: rgba(0,0,0,.4);
+    background: rgba(0,0,0,.5);
     padding: 1rem 0;
     position: relative;
     display: flex;
@@ -189,7 +189,7 @@ export default {
     background-size: cover;
     background-position: center;
     & .chegada-partida-container {
-      background: rgba(0,0,0,.25);
+      background: rgba(0,0,0,.1);
       & .__title {
         width: 100%;
         font-size: 46px;
