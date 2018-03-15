@@ -109,11 +109,11 @@ input {
 /* ******* TEXT HIGHLIGHT COLOR ******* */
 ::-moz-selection { /* Firefox */
   color: white;
-  background: rgb(72, 72, 72);
+  background: rgb(102, 102, 102);
 }
 ::selection {
   color: white;
-  background: rgb(72, 72, 72);
+  background: rgb(102, 102, 102);
 }
 
 /* ******* SIGN IN BUTTONS ******* */
@@ -127,7 +127,7 @@ input {
   height: 2.5rem;
   border-radius: 5px;
   font-size: 15px;
-  font-weight: 500;
+  font-weight: 400;
   width: 50%;
 }
 
@@ -142,7 +142,7 @@ input {
   height: 2.5rem;
   border-radius: 5px;
   font-size: 15px;
-  font-weight: 500;
+  font-weight: 400;
   width: 50%;
 }
 
@@ -157,7 +157,7 @@ input {
   height: 2.5rem;
   border-radius: 5px;
   font-size: 15px;
-  font-weight: 500;
+  font-weight: 400;
   width: 50%;
 }
 

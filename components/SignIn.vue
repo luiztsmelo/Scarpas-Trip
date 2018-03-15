@@ -12,10 +12,11 @@
       <img class="__img" src="../static/brand.svg">
 
       <h1 class="__title">{{ titleSignIn }}</h1>
+      <h3 class="__subtitle">{{ subtitleSignIn }}</h3>
 
-      <button type="button" class="facebook-btn" @click="facebookSignIn()">Cadastrar com Facebook</button>
-      <button type="button" class="google-btn" @click="googleSignIn()">Cadastrar com Google</button>
-      <button type="button" class="email-btn" @click="emailSignIn()">Cadastrar com E-mail</button>
+      <button type="button" class="facebook-btn" @click="facebookSignIn()">{{ facebookText }}</button>
+      <button type="button" class="google-btn" @click="googleSignIn()">{{ googleText }}</button>
+      <button type="button" class="email-btn" @click="emailSignIn()">{{ emailText }}</button>
 
       <h3 class="if-have-account">Já possui uma conta? <span class="underline">Entrar</span></h3>
       
@@ -45,7 +46,19 @@ export default {
       return this.$store.state.user.email
     },
     titleSignIn () {
-      return this.$store.state.clickedAskAcomod === true ? 'Antes, você precisa criar uma conta:' : 'Entrar'
+      return this.$store.state.clickedAskAcomod === true ? 'Antes, você precisa se cadastrar' : 'Acessar sua conta'
+    },
+    subtitleSignIn () {
+      return this.$store.state.clickedAskAcomod === true ? '' : 'Acesse sua conta para acompanhar suas reservas ou gerenciar seus anúncios'
+    },
+    facebookText () {
+      return this.$store.state.clickedAskAcomod === true ? 'Cadastrar com Facebook' : 'Continuar com Facebook'
+    },
+    googleText () {
+      return this.$store.state.clickedAskAcomod === true ? 'Cadastrar com Google' : 'Continuar com Google'
+    },
+    emailText () {
+      return this.$store.state.clickedAskAcomod === true ? 'Cadastrar com E-mail' : 'Continuar com E-mail'
     }
   },
   watch: {
@@ -81,7 +94,7 @@ export default {
     display: flex;
     flex-flow: column;
     align-items: center;
-    padding: 3rem;
+    padding: 2.8rem 4rem 2.8rem 4rem;
     & .__img {
       width: 5.4rem;
       height: auto;
@@ -89,7 +102,13 @@ export default {
     & .__title {
       font-size: 34px;
       text-align: center;
-      padding: 1.3rem 0;
+      padding: 1.3rem 0 .3rem 0;
+    }
+    & .__subtitle {
+      font-size: 15px;
+      text-align: center;
+      padding: 0 0 1.1rem 0;
+      line-height: 22px;
     }
     & .facebook-btn {
       width: 18rem;

@@ -3,9 +3,9 @@
     
     <div class="chegada-partida-container">
       
-      <h1 class="__title">Tudo para sua viagem a Capitólio. <span>Crie um roteiro gratuito:</span></h1>
+      <h1 class="__title">Tudo para sua viagem a Capitólio <!-- <span>Crie um roteiro gratuito:</span> --></h1>
 
-      <div class="chegada-partida-box">
+      <!-- <div class="chegada-partida-box">
 
         <img class="__roteiro-calendar" src="../assets/img/roteiro-calendar.svg" style="transform:scale(0.97)translateY(-.06rem)">
 
@@ -27,7 +27,7 @@
           <img class="__roteiro-confirm" :style="onRoteiro" src="../assets/img/roteiro-confirm.svg" style="transform:translateY(.1rem)" @click="hideFoobar()">
         </nuxt-link>
 
-      </div>
+      </div> -->
   
     </div>
 
@@ -111,7 +111,7 @@ export default {
   background-repeat: no-repeat;
   background-size: cover;
   & .chegada-partida-container {
-    background: rgba(0,0,0,.6);
+    background: rgba(0,0,0,.4);
     padding: 1rem 0;
     position: relative;
     display: flex;
@@ -187,15 +187,14 @@ export default {
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
-    /* background-position: center; */
+    background-position: center;
     & .chegada-partida-container {
-      background: rgba(0,0,0,0);
+      background: rgba(0,0,0,.25);
       & .__title {
         width: 100%;
         font-size: 46px;
-        font-weight: 800;
-        line-height: 70px;
-        padding: 0 7% 1.2rem 7%;
+        font-weight: 700;
+        user-select: none;
         & span {
           font-size: 30px;
           font-weight: 400;

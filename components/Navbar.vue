@@ -39,7 +39,7 @@
             <li class="__nav-item">Anunciar</li>
           </nuxt-link>
 
-          <li class="__sign-in" @click="$modal.show('sign-in-modal')" v-if="$store.state.user.email === null">Entrar</li>
+          <li class="__sign-in" @click="$modal.show('sign-in-modal')" v-if="$store.state.user.email === null">Login</li>
 
           <li><img class="__user-img" :src="$store.state.user.photoURL" :alt="$store.state.user.username" @click="userBox = !userBox" v-if="$store.state.user.email !== null"></li>
 
@@ -163,21 +163,21 @@ export default {
       transform: translateX(.6rem);
       align-items: center;
       & a {
-        margin: 0 .6rem;
+        margin: 0 .7rem;
       }
       & a:hover {
         border-bottom: 1px solid var(--color01);
       }
       & .__nav-item {
         font-size: 14px;
-        font-weight: 600;
+        font-weight: 500;
         user-select: none;
       }
       & .__sign-in {
-        margin: 0 .6rem;
+        margin: 0 .7rem;
         cursor: pointer;
         font-size: 14px;
-        font-weight: 600;
+        font-weight: 500;
         user-select: none;
       }
       & .__sign-in:hover {
@@ -210,16 +210,11 @@ export default {
         & ul {
           padding: .6rem 1.3rem;
           & li {
-            padding: .9rem 0;
+            padding: .7rem 0;
             cursor: pointer;
             font-size: 14px;
-            font-weight: 600;
+            font-weight: 500;
             user-select: none;
-            height: 2.6rem;
-            border-bottom: 1px solid rgb(232,232,232);
-          }
-          & li:hover {
-            border-bottom: 1px solid var(--color01);
           }
         }
       }

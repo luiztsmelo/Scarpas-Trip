@@ -322,11 +322,11 @@ export default {
     & .home-body {
       margin-bottom: 0;
       & .category-container {
-        padding-bottom: 8rem;
+        padding-bottom: 7rem;
         & .title-row {
           padding: 0 7% 1.5rem 7%;
           & .__title {
-            font-size: 28px;
+            font-size: 29px;
             font-weight: 700;
           }
         }
