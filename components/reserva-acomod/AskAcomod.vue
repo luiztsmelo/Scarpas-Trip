@@ -7,7 +7,7 @@
     :scrollable="true"
     @closed="closedModal">
 
-    <img src="../../assets/img/close-modal.svg" class="close-btn" @click="$modal.hide('ask-acomod-modal')">
+    <img src="../../assets/img/close-modal.svg" style="cursor:pointer;position:absolute;top:1rem;right:1rem;width:1rem;height:auto" @click="$modal.hide('ask-acomod-modal')">
 
     <div class="ask-acomod-body">
 
@@ -83,15 +83,6 @@ export default {
 
 .ask-acomod-modal {
   z-index: 10000;
-
-  & .close-btn {
-    cursor: pointer;
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    width: 1rem;
-    height: auto;
-  }
 
   & .ask-acomod-body {
     display: flex;

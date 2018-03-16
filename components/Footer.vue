@@ -46,7 +46,7 @@
     </div>
 
     <h3 class="copyright">
-      Copyright &copy {{ new Date().getFullYear() }} Escarpas Trip. Todos os direitos reservados. CNPJ: 99.999.999/9999-99. Capitólio/MG - Brasil. Desenvolvido com amor por TMstudio.
+      Copyright &copy {{ new Date().getFullYear() }} Escarpas Trip. Todos os direitos reservados. CNPJ: 99.999.999/9999-99. Capitólio/MG - Brasil. Desenvolvido com ♥ por TMstudio.
     </h3>
 
   </div>

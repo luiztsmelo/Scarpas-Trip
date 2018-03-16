@@ -228,12 +228,12 @@
         <form class="reserva-desktop-form">
 
           <div class="valor-box">
-            <h1 class="__valor">R${{ acomod.valorDiariaNormal }}<span class="__valor-dia"> por noite</span></h1>
+            <h1 class="__valor">R${{ acomod.valorDiariaNormal.toLocaleString() }}<span class="__valor-dia"> por noite</span></h1>
           </div>
 
           <div class="item-form">
             <select v-model="$store.state.reservaAcomod.totalHospedes">
-              <option :value="n" v-for="n in totalHospedesArray">{{ n }} {{ n===1 ? 'hóspede' : 'hóspedes' }}</option>
+              <option :value="n" v-for="n in totalHospedesArray">{{ n }} {{ n=='1' ? 'hóspede' : 'hóspedes' }}</option>
             </select>
           </div>
 
@@ -272,14 +272,14 @@
             </v-date-picker>
           </div>
 
-          <div class="reserva-info" v-if="this.$store.state.reservaAcomod.periodoReserva !== null">
+          <div class="reserva-info" v-if="$store.state.reservaAcomod.periodoReserva !== null">
             
-            <div class="info-item">
-              <h3>R${{ acomod.valorDiariaNormal }} x {{ this.$store.state.reservaAcomod.daySpan }} noites</h3>
-              <h3 id="valor">R${{ acomod.valorDiariaNormal*this.$store.state.reservaAcomod.daySpan }}</h3>
+            <div class="reserva-info_item">
+              <h3>R${{ acomod.valorDiariaNormal.toLocaleString() }} x {{ $store.state.reservaAcomod.daySpan }} noites</h3>
+              <h3 id="valor">{{ valorNoitesTotal }}</h3>
             </div>
 
-            <div class="info-item" style="padding-bottom: .3rem">
+            <div class="reserva-info_item" style="padding-bottom: .3rem">
               <div style="display:flex;flex:row;align-items:center">
                 <h3>Taxa de serviço</h3>
                 <img 
@@ -292,7 +292,7 @@
               <h3>{{ serviceFeeTotal }}</h3>
             </div>
 
-            <div class="info-total" style="padding-top: .3rem">
+            <div class="reserva-info_item-total" style="padding-top: .3rem">
               <h3>Total</h3>
               <h3>{{ valorReservaTotal }}</h3>
             </div>
@@ -507,13 +507,13 @@ export default {
           this.datePickerVisibility = 'focus'
         })
       } else {
-        this.$modal.show('reserva-desktop')
+        this.$modal.show('reserva-desktop-modal')
       }
     },
     serviceFeeDialog () {
       this.$modal.show('dialog', {
         title: 'Taxa de Serviço',
-        text: 'Taxa para manter a plataforma e garantir a total segurança em sua viagem, como reembolso em caso de problemas com sua reserva.',
+        text: 'Taxa de ' + this.$store.state.serviceFeeAcomod * 100 + '% cobrada sobre o valor total da estadia, a fim de garantir a total segurança em sua viagem, como reembolso em caso de problemas com sua reserva, e ajudar a manter esta plataforma.',
         buttons: [
           {
             title: 'Fechar'
@@ -582,11 +582,17 @@ export default {
     this.heightImageBox = heightImageBox
   },
   computed: {
+    valorNoitesTotal () {
+      let valorNoitesTotal = this.acomod.valorDiariaNormal * this.$store.state.reservaAcomod.daySpan
+      return 'R$' + valorNoitesTotal.toLocaleString()
+    },
     serviceFeeTotal () {
-      return 'R$' + Math.trunc(this.acomod.valorDiariaNormal * this.$store.state.reservaAcomod.daySpan * this.$store.state.serviceFeeAcomod)
+      let serviceFeeTotal = Math.trunc(this.acomod.valorDiariaNormal * this.$store.state.reservaAcomod.daySpan * this.$store.state.serviceFeeAcomod)
+      return 'R$' + serviceFeeTotal.toLocaleString()
     },
     valorReservaTotal () {
-      return 'R$' + Math.trunc((this.acomod.valorDiariaNormal * this.$store.state.reservaAcomod.daySpan) + this.acomod.valorDiariaNormal * this.$store.state.reservaAcomod.daySpan * this.$store.state.serviceFeeAcomod)
+      let valorReservaTotal = Math.trunc((this.acomod.valorDiariaNormal * this.$store.state.reservaAcomod.daySpan) + this.acomod.valorDiariaNormal * this.$store.state.reservaAcomod.daySpan * this.$store.state.serviceFeeAcomod)
+      return 'R$' + valorReservaTotal.toLocaleString()
     },
     totalHospedesArray () {
       return Array.from({length: this.acomod.totalHospedes}, (v, k) => k+1)
@@ -684,6 +690,7 @@ export default {
   },
   beforeRouteEnter (to, from, next) {
     next(vm => {
+      vm.$modal.hide('reserva-desktop-modal') /* Prevenir bug */
       if (vm.$store.state.isMobile === false) {
         vm.$store.commit('m_showNavbar', true)
       } else {
@@ -1036,7 +1043,7 @@ export default {
           }
           & .reserva-info {
             margin-top: .8rem;
-            & .info-item {
+            & .reserva-info_item {
               display: flex;
               justify-content: space-between;
               align-items: center;
@@ -1044,7 +1051,7 @@ export default {
                 font-size: 15px;
               }
             }
-            & .info-total {
+            & .reserva-info_item-total {
               display: flex;
               justify-content: space-between;
               border-top: 1px solid rgb(232,232,232);

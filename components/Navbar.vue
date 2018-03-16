@@ -48,9 +48,10 @@
         <div class="user-box" v-show="userBox === true" @click="userBox = !userBox">
           <div class="user-box-body">
             <ul>
-              <li>Anunciar</li>
-              <li>Gerenciar anúncios</li>
               <li>Editar perfil</li>
+              <li>Anunciar</li>
+              <li>Meus anúncios</li>
+              <li>Minhas reservas</li>
               <li @click="signOut()">Sair</li>
             </ul>
           </div>

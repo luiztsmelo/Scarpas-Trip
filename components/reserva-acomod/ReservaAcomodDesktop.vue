@@ -1,19 +1,141 @@
 <template>
   <modal
-    name="reserva-desktop"
-    class="reserva-desktop"
-    width="50%"
-    height="70%"
-    >
-    Reserva
+    name="reserva-desktop-modal"
+    class="reserva-desktop-modal"
+    width="74%"
+    height="auto">
+
+    <img src="../../assets/img/close-modal.svg" style="cursor:pointer;position:absolute;top:1rem;right:1rem;width:1rem;height:auto" @click="$modal.hide('reserva-desktop-modal')">
+
+
+    <!-- ******* HEADER PROGRESS ******* -->
+    <div class="header-progress" v-if="$store.state.user.email === null">
+      <h3 class="__item-progress" style="font-weight:700">1. Revisar detalhes</h3>
+      <img src="../../assets/img/arrow-right.svg" class="__arrow-right">
+      <h3 class="__item-progress">2. Diga um oi para Tarcísio</h3>
+      <img src="../../assets/img/arrow-right.svg" class="__arrow-right">
+      <h3 class="__item-progress">3. Pagamento e Confirmação</h3>
+    </div>
+
+    <div class="header-progress" v-else>
+      <h3 class="__item-progress" style="font-weight:700">1. Revisar detalhes</h3>
+      <img src="../../assets/img/arrow-right.svg" class="__arrow-right">
+      <h3 class="__item-progress">2. Diga um oi para Tarcísio</h3>
+      <img src="../../assets/img/arrow-right.svg" class="__arrow-right">
+      <h3 class="__item-progress">3. Identificação</h3>
+      <img src="../../assets/img/arrow-right.svg" class="__arrow-right">
+      <h3 class="__item-progress">4. Pagamento e Confirmação</h3>
+    </div>
+    <!-- ******* HEADER PROGRESS ******* -->
+
+
+    <!-- ******* ETAPA 1 ******* -->
+    <div class="etapa-1">
+
+      <h1 class="__title">Revisar Detalhes da Viagem</h1>
+
+      <div class="container">
+
+        <!-- Left Container -->
+        <div class="left-container">
+          <h3>Testando com um texto aqui</h3>
+          
+        </div><!-- Left Container -->
+
+        <!-- Right Container -->
+        <div class="right-container">
+          <div class="detalhes-reserva-header">
+            <h1 class="__acomod-title">{{ acomod.title }}</h1>
+            <progressive-img class="__acomod-img" :src="image1H(acomod)" :placeholder="acomod.imageL1" :aspect-ratio="0.66"/>
+          </div>
+
+          <div class="detalhes-reserva-data">
+            <div class="detalhes-reserva-data-item">
+              <img src="../../assets/img/guest.svg" class="__img">
+              <h3 class="__text">{{ $store.state.reservaAcomod.totalHospedes == '1'? $store.state.reservaAcomod.totalHospedes + ' hóspede' : $store.state.reservaAcomod.totalHospedes + ' hóspedes' }}</h3>
+            </div>
+            <div class="detalhes-reserva-data-item">
+              <img src="../../assets/img/calendar.svg" class="__img" style="transform: scale(.86)">
+              <h3 class="__text">03 Mai - 07 Mai</h3>
+            </div>
+          </div>
+
+          <div class="detalhes-reserva-valor">
+            <div class="detalhes-reserva-valor_item">
+              <h3>R${{ acomod.valorDiariaNormal.toLocaleString() }} x {{ $store.state.reservaAcomod.daySpan }} noites</h3>
+              <h3 id="valor">{{ valorNoitesTotal }}</h3>
+            </div>
+
+            <div class="detalhes-reserva-valor_item" style="padding-bottom: 1rem">
+              <div style="display:flex;flex:row;align-items:center">
+                <h3>Taxa de serviço</h3>
+                <img 
+                  src="../../assets/img/info.svg"
+                  style="width:.95rem;height:auto;margin-left:.3rem;cursor:pointer"
+                  @click="serviceFeeDialog"
+                >
+                <v-dialog id="service-fee" style="z-index:10000"/>
+              </div>
+              <h3>{{ serviceFeeTotal }}</h3>
+            </div>
+
+            <div class="detalhes-reserva-valor_item-total" style="padding-top: 1rem">
+              <h3>Total</h3>
+              <h3>{{ valorReservaTotal }}</h3>
+            </div>
+          </div>
+          
+        </div>
+      </div><!-- Right Container -->
+
+      <button class="__next-btn">Continuar</button>
+      
+    </div><!-- ******* ETAPA 1 ******* -->
+
+
+
   </modal>
 </template>
 
 <script>
+import supportsWebP from 'supports-webp'
+
 export default {
+  methods: {
+    image1H (acomod) {
+      if (supportsWebP) {
+        return acomod.imageH1W
+      } else {
+        return acomod.imageH1J
+      }
+    },
+    serviceFeeDialog () {
+      this.$modal.show('dialog', {
+        title: 'Taxa de Serviço',
+        text: 'Taxa de ' + this.$store.state.serviceFeeAcomod * 100 + '% cobrada sobre o valor total da estadia, a fim de garantir a total segurança em sua viagem, como reembolso em caso de problemas com sua reserva, e ajudar a manter esta plataforma.',
+        buttons: [
+          {
+            title: 'Fechar'
+          }
+      ]
+      })
+    }
+  },
   computed: {
     acomod () {
       return this.$store.state.acomod
+    },
+    valorNoitesTotal () {
+      let valorNoitesTotal = this.acomod.valorDiariaNormal * this.$store.state.reservaAcomod.daySpan
+      return 'R$' + valorNoitesTotal.toLocaleString()
+    },
+    serviceFeeTotal () {
+      let serviceFeeTotal = Math.trunc(this.acomod.valorDiariaNormal * this.$store.state.reservaAcomod.daySpan * this.$store.state.serviceFeeAcomod)
+      return 'R$' + serviceFeeTotal.toLocaleString()
+    },
+    valorReservaTotal () {
+      let valorReservaTotal = Math.trunc((this.acomod.valorDiariaNormal * this.$store.state.reservaAcomod.daySpan) + this.acomod.valorDiariaNormal * this.$store.state.reservaAcomod.daySpan * this.$store.state.serviceFeeAcomod)
+      return 'R$' + valorReservaTotal.toLocaleString()
     }
   },
 }
@@ -22,14 +144,116 @@ export default {
 <style scoped>
 @import url('../../assets/css/main.css');
 
-.v--modal {
-  border-radius: 5px;
-}
 
-.reserva-desktop {
+.reserva-desktop-modal {
   z-index: 10000;
-  
+
+  /* ******* HEADER PROGRESS ******* */
+  & .header-progress {
+    display: flex;
+    align-items: center;
+    margin: 0 3.5rem;
+
+    & .__item-progress {
+      padding: 1.7rem 0 1rem 0;
+      font-size: 15px;
+      font-weight: 400;
+    }
+    & .__arrow-right {
+      padding: 1.7rem 0 1rem 0;
+      width: .9rem; 
+      height: auto;
+      margin: 0 2rem;
+    }
+  }
+
+  /* ******* ETAPA 1 ******* */
+  & .etapa-1 {
+    margin: 1rem 3.5rem 4.3rem 3.5rem;
+    height: 100%;
+    & .__title {
+      font-size: 33px;
+    }
+    & .container {
+      margin: 1.9rem 0 1.3rem 0;
+      display: flex;
+
+      /* Left Container */
+      & .left-container {
+        flex-basis: 60%;
+        border-right: 1px solid rgb(232,232,232);
+        padding-right: 1.5rem;
+        
+      }
+
+      /* Right Container */
+      & .right-container {
+        flex-basis: 40%;
+        padding-left: 1.5rem;
+        & .detalhes-reserva-header {
+          display: flex;
+          align-items: center;
+          padding-bottom: 1.2rem;
+          border-bottom: 1px solid rgb(232,232,232);
+          & .__acomod-img {
+            width: 12rem;
+            height: auto;
+            margin-left: 1rem;
+          }
+          & .__acomod-title {
+            font-size: 16px;
+          }
+        }
+        & .detalhes-reserva-data {
+          padding: .8rem 0;
+          border-bottom: 1px solid rgb(232,232,232);
+          & .detalhes-reserva-data-item {
+            display: flex;
+            align-items: center;
+            padding: .3rem 0;
+            & .__img {
+              margin-right: .7rem;
+              width: 1.8rem;
+              height: auto;
+            }
+            & .__text {
+              font-size: 16px;
+            }
+          }
+        }
+        & .detalhes-reserva-valor {
+          padding: .8rem 0;
+          & .detalhes-reserva-valor_item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: .3rem 0;
+          }
+          & .detalhes-reserva-valor_item-total {
+            display: flex;
+            justify-content: space-between;
+            border-top: 1px solid rgb(232,232,232);
+            & h3 {
+              font-size: 18px;
+              font-weight: 500;
+            }
+          }
+        }
+      }
+    }
+  }
 }
 
+.__next-btn {
+  float: right;
+  padding: 0 2.1rem;
+  font-size: 17px;
+  font-weight: 600;
+  background: #00D8C7;
+  color: white;
+  border-radius: 5px;
+  height: 2.9rem;
+  line-height: 2.8rem;
+}
 
 </style>

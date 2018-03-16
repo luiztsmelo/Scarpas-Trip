@@ -40,7 +40,7 @@ const store = () => new Vuex.Store({
     /*
     -------------------- CONFIGS --------------------
     */
-    serviceFeeAcomod: 0.025, /* 2,5% */
+    serviceFeeAcomod: 0.03, /* 3% */
     /*
     -------------------- ANÚNCIOS --------------------
     */
