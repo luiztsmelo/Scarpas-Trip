@@ -9,28 +9,42 @@
 
 
     <!-- ******* HEADER PROGRESS ******* -->
-    <div class="header-progress" v-if="$store.state.user.email === null">
-      <h3 class="__item-progress" style="font-weight:700">1. Revisar detalhes</h3>
+    <div class="header-progress" v-if="$store.state.user.email !== null">
+
+      <h3 class="__item-progress" :style="etapaProgressed1" @click="backEtapa1">1. Revisar detalhes</h3>
+      
       <img src="../../assets/img/arrow-right.svg" class="__arrow-right">
-      <h3 class="__item-progress">2. Diga um oi para Tarcísio</h3>
+
+      <h3 class="__item-progress" :style="etapaProgressed2" @click="backEtapa2">2. Diga um oi para Tarcísio</h3>
+
       <img src="../../assets/img/arrow-right.svg" class="__arrow-right">
+
       <h3 class="__item-progress">3. Pagamento e Confirmação</h3>
+
     </div>
 
     <div class="header-progress" v-else>
-      <h3 class="__item-progress" style="font-weight:700">1. Revisar detalhes</h3>
+
+      <h3 class="__item-progress" :style="etapaProgressed1" @click="backEtapa1">1. Revisar detalhes</h3>
+
       <img src="../../assets/img/arrow-right.svg" class="__arrow-right">
-      <h3 class="__item-progress">2. Diga um oi para Tarcísio</h3>
+
+      <h3 class="__item-progress" :style="etapaProgressed2" @click="backEtapa2">2. Mensagem</h3>
+
       <img src="../../assets/img/arrow-right.svg" class="__arrow-right">
+
       <h3 class="__item-progress">3. Identificação</h3>
+
       <img src="../../assets/img/arrow-right.svg" class="__arrow-right">
+
       <h3 class="__item-progress">4. Pagamento e Confirmação</h3>
+
     </div>
     <!-- ******* HEADER PROGRESS ******* -->
 
 
     <!-- ******* ETAPA 1 ******* -->
-    <div class="etapa-1">
+    <div class="etapa-1" v-if="$store.state.reservaAcomodDesktop1 === true">
 
       <h1 class="__title">Revisar Detalhes da Viagem</h1>
 
@@ -50,13 +64,13 @@
           </div>
 
           <div class="detalhes-reserva-data">
-            <div class="detalhes-reserva-data-item">
+            <div class="detalhes-reserva-data_item">
               <img src="../../assets/img/guest.svg" class="__img">
-              <h3 class="__text">{{ $store.state.reservaAcomod.totalHospedes == '1'? $store.state.reservaAcomod.totalHospedes + ' hóspede' : $store.state.reservaAcomod.totalHospedes + ' hóspedes' }}</h3>
+              <h3>{{ $store.state.reservaAcomod.totalHospedes == '1'? $store.state.reservaAcomod.totalHospedes + ' hóspede' : $store.state.reservaAcomod.totalHospedes + ' hóspedes' }}</h3>
             </div>
-            <div class="detalhes-reserva-data-item">
+            <div class="detalhes-reserva-data_item">
               <img src="../../assets/img/calendar.svg" class="__img" style="transform: scale(.86)">
-              <h3 class="__text">03 Mai - 07 Mai</h3>
+              <h3>03 Mai - 07 Mai</h3>
             </div>
           </div>
 
@@ -88,9 +102,24 @@
         </div>
       </div><!-- Right Container -->
 
-      <button class="__next-btn">Continuar</button>
+      <button class="__next-btn" type="button" @click="nextBtn1()">Continuar</button>
       
     </div><!-- ******* ETAPA 1 ******* -->
+
+
+    <!-- ******* ETAPA 2 ******* -->
+    <div class="etapa-2" v-if="$store.state.reservaAcomodDesktop2 === true">
+
+      <h1 class="__title">Diga um oi para {{ firstName }}</h1>
+
+      <div class="container">
+
+
+      </div>
+
+      <button class="__next-btn" type="button" @click="nextBtn2()">Continuar</button>
+      
+    </div><!-- ******* ETAPA 2 ******* -->
 
 
 
@@ -112,18 +141,46 @@ export default {
     serviceFeeDialog () {
       this.$modal.show('dialog', {
         title: 'Taxa de Serviço',
-        text: 'Taxa de ' + this.$store.state.serviceFeeAcomod * 100 + '% cobrada sobre o valor total da estadia, a fim de garantir a total segurança em sua viagem, como reembolso em caso de problemas com sua reserva, e ajudar a manter esta plataforma.',
+        text: 'Taxa de ' + this.$store.state.serviceFeeAcomod * 100 + '% cobrada com o intuito de garantir suporte e total segurança na sua reserva, caso algum problema aconteça.',
         buttons: [
           {
             title: 'Fechar'
           }
       ]
       })
+    },
+    nextBtn1 () {
+      this.$store.state.etapaReserva2ok = true, this.$store.commit('m_reservaAcomodDesktop1', false), this.$store.commit('m_reservaAcomodDesktop2', true)
+    },
+    backEtapa1 () {
+      if (this.$store.state.etapaReserva2ok === true) {
+        this.$store.commit('m_reservaAcomodDesktop1', true), this.$store.commit('m_reservaAcomodDesktop2', false)
+      }
+    },
+    backEtapa2 () {
+      if (this.$store.state.etapaReserva2ok === true) {
+        this.$store.commit('m_reservaAcomodDesktop1', false), this.$store.commit('m_reservaAcomodDesktop2', true)
+      }
     }
   },
   computed: {
     acomod () {
       return this.$store.state.acomod
+    },
+    firstName () {
+      let fullName = this.acomod.proprietario.split(' ')
+      let firstName = fullName[0]
+      return firstName
+    },
+    etapaProgressed1 () {
+      if (this.$store.state.etapaReserva1ok === true) {
+        return 'font-weight: 700'
+      }
+    },
+    etapaProgressed2 () {
+      if (this.$store.state.etapaReserva2ok === true) {
+        return 'font-weight: 700'
+      }
     },
     valorNoitesTotal () {
       let valorNoitesTotal = this.acomod.valorDiariaNormal * this.$store.state.reservaAcomod.daySpan
@@ -155,21 +212,23 @@ export default {
     margin: 0 3.5rem;
 
     & .__item-progress {
+      cursor: pointer;
+      user-select: none;
       padding: 1.7rem 0 1rem 0;
-      font-size: 15px;
+      font-size: 14px;
       font-weight: 400;
     }
     & .__arrow-right {
       padding: 1.7rem 0 1rem 0;
-      width: .9rem; 
+      width: .8rem; 
       height: auto;
-      margin: 0 2rem;
+      margin: 0 1.5rem;
     }
   }
 
   /* ******* ETAPA 1 ******* */
   & .etapa-1 {
-    margin: 1rem 3.5rem 4.3rem 3.5rem;
+    margin: .7rem 3.5rem 4.5rem 3.5rem;
     height: 100%;
     & .__title {
       font-size: 33px;
@@ -177,6 +236,7 @@ export default {
     & .container {
       margin: 1.9rem 0 1.3rem 0;
       display: flex;
+      height: 345px;
 
       /* Left Container */
       & .left-container {
@@ -196,7 +256,7 @@ export default {
           padding-bottom: 1.2rem;
           border-bottom: 1px solid rgb(232,232,232);
           & .__acomod-img {
-            width: 12rem;
+            width: 11rem;
             height: auto;
             margin-left: 1rem;
           }
@@ -207,7 +267,7 @@ export default {
         & .detalhes-reserva-data {
           padding: .8rem 0;
           border-bottom: 1px solid rgb(232,232,232);
-          & .detalhes-reserva-data-item {
+          & .detalhes-reserva-data_item {
             display: flex;
             align-items: center;
             padding: .3rem 0;
@@ -215,9 +275,6 @@ export default {
               margin-right: .7rem;
               width: 1.8rem;
               height: auto;
-            }
-            & .__text {
-              font-size: 16px;
             }
           }
         }
@@ -227,19 +284,33 @@ export default {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: .3rem 0;
+            padding: .25rem 0;
           }
           & .detalhes-reserva-valor_item-total {
             display: flex;
             justify-content: space-between;
             border-top: 1px solid rgb(232,232,232);
             & h3 {
-              font-size: 18px;
+              font-size: 17px;
               font-weight: 500;
             }
           }
         }
       }
+    }
+  }
+
+  /* ******* ETAPA 2 ******* */
+  & .etapa-2 {
+    margin: .7rem 3.5rem 4.5rem 3.5rem;
+    height: 100%;
+    & .__title {
+      font-size: 33px;
+    }
+    & .container {
+      margin: 1.9rem 0 1.3rem 0;
+      display: flex;
+      height: 345px;
     }
   }
 }

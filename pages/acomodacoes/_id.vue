@@ -299,7 +299,7 @@
 
           </div>
 
-          <button class="__reserva-desktop-btn" type="button" @click="openReservaModal">Reservar Estadia</button>
+          <button class="__reserva-desktop-btn" type="button" @click="openReservaModal">Reservar</button>
           <reserva-acomod-desktop/>
 
           <h4 class="__info">Não se preocupe, você ainda não será cobrado.</h4>
@@ -317,7 +317,7 @@
     <div class="reserva">
       <div class="reserva-body">
         <h3 class="__reserva-valor">R${{ acomod.valorDiariaNormal }}<span class="__reserva-valor-pessoa">/noite</span></h3>
-        <button class="__reserva-btn" @click="$store.commit('m_showReservaAcomod', true), hashReserva()">Reservar Estadia</button>
+        <button class="__reserva-btn" @click="$store.commit('m_showReservaAcomod', true), hashReserva()">Reservar</button>
       </div>
     </div>
     <reserva-acomod/><!-- ####### RESERVA ####### -->
@@ -423,7 +423,7 @@ export default {
         },
         dayContent: {
           fontWeight: '400',
-          fontSize: '16px'
+          fontSize: '15px'
         },
         dayCellNotInMonth: {
           opacity: 0
@@ -513,7 +513,7 @@ export default {
     serviceFeeDialog () {
       this.$modal.show('dialog', {
         title: 'Taxa de Serviço',
-        text: 'Taxa de ' + this.$store.state.serviceFeeAcomod * 100 + '% cobrada sobre o valor total da estadia, a fim de garantir a total segurança em sua viagem, como reembolso em caso de problemas com sua reserva, e ajudar a manter esta plataforma.',
+        text: 'Taxa de ' + this.$store.state.serviceFeeAcomod * 100 + '% cobrada com o intuito de garantir suporte e total segurança na sua reserva, caso algum problema aconteça.',
         buttons: [
           {
             title: 'Fechar'
@@ -989,10 +989,10 @@ export default {
             align-items: flex-end;
             padding-bottom: 1.2rem;
             & .__valor {
-              font-size: 35px;
+              font-size: 34px;
               font-weight: 400;
               & .__valor-dia {
-                font-size: 17px;
+                font-size: 16px;
                 font-weight: 400;
               }
             }
@@ -1124,7 +1124,7 @@ export default {
             align-items: center;
             margin-top: .8rem;
             & .__img-caracteristica {
-              width: 2.3rem;
+              width: 2.2rem;
               height: auto;
               margin-bottom: .7rem;
             }
@@ -1145,7 +1145,7 @@ export default {
           height: 4rem;
           justify-content: space-between;
           & .__img-comodidade {
-            width: 2.4rem;
+            width: 2.2rem;
             height: auto;
             margin: 0;
           }

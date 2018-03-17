@@ -163,8 +163,8 @@ input {
 
 @media (min-width: 1024px) {
   h3 {
-    font-size: 17px;
-    line-height: 30px;
+    font-size: 16px;
+    line-height: 29px;
   }
 }
 
@@ -176,11 +176,14 @@ input {
 }
 .dialog-c-title {
   font-size: 17px !important;
+  font-weight: 600 !important;
 }
 .dialog-c-text {
-  line-height: 25px !important;
+  font-size: 15px !important;
+  line-height: 26px !important;
   padding-bottom: .4rem !important;
 }
 .vue-dialog-button {
   font-size: 14px !important;
+  font-weight: 500 !important;
 }

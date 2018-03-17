@@ -114,9 +114,9 @@ export default {
         flex-flow: column;
         margin: 1rem 0 1.8rem 0;
         & label {
-          padding-bottom: .6rem;
+          padding-bottom: .7rem;
           font-weight: 700;
-          font-size: 16px;
+          font-size: 15px;
         }
         & input {
           position: relative;
