@@ -700,6 +700,7 @@ export default {
     })
   },
   beforeRouteLeave (to, from, next) {
+    this.$store.dispatch('a_resetReservaAcomodDesktop')/* Resetar dados reservaAcomod p/ evitar bugs */
     if (this.$store.state.showNavbar === false && this.$store.state.showFoobar === false) {
       this.$store.commit('m_showNavbar', true)
       this.$store.commit('m_showFoobar', true)

@@ -33,7 +33,8 @@ const store = () => new Vuex.Store({
     */
     user: {
       userID: null,
-      username: null,
+      firstName: null,
+      fullName: null,
       email: null,
       photoURL: null
     },
@@ -111,7 +112,7 @@ const store = () => new Vuex.Store({
       imageH3J: null,
       imageH3W: null
     },
-    reservaAcomod: {
+    reservaAcomod: {/* Atualizar Action */
       totalHospedes: '1',
       periodoReserva: null,
       daySpan: null,
@@ -712,6 +713,26 @@ const store = () => new Vuex.Store({
         commit('m_loader', false)
       })
     },
+    a_resetReservaAcomodDesktop ({ state }) {
+      state.reservaAcomod = {
+        totalHospedes: '1',
+        periodoReserva: null,
+        daySpan: null,
+        userID: null,
+        reservante: null,
+        email: null,
+        photoURL: null,
+        celular: null
+      }
+      state.reservaAcomodDesktop1 = true
+      state.reservaAcomodDesktop2 = false
+      state.reservaAcomodDesktop3 = false
+      state.reservaAcomodDesktop4 = false
+      state.etapaReserva1ok = true
+      state.etapaReserva2ok = false
+      state.etapaReserva3ok = false
+      state.etapaReserva4ok = false
+    },
     /*
     ########## Eventos ##########
     */
@@ -827,9 +848,10 @@ const store = () => new Vuex.Store({
     /*
     ########## AUTH STATE OBSERVER ##########
     */
-    a_authStateObserver ({ commit, state }) {
+    a_authStateObserver ({ dispatch, state }) {
       firebase.auth().onAuthStateChanged(user => {
-        state.user.username = user.displayName
+        state.user.firstName = user.displayName.split(' ')[0]
+        state.user.fullName = user.displayName
         state.user.userID = user.uid
         state.user.email = user.email
         state.user.photoURL = user.photoURL
@@ -846,6 +868,32 @@ const store = () => new Vuex.Store({
         state.reservaAcomod.photoURL = user.photoURL
         state.reservaAcomod.userID = user.uid
         state.atracaoData.email = user.email
+        dispatch('a_setUser')
+      })
+    },
+    /*
+    ########## SET USER ##########
+    */
+    a_setUser ({ state }) {
+      /* Chechar se usuário já existe */
+      firebase.database().ref('users/' + state.user.userID).once('value', snapshot => {
+        const userID = snapshot.val()
+        if (!userID) { /* Se não existir: */
+          /* 1) Criar usuário no Firebase */
+          firebase.database().ref('users/' + state.user.userID).set(state.user)
+          /* 2) Criar usuário no Airtable */
+          .then(() => {
+            this.$axios.$post('https://api.airtable.com/v0/app2VZONmWdcr8ybJ/Geral?api_key=keyoOJ1ERQwpa2EIg', {
+              'fields': {
+                'userID': state.user.userID,
+                'firstName': state.user.firstName,
+                'fullName': state.user.fullName,
+                'email': state.user.email,
+                'photoURL': state.user.photoURL
+              }
+            })
+          })
+        }
       })
     },
     /*
@@ -854,7 +902,8 @@ const store = () => new Vuex.Store({
     a_signOut ({ state }) {
       firebase.auth().signOut().then(() => {
         state.user.userID = null
-        state.user.username = null
+        state.user.firstName = null
+        state.user.fullName = null
         state.user.email = null
         state.user.photoURL = null
       })

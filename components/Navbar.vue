@@ -41,7 +41,7 @@
 
           <li class="__sign-in" @click="$modal.show('sign-in-modal')" v-if="$store.state.user.email === null">Login</li>
 
-          <li><img class="__user-img" :src="$store.state.user.photoURL" :alt="$store.state.user.username" @click="userBox = !userBox" v-if="$store.state.user.email !== null"></li>
+          <li><img class="__user-img" :src="$store.state.user.photoURL" :alt="$store.state.user.fullName" @click="userBox = !userBox" v-if="$store.state.user.email !== null"></li>
 
         </nav>
 
@@ -164,21 +164,21 @@ export default {
       transform: translateX(.6rem);
       align-items: center;
       & a {
-        margin: 0 .7rem;
+        margin: 0 .8rem;
       }
       & a:hover {
         border-bottom: 1px solid var(--color01);
       }
       & .__nav-item {
         font-size: 14px;
-        font-weight: 500;
+        font-weight: 600;
         user-select: none;
       }
       & .__sign-in {
-        margin: 0 .7rem;
+        margin: 0 .8rem;
         cursor: pointer;
         font-size: 14px;
-        font-weight: 500;
+        font-weight: 600;
         user-select: none;
       }
       & .__sign-in:hover {

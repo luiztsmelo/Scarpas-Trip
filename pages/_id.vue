@@ -10,7 +10,7 @@
 
     <div class="user-box">
       <div class="welcome">
-        <h1 class="__username">Olá, {{ firstName }}</h1>
+        <h1 class="__username">Olá, {{ user.firstName }}</h1>
         <h3 class="__edit">Editar perfil</h3>
       </div>
       <img class="__img" :src="user.photoURL">
@@ -84,11 +84,6 @@ export default {
   computed: {
     user () {
       return this.$store.state.user
-    },
-    firstName () {
-      let fullName = this.user.username.split(' ')
-      let firstName = fullName[0]
-      return firstName
     },
     filteredAcomods () {
       let acomods = this.$store.state.acomods

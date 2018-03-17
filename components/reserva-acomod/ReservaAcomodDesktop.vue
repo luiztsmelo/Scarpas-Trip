@@ -68,9 +68,11 @@
               <img src="../../assets/img/guest.svg" class="__img">
               <h3>{{ $store.state.reservaAcomod.totalHospedes == '1'? $store.state.reservaAcomod.totalHospedes + ' hóspede' : $store.state.reservaAcomod.totalHospedes + ' hóspedes' }}</h3>
             </div>
-            <div class="detalhes-reserva-data_item">
+            <div class="detalhes-reserva-data_item" v-if="$store.state.reservaAcomod.periodoReserva !== null">
               <img src="../../assets/img/calendar.svg" class="__img" style="transform: scale(.86)">
-              <h3>03 Mai - 07 Mai</h3>
+              <h3>{{ $store.state.reservaAcomod.periodoReserva.start.toLocaleDateString() }}</h3>
+              <img src="../../assets/img/arrow-right.svg" class="__arrow-right-date">
+              <h3>{{ $store.state.reservaAcomod.periodoReserva.end.toLocaleDateString() }}</h3>
             </div>
           </div>
 
@@ -274,6 +276,11 @@ export default {
             & .__img {
               margin-right: .7rem;
               width: 1.8rem;
+              height: auto;
+            }
+            & .__arrow-right-date {
+              margin: 0 1rem;
+              width: .8rem;
               height: auto;
             }
           }
