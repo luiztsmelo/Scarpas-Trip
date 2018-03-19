@@ -32,19 +32,19 @@
 
         <div class="item-form">
           <label>Quantos hóspedes?</label>
-          <select v-model="$store.state.reservaAcomod.totalHospedes"><!-- REVER ISSO AQUI DEPOIS -->
+          <select v-model="$store.state.message.totalHospedes">
             <option :value="n" v-for="n in totalHospedesArray">{{ n }} {{ n===1 ? 'hóspede' : 'hóspedes' }}</option>
           </select>
         </div>
 
         <div class="item-form">
           <label>Sua mensagem:</label>
-          <textarea rows="6" maxlength="2000"></textarea>
+          <textarea rows="6" maxlength="2000" v-model="$store.state.message.text"></textarea>
         </div>
 
         <div class="btns">
           <button type="button" class="__book-btn">Reservar</button>
-          <button type="button" class="__send-btn">Enviar Mensagem</button>
+          <button type="button" class="__send-btn" @click="sendMessage()">Enviar Mensagem</button>
         </div>
 
       </form><!-- RIGHT CONTAINER -->
@@ -60,6 +60,10 @@ export default {
   methods: {
     closedModal () {
       this.$store.state.clickedAskAcomod = false
+    },
+    sendMessage () {
+      let routeName = this.$route.name
+      this.$store.dispatch('a_sendMessage', routeName)
     }
   },
   computed: {

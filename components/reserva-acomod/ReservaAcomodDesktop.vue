@@ -19,7 +19,7 @@
 
       <img src="../../assets/img/arrow-right.svg" class="__arrow-right">
 
-      <h3 class="__item-progress">3. Pagamento e Confirmação</h3>
+      <h3 class="__item-progress" :style="etapaProgressed4" @click="backEtapa4">3. Pagamento e Confirmação</h3>
 
     </div>
 
@@ -33,11 +33,11 @@
 
       <img src="../../assets/img/arrow-right.svg" class="__arrow-right">
 
-      <h3 class="__item-progress">3. Identificação</h3>
+      <h3 class="__item-progress" :style="etapaProgressed3" @click="backEtapa3">3. Identificação</h3>
 
       <img src="../../assets/img/arrow-right.svg" class="__arrow-right">
 
-      <h3 class="__item-progress">4. Pagamento e Confirmação</h3>
+      <h3 class="__item-progress" :style="etapaProgressed4" @click="backEtapa4">4. Pagamento e Confirmação</h3>
 
     </div>
     <!-- ******* HEADER PROGRESS ******* -->
@@ -68,18 +68,18 @@
               <img src="../../assets/img/guest.svg" class="__img">
               <h3>{{ $store.state.reservaAcomod.totalHospedes == '1'? $store.state.reservaAcomod.totalHospedes + ' hóspede' : $store.state.reservaAcomod.totalHospedes + ' hóspedes' }}</h3>
             </div>
-            <div class="detalhes-reserva-data_item" v-if="$store.state.reservaAcomod.periodoReserva !== null">
+            <div class="detalhes-reserva-data_item">
               <img src="../../assets/img/calendar.svg" class="__img" style="transform: scale(.86)">
-              <h3>{{ $store.state.reservaAcomod.periodoReserva.start.toLocaleDateString() }}</h3>
+              <h3>{{ $store.state.reservaAcomod.startDate }}</h3>
               <img src="../../assets/img/arrow-right.svg" class="__arrow-right-date">
-              <h3>{{ $store.state.reservaAcomod.periodoReserva.end.toLocaleDateString() }}</h3>
+              <h3>{{ $store.state.reservaAcomod.endDate }}</h3>
             </div>
           </div>
 
-          <div class="detalhes-reserva-valor">
+          <div class="detalhes-reserva-valor" v-if="$store.state.reservaAcomod.valorReservaTotal !== null">
             <div class="detalhes-reserva-valor_item">
-              <h3>R${{ acomod.valorDiariaNormal.toLocaleString() }} x {{ $store.state.reservaAcomod.daySpan }} noites</h3>
-              <h3 id="valor">{{ valorNoitesTotal }}</h3>
+              <h3>R${{ acomod.valorDiariaNormal.toLocaleString() }} x {{ $store.state.reservaAcomod.noites }} noites</h3>
+              <h3 id="valor">R${{ $store.state.reservaAcomod.valorNoitesTotal.toLocaleString() }}</h3>
             </div>
 
             <div class="detalhes-reserva-valor_item" style="padding-bottom: 1rem">
@@ -92,19 +92,19 @@
                 >
                 <v-dialog id="service-fee" style="z-index:10000"/>
               </div>
-              <h3>{{ serviceFeeTotal }}</h3>
+              <h3>R${{ $store.state.reservaAcomod.serviceFeeTotal.toLocaleString() }}</h3>
             </div>
 
             <div class="detalhes-reserva-valor_item-total" style="padding-top: 1rem">
               <h3>Total</h3>
-              <h3>{{ valorReservaTotal }}</h3>
+              <h3>R${{ $store.state.reservaAcomod.valorReservaTotal.toLocaleString() }}</h3>
             </div>
           </div>
           
         </div>
       </div><!-- Right Container -->
 
-      <button class="__next-btn" type="button" @click="nextBtn1()">Continuar</button>
+      <button class="__next-btn" type="button" @click="nextBtn1">Continuar</button>
       
     </div><!-- ******* ETAPA 1 ******* -->
 
@@ -112,16 +112,45 @@
     <!-- ******* ETAPA 2 ******* -->
     <div class="etapa-2" v-if="$store.state.reservaAcomodDesktop2 === true">
 
-      <h1 class="__title">Diga um oi para {{ firstName }}</h1>
+      <h1 class="__title">Diga um oi para {{ acomod.proprietario.split(' ')[0] }}</h1>
 
       <div class="container">
 
+      </div>
+
+      <button class="__next-btn" type="button" @click="nextBtn2">Continuar</button>
+      
+    </div><!-- ******* ETAPA 2 ******* -->
+
+
+
+    <!-- ******* ETAPA 3 ******* -->
+    <div class="etapa-3" v-if="$store.state.reservaAcomodDesktop3 === true && $store.state.user.email === null">
+
+      <h1 class="__title">Identificação</h1>
+
+      <div class="container">
 
       </div>
 
-      <button class="__next-btn" type="button" @click="nextBtn2()">Continuar</button>
+      <button class="__next-btn" type="button" @click="nextBtn3">Continuar</button>
       
-    </div><!-- ******* ETAPA 2 ******* -->
+    </div><!-- ******* ETAPA 3 ******* -->
+
+
+
+    <!-- ******* ETAPA 4 ******* -->
+    <div class="etapa-4" v-if="$store.state.reservaAcomodDesktop4 === true">
+
+      <h1 class="__title">Pagamento e Confirmação</h1>
+
+      <div class="container">
+
+      </div>
+
+      <button class="__next-btn" type="button" @click="concluirReserva">Concluir Reserva</button>
+      
+    </div><!-- ******* ETAPA 4 ******* -->
 
 
 
@@ -143,7 +172,7 @@ export default {
     serviceFeeDialog () {
       this.$modal.show('dialog', {
         title: 'Taxa de Serviço',
-        text: 'Taxa de ' + this.$store.state.serviceFeeAcomod * 100 + '% cobrada com o intuito de garantir suporte e total segurança na sua reserva, caso algum problema aconteça.',
+        text: 'Taxa de ' + this.$store.state.serviceFeeAcomod * 100 + '% cobrada com o intuito de garantir suporte e total segurança em sua reserva caso algum problema aconteça.',
         buttons: [
           {
             title: 'Fechar'
@@ -154,25 +183,43 @@ export default {
     nextBtn1 () {
       this.$store.state.etapaReserva2ok = true, this.$store.commit('m_reservaAcomodDesktop1', false), this.$store.commit('m_reservaAcomodDesktop2', true)
     },
+    nextBtn2 () {
+      if (this.$store.state.user.email === null) {
+        this.$store.state.etapaReserva3ok = true, this.$store.commit('m_reservaAcomodDesktop2', false), this.$store.commit('m_reservaAcomodDesktop3', true)
+      } else {
+        this.$store.state.etapaReserva4ok = true, this.$store.commit('m_reservaAcomodDesktop2', false), this.$store.commit('m_reservaAcomodDesktop4', true)
+      }
+    },
+    nextBtn3 () {
+      this.$store.state.etapaReserva4ok = true, this.$store.commit('m_reservaAcomodDesktop3', false), this.$store.commit('m_reservaAcomodDesktop4', true)
+    },
+    concluirReserva () {
+      this.$store.dispatch('a_newReservaAcomod')
+    },
     backEtapa1 () {
-      if (this.$store.state.etapaReserva2ok === true) {
-        this.$store.commit('m_reservaAcomodDesktop1', true), this.$store.commit('m_reservaAcomodDesktop2', false)
+      if (this.$store.state.etapaReserva1ok === true) {
+        this.$store.commit('m_reservaAcomodDesktop1', true), this.$store.commit('m_reservaAcomodDesktop2', false), this.$store.commit('m_reservaAcomodDesktop3', false), this.$store.commit('m_reservaAcomodDesktop4', false)
       }
     },
     backEtapa2 () {
       if (this.$store.state.etapaReserva2ok === true) {
-        this.$store.commit('m_reservaAcomodDesktop1', false), this.$store.commit('m_reservaAcomodDesktop2', true)
+        this.$store.commit('m_reservaAcomodDesktop1', false), this.$store.commit('m_reservaAcomodDesktop2', true), this.$store.commit('m_reservaAcomodDesktop3', false), this.$store.commit('m_reservaAcomodDesktop4', false)
+      }
+    },
+    backEtapa3 () {
+      if (this.$store.state.etapaReserva3ok === true) {
+        this.$store.commit('m_reservaAcomodDesktop1', false), this.$store.commit('m_reservaAcomodDesktop2', false), this.$store.commit('m_reservaAcomodDesktop3', true), this.$store.commit('m_reservaAcomodDesktop4', false)
+      }
+    },
+    backEtapa4 () {
+      if (this.$store.state.etapaReserva4ok === true) {
+        this.$store.commit('m_reservaAcomodDesktop1', false), this.$store.commit('m_reservaAcomodDesktop2', false), this.$store.commit('m_reservaAcomodDesktop3', false), this.$store.commit('m_reservaAcomodDesktop4', true)
       }
     }
   },
   computed: {
     acomod () {
       return this.$store.state.acomod
-    },
-    firstName () {
-      let fullName = this.acomod.proprietario.split(' ')
-      let firstName = fullName[0]
-      return firstName
     },
     etapaProgressed1 () {
       if (this.$store.state.etapaReserva1ok === true) {
@@ -184,19 +231,17 @@ export default {
         return 'font-weight: 700'
       }
     },
-    valorNoitesTotal () {
-      let valorNoitesTotal = this.acomod.valorDiariaNormal * this.$store.state.reservaAcomod.daySpan
-      return 'R$' + valorNoitesTotal.toLocaleString()
+    etapaProgressed3 () {
+      if (this.$store.state.etapaReserva3ok === true) {
+        return 'font-weight: 700'
+      }
     },
-    serviceFeeTotal () {
-      let serviceFeeTotal = Math.trunc(this.acomod.valorDiariaNormal * this.$store.state.reservaAcomod.daySpan * this.$store.state.serviceFeeAcomod)
-      return 'R$' + serviceFeeTotal.toLocaleString()
-    },
-    valorReservaTotal () {
-      let valorReservaTotal = Math.trunc((this.acomod.valorDiariaNormal * this.$store.state.reservaAcomod.daySpan) + this.acomod.valorDiariaNormal * this.$store.state.reservaAcomod.daySpan * this.$store.state.serviceFeeAcomod)
-      return 'R$' + valorReservaTotal.toLocaleString()
+    etapaProgressed4 () {
+      if (this.$store.state.etapaReserva4ok === true) {
+        return 'font-weight: 700'
+      }
     }
-  },
+  }
 }
 </script>
 
@@ -320,7 +365,36 @@ export default {
       height: 345px;
     }
   }
+
+  /* ******* ETAPA 3 ******* */
+  & .etapa-3 {
+    margin: .7rem 3.5rem 4.5rem 3.5rem;
+    height: 100%;
+    & .__title {
+      font-size: 33px;
+    }
+    & .container {
+      margin: 1.9rem 0 1.3rem 0;
+      display: flex;
+      height: 345px;
+    }
+  }
+
+  /* ******* ETAPA 4 ******* */
+  & .etapa-4 {
+    margin: .7rem 3.5rem 4.5rem 3.5rem;
+    height: 100%;
+    & .__title {
+      font-size: 33px;
+    }
+    & .container {
+      margin: 1.9rem 0 1.3rem 0;
+      display: flex;
+      height: 345px;
+    }
+  }
 }
+
 
 .__next-btn {
   float: right;

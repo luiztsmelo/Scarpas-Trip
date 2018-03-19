@@ -38,6 +38,17 @@ const store = () => new Vuex.Store({
       email: null,
       photoURL: null
     },
+    message: {
+      timestamp: null,
+      from: null,
+      to: null,
+      totalHospedes: '1',
+      startDate: null,
+      endDate: null,
+      text: '',
+      about: null,
+      id: null
+    },
     /*
     -------------------- CONFIGS --------------------
     */
@@ -113,14 +124,23 @@ const store = () => new Vuex.Store({
       imageH3W: null
     },
     reservaAcomod: {/* Atualizar Action */
+      reservaID: null,
+      acomodID: null,
+      requested: null,
       totalHospedes: '1',
       periodoReserva: null,
-      daySpan: null,
-      userID: null,
-      reservante: null,
-      email: null,
-      photoURL: null,
-      celular: null
+      startDate: null,
+      endDate: null,
+      noites: null,
+      valorNoitesTotal: null,
+      serviceFeeTotal: null,
+      valorReservaTotal: null,
+      hostID: null,
+      guestID: null,
+      hostName: null,
+      guestName: null,
+      hostEmail: null,
+      guestEmail: null
     },
     clickedAskAcomod: false,
     cadastroAcomod0: true,
@@ -329,6 +349,15 @@ const store = () => new Vuex.Store({
     m_acomodID (state, payload) {
       state.acomodID = payload
       state.acomodData.acomodID = payload
+    },
+    m_valorNoitesTotal (state, payload) {
+      state.reservaAcomod.valorNoitesTotal = payload
+    },
+    m_serviceFeeTotal (state, payload) {
+      state.reservaAcomod.serviceFeeTotal = payload
+    },
+    m_valorReservaTotal (state, payload) {
+      state.reservaAcomod.valorReservaTotal = payload
     },
     m_creditCard (state, payload) {
       state.creditCard = payload
@@ -713,16 +742,62 @@ const store = () => new Vuex.Store({
         commit('m_loader', false)
       })
     },
+    a_newReservaAcomod ({ state, commit }) {
+      state.reservaAcomod.requested = new Date().getTime()
+      state.reservaAcomod.reservaID = Math.ceil(Math.exp(Math.random() * (Math.log(99999999) - Math.log(10000000))) * 10000000)
+      state.reservaAcomod.acomodID = state.acomod.acomodID
+      state.reservaAcomod.hostName = state.acomod.proprietario
+      state.reservaAcomod.hostEmail = state.acomod.email
+      state.reservaAcomod.hostID = state.acomod.userID
+      /* Corrigir datas para enviar para o Airtable */
+      let yyyyStart = state.reservaAcomod.startDate.slice(6, 10)
+      let mmStart = state.reservaAcomod.startDate.slice(3, 5)
+      let ddStart = state.reservaAcomod.startDate.slice(0, 2)
+      let startDate = yyyyStart + '-' + mmStart + '-' + ddStart
+      let yyyyEnd = state.reservaAcomod.endDate.slice(6, 10)
+      let mmEnd = state.reservaAcomod.endDate.slice(3, 5)
+      let ddEnd = state.reservaAcomod.endDate.slice(0, 2)
+      let endDate = yyyyEnd + '-' + mmEnd + '-' + ddEnd
+      /* Criar reserva no Firebase */
+      firebase.database().ref('reservas/acomods/' + state.reservaAcomod.reservaID).set(state.reservaAcomod).then(() => {
+        /* Criar reserva no Airtable */
+        this.$axios.$post('https://api.airtable.com/v0/appfQX2S7rMRlBWoh/Acomods?api_key=keyoOJ1ERQwpa2EIg', {
+          'fields': {
+            'reservaID': state.reservaAcomod.reservaID,
+            'acomodID': state.reservaAcomod.acomodID,
+            'requested': state.reservaAcomod.requested,
+            'startDate': startDate,
+            'endDate': endDate,
+            'noites': state.reservaAcomod.noites,
+            'valorNoitesTotal': state.reservaAcomod.valorNoitesTotal,
+            'serviceFeeTotal': state.reservaAcomod.serviceFeeTotal,
+            'valorReservaTotal': state.reservaAcomod.valorReservaTotal,
+            'totalHospedes': state.reservaAcomod.totalHospedes,
+            'hostName': state.acomod.proprietario,
+            'hostEmail': state.acomod.email,
+            'hostID': state.acomod.userID
+          }
+        })
+      })
+    },
     a_resetReservaAcomodDesktop ({ state }) {
       state.reservaAcomod = {
+        reservaID: null,
+        acomodID: null,
         totalHospedes: '1',
         periodoReserva: null,
-        daySpan: null,
-        userID: null,
-        reservante: null,
-        email: null,
-        photoURL: null,
-        celular: null
+        startDate: null,
+        endDate: null,
+        noites: null,
+        valorNoitesTotal: null,
+        serviceFeeTotal: null,
+        valorReservaTotal: null,
+        hostID: null,
+        guestID: null,
+        hostName: null,
+        guestName: null,
+        hostEmail: null,
+        guestEmail: null
       }
       state.reservaAcomodDesktop1 = true
       state.reservaAcomodDesktop2 = false
@@ -883,7 +958,7 @@ const store = () => new Vuex.Store({
           firebase.database().ref('users/' + state.user.userID).set(state.user)
           /* 2) Criar usuário no Airtable */
           .then(() => {
-            this.$axios.$post('https://api.airtable.com/v0/app2VZONmWdcr8ybJ/Geral?api_key=keyoOJ1ERQwpa2EIg', {
+            this.$axios.$post('https://api.airtable.com/v0/app2VZONmWdcr8ybJ/Users?api_key=keyoOJ1ERQwpa2EIg', {
               'fields': {
                 'userID': state.user.userID,
                 'firstName': state.user.firstName,
@@ -895,6 +970,18 @@ const store = () => new Vuex.Store({
           })
         }
       })
+    },
+    /*
+    ########## SEND MESSAGE ##########
+    */
+    a_sendMessage ({ state, route }, routeName) {
+      state.message.timestamp = new Date().getTime()
+      state.message.from = state.user.userID
+      state.message.to = routeName === 'acomodacoes-id' ? state.acomod.userID : ''
+      state.message.about = routeName === 'acomodacoes-id' ? 'acomod' : ''
+      state.message.id = routeName === 'acomodacoes-id' ? state.acomod.acomodID : ''
+      /* Enviar mensagem para o Firebase */
+      firebase.database().ref('messages/').push(state.message)
     },
     /*
     ########## SIGN OUT ##########

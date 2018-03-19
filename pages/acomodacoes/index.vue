@@ -65,7 +65,7 @@
                     :value="inputValue"
                     @change='updateValue($event.target.value)' />
                   <span class='day-span'>
-                    {{ daySpan }}
+                    {{ noites }}
                   </span>
                 </div>
               </div>
@@ -231,7 +231,7 @@ export default {
     })
   },
   methods: {
-    getDaySpan(range) {
+    getNoites (range) {
       const msInDay = 1000*60*60*24
       if (!range) return 0
       return (range.end - range.start)/msInDay
@@ -284,8 +284,8 @@ export default {
     acomods () {
       return this.$store.state.acomods
     },
-    daySpan() {
-      const span = this.getDaySpan(this.drag || this.filter.date)
+    noites () {
+      const span = this.getNoites(this.drag || this.filter.date)
       return (span && `${span} noites`) || ''
     },
     /* filteredAcomods () {

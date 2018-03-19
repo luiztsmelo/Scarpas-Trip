@@ -250,6 +250,7 @@
               :disabled-attribute='disabledAttribute'
               :theme-styles='themeStylesReserva'
               :formats='formats'
+              tint-color='#00D8C7'
               :popover-visibility='datePickerVisibility'>
               <div
                 slot-scope='{ inputValue, updateValue }'>
@@ -275,7 +276,7 @@
           <div class="reserva-info" v-if="$store.state.reservaAcomod.periodoReserva !== null">
             
             <div class="reserva-info_item">
-              <h3>R${{ acomod.valorDiariaNormal.toLocaleString() }} x {{ $store.state.reservaAcomod.daySpan }} noites</h3>
+              <h3>R${{ acomod.valorDiariaNormal.toLocaleString() }} x {{ $store.state.reservaAcomod.noites }} noites</h3>
               <h3 id="valor">{{ valorNoitesTotal }}</h3>
             </div>
 
@@ -369,18 +370,16 @@ export default {
           hideIndicator: true,
           component: PopoverCalendar
         },
-        contentStyle: {
-          backgroundColor: '#00D8C7',
-          color: 'white'
-        },
-        contentHoverStyle: {
-          backgroundColor: '#00D8C7',
+        /* contentStyle: {
+          color: 'white',
+          opacity: 1
+        }, */
+        /* contentHoverStyle: {
           color: 'white'
         },
         highlight: {
-          backgroundColor: '#00D8C7',
           color: 'white'
-        }
+        } */
       },
       formats: {
         input: ['D MMM', 'D MMM']
@@ -468,7 +467,7 @@ export default {
           opacity: 0
         },
         dayPopoverContent: {
-          background: '#00D8C7',
+          background: 'rgb(112,112,112)',
           color: 'white',
           border: 'none'
         }
@@ -507,13 +506,15 @@ export default {
           this.datePickerVisibility = 'focus'
         })
       } else {
+        this.$store.state.reservaAcomod.startDate = this.$store.state.reservaAcomod.periodoReserva.start.toLocaleDateString('pt-BR')
+        this.$store.state.reservaAcomod.endDate = this.$store.state.reservaAcomod.periodoReserva.end.toLocaleDateString('pt-BR')
         this.$modal.show('reserva-desktop-modal')
       }
     },
     serviceFeeDialog () {
       this.$modal.show('dialog', {
         title: 'Taxa de Serviço',
-        text: 'Taxa de ' + this.$store.state.serviceFeeAcomod * 100 + '% cobrada com o intuito de garantir suporte e total segurança na sua reserva, caso algum problema aconteça.',
+        text: 'Taxa de ' + this.$store.state.serviceFeeAcomod * 100 + '% cobrada com o intuito de garantir suporte e total segurança em sua reserva caso algum problema aconteça.',
         buttons: [
           {
             title: 'Fechar'
@@ -583,15 +584,18 @@ export default {
   },
   computed: {
     valorNoitesTotal () {
-      let valorNoitesTotal = this.acomod.valorDiariaNormal * this.$store.state.reservaAcomod.daySpan
+      let valorNoitesTotal = this.acomod.valorDiariaNormal * this.$store.state.reservaAcomod.noites
+      this.$store.commit('m_valorNoitesTotal', valorNoitesTotal)
       return 'R$' + valorNoitesTotal.toLocaleString()
     },
     serviceFeeTotal () {
-      let serviceFeeTotal = Math.trunc(this.acomod.valorDiariaNormal * this.$store.state.reservaAcomod.daySpan * this.$store.state.serviceFeeAcomod)
+      let serviceFeeTotal = Math.trunc(this.acomod.valorDiariaNormal * this.$store.state.reservaAcomod.noites * this.$store.state.serviceFeeAcomod)
+      this.$store.commit('m_serviceFeeTotal', serviceFeeTotal)
       return 'R$' + serviceFeeTotal.toLocaleString()
     },
     valorReservaTotal () {
-      let valorReservaTotal = Math.trunc((this.acomod.valorDiariaNormal * this.$store.state.reservaAcomod.daySpan) + this.acomod.valorDiariaNormal * this.$store.state.reservaAcomod.daySpan * this.$store.state.serviceFeeAcomod)
+      let valorReservaTotal = Math.trunc((this.acomod.valorDiariaNormal * this.$store.state.reservaAcomod.noites) + this.acomod.valorDiariaNormal * this.$store.state.reservaAcomod.noites * this.$store.state.serviceFeeAcomod)
+      this.$store.commit('m_valorReservaTotal', valorReservaTotal)
       return 'R$' + valorReservaTotal.toLocaleString()
     },
     totalHospedesArray () {
@@ -1064,7 +1068,7 @@ export default {
           }
           & .__reserva-desktop-btn {
             margin-top: 1.2rem;
-            font-size: 19px;
+            font-size: 18px;
             font-weight: 600;
             line-height: 3rem;
             background: #00D8C7;
