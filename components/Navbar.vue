@@ -133,7 +133,7 @@ export default {
       & .__brand-img {
         width: 1.7rem;
         height: auto;
-        margin-right: .4rem;
+        margin-right: .5rem;
       }
       & .__brand-name {
         font-family: var(--main-font);
@@ -243,7 +243,7 @@ export default {
         }
         & .__brand-name {
           font-size: 20px;
-          font-weight: 600;
+          font-weight: 500;
           line-height: 4rem;
         }
       }

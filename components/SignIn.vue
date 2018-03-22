@@ -9,7 +9,7 @@
     <img src="../assets/img/close-modal.svg" class="close-btn" @click="$modal.hide('sign-in-modal')">
 
     <div class="sign-in-body">
-      <img class="__img" src="../static/brand.svg">
+      <img class="__img" src="../static/brand2.svg">
 
       <h1 class="__title">{{ titleSignIn }}</h1>
       <h3 class="__subtitle">{{ subtitleSignIn }}</h3>

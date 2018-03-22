@@ -52,7 +52,7 @@ const store = () => new Vuex.Store({
     /*
     -------------------- CONFIGS --------------------
     */
-    serviceFeeAcomod: 0.03, /* 3% */
+    serviceFeeAcomod: 0.03,
     /*
     -------------------- ANÚNCIOS --------------------
     */
@@ -780,7 +780,7 @@ const store = () => new Vuex.Store({
         })
       })
     },
-    a_resetReservaAcomodDesktop ({ state }) {
+    a_resetReservaAcomodDesktop ({ state }) { /* Resetar dados quando usuário for p/ outra acomod (evitar bugs) */
       state.reservaAcomod = {
         reservaID: null,
         acomodID: null,
@@ -956,8 +956,8 @@ const store = () => new Vuex.Store({
         if (!userID) { /* Se não existir: */
           /* 1) Criar usuário no Firebase */
           firebase.database().ref('users/' + state.user.userID).set(state.user)
-          /* 2) Criar usuário no Airtable */
           .then(() => {
+            /* 2) Criar usuário no Airtable */
             this.$axios.$post('https://api.airtable.com/v0/app2VZONmWdcr8ybJ/Users?api_key=keyoOJ1ERQwpa2EIg', {
               'fields': {
                 'userID': state.user.userID,
@@ -966,6 +966,32 @@ const store = () => new Vuex.Store({
                 'email': state.user.email,
                 'photoURL': state.user.photoURL
               }
+            })
+            /* 3) Criar contato no SendinBlue */
+            const configSendinBlue = {
+              headers: {
+                'content-type': 'application/json',
+                'api-key': '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'
+              }
+            }
+            this.$axios.post('https://api.sendinblue.com/v3/contacts', {
+              'email': state.user.email,
+              'attributes': {
+                'USERID': state.user.userID,
+                'FULLNAME': state.user.fullName,
+                'FIRSTNAME': state.user.firstName
+              }
+            }, configSendinBlue).then(() => {
+              /* 4) Enviar e-mail de Boas-Vindas */
+              this.$axios.post('https://api.sendinblue.com/v3/smtp/email', {
+                'sender.email': 'luiztsmelo@gmail.com',
+                'to': [{
+                  'email': state.user.email,
+                  'name': state.user.firstName
+                }],
+                'replyTo.email': 'luiztsmelo@gmail.com',
+                'templateId': 7
+              }, configSendinBlue)
             })
           })
         }

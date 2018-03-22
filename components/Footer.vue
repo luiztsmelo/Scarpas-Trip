@@ -1,7 +1,7 @@
 <template>
   <div class="footer">
 
-    <img class="__img" src="../static/brand.svg">
+    <img class="__img" src="../static/brand2.svg">
 
     <div class="box">
       <h1 class="__title">Escarpas Trip</h1>
@@ -70,7 +70,7 @@ export default {
   /* background: #EAEAEC; */
   padding: 3.2rem 7%;
   & .__img {
-    width: 6.6rem;
+    width: 5.5rem;
     height: auto;
     margin-right: 2.5rem;
     align-self: flex-start;
