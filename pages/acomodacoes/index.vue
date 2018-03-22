@@ -239,47 +239,19 @@ export default {
       return (range.end - range.start)/msInDay
     },
     image1H (acomod) {
-      if (supportsWebP) {
-        return acomod.imageH1W
-      } else {
-        return acomod.imageH1J
-      }
+      return supportsWebP ? acomod.imageH1W : acomod.imageH1J
     },
     image2H (acomod) {
-      if (supportsWebP) {
-        return acomod.imageH2W
-      } else {
-        return acomod.imageH2J
-      }
+      return supportsWebP ? acomod.imageH2W : acomod.imageH2J
     },
     image3H (acomod) {
-      if (supportsWebP) {
-        return acomod.imageH3W
-      } else {
-        return acomod.imageH3J
-      }
+      return supportsWebP ? acomod.imageH3W : acomod.imageH3J
     },
     ifImage2 (acomod) {
-      if (acomod.imageH2W === null) {
-        return
-      } else {
-        if (supportsWebP) {
-          return acomod.imageH2W
-        } else {
-          return acomod.imageH2J
-        }
-      }
+      return acomod.imageH2W === null ? '' : supportsWebP ? acomod.imageH2W : acomod.imageH2J
     },
     ifImage3 (acomod) {
-      if (acomod.imageH3W === null) {
-        return
-      } else {
-        if (supportsWebP) {
-          return acomod.imageH3W
-        } else {
-          return acomod.imageH3J
-        }
-      }
+      return acomod.imageH3W === null ? '' : supportsWebP ? acomod.imageH3W : acomod.imageH3J
     }
   },
   computed: {
@@ -463,7 +435,7 @@ export default {
             text-transform: uppercase;
             font-size: 12px;
             font-weight: 600;
-            color: #007B77;
+            color: #006561;
           }
           & .__card-title {
             padding: .4rem 0 .5rem 0;

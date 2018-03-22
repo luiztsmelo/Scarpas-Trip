@@ -521,8 +521,7 @@ export default {
       return 'https://firebasestorage.googleapis.com/v0/b/escarpas-trip.appspot.com/o/utils%2Fmarker.svg?alt=media&token=fcbfd76e-ee93-41e8-a816-98906e19859b'
     },
     markerSize () {
-      if (!this.googleMapsInitialized) return null
-      return new window.google.maps.Size(38, 38)
+      return !this.googleMapsInitialized ? null : new window.google.maps.Size(38, 38)
     },
     titleLength () {
       return 50 - this.$store.state.eventoData.title.length

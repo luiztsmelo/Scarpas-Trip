@@ -57,29 +57,13 @@ export default {
   },
   methods: {
     image1H (atracao) {
-      if (supportsWebP) {
-        return atracao.imageH1W
-      } else {
-        return atracao.imageH1J
-      }
+      return supportsWebP ? atracao.imageH1W : atracao.imageH1J
     },
     image2H (atracao) {
-      if (supportsWebP) {
-        return atracao.imageH2W
-      } else {
-        return atracao.imageH2J
-      }
+      return supportsWebP ? atracao.imageH2W : atracao.imageH2J
     },
     ifImage2 (atracao) {
-      if (atracao.imageH2W === null) {
-        return
-      } else {
-        if (supportsWebP) {
-          return atracao.imageH2W
-        } else {
-          return atracao.imageH2J
-        }
-      }
+      return atracao.imageH2W === null ? '' : supportsWebP ? atracao.imageH2W : atracao.imageH2J
     }
   },
   computed: {

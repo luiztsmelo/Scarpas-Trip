@@ -6,8 +6,8 @@
   --fontSizeAnuncioText: 17px;
   /* ******* COLOR PALETTE ******* */
   --color01: rgb(62, 62, 62);
-  --colorAcomod: #00D8C7;
-  --colorPasseio: #198CFE;
+  --colorAcomod: #00D8C7; /* #006561 for cards info */
+  --colorPasseio: #198CFE; /* #0784FD for cards info */
   --colorEvento: #FF7E65;
   --colorRestaurante: rgb(252, 86, 86);
   --colorAtracao: rgb(252, 86, 86);

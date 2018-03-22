@@ -168,18 +168,10 @@ export default {
        window.location.hash = "compartilhar"
     },
     image1H (evento) {
-      if (supportsWebP) {
-        return evento.imageH1W
-      } else {
-        return evento.imageH1J
-      }
+      return supportsWebP ? evento.imageH1W : evento.imageH1J
     },
     image2H (evento) {
-      if (supportsWebP) {
-        return evento.imageH2W
-      } else {
-        return evento.imageH2J
-      }
+      return supportsWebP ? evento.imageH2W : evento.imageH2J
     },
     enterFullscreen () {
       if ((document.fullScreenElement && document.fullScreenElement !== null) ||
@@ -204,8 +196,7 @@ export default {
       return 'https://firebasestorage.googleapis.com/v0/b/escarpas-trip.appspot.com/o/utils%2Fmarker.svg?alt=media&token=fcbfd76e-ee93-41e8-a816-98906e19859b'
     },
     markerSize () {
-      if (!this.googleMapsInitialized) return null
-      return new window.google.maps.Size(38, 38)
+      return !this.googleMapsInitialized ? null : new window.google.maps.Size(38, 38)
     },
     date () {
       const eventoDate = this.$store.state.evento.date
@@ -233,15 +224,7 @@ export default {
       return this.$store.state.evento
     },
     ifImage2 () {
-      if (this.evento.imageH2W === null) {
-        return
-      } else {
-        if (supportsWebP) {
-          return this.evento.imageH2W
-        } else {
-          return this.evento.imageH2J
-        }
-      }
+      return this.evento.imageH2W === null ? '' : supportsWebP ? this.evento.imageH2W : this.evento.imageH2J
     },
     showShare () {
       return this.$store.state.showShare
@@ -252,11 +235,7 @@ export default {
   },
   watch: {
     scrollY (value) {
-      if (value > 250) {
-        this.scrollTopbar = true
-      } else {
-        this.scrollTopbar = false
-      }
+      value > 250 ? this.scrollTopbar = true : this.scrollTopbar = false
     }
   },
   beforeRouteLeave (to, from, next) {

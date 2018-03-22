@@ -163,11 +163,7 @@ import supportsWebP from 'supports-webp'
 export default {
   methods: {
     image1H (acomod) {
-      if (supportsWebP) {
-        return acomod.imageH1W
-      } else {
-        return acomod.imageH1J
-      }
+      return supportsWebP ? acomod.imageH1W : acomod.imageH1J
     },
     serviceFeeDialog () {
       this.$modal.show('dialog', {

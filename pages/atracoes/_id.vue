@@ -167,18 +167,10 @@ export default {
        window.location.hash = "compartilhar"
     },
     image1H (atracao) {
-      if (supportsWebP) {
-        return atracao.imageH1W
-      } else {
-        return atracao.imageH1J
-      }
+      return supportsWebP ? atracao.imageH1W : atracao.imageH1J
     },
     image2H (atracao) {
-      if (supportsWebP) {
-        return atracao.imageH2W
-      } else {
-        return atracao.imageH2J
-      }
+      return supportsWebP ? atracao.imageH2W : atracao.imageH2J
     },
     enterFullscreen () {
       if ((document.fullScreenElement && document.fullScreenElement !== null) ||
@@ -203,15 +195,13 @@ export default {
       return 'https://firebasestorage.googleapis.com/v0/b/escarpas-trip.appspot.com/o/utils%2Fmarker-partida.svg?alt=media&token=bd41c89e-33ea-4899-bb5a-4f2fc2d936cb'
     },
     markerSizePartida () {
-      if (!this.googleMapsInitialized) return null
-      return new window.google.maps.Size(34, 34)
+      return !this.googleMapsInitialized ? null : new window.google.maps.Size(34, 34)
     },
     markerUrlChegada () {
       return 'https://firebasestorage.googleapis.com/v0/b/escarpas-trip.appspot.com/o/utils%2Fmarker-chegada.svg?alt=media&token=b5b52bc5-a65f-4136-9c31-57830b969067'
     },
     markerSizeChegada () {
-      if (!this.googleMapsInitialized) return null
-      return new window.google.maps.Size(34, 34)
+      return !this.googleMapsInitialized ? null : new window.google.maps.Size(34, 34)
     },
     scrollY () {
       return this.$store.state.scrollY
@@ -220,15 +210,7 @@ export default {
       return this.$store.state.atracao
     },
     ifImage2 () {
-      if (this.atracao.imageH2W === null) {
-        return
-      } else {
-        if (supportsWebP) {
-          return this.atracao.imageH2W
-        } else {
-          return this.atracao.imageH2J
-        }
-      }
+      return this.atracao.imageH2W === null ? '' : supportsWebP ? this.atracao.imageH2W : this.atracao.imageH2J
     },
     showShare () {
       return this.$store.state.showShare

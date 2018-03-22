@@ -463,15 +463,13 @@ export default {
       return 'https://firebasestorage.googleapis.com/v0/b/escarpas-trip.appspot.com/o/utils%2Fmarker-partida.svg?alt=media&token=bd41c89e-33ea-4899-bb5a-4f2fc2d936cb'
     },
     markerSizePartida () {
-      if (!this.googleMapsInitialized) return null
-      return new window.google.maps.Size(34, 34)
+      return !this.googleMapsInitialized ? null : new window.google.maps.Size(34, 34)
     },
     markerUrlChegada () {
       return 'https://firebasestorage.googleapis.com/v0/b/escarpas-trip.appspot.com/o/utils%2Fmarker-chegada.svg?alt=media&token=b5b52bc5-a65f-4136-9c31-57830b969067'
     },
     markerSizeChegada () {
-      if (!this.googleMapsInitialized) return null
-      return new window.google.maps.Size(34, 34)
+      return !this.googleMapsInitialized ? null : new window.google.maps.Size(34, 34)
     },
     titleLength () {
       return 50 - this.$store.state.atracaoData.title.length

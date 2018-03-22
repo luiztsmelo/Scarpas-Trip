@@ -67,18 +67,10 @@ export default {
       window.history.back(1)
     },
     image1H (acomod) {
-      if (supportsWebP) {
-        return acomod.imageH1W
-      } else {
-        return acomod.imageH1J
-      }
+      return supportsWebP ? acomod.imageH1W : acomod.imageH1J
     },
     image1H (passeio) {
-      if (supportsWebP) {
-        return passeio.imageH1W
-      } else {
-        return passeio.imageH1J
-      }
+      return supportsWebP ? passeio.imageH1W : passeio.imageH1J
     },
   },
   computed: {

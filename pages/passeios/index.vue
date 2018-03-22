@@ -58,29 +58,13 @@ export default {
   },
   methods: {
     image1H (passeio) {
-      if (supportsWebP) {
-        return passeio.imageH1W
-      } else {
-        return passeio.imageH1J
-      }
+      return supportsWebP ? passeio.imageH1W : passeio.imageH1J
     },
     image2H (passeio) {
-      if (supportsWebP) {
-        return passeio.imageH2W
-      } else {
-        return passeio.imageH2J
-      }
+      return supportsWebP ? passeio.imageH2W : passeio.imageH2J
     },
     ifImage2 (passeio) {
-      if (passeio.imageH2W === null) {
-        return
-      } else {
-        if (supportsWebP) {
-          return passeio.imageH2W
-        } else {
-          return passeio.imageH2J
-        }
-      }
+      return passeio.imageH2W === null ? '' : supportsWebP ? passeio.imageH2W : passeio.imageH2J
     }
   },
   computed: {

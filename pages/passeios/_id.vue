@@ -239,18 +239,10 @@ export default {
        window.location.hash = "compartilhar"
     },
     image1H (passeio) {
-      if (supportsWebP) {
-        return passeio.imageH1W
-      } else {
-        return passeio.imageH1J
-      }
+      return supportsWebP ? passeio.imageH1W : passeio.imageH1J
     },
     image2H (passeio) {
-      if (supportsWebP) {
-        return passeio.imageH2W
-      } else {
-        return passeio.imageH2J
-      }
+      return supportsWebP ? passeio.imageH2W : passeio.imageH2J
     },
     enterFullscreen () {
       if ((document.fullScreenElement && document.fullScreenElement !== null) ||
@@ -275,8 +267,7 @@ export default {
       return 'https://firebasestorage.googleapis.com/v0/b/escarpas-trip.appspot.com/o/utils%2Fmarker.svg?alt=media&token=fcbfd76e-ee93-41e8-a816-98906e19859b'
     },
     markerSize () {
-      if (!this.googleMapsInitialized) return null
-      return new window.google.maps.Size(38, 38)
+      return !this.googleMapsInitialized ? null : new window.google.maps.Size(38, 38)
     },
     scrollY () {
       return this.$store.state.scrollY
@@ -285,15 +276,7 @@ export default {
       return this.$store.state.passeio
     },
     ifImage2 () {
-      if (this.passeio.imageH2W === null) {
-        return
-      } else {
-        if (supportsWebP) {
-          return this.passeio.imageH2W
-        } else {
-          return this.passeio.imageH2J
-        }
-      }
+      return this.passeio.imageH2W === null ? '' : supportsWebP ? this.passeio.imageH2W : this.passeio.imageH2J
     },
     showShare () {
       return this.$store.state.showShare

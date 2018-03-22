@@ -608,8 +608,7 @@ export default {
       return 'https://firebasestorage.googleapis.com/v0/b/escarpas-trip.appspot.com/o/utils%2Fmarker.svg?alt=media&token=fcbfd76e-ee93-41e8-a816-98906e19859b'
     },
     markerSize () {
-      if (!this.googleMapsInitialized) return null
-      return new window.google.maps.Size(38, 38)
+      return !this.googleMapsInitialized ? null : new window.google.maps.Size(38, 38)
     },
     tipoAcomodText () {
       const path = this.acomod.tipoAcomod
@@ -631,26 +630,10 @@ export default {
       return this.$store.state.acomod
     },
     ifImage2 () {
-      if (this.acomod.imageH2W === null) {
-        return
-      } else {
-        if (supportsWebP) {
-          return this.acomod.imageH2W
-        } else {
-          return this.acomod.imageH2J
-        }
-      }
+      return this.acomod.imageH2W === null ? '' : supportsWebP ? this.acomod.imageH2W : this.acomod.imageH2J
     },
     ifImage3 () {
-      if (this.acomod.imageH3W === null) {
-        return
-      } else {
-        if (supportsWebP) {
-          return this.acomod.imageH3W
-        } else {
-          return this.acomod.imageH3J
-        }
-      }
+      return this.acomod.imageH3W === null ? '' : supportsWebP ? this.acomod.imageH3W : this.acomod.imageH3J
     },
     showShare () {
       return this.$store.state.showShare
@@ -661,16 +644,10 @@ export default {
   },
   watch: {
     scrollY (value) {
-      if (value > this.heightImageBox) {
-        this.scrollTopbar = true
-      } else {
-        this.scrollTopbar = false
-      }
+      value > this.heightImageBox ? this.scrollTopbar = true : this.scrollTopbar = false
     },
     hash (value) {
-      if (value === '') {
-        this.showComods = false
-      }
+      value === '' ? this.showComods = false : ''
     }
   },
   beforeRouteEnter (to, from, next) {

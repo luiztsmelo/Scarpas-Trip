@@ -57,29 +57,13 @@ export default {
   },
   methods: {
     image1H (evento) {
-      if (supportsWebP) {
-        return evento.imageH1W
-      } else {
-        return evento.imageH1J
-      }
+      return supportsWebP ? evento.imageH1W : evento.imageH1J
     },
     image2H (evento) {
-      if (supportsWebP) {
-        return evento.imageH2W
-      } else {
-        return evento.imageH2J
-      }
+      return supportsWebP ? evento.imageH2W : evento.imageH2J
     },
     ifImage2 (evento) {
-      if (evento.imageH2W === null) {
-        return
-      } else {
-        if (supportsWebP) {
-          return evento.imageH2W
-        } else {
-          return evento.imageH2J
-        }
-      }
+      return evento.imageH2W === null ? '' : supportsWebP ? evento.imageH2W : evento.imageH2J
     }
   },
   computed: {
