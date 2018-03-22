@@ -239,6 +239,7 @@
 
           <div class="item-form">
             <v-date-picker
+              ref='datePicker'
               is-required
               mode='range'
               v-model='$store.state.reservaAcomod.periodoReserva'
@@ -251,7 +252,7 @@
               :theme-styles='themeStylesReserva'
               :formats='formats'
               tint-color='#00D8C7'
-              :popover-visibility='datePickerVisibility'>
+              popover-visibility='focus'>
               <div
                 slot-scope='{ inputValue, updateValue }'>
                 <div>
@@ -305,7 +306,7 @@
 
           <h4 class="__info">Não se preocupe, você ainda não será cobrado.</h4>
 
-          <button class="__reserva-desktop-btn-ask" type="button" @click="$store.state.user.email === null ? $modal.show('sign-in-modal') : $modal.show('ask-acomod-modal'), $store.state.clickedAskAcomod = true">Fazer uma Pergunta</button>
+          <button class="__reserva-desktop-btn-ask" type="button" @click="$store.state.user.email === null ? $modal.show('sign-in-modal') : $modal.show('ask-acomod-modal'), $store.state.clickedAskAcomod = true, $store.state.isSignIn = false">Fazer uma Pergunta</button>
           <ask-acomod/>
 
         </form>
@@ -350,7 +351,6 @@ export default {
       
       googleMapsInitialized: false,
 
-      datePickerVisibility: 'focus',
       attributes: [
         {
           key: 'disabledDates',
@@ -467,7 +467,7 @@ export default {
           opacity: 0
         },
         dayPopoverContent: {
-          background: 'rgb(112,112,112)',
+          background: '#00D8C7',
           color: 'white',
           border: 'none'
         }
@@ -501,10 +501,7 @@ export default {
   methods: {
     openReservaModal () {
       if (this.$store.state.reservaAcomod.periodoReserva === null) {
-        this.datePickerVisibility = 'visible'
-        this.$nextTick(() => {
-          this.datePickerVisibility = 'focus'
-        })
+        this.$nextTick(() => this.$refs.datePicker.$el.focus())
       } else {
         this.$store.state.reservaAcomod.startDate = this.$store.state.reservaAcomod.periodoReserva.start.toLocaleDateString('pt-BR')
         this.$store.state.reservaAcomod.endDate = this.$store.state.reservaAcomod.periodoReserva.end.toLocaleDateString('pt-BR')
@@ -515,11 +512,7 @@ export default {
       this.$modal.show('dialog', {
         title: 'Taxa de Serviço',
         text: 'Taxa de ' + this.$store.state.serviceFeeAcomod * 100 + '% cobrada com o intuito de garantir suporte e total segurança em sua reserva caso algum problema aconteça.',
-        buttons: [
-          {
-            title: 'Fechar'
-          }
-      ]
+        buttons: [{ title: 'Fechar' }]
       })
     },
     backBtn () {
@@ -542,25 +535,13 @@ export default {
        window.location.hash = "compartilhar"
     },
     image1H (acomod) {
-      if (supportsWebP) {
-        return acomod.imageH1W
-      } else {
-        return acomod.imageH1J
-      }
+      return supportsWebP ? acomod.imageH1W : acomod.imageH1J
     },
     image2H (acomod) {
-      if (supportsWebP) {
-        return acomod.imageH2W
-      } else {
-        return acomod.imageH2J
-      }
+      return supportsWebP ? acomod.imageH2W : acomod.imageH2J
     },
     image3H (acomod) {
-      if (supportsWebP) {
-        return acomod.imageH3W
-      } else {
-        return acomod.imageH3J
-      }
+      return supportsWebP ? acomod.imageH3W : acomod.imageH3J
     },
     enterFullscreen () {
       if ((document.fullScreenElement && document.fullScreenElement !== null) ||

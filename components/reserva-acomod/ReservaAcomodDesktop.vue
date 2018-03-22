@@ -173,11 +173,7 @@ export default {
       this.$modal.show('dialog', {
         title: 'Taxa de Serviço',
         text: 'Taxa de ' + this.$store.state.serviceFeeAcomod * 100 + '% cobrada com o intuito de garantir suporte e total segurança em sua reserva caso algum problema aconteça.',
-        buttons: [
-          {
-            title: 'Fechar'
-          }
-      ]
+        buttons: [{ title: 'Fechar' }]
       })
     },
     nextBtn1 () {

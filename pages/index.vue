@@ -166,32 +166,16 @@ export default {
   },
   methods: {
     imageEvH (evento) {
-      if (supportsWebP) {
-        return evento.imageH1W
-      } else {
-        return evento.imageH1J
-      }
+      return supportsWebP ? evento.imageH1W : evento.imageH1J
     },
     imageAcH (acomod) {
-      if (supportsWebP) {
-        return acomod.imageH1W
-      } else {
-        return acomod.imageH1J
-      }
+      return supportsWebP ? acomod.imageH1W : acomod.imageH1J
     },
     imagePasH (passeio) {
-      if (supportsWebP) {
-        return passeio.imageH1W
-      } else {
-        return passeio.imageH1J
-      }
+      return supportsWebP ? passeio.imageH1W : passeio.imageH1J
     },
     imageAtH (atracao) {
-      if (supportsWebP) {
-        return atracao.imageH1W
-      } else {
-        return atracao.imageH1J
-      }
+      return supportsWebP ? atracao.imageH1W : atracao.imageH1J
     }
   },
   fetch ({ store }) {
@@ -337,20 +321,20 @@ export default {
             flex: 0 1 23.4%;
             & .__card-img {
               margin-bottom: .3rem;
-              border-radius: 3px;
+              border-radius: 2px;
             }
             & .__card-info {
               text-transform: uppercase;
-              font-size: 11px;
-              font-weight: 700;
+              font-size: 12px;
+              font-weight: 600;
             }
             & .__card-title {
-              margin: .2rem 0 .4rem 0;
-              font-size: 15px;
+              margin: .3rem 0 .5rem 0;
+              font-size: 16px;
               font-weight: 700;
             }
             & .__card-subtitle {
-              font-size: 15px;
+              font-size: 16px;
               font-weight: 400;
               & .__card-valor-dia {
                 font-size: 13px;

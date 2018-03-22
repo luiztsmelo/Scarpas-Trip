@@ -193,7 +193,7 @@ export default {
       & .__title {
         width: 100%;
         font-size: 46px;
-        font-weight: 700;
+        font-weight: 600;
         user-select: none;
         & span {
           font-size: 30px;

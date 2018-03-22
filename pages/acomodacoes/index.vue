@@ -450,7 +450,7 @@ export default {
                 & .__img {
                   width: 100%;
                   height: auto;
-                  border-radius: 4px;
+                  border-radius: 2px;
                 }
               }
             }
@@ -461,13 +461,13 @@ export default {
           flex-flow: column;
           & .__card-tipo-acomod {
             text-transform: uppercase;
-            font-size: 11px;
-            font-weight: 700;
+            font-size: 12px;
+            font-weight: 600;
             color: #007B77;
           }
           & .__card-title {
-            padding: .4rem 0;
-            font-size: 16px;
+            padding: .4rem 0 .5rem 0;
+            font-size: 17px;
             font-weight: 700;
           }
           & .__card-valor {

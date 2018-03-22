@@ -8,23 +8,48 @@
 
     <img src="../assets/img/close-modal.svg" class="close-btn" @click="$modal.hide('sign-in-modal')">
 
-    <div class="sign-in-body">
-      <img class="__img" src="../static/brand2.svg">
 
-      <h1 class="__title">{{ titleSignIn }}</h1>
-      <h3 class="__subtitle">{{ subtitleSignIn }}</h3>
+    <!-- SIGN IN -->
+    <div class="sign-in-out" v-if="$store.state.isSignIn === true">
+      <div class="sign-in-body">
+        <img class="__img" src="../static/brand2.svg">
 
-      <button type="button" class="facebook-btn" @click="facebookSignIn()">{{ facebookText }}</button>
-      <button type="button" class="google-btn" @click="googleSignIn()">{{ googleText }}</button>
-      <button type="button" class="email-btn" @click="emailSignIn()">{{ emailText }}</button>
+        <h1 class="__title">Acessar sua conta</h1>
+        <h3 class="__subtitle">Acesse sua conta para acompanhar suas reservas ou gerenciar seus anúncios</h3>
 
-      <h3 class="if-have-account">Já possui uma conta? <span class="underline">Entrar</span></h3>
-      
+        <button type="button" class="facebook-btn" @click="facebookSignIn()">Continuar com Facebook</button>
+        <button type="button" class="google-btn" @click="googleSignIn()">Continuar com Google</button>
+        <button type="button" class="email-btn" @click="emailSignIn()">Continuar com E-mail</button>
 
-      <nuxt-link to="#" class="terms-of-service">Termos de Serviço</nuxt-link>
+        <h3 class="if-have-account">Ainda não possui uma conta? <span class="underline" @click="$store.state.isSignIn = false">Cadastrar</span></h3>
 
-    </div>
+        <nuxt-link to="#" class="terms-of-service">Termos de Serviço</nuxt-link>
+
+      </div>
+    </div><!-- SIGN IN -->
+
+
+
+     <!-- SIGN OUT -->
+    <div class="sign-in-out" v-else>
+      <div class="sign-in-body">
+        <img class="__img" src="../static/brand2.svg">
+
+        <h1 class="__title">{{ $store.state.clickedAskAcomod === true ? 'Antes, você precisa se cadastrar' : 'Cadastrar' }}</h1>
+        <h3 class="__subtitle">{{ $store.state.clickedAskAcomod === true ? '' : 'Cadastre-se para fazer reservas ou anunciar na Escarpas Trip' }}</h3>
+
+        <button type="button" class="facebook-btn" @click="facebookSignIn()">Cadastrar com Facebook</button>
+        <button type="button" class="google-btn" @click="googleSignIn()">Cadastrar com Google</button>
+        <button type="button" class="email-btn" @click="emailSignIn()">Cadastrar com E-mail</button>
+
+        <h3 class="if-have-account">Já possui uma conta? <span class="underline" @click="$store.state.isSignIn = true">Entrar</span></h3>
+        
+        <nuxt-link to="#" class="terms-of-service">Termos de Serviço</nuxt-link>
+
+      </div>
+    </div> <!-- SIGN OUT -->
     
+
   </modal>
 </template>
 
@@ -39,26 +64,12 @@ export default {
     },
     closedModal () {
       this.$store.state.clickedAskAcomod = false
+      this.$store.state.isSignIn = true
     }
   },
   computed: {
     user () {
       return this.$store.state.user.email
-    },
-    titleSignIn () {
-      return this.$store.state.clickedAskAcomod === true ? 'Antes, você precisa se cadastrar' : 'Acessar sua conta'
-    },
-    subtitleSignIn () {
-      return this.$store.state.clickedAskAcomod === true ? '' : 'Acesse sua conta para acompanhar suas reservas ou gerenciar seus anúncios'
-    },
-    facebookText () {
-      return this.$store.state.clickedAskAcomod === true ? 'Cadastrar com Facebook' : 'Continuar com Facebook'
-    },
-    googleText () {
-      return this.$store.state.clickedAskAcomod === true ? 'Cadastrar com Google' : 'Continuar com Google'
-    },
-    emailText () {
-      return this.$store.state.clickedAskAcomod === true ? 'Cadastrar com E-mail' : 'Continuar com E-mail'
     }
   },
   watch: {
@@ -80,7 +91,6 @@ export default {
 
 .sign-in-modal {
   z-index: 10000;
-
   & .close-btn {
     cursor: pointer;
     position: absolute;
@@ -89,60 +99,61 @@ export default {
     width: 1rem;
     height: auto;
   }
-
-  & .sign-in-body {
-    display: flex;
-    flex-flow: column;
-    align-items: center;
-    padding: 2.8rem 4rem 2.8rem 4rem;
-    & .__img {
-      width: 5.4rem;
-      height: auto;
-    }
-    & .__title {
-      font-size: 34px;
-      text-align: center;
-      padding: 1.3rem 0 .3rem 0;
-    }
-    & .__subtitle {
-      font-size: 15px;
-      text-align: center;
-      padding: 0 0 1.1rem 0;
-      line-height: 22px;
-    }
-    & .facebook-btn {
-      width: 18rem;
-      margin: .6rem 0;
-      height: 2.9rem;
-      text-align: start;
-      padding-left: 50px;
-    }
-    & .google-btn {
-      width: 18rem;
-      margin: .6rem 0;
-      height: 2.9rem;
-      text-align: start;
-      padding-left: 50px;
-    }
-    & .email-btn {
-      width: 18rem;
-      margin: .6rem 0;
-      height: 2.9rem;
-      text-align: start;
-      padding-left: 50px;
-    }
-    & .if-have-account {
-      padding-top: .6rem;
-      font-size: 15px;
-      & .underline {
-        text-decoration: underline;
-        cursor: pointer;
+  & .sign-in-out {
+    & .sign-in-body {
+      display: flex;
+      flex-flow: column;
+      align-items: center;
+      padding: 2.8rem 4rem 2.8rem 4rem;
+      & .__img {
+        width: 5.4rem;
+        height: auto;
       }
-    }
-    & .terms-of-service {
-      padding-top: .8rem;
-      text-decoration: underline;
-      font-size: 15px;
+      & .__title {
+        font-size: 34px;
+        text-align: center;
+        padding: 1.3rem 0 .3rem 0;
+      }
+      & .__subtitle {
+        font-size: 15px;
+        text-align: center;
+        padding: 0 0 1.1rem 0;
+        line-height: 22px;
+      }
+      & .facebook-btn {
+        width: 18rem;
+        margin: .6rem 0;
+        height: 2.9rem;
+        text-align: start;
+        padding-left: 50px;
+      }
+      & .google-btn {
+        width: 18rem;
+        margin: .6rem 0;
+        height: 2.9rem;
+        text-align: start;
+        padding-left: 50px;
+      }
+      & .email-btn {
+        width: 18rem;
+        margin: .6rem 0;
+        height: 2.9rem;
+        text-align: start;
+        padding-left: 50px;
+      }
+      & .if-have-account {
+        padding-top: .6rem;
+        font-size: 15px;
+        & .underline {
+          text-decoration: underline;
+          cursor: pointer;
+        }
+      }
+      & .terms-of-service {
+        padding-top: .8rem;
+        text-decoration: underline;
+        font-size: 15px;
+      }
     }
   }
 }

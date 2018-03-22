@@ -38,11 +38,11 @@ export default {
 
 @media (min-width: 1024px) {
   .valor-diaria {
-    font-size: 16px;
+    font-size: 17px;
     font-weight: 500;
   }
   .valor-diaria-dividido {
-    font-size: 14px;
+    font-size: 15px;
     font-weight: 400;
   }
 }
