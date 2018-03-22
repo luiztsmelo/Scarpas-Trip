@@ -138,7 +138,7 @@ export default {
       & .__brand-name {
         font-family: var(--main-font);
         font-size: 18px;
-        font-weight: 600;
+        font-weight: 500;
         line-height: 3.3rem;
         user-select: none;
       }
