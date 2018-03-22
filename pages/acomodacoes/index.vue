@@ -52,6 +52,8 @@
               tint-color='#00D8C7'
               show-caps
               style='width:100%'
+              titleTransition='none'
+              weeksTransition='none'
               :formats='formats'
               popover-align='right'
               popover-visibility='focus'>

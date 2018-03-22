@@ -36,7 +36,10 @@ const store = () => new Vuex.Store({
       firstName: null,
       fullName: null,
       email: null,
-      photoURL: null
+      photoURL: null,
+      isAcomodHost: false,
+      isPasseioHost: false,
+      isRestauranteHost: false
     },
     message: {
       timestamp: null,

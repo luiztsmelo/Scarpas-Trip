@@ -47,11 +47,11 @@ export default {
 }
 
 @keyframes spin { 
-    from { 
-        transform: rotate(0deg); 
-    } to { 
-        transform: rotate(720deg); 
-    }
+  from { 
+    transform: rotate(0deg);
+  } to { 
+    transform: rotate(720deg);
+  }
 }
 
 @media (min-width: 1024px) {
