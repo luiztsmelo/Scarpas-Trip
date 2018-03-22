@@ -298,7 +298,6 @@ export default {
     return {
       title: '',/* Vue Autosize */
       subtitle: '',/* Vue Autosize */
-      googleMapsInitialized: false,
       showCroppaModal1: false,
       showCroppaModal2: false,
       date: null,
@@ -513,7 +512,7 @@ export default {
   },
   async mounted () {
     loaded.then(() => {
-      this.googleMapsInitialized = true
+      this.$store.state.googleMapsInitialized = true
     })
   },
   computed: {
@@ -521,7 +520,7 @@ export default {
       return 'https://firebasestorage.googleapis.com/v0/b/escarpas-trip.appspot.com/o/utils%2Fmarker.svg?alt=media&token=fcbfd76e-ee93-41e8-a816-98906e19859b'
     },
     markerSize () {
-      return !this.googleMapsInitialized ? null : new window.google.maps.Size(38, 38)
+      return !this.$store.state.googleMapsInitialized ? null : new window.google.maps.Size(38, 38)
     },
     titleLength () {
       return 50 - this.$store.state.eventoData.title.length

@@ -255,9 +255,8 @@ export default {
     return {
       title: '',/* Vue Autosize */
       subtitle: '',/* Vue Autosize */
-      googleMapsInitialized: false,
       polylineOptions: {
-        strokeColor: '#3e3e3e',
+        strokeColor: '#2a2a2a',
         strokeOpacity: 1,
         strokeWeight: 2
       },
@@ -455,7 +454,7 @@ export default {
   },
   async mounted () {
     loaded.then(() => {
-      this.googleMapsInitialized = true
+      this.$store.state.googleMapsInitialized = true
     })
   },
   computed: {
@@ -463,13 +462,13 @@ export default {
       return 'https://firebasestorage.googleapis.com/v0/b/escarpas-trip.appspot.com/o/utils%2Fmarker-partida.svg?alt=media&token=bd41c89e-33ea-4899-bb5a-4f2fc2d936cb'
     },
     markerSizePartida () {
-      return !this.googleMapsInitialized ? null : new window.google.maps.Size(34, 34)
+      return !this.$store.state.googleMapsInitialized ? null : new window.google.maps.Size(34, 34)
     },
     markerUrlChegada () {
       return 'https://firebasestorage.googleapis.com/v0/b/escarpas-trip.appspot.com/o/utils%2Fmarker-chegada.svg?alt=media&token=b5b52bc5-a65f-4136-9c31-57830b969067'
     },
     markerSizeChegada () {
-      return !this.googleMapsInitialized ? null : new window.google.maps.Size(34, 34)
+      return !this.$store.state.googleMapsInitialized ? null : new window.google.maps.Size(34, 34)
     },
     titleLength () {
       return 50 - this.$store.state.atracaoData.title.length
@@ -631,7 +630,7 @@ export default {
       width: 30%;
       height: 2rem;
       color: white;
-      background: #3e3e3e;
+      background: #2a2a2a;
     }
     & .__map-btn-remove {
       width: 70%;

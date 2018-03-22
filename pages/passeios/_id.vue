@@ -170,7 +170,6 @@ export default {
         dynamicBullets: true,
         autoplay: 2222
       },
-      googleMapsInitialized: false,
       monthLabels: ['Janeiro','Favereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
       weekdayLabels: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'],
       themeStyles: {
@@ -259,7 +258,7 @@ export default {
   },
   async mounted () {
     loaded.then(() => {
-      this.googleMapsInitialized = true
+      this.$store.state.googleMapsInitialized = true
     })
   },
   computed: {
@@ -267,7 +266,7 @@ export default {
       return 'https://firebasestorage.googleapis.com/v0/b/escarpas-trip.appspot.com/o/utils%2Fmarker.svg?alt=media&token=fcbfd76e-ee93-41e8-a816-98906e19859b'
     },
     markerSize () {
-      return !this.googleMapsInitialized ? null : new window.google.maps.Size(38, 38)
+      return !this.$store.state.googleMapsInitialized ? null : new window.google.maps.Size(38, 38)
     },
     scrollY () {
       return this.$store.state.scrollY

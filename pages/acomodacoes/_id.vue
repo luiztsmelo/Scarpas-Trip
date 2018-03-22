@@ -348,8 +348,6 @@ export default {
       showTopbar: true,
       scrollTopbar: false,
       heightImageBox: null,
-      
-      googleMapsInitialized: false,
 
       attributes: [
         {
@@ -558,7 +556,7 @@ export default {
   },
   async mounted () {
     loaded.then(() => {
-      this.googleMapsInitialized = true
+      this.$store.state.googleMapsInitialized = true
     })
     let heightImageBox = this.$refs.imageBox.scrollHeight
     this.heightImageBox = heightImageBox
@@ -608,7 +606,7 @@ export default {
       return 'https://firebasestorage.googleapis.com/v0/b/escarpas-trip.appspot.com/o/utils%2Fmarker.svg?alt=media&token=fcbfd76e-ee93-41e8-a816-98906e19859b'
     },
     markerSize () {
-      return !this.googleMapsInitialized ? null : new window.google.maps.Size(38, 38)
+      return !this.$store.state.googleMapsInitialized ? null : new window.google.maps.Size(38, 38)
     },
     tipoAcomodText () {
       const path = this.acomod.tipoAcomod
