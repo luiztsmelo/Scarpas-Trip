@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-show="this.attribute.targetDate.daySpan !== 0">
     <h1 class="valor-diaria">R${{ valorDiaria.toLocaleString() }}</h1>
     <h1 class="valor-diaria-dividido">R${{ valorDiariaDividido.toLocaleString() }}/hóspede</h1>
   </div>

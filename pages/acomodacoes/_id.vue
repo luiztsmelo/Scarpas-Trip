@@ -184,8 +184,6 @@
           is-double-paned
           is-expanded
           mode='single'
-          :month-labels='monthLabels'
-          :weekday-labels='weekdayLabels'
           :theme-styles='themeStylesDesktop'
           :attributes='attributes'
           >
@@ -240,10 +238,10 @@
           <div class="item-form">
             <v-date-picker
               ref='datePicker'
-              is-required
+              is-double-paned
               mode='range'
               v-model='$store.state.reservaAcomod.periodoReserva'
-              :min-date='new Date().getTime()'
+              :available-dates='{ start: new Date(), end: null }'
               :pane-width='280'
               :disabled-dates='disabledDates'
               :drag-attribute='myAttribute'
@@ -252,6 +250,8 @@
               :theme-styles='themeStylesReserva'
               :formats='formats'
               tint-color='#00D8C7'
+              show-caps
+              popover-align='right'
               popover-visibility='focus'>
               <div
                 slot-scope='{ inputValue, updateValue }'>
@@ -278,7 +278,7 @@
             
             <div class="reserva-info_item">
               <h3>R${{ acomod.valorDiariaNormal.toLocaleString() }} x {{ $store.state.reservaAcomod.noites }} noites</h3>
-              <h3 id="valor">{{ valorNoitesTotal }}</h3>
+              <h3 id="valor">R$ {{ valorNoitesTotal.toLocaleString() }}</h3>
             </div>
 
             <div class="reserva-info_item" style="padding-bottom: .3rem">
@@ -291,12 +291,17 @@
                 >
                 <v-dialog id="service-fee" style="z-index:10000"/>
               </div>
-              <h3>{{ serviceFeeTotal }}</h3>
+              <h3>R$ {{ serviceFeeTotal.toLocaleString() }}</h3>
             </div>
 
             <div class="reserva-info_item-total" style="padding-top: .3rem">
               <h3>Total</h3>
-              <h3>{{ valorReservaTotal }}</h3>
+              <h3>R$ {{ valorReservaTotal.toLocaleString() }}</h3>
+            </div>
+
+            <div class="reserva-info_item">
+              <h3>Dividido para {{ $store.state.reservaAcomod.totalHospedes }}</h3>
+              <h3>R$ {{ valorReservaTotalDividido.toLocaleString() }}</h3>
             </div>
 
           </div>
@@ -361,8 +366,6 @@ export default {
           }
         }
       ],
-      monthLabels: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
-      weekdayLabels: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'],
       myAttribute: {
         popover: {
           hideIndicator: true,
@@ -393,7 +396,7 @@ export default {
       },
       themeStylesDesktop: {
         wrapper: {
-          color: 'rgb(62, 62, 62)',
+          color: 'rgb(42, 42, 42)',
           margin: '10px 0px 0 0px',
           padding: '10px 0px 0 0px',
           background: 'white',
@@ -406,34 +409,34 @@ export default {
           fontSize: '1.5rem',
         },
         headerTitle: {
-          fontSize: '17px',
+          fontSize: '16px',
           fontWeight: '400'
         },
         weekdays: {
-          color: 'rgb(62, 62, 62)',
-          fontSize: '17px',
+          color: 'rgb(42, 42, 42)',
+          fontSize: '16px',
           fontWeight: '600',
           padding: '14px 5px 6px 5px',
         },
         dayCell: {
-          height: '32px'
+          height: '38px'
         },
         dayContent: {
           fontWeight: '400',
-          fontSize: '15px'
+          fontSize: '14px'
         },
         dayCellNotInMonth: {
           opacity: 0
         },
         verticalDivider: {
-          borderLeft: 'none'
+          borderLeft: 'none',
         }
       },
       themeStylesReserva: {
         wrapper: {
-          color: 'rgb(62, 62, 62)',
-          borderTop: '10px solid white',
-          borderBottom: '10px solid white',
+          color: 'rgb(42, 42, 42)',
+          borderTop: '8px solid white',
+          borderBottom: '8px solid white',
           borderLeft: '15px solid white',
           borderRight: '15px solid white',
           background: 'white',
@@ -446,11 +449,11 @@ export default {
           fontSize: '1.45rem',
         },
         headerTitle: {
-          fontSize: '17px',
+          fontSize: '16px',
           fontWeight: '400'
         },
         weekdays: {
-          color: 'rgb(62, 62, 62)',
+          color: 'rgb(42, 42, 42)',
           fontWeight: '600',
           padding: '21px 5px 6px 5px',
         },
@@ -459,7 +462,7 @@ export default {
         },
         dayContent: {
           fontWeight: '400',
-          fontSize: '15px'
+          fontSize: '14px'
         },
         dayCellNotInMonth: {
           opacity: 0
@@ -468,6 +471,9 @@ export default {
           background: '#00D8C7',
           color: 'white',
           border: 'none'
+        },
+        verticalDivider: {
+          borderLeft: 'none'
         }
       } 
     }
@@ -565,17 +571,21 @@ export default {
     valorNoitesTotal () {
       let valorNoitesTotal = this.acomod.valorDiariaNormal * this.$store.state.reservaAcomod.noites
       this.$store.commit('m_valorNoitesTotal', valorNoitesTotal)
-      return 'R$' + valorNoitesTotal.toLocaleString()
+      return valorNoitesTotal
     },
     serviceFeeTotal () {
       let serviceFeeTotal = Math.trunc(this.acomod.valorDiariaNormal * this.$store.state.reservaAcomod.noites * this.$store.state.serviceFeeAcomod)
       this.$store.commit('m_serviceFeeTotal', serviceFeeTotal)
-      return 'R$' + serviceFeeTotal.toLocaleString()
+      return serviceFeeTotal
     },
     valorReservaTotal () {
       let valorReservaTotal = Math.trunc((this.acomod.valorDiariaNormal * this.$store.state.reservaAcomod.noites) + this.acomod.valorDiariaNormal * this.$store.state.reservaAcomod.noites * this.$store.state.serviceFeeAcomod)
       this.$store.commit('m_valorReservaTotal', valorReservaTotal)
-      return 'R$' + valorReservaTotal.toLocaleString()
+      return valorReservaTotal
+    },
+    valorReservaTotalDividido () {
+      let valorReservaTotalDividido = Math.trunc(this.valorReservaTotal/this.$store.state.reservaAcomod.totalHospedes)
+      return valorReservaTotalDividido
     },
     totalHospedesArray () {
       return Array.from({length: this.acomod.totalHospedes}, (v, k) => k+1)
@@ -1017,7 +1027,7 @@ export default {
               justify-content: space-between;
               border-top: 1px solid rgb(232,232,232);
               & h3 {
-                font-size: 16px;
+                font-size: 17px;
                 font-weight: 500;
               }
             }

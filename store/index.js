@@ -140,6 +140,7 @@ const store = () => new Vuex.Store({
       valorNoitesTotal: null,
       serviceFeeTotal: null,
       valorReservaTotal: null,
+      mensagem: null,
       hostID: null,
       guestID: null,
       hostName: null,
@@ -789,6 +790,7 @@ const store = () => new Vuex.Store({
       state.reservaAcomod = {
         reservaID: null,
         acomodID: null,
+        requested: null,
         totalHospedes: '1',
         periodoReserva: null,
         startDate: null,
@@ -797,6 +799,7 @@ const store = () => new Vuex.Store({
         valorNoitesTotal: null,
         serviceFeeTotal: null,
         valorReservaTotal: null,
+        mensagem: null,
         hostID: null,
         guestID: null,
         hostName: null,

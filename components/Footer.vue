@@ -1,7 +1,7 @@
 <template>
   <div class="footer">
 
-    <img class="__img" src="../static/brand2.svg">
+    <img class="__img" src="../static/brand.svg">
 
     <div class="box">
       <h1 class="__title">Escarpas Trip</h1>

@@ -2,7 +2,7 @@
   <modal
     name="reserva-desktop-modal"
     class="reserva-desktop-modal"
-    width="74%"
+    width="70%"
     height="auto">
 
     <img src="../../assets/img/close-modal.svg" style="cursor:pointer;position:absolute;top:1rem;right:1rem;width:1rem;height:auto" @click="$modal.hide('reserva-desktop-modal')">
@@ -13,11 +13,11 @@
 
       <h3 class="__item-progress" :style="etapaProgressed1" @click="backEtapa1">1. Revisar detalhes</h3>
       
-      <img src="../../assets/img/arrow-right2.svg" class="__arrow-right">
+      <img src="../../assets/img/arrow-right.svg" class="__arrow-right">
 
       <h3 class="__item-progress" :style="etapaProgressed2" @click="backEtapa2">2. Diga um oi para Tarcísio</h3>
 
-      <img src="../../assets/img/arrow-right2.svg" class="__arrow-right">
+      <img src="../../assets/img/arrow-right.svg" class="__arrow-right">
 
       <h3 class="__item-progress" :style="etapaProgressed4" @click="backEtapa4">3. Pagamento e Confirmação</h3>
 
@@ -27,15 +27,15 @@
 
       <h3 class="__item-progress" :style="etapaProgressed1" @click="backEtapa1">1. Revisar detalhes</h3>
 
-      <img src="../../assets/img/arrow-right2.svg" class="__arrow-right">
+      <img src="../../assets/img/arrow-right.svg" class="__arrow-right">
 
       <h3 class="__item-progress" :style="etapaProgressed2" @click="backEtapa2">2. Mensagem</h3>
 
-      <img src="../../assets/img/arrow-right2.svg" class="__arrow-right">
+      <img src="../../assets/img/arrow-right.svg" class="__arrow-right">
 
       <h3 class="__item-progress" :style="etapaProgressed3" @click="backEtapa3">3. Identificação</h3>
 
-      <img src="../../assets/img/arrow-right2.svg" class="__arrow-right">
+      <img src="../../assets/img/arrow-right.svg" class="__arrow-right">
 
       <h3 class="__item-progress" :style="etapaProgressed4" @click="backEtapa4">4. Pagamento e Confirmação</h3>
 
@@ -115,6 +115,13 @@
       <h1 class="__title">Diga um oi para {{ acomod.proprietario.split(' ')[0] }}</h1>
 
       <div class="container">
+
+        <textarea 
+          rows="6" 
+          maxlength="2000" 
+          v-model="$store.state.reservaAcomod.mensagem" 
+          :placeholder="'E ai ' +  acomod.proprietario.split(' ')[0] + '! Como vai? Achamos ' + tipoAcomodText + '...'">
+        </textarea>
 
       </div>
 
@@ -214,25 +221,30 @@ export default {
       return this.$store.state.acomod
     },
     etapaProgressed1 () {
-      if (this.$store.state.etapaReserva1ok === true) {
-        return 'font-weight: 700'
-      }
+      return this.$store.state.etapaReserva1ok === true ? 'font-weight: 700' : 'cursor: default'
     },
     etapaProgressed2 () {
-      if (this.$store.state.etapaReserva2ok === true) {
-        return 'font-weight: 700'
-      }
+      return this.$store.state.etapaReserva2ok === true ? 'font-weight: 700' : 'cursor: default'
     },
     etapaProgressed3 () {
-      if (this.$store.state.etapaReserva3ok === true) {
-        return 'font-weight: 700'
-      }
+      return this.$store.state.etapaReserva3ok === true ? 'font-weight: 700' : 'cursor: default'
     },
     etapaProgressed4 () {
-      if (this.$store.state.etapaReserva4ok === true) {
-        return 'font-weight: 700'
-      }
-    }
+      return this.$store.state.etapaReserva4ok === true ? 'font-weight: 700' : 'cursor: default'
+    },
+    tipoAcomodText () {
+      const path = this.acomod.tipoAcomod
+      return path === 'Casa' ? 'linda a sua casa' 
+           : path === 'Apartamento' ? 'lindo o seu apartamento'
+           : path === 'Rancho' ? 'lindo o seu rancho'
+           : path === 'Chácara' ? 'linda a sua chácara'
+           : path === 'Pousada' ? 'linda a sua pousada'
+           : path === 'Camping' ? 'lindo o seu camping'
+           : path === 'Sítio' ? 'lindo o seu sítio'
+           : path === 'Fazenda' ? 'linda a sua fazenda'
+           : path === 'Hostel' ? 'lindo o seu hostel'
+           : ''
+    },
   }
 }
 </script>
@@ -259,7 +271,7 @@ export default {
     }
     & .__arrow-right {
       padding: 1.7rem 0 1rem 0;
-      width: 1.5rem; 
+      width: .8rem; 
       height: auto;
       margin: 0 1.5rem;
     }
@@ -279,7 +291,7 @@ export default {
 
       /* Left Container */
       & .left-container {
-        flex-basis: 60%;
+        flex-basis: 58%;
         border-right: 1px solid rgb(232,232,232);
         padding-right: 1.5rem;
         
@@ -287,7 +299,7 @@ export default {
 
       /* Right Container */
       & .right-container {
-        flex-basis: 40%;
+        flex-basis: 42%;
         padding-left: 1.5rem;
         & .detalhes-reserva-header {
           display: flex;
@@ -335,7 +347,7 @@ export default {
             justify-content: space-between;
             border-top: 1px solid rgb(232,232,232);
             & h3 {
-              font-size: 17px;
+              font-size: 18px;
               font-weight: 500;
             }
           }
@@ -355,6 +367,17 @@ export default {
       margin: 1.9rem 0 1.3rem 0;
       display: flex;
       height: 345px;
+      & textarea {
+        width: 100%;
+        border: none;
+        outline: none;
+        font-size: 19px;
+        font-weight: 400;
+        line-height: 32px;
+        resize: none;
+      }
+      textarea::-webkit-input-placeholder {
+      }
     }
   }
 

@@ -12,7 +12,7 @@
     <!-- SIGN IN -->
     <div class="sign-in-out" v-if="$store.state.isSignIn === true">
       <div class="sign-in-body">
-        <img class="__img" src="../static/brand2.svg">
+        <img class="__img" src="../static/brand.svg">
 
         <h1 class="__title">Acessar sua conta</h1>
         <h3 class="__subtitle">Acesse sua conta para acompanhar suas reservas ou gerenciar seus anúncios</h3>
@@ -33,7 +33,7 @@
      <!-- SIGN OUT -->
     <div class="sign-in-out" v-else>
       <div class="sign-in-body">
-        <img class="__img" src="../static/brand2.svg">
+        <img class="__img" src="../static/brand.svg">
 
         <h1 class="__title">{{ $store.state.clickedAskAcomod === true ? 'Antes, você precisa se cadastrar' : 'Cadastrar' }}</h1>
         <h3 class="__subtitle">{{ $store.state.clickedAskAcomod === true ? '' : 'Cadastre-se para fazer reservas ou anunciar na Escarpas Trip' }}</h3>

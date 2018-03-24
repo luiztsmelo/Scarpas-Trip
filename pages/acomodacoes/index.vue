@@ -44,16 +44,16 @@
               @drag='drag = $event'
               v-model='filter.date'
               :show-popover='false'
-              :min-date='new Date().getTime()'
-              :pane-width='275'
+              :available-dates='{ start: new Date(), end: null }'
+              :pane-width='280'
               :disabled-dates='disabledDates'
               :disabled-attribute='disabledAttribute'
+              :drag-attribute='myAttribute'
+              :select-attribute='myAttribute'
               :theme-styles='themeStylesDesktop'
               tint-color='#00D8C7'
               show-caps
               style='width:100%'
-              titleTransition='none'
-              weeksTransition='none'
               :formats='formats'
               popover-align='right'
               popover-visibility='focus'>
@@ -172,6 +172,11 @@ export default {
       formats: {
         input: ['D MMM', 'D MMM']
       },
+      myAttribute: {
+        popover: {
+          visibility: 'hidden'
+        }
+      },
       disabledAttribute: {
         contentStyle: {
           opacity: .3
@@ -183,9 +188,9 @@ export default {
       },
       themeStylesDesktop: {
         wrapper: {
-          color: 'rgb(62, 62, 62)',
-          borderTop: '10px solid white',
-          borderBottom: '10px solid white',
+          color: 'rgb(42, 42, 42)',
+          borderTop: '8px solid white',
+          borderBottom: '8px solid white',
           borderLeft: '15px solid white',
           borderRight: '15px solid white',
           background: 'white',
@@ -202,7 +207,7 @@ export default {
           fontWeight: '400'
         },
         weekdays: {
-          color: 'rgb(62, 62, 62)',
+          color: 'rgb(42, 42, 42)',
           fontWeight: '600',
           padding: '14px 5px 6px 5px',
         },
@@ -234,9 +239,7 @@ export default {
   },
   methods: {
     getNoites (range) {
-      const msInDay = 1000*60*60*24
-      if (!range) return 0
-      return (range.end - range.start)/msInDay
+      return !range ? 0 : (range.end - range.start)/(1000*60*60*24)
     },
     image1H (acomod) {
       return supportsWebP ? acomod.imageH1W : acomod.imageH1J
@@ -422,7 +425,7 @@ export default {
                 & .__img {
                   width: 100%;
                   height: auto;
-                  border-radius: 2px;
+                  border-radius: 1px;
                 }
               }
             }

@@ -74,6 +74,9 @@ input {
   font-family: var(--main-font);
 }
 
+textarea {
+  font-family: var(--main-font);
+}
 /* ******* CHECKBOX ******* */
 
 
@@ -109,11 +112,11 @@ input {
 /* ******* TEXT HIGHLIGHT COLOR ******* */
 ::-moz-selection { /* Firefox */
   color: white;
-  background: rgb(102, 102, 102);
+  background: #FF7E65;
 }
 ::selection {
   color: white;
-  background: rgb(102, 102, 102);
+  background: #FF7E65;
 }
 
 /* ******* SIGN IN BUTTONS ******* */

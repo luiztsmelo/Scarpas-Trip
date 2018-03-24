@@ -81,7 +81,7 @@
             is-required
             mode='range'
             v-model='$store.state.reservaAcomod.periodoReserva'
-            :min-date='new Date().getTime()'
+            :min-date='Date.now()'
             :disabled-dates='disabledDates'
             :drag-attribute='myAttribute'
             :select-attribute='myAttribute'
