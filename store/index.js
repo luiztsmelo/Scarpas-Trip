@@ -148,6 +148,7 @@ const store = () => new Vuex.Store({
       hostEmail: null,
       guestEmail: null
     },
+    clickedReservaAcomod: false,
     clickedAskAcomod: false,
     cadastroAcomod0: true,
     cadastroAcomod1: false,
@@ -169,11 +170,9 @@ const store = () => new Vuex.Store({
     reservaAcomodDesktop1: true,
     reservaAcomodDesktop2: false,
     reservaAcomodDesktop3: false,
-    reservaAcomodDesktop4: false,
     etapaReserva1ok: true,
     etapaReserva2ok: false,
     etapaReserva3ok: false,
-    etapaReserva4ok: false,
     /*
     ########## Evento ##########
     */
@@ -472,9 +471,6 @@ const store = () => new Vuex.Store({
     },
     m_reservaAcomodDesktop3 (state, payload) {
       state.reservaAcomodDesktop3 = payload
-    },
-    m_reservaAcomodDesktop4 (state, payload) {
-      state.reservaAcomodDesktop4 = payload
     },
     /*
     ########## Evento ##########
@@ -810,11 +806,9 @@ const store = () => new Vuex.Store({
       state.reservaAcomodDesktop1 = true
       state.reservaAcomodDesktop2 = false
       state.reservaAcomodDesktop3 = false
-      state.reservaAcomodDesktop4 = false
       state.etapaReserva1ok = true
       state.etapaReserva2ok = false
       state.etapaReserva3ok = false
-      state.etapaReserva4ok = false
     },
     /*
     ########## Eventos ##########

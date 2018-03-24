@@ -269,7 +269,7 @@
       <h1 class="__form-title">Dê um título para seu passeio</h1>
 
       <textarea 
-      v-model="$store.state.passeioData.title"
+      v-model.lazy="$store.state.passeioData.title"
       v-autosize="title"
       maxlength="50"
       rows="1"
@@ -297,7 +297,7 @@
       <h1 class="__form-title">Descreva seu passeio</h1>   
 
       <textarea 
-      v-model="$store.state.passeioData.subtitle"
+      v-model.lazy="$store.state.passeioData.subtitle"
       v-autosize="subtitle"
       maxlength="400"
       rows="1"

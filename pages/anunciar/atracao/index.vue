@@ -161,7 +161,7 @@
       <h1 class="__form-title">Título para a atração</h1>
 
       <textarea 
-      v-model="$store.state.atracaoData.title"
+      v-model.lazy="$store.state.atracaoData.title"
       v-autosize="title"
       maxlength="50"
       rows="1"
@@ -189,7 +189,7 @@
       <h1 class="__form-title">Descreva a atração</h1>   
 
       <textarea 
-      v-model="$store.state.atracaoData.subtitle"
+      v-model.lazy="$store.state.atracaoData.subtitle"
       v-autosize="subtitle"
       maxlength="400"
       rows="1"

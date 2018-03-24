@@ -449,7 +449,7 @@
       <h1 class="__form-title">Dê um título para seu anúncio</h1>
 
       <textarea 
-      v-model="$store.state.acomodData.title"
+      v-model.lazy="$store.state.acomodData.title"
       v-autosize="title"
       maxlength="50"
       rows="1"
@@ -479,7 +479,7 @@
       <h1 class="__form-title">Descreva seu anúncio</h1>   
 
       <textarea 
-      v-model="$store.state.acomodData.subtitle"
+      v-model.lazy="$store.state.acomodData.subtitle"
       v-autosize="subtitle"
       maxlength="500"
       rows="1"

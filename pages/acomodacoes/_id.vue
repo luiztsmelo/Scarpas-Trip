@@ -297,7 +297,7 @@
               <h3>R$ {{ valorReservaTotal.toLocaleString() }}</h3>
             </div>
 
-            <div class="reserva-info_item">
+            <div class="reserva-info_item" v-if="$store.state.reservaAcomod.totalHospedes !== 1">
               <h3>Dividido para {{ $store.state.reservaAcomod.totalHospedes }}</h3>
               <h3>R$ {{ valorReservaTotalDividido.toLocaleString() }}</h3>
             </div>
@@ -507,7 +507,13 @@ export default {
       } else {
         this.$store.state.reservaAcomod.startDate = this.$store.state.reservaAcomod.periodoReserva.start.toLocaleDateString('pt-BR')
         this.$store.state.reservaAcomod.endDate = this.$store.state.reservaAcomod.periodoReserva.end.toLocaleDateString('pt-BR')
-        this.$modal.show('reserva-desktop-modal')
+        if (this.$store.state.user.email === null) {
+          this.$store.state.isSignIn = false
+          this.$store.state.clickedReservaAcomod = true
+          this.$modal.show('sign-in-modal')
+        } else {
+          this.$modal.show('reserva-desktop-modal')
+        }
       }
     },
     serviceFeeDialog () {
@@ -948,7 +954,7 @@ export default {
       display: flex;
       margin: 1.7rem 8% 0 8%;
       & .reserva-desktop {
-        flex-basis: 30%;
+        flex-basis: 31%;
         border: 1px solid rgb(232,232,232);
         align-self: flex-start;
         & .reserva-desktop-form {
@@ -1060,7 +1066,7 @@ export default {
       }
       & .desktop-view-info {
         margin-right: 5%;
-        flex-basis: 70%;
+        flex-basis: 69%;
         /* ####### ANUNCIANTE BOX ####### */
         & .anunciante-box {
           padding: 1.5rem 0 0 0;

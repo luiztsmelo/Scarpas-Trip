@@ -212,7 +212,7 @@
       <h1 class="__form-title">Dê um título para seu evento</h1>  
       
       <textarea 
-      v-model="$store.state.eventoData.title"
+      v-model.lazy="$store.state.eventoData.title"
       v-autosize="title"
       maxlength="50"
       rows="1"
@@ -240,7 +240,7 @@
       <h1 class="__form-title">Descreva seu evento</h1>   
 
       <textarea 
-      v-model="$store.state.eventoData.subtitle"
+      v-model.lazy="$store.state.eventoData.subtitle"
       v-autosize="subtitle"
       maxlength="400"
       rows="1"

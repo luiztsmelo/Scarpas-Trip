@@ -10,7 +10,7 @@
 
 
     <!-- SIGN IN -->
-    <div class="sign-in-out" v-if="$store.state.isSignIn === true">
+    <div class="sign-in-up" v-if="$store.state.isSignIn === true">
       <div class="sign-in-body">
         <img class="__img" src="../static/brand.svg">
 
@@ -30,13 +30,13 @@
 
 
 
-     <!-- SIGN OUT -->
-    <div class="sign-in-out" v-else>
+     <!-- SIGN UP -->
+    <div class="sign-in-up" v-else>
       <div class="sign-in-body">
         <img class="__img" src="../static/brand.svg">
 
-        <h1 class="__title">{{ $store.state.clickedAskAcomod === true ? 'Antes, você precisa se cadastrar' : 'Cadastrar' }}</h1>
-        <h3 class="__subtitle">{{ $store.state.clickedAskAcomod === true ? '' : 'Cadastre-se para fazer reservas ou anunciar na Escarpas Trip' }}</h3>
+        <h1 class="__title">{{ $store.state.clickedAskAcomod === true || $store.state.clickedReservaAcomod === true ? 'Antes, você precisa se cadastrar' : 'Cadastrar' }}</h1>
+        <h3 class="__subtitle">{{ $store.state.clickedAskAcomod === true || $store.state.clickedReservaAcomod === true ? '' : 'Cadastre-se para fazer reservas ou anunciar na Escarpas Trip' }}</h3>
 
         <button type="button" class="facebook-btn" @click="facebookSignIn()">Cadastrar com Facebook</button>
         <button type="button" class="google-btn" @click="googleSignIn()">Cadastrar com Google</button>
@@ -47,7 +47,7 @@
         <nuxt-link to="#" class="terms-of-service">Termos de Serviço</nuxt-link>
 
       </div>
-    </div> <!-- SIGN OUT -->
+    </div> <!-- SIGN UP -->
     
 
   </modal>
@@ -63,6 +63,7 @@ export default {
       this.$store.dispatch('a_facebookSignIn')
     },
     closedModal () {
+      this.$store.state.clickedReservaAcomod = false
       this.$store.state.clickedAskAcomod = false
       this.$store.state.isSignIn = true
     }
@@ -80,6 +81,10 @@ export default {
       if (value !== null && this.$store.state.clickedAskAcomod === true && this.$route.name === 'acomodacoes-id') {
         this.$modal.hide('sign-in-modal')
         this.$modal.show('ask-acomod-modal')
+      }
+      if (value !== null && this.$store.state.clickedReservaAcomod === true && this.$route.name === 'acomodacoes-id') {
+        this.$modal.hide('sign-in-modal')
+        this.$modal.show('reserva-desktop-modal')
       }
     }
   }
@@ -99,7 +104,7 @@ export default {
     width: 1rem;
     height: auto;
   }
-  & .sign-in-out {
+  & .sign-in-up {
     & .sign-in-body {
       display: flex;
       flex-flow: column;

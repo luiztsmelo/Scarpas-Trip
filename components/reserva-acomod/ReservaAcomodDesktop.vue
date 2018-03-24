@@ -3,44 +3,27 @@
     name="reserva-desktop-modal"
     class="reserva-desktop-modal"
     width="70%"
-    height="auto">
+    height="auto"
+    @closed="closedModal">
 
     <img src="../../assets/img/close-modal.svg" style="cursor:pointer;position:absolute;top:1rem;right:1rem;width:1rem;height:auto" @click="$modal.hide('reserva-desktop-modal')">
 
 
     <!-- ******* HEADER PROGRESS ******* -->
-    <div class="header-progress" v-if="$store.state.user.email !== null">
+    <div class="header-progress">
 
       <h3 class="__item-progress" :style="etapaProgressed1" @click="backEtapa1">1. Revisar detalhes</h3>
       
-      <img src="../../assets/img/arrow-right.svg" class="__arrow-right">
-
-      <h3 class="__item-progress" :style="etapaProgressed2" @click="backEtapa2">2. Diga um oi para Tarcísio</h3>
-
-      <img src="../../assets/img/arrow-right.svg" class="__arrow-right">
-
-      <h3 class="__item-progress" :style="etapaProgressed4" @click="backEtapa4">3. Pagamento e Confirmação</h3>
-
-    </div>
-
-    <div class="header-progress" v-else>
-
-      <h3 class="__item-progress" :style="etapaProgressed1" @click="backEtapa1">1. Revisar detalhes</h3>
-
       <img src="../../assets/img/arrow-right.svg" class="__arrow-right">
 
       <h3 class="__item-progress" :style="etapaProgressed2" @click="backEtapa2">2. Mensagem</h3>
 
       <img src="../../assets/img/arrow-right.svg" class="__arrow-right">
 
-      <h3 class="__item-progress" :style="etapaProgressed3" @click="backEtapa3">3. Identificação</h3>
+      <h3 class="__item-progress" :style="etapaProgressed3" @click="backEtapa3">3. Pagamento e Confirmação</h3>
 
-      <img src="../../assets/img/arrow-right.svg" class="__arrow-right">
-
-      <h3 class="__item-progress" :style="etapaProgressed4" @click="backEtapa4">4. Pagamento e Confirmação</h3>
-
-    </div>
-    <!-- ******* HEADER PROGRESS ******* -->
+    </div><!-- ******* HEADER PROGRESS ******* -->
+    
 
 
     <!-- ******* ETAPA 1 ******* -->
@@ -116,10 +99,10 @@
 
       <div class="container">
 
-        <textarea 
-          rows="6" 
+        <textarea
+          autofocus
           maxlength="2000" 
-          v-model="$store.state.reservaAcomod.mensagem" 
+          v-model.lazy="$store.state.reservaAcomod.mensagem"
           :placeholder="'E ai ' +  acomod.proprietario.split(' ')[0] + '! Como vai? Achamos ' + tipoAcomodText + '...'">
         </textarea>
 
@@ -132,22 +115,7 @@
 
 
     <!-- ******* ETAPA 3 ******* -->
-    <div class="etapa-3" v-if="$store.state.reservaAcomodDesktop3 === true && $store.state.user.email === null">
-
-      <h1 class="__title">Identificação</h1>
-
-      <div class="container">
-
-      </div>
-
-      <button class="__next-btn" type="button" @click="nextBtn3">Continuar</button>
-      
-    </div><!-- ******* ETAPA 3 ******* -->
-
-
-
-    <!-- ******* ETAPA 4 ******* -->
-    <div class="etapa-4" v-if="$store.state.reservaAcomodDesktop4 === true">
+    <div class="etapa-3" v-if="$store.state.reservaAcomodDesktop3 === true">
 
       <h1 class="__title">Pagamento e Confirmação</h1>
 
@@ -155,9 +123,9 @@
 
       </div>
 
-      <button class="__next-btn" type="button" @click="concluirReserva">Concluir Reserva</button>
+      <button class="__next-btn" type="button" @click="concluirReserva">Confirmar e Pagar</button>
       
-    </div><!-- ******* ETAPA 4 ******* -->
+    </div><!-- ******* ETAPA 3 ******* -->
 
 
 
@@ -169,6 +137,9 @@ import supportsWebP from 'supports-webp'
 
 export default {
   methods: {
+    closedModal () {
+      this.$store.state.clickedReservaAcomod = false
+    },
     image1H (acomod) {
       return supportsWebP ? acomod.imageH1W : acomod.imageH1J
     },
@@ -183,36 +154,24 @@ export default {
       this.$store.state.etapaReserva2ok = true, this.$store.commit('m_reservaAcomodDesktop1', false), this.$store.commit('m_reservaAcomodDesktop2', true)
     },
     nextBtn2 () {
-      if (this.$store.state.user.email === null) {
-        this.$store.state.etapaReserva3ok = true, this.$store.commit('m_reservaAcomodDesktop2', false), this.$store.commit('m_reservaAcomodDesktop3', true)
-      } else {
-        this.$store.state.etapaReserva4ok = true, this.$store.commit('m_reservaAcomodDesktop2', false), this.$store.commit('m_reservaAcomodDesktop4', true)
-      }
-    },
-    nextBtn3 () {
-      this.$store.state.etapaReserva4ok = true, this.$store.commit('m_reservaAcomodDesktop3', false), this.$store.commit('m_reservaAcomodDesktop4', true)
+      this.$store.state.etapaReserva3ok = true, this.$store.commit('m_reservaAcomodDesktop2', false), this.$store.commit('m_reservaAcomodDesktop3', true)
     },
     concluirReserva () {
       this.$store.dispatch('a_newReservaAcomod')
     },
     backEtapa1 () {
       if (this.$store.state.etapaReserva1ok === true) {
-        this.$store.commit('m_reservaAcomodDesktop1', true), this.$store.commit('m_reservaAcomodDesktop2', false), this.$store.commit('m_reservaAcomodDesktop3', false), this.$store.commit('m_reservaAcomodDesktop4', false)
+        this.$store.commit('m_reservaAcomodDesktop1', true), this.$store.commit('m_reservaAcomodDesktop2', false), this.$store.commit('m_reservaAcomodDesktop3', false)
       }
     },
     backEtapa2 () {
       if (this.$store.state.etapaReserva2ok === true) {
-        this.$store.commit('m_reservaAcomodDesktop1', false), this.$store.commit('m_reservaAcomodDesktop2', true), this.$store.commit('m_reservaAcomodDesktop3', false), this.$store.commit('m_reservaAcomodDesktop4', false)
+        this.$store.commit('m_reservaAcomodDesktop1', false), this.$store.commit('m_reservaAcomodDesktop2', true), this.$store.commit('m_reservaAcomodDesktop3', false)
       }
     },
     backEtapa3 () {
       if (this.$store.state.etapaReserva3ok === true) {
-        this.$store.commit('m_reservaAcomodDesktop1', false), this.$store.commit('m_reservaAcomodDesktop2', false), this.$store.commit('m_reservaAcomodDesktop3', true), this.$store.commit('m_reservaAcomodDesktop4', false)
-      }
-    },
-    backEtapa4 () {
-      if (this.$store.state.etapaReserva4ok === true) {
-        this.$store.commit('m_reservaAcomodDesktop1', false), this.$store.commit('m_reservaAcomodDesktop2', false), this.$store.commit('m_reservaAcomodDesktop3', false), this.$store.commit('m_reservaAcomodDesktop4', true)
+        this.$store.commit('m_reservaAcomodDesktop1', false), this.$store.commit('m_reservaAcomodDesktop2', false), this.$store.commit('m_reservaAcomodDesktop3', true)
       }
     }
   },
@@ -221,16 +180,13 @@ export default {
       return this.$store.state.acomod
     },
     etapaProgressed1 () {
-      return this.$store.state.etapaReserva1ok === true ? 'font-weight: 700' : 'cursor: default'
+      return this.$store.state.etapaReserva1ok === true ? 'font-weight: 600' : 'cursor: default'
     },
     etapaProgressed2 () {
-      return this.$store.state.etapaReserva2ok === true ? 'font-weight: 700' : 'cursor: default'
+      return this.$store.state.etapaReserva2ok === true ? 'font-weight: 600' : 'cursor: default'
     },
     etapaProgressed3 () {
-      return this.$store.state.etapaReserva3ok === true ? 'font-weight: 700' : 'cursor: default'
-    },
-    etapaProgressed4 () {
-      return this.$store.state.etapaReserva4ok === true ? 'font-weight: 700' : 'cursor: default'
+      return this.$store.state.etapaReserva3ok === true ? 'font-weight: 600' : 'cursor: default'
     },
     tipoAcomodText () {
       const path = this.acomod.tipoAcomod
@@ -266,7 +222,7 @@ export default {
       cursor: pointer;
       user-select: none;
       padding: 1.7rem 0 1rem 0;
-      font-size: 14px;
+      font-size: 15px;
       font-weight: 400;
     }
     & .__arrow-right {
@@ -371,32 +327,20 @@ export default {
         width: 100%;
         border: none;
         outline: none;
-        font-size: 19px;
+        font-size: 17px;
         font-weight: 400;
         line-height: 32px;
         resize: none;
       }
-      textarea::-webkit-input-placeholder {
-      }
+      & textarea::-webkit-input-placeholder {color: rgb(162, 162, 162)}
+      & textarea::-moz-placeholder {color: rgb(162, 162, 162)}
+      & textarea:-ms-input-placeholder {color: rgb(162, 162, 162)}
+      & textarea:-moz-placeholder {color: rgb(162, 162, 162)}
     }
   }
 
   /* ******* ETAPA 3 ******* */
   & .etapa-3 {
-    margin: .7rem 3.5rem 4.5rem 3.5rem;
-    height: 100%;
-    & .__title {
-      font-size: 33px;
-    }
-    & .container {
-      margin: 1.9rem 0 1.3rem 0;
-      display: flex;
-      height: 345px;
-    }
-  }
-
-  /* ******* ETAPA 4 ******* */
-  & .etapa-4 {
     margin: .7rem 3.5rem 4.5rem 3.5rem;
     height: 100%;
     & .__title {
