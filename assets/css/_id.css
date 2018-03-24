@@ -49,8 +49,9 @@
 
 
 .id-title {
-  font-size: 26px;
   font-weight: 700;
+  font-size: 27px;
+  line-height: 32px;
   padding: 0 7%;
   margin: 1rem 0 0 0;
 }

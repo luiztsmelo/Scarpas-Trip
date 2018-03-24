@@ -238,7 +238,6 @@
           <div class="item-form">
             <v-date-picker
               ref='datePicker'
-              is-double-paned
               mode='range'
               v-model='$store.state.reservaAcomod.periodoReserva'
               :available-dates='{ start: new Date(), end: null }'
@@ -251,7 +250,6 @@
               :formats='formats'
               tint-color='#00D8C7'
               show-caps
-              popover-align='right'
               popover-visibility='focus'>
               <div
                 slot-scope='{ inputValue, updateValue }'>
@@ -717,12 +715,12 @@ export default {
   /* ####### ANUNCIANTE BOX ####### */
   & .anunciante-box {
     display: flex;
-    padding: 1.5rem 7% 0 7%;
+    padding: 2rem 7% 0 7%;
     align-items: center;
     & .__anunciante-img {
       cursor: pointer;
-      width: 3.3rem;
-      height: 3.3rem;
+      width: 3.4rem;
+      height: 3.4rem;
       border-radius: 50%;
       user-select: none;
       margin-right: .6rem;
@@ -897,12 +895,12 @@ export default {
       }
       & .__reserva-btn {
         font-size: 16px;
-        font-weight: 600;
+        font-weight: 700;
         background: #00D8C7;
         line-height: 2.6rem;
         color: white;
         height: 2.7rem;
-        width:  11rem;
+        width:  10rem;
         border-radius: 4px;
       }
     }
