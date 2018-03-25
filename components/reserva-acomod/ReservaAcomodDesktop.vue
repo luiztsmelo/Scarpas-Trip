@@ -2,7 +2,7 @@
   <modal
     name="reserva-desktop-modal"
     class="reserva-desktop-modal"
-    width="70%"
+    width="71%"
     height="auto"
     @closed="closedModal">
 
@@ -180,13 +180,13 @@ export default {
       return this.$store.state.acomod
     },
     etapaProgressed1 () {
-      return this.$store.state.etapaReserva1ok === true ? 'font-weight: 600' : 'cursor: default'
+      return this.$store.state.etapaReserva1ok === true ? 'font-weight: 500' : 'cursor: default'
     },
     etapaProgressed2 () {
-      return this.$store.state.etapaReserva2ok === true ? 'font-weight: 600' : 'cursor: default'
+      return this.$store.state.etapaReserva2ok === true ? 'font-weight: 500' : 'cursor: default'
     },
     etapaProgressed3 () {
-      return this.$store.state.etapaReserva3ok === true ? 'font-weight: 600' : 'cursor: default'
+      return this.$store.state.etapaReserva3ok === true ? 'font-weight: 500' : 'cursor: default'
     },
     tipoAcomodText () {
       const path = this.acomod.tipoAcomod
@@ -223,7 +223,7 @@ export default {
       user-select: none;
       padding: 1.7rem 0 1rem 0;
       font-size: 15px;
-      font-weight: 400;
+      font-weight: 300;
     }
     & .__arrow-right {
       padding: 1.7rem 0 1rem 0;
@@ -235,7 +235,7 @@ export default {
 
   /* ******* ETAPA 1 ******* */
   & .etapa-1 {
-    margin: .7rem 3.5rem 4.5rem 3.5rem;
+    margin: .7rem 3.5rem 4.6rem 3.5rem;
     height: 100%;
     & .__title {
       font-size: 33px;
@@ -314,7 +314,7 @@ export default {
 
   /* ******* ETAPA 2 ******* */
   & .etapa-2 {
-    margin: .7rem 3.5rem 4.5rem 3.5rem;
+    margin: .7rem 3.5rem 4.6rem 3.5rem;
     height: 100%;
     & .__title {
       font-size: 33px;
@@ -341,7 +341,7 @@ export default {
 
   /* ******* ETAPA 3 ******* */
   & .etapa-3 {
-    margin: .7rem 3.5rem 4.5rem 3.5rem;
+    margin: .7rem 3.5rem 4.6rem 3.5rem;
     height: 100%;
     & .__title {
       font-size: 33px;

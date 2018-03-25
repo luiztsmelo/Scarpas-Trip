@@ -231,7 +231,7 @@
 
           <div class="item-form">
             <select v-model="$store.state.reservaAcomod.totalHospedes">
-              <option :value="n" v-for="n in totalHospedesArray">{{ n }} {{ n=='1' ? 'hóspede' : 'hóspedes' }}</option>
+              <option :value="n" v-for="n in totalHospedesArray">{{ n }} {{ n === 1 ? 'hóspede' : 'hóspedes' }}</option>
             </select>
           </div>
 

@@ -132,7 +132,7 @@ const store = () => new Vuex.Store({
       reservaID: null,
       acomodID: null,
       requested: null,
-      totalHospedes: '1',
+      totalHospedes: 1,
       periodoReserva: null,
       startDate: null,
       endDate: null,
