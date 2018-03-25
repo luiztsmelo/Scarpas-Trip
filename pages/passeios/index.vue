@@ -52,8 +52,8 @@ export default {
     }
   },
   fetch ({ store }) {
-    return firebase.database().ref('passeios').on('value', function(snapshot) {
-      store.commit('m_passeios', snapshot.val())
+    return firebase.firestore().collection('passeios').onSnapshot(snapshot => {
+      store.commit('m_passeios', snapshot.docs.map(doc => doc.data()))
     })
   },
   methods: {

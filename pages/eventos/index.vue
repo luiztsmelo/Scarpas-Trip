@@ -51,8 +51,8 @@ export default {
     }
   },
   fetch ({ store }) {
-    return firebase.database().ref('eventos').on('value', function(snapshot) {
-      store.commit('m_eventos', snapshot.val())
+    return firebase.firestore().collection('eventos').onSnapshot(snapshot => {
+      store.commit('m_eventos', snapshot.docs.map(doc => doc.data()))
     })
   },
   methods: {

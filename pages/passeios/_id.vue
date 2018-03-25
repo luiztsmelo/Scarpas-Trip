@@ -157,6 +157,7 @@ import Proprietario from '../../components/Proprietario'
 import supportsWebP from 'supports-webp'
 import { mapstyle } from '../../mixins/mapstyle'
 import * as firebase from 'firebase'
+require('firebase/firestore')
 
 export default {
   components: { Proprietario },
@@ -220,9 +221,8 @@ export default {
   },
   transition: 'evento',
   fetch ({ store, params }) {
-    return firebase.database().ref('passeios/' + params.id).once('value')
-    .then(snapshot => {
-      store.commit('m_passeio', snapshot.val())
+    return firebase.firestore().collection('passeios').doc(params.id).get().then(doc => {
+      store.commit('m_passeio', doc.data())
       store.commit('m_showNavbar', false)
       store.commit('m_showFoobar', false)
     })

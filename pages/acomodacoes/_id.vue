@@ -297,7 +297,7 @@
               <h3>R$ {{ valorReservaTotal.toLocaleString() }}</h3>
             </div>
 
-            <div class="reserva-info_item" v-if="$store.state.reservaAcomod.totalHospedes !== 1">
+            <div class="reserva-info_item" v-if="$store.state.reservaAcomod.totalHospedes != 1">
               <h3>Dividido para {{ $store.state.reservaAcomod.totalHospedes }}</h3>
               <h3>R$ {{ valorReservaTotalDividido.toLocaleString() }}</h3>
             </div>
@@ -341,6 +341,7 @@ import Proprietario from '../../components/Proprietario'
 import supportsWebP from 'supports-webp'
 import { mapstyle } from '../../mixins/mapstyle'
 import * as firebase from 'firebase'
+require('firebase/firestore')
 
 export default {
   components: { ReservaAcomod, ReservaAcomodDesktop, Proprietario, AskAcomod },
@@ -491,9 +492,8 @@ export default {
   },
   transition: 'evento',
   fetch ({ store, params }) {
-    return firebase.database().ref('acomodacoes/' + params.id).once('value')
-    .then(snapshot => {
-      store.commit('m_acomod', snapshot.val())
+    return firebase.firestore().collection('acomods').doc(params.id).get().then(doc => {
+      store.commit('m_acomod', doc.data())
       if (store.state.isMobile === true) {
         store.commit('m_showNavbar', false)
         store.commit('m_showFoobar', false)
@@ -573,7 +573,7 @@ export default {
   },
   computed: {
     valorNoitesTotal () {
-      let valorNoitesTotal = this.acomod.valorDiariaNormal * this.$store.state.reservaAcomod.noites
+      let valorNoitesTotal = Math.trunc(this.acomod.valorDiariaNormal * this.$store.state.reservaAcomod.noites)
       this.$store.commit('m_valorNoitesTotal', valorNoitesTotal)
       return valorNoitesTotal
     },

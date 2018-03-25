@@ -436,7 +436,7 @@ export default {
     concluir () {
       if (1<2) {/* IF PAGAMENTO CONCLUIDO */
         this.$store.commit('m_loader', true)
-        const eventoID = Math.floor(Math.random() * (99999 - 10000 + 1) + 10000)
+        const eventoID = Math.floor(Math.random() * (99999 - 10000 + 1) + 10000).toString()
         this.$store.commit('m_eventoID', eventoID)
         const storageRef = firebase.storage().ref('eventos/' + eventoID + '/')
         /* 

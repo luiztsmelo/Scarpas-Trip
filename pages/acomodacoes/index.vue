@@ -233,8 +233,8 @@ export default {
     }
   },
   fetch ({ store }) {
-    return firebase.database().ref('acomodacoes').on('value', function(snapshot) {
-      store.commit('m_acomods', snapshot.val())
+    return firebase.firestore().collection('acomods').onSnapshot(snapshot => {
+      store.commit('m_acomods', snapshot.docs.map(doc => doc.data()))
     })
   },
   methods: {

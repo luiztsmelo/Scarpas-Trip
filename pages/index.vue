@@ -140,6 +140,7 @@
 <script>
 import supportsWebP from 'supports-webp'
 import * as firebase from 'firebase'
+require('firebase/firestore')
 import Roteiro from '../components/Roteiro'
 import Footer from '../components/Footer'
 
@@ -179,17 +180,17 @@ export default {
     }
   },
   fetch ({ store }) {
-    return firebase.database().ref('eventos').on('value', function(snapshot) {
-      store.commit('m_eventos', snapshot.val())
-    }) 
-    && firebase.database().ref('acomodacoes').on('value', function(snapshot) {
-      store.commit('m_acomods', snapshot.val())
+    return firebase.firestore().collection('eventos').onSnapshot(snapshot => {
+      store.commit('m_eventos', snapshot.docs.map(doc => doc.data()))
     })
-    && firebase.database().ref('passeios').on('value', function(snapshot) {
-      store.commit('m_passeios', snapshot.val())
+    && firebase.firestore().collection('acomods').onSnapshot(snapshot => {
+      store.commit('m_acomods', snapshot.docs.map(doc => doc.data()))
     })
-    && firebase.database().ref('atracoes').on('value', function(snapshot) {
-      store.commit('m_atracoes', snapshot.val())
+    && firebase.firestore().collection('passeios').onSnapshot(snapshot => {
+      store.commit('m_passeios', snapshot.docs.map(doc => doc.data()))
+    })
+    && firebase.firestore().collection('atracoes').onSnapshot(snapshot => {
+      store.commit('m_atracoes', snapshot.docs.map(doc => doc.data()))
     })
   },
   beforeRouteEnter (to, from, next) {

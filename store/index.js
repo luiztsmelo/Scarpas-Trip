@@ -1,5 +1,6 @@
 import Vuex from 'vuex'
 import * as firebase from 'firebase'
+require('firebase/firestore')
 import createPersistedState from 'vuex-persistedstate'
 
 const store = () => new Vuex.Store({
@@ -690,7 +691,7 @@ const store = () => new Vuex.Store({
     ########## Acomodações ##########
     */
     a_uploadAcomod ({ state, commit }) {
-      firebase.database().ref('acomodacoes/' + state.acomodID).set(state.acomodData).then(() => {
+      firebase.firestore().collection('acomods').doc(state.acomodID).set(state.acomodData).then(() => {
         /* Resetar states */
         commit('m_creditCard', {
           cardNumber: '',
@@ -746,11 +747,14 @@ const store = () => new Vuex.Store({
     },
     a_newReservaAcomod ({ state, commit }) {
       state.reservaAcomod.requested = new Date().getTime()
-      state.reservaAcomod.reservaID = Math.ceil(Math.exp(Math.random() * (Math.log(99999999) - Math.log(10000000))) * 10000000)
+      state.reservaAcomod.reservaID = Math.ceil(Math.exp(Math.random() * (Math.log(99999999) - Math.log(10000000))) * 10000000).toString()
       state.reservaAcomod.acomodID = state.acomod.acomodID
+      state.reservaAcomod.hostID = state.acomod.userID
       state.reservaAcomod.hostName = state.acomod.proprietario
       state.reservaAcomod.hostEmail = state.acomod.email
-      state.reservaAcomod.hostID = state.acomod.userID
+      state.reservaAcomod.guestID = state.user.userID
+      state.reservaAcomod.guestName = state.user.fullName
+      state.reservaAcomod.guestEmail = state.user.email
       /* Corrigir datas para enviar para o Airtable */
       let yyyyStart = state.reservaAcomod.startDate.slice(6, 10)
       let mmStart = state.reservaAcomod.startDate.slice(3, 5)
@@ -761,7 +765,7 @@ const store = () => new Vuex.Store({
       let ddEnd = state.reservaAcomod.endDate.slice(0, 2)
       let endDate = yyyyEnd + '-' + mmEnd + '-' + ddEnd
       /* Criar reserva no Firebase */
-      firebase.database().ref('reservas/acomods/' + state.reservaAcomod.reservaID).set(state.reservaAcomod).then(() => {
+      firebase.firestore().collection('reservasAcomods').doc(state.reservaAcomod.reservaID).set(state.reservaAcomod).then(() => {
         /* Criar reserva no Airtable */
         this.$axios.$post('https://api.airtable.com/v0/appfQX2S7rMRlBWoh/Acomods?api_key=keyoOJ1ERQwpa2EIg', {
           'fields': {
@@ -787,7 +791,7 @@ const store = () => new Vuex.Store({
         reservaID: null,
         acomodID: null,
         requested: null,
-        totalHospedes: '1',
+        totalHospedes: 1,
         periodoReserva: null,
         startDate: null,
         endDate: null,
@@ -814,7 +818,7 @@ const store = () => new Vuex.Store({
     ########## Eventos ##########
     */
     a_uploadEvento ({ state, commit }) {
-      firebase.database().ref('eventos/' + state.eventoID).set(state.eventoData).then(() => {
+      firebase.firestore().collection('eventos').doc(state.eventoID).set(state.eventoData).then(() => {
         /* Resetar states */
         commit('m_eventoData', {
           eventoID: null,
@@ -843,7 +847,7 @@ const store = () => new Vuex.Store({
     ########## Passeios ##########
     */
     a_uploadPasseio ({ state, commit }) {
-      firebase.database().ref('passeios/' + state.passeioID).set(state.passeioData).then(() => {
+      firebase.firestore().collection('passeios').doc(state.passeioID).set(state.passeioData).then(() => {
         /* Resetar states */
         commit('m_passeioData', {
           passeioID: null,
@@ -876,7 +880,7 @@ const store = () => new Vuex.Store({
     ########## Atracões ##########
     */
     a_uploadAtracao ({ state, commit }) {
-      firebase.database().ref('atracoes/' + state.atracaoID).set(state.atracaoData).then(() => {
+      firebase.firestore().collection('atracoes').doc(state.atracaoID).set(state.atracaoData).then(() => {
         /* Resetar states */
         commit('m_atracaoData', {
           atracaoID: null,
@@ -940,7 +944,6 @@ const store = () => new Vuex.Store({
         state.passeioData.email = user.email
         state.passeioData.photoURL = user.photoURL
         state.passeioData.userID = user.uid
-        state.reservaAcomod.reservante = user.displayName
         state.reservaAcomod.email = user.email
         state.reservaAcomod.photoURL = user.photoURL
         state.reservaAcomod.userID = user.uid
@@ -953,11 +956,10 @@ const store = () => new Vuex.Store({
     */
     a_setUser ({ state }) {
       /* Chechar se usuário já existe */
-      firebase.database().ref('users/' + state.user.userID).once('value', snapshot => {
-        const userID = snapshot.val()
-        if (!userID) { /* Se não existir: */
+      firebase.firestore().collection('users').doc(state.user.userID).get().then(doc => {
+        if (!doc.exists) { /* Se não existir: */
           /* 1) Criar usuário no Firebase */
-          firebase.database().ref('users/' + state.user.userID).set(state.user)
+          firebase.firestore().collection('users').doc(state.user.userID).set(state.user)
           .then(() => {
             /* 2) Criar usuário no Airtable */
             this.$axios.$post('https://api.airtable.com/v0/app2VZONmWdcr8ybJ/Users?api_key=keyoOJ1ERQwpa2EIg', {
@@ -1009,7 +1011,7 @@ const store = () => new Vuex.Store({
       state.message.about = routeName === 'acomodacoes-id' ? 'acomod' : ''
       state.message.id = routeName === 'acomodacoes-id' ? state.acomod.acomodID : ''
       /* Enviar mensagem para o Firebase */
-      firebase.database().ref('messages/').push(state.message)
+      firebase.firestore().collection('messages').add(state.message)
     },
     /*
     ########## SIGN OUT ##########

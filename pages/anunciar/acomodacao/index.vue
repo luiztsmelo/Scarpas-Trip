@@ -893,7 +893,7 @@ export default {
       const cardCVV = this.$store.state.creditCard.cardCVV
       if (cardNumber.length === 19 && cardHolderName !== '' && cardExpirationMonth !== 'MM' && cardExpirationYear !== 'AA' && cardCVV.length === 3) {
         this.$store.commit('m_loader', true)
-        const acomodID = Math.floor(Math.random() * (99999 - 10000 + 1) + 10000)
+        const acomodID = Math.floor(Math.random() * (99999 - 10000 + 1) + 10000).toString()
         this.$store.commit('m_acomodID', acomodID)
         const storageRef = firebase.storage().ref('acomodacoes/' + acomodID + '/')
         /* 

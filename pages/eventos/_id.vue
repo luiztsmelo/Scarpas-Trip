@@ -124,6 +124,7 @@ import { loaded } from '~/node_modules/vue2-google-maps/src/manager'
 import supportsWebP from 'supports-webp'
 import { mapstyle } from '../../mixins/mapstyle'
 import * as firebase from 'firebase'
+require('firebase/firestore')
 
 export default {
   mixins: [mapstyle],
@@ -152,9 +153,8 @@ export default {
   },
   transition: 'evento',
   fetch ({ store, params }) {
-    return firebase.database().ref('eventos/' + params.id).once('value')
-    .then(snapshot => {
-      store.commit('m_evento', snapshot.val())
+    return firebase.firestore().collection('eventos').doc(params.id).get().then(doc => {
+      store.commit('m_evento', doc.data())
       store.commit('m_showNavbar', false)
       store.commit('m_showFoobar', false)
     })

@@ -376,7 +376,7 @@ export default {
     concluir () {
       if (this.$store.state.atracaoData.email === 'luiztsmelo@gmail.com') {/* IF ME */
         this.$store.commit('m_loader', true)
-        const atracaoID = Math.floor(Math.random() * (99999 - 10000 + 1) + 10000)
+        const atracaoID = Math.floor(Math.random() * (99999 - 10000 + 1) + 10000).toString()
         this.$store.commit('m_atracaoID', atracaoID)
         const storageRef = firebase.storage().ref('atracoes/' + atracaoID + '/')
         /* 
