@@ -240,7 +240,7 @@
               ref='datePicker'
               mode='range'
               v-model='$store.state.reservaAcomod.periodoReserva'
-              :available-dates='{ start: new Date(), end: null }'
+              :min-date='new Date()'
               :pane-width='280'
               :disabled-dates='disabledDates'
               :drag-attribute='myAttribute'
@@ -573,23 +573,22 @@ export default {
   },
   computed: {
     valorNoitesTotal () {
-      let valorNoitesTotal = Math.trunc(this.acomod.valorDiariaNormal * this.$store.state.reservaAcomod.noites)
+      let valorNoitesTotal = Math.round(this.acomod.valorDiariaNormal * this.$store.state.reservaAcomod.noites)
       this.$store.commit('m_valorNoitesTotal', valorNoitesTotal)
       return valorNoitesTotal
     },
     serviceFeeTotal () {
-      let serviceFeeTotal = Math.trunc(this.acomod.valorDiariaNormal * this.$store.state.reservaAcomod.noites * this.$store.state.serviceFeeAcomod)
+      let serviceFeeTotal = Math.round(this.valorNoitesTotal * this.$store.state.serviceFeeAcomod)
       this.$store.commit('m_serviceFeeTotal', serviceFeeTotal)
       return serviceFeeTotal
     },
     valorReservaTotal () {
-      let valorReservaTotal = Math.trunc((this.acomod.valorDiariaNormal * this.$store.state.reservaAcomod.noites) + this.acomod.valorDiariaNormal * this.$store.state.reservaAcomod.noites * this.$store.state.serviceFeeAcomod)
+      let valorReservaTotal = this.valorNoitesTotal + this.serviceFeeTotal
       this.$store.commit('m_valorReservaTotal', valorReservaTotal)
       return valorReservaTotal
     },
     valorReservaTotalDividido () {
-      let valorReservaTotalDividido = Math.trunc(this.valorReservaTotal/this.$store.state.reservaAcomod.totalHospedes)
-      return valorReservaTotalDividido
+      return Math.round(this.valorReservaTotal/this.$store.state.reservaAcomod.totalHospedes)
     },
     totalHospedesArray () {
       return Array.from({length: this.acomod.totalHospedes}, (v, k) => k+1)
@@ -612,7 +611,7 @@ export default {
           dynamicBullets: true,
           freeMode: true,
           autoplay: 2300,
-          speed: 8000
+          speed: 10000
         }
       }
     },
@@ -990,21 +989,25 @@ export default {
             & select {
               cursor: pointer;
               width: 100%;
-              font-size: 17px;
-              padding: .6rem;
-              color: #989898;
+              font-size: 16px;
+              font-weight: 400;
+              padding: 0 .6rem;
+              height: 2.7rem;
+              color: #8D8D8D;
               border: 1px solid rgb(232,232,232);
               outline: none;
               background: white;
               & option {
                 background: white;
-                color: #989898;
+                color: #8D8D8D;
               }
             }
             & .reserva-input-date {
+              height: 2.7rem;
               padding-left: .9rem;
-              color: var(--color01);
-              font-size: 15px;
+              color: #8D8D8D;
+              font-size: 16px;
+              font-weight: 400;
             }
             & .reserva-close-date {
               width: .65rem;
@@ -1017,7 +1020,7 @@ export default {
             }
           }
           & .reserva-info {
-            margin-top: .8rem;
+            margin-top: .9rem;
             & .reserva-info_item {
               display: flex;
               justify-content: space-between;
@@ -1037,11 +1040,11 @@ export default {
             }
           }
           & .__reserva-desktop-btn {
-            margin-top: 1.2rem;
+            margin-top: 1.3rem;
             font-size: 18px;
             font-weight: 600;
             line-height: 3rem;
-            background: #00D8C7;
+            background: #FFA04F;
             color: white;
             height: 3.1rem;
             width:  100%;

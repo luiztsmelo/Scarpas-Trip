@@ -74,6 +74,10 @@ input {
   font-family: var(--main-font);
 }
 
+select {
+  font-family: var(--main-font);
+}
+
 textarea {
   font-family: var(--main-font);
 }

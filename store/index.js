@@ -58,7 +58,7 @@ const store = () => new Vuex.Store({
     /*
     -------------------- CONFIGS --------------------
     */
-    serviceFeeAcomod: 0.03,
+    serviceFeeAcomod: 0.04,
     /*
     -------------------- ANÚNCIOS --------------------
     */
@@ -92,6 +92,7 @@ const store = () => new Vuex.Store({
     acomodData: {/* Atualizar a action */
       acomodID: null,
       userID: null,
+      recipientID: null,
       proprietario: null,
       email: null,
       celular: '',
@@ -130,9 +131,9 @@ const store = () => new Vuex.Store({
       imageH3W: null
     },
     reservaAcomod: {/* Atualizar Action */
-      reservaID: null,
       acomodID: null,
       requested: null,
+      paymentMethod: 'credit_card',
       totalHospedes: 1,
       periodoReserva: null,
       startDate: null,
@@ -745,9 +746,8 @@ const store = () => new Vuex.Store({
         commit('m_loader', false)
       })
     },
-    a_newReservaAcomod ({ state, commit }) {
+    a_newReservaAcomod ({ state, commit }, reservaID) {
       state.reservaAcomod.requested = new Date().getTime()
-      state.reservaAcomod.reservaID = Math.ceil(Math.exp(Math.random() * (Math.log(99999999) - Math.log(10000000))) * 10000000).toString()
       state.reservaAcomod.acomodID = state.acomod.acomodID
       state.reservaAcomod.hostID = state.acomod.userID
       state.reservaAcomod.hostName = state.acomod.proprietario
@@ -765,12 +765,12 @@ const store = () => new Vuex.Store({
       let ddEnd = state.reservaAcomod.endDate.slice(0, 2)
       let endDate = yyyyEnd + '-' + mmEnd + '-' + ddEnd
       /* Criar reserva no Firebase */
-      firebase.firestore().collection('reservasAcomods').doc(state.reservaAcomod.reservaID).set(state.reservaAcomod).then(() => {
+      firebase.firestore().collection('reservasAcomods').doc(reservaID).set(state.reservaAcomod).then(() => {
         /* Criar reserva no Airtable */
         this.$axios.$post('https://api.airtable.com/v0/appfQX2S7rMRlBWoh/Acomods?api_key=keyoOJ1ERQwpa2EIg', {
           'fields': {
-            'reservaID': state.reservaAcomod.reservaID,
-            'acomodID': state.reservaAcomod.acomodID,
+            'reservaID': reservaID,
+            'acomodID': state.acomod.acomodID,
             'requested': state.reservaAcomod.requested,
             'startDate': startDate,
             'endDate': endDate,

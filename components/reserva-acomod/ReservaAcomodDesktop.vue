@@ -84,8 +84,9 @@
             </div>
           </div>
           
-        </div>
-      </div><!-- Right Container -->
+        </div><!-- Right Container -->
+
+      </div>
 
       <button class="__next-btn" type="button" @click="nextBtn1">Continuar</button>
       
@@ -121,6 +122,63 @@
 
       <div class="container">
 
+        <!-- Left Container -->
+        <div class="left-container">
+
+          <div class="item-form">
+            <label>Pagar com</label>
+            <select v-model="$store.state.reservaAcomod.paymentMethod">
+              <option selected :value="'credit_card'">Cartão de Crédito</option>
+              <option :value="'boleto'">Boleto</option>
+            </select>
+          </div>
+
+          <div class="item-form">
+            <label>Número do Cartão</label>
+            <masked-input
+              type="tel"
+              v-model="$store.state.creditCard.cardNumber"
+              :mask="[/\d/, /\d/, /\d/, /\d/, ' ', /\d/, /\d/, /\d/, /\d/, ' ', /\d/, /\d/, /\d/, /\d/, ' ', /\d/, /\d/, /\d/, /\d/]"
+              :guide="false">
+            </masked-input>
+          </div>
+          
+          <div class="item-form">
+            <label>Nome impresso no Cartão</label>
+            <input type="text" pattern="[A-Za-z]" v-model="$store.state.creditCard.cardHolderName">
+          </div>
+
+          <div style="display: flex; justify-content: space-between">
+            <div class="item-form" style="width: 11rem">
+              <label>Validade</label>
+              <div style="display: flex">
+                <select v-model="$store.state.creditCard.cardExpirationMonth" style="border-right:none">
+                  <option value="MM" disabled selected>MM</option>
+                  <option v-for="n in monthsPermitted">{{ n }}</option>
+                </select>
+                <select v-model="$store.state.creditCard.cardExpirationYear" style="border-left:none">
+                  <option value="AA" disabled selected>AA</option>
+                  <option v-for="n in yearsPermitted">{{ n }}</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="item-form" style="width: 6rem">
+              <label>CVV*</label>
+              <masked-input
+                type="tel"
+                v-model="$store.state.creditCard.cardCVV"
+                :mask="[/\d/, /\d/, /\d/, /\d/]"
+                :guide="false">
+              </masked-input>
+            </div>
+          </div>
+        </div><!-- Left Container -->
+
+        <!-- Right Container -->
+        <div class="right-container">
+         
+        </div><!-- Right Container -->
       </div>
 
       <button class="__next-btn" type="button" @click="concluirReserva">Confirmar e Pagar</button>
@@ -133,9 +191,17 @@
 </template>
 
 <script>
+import pagarme from 'pagarme'
 import supportsWebP from 'supports-webp'
+import MaskedInput from 'vue-text-mask'
 
 export default {
+  components: { MaskedInput },
+  data() {
+    return {
+      monthsPermitted: ['01','02','03','04','05','06','07','08','09','10','11','12']
+    }
+  },
   methods: {
     closedModal () {
       this.$store.state.clickedReservaAcomod = false
@@ -157,7 +223,101 @@ export default {
       this.$store.state.etapaReserva3ok = true, this.$store.commit('m_reservaAcomodDesktop2', false), this.$store.commit('m_reservaAcomodDesktop3', true)
     },
     concluirReserva () {
-      this.$store.dispatch('a_newReservaAcomod')
+      const cardNumber = this.$store.state.creditCard.cardNumber
+      const cardHolderName = this.$store.state.creditCard.cardHolderName
+      const cardExpirationMonth = this.$store.state.creditCard.cardExpirationMonth
+      const cardExpirationYear = this.$store.state.creditCard.cardExpirationYear
+      const cardCVV = this.$store.state.creditCard.cardCVV
+      if (cardNumber.length === 19 && cardHolderName !== '' && cardExpirationMonth !== 'MM' && cardExpirationYear !== 'AA' && cardCVV.length >= 3) {
+        /* 
+        CORRIGIR VALORES 
+        */
+        const creditCardPath = this.$store.state.creditCard
+        /* Card Number */
+        let cardNumberPath = creditCardPath.cardNumber
+        let cardNumber1 = cardNumberPath.slice(0,4)
+        let cardNumber2 = cardNumberPath.slice(5,9)
+        let cardNumber3 = cardNumberPath.slice(10,14)
+        let cardNumber4 = cardNumberPath.slice(15,19)
+        let cardNumber = cardNumber1 + cardNumber2 + cardNumber3 + cardNumber4
+        /* Expiration Date */
+        let cardExpirationDate = creditCardPath.cardExpirationMonth.concat(creditCardPath.cardExpirationYear)
+
+        pagarme.client.connect({ api_key: 'ak_test_E3I46o4e7guZDqwRnSY9sW8o8HrL9D' })
+        .then(client => client.recipients.all())
+        .then(recipients => console.log(recipients))
+        /* 
+        CRIAR TRANSAÇÃO
+        */
+        let amountAnunciante = this.$store.state.reservaAcomod.valorNoitesTotal * 100
+        let amountEscarpasTrip = this.$store.state.reservaAcomod.serviceFeeTotal * 100
+        
+        pagarme.client.connect({ api_key: 'ak_test_E3I46o4e7guZDqwRnSY9sW8o8HrL9D' })
+        .then(client => client.transactions.create({
+          'amount': this.$store.state.reservaAcomod.valorReservaTotal * 100,
+          'payment_method': this.$store.state.reservaAcomod.paymentMethod,
+          'card_number': cardNumber,
+          'card_cvv': cardCVV,
+          'card_expiration_date': cardExpirationDate,
+          'card_holder_name': cardHolderName,
+          'customer': {
+            'external_id': this.$store.state.user.userID,
+            'name': this.$store.state.user.fullName,
+            'type': 'individual',
+            'country': 'br',
+            'email': this.$store.state.user.email,
+            'documents': [
+              {
+                'type': 'cpf',
+                'number': '00000000000'
+              }
+            ],
+            'phone_numbers': ['+5511999998888']
+          },
+          'billing': {
+            'name': this.$store.state.user.fullName,
+            'address': {
+              'country': 'br',
+              'state': 'sp',
+              'city': 'Cotia',
+              'neighborhood': 'Rio Cotia',
+              'street': 'Rua Matrix',
+              'street_number': '9999',
+              'zipcode': '06714360'
+            }
+          },
+          'items': [
+            {
+              'id': this.$store.state.acomod.acomodID,
+              'title': this.$store.state.acomod.title,
+              'category': 'acomod',
+              'unit_price': this.$store.state.acomod.valorDiariaNormal * 100,
+              'quantity': this.$store.state.reservaAcomod.noites,
+              'tangible': false
+            }
+          ],
+          'split_rules': [
+            {
+              'recipient_id': 're_cjfcpgjli007ggb6dku6oc33s',
+              'amount': this.$store.state.reservaAcomod.serviceFeeTotal * 100,
+              'liable': true,
+              'charge_processing_fee': true
+            },
+            {
+              'recipient_id': this.$store.state.acomod.recipientID,
+              'amount': this.$store.state.reservaAcomod.valorNoitesTotal * 100,
+              'liable': true,
+              'charge_processing_fee': true
+            }
+          ]
+          }))
+          .catch(error => console.log(error))
+          .then(transaction => {
+            console.log(transaction)
+            let reservaID = transaction.id.toString()
+            this.$store.dispatch('a_newReservaAcomod', reservaID)
+          })
+      }
     },
     backEtapa1 () {
       if (this.$store.state.etapaReserva1ok === true) {
@@ -201,6 +361,22 @@ export default {
            : path === 'Hostel' ? 'lindo o seu hostel'
            : ''
     },
+    yearsPermitted () {
+      let year = new Date().getFullYear().toString()
+      let shortYear = Number(year.slice(-2))
+      let n1 = shortYear + 1
+      let n2 = shortYear + 2
+      let n3 = shortYear + 3
+      let n4 = shortYear + 4
+      let n5 = shortYear + 5
+      let n6 = shortYear + 6
+      let n7 = shortYear + 7
+      let n8 = shortYear + 8
+      let n9 = shortYear + 9
+      let n10 = shortYear + 10
+      let yearsPermitted = [shortYear, n1, n2, n3, n4, n5, n6, n7, n8, n9, n10]
+      return yearsPermitted
+    }
   }
 }
 </script>
@@ -235,7 +411,7 @@ export default {
 
   /* ******* ETAPA 1 ******* */
   & .etapa-1 {
-    margin: .7rem 3.5rem 4.6rem 3.5rem;
+    margin: .5rem 3.5rem 4.6rem 3.5rem;
     height: 100%;
     & .__title {
       font-size: 33px;
@@ -243,7 +419,7 @@ export default {
     & .container {
       margin: 1.9rem 0 1.3rem 0;
       display: flex;
-      height: 345px;
+      height: 355px;
 
       /* Left Container */
       & .left-container {
@@ -263,7 +439,8 @@ export default {
           padding-bottom: 1.2rem;
           border-bottom: 1px solid rgb(232,232,232);
           & .__acomod-img {
-            width: 11rem;
+            min-width: 6rem;
+            max-width: 6rem;
             height: auto;
             margin-left: 1rem;
           }
@@ -314,7 +491,7 @@ export default {
 
   /* ******* ETAPA 2 ******* */
   & .etapa-2 {
-    margin: .7rem 3.5rem 4.6rem 3.5rem;
+    margin: .5rem 3.5rem 4.6rem 3.5rem;
     height: 100%;
     & .__title {
       font-size: 33px;
@@ -322,7 +499,7 @@ export default {
     & .container {
       margin: 1.9rem 0 1.3rem 0;
       display: flex;
-      height: 345px;
+      height: 355px;
       & textarea {
         width: 100%;
         border: none;
@@ -341,7 +518,7 @@ export default {
 
   /* ******* ETAPA 3 ******* */
   & .etapa-3 {
-    margin: .7rem 3.5rem 4.6rem 3.5rem;
+    margin: .5rem 3.5rem 4.6rem 3.5rem;
     height: 100%;
     & .__title {
       font-size: 33px;
@@ -349,7 +526,53 @@ export default {
     & .container {
       margin: 1.9rem 0 1.3rem 0;
       display: flex;
-      height: 345px;
+      height: 355px;
+
+      /* Left Container */
+      & .left-container {
+        flex-basis: 42%;
+        border-right: 1px solid rgb(232,232,232);
+        padding-right: 1.5rem;
+        & .item-form {
+          display: flex;
+          flex-flow: column;
+          margin: 0 0 1.4rem 0;
+          & label {
+            padding-bottom: .6rem;
+            font-weight: 600;
+            font-size: 15px;
+          }
+          & input {
+            cursor: text;
+            padding-left: .6rem;
+            position: relative;
+            width: 100%;
+            height: 2.6rem;
+            font-size: 16px;
+            font-weight: 400;
+            background: white;
+            color: var(--color01);
+            border: 1px solid rgb(232, 232, 232);
+            outline: none;
+          }
+          & select {
+            width: 100%;
+            height: 2.6rem;
+            font-size: 16px;
+            font-weight: 400;
+            background: white;
+            color: var(--color01);
+            border: 1px solid rgb(232, 232, 232);
+            outline: none;
+          }
+        }
+      }
+
+      /* Right Container */
+      & .right-container {
+        flex-basis: 58%;
+        padding-left: 1.5rem;
+      }
     }
   }
 }

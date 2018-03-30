@@ -44,7 +44,7 @@
               @drag='drag = $event'
               v-model='filter.date'
               :show-popover='false'
-              :available-dates='{ start: new Date(), end: null }'
+              :min-date='new Date()'
               :pane-width='280'
               :disabled-dates='disabledDates'
               :disabled-attribute='disabledAttribute'
@@ -473,19 +473,19 @@ export default {
           & input {
             cursor: pointer;
             width: 100%;
+            height: 2.7rem;
             font-size: 14px;
             font-weight: 500;
-            padding: .6rem;
+            padding-left: .6rem;
             border: 1px solid rgb(232,232,232);
             outline: none;
             background: white;
             color: var(--color01);
-            border-radius: 5px
           }
           & .multiselect {
             cursor: pointer;
             & .multiselect__tags {
-              
+              border-radius: 0;
               & .multiselect__tags-wrap {
                 & .multiselect__tag {
                   background: #00D8C7;

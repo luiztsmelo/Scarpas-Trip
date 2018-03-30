@@ -62,7 +62,7 @@
               <progressive-img class="__card-img" :src="imageAcH(acomod)" :placeholder="acomod.imageL1" :aspect-ratio="0.66"/>
               <span class="__card-info" style="color: #006561">{{ acomod.tipoAcomod }}</span>
               <h1 class="__card-title">{{ acomod.title }}</h1>
-              <span class="__card-subtitle">R${{ acomod.valorDiariaNormal }}<span class="__card-valor-dia"> por dia</span></span>
+              <span class="__card-subtitle">R${{ acomod.valorDiariaNormal.toLocaleString() }}<span class="__card-valor-noite"> por noite</span></span>
             </nuxt-link> 
           </div>
         </div>
@@ -93,7 +93,7 @@
               <progressive-img class="__card-img" :src="imagePasH(passeio)" :placeholder="passeio.imageL1" :aspect-ratio="0.66"/>
               <span class="__card-info" style="color: #0784FD">{{ passeio.tipoPasseio }}</span>
               <h1 class="__card-title">{{ passeio.title }}</h1>
-              <span class="__card-subtitle">R${{ passeio.valorPasseio }}<span class="__card-valor-pessoa"> por pessoa</span></span>
+              <span class="__card-subtitle">R${{ passeio.valorPasseio.toLocaleString() }}<span class="__card-valor-noite"> por pessoa</span></span>
             </nuxt-link> 
           </div>
         </div>
@@ -281,7 +281,7 @@ export default {
           & .__card-subtitle {
             font-size: 14px;
             font-weight: 400;
-            & .__card-valor-dia {
+            & .__card-valor-noite {
               font-size: 12px;
             }
           }
@@ -337,8 +337,8 @@ export default {
             & .__card-subtitle {
               font-size: 16px;
               font-weight: 400;
-              & .__card-valor-dia {
-                font-size: 13px;
+              & .__card-valor-noite {
+                font-size: 14px;
               }
             }
           }

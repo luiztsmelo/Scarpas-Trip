@@ -17,7 +17,7 @@ export default {
       return this.acomod.valorDiariaNormal * (this.attribute.targetDate.daySpan)
     },
     valorDiariaDividido () {
-      return Math.trunc(this.valorDiaria / this.$store.state.reservaAcomod.totalHospedes)
+      return Math.round(this.valorDiaria / this.$store.state.reservaAcomod.totalHospedes)
     }
   }
 }
