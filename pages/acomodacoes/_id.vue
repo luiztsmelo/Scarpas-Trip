@@ -4,21 +4,20 @@
     <proprietario/>
 
     <!-- ####### TOPBAR ####### -->
-    <transition name="topbar-animation">
-      <div class="topbar" :class="{ topbarBg: scrollTopbar }" v-show="showTopbar">
-        <div class="topbar-body">
+    <div class="topbar" v-scroll="scrollTopbarBg">
+      <div class="topbar-body">
 
-          <div class="back-box" @click="backBtn">
-            <img class="__back-btn" :class="{ topbarBtn: scrollTopbar }" src="../../assets/img/back.svg" alt="voltar">
-          </div>
-          
-          <div class="share-box" @click="$store.commit('m_showShare', true), hashShare()">
-            <img class="__share-btn" :class="{ topbarBtn: scrollTopbar }" src="../../assets/img/share.svg" alt="compartilhar" >
-          </div>
-          
+        <div class="back-box" @click="backBtn">
+          <img class="__back-btn" v-scroll="scrollTopbarBtns" src="../../assets/img/back.svg" alt="voltar">
         </div>
+        
+        <div class="share-box" @click="$store.commit('m_showShare', true), hashShare()">
+          <img class="__share-btn" v-scroll="scrollTopbarBtns" src="../../assets/img/share.svg" alt="compartilhar" >
+        </div>
+        
       </div>
-    </transition><!-- ####### TOPBAR ####### -->
+    </div><!-- ####### TOPBAR ####### -->
+    
 
     
     <!-- ####### IMAGE ####### -->
@@ -349,8 +348,6 @@ export default {
   data () {
     return {
       showComods: false,
-      showTopbar: true,
-      scrollTopbar: false,
       heightImageBox: null,
 
       attributes: [
@@ -501,6 +498,20 @@ export default {
     })
   },
   methods: {
+    scrollTopbarBg (evt, el) {
+      if (window.scrollY > this.heightImageBox) {
+        return el.setAttribute("style", "background: white; box-shadow: 0px 1px 1px 0px rgba(0,0,0,0.1)")
+      } else {
+        return el.setAttribute("style", "")
+      }
+    },
+    scrollTopbarBtns (evt, el) {
+      if (window.scrollY > this.heightImageBox) {
+        return el.setAttribute("style", "filter: invert(65%)")
+      } else {
+        return el.setAttribute("style", "")
+      }
+    },
     openReservaModal () {
       if (this.$store.state.reservaAcomod.periodoReserva === null) {
         this.$nextTick(() => this.$refs.datePicker.$el.focus())
@@ -634,9 +645,6 @@ export default {
            : path === 'Hostel' ? 'o Hostel'
            : ''
     },
-    scrollY () {
-      return this.$store.state.scrollY
-    },
     acomod () {
       return this.$store.state.acomod
     },
@@ -654,9 +662,6 @@ export default {
     }
   },
   watch: {
-    scrollY (value) {
-      value > this.heightImageBox ? this.scrollTopbar = true : this.scrollTopbar = false
-    },
     hash (value) {
       value === '' ? this.showComods = false : ''
     }

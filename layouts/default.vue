@@ -31,14 +31,6 @@ import MapFull from '~/components/MapFull.vue'
 
 export default {
   components: { Navbar, Foobar, SignIn, Menuu, Loader, Share, MapFull },
-  mounted () {
-    /* 
-    DETECT SCROLL POSITION
-    */
-    window.addEventListener('scroll', event => {
-      this.$store.state.scrollY = event.path[1].scrollY
-    })
-  },
   beforeCreate () {
     /* 
     DETECT DEVICE

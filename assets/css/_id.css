@@ -7,7 +7,7 @@
   height: 3rem;
   width:  100%;
   background: transparent;
-  transition: all .5s ease;
+  transition: var(--main-transition);
   & .topbar-body {
     display: flex;
     justify-content: space-between;
@@ -38,15 +38,6 @@
   }
 }
 
-.topbarBg {
-  background: white !important;
-  box-shadow: 0px 1px 1px 0px rgba(0,0,0,0.1);
-}
-.topbarBtn {
-  filter: invert(75%);
-}
-/* ####### TOPBAR ####### */
-
 
 .id-title {
   font-weight: 700;
@@ -63,12 +54,6 @@
   user-select: none;
 }
 
-
-/* TRANSITIONS */
-.topbar-animation-enter,
-.topbar-animation-leave-active {
-  transform: translateY(-100%);
-}
 
 @media (min-width: 1024px) {
   .topbar {

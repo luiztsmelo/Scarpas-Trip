@@ -41,7 +41,8 @@ module.exports = {
     '~plugins/vue-awesome-swiper',
     '~plugins/v-money',
     '~plugins/v-calendar',
-    '~plugins/vue-js-modal'
+    '~plugins/vue-js-modal',
+    '~plugins/scroll'
   ],
   /*
   ** Customize the progress-bar color
