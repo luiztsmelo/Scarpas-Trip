@@ -3,27 +3,25 @@
 
 
     <!-- ####### TOPBAR ####### -->
-    <transition name="topbar-animation">
-      <div class="topbar" :class="{ topbarBg: scrollTopbar }" v-show="showTopbar">
+      <div class="topbar" v-scroll="scrollTopbarBg">
         <div class="topbar-body">
           
           <div class="back-box" @click="backBtn">
-            <img class="__back-btn" :class="{ topbarBtn: scrollTopbar }" src="../../assets/img/back.svg" alt="voltar">
+            <img class="__back-btn" v-scroll="scrollTopbarBtns" src="../../assets/img/back.svg" alt="voltar">
           </div>
 
           <div class="share-box" @click="$store.commit('m_showShare', true), hashShare()">
-            <img class="__share-btn" :class="{ topbarBtn: scrollTopbar }" src="../../assets/img/share.svg" alt="compartilhar">
+            <img class="__share-btn" v-scroll="scrollTopbarBtns" src="../../assets/img/share.svg" alt="compartilhar">
           </div>
           
         </div>
-      </div>
-    </transition><!-- ####### TOPBAR ####### -->
+      </div><!-- ####### TOPBAR ####### -->
 
 
 
 
     <!-- ####### IMAGE ####### -->
-    <div class="image-box">
+    <div class="image-box" ref="imageBox">
       <swiper :options="swiperOption">
 
         <swiper-slide class="slide">
@@ -123,8 +121,7 @@ export default {
   mixins: [mapstyle],
   data () {
     return {
-      showTopbar: true,
-      scrollTopbar: false,
+      heightImageBox: null,
       swiperOption: {
         pagination: '.swiper-pagination',
         dynamicBullets: true,
@@ -159,6 +156,20 @@ export default {
     })
   },
   methods: {
+    scrollTopbarBg (evt, el) {
+      if (window.scrollY > this.heightImageBox) {
+        return el.setAttribute("style", "background: white; box-shadow: 0px 1px 1px 0px rgba(0,0,0,0.1)")
+      } else {
+        return el.setAttribute("style", "")
+      }
+    },
+    scrollTopbarBtns (evt, el) {
+      if (window.scrollY > this.heightImageBox) {
+        return el.setAttribute("style", "filter: invert(90%)")
+      } else {
+        return el.setAttribute("style", "")
+      }
+    },
     backBtn () {
       window.history.back(1)
     },
@@ -188,6 +199,8 @@ export default {
     loaded.then(() => {
       this.$store.state.googleMapsInitialized = true
     })
+    let heightImageBox = this.$refs.imageBox.scrollHeight
+    this.heightImageBox = heightImageBox
   },
   computed: {
     markerUrlPartida () {
@@ -202,9 +215,6 @@ export default {
     markerSizeChegada () {
       return !this.$store.state.googleMapsInitialized ? null : new window.google.maps.Size(34, 34)
     },
-    scrollY () {
-      return this.$store.state.scrollY
-    },
     atracao () {
       return this.$store.state.atracao
     },
@@ -213,15 +223,6 @@ export default {
     },
     showShare () {
       return this.$store.state.showShare
-    }
-  },
-  watch: {
-    scrollY (value) {
-      if (value > 250) {
-        this.scrollTopbar = true
-      } else {
-        this.scrollTopbar = false
-      }
     }
   },
   beforeRouteLeave (to, from, next) {

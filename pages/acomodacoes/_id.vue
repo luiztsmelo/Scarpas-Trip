@@ -12,7 +12,7 @@
         </div>
         
         <div class="share-box" @click="$store.commit('m_showShare', true), hashShare()">
-          <img class="__share-btn" v-scroll="scrollTopbarBtns" src="../../assets/img/share.svg" alt="compartilhar" >
+          <img class="__share-btn" v-scroll="scrollTopbarBtns" src="../../assets/img/share.svg" alt="compartilhar">
         </div>
         
       </div>
@@ -507,7 +507,7 @@ export default {
     },
     scrollTopbarBtns (evt, el) {
       if (window.scrollY > this.heightImageBox) {
-        return el.setAttribute("style", "filter: invert(65%)")
+        return el.setAttribute("style", "filter: invert(90%)")
       } else {
         return el.setAttribute("style", "")
       }
