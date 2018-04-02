@@ -489,12 +489,14 @@ export default {
   },
   transition: 'evento',
   fetch ({ store, params }) {
+    store.state.loader = true
     return firebase.firestore().collection('acomods').doc(params.id).get().then(doc => {
       store.commit('m_acomod', doc.data())
       if (store.state.isMobile === true) {
         store.commit('m_showNavbar', false)
         store.commit('m_showFoobar', false)
       }
+      store.state.loader = false
     })
   },
   methods: {
@@ -502,14 +504,14 @@ export default {
       if (window.scrollY > this.heightImageBox) {
         return el.setAttribute("style", "background: white; box-shadow: 0px 1px 1px 0px rgba(0,0,0,0.1)")
       } else {
-        return el.setAttribute("style", "")
+        return el.removeAttribute("style")
       }
     },
     scrollTopbarBtns (evt, el) {
       if (window.scrollY > this.heightImageBox) {
         return el.setAttribute("style", "filter: invert(90%)")
       } else {
-        return el.setAttribute("style", "")
+        return el.removeAttribute("style")
       }
     },
     openReservaModal () {

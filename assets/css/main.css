@@ -106,13 +106,13 @@ textarea {
   opacity: 0;
 }
 
-.evento-leave-active,
-.evento-enter 
-{ 
-  opacity: 0;
-  transform: translateY(1.6rem);
-}
 
+.evento-enter { 
+  transform: translateY(1.7rem);
+}
+.evento-leave-active {
+  opacity: 0;
+}
 /* ******* TEXT HIGHLIGHT COLOR ******* */
 ::-moz-selection { /* Firefox */
   color: white;
