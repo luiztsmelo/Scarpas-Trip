@@ -29,6 +29,7 @@ const store = () => new Vuex.Store({
     offFoobar3: true,
     offFoobar4: true,
     offFoobar5: true,
+    heightImageBox: null,
     googleMapsInitialized: false,
     /*
     -------------------- USER --------------------

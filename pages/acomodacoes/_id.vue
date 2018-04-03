@@ -348,7 +348,6 @@ export default {
   data () {
     return {
       showComods: false,
-      heightImageBox: null,
 
       attributes: [
         {
@@ -500,18 +499,14 @@ export default {
   },
   methods: {
     scrollTopbarBg (evt, el) {
-      if (window.scrollY > this.heightImageBox) {
-        return el.setAttribute("style", "background: white; box-shadow: 0px 1px 1px 0px rgba(0,0,0,0.1)")
-      } else {
-        return el.removeAttribute("style")
-      }
+      return window.scrollY >= this.$store.state.heightImageBox
+        ? el.setAttribute("style", "background: white; box-shadow: 0px 1px 1px 0px rgba(0,0,0,0.1)")
+        : el.removeAttribute("style")
     },
     scrollTopbarBtns (evt, el) {
-      if (window.scrollY > this.heightImageBox) {
-        return el.setAttribute("style", "filter: invert(90%)")
-      } else {
-        return el.removeAttribute("style")
-      }
+      return window.scrollY >= this.$store.state.heightImageBox
+        ? el.setAttribute("style", "filter: invert(90%)")
+        : el.removeAttribute("style")
     },
     openReservaModal () {
       if (this.$store.state.reservaAcomod.periodoReserva === null) {
@@ -580,8 +575,7 @@ export default {
     loaded.then(() => {
       this.$store.state.googleMapsInitialized = true
     })
-    let heightImageBox = this.$refs.imageBox.scrollHeight
-    this.heightImageBox = heightImageBox
+    this.$store.state.heightImageBox === null ? this.$store.state.heightImageBox = this.$refs.imageBox.clientHeight : null
   },
   computed: {
     valorNoitesTotal () {

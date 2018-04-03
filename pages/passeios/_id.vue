@@ -162,7 +162,6 @@ export default {
   mixins: [mapstyle],
   data () {
     return {
-      heightImageBox: null,
       swiperOption: {
         pagination: '.swiper-pagination',
         dynamicBullets: true,
@@ -227,12 +226,12 @@ export default {
   },
   methods: {
     scrollTopbarBg (evt, el) {
-      return window.scrollY >= this.heightImageBox
+      return window.scrollY >= this.$store.state.heightImageBox
         ? el.setAttribute("style", "background: white; box-shadow: 0px 1px 1px 0px rgba(0,0,0,0.1)")
         : el.removeAttribute("style")
     },
     scrollTopbarBtns (evt, el) {
-      return window.scrollY >= this.heightImageBox
+      return window.scrollY >= this.$store.state.heightImageBox
         ? el.setAttribute("style", "filter: invert(90%)")
         : el.removeAttribute("style")
     },
@@ -268,8 +267,7 @@ export default {
     loaded.then(() => {
       this.$store.state.googleMapsInitialized = true
     })
-    let heightImageBox = this.$refs.imageBox.scrollHeight
-    this.heightImageBox = heightImageBox
+    this.$store.state.heightImageBox === null ? this.$store.state.heightImageBox = this.$refs.imageBox.clientHeight : null
   },
   computed: {
     markerUrl () {
