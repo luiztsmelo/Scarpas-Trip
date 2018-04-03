@@ -107,10 +107,10 @@ textarea {
 }
 
 
-.evento-enter { 
-  transform: translateY(1.7rem);
+.id-enter { 
+  transform: translateY(1.6rem);
 }
-.evento-leave-active {
+.id-leave-active {
   opacity: 0;
 }
 /* ******* TEXT HIGHLIGHT COLOR ******* */

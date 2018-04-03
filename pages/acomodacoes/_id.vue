@@ -487,16 +487,15 @@ export default {
       ]
     }
   },
-  transition: 'evento',
+  transition: 'id',
   fetch ({ store, params }) {
-    store.state.loader = true
     return firebase.firestore().collection('acomods').doc(params.id).get().then(doc => {
       store.commit('m_acomod', doc.data())
       if (store.state.isMobile === true) {
         store.commit('m_showNavbar', false)
         store.commit('m_showFoobar', false)
       }
-      store.state.loader = false
+      store.commit('m_loader', false)
     })
   },
   methods: {

@@ -147,12 +147,13 @@ export default {
       ]
     }
   },
-  transition: 'evento',
+  transition: 'id',
   fetch ({ store, params }) {
     return firebase.firestore().collection('atracoes').doc(params.id).get().then(doc => {
       store.commit('m_atracao', doc.data())
       store.commit('m_showNavbar', false)
       store.commit('m_showFoobar', false)
+      store.commit('m_loader', false)
     })
   },
   methods: {

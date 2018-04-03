@@ -44,8 +44,8 @@ export default {
   background-image: url('../static/brand.svg');
   background-repeat: no-repeat;
   background-size: cover;
-  animation: spin 4.5s cubic-bezier(.28,1.91,.3,.39) infinite;
-  opacity: .8;
+  animation: spin 5s cubic-bezier(.28,1.91,.3,.39) infinite;
+  opacity: .5;
 }
 
 @keyframes spin { 
