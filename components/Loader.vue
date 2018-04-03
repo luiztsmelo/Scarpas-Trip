@@ -2,7 +2,7 @@
   <transition name="loader">  
     <div class="loader" v-show="loader">
       <div class="loader-body">
-        <div class="spinner"></div>
+        <div class="lds-ripple"><div></div><div></div></div>
       </div> 
     </div>
   </transition>
@@ -35,24 +35,39 @@ export default {
     justify-content: center;
     top: 50%;
     transform: translateY(-50%);
+    & .lds-ripple {
+      display: inline-block;
+      position: relative;
+      width: 72px;
+      height: 72px;
+    }
+    & .lds-ripple div {
+      position: absolute;
+      border: 3px solid #00D8C7;
+      opacity: .25;
+      border-radius: 50%;
+      animation: lds-ripple 1.3s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+    }
+    & .lds-ripple div:nth-child(2) {
+      animation-delay: -0.5s;
+    }
   }
 }
 
-.spinner {
-  width: 3.5rem;
-  height: 3.5rem;
-  background-image: url('../static/brand.svg');
-  background-repeat: no-repeat;
-  background-size: cover;
-  animation: spin 5s cubic-bezier(.28,1.91,.3,.39) infinite;
-  opacity: .5;
-}
-
-@keyframes spin { 
-  from { 
-    transform: rotate(0deg);
-  } to { 
-    transform: rotate(720deg);
+@keyframes lds-ripple {
+  0% {
+    top: 28px;
+    left: 28px;
+    width: 0;
+    height: 0;
+    opacity: .25;
+  }
+  100% {
+    top: -1px;
+    left: -1px;
+    width: 58px;
+    height: 58px;
+    opacity: 0;
   }
 }
 
@@ -62,10 +77,6 @@ export default {
     & .loader-body {
       top: calc(50% - 4rem);
     }
-  }
-  .spinner {
-    width: 4rem;
-    height: 4rem;
   }
 }
 
