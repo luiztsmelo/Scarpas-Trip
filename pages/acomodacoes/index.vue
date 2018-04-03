@@ -40,6 +40,7 @@
           <div class="item-form">
             <v-date-picker
               is-double-paned
+              is-linked
               mode='range'
               @drag='drag = $event'
               v-model='filter.date'

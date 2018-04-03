@@ -227,18 +227,14 @@ export default {
   },
   methods: {
     scrollTopbarBg (evt, el) {
-      if (window.scrollY > this.heightImageBox) {
-        return el.setAttribute("style", "background: white; box-shadow: 0px 1px 1px 0px rgba(0,0,0,0.1)")
-      } else {
-        return el.setAttribute("style", "")
-      }
+      return window.scrollY >= this.heightImageBox
+        ? el.setAttribute("style", "background: white; box-shadow: 0px 1px 1px 0px rgba(0,0,0,0.1)")
+        : el.removeAttribute("style")
     },
     scrollTopbarBtns (evt, el) {
-      if (window.scrollY > this.heightImageBox) {
-        return el.setAttribute("style", "filter: invert(90%)")
-      } else {
-        return el.setAttribute("style", "")
-      }
+      return window.scrollY >= this.heightImageBox
+        ? el.setAttribute("style", "filter: invert(90%)")
+        : el.removeAttribute("style")
     },
     backBtn () {
       window.history.back(1)

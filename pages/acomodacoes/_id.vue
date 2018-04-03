@@ -680,6 +680,7 @@ export default {
   },
   beforeRouteLeave (to, from, next) {
     this.$store.dispatch('a_resetReservaAcomodDesktop')/* Resetar dados reservaAcomod p/ evitar bugs */
+    this.$store.commit('m_loader', false) /* Evitar bugs com o loader */
     if (this.$store.state.showNavbar === false && this.$store.state.showFoobar === false) {
       this.$store.commit('m_showNavbar', true)
       this.$store.commit('m_showFoobar', true)

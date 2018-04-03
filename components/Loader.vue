@@ -38,18 +38,18 @@ export default {
     & .lds-ripple {
       display: inline-block;
       position: relative;
-      width: 72px;
-      height: 72px;
+      width: 64px;
+      height: 64px;
     }
     & .lds-ripple div {
       position: absolute;
       border: 3px solid #00D8C7;
       opacity: .25;
       border-radius: 50%;
-      animation: lds-ripple 1.3s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+      animation: lds-ripple 1.2s cubic-bezier(0, 0.2, 0.8, 1) infinite;
     }
     & .lds-ripple div:nth-child(2) {
-      animation-delay: -0.5s;
+      animation-delay: -0.4s;
     }
   }
 }
