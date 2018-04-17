@@ -42,6 +42,7 @@
     <!-- ####### IMAGE ####### -->
 
 
+
     <div class="desktop-view"><!-- Desktop View -->
 
       
@@ -179,9 +180,11 @@
         <h1 class="item-title">Disponibilidade</h1>
 
         <v-calendar
+          is-linked
           is-inline
           is-double-paned
           is-expanded
+          :min-date='new Date()'
           mode='single'
           :theme-styles='themeStylesDesktop'
           :attributes='attributes'
@@ -219,7 +222,11 @@
           <h3>Comentários aqui...</h3>
         </div><!-- ####### AVALIAÇÕES ####### -->
 
+
+
       </div><!-- Desktop View Info -->
+
+
 
       <div class="reserva-desktop">
         <form class="reserva-desktop-form">
@@ -314,6 +321,7 @@
         </form>
       </div>
 
+
     </div><!-- Desktop View -->
 
 
@@ -331,6 +339,8 @@
 </template>
 
 <script>
+import * as firebase from 'firebase'
+require('firebase/firestore')
 import AskAcomod from '../../components/reserva-acomod/AskAcomod'
 import PopoverCalendar from '../../components/reserva-acomod/PopoverCalendar'
 import { loaded } from '~/node_modules/vue2-google-maps/src/manager'
@@ -339,8 +349,6 @@ import ReservaAcomodDesktop from '../../components/reserva-acomod/ReservaAcomodD
 import Proprietario from '../../components/Proprietario'
 import supportsWebP from 'supports-webp'
 import { mapstyle } from '../../mixins/mapstyle'
-import * as firebase from 'firebase'
-require('firebase/firestore')
 
 export default {
   components: { ReservaAcomod, ReservaAcomodDesktop, Proprietario, AskAcomod },
@@ -928,6 +936,7 @@ export default {
     display: none;
   }
 }
+
 @media (min-width: 1024px) {
   .acomods-id {
     margin-top: 4rem;

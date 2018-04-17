@@ -1,5 +1,5 @@
 <template>
-  <div class="passeios_id">
+  <div class="passeios-id">
 
 
     <!-- ####### TOPBAR ####### -->
@@ -39,100 +39,113 @@
 
 
 
-    <h1 class="id-title">{{ passeio.title }}</h1>
+    <div class="desktop-view"><!-- Desktop View -->
+
+      
+
+      <div class="desktop-view-info"><!-- Desktop View Info -->
+
+        <h1 class="id-title">{{ passeio.title }}</h1>
+
+
+        <!-- ####### ANUNCIANTE ####### -->
+        <div class="anunciante-box" @click="$store.commit('m_showProprietario', true), hashProprietario()">
+          <img class="__anunciante-img" :src="passeio.photoURL" alt="">
+          <div class="box-flex-column">
+            <h3 style="user-select:none">Guiado por</h3>
+            <a class="__anunciante-name">{{ passeio.proprietario }}</a>
+          </div>
+        </div><!-- ####### ANUNCIANTE ####### -->
+
+
+        
+
+        <!-- ####### SOBRE ####### -->
+        <h1 class="item-title">Sobre o Passeio</h1>
+
+        <div class="sobre-box">
+          <h3>{{ passeio.subtitle }}</h3>
+        </div><!-- ####### SOBRE ####### -->
 
 
 
 
-    <!-- ####### ANUNCIANTE ####### -->
-    <div class="anunciante-box" @click="$store.commit('m_showProprietario', true), hashProprietario()">
-      <img class="__anunciante-img" :src="passeio.photoURL" alt="">
-      <div class="box-flex-column">
-        <h3 style="user-select:none">Guiado por</h3>
-        <a class="__anunciante-name">{{ passeio.proprietario }}</a>
+
+        <!-- ####### CAPACIDADE ####### -->
+        <h1 class="item-title">Capacidade</h1>
+
+        <div class="capacidade-box">
+          <h3>{{ passeio.capacidade }}</h3>
+        </div><!-- ####### CAPACIDADE ####### -->
+
+
+
+
+
+        <!-- ####### DURAÇÃO ####### -->
+        <h1 class="item-title">Duração</h1>
+
+        <div class="duracao-box">
+          <h3>{{ passeio.duracao }}</h3>
+        </div><!-- ####### DURAÇÃO ####### -->
+
+
+
+
+        <!-- ####### PONTOS VISITADOS ####### -->
+        <h1 class="item-title">Pontos Visitados</h1>
+
+        <div class="pontos-box">
+          <h3>Pontos aqui...</h3>
+        </div><!-- ####### PONTOS VISITADOS ####### -->
+
+
+
+
+        <!-- ####### DISPONIBILIDADE ####### -->
+        <h1 class="item-title">Disponibilidade</h1>
+
+        <v-calendar
+          mode='single'
+          :month-labels='monthLabels'
+          :weekday-labels='weekdayLabels'
+          :theme-styles='themeStyles'
+          is-inline
+          >
+        </v-calendar>
+        <!-- ####### DISPONIBILIDADE ####### -->
+
+
+
+
+        <!-- ####### LOCAL SAÍDA ####### -->
+        <h1 class="item-title">Local de Saída</h1>
+
+        <div class="local-saida-box">
+          <h3>{{ passeio.localSaida }}</h3>
+          <h3>Mapa aqui...</h3>
+        </div><!-- ####### LOCAL SAÍDA ####### -->
+
+
+
+      
+        <!-- ####### AVALIAÇÕES ####### -->
+        <h1 class="item-title">Avaliações</h1>
+
+        <div class="avaliacoes-box">
+          <h3>Comentários aqui...</h3>
+        </div><!-- ####### AVALIAÇÕES ####### -->
+
+
+      </div><!-- Desktop View Info -->
+
+
+      <div class="reserva-desktop">
+        
       </div>
-    </div><!-- ####### ANUNCIANTE ####### -->
 
 
-    
-
-    <!-- ####### SOBRE ####### -->
-    <h1 class="item-title">Sobre o Passeio</h1>
-
-    <div class="sobre-box">
-      <h3>{{ passeio.subtitle }}</h3>
-    </div><!-- ####### SOBRE ####### -->
-
-
-
-
-
-    <!-- ####### CAPACIDADE ####### -->
-    <h1 class="item-title">Capacidade</h1>
-
-    <div class="capacidade-box">
-      <h3>{{ passeio.capacidade }}</h3>
-    </div><!-- ####### CAPACIDADE ####### -->
-
-
-
-
-
-    <!-- ####### DURAÇÃO ####### -->
-    <h1 class="item-title">Duração</h1>
-
-    <div class="duracao-box">
-      <h3>{{ passeio.duracao }}</h3>
-    </div><!-- ####### DURAÇÃO ####### -->
-
-
-
-
-    <!-- ####### PONTOS VISITADOS ####### -->
-    <h1 class="item-title">Pontos Visitados</h1>
-
-    <div class="pontos-box">
-      <h3>Pontos aqui...</h3>
-    </div><!-- ####### PONTOS VISITADOS ####### -->
-
-
-
-
-    <!-- ####### DISPONIBILIDADE ####### -->
-    <h1 class="item-title">Disponibilidade</h1>
-
-    <v-calendar
-      mode='single'
-      :month-labels='monthLabels'
-      :weekday-labels='weekdayLabels'
-      :theme-styles='themeStyles'
-      is-inline
-      >
-    </v-calendar>
-    <!-- ####### DISPONIBILIDADE ####### -->
-
-
-
-
-    <!-- ####### LOCAL SAÍDA ####### -->
-    <h1 class="item-title">Local de Saída</h1>
-
-    <div class="local-saida-box">
-      <h3>{{ passeio.localSaida }}</h3>
-      <h3>Mapa aqui...</h3>
-    </div><!-- ####### LOCAL SAÍDA ####### -->
-
-
-
-  
-    <!-- ####### AVALIAÇÕES ####### -->
-    <h1 class="item-title">Avaliações</h1>
-
-    <div class="avaliacoes-box">
-      <h3>Comentários aqui...</h3>
-    </div><!-- ####### AVALIAÇÕES ####### -->
-
-
+    </div><!-- Desktop View -->
 
 
     <!-- ####### RESERVA ####### --> 
@@ -162,11 +175,6 @@ export default {
   mixins: [mapstyle],
   data () {
     return {
-      swiperOption: {
-        pagination: '.swiper-pagination',
-        dynamicBullets: true,
-        autoplay: 2222
-      },
       monthLabels: ['Janeiro','Favereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
       weekdayLabels: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'],
       themeStyles: {
@@ -219,8 +227,10 @@ export default {
   fetch ({ store, params }) {
     return firebase.firestore().collection('passeios').doc(params.id).get().then(doc => {
       store.commit('m_passeio', doc.data())
-      store.commit('m_showNavbar', false)
-      store.commit('m_showFoobar', false)
+      if (store.state.isMobile === true) {
+        store.commit('m_showNavbar', false)
+        store.commit('m_showFoobar', false)
+      }
       store.commit('m_loader', false)
     })
   },
@@ -270,6 +280,25 @@ export default {
     this.$store.state.heightImageBox === null ? this.$store.state.heightImageBox = this.$refs.imageBox.clientHeight : null
   },
   computed: {
+    swiperOption () {
+      if (this.$store.state.isMobile === true) {
+        return {
+          pagination: '.swiper-pagination',
+          dynamicBullets: true,
+          autoplay: 2300
+        }
+      } else {
+        return {
+          slidesPerView: 2.33,
+          spaceBetween: 7,
+          pagination: '',
+          dynamicBullets: true,
+          freeMode: true,
+          autoplay: 2300,
+          speed: 10000
+        }
+      }
+    },
     markerUrl () {
       return 'https://firebasestorage.googleapis.com/v0/b/escarpas-trip.appspot.com/o/utils%2Fmarker.svg?alt=media&token=fcbfd76e-ee93-41e8-a816-98906e19859b'
     },
@@ -286,13 +315,24 @@ export default {
       return this.$store.state.showShare
     }
   },
+  beforeRouteEnter (to, from, next) {
+    next(vm => {
+      if (vm.$store.state.isMobile === false) {
+        vm.$store.commit('m_showNavbar', true)
+      } else {
+        vm.$store.commit('m_showNavbar', false)
+        vm.$store.commit('m_showFoobar', false)
+      }
+    })
+  },
   beforeRouteLeave (to, from, next) {
+    this.$store.commit('m_loader', false) /* Evitar bugs com o loader */
     if (this.$store.state.showNavbar === false && this.$store.state.showFoobar === false) {
       this.$store.commit('m_showNavbar', true)
       this.$store.commit('m_showFoobar', true)
       next()
     } else {
-      next(false)
+      next()
     }
   }
 }
@@ -303,7 +343,7 @@ export default {
 @import url('../../assets/css/pagination.css');
 @import url('../../assets/css/_id.css');
 
-.passeios_id {
+.passeios-id {
   display: flex;
   flex-flow: column;
   background-color: white;
@@ -450,11 +490,99 @@ export default {
 
 /* TRANSITIONS */
 
+@media (max-width: 1023px) {
+  .reserva-desktop {
+    display: none;
+  }
+}
+
+@media (min-width: 1024px) {
+  .passeios-id {
+    margin-top: 4rem;
+
+    /* ####### IMAGE BOX ####### */
+    & .image-box {
+      cursor: grab;
+      overflow: hidden;
+      & .swiper-container {
+        position: relative;
+        & .swiper-wrapper {
+          display: inline-flex;
+          overflow: hidden;
+          & .slide {
+            & .__img {
+              width: 100%;
+              height: auto;
+            }
+          }
+        }
+      }
+    }/* ####### IMAGE BOX ####### */
+    & .desktop-view {
+      display: flex;
+      margin: 1.7rem 8% 0 8%;
+      & .reserva-desktop {
+        flex-basis: 31%;
+        border: 1px solid rgb(232,232,232);
+        align-self: flex-start;
+      }
+      & .desktop-view-info {
+        margin-right: 5%;
+        flex-basis: 69%;
+        /* ####### ANUNCIANTE BOX ####### */
+        & .anunciante-box {
+          padding: 1.5rem 0 0 0;
+          & .__anunciante-img {
+            width: 4rem;
+            height: 4rem;
+            margin-right: .7rem;
+          }
+          & .__anunciante-name {
+            color: #00BAAC;
+            user-select: none;
+          }
+        }/* ####### ANUNCIANTE BOX ####### */
 
 
-@media (min-width: 1281px) {
-  .passeios {
-    /* padding: 0 13%; */
+        /* ####### SOBRE BOX ####### */
+        & .sobre-box {
+          padding: 0;
+        }/* ####### SOBRE BOX ####### */
+
+
+
+
+        /* ####### CAPACIDADE BOX ####### */
+        & .capacidade-box {
+          padding: 0;
+        }/* ####### CAPACIDADE BOX ####### */
+
+
+
+        /* ####### LOCAL ####### */
+        & .local-box {
+          & .__adress {
+            padding: 0 0 .6rem 0;
+          }
+          & .vue-map-container {
+            height: 400px;
+          }
+        }/* ####### LOCAL ####### */
+
+
+        /* ####### AVALIAÇÕES ####### */
+        & .avaliacoes-box {
+          padding: 0;
+        }/* ####### AVALIAÇÕES ####### */
+      }
+    }
+    
+  
+
+    /* ####### RESERVA ####### */
+    & .reserva {
+      display: none;
+    }/* ####### RESERVA ####### */
   }
 }
 
