@@ -311,7 +311,7 @@ export default {
         & .title-row {
           padding: 0 7% 1.5rem 7%;
           & .__title {
-            font-size: 30px;
+            font-size: 29px;
             font-weight: 700;
           }
         }
