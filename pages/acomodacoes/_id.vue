@@ -243,6 +243,8 @@
 
           <div class="item-form">
             <v-date-picker
+              is-double-paned
+              is-linked
               ref='datePicker'
               mode='range'
               v-model='$store.state.reservaAcomod.periodoReserva'
@@ -254,6 +256,7 @@
               :disabled-attribute='disabledAttribute'
               :theme-styles='themeStylesReserva'
               :formats='formats'
+              popover-align='right'
               tint-color='#00D8C7'
               show-caps
               popover-visibility='focus'>
@@ -412,12 +415,12 @@ export default {
           fontSize: '1.5rem',
         },
         headerTitle: {
-          fontSize: '16px',
-          fontWeight: '400'
+          fontSize: '17px',
+          fontWeight: '600'
         },
         weekdays: {
           color: 'rgb(42, 42, 42)',
-          fontSize: '16px',
+          fontSize: '15px',
           fontWeight: '600',
           padding: '14px 5px 6px 5px',
         },
@@ -453,7 +456,7 @@ export default {
         },
         headerTitle: {
           fontSize: '16px',
-          fontWeight: '400'
+          fontWeight: '600'
         },
         weekdays: {
           color: 'rgb(42, 42, 42)',
