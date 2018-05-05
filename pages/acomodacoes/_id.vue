@@ -622,7 +622,7 @@ export default {
         }
       } else {
         return {
-          slidesPerView: 2.33,
+          slidesPerView: 2.37,
           spaceBetween: 7,
           pagination: '',
           dynamicBullets: true,

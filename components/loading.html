@@ -4,14 +4,10 @@
 
 body, html, #__nuxt {
   background-color: white;
-  width: 100%;
-  height: 100%;
+  height: 100vh;
   display: flex;
-  flex-flow: column;
   justify-content: center;
   align-items: center;
-  margin: 0;
-  padding: 0;
 }
 
 .logo {
@@ -20,10 +16,10 @@ body, html, #__nuxt {
   background-image: url('./brand.svg');
   background-repeat: no-repeat;
   background-size: cover;
-  animation: spin 7s ease infinite;
+  animation: fade 7s ease infinite;
 }
 
-@keyframes spin { 
+@keyframes fade { 
   from { 
     opacity: 0;
   } to { 
