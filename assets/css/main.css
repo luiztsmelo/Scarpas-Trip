@@ -9,7 +9,7 @@
   --colorAcomod: #00D8C7; /* #006561 for cards info */
   --colorPasseio: #198CFE; /* #0784FD for cards info */
   --colorEvento: #FF7E65;
-  --colorRestaurante: rgb(252, 86, 86);
+  --colorRestaurante: #fc5656;
   --colorAtracao: rgb(252, 86, 86);
   /* ******* MAIN TRANSITION ******* */
   --main-transition: cubic-bezier(0.190, 1.000, 0.220, 1.000) all .7s;

@@ -913,7 +913,7 @@ export default {
       & .__reserva-btn {
         font-size: 16px;
         font-weight: 700;
-        background: #00D8C7;
+        background: #FFA04F;
         line-height: 2.6rem;
         color: white;
         height: 2.7rem;

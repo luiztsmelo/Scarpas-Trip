@@ -35,7 +35,7 @@
             <li class="__nav-item">Restaurantes</li>
           </nuxt-link>
           
-          <nuxt-link to="/acomodacoes" v-if="$store.state.user.email === null">
+          <nuxt-link to="/anunciar" v-if="$store.state.user.email === null">
             <li class="__nav-item">Anunciar</li>
           </nuxt-link>
 
@@ -238,11 +238,11 @@ export default {
     & .navbar-body {
       & .brand {
         & .__brand-img {
-          width: 2.3rem;
+          width: 2.35rem;
           height: auto;
         }
         & .__brand-name {
-          font-size: 20px;
+          font-size: 21px;
           font-weight: 500;
           line-height: 4rem;
         }
