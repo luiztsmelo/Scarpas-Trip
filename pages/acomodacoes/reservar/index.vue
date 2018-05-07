@@ -6,7 +6,6 @@
     <h1>Reservar</h1>
     <h1>Reservar</h1>
     <h1>Reservar</h1>
-    <h1>Reservar</h1>
   </div>
 </template>
 
