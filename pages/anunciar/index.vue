@@ -1,6 +1,8 @@
 <template>
   <div class="anunciar">
-    <h1 class="__title">Ainda gasta com anúncio? Aqui é de graça! Anuncie:</h1>
+
+    <h1 class="__title">Amplie seus Ganhos. Anuncie Gratuitamente:</h1>
+
     <div class="category-container">
 
       <nuxt-link to="/anunciar/acomodacao" class="card">
@@ -24,6 +26,9 @@
       </nuxt-link>
 
     </div>
+
+
+
   </div>
 </template>
 
@@ -43,15 +48,13 @@ export default {
   flex-flow: column;
   justify-content: center;
   align-items: center;
-
-
   transition: var(--main-transition);
   & .__title {
-    padding: 3rem 25%;
-    font-size: 40px;
+    padding: 4rem 20% 4rem;
+    font-size: 34px;
     font-weight: 700;
     text-align: center;
-    line-height: 49px;
+    line-height: 45px;
   }
   & .category-container {
     display: flex;
@@ -62,7 +65,7 @@ export default {
       display: flex;
       flex-flow: column;
       align-items: center;
-      width: 23.4%;
+      width: 23%;
       border-radius: 3px;
       box-shadow: 2px 2px 9px 4px rgba(0,0,0,0.13);
       & .__card-img {
