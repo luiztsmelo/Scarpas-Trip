@@ -752,60 +752,60 @@ export default {
     
     /* ******************** NEXT BUTTONS ******************** */
     hashAcomod () {
-      window.location.hash = "cad1"
+      window.location.hash = "tipo"
     },
     nextBtn1 () {
       if (this.$store.state.acomodData.tipoAcomod !== null) {
-        this.$store.commit('m_cadastroAcomod1', false), this.$store.commit('m_cadastroAcomod2', true), this.$store.commit('m_acomodProgressBar', (100/11)*2), window.location.hash = "cad2"
+        this.$store.commit('m_cadastroAcomod1', false), this.$store.commit('m_cadastroAcomod2', true), this.$store.commit('m_acomodProgressBar', (100/11)*2), window.location.hash = "capacidade"
       }
     },
     nextBtn2 () {
       if (this.$store.state.acomodData.totalHospedes !== null) {
-        this.$store.commit('m_cadastroAcomod2', false), this.$store.commit('m_cadastroAcomod3', true), this.$store.commit('m_acomodProgressBar', (100/11)*3), window.location.hash = "cad3"
+        this.$store.commit('m_cadastroAcomod2', false), this.$store.commit('m_cadastroAcomod3', true), this.$store.commit('m_acomodProgressBar', (100/11)*3), window.location.hash = "caracteristicas"
       }
     },
     nextBtn3 () {
       if (1<2) {
-        this.$store.commit('m_cadastroAcomod3', false), this.$store.commit('m_cadastroAcomod4', true), this.$store.commit('m_acomodProgressBar', (100/11)*4), this.scrollTop(), window.location.hash = "cad4"
+        this.$store.commit('m_cadastroAcomod3', false), this.$store.commit('m_cadastroAcomod4', true), this.$store.commit('m_acomodProgressBar', (100/11)*4), this.scrollTop(), window.location.hash = "comodidades"
       }
     },
     nextBtn4 () {
       if (1<2) {
-        this.$store.commit('m_cadastroAcomod4', false), this.$store.commit('m_cadastroAcomod5', true), this.$store.commit('m_acomodProgressBar', (100/11)*5), this.scrollTop(), window.location.hash = "cad5"
+        this.$store.commit('m_cadastroAcomod4', false), this.$store.commit('m_cadastroAcomod5', true), this.$store.commit('m_acomodProgressBar', (100/11)*5), this.scrollTop(), window.location.hash = "local"
       }
     },
     nextBtn5 () {
       if (this.$store.state.acomodPlace !== null) {
-        this.$store.commit('m_cadastroAcomod5', false), this.$store.commit('m_cadastroAcomod6', true), this.$store.commit('m_acomodProgressBar', (100/11)*6), window.location.hash = "cad6"
+        this.$store.commit('m_cadastroAcomod5', false), this.$store.commit('m_cadastroAcomod6', true), this.$store.commit('m_acomodProgressBar', (100/11)*6), window.location.hash = "imagens"
       } else {
         alert('Adicione um endereço')
       }
     },
     nextBtn6 () {
       if (this.imageURL1 !== null) {
-        this.$store.commit('m_cadastroAcomod6', false), this.$store.commit('m_cadastroAcomod7', true), this.$store.commit('m_acomodProgressBar', (100/11)*7), window.location.hash = "cad7"
+        this.$store.commit('m_cadastroAcomod6', false), this.$store.commit('m_cadastroAcomod7', true), this.$store.commit('m_acomodProgressBar', (100/11)*7), window.location.hash = "valor"
       } else {
         alert('Adicione pelo menos uma imagem')
       }
     },
     nextBtn7 () {
       if (1<2) {
-        this.$store.commit('m_cadastroAcomod7', false), this.$store.commit('m_cadastroAcomod8', true), this.$store.commit('m_acomodProgressBar', (100/11)*8), window.location.hash = "cad8"
+        this.$store.commit('m_cadastroAcomod7', false), this.$store.commit('m_cadastroAcomod8', true), this.$store.commit('m_acomodProgressBar', (100/11)*8), window.location.hash = "titulo"
       }
     },
     nextBtn8 () {
       if (this.$store.state.acomodData.title !== '') {
-        this.$store.commit('m_cadastroAcomod8', false), this.$store.commit('m_cadastroAcomod9', true), this.$store.commit('m_acomodProgressBar', (100/11)*9), window.location.hash = "cad9"
+        this.$store.commit('m_cadastroAcomod8', false), this.$store.commit('m_cadastroAcomod9', true), this.$store.commit('m_acomodProgressBar', (100/11)*9), window.location.hash = "subtitulo"
       }
     },
     nextBtn9 () {
       if (this.$store.state.acomodData.subtitle !== '') {
-        this.$store.commit('m_cadastroAcomod9', false), this.$store.commit('m_cadastroAcomod10', true), this.$store.commit('m_acomodProgressBar', (100/11)*10), window.location.hash = "cad10"
+        this.$store.commit('m_cadastroAcomod9', false), this.$store.commit('m_cadastroAcomod10', true), this.$store.commit('m_acomodProgressBar', (100/11)*10), window.location.hash = "identificacao"
       }
     },
     nextBtn10 () {
       if (this.$store.state.acomodData.celular.length === 15) {
-        this.$store.commit('m_cadastroAcomod10', false), this.$store.commit('m_cadastroAcomod11', true), this.$store.commit('m_acomodProgressBar', (100/11)*11), window.location.hash = "cad11"
+        this.$store.commit('m_cadastroAcomod10', false), this.$store.commit('m_cadastroAcomod11', true), this.$store.commit('m_acomodProgressBar', (100/11)*11), window.location.hash = "dados"
       }
     },
     concluir () {
@@ -1065,7 +1065,7 @@ export default {
         this.$store.commit('m_cadastroAcomod10', false)
         this.$store.commit('m_cadastroAcomod11', false)
       } 
-      if (value === '#cad1') {
+      if (value === '#tipo') {
         this.$store.commit('m_cadastroAcomod0', false)
         this.$store.commit('m_cadastroAcomod1', true)
         this.$store.commit('m_cadastroAcomod2', false)
@@ -1079,7 +1079,7 @@ export default {
         this.$store.commit('m_cadastroAcomod10', false)
         this.$store.commit('m_cadastroAcomod11', false)
       } 
-      if (value === '#cad2') {
+      if (value === '#capacidade') {
         this.$store.commit('m_cadastroAcomod0', false)
         this.$store.commit('m_cadastroAcomod1', false)
         this.$store.commit('m_cadastroAcomod2', true)
@@ -1093,7 +1093,7 @@ export default {
         this.$store.commit('m_cadastroAcomod10', false)
         this.$store.commit('m_cadastroAcomod11', false)
       } 
-      if (value === '#cad3') {
+      if (value === '#caracteristicas') {
         this.$store.commit('m_cadastroAcomod0', false)
         this.$store.commit('m_cadastroAcomod1', false)
         this.$store.commit('m_cadastroAcomod2', false)
@@ -1107,7 +1107,7 @@ export default {
         this.$store.commit('m_cadastroAcomod10', false)
         this.$store.commit('m_cadastroAcomod11', false)
       } 
-      if (value === '#cad4') {
+      if (value === '#comodidades') {
         this.$store.commit('m_cadastroAcomod0', false)
         this.$store.commit('m_cadastroAcomod1', false)
         this.$store.commit('m_cadastroAcomod2', false)
@@ -1121,7 +1121,7 @@ export default {
         this.$store.commit('m_cadastroAcomod10', false)
         this.$store.commit('m_cadastroAcomod11', false)
       } 
-      if (value === '#cad5') {
+      if (value === '#local') {
         this.$store.commit('m_cadastroAcomod0', false)
         this.$store.commit('m_cadastroAcomod1', false)
         this.$store.commit('m_cadastroAcomod2', false)
@@ -1135,7 +1135,7 @@ export default {
         this.$store.commit('m_cadastroAcomod10', false)
         this.$store.commit('m_cadastroAcomod11', false)
       } 
-      if (value === '#cad6') {
+      if (value === '#imagens') {
         this.$store.commit('m_cadastroAcomod0', false)
         this.$store.commit('m_cadastroAcomod1', false)
         this.$store.commit('m_cadastroAcomod2', false)
@@ -1149,7 +1149,7 @@ export default {
         this.$store.commit('m_cadastroAcomod10', false)
         this.$store.commit('m_cadastroAcomod11', false)
       } 
-      if (value === '#cad7') {
+      if (value === '#valor') {
         this.$store.commit('m_cadastroAcomod0', false)
         this.$store.commit('m_cadastroAcomod1', false)
         this.$store.commit('m_cadastroAcomod2', false)
@@ -1163,7 +1163,7 @@ export default {
         this.$store.commit('m_cadastroAcomod10', false)
         this.$store.commit('m_cadastroAcomod11', false)
       } 
-      if (value === '#cad8') {
+      if (value === '#titulo') {
         this.$store.commit('m_cadastroAcomod0', false)
         this.$store.commit('m_cadastroAcomod1', false)
         this.$store.commit('m_cadastroAcomod2', false)
@@ -1177,7 +1177,7 @@ export default {
         this.$store.commit('m_cadastroAcomod10', false)
         this.$store.commit('m_cadastroAcomod11', false)
       } 
-      if (value === '#cad9') {
+      if (value === '#subtitulo') {
         this.$store.commit('m_cadastroAcomod0', false)
         this.$store.commit('m_cadastroAcomod1', false)
         this.$store.commit('m_cadastroAcomod2', false)
@@ -1191,7 +1191,7 @@ export default {
         this.$store.commit('m_cadastroAcomod10', false)
         this.$store.commit('m_cadastroAcomod11', false)
       } 
-      if (value === '#cad10') {
+      if (value === '#identificacao') {
         this.$store.commit('m_cadastroAcomod0', false)
         this.$store.commit('m_cadastroAcomod1', false)
         this.$store.commit('m_cadastroAcomod2', false)
@@ -1205,7 +1205,7 @@ export default {
         this.$store.commit('m_cadastroAcomod10', true)
         this.$store.commit('m_cadastroAcomod11', false)
       } 
-      if (value === '#cad11') {
+      if (value === '#dados') {
         this.$store.commit('m_cadastroAcomod0', false)
         this.$store.commit('m_cadastroAcomod1', false)
         this.$store.commit('m_cadastroAcomod2', false)
