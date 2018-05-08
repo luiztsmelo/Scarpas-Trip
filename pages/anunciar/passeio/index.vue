@@ -680,13 +680,12 @@ export default {
       return 1<2 ? 'background:#198CFE;cursor:pointer' : ''
     }
   },
-  beforeRouteLeave (to, from, next) {
-    if (this.$store.state.showFoobar === false) {
-      this.$store.commit('m_showFoobar', true)
-      next()
-    } else {
-      next(false)
-    }
+  beforeRouteEnter (to, from, next) {
+    next(vm => {
+      if (vm.$store.state.showFoobar === true) {
+        vm.$store.commit('m_showFoobar', false)
+      }
+    })
   }
 }
 </script>
@@ -713,11 +712,11 @@ export default {
     flex-flow: column;
     align-items: center;
     & .__img-header {
-        margin: 2rem 0;
-        width: 6rem;
-        height: auto;
-        filter: grayscale(100%) brightness(250%);
-      }
+      margin: 2rem 0;
+      width: 6rem;
+      height: auto;
+      filter: grayscale(100%) brightness(250%);
+    }
     & .__title {
       font-size: 26px;
       font-weight: 700;

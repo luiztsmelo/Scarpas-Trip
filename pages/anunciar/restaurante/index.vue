@@ -39,13 +39,12 @@ export default {
     }
   },
   transition: 'opacity',
-  beforeRouteLeave (to, from, next) {
-    if (this.$store.state.showFoobar === false) {
-      this.$store.commit('m_showFoobar', true)
-      next()
-    } else {
-      next(false)
-    }
+  beforeRouteEnter (to, from, next) {
+    next(vm => {
+      if (vm.$store.state.showFoobar === true) {
+        vm.$store.commit('m_showFoobar', false)
+      }
+    })
   }
 }
 </script>

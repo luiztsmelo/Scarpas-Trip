@@ -27,15 +27,9 @@
     </div><!-- PLANO ACOMODAÇÃO -->
 
 
+
+
     <div class="progress-bar" v-show="!$store.state.cadastroAcomod0" :style="'width:' + $store.state.acomodProgressBar + '%'"></div>
-
-
-    <!-- BACK BUTTON -->
-    <div class="back-bar" :style="backBarPage0">
-      <div class="back-box" @click="backBtn">
-        <img class="__back-btn" :style="backBtnPage0" src="../../../assets/img/back.svg" alt="voltar">
-      </div>
-    </div><!-- BACK BUTTON -->
 
 
 
@@ -64,14 +58,12 @@
         </select>
       </div> 
 
-      <!-- <div class="back-next"> 
+      <div class="back-next"> 
         <div class="back-next-body">
           <button type="button" class="__back" @click="backBtn1">Voltar</button>
           <button type="button" class="__next" :style="form1ok" @click="nextBtn1">Próximo</button>
         </div>
-      </div> -->
-
-      <button type="button" class="__next-btn" :style="form1ok" @click="nextBtn1">Próximo</button>
+      </div>
     
     </form><!-- ########## TIPO DE ACOMODAÇÃO PG.1 ########## -->
 
@@ -91,14 +83,12 @@
         </select>
       </div> 
 
-      <!-- <div class="back-next"> 
+      <div class="back-next"> 
         <div class="back-next-body">
           <button type="button" class="__back" @click="backBtn2">Voltar</button>
           <button type="button" class="__next" :style="form2ok" @click="nextBtn2">Próximo</button>
         </div>
-      </div>  -->
-
-      <button type="button" class="__next-btn" :style="form2ok" @click="nextBtn2">Próximo</button>
+      </div> 
 
     </form><!-- ########## TOTAL DE HÓSPEDES PG.2 ########## -->
 
@@ -144,14 +134,12 @@
       </div> 
 
 
-      <!-- <div class="back-next"> 
+      <div class="back-next"> 
         <div class="back-next-body">
           <button type="button" class="__back" @click="backBtn3">Voltar</button>
           <button type="button" class="__next" :style="form3ok" @click="nextBtn3">Próximo</button>
         </div>
-      </div>  -->
-
-      <button type="button" class="__next-btn" :style="form3ok" @click="nextBtn3">Próximo</button>
+      </div> 
     
     </form><!-- ########## CARACTERÍSTICAS PG.3 ########## -->
 
@@ -241,15 +229,12 @@
       </div>
       
 
-
-      <!-- <div class="back-next"> 
+      <div class="back-next"> 
         <div class="back-next-body">
           <button type="button" class="__back" @click="backBtn4">Voltar</button>
           <button type="button" class="__next" :style="form4ok" @click="nextBtn4">Próximo</button>
         </div>
-      </div>  -->
-
-      <button type="button" class="__next-btn" :style="form4ok" @click="nextBtn4">Próximo</button>
+      </div> 
     
     </form><!-- ########## COMODIDADES PG.4 ########## -->
 
@@ -286,14 +271,12 @@
       </gmap-map>
 
 
-      <!-- <div class="back-next"> 
+      <div class="back-next"> 
         <div class="back-next-body">
           <button type="button" class="__back" @click="backBtn5">Voltar</button>
           <button type="button" class="__next" :style="form5ok" @click="nextBtn5">Próximo</button>
         </div>
-      </div>  -->
-
-      <button type="button" class="__next-btn" :style="form5ok" @click="nextBtn5">Próximo</button>
+      </div> 
     
     </form><!-- ########## LOCAL PG.5 ########## -->
 
@@ -399,14 +382,12 @@
 
       </div><!-- Preview Image -->
 
-     <!--  <div class="back-next"> 
+      <div class="back-next"> 
         <div class="back-next-body">
           <button type="button" class="__back" @click="backBtn6">Voltar</button>
           <button type="button" class="__next" :style="form6ok" @click="nextBtn6">Próximo</button>
         </div>
-      </div>  -->
-
-      <button type="button" class="__next-btn" :style="form6ok" @click="nextBtn6">Próximo</button>
+      </div> 
     
     </form><!-- ########## IMAGEM E VÍDEOS PG.6 ########## -->
 
@@ -429,14 +410,12 @@
       </div> 
 
 
-      <!-- <div class="back-next"> 
+      <div class="back-next"> 
         <div class="back-next-body">
           <button type="button" class="__back" @click="backBtn7">Voltar</button>
           <button type="button" class="__next" :style="form7ok" @click="nextBtn7">Próximo</button>
         </div>
-      </div>  -->
-
-      <button type="button" class="__next-btn" :style="form7ok" @click="nextBtn7">Próximo</button>
+      </div> 
     
     </form><!-- ########## VALOR DA ESTADIA PG.7 ########## -->
 
@@ -459,14 +438,12 @@
 
       <span class="__lenght-calc">{{ titleLength }}</span>
 
-      <!-- <div class="back-next"> 
+      <div class="back-next"> 
         <div class="back-next-body">
           <button type="button" class="__back" @click="backBtn8">Voltar</button>
           <button type="button" class="__next" :style="form8ok" @click="nextBtn8">Próximo</button>
         </div>
-      </div>  -->
-
-      <button type="button" class="__next-btn" :style="form8ok" @click="nextBtn8">Próximo</button>
+      </div> 
     
     </form><!-- ########## TÍTULO PG.8 ########## -->
 
@@ -489,14 +466,12 @@
 
       <span class="__lenght-calc">{{ subtitleLength }}</span> 
 
-      <!-- <div class="back-next"> 
+      <div class="back-next"> 
         <div class="back-next-body">
           <button type="button" class="__back" @click="backBtn9">Voltar</button>
           <button type="button" class="__next" :style="form9ok" @click="nextBtn9">Próximo</button>
         </div>
-      </div>  -->
-
-      <button type="button" class="__next-btn" :style="form9ok" @click="nextBtn9">Próximo</button>
+      </div> 
     
     </form><!-- ########## DESCRIÇÃO PG.9 ########## -->
 
@@ -534,14 +509,12 @@
 
       <!-- <h3 style="padding: .5rem 7%;font-size:16px;line-height:22px">Ao prosseguir você concorda com nossos <span style="color:#198CFE">Termos de Serviço</span>.</h3> -->
 
-      <!-- <div class="back-next"> 
+      <div class="back-next"> 
         <div class="back-next-body">
           <button type="button" class="__back" @click="backBtn10">Voltar</button>
           <button type="button" class="__next" :style="form10ok" @click="nextBtn10">Próximo</button>
         </div>
-      </div>  -->
-
-      <button type="button" class="__next-btn" :style="form10ok" @click="nextBtn10">Próximo</button>
+      </div> 
     
     </form><!-- ########## IDENTIFICAÇÃO PG.10 ########## -->
 
@@ -554,7 +527,7 @@
 
       <h1 class="__form-title">Investimento</h1>   
 
-      <h3 style="padding: 0 7%">{{ firstName }}, precisamos dos dados da sua conta bancária para podermos transferí-lo seus ganhos financeiros.</h3>
+      <h3 style="padding: 0 7%">{{ firstName }}, precisamos dos dados de sua conta bancária para podermos transferir seus ganhos financeiros.</h3>
 
       <div class="payment-box">
 
@@ -596,15 +569,12 @@
       </div>
 
       
-
-      <!-- <div class="back-next"> 
+      <div class="back-next"> 
         <div class="back-next-body">
           <button type="button" class="__back" @click="backBtn11">Voltar</button>
           <button type="button" class="__next" :style="form11ok" @click="concluir">Anunciar</button>
         </div>
-      </div>  -->
-
-      <button type="button" class="__next-btn" :style="form11ok" @click="concluir">Concluir</button>
+      </div> 
     
     </form><!-- ########## INVESTIMENTO PG.11 ########## -->
 
@@ -746,67 +716,40 @@ export default {
     sliderPier () { this.$refs.sliderPier.click() },
     
     /* ******************** BACK BUTTON ******************** */
-    backBtn () {
-      if (this.$store.state.cadastroAcomod0 === true) {
-        window.history.back(1)
-        this.$store.commit('m_cadastroAcomod0', false)
-      }
-      if (this.$store.state.cadastroAcomod1 === true) {
-        window.history.back(1)
-        this.$store.commit('m_cadastroAcomod1', false)
-        this.$store.commit('m_cadastroAcomod0', true)
-      }
-      if (this.$store.state.cadastroAcomod2 === true) {
-        window.history.back(1)
-        this.$store.commit('m_cadastroAcomod2', false)
-        this.$store.commit('m_cadastroAcomod1', true)
-      }
-      if (this.$store.state.cadastroAcomod3 === true) {
-        window.history.back(1)
-        this.$store.commit('m_cadastroAcomod3', false)
-        this.$store.commit('m_cadastroAcomod2', true)
-      }
-      if (this.$store.state.cadastroAcomod4 === true) {
-        window.history.back(1)
-        this.$store.commit('m_cadastroAcomod4', false)
-        this.$store.commit('m_cadastroAcomod3', true)
-      }
-      if (this.$store.state.cadastroAcomod5 === true) {
-        window.history.back(1)
-        this.$store.commit('m_cadastroAcomod5', false)
-        this.$store.commit('m_cadastroAcomod4', true)
-      }
-      if (this.$store.state.cadastroAcomod6 === true) {
-        window.history.back(1)
-        this.$store.commit('m_cadastroAcomod6', false)
-        this.$store.commit('m_cadastroAcomod5', true)
-      }
-      if (this.$store.state.cadastroAcomod7 === true) {
-        window.history.back(1)
-        this.$store.commit('m_cadastroAcomod7', false)
-        this.$store.commit('m_cadastroAcomod6', true)
-      }
-      if (this.$store.state.cadastroAcomod8 === true) {
-        window.history.back(1)
-        this.$store.commit('m_cadastroAcomod8', false)
-        this.$store.commit('m_cadastroAcomod7', true)
-      }
-      if (this.$store.state.cadastroAcomod9 === true) {
-        window.history.back(1)
-        this.$store.commit('m_cadastroAcomod9', false)
-        this.$store.commit('m_cadastroAcomod8', true)
-      }
-      if (this.$store.state.cadastroAcomod10 === true) {
-        window.history.back(1)
-        this.$store.commit('m_cadastroAcomod10', false)
-        this.$store.commit('m_cadastroAcomod9', true)
-      }
-      if (this.$store.state.cadastroAcomod11 === true) {
-        window.history.back(1)
-        this.$store.commit('m_cadastroAcomod11', false)
-        this.$store.commit('m_cadastroAcomod10', true)
-      }
+    backBtn1 () {
+      this.$store.commit('m_cadastroAcomod1', false), this.$store.commit('m_cadastroAcomod0', true), window.history.back(1)
     },
+    backBtn2 () {
+      this.$store.commit('m_cadastroAcomod2', false), this.$store.commit('m_cadastroAcomod1', true), window.history.back(1)
+    },
+    backBtn3 () {
+      this.$store.commit('m_cadastroAcomod3', false), this.$store.commit('m_cadastroAcomod2', true), window.history.back(1)
+    },
+    backBtn4 () {
+      this.$store.commit('m_cadastroAcomod4', false), this.$store.commit('m_cadastroAcomod3', true), window.history.back(1)
+    },
+    backBtn5 () {
+      this.$store.commit('m_cadastroAcomod5', false), this.$store.commit('m_cadastroAcomod4', true), window.history.back(1)
+    },
+    backBtn6 () {
+      this.$store.commit('m_cadastroAcomod6', false), this.$store.commit('m_cadastroAcomod5', true), window.history.back(1)
+    },
+    backBtn7 () {
+      this.$store.commit('m_cadastroAcomod7', false), this.$store.commit('m_cadastroAcomod6', true), window.history.back(1)
+    },
+    backBtn8 () {
+      this.$store.commit('m_cadastroAcomod8', false), this.$store.commit('m_cadastroAcomod7', true), window.history.back(1)
+    },
+    backBtn9 () {
+      this.$store.commit('m_cadastroAcomod9', false), this.$store.commit('m_cadastroAcomod8', true), window.history.back(1)
+    },
+    backBtn10 () {
+      this.$store.commit('m_cadastroAcomod10', false), this.$store.commit('m_cadastroAcomod9', true), window.history.back(1)
+    },
+    backBtn11 () {
+      this.$store.commit('m_cadastroAcomod11', false), this.$store.commit('m_cadastroAcomod10', true), window.history.back(1)
+    },
+    
     /* ******************** NEXT BUTTONS ******************** */
     hashAcomod () {
       window.location.hash = "cad1"
@@ -1009,12 +952,6 @@ export default {
   computed: {
     hash () {
       return this.$route.hash
-    },
-    backBarPage0 () {
-      return this.$store.state.cadastroAcomod0 === true ? 'background: transparent' : 'background: white'
-    },
-    backBtnPage0 () {
-      return this.$store.state.cadastroAcomod0 === true ? 'filter: invert(0%)' : ''
     },
     markerUrl () {
       return 'https://firebasestorage.googleapis.com/v0/b/escarpas-trip.appspot.com/o/utils%2Fmarker.svg?alt=media&token=fcbfd76e-ee93-41e8-a816-98906e19859b'
@@ -1289,18 +1226,7 @@ export default {
       if (vm.$store.state.showFoobar === true) {
         vm.$store.commit('m_showFoobar', false)
       }
-      if (vm.$store.state.showNavbar === true) {
-        vm.$store.commit('m_showNavbar', false)
-      }
     })
-  },
-  beforeRouteLeave (to, from, next) {
-    if (this.$store.state.showFoobar === false) {
-      this.$store.commit('m_showFoobar', true)
-      next()
-    } else {
-      next(false)
-    }
   }
 }
 </script>
@@ -1310,35 +1236,17 @@ export default {
 @import url('../../../assets/css/switcher.css');
 
 .anunciar-acomodacao {
+  margin-top: 3.2rem;
   background: #00D8C7;
   color: white;
   transition: var(--main-transition);
   & .progress-bar {
     position: fixed;
-    top: 0;
-    height: 4px;
+    top: 3.2rem;
+    height: 3px;
     z-index: 8888;
     background: #00D8C7;
     transition: all .3s ease;
-  }
-  & .back-bar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width:  100%;
-    height: 3rem;
-    & .back-box {
-      display: inline-flex;
-      align-items: center;
-      height: 100%;
-      padding: 0 7%;
-      & .__back-btn {
-        cursor: pointer;
-        width: 1.07rem;
-        height: auto;
-        filter: invert(75%);
-      }
-    }
   }
   /* ******************** PLANO ACOMODAÇÃO ******************** */
   & .plano-acomodacao {
@@ -1346,7 +1254,7 @@ export default {
     flex-flow: column;
     align-items: center;
     & .__img-header {
-      margin: 4rem 0 2rem 0;
+      margin: 2rem 0;
       width: 6rem;
       height: auto;
       filter: grayscale(100%) brightness(250%);
@@ -1404,7 +1312,7 @@ export default {
     color: var(--color01);
     padding: 0 0 5.5rem 0;
     & .__form-title {
-      padding: 4rem 7% 1.5rem 7%;
+      padding: 3rem 7% 1.5rem 7%;
       line-height: 35px;
       font-size: 28px;
       font-weight: 700;
@@ -1588,7 +1496,7 @@ export default {
       display: flex;
       padding: 0 7%;
     }
-    & .__next-btn {
+    /* & .__next-btn {
       position: fixed;
       bottom: 1.3rem;
       right: 7%;
@@ -1601,8 +1509,8 @@ export default {
       border-radius: 4px;
       cursor: no-drop;
       transition: all .3s ease;
-    }
-    /* & .back-next {
+    } */
+    & .back-next {
       position: fixed;
       z-index: 3;
       bottom: 1rem;
@@ -1638,7 +1546,7 @@ export default {
           color: white;
         }
       }
-    } */
+    }
   }
 }
 
