@@ -1003,34 +1003,34 @@ export default {
       return yearsPermitted
     },
     form1ok () {
-      return this.$store.state.acomodData.tipoAcomod !== null ? 'background:#00D8C7;cursor:pointer' : ''
+      return this.$store.state.acomodData.tipoAcomod !== null ? 'background:#FFA04F;cursor:pointer' : ''
     },
     form2ok () {
-      return this.$store.state.acomodData.totalHospedes !== null ? 'background:#00D8C7;cursor:pointer' : ''
+      return this.$store.state.acomodData.totalHospedes !== null ? 'background:#FFA04F;cursor:pointer' : ''
     },
     form3ok () {
-      return 1<2 ? 'background:#00D8C7;cursor:pointer' : ''
+      return 1<2 ? 'background:#FFA04F;cursor:pointer' : ''
     },
     form4ok () {
-      return 1<2 ? 'background:#00D8C7;cursor:pointer' : ''
+      return 1<2 ? 'background:#FFA04F;cursor:pointer' : ''
     },
     form5ok () {
-      return this.$store.state.acomodPlace !== null ? 'background:#00D8C7;cursor:pointer' : ''
+      return this.$store.state.acomodPlace !== null ? 'background:#FFA04F;cursor:pointer' : ''
     },
     form6ok () {
-      return this.imageURL1 !== null ? 'background:#00D8C7;cursor:pointer' : ''
+      return this.imageURL1 !== null ? 'background:#FFA04F;cursor:pointer' : ''
     },
     form7ok () {
-      return 1<2 ? 'background:#00D8C7;cursor:pointer' : ''
+      return 1<2 ? 'background:#FFA04F;cursor:pointer' : ''
     },
     form8ok () {
-      return this.$store.state.acomodData.title !== '' ? 'background:#00D8C7;cursor:pointer' : ''
+      return this.$store.state.acomodData.title !== '' ? 'background:#FFA04F;cursor:pointer' : ''
     },
     form9ok () {
-      return this.$store.state.acomodData.subtitle !== '' ? 'background:#00D8C7;cursor:pointer' : ''
+      return this.$store.state.acomodData.subtitle !== '' ? 'background:#FFA04F;cursor:pointer' : ''
     },
     form10ok () {
-      return this.$store.state.acomodData.celular.length === 15 ? 'background:#00D8C7;cursor:pointer' : ''
+      return this.$store.state.acomodData.celular.length === 15 ? 'background:#FFA04F;cursor:pointer' : ''
     },
     form11ok () {
       const cardNumber = this.$store.state.creditCard.cardNumber
@@ -1237,7 +1237,7 @@ export default {
 
 .anunciar-acomodacao {
   margin-top: 3.2rem;
-  background: #00D8C7;
+  background: #FFA04F;
   color: white;
   transition: var(--main-transition);
   & .progress-bar {
@@ -1245,7 +1245,7 @@ export default {
     top: 3.2rem;
     height: 3px;
     z-index: 8888;
-    background: #00D8C7;
+    background: #FFA04F;
     transition: all .3s ease;
   }
   /* ******************** PLANO ACOMODAÇÃO ******************** */
@@ -1496,20 +1496,6 @@ export default {
       display: flex;
       padding: 0 7%;
     }
-    /* & .__next-btn {
-      position: fixed;
-      bottom: 1.3rem;
-      right: 7%;
-      font-size: 16px;
-      font-weight: 600;
-      background: rgb(222, 222, 222);
-      color: white;
-      height: 2.7rem;
-      width:  9rem;
-      border-radius: 4px;
-      cursor: no-drop;
-      transition: all .3s ease;
-    } */
     & .back-next {
       position: fixed;
       z-index: 3;
@@ -1554,5 +1540,133 @@ export default {
 .payment-animation-enter,
 .payment-animation-leave-active {
   transform: scale(0);
+}
+
+@media (min-width: 1024px) {
+  .anunciar-acomodacao {
+    margin-top: 4rem;
+    & .progress-bar {
+      top: 4rem;
+      height: 6px;
+    }
+    & .plano-acomodacao {
+    & .__img-header {
+    }
+    & .__title {
+    }
+    & .__subtitle {
+    }
+    & .__item {
+    }
+    & .__subitem {
+    }
+    & .__price {
+    }
+    & .__anunciar-btn {
+    }
+  }
+  & .cadastro-acomodacao {
+    & .__form-title {
+      padding: 3rem 22% 1.5rem;
+      font-size: 32px;
+      text-align: center;
+    }
+    & textarea {
+    }
+    & .__lenght-calc {
+    }
+    & .item-form {
+      padding: 0 22%;
+      margin: 2rem 0;
+      & label {
+        font-size: 16px;
+        color: rgb(82, 82, 82);
+      }
+      & input {
+      }
+      & select {
+      }
+    }
+    & .comodidades-box {
+      & .item-form-switches {
+        & h3 {
+        }
+      }
+    }
+    & .payment-box {
+      & .item-form-payment {
+        & .__payment-type {
+        }
+        & .__payment-img {
+        }
+      }
+    }
+    & .modal-croppa {
+      & .modal-croppa-body {
+        & h1 {
+        }
+        & canvas {
+        }
+        & .modal-croppa-btns {
+        }
+      }
+    }
+    & .__input-btn {
+    }
+    & .__croppa-btn {
+    }
+    & .after-choose-image {
+      & .image-box {
+        & .__foto-principal {
+        }
+        & .__preview-img {
+        }
+      }
+    }
+    & .gmap-autocomplete-box {
+      & .__gmap-autocomplete {
+      }
+    }
+    & .signin-btns {
+    }
+    & .back-next {
+      position: fixed;
+      z-index: 3;
+      bottom: 2rem;
+      left: 0;
+      right: 0;
+      margin: auto;
+      height: 2.9rem;
+      width: 27%;
+      background: white;
+      box-shadow: 2px 2px 6px 1px rgba(0,0,0,0.1);
+      border-radius: 2rem;
+      & .back-next-body {
+        display: flex;
+        align-items: center;
+        & button {
+          width: 50%;
+          height: 2.9rem;
+        }
+        & .__back {
+          font-size: 17px;
+          font-weight: 600;
+          border-radius: 2rem 0 0 2rem;
+          cursor: pointer;
+          background: white;
+        }
+        & .__next {
+          font-size: 17px;
+          font-weight: 600;
+          border-radius: 0 2rem 2rem 0;
+          transition: all .3s ease;
+          cursor: no-drop;
+          background: rgb(202, 202, 202);
+          color: white;
+        }
+      }
+    }
+  }
+  }
 }
 </style>

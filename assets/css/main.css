@@ -71,10 +71,12 @@ a a:hover, a:visited, a:link, a:active
 }
 
 input {
+  cursor: pointer;
   font-family: var(--main-font);
 }
 
 select {
+  cursor: pointer;
   font-family: var(--main-font);
 }
 

@@ -748,14 +748,14 @@ export default {
           height: 3rem;
         }
         & .__back {
-          font-size: var(--fontSizeAnuncioText);
+          font-size: 16px;
           font-weight: 500;
           border-radius: 2rem 0 0 2rem;
           cursor: pointer;
           background: white;
         }
         & .__next {
-          font-size: var(--fontSizeAnuncioText);
+          font-size: 16px;
           font-weight: 500;
           border-radius: 0 2rem 2rem 0;
           transition: all .3s ease;
