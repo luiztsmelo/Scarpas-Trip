@@ -152,7 +152,7 @@
     <div class="reserva">
       <div class="reserva-body">
         <h3 class="__reserva-valor">R${{ passeio.valorPasseio }}<span class="__reserva-valor-pessoa">/pessoa</span></h3>
-        <button class="__reserva-btn">Reservar Passeio</button>
+        <button class="__reserva-btn">Reservar</button>
       </div>
     </div>
     <!-- ####### RESERVA ####### -->

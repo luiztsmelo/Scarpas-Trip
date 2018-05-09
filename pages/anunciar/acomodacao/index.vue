@@ -1347,6 +1347,7 @@ export default {
       & label {
         font-weight: 700;
         font-size: 15px;
+        color: rgb(102, 102, 102);
       }
       & input {
         position: relative;
@@ -1375,10 +1376,11 @@ export default {
     & .comodidades-box {
       padding: 0 7%;
       & .item-form-switches {
+        cursor: pointer;
         display: flex;
         justify-content: space-between;
         align-items: center;
-        border-bottom: 1px solid rgb(227, 227, 227);
+        border-bottom: 1px solid rgb(222, 222, 222);
         padding: 1.2rem 0;
         & h3 {
           font-size: var(--fontSizeAnuncioText);
@@ -1404,11 +1406,11 @@ export default {
       }
     }
     & .modal-croppa {
-      background: rgba(0, 0, 0, 0.84);
+      background: rgba(0, 0, 0, 0.8);
       width:  100%;
       height: 100%;
       position: fixed;
-      top:  0;
+      top: 0;
       left: 0;
       z-index: 9999;
       & .modal-croppa-body {
@@ -1434,23 +1436,25 @@ export default {
         }
       }
     }
-    & .__input-btn {
-      margin: 1rem 7%;
-      font-size: 15px;
-      font-weight: 600;
-      background: #00D8C7;
-      color: white;
-      padding: .8rem 1.2rem;
-      border-radius: 3px;
+    & .before-choose-image {
+      & .__input-btn {
+        margin: 1rem 7%;
+        font-size: 16px;
+        font-weight: 600;
+        background: #FFA04F;
+        color: white;
+        padding: .8rem 1.2rem;
+        border-radius: 2rem;
+      }
     }
     & .__croppa-btn {
       margin: .3rem 0;
-      font-size: 15px;
+      font-size: 16px;
       font-weight: 500;
-      background: #00D8C7;
+      background: #FFA04F;
       color: white;
       padding: .8rem 1.2rem;
-      border-radius: 3px;
+      border-radius: 2rem;
     }
     & .after-choose-image {
       margin-top: 1.5rem;
@@ -1482,6 +1486,7 @@ export default {
     & .gmap-autocomplete-box {
       margin: 1.5rem 7% 1rem 7%;
       & .__gmap-autocomplete {
+        cursor: text;
         font-size: calc(var(--fontSizeAnuncioText) + 1px);
         font-weight: 400;
         color: var(--color01);
@@ -1568,28 +1573,38 @@ export default {
   & .cadastro-acomodacao {
     padding: 0 0 7rem 0;
     & .__form-title {
-      padding: 3rem 22% 1.5rem;
+      padding: 3rem 22% 1.1rem;
       font-size: 32px;
       text-align: center;
     }
     & textarea {
+      padding: 0 22%;
+      margin: 1.4rem 0 .6rem 0;
     }
     & .__lenght-calc {
+      padding: 0 22%;
     }
     & .item-form {
       padding: 0 22%;
-      margin: 2rem 0;
+      margin: 2.2rem 0;
       & label {
         font-size: 16px;
-        color: rgb(82, 82, 82);
       }
       & input {
+        font-size: 17px;
+        font-weight: 400;
+        padding: .5rem 0 .6rem 0;
       }
       & select {
+        font-size: 17px;
+        font-weight: 400;
+        padding: .5rem 0 .6rem 0;
       }
     }
     & .comodidades-box {
+      padding: 0 22%;
       & .item-form-switches {
+        padding: 1.4rem 0;
         & h3 {
         }
       }
@@ -1612,11 +1627,18 @@ export default {
         }
       }
     }
-    & .__input-btn {
+    & .before-choose-image {
+      display: flex;
+      flex-flow: column;
+      align-items: center;
+      & .__input-btn {
+        margin: 1.6rem 0 0 0;
+      }
     }
     & .__croppa-btn {
     }
     & .after-choose-image {
+      padding: 0 calc(22% - .3rem);
       & .image-box {
         & .__foto-principal {
         }
@@ -1625,7 +1647,9 @@ export default {
       }
     }
     & .gmap-autocomplete-box {
+      margin: 1.5rem 22% 1rem 22%;
       & .__gmap-autocomplete {
+        font-size: 17px;
       }
     }
     & .signin-btns {
@@ -1640,7 +1664,7 @@ export default {
       height: 2.9rem;
       width: 27%;
       background: white;
-      box-shadow: 2px 2px 6px 1px rgba(0,0,0,0.1);
+      box-shadow: 3px 3px 20px 1px rgba(0,0,0,0.22);
       border-radius: 2rem;
       & .back-next-body {
         display: flex;
