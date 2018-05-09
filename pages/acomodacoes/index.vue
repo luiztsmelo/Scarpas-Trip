@@ -340,11 +340,11 @@ export default {
           text-transform: uppercase;
           font-size: 11px;
           font-weight: 700;
-          color: #007B77;
+          color: var(--colorAcomod);
         }
         & .__card-title {
           padding: .3rem 0;
-          font-size: 20px;
+          font-size: 18px;
           font-weight: 700;
         }
         & .__card-valor {
@@ -436,10 +436,8 @@ export default {
           display: flex;
           flex-flow: column;
           & .__card-tipo-acomod {
-            text-transform: uppercase;
             font-size: 12px;
             font-weight: 600;
-            color: #006561;
           }
           & .__card-title {
             padding: .4rem 0 .5rem 0;

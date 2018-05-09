@@ -151,7 +151,7 @@ export default {
         }
         & .__card-title {
           padding: .3rem 0;
-          font-size: 20px;
+          font-size: 18px;
           font-weight: 700;
         }
         & .__card-valor {

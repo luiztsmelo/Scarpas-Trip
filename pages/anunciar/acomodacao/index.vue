@@ -1566,6 +1566,7 @@ export default {
     }
   }
   & .cadastro-acomodacao {
+    padding: 0 0 7rem 0;
     & .__form-title {
       padding: 3rem 22% 1.5rem;
       font-size: 32px;
