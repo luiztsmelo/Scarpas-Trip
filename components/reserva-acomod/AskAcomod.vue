@@ -130,7 +130,7 @@ export default {
           background: white;
           color: var(--color01);
           padding: 1rem;
-          border: 1px solid rgb(232,232,232);
+          border: 1px solid rgb(222,222,222);
           outline: none;
         }
         & textarea {
@@ -143,7 +143,7 @@ export default {
           background: white;
           color: rgb(82, 82, 82);
           padding: 1rem;
-          border: 1px solid rgb(232,232,232);
+          border: 1px solid rgb(222,222,222);
           outline: none;
         }
       }

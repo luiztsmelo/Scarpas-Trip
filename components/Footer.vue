@@ -66,7 +66,7 @@ export default {
   margin-top: 4.3rem;
   width: 100%;
   height: 19rem;
-  border-top: 1px solid rgb(232,232,232);
+  border-top: 1px solid rgb(222,222,222);
   /* background: #EAEAEC; */
   padding: 3.2rem 7%;
   & .__img {

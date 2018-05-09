@@ -844,7 +844,7 @@ export default {
       flex-flow: row;
       align-items: center;
       padding: 1.1rem 0;
-      border-bottom: 1px solid rgb(222, 222, 222);
+      border-bottom: 1px solid rgb(222,222,222);
       & .__img {
         margin-right: 1rem;
         width: 1.8rem;
@@ -913,7 +913,7 @@ export default {
       & .__reserva-btn {
         font-size: 16px;
         font-weight: 700;
-        background: #FFA04F;
+        background: var(--colorAcomod);
         line-height: 2.6rem;
         color: white;
         height: 2.7rem;
@@ -967,7 +967,7 @@ export default {
       margin: 1.7rem 8% 0 8%;
       & .reserva-desktop {
         flex-basis: 31%;
-        border: 1px solid rgb(232,232,232);
+        border: 1px solid rgb(222,222,222);
         align-self: flex-start;
         & .reserva-desktop-form {
           padding: 1rem 1.4rem;
@@ -995,7 +995,7 @@ export default {
               font-weight: 400;
               padding: .6rem;
               color: #8B8B8C;
-              border: 1px solid rgb(232,232,232);
+              border: 1px solid rgb(222,222,222);
               outline: none;
               background: white;
             }
@@ -1007,7 +1007,7 @@ export default {
               padding: 0 .6rem;
               height: 2.7rem;
               color: #8D8D8D;
-              border: 1px solid rgb(232,232,232);
+              border: 1px solid rgb(222,222,222);
               outline: none;
               background: white;
               & option {
@@ -1045,7 +1045,7 @@ export default {
             & .reserva-info_item-total {
               display: flex;
               justify-content: space-between;
-              border-top: 1px solid rgb(232,232,232);
+              border-top: 1px solid rgb(222,222,222);
               & h3 {
                 font-size: 17px;
                 font-weight: 500;
@@ -1057,7 +1057,7 @@ export default {
             font-size: 18px;
             font-weight: 600;
             line-height: 3rem;
-            background: #FFA04F;
+            background: var(--colorAcomod);
             color: white;
             height: 3.1rem;
             width:  100%;
@@ -1182,7 +1182,7 @@ export default {
               flex-flow: row;
               align-items: center;
               padding: 1.1rem 0;
-              border-bottom: 1px solid rgb(222, 222, 222);
+              border-bottom: 1px solid rgb(222,222,222);
               & .__img {
                 margin-right: 1rem;
                 width: 1.8rem;

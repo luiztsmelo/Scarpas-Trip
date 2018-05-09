@@ -446,7 +446,7 @@ export default {
           color: var(--color01);
           padding: .5rem 0 .6rem 0;
           border: none;
-          border-bottom: 1px solid rgb(222, 222, 222);
+          border-bottom: 1px solid rgb(222,222,222);
           outline: none;
         }
       }
@@ -468,7 +468,7 @@ export default {
           color: var(--color01);
           padding: .6rem 0 .4rem 0;
           border: none;
-          border-bottom: 1px solid rgb(222, 222, 222);
+          border-bottom: 1px solid rgb(222,222,222);
           outline: none;
         }
       }
@@ -482,7 +482,7 @@ export default {
         right: 7%;
         font-size: 16px;
         font-weight: 600;
-        background: rgb(222, 222, 222);
+        background: rgb(222,222,222);
         color: white;
         line-height: 2.6rem;
         height: 2.7rem;

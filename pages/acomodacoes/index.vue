@@ -460,8 +460,8 @@ export default {
       top: 4rem;
       bottom: 0;
       right: 7%;
-      border-left: 1px solid rgb(232,232,232);
-      border-right: 1px solid rgb(232,232,232);
+      border-left: 1px solid rgb(222,222,222);
+      border-right: 1px solid rgb(222,222,222);
       & .filtrar-desktop-form {
         padding: 2.9rem 1.4rem;
         & .item-form {
@@ -476,7 +476,7 @@ export default {
             font-size: 14px;
             font-weight: 500;
             padding-left: .6rem;
-            border: 1px solid rgb(232,232,232);
+            border: 1px solid rgb(222,222,222);
             outline: none;
             background: white;
             color: var(--color01);

@@ -424,7 +424,7 @@ export default {
       /* Left Container */
       & .left-container {
         flex-basis: 58%;
-        border-right: 1px solid rgb(232,232,232);
+        border-right: 1px solid rgb(222,222,222);
         padding-right: 1.5rem;
         
       }
@@ -437,7 +437,7 @@ export default {
           display: flex;
           align-items: center;
           padding-bottom: 1.2rem;
-          border-bottom: 1px solid rgb(232,232,232);
+          border-bottom: 1px solid rgb(222,222,222);
           & .__acomod-img {
             min-width: 6rem;
             max-width: 6rem;
@@ -450,7 +450,7 @@ export default {
         }
         & .detalhes-reserva-data {
           padding: .8rem 0;
-          border-bottom: 1px solid rgb(232,232,232);
+          border-bottom: 1px solid rgb(222,222,222);
           & .detalhes-reserva-data_item {
             display: flex;
             align-items: center;
@@ -478,7 +478,7 @@ export default {
           & .detalhes-reserva-valor_item-total {
             display: flex;
             justify-content: space-between;
-            border-top: 1px solid rgb(232,232,232);
+            border-top: 1px solid rgb(222,222,222);
             & h3 {
               font-size: 18px;
               font-weight: 500;
@@ -531,7 +531,7 @@ export default {
       /* Left Container */
       & .left-container {
         flex-basis: 42%;
-        border-right: 1px solid rgb(232,232,232);
+        border-right: 1px solid rgb(222,222,222);
         padding-right: 1.5rem;
         & .item-form {
           display: flex;
@@ -552,7 +552,7 @@ export default {
             font-weight: 400;
             background: white;
             color: var(--color01);
-            border: 1px solid rgb(232, 232, 232);
+            border: 1px solid rgb(222,222,222);
             outline: none;
           }
           & select {
@@ -562,7 +562,7 @@ export default {
             font-weight: 400;
             background: white;
             color: var(--color01);
-            border: 1px solid rgb(232, 232, 232);
+            border: 1px solid rgb(222,222,222);
             outline: none;
           }
         }

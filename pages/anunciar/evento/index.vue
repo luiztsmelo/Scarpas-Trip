@@ -693,7 +693,7 @@ export default {
         color: var(--color01);
         padding: .5rem 0 .6rem 0;
         border: none;
-        border-bottom: 1px solid rgb(222, 222, 222);
+        border-bottom: 1px solid rgb(222,222,222);
         outline: none;
       }
     }
@@ -760,7 +760,7 @@ export default {
           border-radius: 0 2rem 2rem 0;
           transition: all .3s ease;
           cursor: no-drop;
-          background: rgb(222, 222, 222);
+          background: rgb(222,222,222);
           color: white;
         }
       }
@@ -771,7 +771,7 @@ export default {
       color: var(--color01);
       width: 100%;
       border: none;
-      border-bottom: 1px solid rgb(222, 222, 222);
+      border-bottom: 1px solid rgb(222,222,222);
       margin: 1.5rem 0 1rem 0;
       padding: .5rem 0 .6rem 0;
       outline: none;

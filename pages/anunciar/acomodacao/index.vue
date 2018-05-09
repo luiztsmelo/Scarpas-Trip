@@ -126,7 +126,7 @@
       </div> 
 
       <div class="item-form">
-        <label>Lugares na Garagem</label>
+        <label>Vagas na Garagem</label>
         <select v-model="$store.state.acomodData.totalGaragem">
           <option v-for="n in 7">{{ n }}</option>
           <option>Mais de 7</option>
@@ -492,7 +492,7 @@
         <button type="button" class="google-btn" @click="googleSignIn()">Google</button>
       </div>
 
-      <h3 style="padding: 0 7%" v-if="$store.state.acomodData.proprietario !== null">Ótimo {{ firstName }}! Só mais algumas informações:</h3>
+      <h3 style="padding:1.4rem 22% 0;font-size:17px" v-if="$store.state.acomodData.proprietario !== null">Ótimo {{ firstName }}! Só mais algumas informações:</h3>
 
       <div v-if="$store.state.acomodData.proprietario !== null">
         <div class="item-form">
@@ -522,12 +522,12 @@
 
 
 
-    <!-- ########## INVESTIMENTO PG.11 ########## -->
+    <!-- ########## CONCLUIR PG.11 ########## -->
     <form class="cadastro-acomodacao" v-if="$store.state.cadastroAcomod11">
 
-      <h1 class="__form-title">Investimento</h1>   
+      <h1 class="__form-title">Seus dados bancários para depósito</h1>   
 
-      <h3 style="padding: 0 7%">{{ firstName }}, precisamos dos dados de sua conta bancária para podermos transferir seus ganhos financeiros.</h3>
+      <h3 style="padding:1.4rem 22% 0;font-size:17px">{{ firstName }}, para finalizarmos precisamos dos dados de sua conta bancária para podermos transferir seus ganhos financeiros. Não se preocupe, suas informações estarão seguras.</h3>
 
       <div class="payment-box">
 
@@ -576,7 +576,7 @@
         </div>
       </div> 
     
-    </form><!-- ########## INVESTIMENTO PG.11 ########## -->
+    </form><!-- ########## CONCLUIR PG.11 ########## -->
 
 
     <!-- CADASTRO ACOMODAÇÃO -->
@@ -1237,7 +1237,7 @@ export default {
 
 .anunciar-acomodacao {
   margin-top: 3.2rem;
-  background: #FFA04F;
+  background: var(--colorAcomod);
   color: white;
   transition: var(--main-transition);
   & .progress-bar {
@@ -1245,7 +1245,7 @@ export default {
     top: 3.2rem;
     height: 3px;
     z-index: 8888;
-    background: #FFA04F;
+    background: var(--colorAcomod);
     transition: all .3s ease;
   }
   /* ******************** PLANO ACOMODAÇÃO ******************** */
@@ -1350,6 +1350,7 @@ export default {
         color: rgb(102, 102, 102);
       }
       & input {
+        cursor: text;
         position: relative;
         width: 100%;
         font-size: var(--fontSizeAnuncioText);
@@ -1358,7 +1359,7 @@ export default {
         color: var(--color01);
         padding: .5rem 0 .6rem 0;
         border: none;
-        border-bottom: 1px solid rgb(222, 222, 222);
+        border-bottom: 1px solid rgb(222,222,222);
         outline: none;
       }
       & select {
@@ -1369,7 +1370,7 @@ export default {
         color: var(--color01);
         padding: .5rem 0 .6rem 0;
         border: none;
-        border-bottom: 1px solid rgb(222, 222, 222);
+        border-bottom: 1px solid rgb(222,222,222);
         outline: none;
       }
     }
@@ -1380,7 +1381,7 @@ export default {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        border-bottom: 1px solid rgb(222, 222, 222);
+        border-bottom: 1px solid rgb(222,222,222);
         padding: 1.2rem 0;
         & h3 {
           font-size: var(--fontSizeAnuncioText);
@@ -1441,7 +1442,7 @@ export default {
         margin: 1rem 7%;
         font-size: 16px;
         font-weight: 600;
-        background: #FFA04F;
+        background: var(--colorAcomod);
         color: white;
         padding: .8rem 1.2rem;
         border-radius: 2rem;
@@ -1451,7 +1452,7 @@ export default {
       margin: .3rem 0;
       font-size: 16px;
       font-weight: 500;
-      background: #FFA04F;
+      background: var(--colorAcomod);
       color: white;
       padding: .8rem 1.2rem;
       border-radius: 2rem;
@@ -1492,7 +1493,7 @@ export default {
         color: var(--color01);
         width: 100%;
         border: none;
-        border-bottom: 1px solid rgb(222, 222, 222);
+        border-bottom: 1px solid rgb(222,222,222);
         padding: .5rem 0 .6rem 0;
         outline: none;
       }
@@ -1533,7 +1534,7 @@ export default {
           border-radius: 0 2rem 2rem 0;
           transition: all .3s ease;
           cursor: no-drop;
-          background: rgb(222, 222, 222);
+          background: rgb(222,222,222);
           color: white;
         }
       }
