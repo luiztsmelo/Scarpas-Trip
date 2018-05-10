@@ -561,13 +561,14 @@
 
           <div class="item-form">
             <label>Seu Nome Completo</label>
-            <input type="text" :value="$store.state.user.fullName">
+            <input type="text" v-model="$store.state.bankAccount.legalName">
           </div>
 
           <div class="item-form">
             <label>CPF</label>
             <masked-input
               type="tel"
+              v-model="$store.state.bankAccount.docNumber"
               :mask="[/\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '-', /\d/, /\d/]"
               :guide="false">
             </masked-input>
@@ -831,6 +832,8 @@ export default {
       /* 
       CRIAR RECEBEDOR
       */
+     console.log(this.$store.state.bankAccount.bankCode.substring(0, 3))
+     console.log(this.$store.state.bankAccount.docNumber.replace(/\./g, '').replace(/\-/g, ''))
       pagarme.client.connect({ api_key: 'ak_test_E3I46o4e7guZDqwRnSY9sW8o8HrL9D' })
         .then(client => client.recipients.create({
           transfer_enabled: false,
@@ -838,14 +841,14 @@ export default {
           automatic_anticipation_enabled: true,
           anticipatable_volume_percentage: 100,
           bank_account: {
-            bank_code: "341",
+            bank_code: this.$store.state.bankAccount.bankCode.substring(0, 3),
             agencia: "0932",
             agencia_dv: "5",
             conta: "58054",
             conta_dv: "1",
             type: "conta_corrente",
-            document_number: "26268738888",
-            legal_name: this.$store.state.user.fullName /* MUDAR */
+            document_number: this.$store.state.bankAccount.docNumber.replace(/\./g, '').replace(/\-/g, ''),
+            legal_name: this.$store.state.bankAccount.legalName
           }
         })
       )

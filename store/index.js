@@ -95,8 +95,8 @@ const store = () => new Vuex.Store({
       agenciaDV: '',
       conta: '',
       contaDV: '',
-      docNumber: '',
-      legalName: ''
+      legalName: '',
+      docNumber: ''
     },
     acomodData: {/* Atualizar a action */
       acomodID: null,
@@ -377,6 +377,9 @@ const store = () => new Vuex.Store({
     },
     m_creditCard (state, payload) {
       state.creditCard = payload
+    },
+    m_bankAccount (state, payload) {
+      state.bankAccount = payload
     },
     m_acomodData (state, payload) {
       state.acomodData = payload
@@ -703,12 +706,21 @@ const store = () => new Vuex.Store({
     a_uploadAcomod ({ state, commit }) {
       firebase.firestore().collection('acomods').doc(state.acomodID).set(state.acomodData).then(() => {
         /* Resetar states */
-        commit('m_creditCard', {
+        commit('m_creditCard', { /* MUDAR PARA A RESERVA */
           cardNumber: '',
           cardHolderName: '',
           cardExpirationMonth: 'MM',
           cardExpirationYear: 'AA',
           cardCVV: ''
+        })
+        commit('m_bankAccount', {
+          bankCode: '',
+          agencia: '',
+          agenciaDV: '',
+          conta: '',
+          contaDV: '',
+          legalName: '',
+          docNumber: ''
         })
         commit('m_acomodData', {
           acomodID: null,
