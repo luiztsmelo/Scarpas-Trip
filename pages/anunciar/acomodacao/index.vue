@@ -484,15 +484,14 @@
 
       <h1 class="__form-title">Sua identificação</h1>   
 
-
-      <h3 style="padding: .5rem 7% .7rem 7%" v-if="this.$store.state.acomodData.proprietario === null">Continuar com:</h3>
+      <h3 class="__form-subtitle" v-if="this.$store.state.acomodData.proprietario === null">Continuar com:</h3>
 
       <div class="signin-btns" v-if="$store.state.acomodData.proprietario === null">
         <button type="button" class="facebook-btn" @click="facebookSignIn()">Facebook</button>
         <button type="button" class="google-btn" @click="googleSignIn()">Google</button>
       </div>
 
-      <h3 style="padding:1.4rem 22% 0;font-size:17px" v-if="$store.state.acomodData.proprietario !== null">Ótimo {{ firstName }}! Só mais algumas informações:</h3>
+      <h3 class="__form-subtitle" v-if="$store.state.acomodData.proprietario !== null">Ótimo {{ firstName }}! Só mais algumas informações:</h3>
 
       <div v-if="$store.state.acomodData.proprietario !== null">
         <div class="item-form">
@@ -527,23 +526,37 @@
 
       <h1 class="__form-title">Seus dados bancários para depósito</h1>   
 
-      <h3 style="padding:1.4rem 22% 0;font-size:17px">{{ firstName }}, para finalizarmos precisamos dos dados de sua conta bancária para podermos transferir seus ganhos financeiros. Não se preocupe, suas informações estarão seguras.</h3>
+      <h3 class="__form-subtitle">{{ firstName }}, para finalizarmos precisamos dos dados de sua conta bancária para podermos transferir seus ganhos financeiros. Não se preocupe, suas informações estarão seguras.</h3>
 
       <div class="payment-box">
 
           <div class="item-form">
             <label>Nome do Banco</label>
-            <input type="text">
+            <vue-simple-suggest
+              v-model="$store.state.bankAccount.bankCode"
+              :list="bancos"
+              :filter-by-query="true">
+            </vue-simple-suggest>
           </div>
 
           <div class="item-form">
             <label>Agência</label>
-            <input type="number">
+            <masked-input
+              type="tel"
+              placeholder="Ex: 0123-1"
+              :mask="[/\d/, /\d/, /\d/, /\d/,'-', /\d/]"
+              :guide="false">
+            </masked-input>
           </div>
 
           <div class="item-form">
             <label>Conta Corrente</label>
-            <input type="number">
+            <masked-input
+              type="tel"
+              placeholder="Ex: 01234-1"
+              :mask="[/\d/, /\d/, /\d/, /\d/, /\d/,'-', /\d/]"
+              :guide="false">
+            </masked-input>
           </div>
 
           <div class="item-form">
@@ -591,19 +604,21 @@ import { loaded } from '~/node_modules/vue2-google-maps/src/manager'
 import * as firebase from 'firebase'
 import MaskedInput from 'vue-text-mask'
 import { mapstyle } from '../../../mixins/mapstyle'
+import { bancos } from '../../../mixins/bancos'
+import VueSimpleSuggest from 'vue-simple-suggest'
 
 export default {
   components: { 
-    MaskedInput
+    MaskedInput, VueSimpleSuggest
   },
-  mixins: [mapstyle],
+  mixins: [mapstyle, bancos],
   head () {
     return {
       title: 'Anunciar Acomodação em Capitólio ‒ Escarpas Trip'
     }
   },
   transition: 'opacity',
-  data() {
+  data () {
     return {
       title: '',/* Vue Autosize */
       subtitle: '',/* Vue Autosize */
@@ -827,10 +842,10 @@ export default {
             agencia: "0932",
             agencia_dv: "5",
             conta: "58054",
-            type: "conta_corrente",
             conta_dv: "1",
+            type: "conta_corrente",
             document_number: "26268738888",
-            legal_name: this.$store.state.user.fullName
+            legal_name: this.$store.state.user.fullName /* MUDAR */
           }
         })
       )
@@ -1234,6 +1249,7 @@ export default {
 <style>
 @import url('../../../assets/css/main.css');
 @import url('../../../assets/css/switcher.css');
+@import url('../../../assets/css/vue-simple-suggest.css');
 
 .anunciar-acomodacao {
   margin-top: 3.2rem;
@@ -1317,6 +1333,9 @@ export default {
       font-size: 28px;
       font-weight: 700;
       z-index: 999;
+    }
+    & .__form-subtitle {
+      padding: 0 7%;
     }
     & textarea {
       padding: 0 7%;
@@ -1577,6 +1596,10 @@ export default {
       padding: 3rem 22% 1.1rem;
       font-size: 32px;
       text-align: center;
+    }
+    & .__form-subtitle {
+      padding: 1.4rem 22% 0;
+      font-size: 17px;
     }
     & textarea {
       padding: 0 22%;

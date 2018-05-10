@@ -1,0 +1,53 @@
+
+.vue-simple-suggest.designed {
+  position: relative;
+}
+
+.vue-simple-suggest.designed, .vue-simple-suggest.designed * {
+  box-sizing: border-box;
+}
+
+.vue-simple-suggest.designed .input-wrapper input {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #cde;
+  border-radius: 3px;
+  color: black;
+  background: white;
+  outline:none;
+  transition: all .1s;
+  transition-delay: .05s
+}
+
+.vue-simple-suggest.designed.focus .input-wrapper input {
+}
+
+.vue-simple-suggest.designed .suggestions {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 100%;
+  border: 1px solid rgb(222,222,222);
+  background-color: white;
+  z-index: 10000;
+  font-size: 15px;
+}
+
+.vue-simple-suggest.designed .suggestions .suggest-item {
+  cursor: pointer;
+  user-select: none;
+}
+
+.vue-simple-suggest.designed .suggestions .suggest-item,
+.vue-simple-suggest.designed .suggestions .misc-item {
+  padding: 5px 10px;
+}
+
+.vue-simple-suggest.designed .suggestions .suggest-item.hover {
+  background-color: rgb(242,242,242) !important;
+}
+
+.vue-simple-suggest.designed .suggestions .suggest-item.selected {
+  background-color: rgb(242,242,242);
+}

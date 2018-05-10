@@ -89,6 +89,15 @@ const store = () => new Vuex.Store({
       cardExpirationYear: 'AA',
       cardCVV: ''
     },
+    bankAccount: {
+      bankCode: '',
+      agencia: '',
+      agenciaDV: '',
+      conta: '',
+      contaDV: '',
+      docNumber: '',
+      legalName: ''
+    },
     acomodData: {/* Atualizar a action */
       acomodID: null,
       userID: null,
