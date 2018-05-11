@@ -104,7 +104,7 @@ export default {
     display: flex;
     flex-flow: column;
     text-align: center;
-    padding: 2rem 7%;
+    padding: 2rem 7% 2rem 7.5%;
     height: 100%;
     & .menu-item {
       display: flex;
@@ -114,13 +114,13 @@ export default {
         width: 1.3rem;
         height: auto;
         margin-right: 1rem;
-        filter: grayscale(100%) brightness(80%);
+        filter: grayscale(100%) brightness(15%);
       }
       & .__item-img {
         width: 1.3rem;
         height: auto;
         margin-right: 1rem;
-        filter: brightness(70%);
+        filter: brightness(15%);
       }
     }
     & .tmstudio {

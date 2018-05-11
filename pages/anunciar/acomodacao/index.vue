@@ -1717,7 +1717,7 @@ export default {
         }
         & .__back {
           font-size: 17px;
-          font-weight: 600;
+          font-weight: 500;
           border-radius: 2rem 0 0 2rem;
           cursor: pointer;
           background: white;
