@@ -248,12 +248,15 @@
 
       <h1 class="__form-title">Qual a localização?</h1>
 
-      <div class="gmap-autocomplete-box">
-        <gmap-autocomplete 
-        class="__gmap-autocomplete"
-        placeholder="Digite o endereço aqui"
-        @place_changed="setPlace">
-        </gmap-autocomplete>
+      <div class="item-form">
+        <label>Local</label>
+        <div>
+          <gmap-autocomplete
+          onKeyPress="if (event.which == 13) return false" 
+          placeholder="Digite o endereço completo aqui"
+          @place_changed="setPlace">
+          </gmap-autocomplete>
+        </div>
       </div>
 
       <gmap-map
@@ -498,8 +501,9 @@
       <h3 class="__form-subtitle" v-if="$store.state.acomodData.proprietario !== null">Ótimo {{ firstName }}! Só mais algumas informações:</h3>
 
       <div v-if="$store.state.acomodData.proprietario !== null">
+
         <div class="item-form">
-          <label>Celular</label>
+          <label>Celular / WhatsApp 1</label>
           <masked-input
             type="tel"
             v-model="$store.state.acomodData.celular"
@@ -508,6 +512,18 @@
             placeholder="(  )      -    ">
           </masked-input>
         </div>
+
+        <div class="item-form">
+          <label>Celular / WhatsApp 2 (Opcional)</label>
+          <masked-input
+            type="tel"
+            v-model="$store.state.acomodData.celular2"
+            :mask="['(', /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]"
+            :guide="false"
+            placeholder="(  )      -    ">
+          </masked-input>
+        </div>
+
       </div>
 
       <!-- <h3 style="padding: .5rem 7%;font-size:16px;line-height:22px">Ao prosseguir você concorda com nossos <span style="color:#198CFE">Termos de Serviço</span>.</h3> -->
@@ -751,6 +767,7 @@ export default {
     },
     /* ******************** GOOGLE MAPS ******************** */
     setPlace (place) {
+      console.log(place)
       this.$store.commit('m_acomodPlace', place)
       this.$store.state.acomodData.positionLAT = this.$store.state.acomodPlace.geometry.location.lat()
       this.$store.state.acomodData.positionLNG = this.$store.state.acomodPlace.geometry.location.lng()
@@ -1398,7 +1415,7 @@ export default {
       z-index: 999;
       font-size: var(--fontSizeAnuncioText);
       font-weight: 600;
-      color: rgb(90, 90, 90);
+      color: rgb(102, 102, 102);
     }
     & .item-form {
       padding: 0 7%;
@@ -1444,6 +1461,7 @@ export default {
         border-bottom: 1px solid rgb(222,222,222);
         padding: 1.2rem 0;
         & h3 {
+          user-select: none;
           font-size: var(--fontSizeAnuncioText);
         }
       }
@@ -1528,20 +1546,6 @@ export default {
           height: 100%;
           border-radius: 2px;
         }
-      }
-    }
-    & .gmap-autocomplete-box {
-      margin: 1.5rem 7% 1rem 7%;
-      & .__gmap-autocomplete {
-        cursor: text;
-        font-size: calc(var(--fontSizeAnuncioText) + 1px);
-        font-weight: 400;
-        color: var(--color01);
-        width: 100%;
-        border: none;
-        border-bottom: 1px solid rgb(222,222,222);
-        padding: .5rem 0 .6rem 0;
-        outline: none;
       }
     }
     & .signin-btns {
@@ -1690,12 +1694,6 @@ export default {
         }
       }
     }
-    & .gmap-autocomplete-box {
-      margin: 1.5rem 22% 1rem 22%;
-      & .__gmap-autocomplete {
-        font-size: 17px;
-      }
-    }
     & .signin-btns {
     }
     & .back-next {
@@ -1708,7 +1706,7 @@ export default {
       height: 2.9rem;
       width: 27%;
       background: white;
-      box-shadow: 3px 3px 20px 1px rgba(0,0,0,0.22);
+      box-shadow: 3px 3px 20px 1px rgba(0,0,0,0.18);
       border-radius: 2rem;
       & .back-next-body {
         display: flex;

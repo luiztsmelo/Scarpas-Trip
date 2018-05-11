@@ -117,10 +117,12 @@ textarea {
 }
 /* ******* TEXT HIGHLIGHT COLOR ******* */
 ::-moz-selection { /* Firefox */
-  background: #FFDEC1;
+  background: rgb(102,102,102);
+  color: white;
 }
 ::selection {
-  background: #FFDEC1;
+  background: rgb(102,102,102);
+  color: white;
 }
 
 /* ******* SIGN IN BUTTONS ******* */
