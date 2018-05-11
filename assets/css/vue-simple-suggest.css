@@ -35,19 +35,20 @@
 }
 
 .vue-simple-suggest.designed .suggestions .suggest-item {
-  cursor: pointer;
   user-select: none;
 }
 
 .vue-simple-suggest.designed .suggestions .suggest-item,
 .vue-simple-suggest.designed .suggestions .misc-item {
-  padding: 5px 10px;
+  padding: 4px 4px;
 }
 
 .vue-simple-suggest.designed .suggestions .suggest-item.hover {
-  background-color: rgb(242,242,242) !important;
+  background-color: #3297FD !important;
+  color: white;
 }
 
 .vue-simple-suggest.designed .suggestions .suggest-item.selected {
-  background-color: rgb(242,242,242);
+  background-color: #3297FD;
+  color: white;
 }

@@ -537,10 +537,21 @@
           <div class="item-form">
             <label>Nome do Banco</label>
             <vue-simple-suggest
+              mode="select"
               v-model="$store.state.bankAccount.bankCode"
               :list="bancos"
               :filter-by-query="true">
             </vue-simple-suggest>
+          </div>
+
+          <div class="item-form">
+            <label>Tipo de Conta</label>
+            <select v-model="$store.state.bankAccount.type">
+              <option selected :value="'conta_corrente'">Conta Corrente</option>
+              <option :value="'conta_poupanca'">Conta Poupança</option>
+              <option :value="'conta_corrente_conjunta'">Conta Corrente Conjunta</option>
+              <option :value="'conta_poupanca_conjunta'">Conta Poupança Conjunta</option>
+            </select>
           </div>
 
           <div class="item-form">
