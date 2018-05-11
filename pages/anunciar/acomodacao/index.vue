@@ -77,10 +77,12 @@
 
       <div class="item-form">
         <label>Total de Hóspedes</label>
-        <select v-model="$store.state.acomodData.totalHospedes">
-          <option v-for="n in 20">{{ n }}</option>
-          <option>Mais de 20</option>
-        </select>
+        <masked-input
+          type="tel"
+          v-model="$store.state.acomodData.totalHospedes"
+          :mask="[/\d/, /\d/]"
+          :guide="false">
+        </masked-input>
       </div> 
 
       <div class="back-next"> 
@@ -297,13 +299,13 @@
           <h1>Ajustar imagem</h1>
           <croppa
           ref="myCroppa1"
-          :width="320"
-          :height="214"
-          :quality="2"
+          :width="$store.state.isMobile === true ? 720/2.25 : 720/1.5"
+          :height="$store.state.isMobile === true ? 480/2.25 : 480/1.5"
+          :quality="$store.state.isMobile === true ? 2.25 : 1.5"
           :placeholder="'Carregando...'"
           :placeholder-color="'white'"
           :accept="'image/*'"
-          :zoom-speed="2"
+          :zoom-speed="$store.state.isMobile === true ? 2 : 4"
           :prevent-white-space="true"
           :show-remove-button="false"
           @file-choose="imageChoose1">
@@ -321,12 +323,13 @@
           <h1>Ajustar imagem</h1>
           <croppa
           ref="myCroppa2"
-          :width="320"
-          :height="214"
-          :quality="2"
+          :width="$store.state.isMobile === true ? 720/2.25 : 720/1.5"
+          :height="$store.state.isMobile === true ? 480/2.25 : 480/1.5"
+          :quality="$store.state.isMobile === true ? 2.25 : 1.5"
           :placeholder="'Carregando...'"
           :placeholder-color="'white'"
           :accept="'image/*'"
+          :zoom-speed="$store.state.isMobile === true ? 2 : 4"
           :prevent-white-space="true"
           :show-remove-button="false"
           @file-choose="imageChoose2">
@@ -344,12 +347,13 @@
           <h1>Ajustar imagem</h1>
           <croppa
           ref="myCroppa3"
-          :width="320"
-          :height="214"
-          :quality="2"
+          :width="$store.state.isMobile === true ? 720/2.25 : 720/1.5"
+          :height="$store.state.isMobile === true ? 480/2.25 : 480/1.5"
+          :quality="$store.state.isMobile === true ? 2.25 : 1.5"
           :placeholder="'Carregando...'"
           :placeholder-color="'white'"
           :accept="'image/*'"
+          :zoom-speed="$store.state.isMobile === true ? 2 : 4"
           :prevent-white-space="true"
           :show-remove-button="false"
           @file-choose="imageChoose3">
@@ -371,12 +375,12 @@
         </div>
         
         <div class="image-box">
-          <img src="./../../../assets/img/add-image.svg" class="__preview-img" v-if="imageURL2 === null" @click="$refs.myCroppa2.chooseFile()" style="padding:2rem">
+          <img src="./../../../assets/img/add-image.svg" class="__preview-img" v-if="imageURL2 === null" @click="$refs.myCroppa2.chooseFile()" style="padding:23%">
           <img :src="imageURL2" class="__preview-img" @click="showCroppaModal2=true" v-else>
         </div>
 
         <div class="image-box" v-if="imageURL2 !== null">
-          <img src="./../../../assets/img/add-image.svg" class="__preview-img" v-if="imageURL3 === null" @click="$refs.myCroppa3.chooseFile()" style="padding:2rem">
+          <img src="./../../../assets/img/add-image.svg" class="__preview-img" v-if="imageURL3 === null" @click="$refs.myCroppa3.chooseFile()" style="padding:23%">
           <img :src="imageURL3" class="__preview-img" @click="showCroppaModal3=true" v-else>
         </div>
 
@@ -526,9 +530,9 @@
 
       <h1 class="__form-title">Seus dados bancários para depósito</h1>   
 
-      <h3 class="__form-subtitle">{{ firstName }}, para finalizarmos precisamos dos dados de sua conta bancária para podermos transferir seus ganhos financeiros. Não se preocupe, suas informações estarão seguras.</h3>
+      <h3 class="__form-subtitle">{{ firstName }}, para finalizar precisamos dos dados de sua conta bancária para podermos transferir seus ganhos financeiros advindos das reservas. Não se preocupe, suas informações estarão seguras.</h3>
 
-      <div class="payment-box">
+      <div class="recebedor-box">
 
           <div class="item-form">
             <label>Nome do Banco</label>
@@ -540,23 +544,49 @@
           </div>
 
           <div class="item-form">
-            <label>Agência</label>
-            <masked-input
-              type="tel"
-              placeholder="Ex: 0123-1"
-              :mask="[/\d/, /\d/, /\d/, /\d/,'-', /\d/]"
-              :guide="false">
-            </masked-input>
+            <div class="flex-row" style="display:flex">
+              <div class="agencia" style="flex:50%; margin-right:1rem">
+                <label>Agência</label>
+                <masked-input
+                  type="tel"
+                  v-model="$store.state.bankAccount.agencia"
+                  :mask="[/\d/, /\d/, /\d/, /\d/, /\d/]"
+                  :guide="false">
+                </masked-input>
+              </div>
+              <div class="agencia-dv" style="flex:50%">
+                <label>DV</label>
+                <masked-input
+                  type="tel"
+                  v-model="$store.state.bankAccount.agenciaDV"
+                  :mask="[/\d/, /\d/]"
+                  :guide="false">
+                </masked-input>
+              </div>
+            </div>
           </div>
 
           <div class="item-form">
-            <label>Conta Corrente</label>
-            <masked-input
-              type="tel"
-              placeholder="Ex: 01234-1"
-              :mask="[/\d/, /\d/, /\d/, /\d/, /\d/,'-', /\d/]"
-              :guide="false">
-            </masked-input>
+            <div class="flex-row" style="display:flex">
+              <div class="conta" style="flex:50%; margin-right:1rem">
+                <label>Conta Corrente</label>
+                <masked-input
+                  type="tel"
+                  v-model="$store.state.bankAccount.conta"
+                  :mask="[/\d/, /\d/, /\d/, /\d/, /\d/, /\d/]"
+                  :guide="false">
+                </masked-input>
+              </div>
+              <div class="conta-dv" style="flex:50%">
+                <label>DV</label>
+                <masked-input
+                  type="tel"
+                  v-model="$store.state.bankAccount.contaDV"
+                  :mask="[/\d/, /\d/]"
+                  :guide="false">
+                </masked-input>
+              </div>
+            </div>
           </div>
 
           <div class="item-form">
@@ -573,12 +603,6 @@
               :guide="false">
             </masked-input>
           </div>
-
-
-        <!-- <div class="item-form-payment">
-          <span class="__payment-type">Boleto</span>
-          <img class="__payment-img" src="../../../assets/img/boleto.svg">
-        </div> -->
 
       </div>
 
@@ -600,6 +624,7 @@
 </template>
 
 <script>
+import isMobile from 'ismobilejs'
 import pagarme from 'pagarme'
 import { loaded } from '~/node_modules/vue2-google-maps/src/manager'
 import * as firebase from 'firebase'
@@ -832,8 +857,6 @@ export default {
       /* 
       CRIAR RECEBEDOR
       */
-     console.log(this.$store.state.bankAccount.bankCode.substring(0, 3))
-     console.log(this.$store.state.bankAccount.docNumber.replace(/\./g, '').replace(/\-/g, ''))
       pagarme.client.connect({ api_key: 'ak_test_E3I46o4e7guZDqwRnSY9sW8o8HrL9D' })
         .then(client => client.recipients.create({
           transfer_enabled: false,
@@ -842,10 +865,10 @@ export default {
           anticipatable_volume_percentage: 100,
           bank_account: {
             bank_code: this.$store.state.bankAccount.bankCode.substring(0, 3),
-            agencia: "0932",
-            agencia_dv: "5",
-            conta: "58054",
-            conta_dv: "1",
+            agencia: this.$store.state.bankAccount.agencia,
+            agencia_dv: this.$store.state.bankAccount.agenciaDV,
+            conta: this.$store.state.bankAccount.conta,
+            conta_dv: this.$store.state.bankAccount.contaDV,
             type: "conta_corrente",
             document_number: this.$store.state.bankAccount.docNumber.replace(/\./g, '').replace(/\-/g, ''),
             legal_name: this.$store.state.bankAccount.legalName
@@ -941,6 +964,10 @@ export default {
           })
         }
         this.$store.commit('m_acomodCreated', true)
+        /* Resetar dados */
+        this.imageURL1 = null,
+        this.imageURL2 = null,
+        this.imageURL3 = null
       })
     },
     ifUpload1 () {
@@ -1339,6 +1366,7 @@ export default {
     }
     & .__form-subtitle {
       padding: 0 7%;
+      font-size: var(--fontSizeAnuncioText);
     }
     & textarea {
       padding: 0 7%;
@@ -1367,9 +1395,8 @@ export default {
       flex-flow: column;
       margin: 1.7rem 0;
       & label {
-        font-weight: 700;
+        font-weight: 600;
         font-size: 15px;
-        color: rgb(102, 102, 102);
       }
       & input {
         cursor: text;
@@ -1410,23 +1437,8 @@ export default {
         }
       }
     }
-    & .payment-box {
+    & .recebedor-box {
       padding-top: 1rem;
-      & .item-form-payment {
-        margin: 0 7%;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 1rem 0 0 0;
-        & .__payment-type {
-          font-size: 21px;
-          font-weight: 700;
-        }
-        & .__payment-img {
-          width: 1.75rem;
-          height: auto;
-        }
-      }
     }
     & .modal-croppa {
       background: rgba(0, 0, 0, 0.8);
@@ -1449,13 +1461,14 @@ export default {
           font-weight: 300;
         }
         & canvas {
-          margin: 3rem 0 1rem 0;
+          cursor: grab;
+          margin: 2.5rem 0 1rem 0;
           border: 2px dashed white;
         }
         & .modal-croppa-btns {
           display: flex;
           flex-flow: column;
-          width: 100%
+          width: 70%;
         }
       }
     }
@@ -1556,18 +1569,12 @@ export default {
           border-radius: 0 2rem 2rem 0;
           transition: all .3s ease;
           cursor: no-drop;
-          background: rgb(222,222,222);
+          background: rgb(192,192,192);
           color: white;
         }
       }
     }
   }
-}
-
-/* TRANSITIONS */
-.payment-animation-enter,
-.payment-animation-leave-active {
-  transform: scale(0);
 }
 
 @media (min-width: 1024px) {
@@ -1613,7 +1620,7 @@ export default {
     }
     & .item-form {
       padding: 0 22%;
-      margin: 2.2rem 0;
+      margin: 2.3rem 0;
       & label {
         font-size: 16px;
       }
@@ -1636,21 +1643,17 @@ export default {
         }
       }
     }
-    & .payment-box {
-      & .item-form-payment {
-        & .__payment-type {
-        }
-        & .__payment-img {
-        }
-      }
+    & .recebedor-box {
     }
     & .modal-croppa {
       & .modal-croppa-body {
         & h1 {
         }
         & canvas {
+          border: 3px dashed white;
         }
         & .modal-croppa-btns {
+          width: 50%
         }
       }
     }
@@ -1659,14 +1662,17 @@ export default {
       flex-flow: column;
       align-items: center;
       & .__input-btn {
-        margin: 1.6rem 0 0 0;
+        margin: 2rem 0 0 0;
       }
     }
     & .__croppa-btn {
     }
     & .after-choose-image {
+      margin-top: 2rem;
       padding: 0 calc(22% - .3rem);
       & .image-box {
+        width: 165px;
+        height: 110px;
         & .__foto-principal {
         }
         & .__preview-img {
@@ -1710,11 +1716,6 @@ export default {
         & .__next {
           font-size: 17px;
           font-weight: 600;
-          border-radius: 0 2rem 2rem 0;
-          transition: all .3s ease;
-          cursor: no-drop;
-          background: rgb(202, 202, 202);
-          color: white;
         }
       }
     }

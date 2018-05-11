@@ -192,7 +192,7 @@ export default {
       background: rgba(0,0,0, 0);
       & .__title {
         width: 100%;
-        font-size: 44px;
+        font-size: 42px;
         font-weight: 600;
         user-select: none;
         & span {
