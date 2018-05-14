@@ -289,7 +289,7 @@
 
 
     <!-- ########## IMAGEM E VÍDEOS PG.6 ########## -->
-    <form class="cadastro-acomodacao" v-if="$store.state.cadastroAcomod6">
+    <form class="cadastro-acomodacao" v-show="$store.state.cadastroAcomod6">
 
       <h1 class="__form-title">Adicione Imagens e Vídeo</h1>
 
@@ -302,16 +302,16 @@
           <h1>Ajustar imagem</h1>
           <croppa
           ref="myCroppa1"
+          @file-choose="showCroppaModal1 = true"
           :width="$store.state.isMobile === true ? 720/2.25 : 720/1.5"
           :height="$store.state.isMobile === true ? 480/2.25 : 480/1.5"
           :quality="$store.state.isMobile === true ? 2.25 : 1.5"
           :placeholder="'Carregando...'"
           :placeholder-color="'white'"
-          :accept="'image/*'"
+          :accept="'.jpg, .jpeg, .png, .webp'"
           :zoom-speed="$store.state.isMobile === true ? 2 : 4"
           :prevent-white-space="true"
-          :show-remove-button="false"
-          @file-choose="imageChoose1">
+          :show-remove-button="false">
           </croppa>
           <div class="modal-croppa-btns">
             <button class="__croppa-btn" type="button" @click="showCroppaModal1=false, imageConfirmed1()">Confirmar</button>
@@ -326,16 +326,16 @@
           <h1>Ajustar imagem</h1>
           <croppa
           ref="myCroppa2"
+          @file-choose="showCroppaModal2 = true"
           :width="$store.state.isMobile === true ? 720/2.25 : 720/1.5"
           :height="$store.state.isMobile === true ? 480/2.25 : 480/1.5"
           :quality="$store.state.isMobile === true ? 2.25 : 1.5"
           :placeholder="'Carregando...'"
           :placeholder-color="'white'"
-          :accept="'image/*'"
+          :accept="'.jpg, .jpeg, .png, .webp'"
           :zoom-speed="$store.state.isMobile === true ? 2 : 4"
           :prevent-white-space="true"
-          :show-remove-button="false"
-          @file-choose="imageChoose2">
+          :show-remove-button="false">
           </croppa>
           <div class="modal-croppa-btns">
             <button class="__croppa-btn" type="button" @click="showCroppaModal2=false, imageConfirmed2()">Confirmar</button>
@@ -350,16 +350,16 @@
           <h1>Ajustar imagem</h1>
           <croppa
           ref="myCroppa3"
+          @file-choose="showCroppaModal3 = true"
           :width="$store.state.isMobile === true ? 720/2.25 : 720/1.5"
           :height="$store.state.isMobile === true ? 480/2.25 : 480/1.5"
           :quality="$store.state.isMobile === true ? 2.25 : 1.5"
           :placeholder="'Carregando...'"
           :placeholder-color="'white'"
-          :accept="'image/*'"
+          :accept="'.jpg, .jpeg, .png, .webp'"
           :zoom-speed="$store.state.isMobile === true ? 2 : 4"
           :prevent-white-space="true"
-          :show-remove-button="false"
-          @file-choose="imageChoose3">
+          :show-remove-button="false">
           </croppa>
           <div class="modal-croppa-btns">
             <button class="__croppa-btn" type="button" @click="showCroppaModal3=false, imageConfirmed3()">Confirmar</button>
@@ -697,9 +697,6 @@ export default {
     },
     /* ******************** IMAGE INPUT ******************** */
     /* --- Image 1 --- */
-    imageChoose1 () {
-      this.showCroppaModal1 = true
-    },
     async imageConfirmed1 () {
       if (this.imageURL1 !== null) {
         return 
@@ -720,9 +717,6 @@ export default {
       this.showCroppaModal1 = false
     },
     /* --- Image 2 --- */
-    imageChoose2 () {
-      this.showCroppaModal2 = true
-    },
     async imageConfirmed2 () {
       if (this.imageURL2 !== null) {
         return 
@@ -743,9 +737,6 @@ export default {
       this.showCroppaModal2 = false
     },
     /* --- Image 3 --- */
-    imageChoose3 () {
-      this.showCroppaModal3 = true
-    },
     async imageConfirmed3 () {
       if (this.imageURL3 !== null) {
         return 
@@ -825,12 +816,12 @@ export default {
     },
     nextBtn1 () {
       if (this.$store.state.acomodData.tipoAcomod !== null) {
-        this.$store.commit('m_cadastroAcomod1', false), this.$store.commit('m_cadastroAcomod2', true), this.$store.commit('m_acomodProgressBar', (100/11)*2), window.location.hash = "capacidade"
+        this.$store.commit('m_cadastroAcomod1', false), this.$store.commit('m_cadastroAcomod2', true), this.$store.commit('m_acomodProgressBar', (100/11)*2), this.scrollTop(), window.location.hash = "capacidade"
       }
     },
     nextBtn2 () {
       if (this.$store.state.acomodData.totalHospedes !== null) {
-        this.$store.commit('m_cadastroAcomod2', false), this.$store.commit('m_cadastroAcomod3', true), this.$store.commit('m_acomodProgressBar', (100/11)*3), window.location.hash = "caracteristicas"
+        this.$store.commit('m_cadastroAcomod2', false), this.$store.commit('m_cadastroAcomod3', true), this.$store.commit('m_acomodProgressBar', (100/11)*3), this.scrollTop(), window.location.hash = "caracteristicas"
       }
     },
     nextBtn3 () {
@@ -845,36 +836,36 @@ export default {
     },
     nextBtn5 () {
       if (this.$store.state.acomodPlace !== null) {
-        this.$store.commit('m_cadastroAcomod5', false), this.$store.commit('m_cadastroAcomod6', true), this.$store.commit('m_acomodProgressBar', (100/11)*6), window.location.hash = "imagens"
+        this.$store.commit('m_cadastroAcomod5', false), this.$store.commit('m_cadastroAcomod6', true), this.$store.commit('m_acomodProgressBar', (100/11)*6), this.scrollTop(), window.location.hash = "imagens"
       } else {
         alert('Adicione um endereço')
       }
     },
     nextBtn6 () {
       if (this.imageURL1 !== null) {
-        this.$store.commit('m_cadastroAcomod6', false), this.$store.commit('m_cadastroAcomod7', true), this.$store.commit('m_acomodProgressBar', (100/11)*7), window.location.hash = "valor"
+        this.$store.commit('m_cadastroAcomod6', false), this.$store.commit('m_cadastroAcomod7', true), this.$store.commit('m_acomodProgressBar', (100/11)*7), this.scrollTop(), window.location.hash = "valor"
       } else {
         alert('Adicione pelo menos uma imagem')
       }
     },
     nextBtn7 () {
       if (1<2) {
-        this.$store.commit('m_cadastroAcomod7', false), this.$store.commit('m_cadastroAcomod8', true), this.$store.commit('m_acomodProgressBar', (100/11)*8), window.location.hash = "titulo"
+        this.$store.commit('m_cadastroAcomod7', false), this.$store.commit('m_cadastroAcomod8', true), this.$store.commit('m_acomodProgressBar', (100/11)*8), this.scrollTop(), window.location.hash = "titulo"
       }
     },
     nextBtn8 () {
       if (this.$store.state.acomodData.title !== '') {
-        this.$store.commit('m_cadastroAcomod8', false), this.$store.commit('m_cadastroAcomod9', true), this.$store.commit('m_acomodProgressBar', (100/11)*9), window.location.hash = "subtitulo"
+        this.$store.commit('m_cadastroAcomod8', false), this.$store.commit('m_cadastroAcomod9', true), this.$store.commit('m_acomodProgressBar', (100/11)*9), this.scrollTop(), window.location.hash = "subtitulo"
       }
     },
     nextBtn9 () {
       if (this.$store.state.acomodData.subtitle !== '') {
-        this.$store.commit('m_cadastroAcomod9', false), this.$store.commit('m_cadastroAcomod10', true), this.$store.commit('m_acomodProgressBar', (100/11)*10), window.location.hash = "identificacao"
+        this.$store.commit('m_cadastroAcomod9', false), this.$store.commit('m_cadastroAcomod10', true), this.$store.commit('m_acomodProgressBar', (100/11)*10), this.scrollTop(), window.location.hash = "identificacao"
       }
     },
     nextBtn10 () {
       if (this.$store.state.acomodData.celular.length === 15) {
-        this.$store.commit('m_cadastroAcomod10', false), this.$store.commit('m_cadastroAcomod11', true), this.$store.commit('m_acomodProgressBar', (100/11)*11), window.location.hash = "dados"
+        this.$store.commit('m_cadastroAcomod10', false), this.$store.commit('m_cadastroAcomod11', true), this.$store.commit('m_acomodProgressBar', (100/11)*11), this.scrollTop(), window.location.hash = "dados"
       }
     },
     concluir () {

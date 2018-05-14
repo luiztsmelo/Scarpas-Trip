@@ -330,7 +330,7 @@ export default {
               font-weight: 600;
             }
             & .__card-title {
-              margin: .3rem 0 .5rem 0;
+              margin: .3rem 0 .4rem 0;
               font-size: 16px;
               font-weight: 700;
             }
