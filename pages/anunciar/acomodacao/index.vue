@@ -1540,25 +1540,28 @@ export default {
       flex-flow: column;
       padding: 0 7%;
       & .facebook-btn {
-        width: 16rem;
-        margin: .6rem 0;
+        width: 17rem;
+        margin: .7rem 0;
         height: 2.9rem;
         text-align: start;
         padding-left: 50px;
+        font-size: 15px;
       }
       & .google-btn {
-        width: 16rem;
-        margin: .6rem 0;
+        width: 17rem;
+        margin: .7rem 0;
         height: 2.9rem;
         text-align: start;
         padding-left: 50px;
+        font-size: 15px;
       }
       & .email-btn {
-        width: 16rem;
-        margin: .6rem 0;
+        width: 17rem;
+        margin: .7rem 0;
         height: 2.9rem;
         text-align: start;
         padding-left: 50px;
+        font-size: 15px;
       }
     }
     & .back-next {
@@ -1704,21 +1707,15 @@ export default {
       }
     }
     & .signin-btns {
-      padding: .8rem 41% 0;
+      padding: .8rem 40% 0;
       & .facebook-btn {
         width: 100%;
-        margin: .7rem 0;
-        height: 2.9rem;
       }
       & .google-btn {
         width: 100%;
-        margin: .7rem 0;
-        height: 2.9rem;
       }
       & .email-btn {
         width: 100%;
-        margin: .7rem 0;
-        height: 2.9rem;
       }
     }
     & .back-next {
