@@ -137,7 +137,6 @@ textarea {
   border-radius: 5px;
   font-size: 14px;
   font-weight: 500;
-  width: 50%;
 }
 
 /* ******* FACEBOOK ******* */
@@ -152,7 +151,6 @@ textarea {
   border-radius: 5px;
   font-size: 14px;
   font-weight: 500;
-  width: 50%;
 }
 
 /* ******* E-MAIL ******* */
@@ -167,7 +165,6 @@ textarea {
   border-radius: 5px;
   font-size: 14px;
   font-weight: 500;
-  width: 50%;
 }
 
 @media (min-width: 1024px) {

@@ -77,12 +77,9 @@
 
       <div class="item-form">
         <label>Total de Hóspedes</label>
-        <masked-input
-          type="tel"
-          v-model="$store.state.acomodData.totalHospedes"
-          :mask="[/\d/, /\d/]"
-          :guide="false">
-        </masked-input>
+        <select v-model="$store.state.acomodData.totalHospedes">
+          <option v-for="n in 25">{{ n }}</option>
+        </select>
       </div> 
 
       <div class="back-next"> 
@@ -491,11 +488,10 @@
 
       <h1 class="__form-title">Sua identificação</h1>   
 
-      <h3 class="__form-subtitle" v-if="this.$store.state.acomodData.proprietario === null">Continuar com:</h3>
-
       <div class="signin-btns" v-if="$store.state.acomodData.proprietario === null">
-        <button type="button" class="facebook-btn" @click="facebookSignIn()">Facebook</button>
-        <button type="button" class="google-btn" @click="googleSignIn()">Google</button>
+        <button type="button" class="facebook-btn" @click="facebookSignIn()">Continuar com Facebook</button>
+        <button type="button" class="google-btn" @click="googleSignIn()">Continuar com Google</button>
+        <button type="button" class="email-btn" @click="emailSignIn()">Continuar com E-mail</button>
       </div>
 
       <h3 class="__form-subtitle" v-if="$store.state.acomodData.proprietario !== null">Ótimo {{ firstName }}! Só mais algumas informações:</h3>
@@ -582,7 +578,7 @@
                 </masked-input>
               </div>
               <div class="agencia-dv" style="flex:50%">
-                <label>DV</label>
+                <label>Dígito</label>
                 <masked-input
                   type="tel"
                   v-model="$store.state.bankAccount.agenciaDV"
@@ -605,7 +601,7 @@
                 </masked-input>
               </div>
               <div class="conta-dv" style="flex:50%">
-                <label>DV</label>
+                <label>Dígito</label>
                 <masked-input
                   type="tel"
                   v-model="$store.state.bankAccount.contaDV"
@@ -1541,7 +1537,29 @@ export default {
     }
     & .signin-btns {
       display: flex;
+      flex-flow: column;
       padding: 0 7%;
+      & .facebook-btn {
+        width: 16rem;
+        margin: .6rem 0;
+        height: 2.9rem;
+        text-align: start;
+        padding-left: 50px;
+      }
+      & .google-btn {
+        width: 16rem;
+        margin: .6rem 0;
+        height: 2.9rem;
+        text-align: start;
+        padding-left: 50px;
+      }
+      & .email-btn {
+        width: 16rem;
+        margin: .6rem 0;
+        height: 2.9rem;
+        text-align: start;
+        padding-left: 50px;
+      }
     }
     & .back-next {
       position: fixed;
@@ -1609,23 +1627,23 @@ export default {
   & .cadastro-acomodacao {
     padding: 0 0 7rem 0;
     & .__form-title {
-      padding: 3rem 22% 1.1rem;
+      padding: 3rem 23% 1.1rem;
       font-size: 32px;
       text-align: center;
     }
     & .__form-subtitle {
-      padding: 1.4rem 22% 0;
+      padding: 1.4rem 23% 0;
       font-size: 17px;
     }
     & textarea {
-      padding: 0 22%;
+      padding: 0 23%;
       margin: 1.4rem 0 .6rem 0;
     }
     & .__lenght-calc {
-      padding: 0 22%;
+      padding: 0 23%;
     }
     & .item-form {
-      padding: 0 22%;
+      padding: 0 23%;
       margin: 2.3rem 0;
       & label {
         font-size: 16px;
@@ -1642,7 +1660,7 @@ export default {
       }
     }
     & .comodidades-box {
-      padding: 0 22%;
+      padding: .6rem 23% 0;
       & .item-form-switches {
         padding: 1.4rem 0;
         & h3 {
@@ -1675,7 +1693,7 @@ export default {
     }
     & .after-choose-image {
       margin-top: 2rem;
-      padding: 0 calc(22% - .3rem);
+      padding: 0 calc(23% - .3rem);
       & .image-box {
         width: 165px;
         height: 110px;
@@ -1686,6 +1704,22 @@ export default {
       }
     }
     & .signin-btns {
+      padding: .8rem 41% 0;
+      & .facebook-btn {
+        width: 100%;
+        margin: .7rem 0;
+        height: 2.9rem;
+      }
+      & .google-btn {
+        width: 100%;
+        margin: .7rem 0;
+        height: 2.9rem;
+      }
+      & .email-btn {
+        width: 100%;
+        margin: .7rem 0;
+        height: 2.9rem;
+      }
     }
     & .back-next {
       position: fixed;
@@ -1694,8 +1728,8 @@ export default {
       left: 0;
       right: 0;
       margin: auto;
-      height: 2.9rem;
-      width: 27%;
+      height: 2.85rem;
+      width: 25%;
       background: white;
       box-shadow: 3px 3px 20px 1px rgba(0,0,0,0.18);
       border-radius: 2rem;
@@ -1704,7 +1738,7 @@ export default {
         align-items: center;
         & button {
           width: 50%;
-          height: 2.9rem;
+          height: 2.85rem;
         }
         & .__back {
           font-size: 17px;
