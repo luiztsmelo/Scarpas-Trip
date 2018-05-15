@@ -1,6 +1,8 @@
 <template>
   <div class="anunciar-acomodacao">
 
+    <v-dialog style="z-index:10000"/>
+
     <!-- PLANO ACOMODAÇÃO -->
     <div class="plano-acomodacao" v-show="$store.state.cadastroAcomod0">
       
@@ -834,14 +836,20 @@ export default {
       if (this.$store.state.acomodPlace !== null) {
         this.$store.commit('m_cadastroAcomod5', false), this.$store.commit('m_cadastroAcomod6', true), this.$store.commit('m_acomodProgressBar', (100/11)*6), this.scrollTop(), window.location.hash = "imagens"
       } else {
-        alert('Adicione um endereço')
+        this.$modal.show('dialog', {
+          text: 'Adicione um endereço.',
+          buttons: [{ title: 'Ok' }]
+        })
       }
     },
     nextBtn6 () {
       if (this.imageURL1 !== null) {
         this.$store.commit('m_cadastroAcomod6', false), this.$store.commit('m_cadastroAcomod7', true), this.$store.commit('m_acomodProgressBar', (100/11)*7), this.scrollTop(), window.location.hash = "valor"
       } else {
-        alert('Adicione pelo menos uma imagem')
+        this.$modal.show('dialog', {
+          text: 'Adicione pelo menos uma imagem.',
+          buttons: [{ title: 'Ok' }]
+        })
       }
     },
     nextBtn7 () {
@@ -852,138 +860,177 @@ export default {
     nextBtn8 () {
       if (this.$store.state.acomodData.title !== '') {
         this.$store.commit('m_cadastroAcomod8', false), this.$store.commit('m_cadastroAcomod9', true), this.$store.commit('m_acomodProgressBar', (100/11)*9), this.scrollTop(), window.location.hash = "subtitulo"
+      } else {
+        this.$modal.show('dialog', {
+          text: 'Adicione um título.',
+          buttons: [{ title: 'Ok' }]
+        })
       }
     },
     nextBtn9 () {
       if (this.$store.state.acomodData.subtitle !== '') {
         this.$store.commit('m_cadastroAcomod9', false), this.$store.commit('m_cadastroAcomod10', true), this.$store.commit('m_acomodProgressBar', (100/11)*10), this.scrollTop(), window.location.hash = "identificacao"
+      } else {
+        this.$modal.show('dialog', {
+          text: 'Adicione um subtítulo.',
+          buttons: [{ title: 'Ok' }]
+        })
       }
     },
     nextBtn10 () {
+      if (this.$store.state.user.email === null) {
+        this.$modal.show('dialog', {
+          text: 'Conecte-se com uma de suas contas ou crie uma conta com seu e-mail.',
+          buttons: [{ title: 'Ok' }]
+        })
+      }
       if (this.$store.state.acomodData.celular.length === 15) {
         this.$store.commit('m_cadastroAcomod10', false), this.$store.commit('m_cadastroAcomod11', true), this.$store.commit('m_acomodProgressBar', (100/11)*11), this.scrollTop(), window.location.hash = "dados"
+      } else {
+        this.$modal.show('dialog', {
+          text: 'Adicione pelo menos um número de celular.',
+          buttons: [{ title: 'Ok' }]
+        })
       }
     },
     concluir () {
-      this.$store.commit('m_loader', true)
-      const acomodID = Math.floor(Math.random() * (99999 - 10000 + 1) + 10000).toString()
-      this.$store.commit('m_acomodID', acomodID)
-      const storageRef = firebase.storage().ref('acomodacoes/' + acomodID + '/')
+      const bankCode = this.$store.state.bankAccount.bankCode
+      const type = this.$store.state.bankAccount.type
+      const agencia = this.$store.state.bankAccount.agencia
+      const agenciaDV = this.$store.state.bankAccount.agenciaDV
+      const conta = this.$store.state.bankAccount.conta
+      const contaDV = this.$store.state.bankAccount.contaDV
+      const legalName = this.$store.state.bankAccount.legalName
+      const docNumber = this.$store.state.bankAccount.docNumber
       /* 
-      CRIAR RECEBEDOR
+      Checar se todos os dados foram preenchidos 
       */
-      pagarme.client.connect({ api_key: 'ak_test_E3I46o4e7guZDqwRnSY9sW8o8HrL9D' })
-        .then(client => client.recipients.create({
-          transfer_enabled: false,
-          transfer_interval: "daily",
-          automatic_anticipation_enabled: true,
-          anticipatable_volume_percentage: 100,
-          bank_account: {
-            bank_code: this.$store.state.bankAccount.bankCode.substring(0, 3),
-            agencia: this.$store.state.bankAccount.agencia,
-            agencia_dv: this.$store.state.bankAccount.agenciaDV,
-            conta: this.$store.state.bankAccount.conta,
-            conta_dv: this.$store.state.bankAccount.contaDV,
-            type: "conta_corrente",
-            document_number: this.$store.state.bankAccount.docNumber.replace(/\./g, '').replace(/\-/g, ''),
-            legal_name: this.$store.state.bankAccount.legalName
+      if (bankCode !== null && agencia !== '' && agenciaDV !== '' && conta !== '' && contaDV !== '' && legalName !== '' && docNumber.length === 14) {
+        this.$store.commit('m_loader', true)
+        const acomodID = Math.floor(Math.random() * (99999 - 10000 + 1) + 10000).toString()
+        this.$store.commit('m_acomodID', acomodID)
+        const storageRef = firebase.storage().ref('acomodacoes/' + acomodID + '/')
+        /* 
+        CRIAR RECEBEDOR
+        */
+        pagarme.client.connect({ api_key: 'ak_test_E3I46o4e7guZDqwRnSY9sW8o8HrL9D' })
+          .then(client => client.recipients.create({
+            transfer_enabled: false,
+            transfer_interval: "daily",
+            automatic_anticipation_enabled: true,
+            anticipatable_volume_percentage: 100,
+            bank_account: {
+              bank_code: bankCode.substring(0, 3),
+              type: type,
+              agencia: agencia,
+              agencia_dv: agenciaDV,
+              conta: conta,
+              conta_dv: contaDV,
+              legal_name: legalName,
+              document_number: docNumber.replace(/\./g, '').replace(/\-/g, '')
+            }
+          })
+        )
+        .then(recipient => {
+          console.log(recipient)
+          this.$store.state.acomodData.recipientID = recipient.id.toString()
+          /* 
+          UPLOAD IMAGE 1 
+          */
+          /* imageAcL1 */
+          storageRef.child('imageL1.jpeg').put(this.$store.state.blobAcL1).then(snapshot => {
+            console.log(acomodID + 'L1' + '.jpeg')
+            storageRef.child('imageL1.jpeg').getDownloadURL().then(url => {
+              this.$store.commit('m_imageAcL1', url)
+              this.ifUpload1()
+            })
+          })
+          /* imageAcH1J */
+          storageRef.child('imageH1J.jpeg').put(this.$store.state.blobAcH1J).then(snapshot => {
+            console.log(acomodID + 'H1J' + '.jpeg')
+            storageRef.child('imageH1J.jpeg').getDownloadURL().then(url => {
+              this.$store.commit('m_imageAcH1J', url)
+              this.ifUpload1()
+            })
+          })
+          /* imageAcH1W */
+          storageRef.child('imageH1W.webp').put(this.$store.state.blobAcH1W).then(snapshot => {
+            console.log(acomodID + 'H1W' + '.webp')
+            storageRef.child('imageH1W.webp').getDownloadURL().then(url => {
+              this.$store.commit('m_imageAcH1W', url)
+              this.ifUpload1()
+            })
+          })
+          /* 
+          UPLOAD IMAGE 2 
+          */
+          if (this.$store.state.blobAcH2J !== null) {
+            /* imageAcL2 */
+            storageRef.child('imageL2.jpeg').put(this.$store.state.blobAcL2).then(snapshot => {
+              console.log(acomodID + 'L2' + '.jpeg')
+              storageRef.child('imageL2.jpeg').getDownloadURL().then(url => {
+                this.$store.commit('m_imageAcL2', url)
+                this.ifUpload2()
+              })
+            })
+            /* imageAcH2J */
+            storageRef.child('imageH2J.jpeg').put(this.$store.state.blobAcH2J).then(snapshot => {
+              console.log(acomodID + 'H2J' + '.jpeg')
+              storageRef.child('imageH2J.jpeg').getDownloadURL().then(url => {
+                this.$store.commit('m_imageAcH2J', url)
+                this.ifUpload2()
+              })
+            })
+            /* imageAcH2W */
+            storageRef.child('imageH2W.webp').put(this.$store.state.blobAcH2W).then(snapshot => {
+              console.log(acomodID + 'H2W' + '.webp')
+              storageRef.child('imageH2W.webp').getDownloadURL().then(url => {
+                this.$store.commit('m_imageAcH2W', url)
+                this.ifUpload2()
+              })
+            })
           }
+          /* 
+          UPLOAD IMAGE 3 
+          */
+          if (this.$store.state.blobAcH3J !== null) {
+            /* imageAcL3 */
+            storageRef.child('imageL3.jpeg').put(this.$store.state.blobAcL3).then(snapshot => {
+              console.log(acomodID + 'L3' + '.jpeg')
+              storageRef.child('imageL3.jpeg').getDownloadURL().then(url => {
+                this.$store.commit('m_imageAcL3', url)
+                this.ifUpload3()
+              })
+            })
+            /* imageAcH3J */
+            storageRef.child('imageH3J.jpeg').put(this.$store.state.blobAcH3J).then(snapshot => {
+              console.log(acomodID + 'H3J' + '.jpeg')
+              storageRef.child('imageH3J.jpeg').getDownloadURL().then(url => {
+                this.$store.commit('m_imageAcH3J', url)
+                this.ifUpload3()
+              })
+            })
+            /* imageAcH3W */
+            storageRef.child('imageH3W.webp').put(this.$store.state.blobAcH3W).then(snapshot => {
+              console.log(acomodID + 'H3W' + '.webp')
+              storageRef.child('imageH3W.webp').getDownloadURL().then(url => {
+                this.$store.commit('m_imageAcH3W', url)
+                this.ifUpload3()
+              })
+            })
+          }
+          this.$store.commit('m_acomodCreated', true)
+          /* Resetar dados */
+          this.imageURL1 = null,
+          this.imageURL2 = null,
+          this.imageURL3 = null
         })
-      )
-      .then(recipient => {
-        console.log(recipient)
-        this.$store.state.acomodData.recipientID = recipient.id.toString()
-        /* 
-        UPLOAD IMAGE 1 
-        */
-        /* imageAcL1 */
-        storageRef.child('imageL1.jpeg').put(this.$store.state.blobAcL1).then(snapshot => {
-          console.log(acomodID + 'L1' + '.jpeg')
-          storageRef.child('imageL1.jpeg').getDownloadURL().then(url => {
-            this.$store.commit('m_imageAcL1', url)
-            this.ifUpload1()
-          })
+      } else {
+        this.$modal.show('dialog', {
+          text: 'Adicione seus dados bancários para concluir o anúncio.',
+          buttons: [{ title: 'Ok' }]
         })
-        /* imageAcH1J */
-        storageRef.child('imageH1J.jpeg').put(this.$store.state.blobAcH1J).then(snapshot => {
-          console.log(acomodID + 'H1J' + '.jpeg')
-          storageRef.child('imageH1J.jpeg').getDownloadURL().then(url => {
-            this.$store.commit('m_imageAcH1J', url)
-            this.ifUpload1()
-          })
-        })
-        /* imageAcH1W */
-        storageRef.child('imageH1W.webp').put(this.$store.state.blobAcH1W).then(snapshot => {
-          console.log(acomodID + 'H1W' + '.webp')
-          storageRef.child('imageH1W.webp').getDownloadURL().then(url => {
-            this.$store.commit('m_imageAcH1W', url)
-            this.ifUpload1()
-          })
-        })
-        /* 
-        UPLOAD IMAGE 2 
-        */
-        if (this.$store.state.blobAcH2J !== null) {
-          /* imageAcL2 */
-          storageRef.child('imageL2.jpeg').put(this.$store.state.blobAcL2).then(snapshot => {
-            console.log(acomodID + 'L2' + '.jpeg')
-            storageRef.child('imageL2.jpeg').getDownloadURL().then(url => {
-              this.$store.commit('m_imageAcL2', url)
-              this.ifUpload2()
-            })
-          })
-          /* imageAcH2J */
-          storageRef.child('imageH2J.jpeg').put(this.$store.state.blobAcH2J).then(snapshot => {
-            console.log(acomodID + 'H2J' + '.jpeg')
-            storageRef.child('imageH2J.jpeg').getDownloadURL().then(url => {
-              this.$store.commit('m_imageAcH2J', url)
-              this.ifUpload2()
-            })
-          })
-          /* imageAcH2W */
-          storageRef.child('imageH2W.webp').put(this.$store.state.blobAcH2W).then(snapshot => {
-            console.log(acomodID + 'H2W' + '.webp')
-            storageRef.child('imageH2W.webp').getDownloadURL().then(url => {
-              this.$store.commit('m_imageAcH2W', url)
-              this.ifUpload2()
-            })
-          })
-        }
-        /* 
-        UPLOAD IMAGE 3 
-        */
-        if (this.$store.state.blobAcH3J !== null) {
-          /* imageAcL3 */
-          storageRef.child('imageL3.jpeg').put(this.$store.state.blobAcL3).then(snapshot => {
-            console.log(acomodID + 'L3' + '.jpeg')
-            storageRef.child('imageL3.jpeg').getDownloadURL().then(url => {
-              this.$store.commit('m_imageAcL3', url)
-              this.ifUpload3()
-            })
-          })
-          /* imageAcH3J */
-          storageRef.child('imageH3J.jpeg').put(this.$store.state.blobAcH3J).then(snapshot => {
-            console.log(acomodID + 'H3J' + '.jpeg')
-            storageRef.child('imageH3J.jpeg').getDownloadURL().then(url => {
-              this.$store.commit('m_imageAcH3J', url)
-              this.ifUpload3()
-            })
-          })
-          /* imageAcH3W */
-          storageRef.child('imageH3W.webp').put(this.$store.state.blobAcH3W).then(snapshot => {
-            console.log(acomodID + 'H3W' + '.webp')
-            storageRef.child('imageH3W.webp').getDownloadURL().then(url => {
-              this.$store.commit('m_imageAcH3W', url)
-              this.ifUpload3()
-            })
-          })
-        }
-        this.$store.commit('m_acomodCreated', true)
-        /* Resetar dados */
-        this.imageURL1 = null,
-        this.imageURL2 = null,
-        this.imageURL3 = null
-      })
+      }
     },
     ifUpload1 () {
       if (this.$store.state.acomodData.imageL1 !== null && this.$store.state.acomodData.imageH1J !== null && this.$store.state.acomodData.imageH1W !== null) {
@@ -1063,42 +1110,44 @@ export default {
       return yearsPermitted
     },
     form1ok () {
-      return this.$store.state.acomodData.tipoAcomod !== null ? 'background:#FFA04F;cursor:pointer' : ''
+      return this.$store.state.acomodData.tipoAcomod !== null ? 'background:#FFA04F' : ''
     },
     form2ok () {
-      return this.$store.state.acomodData.totalHospedes !== null ? 'background:#FFA04F;cursor:pointer' : ''
+      return this.$store.state.acomodData.totalHospedes !== null ? 'background:#FFA04F' : ''
     },
     form3ok () {
-      return 1<2 ? 'background:#FFA04F;cursor:pointer' : ''
+      return 1<2 ? 'background:#FFA04F' : ''
     },
     form4ok () {
-      return 1<2 ? 'background:#FFA04F;cursor:pointer' : ''
+      return 1<2 ? 'background:#FFA04F' : ''
     },
     form5ok () {
-      return this.$store.state.acomodPlace !== null ? 'background:#FFA04F;cursor:pointer' : ''
+      return this.$store.state.acomodPlace !== null ? 'background:#FFA04F' : ''
     },
     form6ok () {
-      return this.imageURL1 !== null ? 'background:#FFA04F;cursor:pointer' : ''
+      return this.imageURL1 !== null ? 'background:#FFA04F' : ''
     },
     form7ok () {
-      return 1<2 ? 'background:#FFA04F;cursor:pointer' : ''
+      return 1<2 ? 'background:#FFA04F' : ''
     },
     form8ok () {
-      return this.$store.state.acomodData.title !== '' ? 'background:#FFA04F;cursor:pointer' : ''
+      return this.$store.state.acomodData.title !== '' ? 'background:#FFA04F' : ''
     },
     form9ok () {
-      return this.$store.state.acomodData.subtitle !== '' ? 'background:#FFA04F;cursor:pointer' : ''
+      return this.$store.state.acomodData.subtitle !== '' ? 'background:#FFA04F' : ''
     },
     form10ok () {
-      return this.$store.state.acomodData.celular.length === 15 ? 'background:#FFA04F;cursor:pointer' : ''
+      return this.$store.state.acomodData.celular.length === 15 ? 'background:#FFA04F' : ''
     },
     form11ok () {
-      const cardNumber = this.$store.state.creditCard.cardNumber
-      const cardHolderName = this.$store.state.creditCard.cardHolderName
-      const cardExpirationMonth = this.$store.state.creditCard.cardExpirationMonth
-      const cardExpirationYear = this.$store.state.creditCard.cardExpirationYear
-      const cardCVV = this.$store.state.creditCard.cardCVV
-      return cardNumber.length === 19 && cardHolderName !== '' && cardExpirationMonth !== 'MM' && cardExpirationYear !== 'AA' && cardCVV.length === 3 ? 'background:#00D8C7;cursor:pointer' : ''
+      const bankCode = this.$store.state.bankAccount.bankCode
+      const agencia = this.$store.state.bankAccount.agencia
+      const agenciaDV = this.$store.state.bankAccount.agenciaDV
+      const conta = this.$store.state.bankAccount.conta
+      const contaDV = this.$store.state.bankAccount.contaDV
+      const legalName = this.$store.state.bankAccount.legalName
+      const docNumber = this.$store.state.bankAccount.docNumber
+      return bankCode !== null && agencia !== '' && agenciaDV !== '' && conta !== '' && contaDV !== '' && legalName !== '' && docNumber.length === 14 ? 'background:#FFA04F' : ''
     },
     acomodCreated () {
       return this.$store.state.acomodCreated
@@ -1584,10 +1633,10 @@ export default {
           height: 3rem;
         }
         & .__back {
+          cursor: pointer;
           font-size: 16px;
           font-weight: 500;
           border-radius: 2rem 0 0 2rem;
-          cursor: pointer;
           background: white;
         }
         & .__next {
@@ -1595,7 +1644,6 @@ export default {
           font-weight: 500;
           border-radius: 0 2rem 2rem 0;
           transition: all .3s ease;
-          cursor: no-drop;
           background: rgb(192,192,192);
           color: white;
         }
