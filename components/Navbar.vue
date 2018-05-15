@@ -12,9 +12,8 @@
 
         <nav class="nav-mobile">
           <div class="__menu" @click="showMenu()">
-            <div class="__bar" :class="{ menuIconAnime1: menuIconAnime }"></div>
-            <div class="__bar" :class="{ menuIconAnime2: menuIconAnime }"></div>
-            <div class="__bar" :class="{ menuIconAnime3: menuIconAnime }"></div>
+            <div class="__bar1" :class="{ menuIconAnime1: menuIconAnime }"></div>
+            <div class="__bar2" :class="{ menuIconAnime2: menuIconAnime }"></div>
           </div>
         </nav>
 
@@ -131,7 +130,7 @@ export default {
       display: flex;
       align-items: center;
       & .__brand-img {
-        width: 1.75rem;
+        width: 1.8rem;
         height: auto;
         margin-right: .5rem;
       }
@@ -149,10 +148,18 @@ export default {
       & .__menu {
         display: inline-block;
         cursor: pointer;
-        & .__bar {
+        & .__bar1 {
           transition: all .3s ease;
-          width: 24px;
-          height: 1px;
+          width: 25px;
+          height: 2px;
+          background-color: var(--color01);
+          margin: 5px 0;
+          transform: translateX(-6px);
+        }
+        & .__bar2 {
+          transition: all .3s ease;
+          width: 25px;
+          height: 2px;
           background-color: var(--color01);
           margin: 5px 0;
         }
@@ -265,13 +272,9 @@ export default {
 }
 
 .menuIconAnime1 {
-  transform: rotate(-45deg) translate(-4px, 4px);
+  transform: rotate(-45deg) translate(4px, 5px) !important;
 }
 .menuIconAnime2 {
-  opacity: 0;
-  transform: scale(0);
-}
-.menuIconAnime3 {
-  transform: rotate(45deg) translate(-4px, -4px);
+  transform: rotate(45deg) translate(0px, -8px) !important;
 }
 </style>

@@ -249,31 +249,14 @@
 
       <div class="item-form">
         <label>Local</label>
-        <div>
-          <gmap-autocomplete
+        <gmap-autocomplete
           onKeyPress="if (event.which == 13) return false" 
           placeholder="Digite o endereço completo aqui"
           @place_changed="setPlace">
-          </gmap-autocomplete>
-        </div>
+        </gmap-autocomplete>
       </div>
 
-      <gmap-map
-      v-if="$store.state.cadastroAcomod5"
-      :center="{lat: $store.state.acomodData.positionLAT, lng: $store.state.acomodData.positionLNG}"
-      :zoom="mapZoom"
-      :options="{styles: styles, mapTypeControl:false, streetViewControl:false}"
-      style="width: 100%; height: 230px">
-        <Gmap-Marker
-        v-if="$store.state.acomodPlace"
-        :clickable="true"
-        :draggable="true"
-        :animation="4"
-        :position="{lat: $store.state.acomodData.positionLAT, lng: $store.state.acomodData.positionLNG}"
-        :icon="{url: markerUrl, scaledSize: markerSize}"
-        ></Gmap-Marker>
-      </gmap-map>
-
+      <h3 class="without-address" @click="$modal.show('local-map-modal')">{{ tipoAcomodTextLocal }} não tem endereço?</h3>
 
       <div class="back-next"> 
         <div class="back-next-body">
@@ -1106,6 +1089,19 @@ export default {
            : path === 'Hostel' ? 'do seu hostel'
            : ''
     },
+    tipoAcomodTextLocal () {
+      const path = this.$store.state.acomodData.tipoAcomod
+      return path === 'Casa' ? 'Sua casa' 
+           : path === 'Apartamento' ? 'Seu apartamento'
+           : path === 'Rancho' ? 'Seu rancho'
+           : path === 'Chácara' ? 'Sua chácara'
+           : path === 'Pousada' ? 'Sua pousada'
+           : path === 'Camping' ? 'Seu camping'
+           : path === 'Sítio' ? 'Seu sítio'
+           : path === 'Fazenda' ? 'Sua fazenda'
+           : path === 'Hostel' ? 'Seu hostel'
+           : ''
+    },
     titleLength () {
       return 50 - this.$store.state.acomodData.title.length
     },
@@ -1116,9 +1112,6 @@ export default {
       let fullName = this.$store.state.acomodData.proprietario.split(' ')
       let firstName = fullName[0]
       return firstName
-    },
-    mapZoom () {
-      return this.$store.state.acomodPlace !== null ? 16 : 12
     },
     yearsPermitted () {
       let year = new Date().getFullYear().toString()
@@ -1529,6 +1522,15 @@ export default {
         }
       }
     }
+    & .without-address {
+      display: inline-flex;
+      cursor: pointer;
+      margin: 0 7%;
+      font-size: 16px;
+      font-weight: 500;
+      transform: translateY(-1.7rem);
+      color: #006561;
+    }
     & .recebedor-box {
       padding-top: 1rem;
     }
@@ -1744,6 +1746,9 @@ export default {
         & h3 {
         }
       }
+    }
+    & .without-address {
+      margin: 0 23%;
     }
     & .recebedor-box {
     }
