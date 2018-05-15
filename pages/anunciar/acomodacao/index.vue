@@ -551,6 +551,7 @@
           <div class="item-form">
             <label>Nome do Banco</label>
             <vue-simple-suggest
+              :class="[ bankCodeError ? 'has-error' : '' ]"
               mode="select"
               v-model="$store.state.bankAccount.bankCode"
               :list="bancos"
@@ -573,6 +574,7 @@
               <div class="agencia" style="flex:50%; margin-right:1rem">
                 <label>Agência</label>
                 <masked-input
+                  :class="[ agenciaError ? 'has-error' : '' ]"
                   type="tel"
                   v-model="$store.state.bankAccount.agencia"
                   :mask="[/\d/, /\d/, /\d/, /\d/, /\d/]"
@@ -582,9 +584,10 @@
               <div class="agencia-dv" style="flex:50%">
                 <label>Dígito</label>
                 <masked-input
+                  :class="[ agenciaDVError ? 'has-error' : '' ]"
                   type="tel"
                   v-model="$store.state.bankAccount.agenciaDV"
-                  :mask="[/\d/, /\d/]"
+                  :mask="[/\d/]"
                   :guide="false">
                 </masked-input>
               </div>
@@ -596,15 +599,17 @@
               <div class="conta" style="flex:50%; margin-right:1rem">
                 <label>Conta Corrente</label>
                 <masked-input
+                  :class="[ contaError ? 'has-error' : '' ]"
                   type="tel"
                   v-model="$store.state.bankAccount.conta"
-                  :mask="[/\d/, /\d/, /\d/, /\d/, /\d/, /\d/]"
+                  :mask="[/\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/]"
                   :guide="false">
                 </masked-input>
               </div>
               <div class="conta-dv" style="flex:50%">
                 <label>Dígito</label>
                 <masked-input
+                :class="[ contaDVError ? 'has-error' : '' ]"
                   type="tel"
                   v-model="$store.state.bankAccount.contaDV"
                   :mask="[/\d/, /\d/]"
@@ -616,7 +621,7 @@
 
           <div class="item-form">
             <label>Seu Nome Completo</label>
-            <input type="text" v-model="$store.state.bankAccount.legalName">
+            <input type="text" v-model="$store.state.bankAccount.legalName" :class="[ legalNameError ? 'has-error' : '' ]">
           </div>
 
           <div class="item-form">
@@ -681,6 +686,12 @@ export default {
       imageURL2: null,
       imageURL3: null,
       monthsPermitted: ['01','02','03','04','05','06','07','08','09','10','11','12'],
+      bankCodeError: false,
+      agenciaError: false,
+      agenciaDVError: false,
+      contaError: false,
+      contaDVError: false,
+      legalNameError: false,
       docNumberError: false
     }
   },
@@ -904,10 +915,8 @@ export default {
       const contaDV = this.$store.state.bankAccount.contaDV
       const legalName = this.$store.state.bankAccount.legalName
       const docNumber = this.$store.state.bankAccount.docNumber
-      /* 
-      Checar se todos os dados foram preenchidos 
-      */
-      if (bankCode !== null && agencia !== '' && agenciaDV !== '' && conta !== '' && contaDV !== '' && legalName !== '' && docNumber.length === 14) {
+
+      if (bankCode !== '' && agencia !== '' && agenciaDV !== '' && conta !== '' && contaDV !== '' && legalName !== '' && docNumber.length === 14) {
         this.$store.commit('m_loader', true)
         const acomodID = Math.floor(Math.random() * (99999 - 10000 + 1) + 10000).toString()
         this.$store.commit('m_acomodID', acomodID)
@@ -933,13 +942,6 @@ export default {
             }
           })
         )
-        .catch(err => {
-          console.log(err.response.errors)
-          if (err) {
-            this.$store.commit('m_loader', false)
-            this.docNumberError = true
-          }
-        })
         .then(recipient => {
           console.log(recipient)
           this.$store.state.acomodData.recipientID = recipient.id.toString()
@@ -1034,11 +1036,27 @@ export default {
           this.imageURL2 = null,
           this.imageURL3 = null
         })
-      } else {
-        this.$modal.show('dialog', {
-          text: 'Adicione seus dados bancários para concluir seu anúncio.',
-          buttons: [{ title: 'Ok' }]
+        .catch(err => {
+          if (err) {
+            console.log(err.response.errors)
+            this.$store.commit('m_loader', false)
+            err.response.errors.some(e => e.parameter_name === 'bank_code') ? this.bankCodeError = true : this.bankCodeError = false
+            err.response.errors.some(e => e.parameter_name === 'agencia') ? this.agenciaError = true : this.agenciaError = false
+            err.response.errors.some(e => e.parameter_name === 'agencia_dv') ?  this.agenciaDVError = true :  this.agenciaDVError = false
+            err.response.errors.some(e => e.parameter_name === 'conta') ? this.contaError = true : this.contaError = false
+            err.response.errors.some(e => e.parameter_name === 'conta_dv') ? this.contaDVError = true : this.contaDVError = false
+            err.response.errors.some(e => e.parameter_name === 'legal_name') ? this.legalNameError = true : this.legalNameError = false
+            err.response.errors.some(e => e.parameter_name === 'document_number') ? this.docNumberError = true : this.docNumberError = false
+          }
         })
+      } else {
+        bankCode === '' ? this.bankCodeError = true : this.bankCodeError = false
+        agencia === '' ? this.agenciaError = true : this.agenciaError = false
+        agenciaDV === '' ?  this.agenciaDVError = true :  this.agenciaDVError = false
+        conta === '' ? this.contaError = true : this.contaError = false
+        contaDV === '' ? this.contaDVError = true : this.contaDVError = false
+        legalName === '' ? this.legalNameError = true : this.legalNameError = false
+        docNumber.length !== 14 ? this.docNumberError = true : this.docNumberError = false
       }
     },
     ifUpload1 () {

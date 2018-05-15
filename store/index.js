@@ -90,7 +90,7 @@ const store = () => new Vuex.Store({
       cardCVV: ''
     },
     bankAccount: {
-      bankCode: null,
+      bankCode: '',
       type: 'conta_corrente',
       agencia: '',
       agenciaDV: '',
@@ -717,7 +717,7 @@ const store = () => new Vuex.Store({
           cardCVV: ''
         })
         commit('m_bankAccount', {
-          bankCode: null,
+          bankCode: '',
           type: 'conta_corrente',
           agencia: '',
           agenciaDV: '',
