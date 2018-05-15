@@ -131,7 +131,7 @@ export default {
       display: flex;
       align-items: center;
       & .__brand-img {
-        width: 1.7rem;
+        width: 1.75rem;
         height: auto;
         margin-right: .5rem;
       }

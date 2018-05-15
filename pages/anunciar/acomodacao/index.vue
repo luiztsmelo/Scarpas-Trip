@@ -622,6 +622,7 @@
           <div class="item-form">
             <label>CPF</label>
             <masked-input
+              :class="[ docNumberError ? 'has-error' : '' ]"
               type="tel"
               v-model="$store.state.bankAccount.docNumber"
               :mask="[/\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '-', /\d/, /\d/]"
@@ -679,7 +680,8 @@ export default {
       imageURL1: null,
       imageURL2: null,
       imageURL3: null,
-      monthsPermitted: ['01','02','03','04','05','06','07','08','09','10','11','12']
+      monthsPermitted: ['01','02','03','04','05','06','07','08','09','10','11','12'],
+      docNumberError: false
     }
   },
   methods: {
@@ -931,6 +933,13 @@ export default {
             }
           })
         )
+        .catch(err => {
+          console.log(err.response.errors)
+          if (err) {
+            this.$store.commit('m_loader', false)
+            this.docNumberError = true
+          }
+        })
         .then(recipient => {
           console.log(recipient)
           this.$store.state.acomodData.recipientID = recipient.id.toString()
@@ -1027,7 +1036,7 @@ export default {
         })
       } else {
         this.$modal.show('dialog', {
-          text: 'Adicione seus dados bancários para concluir o anúncio.',
+          text: 'Adicione seus dados bancários para concluir seu anúncio.',
           buttons: [{ title: 'Ok' }]
         })
       }

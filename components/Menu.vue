@@ -120,7 +120,7 @@ export default {
         width: 1.3rem;
         height: auto;
         margin-right: 1rem;
-        filter: brightness(15%);
+        filter: brightness(25%);
       }
     }
     & .tmstudio {
