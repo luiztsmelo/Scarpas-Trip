@@ -63,7 +63,7 @@ export default {
       } else if (document.webkitCancelFullScreen) {
           document.webkitCancelFullScreen();
       }
-    }
+    },
     newPosition (e) {
       this.lat = e.latLng.lat()
       this.lng = e.latLng.lng()
