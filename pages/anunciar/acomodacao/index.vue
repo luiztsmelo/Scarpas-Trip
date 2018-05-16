@@ -837,10 +837,12 @@ export default {
       if (this.$store.state.acomodPlace !== null) {
         this.$store.commit('m_cadastroAcomod5', false), this.$store.commit('m_cadastroAcomod6', true), this.$store.commit('m_acomodProgressBar', (100/11)*6), this.scrollTop(), window.location.hash = "imagens"
       } else {
-        this.$modal.show('dialog', {
-          text: 'Adicione um endereço.',
-          buttons: [{ title: 'Ok' }]
-        })
+        let text = 'Adicione um endereço.'
+        if (this.$store.state.isMobile === true) {
+          alert(text)
+        } else {
+          this.$modal.show('dialog', { text, buttons: [{ title: 'Ok' }] })
+        }
       }
     },
     nextBtn6 () {

@@ -13,10 +13,12 @@
       
       <div class="titles">
         <h1 class="__title" ref="title">
-          {{ $store.state.fromWithoutAddress == false ? 'O marcador está no local certo?' : 'Posicione o marcador' }}
+          {{ $store.state.fromWithoutAddress == false ? 'O marcador está no local certo?' : 'Posicione o marcador no local' }}
         </h1>
 
-        <h3 class="__subtitle" ref="subtitle">Mova-o caso ache necessário</h3>
+        <h3 class="__subtitle" ref="subtitle">
+          {{ $store.state.fromWithoutAddress == false ? 'Mova-o caso ache necessário' : '' }}
+        </h3>
       </div>
       
       <gmap-map
@@ -87,7 +89,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
 @import url('../assets/css/main.css');
 
 .local-map-modal {
@@ -179,7 +181,7 @@ export default {
       }
       & .vue-map-container {
         width: 100%;
-        height: 70vh;
+        height: 71vh;
       }
       & .__confirm-btn {
         position: absolute;
