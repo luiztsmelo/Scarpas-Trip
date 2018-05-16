@@ -22,7 +22,7 @@
       <gmap-map
         :center="{lat: $store.state.acomodData.positionLAT, lng: $store.state.acomodData.positionLNG}"
         :zoom="mapZoom"
-        :options="gmapOptions">
+        :options="mapOptions">
           <Gmap-Marker
           :draggable="true"
           :animation="4"
@@ -66,7 +66,7 @@ export default {
     }
   },
   computed: {
-    gmapOptions () {
+    mapOptions () {
       return {
         styles: this.styles,
         mapTypeControl: false, 
@@ -87,7 +87,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 @import url('../assets/css/main.css');
 
 .local-map-modal {
