@@ -1522,6 +1522,7 @@ export default {
     & .without-address {
       display: inline-flex;
       cursor: pointer;
+      user-select: none;
       margin: 0 7%;
       font-size: 16px;
       font-weight: 500;

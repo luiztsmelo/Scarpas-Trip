@@ -5,7 +5,7 @@
         
 
         <nuxt-link to="/" class="brand" @click="$store.commit('m_showMenu', false), $store.commit('m_menuIconAnime', false)">
-          <img class="__brand-img" src="../static/brand.svg">
+          <img class="__brand-img" src="../static/brand.svg" draggable="false">
           <span class="__brand-name">Escarpas Trip</span>
         </nuxt-link>
         
@@ -126,6 +126,7 @@ export default {
     align-items: center;
     position: relative;
     & .brand {
+      user-select: none;
       cursor: pointer;
       display: flex;
       align-items: center;
