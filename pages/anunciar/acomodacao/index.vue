@@ -692,7 +692,6 @@ export default {
     scrollTop () {
       document.body.scrollTop = 0; // For Safari
       document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
-      document.body.requestFullscreen()
     },
     /* ******************** IMAGE INPUT ******************** */
     /* --- Image 1 --- */
@@ -763,6 +762,19 @@ export default {
       this.$store.state.acomodData.positionLNG = this.$store.state.acomodPlace.geometry.location.lng()
       this.$store.state.acomodData.address = this.$store.state.acomodPlace.formatted_address
       this.$modal.show('local-map-modal')
+      this.enterFullscreen()
+    },
+    enterFullscreen () {
+      if ((document.fullScreenElement && document.fullScreenElement !== null) ||
+        (!document.mozFullScreen && !document.webkitIsFullScreen)) {
+        if (document.documentElement.requestFullScreen) {
+            document.documentElement.requestFullScreen();
+        } else if (document.documentElement.mozRequestFullScreen) {
+            document.documentElement.mozRequestFullScreen();
+        } else if (document.documentElement.webkitRequestFullScreen) {
+            document.documentElement.webkitRequestFullScreen(Element.ALLOW_KEYBOARD_INPUT);
+        }
+      }
     },
     /* ******************** COMODIDADES ******************** */
     sliderRoupasCama () { this.$refs.sliderRoupasCama.click() },

@@ -5,7 +5,7 @@
     :adaptive="true"
     :width="$store.state.isMobile === true ? '100%' : '64%'"
     :height="$store.state.isMobile === true ? '100%' : 'auto'"
-    @closed="$store.state.fromWithoutAddress = false">
+    @closed="$store.state.fromWithoutAddress = false, exitFullscreen()">
 
     <div class="local-map-body">
 
@@ -55,6 +55,15 @@ export default {
     }
   },
   methods: {
+    exitFullscreen () {
+      if (document.cancelFullScreen) {
+          document.cancelFullScreen();
+      } else if (document.mozCancelFullScreen) {
+          document.mozCancelFullScreen();
+      } else if (document.webkitCancelFullScreen) {
+          document.webkitCancelFullScreen();
+      }
+    }
     newPosition (e) {
       this.lat = e.latLng.lat()
       this.lng = e.latLng.lng()
