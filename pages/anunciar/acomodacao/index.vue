@@ -692,6 +692,7 @@ export default {
     scrollTop () {
       document.body.scrollTop = 0; // For Safari
       document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+      document.body.requestFullscreen()
     },
     /* ******************** IMAGE INPUT ******************** */
     /* --- Image 1 --- */
@@ -830,7 +831,7 @@ export default {
     },
     nextBtn4 () {
       if (1<2) {
-        this.$store.commit('m_cadastroAcomod4', false), this.$store.commit('m_cadastroAcomod5', true), this.$store.commit('m_acomodProgressBar', (100/11)*5), this.scrollTop(), window.location.hash = "local", window.scrollTo(0,1)
+        this.$store.commit('m_cadastroAcomod4', false), this.$store.commit('m_cadastroAcomod5', true), this.$store.commit('m_acomodProgressBar', (100/11)*5), this.scrollTop(), window.location.hash = "local"
       }
     },
     nextBtn5 () {
