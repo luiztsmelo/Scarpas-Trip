@@ -830,7 +830,7 @@ export default {
     },
     nextBtn4 () {
       if (1<2) {
-        this.$store.commit('m_cadastroAcomod4', false), this.$store.commit('m_cadastroAcomod5', true), this.$store.commit('m_acomodProgressBar', (100/11)*5), this.scrollTop(), window.location.hash = "local"
+        this.$store.commit('m_cadastroAcomod4', false), this.$store.commit('m_cadastroAcomod5', true), this.$store.commit('m_acomodProgressBar', (100/11)*5), this.scrollTop(), window.location.hash = "local", window.scrollTo(0,1)
       }
     },
     nextBtn5 () {
