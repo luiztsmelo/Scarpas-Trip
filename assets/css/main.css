@@ -182,7 +182,7 @@ textarea {
 
 .v--modal {
   margin: 0 !important;
-  border-radius: 6px;
+  border-radius: 6px !important;
 }
 .v--modal-box {
   margin: 0 !important;

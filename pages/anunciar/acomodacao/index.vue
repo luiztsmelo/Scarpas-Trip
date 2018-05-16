@@ -243,7 +243,7 @@
 
 
     <!-- ########## LOCAL PG.5 ########## -->
-    <form class="cadastro-acomodacao" v-if="$store.state.cadastroAcomod5">
+    <form class="cadastro-acomodacao" v-show="$store.state.cadastroAcomod5">
 
       <h1 class="__form-title">Qual a localização?</h1>
 
@@ -256,7 +256,9 @@
         </gmap-autocomplete>
       </div>
 
-      <h3 class="without-address" @click="$modal.show('local-map-modal')">{{ tipoAcomodTextLocal }} não tem endereço?</h3>
+      <h3 class="without-address" @click="$modal.show('local-map-modal'), $store.state.fromWithoutAddress=true">
+        {{ tipoAcomodTextLocal }} não tem endereço?
+      </h3>
 
       <localMap/>
 
