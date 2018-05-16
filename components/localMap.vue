@@ -5,7 +5,7 @@
     :adaptive="true"
     :width="$store.state.isMobile === true ? '100%' : '64%'"
     :height="$store.state.isMobile === true ? '100%' : 'auto'"
-    @closed="$store.state.fromWithoutAddress = false, exitFullscreen()">
+    @closed="$store.state.fromWithoutAddress = false">
 
     <div class="local-map-body">
 
@@ -55,15 +55,6 @@ export default {
     }
   },
   methods: {
-    exitFullscreen () {
-      if (document.cancelFullScreen) {
-          document.cancelFullScreen();
-      } else if (document.mozCancelFullScreen) {
-          document.mozCancelFullScreen();
-      } else if (document.webkitCancelFullScreen) {
-          document.webkitCancelFullScreen();
-      }
-    },
     newPosition (e) {
       this.lat = e.latLng.lat()
       this.lng = e.latLng.lng()
@@ -106,6 +97,7 @@ export default {
     display: flex;
     flex-flow: column;
     align-items: center;
+    height: 100%;
     & .close-btn {
       cursor: pointer;
       position: absolute;
@@ -119,7 +111,7 @@ export default {
       flex-flow: column;
       justify-content: center;
       width: 100%;
-      height: 25vh;
+      height: 25%;
       padding: 0 7%;
       & .__title {
         padding-top: 1rem;
@@ -132,7 +124,7 @@ export default {
     }
     & .vue-map-container {
       width: 100%;
-      height: 75vh;
+      height: 75%;
     }
     & .__confirm-btn {
       position: absolute;
