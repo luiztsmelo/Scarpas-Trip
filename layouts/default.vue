@@ -13,8 +13,6 @@
 
     <MapFull/>
 
-    <localMap/>
-
     <SignIn/>
 
   </div>
@@ -30,10 +28,9 @@ import Menuu from '~/components/Menu.vue'
 import Loader from '~/components/Loader.vue'
 import Share from '~/components/Share.vue'
 import MapFull from '~/components/MapFull.vue'
-import localMap from '~/components/localMap.vue'
 
 export default {
-  components: { Navbar, Foobar, SignIn, Menuu, Loader, Share, MapFull, localMap },
+  components: { Navbar, Foobar, SignIn, Menuu, Loader, Share, MapFull },
   beforeCreate () {
     /* 
     DETECT DEVICE

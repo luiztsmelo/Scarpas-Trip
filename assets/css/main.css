@@ -181,7 +181,11 @@ textarea {
 }
 
 .v--modal {
+  margin: 0 !important;
   border-radius: 6px;
+}
+.v--modal-box {
+  margin: 0 !important;
 }
 .v--modal-overlay {
   background: rgba(0, 0, 0, .14);

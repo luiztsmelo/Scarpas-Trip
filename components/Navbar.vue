@@ -275,6 +275,6 @@ export default {
   transform: rotate(-45deg) translate(4px, 5px) !important;
 }
 .menuIconAnime2 {
-  transform: rotate(45deg) translate(0px, -8px) !important;
+  transform: rotate(45deg) translate(0px, -9px) !important;
 }
 </style>

@@ -258,6 +258,8 @@
 
       <h3 class="without-address" @click="$modal.show('local-map-modal')">{{ tipoAcomodTextLocal }} não tem endereço?</h3>
 
+      <localMap/>
+
       <div class="back-next"> 
         <div class="back-next-body">
           <button type="button" class="__back" @click="backBtn5">Voltar</button>
@@ -643,15 +645,15 @@ import pagarme from 'pagarme'
 import { loaded } from '~/node_modules/vue2-google-maps/src/manager'
 import * as firebase from 'firebase'
 import MaskedInput from 'vue-text-mask'
-import { mapstyle } from '../../../mixins/mapstyle'
 import { bancos } from '../../../mixins/bancos'
 import VueSimpleSuggest from 'vue-simple-suggest'
+import localMap from '~/components/localMap.vue'
 
 export default {
   components: { 
-    MaskedInput, VueSimpleSuggest
+    MaskedInput, VueSimpleSuggest, localMap
   },
-  mixins: [mapstyle, bancos],
+  mixins: [bancos],
   head () {
     return {
       title: 'Anunciar Acomodação em Capitólio ‒ Escarpas Trip'
@@ -756,7 +758,8 @@ export default {
       this.$store.commit('m_acomodPlace', place)
       this.$store.state.acomodData.positionLAT = this.$store.state.acomodPlace.geometry.location.lat()
       this.$store.state.acomodData.positionLNG = this.$store.state.acomodPlace.geometry.location.lng()
-      this.$store.state.acomodData.address = this.$store.state.acomodPlace.name
+      this.$store.state.acomodData.address = this.$store.state.acomodPlace.formatted_address
+      this.$modal.show('local-map-modal')
     },
     /* ******************** COMODIDADES ******************** */
     sliderRoupasCama () { this.$refs.sliderRoupasCama.click() },
@@ -1069,12 +1072,6 @@ export default {
   computed: {
     hash () {
       return this.$route.hash
-    },
-    markerUrl () {
-      return 'https://firebasestorage.googleapis.com/v0/b/escarpas-trip.appspot.com/o/utils%2Fmarker.svg?alt=media&token=fcbfd76e-ee93-41e8-a816-98906e19859b'
-    },
-    markerSize () {
-      return !this.$store.state.googleMapsInitialized ? null : new window.google.maps.Size(38, 38)
     },
     tipoAcomodText () {
       const path = this.$store.state.acomodData.tipoAcomod
