@@ -22,10 +22,11 @@
 
         <input
           v-if="$store.state.fromWithoutAddress == true"
+          ref="inputAddress"
           v-model="address"
           class="__input-address" 
           type="text" 
-          placeholder="E digite um complemento aqui..."
+          placeholder="E digite um comentário aqui..."
           maxlength="70"
           @focus="mapHeight = 60"
           @blur="mapHeight = 73"
@@ -37,7 +38,8 @@
         :center="{lat: $store.state.acomodData.positionLAT, lng: $store.state.acomodData.positionLNG}"
         :zoom="mapZoom"
         :options="mapOptions"
-        :style="mapStyle">
+        :style="mapStyle"
+        @dragstart="dragStart">
           <Gmap-Marker
             :draggable="true"
             :animation="4"
@@ -69,6 +71,9 @@ export default {
     }
   },
   methods: {
+    dragStart () {
+      this.$refs.inputAddress.blur()
+    },
     newPosition (e) {
       this.lat = e.latLng.lat()
       this.lng = e.latLng.lng()
