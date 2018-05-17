@@ -22,7 +22,7 @@
 
         <input
           v-if="$store.state.fromWithoutAddress == true"
-          v-model.lazy="$store.state.acomodData.address"
+          v-model="address"
           class="__input-address" 
           type="text" 
           placeholder="E digite um complemento aqui..."
@@ -58,6 +58,7 @@ export default {
   mixins: [mapstyle],
   data () {
     return {
+      address: '',
       lat: null,
       lng: null,
       titleHeight: null,
@@ -74,6 +75,7 @@ export default {
       this.$modal.hide('local-map-modal')
       this.$store.state.acomodData.positionLAT = this.lat
       this.$store.state.acomodData.positionLNG = this.lng
+      this.$store.state.acomodData.address = this.address
     }
   },
   computed: {
