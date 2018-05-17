@@ -124,7 +124,7 @@ export default {
       flex-flow: column;
       justify-content: center;
       width: 100%;
-      height: 25%;
+      height: 27%;
       padding: 0 7%;
       & .__title {
         padding-top: 1rem;
@@ -143,11 +143,11 @@ export default {
     }
     & .vue-map-container {
       width: 100%;
-      height: 75%;
+      height: 73%;
     }
     & .__confirm-btn {
       position: absolute;
-      bottom: 1.1rem;
+      bottom: .9rem;
       color: white;
       width: 11rem;
       height: 2.85rem;
