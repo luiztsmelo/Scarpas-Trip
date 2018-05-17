@@ -8,7 +8,7 @@
       
       <img class="__img-header" src="../../../assets/img/anuncio-acomod.svg">
        
-      <h1 class="__title">Amplie seus ganhos anunciando sua casa com a gente!</h1>
+      <h1 class="__title">Anuncie sua casa gratuitamente!</h1>
       
 
 
@@ -1386,14 +1386,18 @@ export default {
       text-align: center;
     }
     & .__anunciar-btn {
+      position: fixed;
+      bottom: 1rem;
+      left: 0;
+      right: 0;
+      margin: auto;
+      height: 3rem;
       color: white;
       width: 13rem;
       background: var(--colorAcomod);
-      height: 2.9rem;
       border-radius: 2rem;
       font-size: var(--fontSizeAnuncioText);
       font-weight: 600;
-      margin: 13rem 0 2rem 0;
       box-shadow: 3px 3px 20px 1px rgba(0,0,0,0.18);
     }
   }
@@ -1658,6 +1662,9 @@ export default {
     & .__title {
     }
     & .__anunciar-btn {
+      bottom: 2rem;
+      font-weight: 700;
+      width: 14rem;
     }
   }
   & .cadastro-acomodacao {

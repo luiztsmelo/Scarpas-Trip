@@ -39,7 +39,8 @@
         :zoom="mapZoom"
         :options="mapOptions"
         :style="mapStyle"
-        @click="clickMap">
+        @click="blurInput"
+        @dragstart="blurInput">
           <Gmap-Marker
             :draggable="true"
             :animation="4"
@@ -72,7 +73,7 @@ export default {
     }
   },
   methods: {
-    clickMap () {
+    blurInput () {
       this.isFocus == true ? this.$refs.inputAddress.blur() : ''
     },
     newPosition (e) {
