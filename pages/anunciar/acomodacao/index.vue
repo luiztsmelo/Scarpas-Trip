@@ -900,16 +900,7 @@ export default {
       }
     },
     concluir () {
-      const bankCode = this.$store.state.bankAccount.bankCode
-      const type = this.$store.state.bankAccount.type
-      const agencia = this.$store.state.bankAccount.agencia
-      const agenciaDV = this.$store.state.bankAccount.agenciaDV
-      const conta = this.$store.state.bankAccount.conta
-      const contaDV = this.$store.state.bankAccount.contaDV
-      const legalName = this.$store.state.bankAccount.legalName
-      const docNumber = this.$store.state.bankAccount.docNumber
-
-      if (bankCode !== '' && agencia !== '' && agenciaDV !== '' && conta !== '' && contaDV !== '' && legalName !== '' && docNumber.length === 14) {
+      if (this.bankCode !== '' && this.agencia !== '' && this.agenciaDV !== '' && this.conta !== '' && this.contaDV !== '' && this.legalName !== '' && this.docNumber.length === 14) {
         this.$store.commit('m_loader', true)
         const acomodID = Math.floor(Math.random() * (99999 - 10000 + 1) + 10000).toString()
         this.$store.commit('m_acomodID', acomodID)
@@ -924,14 +915,14 @@ export default {
             automatic_anticipation_enabled: true,
             anticipatable_volume_percentage: 100,
             bank_account: {
-              bank_code: bankCode.substring(0, 3),
-              type: type,
-              agencia: agencia,
-              agencia_dv: agenciaDV,
-              conta: conta,
-              conta_dv: contaDV,
-              legal_name: legalName,
-              document_number: docNumber.replace(/\./g, '').replace(/\-/g, '')
+              bank_code: this.bankCode.substring(0, 3),
+              type: this.type,
+              agencia: this.agencia,
+              agencia_dv: this.agenciaDV,
+              conta: this.conta,
+              conta_dv: this.contaDV,
+              legal_name: this.legalName,
+              document_number: this.docNumber.replace(/\./g, '').replace(/\-/g, '')
             }
           })
         )
@@ -1043,13 +1034,13 @@ export default {
           }
         })
       } else {
-        bankCode === '' ? this.bankCodeError = true : this.bankCodeError = false
-        agencia === '' ? this.agenciaError = true : this.agenciaError = false
-        agenciaDV === '' ?  this.agenciaDVError = true :  this.agenciaDVError = false
-        conta === '' ? this.contaError = true : this.contaError = false
-        contaDV === '' ? this.contaDVError = true : this.contaDVError = false
-        legalName === '' ? this.legalNameError = true : this.legalNameError = false
-        docNumber.length !== 14 ? this.docNumberError = true : this.docNumberError = false
+        this.bankCode === '' ? this.bankCodeError = true : this.bankCodeError = false
+        this.agencia === '' ? this.agenciaError = true : this.agenciaError = false
+        this.agenciaDV === '' ?  this.agenciaDVError = true :  this.agenciaDVError = false
+        this.conta === '' ? this.contaError = true : this.contaError = false
+        this.contaDV === '' ? this.contaDVError = true : this.contaDVError = false
+        this.legalName === '' ? this.legalNameError = true : this.legalNameError = false
+        this.docNumber.length !== 14 ? this.docNumberError = true : this.docNumberError = false
       }
     },
     ifUpload1 () {
@@ -1080,6 +1071,15 @@ export default {
     hash () {
       return this.$route.hash
     },
+    /* Bank Account Paths */
+    bankCode () { return this.$store.state.bankAccount.bankCode },
+    type () { return this.$store.state.bankAccount.type },
+    agencia () { return this.$store.state.bankAccount.agencia },
+    agenciaDV () { return this.$store.state.bankAccount.agenciaDV },
+    conta () { return this.$store.state.bankAccount.conta },
+    contaDV () { return this.$store.state.bankAccount.contaDV },
+    legalName () { return this.$store.state.bankAccount.legalName },
+    docNumber () { return this.$store.state.bankAccount.docNumber },
     tipoAcomodText () {
       const path = this.$store.state.acomodData.tipoAcomod
       return path === 'Casa' ? 'da sua casa' 
@@ -1164,14 +1164,7 @@ export default {
       return this.$store.state.acomodData.celular.length === 15 ? 'background:#FFA04F' : ''
     },
     form11ok () {
-      const bankCode = this.$store.state.bankAccount.bankCode
-      const agencia = this.$store.state.bankAccount.agencia
-      const agenciaDV = this.$store.state.bankAccount.agenciaDV
-      const conta = this.$store.state.bankAccount.conta
-      const contaDV = this.$store.state.bankAccount.contaDV
-      const legalName = this.$store.state.bankAccount.legalName
-      const docNumber = this.$store.state.bankAccount.docNumber
-      return bankCode !== null && agencia !== '' && agenciaDV !== '' && conta !== '' && contaDV !== '' && legalName !== '' && docNumber.length === 14 ? 'background:#FFA04F' : ''
+      return this.bankCode !== null && this.agencia !== '' && this.agenciaDV !== '' && this.conta !== '' && this.contaDV !== '' && this.legalName !== '' && this.docNumber.length === 14 ? 'background:#FFA04F' : ''
     },
     acomodCreated () {
       return this.$store.state.acomodCreated
@@ -1183,6 +1176,13 @@ export default {
         this.$router.push('/')
       }
     },
+    bankCode (value) { value !== '' ? this.bankCodeError = false : '' },
+    agencia (value) { value !== '' ? this.agenciaError = false : '' },
+    agenciaDV (value) { value !== '' ? this.agenciaDVError = false : '' },
+    conta (value) { value !== '' ? this.contaError = false : '' },
+    contaDV (value) { value !== '' ? this.contaDVError = false : '' },
+    legalName (value) { value !== '' ? this.legalNameError = false : '' },
+    docNumber (value) { value !== '' ? this.docNumberError = false : ''},
     hash (value) {
       if (value === '') {
         this.$store.commit('m_cadastroAcomod0', true)
@@ -1475,7 +1475,7 @@ export default {
       z-index: 999;
       font-size: var(--fontSizeAnuncioText);
       font-weight: 600;
-      color: rgb(102, 102, 102);
+      color: rgb(92, 92, 92);
     }
     & .item-form {
       padding: 0 7%;

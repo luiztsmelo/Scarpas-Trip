@@ -130,7 +130,7 @@ export default {
     }
     & .__confirm-btn {
       position: absolute;
-      bottom: 1.2rem;
+      bottom: 1.1rem;
       color: white;
       width: 11rem;
       height: 2.85rem;
@@ -138,8 +138,13 @@ export default {
       border-radius: 100px;
       font-size: 16px;
       font-weight: 600;
-      box-shadow: 3px 3px 20px 1px rgba(0,0,0,0.18);
     }
+  }
+}
+
+@media (max-width: 425px) {
+  .v--modal {
+    border-radius: 0 !important;
   }
 }
 
@@ -174,16 +179,8 @@ export default {
         height: 71vh;
       }
       & .__confirm-btn {
-        position: absolute;
-        bottom: 1.2rem;
-        color: white;
-        width: 11rem;
-        height: 2.85rem;
-        background: rgb(42, 42, 42);
-        border-radius: 100px;
         font-size: 16px;
         font-weight: 600;
-        box-shadow: 3px 3px 20px 1px rgba(0,0,0,0.18);
       }
     }
   }
