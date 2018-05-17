@@ -19,6 +19,15 @@
         <h3 class="__subtitle" ref="subtitle">
           {{ $store.state.fromWithoutAddress == false ? 'Mova-o caso ache necessário' : '' }}
         </h3>
+
+        <input
+          v-if="$store.state.fromWithoutAddress == true"
+          v-model.lazy="$store.state.acomodData.address"
+          class="__input-address" 
+          type="text" 
+          placeholder="E digite um complemento aqui..."
+          maxlength="70"
+        >
       </div>
       
       <gmap-map
@@ -26,12 +35,12 @@
         :zoom="mapZoom"
         :options="mapOptions">
           <Gmap-Marker
-          :draggable="true"
-          :animation="4"
-          @dragend="newPosition"
-          :position="{lat: $store.state.acomodData.positionLAT, lng: $store.state.acomodData.positionLNG}"
-          :icon="{url: markerUrl, scaledSize: markerSize}"
-          ></Gmap-Marker>
+            :draggable="true"
+            :animation="4"
+            @dragend="newPosition"
+            :position="{lat: $store.state.acomodData.positionLAT, lng: $store.state.acomodData.positionLNG}"
+            :icon="{url: markerUrl, scaledSize: markerSize}">
+          </Gmap-Marker>
       </gmap-map>
 
       <button class="__confirm-btn" type="button" @click="confirmar">Confirmar</button>
@@ -123,6 +132,12 @@ export default {
         padding-top: .5rem;
         font-size: 17px;
       }
+      & .__input-address {
+        cursor: text;
+        border: none;
+        outline: none;
+        width: 100%;
+      }
     }
     & .vue-map-container {
       width: 100%;
@@ -172,6 +187,14 @@ export default {
         }
         & .__subtitle {
           font-size: 17px;
+        }
+        & .__input-address {
+          margin: 0 7%;
+          cursor: text;
+          border: none;
+          outline: none;
+          width: 100%;
+          text-align: center;
         }
       }
       & .vue-map-container {

@@ -834,7 +834,7 @@ export default {
       }
     },
     nextBtn5 () {
-      if (this.$store.state.acomodPlace !== null) {
+      if (this.$store.state.acomodPlace !== null || this.$store.state.acomodData.positionLAT !== -20.6141320) {
         this.$store.commit('m_cadastroAcomod5', false), this.$store.commit('m_cadastroAcomod6', true), this.$store.commit('m_acomodProgressBar', (100/11)*6), this.scrollTop(), window.location.hash = "imagens"
       } else {
         this.$modal.show('dialog', {
@@ -1146,7 +1146,7 @@ export default {
       return 1<2 ? 'background:#FFA04F' : ''
     },
     form5ok () {
-      return this.$store.state.acomodPlace !== null ? 'background:#FFA04F' : ''
+      return this.$store.state.acomodPlace !== null || this.$store.state.acomodData.positionLAT !== -20.6141320 ? 'background:#FFA04F' : ''
     },
     form6ok () {
       return this.imageURL1 !== null ? 'background:#FFA04F' : ''
