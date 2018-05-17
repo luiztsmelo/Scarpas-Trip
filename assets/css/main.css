@@ -173,22 +173,12 @@ textarea {
     line-height: 29px;
   }
 }
-@media (max-width: 375px) {
-  .v--modal-box, .v--modal, .vue-dialog {
-    width: 86% !important;
-    margin: 0 7% !important;
-  }
-}
 
 .v--modal {
-  margin: 0 !important;
   border-radius: 6px !important;
 }
-.v--modal-box {
-  margin: 0 !important;
-}
 .v--modal-overlay {
-  background: rgba(0, 0, 0, .14);
+  background: rgba(0, 0, 0, .14) !important; 
 }
 .dialog-c-title {
   color: var(--color01) !important;
@@ -199,12 +189,12 @@ textarea {
   color: var(--color01) !important;
   font-size: 15px !important;
   line-height: 25px !important;
-  padding-bottom: .4rem !important;
+  padding-bottom: .5rem !important;
 }
 .vue-dialog-button {
   color: var(--color01) !important;
-  font-size: 15px !important;
-  font-weight: 500 !important;
+  font-size: 14px !important;
+  font-weight: 600 !important;
 }
 
 .has-error {

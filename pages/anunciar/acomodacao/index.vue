@@ -837,12 +837,11 @@ export default {
       if (this.$store.state.acomodPlace !== null) {
         this.$store.commit('m_cadastroAcomod5', false), this.$store.commit('m_cadastroAcomod6', true), this.$store.commit('m_acomodProgressBar', (100/11)*6), this.scrollTop(), window.location.hash = "imagens"
       } else {
-        let text = 'Adicione um endereço.'
-        if (this.$store.state.isMobile === true) {
-          alert(text)
-        } else {
-          this.$modal.show('dialog', { text, buttons: [{ title: 'Ok' }] })
-        }
+        this.$modal.show('dialog', {
+          title: 'Ops',
+          text: 'Adicione um endereço.',
+          buttons: [{ title: 'OK' }]
+        })
       }
     },
     nextBtn6 () {
@@ -850,8 +849,9 @@ export default {
         this.$store.commit('m_cadastroAcomod6', false), this.$store.commit('m_cadastroAcomod7', true), this.$store.commit('m_acomodProgressBar', (100/11)*7), this.scrollTop(), window.location.hash = "valor"
       } else {
         this.$modal.show('dialog', {
+          title: 'Ops',
           text: 'Adicione pelo menos uma imagem.',
-          buttons: [{ title: 'Ok' }]
+          buttons: [{ title: 'OK' }]
         })
       }
     },
@@ -865,8 +865,9 @@ export default {
         this.$store.commit('m_cadastroAcomod8', false), this.$store.commit('m_cadastroAcomod9', true), this.$store.commit('m_acomodProgressBar', (100/11)*9), this.scrollTop(), window.location.hash = "subtitulo"
       } else {
         this.$modal.show('dialog', {
+          title: 'Ops',
           text: 'Adicione um título.',
-          buttons: [{ title: 'Ok' }]
+          buttons: [{ title: 'OK' }]
         })
       }
     },
@@ -875,8 +876,9 @@ export default {
         this.$store.commit('m_cadastroAcomod9', false), this.$store.commit('m_cadastroAcomod10', true), this.$store.commit('m_acomodProgressBar', (100/11)*10), this.scrollTop(), window.location.hash = "identificacao"
       } else {
         this.$modal.show('dialog', {
+          title: 'Ops',
           text: 'Adicione um subtítulo.',
-          buttons: [{ title: 'Ok' }]
+          buttons: [{ title: 'OK' }]
         })
       }
     },
@@ -891,8 +893,9 @@ export default {
         this.$store.commit('m_cadastroAcomod10', false), this.$store.commit('m_cadastroAcomod11', true), this.$store.commit('m_acomodProgressBar', (100/11)*11), this.scrollTop(), window.location.hash = "dados"
       } else {
         this.$modal.show('dialog', {
+          title: 'Ops',
           text: 'Adicione pelo menos um número de celular.',
-          buttons: [{ title: 'Ok' }]
+          buttons: [{ title: 'OK' }]
         })
       }
     },
@@ -1530,7 +1533,7 @@ export default {
       margin: 0 7%;
       font-size: 16px;
       font-weight: 500;
-      transform: translateY(-1.7rem);
+      transform: translateY(-1.2rem);
       color: #006561;
     }
     & .recebedor-box {
@@ -1751,6 +1754,7 @@ export default {
     }
     & .without-address {
       margin: 0 23%;
+      transform: translateY(-1.7rem);
     }
     & .recebedor-box {
     }

@@ -143,16 +143,6 @@ export default {
   }
 }
 
-@media (max-width: 375px) {
-  .v--modal-box, .v--modal, .vue-dialog {
-    width: 100% !important;
-    margin: 0 !important;
-  }
-  .v--modal {
-    border-radius: 0 !important;
-  }
-}
-
 @media (min-width: 1024px) {
   .local-map-modal {
     & .local-map-body {
