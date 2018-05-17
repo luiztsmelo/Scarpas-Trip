@@ -1381,7 +1381,7 @@ export default {
     }
     & .__title {
       font-size: 28px;
-      font-weight: 500;
+      font-weight: 700;
       padding: 0 7%;
       text-align: center;
     }
@@ -1389,11 +1389,11 @@ export default {
       color: white;
       width: 13rem;
       background: var(--colorAcomod);
-      height: 2.85rem;
+      height: 2.9rem;
       border-radius: 2rem;
       font-size: var(--fontSizeAnuncioText);
       font-weight: 600;
-      margin: 3rem 0 2rem 0;
+      margin: 13rem 0 2rem 0;
       box-shadow: 3px 3px 20px 1px rgba(0,0,0,0.18);
     }
   }
