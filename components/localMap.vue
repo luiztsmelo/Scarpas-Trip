@@ -27,13 +27,17 @@
           type="text" 
           placeholder="E digite um complemento aqui..."
           maxlength="70"
+          @focus="mapHeight = 60"
+          @blur="mapHeight = 73"
         >
       </div>
       
       <gmap-map
+        ref="map"
         :center="{lat: $store.state.acomodData.positionLAT, lng: $store.state.acomodData.positionLNG}"
         :zoom="mapZoom"
-        :options="mapOptions">
+        :options="mapOptions"
+        :style="mapStyle">
           <Gmap-Marker
             :draggable="true"
             :animation="4"
@@ -61,9 +65,7 @@ export default {
       address: '',
       lat: null,
       lng: null,
-      titleHeight: null,
-      subtitleHeight: null,
-      titlesHeight: 400
+      mapHeight: 73
     }
   },
   methods: {
@@ -79,6 +81,12 @@ export default {
     }
   },
   computed: {
+    mapStyle () {
+      if (this.$store.state.isMobile == true) {
+        return 'height:' + this.mapHeight + '%'
+      }
+      
+    },
     mapOptions () {
       return {
         styles: this.styles,
@@ -110,6 +118,7 @@ export default {
     display: flex;
     flex-flow: column;
     align-items: center;
+    justify-content: space-between;
     height: 100%;
     & .close-btn {
       cursor: pointer;
@@ -142,8 +151,8 @@ export default {
       }
     }
     & .vue-map-container {
+      transition: .3s all ease;
       width: 100%;
-      height: 73%;
     }
     & .__confirm-btn {
       position: absolute;
@@ -151,7 +160,7 @@ export default {
       color: white;
       width: 11rem;
       height: 2.85rem;
-      background: rgb(42, 42, 42);
+      background: var(--color01);
       border-radius: 100px;
       font-size: 16px;
       font-weight: 600;
@@ -200,7 +209,6 @@ export default {
         }
       }
       & .vue-map-container {
-        width: 100%;
         height: 71vh;
       }
       & .__confirm-btn {
