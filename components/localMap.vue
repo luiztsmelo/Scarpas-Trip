@@ -28,8 +28,8 @@
           type="text" 
           placeholder="E digite um comentário aqui..."
           maxlength="70"
-          @focus="mapHeight = 60"
-          @blur="mapHeight = 73"
+          @focus="mapHeight = 60, isFocus = true"
+          @blur="mapHeight = 73, isFocus = false"
         >
       </div>
       
@@ -67,12 +67,13 @@ export default {
       address: '',
       lat: null,
       lng: null,
-      mapHeight: 73
+      mapHeight: 73,
+      isFocus: false
     }
   },
   methods: {
     dragStart () {
-      this.$refs.inputAddress.blur()
+      this.isFocus == true ? this.$refs.inputAddress.blur() : ''
     },
     newPosition (e) {
       this.lat = e.latLng.lat()
