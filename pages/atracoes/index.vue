@@ -94,7 +94,7 @@ export default {
 @import url('../../assets/css/pagination.css');
 
 .atracoes {
-  margin: 3.2rem 0 5.2rem 0;
+  margin: 3.4rem 0 5.4rem 0;
   display: flex;
   flex-flow: column;
   transition: all .2s ease-in-out;

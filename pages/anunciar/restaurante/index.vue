@@ -53,13 +53,13 @@ export default {
 @import url('../../../assets/css/main.css');
 
 .anunciar-restaurante {
-  margin-top: 3.2rem;
+  margin-top: 3.4rem;
   background: #feb47b;
   color: white;
   transition: var(--main-transition);
   & .progress-bar {
     position: fixed;
-    top: 3.2rem;
+    top: 3.4rem;
     height: 3px;
     z-index: 8888;
     background: linear-gradient(80deg, #feb47b, #ff7e5f);

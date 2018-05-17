@@ -215,14 +215,14 @@ export default {
 @import url('../assets/css/main.css');
 
 .home {
-  margin-top: 3.2rem;
+  margin-top: 3.4rem;
   display: flex;
   flex-flow: column;
   transition: var(--main-transition);
   & .home-body {
     display: flex;
     flex-flow: column;
-    margin-bottom: 5.2rem;
+    margin-bottom: 5.4rem;
     & .category-container {
       padding: 2.3rem 0;
       display: flex;

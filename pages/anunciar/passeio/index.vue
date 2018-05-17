@@ -694,13 +694,13 @@ export default {
 @import url('../../../assets/css/main.css');
 
 .anunciar-passeio {
-  margin-top: 3.2rem;
+  margin-top: 3.4rem;
   background: #198CFE;
   color: white;
   transition: var(--main-transition);
   & .progress-bar {
     position: fixed;
-    top: 3.2rem;
+    top: 3.4rem;
     height: 3px;
     z-index: 8888;
     background: #198CFE;

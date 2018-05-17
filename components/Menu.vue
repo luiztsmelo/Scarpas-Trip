@@ -96,7 +96,7 @@ export default {
   z-index: 9998;
   width:  100%;
   height: 100%;
-  top: 3.2rem;
+  top: 3.4rem;
   background: white;
   overflow: hidden;
   transition: var(--main-transition);

@@ -304,7 +304,7 @@ export default {
 @import url('../../node_modules/vue-multiselect/dist/vue-multiselect.min.css');
 
 .acomods {
-  margin: 3.2rem 0 5.2rem 0;
+  margin: 3.4rem 0 5.4rem 0;
   display: flex;
   flex-flow: column;
   transition: var(--main-transition);

@@ -50,7 +50,7 @@ export default {
 @import url('../../assets/css/main.css');
 
 .login {
-  margin-top: 3.2rem;
+  margin-top: 3.4rem;
   display: flex;
   flex-flow: column;
   align-items: center;

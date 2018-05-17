@@ -118,7 +118,7 @@ export default {
 @import url('../assets/css/main.css');
 
 .profile {
-  margin: 3.2rem 0 5rem 0;
+  margin: 3.4rem 0 5rem 0;
   display: flex;
   flex-flow: column;
   transition: var(--main-transition);

@@ -114,7 +114,7 @@ export default {
   top: 0;
   left: 0;
   z-index: 9997;
-  height: 3.2rem;
+  height: 3.4rem;
   width:  100%;
   background: white;
   transition: var(--main-transition);
@@ -131,7 +131,7 @@ export default {
       display: flex;
       align-items: center;
       & .__brand-img {
-        width: 1.8rem;
+        width: 1.85rem;
         height: auto;
         margin-right: .5rem;
       }
@@ -139,7 +139,7 @@ export default {
         font-family: var(--main-font);
         font-size: 18px;
         font-weight: 500;
-        line-height: 3.3rem;
+        line-height: 3.5rem;
         user-select: none;
       }
     }

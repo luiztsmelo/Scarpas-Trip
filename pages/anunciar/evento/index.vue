@@ -576,13 +576,13 @@ export default {
 @import url('../../../assets/css/illustrations.css');
 
 .anunciar-evento {
-  margin-top: 3.2rem;
+  margin-top: 3.4rem;
   background: #FF7D6C;
   color: white;
   transition: var(--main-transition);
   & .progress-bar {
     position: fixed;
-    top: 3.2rem;
+    top: 3.4rem;
     height: 3px;
     z-index: 8888;
     background: #FF7D6C;

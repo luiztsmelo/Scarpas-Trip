@@ -106,7 +106,7 @@ export default {
 
 .roteiro-home {
   width: 100%;
-  height: 10rem;
+  height: 11rem;
   background-image: url('../assets/img/bgimg.jpg');
   background-repeat: no-repeat;
   background-size: cover;
@@ -203,7 +203,7 @@ export default {
       & .chegada-partida-box {
         margin: 0 7%;
         width: 27%;
-        height: 3.2rem;
+        height: 3.4rem;
         border-bottom: 2px solid white;
         & .chegada-partida-input {
           position: relative;

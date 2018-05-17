@@ -33,12 +33,12 @@ export default {
 @import url('../../assets/css/main.css');
 
 .roteiro {
-  margin-top: 3.2rem;
+  margin-top: 3.4rem;
   display: flex;
   flex-flow: column;
   background: linear-gradient(40deg, #93EDC7, #00CFC7);
   color: white;
-  height: calc(100vh - 3.2rem);
+  height: calc(100vh - 3.4rem);
   transition: var(--main-transition);
   & .roteiro-header {
     display: flex;
