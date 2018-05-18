@@ -24,7 +24,7 @@
       <div class="follow">
         <a href="https://www.instagram.com/escarpastrip/"><img class="__img-follow" src="../assets/img/instagram.svg"></a>
         <a href="https://www.facebook.com/escarpastrip/"><img class="__img-follow" src="../assets/img/facebookb.svg"></a>
-        <a href=""><img class="__img-follow" src="../assets/img/pinterest.svg" style="transform: scale(.98)"></a>
+        <!-- <a href=""><img class="__img-follow" src="../assets/img/pinterest.svg" style="transform: scale(.98)"></a> -->
       </div>
 
       <div class="imgs-payment">
@@ -46,7 +46,7 @@
     </div>
 
     <h3 class="copyright">
-      Copyright &copy {{ new Date().getFullYear() }} Escarpas Trip. Todos os direitos reservados. CNPJ: 99.999.999/9999-99. Capitólio/MG - Brasil. Desenvolvido com ♥ por TMstudio.
+      &copy {{ new Date().getFullYear() }} Escarpas Trip. Todos os direitos reservados. CNPJ: 99.999.999/9999-99. Capitólio/MG - Brasil. Desenvolvido por TMstudio.
     </h3>
 
   </div>
@@ -65,12 +65,10 @@ export default {
   display: flex;
   margin-top: 4.3rem;
   width: 100%;
-  height: 19rem;
-  border-top: 1px solid rgb(222,222,222);
-  /* background: #EAEAEC; */
+  height: 18rem;
   padding: 3.2rem 7%;
   & .__img {
-    width: 5.5rem;
+    width: 5.3rem;
     height: auto;
     margin-right: 2.5rem;
     align-self: flex-start;
@@ -79,19 +77,19 @@ export default {
   & .box {
     margin: 0 2.2rem;
     & .__title {
-      font-size: 16px;
+      font-size: 15px;
       padding-bottom: .5rem;
 
     }
     & .__subtitle {
-      font-size: 15px;
+      font-size: 14px;
       line-height: 25px;
     }
     & .trust {
       display: flex;
       align-items: center;
       & .__img-lock {
-        width: 2.1rem;
+        width: 2rem;
         height: auto;
         margin-right: .5rem;
 
@@ -116,7 +114,7 @@ export default {
       margin: 1.2rem 0;
       transform: translateX(-0.3rem);
       & .__img-payment {
-        width: 2.5rem;
+        width: 2.4rem;
         height: auto;
         margin-right: .6rem;
       }
@@ -125,7 +123,7 @@ export default {
       display: flex;
       align-items: center;
       & .__img-follow {
-        width: 1.6rem;
+        width: 1.5rem;
         height: auto;
         margin-right: 1.8rem;
 

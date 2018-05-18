@@ -34,24 +34,40 @@
             <li class="__nav-item">Restaurantes</li>
           </nuxt-link>
           
-          <nuxt-link to="/anunciar" v-if="$store.state.user.email === null">
-            <li class="__nav-item">Anunciar</li>
-          </nuxt-link>
+          <li class="__nav-item-no-a" @click="anuncioDropdown = !anuncioDropdown">Anunciar</li>
 
-          <li class="__sign-in" @click="$modal.show('sign-in-modal')" v-if="$store.state.user.email === null">Login</li>
+          <li class="__nav-item-no-a" @click="$modal.show('sign-in-modal')" v-if="$store.state.user.email === null">Login</li>
 
           <li><img class="__user-img" :src="$store.state.user.photoURL" :alt="$store.state.user.fullName" @click="userBox = !userBox" v-if="$store.state.user.email !== null"></li>
 
         </nav>
 
-        <div class="user-box" v-show="userBox === true" @click="userBox = !userBox">
-          <div class="user-box-body">
+        <div class="dropdown" v-show="userBox === true" @click="userBox = !userBox">
+          <div class="dropdown-body" style="right: 7%">
             <ul>
               <li>Editar perfil</li>
-              <li>Anunciar</li>
               <li>Meus anúncios</li>
               <li>Minhas reservas</li>
               <li @click="signOut()">Sair</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="dropdown" v-show="anuncioDropdown === true" @click="anuncioDropdown = !anuncioDropdown">
+          <div class="dropdown-body" style="right: 11%">
+            <ul>
+              <nuxt-link to="/anunciar/acomodacao">
+                <li class="__nav-item">Acomodação</li>
+              </nuxt-link>
+              <nuxt-link to="/anunciar/passeio">
+                <li class="__nav-item">Passeio</li>
+              </nuxt-link>
+              <nuxt-link to="/anunciar/evento">
+                <li class="__nav-item">Evento</li>
+              </nuxt-link>
+              <nuxt-link to="/anunciar/restaurante">
+                <li class="__nav-item">Restaurante</li>
+              </nuxt-link>
             </ul>
           </div>
         </div>
@@ -65,7 +81,8 @@
 export default {
   data() {
     return {
-      userBox: false
+      userBox: false,
+      anuncioDropdown: false
     }
   },
   methods: {
@@ -172,25 +189,25 @@ export default {
       transform: translateX(.6rem);
       align-items: center;
       & a {
-        margin: 0 .8rem;
+        padding: 0 .8rem;
       }
       & a:hover {
-        border-bottom: 1px solid var(--color01);
+        color: rgb(162, 162, 162);
       }
       & .__nav-item {
         font-size: 14px;
         font-weight: 600;
         user-select: none;
       }
-      & .__sign-in {
-        margin: 0 .8rem;
+      & .__nav-item-no-a {
+        padding: 0 .8rem;
         cursor: pointer;
         font-size: 14px;
         font-weight: 600;
         user-select: none;
       }
-      & .__sign-in:hover {
-        border-bottom: 1px solid var(--color01);
+      & .__nav-item-no-a:hover {
+        color: rgb(162, 162, 162);
       }
       & .__user-img {
         cursor: pointer;
@@ -200,7 +217,7 @@ export default {
         border-radius: 50%;
       }
     }
-    & .user-box {
+    & .dropdown {
       position: fixed;
       z-index: 10000;
       top: 0;
@@ -208,22 +225,24 @@ export default {
       width:  100%;
       height: 100%;
       background: transparent;
-      & .user-box-body {
+      & .dropdown-body {
         position: fixed;
         top: 4rem;
-        right: 7%;
         background: white;
         width: auto;
         height: auto;
         box-shadow: 1px 1px 5px 0px rgba(0,0,0,0.2);
         & ul {
-          padding: .6rem 1.3rem;
+          padding: .7rem 1.4rem .7rem 1.1rem;
           & li {
-            padding: .7rem 0;
+            padding: .8rem 0;
             cursor: pointer;
             font-size: 14px;
-            font-weight: 500;
+            font-weight: 600;
             user-select: none;
+          }
+          & li:hover {
+            color: rgb(162, 162, 162);
           }
         }
       }

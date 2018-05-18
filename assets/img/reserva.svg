@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px" viewBox="0 0 496 496" style="enable-background:new 0 0 496 496;" xml:space="preserve" width="512px" height="512px" class=""><g><g><path style="fill:#FFFFFF" d="M328,328l-24-32V48c0-13.256,10.744-24,24-24l0,0c13.256,0,24,10.744,24,24v248L328,328z" data-original="#81C784" class="active-path" data-old_color="#ffffff"/><g>
+	<rect x="80" y="232" style="fill:#3E3E3E" width="144" height="16" data-original="#3E3E3E" class="" data-old_color="#3e3e3e"/>
+	<rect x="80" y="200" style="fill:#3E3E3E" width="144" height="16" data-original="#3E3E3E" class="" data-old_color="#3e3e3e"/>
+	<rect x="80" y="168" style="fill:#3E3E3E" width="144" height="16" data-original="#3E3E3E" class="" data-old_color="#3e3e3e"/>
+	<rect x="80" y="136" style="fill:#3E3E3E" width="144" height="16" data-original="#3E3E3E" class="" data-old_color="#3e3e3e"/>
+</g><g>
+	<path style="fill:#3E3E3E" d="M448,88h-40v16h24v288H256V104h24V88H48v320h400V88z M64,104h176v288H64V104z" data-original="#3E3E3E" class="" data-old_color="#3e3e3e"/>
+	<path style="fill:#3E3E3E" d="M464,160v16h16v264H280v8c0,17.648-14.352,32-32,32s-32-14.352-32-32v-8H16V176h16v-16H0v296   h200.664c3.824,22.672,23.592,40,47.336,40s43.512-17.328,47.336-40H496V160H464z" data-original="#3E3E3E" class="" data-old_color="#3e3e3e"/>
+	<path style="fill:#3E3E3E" d="M360,298.664V64h8c4.416,0,8,3.584,8,8v152h16V72c0-13.232-10.768-24-24-24h-8   c0-14.872-10.232-27.288-24-30.864V0h-16v17.136C306.232,20.712,296,33.128,296,48v250.664l32,42.672L360,298.664z M328,32   c8.824,0,16,7.176,16,16v80h-32V48C312,39.176,319.176,32,328,32z M312,144h32v149.336l-16,21.328l-16-21.328V144z" data-original="#3E3E3E" class="" data-old_color="#3e3e3e"/>
+	<rect x="272" y="360" style="fill:#3E3E3E" width="112" height="16" data-original="#3E3E3E" class="" data-old_color="#3e3e3e"/>
+	<path style="fill:#3E3E3E" d="M104,272v80h96v-80H104z M184,336h-64v-48h64V336z" data-original="#3E3E3E" class="" data-old_color="#3e3e3e"/>
+	<rect x="400" y="360" style="fill:#3E3E3E" width="16" height="16" data-original="#3E3E3E" class="" data-old_color="#3e3e3e"/>
+</g></g></g> </svg>
