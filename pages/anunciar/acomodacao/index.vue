@@ -3,19 +3,32 @@
 
     <v-dialog style="z-index:10000"/>
 
-    <!-- PLANO ACOMODAÇÃO -->
-    <div class="plano-acomodacao" v-show="$store.state.cadastroAcomod0">
+    <!-- PLANO ACOMODAÇÃO MOBILE -->
+    <div class="plano-acomodacao-mobile" v-show="$store.state.cadastroAcomod0">
       
       <img class="__img-header" src="../../../assets/img/anuncio-acomod.svg">
-       
-      <h1 class="__title">Anuncie sua casa gratuitamente!</h1>
       
-
-
-
+      <h1 class="__title">Anuncie sua casa, é gratuito!</h1>
+      
       <button class="__anunciar-btn" @click="$store.commit('m_cadastroAcomod1', true), $store.commit('m_cadastroAcomod0', false), $store.commit('m_acomodProgressBar', (100/11)), hashAcomod()">Anunciar</button>
 
-    </div><!-- PLANO ACOMODAÇÃO -->
+    </div><!-- PLANO ACOMODAÇÃO MOBILE -->
+
+
+    <!-- PLANO ACOMODAÇÃO DESKTOP -->
+    <div class="plano-acomodacao-desktop" v-show="$store.state.cadastroAcomod0">
+      
+      
+
+      <div class="flex1">
+        <h1 class="__title">Anuncie sua casa, é gratuito!</h1>
+        
+        <button class="__anunciar-btn" @click="$store.commit('m_cadastroAcomod1', true), $store.commit('m_cadastroAcomod0', false), $store.commit('m_acomodProgressBar', (100/11)), hashAcomod()">Anunciar</button>
+      </div>
+
+      <img class="__img-header" src="../../../assets/img/anuncio-acomod.svg">
+
+    </div><!-- PLANO ACOMODAÇÃO DESKTOP -->
 
 
 
@@ -353,12 +366,12 @@
         </div>
         
         <div class="image-box">
-          <img src="./../../../assets/img/add-image.svg" class="__preview-img" v-if="imageURL2 === null" @click="$refs.myCroppa2.chooseFile()" style="padding:23%">
+          <img src="./../../../assets/img/add-image.svg" class="__preview-img" v-if="imageURL2 === null" @click="$refs.myCroppa2.chooseFile()" style="padding:24%">
           <img :src="imageURL2" class="__preview-img" @click="showCroppaModal2=true" v-else>
         </div>
 
         <div class="image-box" v-if="imageURL2 !== null">
-          <img src="./../../../assets/img/add-image.svg" class="__preview-img" v-if="imageURL3 === null" @click="$refs.myCroppa3.chooseFile()" style="padding:23%">
+          <img src="./../../../assets/img/add-image.svg" class="__preview-img" v-if="imageURL3 === null" @click="$refs.myCroppa3.chooseFile()" style="padding:24%">
           <img :src="imageURL3" class="__preview-img" @click="showCroppaModal3=true" v-else>
         </div>
 
@@ -1370,7 +1383,7 @@ export default {
     transition: all .3s ease;
   }
   /* ******************** PLANO ACOMODAÇÃO ******************** */
-  & .plano-acomodacao {
+  & .plano-acomodacao-mobile {
     display: flex;
     flex-flow: column;
     align-items: center;
@@ -1400,6 +1413,9 @@ export default {
       font-weight: 600;
       box-shadow: 3px 3px 20px 1px rgba(0,0,0,0.18);
     }
+  }
+  & .plano-acomodacao-desktop {
+    display: none;
   }
   /* ******************** CADASTRO ACOMODAÇÃO ******************** */
   & .cadastro-acomodacao {
@@ -1655,146 +1671,166 @@ export default {
       top: 4rem;
       height: 6px;
     }
-    & .plano-acomodacao {
-    & .__img-header {
-      width: 7rem;
+    & .plano-acomodacao-mobile {
+      display: none;
     }
-    & .__title {
-    }
-    & .__anunciar-btn {
-      bottom: 2rem;
-      font-weight: 700;
-      width: 14rem;
-    }
-  }
-  & .cadastro-acomodacao {
-    padding: 0 0 7rem 0;
-    & .__form-title {
-      padding: 3rem 23% 1.1rem;
-      font-size: 32px;
-      text-align: center;
-    }
-    & .__form-subtitle {
-      padding: 1.4rem 23% 0;
-      font-size: 17px;
-    }
-    & textarea {
-      padding: 0 23%;
-      margin: 1.4rem 0 .6rem 0;
-    }
-    & .__lenght-calc {
-      padding: 0 23%;
-    }
-    & .item-form {
-      padding: 0 23%;
-      margin: 2.3rem 0;
-      & label {
-        font-size: 16px;
-      }
-      & input {
-        font-size: 17px;
-        font-weight: 400;
-        padding: .5rem 0 .6rem 0;
-      }
-      & select {
-        font-size: 17px;
-        font-weight: 400;
-        padding: .5rem 0 .6rem 0;
-      }
-    }
-    & .comodidades-box {
-      padding: .6rem 23% 0;
-      & .item-form-switches {
-        padding: 1.4rem 0;
-        & h3 {
-        }
-      }
-    }
-    & .without-address {
-      margin: 0 23%;
-      transform: translateY(-1.7rem);
-    }
-    & .recebedor-box {
-    }
-    & .modal-croppa {
-      & .modal-croppa-body {
-        & h1 {
-        }
-        & canvas {
-          border: 3px dashed white;
-        }
-        & .modal-croppa-btns {
-          width: 50%
-        }
-      }
-    }
-    & .before-choose-image {
+    & .plano-acomodacao-desktop {
+      padding: 0 7%;
       display: flex;
-      flex-flow: column;
-      align-items: center;
-      & .__input-btn {
-        margin: 2rem 0 0 0;
-      }
-    }
-    & .__croppa-btn {
-    }
-    & .after-choose-image {
-      margin-top: 2rem;
-      padding: 0 calc(23% - .3rem);
-      & .image-box {
-        width: 165px;
-        height: 110px;
-        & .__foto-principal {
-        }
-        & .__preview-img {
-        }
-      }
-    }
-    & .signin-btns {
-      padding: .8rem 40% 0;
-      & .facebook-btn {
-        width: 100%;
-      }
-      & .google-btn {
-        width: 100%;
-      }
-      & .email-btn {
-        width: 100%;
-      }
-    }
-    & .back-next {
-      position: fixed;
-      z-index: 3;
-      bottom: 2rem;
-      left: 0;
-      right: 0;
-      margin: auto;
-      height: 2.85rem;
-      width: 25%;
-      background: white;
-      box-shadow: 3px 3px 20px 1px rgba(0,0,0,0.18);
-      border-radius: 2rem;
-      & .back-next-body {
-        display: flex;
-        align-items: center;
-        & button {
-          width: 50%;
-          height: 2.85rem;
-        }
-        & .__back {
-          font-size: 17px;
-          font-weight: 500;
-          border-radius: 2rem 0 0 2rem;
-          cursor: pointer;
-          background: white;
-        }
-        & .__next {
-          font-size: 17px;
+      height: calc(100vh - 4rem);
+      & .flex1 {
+        padding: 6rem 0 0 0;
+        flex: 66%;
+        & .__title {
+          font-size: 38px;
           font-weight: 600;
         }
+        & .__anunciar-btn {
+          margin-top: 5rem;
+          font-weight: 700;
+          width: 13rem;
+          height: 3rem;
+          color: white;
+          background: var(--colorAcomod);
+          border-radius: 2rem;
+          font-size: var(--fontSizeAnuncioText);
+        }
+      }
+      & .__img-header {
+        flex: 34%;
+        width: 1rem;
+        height: auto;
       }
     }
-  }
+    & .cadastro-acomodacao {
+      padding: 0 0 7rem 0;
+      & .__form-title {
+        padding: 3.5rem 24% 1.2rem;
+        font-size: 33px;
+        font-weight: 600;
+        text-align: center;
+      }
+      & .__form-subtitle {
+        padding: 1.4rem 24% 0;
+        font-size: 17px;
+      }
+      & textarea {
+        padding: 0 24%;
+        margin: 1.4rem 0 .6rem 0;
+      }
+      & .__lenght-calc {
+        padding: 0 24%;
+      }
+      & .item-form {
+        padding: 0 24%;
+        margin: 2.4rem 0;
+        & label {
+          font-size: 16px;
+        }
+        & input {
+          font-size: 17px;
+          font-weight: 400;
+          padding: .5rem 0 .6rem 0;
+        }
+        & select {
+          font-size: 17px;
+          font-weight: 400;
+          padding: .5rem 0 .6rem 0;
+        }
+      }
+      & .comodidades-box {
+        padding: .6rem 24% 0;
+        & .item-form-switches {
+          padding: 1.4rem 0;
+          & h3 {
+          }
+        }
+      }
+      & .without-address {
+        margin: 0 24%;
+        transform: translateY(-1.7rem);
+      }
+      & .recebedor-box {
+      }
+      & .modal-croppa {
+        & .modal-croppa-body {
+          & h1 {
+          }
+          & canvas {
+            border: 3px dashed white;
+          }
+          & .modal-croppa-btns {
+            width: 50%
+          }
+        }
+      }
+      & .before-choose-image {
+        display: flex;
+        flex-flow: column;
+        align-items: center;
+        & .__input-btn {
+          margin: 2rem 0 0 0;
+        }
+      }
+      & .__croppa-btn {
+      }
+      & .after-choose-image {
+        margin-top: 2rem;
+        padding: 0 calc(24% - .3rem);
+        & .image-box {
+          width: 165px;
+          height: 110px;
+          & .__foto-principal {
+          }
+          & .__preview-img {
+          }
+        }
+      }
+      & .signin-btns {
+        padding: .8rem 40% 0;
+        & .facebook-btn {
+          width: 100%;
+        }
+        & .google-btn {
+          width: 100%;
+        }
+        & .email-btn {
+          width: 100%;
+        }
+      }
+      & .back-next {
+        position: fixed;
+        z-index: 3;
+        bottom: 2rem;
+        left: 0;
+        right: 0;
+        margin: auto;
+        height: 2.85rem;
+        width: 25%;
+        background: white;
+        box-shadow: 3px 3px 20px 1px rgba(0,0,0,0.18);
+        border-radius: 2rem;
+        & .back-next-body {
+          display: flex;
+          align-items: center;
+          & button {
+            width: 50%;
+            height: 2.85rem;
+          }
+          & .__back {
+            font-size: 17px;
+            font-weight: 500;
+            border-radius: 2rem 0 0 2rem;
+            cursor: pointer;
+            background: white;
+          }
+          & .__next {
+            font-size: 17px;
+            font-weight: 600;
+          }
+        }
+      }
+    }
   }
 }
 </style>
