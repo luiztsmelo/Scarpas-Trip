@@ -367,12 +367,12 @@
         </div>
         
         <div class="image-box">
-          <img src="./../../../assets/img/add-image.svg" class="__preview-img" v-if="imageURL2 === null" @click="$refs.myCroppa2.chooseFile()" style="padding:24%">
+          <img src="./../../../assets/img/add-image.svg" class="__preview-img" v-if="imageURL2 === null" @click="$refs.myCroppa2.chooseFile()" style="padding:25%">
           <img :src="imageURL2" class="__preview-img" @click="showCroppaModal2=true" v-else>
         </div>
 
         <div class="image-box" v-if="imageURL2 !== null">
-          <img src="./../../../assets/img/add-image.svg" class="__preview-img" v-if="imageURL3 === null" @click="$refs.myCroppa3.chooseFile()" style="padding:24%">
+          <img src="./../../../assets/img/add-image.svg" class="__preview-img" v-if="imageURL3 === null" @click="$refs.myCroppa3.chooseFile()" style="padding:25%">
           <img :src="imageURL3" class="__preview-img" @click="showCroppaModal3=true" v-else>
         </div>
 
@@ -428,7 +428,7 @@
       v-autosize="title"
       maxlength="50"
       rows="1"
-      placeholder="ex: Linda casa em Capitólio"
+      :placeholder="'ex: ' + tipoAcomodTitulo + ' em Capitólio'"
       required>
       {{title}}</textarea>
 
@@ -534,7 +534,7 @@
 
       <h1 class="__form-title">Seus dados bancários para depósito</h1>   
 
-      <h3 class="__form-subtitle">{{ firstName }}, para finalizar precisamos dos dados de sua conta bancária para podermos transferir seus ganhos financeiros advindos das reservas. Não se preocupe, suas informações estarão seguras.</h3>
+      <h3 class="__form-subtitle">{{ firstName }}, para finalizar precisamos dos dados de sua conta bancária para podermos transferir seus ganhos financeiros. Não se preocupe, suas informações estarão seguras.</h3>
 
       <div class="recebedor-box">
 
@@ -880,7 +880,7 @@ export default {
       } else {
         this.$modal.show('dialog', {
           title: 'Ops',
-          text: 'Adicione um subtítulo.',
+          text: 'Adicione uma descrição.',
           buttons: [{ title: 'OK' }]
         })
       }
@@ -1107,6 +1107,19 @@ export default {
            : path === 'Sítio' ? 'Seu sítio'
            : path === 'Fazenda' ? 'Sua fazenda'
            : path === 'Hostel' ? 'Seu hostel'
+           : ''
+    },
+    tipoAcomodTitulo () {
+      const path = this.$store.state.acomodData.tipoAcomod
+      return path === 'Casa' ? 'Linda casa' 
+           : path === 'Apartamento' ? 'Lindo apartamento'
+           : path === 'Rancho' ? 'Lindo rancho'
+           : path === 'Chácara' ? 'Linda chácara'
+           : path === 'Pousada' ? 'Linda pousada'
+           : path === 'Camping' ? 'Lindo camping'
+           : path === 'Sítio' ? 'Lindo sítio'
+           : path === 'Fazenda' ? 'Linda fazenda'
+           : path === 'Hostel' ? 'Lindo hostel'
            : ''
     },
     titleLength () {
@@ -1683,8 +1696,8 @@ export default {
         padding: 6rem 0 0 0;
         flex: 66%;
         & .__title {
-          font-size: 37px;
-          font-weight: 600;
+          font-size: 34px;
+          font-weight: 700;
         }
         & .__anunciar-btn {
           margin-top: 5rem;
@@ -1706,25 +1719,25 @@ export default {
     & .cadastro-acomodacao {
       padding: 0 0 7rem 0;
       & .__form-title {
-        padding: 3.5rem 24% 1.2rem;
+        padding: 3.5rem 25% 1.2rem;
         font-size: 33px;
         font-weight: 600;
         text-align: center;
       }
       & .__form-subtitle {
-        padding: 1.4rem 24% 0;
+        padding: 1.4rem 25% 0;
         font-size: 17px;
       }
       & textarea {
-        padding: 0 24%;
-        margin: 1.4rem 0 .6rem 0;
+        padding: 0 25%;
+        margin: 1.7rem 0 .6rem 0;
       }
       & .__lenght-calc {
-        padding: 0 24%;
+        padding: 0 25%;
       }
       & .item-form {
-        padding: 0 24%;
-        margin: 2.4rem 0;
+        padding: 0 25%;
+        margin: 2.6rem 0;
         & label {
           font-size: 16px;
         }
@@ -1740,15 +1753,15 @@ export default {
         }
       }
       & .comodidades-box {
-        padding: .6rem 24% 0;
+        padding: .6rem 25% 0;
         & .item-form-switches {
-          padding: 1.4rem 0;
+          padding: 1.6rem 0;
           & h3 {
           }
         }
       }
       & .without-address {
-        margin: 0 24%;
+        margin: 0 25%;
         transform: translateY(-1.7rem);
       }
       & .recebedor-box {
@@ -1777,7 +1790,7 @@ export default {
       }
       & .after-choose-image {
         margin-top: 2rem;
-        padding: 0 calc(24% - .3rem);
+        padding: 0 calc(25% - .3rem);
         & .image-box {
           width: 165px;
           height: 110px;
