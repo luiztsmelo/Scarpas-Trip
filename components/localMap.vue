@@ -13,7 +13,7 @@
       
       <div class="titles">
         <h1 class="__title" ref="title">
-          {{ $store.state.fromWithoutAddress == false ? 'O marcador está no local certo?' : 'Posicione o marcador no local' }}
+          {{ $store.state.fromWithoutAddress == false ? 'O marcador está no local correto?' : 'Posicione o marcador no local' }}
         </h1>
 
         <h3 class="__subtitle" ref="subtitle">
@@ -145,6 +145,7 @@ export default {
       & .__title {
         padding-top: 1rem;
         font-size: 28px;
+        font-weight: 600;
       }
       & .__subtitle {
         padding-top: .5rem;

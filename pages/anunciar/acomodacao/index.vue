@@ -21,7 +21,8 @@
       
 
       <div class="flex1">
-        <h1 class="__title">Ainda gasta anunciando sua casa? Aqui é gratuito.</h1>
+        <h1 class="__title">Ainda gasta anunciando sua casa?</h1>
+        <h1 class="__title">Aqui é gratuito.</h1>
         
         <button class="__anunciar-btn" @click="$store.commit('m_cadastroAcomod1', true), $store.commit('m_cadastroAcomod0', false), $store.commit('m_acomodProgressBar', (100/11)), hashAcomod()">Anunciar</button>
       </div>
@@ -1393,8 +1394,8 @@ export default {
       height: auto;
     }
     & .__title {
-      font-size: 29px;
-      font-weight: 600;
+      font-size: 28px;
+      font-weight: 700;
       padding: 0 7%;
       text-align: center;
     }
@@ -1426,7 +1427,7 @@ export default {
     & .__form-title {
       padding: 3rem 7% 1.5rem 7%;
       line-height: 35px;
-      font-size: 29px;
+      font-size: 28px;
       font-weight: 600;
       z-index: 999;
     }
@@ -1682,7 +1683,7 @@ export default {
         padding: 6rem 0 0 0;
         flex: 66%;
         & .__title {
-          font-size: 38px;
+          font-size: 37px;
           font-weight: 600;
         }
         & .__anunciar-btn {
