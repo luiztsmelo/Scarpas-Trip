@@ -81,10 +81,12 @@ export default {
       this.lng = e.latLng.lng()
     },
     confirmar () {
+      if (this.$store.state.fromWithoutAddress == true) {
+        this.$store.state.acomodData.positionLAT = this.lat
+        this.$store.state.acomodData.positionLNG = this.lng
+        this.$store.state.acomodData.address = this.address
+      }
       this.$modal.hide('local-map-modal')
-      this.$store.state.acomodData.positionLAT = this.lat
-      this.$store.state.acomodData.positionLNG = this.lng
-      this.$store.state.acomodData.address = this.address
     }
   },
   computed: {
@@ -144,8 +146,8 @@ export default {
       padding: 0 7%;
       & .__title {
         padding-top: 1rem;
-        font-size: 28px;
-        font-weight: 600;
+        font-size: 27px;
+        font-weight: 700;
       }
       & .__subtitle {
         padding-top: .5rem;

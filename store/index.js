@@ -40,10 +40,7 @@ const store = () => new Vuex.Store({
       firstName: null,
       fullName: null,
       email: null,
-      photoURL: null,
-      isAcomodHost: false,
-      isPasseioHost: false,
-      isRestauranteHost: false
+      photoURL: null
     },
     message: {
       timestamp: null,
@@ -102,6 +99,7 @@ const store = () => new Vuex.Store({
     },
     acomodData: {/* Atualizar a action */
       acomodID: null,
+      timesVisited: 1,
       userID: null,
       recipientID: null,
       proprietario: null,
@@ -709,6 +707,10 @@ const store = () => new Vuex.Store({
     */
     a_uploadAcomod ({ state, commit }) {
       firebase.firestore().collection('acomods').doc(state.acomodID).set(state.acomodData).then(() => {
+        firebase.firestore().collection('users').doc(state.user.userID).update({
+          isAcomodHost: true,
+          celular: state.acomodData.celular
+        })
         /* Resetar states */
         commit('m_creditCard', { /* MUDAR PARA A RESERVA */
           cardNumber: '',

@@ -178,7 +178,7 @@ textarea {
   border-radius: 6px !important;
 }
 .v--modal-overlay {
-  background: rgba(0, 0, 0, .14) !important; 
+  background: rgba(0, 0, 0, .17) !important; 
 }
 .dialog-c-title {
   color: var(--color01) !important;

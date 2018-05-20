@@ -18,16 +18,16 @@
     <!-- PLANO ACOMODAÇÃO DESKTOP -->
     <div class="plano-acomodacao-desktop" v-show="$store.state.cadastroAcomod0">
       
-      
+      <img class="__img-header" src="../../../assets/img/anuncio-acomod.svg">
 
       <div class="flex1">
         <h1 class="__title">Ainda gasta anunciando sua casa?</h1>
-        <h1 class="__title">Aqui é gratuito.</h1>
+        <h1 class="__subtitle">Aqui é gratuito.</h1>
+
+        <h3 class="__text">Além disso...</h3>
         
         <button class="__anunciar-btn" @click="$store.commit('m_cadastroAcomod1', true), $store.commit('m_cadastroAcomod0', false), $store.commit('m_acomodProgressBar', (100/11)), hashAcomod()">Anunciar</button>
       </div>
-
-      <img class="__img-header" src="../../../assets/img/anuncio-acomod.svg">
 
     </div><!-- PLANO ACOMODAÇÃO DESKTOP -->
 
@@ -367,12 +367,12 @@
         </div>
         
         <div class="image-box">
-          <img src="./../../../assets/img/add-image.svg" class="__preview-img" v-if="imageURL2 === null" @click="$refs.myCroppa2.chooseFile()" style="padding:25%">
+          <img src="./../../../assets/img/add-image.svg" class="__preview-img" v-if="imageURL2 === null" @click="$refs.myCroppa2.chooseFile()" style="padding:26%">
           <img :src="imageURL2" class="__preview-img" @click="showCroppaModal2=true" v-else>
         </div>
 
         <div class="image-box" v-if="imageURL2 !== null">
-          <img src="./../../../assets/img/add-image.svg" class="__preview-img" v-if="imageURL3 === null" @click="$refs.myCroppa3.chooseFile()" style="padding:25%">
+          <img src="./../../../assets/img/add-image.svg" class="__preview-img" v-if="imageURL3 === null" @click="$refs.myCroppa3.chooseFile()" style="padding:26%">
           <img :src="imageURL3" class="__preview-img" @click="showCroppaModal3=true" v-else>
         </div>
 
@@ -454,7 +454,7 @@
       <textarea 
       v-model="$store.state.acomodData.subtitle"
       v-autosize="subtitle"
-      maxlength="500"
+      maxlength="600"
       rows="1"
       placeholder="Coloque informações importantes aqui, que não foram perguntadas antes"
       required>
@@ -480,15 +480,15 @@
 
       <h1 class="__form-title">Sua identificação</h1>   
 
-      <div class="signin-btns" v-if="$store.state.acomodData.proprietario === null">
+      <div class="signin-btns" v-if="$store.state.user.email === null">
         <button type="button" class="facebook-btn" @click="facebookSignIn()">Continuar com Facebook</button>
         <button type="button" class="google-btn" @click="googleSignIn()">Continuar com Google</button>
         <button type="button" class="email-btn" @click="emailSignIn()">Continuar com E-mail</button>
       </div>
 
-      <h3 class="__form-subtitle" v-if="$store.state.acomodData.proprietario !== null">Ótimo {{ firstName }}! Só mais algumas informações:</h3>
+      <h3 class="__form-subtitle" v-if="$store.state.user.email !== null">Ótimo {{ firstName }}! Só mais algumas informações:</h3>
 
-      <div v-if="$store.state.acomodData.proprietario !== null">
+      <div v-if="$store.state.user.email !== null">
 
         <div class="item-form">
           <label>Celular / WhatsApp 1</label>
@@ -1126,7 +1126,7 @@ export default {
       return 50 - this.$store.state.acomodData.title.length
     },
     subtitleLength () {
-      return 500 - this.$store.state.acomodData.subtitle.length
+      return 600 - this.$store.state.acomodData.subtitle.length
     },
     firstName () {
       let fullName = this.$store.state.acomodData.proprietario.split(' ')
@@ -1440,8 +1440,8 @@ export default {
     & .__form-title {
       padding: 3rem 7% 1.5rem 7%;
       line-height: 35px;
-      font-size: 28px;
-      font-weight: 600;
+      font-size: 27px;
+      font-weight: 700;
       z-index: 999;
     }
     & .__form-subtitle {
@@ -1693,14 +1693,27 @@ export default {
       display: flex;
       height: calc(100vh - 4rem);
       & .flex1 {
-        padding: 6rem 0 0 0;
-        flex: 66%;
+        display: flex;
+        flex-flow: column;
+        padding: 5rem 0 0 0;
+        flex: 69%;
+        align-items: center;
         & .__title {
-          font-size: 34px;
+          font-size: 36px;
           font-weight: 700;
         }
+        & .__subtitle {
+          padding-top: .2rem;
+          font-size: 32px;
+          font-weight: 400;
+        }
+        & .__text {
+          text-align: center;
+          padding: 2rem 0 3rem 0;
+          font-size: 18px;
+          font-weight: 400;
+        }
         & .__anunciar-btn {
-          margin-top: 5rem;
           font-weight: 700;
           width: 13rem;
           height: 3rem;
@@ -1711,7 +1724,7 @@ export default {
         }
       }
       & .__img-header {
-        flex: 34%;
+        flex: 31%;
         width: 1rem;
         height: auto;
       }
@@ -1719,24 +1732,24 @@ export default {
     & .cadastro-acomodacao {
       padding: 0 0 7rem 0;
       & .__form-title {
-        padding: 3.5rem 25% 1.2rem;
-        font-size: 33px;
-        font-weight: 600;
+        padding: 3.5rem 26% 1.2rem;
+        font-size: 32px;
+        font-weight: 700;
         text-align: center;
       }
       & .__form-subtitle {
-        padding: 1.4rem 25% 0;
+        padding: 1.4rem 26% 0;
         font-size: 17px;
       }
       & textarea {
-        padding: 0 25%;
+        padding: 0 26%;
         margin: 1.7rem 0 .6rem 0;
       }
       & .__lenght-calc {
-        padding: 0 25%;
+        padding: 0 26%;
       }
       & .item-form {
-        padding: 0 25%;
+        padding: 0 26%;
         margin: 2.6rem 0;
         & label {
           font-size: 16px;
@@ -1753,7 +1766,7 @@ export default {
         }
       }
       & .comodidades-box {
-        padding: .6rem 25% 0;
+        padding: .6rem 26% 0;
         & .item-form-switches {
           padding: 1.6rem 0;
           & h3 {
@@ -1761,7 +1774,7 @@ export default {
         }
       }
       & .without-address {
-        margin: 0 25%;
+        margin: 0 26%;
         transform: translateY(-1.7rem);
       }
       & .recebedor-box {
@@ -1790,7 +1803,7 @@ export default {
       }
       & .after-choose-image {
         margin-top: 2rem;
-        padding: 0 calc(25% - .3rem);
+        padding: 0 calc(26% - .3rem);
         & .image-box {
           width: 165px;
           height: 110px;

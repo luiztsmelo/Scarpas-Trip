@@ -507,11 +507,14 @@ export default {
   fetch ({ store, params }) {
     return firebase.firestore().collection('acomods').doc(params.id).get().then(doc => {
       store.commit('m_acomod', doc.data())
-      if (store.state.isMobile === true) {
+      if (store.state.isMobile == true) {
         store.commit('m_showNavbar', false)
         store.commit('m_showFoobar', false)
       }
       store.commit('m_loader', false)
+      firebase.firestore().collection('acomods').doc(params.id).update({ 
+        timesVisited: store.state.acomod.timesVisited +1
+      })
     })
   },
   methods: {
@@ -544,7 +547,7 @@ export default {
       this.$modal.show('dialog', {
         title: 'Taxa de Serviço',
         text: 'Taxa de ' + this.$store.state.serviceFeeAcomod * 100 + '% cobrada com o intuito de garantir suporte e total segurança em sua reserva caso algum problema aconteça.',
-        buttons: [{ title: 'Fechar' }]
+        buttons: [{ title: 'OK' }]
       })
     },
     backBtn () {
