@@ -245,7 +245,7 @@ export default {
             font-size: 14px;
             font-weight: 600;
             padding-right: 3px;
-            color: rgb(142,142,142);
+            color: #1E9297;
           }
           & .__see-all-arrow {
             opacity: .6;

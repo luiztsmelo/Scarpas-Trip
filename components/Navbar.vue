@@ -192,7 +192,7 @@ export default {
         padding: 0 .8rem;
       }
       & a:hover {
-        color: #FFA04F;
+        color: #1E9297;
       }
       & .__nav-item {
         font-size: 14px;
@@ -207,7 +207,7 @@ export default {
         user-select: none;
       }
       & .__nav-item-no-a:hover {
-        color: #FFA04F;
+        color: #1E9297;
       }
       & .__user-img {
         cursor: pointer;
@@ -242,7 +242,7 @@ export default {
             user-select: none;
           }
           & li:hover {
-            color: #FFA04F;
+            color: #1E9297;
           }
         }
       }

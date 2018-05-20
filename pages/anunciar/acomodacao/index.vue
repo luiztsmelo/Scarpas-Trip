@@ -1526,7 +1526,7 @@ export default {
       font-size: 16px;
       font-weight: 500;
       transform: translateY(-1.2rem);
-      color: #006561;
+      color: #1E9297;
     }
     & .recebedor-box {
       padding-top: 1rem;

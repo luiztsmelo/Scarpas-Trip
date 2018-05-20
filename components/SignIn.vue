@@ -115,7 +115,7 @@ export default {
         height: auto;
       }
       & .__title {
-        font-size: 34px;
+        font-size: 33px;
         text-align: center;
         padding: 1.3rem 0 .3rem 0;
       }

@@ -79,17 +79,23 @@
           
           <div class="__item-caracteristica">
             <img class="__img-caracteristica" src="../../assets/img/quarto.svg">
-            <h3>{{ acomod.totalQuartos }} quartos ({{ acomod.totalSuites }} suítes)</h3>
+            <h3>
+              {{ acomod.totalQuartos }} {{ acomod.totalQuartos == '1' ? 'quarto' : 'quartos' }} ({{ acomod.totalSuites }} {{ acomod.totalSuites == '1' ? 'suíte' : 'suítes' }})
+            </h3>
           </div>
 
           <div class="__item-caracteristica">
             <img class="__img-caracteristica" src="../../assets/img/banheiro.svg" style="transform: scale(1.06)">
-            <h3>{{ acomod.totalBanheiros }} banheiros</h3>
+            <h3>
+              {{ acomod.totalBanheiros }} {{ acomod.totalBanheiros == '1' ? 'banheiro' : 'banheiros' }}
+            </h3>
           </div>
 
           <div class="__item-caracteristica">
             <img class="__img-caracteristica" src="../../assets/img/garagem.svg" style="transform: scale(1.01)">
-            <h3>{{ acomod.totalGaragem }} vagas na garagem</h3>
+            <h3>
+              {{ acomod.totalGaragem }} {{ acomod.totalGaragem == '1' ? 'vaga' : 'vagas' }} na garagem
+            </h3>
           </div>
 
         </div><!-- ####### CARACTERÍSTICAS ####### -->
@@ -636,7 +642,7 @@ export default {
       return 'https://firebasestorage.googleapis.com/v0/b/escarpas-trip.appspot.com/o/utils%2Fmarker.svg?alt=media&token=fcbfd76e-ee93-41e8-a816-98906e19859b'
     },
     markerSize () {
-      return !this.$store.state.googleMapsInitialized ? null : new window.google.maps.Size(38, 38)
+      return !this.$store.state.googleMapsInitialized ? null : new window.google.maps.Size(42, 42)
     },
     tipoAcomodText () {
       const path = this.acomod.tipoAcomod
