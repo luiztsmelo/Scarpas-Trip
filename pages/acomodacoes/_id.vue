@@ -512,8 +512,8 @@ export default {
         store.commit('m_showFoobar', false)
       }
       store.commit('m_loader', false)
-      firebase.firestore().collection('acomods').doc(params.id).update({ 
-        timesVisited: store.state.acomod.timesVisited +1
+      firebase.firestore().collection('acomods').doc(params.id).collection('visited').add({ 
+        date: new Date().getTime()
       })
     })
   },

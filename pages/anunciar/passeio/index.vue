@@ -1,30 +1,34 @@
 <template>
   <div class="anunciar-passeio">
 
-    <!-- PLANO PASSEIO -->
-    <div class="plano-passeio" v-show="$store.state.cadastroPasseio0">
+
+    <!-- PLANO PASSEIO MOBILE -->
+    <div class="plano-passeio-mobile" v-show="$store.state.cadastroPasseio0">
       
-      <img class="__img-header" src="../../../assets/img/passeios.svg">
-       
-      <h1 class="__title">Amplie seus ganhos anunciando seu passeio com a gente!</h1>
+      <img class="__img-header" src="../../../assets/img/anuncio-passeio.svg">
       
-      <span class="__subtitle">Como funciona?</span>
-      <h3 class="__item">A Escarpas Trip </h3>
-
-
-      <span class="__subtitle">Quais as vantagens?</span>
-      <h3 class="__item">Destaque nas redes sociais</h3>
-      <h3 class="__item">Transparência</h3>
-      <h3 class="__item">Segurança</h3>
+      <h1 class="__title">Ainda gasta anunciando seu passeio? Aqui é gratuito.</h1>
       
-      <span class="__subtitle">Investimento Mensal</span>
-      <span class="__price">R$49</span>
-      <h3 class="__subitem">Primeiro mês grátis</h3>
-      <h3 class="__subitem">Cancele quando quiser</h3>
+      <button class="__anunciar-btn" @click="$store.commit('m_cadastroPasseio1', true), $store.commit('m_cadastroPasseio0', false), $store.commit('m_acomodProgressBar', (100/11))">Anunciar</button>
 
-      <button class="__anunciar-btn" @click="$store.commit('m_cadastroPasseio1', true), $store.commit('m_cadastroPasseio0', false), $store.commit('m_passeioProgressBar', (100/11))">Anunciar</button>
+    </div><!-- PLANO PASSEIO MOBILE -->
 
-    </div><!-- PLANO PASSEIO -->
+
+    <!-- PLANO PASSEIO DESKTOP -->
+    <div class="plano-passeio-desktop" v-show="$store.state.cadastroPasseio0">
+      
+      <img class="__img-header" src="../../../assets/img/anuncio-passeio.svg">
+
+      <div class="flex1">
+        <h1 class="__title">Ainda paga para anunciar seu passeio?</h1>
+        <h1 class="__subtitle">Aqui é gratuito.</h1>
+
+        <h3 class="__text">Além disso...</h3>
+        
+        <button class="__anunciar-btn" @click="$store.commit('m_cadastroPasseio1', true), $store.commit('m_cadastroPasseio0', false), $store.commit('m_acomodProgressBar', (100/11))">Anunciar</button>
+      </div>
+
+    </div><!-- PLANO PASSEIO DESKTOP -->
 
 
 
@@ -73,7 +77,6 @@
         <label>Capacidade</label>
         <select v-model="$store.state.passeioData.capacidade">
           <option v-for="n in 20">{{ n }}</option>
-          <option>Mais de 20</option>
         </select>
       </div> 
 
@@ -269,7 +272,7 @@
       <h1 class="__form-title">Dê um título para seu passeio</h1>
 
       <textarea 
-      v-model.lazy="$store.state.passeioData.title"
+      v-model="$store.state.passeioData.title"
       v-autosize="title"
       maxlength="50"
       rows="1"
@@ -297,9 +300,9 @@
       <h1 class="__form-title">Descreva seu passeio</h1>   
 
       <textarea 
-      v-model.lazy="$store.state.passeioData.subtitle"
+      v-model="$store.state.passeioData.subtitle"
       v-autosize="subtitle"
-      maxlength="400"
+      maxlength="600"
       rows="1"
       placeholder="Coloque informações importantes aqui, que não foram perguntadas antes"
       required>
@@ -322,28 +325,25 @@
     <!-- ########## IDENTIFICAÇÃO PG.10 ########## -->
     <form class="cadastro-passeio" v-show="$store.state.cadastroPasseio10">
 
-      <h1 class="__form-title">Seus dados pessoais para contato</h1>   
+      <h1 class="__form-title">Sua identificação</h1>   
 
-
-      <h3 style="padding: .5rem 7% .7rem 7%" v-if="this.$store.state.passeioData.proprietario === null">Obter dados com:</h3>
-
-      <div class="signin-btns" v-if="$store.state.passeioData.proprietario === null">
-        <button type="button" class="facebook-btn" @click="facebookSignIn()">Facebook</button>
-        <button type="button" class="google-btn" @click="googleSignIn()">Google</button>
+      <div class="signin-btns" v-if="$store.state.user.email === null">
+        <button type="button" class="facebook-btn" @click="facebookSignIn()">Continuar com Facebook</button>
+        <button type="button" class="google-btn" @click="googleSignIn()">Continuar com Google</button>
+        <button type="button" class="email-btn" @click="emailSignIn()">Continuar com E-mail</button>
       </div>
 
-      <h3 style="padding: .5rem 7% 0 7%" v-if="$store.state.passeioData.proprietario !== null">Ótimo {{ firstName }}! Só mais algumas informações:</h3>
+      <h3 class="__form-subtitle" v-if="$store.state.user.email !== null">Ótimo {{ firstName }}! Só mais algumas informações:</h3>
 
-      <div v-if="$store.state.passeioData.proprietario !== null">
+      <div v-if="$store.state.user.email !== null">
         <div class="item-form">
           <label>Celular</label>
           <masked-input
             type="tel"
             v-model="$store.state.passeioData.celular"
             :mask="['(', /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]"
-            :guide="true"
-            placeholder="(__) _____-____"
-            placeholderChar="_">
+            :guide="false"
+            placeholder="(  )      -    ">
           </masked-input>
         </div>
       </div>
@@ -637,7 +637,7 @@ export default {
       return 50 - this.$store.state.passeioData.title.length
     },
     subtitleLength () {
-      return 400 - this.$store.state.passeioData.subtitle.length
+      return 600 - this.$store.state.passeioData.subtitle.length
     },
     firstName () {
       let fullName = this.$store.state.passeioData.proprietario.split(' ')
@@ -695,75 +695,50 @@ export default {
 
 .anunciar-passeio {
   margin-top: 3.4rem;
-  background: #198CFE;
-  color: white;
   transition: var(--main-transition);
   & .progress-bar {
     position: fixed;
     top: 3.4rem;
     height: 3px;
     z-index: 8888;
-    background: #198CFE;
+    background: var(--colorPasseio);
     transition: all .3s ease;
   }
   /* ******************** PLANO PASSEIO ******************** */
-  & .plano-passeio {
+  & .plano-passeio-mobile {
     display: flex;
     flex-flow: column;
     align-items: center;
     & .__img-header {
-      margin: 2rem 0;
-      width: 6rem;
+      margin: 3rem 0 2rem 0;
+      width: 7rem;
       height: auto;
-      filter: grayscale(100%) brightness(250%);
     }
     & .__title {
-      font-size: 26px;
+      font-size: 28px;
       font-weight: 700;
       padding: 0 7%;
       text-align: center;
-    }
-    & .__subtitle {
-      text-transform: uppercase;
-      margin: 3rem 0 .5rem 0;
-      font-size: 15px;
-      font-weight: 700;
-      padding: 0 7%;
-      text-align: center;
-    }
-    & .__item {
-      padding: 0 7%;
-      font-size: var(--fontSizeAnuncioText);
-      font-weight: 400;
-      margin: 0 0 .2rem 0;
-      color: white;
-    }
-    & .__subitem {
-      padding: 0 7%;
-      font-size: 14px;
-      font-weight: 400;
-      margin: 0 ;
-      color: white;
-      line-height: 21px;
-    }
-    & .__price {
-      font-size: 52px;
-      font-weight: 100;
-      margin-bottom: .5rem;
     }
     & .__anunciar-btn {
-      color: var(--color01);
-      width: 65%;
-      background: white;
-      padding: 1rem 0;
-      border-radius: 100px;
+      position: fixed;
+      bottom: 1rem;
+      left: 0;
+      right: 0;
+      margin: auto;
+      height: 3rem;
+      color: white;
+      width: 13rem;
+      background: var(--colorPasseio);
+      border-radius: 2rem;
       font-size: var(--fontSizeAnuncioText);
       font-weight: 600;
-      margin: 3rem 0 2rem 0;
-      box-shadow: 2px 2px 9px 4px rgba(0,0,0,0.13);
+      box-shadow: 3px 3px 20px 1px rgba(0,0,0,0.18);
     }
   }
-
+  & .plano-passeio-desktop {
+    display: none;
+  }
 
   /* ******************** CADASTRO PASSEIO ******************** */
   & .cadastro-passeio {
@@ -774,11 +749,12 @@ export default {
     & .__form-title {
       padding: 3rem 7% 1.5rem 7%;
       line-height: 35px;
-      font-size: 28px;
+      font-size: 27px;
       font-weight: 700;
       z-index: 999;
     }
-    & h3 {
+    & .__form-subtitle {
+      padding: 0 7%;
       font-size: var(--fontSizeAnuncioText);
     }
     & textarea {
@@ -800,7 +776,7 @@ export default {
       z-index: 999;
       font-size: var(--fontSizeAnuncioText);
       font-weight: 600;
-      color: rgb(90, 90, 90);
+      color: rgb(92, 92, 92);
     }
     & .item-form {
       padding: 0 7%;
@@ -808,10 +784,11 @@ export default {
       flex-flow: column;
       margin: 1.7rem 0;
       & label {
-        font-weight: 700;
+        font-weight: 600;
         font-size: 15px;
       }
       & input {
+        cursor: text;
         width: 100%;
         font-size: var(--fontSizeAnuncioText);
         font-weight: 400;
@@ -839,11 +816,11 @@ export default {
       }
     }
     & .modal-croppa {
-      background: rgba(0, 0, 0, 0.84);
+      background: rgba(0, 0, 0, 0.8);
       width:  100%;
       height: 100%;
       position: fixed;
-      top:  0;
+      top: 0;
       left: 0;
       z-index: 9999;
       & .modal-croppa-body {
@@ -859,13 +836,14 @@ export default {
           font-weight: 300;
         }
         & canvas {
-          margin: 3rem 0 1rem 0;
+          cursor: grab;
+          margin: 2.5rem 0 1rem 0;
           border: 2px dashed white;
         }
         & .modal-croppa-btns {
           display: flex;
           flex-flow: column;
-          width: 100%
+          width: 70%;
         }
       }
     }
@@ -880,9 +858,9 @@ export default {
     }
     & .__croppa-btn {
       margin: .3rem 0;
-      font-size: 15px;
+      font-size: 16px;
       font-weight: 500;
-      background: #198CFE;
+      background: var(--colorPasseio);
       color: white;
       padding: .8rem 1.2rem;
       border-radius: 2rem;
@@ -901,7 +879,32 @@ export default {
     }
     & .signin-btns {
       display: flex;
+      flex-flow: column;
       padding: 0 7%;
+      & .facebook-btn {
+        width: 17rem;
+        margin: .7rem 0;
+        height: 2.9rem;
+        text-align: start;
+        padding-left: 50px;
+        font-size: 15px;
+      }
+      & .google-btn {
+        width: 17rem;
+        margin: .7rem 0;
+        height: 2.9rem;
+        text-align: start;
+        padding-left: 50px;
+        font-size: 15px;
+      }
+      & .email-btn {
+        width: 17rem;
+        margin: .7rem 0;
+        height: 2.9rem;
+        text-align: start;
+        padding-left: 50px;
+        font-size: 15px;
+      }
     }
     & .back-next {
       position: fixed;
@@ -937,6 +940,163 @@ export default {
           cursor: no-drop;
           background: rgb(222,222,222);
           color: white;
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: 1024px) {
+  .anunciar-passeio {
+    margin-top: 4rem;
+    & .progress-bar {
+      top: 4rem;
+      height: 6px;
+    }
+    & .plano-passeio-mobile {
+      display: none;
+    }
+    & .plano-passeio-desktop {
+      padding: 0 7%;
+      display: flex;
+      height: calc(100vh - 4rem);
+      & .flex1 {
+        display: flex;
+        flex-flow: column;
+        padding: 5rem 0 0 0;
+        flex: 70%;
+        align-items: center;
+        & .__title {
+          font-size: 36px;
+          font-weight: 700;
+        }
+        & .__subtitle {
+          padding-top: .2rem;
+          font-size: 32px;
+          font-weight: 400;
+        }
+        & .__text {
+          text-align: center;
+          padding: 2rem 0 3rem 0;
+          font-size: 18px;
+          font-weight: 400;
+        }
+        & .__anunciar-btn {
+          font-weight: 700;
+          width: 13rem;
+          height: 3rem;
+          color: white;
+          background: var(--colorPasseio);
+          border-radius: 2rem;
+          font-size: var(--fontSizeAnuncioText);
+        }
+      }
+      & .__img-header {
+        flex: 30%;
+        width: 1rem;
+        height: auto;
+      }
+    }
+    & .cadastro-passeio {
+      padding: 0 0 7rem 0;
+      & .__form-title {
+        padding: 3.5rem 26% 1.2rem;
+        font-size: 32px;
+        font-weight: 700;
+        text-align: center;
+      }
+      & .__form-subtitle {
+        padding: 1.4rem 26% 0;
+        font-size: 17px;
+      }
+      & textarea {
+        padding: 0 26%;
+        margin: 1.7rem 0 .6rem 0;
+      }
+      & .__lenght-calc {
+        padding: 0 26%;
+      }
+      & .item-form {
+        padding: 0 26%;
+        margin: 2.6rem 0;
+        & label {
+          font-size: 16px;
+        }
+        & input {
+          font-size: 17px;
+          font-weight: 400;
+          padding: .5rem 0 .6rem 0;
+        }
+        & select {
+          font-size: 17px;
+          font-weight: 400;
+          padding: .5rem 0 .6rem 0;
+        }
+      }
+      & .modal-croppa {
+        & .modal-croppa-body {
+          & h1 {
+          }
+          & canvas {
+            border: 3px dashed white;
+          }
+          & .modal-croppa-btns {
+            width: 50%
+          }
+        }
+      }
+      & .before-choose-image {
+        display: flex;
+        flex-flow: column;
+        align-items: center;
+        & .__input-btn {
+          margin: 2rem 0 0 0;
+        }
+      }
+      & .__croppa-btn {
+      }
+      & .after-choose-image {
+        margin-top: 2rem;
+        padding: 0 calc(26% - .3rem);
+        & .image-box {
+          width: 165px;
+          height: 110px;
+          & .__foto-principal {
+          }
+          & .__preview-img {
+          }
+        }
+      }
+      & .signin-btns {
+        padding: .8rem 40% 0;
+        & .facebook-btn {
+          width: 100%;
+        }
+        & .google-btn {
+          width: 100%;
+        }
+        & .email-btn {
+          width: 100%;
+        }
+      }
+      & .back-next {
+        bottom: 2rem;
+        height: 2.85rem;
+        width: 25%;
+        box-shadow: 3px 3px 20px 1px rgba(0,0,0,0.18);
+        & .back-next-body {
+          & button {
+            height: 2.85rem;
+          }
+          & .__back {
+            font-size: 17px;
+            font-weight: 500;
+            cursor: pointer;
+          }
+          & .__next {
+            font-size: 17px;
+            font-weight: 600;
+          }
         }
       }
     }

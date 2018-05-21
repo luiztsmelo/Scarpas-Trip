@@ -21,7 +21,7 @@
       <img class="__img-header" src="../../../assets/img/anuncio-acomod.svg">
 
       <div class="flex1">
-        <h1 class="__title">Ainda gasta anunciando sua casa?</h1>
+        <h1 class="__title">Ainda paga para anunciar sua casa?</h1>
         <h1 class="__subtitle">Aqui é gratuito.</h1>
 
         <h3 class="__text">Além disso...</h3>
@@ -1659,7 +1659,6 @@ export default {
           height: 3rem;
         }
         & .__back {
-          cursor: pointer;
           font-size: 16px;
           font-weight: 500;
           border-radius: 2rem 0 0 2rem;
@@ -1696,7 +1695,7 @@ export default {
         display: flex;
         flex-flow: column;
         padding: 5rem 0 0 0;
-        flex: 69%;
+        flex: 70%;
         align-items: center;
         & .__title {
           font-size: 36px;
@@ -1724,7 +1723,7 @@ export default {
         }
       }
       & .__img-header {
-        flex: 31%;
+        flex: 30%;
         width: 1rem;
         height: auto;
       }
@@ -1826,30 +1825,18 @@ export default {
         }
       }
       & .back-next {
-        position: fixed;
-        z-index: 3;
         bottom: 2rem;
-        left: 0;
-        right: 0;
-        margin: auto;
         height: 2.85rem;
         width: 25%;
-        background: white;
         box-shadow: 3px 3px 20px 1px rgba(0,0,0,0.18);
-        border-radius: 2rem;
         & .back-next-body {
-          display: flex;
-          align-items: center;
           & button {
-            width: 50%;
             height: 2.85rem;
           }
           & .__back {
             font-size: 17px;
             font-weight: 500;
-            border-radius: 2rem 0 0 2rem;
             cursor: pointer;
-            background: white;
           }
           & .__next {
             font-size: 17px;

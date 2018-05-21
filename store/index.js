@@ -99,7 +99,6 @@ const store = () => new Vuex.Store({
     },
     acomodData: {/* Atualizar a action */
       acomodID: null,
-      timesVisited: 1,
       userID: null,
       recipientID: null,
       proprietario: null,

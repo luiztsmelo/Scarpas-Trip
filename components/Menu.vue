@@ -18,16 +18,16 @@
         </div>
 
         <div @click="$store.commit('m_showMenu', false), $store.commit('m_menuIconAnime', false)">
-          <nuxt-link to="/anunciar/evento" class="menu-item">
-            <img src="../assets/img/eventos.svg" class="__item-img-color">
-            <h3>Anunciar Evento</h3>
-          </nuxt-link>
-        </div>
-        
-        <div @click="$store.commit('m_showMenu', false), $store.commit('m_menuIconAnime', false)">
           <nuxt-link to="/anunciar/passeio" class="menu-item">
             <img src="../assets/img/passeios.svg" class="__item-img-color">
             <h3>Anunciar Passeio</h3>
+          </nuxt-link>
+        </div>
+
+        <div @click="$store.commit('m_showMenu', false), $store.commit('m_menuIconAnime', false)">
+          <nuxt-link to="/anunciar/evento" class="menu-item">
+            <img src="../assets/img/eventos.svg" class="__item-img-color">
+            <h3>Anunciar Evento</h3>
           </nuxt-link>
         </div>
 
