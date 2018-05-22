@@ -941,23 +941,25 @@ const store = () => new Vuex.Store({
     /*
     ########## GOOGLE SIGN IN ##########
     */
-    a_googleSignIn ({ commit, dispatch }, user) {
+    a_googleSignIn ({ state, commit, dispatch }, user) {
       const provider = new firebase.auth.GoogleAuthProvider()
-      firebase.auth().signInWithPopup(provider)
-        .then().catch(error => {
-          console.log(error)
-        })
+      if (state.isMobile === true) {
+        firebase.auth().signInWithRedirect(provider)
+      } else {
+        firebase.auth().signInWithPopup(provider)
+      }
       dispatch('a_authStateObserver')
     },
     /*
     ########## FACEBOOK SIGN IN ##########
     */
-    a_facebookSignIn ({ commit, dispatch }, user) {
+    a_facebookSignIn ({ state, commit, dispatch }, user) {
       const provider = new firebase.auth.FacebookAuthProvider()
-      firebase.auth().signInWithPopup(provider)
-        .then().catch(error => {
-          console.log(error)
-        })
+      if (state.isMobile === true) {
+        firebase.auth().signInWithRedirect(provider)
+      } else {
+        firebase.auth().signInWithPopup(provider)
+      }
       dispatch('a_authStateObserver')
     },
     /*
