@@ -232,6 +232,9 @@ export default {
         store.commit('m_showFoobar', false)
       }
       store.commit('m_loader', false)
+      firebase.firestore().collection('passeios').doc(params.id).collection('visited').add({ 
+        date: new Date().getTime()
+      })
     })
   },
   methods: {
@@ -470,16 +473,16 @@ export default {
         font-weight: 500;
       }
       & .__reserva-valor-pessoa {
-        font-size: 14px;
+        font-size: 15px;
       }
       & .__reserva-btn {
         font-size: 16px;
-        font-weight: 600;
-        background: #198CFE;
-        color: white;
+        font-weight: 700;
+        background: var(--colorPasseio);
         line-height: 2.6rem;
+        color: white;
         height: 2.7rem;
-        width:  11rem;
+        width:  10rem;
         border-radius: 4px;
       }
     }

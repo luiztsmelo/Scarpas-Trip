@@ -307,7 +307,7 @@ export default {
     & .home-body {
       margin-bottom: 0;
       & .category-container {
-        padding-bottom: 7rem;
+        padding-bottom: 6rem;
         & .title-row {
           padding: 0 7% 1.5rem 7%;
           & .__title {

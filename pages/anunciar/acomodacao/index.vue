@@ -290,17 +290,17 @@
         <div class="modal-croppa-body" @click.stop>
           <h1>Ajustar imagem</h1>
           <croppa
-          ref="myCroppa1"
-          @file-choose="showCroppaModal1 = true"
-          :width="$store.state.isMobile === true ? 720/2.25 : 720/1.5"
-          :height="$store.state.isMobile === true ? 480/2.25 : 480/1.5"
-          :quality="$store.state.isMobile === true ? 2.25 : 1.5"
-          :placeholder="'Carregando...'"
-          :placeholder-color="'white'"
-          :accept="'.jpg, .jpeg, .png, .webp'"
-          :zoom-speed="$store.state.isMobile === true ? 2 : 4"
-          :prevent-white-space="true"
-          :show-remove-button="false">
+            ref="myCroppa1"
+            @file-choose="showCroppaModal1 = true"
+            :width="$store.state.isMobile === true ? 720/2.25 : 720/1.5"
+            :height="$store.state.isMobile === true ? 480/2.25 : 480/1.5"
+            :quality="$store.state.isMobile === true ? 2.25 : 1.5"
+            :placeholder="'Carregando...'"
+            :placeholder-color="'white'"
+            :accept="'.jpg, .jpeg, .png, .webp'"
+            :zoom-speed="$store.state.isMobile === true ? 2 : 4"
+            :prevent-white-space="true"
+            :show-remove-button="false">
           </croppa>
           <div class="modal-croppa-btns">
             <button class="__croppa-btn" type="button" @click="showCroppaModal1=false, imageConfirmed1()">Confirmar</button>
@@ -314,17 +314,17 @@
         <div class="modal-croppa-body" @click.stop>
           <h1>Ajustar imagem</h1>
           <croppa
-          ref="myCroppa2"
-          @file-choose="showCroppaModal2 = true"
-          :width="$store.state.isMobile === true ? 720/2.25 : 720/1.5"
-          :height="$store.state.isMobile === true ? 480/2.25 : 480/1.5"
-          :quality="$store.state.isMobile === true ? 2.25 : 1.5"
-          :placeholder="'Carregando...'"
-          :placeholder-color="'white'"
-          :accept="'.jpg, .jpeg, .png, .webp'"
-          :zoom-speed="$store.state.isMobile === true ? 2 : 4"
-          :prevent-white-space="true"
-          :show-remove-button="false">
+            ref="myCroppa2"
+            @file-choose="showCroppaModal2 = true"
+            :width="$store.state.isMobile === true ? 720/2.25 : 720/1.5"
+            :height="$store.state.isMobile === true ? 480/2.25 : 480/1.5"
+            :quality="$store.state.isMobile === true ? 2.25 : 1.5"
+            :placeholder="'Carregando...'"
+            :placeholder-color="'white'"
+            :accept="'.jpg, .jpeg, .png, .webp'"
+            :zoom-speed="$store.state.isMobile === true ? 2 : 4"
+            :prevent-white-space="true"
+            :show-remove-button="false">
           </croppa>
           <div class="modal-croppa-btns">
             <button class="__croppa-btn" type="button" @click="showCroppaModal2=false, imageConfirmed2()">Confirmar</button>
@@ -338,17 +338,17 @@
         <div class="modal-croppa-body" @click.stop>
           <h1>Ajustar imagem</h1>
           <croppa
-          ref="myCroppa3"
-          @file-choose="showCroppaModal3 = true"
-          :width="$store.state.isMobile === true ? 720/2.25 : 720/1.5"
-          :height="$store.state.isMobile === true ? 480/2.25 : 480/1.5"
-          :quality="$store.state.isMobile === true ? 2.25 : 1.5"
-          :placeholder="'Carregando...'"
-          :placeholder-color="'white'"
-          :accept="'.jpg, .jpeg, .png, .webp'"
-          :zoom-speed="$store.state.isMobile === true ? 2 : 4"
-          :prevent-white-space="true"
-          :show-remove-button="false">
+            ref="myCroppa3"
+            @file-choose="showCroppaModal3 = true"
+            :width="$store.state.isMobile === true ? 720/2.25 : 720/1.5"
+            :height="$store.state.isMobile === true ? 480/2.25 : 480/1.5"
+            :quality="$store.state.isMobile === true ? 2.25 : 1.5"
+            :placeholder="'Carregando...'"
+            :placeholder-color="'white'"
+            :accept="'.jpg, .jpeg, .png, .webp'"
+            :zoom-speed="$store.state.isMobile === true ? 2 : 4"
+            :prevent-white-space="true"
+            :show-remove-button="false">
           </croppa>
           <div class="modal-croppa-btns">
             <button class="__croppa-btn" type="button" @click="showCroppaModal3=false, imageConfirmed3()">Confirmar</button>
@@ -529,7 +529,7 @@
 
 
 
-    <!-- ########## CONCLUIR PG.11 ########## -->
+    <!-- ########## DADOS BANCÁRIOS PG.11 ########## -->
     <form class="cadastro-acomodacao" v-if="$store.state.cadastroAcomod11">
 
       <h1 class="__form-title">Seus dados bancários para depósito</h1>   
@@ -635,7 +635,7 @@
         </div>
       </div> 
     
-    </form><!-- ########## CONCLUIR PG.11 ########## -->
+    </form><!-- ########## DADOS BANCÁRIOS PG.11 ########## -->
 
 
     <!-- CADASTRO ACOMODAÇÃO -->
@@ -1018,7 +1018,7 @@ export default {
             })
           }
           this.$store.commit('m_acomodCreated', true)
-          /* Resetar dados */
+          /* Resetar imagens */
           this.imageURL1 = null,
           this.imageURL2 = null,
           this.imageURL3 = null
@@ -1074,7 +1074,6 @@ export default {
     hash () {
       return this.$route.hash
     },
-    /* Bank Account Paths */
     bankCode () { return this.$store.state.bankAccount.bankCode },
     type () { return this.$store.state.bankAccount.type },
     agencia () { return this.$store.state.bankAccount.agencia },
@@ -1188,9 +1187,7 @@ export default {
   },
   watch: {
     acomodCreated (value) {
-      if (value === true) {
-        this.$router.push('/')
-      }
+      value === true ? this.$router.push('/') : ''
     },
     bankCode (value) { value !== '' ? this.bankCodeError = false : '' },
     agencia (value) { value !== '' ? this.agenciaError = false : '' },
@@ -1836,7 +1833,6 @@ export default {
           & .__back {
             font-size: 17px;
             font-weight: 500;
-            cursor: pointer;
           }
           & .__next {
             font-size: 17px;

@@ -84,7 +84,8 @@ export default {
       }
       if (value !== null && this.$store.state.clickedReservaAcomod === true && this.$route.name === 'acomodacoes-id') {
         this.$modal.hide('sign-in-modal')
-        this.$modal.show('reserva-desktop-modal')
+        /* this.$modal.show('reserva-desktop-modal') */
+        this.$router.push('/acomodacoes/reservar')
       }
     }
   }

@@ -227,6 +227,7 @@ const store = () => new Vuex.Store({
     /*
     ########## Passeio ##########
     */
+    passeioCreated: false,
     passeioID: null,
     passeios: null,
     passeio: null,
@@ -240,6 +241,7 @@ const store = () => new Vuex.Store({
     passeioData: {/* Atualizar a action */
       passeioID: null,
       userID: null,
+      recipientID: null,
       proprietario: null,
       email: null,
       celular: '',
@@ -557,6 +559,9 @@ const store = () => new Vuex.Store({
     /*
     ########## Passeio ##########
     */
+    m_passeioCreated (state, payload) {
+      state.passeioCreated = payload
+    },
     m_passeioID (state, payload) {
       state.passeioID = payload
       state.passeioData.passeioID = payload

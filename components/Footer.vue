@@ -85,6 +85,9 @@ export default {
       font-size: 14px;
       line-height: 25px;
     }
+    & .__subtitle:hover {
+      text-decoration: underline;
+    }
     & .trust {
       display: flex;
       align-items: center;
