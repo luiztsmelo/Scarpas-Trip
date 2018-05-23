@@ -65,6 +65,7 @@ const store = () => new Vuex.Store({
     */
     acomodCreated: false,
     showReservaAcomod: false,
+    isReservar: false,
     acomodID: null,
     acomods: null,
     acomod: null,
@@ -364,6 +365,9 @@ const store = () => new Vuex.Store({
     },
     m_showReservaAcomod (state, payload) {
       state.showReservaAcomod = payload
+    },
+    m_isReservar (state, payload) {
+      state.isReservar = payload
     },
     m_acomodID (state, payload) {
       state.acomodID = payload

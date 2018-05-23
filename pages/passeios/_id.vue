@@ -482,7 +482,7 @@ export default {
         line-height: 2.6rem;
         color: white;
         height: 2.7rem;
-        width:  10rem;
+        width:  50%;
         border-radius: 4px;
       }
     }

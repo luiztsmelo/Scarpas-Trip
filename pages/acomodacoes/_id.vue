@@ -319,7 +319,7 @@
 
           </div>
 
-          <button class="__reserva-desktop-btn" type="button" @click="openReservaModal">Reservar</button>
+          <button class="__reserva-desktop-btn" type="button" @click="reservar">Reservar</button>
           <reserva-acomod-desktop/>
 
           <h4 class="__info">Não se preocupe, você ainda não será cobrado.</h4>
@@ -528,7 +528,7 @@ export default {
         ? el.setAttribute("style", "filter: invert(90%)")
         : el.removeAttribute("style")
     },
-    openReservaModal () {
+    reservar () {
       if (this.$store.state.reservaAcomod.periodoReserva === null) {
         this.$nextTick(() => this.$refs.datePicker.$el.focus())
       } else {
@@ -539,7 +539,8 @@ export default {
           this.$store.state.clickedReservaAcomod = true
           this.$modal.show('sign-in-modal')
         } else {
-          this.$modal.show('reserva-desktop-modal')
+          this.$store.commit('m_isReservar', true)
+          this.$router.push('/acomodacoes/reservar')
         }
       }
     },
@@ -693,7 +694,9 @@ export default {
     })
   },
   beforeRouteLeave (to, from, next) {
-    this.$store.dispatch('a_resetReservaAcomodDesktop')/* Resetar dados reservaAcomod p/ evitar bugs */
+    if (this.$store.state.isReservar === false) {
+      this.$store.dispatch('a_resetReservaAcomodDesktop')/* Resetar dados reservaAcomod p/ evitar bugs */
+    }
     this.$store.commit('m_loader', false) /* Evitar bugs com o loader */
     if (this.$store.state.showNavbar === false && this.$store.state.showFoobar === false) {
       this.$store.commit('m_showNavbar', true)
@@ -926,7 +929,7 @@ export default {
         line-height: 2.6rem;
         color: white;
         height: 2.7rem;
-        width:  10rem;
+        width:  50%;
         border-radius: 4px;
       }
     }
