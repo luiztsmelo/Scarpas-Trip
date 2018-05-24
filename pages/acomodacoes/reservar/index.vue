@@ -11,6 +11,7 @@ export default {
   /* NÃO FUNCIONA! MUDAR O SISTEMA DE RESERVA */
   beforeRouteLeave (to, from, next) {
     this.$store.commit('m_isReservar', false)
+    this.$store.dispatch('a_resetReservaAcomod')
     next()
   }
 }

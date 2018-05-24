@@ -823,7 +823,7 @@ const store = () => new Vuex.Store({
         })
       })
     },
-    a_resetReservaAcomodDesktop ({ state }) { /* Resetar dados quando usuário for p/ outra acomod (evitar bugs) */
+    a_resetReservaAcomod ({ state }) { /* Resetar dados quando usuário for p/ outra acomod (evitar bugs) */
       state.reservaAcomod = {
         reservaID: null,
         acomodID: null,
@@ -947,11 +947,7 @@ const store = () => new Vuex.Store({
     */
     a_googleSignIn ({ state, commit, dispatch }, user) {
       const provider = new firebase.auth.GoogleAuthProvider()
-      if (state.isMobile === true) {
-        firebase.auth().signInWithRedirect(provider)
-      } else {
-        firebase.auth().signInWithPopup(provider)
-      }
+      firebase.auth().signInWithPopup(provider)
       dispatch('a_authStateObserver')
     },
     /*
@@ -959,11 +955,7 @@ const store = () => new Vuex.Store({
     */
     a_facebookSignIn ({ state, commit, dispatch }, user) {
       const provider = new firebase.auth.FacebookAuthProvider()
-      if (state.isMobile === true) {
-        firebase.auth().signInWithRedirect(provider)
-      } else {
-        firebase.auth().signInWithPopup(provider)
-      }
+      firebase.auth().signInWithPopup(provider)
       dispatch('a_authStateObserver')
     },
     /*

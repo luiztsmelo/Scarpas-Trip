@@ -532,7 +532,7 @@
     <!-- ########## DADOS BANCÁRIOS PG.11 ########## -->
     <form class="cadastro-acomodacao" v-if="$store.state.cadastroAcomod11">
 
-      <h1 class="__form-title">Seus dados bancários para depósito</h1>   
+      <h1 class="__form-title">Seus dados bancários para transferência</h1>   
 
       <h3 class="__form-subtitle">{{ firstName }}, para finalizar precisamos dos dados de sua conta bancária para podermos transferir seus ganhos financeiros. Não se preocupe, suas informações estarão seguras.</h3>
 

@@ -26,7 +26,7 @@
           v-model="address"
           class="__input-address" 
           type="text" 
-          placeholder="E digite um comentário aqui..."
+          placeholder="E digite uma referência aqui..."
           maxlength="70"
           @focus="mapHeight = 60, isFocus = true"
           @blur="mapHeight = 73, isFocus = false"

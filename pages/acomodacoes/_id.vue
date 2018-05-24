@@ -695,9 +695,8 @@ export default {
   },
   beforeRouteLeave (to, from, next) {
     if (this.$store.state.isReservar === false) {
-      this.$store.dispatch('a_resetReservaAcomodDesktop')/* Resetar dados reservaAcomod p/ evitar bugs */
+      this.$store.dispatch('a_resetReservaAcomod')
     }
-    this.$store.commit('m_loader', false) /* Evitar bugs com o loader */
     if (this.$store.state.showNavbar === false && this.$store.state.showFoobar === false) {
       this.$store.commit('m_showNavbar', true)
       this.$store.commit('m_showFoobar', true)
