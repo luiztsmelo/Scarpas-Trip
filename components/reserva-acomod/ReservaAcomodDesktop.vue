@@ -43,7 +43,7 @@
         <div class="right-container">
           <div class="detalhes-reserva-header">
             <h1 class="__acomod-title">{{ acomod.title }}</h1>
-            <progressive-img class="__acomod-img" :src="image1H(acomod)" :placeholder="acomod.imageL1" :aspect-ratio="0.66"/>
+            <progressive-img class="__acomod-img" :src="image1H(acomod)" :placeholder="acomod.imageL1" :aspect-ratio="2/3"/>
           </div>
 
           <div class="detalhes-reserva-data">

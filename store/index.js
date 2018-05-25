@@ -56,7 +56,7 @@ const store = () => new Vuex.Store({
     /*
     -------------------- CONFIGS --------------------
     */
-    serviceFeeAcomod: 0.06,
+    serviceFeeAcomod: 0.07,
     /*
     -------------------- ANÚNCIOS --------------------
     */
@@ -66,6 +66,7 @@ const store = () => new Vuex.Store({
     acomodCreated: false,
     showReservaAcomod: false,
     isReservar: false,
+    visitedID: null,
     acomodID: null,
     acomods: null,
     acomod: null,

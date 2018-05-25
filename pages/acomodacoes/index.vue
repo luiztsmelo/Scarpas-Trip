@@ -9,15 +9,15 @@
               <swiper :options="swiperOption">
 
                 <swiper-slide class="slide">
-                  <progressive-img class="__img" :src="image1H(acomod)" :placeholder="acomod.imageL1" :aspect-ratio="0.66"/>
+                  <progressive-img class="__img" :src="image1H(acomod)" :placeholder="acomod.imageL1" :aspect-ratio="2/3"/>
                 </swiper-slide>
 
                 <swiper-slide class="slide" v-if="ifImage2(acomod)">
-                  <progressive-img class="__img" :src="image2H(acomod)" :placeholder="acomod.imageL2" :aspect-ratio="0.66"/>
+                  <progressive-img class="__img" :src="image2H(acomod)" :placeholder="acomod.imageL2" :aspect-ratio="2/3"/>
                 </swiper-slide>
 
                 <swiper-slide class="slide" v-if="ifImage3(acomod)">
-                  <progressive-img class="__img" :src="image3H(acomod)" :placeholder="acomod.imageL3" :aspect-ratio="0.66"/>
+                  <progressive-img class="__img" :src="image3H(acomod)" :placeholder="acomod.imageL3" :aspect-ratio="2/3"/>
                 </swiper-slide>
 
                 <div class="swiper-pagination" slot="pagination"></div>

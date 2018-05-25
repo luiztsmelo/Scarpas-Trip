@@ -25,15 +25,15 @@
       <swiper :options="swiperOption">
         
         <swiper-slide class="slide">
-          <progressive-img class="__img" :src="image1H(acomod)" :placeholder="acomod.imageL1" :aspect-ratio="0.66"/>
+          <progressive-img class="__img" :src="image1H(acomod)" :placeholder="acomod.imageL1" :aspect-ratio="2/3"/>
         </swiper-slide>
 
         <swiper-slide class="slide" v-if="ifImage2">
-          <progressive-img class="__img" :src="image2H(acomod)" :placeholder="acomod.imageL1" :aspect-ratio="0.66"/>
+          <progressive-img class="__img" :src="image2H(acomod)" :placeholder="acomod.imageL2" :aspect-ratio="2/3"/>
         </swiper-slide>
 
         <swiper-slide class="slide" v-if="ifImage3">
-          <progressive-img class="__img" :src="image3H(acomod)" :placeholder="acomod.imageL3" :aspect-ratio="0.66"/>
+          <progressive-img class="__img" :src="image3H(acomod)" :placeholder="acomod.imageL3" :aspect-ratio="2/3"/>
         </swiper-slide>
 
         <div class="swiper-pagination" slot="pagination"></div>
@@ -513,8 +513,11 @@ export default {
       }
       store.commit('m_loader', false)
       firebase.firestore().collection('acomods').doc(params.id).collection('visited').add({ 
-        date: new Date().getTime()
-      })
+        date: new Date().getTime(),
+        clickedReservaBtn: false,
+        wentToReservaPage: false,
+        concludedReserva: false
+      }).then(doc => store.state.visitedID = doc.id)
     })
   },
   methods: {
@@ -529,6 +532,9 @@ export default {
         : el.removeAttribute("style")
     },
     reservar () {
+      firebase.firestore().collection('acomods').doc(this.$route.params.id).collection('visited').doc(this.$store.state.visitedID).update({ 
+        clickedReservaBtn: true
+      })
       if (this.$store.state.reservaAcomod.periodoReserva === null) {
         this.$nextTick(() => this.$refs.datePicker.$el.focus())
       } else {
@@ -547,7 +553,7 @@ export default {
     serviceFeeDialog () {
       this.$modal.show('dialog', {
         title: 'Taxa de Serviço',
-        text: 'Taxa de ' + this.$store.state.serviceFeeAcomod * 100 + '% cobrada com o intuito de garantir suporte e total segurança em sua reserva caso algum problema aconteça.',
+        text: 'Taxa de ' + this.$store.state.serviceFeeAcomod * 100 + '% cobrada com o intuito de garantir suporte e total segurança em sua estadia caso algum problema aconteça.',
         buttons: [{ title: 'OK' }]
       })
     },
