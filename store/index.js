@@ -37,6 +37,8 @@ const store = () => new Vuex.Store({
     */
     error: false,
     reservaPageError: false,
+    acomodPageError: false,
+    acomodRef: null,
     /*
     -------------------- USER --------------------
     */
@@ -716,6 +718,15 @@ const store = () => new Vuex.Store({
   *****************************************************************************************
   */
   actions: {
+    /*
+    ########## Error ##########
+    */
+    a_resetError ({ state }) {
+      state.error = false
+      state.reservaPageError = false
+      state.acomodPageError = false
+      state.acomodRef = null
+    },
     /*
     ########## Acomodações ##########
     */

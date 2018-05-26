@@ -4,7 +4,8 @@
 
     <div class="alert-box" v-if="$store.state.error">
       <h3 class="__text" v-if="$store.state.reservaPageError">Reserva não encontrada.</h3>
-      <img src="../assets/img/exit.svg" class="__close" @click="closeAlertBox">
+      <h3 class="__text" v-if="$store.state.acomodPageError">Acomodação {{ this.$store.state.acomodRef }} não está listada.</h3>
+      <img src="../assets/img/exit.svg" class="__close" @click="$store.dispatch('a_resetError')">
     </div>
 
 
@@ -41,12 +42,6 @@ import MapFull from '~/components/MapFull.vue'
 
 export default {
   components: { Navbar, Foobar, SignIn, Menuu, Loader, Share, MapFull },
-  methods: {
-    closeAlertBox () {
-      this.$store.state.error = false
-      this.$store.state.reservaPageError = false
-    }
-  },
   beforeCreate () {
     /* 
     DETECT DEVICE
@@ -75,11 +70,13 @@ export default {
     z-index: 999999;
     height: 3rem;
     width: 100%;
-    background: #EC0000;
+    background: #EC407A;
     color: white;
-    transition: .3s all ease;
     & .__text {
+      text-align: center;
+      font-size: 15px;
       font-weight: 500;
+      width: 100%;
     }
     & .__close {
       cursor: pointer;

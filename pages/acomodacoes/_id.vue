@@ -499,6 +499,7 @@ export default {
       ]
     }
   },
+  middleware: 'acomodValidate',
   transition: 'id',
   fetch ({ store, params }) {
     return firebase.firestore().collection('acomods').doc(params.id).get().then(doc => {
