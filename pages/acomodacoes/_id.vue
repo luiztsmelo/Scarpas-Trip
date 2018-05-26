@@ -297,24 +297,20 @@
             <div class="reserva-info_item" style="padding-bottom: .3rem">
               <div style="display:flex;flex:row;align-items:center">
                 <h3>Taxa de serviço</h3>
-                <img 
-                  src="../../assets/img/info.svg"
-                  style="width:.95rem;height:auto;margin-left:.3rem;cursor:pointer"
-                  @click="serviceFeeDialog"
-                >
+                <img src="../../assets/img/info.svg" style="width:.95rem;height:auto;margin-left:.3rem;cursor:pointer" @click="serviceFeeDialog">
                 <v-dialog id="service-fee" style="z-index:10000"/>
               </div>
-              <h3>R$ {{ serviceFeeTotal.toLocaleString() }}</h3>
+              <h3>R${{ serviceFeeTotal.toLocaleString() }}</h3>
             </div>
 
             <div class="reserva-info_item-total" style="padding-top: .3rem">
               <h3>Total</h3>
-              <h3>R$ {{ valorReservaTotal.toLocaleString() }}</h3>
+              <h3>R${{ valorReservaTotal.toLocaleString() }}</h3>
             </div>
 
             <div class="reserva-info_item" v-if="$store.state.reservaAcomod.totalHospedes != 1">
               <h3>Dividido para {{ $store.state.reservaAcomod.totalHospedes }}</h3>
-              <h3>R$ {{ valorReservaTotalDividido.toLocaleString() }}</h3>
+              <h3>R${{ valorReservaTotalDividido.toLocaleString() }}</h3>
             </div>
 
           </div>
@@ -553,7 +549,7 @@ export default {
     serviceFeeDialog () {
       this.$modal.show('dialog', {
         title: 'Taxa de Serviço',
-        text: 'Taxa de ' + this.$store.state.serviceFeeAcomod * 100 + '% cobrada com o intuito de garantir suporte e total segurança em sua estadia caso algum problema aconteça.',
+        text: 'Taxa de ' + Math.round(this.$store.state.serviceFeeAcomod * 100) + '% cobrada com o intuito de garantir suporte e total segurança em sua estadia caso algum problema aconteça.',
         buttons: [{ title: 'OK' }]
       })
     },
@@ -715,9 +711,9 @@ export default {
 </script>
 
 <style>
-@import url('../../assets/css/main.css');
-@import url('../../assets/css/pagination.css');
-@import url('../../assets/css/_id.css');
+@import url('~/assets/css/main.css');
+@import url('~/assets/css/pagination.css');
+@import url('~/assets/css/_id.css');
 
 .acomods-id {
   background-color: white;

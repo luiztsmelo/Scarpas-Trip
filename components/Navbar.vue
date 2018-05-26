@@ -1,6 +1,11 @@
 <template>
   <transition name="navbar-animation">
-    <div class="navbar" v-show="showNavbar">
+
+    <div 
+      class="navbar" 
+      :class="[ $store.state.error ? 'error' : '' ]" 
+      v-show="showNavbar">
+      
       <div class="navbar-body">
         
 
@@ -284,6 +289,12 @@ export default {
     }
   }
 }
+
+.error {
+  transform: translateY(3rem);
+}
+
+
 /* TRANSITIONS */
 
 .navbar-animation-enter,

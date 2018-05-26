@@ -33,6 +33,11 @@ const store = () => new Vuex.Store({
     googleMapsInitialized: false,
     fromWithoutAddress: false,
     /*
+    -------------------- ERRORS --------------------
+    */
+    error: false,
+    reservaPageError: false,
+    /*
     -------------------- USER --------------------
     */
     user: {
@@ -83,6 +88,7 @@ const store = () => new Vuex.Store({
     blobAcH3J: null,
     blobAcH3W: null,
     creditCard: {
+      paymentMethod: 'credit_card',
       cardNumber: '',
       cardHolderName: '',
       cardExpirationMonth: 'MM',
@@ -143,8 +149,7 @@ const store = () => new Vuex.Store({
     },
     reservaAcomod: {/* Atualizar Action */
       acomodID: null,
-      requested: null,
-      paymentMethod: 'credit_card',
+      created: null,
       totalHospedes: 1,
       periodoReserva: null,
       startDate: null,
@@ -722,6 +727,7 @@ const store = () => new Vuex.Store({
         })
         /* Resetar states */
         commit('m_creditCard', { /* MUDAR PARA A RESERVA */
+          paymentMethod: 'credit_card',
           cardNumber: '',
           cardHolderName: '',
           cardExpirationMonth: 'MM',
@@ -785,7 +791,7 @@ const store = () => new Vuex.Store({
       })
     },
     a_newReservaAcomod ({ state, commit }, reservaID) {
-      state.reservaAcomod.requested = new Date().getTime()
+      state.reservaAcomod.created = new Date().getTime()
       state.reservaAcomod.acomodID = state.acomod.acomodID
       state.reservaAcomod.hostID = state.acomod.userID
       state.reservaAcomod.hostName = state.acomod.proprietario
@@ -809,7 +815,7 @@ const store = () => new Vuex.Store({
           'fields': {
             'reservaID': reservaID,
             'acomodID': state.acomod.acomodID,
-            'requested': state.reservaAcomod.requested,
+            'created': state.reservaAcomod.created,
             'startDate': startDate,
             'endDate': endDate,
             'noites': state.reservaAcomod.noites,
@@ -826,9 +832,8 @@ const store = () => new Vuex.Store({
     },
     a_resetReservaAcomod ({ state }) { /* Resetar dados quando usuário for p/ outra acomod (evitar bugs) */
       state.reservaAcomod = {
-        reservaID: null,
         acomodID: null,
-        requested: null,
+        created: null,
         totalHospedes: 1,
         periodoReserva: null,
         startDate: null,

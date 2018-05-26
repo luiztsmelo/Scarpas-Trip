@@ -1,6 +1,7 @@
 <template>
   <div class="reservar">
     
+
     <!-- ******* FLEX LEFT ******* -->
     <div class="flex-left">
 
@@ -10,6 +11,7 @@
       </div>
       
     </div><!-- ******* FLEX LEFT ******* -->
+
 
 
     <!-- ******* FLEX RIGHT ******* -->
@@ -49,11 +51,12 @@
 
         <div class="detalhes-reserva-valor_item-total" style="padding-top: 1rem">
           <h3>Total</h3>
-          <h3>R${{ $store.state.reservaAcomod.valorReservaTotal.toLocaleString() }}</h3>
+          <h3 class="__valor-total">R${{ $store.state.reservaAcomod.valorReservaTotal.toLocaleString() }}</h3>
         </div>
       </div>
 
     </div> <!-- ******* FLEX RIGHT ******* -->
+
 
   </div>
 </template>
@@ -69,6 +72,7 @@ export default {
       title: 'Reservar: ' + this.acomod.title
     }
   },
+  middleware: 'reservaValidate',
   transition: 'opacity',
   methods: {
     image1H (acomod) {
@@ -83,7 +87,7 @@ export default {
     serviceFeeDialog () {
       this.$modal.show('dialog', {
         title: 'Taxa de Serviço',
-        text: 'Taxa de ' + this.$store.state.serviceFeeAcomod * 100 + '% cobrada com o intuito de garantir suporte e total segurança em sua estadia caso algum problema aconteça.',
+        text: 'Taxa de ' + Math.round(this.$store.state.serviceFeeAcomod * 100) + '% cobrada com o intuito de garantir suporte e total segurança em sua estadia caso algum problema aconteça.',
         buttons: [{ title: 'OK' }]
       })
     }
@@ -126,15 +130,15 @@ export default {
 </script>
 
 <style scoped>
-@import url('../../../assets/css/main.css');
+@import url('~/assets/css/main.css');
 
 .reservar {
   display: flex;
-  padding: 8rem 12% 3rem;
+  padding: 8rem 12% 4rem;
 
   /* ******* FLEX LEFT ******* */
   & .flex-left {
-    flex: 66%;
+    flex: 65%;
     & .title-box {
       display: flex;
       align-items: center;
@@ -151,8 +155,8 @@ export default {
 
   /* ******* FLEX RIGHT ******* */
   & .flex-right {
-    flex: 34%;
-    max-width: 34%;
+    flex: 35%;
+    max-width: 35%;
     border: 1px solid rgb(222,222,222);
     & .__acomod-image {
       width: 100%;
@@ -160,8 +164,8 @@ export default {
     }
     & .__acomod-title {
       margin: 0 1.4rem;
-      padding: 1.4rem 0;
-      font-size: 18px;
+      padding: 1.2rem 0;
+      font-size: 19px;
       font-weight: 700;
       border-bottom: 1px solid rgb(222,222,222);
       white-space: nowrap;
@@ -201,9 +205,9 @@ export default {
         display: flex;
         justify-content: space-between;
         border-top: 1px solid rgb(222,222,222);
-        & h3 {
-          font-size: 18px;
-          font-weight: 500;
+        & .__valor-total {
+          font-size: 19px;
+          font-weight: 600;
         }
       }
     }

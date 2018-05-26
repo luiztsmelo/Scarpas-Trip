@@ -1378,9 +1378,9 @@ export default {
 </script>
 
 <style>
-@import url('../../../assets/css/main.css');
-@import url('../../../assets/css/switcher.css');
-@import url('../../../assets/css/vue-simple-suggest.css');
+@import url('~/assets/css/main.css');
+@import url('~/assets/css/switcher.css');
+@import url('~/assets/css/vue-simple-suggest.css');
 
 .anunciar-acomodacao {
   margin-top: 3.4rem;

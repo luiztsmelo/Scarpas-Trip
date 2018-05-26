@@ -212,7 +212,7 @@ export default {
     serviceFeeDialog () {
       this.$modal.show('dialog', {
         title: 'Taxa de Serviço',
-        text: 'Taxa de ' + this.$store.state.serviceFeeAcomod * 100 + '% cobrada com o intuito de garantir suporte e total segurança em sua reserva caso algum problema aconteça.',
+        text: 'Taxa de ' + Math.round(this.$store.state.serviceFeeAcomod * 100) + '% cobrada com o intuito de garantir suporte e total segurança em sua reserva caso algum problema aconteça.',
         buttons: [{ title: 'Fechar' }]
       })
     },

@@ -188,7 +188,7 @@ textarea {
 .dialog-c-text {
   color: var(--color01) !important;
   font-size: 15px !important;
-  line-height: 24px !important;
+  line-height: 23px !important;
   padding-bottom: .5rem !important;
 }
 .vue-dialog-button {

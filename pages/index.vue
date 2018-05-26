@@ -212,7 +212,7 @@ export default {
 </script>
 
 <style>
-@import url('../assets/css/main.css');
+@import url('~/assets/css/main.css');
 
 .home {
   margin-top: 3.4rem;
