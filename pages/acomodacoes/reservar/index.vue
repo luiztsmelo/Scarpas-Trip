@@ -7,8 +7,18 @@
 
       <div class="title-box">
         <h1 class="__number">1</h1>
-        <h1 class="__title">Regras {{ tipoAcomodTitle }}</h1>
+        <h1 class="__title">Revisar Regras {{ tipoAcomodTitle }}</h1>
       </div>
+
+      <!-- <div class="title-box">
+        <h1 class="__number">2</h1>
+        <h1 class="__title">Mensagem para {{ acomod.proprietario.split(' ')[0] }}</h1>
+      </div> -->
+
+      <!-- <div class="title-box">
+        <h1 class="__number">3</h1>
+        <h1 class="__title">Pagamento</h1>
+      </div> -->
       
     </div><!-- ******* FLEX LEFT ******* -->
 
@@ -134,7 +144,7 @@ export default {
 
 .reservar {
   display: flex;
-  padding: 8rem 12% 4rem;
+  padding: 7rem 12% 4rem;
 
   /* ******* FLEX LEFT ******* */
   & .flex-left {
@@ -143,8 +153,10 @@ export default {
       display: flex;
       align-items: center;
       & .__number {
-        font-size: 37px;
-        padding-right: .8rem;
+        width: 2rem;
+        padding-right: .4rem;
+        text-align: center;
+        font-size: 38px;
         color: rgb(200,200,200);
       }
       & .__title {
@@ -206,7 +218,7 @@ export default {
         justify-content: space-between;
         border-top: 1px solid rgb(222,222,222);
         & .__valor-total {
-          font-size: 19px;
+          font-size: 18px;
           font-weight: 600;
         }
       }

@@ -4,7 +4,7 @@
 
     <div class="alert-box" v-if="$store.state.error">
       <h3 class="__text" v-if="$store.state.reservaPageError">Reserva não encontrada.</h3>
-      <h3 class="__text" v-if="$store.state.acomodPageError">Acomodação {{ this.$store.state.acomodRef }} não está listada.</h3>
+      <h3 class="__text" v-if="$store.state.acomodPageError">A acomodação {{ this.$store.state.acomodRef }} não está listada.</h3>
       <img src="../assets/img/exit.svg" class="__close" @click="$store.dispatch('a_resetError')">
     </div>
 

@@ -193,20 +193,6 @@ export default {
       store.commit('m_atracoes', snapshot.docs.map(doc => doc.data()))
     })
   },
-  computed: {
-    error () {
-      return this.$store.state.error 
-    }
-  },
-  watch: {
-    error (value) {
-      if (value === true) {
-        setTimeout(() => {
-          this.$store.dispatch('a_resetError')
-        }, 3000)
-      }
-    }
-  },
   beforeRouteEnter (to, from, next) {
     next(vm => {
       vm.$store.state.offFoobar1 = true
