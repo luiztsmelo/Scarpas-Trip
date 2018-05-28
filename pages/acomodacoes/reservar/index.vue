@@ -220,7 +220,7 @@ export default {
         padding: .3rem 0;
         & .__img {
           margin-right: .7rem;
-          width: 1.8rem;
+          width: 1.75rem;
           height: auto;
         }
         & .__arrow-right-date {

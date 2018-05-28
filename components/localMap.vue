@@ -92,9 +92,8 @@ export default {
   computed: {
     mapStyle () {
       if (this.$store.state.isMobile == true) {
-        return 'height:' + this.mapHeight + '%'
+        return `height: ${this.mapHeight}%`
       }
-      
     },
     mapOptions () {
       return {

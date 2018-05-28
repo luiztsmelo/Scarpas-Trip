@@ -4,7 +4,7 @@ module.exports = {
   ** Build configuration
   */
   build: {
-    vendor: ['firebase']
+    vendor: ['firebase', 'pagarme']
   },
   /*
   ** Headers
