@@ -25,15 +25,15 @@
       <swiper :options="swiperOption">
         
         <swiper-slide class="slide">
-          <progressive-img class="__img" :src="image1H(acomod)" :placeholder="acomod.imageL1" :aspect-ratio="2/3"/>
+          <progressive-background class="__img" :src="image1H(acomod)" :placeholder="acomod.imageL1" :aspect-ratio="2/3"/>
         </swiper-slide>
 
         <swiper-slide class="slide" v-if="ifImage2">
-          <progressive-img class="__img" :src="image2H(acomod)" :placeholder="acomod.imageL2" :aspect-ratio="2/3"/>
+          <progressive-background class="__img" :src="image2H(acomod)" :placeholder="acomod.imageL2" :aspect-ratio="2/3"/>
         </swiper-slide>
 
         <swiper-slide class="slide" v-if="ifImage3">
-          <progressive-img class="__img" :src="image3H(acomod)" :placeholder="acomod.imageL3" :aspect-ratio="2/3"/>
+          <progressive-background class="__img" :src="image3H(acomod)" :placeholder="acomod.imageL3" :aspect-ratio="2/3"/>
         </swiper-slide>
 
         <div class="swiper-pagination" slot="pagination"></div>
@@ -289,12 +289,21 @@
 
           <div class="reserva-info" v-if="$store.state.reservaAcomod.periodoReserva !== null">
             
-            <div class="reserva-info_item">
+            <div class="reserva-info_item" style="padding-bottom: .2rem">
               <h3>R${{ acomod.valorDiariaNormal.toLocaleString() }} x {{ $store.state.reservaAcomod.noites }} noites</h3>
               <h3 id="valor">R$ {{ valorNoitesTotal.toLocaleString() }}</h3>
             </div>
 
-            <div class="reserva-info_item" style="padding-bottom: .3rem">
+            <div class="reserva-info_item" style="padding-bottom: .2rem">
+              <div style="display:flex;flex:row;align-items:center">
+                <h3>Taxa de limpeza</h3>
+                <img src="../../assets/img/info.svg" style="width:.95rem;height:auto;margin-left:.3rem;cursor:pointer" @click="limpezaFeeDialog">
+                <v-dialog id="limpeza-fee" style="z-index:10000"/>
+              </div>
+              <h3>R$0</h3>
+            </div>
+
+            <div class="reserva-info_item" style="padding-bottom: .4rem">
               <div style="display:flex;flex:row;align-items:center">
                 <h3>Taxa de serviço</h3>
                 <img src="../../assets/img/info.svg" style="width:.95rem;height:auto;margin-left:.3rem;cursor:pointer" @click="serviceFeeDialog">
@@ -308,10 +317,10 @@
               <h3>R${{ valorReservaTotal.toLocaleString() }}</h3>
             </div>
 
-            <div class="reserva-info_item" v-if="$store.state.reservaAcomod.totalHospedes != 1">
+            <!-- <div class="reserva-info_item" v-if="$store.state.reservaAcomod.totalHospedes != 1">
               <h3>Dividido para {{ $store.state.reservaAcomod.totalHospedes }}</h3>
               <h3>R${{ valorReservaTotalDividido.toLocaleString() }}</h3>
-            </div>
+            </div> -->
 
           </div>
 
@@ -547,10 +556,17 @@ export default {
         }
       }
     },
+    limpezaFeeDialog () {
+      this.$modal.show('dialog', {
+        title: 'Taxa de Limpeza',
+        text: `Taxa cobrada pelo proprietário para arcar com os custos de limpeza ${this.tipoAcomodLimpeza}.`,
+        buttons: [{ title: 'OK' }]
+      })
+    },
     serviceFeeDialog () {
       this.$modal.show('dialog', {
         title: 'Taxa de Serviço',
-        text: 'Taxa de ' + Math.round(this.$store.state.serviceFeeAcomod * 100) + '% cobrada com o intuito de garantir suporte e total segurança em sua estadia caso algum problema aconteça.',
+        text: `Taxa de ${Math.round(this.$store.state.serviceFeeAcomod * 100)}% cobrada com o intuito de garantir suporte e total segurança em sua estadia caso algum problema aconteça.`,
         buttons: [{ title: 'OK' }]
       })
     },
@@ -662,6 +678,19 @@ export default {
            : path === 'Sítio' ? 'o Sítio'
            : path === 'Fazenda' ? 'a Fazenda'
            : path === 'Hostel' ? 'o Hostel'
+           : ''
+    },
+    tipoAcomodLimpeza () {
+      const path = this.acomod.tipoAcomod
+      return path === 'Casa' ? 'da casa' 
+           : path === 'Apartamento' ? 'do apartamento'
+           : path === 'Rancho' ? 'do rancho'
+           : path === 'Chácara' ? 'da chácara'
+           : path === 'Pousada' ? 'da pousada'
+           : path === 'Camping' ? 'do camping'
+           : path === 'Sítio' ? 'do sítio'
+           : path === 'Fazenda' ? 'da fazenda'
+           : path === 'Hostel' ? 'do hostel'
            : ''
     },
     acomod () {

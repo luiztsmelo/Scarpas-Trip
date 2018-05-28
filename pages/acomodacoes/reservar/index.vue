@@ -5,20 +5,15 @@
     <!-- ******* FLEX LEFT ******* -->
     <div class="flex-left">
 
-      <div class="title-box">
+      <div class="title-div">
         <h1 class="__number">1</h1>
         <h1 class="__title">Revisar Regras {{ tipoAcomodTitle }}</h1>
       </div>
 
-      <!-- <div class="title-box">
-        <h1 class="__number">2</h1>
-        <h1 class="__title">Mensagem para {{ acomod.proprietario.split(' ')[0] }}</h1>
-      </div> -->
+      <h3>Check in/out</h3>
+      <h3>Se permitido Fumar, Pets, Festas ou Eventos</h3>
+      <h3>Regras de Cancelamento</h3>
 
-      <!-- <div class="title-box">
-        <h1 class="__number">3</h1>
-        <h1 class="__title">Pagamento</h1>
-      </div> -->
       
     </div><!-- ******* FLEX LEFT ******* -->
 
@@ -27,7 +22,7 @@
     <!-- ******* FLEX RIGHT ******* -->
     <div class="flex-right">
 
-      <progressive-img class="__acomod-image" :src="image1H(acomod)" :placeholder="acomod.imageL1" :aspect-ratio="2/3"/>
+      <progressive-background  class="__acomod-image" :src="image1H(acomod)" :placeholder="acomod.imageL1" :aspect-ratio="2/3"/>
 
       <h1 class="__acomod-title">{{ acomod.title }}</h1>
 
@@ -45,12 +40,22 @@
       </div>
 
       <div class="detalhes-reserva-valor" v-if="$store.state.reservaAcomod.valorReservaTotal !== null">
-        <div class="detalhes-reserva-valor_item">
+
+        <div class="detalhes-reserva-valor_item" style="padding-bottom: .5rem">
           <h3>R${{ acomod.valorDiariaNormal.toLocaleString() }} x {{ $store.state.reservaAcomod.noites }} noites</h3>
           <h3 id="valor">R${{ $store.state.reservaAcomod.valorNoitesTotal.toLocaleString() }}</h3>
         </div>
 
-        <div class="detalhes-reserva-valor_item" style="padding-bottom: 1rem">
+        <div class="detalhes-reserva-valor_item" style="padding-bottom: .5rem">
+          <div style="display:flex;flex:row;align-items:center">
+            <h3>Taxa de limpeza</h3>
+            <img src="../../../assets/img/info.svg" style="width:.95rem;height:auto;margin-left:.3rem;cursor:pointer" @click="limpezaFeeDialog">
+            <v-dialog id="limpeza-fee" style="z-index:10000"/>
+          </div>
+          <h3>R$0</h3>
+        </div>
+
+        <div class="detalhes-reserva-valor_item" style="padding-bottom: .8rem">
           <div style="display:flex;flex:row;align-items:center">
             <h3>Taxa de serviço</h3>
             <img src="../../../assets/img/info.svg" style="width:.95rem;height:auto;margin-left:.3rem;cursor:pointer" @click="serviceFeeDialog">
@@ -59,7 +64,7 @@
           <h3>R${{ $store.state.reservaAcomod.serviceFeeTotal.toLocaleString() }}</h3>
         </div>
 
-        <div class="detalhes-reserva-valor_item-total" style="padding-top: 1rem">
+        <div class="detalhes-reserva-valor_item-total" style="padding-top: .8rem">
           <h3>Total</h3>
           <h3 class="__valor-total">R${{ $store.state.reservaAcomod.valorReservaTotal.toLocaleString() }}</h3>
         </div>
@@ -94,10 +99,17 @@ export default {
     image3H (acomod) {
       return supportsWebP ? acomod.imageH3W : acomod.imageH3J
     },
+    limpezaFeeDialog () {
+      this.$modal.show('dialog', {
+        title: 'Taxa de Limpeza',
+        text: `Taxa cobrada pelo proprietário para arcar com os custos de limpeza ${this.tipoAcomodLimpeza}.`,
+        buttons: [{ title: 'OK' }]
+      })
+    },
     serviceFeeDialog () {
       this.$modal.show('dialog', {
         title: 'Taxa de Serviço',
-        text: 'Taxa de ' + Math.round(this.$store.state.serviceFeeAcomod * 100) + '% cobrada com o intuito de garantir suporte e total segurança em sua estadia caso algum problema aconteça.',
+        text: `Taxa de ${Math.round(this.$store.state.serviceFeeAcomod * 100)}% cobrada com o intuito de garantir suporte e total segurança em sua estadia caso algum problema aconteça.`,
         buttons: [{ title: 'OK' }]
       })
     }
@@ -117,6 +129,19 @@ export default {
            : path === 'Sítio' ? 'do Sítio'
            : path === 'Fazenda' ? 'da Fazenda'
            : path === 'Hostel' ? 'do Hostel'
+           : ''
+    },
+    tipoAcomodLimpeza () {
+      const path = this.acomod.tipoAcomod
+      return path === 'Casa' ? 'da casa' 
+           : path === 'Apartamento' ? 'do apartamento'
+           : path === 'Rancho' ? 'do rancho'
+           : path === 'Chácara' ? 'da chácara'
+           : path === 'Pousada' ? 'da pousada'
+           : path === 'Camping' ? 'do camping'
+           : path === 'Sítio' ? 'do sítio'
+           : path === 'Fazenda' ? 'da fazenda'
+           : path === 'Hostel' ? 'do hostel'
            : ''
     },
   },
@@ -149,15 +174,16 @@ export default {
   /* ******* FLEX LEFT ******* */
   & .flex-left {
     flex: 65%;
-    & .title-box {
+    & .title-div {
       display: flex;
       align-items: center;
+      padding-bottom: 2rem;
       & .__number {
         width: 2rem;
         padding-right: .4rem;
         text-align: center;
         font-size: 38px;
-        color: rgb(200,200,200);
+        color: rgb(192,192,192);
       }
       & .__title {
         font-size: 32px;
@@ -211,7 +237,6 @@ export default {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: .23rem 0;
       }
       & .detalhes-reserva-valor_item-total {
         display: flex;
