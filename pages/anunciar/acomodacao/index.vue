@@ -390,7 +390,7 @@
     <!-- ########## VALOR DA ESTADIA PG.7 ########## -->
     <form class="cadastro-acomodacao" v-if="$store.state.cadastroAcomod7">
 
-      <h1 class="__form-title">Quanto será o valor por noite?</h1>
+      <h1 class="__form-title">Qual será o valor por noite?</h1>
 
       <h3 class="__form-subtitle">Será possível ajustar o valor após a publicação do anúncio, para adequar a períodos de baixa e alta demanda. A taxa de limpeza é opcional.</h3>
 
@@ -490,24 +490,24 @@
       <div v-if="$store.state.user.email !== null">
 
         <div class="item-form">
-          <label>Celular / WhatsApp 1</label>
+          <label>Celular / WhatsApp</label>
           <masked-input
             type="tel"
             v-model="$store.state.acomodData.celular"
             :mask="['(', /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]"
             :guide="false"
-            placeholder="(  )      -    ">
+            placeholder="(  )          ">
           </masked-input>
         </div>
 
         <div class="item-form">
-          <label>Celular / WhatsApp 2 (Opcional)</label>
+          <label>Celular / WhatsApp 2 <light>(Opcional)</light></label>
           <masked-input
             type="tel"
             v-model="$store.state.acomodData.celular2"
             :mask="['(', /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]"
             :guide="false"
-            placeholder="(  )      -    ">
+            placeholder="(  )          ">
           </masked-input>
         </div>
 
