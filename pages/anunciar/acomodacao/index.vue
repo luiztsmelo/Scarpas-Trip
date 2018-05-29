@@ -390,7 +390,7 @@
     <!-- ########## VALOR DA ESTADIA PG.7 ########## -->
     <form class="cadastro-acomodacao" v-if="$store.state.cadastroAcomod7">
 
-      <h1 class="__form-title">Qual será o valor por noite?</h1>
+      <h1 class="__form-title">Quanto será o valor por noite?</h1>
 
       <h3 class="__form-subtitle">Será possível ajustar o valor após a publicação do anúncio, para adequar a períodos de baixa e alta demanda. A taxa de limpeza é opcional.</h3>
 
@@ -858,8 +858,14 @@ export default {
       }
     },
     nextBtn7 () {
-      if (1<2) {
+      if (this.$store.state.acomodData.valorNoite !== 0) {
         this.$store.commit('m_cadastroAcomod7', false), this.$store.commit('m_cadastroAcomod8', true), this.$store.commit('m_acomodProgressBar', (100/11)*8), this.scrollTop(), window.location.hash = "titulo"
+      } else {
+        this.$modal.show('dialog', {
+          title: 'Ops',
+          text: 'O valor por noite não pode ser zero.',
+          buttons: [{ title: 'OK' }]
+        })
       }
     },
     nextBtn8 () {
@@ -1173,7 +1179,7 @@ export default {
       return this.imageURL1 !== null ? 'background:#FFA04F' : ''
     },
     form7ok () {
-      return 1<2 ? 'background:#FFA04F' : ''
+      return this.$store.state.acomodData.valorNoite !== 0 ? 'background:#FFA04F' : ''
     },
     form8ok () {
       return this.$store.state.acomodData.title !== '' ? 'background:#FFA04F' : ''
