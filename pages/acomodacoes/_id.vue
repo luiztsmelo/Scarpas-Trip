@@ -513,14 +513,15 @@ export default {
   fetch ({ store, params }) {
     return firebase.firestore().collection('acomods').doc(params.id).get().then(doc => {
       store.commit('m_acomod', doc.data())
-      if (store.state.isMobile == true) {
+      if (store.state.isMobile === true) {
         store.commit('m_showNavbar', false)
         store.commit('m_showFoobar', false)
       }
       store.commit('m_loader', false)
       if (doc.exists) {
-        firebase.firestore().collection('acomods').doc(params.id).collection('visited').add({ 
+        firebase.firestore().collection('acomods').doc(params.id).collection('visits').add({ 
           date: new Date().getTime(),
+          fromMobile: store.state.isMobile === true ? true : false,
           clickedReservaBtn: false,
           wentToReservaPage: false,
           concludedReserva: false
