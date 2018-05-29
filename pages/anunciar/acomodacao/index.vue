@@ -78,7 +78,7 @@
     <!-- ########## TOTAL DE HÓSPEDES PG.2 ########## -->
     <form class="cadastro-acomodacao" v-if="$store.state.cadastroAcomod2">
 
-      <h1 class="__form-title">Quantas pessoas podem se hospedar?</h1>
+      <h1 class="__form-title">Quantas pessoas {{ tipoAcomodTextLower }} consegue acomodar?</h1>
 
       <div class="item-form">
         <label>Total de Hóspedes</label>
@@ -277,7 +277,7 @@
     <!-- ########## IMAGEM E VÍDEOS PG.6 ########## -->
     <form class="cadastro-acomodacao" v-show="$store.state.cadastroAcomod6">
 
-      <h1 class="__form-title">Adicione Imagens e Vídeo</h1>
+      <h1 class="__form-title">Adicione imagens {{ tipoAcomodText }}</h1>
 
       <div class="before-choose-image" v-show="imageURL1 === null">
         <button class="__input-btn" type="button" @click="$refs.myCroppa1.chooseFile()">Adicionar Imagem</button>
@@ -390,7 +390,7 @@
     <!-- ########## VALOR DA ESTADIA PG.7 ########## -->
     <form class="cadastro-acomodacao" v-if="$store.state.cadastroAcomod7">
 
-      <h1 class="__form-title">Qual será o valor por noite?</h1>
+      <h1 class="__form-title">Qual será o valor da estadia?</h1>
 
       <h3 class="__form-subtitle">Será possível ajustar o valor após a publicação do anúncio, para adequar a períodos de baixa e alta demanda. A taxa de limpeza é opcional.</h3>
 
@@ -417,21 +417,12 @@
 
 
 
-    <!-- ########## TÍTULO PG.8 ########## -->
+    <!-- ########## REGRAS PG.8 ########## -->
     <form class="cadastro-acomodacao" v-if="$store.state.cadastroAcomod8">
 
-      <h1 class="__form-title">Dê um título para seu anúncio</h1>
+      <h1 class="__form-title">Regras</h1>
 
-      <textarea 
-      v-model="$store.state.acomodData.title"
-      v-autosize="title"
-      maxlength="50"
-      rows="1"
-      :placeholder="'ex: ' + tipoAcomodTitulo + ' em Capitólio'"
-      required>
-      {{title}}</textarea>
 
-      <span class="__lenght-calc">{{ titleLength }}</span>
 
       <div class="back-next"> 
         <div class="back-next-body">
@@ -440,26 +431,26 @@
         </div>
       </div> 
     
-    </form><!-- ########## TÍTULO PG.8 ########## -->
+    </form><!-- ########## REGRAS PG.8 ########## -->
 
 
 
 
-    <!-- ########## DESCRIÇÃO PG.9 ########## -->
+    <!-- ########## TÍTULO PG.9 ########## -->
     <form class="cadastro-acomodacao" v-if="$store.state.cadastroAcomod9">
 
-      <h1 class="__form-title">Descreva seu anúncio</h1>   
+      <h1 class="__form-title">Dê um título para seu anúncio</h1>
 
       <textarea 
-      v-model="$store.state.acomodData.subtitle"
-      v-autosize="subtitle"
-      maxlength="600"
+      v-model="$store.state.acomodData.title"
+      v-autosize="title"
+      maxlength="50"
       rows="1"
-      placeholder="Coloque informações importantes aqui, que não foram perguntadas antes"
+      :placeholder="'ex: ' + tipoAcomodTitulo + ' em Capitólio' + totalSuitesTitulo"
       required>
-      {{subtitle}}</textarea>
+      {{title}}</textarea>
 
-      <span class="__lenght-calc">{{ subtitleLength }}</span> 
+      <span class="__lenght-calc">{{ titleLength }}</span>
 
       <div class="back-next"> 
         <div class="back-next-body">
@@ -468,14 +459,42 @@
         </div>
       </div> 
     
-    </form><!-- ########## DESCRIÇÃO PG.9 ########## -->
+    </form><!-- ########## TÍTULO PG.9 ########## -->
 
 
 
 
-
-    <!-- ########## IDENTIFICAÇÃO PG.10 ########## -->
+    <!-- ########## DESCRIÇÃO PG.10 ########## -->
     <form class="cadastro-acomodacao" v-if="$store.state.cadastroAcomod10">
+
+      <h1 class="__form-title">Descreva melhor sobre {{ tipoAcomodTextLower }}</h1>   
+
+      <textarea 
+      v-model="$store.state.acomodData.subtitle"
+      v-autosize="subtitle"
+      maxlength="600"
+      rows="1"
+      placeholder="Dica: Escreva detalhes importantes aqui, que não foram perguntados antes."
+      required>
+      {{subtitle}}</textarea>
+
+      <span class="__lenght-calc">{{ subtitleLength }}</span> 
+
+      <div class="back-next"> 
+        <div class="back-next-body">
+          <button type="button" class="__back" @click="backBtn10">Voltar</button>
+          <button type="button" class="__next" :style="form10ok" @click="nextBtn10">Próximo</button>
+        </div>
+      </div> 
+    
+    </form><!-- ########## DESCRIÇÃO PG.10 ########## -->
+
+
+
+
+
+    <!-- ########## IDENTIFICAÇÃO PG.11 ########## -->
+    <form class="cadastro-acomodacao" v-if="$store.state.cadastroAcomod11">
 
       <h1 class="__form-title">Sua identificação</h1>   
 
@@ -517,19 +536,19 @@
 
       <div class="back-next"> 
         <div class="back-next-body">
-          <button type="button" class="__back" @click="backBtn10">Voltar</button>
-          <button type="button" class="__next" :style="form10ok" @click="nextBtn10">Próximo</button>
+          <button type="button" class="__back" @click="backBtn11">Voltar</button>
+          <button type="button" class="__next" :style="form11ok" @click="nextBtn11">Próximo</button>
         </div>
       </div> 
     
-    </form><!-- ########## IDENTIFICAÇÃO PG.10 ########## -->
+    </form><!-- ########## IDENTIFICAÇÃO PG.11 ########## -->
 
 
 
 
 
-    <!-- ########## DADOS BANCÁRIOS PG.11 ########## -->
-    <form class="cadastro-acomodacao" v-if="$store.state.cadastroAcomod11">
+    <!-- ########## DADOS BANCÁRIOS PG.12 ########## -->
+    <form class="cadastro-acomodacao" v-if="$store.state.cadastroAcomod12">
 
       <h1 class="__form-title">Seus dados bancários para transferência</h1>   
 
@@ -629,12 +648,12 @@
       
       <div class="back-next"> 
         <div class="back-next-body">
-          <button type="button" class="__back" @click="backBtn11">Voltar</button>
-          <button type="button" class="__next" :style="form11ok" @click="concluir">Anunciar</button>
+          <button type="button" class="__back" @click="backBtn12">Voltar</button>
+          <button type="button" class="__next" :style="form12ok" @click="concluir">Publicar</button>
         </div>
       </div> 
     
-    </form><!-- ########## DADOS BANCÁRIOS PG.11 ########## -->
+    </form><!-- ########## DADOS BANCÁRIOS PG.12 ########## -->
 
 
     <!-- CADASTRO ACOMODAÇÃO -->
@@ -810,6 +829,9 @@ export default {
     backBtn11 () {
       this.$store.commit('m_cadastroAcomod11', false), this.$store.commit('m_cadastroAcomod10', true), window.history.back(1)
     },
+    backBtn12 () {
+      this.$store.commit('m_cadastroAcomod12', false), this.$store.commit('m_cadastroAcomod11', true), window.history.back(1)
+    },
     
     /* ******************** NEXT BUTTONS ******************** */
     hashAcomod () {
@@ -817,27 +839,27 @@ export default {
     },
     nextBtn1 () {
       if (this.$store.state.acomodData.tipoAcomod !== null) {
-        this.$store.commit('m_cadastroAcomod1', false), this.$store.commit('m_cadastroAcomod2', true), this.$store.commit('m_acomodProgressBar', (100/11)*2), this.scrollTop(), window.location.hash = "capacidade"
+        this.$store.commit('m_cadastroAcomod1', false), this.$store.commit('m_cadastroAcomod2', true), this.$store.commit('m_acomodProgressBar', (100/12)*2), this.scrollTop(), window.location.hash = "capacidade"
       }
     },
     nextBtn2 () {
       if (this.$store.state.acomodData.totalHospedes !== null) {
-        this.$store.commit('m_cadastroAcomod2', false), this.$store.commit('m_cadastroAcomod3', true), this.$store.commit('m_acomodProgressBar', (100/11)*3), this.scrollTop(), window.location.hash = "caracteristicas"
+        this.$store.commit('m_cadastroAcomod2', false), this.$store.commit('m_cadastroAcomod3', true), this.$store.commit('m_acomodProgressBar', (100/12)*3), this.scrollTop(), window.location.hash = "caracteristicas"
       }
     },
     nextBtn3 () {
       if (1<2) {
-        this.$store.commit('m_cadastroAcomod3', false), this.$store.commit('m_cadastroAcomod4', true), this.$store.commit('m_acomodProgressBar', (100/11)*4), this.scrollTop(), window.location.hash = "comodidades"
+        this.$store.commit('m_cadastroAcomod3', false), this.$store.commit('m_cadastroAcomod4', true), this.$store.commit('m_acomodProgressBar', (100/12)*4), this.scrollTop(), window.location.hash = "comodidades"
       }
     },
     nextBtn4 () {
       if (1<2) {
-        this.$store.commit('m_cadastroAcomod4', false), this.$store.commit('m_cadastroAcomod5', true), this.$store.commit('m_acomodProgressBar', (100/11)*5), this.scrollTop(), window.location.hash = "local"
+        this.$store.commit('m_cadastroAcomod4', false), this.$store.commit('m_cadastroAcomod5', true), this.$store.commit('m_acomodProgressBar', (100/12)*5), this.scrollTop(), window.location.hash = "local"
       }
     },
     nextBtn5 () {
       if (this.$store.state.acomodPlace !== null || this.$store.state.acomodData.positionLAT !== -20.6141320) {
-        this.$store.commit('m_cadastroAcomod5', false), this.$store.commit('m_cadastroAcomod6', true), this.$store.commit('m_acomodProgressBar', (100/11)*6), this.scrollTop(), window.location.hash = "imagens"
+        this.$store.commit('m_cadastroAcomod5', false), this.$store.commit('m_cadastroAcomod6', true), this.$store.commit('m_acomodProgressBar', (100/12)*6), this.scrollTop(), window.location.hash = "imagens"
       } else {
         this.$modal.show('dialog', {
           title: 'Ops',
@@ -848,7 +870,7 @@ export default {
     },
     nextBtn6 () {
       if (this.imageURL1 !== null) {
-        this.$store.commit('m_cadastroAcomod6', false), this.$store.commit('m_cadastroAcomod7', true), this.$store.commit('m_acomodProgressBar', (100/11)*7), this.scrollTop(), window.location.hash = "valor"
+        this.$store.commit('m_cadastroAcomod6', false), this.$store.commit('m_cadastroAcomod7', true), this.$store.commit('m_acomodProgressBar', (100/12)*7), this.scrollTop(), window.location.hash = "valor"
       } else {
         this.$modal.show('dialog', {
           title: 'Ops',
@@ -859,7 +881,7 @@ export default {
     },
     nextBtn7 () {
       if (this.$store.state.acomodData.valorNoite !== 0) {
-        this.$store.commit('m_cadastroAcomod7', false), this.$store.commit('m_cadastroAcomod8', true), this.$store.commit('m_acomodProgressBar', (100/11)*8), this.scrollTop(), window.location.hash = "titulo"
+        this.$store.commit('m_cadastroAcomod7', false), this.$store.commit('m_cadastroAcomod8', true), this.$store.commit('m_acomodProgressBar', (100/12)*8), this.scrollTop(), window.location.hash = "regras"
       } else {
         this.$modal.show('dialog', {
           title: 'Ops',
@@ -869,8 +891,19 @@ export default {
       }
     },
     nextBtn8 () {
+      if (1<2) {
+        this.$store.commit('m_cadastroAcomod8', false), this.$store.commit('m_cadastroAcomod9', true), this.$store.commit('m_acomodProgressBar', (100/12)*9), this.scrollTop(), window.location.hash = "titulo"
+      } else {
+        this.$modal.show('dialog', {
+          title: 'Ops',
+          text: 'É preciso definir as regras.',
+          buttons: [{ title: 'OK' }]
+        })
+      }
+    },
+    nextBtn9 () {
       if (this.$store.state.acomodData.title !== '') {
-        this.$store.commit('m_cadastroAcomod8', false), this.$store.commit('m_cadastroAcomod9', true), this.$store.commit('m_acomodProgressBar', (100/11)*9), this.scrollTop(), window.location.hash = "subtitulo"
+        this.$store.commit('m_cadastroAcomod9', false), this.$store.commit('m_cadastroAcomod10', true), this.$store.commit('m_acomodProgressBar', (100/12)*10), this.scrollTop(), window.location.hash = "subtitulo"
       } else {
         this.$modal.show('dialog', {
           title: 'Ops',
@@ -879,9 +912,9 @@ export default {
         })
       }
     },
-    nextBtn9 () {
+    nextBtn10 () {
       if (this.$store.state.acomodData.subtitle !== '') {
-        this.$store.commit('m_cadastroAcomod9', false), this.$store.commit('m_cadastroAcomod10', true), this.$store.commit('m_acomodProgressBar', (100/11)*10), this.scrollTop(), window.location.hash = "identificacao"
+        this.$store.commit('m_cadastroAcomod10', false), this.$store.commit('m_cadastroAcomod11', true), this.$store.commit('m_acomodProgressBar', (100/12)*11), this.scrollTop(), window.location.hash = "identificacao"
       } else {
         this.$modal.show('dialog', {
           title: 'Ops',
@@ -890,7 +923,7 @@ export default {
         })
       }
     },
-    nextBtn10 () {
+    nextBtn11 () {
       if (this.$store.state.user.email === null) {
         this.$modal.show('dialog', {
           text: 'Conecte-se com uma de suas contas ou crie uma conta com seu e-mail.',
@@ -898,7 +931,7 @@ export default {
         })
       }
       if (this.$store.state.acomodData.celular.length === 15) {
-        this.$store.commit('m_cadastroAcomod10', false), this.$store.commit('m_cadastroAcomod11', true), this.$store.commit('m_acomodProgressBar', (100/11)*11), this.scrollTop(), window.location.hash = "dados"
+        this.$store.commit('m_cadastroAcomod11', false), this.$store.commit('m_cadastroAcomod12', true), this.$store.commit('m_acomodProgressBar', (100/12)*12), this.scrollTop(), window.location.hash = "dados"
       } else {
         this.$modal.show('dialog', {
           title: 'Ops',
@@ -1094,17 +1127,33 @@ export default {
         return 10
       }
     },
+    totalSuitesTitulo () {
+      return this.$store.state.acomodData.totalSuites != 1 ? ', ' + this.$store.state.acomodData.totalSuites + ' suítes' : ''
+    },
     tipoAcomodText () {
       const path = this.$store.state.acomodData.tipoAcomod
-      return path === 'Casa' ? 'da sua casa' 
-           : path === 'Apartamento' ? 'do seu apartamento'
-           : path === 'Rancho' ? 'do seu rancho'
-           : path === 'Chácara' ? 'da sua chácara'
-           : path === 'Pousada' ? 'da sua pousada'
-           : path === 'Camping' ? 'do seu camping'
-           : path === 'Sítio' ? 'do seu sítio'
-           : path === 'Fazenda' ? 'da sua fazenda'
-           : path === 'Hostel' ? 'do seu hostel'
+      return path === 'Casa' ? 'da casa' 
+           : path === 'Apartamento' ? 'do apartamento'
+           : path === 'Rancho' ? 'do rancho'
+           : path === 'Chácara' ? 'da chácara'
+           : path === 'Pousada' ? 'da pousada'
+           : path === 'Camping' ? 'do camping'
+           : path === 'Sítio' ? 'do sítio'
+           : path === 'Fazenda' ? 'da fazenda'
+           : path === 'Hostel' ? 'do hostel'
+           : ''
+    },
+    tipoAcomodTextLower () {
+      const path = this.$store.state.acomodData.tipoAcomod
+      return path === 'Casa' ? 'sua casa' 
+           : path === 'Apartamento' ? 'seu apartamento'
+           : path === 'Rancho' ? 'seu rancho'
+           : path === 'Chácara' ? 'sua chácara'
+           : path === 'Pousada' ? 'sua pousada'
+           : path === 'Camping' ? 'seu camping'
+           : path === 'Sítio' ? 'seu sítio'
+           : path === 'Fazenda' ? 'sua fazenda'
+           : path === 'Hostel' ? 'seu hostel'
            : ''
     },
     tipoAcomodTextLocal () {
@@ -1182,15 +1231,18 @@ export default {
       return this.$store.state.acomodData.valorNoite !== 0 ? 'background:#FFA04F' : ''
     },
     form8ok () {
-      return this.$store.state.acomodData.title !== '' ? 'background:#FFA04F' : ''
+      return 1<2 ? 'background:#FFA04F' : ''
     },
     form9ok () {
-      return this.$store.state.acomodData.subtitle !== '' ? 'background:#FFA04F' : ''
+      return this.$store.state.acomodData.title !== '' ? 'background:#FFA04F' : ''
     },
     form10ok () {
-      return this.$store.state.acomodData.celular.length === 15 ? 'background:#FFA04F' : ''
+      return this.$store.state.acomodData.subtitle !== '' ? 'background:#FFA04F' : ''
     },
     form11ok () {
+      return this.$store.state.acomodData.celular.length === 15 ? 'background:#FFA04F' : ''
+    },
+    form12ok () {
       return this.bankCode !== null && this.agencia !== '' && this.agenciaDV !== '' && this.conta !== '' && this.contaDV !== '' && this.legalName !== '' && this.docNumber.length === 14 ? 'background:#FFA04F' : ''
     },
     acomodCreated () {
@@ -1222,6 +1274,7 @@ export default {
         this.$store.commit('m_cadastroAcomod9', false)
         this.$store.commit('m_cadastroAcomod10', false)
         this.$store.commit('m_cadastroAcomod11', false)
+        this.$store.commit('m_cadastroAcomod12', false)
       } 
       if (value === '#tipo') {
         this.$store.commit('m_cadastroAcomod0', false)
@@ -1236,6 +1289,7 @@ export default {
         this.$store.commit('m_cadastroAcomod9', false)
         this.$store.commit('m_cadastroAcomod10', false)
         this.$store.commit('m_cadastroAcomod11', false)
+        this.$store.commit('m_cadastroAcomod12', false)
       } 
       if (value === '#capacidade') {
         this.$store.commit('m_cadastroAcomod0', false)
@@ -1250,6 +1304,7 @@ export default {
         this.$store.commit('m_cadastroAcomod9', false)
         this.$store.commit('m_cadastroAcomod10', false)
         this.$store.commit('m_cadastroAcomod11', false)
+        this.$store.commit('m_cadastroAcomod12', false)
       } 
       if (value === '#caracteristicas') {
         this.$store.commit('m_cadastroAcomod0', false)
@@ -1264,6 +1319,7 @@ export default {
         this.$store.commit('m_cadastroAcomod9', false)
         this.$store.commit('m_cadastroAcomod10', false)
         this.$store.commit('m_cadastroAcomod11', false)
+        this.$store.commit('m_cadastroAcomod12', false)
       } 
       if (value === '#comodidades') {
         this.$store.commit('m_cadastroAcomod0', false)
@@ -1278,6 +1334,7 @@ export default {
         this.$store.commit('m_cadastroAcomod9', false)
         this.$store.commit('m_cadastroAcomod10', false)
         this.$store.commit('m_cadastroAcomod11', false)
+        this.$store.commit('m_cadastroAcomod12', false)
       } 
       if (value === '#local') {
         this.$store.commit('m_cadastroAcomod0', false)
@@ -1292,6 +1349,7 @@ export default {
         this.$store.commit('m_cadastroAcomod9', false)
         this.$store.commit('m_cadastroAcomod10', false)
         this.$store.commit('m_cadastroAcomod11', false)
+        this.$store.commit('m_cadastroAcomod12', false)
       } 
       if (value === '#imagens') {
         this.$store.commit('m_cadastroAcomod0', false)
@@ -1306,6 +1364,7 @@ export default {
         this.$store.commit('m_cadastroAcomod9', false)
         this.$store.commit('m_cadastroAcomod10', false)
         this.$store.commit('m_cadastroAcomod11', false)
+        this.$store.commit('m_cadastroAcomod12', false)
       } 
       if (value === '#valor') {
         this.$store.commit('m_cadastroAcomod0', false)
@@ -1320,8 +1379,9 @@ export default {
         this.$store.commit('m_cadastroAcomod9', false)
         this.$store.commit('m_cadastroAcomod10', false)
         this.$store.commit('m_cadastroAcomod11', false)
+        this.$store.commit('m_cadastroAcomod12', false)
       } 
-      if (value === '#titulo') {
+      if (value === '#regras') {
         this.$store.commit('m_cadastroAcomod0', false)
         this.$store.commit('m_cadastroAcomod1', false)
         this.$store.commit('m_cadastroAcomod2', false)
@@ -1334,8 +1394,9 @@ export default {
         this.$store.commit('m_cadastroAcomod9', false)
         this.$store.commit('m_cadastroAcomod10', false)
         this.$store.commit('m_cadastroAcomod11', false)
+        this.$store.commit('m_cadastroAcomod12', false)
       } 
-      if (value === '#subtitulo') {
+      if (value === '#titulo') {
         this.$store.commit('m_cadastroAcomod0', false)
         this.$store.commit('m_cadastroAcomod1', false)
         this.$store.commit('m_cadastroAcomod2', false)
@@ -1348,8 +1409,9 @@ export default {
         this.$store.commit('m_cadastroAcomod9', true)
         this.$store.commit('m_cadastroAcomod10', false)
         this.$store.commit('m_cadastroAcomod11', false)
+        this.$store.commit('m_cadastroAcomod12', false)
       } 
-      if (value === '#identificacao') {
+      if (value === '#subtitulo') {
         this.$store.commit('m_cadastroAcomod0', false)
         this.$store.commit('m_cadastroAcomod1', false)
         this.$store.commit('m_cadastroAcomod2', false)
@@ -1362,6 +1424,22 @@ export default {
         this.$store.commit('m_cadastroAcomod9', false)
         this.$store.commit('m_cadastroAcomod10', true)
         this.$store.commit('m_cadastroAcomod11', false)
+        this.$store.commit('m_cadastroAcomod12', false)
+      } 
+      if (value === '#identificacao') {
+        this.$store.commit('m_cadastroAcomod0', false)
+        this.$store.commit('m_cadastroAcomod1', false)
+        this.$store.commit('m_cadastroAcomod2', false)
+        this.$store.commit('m_cadastroAcomod3', false)
+        this.$store.commit('m_cadastroAcomod4', false)
+        this.$store.commit('m_cadastroAcomod5', false)
+        this.$store.commit('m_cadastroAcomod6', false)
+        this.$store.commit('m_cadastroAcomod7', false)
+        this.$store.commit('m_cadastroAcomod8', false)
+        this.$store.commit('m_cadastroAcomod9', false)
+        this.$store.commit('m_cadastroAcomod10', false)
+        this.$store.commit('m_cadastroAcomod11', true)
+        this.$store.commit('m_cadastroAcomod12', false)
       } 
       if (value === '#dados') {
         this.$store.commit('m_cadastroAcomod0', false)
@@ -1375,7 +1453,8 @@ export default {
         this.$store.commit('m_cadastroAcomod8', false)
         this.$store.commit('m_cadastroAcomod9', false)
         this.$store.commit('m_cadastroAcomod10', false)
-        this.$store.commit('m_cadastroAcomod11', true)
+        this.$store.commit('m_cadastroAcomod11', false)
+        this.$store.commit('m_cadastroAcomod12', true)
       } 
     }
   },
@@ -1448,7 +1527,7 @@ export default {
     padding: 0 0 5.5rem 0;
     & .__form-title {
       padding: 3rem 7% 1.5rem 7%;
-      line-height: 35px;
+      line-height: 36px;
       font-size: 27px;
       font-weight: 700;
       z-index: 999;

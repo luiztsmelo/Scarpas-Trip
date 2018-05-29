@@ -521,7 +521,7 @@ export default {
       if (doc.exists) {
         firebase.firestore().collection('acomods').doc(params.id).collection('visits').add({ 
           date: new Date().getTime(),
-          fromMobile: store.state.isMobile === true ? true : false,
+          fromMobile: store.state.isMobile,
           clickedReservaBtn: false,
           wentToReservaPage: false,
           concludedReserva: false
