@@ -2,7 +2,7 @@ import Vue from 'vue'
 import money from 'v-money'
 
 Vue.use(money, {
-  precision: 2,
+  precision: 0,
   prefix: 'R$ ',
   decimal: ',',
   thousands: '.',

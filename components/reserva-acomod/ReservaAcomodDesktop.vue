@@ -61,7 +61,7 @@
 
           <div class="detalhes-reserva-valor" v-if="$store.state.reservaAcomod.valorReservaTotal !== null">
             <div class="detalhes-reserva-valor_item">
-              <h3>R${{ acomod.valorDiariaNormal.toLocaleString() }} x {{ $store.state.reservaAcomod.noites }} noites</h3>
+              <h3>R${{ acomod.valorNoite.toLocaleString() }} x {{ $store.state.reservaAcomod.noites }} noites</h3>
               <h3 id="valor">R${{ $store.state.reservaAcomod.valorNoitesTotal.toLocaleString() }}</h3>
             </div>
 
@@ -291,7 +291,7 @@ export default {
               'id': this.$store.state.acomod.acomodID,
               'title': this.$store.state.acomod.title,
               'category': 'acomod',
-              'unit_price': this.$store.state.acomod.valorDiariaNormal * 100,
+              'unit_price': this.$store.state.acomod.valorNoite * 100,
               'quantity': this.$store.state.reservaAcomod.noites,
               'tangible': false
             }

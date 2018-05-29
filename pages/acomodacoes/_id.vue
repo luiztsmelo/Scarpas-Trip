@@ -238,7 +238,7 @@
         <form class="reserva-desktop-form">
 
           <div class="valor-box">
-            <h1 class="__valor">R${{ acomod.valorDiariaNormal.toLocaleString() }}<span class="__valor-dia"> por noite</span></h1>
+            <h1 class="__valor">R${{ acomod.valorNoite.toLocaleString() }}<span class="__valor-dia"> por noite</span></h1>
           </div>
 
           <div class="item-form">
@@ -290,7 +290,7 @@
           <div class="reserva-info" v-if="$store.state.reservaAcomod.periodoReserva !== null">
             
             <div class="reserva-info_item" style="padding-bottom: .2rem">
-              <h3>R${{ acomod.valorDiariaNormal.toLocaleString() }} x {{ $store.state.reservaAcomod.noites }} noites</h3>
+              <h3>R${{ acomod.valorNoite.toLocaleString() }} x {{ $store.state.reservaAcomod.noites }} noites</h3>
               <h3 id="valor">R$ {{ valorNoitesTotal.toLocaleString() }}</h3>
             </div>
 
@@ -300,7 +300,7 @@
                 <img src="../../assets/img/info.svg" style="width:.95rem;height:auto;margin-left:.3rem;cursor:pointer" @click="limpezaFeeDialog">
                 <v-dialog id="limpeza-fee" style="z-index:10000"/>
               </div>
-              <h3>R$0</h3>
+              <h3>R${{ this.acomod.limpezaFee.toLocaleString() }}</h3>
             </div>
 
             <div class="reserva-info_item" style="padding-bottom: .4rem">
@@ -342,7 +342,7 @@
     <!-- ####### RESERVA ####### --> 
     <div class="reserva">
       <div class="reserva-body">
-        <h3 class="__reserva-valor">R${{ acomod.valorDiariaNormal }}<span class="__reserva-valor-pessoa">/noite</span></h3>
+        <h3 class="__reserva-valor">R${{ acomod.valorNoite }}<span class="__reserva-valor-pessoa">/noite</span></h3>
         <button class="__reserva-btn" @click="$store.commit('m_showReservaAcomod', true), hashReserva()">Reservar</button>
       </div>
     </div>
@@ -518,12 +518,14 @@ export default {
         store.commit('m_showFoobar', false)
       }
       store.commit('m_loader', false)
-      firebase.firestore().collection('acomods').doc(params.id).collection('visited').add({ 
-        date: new Date().getTime(),
-        clickedReservaBtn: false,
-        wentToReservaPage: false,
-        concludedReserva: false
-      }).then(doc => store.state.visitedID = doc.id)
+      if (doc.exists) {
+        firebase.firestore().collection('acomods').doc(params.id).collection('visited').add({ 
+          date: new Date().getTime(),
+          clickedReservaBtn: false,
+          wentToReservaPage: false,
+          concludedReserva: false
+        }).then(doc => store.state.visitedID = doc.id)
+      }
     })
   },
   methods: {
@@ -619,7 +621,7 @@ export default {
   },
   computed: {
     valorNoitesTotal () {
-      let valorNoitesTotal = Math.round(this.acomod.valorDiariaNormal * this.$store.state.reservaAcomod.noites)
+      let valorNoitesTotal = Math.round(this.acomod.valorNoite * this.$store.state.reservaAcomod.noites)
       this.$store.commit('m_valorNoitesTotal', valorNoitesTotal)
       return valorNoitesTotal
     },
@@ -629,7 +631,7 @@ export default {
       return serviceFeeTotal
     },
     valorReservaTotal () {
-      let valorReservaTotal = this.valorNoitesTotal + this.serviceFeeTotal
+      let valorReservaTotal = this.valorNoitesTotal + this.acomod.limpezaFee + this.serviceFeeTotal
       this.$store.commit('m_valorReservaTotal', valorReservaTotal)
       return valorReservaTotal
     },

@@ -42,7 +42,7 @@
       <div class="detalhes-reserva-valor" v-if="$store.state.reservaAcomod.valorReservaTotal !== null">
 
         <div class="detalhes-reserva-valor_item" style="padding-bottom: .5rem">
-          <h3>R${{ acomod.valorDiariaNormal.toLocaleString() }} x {{ $store.state.reservaAcomod.noites }} noites</h3>
+          <h3>R${{ acomod.valorNoite.toLocaleString() }} x {{ $store.state.reservaAcomod.noites }} noites</h3>
           <h3 id="valor">R${{ $store.state.reservaAcomod.valorNoitesTotal.toLocaleString() }}</h3>
         </div>
 
@@ -52,7 +52,7 @@
             <img src="../../../assets/img/info.svg" style="width:.95rem;height:auto;margin-left:.3rem;cursor:pointer" @click="limpezaFeeDialog">
             <v-dialog id="limpeza-fee" style="z-index:10000"/>
           </div>
-          <h3>R$0</h3>
+          <h3>R${{ this.acomod.limpezaFee.toLocaleString() }}</h3>
         </div>
 
         <div class="detalhes-reserva-valor_item" style="padding-bottom: .8rem">

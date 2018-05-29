@@ -62,7 +62,7 @@
               <progressive-background class="__card-img" :src="imageAcH(acomod)" :placeholder="acomod.imageL1" :aspect-ratio="2/3"/>
               <span class="__card-info" style="color: #FFA04F">{{ acomod.tipoAcomod }}</span>
               <h1 class="__card-title">{{ acomod.title }}</h1>
-              <span class="__card-subtitle">R${{ acomod.valorDiariaNormal.toLocaleString() }}<span class="__card-valor-noite"> por noite</span></span>
+              <span class="__card-subtitle">R${{ acomod.valorNoite.toLocaleString() }}<span class="__card-valor-noite"> por noite</span></span>
             </nuxt-link> 
           </div>
         </div>

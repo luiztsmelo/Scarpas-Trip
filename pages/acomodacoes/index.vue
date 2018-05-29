@@ -27,7 +27,7 @@
             <div class="card-details">
               <span class="__card-tipo-acomod">{{ acomod.tipoAcomod }}</span>
               <span class="__card-title">{{ acomod.title }}</span>
-              <span class="__card-valor">R${{ acomod.valorDiariaNormal }}<span class="__card-valor-dia"> por dia</span></span>
+              <span class="__card-valor">R${{ acomod.valorNoite }}<span class="__card-valor-dia"> por dia</span></span>
             </div>
             
           </nuxt-link> 

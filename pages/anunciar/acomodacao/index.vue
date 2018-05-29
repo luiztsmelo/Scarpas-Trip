@@ -116,24 +116,21 @@
         <label>Quantos são Suítes?</label>
         <select v-model="$store.state.acomodData.totalSuites">
           <option>0</option>
-          <option v-for="n in 7">{{ n }}</option>
-          <option>Mais de 7</option>
+          <option v-for="n in totalSuites">{{ n }}</option>
         </select>
       </div>
 
       <div class="item-form">
         <label>Nº de Banheiros</label>
         <select v-model="$store.state.acomodData.totalBanheiros">
-          <option v-for="n in 7">{{ n }}</option>
-          <option>Mais de 7</option>
+          <option v-for="n in 10">{{ n }}</option>
         </select>
       </div> 
 
       <div class="item-form">
         <label>Vagas na Garagem</label>
         <select v-model="$store.state.acomodData.totalGaragem">
-          <option v-for="n in 7">{{ n }}</option>
-          <option>Mais de 7</option>
+          <option v-for="n in 10">{{ n }}</option>
         </select>
       </div> 
 
@@ -393,16 +390,18 @@
     <!-- ########## VALOR DA ESTADIA PG.7 ########## -->
     <form class="cadastro-acomodacao" v-if="$store.state.cadastroAcomod7">
 
-      <h1 class="__form-title">Qual será o valor da diária?</h1>
+      <h1 class="__form-title">Qual será o valor por noite?</h1>
+
+      <h3 class="__form-subtitle">Será possível ajustar o valor após a publicação do anúncio, para adequar a períodos de baixa e alta demanda. A taxa de limpeza é opcional.</h3>
 
       <div class="item-form">
-        <label>Em dias normais</label>
-        <money v-model="$store.state.acomodData.valorDiariaNormal"></money>
+        <label>Valor por noite</label>
+        <money v-model="$store.state.acomodData.valorNoite"></money>
       </div> 
 
       <div class="item-form">
-        <label>Nos feriados</label>
-        <money v-model="$store.state.acomodData.valorDiariaFeriado"></money>
+        <label>Taxa de limpeza</label>
+        <money v-model="$store.state.acomodData.limpezaFee"></money>
       </div> 
 
 
@@ -1082,6 +1081,13 @@ export default {
     contaDV () { return this.$store.state.bankAccount.contaDV },
     legalName () { return this.$store.state.bankAccount.legalName },
     docNumber () { return this.$store.state.bankAccount.docNumber },
+    totalSuites () {
+      if (this.$store.state.acomodData.totalQuartos !== '1') {
+        return Array.from({length: this.$store.state.acomodData.totalQuartos}, (v, k) => k+1)
+      } else {
+        return 10
+      }
+    },
     tipoAcomodText () {
       const path = this.$store.state.acomodData.tipoAcomod
       return path === 'Casa' ? 'da sua casa' 
@@ -1470,7 +1476,7 @@ export default {
       padding: 0 7%;
       display: flex;
       flex-flow: column;
-      margin: 1.7rem 0;
+      margin: 1.8rem 0;
       & label {
         font-weight: 600;
         font-size: 15px;
@@ -1508,7 +1514,7 @@ export default {
         justify-content: space-between;
         align-items: center;
         border-bottom: 1px solid rgb(222,222,222);
-        padding: 1.2rem 0;
+        padding: 1.3rem 0;
         & h3 {
           user-select: none;
           font-size: var(--fontSizeAnuncioText);

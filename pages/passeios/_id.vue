@@ -232,9 +232,11 @@ export default {
         store.commit('m_showFoobar', false)
       }
       store.commit('m_loader', false)
-      firebase.firestore().collection('passeios').doc(params.id).collection('visited').add({ 
-        date: new Date().getTime()
-      })
+      if (doc.exists) {
+        firebase.firestore().collection('passeios').doc(params.id).collection('visited').add({ 
+          date: new Date().getTime()
+        })
+      }
     })
   },
   methods: {

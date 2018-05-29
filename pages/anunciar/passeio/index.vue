@@ -971,7 +971,7 @@ export default {
       padding: 0 7%;
       display: flex;
       flex-flow: column;
-      margin: 1.7rem 0;
+      margin: 1.8rem 0;
       & label {
         font-weight: 600;
         font-size: 15px;
