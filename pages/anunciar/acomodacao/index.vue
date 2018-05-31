@@ -1923,7 +1923,7 @@ export default {
         font-size: 32px;
         font-weight: 700;
         text-align: center;
-        user-select: none;
+        user-select: none !important;
       }
       & .__form-subtitle {
         padding: 1.4rem 26% 0;
