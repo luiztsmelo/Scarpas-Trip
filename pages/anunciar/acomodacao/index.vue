@@ -460,8 +460,8 @@
         <div class="regras-adicionais">
           <h3 class="__title">Regras adicionais</h3>
           <div class="input-row">
-            <input type="text" class="__input" placeholder="Regras?">
-            <button class="__add-btn" type="button">Adicionar</button>
+            <input type="text" class="__input" placeholder="Regras adicionais?" onKeyPress="if (event.which == 13) return false">
+            <button class="__add-btn" type="button"></button>
           </div>
           
         </div>
@@ -1571,7 +1571,7 @@ export default {
     height: 100%;
     background: white;
     color: var(--color01);
-    padding: 0 0 5.5rem 0;
+    padding: 0 0 6rem 0;
     & .__form-title {
       padding: 3rem 7% 1.5rem 7%;
       line-height: 36px;
@@ -1647,7 +1647,7 @@ export default {
         justify-content: space-between;
         align-items: center;
         border-bottom: 1px solid rgb(222,222,222);
-        padding: 1.3rem 0;
+        padding: 1.2rem 0;
         & h3 {
           user-select: none;
           font-size: var(--fontSizeAnuncioText);
@@ -1655,13 +1655,13 @@ export default {
       }
     }
     & .regras-box {
-      padding: 0 7%;
+      padding: .5rem 7% 0;
       & .item-form-regras {
         display: flex;
         justify-content: space-between;
         align-items: center;
         border-bottom: 1px solid rgb(222,222,222);
-        padding: 1.3rem 0;
+        padding: 1.2rem 0;
         & h3 {
           user-select: none;
           font-size: var(--fontSizeAnuncioText);
@@ -1670,7 +1670,7 @@ export default {
       & .regras-adicionais {
         display: flex;
         flex-flow: column;
-        padding-top: .8rem;
+        padding-top: 1.2rem;
         & .__title {
           font-size: 18px;
           font-weight: 600;
@@ -1693,12 +1693,15 @@ export default {
             outline: none;
           }
           & .__add-btn {
-            background: white;
+            background-image: url('./../../../assets/img/add-image.svg');
+            background-position: 50%;
+            background-repeat: no-repeat;
+            background-size: 20px;
+            background-color: white;
             font-weight: 500;
             border-bottom: 1px solid rgb(222,222,222);
-            width: 6.3rem;
-            min-width: 6.3rem;
-            color: #1E9297;
+            width: 3rem;
+            min-width: 3rem;
           }
         }
       }
