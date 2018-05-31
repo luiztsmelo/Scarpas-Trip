@@ -1593,8 +1593,8 @@ export default {
       padding: 3rem 7% 1.5rem 7%;
       line-height: 36px;
       font-size: 27px;
-      font-weight: 700;
       z-index: 999;
+      user-select: none !important;
     }
     & .__form-subtitle {
       padding: .7rem 7%;
@@ -1699,7 +1699,7 @@ export default {
           align-items: center;
           padding: .5rem 0;
           & .__regra-text {
-            font-size: 17px;
+            font-size: var(--fontSizeAnuncioText);
             user-select: none;
           }
           & .__regra-remove {
@@ -1961,7 +1961,6 @@ export default {
         font-size: 32px;
         font-weight: 700;
         text-align: center;
-        user-select: none !important;
       }
       & .__form-subtitle {
         padding: 1.4rem 26% 0;
