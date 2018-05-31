@@ -143,6 +143,7 @@ const store = () => new Vuex.Store({
       allowPets: false,
       allowBabys: false,
       allowFumar: false,
+      regrasAdicionais: [],
       imageL1: null,
       imageH1J: null,
       imageH1W: null,

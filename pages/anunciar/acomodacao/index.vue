@@ -459,9 +459,16 @@
 
         <div class="regras-adicionais">
           <h3 class="__title">Regras adicionais</h3>
+
+          <div class="new-regras" v-for="(regra, index) in $store.state.acomodData.regrasAdicionais">
+            <h3 class="__regra-text">{{ regra }}</h3>
+            <button class="__regra-remove" type="button" @click="removeRegra(index)"></button>
+          </div>
+          
+
           <div class="input-row">
-            <input type="text" class="__input" placeholder="Regras adicionais?" onKeyPress="if (event.which == 13) return false">
-            <button class="__add-btn" type="button"></button>
+            <input type="text" class="__input" placeholder="Regras adicionais?" v-model="newRegra" @keyup.enter="addRegra" onKeyPress="if (event.which == 13) return false">
+            <button class="__add-btn" type="button" @click="addRegra"></button>
           </div>
           
         </div>
@@ -739,6 +746,7 @@ export default {
       imageURL1: null,
       imageURL2: null,
       imageURL3: null,
+      newRegra: '',
       monthsPermitted: ['01','02','03','04','05','06','07','08','09','10','11','12'],
       bankCodeError: false,
       agenciaError: false,
@@ -840,7 +848,16 @@ export default {
     sliderCaixaSom () { this.$refs.sliderCaixaSom.click() },
     sliderBarracas () { this.$refs.sliderBarracas.click() },
     sliderPier () { this.$refs.sliderPier.click() },
-    
+    /* ******************** REGRAS ******************** */
+    addRegra () {
+      if (this.newRegra) {
+        this.$store.state.acomodData.regrasAdicionais.push(this.newRegra)
+        this.newRegra = ''
+      }
+    },
+    removeRegra (index) {
+      this.$store.state.acomodData.regrasAdicionais.splice(index, 1)
+    },
     /* ******************** BACK BUTTON ******************** */
     backBtn1 () {
       this.$store.commit('m_cadastroAcomod1', false), this.$store.commit('m_cadastroAcomod0', true), window.history.back(1)
@@ -1674,6 +1691,24 @@ export default {
         & .__title {
           font-size: 18px;
           font-weight: 600;
+        }
+        & .new-regras {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: .4rem 0;
+          & .__regra-text {
+          }
+          & .__regra-remove {
+            background-image: url('../../../assets/img/close-modal.svg');
+            background-position: 50%;
+            background-repeat: no-repeat;
+            background-size: 16px;
+            background-color: white;
+            width: 3rem;
+            min-width: 3rem;
+            height: 1rem;
+          }
         }
         & .input-row {
           display: flex;
