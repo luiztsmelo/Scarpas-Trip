@@ -467,7 +467,7 @@
           
 
           <div class="input-row">
-            <input type="text" class="__input" placeholder="Regras adicionais?" v-model="newRegra" @keyup.enter="addRegra" onKeyPress="if (event.which == 13) return false">
+            <input type="text" class="__input" placeholder="Nova regra?" v-model="newRegra" @keyup.enter="addRegra" onKeyPress="if (event.which == 13) return false">
             <button class="__add-btn" type="button" @click="addRegra"></button>
           </div>
           
@@ -1689,15 +1689,18 @@ export default {
         flex-flow: column;
         padding-top: 1.3rem;
         & .__title {
-          font-size: 18px;
+          font-size: 19px;
           font-weight: 600;
+          user-select: none;
         }
         & .new-regras {
           display: flex;
           justify-content: space-between;
           align-items: center;
-          padding: .4rem 0;
+          padding: .5rem 0;
           & .__regra-text {
+            font-size: 17px;
+            user-select: none;
           }
           & .__regra-remove {
             background-image: url('../../../assets/img/close-modal.svg');
