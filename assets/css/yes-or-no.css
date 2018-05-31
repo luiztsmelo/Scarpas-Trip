@@ -26,7 +26,7 @@
     border-radius: 0 2rem 2rem 0;
   }
   & .is-false {
-    background: rgb(237,237,237);;
+    background: rgb(242,242,242);
   }
   & .is-true {
     color: white;

@@ -423,6 +423,7 @@
       <h1 class="__form-title">Defina as regras e lembretes {{ tipoAcomodText }}</h1>
 
       <div class="regras-box">
+
         <div class="item-form-regras">
           <h3>Festas são permitidas?</h3>
           <div class="yes-or-no">
@@ -432,10 +433,10 @@
         </div>
 
         <div class="item-form-regras">
-          <h3>Fumar é permitido?</h3>
+          <h3>Animais de estimação são permitidos?</h3>
           <div class="yes-or-no">
-            <div class="__no" :class="[ !$store.state.acomodData.allowFumar ? 'is-false' : '' ]" @click="$store.state.acomodData.allowFumar = false">Não</div>
-            <div class="__yes" :class="[ $store.state.acomodData.allowFumar ? 'is-true' : '' ]" @click="$store.state.acomodData.allowFumar = true">Sim</div>
+            <div class="__no" :class="[ !$store.state.acomodData.allowPets ? 'is-false' : '' ]" @click="$store.state.acomodData.allowPets = false">Não</div>
+            <div class="__yes" :class="[ $store.state.acomodData.allowPets ? 'is-true' : '' ]" @click="$store.state.acomodData.allowPets = true">Sim</div>
           </div>
         </div>
 
@@ -446,6 +447,26 @@
             <div class="__yes" :class="[ $store.state.acomodData.allowBabys ? 'is-true' : '' ]" @click="$store.state.acomodData.allowBabys = true">Sim</div>
           </div>
         </div>
+
+        <div class="item-form-regras" style="border: none">
+          <h3>Fumar é permitido?</h3>
+          <div class="yes-or-no">
+            <div class="__no" :class="[ !$store.state.acomodData.allowFumar ? 'is-false' : '' ]" @click="$store.state.acomodData.allowFumar = false">Não</div>
+            <div class="__yes" :class="[ $store.state.acomodData.allowFumar ? 'is-true' : '' ]" @click="$store.state.acomodData.allowFumar = true">Sim</div>
+          </div>
+        </div>
+
+
+        <div class="regras-adicionais">
+          <h3 class="__title">Regras adicionais</h3>
+          <div class="input-row">
+            <input type="text" class="__input" placeholder="Regras?">
+            <button class="__add-btn" type="button">Adicionar</button>
+          </div>
+          
+        </div>
+        
+
       </div>
       
 
@@ -1644,6 +1665,41 @@ export default {
         & h3 {
           user-select: none;
           font-size: var(--fontSizeAnuncioText);
+        }
+      }
+      & .regras-adicionais {
+        display: flex;
+        flex-flow: column;
+        padding-top: .8rem;
+        & .__title {
+          font-size: 18px;
+          font-weight: 600;
+        }
+        & .input-row {
+          display: flex;
+          width: 100%;
+          padding-top: .6rem;
+          & .__input {
+            width: 100%;
+            cursor: text;
+            position: relative;
+            font-size: var(--fontSizeAnuncioText);
+            font-weight: 400;
+            background: white;
+            color: var(--color01);
+            padding: .5rem 0 .6rem 0;
+            border: none;
+            border-bottom: 1px solid rgb(222,222,222);
+            outline: none;
+          }
+          & .__add-btn {
+            background: white;
+            font-weight: 500;
+            border-bottom: 1px solid rgb(222,222,222);
+            width: 6.3rem;
+            min-width: 6.3rem;
+            color: #1E9297;
+          }
         }
       }
     }
