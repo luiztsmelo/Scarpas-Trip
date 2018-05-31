@@ -420,9 +420,34 @@
     <!-- ########## REGRAS PG.8 ########## -->
     <form class="cadastro-acomodacao" v-if="$store.state.cadastroAcomod8">
 
-      <h1 class="__form-title">Regras</h1>
+      <h1 class="__form-title">Defina as regras e lembretes {{ tipoAcomodText }}</h1>
 
+      <div class="regras-box">
+        <div class="item-form-regras">
+          <h3>Festas são permitidas?</h3>
+          <div class="yes-or-no">
+            <div class="__no" :class="[ !$store.state.acomodData.allowFestas ? 'is-false' : '' ]" @click="$store.state.acomodData.allowFestas = false">Não</div>
+            <div class="__yes" :class="[ $store.state.acomodData.allowFestas ? 'is-true' : '' ]" @click="$store.state.acomodData.allowFestas = true">Sim</div>
+          </div>
+        </div>
 
+        <div class="item-form-regras">
+          <h3>Fumar é permitido?</h3>
+          <div class="yes-or-no">
+            <div class="__no" :class="[ !$store.state.acomodData.allowFumar ? 'is-false' : '' ]" @click="$store.state.acomodData.allowFumar = false">Não</div>
+            <div class="__yes" :class="[ $store.state.acomodData.allowFumar ? 'is-true' : '' ]" @click="$store.state.acomodData.allowFumar = true">Sim</div>
+          </div>
+        </div>
+
+        <div class="item-form-regras">
+          <h3>É adequado para bebês?</h3>
+          <div class="yes-or-no">
+            <div class="__no" :class="[ !$store.state.acomodData.allowBabys ? 'is-false' : '' ]" @click="$store.state.acomodData.allowBabys = false">Não</div>
+            <div class="__yes" :class="[ $store.state.acomodData.allowBabys ? 'is-true' : '' ]" @click="$store.state.acomodData.allowBabys = true">Sim</div>
+          </div>
+        </div>
+      </div>
+      
 
       <div class="back-next"> 
         <div class="back-next-body">
@@ -467,7 +492,7 @@
     <!-- ########## DESCRIÇÃO PG.10 ########## -->
     <form class="cadastro-acomodacao" v-if="$store.state.cadastroAcomod10">
 
-      <h1 class="__form-title">Descreva melhor sobre {{ tipoAcomodTextLower }}</h1>   
+      <h1 class="__form-title">Descreva melhor {{ tipoAcomodTextLower }}</h1>   
 
       <textarea 
       v-model="$store.state.acomodData.subtitle"
@@ -1591,6 +1616,7 @@ export default {
         outline: none;
       }
     }
+    
     & .comodidades-box {
       padding: 0 7%;
       & .item-form-switches {
@@ -1603,6 +1629,54 @@ export default {
         & h3 {
           user-select: none;
           font-size: var(--fontSizeAnuncioText);
+        }
+      }
+    }
+    & .regras-box {
+      padding: 0 7%;
+      & .item-form-regras {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid rgb(222,222,222);
+        padding: 1.3rem 0;
+        & h3 {
+          user-select: none;
+          font-size: var(--fontSizeAnuncioText);
+        }
+        & .yes-or-no {
+          cursor: pointer;
+          display: flex;
+          height: 2.2rem;
+          width: 6.3rem;
+          border: 1px solid rgb(222,222,222);
+          border-radius: 2rem;
+          align-items: center;
+          user-select: none;
+          & .__no {
+            flex: 1;
+            margin-left: 3px;
+            line-height: 1.8rem;
+            font-size: 15px;
+            text-align: center;
+            border-radius: 2rem 0 0 2rem;
+          }
+          & .__yes {
+            flex: 1;
+            margin-right: 3px;
+            line-height: 1.8rem;
+            font-size: 15px;
+            text-align: center;
+            border-radius: 0 2rem 2rem 0;
+          }
+          & .is-false {
+            background: rgb(237,237,237);;
+          }
+          & .is-true {
+            color: white;
+            background: var(--colorAcomod);
+            font-weight: 500;
+          }
         }
       }
     }
@@ -1855,7 +1929,15 @@ export default {
       & .comodidades-box {
         padding: .6rem 26% 0;
         & .item-form-switches {
-          padding: 1.6rem 0;
+          padding: 1.5rem 0;
+          & h3 {
+          }
+        }
+      }
+      & .regras-box {
+        padding: .6rem 26% 0;
+        & .item-form-regras {
+          padding: 1.5rem 0;
           & h3 {
           }
         }
