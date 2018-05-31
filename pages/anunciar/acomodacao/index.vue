@@ -1496,6 +1496,7 @@ export default {
 <style>
 @import url('~/assets/css/main.css');
 @import url('~/assets/css/switcher.css');
+@import url('~/assets/css/yes-or-no.css');
 @import url('~/assets/css/vue-simple-suggest.css');
 
 .anunciar-acomodacao {
@@ -1643,40 +1644,6 @@ export default {
         & h3 {
           user-select: none;
           font-size: var(--fontSizeAnuncioText);
-        }
-        & .yes-or-no {
-          cursor: pointer;
-          display: flex;
-          height: 2.2rem;
-          width: 6.3rem;
-          border: 1px solid rgb(222,222,222);
-          border-radius: 2rem;
-          align-items: center;
-          user-select: none;
-          & .__no {
-            flex: 1;
-            margin-left: 3px;
-            line-height: 1.8rem;
-            font-size: 15px;
-            text-align: center;
-            border-radius: 2rem 0 0 2rem;
-          }
-          & .__yes {
-            flex: 1;
-            margin-right: 3px;
-            line-height: 1.8rem;
-            font-size: 15px;
-            text-align: center;
-            border-radius: 0 2rem 2rem 0;
-          }
-          & .is-false {
-            background: rgb(237,237,237);;
-          }
-          & .is-true {
-            color: white;
-            background: var(--colorAcomod);
-            font-weight: 500;
-          }
         }
       }
     }
@@ -1897,6 +1864,7 @@ export default {
         font-size: 32px;
         font-weight: 700;
         text-align: center;
+        user-select: none;
       }
       & .__form-subtitle {
         padding: 1.4rem 26% 0;

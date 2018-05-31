@@ -1,0 +1,58 @@
+.yes-or-no {
+  cursor: pointer;
+  display: flex;
+  height: 2.1rem;
+  width: 6.1rem;
+  min-width: 6.1rem;
+  border: 1px solid rgb(222,222,222);
+  border-radius: 2rem;
+  align-items: center;
+  user-select: none;
+  margin-left: 1.8rem;
+  & .__no {
+    flex: 1;
+    margin-left: 3px;
+    line-height: 1.7rem;
+    font-size: 15px;
+    text-align: center;
+    border-radius: 2rem 0 0 2rem;
+  }
+  & .__yes {
+    flex: 1;
+    margin-right: 3px;
+    line-height: 1.7rem;
+    font-size: 15px;
+    text-align: center;
+    border-radius: 0 2rem 2rem 0;
+  }
+  & .is-false {
+    background: rgb(237,237,237);;
+  }
+  & .is-true {
+    color: white;
+    background: var(--colorAcomod);
+    font-weight: 500;
+  }
+}
+
+@media (min-width: 1024px) {
+  .yes-or-no {
+    height: 2.2rem;
+    width: 6.3rem;
+    min-width: 6.3rem;
+    & .__no {
+      margin-left: 3px;
+      line-height: 1.8rem;
+      font-size: 15px;
+    }
+    & .__yes {
+      margin-right: 3px;
+      line-height: 1.8rem;
+      font-size: 15px;
+    }
+    & .is-false {
+    }
+    & .is-true {
+    }
+  }
+}
