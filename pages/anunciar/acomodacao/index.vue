@@ -1580,7 +1580,7 @@ export default {
       z-index: 999;
     }
     & .__form-subtitle {
-      padding: 0 7%;
+      padding: .7rem 7%;
       font-size: var(--fontSizeAnuncioText);
     }
     & textarea {
@@ -1608,7 +1608,7 @@ export default {
       padding: 0 7%;
       display: flex;
       flex-flow: column;
-      margin: 1.8rem 0;
+      margin: 1.9rem 0;
       & label {
         font-weight: 600;
         font-size: 15px;
@@ -1621,7 +1621,7 @@ export default {
         font-weight: 400;
         background: white;
         color: var(--color01);
-        padding: .5rem 0 .6rem 0;
+        padding: .6rem 0;
         border: none;
         border-bottom: 1px solid rgb(222,222,222);
         outline: none;
@@ -1632,7 +1632,7 @@ export default {
         font-weight: 400;
         background: white;
         color: var(--color01);
-        padding: .5rem 0 .6rem 0;
+        padding: .6rem 0;
         border: none;
         border-bottom: 1px solid rgb(222,222,222);
         outline: none;
@@ -1647,7 +1647,7 @@ export default {
         justify-content: space-between;
         align-items: center;
         border-bottom: 1px solid rgb(222,222,222);
-        padding: 1.2rem 0;
+        padding: 1.3rem 0;
         & h3 {
           user-select: none;
           font-size: var(--fontSizeAnuncioText);
@@ -1661,7 +1661,7 @@ export default {
         justify-content: space-between;
         align-items: center;
         border-bottom: 1px solid rgb(222,222,222);
-        padding: 1.2rem 0;
+        padding: 1.1rem 0;
         & h3 {
           user-select: none;
           font-size: var(--fontSizeAnuncioText);
@@ -1670,7 +1670,7 @@ export default {
       & .regras-adicionais {
         display: flex;
         flex-flow: column;
-        padding-top: 1.2rem;
+        padding-top: 1.3rem;
         & .__title {
           font-size: 18px;
           font-weight: 600;
@@ -1945,12 +1945,10 @@ export default {
         & input {
           font-size: 17px;
           font-weight: 400;
-          padding: .5rem 0 .6rem 0;
         }
         & select {
           font-size: 17px;
           font-weight: 400;
-          padding: .5rem 0 .6rem 0;
         }
       }
       & .comodidades-box {
