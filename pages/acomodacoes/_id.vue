@@ -1007,6 +1007,9 @@ export default {
           }
         }
       }
+    }
+    & .image-box:active {
+      cursor: grabbing;
     }/* ####### IMAGE BOX ####### */
     & .desktop-view {
       display: flex;
@@ -1106,7 +1109,7 @@ export default {
             background: var(--colorAcomod);
             color: white;
             height: 3.1rem;
-            width:  100%;
+            width: 100%;
             border-radius: 5px;
           }
           & .__reserva-desktop-btn-ask {
@@ -1115,7 +1118,7 @@ export default {
             background: transparent;
             color: #00D8C7;
             height: 2rem;
-            width:  100%;
+            width: 100%;
           }
           & .__info {
             margin: .6rem 0;

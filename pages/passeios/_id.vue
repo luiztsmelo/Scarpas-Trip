@@ -522,6 +522,9 @@ export default {
           }
         }
       }
+    }
+    & .image-box:active {
+      cursor: grabbing;
     }/* ####### IMAGE BOX ####### */
     & .desktop-view {
       display: flex;

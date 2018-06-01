@@ -1782,6 +1782,9 @@ export default {
           margin: 2.5rem 0 1rem 0;
           border: 2px dashed white;
         }
+        & canvas:active {
+          cursor: grabbing;
+        }
         & .modal-croppa-btns {
           display: flex;
           flex-flow: column;
