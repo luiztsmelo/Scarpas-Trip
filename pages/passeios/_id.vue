@@ -233,7 +233,7 @@ export default {
       }
       store.commit('m_loader', false)
       if (doc.exists) {
-        firebase.firestore().collection('passeios').doc(params.id).collection('visited').add({ 
+        firebase.firestore().collection('passeios').doc(params.id).collection('visits').add({ 
           date: new Date().getTime()
         })
       }

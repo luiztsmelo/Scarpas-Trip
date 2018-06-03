@@ -342,7 +342,7 @@
         <button type="button" class="email-btn" @click="emailSignIn()">Continuar com E-mail</button>
       </div>
 
-      <h3 class="__form-subtitle" v-if="$store.state.user.email !== null">Ótimo {{ firstName }}! Só mais algumas informações:</h3>
+      <h3 class="__form-text" v-if="$store.state.user.email !== null">Ótimo {{ firstName }}! Só mais algumas informações:</h3>
 
       <div v-if="$store.state.user.email !== null">
         <div class="item-form">
@@ -376,7 +376,7 @@
 
       <h1 class="__form-title">Seus dados bancários para transferência</h1>
 
-      <h3 class="__form-subtitle">{{ firstName }}, para finalizar precisamos dos dados de sua conta bancária para podermos transferir seus ganhos financeiros. Não se preocupe, suas informações estarão seguras.</h3>
+      <h3 class="__form-text">{{ firstName }}, para finalizar precisamos dos dados de sua conta bancária para podermos transferir seus ganhos financeiros. Não se preocupe, suas informações estarão seguras.</h3>
 
       <div class="recebedor-box">
 
@@ -942,7 +942,7 @@ export default {
       font-weight: 700;
       z-index: 999;
     }
-    & .__form-subtitle {
+    & .__form-text {
       padding: 0 7%;
       font-size: var(--fontSizeAnuncioText);
     }
@@ -1213,7 +1213,7 @@ export default {
         font-weight: 700;
         text-align: center;
       }
-      & .__form-subtitle {
+      & .__form-text {
         padding: 1.4rem 26% 0;
         font-size: 17px;
       }

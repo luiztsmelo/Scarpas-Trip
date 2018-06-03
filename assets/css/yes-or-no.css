@@ -1,5 +1,5 @@
 :root {
-  --mobileHeight: 2.4rem;
+  --mobileHeight: 2.3rem;
   --desktopHeight: 2.2rem;
 }
 
@@ -7,8 +7,8 @@
   cursor: pointer;
   display: flex;
   height: var(--mobileHeight);
-  width: 6.1rem;
-  min-width: 6.1rem;
+  width: 6rem;
+  min-width: 6rem;
   border: 1px solid rgb(222,222,222);
   border-radius: 2rem;
   align-items: center;
@@ -16,16 +16,16 @@
   margin-left: 1.8rem;
   & .__no {
     flex: 1;
-    margin-left: 3px;
-    line-height: calc(var(--mobileHeight) - .5rem);
+    margin-left: 2px;
+    line-height: calc(var(--mobileHeight) - .35rem);
     font-size: 15px;
     text-align: center;
     border-radius: 2rem 0 0 2rem;
   }
   & .__yes {
     flex: 1;
-    margin-right: 3px;
-    line-height: calc(var(--mobileHeight) - .5rem);
+    margin-right: 2px;
+    line-height: calc(var(--mobileHeight) - .35rem);
     font-size: 15px;
     text-align: center;
     border-radius: 0 2rem 2rem 0;
@@ -46,13 +46,13 @@
     width: 6.3rem;
     min-width: 6.3rem;
     & .__no {
-      margin-left: 3px;
-      line-height: calc(var(--desktopHeight) - .5rem);
+      margin-left: 2px;
+      line-height: calc(var(--desktopHeight) - .35rem);
       font-size: 15px;
     }
     & .__yes {
-      margin-right: 3px;
-      line-height: calc(var(--desktopHeight) - .5rem);
+      margin-right: 2px;
+      line-height: calc(var(--desktopHeight) - .35rem);
       font-size: 15px;
     }
     & .is-false {

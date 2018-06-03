@@ -147,7 +147,7 @@ export default {
   },
   beforeRouteEnter (to, from, next) {
     next(vm => {
-      firebase.firestore().collection('acomods').doc(vm.$store.state.acomod.acomodID).collection('visited').doc(vm.$store.state.visitedID).update({ 
+      firebase.firestore().collection('acomods').doc(vm.$store.state.acomod.acomodID).collection('visits').doc(vm.$store.state.visitID).update({ 
         wentToReservaPage: true
       })
     })

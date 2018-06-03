@@ -392,7 +392,7 @@
 
       <h1 class="__form-title">Qual será o valor da estadia?</h1>
 
-      <h3 class="__form-subtitle">Será possível ajustar o valor após a publicação do anúncio, para adequar a períodos de baixa e alta demanda. A taxa de limpeza é opcional.</h3>
+      <h3 class="__form-text">Será possível ajustar o valor após a publicação do anúncio, para adequar a períodos de baixa e alta temporada. Também será possível oferecer descontos personalizados. A taxa de limpeza é opcional.</h3>
 
       <div class="item-form">
         <label>Valor por noite</label>
@@ -423,6 +423,26 @@
       <h1 class="__form-title">Defina as regras e lembretes {{ tipoAcomodText }}</h1>
 
       <div class="regras-box">
+
+
+        <!-- Horário Check-in -->
+        <h3 class="__form-subtitle">Horário para Check-in</h3>
+
+        <div style="display:flex">
+          <div class="item-form" style="padding:0;margin:1rem .5rem 1.5rem 0;flex:50%">
+            <label>De:</label>
+            <input type="time" v-model="$store.state.acomodData.checkinFrom">
+          </div> 
+          <div class="item-form" style="padding:0;margin:1rem 0 1.5rem .5rem;flex:50%">
+            <label>Até:</label>
+            <input type="time" v-model="$store.state.acomodData.checkinTo">
+          </div> 
+        </div>
+        <!-- Horário Check-in -->
+
+
+        <!-- Regras -->
+        <h3 class="__form-subtitle" style="margin-top:.4rem">Regras</h3>
 
         <div class="item-form-regras">
           <h3>Festas são permitidas?</h3>
@@ -455,24 +475,23 @@
             <div class="__yes" :class="[ $store.state.acomodData.allowFumar ? 'is-true' : '' ]" @click="$store.state.acomodData.allowFumar = true">Sim</div>
           </div>
         </div>
+        <!-- Regras -->
 
 
-        <div class="regras-adicionais">
-          <h3 class="__title">Regras adicionais</h3>
+        <!-- Regras adicionais -->
+        <h3 class="__form-subtitle" style="margin-top:.6rem">Regras adicionais</h3>
 
-          <div class="new-regras" v-for="(regra, index) in $store.state.acomodData.regrasAdicionais">
-            <h3 class="__regra-text">{{ regra }}</h3>
-            <button class="__regra-remove" type="button" @click="removeRegra(index)"></button>
-          </div>
-          
-
-          <div class="input-row">
-            <input type="text" class="__input" placeholder="Nova regra?" v-model="newRegra" @keyup.enter="addRegra" onKeyPress="if (event.which == 13) return false">
-            <button class="__add-btn" type="button" @click="addRegra"></button>
-          </div>
-          
+        <div class="new-regras" v-for="(regra, index) in $store.state.acomodData.regrasAdicionais">
+          <h3 class="__regra-text">{{ regra }}</h3>
+          <button class="__regra-remove" type="button" @click="removeRegra(index)"></button>
         </div>
         
+        <div class="input-row">
+          <input type="text" class="__input" placeholder="Nova regra?" v-model="newRegra" @keyup.enter="addRegra" onKeyPress="if (event.which == 13) return false">
+          <button class="__add-btn" type="button" @click="addRegra"></button>
+        </div>
+        <!-- Regras adicionais -->
+
 
       </div>
       
@@ -557,7 +576,7 @@
         <button type="button" class="email-btn" @click="emailSignIn()">Continuar com E-mail</button>
       </div>
 
-      <h3 class="__form-subtitle" v-if="$store.state.user.email !== null">Ótimo {{ firstName }}! Só mais algumas informações:</h3>
+      <h3 class="__form-text" v-if="$store.state.user.email !== null">Ótimo {{ firstName }}! Só mais algumas informações:</h3>
 
       <div v-if="$store.state.user.email !== null">
 
@@ -605,7 +624,7 @@
 
       <h1 class="__form-title">Seus dados bancários para transferência</h1>   
 
-      <h3 class="__form-subtitle">{{ firstName }}, para finalizar precisamos dos dados de sua conta bancária para podermos transferir seus ganhos financeiros. Não se preocupe, suas informações estarão seguras.</h3>
+      <h3 class="__form-text">{{ firstName }}, para finalizar precisamos dos dados de sua conta bancária para podermos transferir seus ganhos financeiros. Não se preocupe, suas informações estarão seguras.</h3>
 
       <div class="recebedor-box">
 
@@ -632,7 +651,7 @@
 
           <div class="item-form">
             <div class="flex-row" style="display:flex">
-              <div class="agencia" style="flex:50%; margin-right:1rem">
+              <div class="agencia" style="flex:50%; margin-right:.5rem">
                 <label>Agência</label>
                 <masked-input
                   :class="[ agenciaError ? 'has-error' : '' ]"
@@ -642,7 +661,7 @@
                   :guide="false">
                 </masked-input>
               </div>
-              <div class="agencia-dv" style="flex:50%">
+              <div class="agencia-dv" style="flex:50%; margin-left:.5rem">
                 <label>Dígito</label>
                 <masked-input
                   :class="[ agenciaDVError ? 'has-error' : '' ]"
@@ -657,7 +676,7 @@
 
           <div class="item-form">
             <div class="flex-row" style="display:flex">
-              <div class="conta" style="flex:50%; margin-right:1rem">
+              <div class="conta" style="flex:50%; margin-right:.5rem">
                 <label>Conta Corrente</label>
                 <masked-input
                   :class="[ contaError ? 'has-error' : '' ]"
@@ -667,7 +686,7 @@
                   :guide="false">
                 </masked-input>
               </div>
-              <div class="conta-dv" style="flex:50%">
+              <div class="conta-dv" style="flex:50%; margin-left:.5rem">
                 <label>Dígito</label>
                 <masked-input
                 :class="[ contaDVError ? 'has-error' : '' ]"
@@ -1596,9 +1615,15 @@ export default {
       z-index: 999;
       user-select: none !important;
     }
-    & .__form-subtitle {
+    & .__form-text {
       padding: .7rem 7%;
       font-size: var(--fontSizeAnuncioText);
+    }
+    & .__form-subtitle {
+      padding-top: 1.1rem;
+      font-size: 18px;
+      font-weight: 600;
+      user-select: none;
     }
     & textarea {
       padding: 0 7%;
@@ -1684,63 +1709,53 @@ export default {
           font-size: var(--fontSizeAnuncioText);
         }
       }
-      & .regras-adicionais {
+      & .new-regras {
         display: flex;
-        flex-flow: column;
-        padding-top: 1.3rem;
-        & .__title {
-          font-size: 19px;
-          font-weight: 600;
+        justify-content: space-between;
+        align-items: center;
+        padding: .5rem 0;
+        & .__regra-text {
+          font-size: var(--fontSizeAnuncioText);
           user-select: none;
         }
-        & .new-regras {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          padding: .5rem 0;
-          & .__regra-text {
-            font-size: var(--fontSizeAnuncioText);
-            user-select: none;
-          }
-          & .__regra-remove {
-            background-image: url('../../../assets/img/close-modal.svg');
-            background-position: 50%;
-            background-repeat: no-repeat;
-            background-size: 16px;
-            background-color: white;
-            width: 3rem;
-            min-width: 3rem;
-            height: 1rem;
-          }
+        & .__regra-remove {
+          background-image: url('../../../assets/img/close-modal.svg');
+          background-position: 50%;
+          background-repeat: no-repeat;
+          background-size: 16px;
+          background-color: white;
+          width: 3rem;
+          min-width: 3rem;
+          height: 1rem;
         }
-        & .input-row {
-          display: flex;
+      }
+      & .input-row {
+        display: flex;
+        width: 100%;
+        padding-top: .6rem;
+        & .__input {
           width: 100%;
-          padding-top: .6rem;
-          & .__input {
-            width: 100%;
-            cursor: text;
-            position: relative;
-            font-size: var(--fontSizeAnuncioText);
-            font-weight: 400;
-            background: white;
-            color: var(--color01);
-            padding: .5rem 0 .6rem 0;
-            border: none;
-            border-bottom: 1px solid rgb(222,222,222);
-            outline: none;
-          }
-          & .__add-btn {
-            background-image: url('./../../../assets/img/add-image.svg');
-            background-position: 50%;
-            background-repeat: no-repeat;
-            background-size: 20px;
-            background-color: white;
-            font-weight: 500;
-            border-bottom: 1px solid rgb(222,222,222);
-            width: 3rem;
-            min-width: 3rem;
-          }
+          cursor: text;
+          position: relative;
+          font-size: var(--fontSizeAnuncioText);
+          font-weight: 400;
+          background: white;
+          color: var(--color01);
+          padding: .5rem 0 .6rem 0;
+          border: none;
+          border-bottom: 1px solid rgb(222,222,222);
+          outline: none;
+        }
+        & .__add-btn {
+          background-image: url('./../../../assets/img/add-image.svg');
+          background-position: 50%;
+          background-repeat: no-repeat;
+          background-size: 20px;
+          background-color: white;
+          font-weight: 500;
+          border-bottom: 1px solid rgb(222,222,222);
+          width: 3rem;
+          min-width: 3rem;
         }
       }
     }
@@ -1965,9 +1980,13 @@ export default {
         font-weight: 700;
         text-align: center;
       }
-      & .__form-subtitle {
+      & .__form-text {
         padding: 1.4rem 26% 0;
         font-size: 17px;
+      }
+      & .__form-subtitle {
+        padding-top: 1.5rem;
+        font-size: 19px;
       }
       & textarea {
         padding: 0 26%;

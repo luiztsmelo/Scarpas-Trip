@@ -249,8 +249,6 @@
 
           <div class="item-form">
             <v-date-picker
-              is-double-paned
-              is-linked
               ref='datePicker'
               mode='range'
               v-model='$store.state.reservaAcomod.periodoReserva'
@@ -262,7 +260,6 @@
               :disabled-attribute='disabledAttribute'
               :theme-styles='themeStylesReserva'
               :formats='formats'
-              popover-align='right'
               tint-color='#00D8C7'
               show-caps
               popover-visibility='focus'>
@@ -294,13 +291,13 @@
               <h3 id="valor">R$ {{ valorNoitesTotal.toLocaleString() }}</h3>
             </div>
 
-            <div class="reserva-info_item" style="padding-bottom: .2rem">
+            <div class="reserva-info_item" style="padding-bottom: .2rem" v-if="acomod.limpezaFee !== 0">
               <div style="display:flex;flex:row;align-items:center">
                 <h3>Taxa de limpeza</h3>
                 <img src="../../assets/img/info.svg" style="width:.95rem;height:auto;margin-left:.3rem;cursor:pointer" @click="limpezaFeeDialog">
                 <v-dialog id="limpeza-fee" style="z-index:10000"/>
               </div>
-              <h3>R${{ this.acomod.limpezaFee.toLocaleString() }}</h3>
+              <h3>R${{ acomod.limpezaFee.toLocaleString() }}</h3>
             </div>
 
             <div class="reserva-info_item" style="padding-bottom: .4rem">
@@ -525,7 +522,7 @@ export default {
           clickedReservaBtn: false,
           wentToReservaPage: false,
           concludedReserva: false
-        }).then(doc => store.state.visitedID = doc.id)
+        }).then(doc => store.state.visitID = doc.id)
       }
     })
   },
@@ -541,7 +538,7 @@ export default {
         : el.removeAttribute("style")
     },
     reservar () {
-      firebase.firestore().collection('acomods').doc(this.$route.params.id).collection('visited').doc(this.$store.state.visitedID).update({ 
+      firebase.firestore().collection('acomods').doc(this.$route.params.id).collection('visits').doc(this.$store.state.visitID).update({ 
         clickedReservaBtn: true
       })
       if (this.$store.state.reservaAcomod.periodoReserva === null) {
