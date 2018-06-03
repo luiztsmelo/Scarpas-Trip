@@ -359,7 +359,7 @@
       <div class="after-choose-image" v-show="imageURL1 !== null">
 
         <div class="image-box">
-          <div class="__foto-principal">Imagem principal</div>
+          <div class="__foto-principal">Imagem de Capa</div>
           <img :src="imageURL1" class="__preview-img" @click="showCroppaModal1=true">
         </div>
         
@@ -420,7 +420,7 @@
     <!-- ########## REGRAS PG.8 ########## -->
     <form class="cadastro-acomodacao" v-if="$store.state.cadastroAcomod8">
 
-      <h1 class="__form-title">Defina as regras e lembretes {{ tipoAcomodText }}</h1>
+      <h1 class="__form-title">Quais são as regras {{ tipoAcomodText }}?</h1>
 
       <div class="regras-box">
 
