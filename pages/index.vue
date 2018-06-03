@@ -230,7 +230,7 @@ export default {
   & .home-body {
     display: flex;
     flex-flow: column;
-    margin-bottom: 5.4rem;
+    margin-bottom: 5.3rem;
     & .category-container {
       padding: 2rem 0;
       display: flex;
