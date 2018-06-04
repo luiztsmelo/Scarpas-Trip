@@ -250,7 +250,7 @@
       <div class="after-choose-image" v-show="imageURL1 !== null">
 
         <div class="image-box">
-          <div class="__foto-principal">Imagem principal</div>
+          <div class="__foto-principal">Imagem de Capa</div>
           <img :src="imageURL1" class="__preview-img" @click="showCroppaModal1=true">
         </div>
         
@@ -538,17 +538,14 @@ export default {
       this.showCroppaModal1 = true
     },
     async imageConfirmed1 () {
-      if (this.imageURL1 !== null) {
-        return 
-      } else {
+      if (this.imageURL1 === null) {
         const blobPasL1 = await this.$refs.myCroppa1.promisedBlob('image/jpeg', 0.01)
         const blobPasH1J = await this.$refs.myCroppa1.promisedBlob('image/jpeg')
         const blobPasH1W = await this.$refs.myCroppa1.promisedBlob('image/webp')
-        let url1 = URL.createObjectURL(blobPasH1J)
-        this.imageURL1 = url1
+        this.imageURL1 = URL.createObjectURL(blobPasH1J)
         this.$store.state.blobPasL1 = blobPasL1
         this.$store.state.blobPasH1J = blobPasH1J
-        this.$store.state.blobPasH1W = blobPasH1W
+        this.$store.state.blobPasH1W = blobPasH1W 
       }
     },
     removeImage1 () {
@@ -561,17 +558,14 @@ export default {
       this.showCroppaModal2 = true
     },
     async imageConfirmed2 () {
-      if (this.imageURL2 !== null) {
-        return 
-      } else {
+      if (this.imageURL2 === null) {
         const blobPasL2 = await this.$refs.myCroppa2.promisedBlob('image/jpeg', 0.01)
         const blobPasH2J = await this.$refs.myCroppa2.promisedBlob('image/jpeg')
         const blobPasH2W = await this.$refs.myCroppa2.promisedBlob('image/webp')
-        let url2 = URL.createObjectURL(blobPasH2J)
-        this.imageURL2 = url2
+        this.imageURL2 = URL.createObjectURL(blobPasH2J)
         this.$store.state.blobPasL2 = blobPasL2
         this.$store.state.blobPasH2J = blobPasH2J
-        this.$store.state.blobPasH2W = blobPasH2W
+        this.$store.state.blobPasH2W = blobPasH2W 
       }
     },
     removeImage2 () {

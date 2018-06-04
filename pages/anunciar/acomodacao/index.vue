@@ -279,19 +279,16 @@
 
       <h1 class="__form-title">Adicione imagens {{ tipoAcomodText }}</h1>
 
-      <div class="before-choose-image" v-show="imageURL1 === null">
-        <button class="__input-btn" type="button" @click="$refs.myCroppa1.chooseFile()">Adicionar Imagem</button>
-      </div>
 
-      <div class="modal-croppa" v-show="showCroppaModal1" @click="showCroppaModal1=false">
+      <div class="modal-croppa" v-show="showCroppaModal" @click="showCroppaModal=false">
         <div class="modal-croppa-body" @click.stop>
           <h1>Ajustar imagem</h1>
           <croppa
-            ref="myCroppa1"
-            @file-choose="showCroppaModal1 = true"
-            :width="$store.state.isMobile === true ? 720/2.25 : 720/1.5"
-            :height="$store.state.isMobile === true ? 480/2.25 : 480/1.5"
-            :quality="$store.state.isMobile === true ? 2.25 : 1.5"
+            ref="myCroppa"
+            @file-choose="showCroppaModal = true"
+            :width="$store.state.isMobile === true ? 720/2.25 : 720/1.2"
+            :height="$store.state.isMobile === true ? 480/2.25 : 480/1.2"
+            :quality="$store.state.isMobile === true ? 2.25 : 1.2"
             :placeholder="'Carregando...'"
             :placeholder-color="'white'"
             :accept="'.jpg, .jpeg, .png, .webp'"
@@ -299,81 +296,27 @@
             :prevent-white-space="true"
             :show-remove-button="false">
           </croppa>
-          <div class="modal-croppa-btns">
-            <button class="__croppa-btn" type="button" @click="showCroppaModal1=false, imageConfirmed1()">Confirmar</button>
-            <button class="__croppa-btn" type="button" @click="$refs.myCroppa1.chooseFile(), $refs.myCroppa1.remove(), imageURL1 = null"  style="background:transparent">Escolher outra</button>
-            <button class="__croppa-btn" type="button" @click="removeImage1()" style="background:transparent">Remover</button>
-          </div>
+          <button class="__croppa-btn" type="button" @click="showCroppaModal=false, imageConfirm()">Confirmar</button>
         </div>
       </div>
 
-      <div class="modal-croppa" v-show="showCroppaModal2" @click="showCroppaModal2=false">
-        <div class="modal-croppa-body" @click.stop>
-          <h1>Ajustar imagem</h1>
-          <croppa
-            ref="myCroppa2"
-            @file-choose="showCroppaModal2 = true"
-            :width="$store.state.isMobile === true ? 720/2.25 : 720/1.5"
-            :height="$store.state.isMobile === true ? 480/2.25 : 480/1.5"
-            :quality="$store.state.isMobile === true ? 2.25 : 1.5"
-            :placeholder="'Carregando...'"
-            :placeholder-color="'white'"
-            :accept="'.jpg, .jpeg, .png, .webp'"
-            :zoom-speed="$store.state.isMobile === true ? 2 : 4"
-            :prevent-white-space="true"
-            :show-remove-button="false">
-          </croppa>
-          <div class="modal-croppa-btns">
-            <button class="__croppa-btn" type="button" @click="showCroppaModal2=false, imageConfirmed2()">Confirmar</button>
-            <button class="__croppa-btn" type="button" @click="$refs.myCroppa2.chooseFile(), $refs.myCroppa2.remove(), imageURL2 = null"  style="background:transparent">Escolher outra</button>
-            <button class="__croppa-btn" type="button" @click="removeImage2()" style="background:transparent">Remover</button>
-          </div>
-        </div>
-      </div>
 
-      <div class="modal-croppa" v-show="showCroppaModal3" @click="showCroppaModal3=false">
-        <div class="modal-croppa-body" @click.stop>
-          <h1>Ajustar imagem</h1>
-          <croppa
-            ref="myCroppa3"
-            @file-choose="showCroppaModal3 = true"
-            :width="$store.state.isMobile === true ? 720/2.25 : 720/1.5"
-            :height="$store.state.isMobile === true ? 480/2.25 : 480/1.5"
-            :quality="$store.state.isMobile === true ? 2.25 : 1.5"
-            :placeholder="'Carregando...'"
-            :placeholder-color="'white'"
-            :accept="'.jpg, .jpeg, .png, .webp'"
-            :zoom-speed="$store.state.isMobile === true ? 2 : 4"
-            :prevent-white-space="true"
-            :show-remove-button="false">
-          </croppa>
-          <div class="modal-croppa-btns">
-            <button class="__croppa-btn" type="button" @click="showCroppaModal3=false, imageConfirmed3()">Confirmar</button>
-            <button class="__croppa-btn" type="button" @click="$refs.myCroppa3.chooseFile(), $refs.myCroppa3.remove(), imageURL3 = null"  style="background:transparent">Escolher outra</button>
-            <button class="__croppa-btn" type="button" @click="removeImage3()" style="background:transparent">Remover</button>
-          </div>
-        </div>
-      </div>
+      <!-- Preview images -->
+      <div class="after-choose-image">
 
-      <!-- Preview Image -->
-      <div class="after-choose-image" v-show="imageURL1 !== null">
-
-        <div class="image-box">
-          <div class="__foto-principal">Imagem de Capa</div>
-          <img :src="imageURL1" class="__preview-img" @click="showCroppaModal1=true">
-        </div>
-        
-        <div class="image-box">
-          <img src="./../../../assets/img/add-image.svg" class="__preview-img" v-if="imageURL2 === null" @click="$refs.myCroppa2.chooseFile()" style="padding:26%">
-          <img :src="imageURL2" class="__preview-img" @click="showCroppaModal2=true" v-else>
+        <div class="image-box" v-for="(image, index) in $store.state.acomodData.images">
+          <img src="../../../assets/img/delete.svg" class="__delete" @click="deleteImage(image, index)">
+          <progressive-background class="__image" :src="image.HW" :placeholder="image.L" :aspect-ratio="2/3"/>
         </div>
 
-        <div class="image-box" v-if="imageURL2 !== null">
-          <img src="./../../../assets/img/add-image.svg" class="__preview-img" v-if="imageURL3 === null" @click="$refs.myCroppa3.chooseFile()" style="padding:26%">
-          <img :src="imageURL3" class="__preview-img" @click="showCroppaModal3=true" v-else>
+
+        <div class="image-box __add-image" @click="$refs.myCroppa.chooseFile()">
+          <img src="../../../assets/img/add-image.svg" class="__add-image-svg">
+          <progressive-background src="../../../assets/img/add-image.png" :aspect-ratio="2/3"/>
         </div>
 
-      </div><!-- Preview Image -->
+      </div><!-- Preview images -->
+
 
       <div class="back-next"> 
         <div class="back-next-body">
@@ -736,6 +679,7 @@
 
 <script>
 import isMobile from 'ismobilejs'
+import supportsWebP from 'supports-webp'
 import pagarme from 'pagarme'
 import { loaded } from '~/node_modules/vue2-google-maps/src/manager'
 import * as firebase from 'firebase'
@@ -759,12 +703,14 @@ export default {
     return {
       title: '',/* Vue Autosize */
       subtitle: '',/* Vue Autosize */
-      showCroppaModal1: false,
-      showCroppaModal2: false,
-      showCroppaModal3: false,
-      imageURL1: null,
-      imageURL2: null,
-      imageURL3: null,
+      showCroppaModal: false,
+      n: 0,
+      image: {
+        id: null,
+        L: null,
+        HJ: null,
+        HW: null,
+      },
       newRegra: '',
       monthsPermitted: ['01','02','03','04','05','06','07','08','09','10','11','12'],
       bankCodeError: false,
@@ -788,65 +734,41 @@ export default {
       document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
     },
     /* ******************** IMAGE INPUT ******************** */
-    /* --- Image 1 --- */
-    async imageConfirmed1 () {
-      if (this.imageURL1 !== null) {
-        return 
-      } else {
-        const blobAcL1 = await this.$refs.myCroppa1.promisedBlob('image/jpeg', 0.01)
-        const blobAcH1J = await this.$refs.myCroppa1.promisedBlob('image/jpeg')
-        const blobAcH1W = await this.$refs.myCroppa1.promisedBlob('image/webp')
-        let url1 = URL.createObjectURL(blobAcH1J)
-        this.imageURL1 = url1
-        this.$store.state.blobAcL1 = blobAcL1
-        this.$store.state.blobAcH1J = blobAcH1J
-        this.$store.state.blobAcH1W = blobAcH1W
-      }
+    async imageConfirm () {
+      const storageRef = firebase.storage().ref('acomods/' + this.$store.state.acomodData.acomodID + '/')
+      let blobL = await this.$refs.myCroppa.promisedBlob('image/jpeg', 0.01)
+      let blobHJ = await this.$refs.myCroppa.promisedBlob('image/jpeg')
+      let blobHW = await this.$refs.myCroppa.promisedBlob('image/webp')
+      /* L */
+      storageRef.child('L' + this.n + '.jpeg').put(blobL).then(snapshot => {
+        storageRef.child('L' + this.n + '.jpeg').getDownloadURL().then(url => {
+          this.image.L = url
+          /* HJ */
+          storageRef.child('H' + this.n + 'J.jpeg').put(blobHJ).then(snapshot => {
+            storageRef.child('H' + this.n + 'J.jpeg').getDownloadURL().then(url => {
+              this.image.HJ = url
+              /* HW */
+              storageRef.child('H' + this.n + 'W.webp').put(blobHW).then(snapshot => {
+                storageRef.child('H' + this.n + 'W.webp').getDownloadURL().then(url => {
+                  this.image.HW = url
+                  this.image.id = this.n
+                  this.$store.state.acomodData.images.push(this.image)
+                  this.$refs.myCroppa.remove()
+                  this.n++
+                })
+              })
+            })
+          })
+        })
+      })
     },
-    removeImage1 () {
-      this.imageURL1 = null
-      this.$refs.myCroppa1.remove()
-      this.showCroppaModal1 = false
-    },
-    /* --- Image 2 --- */
-    async imageConfirmed2 () {
-      if (this.imageURL2 !== null) {
-        return 
-      } else {
-        const blobAcL2 = await this.$refs.myCroppa2.promisedBlob('image/jpeg', 0.01)
-        const blobAcH2J = await this.$refs.myCroppa2.promisedBlob('image/jpeg')
-        const blobAcH2W = await this.$refs.myCroppa2.promisedBlob('image/webp')
-        let url2 = URL.createObjectURL(blobAcH2J)
-        this.imageURL2 = url2
-        this.$store.state.blobAcL2 = blobAcL2
-        this.$store.state.blobAcH2J = blobAcH2J
-        this.$store.state.blobAcH2W = blobAcH2W
-      }
-    },
-    removeImage2 () {
-      this.imageURL2 = null
-      this.$refs.myCroppa2.remove()
-      this.showCroppaModal2 = false
-    },
-    /* --- Image 3 --- */
-    async imageConfirmed3 () {
-      if (this.imageURL3 !== null) {
-        return 
-      } else {
-        const blobAcL3 = await this.$refs.myCroppa3.promisedBlob('image/jpeg', 0.01)
-        const blobAcH3J = await this.$refs.myCroppa3.promisedBlob('image/jpeg')
-        const blobAcH3W = await this.$refs.myCroppa3.promisedBlob('image/webp')
-        let url3 = URL.createObjectURL(blobAcH3J)
-        this.imageURL3 = url3
-        this.$store.state.blobAcL3 = blobAcL3
-        this.$store.state.blobAcH3J = blobAcH3J
-        this.$store.state.blobAcH3W = blobAcH3W
-      }
-    },
-    removeImage3 () {
-      this.imageURL3 = null
-      this.$refs.myCroppa3.remove()
-      this.showCroppaModal3 = false
+    deleteImage (image, index) {
+      const storageRef = firebase.storage().ref('acomods/' + this.$store.state.acomodData.acomodID + '/')
+      this.$store.state.acomodData.images.splice(index, 1)
+      storageRef.child('L' + image.id + '.jpeg').delete()
+      storageRef.child('H' + image.id + 'J.jpeg').delete()
+      storageRef.child('H' + image.id + 'W.webp').delete()
+      this.$refs.myCroppa.remove()
     },
     /* ******************** GOOGLE MAPS ******************** */
     setPlace (place) {
@@ -914,11 +836,7 @@ export default {
     backBtn12 () {
       this.$store.commit('m_cadastroAcomod12', false), this.$store.commit('m_cadastroAcomod11', true), window.history.back(1)
     },
-    
     /* ******************** NEXT BUTTONS ******************** */
-    hashAcomod () {
-      window.location.hash = "tipo"
-    },
     nextBtn1 () {
       if (this.$store.state.acomodData.tipoAcomod !== null) {
         this.$store.commit('m_cadastroAcomod1', false), this.$store.commit('m_cadastroAcomod2', true), this.$store.commit('m_acomodProgressBar', (100/12)*2), this.scrollTop(), window.location.hash = "capacidade"
@@ -951,7 +869,7 @@ export default {
       }
     },
     nextBtn6 () {
-      if (this.imageURL1 !== null) {
+      if (this.$store.state.acomodData.imageH1J !== null) {
         this.$store.commit('m_cadastroAcomod6', false), this.$store.commit('m_cadastroAcomod7', true), this.$store.commit('m_acomodProgressBar', (100/12)*7), this.scrollTop(), window.location.hash = "valor"
       } else {
         this.$modal.show('dialog', {
@@ -1022,12 +940,12 @@ export default {
         })
       }
     },
+    hashAcomod () {
+      window.location.hash = "tipo"
+    },
     concluir () {
       if (this.bankCode !== '' && this.agencia !== '' && this.agenciaDV !== '' && this.conta !== '' && this.contaDV !== '' && this.legalName !== '' && this.docNumber.length === 14) {
         this.$store.commit('m_loader', true)
-        const acomodID = Math.floor(Math.random() * (99999 - 10000 + 1) + 10000).toString()
-        this.$store.commit('m_acomodID', acomodID)
-        const storageRef = firebase.storage().ref('acomodacoes/' + acomodID + '/')
         /* 
         CRIAR RECEBEDOR
         */
@@ -1052,96 +970,8 @@ export default {
         .then(recipient => {
           console.log(recipient)
           this.$store.state.acomodData.recipientID = recipient.id.toString()
-          /* 
-          UPLOAD IMAGE 1 
-          */
-          /* imageAcL1 */
-          storageRef.child('imageL1.jpeg').put(this.$store.state.blobAcL1).then(snapshot => {
-            console.log(acomodID + 'L1' + '.jpeg')
-            storageRef.child('imageL1.jpeg').getDownloadURL().then(url => {
-              this.$store.commit('m_imageAcL1', url)
-              this.ifUpload1()
-            })
-          })
-          /* imageAcH1J */
-          storageRef.child('imageH1J.jpeg').put(this.$store.state.blobAcH1J).then(snapshot => {
-            console.log(acomodID + 'H1J' + '.jpeg')
-            storageRef.child('imageH1J.jpeg').getDownloadURL().then(url => {
-              this.$store.commit('m_imageAcH1J', url)
-              this.ifUpload1()
-            })
-          })
-          /* imageAcH1W */
-          storageRef.child('imageH1W.webp').put(this.$store.state.blobAcH1W).then(snapshot => {
-            console.log(acomodID + 'H1W' + '.webp')
-            storageRef.child('imageH1W.webp').getDownloadURL().then(url => {
-              this.$store.commit('m_imageAcH1W', url)
-              this.ifUpload1()
-            })
-          })
-          /* 
-          UPLOAD IMAGE 2 
-          */
-          if (this.$store.state.blobAcH2J !== null) {
-            /* imageAcL2 */
-            storageRef.child('imageL2.jpeg').put(this.$store.state.blobAcL2).then(snapshot => {
-              console.log(acomodID + 'L2' + '.jpeg')
-              storageRef.child('imageL2.jpeg').getDownloadURL().then(url => {
-                this.$store.commit('m_imageAcL2', url)
-                this.ifUpload2()
-              })
-            })
-            /* imageAcH2J */
-            storageRef.child('imageH2J.jpeg').put(this.$store.state.blobAcH2J).then(snapshot => {
-              console.log(acomodID + 'H2J' + '.jpeg')
-              storageRef.child('imageH2J.jpeg').getDownloadURL().then(url => {
-                this.$store.commit('m_imageAcH2J', url)
-                this.ifUpload2()
-              })
-            })
-            /* imageAcH2W */
-            storageRef.child('imageH2W.webp').put(this.$store.state.blobAcH2W).then(snapshot => {
-              console.log(acomodID + 'H2W' + '.webp')
-              storageRef.child('imageH2W.webp').getDownloadURL().then(url => {
-                this.$store.commit('m_imageAcH2W', url)
-                this.ifUpload2()
-              })
-            })
-          }
-          /* 
-          UPLOAD IMAGE 3 
-          */
-          if (this.$store.state.blobAcH3J !== null) {
-            /* imageAcL3 */
-            storageRef.child('imageL3.jpeg').put(this.$store.state.blobAcL3).then(snapshot => {
-              console.log(acomodID + 'L3' + '.jpeg')
-              storageRef.child('imageL3.jpeg').getDownloadURL().then(url => {
-                this.$store.commit('m_imageAcL3', url)
-                this.ifUpload3()
-              })
-            })
-            /* imageAcH3J */
-            storageRef.child('imageH3J.jpeg').put(this.$store.state.blobAcH3J).then(snapshot => {
-              console.log(acomodID + 'H3J' + '.jpeg')
-              storageRef.child('imageH3J.jpeg').getDownloadURL().then(url => {
-                this.$store.commit('m_imageAcH3J', url)
-                this.ifUpload3()
-              })
-            })
-            /* imageAcH3W */
-            storageRef.child('imageH3W.webp').put(this.$store.state.blobAcH3W).then(snapshot => {
-              console.log(acomodID + 'H3W' + '.webp')
-              storageRef.child('imageH3W.webp').getDownloadURL().then(url => {
-                this.$store.commit('m_imageAcH3W', url)
-                this.ifUpload3()
-              })
-            })
-          }
-          this.$store.commit('m_acomodCreated', true)
-          /* Resetar imagens */
-          this.imageURL1 = null,
-          this.imageURL2 = null,
-          this.imageURL3 = null
+          this.$store.dispatch('a_uploadAcomod')
+          this.$router.push('/acomodacoes/' + this.$store.state.acomodData.acomodID) /* Pode causar bug em conexão lenta. REVER */
         })
         .catch(err => {
           if (err) {
@@ -1165,24 +995,6 @@ export default {
         this.legalName === '' ? this.legalNameError = true : this.legalNameError = false
         this.docNumber.length !== 14 ? this.docNumberError = true : this.docNumberError = false
       }
-    },
-    ifUpload1 () {
-      if (this.$store.state.acomodData.imageL1 !== null && this.$store.state.acomodData.imageH1J !== null && this.$store.state.acomodData.imageH1W !== null) {
-        this.$store.dispatch('a_uploadAcomod')
-        this.$router.push('/acomodacoes/' + this.$store.state.acomodData.acomodID)
-      }
-    },
-    ifUpload2 () {
-      if (this.$store.state.acomodData.imageL1 !== null && this.$store.state.acomodData.imageH1J !== null && this.$store.state.acomodData.imageH1W !== null && this.$store.state.acomodData.imageL2 !== null && this.$store.state.acomodData.imageH2J !== null && this.$store.state.acomodData.imageH2W !== null) {
-        this.$store.dispatch('a_uploadAcomod')
-        this.$router.push('/acomodacoes/' + this.$store.state.acomodData.acomodID)
-      }
-    },
-    ifUpload3 () {
-      if (this.$store.state.acomodData.imageL1 !== null && this.$store.state.acomodData.imageH1J !== null && this.$store.state.acomodData.imageH1W !== null && this.$store.state.acomodData.imageL2 !== null && this.$store.state.acomodData.imageH2J !== null && this.$store.state.acomodData.imageH2W !== null && this.$store.state.acomodData.imageL3 !== null && this.$store.state.acomodData.imageH3J !== null && this.$store.state.acomodData.imageH3W !== null) {
-        this.$store.dispatch('a_uploadAcomod')
-        this.$router.push('/acomodacoes/' + this.$store.state.acomodData.acomodID)
-      }
     }
   },
   async mounted () {
@@ -1194,6 +1006,14 @@ export default {
     hash () {
       return this.$route.hash
     },
+    /* ******************** IMAGES ******************** */
+    addImageHeight () {
+      return 'height:' + this.$store.state.addImageHeight + 'px'
+    },
+    image1H () {
+      return supportsWebP ? this.$store.state.acomodData.imageH1W : this.$store.state.acomodData.imageH1J
+    },
+    /* ******************** BANK ACCOUNT ******************** */
     bankCode () { return this.$store.state.bankAccount.bankCode },
     type () { return this.$store.state.bankAccount.type },
     agencia () { return this.$store.state.bankAccount.agencia },
@@ -1307,7 +1127,7 @@ export default {
       return this.$store.state.acomodPlace !== null || this.$store.state.acomodData.positionLAT !== -20.6141320 ? 'background:#FFA04F' : ''
     },
     form6ok () {
-      return this.imageURL1 !== null ? 'background:#FFA04F' : ''
+      return this.$store.state.acomodData.imageH1J !== null ? 'background:#FFA04F' : ''
     },
     form7ok () {
       return this.$store.state.acomodData.valorNoite !== 0 ? 'background:#FFA04F' : ''
@@ -1326,15 +1146,9 @@ export default {
     },
     form12ok () {
       return this.bankCode !== null && this.agencia !== '' && this.agenciaDV !== '' && this.conta !== '' && this.contaDV !== '' && this.legalName !== '' && this.docNumber.length === 14 ? 'background:#FFA04F' : ''
-    },
-    acomodCreated () {
-      return this.$store.state.acomodCreated
     }
   },
   watch: {
-    acomodCreated (value) {
-      value === true ? this.$router.push('/') : ''
-    },
     bankCode (value) { value !== '' ? this.bankCodeError = false : '' },
     agencia (value) { value !== '' ? this.agenciaError = false : '' },
     agenciaDV (value) { value !== '' ? this.agenciaDVError = false : '' },
@@ -1544,6 +1358,10 @@ export default {
     next(vm => {
       if (vm.$store.state.showFoobar === true) {
         vm.$store.commit('m_showFoobar', false)
+      }
+      if (vm.$store.state.acomodData.acomodID === null) {
+        const acomodID = Math.floor(Math.random() * (99999 - 10000 + 1) + 10000).toString()
+        vm.$store.commit('m_acomodID', acomodID)
       }
     })
   }
@@ -1829,15 +1647,33 @@ export default {
     }
     & .after-choose-image {
       margin-top: 1.5rem;
-      padding: 0 calc(7% - .3rem);
+      padding: 0 calc(7% - 1%);
       display: flex;
       flex-flow: row wrap;
+      align-items: center;
+      align-content: flex-start;
       & .image-box {
-        cursor: pointer;
         position: relative;
-        margin: .3rem;
-        width: 145px;
-        height: 97px;
+        margin: 1%;
+        width: 48%;
+        height: auto;
+        & .__image {
+          width: 100%;
+          height: 100%;
+          border-radius: 4px;
+        }
+        & .__delete {
+          position: absolute;
+          cursor: pointer;
+          width: 2.2rem;
+          padding: .5rem;
+          height: auto;
+          top: .7rem;
+          right: .7rem;
+          z-index: 5;
+          background: rgba(0, 0, 0, 0.5);
+          border-radius: 50%;
+        }
         & .__foto-principal {
           position: absolute;
           color: white;
@@ -1847,11 +1683,24 @@ export default {
           width: 100%;
           text-align: center;
         }
-        & .__preview-img {
-          width: 100%;
-          height: 100%;
-          border-radius: 2px;
+      }
+      & .__add-image {
+        position: relative;
+        cursor: pointer;
+        border: 2px dashed rgb(182,182,182);
+        border-radius: 4px;
+        transition: all .1s ease;
+        & .__add-image-svg {
+          position: absolute;
+          width: 2.2rem;
+          height: auto;
+          top: 0; left: 0; bottom: 0; right: 0;
+          margin: auto;
+          z-index: 5;
         }
+      }
+      & .__add-image:hover {
+        background: rgb(251,251,251);
       }
     }
     & .signin-btns {
@@ -1973,7 +1822,7 @@ export default {
       }
     }
     & .cadastro-acomodacao {
-      padding: 0 0 7rem 0;
+      padding: 0 0 8rem 0;
       & .__form-title {
         padding: 3.5rem 26% 1.2rem;
         font-size: 32px;
@@ -2056,10 +1905,8 @@ export default {
       }
       & .after-choose-image {
         margin-top: 2rem;
-        padding: 0 calc(26% - .3rem);
+        padding: 0 calc(26% - 1%);
         & .image-box {
-          width: 165px;
-          height: 110px;
           & .__foto-principal {
           }
           & .__preview-img {

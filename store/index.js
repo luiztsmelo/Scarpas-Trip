@@ -70,7 +70,6 @@ const store = () => new Vuex.Store({
     /*
     ########## Acomodação ##########
     */
-    acomodCreated: false,
     showReservaAcomod: false,
     isReservar: false,
     visitID: null,
@@ -80,15 +79,6 @@ const store = () => new Vuex.Store({
     acomodMap: null,
     acomodProgressBar: 0,
     acomodPlace: null,
-    blobAcL1: null,
-    blobAcH1J: null,
-    blobAcH1W: null,
-    blobAcL2: null,
-    blobAcH2J: null,
-    blobAcH2W: null,
-    blobAcL3: null,
-    blobAcH3J: null,
-    blobAcH3W: null,
     creditCard: {
       paymentMethod: 'credit_card',
       cardNumber: '',
@@ -146,15 +136,7 @@ const store = () => new Vuex.Store({
       allowBabys: false,
       allowFumar: false,
       regrasAdicionais: [],
-      imageL1: null,
-      imageH1J: null,
-      imageH1W: null,
-      imageL2: null,
-      imageH2J: null,
-      imageH2W: null,
-      imageL3: null,
-      imageH3J: null,
-      imageH3W: null
+      images: []
     },
     reservaAcomod: {/* Atualizar Action */
       acomodID: null,
@@ -376,9 +358,6 @@ const store = () => new Vuex.Store({
     /*
     ########## Acomodação ##########
     */
-    m_acomodCreated (state, payload) {
-      state.acomodCreated = payload
-    },
     m_showReservaAcomod (state, payload) {
       state.showReservaAcomod = payload
     },
@@ -406,33 +385,6 @@ const store = () => new Vuex.Store({
     },
     m_acomodData (state, payload) {
       state.acomodData = payload
-    },
-    m_imageAcL1 (state, payload) {
-      state.acomodData.imageL1 = payload
-    },
-    m_imageAcH1J (state, payload) {
-      state.acomodData.imageH1J = payload
-    },
-    m_imageAcH1W (state, payload) {
-      state.acomodData.imageH1W = payload
-    },
-    m_imageAcL2 (state, payload) {
-      state.acomodData.imageL2 = payload
-    },
-    m_imageAcH2J (state, payload) {
-      state.acomodData.imageH2J = payload
-    },
-    m_imageAcH2W (state, payload) {
-      state.acomodData.imageH2W = payload
-    },
-    m_imageAcL3 (state, payload) {
-      state.acomodData.imageL3 = payload
-    },
-    m_imageAcH3J (state, payload) {
-      state.acomodData.imageH3J = payload
-    },
-    m_imageAcH3W (state, payload) {
-      state.acomodData.imageH3W = payload
     },
     m_acomodPlace (state, payload) {
       state.acomodPlace = payload
