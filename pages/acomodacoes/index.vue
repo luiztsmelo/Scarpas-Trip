@@ -8,16 +8,8 @@
             <div class="image-box">
               <swiper :options="swiperOption">
 
-                <swiper-slide class="slide">
-                  <progressive-background class="__img" :src="image1H(acomod)" :placeholder="acomod.imageL1" :aspect-ratio="2/3"/>
-                </swiper-slide>
-
-                <swiper-slide class="slide" v-if="ifImage2(acomod)">
-                  <progressive-background class="__img" :src="image2H(acomod)" :placeholder="acomod.imageL2" :aspect-ratio="2/3"/>
-                </swiper-slide>
-
-                <swiper-slide class="slide" v-if="ifImage3(acomod)">
-                  <progressive-background class="__img" :src="image3H(acomod)" :placeholder="acomod.imageL3" :aspect-ratio="2/3"/>
+                <swiper-slide class="slide" v-for="image in acomod.images" :key="image.id">
+                  <progressive-background class="__img" :src="imageH(image)" :placeholder="image.L" :aspect-ratio="2/3"/>
                 </swiper-slide>
 
                 <div class="swiper-pagination" slot="pagination"></div>
@@ -242,20 +234,8 @@ export default {
     getNoites (range) {
       return !range ? 0 : (range.end - range.start)/(1000*60*60*24)
     },
-    image1H (acomod) {
-      return supportsWebP ? acomod.imageH1W : acomod.imageH1J
-    },
-    image2H (acomod) {
-      return supportsWebP ? acomod.imageH2W : acomod.imageH2J
-    },
-    image3H (acomod) {
-      return supportsWebP ? acomod.imageH3W : acomod.imageH3J
-    },
-    ifImage2 (acomod) {
-      return acomod.imageH2W === null ? '' : supportsWebP ? acomod.imageH2W : acomod.imageH2J
-    },
-    ifImage3 (acomod) {
-      return acomod.imageH3W === null ? '' : supportsWebP ? acomod.imageH3W : acomod.imageH3J
+    imageH (image) {
+      return supportsWebP ? image.HW : image.HJ
     }
   },
   computed: {
@@ -266,16 +246,6 @@ export default {
       const span = this.getNoites(this.drag || this.filter.date)
       return (span && `${span} noites`) || ''
     },
-    /* filteredAcomods () {
-      let acomods = this.$store.state.acomods
-      let acomodsArray = Object.values(acomods)
-      if (this.filter.tipoAcomod !== null) {
-        let filteredByTipo = acomodsArray.filter(acomod => acomod.tipoAcomod === this.filter.tipoAcomod[0])
-        return filteredByTipo
-      } else {
-        return acomods
-      }
-    }, */
     disabledDates () {
       return 
     }

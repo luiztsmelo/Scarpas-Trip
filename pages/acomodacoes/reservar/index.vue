@@ -22,14 +22,14 @@
     <!-- ******* FLEX RIGHT ******* -->
     <div class="flex-right">
 
-      <progressive-background  class="__acomod-image" :src="image1H(acomod)" :placeholder="acomod.imageL1" :aspect-ratio="2/3"/>
+      <progressive-background  class="__acomod-image" :src="imageH" :placeholder="acomod.images[0].L" :aspect-ratio="2/3"/>
 
       <h1 class="__acomod-title">{{ acomod.title }}</h1>
 
       <div class="detalhes-reserva-data">
         <div class="detalhes-reserva-data_item">
           <img src="../../../assets/img/guest.svg" class="__img">
-          <h3>{{ $store.state.reservaAcomod.totalHospedes == '1'? $store.state.reservaAcomod.totalHospedes + ' hóspede' : $store.state.reservaAcomod.totalHospedes + ' hóspedes' }}</h3>
+          <h3>{{ $store.state.reservaAcomod.totalHospedes == '1' ? $store.state.reservaAcomod.totalHospedes + ' hóspede' : $store.state.reservaAcomod.totalHospedes + ' hóspedes' }}</h3>
         </div>
         <div class="detalhes-reserva-data_item">
           <img src="../../../assets/img/calendar.svg" class="__img" style="transform: scale(.86)">
@@ -90,15 +90,6 @@ export default {
   middleware: 'reservaValidate',
   transition: 'opacity',
   methods: {
-    image1H (acomod) {
-      return supportsWebP ? acomod.imageH1W : acomod.imageH1J
-    },
-    image2H (acomod) {
-      return supportsWebP ? acomod.imageH2W : acomod.imageH2J
-    },
-    image3H (acomod) {
-      return supportsWebP ? acomod.imageH3W : acomod.imageH3J
-    },
     limpezaFeeDialog () {
       this.$modal.show('dialog', {
         title: 'Taxa de Limpeza',
@@ -117,6 +108,9 @@ export default {
   computed: {
     acomod () {
       return this.$store.state.acomod
+    },
+    imageH () {
+      return supportsWebP ? this.acomod.images[0].HW : this.acomod.images[0].HJ
     },
     tipoAcomodTitle () {
       const path = this.acomod.tipoAcomod

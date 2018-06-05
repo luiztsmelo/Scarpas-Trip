@@ -24,16 +24,8 @@
     <div class="image-box" ref="imageBox">
       <swiper :options="swiperOption">
         
-        <swiper-slide class="slide">
-          <progressive-background class="__img" :src="image1H(acomod)" :placeholder="acomod.imageL1" :aspect-ratio="2/3"/>
-        </swiper-slide>
-
-        <swiper-slide class="slide" v-if="ifImage2">
-          <progressive-background class="__img" :src="image2H(acomod)" :placeholder="acomod.imageL2" :aspect-ratio="2/3"/>
-        </swiper-slide>
-
-        <swiper-slide class="slide" v-if="ifImage3">
-          <progressive-background class="__img" :src="image3H(acomod)" :placeholder="acomod.imageL3" :aspect-ratio="2/3"/>
+        <swiper-slide class="slide" v-for="image in acomod.images" :key="image.id">
+          <progressive-background class="__img" :src="imageH(image)" :placeholder="image.L" :aspect-ratio="2/3"/>
         </swiper-slide>
 
         <div class="swiper-pagination" slot="pagination"></div>
@@ -527,6 +519,9 @@ export default {
     })
   },
   methods: {
+    imageH (image) {
+      return supportsWebP ? image.HW : image.HJ
+    },
     scrollTopbarBg (evt, el) {
       return window.scrollY >= this.$store.state.heightImageBox
         ? el.setAttribute("style", "background: white; box-shadow: 0px 1px 1px 0px rgba(0,0,0,0.1)")
@@ -588,15 +583,6 @@ export default {
     },
     hashShare () {
        window.location.hash = "compartilhar"
-    },
-    image1H (acomod) {
-      return supportsWebP ? acomod.imageH1W : acomod.imageH1J
-    },
-    image2H (acomod) {
-      return supportsWebP ? acomod.imageH2W : acomod.imageH2J
-    },
-    image3H (acomod) {
-      return supportsWebP ? acomod.imageH3W : acomod.imageH3J
     },
     enterFullscreen () {
       if ((document.fullScreenElement && document.fullScreenElement !== null) ||
@@ -695,12 +681,6 @@ export default {
     },
     acomod () {
       return this.$store.state.acomod
-    },
-    ifImage2 () {
-      return this.acomod.imageH2W === null ? '' : supportsWebP ? this.acomod.imageH2W : this.acomod.imageH2J
-    },
-    ifImage3 () {
-      return this.acomod.imageH3W === null ? '' : supportsWebP ? this.acomod.imageH3W : this.acomod.imageH3J
     },
     showShare () {
       return this.$store.state.showShare

@@ -753,6 +753,7 @@ export default {
                   this.image.HW = url
                   this.image.id = this.n
                   this.$store.state.acomodData.images.push(this.image)
+                  this.image = { id: null, L: null, HJ: null, HW: null },
                   this.$refs.myCroppa.remove()
                   this.n++
                 })

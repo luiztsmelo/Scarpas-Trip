@@ -59,10 +59,15 @@
         <div class="cards-container">
           <div class="card" v-for="acomod in $store.state.acomods" :key="acomod.acomodID" @click="$store.commit('m_loader', true)">
             <nuxt-link :to="'/acomodacoes/' + acomod.acomodID">
-              <progressive-background class="__card-img" :src="imageAcH(acomod)" :placeholder="acomod.imageL1" :aspect-ratio="2/3"/>
+
+              <progressive-background class="__card-img" :src="imageAcH(acomod)" :placeholder="acomod.images[0].L" :aspect-ratio="2/3"/>
+
               <span class="__card-info" style="color: #FFA04F">{{ acomod.tipoAcomod }}</span>
+
               <h1 class="__card-title">{{ acomod.title }}</h1>
+
               <span class="__card-subtitle">R${{ acomod.valorNoite.toLocaleString() }}<span class="__card-valor-noite"> por noite</span></span>
+              
             </nuxt-link> 
           </div>
         </div>
@@ -170,7 +175,7 @@ export default {
       return supportsWebP ? evento.imageH1W : evento.imageH1J
     },
     imageAcH (acomod) {
-      return supportsWebP ? acomod.imageH1W : acomod.imageH1J
+      return supportsWebP ? acomod.images[0].HW : acomod.images[0].HJ
     },
     imagePasH (passeio) {
       return supportsWebP ? passeio.imageH1W : passeio.imageH1J
