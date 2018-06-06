@@ -73,13 +73,12 @@ const store = () => new Vuex.Store({
     showReservaAcomod: false,
     isReservar: false,
     visitID: null,
-    acomodID: null,
     acomods: null,
     acomod: null,
     acomodMap: null,
     acomodProgressBar: 0,
     acomodPlace: null,
-    imgCountAc: 0,
+    imageCountAc: 0,
     creditCard: {
       paymentMethod: 'credit_card',
       cardNumber: '',
@@ -366,11 +365,10 @@ const store = () => new Vuex.Store({
       state.isReservar = payload
     },
     m_acomodID (state, payload) {
-      state.acomodID = payload
       state.acomodData.acomodID = payload
     },
-    m_imgCountAc (state) {
-      state.imgCountAc++
+    m_imageCountAc (state) {
+      state.imageCountAc++
     },
     m_valorNoitesTotal (state, payload) {
       state.reservaAcomod.valorNoitesTotal = payload
@@ -698,7 +696,7 @@ const store = () => new Vuex.Store({
     ########## Acomodações ##########
     */
     a_uploadAcomod ({ state, commit }) {
-      firebase.firestore().collection('acomods').doc(state.acomodID).set(state.acomodData).then(() => {
+      firebase.firestore().collection('acomods').doc(state.acomodData.acomodID).set(state.acomodData).then(() => {
         firebase.firestore().collection('users').doc(state.user.userID).update({
           isAcomodHost: true,
           celular: state.acomodData.celular
@@ -763,7 +761,7 @@ const store = () => new Vuex.Store({
           regrasAdicionais: [],
           images: []
         })
-        state.imgCountAc = 0
+        state.imageCountAc = 0
         commit('m_cadastroAcomod12', false)
         commit('m_cadastroAcomod0', true)
         commit('m_loader', false)

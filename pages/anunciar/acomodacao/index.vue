@@ -302,11 +302,11 @@
 
 
       <!-- Preview images -->
-      <div class="after-choose-image">
+      <div class="after-choose-image" :class="[ $store.state.acomodData.images.length == 0 ? 'center-first-image' : '' ]">
 
         <div class="image-box" v-for="(image, index) in $store.state.acomodData.images">
-          <div class="loader" @click="deleteImage(image, index)">
-            <img src="../../../assets/img/delete.svg" class="__delete">
+          <div class="delete" @click="deleteImage(image, index)">
+            <img src="../../../assets/img/delete.svg" class="__delete-img">
           </div>
           <progressive-background class="__image" :src="image.HJ" :placeholder="image.L" :aspect-ratio="2/3"/>
         </div>
@@ -521,7 +521,7 @@
         <button type="button" class="email-btn" @click="emailSignIn()">Continuar com E-mail</button>
       </div>
 
-      <h3 class="__form-text" v-if="$store.state.user.email !== null">Ótimo {{ firstName }}! Só mais algumas informações:</h3>
+      <h3 class="__form-text" v-if="$store.state.user.email !== null">Ótimo {{ $store.state.user.firstName }}! Só mais algumas informações:</h3>
 
       <div v-if="$store.state.user.email !== null">
 
@@ -549,7 +549,6 @@
 
       </div>
 
-      <!-- <h3 style="padding: .5rem 7%;font-size:16px;line-height:22px">Ao prosseguir você concorda com nossos <span style="color:#198CFE">Termos de Serviço</span>.</h3> -->
 
       <div class="back-next"> 
         <div class="back-next-body">
@@ -569,7 +568,7 @@
 
       <h1 class="__form-title">Seus dados bancários para transferência</h1>   
 
-      <h3 class="__form-text">{{ firstName }}, para finalizar precisamos dos dados de sua conta bancária para podermos transferir seus ganhos financeiros. Não se preocupe, suas informações estarão seguras.</h3>
+      <h3 class="__form-text">{{ $store.state.user.firstName }}, para finalizar precisamos dos dados de sua conta bancária para podermos transferir seus ganhos financeiros. Não se preocupe, suas informações estarão seguras.</h3>
 
       <div class="recebedor-box">
 
@@ -681,7 +680,6 @@
 
 <script>
 import isMobile from 'ismobilejs'
-import supportsWebP from 'supports-webp'
 import pagarme from 'pagarme'
 import { loaded } from '~/node_modules/vue2-google-maps/src/manager'
 import * as firebase from 'firebase'
@@ -736,7 +734,7 @@ export default {
       let blobL = await this.$refs.myCroppa.promisedBlob('image/jpeg', 0.01)
       let blobHJ = await this.$refs.myCroppa.promisedBlob('image/jpeg')
       let blobHW = await this.$refs.myCroppa.promisedBlob('image/webp')
-      let n = this.$store.state.imgCountAc
+      let n = this.$store.state.imageCountAc
       let key = this.$store.state.acomodData.images.length
       /* L */
       storageRef.child('L' + n + '.jpeg').put(blobL).then(snapshot => {
@@ -753,7 +751,7 @@ export default {
                   this.$store.state.acomodData.images[key].HW = url
                   this.$store.state.acomodData.images[key].id = n
                   this.$refs.myCroppa.remove()
-                  this.$store.commit('m_imgCountAc')
+                  this.$store.commit('m_imageCountAc')
                   this.isUploading = false
                 })
               })
@@ -1082,11 +1080,6 @@ export default {
     },
     subtitleLength () {
       return 600 - this.$store.state.acomodData.subtitle.length
-    },
-    firstName () {
-      let fullName = this.$store.state.acomodData.proprietario.split(' ')
-      let firstName = fullName[0]
-      return firstName
     },
     yearsPermitted () {
       let year = new Date().getFullYear().toString()
@@ -1639,7 +1632,7 @@ export default {
       border-radius: 2rem;
     }
     & .after-choose-image {
-      margin-top: 1.5rem;
+      margin-top: 1.4rem;
       padding: 0 calc(7% - 1%);
       display: flex;
       flex-flow: row wrap;
@@ -1655,22 +1648,21 @@ export default {
           height: 100%;
           border-radius: 4px;
         }
-        & .loader {
-          display: none;
+        & .delete {
+          display: flex;
           align-items: center;
           justify-content: center;
           cursor: pointer;
           position: absolute;
-          top: .7rem;
-          right: .7rem;
+          top: .4rem;
+          right: .4rem;
           z-index: 5;
-          width: 2.3rem;
-          height: 2.3rem;
+          width: 2rem;
+          height: 2rem;
           background: rgba(0, 0, 0, 0.5);
           border-radius: 50%;
-          & .__delete {
-            display: none;
-            width: 1.2rem;
+          & .__delete-img {
+            width: 1rem;
             height: auto;
           }
         }
@@ -1683,12 +1675,6 @@ export default {
           width: 100%;
           text-align: center;
         }
-      }
-      & .image-box:hover .loader {
-        display: flex;
-      }
-      & .image-box:hover .__delete {
-        display: initial;
       }
       & .__add-image {
         position: relative;
@@ -1913,11 +1899,40 @@ export default {
         margin-top: 2rem;
         padding: 0 calc(26% - 1%);
         & .image-box {
-          & .__foto-principal {
-          }
-          & .__preview-img {
+        margin: 1%;
+        width: 48%;
+        & .__image {
+        }
+        & .delete {
+          display: none;
+          top: .7rem;
+          right: .7rem;
+          width: 2.3rem;
+          height: 2.3rem;
+          & .__delete-img {
+            display: none;
+            width: 1.2rem;
           }
         }
+        & .__foto-principal {
+          position: absolute;
+          color: white;
+          background: rgba(0, 0, 0, 0.4);
+          font-size: 12px;
+          padding: .2rem 0;
+          width: 100%;
+          text-align: center;
+        }
+      }
+      & .image-box:hover .delete {
+        display: flex;
+      }
+      & .image-box:hover .__delete-img {
+        display: initial;
+      }
+      }
+      & .center-first-image {
+        flex-flow: column wrap;
       }
       & .signin-btns {
         padding: .8rem 40% 0;

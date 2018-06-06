@@ -46,7 +46,7 @@
           <h3 id="valor">R${{ $store.state.reservaAcomod.valorNoitesTotal.toLocaleString() }}</h3>
         </div>
 
-        <div class="detalhes-reserva-valor_item" style="padding-bottom: .5rem">
+        <div class="detalhes-reserva-valor_item" style="padding-bottom: .5rem" v-if="acomod.limpezaFee !== 0">
           <div style="display:flex;flex:row;align-items:center">
             <h3>Taxa de limpeza</h3>
             <img src="../../../assets/img/info.svg" style="width:.95rem;height:auto;margin-left:.3rem;cursor:pointer" @click="limpezaFeeDialog">
