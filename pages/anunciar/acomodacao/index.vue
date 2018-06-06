@@ -305,12 +305,14 @@
       <div class="after-choose-image">
 
         <div class="image-box" v-for="(image, index) in $store.state.acomodData.images">
-          <img src="../../../assets/img/delete.svg" class="__delete" @click="deleteImage(image, index)">
-          <progressive-background class="__image" :src="image.HW" :placeholder="image.L" :aspect-ratio="2/3"/>
+          <div class="loader" @click="deleteImage(image, index)">
+            <img src="../../../assets/img/delete.svg" class="__delete">
+          </div>
+          <progressive-background class="__image" :src="image.HJ" :placeholder="image.L" :aspect-ratio="2/3"/>
         </div>
 
 
-        <div class="image-box __add-image" @click="$refs.myCroppa.chooseFile()">
+        <div class="image-box __add-image" @click="!isUploading ? $refs.myCroppa.chooseFile() : ''">
           <img src="../../../assets/img/add-image.svg" class="__add-image-svg">
           <progressive-background src="../../../assets/img/add-image.png" :aspect-ratio="2/3"/>
         </div>
@@ -704,13 +706,7 @@ export default {
       title: '',/* Vue Autosize */
       subtitle: '',/* Vue Autosize */
       showCroppaModal: false,
-      n: 0,
-      image: {
-        id: null,
-        L: null,
-        HJ: null,
-        HW: null,
-      },
+      isUploading: false,
       newRegra: '',
       monthsPermitted: ['01','02','03','04','05','06','07','08','09','10','11','12'],
       bankCodeError: false,
@@ -735,27 +731,30 @@ export default {
     },
     /* ******************** IMAGE INPUT ******************** */
     async imageConfirm () {
+      this.isUploading = true
       const storageRef = firebase.storage().ref('acomods/' + this.$store.state.acomodData.acomodID + '/')
       let blobL = await this.$refs.myCroppa.promisedBlob('image/jpeg', 0.01)
       let blobHJ = await this.$refs.myCroppa.promisedBlob('image/jpeg')
       let blobHW = await this.$refs.myCroppa.promisedBlob('image/webp')
+      let n = this.$store.state.imgCountAc
+      let key = this.$store.state.acomodData.images.length
       /* L */
-      storageRef.child('L' + this.n + '.jpeg').put(blobL).then(snapshot => {
-        storageRef.child('L' + this.n + '.jpeg').getDownloadURL().then(url => {
-          this.image.L = url
+      storageRef.child('L' + n + '.jpeg').put(blobL).then(snapshot => {
+        storageRef.child('L' + n + '.jpeg').getDownloadURL().then(url => {
+          this.$store.state.acomodData.images.push({ id: null, L: null, HJ: null, HW: null })
+          this.$store.state.acomodData.images[key].L = url
           /* HJ */
-          storageRef.child('H' + this.n + 'J.jpeg').put(blobHJ).then(snapshot => {
-            storageRef.child('H' + this.n + 'J.jpeg').getDownloadURL().then(url => {
-              this.image.HJ = url
+          storageRef.child('H' + n + 'J.jpeg').put(blobHJ).then(snapshot => {
+            storageRef.child('H' + n + 'J.jpeg').getDownloadURL().then(url => {
+              this.$store.state.acomodData.images[key].HJ = url
               /* HW */
-              storageRef.child('H' + this.n + 'W.webp').put(blobHW).then(snapshot => {
-                storageRef.child('H' + this.n + 'W.webp').getDownloadURL().then(url => {
-                  this.image.HW = url
-                  this.image.id = this.n
-                  this.$store.state.acomodData.images.push(this.image)
-                  this.image = { id: null, L: null, HJ: null, HW: null },
+              storageRef.child('H' + n + 'W.webp').put(blobHW).then(snapshot => {
+                storageRef.child('H' + n + 'W.webp').getDownloadURL().then(url => {
+                  this.$store.state.acomodData.images[key].HW = url
+                  this.$store.state.acomodData.images[key].id = n
                   this.$refs.myCroppa.remove()
-                  this.n++
+                  this.$store.commit('m_imgCountAc')
+                  this.isUploading = false
                 })
               })
             })
@@ -765,10 +764,10 @@ export default {
     },
     deleteImage (image, index) {
       const storageRef = firebase.storage().ref('acomods/' + this.$store.state.acomodData.acomodID + '/')
-      this.$store.state.acomodData.images.splice(index, 1)
       storageRef.child('L' + image.id + '.jpeg').delete()
       storageRef.child('H' + image.id + 'J.jpeg').delete()
       storageRef.child('H' + image.id + 'W.webp').delete()
+      this.$store.state.acomodData.images.splice(index, 1)
       this.$refs.myCroppa.remove()
     },
     /* ******************** GOOGLE MAPS ******************** */
@@ -870,12 +869,12 @@ export default {
       }
     },
     nextBtn6 () {
-      if (this.$store.state.acomodData.imageH1J !== null) {
+      if (this.$store.state.acomodData.images.length >= 3) {
         this.$store.commit('m_cadastroAcomod6', false), this.$store.commit('m_cadastroAcomod7', true), this.$store.commit('m_acomodProgressBar', (100/12)*7), this.scrollTop(), window.location.hash = "valor"
       } else {
         this.$modal.show('dialog', {
           title: 'Ops',
-          text: 'Adicione pelo menos uma imagem.',
+          text: 'Adicione pelo menos 3 imagens.',
           buttons: [{ title: 'OK' }]
         })
       }
@@ -972,7 +971,7 @@ export default {
           console.log(recipient)
           this.$store.state.acomodData.recipientID = recipient.id.toString()
           this.$store.dispatch('a_uploadAcomod')
-          this.$router.push('/acomodacoes/' + this.$store.state.acomodData.acomodID) /* Pode causar bug em conexão lenta. REVER */
+          this.$router.push('/acomodacoes/' + this.$store.state.acomodData.acomodID)
         })
         .catch(err => {
           if (err) {
@@ -1006,13 +1005,6 @@ export default {
   computed: {
     hash () {
       return this.$route.hash
-    },
-    /* ******************** IMAGES ******************** */
-    addImageHeight () {
-      return 'height:' + this.$store.state.addImageHeight + 'px'
-    },
-    image1H () {
-      return supportsWebP ? this.$store.state.acomodData.imageH1W : this.$store.state.acomodData.imageH1J
     },
     /* ******************** BANK ACCOUNT ******************** */
     bankCode () { return this.$store.state.bankAccount.bankCode },
@@ -1128,7 +1120,7 @@ export default {
       return this.$store.state.acomodPlace !== null || this.$store.state.acomodData.positionLAT !== -20.6141320 ? 'background:#FFA04F' : ''
     },
     form6ok () {
-      return this.$store.state.acomodData.imageH1J !== null ? 'background:#FFA04F' : ''
+      return this.$store.state.acomodData.images.length >= 3 ? 'background:#FFA04F' : ''
     },
     form7ok () {
       return this.$store.state.acomodData.valorNoite !== 0 ? 'background:#FFA04F' : ''
@@ -1663,17 +1655,24 @@ export default {
           height: 100%;
           border-radius: 4px;
         }
-        & .__delete {
-          position: absolute;
+        & .loader {
+          display: none;
+          align-items: center;
+          justify-content: center;
           cursor: pointer;
-          width: 2.2rem;
-          padding: .5rem;
-          height: auto;
+          position: absolute;
           top: .7rem;
           right: .7rem;
           z-index: 5;
+          width: 2.3rem;
+          height: 2.3rem;
           background: rgba(0, 0, 0, 0.5);
           border-radius: 50%;
+          & .__delete {
+            display: none;
+            width: 1.2rem;
+            height: auto;
+          }
         }
         & .__foto-principal {
           position: absolute;
@@ -1684,6 +1683,12 @@ export default {
           width: 100%;
           text-align: center;
         }
+      }
+      & .image-box:hover .loader {
+        display: flex;
+      }
+      & .image-box:hover .__delete {
+        display: initial;
       }
       & .__add-image {
         position: relative;

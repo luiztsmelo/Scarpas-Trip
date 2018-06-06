@@ -79,6 +79,7 @@ const store = () => new Vuex.Store({
     acomodMap: null,
     acomodProgressBar: 0,
     acomodPlace: null,
+    imgCountAc: 0,
     creditCard: {
       paymentMethod: 'credit_card',
       cardNumber: '',
@@ -367,6 +368,9 @@ const store = () => new Vuex.Store({
     m_acomodID (state, payload) {
       state.acomodID = payload
       state.acomodData.acomodID = payload
+    },
+    m_imgCountAc (state) {
+      state.imgCountAc++
     },
     m_valorNoitesTotal (state, payload) {
       state.reservaAcomod.valorNoitesTotal = payload
@@ -721,6 +725,7 @@ const store = () => new Vuex.Store({
         commit('m_acomodData', {
           acomodID: null,
           userID: null,
+          recipientID: null,
           proprietario: null,
           email: null,
           celular: '',
@@ -749,16 +754,16 @@ const store = () => new Vuex.Store({
           positionLAT: -20.6141320,
           positionLNG: -46.0478760,
           address: null,
-          imageL1: null,
-          imageH1J: null,
-          imageH1W: null,
-          imageL2: null,
-          imageH2J: null,
-          imageH2W: null,
-          imageL3: null,
-          imageH3J: null,
-          imageH3W: null
+          checkinFrom: '12:00',
+          checkinTo: '23:00',
+          allowFestas: false,
+          allowPets: false,
+          allowBabys: false,
+          allowFumar: false,
+          regrasAdicionais: [],
+          images: []
         })
+        state.imgCountAc = 0
         commit('m_cadastroAcomod12', false)
         commit('m_cadastroAcomod0', true)
         commit('m_loader', false)
