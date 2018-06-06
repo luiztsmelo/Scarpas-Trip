@@ -313,7 +313,20 @@
 
 
         <div class="image-box __add-image" @click="!isUploading ? $refs.myCroppa.chooseFile() : ''">
-          <img src="../../../assets/img/add-image.svg" class="__add-image-svg">
+          <svg class="loader-svg" v-if="isUploading">
+            <circle
+              class="__circle"
+              stroke-width="4"
+              stroke="#484848"
+              :stroke-dasharray="`${18*2*Math.PI} ${18*2*Math.PI}`"
+              :stroke-dashoffset="18*2*Math.PI - this.uploadProgress/100*18*2*Math.PI"
+              fill="transparent"
+              r="18"
+              cx="20"
+              cy="20"
+            />
+          </svg>
+          <img src="../../../assets/img/add-image.svg" class="__add-image-svg" v-else>
           <progressive-background src="../../../assets/img/add-image.png" :aspect-ratio="2/3"/>
         </div>
 
@@ -705,6 +718,7 @@ export default {
       subtitle: '',/* Vue Autosize */
       showCroppaModal: false,
       isUploading: false,
+      uploadProgress: 0,
       newRegra: '',
       monthsPermitted: ['01','02','03','04','05','06','07','08','09','10','11','12'],
       bankCodeError: false,
@@ -734,6 +748,7 @@ export default {
       let blobL = await this.$refs.myCroppa.promisedBlob('image/jpeg', 0.01)
       let blobHJ = await this.$refs.myCroppa.promisedBlob('image/jpeg')
       let blobHW = await this.$refs.myCroppa.promisedBlob('image/webp')
+      this.uploadProgress = 35
       let n = this.$store.state.imageCountAc
       let key = this.$store.state.acomodData.images.length
       /* L */
@@ -741,18 +756,22 @@ export default {
         storageRef.child('L' + n + '.jpeg').getDownloadURL().then(url => {
           this.$store.state.acomodData.images.push({ id: null, L: null, HJ: null, HW: null })
           this.$store.state.acomodData.images[key].L = url
+          this.uploadProgress = 70
           /* HJ */
           storageRef.child('H' + n + 'J.jpeg').put(blobHJ).then(snapshot => {
             storageRef.child('H' + n + 'J.jpeg').getDownloadURL().then(url => {
               this.$store.state.acomodData.images[key].HJ = url
+              this.uploadProgress = 92
               /* HW */
               storageRef.child('H' + n + 'W.webp').put(blobHW).then(snapshot => {
                 storageRef.child('H' + n + 'W.webp').getDownloadURL().then(url => {
                   this.$store.state.acomodData.images[key].HW = url
                   this.$store.state.acomodData.images[key].id = n
+                  this.uploadProgress = 100
                   this.$refs.myCroppa.remove()
                   this.$store.commit('m_imageCountAc')
                   this.isUploading = false
+                  this.uploadProgress = 0
                 })
               })
             })
@@ -1346,8 +1365,17 @@ export default {
         vm.$store.commit('m_showFoobar', false)
       }
       if (vm.$store.state.acomodData.acomodID === null) {
-        const acomodID = Math.floor(Math.random() * (99999 - 10000 + 1) + 10000).toString()
-        vm.$store.commit('m_acomodID', acomodID)
+        let acomodID = Math.floor(Math.random() * (99999 - 10000 + 1) + 10000).toString()
+        firebase.firestore().collection('acomods').doc(acomodID).get().then(doc => {
+          if (doc.exists) {
+            do {
+              acomodID = Math.floor(Math.random() * (99999 - 10000 + 1) + 10000).toString()
+              vm.$store.commit('m_acomodID', acomodID)
+            } while (!doc.exists)
+          } else {
+            vm.$store.commit('m_acomodID', acomodID)
+          }
+        })
       }
     })
   }
@@ -1681,7 +1709,18 @@ export default {
         cursor: pointer;
         border: 2px dashed rgb(182,182,182);
         border-radius: 4px;
-        transition: all .1s ease;
+        & .loader-svg {
+          position: absolute;
+          top: 0; left: 0; bottom: 0; right: 0;
+          margin: auto;
+          width: 4rem;
+          height: 4rem;
+          & .__circle {
+            transition: stroke-dashoffset 1s ease;
+            transform: rotate(-90deg);
+            transform-origin: 50% 50%;
+          }
+        }
         & .__add-image-svg {
           position: absolute;
           width: 2.2rem;
@@ -1690,9 +1729,6 @@ export default {
           margin: auto;
           z-index: 5;
         }
-      }
-      & .__add-image:hover {
-        background: rgb(251,251,251);
       }
     }
     & .signin-btns {
