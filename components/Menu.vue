@@ -10,28 +10,28 @@
           </nuxt-link>
         </div>
 
-        <div style="padding-top:.6rem" @click="$store.commit('m_showMenu', false), $store.commit('m_menuIconAnime', false), $store.commit('m_cadastroAcomod0', true)">
+        <div style="padding-top:.6rem" @click="$store.commit('m_showMenu', false), $store.commit('m_showFoobar', false), $store.commit('m_menuIconAnime', false), $store.commit('m_cadastroAcomod0', true)">
           <nuxt-link to="/anunciar/acomodacao" class="menu-item">
             <img src="../assets/img/estadia.svg" class="__item-img-color">
             <h3>Anunciar Acomodação</h3>
           </nuxt-link>
         </div>
 
-        <div @click="$store.commit('m_showMenu', false), $store.commit('m_menuIconAnime', false)">
+        <div @click="$store.commit('m_showMenu', false), $store.commit('m_showFoobar', false), $store.commit('m_menuIconAnime', false)">
           <nuxt-link to="/anunciar/passeio" class="menu-item">
             <img src="../assets/img/passeios.svg" class="__item-img-color">
             <h3>Anunciar Passeio</h3>
           </nuxt-link>
         </div>
 
-        <div @click="$store.commit('m_showMenu', false), $store.commit('m_menuIconAnime', false)">
+        <div @click="$store.commit('m_showMenu', false), $store.commit('m_showFoobar', false), $store.commit('m_menuIconAnime', false)">
           <nuxt-link to="/anunciar/evento" class="menu-item">
             <img src="../assets/img/eventos.svg" class="__item-img-color">
             <h3>Anunciar Evento</h3>
           </nuxt-link>
         </div>
 
-        <div style="border-bottom:1px solid rgb(222,222,222);padding-bottom:.6rem" @click="$store.commit('m_showMenu', false), $store.commit('m_menuIconAnime', false)">
+        <div style="border-bottom:1px solid rgb(222,222,222);padding-bottom:.6rem" @click="$store.commit('m_showMenu', false), $store.commit('m_showFoobar', false), $store.commit('m_menuIconAnime', false)">
           <nuxt-link to="/anunciar/restaurante" class="menu-item">
             <img src="../assets/img/restaurantes.svg" class="__item-img-color">
             <h3>Anunciar Restaurante</h3>

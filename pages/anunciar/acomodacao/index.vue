@@ -286,13 +286,13 @@
           <croppa
             ref="myCroppa"
             @file-choose="showCroppaModal = true"
-            :width="$store.state.isMobile === true ? 720/2.25 : 720/1.2"
-            :height="$store.state.isMobile === true ? 480/2.25 : 480/1.2"
-            :quality="$store.state.isMobile === true ? 2.25 : 1.2"
+            :width="$store.state.isMobile ? 720/2.25 : 720/1.2"
+            :height="$store.state.isMobile ? 480/2.25 : 480/1.2"
+            :quality="$store.state.isMobile ? 2.25 : 1.2"
             :placeholder="'Carregando...'"
             :placeholder-color="'white'"
             :accept="'.jpg, .jpeg, .png, .webp'"
-            :zoom-speed="$store.state.isMobile === true ? 2 : 4"
+            :zoom-speed="$store.state.isMobile ? 2 : 4"
             :prevent-white-space="true"
             :show-remove-button="false">
           </croppa>
@@ -305,7 +305,7 @@
       <div class="after-choose-image" :class="[ $store.state.acomodData.images.length == 0 ? 'center-first-image' : '' ]">
 
         <div class="image-box" v-for="(image, index) in $store.state.acomodData.images">
-          <div class="delete" @click="deleteImage(image, index)">
+          <div class="delete" @click="!isUploading ? deleteImage(image, index) : ''">
             <img src="../../../assets/img/delete.svg" class="__delete-img">
           </div>
           <progressive-background class="__image" :src="image.HJ" :placeholder="image.L" :aspect-ratio="2/3"/>
@@ -316,14 +316,14 @@
           <svg class="loader-svg" v-if="isUploading">
             <circle
               class="__circle"
-              stroke-width="4"
+              :stroke-width="$store.state.isMobile ? 3 : 4"
               stroke="#484848"
-              :stroke-dasharray="`${18*2*Math.PI} ${18*2*Math.PI}`"
-              :stroke-dashoffset="18*2*Math.PI - this.uploadProgress/100*18*2*Math.PI"
+              :stroke-dasharray="$store.state.isMobile ? `${14.5*2*Math.PI} ${14.5*2*Math.PI}` : `${18*2*Math.PI} ${18*2*Math.PI}`"
+              :stroke-dashoffset="$store.state.isMobile ? 14.5*2*Math.PI - this.uploadProgress/100*14.5*2*Math.PI : 18*2*Math.PI - this.uploadProgress/100*18*2*Math.PI"
               fill="transparent"
-              r="18"
-              cx="20"
-              cy="20"
+              :r="$store.state.isMobile ? 14.5 : 18"
+              :cx="$store.state.isMobile ? 16 : 20"
+              :cy="$store.state.isMobile ? 16 : 20"
             />
           </svg>
           <img src="../../../assets/img/add-image.svg" class="__add-image-svg" v-else>
@@ -748,7 +748,7 @@ export default {
       let blobL = await this.$refs.myCroppa.promisedBlob('image/jpeg', 0.01)
       let blobHJ = await this.$refs.myCroppa.promisedBlob('image/jpeg')
       let blobHW = await this.$refs.myCroppa.promisedBlob('image/webp')
-      this.uploadProgress = 35
+      this.uploadProgress = 60
       let n = this.$store.state.imageCountAc
       let key = this.$store.state.acomodData.images.length
       /* L */
@@ -756,12 +756,12 @@ export default {
         storageRef.child('L' + n + '.jpeg').getDownloadURL().then(url => {
           this.$store.state.acomodData.images.push({ id: null, L: null, HJ: null, HW: null })
           this.$store.state.acomodData.images[key].L = url
-          this.uploadProgress = 70
+          this.uploadProgress = 80
           /* HJ */
           storageRef.child('H' + n + 'J.jpeg').put(blobHJ).then(snapshot => {
             storageRef.child('H' + n + 'J.jpeg').getDownloadURL().then(url => {
               this.$store.state.acomodData.images[key].HJ = url
-              this.uploadProgress = 92
+              this.uploadProgress = 98
               /* HW */
               storageRef.child('H' + n + 'W.webp').put(blobHW).then(snapshot => {
                 storageRef.child('H' + n + 'W.webp').getDownloadURL().then(url => {
@@ -1713,17 +1713,17 @@ export default {
           position: absolute;
           top: 0; left: 0; bottom: 0; right: 0;
           margin: auto;
-          width: 4rem;
-          height: 4rem;
+          width: 32px;
+          height: 32px;
           & .__circle {
-            transition: stroke-dashoffset 1s ease;
+            transition: stroke-dashoffset .8s ease;
             transform: rotate(-90deg);
             transform-origin: 50% 50%;
           }
         }
         & .__add-image-svg {
           position: absolute;
-          width: 2.2rem;
+          width: 1.8rem;
           height: auto;
           top: 0; left: 0; bottom: 0; right: 0;
           margin: auto;
@@ -1935,37 +1935,48 @@ export default {
         margin-top: 2rem;
         padding: 0 calc(26% - 1%);
         & .image-box {
-        margin: 1%;
-        width: 48%;
-        & .__image {
-        }
-        & .delete {
-          display: none;
-          top: .7rem;
-          right: .7rem;
-          width: 2.3rem;
-          height: 2.3rem;
-          & .__delete-img {
+          margin: 1%;
+          width: 48%;
+          & .__image {
+          }
+          & .delete {
             display: none;
-            width: 1.2rem;
+            top: .7rem;
+            right: .7rem;
+            width: 2.3rem;
+            height: 2.3rem;
+            & .__delete-img {
+              display: none;
+              width: 1.2rem;
+            }
+          }
+          & .__foto-principal {
+            position: absolute;
+            color: white;
+            background: rgba(0, 0, 0, 0.4);
+            font-size: 12px;
+            padding: .2rem 0;
+            width: 100%;
+            text-align: center;
           }
         }
-        & .__foto-principal {
-          position: absolute;
-          color: white;
-          background: rgba(0, 0, 0, 0.4);
-          font-size: 12px;
-          padding: .2rem 0;
-          width: 100%;
-          text-align: center;
+        & .image-box:hover .delete {
+          display: flex;
         }
-      }
-      & .image-box:hover .delete {
-        display: flex;
-      }
-      & .image-box:hover .__delete-img {
-        display: initial;
-      }
+        & .image-box:hover .__delete-img {
+          display: initial;
+        }
+        & .__add-image {
+          & .loader-svg {
+            width: 40px;
+            height: 40px;
+            & .__circle {
+            }
+          }
+          & .__add-image-svg {
+            width: 2.2rem;
+          }
+        }
       }
       & .center-first-image {
         flex-flow: column wrap;
