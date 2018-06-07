@@ -550,7 +550,7 @@
         </div>
 
         <div class="item-form">
-          <label>Celular / WhatsApp 2 <light>(Opcional)</light></label>
+          <label>Celular / WhatsApp 2 (Opcional)</label>
           <masked-input
             type="tel"
             v-model="$store.state.acomodData.celular2"
@@ -886,7 +886,7 @@ export default {
       }
     },
     nextBtn6 () {
-      if (this.$store.state.acomodData.images.length >= 3) {
+      if (this.$store.state.acomodData.images.length >= 1) {
         this.$store.commit('m_cadastroAcomod6', false), this.$store.commit('m_cadastroAcomod7', true), this.$store.commit('m_acomodProgressBar', (100/12)*7), this.scrollTop(), window.location.hash = "valor"
       } else {
         this.$modal.show('dialog', {
@@ -986,9 +986,26 @@ export default {
         )
         .then(recipient => {
           console.log(recipient)
-          this.$store.state.acomodData.recipientID = recipient.id.toString()
-          this.$store.dispatch('a_uploadAcomod')
-          this.$router.push('/acomodacoes/' + this.$store.state.acomodData.acomodID)
+          let acomodData = this.$store.state.acomodData
+          acomodData.recipientID = recipient.id.toString()
+          /* 
+          CRIAR ACOMOD NA FIRESTORE
+          */
+          firebase.firestore().collection('acomods').doc(acomodData.acomodID).set(acomodData).then(() => {
+            this.$router.push('/acomodacoes/' + acomodData.acomodID)
+            /* Atualizar user */
+            firebase.firestore().collection('users').doc(acomodData.userID).update({
+              isAcomodHost: true,
+              celular: acomodData.celular
+            }).then(() => {
+              this.$store.dispatch('a_resetAcomodData')
+              this.$store.commit('m_loader', false)
+            })
+          })
+          .catch(err => {
+            this.$store.commit('m_loader', false)
+            console.log(err)
+          })
         })
         .catch(err => {
           if (err) {
@@ -1132,7 +1149,7 @@ export default {
       return this.$store.state.acomodPlace !== null || this.$store.state.acomodData.positionLAT !== -20.6141320 ? 'background:#FFA04F' : ''
     },
     form6ok () {
-      return this.$store.state.acomodData.images.length >= 3 ? 'background:#FFA04F' : ''
+      return this.$store.state.acomodData.images.length >= 1 ? 'background:#FFA04F' : ''
     },
     form7ok () {
       return this.$store.state.acomodData.valorNoite !== 0 ? 'background:#FFA04F' : ''

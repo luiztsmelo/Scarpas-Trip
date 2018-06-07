@@ -107,7 +107,6 @@ const store = () => new Vuex.Store({
       celular2: '',
       photoURL: null,
       tipoAcomod: 'Casa',
-      local: null,
       title: '',
       subtitle: '',
       valorNoite: 0,
@@ -695,79 +694,74 @@ const store = () => new Vuex.Store({
     /*
     ########## Acomodações ##########
     */
-    a_uploadAcomod ({ state, commit }) {
-      firebase.firestore().collection('acomods').doc(state.acomodData.acomodID).set(state.acomodData).then(() => {
-        firebase.firestore().collection('users').doc(state.user.userID).update({
-          isAcomodHost: true,
-          celular: state.acomodData.celular
-        })
-        /* Resetar states */
-        commit('m_creditCard', { /* MUDAR PARA A RESERVA */
-          paymentMethod: 'credit_card',
-          cardNumber: '',
-          cardHolderName: '',
-          cardExpirationMonth: 'MM',
-          cardExpirationYear: 'AA',
-          cardCVV: ''
-        })
-        commit('m_bankAccount', {
-          bankCode: '',
-          type: 'conta_corrente',
-          agencia: '',
-          agenciaDV: '',
-          conta: '',
-          contaDV: '',
-          legalName: '',
-          docNumber: ''
-        })
-        commit('m_acomodData', {
-          acomodID: null,
-          userID: null,
-          recipientID: null,
-          proprietario: null,
-          email: null,
-          celular: '',
-          celular2: '',
-          photoURL: null,
-          tipoAcomod: 'Casa',
-          local: null,
-          title: '',
-          subtitle: '',
-          valorNoite: 0,
-          limpezaFee: 0,
-          totalHospedes: '1',
-          totalQuartos: '1',
-          totalSuites: '1',
-          totalBanheiros: '1',
-          totalGaragem: '1',
-          hasRoupasCama: false,
-          hasPiscina: false,
-          hasChurrasqueira: false,
-          hasCozinha: false,
-          hasWifi: false,
-          hasArCond: false,
-          hasCaixaSom: false,
-          hasBarracas: false,
-          hasPier: false,
-          positionLAT: -20.6141320,
-          positionLNG: -46.0478760,
-          address: null,
-          checkinFrom: '12:00',
-          checkinTo: '23:00',
-          allowFestas: false,
-          allowPets: false,
-          allowBabys: false,
-          allowFumar: false,
-          regrasAdicionais: [],
-          images: []
-        })
-        state.imageCountAc = 0
-        commit('m_cadastroAcomod12', false)
-        commit('m_cadastroAcomod0', true)
-        commit('m_loader', false)
+    a_resetAcomodData ({ state, commit }) {
+      /* Resetar valores */
+      state.acomodPlace = null
+      state.imageCountAc = 0
+      /* Resetar bankAccount */
+      commit('m_bankAccount', {
+        bankCode: '',
+        type: 'conta_corrente',
+        agencia: '',
+        agenciaDV: '',
+        conta: '',
+        contaDV: '',
+        legalName: '',
+        docNumber: ''
+      })
+      /* Resetar acomodData */
+      commit('m_acomodData', {
+        acomodID: null,
+        userID: null,
+        recipientID: null,
+        proprietario: null,
+        email: null,
+        celular: '',
+        celular2: '',
+        photoURL: null,
+        tipoAcomod: 'Casa',
+        local: null,
+        title: '',
+        subtitle: '',
+        valorNoite: 0,
+        limpezaFee: 0,
+        totalHospedes: '1',
+        totalQuartos: '1',
+        totalSuites: '1',
+        totalBanheiros: '1',
+        totalGaragem: '1',
+        hasRoupasCama: false,
+        hasPiscina: false,
+        hasChurrasqueira: false,
+        hasCozinha: false,
+        hasWifi: false,
+        hasArCond: false,
+        hasCaixaSom: false,
+        hasBarracas: false,
+        hasPier: false,
+        positionLAT: -20.6141320,
+        positionLNG: -46.0478760,
+        address: null,
+        checkinFrom: '12:00',
+        checkinTo: '23:00',
+        allowFestas: false,
+        allowPets: false,
+        allowBabys: false,
+        allowFumar: false,
+        regrasAdicionais: [],
+        images: []
       })
     },
     a_newReservaAcomod ({ state, commit }, reservaID) {
+      /* Resetar states */
+      commit('m_creditCard', {
+        paymentMethod: 'credit_card',
+        cardNumber: '',
+        cardHolderName: '',
+        cardExpirationMonth: 'MM',
+        cardExpirationYear: 'AA',
+        cardCVV: ''
+      })
       state.reservaAcomod.created = new Date().getTime()
       state.reservaAcomod.acomodID = state.acomod.acomodID
       state.reservaAcomod.hostID = state.acomod.userID

@@ -202,8 +202,8 @@
           <gmap-map
           :center="{lat: acomod.positionLAT, lng: acomod.positionLNG}"
           :zoom="15"
-          :options="{styles: styles, draggable:false, fullscreenControl:false, zoomControl:false, mapTypeControl:false, streetViewControl:false}"
-          @click="$store.commit('m_acomodMap', acomod), enterFullscreen()">
+          :options="{styles: styles, draggable: $store.state.isMobile ? false : true, fullscreenControl: $store.state.isMobile ? false : true, zoomControl: $store.state.isMobile ? false : true, mapTypeControl:false, streetViewControl:false}"
+          @click="$store.state.isMobile ? $store.commit('m_acomodMap', acomod) && enterFullscreen() : ''">
             <Gmap-Marker
             :position="{lat: acomod.positionLAT, lng: acomod.positionLNG}"
             :icon="{url: markerUrl, scaledSize: markerSize}"

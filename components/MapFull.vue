@@ -1,24 +1,28 @@
 <template>
-  <div class="mapfull" v-if="eventoMap">
-    <img class="__exit" src="../assets/img/exit.svg" @click="$store.commit('m_eventoMap', null), exitFullscreen()">
+  <div class="mapfull" v-if="acomodMap">
+
+    <div class="exit" @click="$store.commit('m_acomodMap', null), exitFullscreen()">
+      <img class="__exit-img" src="../assets/img/exit.svg" >
+    </div>
+
     <gmap-map
-      v-if="eventoMap"
-      :center="{lat: eventoMap.positionLAT, lng: eventoMap.positionLNG}"
+      v-if="acomodMap"
+      :center="{lat: acomodMap.positionLAT, lng: acomodMap.positionLNG}"
       :zoom="15"
       :options="{styles: styles, fullscreenControl:false, zoomControl:false, mapTypeControl:false, backgroundColor:'white'}"
-      style="width: 100%; height: 100%">
+      style="width: 100vh; height: 100vh">
       <Gmap-Marker
-      :position="{lat: eventoMap.positionLAT, lng: eventoMap.positionLNG}"
-      :icon="{url: markerUrl, scaledSize: markerSize}"
-      ></Gmap-Marker>
+        :position="{lat: acomodMap.positionLAT, lng: acomodMap.positionLNG}"
+        :icon="{url: markerUrl, scaledSize: markerSize}">
+      </Gmap-Marker>
     </gmap-map>
+
   </div>  
 </template>
 
 <script>
 import { loaded } from '~/node_modules/vue2-google-maps/src/manager'
 import { mapstyle } from '../mixins/mapstyle'
-import * as VueGoogleMaps from '~/node_modules/vue2-google-maps/src/main'
 
 export default {
   mixins: [mapstyle],
@@ -40,8 +44,8 @@ export default {
     markerSize () {
       return !this.$store.state.googleMapsInitialized ? null : new window.google.maps.Size(38, 38)
     },
-    eventoMap () {
-      return this.$store.state.eventoMap
+    acomodMap () {
+      return this.$store.state.acomodMap
     }
   },
   async mounted () {
@@ -56,6 +60,7 @@ export default {
 @import url('../assets/css/main.css');
 
 .mapfull {
+  position: relative;
   overflow: hidden;
   position: fixed;
   top: 0;
@@ -63,14 +68,24 @@ export default {
   z-index: 9998;
   width: 100%;
   height: 100%;
-  & .__exit {
-    width:  1.3rem;
-    height: auto;
-    position: fixed;
-    margin: 1.2rem 7%;
-    top: 0;
-    right: 0;
+  & .exit {
+    position: absolute;
+    top: .6rem;
+    right: .6rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    width: 2.5rem;
+    height: 2.5rem;
+    background: rgba(0, 0, 0, 0.4);
+    border-radius: 50%;
     z-index: 9999;
+    & .__exit-img {
+      width: 1rem;
+      height: auto;
+      filter: brightness(500%);
+    }
   }
 }
 
