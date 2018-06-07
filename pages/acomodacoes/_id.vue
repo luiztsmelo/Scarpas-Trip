@@ -203,7 +203,7 @@
           :center="{lat: acomod.positionLAT, lng: acomod.positionLNG}"
           :zoom="15"
           :options="{styles: styles, draggable: $store.state.isMobile ? false : true, fullscreenControl: $store.state.isMobile ? false : true, zoomControl: $store.state.isMobile ? false : true, mapTypeControl:false, streetViewControl:false}"
-          @click="$store.state.isMobile ? $store.commit('m_acomodMap', acomod) && enterFullscreen() : ''">
+          @click="fullscreenMobile">
             <Gmap-Marker
             :position="{lat: acomod.positionLAT, lng: acomod.positionLNG}"
             :icon="{url: markerUrl, scaledSize: markerSize}"
@@ -532,6 +532,22 @@ export default {
         ? el.setAttribute("style", "filter: invert(90%)")
         : el.removeAttribute("style")
     },
+    fullscreenMobile () {
+      if (this.$store.state.isMobile === true) {
+        this.$store.commit('m_acomodMap', this.acomod)
+        /* Enter fullscreen */
+        if ((document.fullScreenElement && document.fullScreenElement !== null) ||
+        (!document.mozFullScreen && !document.webkitIsFullScreen)) {
+          if (document.documentElement.requestFullScreen) {
+             document.documentElement.requestFullScreen()
+          } else if (document.documentElement.mozRequestFullScreen) {
+            document.documentElement.mozRequestFullScreen()
+          } else if (document.documentElement.webkitRequestFullScreen) {
+            document.documentElement.webkitRequestFullScreen(Element.ALLOW_KEYBOARD_INPUT)
+          }
+        }
+      }
+    },
     reservar () {
       firebase.firestore().collection('acomods').doc(this.$route.params.id).collection('visits').doc(this.$store.state.visitID).update({ 
         clickedReservaBtn: true
@@ -583,18 +599,6 @@ export default {
     },
     hashShare () {
        window.location.hash = "compartilhar"
-    },
-    enterFullscreen () {
-      if ((document.fullScreenElement && document.fullScreenElement !== null) ||
-        (!document.mozFullScreen && !document.webkitIsFullScreen)) {
-        if (document.documentElement.requestFullScreen) {
-            document.documentElement.requestFullScreen();
-        } else if (document.documentElement.mozRequestFullScreen) {
-            document.documentElement.mozRequestFullScreen();
-        } else if (document.documentElement.webkitRequestFullScreen) {
-            document.documentElement.webkitRequestFullScreen(Element.ALLOW_KEYBOARD_INPUT);
-        }
-      }
     }
   },
   async mounted () {

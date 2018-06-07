@@ -2,7 +2,7 @@
   <div class="mapfull" v-if="acomodMap">
 
     <div class="exit" @click="$store.commit('m_acomodMap', null), exitFullscreen()">
-      <img class="__exit-img" src="../assets/img/exit.svg" >
+      <img class="__exit-img" src="../assets/img/exit.svg">
     </div>
 
     <gmap-map
@@ -52,12 +52,21 @@ export default {
     loaded.then(() => {
       this.$store.state.googleMapsInitialized = true
     })
+  },
+  watch: {
+    acomodMap (value) {
+      value !== null ? document.body.classList.add('mapfull-open') : document.body.classList.remove('mapfull-open')
+    }
   }
 }
 </script>
 
 <style>
 @import url('../assets/css/main.css');
+
+body.mapfull-open {
+  overflow: hidden;
+}
 
 .mapfull {
   position: relative;
