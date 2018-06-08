@@ -1501,6 +1501,7 @@ export default {
       flex-flow: column;
       margin: 1.9rem 0;
       & label {
+        user-select: none;
         font-weight: 600;
         font-size: 15px;
       }

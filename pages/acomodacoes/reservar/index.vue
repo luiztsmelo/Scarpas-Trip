@@ -29,24 +29,80 @@
 
 
 
-    <!-- ******* BODY ******* -->
-    <div class="reservar-body">
+    <div class="reserva-body">
 
 
       <!-- ******* FLEX LEFT ******* -->
       <div class="flex-left">
 
-        <div class="title-div">
-          <h1 class="__number">1</h1>
-          <h1 class="__title">Revisar Regras {{ tipoAcomodTitle }}</h1>
-        </div>
 
-        <h3>Check in/out</h3>
-        <h3>Se permitido Fumar, Pets, Festas ou Eventos</h3>
-        <h3>Regras de Cancelamento</h3>
+        <!-- Etapa 1 -->
+        <div class="etapa-1" v-if="$store.state.reservaAcomodDesktop1 === true">
 
+          <div class="title">
+            <h1 class="__title-number">1</h1>
+            <h1 class="__title-text">Revisar Regras {{ tipoAcomodTitle }}</h1>
+          </div>
+
+          <div class="etapa-1-item">
+            <h3 class="__subtitle">Horário para Check-in:</h3>
+            <h3>{{ 'Entre ' + acomod.checkinFrom + ' e ' + acomod.checkinTo }}</h3>
+          </div>
         
+
+          <div class="etapa-1-item" v-show="!acomod.allowFestas || !acomod.allowPets || !acomod.allowBabys || !acomod.allowFumar">
+            <h3 class="__subtitle">Nesta casa não é adequado:</h3>
+            <h3>{{ !acomod.allowFestas ? 'Festas' : '' }}</h3>
+            <h3>{{ !acomod.allowPets ? 'Animais de estimação' : '' }}</h3>
+            <h3>{{ !acomod.allowBabys ? 'Bebês de até 2 anos' : '' }}</h3>
+            <h3>{{ !acomod.allowFumar ? 'Fumar dentro de casa' : '' }}</h3>
+          </div>
+
+          <div class="etapa-1-item" v-show="acomod.regrasAdicionais.length !== 0">
+            <h3 class="__subtitle">Lembretes adicionais:</h3>
+            <h3 v-for="regra in acomod.regrasAdicionais">{{ regra }}</h3>
+          </div>
+          
+
+
+          <!-- <h3>Regras de Cancelamento</h3> -->
+
+
+          <button class="__next-btn" type="button" @click="nextBtn1">Continuar</button>
+
+        </div><!-- Etapa 1 -->
+
+
+        <!-- Etapa 2 -->
+        <div class="etapa-2" v-if="$store.state.reservaAcomodDesktop2 === true">
+
+          <div class="title">
+            <h1 class="__title-number">2</h1>
+            <h1 class="__title-text">Mensagem</h1>
+          </div>
+
+
+          <button class="__next-btn" type="button" @click="nextBtn2">Continuar</button>
+
+        </div><!-- Etapa 2 -->
+
+
+        <!-- Etapa 3 -->
+        <div class="etapa-3" v-if="$store.state.reservaAcomodDesktop3 === true">
+
+          <div class="title">
+            <h1 class="__title-number">3</h1>
+            <h1 class="__title-text">Pagamento e Confirmação</h1>
+          </div>
+
+
+          <button class="__next-btn" type="button" @click="concluirReserva">Confirmar Reserva</button>
+
+        </div><!-- Etapa 3 -->
+        
+
       </div><!-- ******* FLEX LEFT ******* -->
+
 
 
 
@@ -60,9 +116,9 @@
         <div class="detalhes-reserva-data">
           <div class="detalhes-reserva-data_item">
             <img src="../../../assets/img/calendar.svg" class="__img" style="transform: scale(.9)">
-            <h3>{{ $store.state.reservaAcomod.startDate }}</h3>
+            <h3>{{ startDateFormatted }}</h3>
             <img src="../../../assets/img/arrow-right.svg" class="__arrow-right-date">
-            <h3>{{ $store.state.reservaAcomod.endDate }}</h3>
+            <h3>{{ endDateFormatted }}</h3>
           </div>
           <div class="detalhes-reserva-data_item">
             <img src="../../../assets/img/guests.svg" class="__img">
@@ -102,7 +158,7 @@
       </div> <!-- ******* FLEX RIGHT ******* -->
 
 
-    </div><!-- ******* BODY ******* -->
+    </div>
   </div>
 </template>
 
@@ -120,6 +176,12 @@ export default {
   middleware: 'reservaValidate',
   transition: 'opacity',
   methods: {
+    nextBtn1 () {
+      this.$store.state.etapaReserva2ok = true, this.$store.commit('m_reservaAcomodDesktop1', false), this.$store.commit('m_reservaAcomodDesktop2', true)
+    },
+    nextBtn2 () {
+      this.$store.state.etapaReserva3ok = true, this.$store.commit('m_reservaAcomodDesktop2', false), this.$store.commit('m_reservaAcomodDesktop3', true)
+    },
     backEtapa1 () {
       if (this.$store.state.etapaReserva1ok === true) {
         this.$store.commit('m_reservaAcomodDesktop1', true), this.$store.commit('m_reservaAcomodDesktop2', false), this.$store.commit('m_reservaAcomodDesktop3', false)
@@ -166,6 +228,28 @@ export default {
     imageH () {
       return supportsWebP ? this.acomod.images[0].HW : this.acomod.images[0].HJ
     },
+    startDateFormatted () {
+      let startDate = this.$store.state.reservaAcomod.startDate
+      let dd = startDate.slice(0, 2)
+      let mm = startDate.slice(3, 5)
+      let yyyy = startDate.slice(6, 10)
+      let mmLong = mm == '01' ? 'Jan' : mm == '02' ? 'Fev' : mm == '03' ? 'Mar' : mm == '04' ? 'Abr' : mm == '05' ? 'Mai' : mm == '06' ? 'Jun' : mm == '07' ? 'Jul' : mm == '08' ? 'Ago' : mm == '09' ? 'Set' : mm == '10' ? 'Out' : mm == '11' ? 'Nov' : mm == '12' ? 'Dez' : ''
+      return dd + ' de ' + mmLong + ', ' + yyyy
+    },
+    endDateFormatted () {
+      let endDate = this.$store.state.reservaAcomod.endDate
+      let dd = endDate.slice(0, 2)
+      let mm = endDate.slice(3, 5)
+      let yyyy = endDate.slice(6, 10)
+      let mmLong = mm == '01' ? 'Jan' : mm == '02' ? 'Fev' : mm == '03' ? 'Mar' : mm == '04' ? 'Abr' : mm == '05' ? 'Mai' : mm == '06' ? 'Jun' : mm == '07' ? 'Jul' : mm == '08' ? 'Ago' : mm == '09' ? 'Set' : mm == '10' ? 'Out' : mm == '11' ? 'Nov' : mm == '12' ? 'Dez' : ''
+      return dd + ' de ' + mmLong + ', ' + yyyy
+    },
+    /* regras () {
+      this.acomod.allowFestas ? 'Festas são permitidas' : 'Festas não são permitidas'
+      if (!this.acomod.allowFestas || !this.acomod.allowPets || !this.acomod.allowBabys || !this.acomod.allowFumar) {
+        return 'Não são permitidos ' + !this.acomod.allowFestas ? 'Festas' : !this.acomod.allowFestas ?
+      }
+    }, */
     tipoAcomodTitle () {
       const path = this.acomod.tipoAcomod
       return path === 'Casa' ? 'da Casa' 
@@ -244,33 +328,40 @@ export default {
         font-weight: 300;
       }
       & .__arrow-right {
-        width: .8rem; 
+        width: .7rem; 
         height: auto;
-        margin: 0 1.4rem;
+        margin: 0 1.1rem;
       }
     }
   }
 
   /* ******* BODY ******* */
-  & .reservar-body {
+  & .reserva-body {
     padding: 1rem 12% 4rem;
     display: flex;
     /* ******* FLEX LEFT ******* */
     & .flex-left {
       flex: 65%;
-      & .title-div {
+      & .title {
         display: flex;
         align-items: center;
-        padding-bottom: 2rem;
-        & .__number {
+        padding-bottom: 1rem;
+        & .__title-number {
           width: 2rem;
-          padding-right: .4rem;
+          padding-right: .45rem;
           text-align: center;
           font-size: 38px;
-          color: var(--colorAcomod);
+          color: rgb(202,202,202);
         }
-        & .__title {
-          font-size: 32px;
+        & .__title-text {
+          font-size: 31px;
+        }
+      }
+      & .etapa-1-item {
+        padding-top: 2rem;
+        & .__subtitle {
+          font-size: 18px;
+          font-weight: 600;
         }
       }
     }
@@ -307,7 +398,7 @@ export default {
             height: auto;
           }
           & .__arrow-right-date {
-            margin: 0 1rem;
+            margin: 0 .7rem;
             width: .8rem;
             height: auto;
           }
@@ -333,6 +424,18 @@ export default {
       }
     }
   }
+}
+
+.__next-btn {
+  margin-top: 4rem;
+  padding: 0 2.1rem;
+  font-size: 17px;
+  font-weight: 600;
+  background: var(--colorAcomod);
+  color: white;
+  border-radius: 5px;
+  height: 2.9rem;
+  line-height: 2.8rem;
 }
 
 </style>
