@@ -29,11 +29,11 @@ export default {
   methods: {
     exitFullscreen () {
       if (document.cancelFullScreen) {
-          document.cancelFullScreen();
+        document.cancelFullScreen()
       } else if (document.mozCancelFullScreen) {
-          document.mozCancelFullScreen();
+        document.mozCancelFullScreen()
       } else if (document.webkitCancelFullScreen) {
-          document.webkitCancelFullScreen();
+        document.webkitCancelFullScreen()
       }
     }
   },
@@ -79,15 +79,15 @@ body.mapfull-open {
   height: 100%;
   & .exit {
     position: absolute;
-    top: .6rem;
-    right: .6rem;
+    top: .8rem;
+    right: .8rem;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    width: 2.5rem;
-    height: 2.5rem;
-    background: rgba(0, 0, 0, 0.4);
+    width: 2.6rem;
+    height: 2.6rem;
+    background: rgba(0, 0, 0, 0.25);
     border-radius: 50%;
     z-index: 9999;
     & .__exit-img {

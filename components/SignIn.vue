@@ -86,6 +86,7 @@ export default {
         this.$modal.hide('sign-in-modal')
         this.$store.commit('m_isReservar', true)
         this.$router.push('/acomodacoes/reservar')
+        this.$store.commit('m_showNavbar', false)
       }
     }
   }

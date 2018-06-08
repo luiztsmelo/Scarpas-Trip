@@ -299,7 +299,7 @@ export default {
 
 .navbar-animation-enter,
 .navbar-animation-leave-active {
-  transform: translateY(-100%);
+  opacity: 0;
 }
 
 .menuIconAnime1 {

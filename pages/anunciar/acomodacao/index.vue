@@ -1002,12 +1002,12 @@ export default {
               this.$store.commit('m_loader', false)
             })
           })
-          .catch(err => {
+          .catch(err => { /* Erro ao criar acomod */
             this.$store.commit('m_loader', false)
             console.log(err)
           })
         })
-        .catch(err => {
+        .catch(err => { /* Erro ao criar recebedor */
           if (err) {
             console.log(err.response.errors)
             this.$store.commit('m_loader', false)
@@ -1057,7 +1057,7 @@ export default {
       }
     },
     totalSuitesTitulo () {
-      return this.$store.state.acomodData.totalSuites != 1 ? ', ' + this.$store.state.acomodData.totalSuites + ' suítes' : ''
+      return this.$store.state.acomodData.totalSuites != 1 ? ' com ' + this.$store.state.acomodData.totalSuites + ' suítes' : ''
     },
     tipoAcomodText () {
       const path = this.$store.state.acomodData.tipoAcomod
@@ -1382,11 +1382,11 @@ export default {
         vm.$store.commit('m_showFoobar', false)
       }
       if (vm.$store.state.acomodData.acomodID === null) {
-        let acomodID = Math.floor(Math.random() * (99999 - 10000 + 1) + 10000).toString()
+        let acomodID = Math.floor(Math.random() * (9999 - 1000 + 1) + 1000).toString()
         firebase.firestore().collection('acomods').doc(acomodID).get().then(doc => {
           if (doc.exists) {
             do {
-              acomodID = Math.floor(Math.random() * (99999 - 10000 + 1) + 10000).toString()
+              acomodID = Math.floor(Math.random() * (9999 - 1000 + 1) + 1000).toString()
               vm.$store.commit('m_acomodID', acomodID)
             } while (!doc.exists)
           } else {

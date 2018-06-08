@@ -48,7 +48,7 @@
 
           <div class="detalhes-reserva-data">
             <div class="detalhes-reserva-data_item">
-              <img src="../../assets/img/guest.svg" class="__img">
+              <img src="../../assets/img/guests.svg" class="__img">
               <h3>{{ $store.state.reservaAcomod.totalHospedes == '1'? $store.state.reservaAcomod.totalHospedes + ' hóspede' : $store.state.reservaAcomod.totalHospedes + ' hóspedes' }}</h3>
             </div>
             <div class="detalhes-reserva-data_item">

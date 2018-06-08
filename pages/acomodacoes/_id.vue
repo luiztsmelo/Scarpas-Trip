@@ -3,6 +3,8 @@
 
     <proprietario/>
 
+    <v-dialog style="z-index:10000"/>
+
     <!-- ####### TOPBAR ####### -->
     <div class="topbar" v-scroll="scrollTopbarBg">
       <div class="topbar-body">
@@ -287,7 +289,6 @@
               <div style="display:flex;flex:row;align-items:center">
                 <h3>Taxa de limpeza</h3>
                 <img src="../../assets/img/info.svg" style="width:.95rem;height:auto;margin-left:.3rem;cursor:pointer" @click="limpezaFeeDialog">
-                <v-dialog id="limpeza-fee" style="z-index:10000"/>
               </div>
               <h3>R${{ acomod.limpezaFee.toLocaleString() }}</h3>
             </div>
@@ -296,7 +297,6 @@
               <div style="display:flex;flex:row;align-items:center">
                 <h3>Taxa de serviço</h3>
                 <img src="../../assets/img/info.svg" style="width:.95rem;height:auto;margin-left:.3rem;cursor:pointer" @click="serviceFeeDialog">
-                <v-dialog id="service-fee" style="z-index:10000"/>
               </div>
               <h3>R${{ serviceFeeTotal.toLocaleString() }}</h3>
             </div>
@@ -564,6 +564,7 @@ export default {
         } else {
           this.$store.commit('m_isReservar', true)
           this.$router.push('/acomodacoes/reservar')
+          this.$store.commit('m_showNavbar', false)
         }
       }
     },
