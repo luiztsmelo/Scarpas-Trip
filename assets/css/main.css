@@ -115,15 +115,16 @@ textarea {
 .id-leave-active {
   opacity: 0;
 }
+
 /* ******* TEXT HIGHLIGHT COLOR ******* */
-::-moz-selection { /* Firefox */
-  background: rgb(102,102,102);
+/* ::-moz-selection {
+  background: rgb(122,122,122);
   color: white;
 }
 ::selection {
-  background: rgb(102,102,102);
+  background: rgb(122,122,122);
   color: white;
-}
+} */
 
 /* ******* SIGN IN BUTTONS ******* */
 .google-btn {

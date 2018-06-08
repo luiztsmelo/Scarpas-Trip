@@ -83,8 +83,9 @@ const store = () => new Vuex.Store({
       paymentMethod: 'credit_card',
       cardNumber: '',
       cardHolderName: '',
-      cardExpirationMonth: 'MM',
-      cardExpirationYear: 'AA',
+      cardExpirationDate: '',
+      cardExpirationMonth: '',
+      cardExpirationYear: '',
       cardCVV: ''
     },
     bankAccount: {
@@ -758,8 +759,9 @@ const store = () => new Vuex.Store({
         paymentMethod: 'credit_card',
         cardNumber: '',
         cardHolderName: '',
-        cardExpirationMonth: 'MM',
-        cardExpirationYear: 'AA',
+        cardExpirationDate: '',
+        cardExpirationMonth: '',
+        cardExpirationYear: '',
         cardCVV: ''
       })
       state.reservaAcomod.created = new Date().getTime()

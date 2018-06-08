@@ -1,13 +1,12 @@
 <template>
   <div class="reservar">
     
-
     <v-dialog style="z-index:10000"/>
 
 
 
-    <!-- ******* TOPBAR ******* -->
-    <div class="reserva-topbar">
+    <!-- ******* HEADER PROGRESS ******* -->
+    <div class="header-progress">
 
       <nuxt-link to="/" class="brand">
         <img class="__brand-img" src="../../../static/brand.svg" draggable="false">
@@ -25,18 +24,19 @@
         <h3 class="__item-progress" :style="etapaProgressed3" @click="backEtapa3">3. Pagamento e Confirmação</h3>
       </div>
 
-    </div><!-- ******* TOPBAR ******* -->
+    </div><!-- ******* HEADER PROGRESS ******* -->
+
 
 
 
     <div class="reserva-body">
 
-
-      <!-- ******* FLEX LEFT ******* -->
+      <!-- ******* Flex Left ******* -->
       <div class="flex-left">
 
 
-        <!-- Etapa 1 -->
+
+        <!-- ******* ETAPA 1 ******* -->
         <div class="etapa-1" v-if="$store.state.reservaAcomodDesktop1 === true">
 
           <div class="title">
@@ -63,17 +63,16 @@
             <h3 v-for="regra in acomod.regrasAdicionais">{{ regra }}</h3>
           </div>
           
-
-
           <!-- <h3>Regras de Cancelamento</h3> -->
 
+          <button class="__next-btn" type="button" @click="nextBtn1">Concordar e Continuar</button>
 
-          <button class="__next-btn" type="button" @click="nextBtn1">Continuar</button>
-
-        </div><!-- Etapa 1 -->
+        </div><!-- ******* ETAPA 1 ******* -->
 
 
-        <!-- Etapa 2 -->
+
+
+        <!-- ******* ETAPA 2 ******* -->
         <div class="etapa-2" v-if="$store.state.reservaAcomodDesktop2 === true">
 
           <div class="title">
@@ -84,10 +83,12 @@
 
           <button class="__next-btn" type="button" @click="nextBtn2">Continuar</button>
 
-        </div><!-- Etapa 2 -->
+        </div><!-- ******* ETAPA 2 ******* -->
 
 
-        <!-- Etapa 3 -->
+
+
+        <!-- ******* ETAPA 3 ******* -->
         <div class="etapa-3" v-if="$store.state.reservaAcomodDesktop3 === true">
 
           <div class="title">
@@ -96,17 +97,94 @@
           </div>
 
 
+          <div class="payment">
+
+            <div class="item-form">
+              <label>Pagar com</label>
+              <select v-model="$store.state.creditCard.paymentMethod">
+                <option selected :value="'credit_card'">Cartão de Crédito</option>
+                <option :value="'boleto'">Boleto</option>
+              </select>
+            </div>
+
+            <div class="item-form">
+              <label>Nome impresso no Cartão</label>
+              <input type="text" pattern="[A-Za-z]" v-model="$store.state.creditCard.cardHolderName">
+            </div>
+
+            <div class="card-info">
+              <div class="item-form">
+                <label>Dados do Cartão</label>
+
+                <masked-input
+                  style="border-bottom:none"
+                  ref="cardNumberInput"
+                  type="tel"
+                  v-model="$store.state.creditCard.cardNumber"
+                  :mask="[/\d/, /\d/, /\d/, /\d/, ' ', /\d/, /\d/, /\d/, /\d/, ' ', /\d/, /\d/, /\d/, /\d/, ' ', /\d/, /\d/, /\d/, /\d/]"
+                  :guide="false"
+                  @focus="$refs.cardNumberInput.$el.placeholder = '0000 0000 0000 0000'"
+                  @blur="$refs.cardNumberInput.$el.placeholder = 'Número do Cartão'"
+                  placeholder="Número do Cartão">
+                </masked-input>
+
+                <div class="flex" style="display:flex">
+                  <masked-input
+                    style="border-right:none"
+                    ref="validadeInput"
+                    type="tel"
+                    v-model="$store.state.creditCard.cardExpirationDate"
+                    :mask="[/\d/, /\d/, '/', /\d/, /\d/]"
+                    :guide="false"
+                    @focus="$refs.validadeInput.$el.placeholder = 'MM / AA'"
+                    @blur="$refs.validadeInput.$el.placeholder = 'Validade'"
+                    placeholder="Validade">
+                  </masked-input>
+
+                  <masked-input
+                    ref="cvvInput"
+                    type="tel"
+                    v-model="$store.state.creditCard.cardCVV"
+                    :mask="[/\d/, /\d/, /\d/, /\d/]"
+                    :guide="false"
+                    @focus="$refs.cvvInput.$el.placeholder = ''"
+                    @blur="$refs.cvvInput.$el.placeholder = 'CVV'"
+                    placeholder="CVV">
+                  </masked-input>
+                </div>
+
+              </div>
+            </div>
+            
+
+            <div style="display:flex">
+              <div class="item-form">
+                <div style="display:flex">
+                  
+                </div>
+              </div>
+
+              <div class="item-form">
+                
+              </div>
+            </div>
+            
+          </div>
+          
+
           <button class="__next-btn" type="button" @click="concluirReserva">Confirmar Reserva</button>
 
-        </div><!-- Etapa 3 -->
+        </div><!-- ******* ETAPA 3 ******* -->
         
 
-      </div><!-- ******* FLEX LEFT ******* -->
+
+      </div><!-- ******* Flex Left ******* -->
 
 
 
 
-      <!-- ******* FLEX RIGHT ******* -->
+
+      <!-- ******* Flex Right ******* -->
       <div class="flex-right">
 
         <progressive-background  class="__acomod-image" :src="imageH" :placeholder="acomod.images[0].L" :aspect-ratio="2/3"/>
@@ -155,7 +233,8 @@
           </div>
         </div>
 
-      </div> <!-- ******* FLEX RIGHT ******* -->
+      </div><!-- ******* Flex Right ******* -->
+
 
 
     </div>
@@ -165,9 +244,12 @@
 <script>
 import * as firebase from 'firebase'
 require('firebase/firestore')
+import pagarme from 'pagarme'
 import supportsWebP from 'supports-webp'
+import MaskedInput from 'vue-text-mask'
 
 export default {
+  components: { MaskedInput },
   head () {
     return {
       title: 'Reservar: ' + this.acomod.title
@@ -175,6 +257,11 @@ export default {
   },
   middleware: 'reservaValidate',
   transition: 'opacity',
+  data() {
+    return {
+      monthsPermitted: ['01','02','03','04','05','06','07','08','09','10','11','12']
+    }
+  },
   methods: {
     nextBtn1 () {
       this.$store.state.etapaReserva2ok = true, this.$store.commit('m_reservaAcomodDesktop1', false), this.$store.commit('m_reservaAcomodDesktop2', true)
@@ -244,6 +331,22 @@ export default {
       let mmLong = mm == '01' ? 'Jan' : mm == '02' ? 'Fev' : mm == '03' ? 'Mar' : mm == '04' ? 'Abr' : mm == '05' ? 'Mai' : mm == '06' ? 'Jun' : mm == '07' ? 'Jul' : mm == '08' ? 'Ago' : mm == '09' ? 'Set' : mm == '10' ? 'Out' : mm == '11' ? 'Nov' : mm == '12' ? 'Dez' : ''
       return dd + ' de ' + mmLong + ', ' + yyyy
     },
+    yearsPermitted () {
+      let year = new Date().getFullYear().toString()
+      let shortYear = Number(year.slice(-2))
+      let n1 = shortYear + 1
+      let n2 = shortYear + 2
+      let n3 = shortYear + 3
+      let n4 = shortYear + 4
+      let n5 = shortYear + 5
+      let n6 = shortYear + 6
+      let n7 = shortYear + 7
+      let n8 = shortYear + 8
+      let n9 = shortYear + 9
+      let n10 = shortYear + 10
+      let yearsPermitted = [shortYear, n1, n2, n3, n4, n5, n6, n7, n8, n9, n10]
+      return yearsPermitted
+    },
     /* regras () {
       this.acomod.allowFestas ? 'Festas são permitidas' : 'Festas não são permitidas'
       if (!this.acomod.allowFestas || !this.acomod.allowPets || !this.acomod.allowBabys || !this.acomod.allowFumar) {
@@ -300,8 +403,8 @@ export default {
   flex-flow: column;
   transition: all .27s cubic-bezier(.15,.97,.43,.93);
   
-  /* ******* TOPBAR ******* */
-  & .reserva-topbar {
+  /* ******* HEADER PROGRESS ******* */
+  & .header-progress {
     position: relative;
     display: flex;
     align-content: center;
@@ -364,11 +467,55 @@ export default {
           font-weight: 600;
         }
       }
+      & .payment {
+         margin-right: 32%;
+        & .item-form {
+          display: flex;
+          flex-flow: column;
+          margin: 2.6rem 0;
+          & label {
+            padding-bottom: .7rem;
+            user-select: none;
+            font-weight: 600;
+            font-size: 16px;
+          }
+          & input {
+            cursor: text;
+            position: relative;
+            width: 100%;
+            font-size: 17px;
+            font-weight: 400;
+            background: white;
+            color: var(--color01);
+            padding: .9rem 0 .9rem .7rem;
+            border: 1px solid rgb(222,222,222);
+            outline: none;
+          }
+          & input:focus {
+            border: 1px solid rgb(122,122,122) !important;
+          }
+          & select {
+            width: 100%;
+            font-size: 17px;
+            font-weight: 400;
+            background: white;
+            color: var(--color01);
+            padding: .9rem 0 .9rem .7rem;
+            border: 1px solid rgb(222,222,222);
+            outline: none;
+            transition: .1s border ease;
+          }
+          & select:focus {
+            border: 1px solid rgb(122,122,122);
+          }
+        }
+      }
     }
     /* ******* FLEX RIGHT ******* */
     & .flex-right {
       flex: 35%;
       max-width: 35%;
+      align-self: flex-start;
       border: 1px solid rgb(222,222,222);
       & .__acomod-image {
         width: 100%;
@@ -427,8 +574,8 @@ export default {
 }
 
 .__next-btn {
-  margin-top: 4rem;
-  padding: 0 2.1rem;
+  margin-top: 3rem;
+  padding: 0 2rem;
   font-size: 17px;
   font-weight: 600;
   background: var(--colorAcomod);
