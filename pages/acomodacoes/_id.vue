@@ -1030,6 +1030,10 @@ export default {
               border: 1px solid rgb(222,222,222);
               outline: none;
               background: white;
+              transition: .15s border ease;
+            }
+            & input:focus {
+              border: 1px solid rgb(72,72,72) !important;
             }
             & select {
               cursor: pointer;
@@ -1042,10 +1046,14 @@ export default {
               border: 1px solid rgb(222,222,222);
               outline: none;
               background: white;
+              transition: .15s border ease;
               & option {
                 background: white;
                 color: #8D8D8D;
               }
+            }
+            & select:focus {
+              border: 1px solid rgb(72,72,72) !important;
             }
             & .reserva-input-date {
               height: 2.7rem;

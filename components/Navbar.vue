@@ -200,15 +200,17 @@ export default {
         color: rgb(152, 152, 152);
       }
       & .__nav-item {
-        font-size: 14px;
-        font-weight: 600;
+        text-transform: uppercase;
+        font-size: 12px;
+        font-weight: 700;
         user-select: none;
       }
       & .__nav-item-no-a {
+        text-transform: uppercase;
         padding: 0 .8rem;
         cursor: pointer;
-        font-size: 14px;
-        font-weight: 600;
+        font-size: 12px;
+        font-weight: 700;
         user-select: none;
       }
       & .__nav-item-no-a:hover {
@@ -217,7 +219,7 @@ export default {
       & .__user-img {
         cursor: pointer;
         margin: 0 .8rem;
-        width: 2.1rem;
+        width: 2.2rem;
         height: auto;
         border-radius: 50%;
       }
@@ -240,10 +242,11 @@ export default {
         & ul {
           padding: .7rem 1.4rem .7rem 1.1rem;
           & li {
-            padding: .8rem 0;
+            text-transform: uppercase;
+            padding: .9rem 0;
             cursor: pointer;
-            font-size: 14px;
-            font-weight: 600;
+            font-size: 12px;
+            font-weight: 700;
             user-select: none;
           }
           & li:hover {
@@ -270,7 +273,7 @@ export default {
     & .navbar-body {
       & .brand {
         & .__brand-img {
-          width: 2.4rem;
+          width: 2.45rem;
           height: auto;
         }
         & .__brand-name {

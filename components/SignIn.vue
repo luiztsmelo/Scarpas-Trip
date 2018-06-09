@@ -35,7 +35,7 @@
       <div class="sign-in-body">
         <img class="__img" src="../static/brand.svg">
 
-        <h1 class="__title">{{ $store.state.clickedAskAcomod === true || $store.state.clickedReservaAcomod === true ? 'Antes, você precisa se cadastrar' : 'Cadastrar' }}</h1>
+        <h1 class="__title">{{ $store.state.clickedAskAcomod === true || $store.state.clickedReservaAcomod === true ? 'Antes, é preciso se cadastrar' : 'Cadastrar' }}</h1>
         <h3 class="__subtitle">{{ $store.state.clickedAskAcomod === true || $store.state.clickedReservaAcomod === true ? '' : 'Cadastre-se para fazer reservas ou anunciar na Escarpas Trip' }}</h3>
 
         <button type="button" class="facebook-btn" @click="facebookSignIn()">Cadastrar com Facebook</button>

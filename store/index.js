@@ -15,7 +15,6 @@ const store = () => new Vuex.Store({
     -------------------- GERAL --------------------
     */
     isMobile: false,
-    authUser: null,
     isSignIn: true,
     showNavbar: true,
     showMenu: false,
@@ -84,8 +83,6 @@ const store = () => new Vuex.Store({
       cardNumber: '',
       cardHolderName: '',
       cardExpirationDate: '',
-      cardExpirationMonth: '',
-      cardExpirationYear: '',
       cardCVV: ''
     },
     bankAccount: {
@@ -139,8 +136,9 @@ const store = () => new Vuex.Store({
       images: []
     },
     reservaAcomod: {/* Atualizar Action */
+      reservaID: null,
       acomodID: null,
-      created: null,
+      requested: null,
       totalHospedes: 1,
       periodoReserva: null,
       startDate: null,
@@ -149,7 +147,7 @@ const store = () => new Vuex.Store({
       valorNoitesTotal: null,
       serviceFeeTotal: null,
       valorReservaTotal: null,
-      mensagem: null,
+      mensagem: '',
       hostID: null,
       guestID: null,
       hostName: null,
@@ -328,8 +326,12 @@ const store = () => new Vuex.Store({
     m_isMobile (state, payload) {
       state.isMobile = payload
     },
-    m_authUser (state, payload) {
-      state.authUser = payload
+    m_resetUser (state) {
+      state.user.userID = null
+      state.user.firstName = null
+      state.user.fullName = null
+      state.user.email = null
+      state.user.photoURL = null
     },
     m_showNavbar (state, payload) {
       state.showNavbar = payload
@@ -379,8 +381,12 @@ const store = () => new Vuex.Store({
     m_valorReservaTotal (state, payload) {
       state.reservaAcomod.valorReservaTotal = payload
     },
-    m_creditCard (state, payload) {
-      state.creditCard = payload
+    m_resetCreditCard (state) {
+      state.creditCard.paymentMethod = 'credit_card'
+      state.creditCard.cardNumber = ''
+      state.creditCard.cardHolderName = ''
+      state.creditCard.cardExpirationDate = ''
+      state.creditCard.cardCVV = ''
     },
     m_bankAccount (state, payload) {
       state.bankAccount = payload
@@ -753,60 +759,11 @@ const store = () => new Vuex.Store({
         images: []
       })
     },
-    a_newReservaAcomod ({ state, commit }, reservaID) {
-      /* Resetar states */
-      commit('m_creditCard', {
-        paymentMethod: 'credit_card',
-        cardNumber: '',
-        cardHolderName: '',
-        cardExpirationDate: '',
-        cardExpirationMonth: '',
-        cardExpirationYear: '',
-        cardCVV: ''
-      })
-      state.reservaAcomod.created = new Date().getTime()
-      state.reservaAcomod.acomodID = state.acomod.acomodID
-      state.reservaAcomod.hostID = state.acomod.userID
-      state.reservaAcomod.hostName = state.acomod.proprietario
-      state.reservaAcomod.hostEmail = state.acomod.email
-      state.reservaAcomod.guestID = state.user.userID
-      state.reservaAcomod.guestName = state.user.fullName
-      state.reservaAcomod.guestEmail = state.user.email
-      /* Corrigir datas para enviar para o Airtable */
-      let yyyyStart = state.reservaAcomod.startDate.slice(6, 10)
-      let mmStart = state.reservaAcomod.startDate.slice(3, 5)
-      let ddStart = state.reservaAcomod.startDate.slice(0, 2)
-      let startDate = yyyyStart + '-' + mmStart + '-' + ddStart
-      let yyyyEnd = state.reservaAcomod.endDate.slice(6, 10)
-      let mmEnd = state.reservaAcomod.endDate.slice(3, 5)
-      let ddEnd = state.reservaAcomod.endDate.slice(0, 2)
-      let endDate = yyyyEnd + '-' + mmEnd + '-' + ddEnd
-      /* Criar reserva no Firebase */
-      firebase.firestore().collection('reservasAcomods').doc(reservaID).set(state.reservaAcomod).then(() => {
-        /* Criar reserva no Airtable */
-        this.$axios.$post('https://api.airtable.com/v0/appfQX2S7rMRlBWoh/Acomods?api_key=keyoOJ1ERQwpa2EIg', {
-          'fields': {
-            'reservaID': reservaID,
-            'acomodID': state.acomod.acomodID,
-            'created': state.reservaAcomod.created,
-            'startDate': startDate,
-            'endDate': endDate,
-            'noites': state.reservaAcomod.noites,
-            'valorNoitesTotal': state.reservaAcomod.valorNoitesTotal,
-            'serviceFeeTotal': state.reservaAcomod.serviceFeeTotal,
-            'valorReservaTotal': state.reservaAcomod.valorReservaTotal,
-            'totalHospedes': state.reservaAcomod.totalHospedes,
-            'hostName': state.acomod.proprietario,
-            'hostEmail': state.acomod.email,
-            'hostID': state.acomod.userID
-          }
-        })
-      })
-    },
     a_resetReservaAcomod ({ state }) { /* Resetar dados quando usuário for p/ outra acomod (evitar bugs) */
       state.reservaAcomod = {
+        reservaID: null,
         acomodID: null,
-        created: null,
+        requested: null,
         totalHospedes: 1,
         periodoReserva: null,
         startDate: null,
@@ -815,7 +772,7 @@ const store = () => new Vuex.Store({
         valorNoitesTotal: null,
         serviceFeeTotal: null,
         valorReservaTotal: null,
-        mensagem: null,
+        mensagem: '',
         hostID: null,
         guestID: null,
         hostName: null,
@@ -924,7 +881,7 @@ const store = () => new Vuex.Store({
     /*
     ########## GOOGLE SIGN IN ##########
     */
-    a_googleSignIn ({ state, commit, dispatch }, user) {
+    a_googleSignIn ({ dispatch }) {
       const provider = new firebase.auth.GoogleAuthProvider()
       firebase.auth().signInWithPopup(provider)
       dispatch('a_authStateObserver')
@@ -932,7 +889,7 @@ const store = () => new Vuex.Store({
     /*
     ########## FACEBOOK SIGN IN ##########
     */
-    a_facebookSignIn ({ state, commit, dispatch }, user) {
+    a_facebookSignIn ({ dispatch }) {
       const provider = new firebase.auth.FacebookAuthProvider()
       firebase.auth().signInWithPopup(provider)
       dispatch('a_authStateObserver')
@@ -955,9 +912,6 @@ const store = () => new Vuex.Store({
         state.passeioData.email = user.email
         state.passeioData.photoURL = user.photoURL
         state.passeioData.userID = user.uid
-        state.reservaAcomod.email = user.email
-        state.reservaAcomod.photoURL = user.photoURL
-        state.reservaAcomod.userID = user.uid
         state.atracaoData.email = user.email
         dispatch('a_setUser')
       })
@@ -1015,26 +969,20 @@ const store = () => new Vuex.Store({
     /*
     ########## SEND MESSAGE ##########
     */
-    a_sendMessage ({ state, route }, routeName) {
+    a_sendMessage ({ state }, routeName) {
       state.message.timestamp = new Date().getTime()
       state.message.from = state.user.userID
       state.message.to = routeName === 'acomodacoes-id' ? state.acomod.userID : ''
       state.message.about = routeName === 'acomodacoes-id' ? 'acomod' : ''
       state.message.id = routeName === 'acomodacoes-id' ? state.acomod.acomodID : ''
-      /* Enviar mensagem para o Firebase */
+      /* Enviar mensagem para a firestore */
       firebase.firestore().collection('messages').add(state.message)
     },
     /*
     ########## SIGN OUT ##########
     */
-    a_signOut ({ state }) {
-      firebase.auth().signOut().then(() => {
-        state.user.userID = null
-        state.user.firstName = null
-        state.user.fullName = null
-        state.user.email = null
-        state.user.photoURL = null
-      })
+    a_signOut ({ commit }) {
+      firebase.auth().signOut().then(() => commit('m_resetUser'))
     }
   }
 })
