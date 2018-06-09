@@ -316,7 +316,7 @@ export default {
 }
 @media (min-width: 1024px) {
   .home {
-    margin-top: 4rem;
+    margin-top: var(--navbarHeightDesktop);
     & .home-body {
       margin-bottom: 0;
       & .category-container {

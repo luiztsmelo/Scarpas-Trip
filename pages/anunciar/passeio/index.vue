@@ -1150,9 +1150,9 @@ export default {
 
 @media (min-width: 1024px) {
   .anunciar-passeio {
-    margin-top: 4rem;
+    margin-top: var(--navbarHeightDesktop);
     & .progress-bar {
-      top: 4rem;
+      top: var(--navbarHeightDesktop);
       height: 6px;
     }
     & .plano-passeio-mobile {
@@ -1161,7 +1161,7 @@ export default {
     & .plano-passeio-desktop {
       padding: 0 7%;
       display: flex;
-      height: calc(100vh - 4rem);
+      height: calc(100vh - var(--navbarHeightDesktop));
       & .flex1 {
         display: flex;
         flex-flow: column;

@@ -643,13 +643,13 @@ export default {
         }
       } else {
         return {
-          slidesPerView: 2.37,
+          slidesPerView: 2.3,
           spaceBetween: 7,
           pagination: '',
           dynamicBullets: true,
           freeMode: true,
           autoplay: 2300,
-          speed: 10000
+          speed: 18000
         }
       }
     },
@@ -971,7 +971,7 @@ export default {
 
 @media (min-width: 1024px) {
   .acomods-id {
-    margin-top: 4rem;
+    margin-top: var(--navbarHeightDesktop);
 
     /* ####### IMAGE BOX ####### */
     & .image-box {

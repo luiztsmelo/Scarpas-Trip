@@ -73,9 +73,9 @@ export default {
 
 @media (min-width: 1024px) {
   .loader {
-    top: 4rem;
+    top: var(--navbarHeightDesktop);
     & .loader-body {
-      top: calc(50% - 4rem);
+      top: calc(50% - var(--navbarHeightDesktop));
     }
   }
 }

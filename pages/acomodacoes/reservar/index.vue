@@ -416,7 +416,7 @@ export default {
       left: 2%;
       & .__brand-img {
         cursor: pointer;
-        width: 2.5rem;
+        width: 2.55rem;
         height: auto;
       }
     }
@@ -468,7 +468,7 @@ export default {
         }
       }
       & .payment {
-         margin-right: 32%;
+         margin-right: 30%;
         & .item-form {
           display: flex;
           flex-flow: column;

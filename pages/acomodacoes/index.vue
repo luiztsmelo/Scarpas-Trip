@@ -427,7 +427,7 @@ export default {
     & .filtrar-desktop {
       position: fixed;
       width: 24%;
-      top: 4rem;
+      top: var(--navbarHeightDesktop);
       bottom: 0;
       right: 7%;
       border-left: 1px solid rgb(222,222,222);

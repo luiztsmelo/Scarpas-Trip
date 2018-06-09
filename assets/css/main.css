@@ -1,6 +1,7 @@
 @import url('../css/normalize.css');
 
 :root {
+  --navbarHeightDesktop: 4.4rem;
   /* ******* FONTS ******* */
   --main-font: 'Montserrat', sans-serif !important;
   --fontSizeAnuncioText: 17px;

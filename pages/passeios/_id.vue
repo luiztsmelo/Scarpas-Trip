@@ -503,7 +503,7 @@ export default {
 
 @media (min-width: 1024px) {
   .passeios-id {
-    margin-top: 4rem;
+    margin-top: var(--navbarHeightDesktop);
 
     /* ####### IMAGE BOX ####### */
     & .image-box {

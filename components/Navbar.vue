@@ -232,7 +232,7 @@ export default {
       background: transparent;
       & .dropdown-body {
         position: fixed;
-        top: 4rem;
+        top: var(--navbarHeightDesktop);
         background: white;
         width: auto;
         height: auto;
@@ -265,18 +265,18 @@ export default {
 }
 @media (min-width: 1024px) {
   .navbar {
-    height: 4rem;
+    height: var(--navbarHeightDesktop);
     padding: 0 7%;
     & .navbar-body {
       & .brand {
         & .__brand-img {
-          width: 2.35rem;
+          width: 2.4rem;
           height: auto;
         }
         & .__brand-name {
           font-size: 21px;
           font-weight: 500;
-          line-height: 4rem;
+          line-height: var(--navbarHeightDesktop);
         }
       }
       & .nav-mobile {

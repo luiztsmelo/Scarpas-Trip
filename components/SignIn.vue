@@ -2,7 +2,7 @@
   <modal
     name="sign-in-modal"
     class="sign-in-modal"
-    width="36%"
+    width="35%"
     height="auto"
     @closed="closedModal">
 
