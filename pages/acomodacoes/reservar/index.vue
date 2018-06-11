@@ -277,6 +277,7 @@ export default {
       let cardHolderName = this.$store.state.creditCard.cardHolderName
       let cardExpirationDate = this.$store.state.creditCard.cardExpirationDate.replace(/[^0-9\.]+/g, '')
       let cardCVV = this.$store.state.creditCard.cardCVV
+
       let amountAnunciante = reservaAcomod.valorNoitesTotal * 100
       let amountEscarpasTrip = reservaAcomod.serviceFeeTotal * 100
 
@@ -299,12 +300,10 @@ export default {
             'type': 'individual',
             'country': 'br',
             'email': user.email,
-            'documents': [
-              {
-                'type': 'cpf',
-                'number': '00000000000'
-              }
-            ],
+            'documents': [{
+              'type': 'cpf',
+              'number': '00000000000'
+            }],
             'phone_numbers': ['+5511999998888']
           },
           'billing': {
@@ -319,26 +318,24 @@ export default {
               'zipcode': '06714360'
             }
           },
-          'items': [
-            {
-              'id': this.acomod.acomodID,
-              'title': this.acomod.title,
-              'category': 'Acomod',
-              'unit_price': this.acomod.valorNoite * 100,
-              'quantity': reservaAcomod.noites,
-              'tangible': false
-            }
-          ],
+          'items': [{
+            'id': this.acomod.acomodID,
+            'title': this.acomod.title,
+            'category': 'Acomod',
+            'unit_price': this.acomod.valorNoite * 100,
+            'quantity': reservaAcomod.noites,
+            'tangible': false
+          }],
           'split_rules': [
             {
               'recipient_id': 're_cjfcpgjli007ggb6dku6oc33s',
-              'amount': reservaAcomod.serviceFeeTotal * 100,
+              'amount': amountEscarpasTrip,
               'liable': true,
               'charge_processing_fee': true
             },
             {
               'recipient_id': this.acomod.recipientID,
-              'amount': reservaAcomod.valorNoitesTotal * 100,
+              'amount': amountAnunciante,
               'liable': true,
               'charge_processing_fee': true
             }
@@ -361,6 +358,8 @@ export default {
           firebase.firestore().collection('reservasAcomods').doc(reservaID).set(reservaAcomod)
           this.$store.commit('m_resetCreditCard')
         })
+      } else {
+        /* Formulário incorreto */
       }
     },
     backEtapa1 () {
@@ -543,6 +542,7 @@ export default {
         display: flex;
         align-items: center;
         padding-bottom: 1rem;
+        user-select: none;
         & .__title-number {
           width: 2rem;
           padding-right: .45rem;

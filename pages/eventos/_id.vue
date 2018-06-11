@@ -371,7 +371,7 @@ export default {
       & .__reserva-btn {
         font-size: 16px;
         font-weight: 600;
-        background: #FF7D6C;
+        background: var(--colorEvento);
         color: white;
         line-height: 2.6rem;
         height: 2.7rem;

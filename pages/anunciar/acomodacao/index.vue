@@ -286,9 +286,9 @@
           <croppa
             ref="myCroppa"
             @file-choose="showCroppaModal = true"
-            :width="$store.state.isMobile ? 720/2.25 : 720/1.2"
-            :height="$store.state.isMobile ? 480/2.25 : 480/1.2"
-            :quality="$store.state.isMobile ? 2.25 : 1.2"
+            :width="$store.state.isMobile ? 639/2 : 639"
+            :height="$store.state.isMobile ? 426/2 : 426"
+            :quality="$store.state.isMobile ? 2 : 1"
             :placeholder="'Carregando...'"
             :placeholder-color="'white'"
             :accept="'.jpg, .jpeg, .png, .webp'"
@@ -474,7 +474,7 @@
       <textarea 
       v-model="$store.state.acomodData.title"
       v-autosize="title"
-      maxlength="50"
+      maxlength="60"
       rows="1"
       :placeholder="'ex: ' + tipoAcomodTitulo + ' em Capitólio' + totalSuitesTitulo"
       required>
@@ -502,7 +502,7 @@
       <textarea 
       v-model="$store.state.acomodData.subtitle"
       v-autosize="subtitle"
-      maxlength="600"
+      maxlength="1000"
       rows="1"
       placeholder="Dica: Escreva detalhes importantes aqui, que não foram perguntados antes."
       required>
@@ -1112,10 +1112,10 @@ export default {
            : ''
     },
     titleLength () {
-      return 50 - this.$store.state.acomodData.title.length
+      return 60 - this.$store.state.acomodData.title.length
     },
     subtitleLength () {
-      return 600 - this.$store.state.acomodData.subtitle.length
+      return 1000 - this.$store.state.acomodData.subtitle.length
     },
     yearsPermitted () {
       let year = new Date().getFullYear().toString()
