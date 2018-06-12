@@ -191,7 +191,6 @@
 </template>
 
 <script>
-import pagarme from 'pagarme'
 import supportsWebP from 'supports-webp'
 import MaskedInput from 'vue-text-mask'
 
@@ -223,101 +222,6 @@ export default {
       this.$store.state.etapaReserva3ok = true, this.$store.commit('m_reservaAcomodDesktop2', false), this.$store.commit('m_reservaAcomodDesktop3', true)
     },
     concluirReserva () {
-      const cardNumber = this.$store.state.creditCard.cardNumber
-      const cardHolderName = this.$store.state.creditCard.cardHolderName
-      const cardExpirationMonth = this.$store.state.creditCard.cardExpirationMonth
-      const cardExpirationYear = this.$store.state.creditCard.cardExpirationYear
-      const cardCVV = this.$store.state.creditCard.cardCVV
-      if (cardNumber.length === 19 && cardHolderName !== '' && cardExpirationMonth !== 'MM' && cardExpirationYear !== 'AA' && cardCVV.length >= 3) {
-        /* 
-        CORRIGIR VALORES 
-        */
-        const creditCardPath = this.$store.state.creditCard
-        /* Card Number */
-        let cardNumberPath = creditCardPath.cardNumber
-        let cardNumber1 = cardNumberPath.slice(0,4)
-        let cardNumber2 = cardNumberPath.slice(5,9)
-        let cardNumber3 = cardNumberPath.slice(10,14)
-        let cardNumber4 = cardNumberPath.slice(15,19)
-        let cardNumber = cardNumber1 + cardNumber2 + cardNumber3 + cardNumber4
-        /* Expiration Date */
-        let cardExpirationDate = creditCardPath.cardExpirationMonth.concat(creditCardPath.cardExpirationYear)
-
-        pagarme.client.connect({ api_key: 'ak_test_E3I46o4e7guZDqwRnSY9sW8o8HrL9D' })
-        .then(client => client.recipients.all())
-        .then(recipients => console.log(recipients))
-        /* 
-        CRIAR TRANSAÇÃO
-        */
-        let amountAnunciante = this.$store.state.reservaAcomod.valorNoitesTotal * 100
-        let amountEscarpasTrip = this.$store.state.reservaAcomod.serviceFeeTotal * 100
-        
-        pagarme.client.connect({ api_key: 'ak_test_E3I46o4e7guZDqwRnSY9sW8o8HrL9D' })
-        .then(client => client.transactions.create({
-          'amount': this.$store.state.reservaAcomod.valorReservaTotal * 100,
-          'payment_method': this.$store.state.reservaAcomod.paymentMethod,
-          'card_number': cardNumber,
-          'card_cvv': cardCVV,
-          'card_expiration_date': cardExpirationDate,
-          'card_holder_name': cardHolderName,
-          'customer': {
-            'external_id': this.$store.state.user.userID,
-            'name': this.$store.state.user.fullName,
-            'type': 'individual',
-            'country': 'br',
-            'email': this.$store.state.user.email,
-            'documents': [
-              {
-                'type': 'cpf',
-                'number': '00000000000'
-              }
-            ],
-            'phone_numbers': ['+5511999998888']
-          },
-          'billing': {
-            'name': this.$store.state.user.fullName,
-            'address': {
-              'country': 'br',
-              'state': 'sp',
-              'city': 'Cotia',
-              'neighborhood': 'Rio Cotia',
-              'street': 'Rua Matrix',
-              'street_number': '9999',
-              'zipcode': '06714360'
-            }
-          },
-          'items': [
-            {
-              'id': this.$store.state.acomod.acomodID,
-              'title': this.$store.state.acomod.title,
-              'category': 'acomod',
-              'unit_price': this.$store.state.acomod.valorNoite * 100,
-              'quantity': this.$store.state.reservaAcomod.noites,
-              'tangible': false
-            }
-          ],
-          'split_rules': [
-            {
-              'recipient_id': 're_cjfcpgjli007ggb6dku6oc33s',
-              'amount': this.$store.state.reservaAcomod.serviceFeeTotal * 100,
-              'liable': true,
-              'charge_processing_fee': true
-            },
-            {
-              'recipient_id': this.$store.state.acomod.recipientID,
-              'amount': this.$store.state.reservaAcomod.valorNoitesTotal * 100,
-              'liable': true,
-              'charge_processing_fee': true
-            }
-          ]
-          }))
-          .catch(error => console.log(error))
-          .then(transaction => {
-            console.log(transaction)
-            let reservaID = transaction.id.toString()
-            this.$store.dispatch('a_newReservaAcomod', reservaID)
-          })
-      }
     },
     backEtapa1 () {
       if (this.$store.state.etapaReserva1ok === true) {

@@ -243,8 +243,8 @@
 
 <script>
 import * as firebase from 'firebase'
+import 'firebase/functions'
 require('firebase/firestore')
-import pagarme from 'pagarme'
 import supportsWebP from 'supports-webp'
 import MaskedInput from 'vue-text-mask'
 
@@ -270,93 +270,41 @@ export default {
       this.$store.state.etapaReserva3ok = true, this.$store.commit('m_reservaAcomodDesktop2', false), this.$store.commit('m_reservaAcomodDesktop3', true)
     },
     concluirReserva () {
-      let reservaAcomod = this.$store.state.reservaAcomod
-      let user = this.$store.state.user
-      let paymentMethod = this.$store.state.creditCard.paymentMethod
-      let cardNumber = this.$store.state.creditCard.cardNumber.replace(/[^0-9\.]+/g, '')
-      let cardHolderName = this.$store.state.creditCard.cardHolderName
-      let cardExpirationDate = this.$store.state.creditCard.cardExpirationDate.replace(/[^0-9\.]+/g, '')
-      let cardCVV = this.$store.state.creditCard.cardCVV
+      const reservaAcomod = this.$store.state.reservaAcomod
+      const creditCard = this.$store.state.creditCard
+      const user = this.$store.state.user
 
-      let amountAnunciante = reservaAcomod.valorNoitesTotal * 100
-      let amountEscarpasTrip = reservaAcomod.serviceFeeTotal * 100
+      reservaAcomod.requested = new Date().getTime()
+      reservaAcomod.acomodID = this.acomod.acomodID
+      reservaAcomod.hostID = this.acomod.userID
+      reservaAcomod.hostName = this.acomod.proprietario
+      reservaAcomod.hostEmail = this.acomod.email
+      reservaAcomod.guestID = user.userID
+      reservaAcomod.guestName = user.fullName
+      reservaAcomod.guestEmail = user.email
 
       /* Se todos os dados foram preenchidos corretamente: */
-      if (cardNumber.length === 16 && cardHolderName !== '' && cardExpirationDate.length === 4 && cardCVV.length >= 3) {
+      if (creditCard.cardNumber.length === 19 && creditCard.cardHolderName !== '' && creditCard.cardExpirationDate.length === 5 && creditCard.cardCVV.length >= 3) {
         /* 
         CRIAR TRANSAÇÃO
         */
-        pagarme.client.connect({ api_key: 'ak_test_E3I46o4e7guZDqwRnSY9sW8o8HrL9D' })
-        .then(client => client.transactions.create({
-          'amount': amountAnunciante + amountEscarpasTrip,
-          'payment_method': paymentMethod,
-          'card_number': cardNumber,
-          'card_cvv': cardCVV,
-          'card_expiration_date': cardExpirationDate,
-          'card_holder_name': cardHolderName,
-          'customer': {
-            'external_id': user.userID,
-            'name': user.fullName,
-            'type': 'individual',
-            'country': 'br',
-            'email': user.email,
-            'documents': [{
-              'type': 'cpf',
-              'number': '00000000000'
-            }],
-            'phone_numbers': ['+5511999998888']
-          },
-          'billing': {
-            'name': user.fullName,
-            'address': {
-              'country': 'br',
-              'state': 'sp',
-              'city': 'Cotia',
-              'neighborhood': 'Rio Cotia',
-              'street': 'Rua Matrix',
-              'street_number': '9999',
-              'zipcode': '06714360'
-            }
-          },
-          'items': [{
-            'id': this.acomod.acomodID,
-            'title': this.acomod.title,
-            'category': 'Acomod',
-            'unit_price': this.acomod.valorNoite * 100,
-            'quantity': reservaAcomod.noites,
-            'tangible': false
-          }],
-          'split_rules': [
-            {
-              'recipient_id': 're_cjfcpgjli007ggb6dku6oc33s',
-              'amount': amountEscarpasTrip,
-              'liable': true,
-              'charge_processing_fee': true
-            },
-            {
-              'recipient_id': this.acomod.recipientID,
-              'amount': amountAnunciante,
-              'liable': true,
-              'charge_processing_fee': true
-            }
-          ]
-          }))
-        .catch(err => console.log(err)) /* Erro ao criar transação */
-        .then(transaction => {
-          console.log(transaction)
-          let reservaID = transaction.id.toString()
+        firebase.functions().httpsCallable('pagarmeReservaAcomod')({
+          reservaAcomod: this.$store.state.reservaAcomod,
+          creditCard: this.$store.state.creditCard,
+          acomod: this.$store.state.acomod
+        })
+        .then(result => {
+          console.log(result.data)
+          const reservaID = result.data.reservaID.toString()
           reservaAcomod.reservaID = reservaID
-          reservaAcomod.requested = new Date().getTime()
-          reservaAcomod.acomodID = this.acomod.acomodID
-          reservaAcomod.hostID = this.acomod.userID
-          reservaAcomod.hostName = this.acomod.proprietario
-          reservaAcomod.hostEmail = this.acomod.email
-          reservaAcomod.guestID = user.userID
-          reservaAcomod.guestName = user.fullName
-          reservaAcomod.guestEmail = user.email
-          /* Criar reserva no Firebase */
+          /* 
+          CRIAR RESERVA NA FIRESTORE
+          */
           firebase.firestore().collection('reservasAcomods').doc(reservaID).set(reservaAcomod)
           this.$store.commit('m_resetCreditCard')
+        })
+        .catch(err => {
+          console.log(err)
         })
       } else {
         /* Formulário incorreto */

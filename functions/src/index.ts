@@ -1,16 +1,134 @@
 import * as functions from 'firebase-functions'
 import * as admin from 'firebase-admin'
 import * as Airtable from 'airtable'
+import * as pagarme from 'pagarme'
 
+
+/* Firebase admin */
 admin.initializeApp(functions.config().firebase)
 
+
+/* Airtable */
 const base = new Airtable({ apiKey: functions.config().airtable.key }).base('appfQX2S7rMRlBWoh')
 
-const Mailjet = require ('node-mailjet')
-  .connect('2213afd9febdc226190169a58fc26afa', '74d6c365c8fa5de11a937017c5545165')
 
+/* Mailjet */
+const Mailjet = require ('node-mailjet').connect('2213afd9febdc226190169a58fc26afa', '74d6c365c8fa5de11a937017c5545165')
 const ESemail = 'tarcisio@escarpastrip.com'
 const ESname = 'Escarpas Trip'
+
+
+exports.pagarmeRecipientAcomod = functions.https.onCall(data => {
+  const bankAccount = data.bankAccount
+
+  return pagarme.client.connect({ api_key: 'ak_test_E3I46o4e7guZDqwRnSY9sW8o8HrL9D' })
+    .then(client => client.recipients.create({
+      transfer_enabled: false,
+      transfer_interval: "daily",
+      automatic_anticipation_enabled: true,
+      anticipatable_volume_percentage: 100,
+      bank_account: {
+        bank_code: bankAccount.bankCode.substring(0, 3),
+        type: bankAccount.type,
+        agencia: bankAccount.agencia,
+        agencia_dv: bankAccount.agenciaDV,
+        conta: bankAccount.conta,
+        conta_dv: bankAccount.contaDV,
+        legal_name: bankAccount.legalName,
+        document_number: bankAccount.docNumber.replace(/\./g, '').replace(/\-/g, '')
+      }
+    })
+  )
+  .then(recipient => {
+    console.log(recipient)
+    return { recipientID: recipient.id }
+  })
+  .catch (err => {
+    console.log(err)
+    throw new functions.https.HttpsError(err)
+  })
+})
+
+
+exports.pagarmeReservaAcomod = functions.https.onCall((data, context) => {
+  const reservaAcomod = data.reservaAcomod
+  const creditCard = data.creditCard
+  const acomod = data.acomod
+
+  const paymentMethod = creditCard.paymentMethod
+  const cardNumber = creditCard.cardNumber.replace(/[^0-9\.]+/g, '')
+  const cardHolderName = creditCard.cardHolderName
+  const cardExpirationDate = creditCard.cardExpirationDate.replace(/[^0-9\.]+/g, '')
+  const cardCVV = creditCard.cardCVV
+
+  const amountAnunciante = reservaAcomod.valorNoitesTotal * 100
+  const amountEscarpasTrip = reservaAcomod.serviceFeeTotal * 100
+
+  return pagarme.client.connect({ api_key: 'ak_test_E3I46o4e7guZDqwRnSY9sW8o8HrL9D' })
+    .then(client => client.transactions.create({
+      'amount': amountAnunciante + amountEscarpasTrip,
+      'payment_method': paymentMethod,
+      'card_number': cardNumber,
+      'card_cvv': cardCVV,
+      'card_expiration_date': cardExpirationDate,
+      'card_holder_name': cardHolderName,
+      'customer': {
+        'external_id': context.auth.token.uid,
+        'name': context.auth.token.name,
+        'type': 'individual',
+        'country': 'br',
+        'email': context.auth.token.email,
+        'documents': [{
+          'type': 'cpf',
+          'number': '00000000000'
+        }],
+        'phone_numbers': ['+5511999998888']
+      },
+      'billing': {
+        'name': context.auth.token.name,
+        'address': {
+          'country': 'br',
+          'state': 'sp',
+          'city': 'Cotia',
+          'neighborhood': 'Rio Cotia',
+          'street': 'Rua Matrix',
+          'street_number': '9999',
+          'zipcode': '06714360'
+        }
+      },
+      'items': [{
+        'id': acomod.acomodID,
+        'title': acomod.title,
+        'category': 'Acomod',
+        'unit_price': acomod.valorNoite * 100,
+        'quantity': reservaAcomod.noites,
+        'tangible': false
+      }],
+      'split_rules': [
+        {
+          'recipient_id': 're_cjfcpgjli007ggb6dku6oc33s',
+          'amount': amountEscarpasTrip,
+          'liable': true,
+          'charge_processing_fee': true
+        },
+        {
+          'recipient_id': acomod.recipientID,
+          'amount': amountAnunciante,
+          'liable': true,
+          'charge_processing_fee': true
+        }
+      ]
+      }))
+    .then(transaction => {
+      console.log(transaction)
+      return { reservaID: transaction.id }
+    })
+    .catch(err => {
+      console.log(err)
+      throw new functions.https.HttpsError(err)
+    })
+})
+
 
 
 exports.addReservaAcomodAirtable = functions.firestore
@@ -97,6 +215,7 @@ exports.bookConfirmationEmail = functions.firestore
           'Subject': 'Ótimas notícias, ' + reservaAcomod.guestName.split(' ')[0],
           'Variables': {
             'reservaID': reservaAcomod.reservaID,
+            'acomodURL': 'https://www.escarpastrip.com/acomodacoes/' + reservaAcomod.acomodID,
             'guestFirstName': reservaAcomod.guestName.split(' ')[0],
             'hostFirstName': reservaAcomod.hostName.split(' ')[0],
             'title': acomod.title,

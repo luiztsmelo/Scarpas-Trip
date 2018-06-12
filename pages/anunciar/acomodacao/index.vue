@@ -692,10 +692,10 @@
 </template>
 
 <script>
-import isMobile from 'ismobilejs'
-import pagarme from 'pagarme'
-import { loaded } from '~/node_modules/vue2-google-maps/src/manager'
 import * as firebase from 'firebase'
+import 'firebase/functions'
+import isMobile from 'ismobilejs'
+import { loaded } from '~/node_modules/vue2-google-maps/src/manager'
 import MaskedInput from 'vue-text-mask'
 import { bancos } from '../../../mixins/bancos'
 import VueSimpleSuggest from 'vue-simple-suggest'
@@ -966,28 +966,10 @@ export default {
         /* 
         CRIAR RECEBEDOR
         */
-        pagarme.client.connect({ api_key: 'ak_test_E3I46o4e7guZDqwRnSY9sW8o8HrL9D' })
-          .then(client => client.recipients.create({
-            transfer_enabled: false,
-            transfer_interval: "daily",
-            automatic_anticipation_enabled: true,
-            anticipatable_volume_percentage: 100,
-            bank_account: {
-              bank_code: this.bankCode.substring(0, 3),
-              type: this.type,
-              agencia: this.agencia,
-              agencia_dv: this.agenciaDV,
-              conta: this.conta,
-              conta_dv: this.contaDV,
-              legal_name: this.legalName,
-              document_number: this.docNumber.replace(/\./g, '').replace(/\-/g, '')
-            }
-          })
-        )
-        .then(recipient => {
-          console.log(recipient)
-          let acomodData = this.$store.state.acomodData
-          acomodData.recipientID = recipient.id.toString()
+        firebase.functions().httpsCallable('pagarmeRecipientAcomod')({ bankAccount: this.$store.state.bankAccount })
+        .then(result => {
+          const acomodData = this.$store.state.acomodData
+          acomodData.recipientID = result.data.recipientID
           /* 
           CRIAR ACOMOD NA FIRESTORE
           */
@@ -1008,6 +990,7 @@ export default {
           })
         })
         .catch(err => { /* Erro ao criar recebedor */
+          console.log(err)
           if (err) {
             console.log(err.response.errors)
             this.$store.commit('m_loader', false)

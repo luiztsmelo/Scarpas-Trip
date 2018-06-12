@@ -4,7 +4,7 @@ module.exports = {
   ** Build configuration
   */
   build: {
-    vendor: ['firebase', 'pagarme', 'supports-webp']
+    vendor: ['firebase', 'supports-webp']
     /* analyze: true */
   },
   /*

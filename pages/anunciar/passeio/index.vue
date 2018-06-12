@@ -489,7 +489,6 @@
 
 <script>
 import isMobile from 'ismobilejs'
-import pagarme from 'pagarme'
 import * as firebase from 'firebase'
 import MaskedInput from 'vue-text-mask'
 import { bancos } from '../../../mixins/bancos'
@@ -673,7 +672,7 @@ export default {
         /* 
         CRIAR RECEBEDOR
         */
-        pagarme.client.connect({ api_key: 'ak_test_E3I46o4e7guZDqwRnSY9sW8o8HrL9D' })
+        /* pagarme.client.connect({ api_key: 'ak_test_E3I46o4e7guZDqwRnSY9sW8o8HrL9D' })
           .then(client => client.recipients.create({
             transfer_enabled: false,
             transfer_interval: "daily",
@@ -690,7 +689,7 @@ export default {
               document_number: this.docNumber.replace(/\./g, '').replace(/\-/g, '')
             }
           })
-        )
+        ) */
         .then(recipient => {
           console.log(recipient)
           this.$store.state.passeioData.recipientID = recipient.id.toString()

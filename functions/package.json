@@ -14,7 +14,8 @@
     "airtable": "^0.5.6",
     "firebase-admin": "~5.12.1",
     "firebase-functions": "^1.0.3",
-    "node-mailjet": "^3.2.1"
+    "node-mailjet": "^3.2.1",
+    "pagarme": "^3.7.3"
   },
   "devDependencies": {
     "tslint": "^5.8.0",
