@@ -1,5 +1,8 @@
 import * as functions from 'firebase-functions'
+import * as admin from 'firebase-admin'
 import * as Airtable from 'airtable'
+
+admin.initializeApp(functions.config().firebase)
 
 const base = new Airtable({ apiKey: functions.config().airtable.key }).base('appfQX2S7rMRlBWoh')
 
@@ -43,6 +46,8 @@ exports.welcomeEmail = functions.firestore
   .document('users/{userID}')
   .onCreate(snap => {
     const user = snap.data()
+
+    /* Send Email */
     const request = Mailjet
     .post('send', {'version': 'v3.1'})
     .request({
@@ -70,29 +75,46 @@ exports.welcomeEmail = functions.firestore
 exports.bookConfirmationEmail = functions.firestore
   .document('reservasAcomods/{reservaID}')
   /* MUDAR PARA onUpdate() "when confirmed = true" */
-  .onCreate(snap => {
+  .onCreate(async snap => {
     const reservaAcomod = snap.data()
-    const request = Mailjet
-    .post('send', {'version': 'v3.1'})
-    .request({
-      'Messages':[{
-        'From': { 'Email': ESemail, 'Name': ESname },
-        'To': [{
-          'Email': reservaAcomod.guestEmail,
-          'Name': reservaAcomod.guestName
-        }],
-        'TemplateID': 448210,
-        'TemplateLanguage': true,
-        'Subject': 'Sua reserva foi confirmada!',
-        'Variables': {
-          'reservaID': reservaAcomod.reservaID,
-          'guestFirstName': reservaAcomod.guestName.split(' ')[0],
-          'hostFirstName': reservaAcomod.hostName.split(' ')[0]
-        }
-      }]
-    })
+    try {
+      /* Get acomod data */
+      const docAcomod = await admin.firestore().collection('acomods').doc(reservaAcomod.acomodID).get()
+      const acomod = docAcomod.data()
 
-    return request
-      .then(result => console.log(result.body))
-      .catch(err => console.log(err.statusCode))
+      /* Send Email */
+      const request = Mailjet
+      .post('send', {'version': 'v3.1'})
+      .request({
+        'Messages':[{
+          'From': { 'Email': ESemail, 'Name': ESname },
+          'To': [{
+            'Email': reservaAcomod.guestEmail,
+            'Name': reservaAcomod.guestName
+          }],
+          'TemplateID': 448210,
+          'TemplateLanguage': true,
+          'Subject': 'Ótimas notícias, ' + reservaAcomod.guestName.split(' ')[0],
+          'Variables': {
+            'reservaID': reservaAcomod.reservaID,
+            'guestFirstName': reservaAcomod.guestName.split(' ')[0],
+            'hostFirstName': reservaAcomod.hostName.split(' ')[0],
+            'title': acomod.title,
+            'imageURL': acomod.images[0].HJ,
+            'address': acomod.address,
+            'positionLAT': acomod.positionLAT,
+            'positionLNG': acomod.positionLNG,
+            'startDate': reservaAcomod.startDate,
+            'endDate': reservaAcomod.endDate
+          }
+        }]
+      })
+
+      return request
+        .then(result => console.log(result.body))
+        .catch(err => console.log(err.statusCode))
+    } 
+    catch (err) {
+      return err
+    }
   })

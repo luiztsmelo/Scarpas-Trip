@@ -520,8 +520,7 @@ export default {
       & .__item-progress {
         cursor: pointer;
         user-select: none;
-        font-size: 15px;
-        font-weight: 300;
+        font-size: 14px;
       }
       & .__arrow-right {
         width: .7rem; 
