@@ -109,7 +109,11 @@
 
             <div class="item-form">
               <label>Nome impresso no Cartão</label>
-              <input type="text" pattern="[A-Za-z]" v-model="$store.state.creditCard.cardHolderName">
+              <input
+                :class="[ cardHolderNameError ? 'has-error' : '' ]"
+                type="text" pattern="[A-Za-z]"
+                v-model="$store.state.creditCard.cardHolderName"
+              >
             </div>
 
             <div class="card-info">
@@ -117,6 +121,7 @@
                 <label>Dados do Cartão</label>
 
                 <masked-input
+                  :class="[ cardNumberError ? 'has-error' : '' ]"
                   style="border-bottom:none"
                   ref="cardNumberInput"
                   type="tel"
@@ -130,6 +135,7 @@
 
                 <div class="flex" style="display:flex">
                   <masked-input
+                    :class="[ cardExpirationDateError ? 'has-error' : '' ]"
                     style="border-right:none"
                     ref="validadeInput"
                     type="tel"
@@ -142,6 +148,7 @@
                   </masked-input>
 
                   <masked-input
+                    :class="[ cardCvvError ? 'has-error' : '' ]"
                     ref="cvvInput"
                     type="tel"
                     v-model="$store.state.creditCard.cardCVV"
@@ -259,7 +266,10 @@ export default {
   transition: 'opacity',
   data() {
     return {
-      monthsPermitted: ['01','02','03','04','05','06','07','08','09','10','11','12']
+      cardNumberError: false,
+      cardHolderNameError: false,
+      cardExpirationDateError: false,
+      cardCvvError: false
     }
   },
   methods: {
@@ -284,30 +294,41 @@ export default {
       reservaAcomod.guestEmail = user.email
 
       /* Se todos os dados foram preenchidos corretamente: */
-      if (creditCard.cardNumber.length === 19 && creditCard.cardHolderName !== '' && creditCard.cardExpirationDate.length === 5 && creditCard.cardCVV.length >= 3) {
-        /* 
-        CRIAR TRANSAÇÃO
-        */
-        firebase.functions().httpsCallable('pagarmeReservaAcomod')({
-          reservaAcomod: this.$store.state.reservaAcomod,
-          creditCard: this.$store.state.creditCard,
-          acomod: this.$store.state.acomod
+      if (this.cardNumber.length === 19 && this.cardHolderName !== '' && this.cardExpirationDate.length === 5 && this.cardCVV.length >= 3) {
+        
+        /* Transaction pagarme */
+        firebase.functions().httpsCallable('pagarme_newReservaAcomod')({
+          reservaAcomod: reservaAcomod,
+          creditCard: creditCard,
+          acomod: this.acomod
         })
         .then(result => {
           console.log(result.data)
-          const reservaID = result.data.reservaID.toString()
+          const reservaID = result.data.reservaID
           reservaAcomod.reservaID = reservaID
-          /* 
-          CRIAR RESERVA NA FIRESTORE
-          */
+
+          /* Set reservaAcomod */
           firebase.firestore().collection('reservasAcomods').doc(reservaID).set(reservaAcomod)
+          .catch(err => {
+            console.log(err)
+          })
+
           this.$store.commit('m_resetCreditCard')
         })
-        .catch(err => {
-          console.log(err)
+        .catch(err => { /* Transaction error */
+          console.log(err.code)
+          console.log(err.message)
+          console.log(err.details)
+          err.details === 'card_number' ? this.cardNumberError = true : this.cardNumberError = false
+          err.details === 'card_holder_name' ? this.cardHolderNameError = true : this.cardHolderNameError = false
+          err.details === 'card_expiration_date' ? this.cardExpirationDateError = true : this.cardExpirationDateError = false
+          err.details === 'card_cvv' ? this.cardCvvError = true : this.cardCvvError = false
         })
       } else {
-        /* Formulário incorreto */
+        this.cardNumber.length < 19 ? this.cardNumberError = true : this.cardNumberError = false
+        this.cardHolderName.length < 3 ? this.cardHolderNameError = true : this.cardHolderNameError = false
+        this.cardExpirationDate.length < 5 ?  this.cardExpirationDateError = true :  this.cardExpirationDateError = false
+        this.cardCVV.length < 3 ? this.cardCvvError = true : this.cardCvvError = false
       }
     },
     backEtapa1 () {
@@ -341,6 +362,10 @@ export default {
     }
   },
   computed: {
+    cardNumber () { return this.$store.state.creditCard.cardNumber },
+    cardHolderName () { return this.$store.state.creditCard.cardHolderName },
+    cardExpirationDate () { return this.$store.state.creditCard.cardExpirationDate },
+    cardCVV () { return this.$store.state.creditCard.cardCVV },
     acomod () {
       return this.$store.state.acomod
     },
@@ -372,28 +397,6 @@ export default {
       let mmLong = mm == '01' ? 'Jan' : mm == '02' ? 'Fev' : mm == '03' ? 'Mar' : mm == '04' ? 'Abr' : mm == '05' ? 'Mai' : mm == '06' ? 'Jun' : mm == '07' ? 'Jul' : mm == '08' ? 'Ago' : mm == '09' ? 'Set' : mm == '10' ? 'Out' : mm == '11' ? 'Nov' : mm == '12' ? 'Dez' : ''
       return dd + ' de ' + mmLong + ', ' + yyyy
     },
-    yearsPermitted () {
-      let year = new Date().getFullYear().toString()
-      let shortYear = Number(year.slice(-2))
-      let n1 = shortYear + 1
-      let n2 = shortYear + 2
-      let n3 = shortYear + 3
-      let n4 = shortYear + 4
-      let n5 = shortYear + 5
-      let n6 = shortYear + 6
-      let n7 = shortYear + 7
-      let n8 = shortYear + 8
-      let n9 = shortYear + 9
-      let n10 = shortYear + 10
-      let yearsPermitted = [shortYear, n1, n2, n3, n4, n5, n6, n7, n8, n9, n10]
-      return yearsPermitted
-    },
-    /* regras () {
-      this.acomod.allowFestas ? 'Festas são permitidas' : 'Festas não são permitidas'
-      if (!this.acomod.allowFestas || !this.acomod.allowPets || !this.acomod.allowBabys || !this.acomod.allowFumar) {
-        return 'Não são permitidos ' + !this.acomod.allowFestas ? 'Festas' : !this.acomod.allowFestas ?
-      }
-    }, */
     tipoAcomodTitle () {
       const path = this.acomod.tipoAcomod
       return path === 'Casa' ? 'da Casa' 
@@ -420,6 +423,12 @@ export default {
            : path === 'Hostel' ? 'do hostel'
            : ''
     },
+  },
+  watch: {
+    cardNumber (value) { value !== '' ? this.cardNumberError = false : '' },
+    cardHolderName (value) { value !== '' ? this.cardHolderNameError = false : '' },
+    cardExpirationDate (value) { value !== '' ? this.cardExpirationDateError = false : '' },
+    cardCVV (value) { value !== '' ? this.cardCvvError = false : '' }
   },
   beforeRouteEnter (to, from, next) {
     next(vm => {
@@ -625,6 +634,10 @@ export default {
   border-radius: 5px;
   height: 2.9rem;
   line-height: 2.8rem;
+}
+
+.has-error {
+  border: 1px solid #F31431 !important;
 }
 
 </style>

@@ -961,35 +961,37 @@ export default {
       window.location.hash = "tipo"
     },
     concluir () {
+      const acomodData = this.$store.state.acomodData
+
       if (this.bankCode !== '' && this.agencia !== '' && this.agenciaDV !== '' && this.conta !== '' && this.contaDV !== '' && this.legalName !== '' && this.docNumber.length === 14) {
         this.$store.commit('m_loader', true)
-        /* 
-        CRIAR RECEBEDOR
-        */
-        firebase.functions().httpsCallable('pagarmeRecipientAcomod')({ bankAccount: this.$store.state.bankAccount })
+
+        /* Recipient pagarme */
+        firebase.functions().httpsCallable('pagarme_newAcomod')({ bankAccount: this.$store.state.bankAccount })
         .then(result => {
-          const acomodData = this.$store.state.acomodData
           acomodData.recipientID = result.data.recipientID
-          /* 
-          CRIAR ACOMOD NA FIRESTORE
-          */
+
+          /* Set acomod */
           firebase.firestore().collection('acomods').doc(acomodData.acomodID).set(acomodData).then(() => {
             this.$router.push('/acomodacoes/' + acomodData.acomodID)
-            /* Atualizar user */
+
+            /* Update user */
             firebase.firestore().collection('users').doc(acomodData.userID).update({
               isAcomodHost: true,
               celular: acomodData.celular
             }).then(() => {
               this.$store.dispatch('a_resetAcomodData')
               this.$store.commit('m_loader', false)
-            })
+            }).catch(err => console.log(err))
+
           })
-          .catch(err => { /* Erro ao criar acomod */
+          .catch(err => { /* Set acomod error */
             this.$store.commit('m_loader', false)
             console.log(err)
           })
+
         })
-        .catch(err => { /* Erro ao criar recebedor */
+        .catch(err => { /* Recipient error */
           console.log(err)
           if (err) {
             console.log(err.response.errors)
@@ -2016,4 +2018,9 @@ export default {
     }
   }
 }
+
+.has-error {
+  border-bottom: 2px solid #F31431 !important;
+}
+
 </style>

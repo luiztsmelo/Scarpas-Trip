@@ -208,7 +208,3 @@ textarea {
   font-size: 14px !important;
   font-weight: 600 !important;
 }
-
-.has-error {
-  border-bottom: 2px solid #F31431 !important;
-}

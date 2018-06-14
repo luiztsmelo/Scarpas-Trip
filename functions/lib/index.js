@@ -20,7 +20,7 @@ const base = new Airtable({ apiKey: functions.config().airtable.key }).base('app
 const Mailjet = require('node-mailjet').connect('2213afd9febdc226190169a58fc26afa', '74d6c365c8fa5de11a937017c5545165');
 const ESemail = 'tarcisio@escarpastrip.com';
 const ESname = 'Escarpas Trip';
-exports.pagarmeRecipientAcomod = functions.https.onCall(data => {
+exports.pagarme_newAcomod = functions.https.onCall(data => {
     const bankAccount = data.bankAccount;
     return pagarme.client.connect({ api_key: 'ak_test_E3I46o4e7guZDqwRnSY9sW8o8HrL9D' })
         .then(client => client.recipients.create({
@@ -40,7 +40,6 @@ exports.pagarmeRecipientAcomod = functions.https.onCall(data => {
         }
     }))
         .then(recipient => {
-        console.log(recipient);
         return { recipientID: recipient.id };
     })
         .catch(err => {
@@ -48,7 +47,7 @@ exports.pagarmeRecipientAcomod = functions.https.onCall(data => {
         throw new functions.https.HttpsError(err);
     });
 });
-exports.pagarmeReservaAcomod = functions.https.onCall((data, context) => {
+exports.pagarme_newReservaAcomod = functions.https.onCall((data, context) => {
     const reservaAcomod = data.reservaAcomod;
     const creditCard = data.creditCard;
     const acomod = data.acomod;
@@ -115,15 +114,25 @@ exports.pagarmeReservaAcomod = functions.https.onCall((data, context) => {
         ]
     }))
         .then(transaction => {
-        console.log(transaction);
-        return { reservaID: transaction.id };
+        return { reservaID: transaction.id.toString() };
     })
         .catch(err => {
-        console.log(err);
-        throw new functions.https.HttpsError(err);
+        console.log(err.response);
+        if (err.response.errors.some(e => e.parameter_name === 'card_number')) {
+            throw new functions.https.HttpsError('invalid-argument', 'Número do cartão inválido.', 'card_number');
+        }
+        if (err.response.errors.some(e => e.parameter_name === 'card_holder_name')) {
+            throw new functions.https.HttpsError('invalid-argument', 'Nome do portador inválido.', 'card_holder_name');
+        }
+        if (err.response.errors.some(e => e.parameter_name === 'card_expiration_date')) {
+            throw new functions.https.HttpsError('invalid-argument', 'Data de expiração inválida.', 'card_expiration_date');
+        }
+        if (err.response.errors.some(e => e.parameter_name === 'card_cvv')) {
+            throw new functions.https.HttpsError('invalid-argument', 'Código de segurança inválido.', 'card_cvv');
+        }
     });
 });
-exports.addReservaAcomodAirtable = functions.firestore
+exports.airtable_newReservaAcomod = functions.firestore
     .document('reservasAcomods/{reservaID}')
     .onCreate(snap => {
     const reservaAcomod = snap.data();
@@ -150,7 +159,7 @@ exports.addReservaAcomodAirtable = functions.firestore
     */
     return base('Acomods').create(reservaAcomod);
 });
-exports.welcomeEmail = functions.firestore
+exports.email_newUser = functions.firestore
     .document('users/{userID}')
     .onCreate(snap => {
     const user = snap.data();
@@ -176,7 +185,7 @@ exports.welcomeEmail = functions.firestore
         .then(result => console.log(result.body))
         .catch(err => console.log(err.statusCode));
 });
-exports.bookConfirmationEmail = functions.firestore
+exports.email_reservaAcomodConfirmed = functions.firestore
     .document('reservasAcomods/{reservaID}')
     /* MUDAR PARA onUpdate() "when confirmed = true" */
     .onCreate((snap) => __awaiter(this, void 0, void 0, function* () {

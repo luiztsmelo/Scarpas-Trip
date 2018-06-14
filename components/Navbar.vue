@@ -200,17 +200,17 @@ export default {
         color: rgb(152, 152, 152);
       }
       & .__nav-item {
-        text-transform: uppercase;
-        font-size: 12px;
-        font-weight: 700;
+
+        font-size: 14px;
+        font-weight: 600;
         user-select: none;
       }
       & .__nav-item-no-a {
-        text-transform: uppercase;
+  
         padding: 0 .8rem;
         cursor: pointer;
-        font-size: 12px;
-        font-weight: 700;
+        font-size: 14px;
+        font-weight: 600;
         user-select: none;
       }
       & .__nav-item-no-a:hover {
@@ -242,11 +242,11 @@ export default {
         & ul {
           padding: .7rem 1.4rem .7rem 1.1rem;
           & li {
-            text-transform: uppercase;
+           
             padding: .9rem 0;
             cursor: pointer;
-            font-size: 12px;
-            font-weight: 700;
+            font-size: 14px;
+            font-weight: 600;
             user-select: none;
           }
           & li:hover {
