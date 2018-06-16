@@ -163,19 +163,6 @@
               </div>
             </div>
             
-
-            <div style="display:flex">
-              <div class="item-form">
-                <div style="display:flex">
-                  
-                </div>
-              </div>
-
-              <div class="item-form">
-                
-              </div>
-            </div>
-            
           </div>
           
 
