@@ -56,7 +56,7 @@ exports.pagarme_newReservaAcomod = functions.https.onCall((data, context) => {
     const cardHolderName = creditCard.cardHolderName;
     const cardExpirationDate = creditCard.cardExpirationDate.replace(/[^0-9\.]+/g, '');
     const cardCVV = creditCard.cardCVV;
-    const amountAnunciante = reservaAcomod.valorNoitesTotal * 100;
+    const amountAnunciante = (reservaAcomod.valorNoitesTotal + reservaAcomod.limpezaFee) * 100;
     const amountEscarpasTrip = reservaAcomod.serviceFeeTotal * 100;
     return pagarme.client.connect({ api_key: 'ak_test_E3I46o4e7guZDqwRnSY9sW8o8HrL9D' })
         .then(client => client.transactions.create({

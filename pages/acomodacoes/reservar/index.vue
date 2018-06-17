@@ -12,7 +12,7 @@
         <img class="__brand-img" src="../../../static/brand.svg" draggable="false">
       </nuxt-link>
 
-      <div class="progress">
+      <div class="progress" v-if="$store.state.concludedReservaAcomod === false">
         <h3 class="__item-progress" :style="etapaProgressed1" @click="backEtapa1">1. Revisar Regras {{ tipoAcomodTitle }}</h3>
         
         <img src="../../../assets/img/arrow-right.svg" class="__arrow-right">
@@ -29,7 +29,7 @@
 
 
 
-    <div class="reserva-body">
+    <div class="reserva-body" v-if="$store.state.concludedReservaAcomod === false">
 
       <!-- ******* Flex Left ******* -->
       <div class="flex-left">
@@ -39,10 +39,8 @@
         <!-- ******* ETAPA 1 ******* -->
         <div class="etapa-1" v-if="$store.state.reservaAcomodDesktop1 === true">
 
-          <div class="title">
-            <h1 class="__title-number">1</h1>
-            <h1 class="__title-text">Revisar Regras {{ tipoAcomodTitle }}</h1>
-          </div>
+          <h1 class="__title">Revisar Regras {{ tipoAcomodTitle }}</h1>
+
 
           <div class="etapa-1-item">
             <h3 class="__subtitle">Horário para Check-in:</h3>
@@ -75,10 +73,7 @@
         <!-- ******* ETAPA 2 ******* -->
         <div class="etapa-2" v-if="$store.state.reservaAcomodDesktop2 === true">
 
-          <div class="title">
-            <h1 class="__title-number">2</h1>
-            <h1 class="__title-text">Mensagem</h1>
-          </div>
+          <h1 class="__title">Mensagem</h1>
 
 
           <button class="__next-btn" type="button" @click="nextBtn2">Continuar</button>
@@ -91,10 +86,7 @@
         <!-- ******* ETAPA 3 ******* -->
         <div class="etapa-3" v-if="$store.state.reservaAcomodDesktop3 === true">
 
-          <div class="title">
-            <h1 class="__title-number">3</h1>
-            <h1 class="__title-text">Pagamento e Confirmação</h1>
-          </div>
+          <h1 class="__title">Pagamento e Confirmação</h1>
 
 
           <div class="payment">
@@ -279,6 +271,7 @@ export default {
       reservaAcomod.guestID = user.userID
       reservaAcomod.guestName = user.fullName
       reservaAcomod.guestEmail = user.email
+      reservaAcomod.limpezaFee = this.acomod.limpezaFee
 
       /* Se todos os dados foram preenchidos corretamente: */
       if (this.cardNumber.length === 19 && this.cardHolderName !== '' && this.cardExpirationDate.length === 5 && this.cardCVV.length >= 3) {
@@ -476,26 +469,15 @@ export default {
 
   /* ******* BODY ******* */
   & .reserva-body {
-    padding: 1rem 12% 4rem;
+    padding: 1.2rem 12% 4rem;
     display: flex;
     /* ******* FLEX LEFT ******* */
     & .flex-left {
       flex: 65%;
-      & .title {
-        display: flex;
-        align-items: center;
+      & .__title {
         padding-bottom: 1rem;
+        font-size: 32px;
         user-select: none;
-        & .__title-number {
-          width: 2rem;
-          padding-right: .45rem;
-          text-align: center;
-          font-size: 38px;
-          color: rgb(202,202,202);
-        }
-        & .__title-text {
-          font-size: 31px;
-        }
       }
       & .etapa-1-item {
         padding-top: 2rem;
@@ -560,10 +542,10 @@ export default {
         height: auto;
       }
       & .__acomod-title {
-        margin: 0 1.4rem;
+        margin: 0 1.3rem;
         padding: 1.2rem 0;
         font-size: 19px;
-        font-weight: 700;
+        font-weight: 600;
         border-bottom: 1px solid rgb(222,222,222);
         white-space: nowrap;
         overflow: hidden;
@@ -571,7 +553,7 @@ export default {
       }
       & .detalhes-reserva-data {
         padding: .8rem 0;
-        margin: 0 1.4rem;
+        margin: 0 1.3rem;
         border-bottom: 1px solid rgb(222,222,222);
         & .detalhes-reserva-data_item {
           display: flex;
@@ -591,7 +573,7 @@ export default {
       }
       & .detalhes-reserva-valor {
         padding: .8rem 0;
-        margin: 0 1.4rem;
+        margin: 0 1.3rem;
         & .detalhes-reserva-valor_item {
           display: flex;
           justify-content: space-between;

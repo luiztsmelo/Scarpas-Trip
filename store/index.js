@@ -145,6 +145,7 @@ const store = () => new Vuex.Store({
       endDate: null,
       noites: null,
       valorNoitesTotal: null,
+      limpezaFee: null,
       serviceFeeTotal: null,
       valorReservaTotal: null,
       mensagem: '',
@@ -156,6 +157,7 @@ const store = () => new Vuex.Store({
       guestEmail: null
     },
     clickedReservaAcomod: false,
+    concludedReservaAcomod: false,
     clickedAskAcomod: false,
     cadastroAcomod0: true,
     cadastroAcomod1: false,
@@ -770,6 +772,7 @@ const store = () => new Vuex.Store({
         endDate: null,
         noites: null,
         valorNoitesTotal: null,
+        limpezaFee: null,
         serviceFeeTotal: null,
         valorReservaTotal: null,
         mensagem: '',
