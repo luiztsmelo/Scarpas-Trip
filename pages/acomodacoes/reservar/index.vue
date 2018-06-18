@@ -1,5 +1,5 @@
 <template>
-  <div class="reservar">
+  <div class="reservar" v-if="$store.state.reservaAcomod.startDate !== null">
     
     <v-dialog style="z-index:10000"/>
 
@@ -62,6 +62,7 @@
           </div>
           
           <!-- <h3>Regras de Cancelamento</h3> -->
+
 
           <button class="__next-btn" type="button" @click="nextBtn1">Concordar e Continuar</button>
 
@@ -158,7 +159,11 @@
           </div>
           
 
-          <button class="__next-btn" type="button" @click="concluirReserva">Confirmar Reserva</button>
+          <button class="__next-btn" type="button" style="width:13rem" @click="concluirReserva" v-if="!loading">Confirmar Reserva</button>
+
+          <button class="__next-btn" type="button" style="cursor:initial;background:#FFCA9D;width:13rem" v-else>
+            <div class="spinner"><div class="bounce1"></div><div class="bounce2"></div><div class="bounce3"></div></div>
+          </button>
 
         </div><!-- ******* ETAPA 3 ******* -->
         
@@ -245,6 +250,7 @@ export default {
   transition: 'opacity',
   data() {
     return {
+      loading: false,
       cardNumberError: false,
       cardHolderNameError: false,
       cardExpirationDateError: false,
@@ -259,6 +265,8 @@ export default {
       this.$store.state.etapaReserva3ok = true, this.$store.commit('m_reservaAcomodDesktop2', false), this.$store.commit('m_reservaAcomodDesktop3', true)
     },
     concluirReserva () {
+      this.loading = true
+
       const reservaAcomod = this.$store.state.reservaAcomod
       const creditCard = this.$store.state.creditCard
       const user = this.$store.state.user
@@ -289,6 +297,9 @@ export default {
 
           /* Set reservaAcomod */
           firebase.firestore().collection('reservasAcomods').doc(reservaID).set(reservaAcomod)
+          .then(() => {
+            this.loading = false
+          })
           .catch(err => {
             console.log(err)
           })
@@ -296,6 +307,7 @@ export default {
           this.$store.commit('m_resetCreditCard')
         })
         .catch(err => { /* Transaction error */
+          this.loading = false
           console.log(err.code)
           console.log(err.message)
           console.log(err.details)
@@ -305,6 +317,7 @@ export default {
           err.details === 'card_cvv' ? this.cardCvvError = true : this.cardCvvError = false
         })
       } else {
+        this.loading = false
         this.cardNumber.length < 19 ? this.cardNumberError = true : this.cardNumberError = false
         this.cardHolderName.length < 3 ? this.cardHolderNameError = true : this.cardHolderNameError = false
         this.cardExpirationDate.length < 5 ?  this.cardExpirationDateError = true :  this.cardExpirationDateError = false
@@ -420,6 +433,7 @@ export default {
   beforeRouteLeave (to, from, next) {
     this.$store.commit('m_isReservar', false)
     this.$store.dispatch('a_resetReservaAcomod')
+    this.$store.commit('m_resetCreditCard')
     next()
   }
 }
@@ -446,7 +460,7 @@ export default {
       left: 2%;
       & .__brand-img {
         cursor: pointer;
-        width: 2.55rem;
+        width: 2.65rem;
         height: auto;
       }
     }
@@ -454,6 +468,7 @@ export default {
       padding-left: 12%;
       display: flex;
       align-items: center;
+      width: 100%;
       & .__item-progress {
         cursor: pointer;
         user-select: none;
@@ -594,19 +609,60 @@ export default {
 }
 
 .__next-btn {
+  position: relative;
   margin-top: 3rem;
-  padding: 0 2rem;
+  padding: 0 1.2rem;
+  min-height: 2.95rem;
   font-size: 17px;
   font-weight: 600;
   background: var(--colorAcomod);
   color: white;
   border-radius: 5px;
-  height: 2.9rem;
-  line-height: 2.8rem;
+  line-height: 2.85rem;
+  transition: .3s all ease;
 }
 
 .has-error {
   border: 1px solid #F31431 !important;
 }
 
+
+.spinner {
+  position: absolute;
+  margin: auto;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+.spinner > div {
+  width: 8px;
+  height: 8px;
+  background-color: #fff;
+  border-radius: 100%;
+  display: inline-flex;
+  margin: 0 .12rem;
+  animation: sk-bouncedelay 1.3s infinite ease-in-out both;
+}
+.spinner .bounce1 {
+  -webkit-animation-delay: -0.32s;
+  animation-delay: -0.32s;
+}
+.spinner .bounce2 {
+  -webkit-animation-delay: -0.16s;
+  animation-delay: -0.16s;
+}
+@-webkit-keyframes sk-bouncedelay {
+  0%, 80%, 100% { -webkit-transform: scale(0) }
+  40% { -webkit-transform: scale(1.0) }
+}
+@keyframes sk-bouncedelay {
+  0%, 80%, 100% { 
+    -webkit-transform: scale(0);
+    transform: scale(0);
+  } 40% { 
+    -webkit-transform: scale(1.0);
+    transform: scale(1.0);
+  }
+}
 </style>

@@ -240,10 +240,9 @@ export default {
         height: auto;
         box-shadow: 1px 1px 5px 0px rgba(0,0,0,0.2);
         & ul {
-          padding: .7rem 1.4rem .7rem 1.1rem;
+          padding: .7rem 1.8rem .7rem 1.1rem;
           & li {
-           
-            padding: .9rem 0;
+            padding: .85rem 0;
             cursor: pointer;
             font-size: 14px;
             font-weight: 600;

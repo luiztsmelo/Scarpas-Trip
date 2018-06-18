@@ -643,7 +643,7 @@ export default {
         }
       } else {
         return {
-          slidesPerView: 2.3,
+          slidesPerView: 2.28,
           spaceBetween: 7,
           pagination: '',
           dynamicBullets: true,
