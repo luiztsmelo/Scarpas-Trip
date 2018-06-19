@@ -50,9 +50,9 @@
         <div class="dropdown" v-show="userBox === true" @click="userBox = !userBox">
           <div class="dropdown-body" style="right: 7%">
             <ul>
-              <li>Editar perfil</li>
-              <li>Meus anúncios</li>
               <li>Minhas reservas</li>
+              <li>Meus anúncios</li>
+              <li>Editar perfil</li>
               <li @click="signOut()">Sair</li>
             </ul>
           </div>
@@ -219,7 +219,7 @@ export default {
       & .__user-img {
         cursor: pointer;
         margin: 0 .8rem;
-        width: 2.2rem;
+        width: 2.1rem;
         height: auto;
         border-radius: 50%;
       }

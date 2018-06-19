@@ -4,15 +4,14 @@
     <v-dialog style="z-index:10000"/>
 
 
-
     <!-- ******* HEADER PROGRESS ******* -->
-    <div class="header-progress">
+    <div class="header-progress" v-if="!$store.state.concludedReservaAcomod">
 
       <nuxt-link to="/" class="brand">
         <img class="__brand-img" src="../../../static/brand.svg" draggable="false">
       </nuxt-link>
 
-      <div class="progress" v-if="$store.state.concludedReservaAcomod === false">
+      <div class="progress">
         <h3 class="__item-progress" :style="etapaProgressed1" @click="backEtapa1">1. Revisar Regras {{ tipoAcomodTitle }}</h3>
         
         <img src="../../../assets/img/arrow-right.svg" class="__arrow-right">
@@ -29,7 +28,7 @@
 
 
 
-    <div class="reserva-body" v-if="$store.state.concludedReservaAcomod === false">
+    <div class="reserva-body" v-if="!$store.state.concludedReservaAcomod">
 
       <!-- ******* Flex Left ******* -->
       <div class="flex-left">
@@ -89,6 +88,8 @@
 
           <h1 class="__title">Pagamento e Confirmação</h1>
 
+          <h3 class="__subtitle">Você não será cobrado até que a reserva seja confirmada.</h3>
+          
 
           <div class="payment">
 
@@ -155,15 +156,39 @@
 
               </div>
             </div>
-            
+
+            <div class="flex" style="display:flex; justify-content:space-between">
+
+              <div class="item-form" style="margin:0">
+                <label>CPF</label>
+                <masked-input
+                  :class="[ cpfError ? 'has-error' : '' ]"
+                  type="tel"
+                  v-model="$store.state.reservaAcomod.guestCPF"
+                  :mask="[/\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '-', /\d/, /\d/]"
+                  :guide="false"
+                  placeholder="___.___.___-__">
+                </masked-input>
+              </div>
+
+              <div class="item-form" style="margin:0">
+                <label>Celular</label>
+                <masked-input
+                  :class="[ celularError ? 'has-error' : '' ]"
+                  type="tel"
+                  v-model="$store.state.reservaAcomod.guestCelular"
+                  :mask="['(', /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]"
+                  :guide="false"
+                  placeholder="(  )          ">
+                </masked-input>
+              </div>
+
+            </div>
+
           </div>
           
 
-          <button class="__next-btn" type="button" style="width:13rem" @click="concluirReserva" v-if="!loading">Confirmar Reserva</button>
-
-          <button class="__next-btn" type="button" style="cursor:initial;background:#FFCA9D;width:13rem" v-else>
-            <div class="spinner"><div class="bounce1"></div><div class="bounce2"></div><div class="bounce3"></div></div>
-          </button>
+          <button class="__next-btn" type="button" @click="concluirReserva">Confirmar Reserva</button>
 
         </div><!-- ******* ETAPA 3 ******* -->
         
@@ -227,8 +252,40 @@
       </div><!-- ******* Flex Right ******* -->
 
 
+    </div>
+
+
+
+    <div class="concluded-reserva" v-if="$store.state.concludedReservaAcomod">
+
+      <img class="__img" src="../../../assets/img/brand.svg">
+
+      <h1 class="__title">Pedido de reserva enviado</h1>
+
+      <h3 class="__text">
+        {{ this.acomod.proprietario.split(' ')[0] }} irá analisar seu pedido e dentro de 48 horas você receberá um e-mail e SMS com a confirmação de sua reserva, juntamente com as informações de contato do anunciante.
+      </h3>
+
+      <h3 class="__subtitle">Código da Reserva</h3>
+      <h3 class="__text">{{ $store.state.reservaAcomod.reservaID }}</h3>
+
+      <h3 class="__subtitle">Cancelamento</h3>
+      <h3 class="__text">
+        É possível cancelar sua reserva, com reembolso total, até dia tal, acessando sua <nuxt-link to="/@name" style="text-decoration:underline">página pessoal</nuxt-link>. Para mais detalhes, leia nossa <nuxt-link to="/" style="text-decoration:underline">Política de Cancelamento</nuxt-link>.
+      </h3>
+
+      <h3 class="__subtitle">Dúvidas?</h3>
+      <h3 class="__text">Entre em contato conosco pelo nosso WhatsApp: (34) 99141-0085 ou e-mail: contato@escarpastrip.com.</h3>
+      
+      
+      <nuxt-link to="/" style="margin-top:4rem">
+        <button class="__next-btn" type="button" style="margin:0">Acessar Página Pessoal</button>
+      </nuxt-link>
+      
 
     </div>
+
+
   </div>
 </template>
 
@@ -250,11 +307,12 @@ export default {
   transition: 'opacity',
   data() {
     return {
-      loading: false,
       cardNumberError: false,
       cardHolderNameError: false,
       cardExpirationDateError: false,
-      cardCvvError: false
+      cardCvvError: false,
+      cpfError: false,
+      celularError: false
     }
   },
   methods: {
@@ -265,7 +323,7 @@ export default {
       this.$store.state.etapaReserva3ok = true, this.$store.commit('m_reservaAcomodDesktop2', false), this.$store.commit('m_reservaAcomodDesktop3', true)
     },
     concluirReserva () {
-      this.loading = true
+      this.$store.commit('m_loader', true)
 
       const reservaAcomod = this.$store.state.reservaAcomod
       const creditCard = this.$store.state.creditCard
@@ -274,15 +332,16 @@ export default {
       reservaAcomod.requested = new Date().getTime()
       reservaAcomod.acomodID = this.acomod.acomodID
       reservaAcomod.hostID = this.acomod.userID
-      reservaAcomod.hostName = this.acomod.proprietario
       reservaAcomod.hostEmail = this.acomod.email
+      reservaAcomod.hostName = this.acomod.proprietario
+      reservaAcomod.hostCelular = this.acomod.celular
       reservaAcomod.guestID = user.userID
-      reservaAcomod.guestName = user.fullName
       reservaAcomod.guestEmail = user.email
+      reservaAcomod.guestName = user.fullName
       reservaAcomod.limpezaFee = this.acomod.limpezaFee
 
       /* Se todos os dados foram preenchidos corretamente: */
-      if (this.cardNumber.length === 19 && this.cardHolderName !== '' && this.cardExpirationDate.length === 5 && this.cardCVV.length >= 3) {
+      if (creditCard.cardNumber.length === 19 && creditCard.cardHolderName !== '' && creditCard.cardExpirationDate.length === 5 && creditCard.cardCVV.length >= 3 && reservaAcomod.guestCPF.length === 14 && reservaAcomod.guestCelular.length === 15) {
         
         /* Transaction pagarme */
         firebase.functions().httpsCallable('pagarme_newReservaAcomod')({
@@ -298,16 +357,18 @@ export default {
           /* Set reservaAcomod */
           firebase.firestore().collection('reservasAcomods').doc(reservaID).set(reservaAcomod)
           .then(() => {
-            this.loading = false
+            this.$store.commit('m_loader', false)
+            this.scrollTop()
+            this.$store.state.concludedReservaAcomod = true
+            this.$store.commit('m_resetCreditCard')
           })
           .catch(err => {
             console.log(err)
+            this.$store.commit('m_loader', false)
           })
-
-          this.$store.commit('m_resetCreditCard')
         })
         .catch(err => { /* Transaction error */
-          this.loading = false
+          this.$store.commit('m_loader', false)
           console.log(err.code)
           console.log(err.message)
           console.log(err.details)
@@ -315,14 +376,21 @@ export default {
           err.details === 'card_holder_name' ? this.cardHolderNameError = true : this.cardHolderNameError = false
           err.details === 'card_expiration_date' ? this.cardExpirationDateError = true : this.cardExpirationDateError = false
           err.details === 'card_cvv' ? this.cardCvvError = true : this.cardCvvError = false
+          err.details === 'customer' ? this.cpfError = true : this.cpfError = false
         })
       } else {
-        this.loading = false
-        this.cardNumber.length < 19 ? this.cardNumberError = true : this.cardNumberError = false
-        this.cardHolderName.length < 3 ? this.cardHolderNameError = true : this.cardHolderNameError = false
-        this.cardExpirationDate.length < 5 ?  this.cardExpirationDateError = true :  this.cardExpirationDateError = false
-        this.cardCVV.length < 3 ? this.cardCvvError = true : this.cardCvvError = false
+        this.$store.commit('m_loader', false)
+        creditCard.cardNumber.length < 19 ? this.cardNumberError = true : this.cardNumberError = false
+        creditCard.cardHolderName.length < 3 ? this.cardHolderNameError = true : this.cardHolderNameError = false
+        creditCard.cardExpirationDate.length < 5 ?  this.cardExpirationDateError = true :  this.cardExpirationDateError = false
+        creditCard.cardCVV.length < 3 ? this.cardCvvError = true : this.cardCvvError = false
+        reservaAcomod.guestCPF.length < 14 ? this.cpfError = true : this.cpfError = false
+        reservaAcomod.guestCelular.length < 15 ? this.celularError = true : this.celularError = false
       }
+    },
+    scrollTop () {
+      document.body.scrollTop = 0; // For Safari
+      document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
     },
     backEtapa1 () {
       if (this.$store.state.etapaReserva1ok === true) {
@@ -359,6 +427,8 @@ export default {
     cardHolderName () { return this.$store.state.creditCard.cardHolderName },
     cardExpirationDate () { return this.$store.state.creditCard.cardExpirationDate },
     cardCVV () { return this.$store.state.creditCard.cardCVV },
+    guestCPF () { return this.$store.state.reservaAcomod.guestCPF },
+    guestCelular () { return this.$store.state.reservaAcomod.guestCelular },
     acomod () {
       return this.$store.state.acomod
     },
@@ -421,7 +491,9 @@ export default {
     cardNumber (value) { value !== '' ? this.cardNumberError = false : '' },
     cardHolderName (value) { value !== '' ? this.cardHolderNameError = false : '' },
     cardExpirationDate (value) { value !== '' ? this.cardExpirationDateError = false : '' },
-    cardCVV (value) { value !== '' ? this.cardCvvError = false : '' }
+    cardCVV (value) { value !== '' ? this.cardCvvError = false : '' },
+    guestCPF (value) { value !== '' ? this.cpfError = false : '' },
+    guestCelular (value) { value !== '' ? this.celularError = false : '' }
   },
   beforeRouteEnter (to, from, next) {
     next(vm => {
@@ -434,6 +506,7 @@ export default {
     this.$store.commit('m_isReservar', false)
     this.$store.dispatch('a_resetReservaAcomod')
     this.$store.commit('m_resetCreditCard')
+    this.$store.state.concludedReservaAcomod = false
     next()
   }
 }
@@ -460,7 +533,7 @@ export default {
       left: 2%;
       & .__brand-img {
         cursor: pointer;
-        width: 2.65rem;
+        width: 2.7rem;
         height: auto;
       }
     }
@@ -493,6 +566,10 @@ export default {
         padding-bottom: 1rem;
         font-size: 32px;
         user-select: none;
+      }
+      & .__subtitle {
+        padding-top: 2rem;
+        font-size: 17px;
       }
       & .etapa-1-item {
         padding-top: 2rem;
@@ -606,19 +683,44 @@ export default {
       }
     }
   }
+  & .concluded-reserva {
+    padding: 4rem 24%;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    & .__img {
+      width: 4.8rem;
+      height: auto;
+    }
+    & .__title {
+      text-align: center;
+      font-size: 37px;
+      padding: 1.2rem 0 .7rem 0;
+    }
+    & .__subtitle {
+      padding-top: 2rem;
+      text-align: center;
+      font-size: 18px;
+      font-weight: 600;
+    }
+    & .__text {
+      text-align: center;
+      font-size: 17px;
+    }
+  }
 }
 
 .__next-btn {
   position: relative;
   margin-top: 3rem;
-  padding: 0 1.2rem;
-  min-height: 2.95rem;
+  padding: 0 1.4rem;
+  min-height: 3rem;
   font-size: 17px;
   font-weight: 600;
   background: var(--colorAcomod);
   color: white;
   border-radius: 5px;
-  line-height: 2.85rem;
+  line-height: 2.9rem;
   transition: .3s all ease;
 }
 
@@ -626,43 +728,4 @@ export default {
   border: 1px solid #F31431 !important;
 }
 
-
-.spinner {
-  position: absolute;
-  margin: auto;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-}
-.spinner > div {
-  width: 8px;
-  height: 8px;
-  background-color: #fff;
-  border-radius: 100%;
-  display: inline-flex;
-  margin: 0 .12rem;
-  animation: sk-bouncedelay 1.3s infinite ease-in-out both;
-}
-.spinner .bounce1 {
-  -webkit-animation-delay: -0.32s;
-  animation-delay: -0.32s;
-}
-.spinner .bounce2 {
-  -webkit-animation-delay: -0.16s;
-  animation-delay: -0.16s;
-}
-@-webkit-keyframes sk-bouncedelay {
-  0%, 80%, 100% { -webkit-transform: scale(0) }
-  40% { -webkit-transform: scale(1.0) }
-}
-@keyframes sk-bouncedelay {
-  0%, 80%, 100% { 
-    -webkit-transform: scale(0);
-    transform: scale(0);
-  } 40% { 
-    -webkit-transform: scale(1.0);
-    transform: scale(1.0);
-  }
-}
 </style>

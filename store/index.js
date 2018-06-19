@@ -139,6 +139,9 @@ const store = () => new Vuex.Store({
       reservaID: null,
       acomodID: null,
       requested: null,
+      confirmed: false,
+      rejected: false,
+      canceled: false,
       totalHospedes: 1,
       periodoReserva: null,
       startDate: null,
@@ -150,11 +153,14 @@ const store = () => new Vuex.Store({
       valorReservaTotal: null,
       mensagem: '',
       hostID: null,
-      guestID: null,
-      hostName: null,
-      guestName: null,
       hostEmail: null,
-      guestEmail: null
+      hostName: null,
+      hostCelular: null,
+      guestID: null,
+      guestEmail: null,
+      guestName: null,
+      guestCPF: null,
+      guestCelular: null
     },
     clickedReservaAcomod: false,
     concludedReservaAcomod: false,
@@ -766,6 +772,7 @@ const store = () => new Vuex.Store({
         reservaID: null,
         acomodID: null,
         requested: null,
+        confirmed: false,
         totalHospedes: 1,
         periodoReserva: null,
         startDate: null,
@@ -777,11 +784,14 @@ const store = () => new Vuex.Store({
         valorReservaTotal: null,
         mensagem: '',
         hostID: null,
-        guestID: null,
-        hostName: null,
-        guestName: null,
         hostEmail: null,
-        guestEmail: null
+        hostName: null,
+        hostCelular: null,
+        guestID: null,
+        guestEmail: null,
+        guestName: null,
+        guestCPF: null,
+        guestCelular: null
       }
       state.reservaAcomodDesktop1 = true
       state.reservaAcomodDesktop2 = false

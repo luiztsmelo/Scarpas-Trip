@@ -18,7 +18,7 @@ admin.initializeApp(functions.config().firebase);
 const base = new Airtable({ apiKey: functions.config().airtable.key }).base('appfQX2S7rMRlBWoh');
 /* Mailjet */
 const Mailjet = require('node-mailjet').connect('2213afd9febdc226190169a58fc26afa', '74d6c365c8fa5de11a937017c5545165');
-const ESemail = 'tarcisio@escarpastrip.com';
+const ESemail = 'contato@escarpastrip.com';
 const ESname = 'Escarpas Trip';
 exports.pagarme_newAcomod = functions.https.onCall(data => {
     const bankAccount = data.bankAccount;
@@ -56,6 +56,7 @@ exports.pagarme_newReservaAcomod = functions.https.onCall((data, context) => {
     const cardHolderName = creditCard.cardHolderName;
     const cardExpirationDate = creditCard.cardExpirationDate.replace(/[^0-9\.]+/g, '');
     const cardCVV = creditCard.cardCVV;
+    const guestCPF = reservaAcomod.guestCPF.replace(/[^0-9\.]+/g, '');
     const amountAnunciante = (reservaAcomod.valorNoitesTotal + reservaAcomod.limpezaFee) * 100;
     const amountEscarpasTrip = reservaAcomod.serviceFeeTotal * 100;
     return pagarme.client.connect({ api_key: 'ak_test_E3I46o4e7guZDqwRnSY9sW8o8HrL9D' })
@@ -74,7 +75,7 @@ exports.pagarme_newReservaAcomod = functions.https.onCall((data, context) => {
             'email': context.auth.token.email,
             'documents': [{
                     'type': 'cpf',
-                    'number': '00000000000'
+                    'number': guestCPF
                 }],
             'phone_numbers': ['+5511999998888']
         },
@@ -118,7 +119,7 @@ exports.pagarme_newReservaAcomod = functions.https.onCall((data, context) => {
     })
         .catch(err => {
         console.log(err.response);
-        if (err.response.errors.some(e => e.parameter_name === 'card_number')) {
+        if (err.response.errors.some(e => e.type === 'action_forbidden' || e.parameter_name === 'card_number')) {
             throw new functions.https.HttpsError('invalid-argument', 'Número do cartão inválido.', 'card_number');
         }
         if (err.response.errors.some(e => e.parameter_name === 'card_holder_name')) {
@@ -129,6 +130,9 @@ exports.pagarme_newReservaAcomod = functions.https.onCall((data, context) => {
         }
         if (err.response.errors.some(e => e.parameter_name === 'card_cvv')) {
             throw new functions.https.HttpsError('invalid-argument', 'Código de segurança inválido.', 'card_cvv');
+        }
+        if (err.response.errors.some(e => e.parameter_name === 'customer')) {
+            throw new functions.https.HttpsError('invalid-argument', 'CPF inválido.', 'customer');
         }
     });
 });
@@ -151,12 +155,11 @@ exports.airtable_newReservaAcomod = functions.firestore
     const mmEnd = reservaAcomod.endDate.slice(3, 5);
     const ddEnd = reservaAcomod.endDate.slice(0, 2);
     reservaAcomod.endDate = yyyyEnd + '-' + mmEnd + '-' + ddEnd;
-    /* Deletar valores não suportados pelo Airtable */
+    /* Deletar valores não suportados ou desnecessários para o Airtable */
     delete reservaAcomod.periodoReserva;
     delete reservaAcomod.mensagem;
-    /*
-    CRIAR RESERVA NO AIRTABLE
-    */
+    delete reservaAcomod.guestCPF;
+    /* Criar reserva no Airtable */
     return base('Acomods').create(reservaAcomod);
 });
 exports.email_newUser = functions.firestore
