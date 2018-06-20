@@ -1,5 +1,5 @@
 <template>
-  <div class="reservar" v-if="$store.state.reservaAcomod.startDate !== null">
+  <div class="reservar" v-if="$store.state.reservaAcomod.periodoReserva !== null">
     
     <v-dialog style="z-index:10000"/>
 
@@ -88,10 +88,10 @@
 
           <h1 class="__title">Pagamento e Confirmação</h1>
 
-          <h3 class="__subtitle">Você não será cobrado até que a reserva seja confirmada.</h3>
-          
 
           <div class="payment">
+
+            <h3 class="__subtitle">Você somente será cobrado após {{ acomod.proprietario.split(' ')[0] }} confirmar sua reserva. Para sua segurança, só liberaremos o pagamento para ele no dia seguinte de seu check-in, {{ dayAfterCheckin }}. Não se preocupe, seus dados estarão em total sigilo.</h3>
 
             <div class="item-form">
               <label>Pagar com</label>
@@ -210,9 +210,8 @@
         <div class="detalhes-reserva-data">
           <div class="detalhes-reserva-data_item">
             <img src="../../../assets/img/calendar.svg" class="__img" style="transform: scale(.9)">
-            <h3>{{ startDateFormatted }}</h3>
-            <img src="../../../assets/img/arrow-right.svg" class="__arrow-right-date">
-            <h3>{{ endDateFormatted }}</h3>
+            <h3>{{ checkInFormatted }}&nbsp/&nbsp</h3>
+            <h3>{{ checkOutFormatted }}</h3>
           </div>
           <div class="detalhes-reserva-data_item">
             <img src="../../../assets/img/guests.svg" class="__img">
@@ -295,6 +294,9 @@ import 'firebase/functions'
 require('firebase/firestore')
 import supportsWebP from 'supports-webp'
 import MaskedInput from 'vue-text-mask'
+import dayjs from 'dayjs'
+import 'dayjs/locale/pt-br'
+dayjs.locale('pt-br')
 
 export default {
   components: { MaskedInput },
@@ -444,21 +446,17 @@ export default {
     imageH () {
       return supportsWebP ? this.acomod.images[0].HW : this.acomod.images[0].HJ
     },
-    startDateFormatted () {
-      let startDate = this.$store.state.reservaAcomod.startDate
-      let dd = startDate.slice(0, 2)
-      let mm = startDate.slice(3, 5)
-      let yyyy = startDate.slice(6, 10)
-      let mmLong = mm == '01' ? 'Jan' : mm == '02' ? 'Fev' : mm == '03' ? 'Mar' : mm == '04' ? 'Abr' : mm == '05' ? 'Mai' : mm == '06' ? 'Jun' : mm == '07' ? 'Jul' : mm == '08' ? 'Ago' : mm == '09' ? 'Set' : mm == '10' ? 'Out' : mm == '11' ? 'Nov' : mm == '12' ? 'Dez' : ''
-      return dd + ' de ' + mmLong + ', ' + yyyy
+    checkInFormatted () {
+      const checkIn = new Date(this.$store.state.reservaAcomod.periodoReserva.start)
+      return dayjs(checkIn).format('ddd DD-MM-YYYY')
     },
-    endDateFormatted () {
-      let endDate = this.$store.state.reservaAcomod.endDate
-      let dd = endDate.slice(0, 2)
-      let mm = endDate.slice(3, 5)
-      let yyyy = endDate.slice(6, 10)
-      let mmLong = mm == '01' ? 'Jan' : mm == '02' ? 'Fev' : mm == '03' ? 'Mar' : mm == '04' ? 'Abr' : mm == '05' ? 'Mai' : mm == '06' ? 'Jun' : mm == '07' ? 'Jul' : mm == '08' ? 'Ago' : mm == '09' ? 'Set' : mm == '10' ? 'Out' : mm == '11' ? 'Nov' : mm == '12' ? 'Dez' : ''
-      return dd + ' de ' + mmLong + ', ' + yyyy
+    checkOutFormatted () {
+      const checkOut = new Date(this.$store.state.reservaAcomod.periodoReserva.end)
+      return dayjs(checkOut).format('ddd DD-MM-YYYY')
+    },
+    dayAfterCheckin () {
+      const checkIn = new Date(this.$store.state.reservaAcomod.periodoReserva.start)
+      return dayjs(checkIn).add(1, 'day').format('DD/MM')
     },
     tipoAcomodTitle () {
       const path = this.acomod.tipoAcomod
@@ -557,7 +555,7 @@ export default {
 
   /* ******* BODY ******* */
   & .reserva-body {
-    padding: 1.2rem 12% 4rem;
+    padding: 1.2rem 12% 5rem;
     display: flex;
     /* ******* FLEX LEFT ******* */
     & .flex-left {
@@ -579,7 +577,7 @@ export default {
         }
       }
       & .payment {
-         margin-right: 30%;
+         margin-right: 29%;
         & .item-form {
           display: flex;
           flex-flow: column;
@@ -654,11 +652,6 @@ export default {
           & .__img {
             margin-right: .7rem;
             width: 1.65rem;
-            height: auto;
-          }
-          & .__arrow-right-date {
-            margin: 0 .7rem;
-            width: .8rem;
             height: auto;
           }
         }

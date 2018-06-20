@@ -23,6 +23,7 @@ const store = () => new Vuex.Store({
     showProprietario: false,
     menuIconAnime: false,
     loader: false,
+    miniLoader: false,
     offFoobar1: true,
     offFoobar2: true,
     offFoobar3: true,
@@ -53,8 +54,8 @@ const store = () => new Vuex.Store({
       from: null,
       to: null,
       totalHospedes: '1',
-      startDate: null,
-      endDate: null,
+      checkIn: null,
+      checkOut: null,
       text: '',
       about: null,
       id: null
@@ -144,8 +145,6 @@ const store = () => new Vuex.Store({
       canceled: false,
       totalHospedes: 1,
       periodoReserva: null,
-      startDate: null,
-      endDate: null,
       noites: null,
       valorNoitesTotal: null,
       limpezaFee: null,
@@ -358,6 +357,9 @@ const store = () => new Vuex.Store({
     },
     m_loader (state, payload) {
       state.loader = payload
+    },
+    m_miniLoader (state, payload) {
+      state.miniLoader = payload
     },
     m_showProprietario (state, payload) {
       state.showProprietario = payload
@@ -775,8 +777,6 @@ const store = () => new Vuex.Store({
         confirmed: false,
         totalHospedes: 1,
         periodoReserva: null,
-        startDate: null,
-        endDate: null,
         noites: null,
         valorNoitesTotal: null,
         limpezaFee: null,

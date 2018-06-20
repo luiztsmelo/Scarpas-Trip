@@ -2,6 +2,10 @@ import * as functions from 'firebase-functions'
 import * as admin from 'firebase-admin'
 import * as Airtable from 'airtable'
 import * as pagarme from 'pagarme'
+import * as dayjs from 'dayjs'
+import 'dayjs/locale/pt-br'
+
+dayjs.locale('pt-br')
 
 
 /* Firebase admin */
@@ -60,7 +64,8 @@ exports.pagarme_newReservaAcomod = functions.https.onCall((data, context) => {
   const cardExpirationDate = creditCard.cardExpirationDate.replace(/[^0-9\.]+/g, '')
   const cardCVV = creditCard.cardCVV
 
-  const guestCPF = reservaAcomod.guestCPF.replace(/[^0-9\.]+/g, '')
+  const guestCPF = reservaAcomod.guestCPF.replace(/[^0-9\.]+/g, '').replace(/\./g, '')
+  const guestCelular = '+55' + reservaAcomod.guestCelular.replace(/[^0-9\.]+/g, '')
 
   const amountAnunciante = (reservaAcomod.valorNoitesTotal + reservaAcomod.limpezaFee) * 100
   const amountEscarpasTrip = reservaAcomod.serviceFeeTotal * 100
@@ -83,7 +88,7 @@ exports.pagarme_newReservaAcomod = functions.https.onCall((data, context) => {
           'type': 'cpf',
           'number': guestCPF
         }],
-        'phone_numbers': ['+5511999998888']
+        'phone_numbers': [ guestCelular ]
       },
       'billing': {
         'name': context.auth.token.name,
@@ -157,14 +162,11 @@ exports.airtable_newReservaAcomod = functions.firestore
     reservaAcomod.acomodID = Number(reservaAcomod.acomodID)
 
     /* Dates: converter para formato válido ao Airtable */
-    const yyyyStart = reservaAcomod.startDate.slice(6, 10)
-    const mmStart = reservaAcomod.startDate.slice(3, 5)
-    const ddStart = reservaAcomod.startDate.slice(0, 2)
-    reservaAcomod.startDate = yyyyStart + '-' + mmStart + '-' + ddStart
-    const yyyyEnd = reservaAcomod.endDate.slice(6, 10)
-    const mmEnd = reservaAcomod.endDate.slice(3, 5)
-    const ddEnd = reservaAcomod.endDate.slice(0, 2)
-    reservaAcomod.endDate = yyyyEnd + '-' + mmEnd + '-' + ddEnd
+    const checkIn = new Date(reservaAcomod.periodoReserva.start)
+    reservaAcomod.checkIn = dayjs(checkIn).format('YYYY-MM-DD')
+
+    const checkOut = new Date(reservaAcomod.periodoReserva.end)
+    reservaAcomod.checkOut = dayjs(checkOut).format('YYYY-MM-DD')
 
     /* Deletar valores não suportados ou desnecessários para o Airtable */
     delete reservaAcomod.periodoReserva
@@ -216,6 +218,9 @@ exports.email_reservaAcomodConfirmed = functions.firestore
       const docAcomod = await admin.firestore().collection('acomods').doc(reservaAcomod.acomodID).get()
       const acomod = docAcomod.data()
 
+      const checkIn = new Date(reservaAcomod.periodoReserva.start)
+      const checkOut = new Date(reservaAcomod.periodoReserva.end)
+
       /* Send Email */
       const request = Mailjet
       .post('send', {'version': 'v3.1'})
@@ -239,8 +244,8 @@ exports.email_reservaAcomodConfirmed = functions.firestore
             'address': acomod.address,
             'positionLAT': acomod.positionLAT,
             'positionLNG': acomod.positionLNG,
-            'startDate': reservaAcomod.startDate,
-            'endDate': reservaAcomod.endDate
+            'checkIn': dayjs(checkIn).format('ddd DD-MM-YYYY'),
+            'checkOut': dayjs(checkOut).format('ddd DD-MM-YYYY')
           }
         }]
       })

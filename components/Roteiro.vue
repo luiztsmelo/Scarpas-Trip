@@ -106,7 +106,7 @@ export default {
 
 .roteiro-home {
   width: 100%;
-  height: 11rem;
+  height: 12rem;
   background-image: url('../assets/img/bgimg.jpg');
   background-repeat: no-repeat;
   background-size: cover;

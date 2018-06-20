@@ -53,9 +53,9 @@
             </div>
             <div class="detalhes-reserva-data_item">
               <img src="../../assets/img/calendar.svg" class="__img" style="transform: scale(.86)">
-              <h3>{{ $store.state.reservaAcomod.startDate }}</h3>
+              <h3>{{ $store.state.reservaAcomod.checkIn }}</h3>
               <img src="../../assets/img/arrow-right.svg" class="__arrow-right-date">
-              <h3>{{ $store.state.reservaAcomod.endDate }}</h3>
+              <h3>{{ $store.state.reservaAcomod.checkOut }}</h3>
             </div>
           </div>
 

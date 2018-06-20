@@ -555,8 +555,6 @@ export default {
       if (this.$store.state.reservaAcomod.periodoReserva === null) {
         this.$nextTick(() => this.$refs.datePicker.$el.focus())
       } else {
-        this.$store.state.reservaAcomod.startDate = this.$store.state.reservaAcomod.periodoReserva.start.toLocaleDateString('pt-BR')
-        this.$store.state.reservaAcomod.endDate = this.$store.state.reservaAcomod.periodoReserva.end.toLocaleDateString('pt-BR')
         if (this.$store.state.user.email === null) {
           this.$store.state.isSignIn = false
           this.$store.state.clickedReservaAcomod = true

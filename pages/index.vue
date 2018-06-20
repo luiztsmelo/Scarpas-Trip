@@ -5,9 +5,7 @@
 
 
 
-
       <Roteiro/>
-
 
 
 
@@ -150,9 +148,7 @@ import Roteiro from '../components/Roteiro'
 import Footer from '../components/Footer'
 
 export default {
-  components: {
-    Roteiro, Footer
-  },
+  components: { Roteiro, Footer },
   head () {
     return {
       meta: [
@@ -185,16 +181,16 @@ export default {
     }
   },
   fetch ({ store }) {
-    return firebase.firestore().collection('eventos').onSnapshot(snapshot => {
+    firebase.firestore().collection('eventos').onSnapshot(snapshot => {
       store.commit('m_eventos', snapshot.docs.map(doc => doc.data()))
-    })
-    && firebase.firestore().collection('acomods').onSnapshot(snapshot => {
+    }),
+    firebase.firestore().collection('acomods').onSnapshot(snapshot => {
       store.commit('m_acomods', snapshot.docs.map(doc => doc.data()))
-    })
-    && firebase.firestore().collection('passeios').onSnapshot(snapshot => {
+    }),
+    firebase.firestore().collection('passeios').onSnapshot(snapshot => {
       store.commit('m_passeios', snapshot.docs.map(doc => doc.data()))
-    })
-    && firebase.firestore().collection('atracoes').onSnapshot(snapshot => {
+    }),
+    firebase.firestore().collection('atracoes').onSnapshot(snapshot => {
       store.commit('m_atracoes', snapshot.docs.map(doc => doc.data()))
     })
   },
