@@ -184,6 +184,65 @@
 
             </div>
 
+
+            <div class="flex" style="display:flex; justify-content:space-between">
+
+              <div class="item-form">
+                <label>CEP</label>
+                <masked-input
+                  :class="[ zipcodeError ? 'has-error' : '' ]"
+                  @blur="zipcodeInfo"
+                  type="tel"
+                  v-model="$store.state.reservaAcomod.billing.zipcode"
+                  :mask="[/\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/]"
+                  :guide="false"
+                  placeholder="_____-___">
+                </masked-input>
+              </div>
+
+              <div class="item-form">
+                <label>Endereço</label>
+                <input type="text" v-model="$store.state.reservaAcomod.billing.street">
+              </div>
+
+            </div>
+
+            <div class="flex" style="display:flex; justify-content:space-between">
+
+              <div class="item-form" style="margin:0">
+                <label>Número</label>
+                <masked-input
+                  :class="[ streetNumberError ? 'has-error' : '' ]"
+                  type="tel"
+                  v-model="$store.state.reservaAcomod.billing.street_number"
+                  :mask="[/\d/, /\d/, /\d/, /\d/]"
+                  :guide="false">
+                </masked-input>
+              </div>
+
+              <div class="item-form" style="margin:0">
+                <label>Bairro</label>
+                <input type="text" v-model="$store.state.reservaAcomod.billing.neighborhood">
+              </div>
+
+            </div>
+
+            <div class="flex" style="display:flex; justify-content:space-between">
+
+              <div class="item-form">
+                <label>Cidade</label>
+                <input type="text" v-model="$store.state.reservaAcomod.billing.city">
+              </div>
+
+              <div class="item-form">
+                <label>Estado</label>
+                <select v-model="$store.state.reservaAcomod.billing.state">
+                  <option v-for="state in states" :value="state.value">{{ state.name }}</option>
+                </select>
+              </div>
+
+            </div>
+
           </div>
           
 
@@ -283,12 +342,14 @@ require('firebase/firestore')
 import supportsWebP from 'supports-webp'
 import MaskedInput from 'vue-text-mask'
 import detalhesValor from '@/components/detalhesValor'
+import { states } from '../../../mixins/statesBrazil'
 import dayjs from 'dayjs'
 import 'dayjs/locale/pt-br'
 dayjs.locale('pt-br')
 
 export default {
   components: { MaskedInput, detalhesValor },
+  mixins: [states],
   head () {
     return {
       title: 'Reservar: ' + this.acomod.title
@@ -303,7 +364,8 @@ export default {
       cardExpirationDateError: false,
       cardCvvError: false,
       cpfError: false,
-      celularError: false
+      celularError: false,
+      zipcodeError: false
     }
   },
   methods: {
@@ -312,6 +374,25 @@ export default {
     },
     nextBtn2 () {
       this.$store.state.etapaReserva3ok = true, this.$store.commit('m_reservaAcomodDesktop2', false), this.$store.commit('m_reservaAcomodDesktop3', true)
+    },
+    zipcodeInfo () {
+      this.$store.commit('m_loader', true)
+      
+      const billing = this.$store.state.reservaAcomod.billing
+      const zipcode = billing.zipcode.replace(/[^0-9\.]+/g, '')
+
+      this.$axios.$get('https://api.pagar.me/1/zipcodes/' + zipcode)
+      .then(data => {
+        billing.state = data.state
+        billing.city = data.city
+        billing.neighborhood = data.neighborhood
+        billing.street = data.street
+        this.$store.commit('m_loader', false)
+      })
+      .catch(err => {
+        this.zipcodeError = true
+        this.$store.commit('m_loader', false)
+      })
     },
     concluirReserva () {
       this.$store.commit('m_loader', true)
@@ -406,6 +487,7 @@ export default {
     cardCVV () { return this.$store.state.creditCard.cardCVV },
     guestCPF () { return this.$store.state.reservaAcomod.guestCPF },
     guestCelular () { return this.$store.state.reservaAcomod.guestCelular },
+    zipcode () { return this.$store.state.reservaAcomod.billing.zipcode },
     acomod () {
       return this.$store.state.acomod
     },
@@ -453,7 +535,8 @@ export default {
     cardExpirationDate (value) { value !== '' ? this.cardExpirationDateError = false : '' },
     cardCVV (value) { value !== '' ? this.cardCvvError = false : '' },
     guestCPF (value) { value !== '' ? this.cpfError = false : '' },
-    guestCelular (value) { value !== '' ? this.celularError = false : '' }
+    guestCelular (value) { value !== '' ? this.celularError = false : '' },
+    zipcode (value) { value !== null ? this.zipcodeError = false : '' }
   },
   beforeRouteEnter (to, from, next) {
     next(vm => {
@@ -539,7 +622,7 @@ export default {
         }
       }
       & .payment {
-         margin-right: 29%;
+         margin-right: 28%;
         & .item-form {
           display: flex;
           flex-flow: column;
@@ -558,7 +641,7 @@ export default {
             font-weight: 400;
             background: white;
             color: var(--color01);
-            padding: .9rem 0 .9rem .7rem;
+            padding: .9rem .4rem .9rem .7rem;
             border: 1px solid rgb(222,222,222);
             outline: none;
             transition: .15s border ease;
@@ -572,7 +655,7 @@ export default {
             font-weight: 400;
             background: white;
             color: var(--color01);
-            padding: .9rem 0 .9rem .7rem;
+            padding: .9rem 1.35rem .9rem .7rem;
             border: 1px solid rgb(222,222,222);
             outline: none;
             transition: .15s border ease;

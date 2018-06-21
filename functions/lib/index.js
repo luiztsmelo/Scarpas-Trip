@@ -61,11 +61,14 @@ exports.pagarme_newReservaAcomod = functions.https.onCall((data, context) => {
     const cardCVV = creditCard.cardCVV;
     const guestCPF = reservaAcomod.guestCPF.replace(/[^0-9\.]+/g, '').replace(/\./g, '');
     const guestCelular = '+55' + reservaAcomod.guestCelular.replace(/[^0-9\.]+/g, '');
+    const zipcode = reservaAcomod.billing.zipcode.replace(/[^0-9\.]+/g, '');
     const amountAnunciante = (reservaAcomod.valorNoitesTotal + reservaAcomod.limpezaFee) * 100;
     const amountEscarpasTrip = reservaAcomod.serviceFeeTotal * 100;
     return pagarme.client.connect({ api_key: 'ak_test_E3I46o4e7guZDqwRnSY9sW8o8HrL9D' })
         .then(client => client.transactions.create({
         'amount': amountAnunciante + amountEscarpasTrip,
+        'capture': false,
+        'installments': '1',
         'payment_method': paymentMethod,
         'card_number': cardNumber,
         'card_cvv': cardCVV,
@@ -87,12 +90,12 @@ exports.pagarme_newReservaAcomod = functions.https.onCall((data, context) => {
             'name': context.auth.token.name,
             'address': {
                 'country': 'br',
-                'state': 'sp',
-                'city': 'Cotia',
-                'neighborhood': 'Rio Cotia',
-                'street': 'Rua Matrix',
-                'street_number': '9999',
-                'zipcode': '06714360'
+                'state': reservaAcomod.billing.state,
+                'city': reservaAcomod.billing.city,
+                'neighborhood': reservaAcomod.billing.neighborhood,
+                'street': reservaAcomod.billing.street,
+                'street_number': reservaAcomod.billing.street_number,
+                'zipcode': zipcode
             }
         },
         'items': [{
@@ -159,6 +162,7 @@ exports.airtable_newReservaAcomod = functions.firestore
     delete reservaAcomod.periodoReserva;
     delete reservaAcomod.mensagem;
     delete reservaAcomod.guestCPF;
+    delete reservaAcomod.billing;
     /* Criar reserva no Airtable */
     return base('Acomods').create(reservaAcomod);
 });
