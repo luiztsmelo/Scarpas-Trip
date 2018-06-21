@@ -244,8 +244,8 @@ exports.email_reservaAcomodConfirmed = functions.firestore
             'address': acomod.address,
             'positionLAT': acomod.positionLAT,
             'positionLNG': acomod.positionLNG,
-            'checkIn': dayjs(checkIn).format('ddd DD-MM-YYYY'),
-            'checkOut': dayjs(checkOut).format('ddd DD-MM-YYYY')
+            'checkIn': dayjs(checkIn).format('ddd, DD MMM YYYY'),
+            'checkOut': dayjs(checkOut).format('ddd, DD MMM YYYY')
           }
         }]
       })

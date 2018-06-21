@@ -1,7 +1,6 @@
 <template>
   <div class="reservar" v-if="$store.state.reservaAcomod.periodoReserva !== null">
     
-    <v-dialog style="z-index:10000"/>
 
 
     <!-- ******* HEADER PROGRESS ******* -->
@@ -207,45 +206,34 @@
 
         <h1 class="__acomod-title">{{ acomod.title }}</h1>
 
+
         <div class="detalhes-reserva-data">
+
           <div class="detalhes-reserva-data_item">
-            <img src="../../../assets/img/calendar.svg" class="__img" style="transform: scale(.9)">
-            <h3>{{ checkInFormatted }}&nbsp/&nbsp</h3>
-            <h3>{{ checkOutFormatted }}</h3>
+            <img src="../../../assets/img/calendar.svg" class="__img" style="transform: scale(.91)">
+            <h3>{{ checkIn }}&nbsp/&nbsp</h3>
+            <h3>{{ checkOut }}</h3>
           </div>
+
           <div class="detalhes-reserva-data_item">
             <img src="../../../assets/img/guests.svg" class="__img">
             <h3>{{ $store.state.reservaAcomod.totalHospedes == '1' ? $store.state.reservaAcomod.totalHospedes + ' hóspede' : $store.state.reservaAcomod.totalHospedes + ' hóspedes' }}</h3>
           </div>
+
         </div>
 
+
         <div class="detalhes-reserva-valor" v-if="$store.state.reservaAcomod.valorReservaTotal !== null">
-
-          <div class="detalhes-reserva-valor_item" style="padding-bottom: .5rem">
-            <h3>R${{ acomod.valorNoite.toLocaleString() }} x {{ $store.state.reservaAcomod.noites }} noites</h3>
-            <h3 id="valor">R${{ $store.state.reservaAcomod.valorNoitesTotal.toLocaleString() }}</h3>
-          </div>
-
-          <div class="detalhes-reserva-valor_item" style="padding-bottom: .5rem" v-if="acomod.limpezaFee !== 0">
-            <div style="display:flex;flex:row;align-items:center">
-              <h3>Taxa de limpeza</h3>
-              <img src="../../../assets/img/info.svg" style="width:.95rem;height:auto;margin-left:.3rem;cursor:pointer" @click="limpezaFeeDialog">
-            </div>
-            <h3>R${{ this.acomod.limpezaFee.toLocaleString() }}</h3>
-          </div>
-
-          <div class="detalhes-reserva-valor_item" style="padding-bottom: .8rem">
-            <div style="display:flex;flex:row;align-items:center">
-              <h3>Taxa de serviço</h3>
-              <img src="../../../assets/img/info.svg" style="width:.95rem;height:auto;margin-left:.3rem;cursor:pointer" @click="serviceFeeDialog">
-            </div>
-            <h3>R${{ $store.state.reservaAcomod.serviceFeeTotal.toLocaleString() }}</h3>
-          </div>
 
           <div class="detalhes-reserva-valor_item-total" style="padding-top: .8rem">
             <h3>Total</h3>
             <h3 class="__valor-total">R${{ $store.state.reservaAcomod.valorReservaTotal.toLocaleString() }}</h3>
           </div>
+
+          <span class="__ver-detalhes" @click="$modal.show('detalhes-valor-modal')">Ver detalhes</span>
+
+          <detalhes-valor/>
+
         </div>
 
       </div><!-- ******* Flex Right ******* -->
@@ -262,7 +250,7 @@
       <h1 class="__title">Pedido de reserva enviado</h1>
 
       <h3 class="__text">
-        {{ this.acomod.proprietario.split(' ')[0] }} irá analisar seu pedido e dentro de 48 horas você receberá um e-mail e SMS com a confirmação de sua reserva, juntamente com as informações de contato do anunciante.
+        {{ acomod.proprietario.split(' ')[0] }} irá analisar seu pedido e dentro de 48 horas você receberá um e-mail e SMS com a confirmação de sua reserva, juntamente com as informações de contato do anunciante.
       </h3>
 
       <h3 class="__subtitle">Código da Reserva</h3>
@@ -294,12 +282,13 @@ import 'firebase/functions'
 require('firebase/firestore')
 import supportsWebP from 'supports-webp'
 import MaskedInput from 'vue-text-mask'
+import detalhesValor from '@/components/detalhesValor'
 import dayjs from 'dayjs'
 import 'dayjs/locale/pt-br'
 dayjs.locale('pt-br')
 
 export default {
-  components: { MaskedInput },
+  components: { MaskedInput, detalhesValor },
   head () {
     return {
       title: 'Reservar: ' + this.acomod.title
@@ -408,20 +397,6 @@ export default {
       if (this.$store.state.etapaReserva3ok === true) {
         this.$store.commit('m_reservaAcomodDesktop1', false), this.$store.commit('m_reservaAcomodDesktop2', false), this.$store.commit('m_reservaAcomodDesktop3', true)
       }
-    },
-    limpezaFeeDialog () {
-      this.$modal.show('dialog', {
-        title: 'Taxa de Limpeza',
-        text: `Taxa cobrada pelo proprietário para arcar com os custos de limpeza ${this.tipoAcomodLimpeza}.`,
-        buttons: [{ title: 'OK' }]
-      })
-    },
-    serviceFeeDialog () {
-      this.$modal.show('dialog', {
-        title: 'Taxa de Serviço',
-        text: `Taxa de ${Math.round(this.$store.state.serviceFeeAcomod * 100)}% cobrada com o intuito de garantir suporte e total segurança em sua estadia caso algum problema aconteça.`,
-        buttons: [{ title: 'OK' }]
-      })
     }
   },
   computed: {
@@ -446,13 +421,13 @@ export default {
     imageH () {
       return supportsWebP ? this.acomod.images[0].HW : this.acomod.images[0].HJ
     },
-    checkInFormatted () {
+    checkIn () {
       const checkIn = new Date(this.$store.state.reservaAcomod.periodoReserva.start)
-      return dayjs(checkIn).format('ddd DD-MM-YYYY')
+      return dayjs(checkIn).format('ddd, DD MMM YYYY') 
     },
-    checkOutFormatted () {
+    checkOut () {
       const checkOut = new Date(this.$store.state.reservaAcomod.periodoReserva.end)
-      return dayjs(checkOut).format('ddd DD-MM-YYYY')
+      return dayjs(checkOut).format('ddd, DD MMM YYYY')
     },
     dayAfterCheckin () {
       const checkIn = new Date(this.$store.state.reservaAcomod.periodoReserva.start)
@@ -470,20 +445,7 @@ export default {
            : path === 'Fazenda' ? 'da Fazenda'
            : path === 'Hostel' ? 'do Hostel'
            : ''
-    },
-    tipoAcomodLimpeza () {
-      const path = this.acomod.tipoAcomod
-      return path === 'Casa' ? 'da casa' 
-           : path === 'Apartamento' ? 'do apartamento'
-           : path === 'Rancho' ? 'do rancho'
-           : path === 'Chácara' ? 'da chácara'
-           : path === 'Pousada' ? 'da pousada'
-           : path === 'Camping' ? 'do camping'
-           : path === 'Sítio' ? 'do sítio'
-           : path === 'Fazenda' ? 'da fazenda'
-           : path === 'Hostel' ? 'do hostel'
-           : ''
-    },
+    }
   },
   watch: {
     cardNumber (value) { value !== '' ? this.cardNumberError = false : '' },
@@ -531,7 +493,7 @@ export default {
       left: 2%;
       & .__brand-img {
         cursor: pointer;
-        width: 2.7rem;
+        width: 2.6rem;
         height: auto;
       }
     }
@@ -650,28 +612,28 @@ export default {
           align-items: center;
           padding: .3rem 0;
           & .__img {
-            margin-right: .7rem;
-            width: 1.65rem;
+            margin-right: .6rem;
+            width: 1.55rem;
             height: auto;
           }
         }
       }
       & .detalhes-reserva-valor {
-        padding: .8rem 0;
+        padding-bottom: .8rem;
         margin: 0 1.3rem;
-        & .detalhes-reserva-valor_item {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-        }
         & .detalhes-reserva-valor_item-total {
           display: flex;
           justify-content: space-between;
-          border-top: 1px solid rgb(222,222,222);
           & .__valor-total {
             font-size: 18px;
             font-weight: 600;
           }
+        }
+        & .__ver-detalhes {
+          cursor: pointer;
+          font-size: 14px;
+          font-weight: 600;
+          color: #00D8C7;
         }
       }
     }
