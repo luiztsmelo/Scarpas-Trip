@@ -92,27 +92,34 @@
 
             <h3 class="__subtitle">Você somente será cobrado após {{ acomod.proprietario.split(' ')[0] }} confirmar sua reserva. Para sua segurança, só liberaremos o pagamento para ele no dia seguinte de seu check-in, {{ dayAfterCheckin }}. Não se preocupe, seus dados estarão em total sigilo.</h3>
 
+
+            <!-- PAYMENT METHOD -->
             <div class="item-form">
               <label>Pagar com</label>
-              <select v-model="$store.state.creditCard.paymentMethod">
+              <select v-model="$store.state.reservaAcomod.paymentMethod">
                 <option selected :value="'credit_card'">Cartão de Crédito</option>
                 <option :value="'boleto'">Boleto</option>
               </select>
-            </div>
+            </div><!-- PAYMENT METHOD -->
 
+
+            <!-- NAME -->
             <div class="item-form">
-              <label>Nome impresso no Cartão</label>
+              <label>{{ $store.state.reservaAcomod.paymentMethod === 'credit_card' ? 'Nome impresso no Cartão' : 'Nome Completo'}}</label>
               <input
-                :class="[ cardHolderNameError ? 'has-error' : '' ]"
+                :class="[ cardHolderNameError || guestNameError ? 'has-error' : '' ]"
                 type="text" pattern="[A-Za-z]"
-                v-model="$store.state.creditCard.cardHolderName"
-              >
-            </div>
+                v-model="$store.state.reservaAcomod.paymentMethod === 'credit_card' ? $store.state.creditCard.cardHolderName : $store.state.reservaAcomod.guestName">
+            </div><!-- NAME -->
 
-            <div class="card-info">
+
+            <!-- Credit Card -->
+            <div class="credit-card" v-show="$store.state.reservaAcomod.paymentMethod === 'credit_card'">
+
               <div class="item-form">
                 <label>Dados do Cartão</label>
 
+                <!-- CARD NUMBER -->
                 <masked-input
                   :class="[ cardNumberError ? 'has-error' : '' ]"
                   style="border-bottom:none"
@@ -124,8 +131,10 @@
                   @focus="$refs.cardNumberInput.$el.placeholder = '0000 0000 0000 0000'"
                   @blur="$refs.cardNumberInput.$el.placeholder = 'Número do Cartão'"
                   placeholder="Número do Cartão">
-                </masked-input>
+                </masked-input><!-- CARD NUMBER -->
 
+
+                <!-- CARD EXPIRATION -->
                 <div class="flex" style="display:flex">
                   <masked-input
                     :class="[ cardExpirationDateError ? 'has-error' : '' ]"
@@ -138,8 +147,10 @@
                     @focus="$refs.validadeInput.$el.placeholder = 'MM / AA'"
                     @blur="$refs.validadeInput.$el.placeholder = 'Validade'"
                     placeholder="Validade">
-                  </masked-input>
+                  </masked-input><!-- CARD EXPIRATION -->
 
+
+                  <!-- CVV -->
                   <masked-input
                     :class="[ cardCvvError ? 'has-error' : '' ]"
                     ref="cvvInput"
@@ -150,98 +161,131 @@
                     @focus="$refs.cvvInput.$el.placeholder = ''"
                     @blur="$refs.cvvInput.$el.placeholder = 'CVV'"
                     placeholder="CVV">
-                  </masked-input>
+                  </masked-input><!-- CVV -->
+
                 </div>
 
               </div>
-            </div>
+            </div><!-- Credit Card -->
 
-            <div class="flex" style="display:flex; justify-content:space-between">
 
-              <div class="item-form" style="margin:0">
-                <label>CPF</label>
-                <masked-input
-                  :class="[ cpfError ? 'has-error' : '' ]"
-                  type="tel"
-                  v-model="$store.state.reservaAcomod.guestCPF"
-                  :mask="[/\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '-', /\d/, /\d/]"
-                  :guide="false"
-                  placeholder="___.___.___-__">
-                </masked-input>
+            <!-- Customer -->
+            <div class="customer">
+
+              <div class="flex" style="display:flex; justify-content:space-between">
+
+                <!-- CPF -->
+                <div class="item-form" style="margin:0">
+                  <label>CPF</label>
+                  <masked-input
+                    :class="[ cpfError ? 'has-error' : '' ]"
+                    type="tel"
+                    v-model="$store.state.reservaAcomod.guestCPF"
+                    :mask="[/\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '-', /\d/, /\d/]"
+                    :guide="false"
+                    placeholder="___.___.___-__">
+                  </masked-input>
+                </div><!-- CPF -->
+
+
+                <!-- CELULAR -->
+                <div class="item-form" style="margin:0">
+                  <label>Celular</label>
+                  <masked-input
+                    :class="[ celularError ? 'has-error' : '' ]"
+                    type="tel"
+                    v-model="$store.state.reservaAcomod.guestCelular"
+                    :mask="['(', /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]"
+                    :guide="false"
+                    placeholder="(  )          ">
+                  </masked-input>
+                </div><!-- CELULAR -->
+
               </div>
 
-              <div class="item-form" style="margin:0">
-                <label>Celular</label>
-                <masked-input
-                  :class="[ celularError ? 'has-error' : '' ]"
-                  type="tel"
-                  v-model="$store.state.reservaAcomod.guestCelular"
-                  :mask="['(', /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]"
-                  :guide="false"
-                  placeholder="(  )          ">
-                </masked-input>
+            </div><!-- Customer -->
+            
+            <!-- Billing -->
+            <div class="billing" v-show="$store.state.reservaAcomod.paymentMethod === 'credit_card'">
+
+              <div class="flex" style="display:flex; justify-content:space-between">
+                
+                <!-- CEP -->
+                <div class="item-form">
+                  <label>CEP</label>
+                  <masked-input
+                    :class="[ zipcodeError ? 'has-error' : '' ]"
+                    @blur="zipcodeInfo"
+                    type="tel"
+                    v-model="$store.state.reservaAcomod.billing.zipcode"
+                    :mask="[/\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/]"
+                    :guide="false"
+                    placeholder="_____-___">
+                  </masked-input>
+                </div><!-- CEP -->
+
+
+                <!-- ENDEREÇO -->
+                <div class="item-form">
+                  <label>Endereço</label>
+                  <input
+                    :class="[ streetError ? 'has-error' : '' ]"
+                    type="text" 
+                    v-model="$store.state.reservaAcomod.billing.street">
+                </div><!-- ENDEREÇO -->
+
               </div>
 
-            </div>
+              
+              <div class="flex" style="display:flex; justify-content:space-between">
+
+                <!-- NÚMERO -->
+                <div class="item-form" style="margin:0">
+                  <label>Número</label>
+                  <masked-input
+                    :class="[ streetNumberError ? 'has-error' : '' ]"
+                    type="tel"
+                    v-model="$store.state.reservaAcomod.billing.street_number"
+                    :mask="[/\d/, /\d/, /\d/, /\d/]"
+                    :guide="false">
+                  </masked-input>
+                </div><!-- NÚMERO -->
 
 
-            <div class="flex" style="display:flex; justify-content:space-between">
+                <!-- BAIRRO -->
+                <div class="item-form" style="margin:0">
+                  <label>Bairro</label>
+                  <input
+                    :class="[ neighborhoodError ? 'has-error' : '' ]"
+                    type="text" 
+                    v-model="$store.state.reservaAcomod.billing.neighborhood">
+                </div><!-- BAIRRO -->
 
-              <div class="item-form">
-                <label>CEP</label>
-                <masked-input
-                  :class="[ zipcodeError ? 'has-error' : '' ]"
-                  @blur="zipcodeInfo"
-                  type="tel"
-                  v-model="$store.state.reservaAcomod.billing.zipcode"
-                  :mask="[/\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/]"
-                  :guide="false"
-                  placeholder="_____-___">
-                </masked-input>
               </div>
 
-              <div class="item-form">
-                <label>Endereço</label>
-                <input type="text" v-model="$store.state.reservaAcomod.billing.street">
+              <div class="flex" style="display:flex; justify-content:space-between">
+
+                <!-- CIDADE -->
+                <div class="item-form">
+                  <label>Cidade</label>
+                  <input
+                    :class="[ cityError ? 'has-error' : '' ]"
+                    type="text" 
+                    v-model="$store.state.reservaAcomod.billing.city">
+                </div><!-- CIDADE -->
+
+
+                <!-- ESTADO -->
+                <div class="item-form">
+                  <label>Estado</label>
+                  <select :class="[ stateError ? 'has-error' : '' ]" v-model="$store.state.reservaAcomod.billing.state">
+                    <option v-for="state in states" :value="state.value">{{ state.name }}</option>
+                  </select>
+                </div><!-- ESTADO -->
+
               </div>
 
-            </div>
-
-            <div class="flex" style="display:flex; justify-content:space-between">
-
-              <div class="item-form" style="margin:0">
-                <label>Número</label>
-                <masked-input
-                  :class="[ streetNumberError ? 'has-error' : '' ]"
-                  type="tel"
-                  v-model="$store.state.reservaAcomod.billing.street_number"
-                  :mask="[/\d/, /\d/, /\d/, /\d/]"
-                  :guide="false">
-                </masked-input>
-              </div>
-
-              <div class="item-form" style="margin:0">
-                <label>Bairro</label>
-                <input type="text" v-model="$store.state.reservaAcomod.billing.neighborhood">
-              </div>
-
-            </div>
-
-            <div class="flex" style="display:flex; justify-content:space-between">
-
-              <div class="item-form">
-                <label>Cidade</label>
-                <input type="text" v-model="$store.state.reservaAcomod.billing.city">
-              </div>
-
-              <div class="item-form">
-                <label>Estado</label>
-                <select v-model="$store.state.reservaAcomod.billing.state">
-                  <option v-for="state in states" :value="state.value">{{ state.name }}</option>
-                </select>
-              </div>
-
-            </div>
+            </div><!-- Billing -->
 
           </div>
           
@@ -363,9 +407,15 @@ export default {
       cardHolderNameError: false,
       cardExpirationDateError: false,
       cardCvvError: false,
+      guestNameError: false,
       cpfError: false,
       celularError: false,
-      zipcodeError: false
+      zipcodeError: false,
+      streetError: false,
+      streetNumberError: false,
+      neighborhoodError: false,
+      cityError: false,
+      stateError: false
     }
   },
   methods: {
@@ -403,61 +453,120 @@ export default {
 
       reservaAcomod.requested = new Date().getTime()
       reservaAcomod.acomodID = this.acomod.acomodID
+      reservaAcomod.status = 'pending'
+
       reservaAcomod.hostID = this.acomod.userID
       reservaAcomod.hostEmail = this.acomod.email
       reservaAcomod.hostName = this.acomod.proprietario
       reservaAcomod.hostCelular = this.acomod.celular
+
       reservaAcomod.guestID = user.userID
       reservaAcomod.guestEmail = user.email
-      reservaAcomod.guestName = user.fullName
+      
       reservaAcomod.limpezaFee = this.acomod.limpezaFee
 
-      /* Se todos os dados foram preenchidos corretamente: */
-      if (creditCard.cardNumber.length === 19 && creditCard.cardHolderName !== '' && creditCard.cardExpirationDate.length === 5 && creditCard.cardCVV.length >= 3 && reservaAcomod.guestCPF.length === 14 && reservaAcomod.guestCelular.length === 15) {
-        
-        /* Transaction pagarme */
-        firebase.functions().httpsCallable('pagarme_newReservaAcomod')({
-          reservaAcomod: reservaAcomod,
-          creditCard: creditCard,
-          acomod: this.acomod
-        })
-        .then(result => {
-          console.log(result.data)
-          const reservaID = result.data.reservaID
-          reservaAcomod.reservaID = reservaID
 
-          /* Set reservaAcomod */
-          firebase.firestore().collection('reservasAcomods').doc(reservaID).set(reservaAcomod)
-          .then(() => {
-            this.$store.commit('m_loader', false)
-            this.scrollTop()
-            this.$store.state.concludedReservaAcomod = true
-            this.$store.commit('m_resetCreditCard')
+      /* ******************** CREDIT CARD ******************** */
+      if (reservaAcomod.paymentMethod === 'credit_card') {
+        
+        /* Checar se todos os dados foram preenchidos */
+        if (creditCard.cardNumber.length === 19 && creditCard.cardHolderName !== '' && creditCard.cardExpirationDate.length === 5 && creditCard.cardCVV.length >= 3 && reservaAcomod.guestCPF.length === 14 && reservaAcomod.guestCelular.length === 15) {
+          
+          /* TRANSACTION PAGARME */
+          firebase.functions().httpsCallable('pagarme_newReservaAcomod')({
+            reservaAcomod: reservaAcomod,
+            creditCard: creditCard,
+            acomod: this.acomod
           })
-          .catch(err => {
-            console.log(err)
-            this.$store.commit('m_loader', false)
+          .then(result => {
+            console.log(result.data)
+            const reservaID = result.data.reservaID
+            reservaAcomod.reservaID = reservaID
+
+            /* SET RESERVA FIRESTORE */
+            firebase.firestore().collection('reservasAcomods').doc(reservaID).set(reservaAcomod)
+            .then(() => {
+              this.$store.commit('m_loader', false)
+              this.scrollTop()
+              this.$store.state.concludedReservaAcomod = true
+              this.$store.commit('m_resetCreditCard')
+            })
+            .catch(err => {
+              console.log(err)
+              this.$store.commit('m_loader', false)
+            })
+
           })
-        })
-        .catch(err => { /* Transaction error */
+          .catch(err => { /* Transaction error */
+            this.$store.commit('m_loader', false)
+            console.log(err.code)
+            console.log(err.message)
+            console.log(err.details)
+            err.details === 'card_number' ? this.cardNumberError = true : this.cardNumberError = false
+            err.details === 'card_holder_name' ? this.cardHolderNameError = true : this.cardHolderNameError = false
+            err.details === 'card_expiration_date' ? this.cardExpirationDateError = true : this.cardExpirationDateError = false
+            err.details === 'card_cvv' ? this.cardCvvError = true : this.cardCvvError = false
+            err.details === 'customer' ? this.cpfError = true : this.cpfError = false
+          })
+
+        } else { /* Há dados incompletos */
           this.$store.commit('m_loader', false)
-          console.log(err.code)
-          console.log(err.message)
-          console.log(err.details)
-          err.details === 'card_number' ? this.cardNumberError = true : this.cardNumberError = false
-          err.details === 'card_holder_name' ? this.cardHolderNameError = true : this.cardHolderNameError = false
-          err.details === 'card_expiration_date' ? this.cardExpirationDateError = true : this.cardExpirationDateError = false
-          err.details === 'card_cvv' ? this.cardCvvError = true : this.cardCvvError = false
-          err.details === 'customer' ? this.cpfError = true : this.cpfError = false
-        })
-      } else {
-        this.$store.commit('m_loader', false)
-        creditCard.cardNumber.length < 19 ? this.cardNumberError = true : this.cardNumberError = false
-        creditCard.cardHolderName.length < 3 ? this.cardHolderNameError = true : this.cardHolderNameError = false
-        creditCard.cardExpirationDate.length < 5 ?  this.cardExpirationDateError = true :  this.cardExpirationDateError = false
-        creditCard.cardCVV.length < 3 ? this.cardCvvError = true : this.cardCvvError = false
-        reservaAcomod.guestCPF.length < 14 ? this.cpfError = true : this.cpfError = false
-        reservaAcomod.guestCelular.length < 15 ? this.celularError = true : this.celularError = false
+          creditCard.cardNumber.length < 19 ? this.cardNumberError = true : this.cardNumberError = false
+          creditCard.cardHolderName.length < 3 ? this.cardHolderNameError = true : this.cardHolderNameError = false
+          creditCard.cardExpirationDate.length < 5 ?  this.cardExpirationDateError = true :  this.cardExpirationDateError = false
+          creditCard.cardCVV.length < 3 ? this.cardCvvError = true : this.cardCvvError = false
+          reservaAcomod.guestCPF.length < 14 ? this.cpfError = true : this.cpfError = false
+          reservaAcomod.guestCelular.length < 15 ? this.celularError = true : this.celularError = false
+          reservaAcomod.billing.zipcode.length < 9 ? this.zipcodeError = true : this.zipcodeError = false
+          reservaAcomod.billing.street === '' ? this.streetError = true : this.streetError = false
+          reservaAcomod.billing.street_number === '' ? this.streetNumberError = true : this.streetNumberError = false
+          reservaAcomod.billing.neighborhood === '' ? this.neighborhoodError = true : this.neighborhoodError = false
+          reservaAcomod.billing.city === '' ? this.cityError = true : this.cityError = false
+          reservaAcomod.billing.state === '' ? this.stateError = true : this.stateError = false
+        }
+
+      } else { /* ******************** BOLETO ******************** */
+
+        /* Checar se todos os dados foram preenchidos */
+        if (reservaAcomod.guestName !== '' && reservaAcomod.guestCPF.length === 14 && reservaAcomod.guestCelular.length === 15) {
+
+          /* TRANSACTION PAGARME */
+          firebase.functions().httpsCallable('pagarme_newReservaAcomod')({
+            reservaAcomod: reservaAcomod,
+            acomod: this.acomod
+          })
+          .then(result => {
+            console.log(result.data)
+            const reservaID = result.data.reservaID
+            reservaAcomod.reservaID = reservaID
+
+            /* SET RESERVA FIRESTORE */
+            firebase.firestore().collection('reservasAcomods').doc(reservaID).set(reservaAcomod)
+            .then(() => {
+              this.$store.commit('m_loader', false)
+              this.scrollTop()
+              this.$store.state.concludedReservaAcomod = true
+            })
+            .catch(err => {
+              console.log(err)
+              this.$store.commit('m_loader', false)
+            })
+
+          })
+          .catch(err => { /* Transaction error */
+            this.$store.commit('m_loader', false)
+            console.log(err.code)
+            console.log(err.message)
+            console.log(err.details)
+            err.details === 'customer' ? this.cpfError = true : this.cpfError = false
+          })
+
+        } else { /* Há dados incompletos */
+          this.$store.commit('m_loader', false)
+          reservaAcomod.guestName === '' ? this.guestNameError = true : this.guestNameError = false
+          reservaAcomod.guestCPF.length < 14 ? this.cpfError = true : this.cpfError = false
+          reservaAcomod.guestCelular.length < 15 ? this.celularError = true : this.celularError = false
+        }
       }
     },
     scrollTop () {
@@ -481,16 +590,23 @@ export default {
     }
   },
   computed: {
+    /* ******************** PATHS ******************** */
+    acomod () { return this.$store.state.acomod },
     cardNumber () { return this.$store.state.creditCard.cardNumber },
     cardHolderName () { return this.$store.state.creditCard.cardHolderName },
     cardExpirationDate () { return this.$store.state.creditCard.cardExpirationDate },
     cardCVV () { return this.$store.state.creditCard.cardCVV },
+    guestName () { return this.$store.state.reservaAcomod.guestName },
     guestCPF () { return this.$store.state.reservaAcomod.guestCPF },
     guestCelular () { return this.$store.state.reservaAcomod.guestCelular },
     zipcode () { return this.$store.state.reservaAcomod.billing.zipcode },
-    acomod () {
-      return this.$store.state.acomod
-    },
+    street () { return this.$store.state.reservaAcomod.billing.street },
+    streetNumber () { return this.$store.state.reservaAcomod.billing.street_number },
+    neighborhood () { return this.$store.state.reservaAcomod.billing.neighborhood },
+    city () { return this.$store.state.reservaAcomod.billing.city },
+    state () { return this.$store.state.reservaAcomod.billing.state },
+
+    /* ******************** PROGRESS ******************** */
     etapaProgressed1 () {
       return this.$store.state.etapaReserva1ok === true ? 'font-weight: 600' : 'cursor: default'
     },
@@ -500,9 +616,13 @@ export default {
     etapaProgressed3 () {
       return this.$store.state.etapaReserva3ok === true ? 'font-weight: 600' : 'cursor: default'
     },
+
+    /* ******************** IMAGES ******************** */
     imageH () {
       return supportsWebP ? this.acomod.images[0].HW : this.acomod.images[0].HJ
     },
+
+    /* ******************** DATES ******************** */
     checkIn () {
       const checkIn = new Date(this.$store.state.reservaAcomod.periodoReserva.start)
       return dayjs(checkIn).format('ddd, DD MMM YYYY') 
@@ -515,6 +635,8 @@ export default {
       const checkIn = new Date(this.$store.state.reservaAcomod.periodoReserva.start)
       return dayjs(checkIn).add(1, 'day').format('DD/MM')
     },
+
+    /* ******************** FORMATTINGS ******************** */
     tipoAcomodTitle () {
       const path = this.acomod.tipoAcomod
       return path === 'Casa' ? 'da Casa' 
@@ -534,9 +656,15 @@ export default {
     cardHolderName (value) { value !== '' ? this.cardHolderNameError = false : '' },
     cardExpirationDate (value) { value !== '' ? this.cardExpirationDateError = false : '' },
     cardCVV (value) { value !== '' ? this.cardCvvError = false : '' },
+    guestName (value) { value !== '' ? this.guestNameError = false : '' },
     guestCPF (value) { value !== '' ? this.cpfError = false : '' },
     guestCelular (value) { value !== '' ? this.celularError = false : '' },
-    zipcode (value) { value !== null ? this.zipcodeError = false : '' }
+    zipcode (value) { value !== '' ? this.zipcodeError = false : '' },
+    street (value) { value !== '' ? this.streetError = false : '' },
+    streetNumber (value) { value !== '' ? this.streetNumberError = false : '' },
+    neighborhood (value) { value !== '' ? this.neighborhoodError = false : '' },
+    city (value) { value !== '' ? this.cityError = false : '' },
+    state (value) { value !== '' ? this.stateError = false : '' }
   },
   beforeRouteEnter (to, from, next) {
     next(vm => {
@@ -612,7 +740,6 @@ export default {
       }
       & .__subtitle {
         padding-top: 2rem;
-        font-size: 17px;
       }
       & .etapa-1-item {
         padding-top: 2rem;
@@ -637,11 +764,10 @@ export default {
             cursor: text;
             position: relative;
             width: 100%;
-            font-size: 17px;
             font-weight: 400;
             background: white;
             color: var(--color01);
-            padding: .9rem .4rem .9rem .7rem;
+            padding: .85rem .4rem .85rem .7rem;
             border: 1px solid rgb(222,222,222);
             outline: none;
             transition: .15s border ease;
@@ -651,11 +777,10 @@ export default {
           }
           & select {
             width: 100%;
-            font-size: 17px;
             font-weight: 400;
             background: white;
             color: var(--color01);
-            padding: .9rem 1.35rem .9rem .7rem;
+            padding: .85rem 1.85rem .85rem .7rem;
             border: 1px solid rgb(222,222,222);
             outline: none;
             transition: .15s border ease;
@@ -679,7 +804,7 @@ export default {
       & .__acomod-title {
         margin: 0 1.3rem;
         padding: 1.2rem 0;
-        font-size: 19px;
+        font-size: 18px;
         font-weight: 600;
         border-bottom: 1px solid rgb(222,222,222);
         white-space: nowrap;
@@ -708,14 +833,14 @@ export default {
           display: flex;
           justify-content: space-between;
           & .__valor-total {
-            font-size: 18px;
+            font-size: 17px;
             font-weight: 600;
           }
         }
         & .__ver-detalhes {
           cursor: pointer;
           font-size: 14px;
-          font-weight: 600;
+          font-weight: 500;
           color: #00D8C7;
         }
       }
@@ -738,12 +863,11 @@ export default {
     & .__subtitle {
       padding-top: 2rem;
       text-align: center;
-      font-size: 18px;
+      font-size: 17px;
       font-weight: 600;
     }
     & .__text {
       text-align: center;
-      font-size: 17px;
     }
   }
 }

@@ -2,7 +2,7 @@
   <modal
     name="detalhes-valor-modal"
     class="detalhes-valor"
-    width="29%"
+    width="24%"
     height="auto">
 
 
@@ -27,7 +27,7 @@
       <div class="item" v-if="acomod.limpezaFee !== 0">
         <div style="display:flex;flex:row;align-items:center">
           <h3>Taxa de limpeza</h3>
-          <img src="../assets/img/info.svg" style="width:.95rem;height:auto;margin-left:.3rem;cursor:pointer" @click="limpezaFeeDialog">
+          <img src="../assets/img/info.svg" style="width:.9rem;height:auto;margin-left:.3rem;cursor:pointer" @click="limpezaFeeDialog">
         </div>
         <h3>R${{ acomod.limpezaFee.toLocaleString() }}</h3>
       </div>
@@ -35,7 +35,7 @@
       <div class="item" style="padding-bottom: .8rem">
         <div style="display:flex;flex:row;align-items:center">
           <h3>Taxa de serviço</h3>
-          <img src="../assets/img/info.svg" style="width:.95rem;height:auto;margin-left:.3rem;cursor:pointer" @click="serviceFeeDialog">
+          <img src="../assets/img/info.svg" style="width:.9rem;height:auto;margin-left:.3rem;cursor:pointer" @click="serviceFeeDialog">
         </div>
         <h3>R${{ reservaAcomod.serviceFeeTotal.toLocaleString() }}</h3>
       </div>
@@ -97,7 +97,7 @@ export default {
     margin: 2rem 1.6rem 1.2rem;
     & .__title {
       padding: .5rem 0 2rem 0;
-      font-size: 19px;
+      font-size: 18px;
       font-weight: 600;
     }
     & .item {
@@ -107,10 +107,6 @@ export default {
       padding-bottom: .5rem
     }
   }
-}
-
-h3 {
-  font-size: 17px;
 }
 
 </style>

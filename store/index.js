@@ -80,7 +80,6 @@ const store = () => new Vuex.Store({
     acomodPlace: null,
     imageCountAc: 0,
     creditCard: {
-      paymentMethod: 'credit_card',
       cardNumber: '',
       cardHolderName: '',
       cardExpirationDate: '',
@@ -139,10 +138,9 @@ const store = () => new Vuex.Store({
     reservaAcomod: {/* Atualizar Action */
       reservaID: null,
       acomodID: null,
+      paymentMethod: 'credit_card',
       requested: null,
-      confirmed: false,
-      rejected: false,
-      canceled: false,
+      status: '',
       totalHospedes: 1,
       periodoReserva: null,
       noites: null,
@@ -161,12 +159,12 @@ const store = () => new Vuex.Store({
       guestCPF: null,
       guestCelular: null,
       billing: {
-        state: null,
-        city: null,
-        neighborhood: null,
-        street: null,
-        street_number: null,
-        zipcode: null
+        zipcode: '',
+        street: '',
+        street_number: '',
+        neighborhood: '',
+        city: '',
+        state: ''
       }
     },
     clickedReservaAcomod: false,
@@ -400,7 +398,6 @@ const store = () => new Vuex.Store({
       state.reservaAcomod.valorReservaTotal = payload
     },
     m_resetCreditCard (state) {
-      state.creditCard.paymentMethod = 'credit_card'
       state.creditCard.cardNumber = ''
       state.creditCard.cardHolderName = ''
       state.creditCard.cardExpirationDate = ''
@@ -781,10 +778,9 @@ const store = () => new Vuex.Store({
       state.reservaAcomod = {
         reservaID: null,
         acomodID: null,
+        paymentMethod: 'credit_card',
         requested: null,
-        confirmed: false,
-        rejected: false,
-        canceled: false,
+        status: '',
         totalHospedes: 1,
         periodoReserva: null,
         noites: null,
@@ -803,12 +799,12 @@ const store = () => new Vuex.Store({
         guestCPF: null,
         guestCelular: null,
         billing: {
-          state: null,
-          city: null,
-          neighborhood: null,
-          street: null,
-          street_number: null,
-          zipcode: null
+          zipcode: '',
+          street: '',
+          street_number: '',
+          neighborhood: '',
+          city: '',
+          state: ''
         }
       }
       state.reservaAcomodDesktop1 = true

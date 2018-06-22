@@ -561,6 +561,7 @@ export default {
           this.$modal.show('sign-in-modal')
         } else {
           this.$store.state.creditCard.cardHolderName = this.$store.state.user.fullName
+          this.$store.state.reservaAcomod.guestName = this.$store.state.user.fullName
           this.$store.commit('m_isReservar', true)
           this.$router.push('/acomodacoes/reservar')
           this.$store.commit('m_showNavbar', false)
