@@ -1022,9 +1022,7 @@ export default {
             & input {
               cursor: pointer;
               width: 100%;
-              font-size: 16px;
-              font-weight: 400;
-              padding: .6rem;
+              padding: .8rem .6rem;
               color: #8B8B8C;
               border: 1px solid rgb(222,222,222);
               outline: none;
@@ -1037,10 +1035,7 @@ export default {
             & select {
               cursor: pointer;
               width: 100%;
-              font-size: 16px;
-              font-weight: 400;
-              padding: 0 .6rem;
-              height: 2.7rem;
+              padding: .8rem .6rem;
               color: #8D8D8D;
               border: 1px solid rgb(222,222,222);
               outline: none;
@@ -1055,7 +1050,6 @@ export default {
               border: 1px solid rgb(72,72,72) !important;
             }
             & .reserva-input-date {
-              height: 2.7rem;
               padding-left: .9rem;
               color: #8D8D8D;
               font-size: 16px;
