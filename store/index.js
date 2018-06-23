@@ -32,6 +32,22 @@ const store = () => new Vuex.Store({
     heightImageBox: null,
     googleMapsInitialized: false,
     fromWithoutAddress: false,
+    bankAccount: {
+      bankCode: '',
+      type: 'conta_corrente',
+      agencia: '',
+      agenciaDV: '',
+      conta: '',
+      contaDV: '',
+      legalName: '',
+      docNumber: ''
+    },
+    creditCard: {
+      cardNumber: '',
+      cardHolderName: '',
+      cardExpirationDate: '',
+      cardCVV: ''
+    },
     /*
     -------------------- ERRORS --------------------
     */
@@ -79,23 +95,7 @@ const store = () => new Vuex.Store({
     acomodProgressBar: 0,
     acomodPlace: null,
     imageCountAc: 0,
-    creditCard: {
-      cardNumber: '',
-      cardHolderName: '',
-      cardExpirationDate: '',
-      cardCVV: ''
-    },
-    bankAccount: {
-      bankCode: '',
-      type: 'conta_corrente',
-      agencia: '',
-      agenciaDV: '',
-      conta: '',
-      contaDV: '',
-      legalName: '',
-      docNumber: ''
-    },
-    acomodData: {/* Atualizar a action */
+    acomodData: {/* Atualizar action */
       acomodID: null,
       userID: null,
       recipientID: null,
@@ -140,7 +140,7 @@ const store = () => new Vuex.Store({
       acomodID: null,
       paymentMethod: 'credit_card',
       requested: null,
-      status: '',
+      status: 'pending',
       totalHospedes: 1,
       periodoReserva: null,
       noites: null,
@@ -780,7 +780,7 @@ const store = () => new Vuex.Store({
         acomodID: null,
         paymentMethod: 'credit_card',
         requested: null,
-        status: '',
+        status: 'pending',
         totalHospedes: 1,
         periodoReserva: null,
         noites: null,

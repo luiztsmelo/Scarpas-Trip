@@ -113,7 +113,7 @@
             </div><!-- NAME -->
 
 
-            <!-- Credit Card -->
+            <!-- ************** CREDIT CARD ************** -->
             <div class="credit-card" v-show="$store.state.reservaAcomod.paymentMethod === 'credit_card'">
 
               <div class="item-form">
@@ -166,10 +166,11 @@
                 </div>
 
               </div>
-            </div><!-- Credit Card -->
+            </div><!-- ************** CREDIT CARD ************** -->
 
 
-            <!-- Customer -->
+
+            <!-- ************** CUSTOMER ************** -->
             <div class="customer">
 
               <div class="flex" style="display:flex; justify-content:space-between">
@@ -203,9 +204,11 @@
 
               </div>
 
-            </div><!-- Customer -->
+            </div><!-- ************** CUSTOMER ************** -->
+
+
             
-            <!-- Billing -->
+            <!-- ************** BILLING ************** -->
             <div class="billing" v-show="$store.state.reservaAcomod.paymentMethod === 'credit_card'">
 
               <div class="flex" style="display:flex; justify-content:space-between">
@@ -285,18 +288,20 @@
 
               </div>
 
-            </div><!-- Billing -->
+            </div><!-- ************** BILLING ************** -->
 
-          </div>
+
+          </div><!-- Payment -->
           
 
           <button class="__next-btn" type="button" @click="concluirReserva">Confirmar Reserva</button>
 
+
         </div><!-- ******* ETAPA 3 ******* -->
         
 
-
       </div><!-- ******* Flex Left ******* -->
+
 
 
 
@@ -453,7 +458,6 @@ export default {
 
       reservaAcomod.requested = new Date().getTime()
       reservaAcomod.acomodID = this.acomod.acomodID
-      reservaAcomod.status = 'pending'
 
       reservaAcomod.hostID = this.acomod.userID
       reservaAcomod.hostEmail = this.acomod.email
@@ -462,7 +466,7 @@ export default {
 
       reservaAcomod.guestID = user.userID
       reservaAcomod.guestEmail = user.email
-      
+
       reservaAcomod.limpezaFee = this.acomod.limpezaFee
 
 

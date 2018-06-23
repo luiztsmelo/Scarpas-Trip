@@ -88,7 +88,7 @@
           <div class="__item-caracteristica">
             <img class="__img-caracteristica" src="../../assets/img/garagem.svg" style="transform: scale(1.01)">
             <h3>
-              {{ acomod.totalGaragem }} {{ acomod.totalGaragem == '1' ? 'vaga' : 'vagas' }} na garagem
+              {{ acomod.totalGaragem }} {{ acomod.totalGaragem == '1' ? 'vaga' : 'vagas' }} garagem
             </h3>
           </div>
 
