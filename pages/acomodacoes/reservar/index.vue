@@ -42,7 +42,7 @@
 
           <div class="etapa-1-item">
             <h3 class="__subtitle">Horário para Check-in:</h3>
-            <h3>{{ 'Entre ' + acomod.checkinFrom + ' e ' + acomod.checkinTo }}</h3>
+            <!-- <h3>{{ 'Entre ' + acomod.checkinFrom + ' e ' + acomod.checkinTo }}</h3> MUDAR ISSO AQUI-->
           </div>
         
 
@@ -856,18 +856,18 @@ export default {
     flex-flow: column;
     align-items: center;
     & .__img {
-      width: 4.8rem;
+      width: 4.6rem;
       height: auto;
     }
     & .__title {
       text-align: center;
       font-size: 37px;
-      padding: 1.2rem 0 .7rem 0;
+      padding: 1.1rem 0 .7rem 0;
     }
     & .__subtitle {
       padding-top: 2rem;
       text-align: center;
-      font-size: 17px;
+      font-size: 18px;
       font-weight: 600;
     }
     & .__text {

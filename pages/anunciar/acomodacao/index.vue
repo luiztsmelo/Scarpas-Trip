@@ -384,16 +384,22 @@
 
 
         <!-- Horário Check-in -->
-        <h3 class="__form-subtitle">Horário para Check-in</h3>
-
         <div style="display:flex">
           <div class="item-form" style="padding:0;margin:1rem .5rem 1.5rem 0;flex:50%">
-            <label>De:</label>
-            <input type="time" v-model="$store.state.acomodData.checkinFrom">
+            <label>Check-in após as:</label>
+            <select v-model="$store.state.acomodData.checkInTime">
+              <option>Flexível</option>
+              <option>12h</option>
+              <option>15h</option>
+            </select>
           </div> 
           <div class="item-form" style="padding:0;margin:1rem 0 1.5rem .5rem;flex:50%">
-            <label>Até:</label>
-            <input type="time" v-model="$store.state.acomodData.checkinTo">
+            <label>Check-out até as:</label>
+            <select v-model="$store.state.acomodData.checkOutTime">
+              <option>Flexível</option>
+              <option>12h</option>
+              <option>15h</option>
+            </select>
           </div> 
         </div>
         <!-- Horário Check-in -->
@@ -964,46 +970,49 @@ export default {
       const acomodData = this.$store.state.acomodData
 
       if (this.bankCode !== '' && this.agencia !== '' && this.agenciaDV !== '' && this.conta !== '' && this.contaDV !== '' && this.legalName !== '' && this.docNumber.length === 14) {
+
         this.$store.commit('m_loader', true)
 
-        /* Recipient pagarme */
+        /* RECIPIENT PAGARME */
         firebase.functions().httpsCallable('pagarme_newAcomod')({ bankAccount: this.$store.state.bankAccount })
         .then(result => {
           acomodData.recipientID = result.data.recipientID
 
-          /* Set acomod */
+          /* SET ACOMOD FIRESTORE */
           firebase.firestore().collection('acomods').doc(acomodData.acomodID).set(acomodData).then(() => {
             this.$router.push('/acomodacoes/' + acomodData.acomodID)
 
-            /* Update user */
+            /* UPDATE USER */
             firebase.firestore().collection('users').doc(acomodData.userID).update({
               isAcomodHost: true,
               celular: acomodData.celular
             }).then(() => {
               this.$store.dispatch('a_resetAcomodData')
               this.$store.commit('m_loader', false)
-            }).catch(err => console.log(err))
+            })
+            .catch(err => { /* Update user error */
+              console.log(err)
+              this.$store.commit('m_loader', false)
+            })
 
           })
           .catch(err => { /* Set acomod error */
-            this.$store.commit('m_loader', false)
             console.log(err)
+            this.$store.commit('m_loader', false)
           })
 
         })
         .catch(err => { /* Recipient error */
-          console.log(err)
-          if (err) {
-            console.log(err.response.errors)
-            this.$store.commit('m_loader', false)
-            err.response.errors.some(e => e.parameter_name === 'bank_code') ? this.bankCodeError = true : this.bankCodeError = false
-            err.response.errors.some(e => e.parameter_name === 'agencia') ? this.agenciaError = true : this.agenciaError = false
-            err.response.errors.some(e => e.parameter_name === 'agencia_dv') ?  this.agenciaDVError = true :  this.agenciaDVError = false
-            err.response.errors.some(e => e.parameter_name === 'conta') ? this.contaError = true : this.contaError = false
-            err.response.errors.some(e => e.parameter_name === 'conta_dv') ? this.contaDVError = true : this.contaDVError = false
-            err.response.errors.some(e => e.parameter_name === 'legal_name') ? this.legalNameError = true : this.legalNameError = false
-            err.response.errors.some(e => e.parameter_name === 'document_number') ? this.docNumberError = true : this.docNumberError = false
-          }
+          console.log(err.details)
+          this.$store.commit('m_loader', false)
+          
+          err.details === 'bank_code' ? this.bankCodeError = true : this.bankCodeError = false
+          err.details === 'agencia' ? this.agenciaError = true : this.agenciaError = false
+          err.details === 'agencia_dv' ? this.agenciaDVError = true : this.agenciaDVError = false
+          err.details === 'conta' ? this.contaError = true : this.contaError = false
+          err.details === 'conta_dv' ? this.contaDVError = true : this.contaDVError = false
+          err.details === 'legal_name' ? this.legalNameError = true : this.legalNameError = false
+          err.details === 'document_number' ? this.docNumberError = true : this.docNumberError = false
         })
       } else {
         this.bankCode === '' ? this.bankCodeError = true : this.bankCodeError = false
@@ -1441,7 +1450,7 @@ export default {
     height: 100%;
     background: white;
     color: var(--color01);
-    padding: 0 0 6rem 0;
+    padding: 0 0 8rem 0;
     & .__form-title {
       padding: 3rem 7% 1.5rem 7%;
       line-height: 36px;
@@ -1484,7 +1493,7 @@ export default {
       padding: 0 7%;
       display: flex;
       flex-flow: column;
-      margin: 1.9rem 0;
+      margin: 2.1rem 0;
       & label {
         user-select: none;
         font-weight: 600;
@@ -1605,7 +1614,6 @@ export default {
       color: #1E9297;
     }
     & .recebedor-box {
-      padding-top: 1rem;
     }
     & .modal-croppa {
       background: rgba(0, 0, 0, 0.8);
@@ -1853,45 +1861,41 @@ export default {
       }
     }
     & .cadastro-acomodacao {
-      padding: 0 0 8rem 0;
+      padding: 0 0 9rem 0;
       & .__form-title {
-        padding: 3.5rem 26% 1.2rem;
+        padding: 3.5rem 27% 1.2rem;
         font-size: 32px;
         font-weight: 700;
         text-align: center;
       }
       & .__form-text {
-        padding: 1.4rem 26% 0;
-        font-size: 17px;
+        padding: 1.4rem 27% 0;
+
       }
       & .__form-subtitle {
         padding-top: 1.5rem;
         font-size: 19px;
       }
       & textarea {
-        padding: 0 26%;
+        padding: 0 27%;
         margin: 1.7rem 0 .6rem 0;
       }
       & .__lenght-calc {
-        padding: 0 26%;
+        padding: 0 27%;
       }
       & .item-form {
-        padding: 0 26%;
-        margin: 2.6rem 0;
+        padding: 0 27%;
+        margin: 2.7rem 0;
         & label {
           font-size: 16px;
         }
         & input {
-          font-size: 17px;
-          font-weight: 400;
         }
         & select {
-          font-size: 17px;
-          font-weight: 400;
         }
       }
       & .comodidades-box {
-        padding: .6rem 26% 0;
+        padding: .6rem 27% 0;
         & .item-form-switches {
           padding: 1.5rem 0;
           & h3 {
@@ -1899,7 +1903,7 @@ export default {
         }
       }
       & .regras-box {
-        padding: .6rem 26% 0;
+        padding: .6rem 27% 0;
         & .item-form-regras {
           padding: 1.5rem 0;
           & h3 {
@@ -1907,7 +1911,7 @@ export default {
         }
       }
       & .without-address {
-        margin: 0 26%;
+        margin: 0 27%;
         transform: translateY(-1.7rem);
       }
       & .recebedor-box {
@@ -1936,7 +1940,7 @@ export default {
       }
       & .after-choose-image {
         margin-top: 2rem;
-        padding: 0 calc(26% - 1%);
+        padding: 0 calc(27% - 1%);
         & .image-box {
           margin: 1%;
           width: 48%;

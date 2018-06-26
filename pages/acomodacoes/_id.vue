@@ -1022,7 +1022,7 @@ export default {
             & input {
               cursor: pointer;
               width: 100%;
-              padding: .8rem .6rem;
+              padding: .75rem .6rem;
               color: #8B8B8C;
               border: 1px solid rgb(222,222,222);
               outline: none;
@@ -1035,7 +1035,7 @@ export default {
             & select {
               cursor: pointer;
               width: 100%;
-              padding: .8rem .6rem;
+              padding: .75rem .6rem;
               color: #8D8D8D;
               border: 1px solid rgb(222,222,222);
               outline: none;

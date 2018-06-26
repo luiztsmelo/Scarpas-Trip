@@ -115,7 +115,7 @@ export default {
       align-items: center;
       padding: 2.8rem 4rem 2.8rem 4rem;
       & .__img {
-        width: 4.7rem;
+        width: 4.3rem;
         height: auto;
       }
       & .__title {
@@ -130,21 +130,21 @@ export default {
         line-height: 22px;
       }
       & .facebook-btn {
-        width: 17rem;
+        width: 16rem;
         margin: .6rem 0;
         height: 2.9rem;
         text-align: start;
         padding-left: 50px;
       }
       & .google-btn {
-        width: 17rem;
+        width: 16rem;
         margin: .6rem 0;
         height: 2.9rem;
         text-align: start;
         padding-left: 50px;
       }
       & .email-btn {
-        width: 17rem;
+        width: 16rem;
         margin: .6rem 0;
         height: 2.9rem;
         text-align: start;

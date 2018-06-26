@@ -1,14 +1,14 @@
 :root {
-  --mobileHeight: 2.3rem;
-  --desktopHeight: 2.2rem;
+  --mobileHeight: 2.2rem;
+  --desktopHeight: 2.1rem;
 }
 
 .yes-or-no {
   cursor: pointer;
   display: flex;
   height: var(--mobileHeight);
-  width: 6rem;
-  min-width: 6rem;
+  width: 5.9rem;
+  min-width: 5.9rem;
   border: 1px solid rgb(222,222,222);
   border-radius: 2rem;
   align-items: center;
@@ -43,8 +43,8 @@
 @media (min-width: 1024px) {
   .yes-or-no {
     height: var(--desktopHeight);
-    width: 6.3rem;
-    min-width: 6.3rem;
+    width: 6.2rem;
+    min-width: 6.2rem;
     & .__no {
       margin-left: 2px;
       line-height: calc(var(--desktopHeight) - .35rem);

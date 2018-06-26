@@ -79,7 +79,7 @@ const store = () => new Vuex.Store({
     /*
     -------------------- CONFIGS --------------------
     */
-    serviceFeeAcomod: 0.07,
+    serviceFeeAcomod: 0.08,
     /*
     -------------------- ANÚNCIOS --------------------
     */
@@ -126,8 +126,8 @@ const store = () => new Vuex.Store({
       positionLAT: -20.6141320,
       positionLNG: -46.0478760,
       address: null,
-      checkinFrom: '12:00',
-      checkinTo: '23:00',
+      checkInTime: null,
+      checkOutTime: null,
       allowFestas: false,
       allowPets: false,
       allowBabys: false,
@@ -138,8 +138,9 @@ const store = () => new Vuex.Store({
     reservaAcomod: {/* Atualizar Action */
       reservaID: null,
       acomodID: null,
-      paymentMethod: 'credit_card',
       requested: null,
+      paymentMethod: 'credit_card',
+      parcelas: '1',
       status: 'pending',
       totalHospedes: 1,
       periodoReserva: null,
@@ -764,8 +765,8 @@ const store = () => new Vuex.Store({
         positionLAT: -20.6141320,
         positionLNG: -46.0478760,
         address: null,
-        checkinFrom: '12:00',
-        checkinTo: '23:00',
+        checkInTime: null,
+        checkOutTime: null,
         allowFestas: false,
         allowPets: false,
         allowBabys: false,
@@ -778,8 +779,9 @@ const store = () => new Vuex.Store({
       state.reservaAcomod = {
         reservaID: null,
         acomodID: null,
-        paymentMethod: 'credit_card',
         requested: null,
+        paymentMethod: 'credit_card',
+        parcelas: '1',
         status: 'pending',
         totalHospedes: 1,
         periodoReserva: null,

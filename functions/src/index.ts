@@ -5,7 +5,6 @@ import * as pagarme from 'pagarme'
 import * as dayjs from 'dayjs'
 import 'dayjs/locale/pt-br'
 
-dayjs.locale('pt-br')
 
 
 /* Firebase admin */
@@ -22,13 +21,19 @@ const ESemail = 'contato@escarpastrip.com'
 const ESname = 'Escarpas Trip'
 
 
+/* Day.js */
+dayjs.locale('pt-br')
+
+
+
+
 exports.pagarme_newAcomod = functions.https.onCall(data => {
   const bankAccount = data.bankAccount
 
   return pagarme.client.connect({ api_key: 'ak_test_E3I46o4e7guZDqwRnSY9sW8o8HrL9D' })
     .then(client => client.recipients.create({
       transfer_enabled: false,
-      transfer_interval: "daily",
+      transfer_interval: 'daily',
       automatic_anticipation_enabled: true,
       anticipatable_volume_percentage: 100,
       bank_account: {
@@ -47,29 +52,46 @@ exports.pagarme_newAcomod = functions.https.onCall(data => {
     return { recipientID: recipient.id }
   })
   .catch (err => {
-    console.log(err)
-    throw new functions.https.HttpsError(err)
+    console.log(err.response)
+    if (err.response.errors.some(e => e.parameter_name === 'bank_code')) {
+      throw new functions.https.HttpsError('invalid-argument', 'Banco não permitido.', 'bank_code')
+    }
+    if (err.response.errors.some(e => e.parameter_name === 'agencia')) {
+      throw new functions.https.HttpsError('invalid-argument', 'Agência incorreta.', 'agencia')
+    }
+    if (err.response.errors.some(e => e.parameter_name === 'agencia_dv')) {
+      throw new functions.https.HttpsError('invalid-argument', 'Dígito de agência incorreto.', 'agencia_dv')
+    }
+    if (err.response.errors.some(e => e.parameter_name === 'conta')) {
+      throw new functions.https.HttpsError('invalid-argument', 'Conta incorreta.', 'conta')
+    }
+    if (err.response.errors.some(e => e.parameter_name === 'conta_dv')) {
+      throw new functions.https.HttpsError('invalid-argument', 'Dígito de conta incorreto.', 'conta_dv')
+    }
+    if (err.response.errors.some(e => e.parameter_name === 'legal_name')) {
+      throw new functions.https.HttpsError('invalid-argument', 'Nome digitado incorretamente.', 'legal_name')
+    }
+    if (err.response.errors.some(e => e.parameter_name === 'document_number')) {
+      throw new functions.https.HttpsError('invalid-argument', 'CPF inválido.', 'document_number')
+    }
   })
 })
+
+
+
 
 
 exports.pagarme_newReservaAcomod = functions.https.onCall((data, context) => {
   const reservaAcomod = data.reservaAcomod
   const acomod = data.acomod
-
-  const paymentMethod = reservaAcomod.paymentMethod
-
-  const guestName = reservaAcomod.guestName
+ 
   const guestCPF = reservaAcomod.guestCPF.replace(/[^0-9\.]+/g, '').replace(/\./g, '')
   const guestCelular = '+55' + reservaAcomod.guestCelular.replace(/[^0-9\.]+/g, '')
-
   const zipcode = reservaAcomod.billing.zipcode.replace(/[^0-9\.]+/g, '')
 
-  const amountAnunciante = (reservaAcomod.valorNoitesTotal + reservaAcomod.limpezaFee) * 100
-  const amountEscarpasTrip = reservaAcomod.serviceFeeTotal * 100
-
-
-  if (paymentMethod === 'credit_card') { /* CREDIT CARD */
+  
+  /* ******************** CREDIT CARD ******************** */
+  if (reservaAcomod.paymentMethod === 'credit_card') {
 
     const cardNumber = data.creditCard.cardNumber.replace(/[^0-9\.]+/g, '')
     const cardHolderName = data.creditCard.cardHolderName
@@ -78,9 +100,9 @@ exports.pagarme_newReservaAcomod = functions.https.onCall((data, context) => {
 
     return pagarme.client.connect({ api_key: 'ak_test_E3I46o4e7guZDqwRnSY9sW8o8HrL9D' })
     .then(client => client.transactions.create({
-      'amount': amountAnunciante + amountEscarpasTrip,
+      'amount': reservaAcomod.valorReservaTotal * 100,
       'capture': false,
-      'installments': '1',
+      'installments': reservaAcomod.parcelas,
       'payment_method': 'credit_card',
       'card_number': cardNumber,
       'card_cvv': cardCVV,
@@ -117,21 +139,7 @@ exports.pagarme_newReservaAcomod = functions.https.onCall((data, context) => {
         'unit_price': acomod.valorNoite * 100,
         'quantity': reservaAcomod.noites,
         'tangible': false
-      }],
-      'split_rules': [
-        {
-          'recipient_id': 're_cjfcpgjli007ggb6dku6oc33s',
-          'amount': amountEscarpasTrip,
-          'liable': true,
-          'charge_processing_fee': true
-        },
-        {
-          'recipient_id': acomod.recipientID,
-          'amount': amountAnunciante,
-          'liable': true,
-          'charge_processing_fee': true
-        }
-      ]
+      }]
       }))
     .then(transaction => {
       return { reservaID: transaction.id.toString() }
@@ -154,17 +162,18 @@ exports.pagarme_newReservaAcomod = functions.https.onCall((data, context) => {
         throw new functions.https.HttpsError('invalid-argument', 'CPF inválido.', 'customer')
       }
     })
-  } else { /* BOLETO */
+
+    /* ******************** BOLETO ******************** */
+  } else {
 
     return pagarme.client.connect({ api_key: 'ak_test_E3I46o4e7guZDqwRnSY9sW8o8HrL9D' })
     .then(client => client.transactions.create({
-      'amount': amountAnunciante + amountEscarpasTrip,
+      'amount': reservaAcomod.valorReservaTotal * 100,
       'capture': false,
       'payment_method': 'boleto',
-      'postback_url': 'http://requestb.in/pkt7pgpk',
       'customer': {
         'external_id': context.auth.token.uid,
-        'name': guestName,
+        'name': reservaAcomod.guestName,
         'type': 'individual',
         'country': 'br',
         'email': context.auth.token.email,
@@ -197,6 +206,16 @@ exports.pagarme_newReservaAcomod = functions.https.onCall((data, context) => {
 
 
 
+
+
+exports.pagarme_payHostAcomod = functions.https.onCall(data => {
+  /* ENVIAR PAGAMENTO PARA O HOST NO DIA SEGUINTE DO CHECK-IN */
+})
+
+
+
+
+
 exports.airtable_newReservaAcomod = functions.firestore
   .document('reservasAcomods/{reservaID}')
   .onCreate(snap => {
@@ -224,6 +243,9 @@ exports.airtable_newReservaAcomod = functions.firestore
     /* Criar reserva no Airtable */
     return base('Acomods').create(reservaAcomod)
   })
+
+
+
 
 
 exports.email_newUser = functions.firestore
@@ -254,6 +276,9 @@ exports.email_newUser = functions.firestore
       .then(result => console.log(result.body))
       .catch(err => console.log(err.statusCode))
   })
+
+
+
 
 
 exports.email_reservaAcomodConfirmed = functions.firestore
