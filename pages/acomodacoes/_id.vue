@@ -514,7 +514,9 @@ export default {
           clickedReservaBtn: false,
           wentToReservaPage: false,
           concludedReserva: false
-        }).then(doc => store.state.visitID = doc.id)
+        })
+        .then(doc => store.state.visitID = doc.id)
+        .catch(err => console.log(err))
       }
     })
   },

@@ -388,17 +388,29 @@
           <div class="item-form" style="padding:0;margin:1rem .5rem 1.5rem 0;flex:50%">
             <label>Check-in após:</label>
             <select v-model="$store.state.acomodData.checkInTime">
-              <option>Flexível</option>
-              <option>12h</option>
-              <option>15h</option>
+              <option>Horário Flexível</option>
+              <option>8:00</option>
+              <option>10:00</option>
+              <option>12:00</option>
+              <option>14:00</option>
+              <option>16:00</option>
+              <option>18:00</option>
+              <option>20:00</option>
+              <option>22:00</option>
             </select>
           </div> 
           <div class="item-form" style="padding:0;margin:1rem 0 1.5rem .5rem;flex:50%">
             <label>Check-out até:</label>
             <select v-model="$store.state.acomodData.checkOutTime">
-              <option>Flexível</option>
-              <option>12h</option>
-              <option>15h</option>
+              <option>Horário Flexível</option>
+              <option>8:00</option>
+              <option>10:00</option>
+              <option>12:00</option>
+              <option>14:00</option>
+              <option>16:00</option>
+              <option>18:00</option>
+              <option>20:00</option>
+              <option>22:00</option>
             </select>
           </div> 
         </div>
@@ -1453,7 +1465,7 @@ export default {
     padding: 0 0 8rem 0;
     & .__form-title {
       padding: 3rem 7% 1.5rem 7%;
-      line-height: 36px;
+      line-height: 38px;
       font-size: 27px;
       z-index: 999;
       user-select: none !important;
@@ -1863,13 +1875,13 @@ export default {
     & .cadastro-acomodacao {
       padding: 0 0 9rem 0;
       & .__form-title {
-        padding: 3.5rem 27% 1.2rem;
+        padding: 3.5rem 28% 1.3rem;
         font-size: 32px;
         font-weight: 700;
         text-align: center;
       }
       & .__form-text {
-        padding: 1.4rem 27% 0;
+        padding: 1.4rem 28% 0;
 
       }
       & .__form-subtitle {
@@ -1877,14 +1889,14 @@ export default {
         font-size: 19px;
       }
       & textarea {
-        padding: 0 27%;
+        padding: 0 28%;
         margin: 1.7rem 0 .6rem 0;
       }
       & .__lenght-calc {
-        padding: 0 27%;
+        padding: 0 28%;
       }
       & .item-form {
-        padding: 0 27%;
+        padding: 0 28%;
         margin: 2.7rem 0;
         & label {
           font-size: 16px;
@@ -1895,7 +1907,7 @@ export default {
         }
       }
       & .comodidades-box {
-        padding: .6rem 27% 0;
+        padding: .6rem 28% 0;
         & .item-form-switches {
           padding: 1.5rem 0;
           & h3 {
@@ -1903,7 +1915,7 @@ export default {
         }
       }
       & .regras-box {
-        padding: .6rem 27% 0;
+        padding: .6rem 28% 0;
         & .item-form-regras {
           padding: 1.5rem 0;
           & h3 {
@@ -1911,7 +1923,7 @@ export default {
         }
       }
       & .without-address {
-        margin: 0 27%;
+        margin: 0 28%;
         transform: translateY(-1.7rem);
       }
       & .recebedor-box {
@@ -1940,7 +1952,7 @@ export default {
       }
       & .after-choose-image {
         margin-top: 2rem;
-        padding: 0 calc(27% - 1%);
+        padding: 0 calc(28% - 1%);
         & .image-box {
           margin: 1%;
           width: 48%;

@@ -596,6 +596,7 @@ export default {
   computed: {
     /* ******************** PATHS ******************** */
     acomod () { return this.$store.state.acomod },
+    concludedReservaAcomod () { return this.$store.state.concludedReservaAcomod },
     cardNumber () { return this.$store.state.creditCard.cardNumber },
     cardHolderName () { return this.$store.state.creditCard.cardHolderName },
     cardExpirationDate () { return this.$store.state.creditCard.cardExpirationDate },
@@ -668,7 +669,14 @@ export default {
     streetNumber (value) { value !== '' ? this.streetNumberError = false : '' },
     neighborhood (value) { value !== '' ? this.neighborhoodError = false : '' },
     city (value) { value !== '' ? this.cityError = false : '' },
-    state (value) { value !== '' ? this.stateError = false : '' }
+    state (value) { value !== '' ? this.stateError = false : '' },
+    concludedReservaAcomod (value) {
+      if (value === true) {
+        firebase.firestore().collection('acomods').doc(this.acomod.acomodID).collection('visits').doc(this.$store.state.visitID).update({ 
+          concludedReserva: true
+        })
+      }
+    } 
   },
   beforeRouteEnter (to, from, next) {
     next(vm => {
