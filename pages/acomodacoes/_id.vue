@@ -30,7 +30,6 @@
           <progressive-background class="__img" :src="imageH(image)" :placeholder="image.L" :aspect-ratio="2/3"/>
         </swiper-slide>
 
-        <div class="swiper-pagination" slot="pagination"></div>
       </swiper>
     </div> 
     <!-- ####### IMAGE ####### -->
@@ -942,7 +941,7 @@ export default {
       }
       & .__reserva-btn {
         font-size: 16px;
-        font-weight: 700;
+        font-weight: 600;
         background: var(--colorAcomod);
         line-height: 2.6rem;
         color: white;
