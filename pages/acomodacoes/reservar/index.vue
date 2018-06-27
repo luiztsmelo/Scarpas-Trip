@@ -90,7 +90,7 @@
 
           <div class="payment">
 
-            <h3 class="__subtitle">Você somente será cobrado após {{ acomod.proprietario.split(' ')[0] }} confirmar sua reserva. Para sua segurança, só liberaremos o pagamento para ele no dia seguinte de seu check-in, {{ dayAfterCheckin }}. Não se preocupe, seus dados estarão em total sigilo.</h3>
+            <h3 class="__subtitle">Você somente será cobrado caso {{ acomod.proprietario.split(' ')[0] }} confirme seu pedido de reserva. Para sua segurança, só liberaremos o pagamento para ele no dia seguinte de seu check-in, {{ dayAfterCheckin }}. Não se preocupe, seus dados estarão em total sigilo.</h3>
 
 
             <!-- PAYMENT METHOD -->
@@ -294,7 +294,7 @@
           </div><!-- Payment -->
           
 
-          <button class="__next-btn" type="button" @click="concluirReserva">Confirmar Reserva</button>
+          <button class="__next-btn" type="button" @click="concluirReserva">Confirmar Pedido</button>
 
 
         </div><!-- ******* ETAPA 3 ******* -->
@@ -312,35 +312,38 @@
 
         <progressive-background  class="__acomod-image" :src="imageH" :placeholder="acomod.images[0].L" :aspect-ratio="2/3"/>
 
-        <h1 class="__acomod-title">{{ acomod.title }}</h1>
+        <div class="card-body">
 
+          <h1 class="__acomod-title">{{ acomod.title }}</h1>
+          
+          <div class="detalhes-reserva-data">
 
-        <div class="detalhes-reserva-data">
+            <div class="detalhes-reserva-data_item">
+              <img src="../../../assets/img/calendar.svg" class="__img" style="transform: scale(.91)">
+              <h3>{{ checkIn }}&nbsp/&nbsp</h3>
+              <h3>{{ checkOut }}</h3>
+            </div>
 
-          <div class="detalhes-reserva-data_item">
-            <img src="../../../assets/img/calendar.svg" class="__img" style="transform: scale(.91)">
-            <h3>{{ checkIn }}&nbsp/&nbsp</h3>
-            <h3>{{ checkOut }}</h3>
+            <div class="detalhes-reserva-data_item">
+              <img src="../../../assets/img/guests.svg" class="__img">
+              <h3>{{ $store.state.reservaAcomod.totalHospedes == '1' ? $store.state.reservaAcomod.totalHospedes + ' hóspede' : $store.state.reservaAcomod.totalHospedes + ' hóspedes' }}</h3>
+            </div>
+
           </div>
 
-          <div class="detalhes-reserva-data_item">
-            <img src="../../../assets/img/guests.svg" class="__img">
-            <h3>{{ $store.state.reservaAcomod.totalHospedes == '1' ? $store.state.reservaAcomod.totalHospedes + ' hóspede' : $store.state.reservaAcomod.totalHospedes + ' hóspedes' }}</h3>
+
+          <div class="detalhes-reserva-valor" v-if="$store.state.reservaAcomod.valorReservaTotal !== null">
+
+            <div class="detalhes-reserva-valor_item-total" style="padding-top: .8rem">
+              <h3>Total</h3>
+              <h3 class="__valor-total">R${{ $store.state.reservaAcomod.valorReservaTotal.toLocaleString() }}</h3>
+            </div>
+
+            <span class="__ver-detalhes" @click="$modal.show('detalhes-valor-modal')">Ver detalhes</span>
+
+            <detalhes-valor/>
+
           </div>
-
-        </div>
-
-
-        <div class="detalhes-reserva-valor" v-if="$store.state.reservaAcomod.valorReservaTotal !== null">
-
-          <div class="detalhes-reserva-valor_item-total" style="padding-top: .8rem">
-            <h3>Total</h3>
-            <h3 class="__valor-total">R${{ $store.state.reservaAcomod.valorReservaTotal.toLocaleString() }}</h3>
-          </div>
-
-          <span class="__ver-detalhes" @click="$modal.show('detalhes-valor-modal')">Ver detalhes</span>
-
-          <detalhes-valor/>
 
         </div>
 
@@ -756,7 +759,7 @@ export default {
       & .etapa-1-item {
         padding-top: 2rem;
         & .__subtitle {
-          font-size: 18px;
+          font-size: 17px;
           font-weight: 600;
         }
       }
@@ -808,52 +811,56 @@ export default {
       flex: 35%;
       max-width: 35%;
       align-self: flex-start;
-      border: 1px solid rgb(222,222,222);
       & .__acomod-image {
         width: 100%;
         height: auto;
       }
-      & .__acomod-title {
-        margin: 0 1.3rem;
-        padding: 1.2rem 0;
-        font-size: 18px;
-        font-weight: 600;
+      & .card-body {
+        border-left: 1px solid rgb(222,222,222);
+        border-right: 1px solid rgb(222,222,222);
         border-bottom: 1px solid rgb(222,222,222);
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-      }
-      & .detalhes-reserva-data {
-        padding: .8rem 0;
-        margin: 0 1.3rem;
-        border-bottom: 1px solid rgb(222,222,222);
-        & .detalhes-reserva-data_item {
-          display: flex;
-          align-items: center;
-          padding: .3rem 0;
-          & .__img {
-            margin-right: .6rem;
-            width: 1.55rem;
-            height: auto;
+        & .__acomod-title {
+          margin: 0 1.3rem;
+          padding: 1.2rem 0;
+          font-size: 18px;
+          font-weight: 600;
+          border-bottom: 1px solid rgb(222,222,222);
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+        & .detalhes-reserva-data {
+          padding: .8rem 0;
+          margin: 0 1.3rem;
+          border-bottom: 1px solid rgb(222,222,222);
+          & .detalhes-reserva-data_item {
+            display: flex;
+            align-items: center;
+            padding: .3rem 0;
+            & .__img {
+              margin-right: .6rem;
+              width: 1.55rem;
+              height: auto;
+            }
           }
         }
-      }
-      & .detalhes-reserva-valor {
-        padding-bottom: .8rem;
-        margin: 0 1.3rem;
-        & .detalhes-reserva-valor_item-total {
-          display: flex;
-          justify-content: space-between;
-          & .__valor-total {
-            font-size: 17px;
-            font-weight: 600;
+        & .detalhes-reserva-valor {
+          padding-bottom: .8rem;
+          margin: 0 1.3rem;
+          & .detalhes-reserva-valor_item-total {
+            display: flex;
+            justify-content: space-between;
+            & .__valor-total {
+              font-size: 17px;
+              font-weight: 600;
+            }
           }
-        }
-        & .__ver-detalhes {
-          cursor: pointer;
-          font-size: 14px;
-          font-weight: 500;
-          color: #00D8C7;
+          & .__ver-detalhes {
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--colorAcomod);
+          }
         }
       }
     }
@@ -887,7 +894,7 @@ export default {
 .__next-btn {
   position: relative;
   margin-top: 3rem;
-  padding: 0 1.4rem;
+  padding: 0 1.5rem;
   min-height: 3rem;
   font-size: 17px;
   font-weight: 600;

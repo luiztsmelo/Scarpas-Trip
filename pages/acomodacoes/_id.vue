@@ -231,7 +231,7 @@
         <form class="reserva-desktop-form">
 
           <div class="valor-box">
-            <h1 class="__valor">R${{ acomod.valorNoite.toLocaleString() }}<span class="__valor-dia"> por noite</span></h1>
+            <h1 class="__valor">R${{ acomod.valorNoite.toLocaleString() }}<span class="__valor-noite"> por noite</span></h1>
           </div>
 
           <div class="item-form">
@@ -312,12 +312,12 @@
 
           </div>
 
-          <button class="__reserva-desktop-btn" type="button" @click="reservar">Reservar</button>
+          <button class="__reserva-desktop-btn" type="button" @click="reservar">Pedir para Reservar</button>
           <reserva-acomod-desktop/>
 
-          <h4 class="__info">Não se preocupe, você ainda não será cobrado.</h4>
+          <h4 class="__info">Você ainda não será cobrado.</h4>
 
-          <button class="__reserva-desktop-btn-ask" type="button" @click="$store.state.user.email === null ? $modal.show('sign-in-modal') : $modal.show('ask-acomod-modal'), $store.state.clickedAskAcomod = true, $store.state.isSignIn = false">Fazer uma Pergunta</button>
+          <button class="__reserva-desktop-btn-ask" type="button" @click="$store.state.user.email === null ? $modal.show('sign-in-modal') : $modal.show('ask-acomod-modal'), $store.state.clickedAskAcomod = true, $store.state.isSignIn = false">Falar com Anunciante</button>
           <ask-acomod/>
 
         </form>
@@ -331,7 +331,7 @@
     <div class="reserva">
       <div class="reserva-body">
         <h3 class="__reserva-valor">R${{ acomod.valorNoite }}<span class="__reserva-valor-pessoa">/noite</span></h3>
-        <button class="__reserva-btn" @click="$store.commit('m_showReservaAcomod', true), hashReserva()">Reservar</button>
+        <button class="__reserva-btn" @click="$store.commit('m_showReservaAcomod', true), hashReserva()">Pedir para Reservar</button>
       </div>
     </div>
     <reserva-acomod/><!-- ####### RESERVA ####### -->
@@ -937,17 +937,16 @@ export default {
         font-weight: 500;
       }
       & .__reserva-valor-pessoa {
-        font-size: 15px;
+        font-size: 13px;
       }
       & .__reserva-btn {
-        font-size: 16px;
+        font-size: 15px;
         font-weight: 600;
         background: var(--colorAcomod);
-        line-height: 2.6rem;
         color: white;
-        height: 2.7rem;
-        width:  50%;
-        border-radius: 4px;
+        height: 2.75rem;
+        width: 60%;
+        border-radius: 5px;
       }
     }
   }/* ####### RESERVA ####### */
@@ -1010,7 +1009,7 @@ export default {
             & .__valor {
               font-size: 34px;
               font-weight: 400;
-              & .__valor-dia {
+              & .__valor-noite {
                 font-size: 16px;
                 font-weight: 400;
               }
@@ -1088,9 +1087,8 @@ export default {
           }
           & .__reserva-desktop-btn {
             margin-top: 1.3rem;
-            font-size: 18px;
+            font-size: 16px;
             font-weight: 600;
-            line-height: 3rem;
             background: var(--colorAcomod);
             color: white;
             height: 3.1rem;
@@ -1098,15 +1096,15 @@ export default {
             border-radius: 5px;
           }
           & .__reserva-desktop-btn-ask {
-            font-size: 17px;
+            font-size: 16px;
             font-weight: 600;
             background: transparent;
-            color: #00D8C7;
+            color: var(--colorAcomod);
             height: 2rem;
             width: 100%;
           }
           & .__info {
-            margin: .6rem 0;
+            margin: .5rem 0 .8rem;
             text-align: center;
             font-size: 13px;
             font-weight: 400;

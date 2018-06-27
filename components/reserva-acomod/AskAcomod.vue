@@ -18,7 +18,7 @@
 
         <h3 class="__subtitle">Para sua segurança, recomendamos que não faça reservas diretamente com o proprietário, fora deste site.</h3>
         <h3 class="__subtitle">Isto poderá lhe causar desagradáveis dores de cabeça caso algum imprevisto aconteça.</h3>
-        <h3 class="__subtitle">Portanto, nunca divulgue suas informações de contato. Somente após a reserva tais informações serão fornecidas, para ambos.</h3>
+        <h3 class="__subtitle">Portanto, nunca divulgue suas informações de contato. Somente após seu pedido de reserva tais informações serão fornecidas, para ambos.</h3>
 
       </div><!-- LEFT CONTAINER -->
 
@@ -94,11 +94,11 @@ export default {
     
     /* LEFT CONTAINER */
     & .left-container {
-      min-width: 44%;
-      flex-basis: 44%;
+      min-width: 45%;
+      flex-basis: 45%;
       padding: 2.5rem 3rem 2.5rem 3rem;
       & .__title {
-        font-size: 41px;
+        font-size: 37px;
         padding-bottom: 1.5rem;
       } 
       & .__subtitle {
@@ -110,8 +110,8 @@ export default {
 
     /* RIGHT CONTAINER */
     & .right-container {
-      flex-basis: 56%;
-      max-width: 56%;
+      flex-basis: 55%;
+      max-width: 55%;
       padding: 3rem;
       & .item-form {
         display: flex;
@@ -119,17 +119,17 @@ export default {
         margin: 1rem 0 1.8rem 0;
         & label {
           padding-bottom: .7rem;
-          font-weight: 700;
+          font-weight: 600;
           font-size: 15px;
         }
-        & input {
+        & select {
           position: relative;
           width: 100%;
-          font-size: 17px;
+          font-size: 16px;
           font-weight: 400;
           background: white;
           color: var(--color01);
-          padding: 1rem;
+          padding: .75rem .6rem;
           border: 1px solid rgb(222,222,222);
           outline: none;
         }
@@ -137,12 +137,12 @@ export default {
           width: 100%;
           min-width: 100%;
           max-width: 100%;
-          font-size: 17px;
+          font-size: 16px;
           font-weight: 400;
           line-height: 26px;
           background: white;
           color: rgb(82, 82, 82);
-          padding: 1rem;
+          padding: .8rem;
           border: 1px solid rgb(222,222,222);
           outline: none;
         }
@@ -152,21 +152,20 @@ export default {
         justify-content: flex-end;
         height: 2.9rem;
         & .__book-btn {
-          padding: 0 1.2rem;
+          padding: 0 1.4rem;
           margin-right: 1rem;
           font-size: 16px;
           font-weight: 600;
           background: transparent;
-          color: #00D8C7;
-          border: 1px solid #00D8C7;
+          color: var(--colorAcomod);
           border-radius: 5px;
           line-height: 2.8rem;
         }
         & .__send-btn {
-          padding: 0 1.2rem;
+          padding: 0 1.4rem;
           font-size: 16px;
           font-weight: 600;
-          background: #00D8C7;
+          background: var(--colorAcomod);
           color: white;
           border-radius: 5px;
           line-height: 2.8rem;
