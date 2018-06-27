@@ -19,22 +19,8 @@
 
           <h3 class="etapas">1 de 5 etapas</h3>
 
-          <h1 class="__title">Antes de continuar, algumas informações importantes:</h1>
+          <h1 class="__title">Revisar regras da casa</h1>
 
-
-          <div class="info-box">
-            
-            <div class="info-item">
-              <span class="__info-number">1</span>
-              <h3 class="__info-text">A Escarpas Trip somente faz a reserva. O pagamento deverá ser feito diretamente com o proprietário.</h3>
-            </div>
-        
-            <div class="info-item">
-              <span class="__info-number">2</span>
-              <h3 class="__info-text">Caso haja alguma dúvida sobre a reserva, entre em contato com o proprietário, <span class="highlight" @click="$store.commit('m_showProprietario', true), hashProprietario()">{{ acomod.proprietario }}</span>.</h3>
-            </div>
-
-          </div>
           
 
           <button type="button" class="__next-btn" :style="form0ok" @click="nextBtn0">Continuar</button>
@@ -90,8 +76,7 @@
             :weekday-labels='weekdayLabels'
             :theme-styles='themeStyles'
             tint-color='#00D8C7'
-            show-caps
-            >
+            show-caps>
           </v-date-picker>
 
 
@@ -198,7 +183,7 @@ export default {
       weekdayLabels: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'],
       themeStyles: {
         wrapper: {
-          color: 'rgb(52, 52, 52)',
+          color: 'rgb(42, 42, 42)',
           border: '0',
           padding: '6px 9px 0 9px',
           background: 'white',
@@ -216,7 +201,7 @@ export default {
           fontWeight: '400'
         },
         weekdays: {
-          color: 'rgb(52, 52, 52)',
+          color: 'rgb(42, 42, 42)',
           fontWeight: '700',
           padding: '15px 5px 8px 5px',
         },
@@ -320,13 +305,13 @@ export default {
       return 
     },
     form0ok () {
-      return 1<2 ? 'background:#00D8C7;cursor:pointer' : ''
+      return 1<2 ? 'background:#FFA04F;cursor:pointer' : ''
     },
     form1ok () {
-      return 1<2 ? 'background:#00D8C7;cursor:pointer' : ''
+      return 1<2 ? 'background:#FFA04F;cursor:pointer' : ''
     },
     form2ok () {
-      return this.$store.state.reservaAcomod.periodoReserva !== null ? 'background:#00D8C7;cursor:pointer' : ''
+      return this.$store.state.reservaAcomod.periodoReserva !== null ? 'background:#FFA04F;cursor:pointer' : ''
     },
   },
   watch: {
@@ -414,28 +399,6 @@ export default {
         font-size: 27px;
         font-weight: 700;
       }
-      & .info-box {
-        display: flex;
-        flex-flow: column;
-        padding: 0 7%;
-        & .info-item {
-          display: flex;
-          margin-bottom: 1.5rem;
-          & .__info-number {
-            font-size: 27px;
-            font-weight: 600;
-            line-height: 28px;
-            color: #00D8C7;
-            margin-right: .6rem;
-          }
-          & .__info-text {
-          }
-          & .highlight {
-            color: #00BAAC;
-          }
-        }
-      }
-      
       & .__item {
         padding: 0 7%;
         & select {
@@ -450,7 +413,6 @@ export default {
           outline: none;
         }
       }
-
       & .item-form {
       padding: 0 7%;
       display: flex;

@@ -186,8 +186,7 @@
           :min-date='new Date()'
           mode='single'
           :theme-styles='themeStylesDesktop'
-          :attributes='attributes'
-          >
+          :attributes='attributes'>
         </v-calendar>
         <!-- ####### DISPONIBILIDADE ####### -->
 
@@ -242,26 +241,26 @@
 
           <div class="item-form">
             <v-date-picker
-              ref='datePicker'
-              mode='range'
-              v-model='$store.state.reservaAcomod.periodoReserva'
-              :min-date='new Date()'
-              :pane-width='280'
-              :disabled-dates='disabledDates'
-              :drag-attribute='myAttribute'
-              :select-attribute='myAttribute'
-              :disabled-attribute='disabledAttribute'
-              :theme-styles='themeStylesReserva'
-              :formats='formats'
-              tint-color='#00D8C7'
+              ref="datePicker"
+              mode="range"
+              v-model="$store.state.reservaAcomod.periodoReserva"
+              :min-date="new Date()"
+              :pane-width="280"
+              :disabled-dates="disabledDates"
+              :drag-attribute="myAttribute"
+              :select-attribute="myAttribute"
+              :disabled-attribute="disabledAttribute"
+              :theme-styles="themeStylesReserva"
+              :formats="formats"
+              tint-color="#00D8C7"
               show-caps
-              popover-visibility='focus'>
+              popover-visibility="focus">
               <div
-                slot-scope='{ inputValue, updateValue }'>
+                slot-scope="{ inputValue, updateValue }">
                 <div>
                   <input
-                    type='text'
-                    placeholder='Chegada - Partida'
+                    type="text"
+                    placeholder="Chegada - Partida"
                     :value="inputValue"
                     @change='updateValue($event.target.value)' 
                     class="reserva-input-date"
@@ -919,7 +918,7 @@ export default {
     bottom: 0;
     left: 0;
     z-index: 8888;
-    height: 3.8rem;
+    height: 4rem;
     width:  100%;
     background: white;
     padding: 0 7%;
