@@ -236,7 +236,7 @@ exports.airtable_newReservaAcomod = functions.firestore
 
     /* Deletar valores não suportados ou desnecessários para o Airtable */
     delete reservaAcomod.periodoReserva
-    delete reservaAcomod.mensagem
+    delete reservaAcomod.message
     delete reservaAcomod.guestCPF
     delete reservaAcomod.billing
 

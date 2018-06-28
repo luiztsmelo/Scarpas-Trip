@@ -23,6 +23,8 @@
       <MapFull/>
 
       <SignIn/>
+
+      <ask-acomod/>
     </div>
 
 
@@ -39,9 +41,10 @@ import Menuu from '~/components/Menu.vue'
 import Loader from '~/components/Loader.vue'
 import Share from '~/components/Share.vue'
 import MapFull from '~/components/MapFull.vue'
+import AskAcomod from '~/components/reserva-acomod/AskAcomod'
 
 export default {
-  components: { Navbar, Foobar, SignIn, Menuu, Loader, Share, MapFull },
+  components: { Navbar, Foobar, SignIn, Menuu, Loader, Share, MapFull, AskAcomod },
   beforeCreate () {
     /* 
     DETECT DEVICE

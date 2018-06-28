@@ -311,13 +311,12 @@
 
           </div>
 
-          <button class="__reserva-desktop-btn" type="button" @click="reservar">Pedir para Reservar</button>
+          <button class="__reserva-desktop-btn" type="button" @click="reservar">Pedir Reserva</button>
           <reserva-acomod-desktop/>
 
           <h4 class="__info">Você ainda não será cobrado.</h4>
 
           <button class="__reserva-desktop-btn-ask" type="button" @click="$store.state.user.email === null ? $modal.show('sign-in-modal') : $modal.show('ask-acomod-modal'), $store.state.clickedAskAcomod = true, $store.state.isSignIn = false">Falar com Anunciante</button>
-          <ask-acomod/>
 
         </form>
       </div>
@@ -330,7 +329,7 @@
     <div class="reserva">
       <div class="reserva-body">
         <h3 class="__reserva-valor">R${{ acomod.valorNoite }}<span class="__reserva-valor-pessoa">/noite</span></h3>
-        <button class="__reserva-btn" @click="$store.commit('m_showReservaAcomod', true), hashReserva()">Pedir para Reservar</button>
+        <button class="__reserva-btn" @click="$store.commit('m_showReservaAcomod', true), hashReserva()">Pedir Reserva</button>
       </div>
     </div>
     <reserva-acomod/><!-- ####### RESERVA ####### -->
@@ -342,7 +341,6 @@
 <script>
 import * as firebase from 'firebase'
 require('firebase/firestore')
-import AskAcomod from '../../components/reserva-acomod/AskAcomod'
 import PopoverCalendar from '../../components/reserva-acomod/PopoverCalendar'
 import { loaded } from '~/node_modules/vue2-google-maps/src/manager'
 import ReservaAcomod from '../../components/ReservaAcomod'
@@ -352,7 +350,7 @@ import supportsWebP from 'supports-webp'
 import { mapstyle } from '../../mixins/mapstyle'
 
 export default {
-  components: { ReservaAcomod, ReservaAcomodDesktop, Proprietario, AskAcomod },
+  components: { ReservaAcomod, ReservaAcomodDesktop, Proprietario },
   mixins: [mapstyle],
   data () {
     return {
@@ -498,13 +496,17 @@ export default {
   middleware: 'acomodValidate',
   transition: 'id',
   fetch ({ store, params }) {
-    return firebase.firestore().collection('acomods').doc(params.id).get().then(doc => {
+    return firebase.firestore().collection('acomods').doc(params.id).get()
+    .then(doc => {
       store.commit('m_acomod', doc.data())
+
       if (store.state.isMobile === true) {
         store.commit('m_showNavbar', false)
         store.commit('m_showFoobar', false)
       }
+
       store.commit('m_loader', false)
+
       if (doc.exists) {
         firebase.firestore().collection('acomods').doc(params.id).collection('visits').add({ 
           date: new Date().getTime(),
@@ -516,6 +518,10 @@ export default {
         .then(doc => store.state.visitID = doc.id)
         .catch(err => console.log(err))
       }
+    })
+    .catch(err => {
+      console.log(err)
+      store.commit('m_loader', false)
     })
   },
   methods: {

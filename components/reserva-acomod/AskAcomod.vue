@@ -1,8 +1,9 @@
 <template>
   <modal
+    v-if="acomod !== null"
     name="ask-acomod-modal"
     class="ask-acomod-modal"
-    width="75%"
+    width="72%"
     height="auto"
     :scrollable="true"
     @closed="closedModal">
@@ -14,10 +15,10 @@
       <!-- LEFT CONTAINER -->
       <div class="left-container">
 
-        <h1 class="__title">Mandar uma mensagem para {{ firstName }}</h1>
+        <h1 class="__title">Enviar uma mensagem para {{ acomod.proprietario.split(' ')[0] }}</h1>
 
-        <h3 class="__subtitle">Para sua segurança, recomendamos que não faça reservas diretamente com o proprietário, fora deste site.</h3>
-        <h3 class="__subtitle">Isto poderá lhe causar desagradáveis dores de cabeça caso algum imprevisto aconteça.</h3>
+        <h3 class="__subtitle">Para sua segurança, recomendamos que não faça reservas diretamente com o anunciante, fora desse site. Você poderá se prejudicar caso algum problema aconteça.</h3>
+
         <h3 class="__subtitle">Portanto, nunca divulgue suas informações de contato. Somente após seu pedido de reserva tais informações serão fornecidas, para ambos.</h3>
 
       </div><!-- LEFT CONTAINER -->
@@ -27,23 +28,23 @@
       <form class="right-container">
 
         <div class="item-form">
-          <label>Quando será sua viagem, {{ firstName }}?</label>
+          <label>Quando pretende viajar, {{ user.firstName }}?</label>
         </div>
 
         <div class="item-form">
           <label>Quantos hóspedes?</label>
-          <select v-model="$store.state.message.totalHospedes">
+          <select v-model="$store.state.reservaAcomod.totalHospedes">
             <option :value="n" v-for="n in totalHospedesArray">{{ n }} {{ n===1 ? 'hóspede' : 'hóspedes' }}</option>
           </select>
         </div>
 
         <div class="item-form">
           <label>Sua mensagem:</label>
-          <textarea rows="6" maxlength="2000" v-model="$store.state.message.text"></textarea>
+          <textarea rows="5" maxlength="2000" v-model="$store.state.message.text"></textarea>
         </div>
 
         <div class="btns">
-          <button type="button" class="__book-btn">Reservar</button>
+          <button type="button" class="__book-btn" v-if="$route.name === 'acomodacoes-id'">Pedir Reserva</button>
           <button type="button" class="__send-btn" @click="sendMessage()">Enviar Mensagem</button>
         </div>
 
@@ -62,18 +63,23 @@ export default {
       this.$store.state.clickedAskAcomod = false
     },
     sendMessage () {
-      let routeName = this.$route.name
-      this.$store.dispatch('a_sendMessage', routeName)
+      if (this.reservaAcomod.periodoReserva !== null && this.$store.state.message.text !== null) {
+        const routeName = this.$route.name
+        this.$store.dispatch('a_sendMessage', routeName)
+      } else {
+        alert('Erro')
+      }
     }
   },
   computed: {
     acomod () {
       return this.$store.state.acomod
     },
-    firstName () {
-      let fullName = this.acomod.proprietario.split(' ')
-      let firstName = fullName[0]
-      return firstName
+    user () {
+      return this.$store.state.user
+    },
+    reservaAcomod () {
+      return this.$store.state.reservaAcomod
     },
     totalHospedesArray () {
       return Array.from({length: this.acomod.totalHospedes}, (v, k) => k+1)
@@ -96,7 +102,7 @@ export default {
     & .left-container {
       min-width: 45%;
       flex-basis: 45%;
-      padding: 2.5rem 3rem 2.5rem 3rem;
+      padding: 3rem;
       & .__title {
         font-size: 37px;
         padding-bottom: 1.5rem;
@@ -141,10 +147,12 @@ export default {
           font-weight: 400;
           line-height: 26px;
           background: white;
-          color: rgb(82, 82, 82);
           padding: .8rem;
           border: 1px solid rgb(222,222,222);
           outline: none;
+        }
+        & textarea:focus {
+          border: 1px solid rgb(72,72,72) !important;
         }
       }
       & .btns {
@@ -152,7 +160,7 @@ export default {
         justify-content: flex-end;
         height: 2.9rem;
         & .__book-btn {
-          padding: 0 1.4rem;
+          padding: 0 1.3rem;
           margin-right: 1rem;
           font-size: 16px;
           font-weight: 600;
@@ -162,7 +170,7 @@ export default {
           line-height: 2.8rem;
         }
         & .__send-btn {
-          padding: 0 1.4rem;
+          padding: 0 1.3rem;
           font-size: 16px;
           font-weight: 600;
           background: var(--colorAcomod);

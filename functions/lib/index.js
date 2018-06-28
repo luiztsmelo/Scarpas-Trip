@@ -207,7 +207,7 @@ exports.airtable_newReservaAcomod = functions.firestore
     reservaAcomod.checkOut = dayjs(checkOut).format('YYYY-MM-DD');
     /* Deletar valores não suportados ou desnecessários para o Airtable */
     delete reservaAcomod.periodoReserva;
-    delete reservaAcomod.mensagem;
+    delete reservaAcomod.message;
     delete reservaAcomod.guestCPF;
     delete reservaAcomod.billing;
     /* Criar reserva no Airtable */

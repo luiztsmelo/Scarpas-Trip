@@ -115,13 +115,13 @@ export default {
       align-items: center;
       padding: 2.8rem 4rem 2.8rem 4rem;
       & .__img {
-        width: 4.3rem;
+        width: 4.2rem;
         height: auto;
       }
       & .__title {
-        font-size: 33px;
+        font-size: 32px;
         text-align: center;
-        padding: 1rem 0 .3rem 0;
+        padding: .8rem 0 .3rem 0;
       }
       & .__subtitle {
         font-size: 15px;

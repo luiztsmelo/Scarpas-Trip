@@ -69,12 +69,12 @@ const store = () => new Vuex.Store({
       timestamp: null,
       from: null,
       to: null,
-      totalHospedes: '1',
+      text: null,
+      about: null,
+      id: null,
       checkIn: null,
       checkOut: null,
-      text: '',
-      about: null,
-      id: null
+      totalHospedes: null
     },
     /*
     -------------------- CONFIGS --------------------
@@ -149,7 +149,7 @@ const store = () => new Vuex.Store({
       limpezaFee: null,
       serviceFeeTotal: null,
       valorReservaTotal: null,
-      mensagem: '',
+      message: '',
       hostID: null,
       hostEmail: null,
       hostName: null,
@@ -790,7 +790,7 @@ const store = () => new Vuex.Store({
         limpezaFee: null,
         serviceFeeTotal: null,
         valorReservaTotal: null,
-        mensagem: '',
+        message: '',
         hostID: null,
         hostEmail: null,
         hostName: null,
@@ -1001,11 +1001,17 @@ const store = () => new Vuex.Store({
     a_sendMessage ({ state }, routeName) {
       state.message.timestamp = new Date().getTime()
       state.message.from = state.user.userID
-      state.message.to = routeName === 'acomodacoes-id' ? state.acomod.userID : ''
-      state.message.about = routeName === 'acomodacoes-id' ? 'acomod' : ''
-      state.message.id = routeName === 'acomodacoes-id' ? state.acomod.acomodID : ''
+      state.message.to = routeName === 'acomodacoes-id' || 'acomodacoes-reservar' ? state.acomod.userID : ''
+      state.message.about = routeName === 'acomodacoes-id' || 'acomodacoes-reservar' ? 'acomod' : ''
+      state.message.id = routeName === 'acomodacoes-id' || 'acomodacoes-reservar' ? state.acomod.acomodID : ''
+      state.message.checkIn = state.reservaAcomod.periodoReserva.start
+      state.message.checkOut = state.reservaAcomod.periodoReserva.end
+      state.message.totalHospedes = state.reservaAcomod.totalHospedes
       /* Enviar mensagem para a firestore */
       firebase.firestore().collection('messages').add(state.message)
+      .catch(err => {
+        console.log(err)
+      })
     },
     /*
     ########## SIGN OUT ##########

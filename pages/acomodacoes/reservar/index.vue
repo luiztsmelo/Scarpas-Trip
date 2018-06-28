@@ -72,7 +72,31 @@
         <!-- ******* ETAPA 2 ******* -->
         <div class="etapa-2" v-if="$store.state.reservaAcomodDesktop2 === true">
 
-          <h1 class="__title">Mensagem</h1>
+          <h1 class="__title">Mensagem para {{ acomod.proprietario.split(' ')[0] }}</h1>
+
+
+          <div class="message">
+
+            <h3 class="__subtitle">
+              Para sua segurança, somente divulgaremos as informações de contato do anunciante após ele confirmar seu pedido de reserva. Se precisar de uma resposta dele antes de decidir se irá concluir o pedido ou não,
+              <span class="clique-aqui" @click="$modal.show('ask-acomod-modal')"> clique aqui</span>.
+            </h3>
+            
+            <h3 class="__subtitle">Diga</h3>
+
+
+            <div class="item-form">
+              <label>Sua mensagem:</label>
+              <textarea
+                :class="[ messageError ? 'has-error' : '' ]"
+                v-model="$store.state.reservaAcomod.message"
+                maxlength="2000"
+                rows="5"
+                :placeholder="'Olá, ' + acomod.proprietario.split(' ')[0] + '! Não vejo a hora de conhecer Capitólio.'">
+              </textarea>
+            </div>
+
+          </div>
 
 
           <button class="__next-btn" type="button" @click="nextBtn2">Continuar</button>
@@ -411,6 +435,7 @@ export default {
   transition: 'opacity',
   data() {
     return {
+      messageError: false,
       cardNumberError: false,
       cardHolderNameError: false,
       cardExpirationDateError: false,
@@ -431,7 +456,11 @@ export default {
       this.$store.state.etapaReserva2ok = true, this.$store.commit('m_reservaAcomodDesktop1', false), this.$store.commit('m_reservaAcomodDesktop2', true)
     },
     nextBtn2 () {
-      this.$store.state.etapaReserva3ok = true, this.$store.commit('m_reservaAcomodDesktop2', false), this.$store.commit('m_reservaAcomodDesktop3', true)
+      if (this.$store.state.reservaAcomod.message.length > 0) {
+        this.$store.state.etapaReserva3ok = true, this.$store.commit('m_reservaAcomodDesktop2', false), this.$store.commit('m_reservaAcomodDesktop3', true)
+      } else {
+        this.messageError = true
+      }
     },
     zipcodeInfo () {
       this.$store.commit('m_loader', true)
@@ -600,6 +629,7 @@ export default {
     /* ******************** PATHS ******************** */
     acomod () { return this.$store.state.acomod },
     concludedReservaAcomod () { return this.$store.state.concludedReservaAcomod },
+    message () { return this.$store.state.reservaAcomod.message },
     cardNumber () { return this.$store.state.creditCard.cardNumber },
     cardHolderName () { return this.$store.state.creditCard.cardHolderName },
     cardExpirationDate () { return this.$store.state.creditCard.cardExpirationDate },
@@ -660,6 +690,7 @@ export default {
     }
   },
   watch: {
+    message (value) { value !== '' ? this.messageError = false : '' },
     cardNumber (value) { value !== '' ? this.cardNumberError = false : '' },
     cardHolderName (value) { value !== '' ? this.cardHolderNameError = false : '' },
     cardExpirationDate (value) { value !== '' ? this.cardExpirationDateError = false : '' },
@@ -749,12 +780,12 @@ export default {
     & .flex-left {
       flex: 65%;
       & .__title {
-        padding-bottom: 1rem;
+        padding-bottom: 1.6rem;
         font-size: 32px;
         user-select: none;
       }
       & .__subtitle {
-        padding-top: 2rem;
+        padding-top: .5rem;
       }
       & .etapa-1-item {
         padding-top: 2rem;
@@ -763,46 +794,71 @@ export default {
           font-weight: 600;
         }
       }
+      & .message {
+        margin-right: 28%;
+        & .clique-aqui {
+          cursor: pointer;
+        }
+        & .clique-aqui:hover {
+          cursor: pointer;
+          text-decoration: underline;
+        }
+      }
       & .payment {
-         margin-right: 28%;
-        & .item-form {
-          display: flex;
-          flex-flow: column;
-          margin: 2.6rem 0;
-          & label {
-            padding-bottom: .7rem;
-            user-select: none;
-            font-weight: 600;
-            font-size: 16px;
-          }
-          & input {
-            cursor: text;
-            position: relative;
-            width: 100%;
-            font-weight: 400;
-            background: white;
-            color: var(--color01);
-            padding: .85rem .4rem .85rem .7rem;
-            border: 1px solid rgb(222,222,222);
-            outline: none;
-            transition: .15s border ease;
-          }
-          & input:focus {
-            border: 1px solid rgb(72,72,72) !important;
-          }
-          & select {
-            width: 100%;
-            font-weight: 400;
-            background: white;
-            color: var(--color01);
-            padding: .85rem 1.85rem .85rem .7rem;
-            border: 1px solid rgb(222,222,222);
-            outline: none;
-            transition: .15s border ease;
-          }
-          & select:focus {
-            border: 1px solid rgb(72,72,72) !important;
-          }
+        margin-right: 28%;
+      }
+      & .item-form {
+        display: flex;
+        flex-flow: column;
+        margin: 2.6rem 0;
+        & label {
+          padding-bottom: .7rem;
+          user-select: none;
+          font-weight: 600;
+          font-size: 16px;
+        }
+        & input {
+          cursor: text;
+          position: relative;
+          width: 100%;
+          font-weight: 400;
+          background: white;
+          color: var(--color01);
+          padding: .85rem .4rem .85rem .7rem;
+          border: 1px solid rgb(222,222,222);
+          outline: none;
+          transition: .15s border ease;
+        }
+        & input:focus {
+          border: 1px solid rgb(72,72,72) !important;
+        }
+        & select {
+          width: 100%;
+          font-weight: 400;
+          background: white;
+          color: var(--color01);
+          padding: .85rem 1.85rem .85rem .7rem;
+          border: 1px solid rgb(222,222,222);
+          outline: none;
+          transition: .15s border ease;
+        }
+        & select:focus {
+          border: 1px solid rgb(72,72,72) !important;
+        }
+        & textarea {
+          width: 100%;
+          min-width: 100%;
+          max-width: 100%;
+          font-size: 16px;
+          font-weight: 400;
+          line-height: 26px;
+          background: white;
+          padding: .8rem;
+          border: 1px solid rgb(222,222,222);
+          outline: none;
+        }
+        & textarea:focus {
+          border: 1px solid rgb(72,72,72) !important;
         }
       }
     }
@@ -893,7 +949,7 @@ export default {
 
 .__next-btn {
   position: relative;
-  margin-top: 3rem;
+  margin-top: 1rem;
   padding: 0 1.5rem;
   min-height: 3rem;
   font-size: 17px;
