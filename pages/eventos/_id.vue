@@ -152,12 +152,28 @@ export default {
   },
   transition: 'id',
   fetch ({ store, params }) {
-    return firebase.firestore().collection('eventos').doc(params.id).get().then(doc => {
+    firebase.firestore().collection('eventos').doc(params.id).get()
+    .then(doc => {
       store.commit('m_evento', doc.data())
-      store.commit('m_showNavbar', false)
-      store.commit('m_showFoobar', false)
-      store.commit('m_loader', false)
+
+      if (store.state.isMobile === true) {
+        store.commit('m_showNavbar', false)
+        store.commit('m_showFoobar', false)
+      }
+
+      if (doc.exists) {
+        firebase.firestore().collection('eventos').doc(params.id).collection('visits').add({ 
+          date: new Date().getTime(),
+          fromMobile: store.state.isMobile,
+          clickedReservaBtn: false,
+          wentToReservaPage: false,
+          concludedReserva: false
+        })
+        .then(doc => store.state.visitID = doc.id)
+        .catch(err => console.log(err))
+      }
     })
+    .catch(err => console.log(err))
   },
   methods: {
     scrollTopbarBg (evt, el) {

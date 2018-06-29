@@ -496,7 +496,7 @@ export default {
   middleware: 'acomodValidate',
   transition: 'id',
   fetch ({ store, params }) {
-    return firebase.firestore().collection('acomods').doc(params.id).get()
+    firebase.firestore().collection('acomods').doc(params.id).get()
     .then(doc => {
       store.commit('m_acomod', doc.data())
 
@@ -504,8 +504,6 @@ export default {
         store.commit('m_showNavbar', false)
         store.commit('m_showFoobar', false)
       }
-
-      store.commit('m_loader', false)
 
       if (doc.exists) {
         firebase.firestore().collection('acomods').doc(params.id).collection('visits').add({ 
@@ -519,10 +517,7 @@ export default {
         .catch(err => console.log(err))
       }
     })
-    .catch(err => {
-      console.log(err)
-      store.commit('m_loader', false)
-    })
+    .catch(err => console.log(err))
   },
   methods: {
     imageH (image) {
