@@ -152,15 +152,13 @@ export default {
   },
   transition: 'id',
   fetch ({ store, params }) {
+    if (store.state.isMobile === true) {
+      store.commit('m_showNavbar', false)
+      store.commit('m_showFoobar', false)
+    }
     firebase.firestore().collection('eventos').doc(params.id).get()
     .then(doc => {
       store.commit('m_evento', doc.data())
-
-      if (store.state.isMobile === true) {
-        store.commit('m_showNavbar', false)
-        store.commit('m_showFoobar', false)
-      }
-
       if (doc.exists) {
         firebase.firestore().collection('eventos').doc(params.id).collection('visits').add({ 
           date: new Date().getTime(),

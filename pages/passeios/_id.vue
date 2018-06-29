@@ -225,15 +225,13 @@ export default {
   },
   transition: 'id',
   fetch ({ store, params }) {
+    if (store.state.isMobile === true) {
+      store.commit('m_showNavbar', false)
+      store.commit('m_showFoobar', false)
+    }
     firebase.firestore().collection('passeios').doc(params.id).get()
     .then(doc => {
       store.commit('m_passeio', doc.data())
-
-      if (store.state.isMobile === true) {
-        store.commit('m_showNavbar', false)
-        store.commit('m_showFoobar', false)
-      }
-
       if (doc.exists) {
         firebase.firestore().collection('passeios').doc(params.id).collection('visits').add({ 
           date: new Date().getTime(),
@@ -328,16 +326,6 @@ export default {
     showShare () {
       return this.$store.state.showShare
     }
-  },
-  beforeRouteEnter (to, from, next) {
-    next(vm => {
-      if (vm.$store.state.isMobile === false) {
-        vm.$store.commit('m_showNavbar', true)
-      } else {
-        vm.$store.commit('m_showNavbar', false)
-        vm.$store.commit('m_showFoobar', false)
-      }
-    })
   },
   beforeRouteLeave (to, from, next) {
     this.$store.commit('m_loader', false) /* Evitar bugs com o loader */

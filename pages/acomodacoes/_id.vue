@@ -496,15 +496,13 @@ export default {
   middleware: 'acomodValidate',
   transition: 'id',
   fetch ({ store, params }) {
+    if (store.state.isMobile === true) {
+      store.commit('m_showNavbar', false)
+      store.commit('m_showFoobar', false)
+    }
     firebase.firestore().collection('acomods').doc(params.id).get()
     .then(doc => {
       store.commit('m_acomod', doc.data())
-
-      if (store.state.isMobile === true) {
-        store.commit('m_showNavbar', false)
-        store.commit('m_showFoobar', false)
-      }
-
       if (doc.exists) {
         firebase.firestore().collection('acomods').doc(params.id).collection('visits').add({ 
           date: new Date().getTime(),
@@ -700,17 +698,6 @@ export default {
       value === '' ? this.showComods = false : ''
     }
   },
-  beforeRouteEnter (to, from, next) {
-    next(vm => {
-      vm.$modal.hide('reserva-desktop-modal') /* Prevenir bug */
-      if (vm.$store.state.isMobile === false) {
-        vm.$store.commit('m_showNavbar', true)
-      } else {
-        vm.$store.commit('m_showNavbar', false)
-        vm.$store.commit('m_showFoobar', false)
-      }
-    })
-  },
   beforeRouteLeave (to, from, next) {
     if (this.$store.state.isReservar === false) {
       this.$store.dispatch('a_resetReservaAcomod')
@@ -734,7 +721,7 @@ export default {
 .acomods-id {
   background-color: white;
   margin-bottom: 5.3rem;
-  transition: all .27s cubic-bezier(.15,.97,.43,.93);
+  transition: all .3s cubic-bezier(.15,.97,.43,.93);
   
 
   /* ####### IMAGE BOX ####### */
