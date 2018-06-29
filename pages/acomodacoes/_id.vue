@@ -698,6 +698,16 @@ export default {
       value === '' ? this.showComods = false : ''
     }
   },
+  beforeRouteEnter (to, from, next) {
+    next(vm => {
+      if (vm.$store.state.isMobile === false) {
+        vm.$store.commit('m_showNavbar', true)
+      } else {
+        vm.$store.commit('m_showNavbar', false)
+        vm.$store.commit('m_showFoobar', false)
+      }
+    })
+  },
   beforeRouteLeave (to, from, next) {
     if (this.$store.state.isReservar === false) {
       this.$store.dispatch('a_resetReservaAcomod')
@@ -721,7 +731,7 @@ export default {
 .acomods-id {
   background-color: white;
   margin-bottom: 5.3rem;
-  transition: all .3s cubic-bezier(.15,.97,.43,.93);
+  transition: all .27s cubic-bezier(.15,.97,.43,.93);
   
 
   /* ####### IMAGE BOX ####### */
