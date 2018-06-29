@@ -10,18 +10,19 @@
 
     <img src="../../assets/img/close-modal.svg" style="cursor:pointer;position:absolute;top:1rem;right:1rem;width:1rem;height:auto" @click="$modal.hide('ask-acomod-modal')">
 
-    <div class="ask-acomod-body">
+
+    <div class="ask-acomod-body" v-if="!messageSent">
+
 
       <!-- LEFT CONTAINER -->
       <div class="left-container">
 
         <h1 class="__title">Enviar uma mensagem para {{ acomod.proprietario.split(' ')[0] }}</h1>
 
-        <h3 class="__subtitle">Para sua segurança, recomendamos que não faça reservas diretamente com o anunciante, fora desse site. Você poderá se prejudicar caso algum problema aconteça.</h3>
-
-        <h3 class="__subtitle">Portanto, nunca divulgue suas informações de contato. Somente após seu pedido de reserva tais informações serão fornecidas, para ambos.</h3>
+        <h3 class="__subtitle">Para sua segurança, recomendamos que não faça reservas diretamente com o anunciante, fora desse site. Você poderá se prejudicar caso algum problema aconteça. Portanto, nunca divulgue suas informações de contato. Somente após seu pedido de reserva tais informações serão fornecidas.</h3>
 
       </div><!-- LEFT CONTAINER -->
+
 
 
       <!-- RIGHT CONTAINER -->
@@ -49,23 +50,66 @@
         </div>
 
       </form><!-- RIGHT CONTAINER -->
-      
+
 
     </div>
+
+
+    <div class="after-sent" v-else>
+      <img class="__img" src="../../assets/img/brand.svg">
+      <h1 class="__title">Mensagem enviada</h1>
+      <h3 class="__subtitle">Pediremos a {{ acomod.proprietario.split(' ')[0] }} que te responda o mais rápido possível. Dentro de 24-48h você receberá a resposta em seu e-mail.</h3>
+      <button type="button" class="__close-btn" @click="$modal.hide('ask-acomod-modal')">Fechar</button>
+    </div>
+
     
   </modal>
 </template>
 
 <script>
+import * as firebase from 'firebase'
+import 'firebase/functions'
+require('firebase/firestore')
+
 export default {
+  data() {
+    return {
+      messageSent: false
+    }
+  },
   methods: {
     closedModal () {
       this.$store.state.clickedAskAcomod = false
+      this.messageSent = false
     },
     sendMessage () {
-      if (this.reservaAcomod.periodoReserva !== null && this.$store.state.message.text !== null) {
+      if (this.reservaAcomod.periodoReserva !== null && this.$store.state.message.text !== '') {
+        this.$store.commit('m_loader', true)
+
+        const message = this.$store.state.message
         const routeName = this.$route.name
-        this.$store.dispatch('a_sendMessage', routeName)
+
+        message.timestamp = new Date().getTime()
+        message.from = this.user.userID
+        message.to = routeName === 'acomodacoes-id' || 'acomodacoes-reservar' ? this.acomod.userID : ''
+        message.about = routeName === 'acomodacoes-id' || 'acomodacoes-reservar' ? 'acomod' : ''
+        message.id = routeName === 'acomodacoes-id' || 'acomodacoes-reservar' ? this.acomod.acomodID : ''
+        message.checkIn = this.reservaAcomod.periodoReserva.start
+        message.checkOut = this.reservaAcomod.periodoReserva.end
+        message.totalHospedes = this.reservaAcomod.totalHospedes
+
+        /* Add Message Firestore */
+        firebase.firestore().collection('messages').add(message)
+        .then(() => {
+          this.messageSent = true
+          this.$store.commit('m_resetMessage')
+          this.$store.commit('m_loader', false)
+        })
+        .catch(err => {
+          console.log(err)
+          this.$store.commit('m_loader', false)
+        })
+
       } else {
         alert('Erro')
       }
@@ -104,7 +148,7 @@ export default {
       flex-basis: 45%;
       padding: 3rem;
       & .__title {
-        font-size: 37px;
+        font-size: 36px;
         padding-bottom: 1.5rem;
       } 
       & .__subtitle {
@@ -124,7 +168,8 @@ export default {
         flex-flow: column;
         margin: 1rem 0 1.8rem 0;
         & label {
-          padding-bottom: .7rem;
+          padding-bottom: .6rem;
+          user-select: none;
           font-weight: 600;
           font-size: 15px;
         }
@@ -138,6 +183,9 @@ export default {
           padding: .75rem .6rem;
           border: 1px solid rgb(222,222,222);
           outline: none;
+        }
+        & select:focus {
+          border: 1px solid rgb(72,72,72) !important;
         }
         & textarea {
           width: 100%;
@@ -181,6 +229,36 @@ export default {
       }
     }/* RIGHT CONTAINER */
 
+  }
+
+  & .after-sent {
+    display: flex;
+    height: 100%;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+    padding: 3rem 23%;
+    & .__img {
+      width: 62px;
+      height: auto;
+    }
+    & .__title {
+      text-align: center;
+      padding: .7rem 0 .4rem 0;
+    }
+    & .__subtitle {
+      text-align: center;
+    }
+    & .__close-btn {
+      margin-top: 3rem;
+      width: 10rem;
+      font-size: 16px;
+      font-weight: 600;
+      background: var(--colorAcomod);
+      color: white;
+      border-radius: 5px;
+      line-height: 2.8rem;
+    }
   }
 }
 

@@ -69,7 +69,7 @@ const store = () => new Vuex.Store({
       timestamp: null,
       from: null,
       to: null,
-      text: null,
+      text: '',
       about: null,
       id: null,
       checkIn: null,
@@ -346,6 +346,17 @@ const store = () => new Vuex.Store({
       state.user.fullName = null
       state.user.email = null
       state.user.photoURL = null
+    },
+    m_resetMessage (state) {
+      state.message.timestamp = null
+      state.message.from = null
+      state.message.to = null
+      state.message.text = ''
+      state.message.about = null
+      state.message.id = null
+      state.message.checkIn = null
+      state.message.checkOut = null
+      state.message.totalHospedes = null
     },
     m_showNavbar (state, payload) {
       state.showNavbar = payload
@@ -949,13 +960,13 @@ const store = () => new Vuex.Store({
     ########## SET USER ##########
     */
     a_setUser ({ state }) {
-      /* Chechar se usuário já existe */
+      /* Chechar se user já existe */
       firebase.firestore().collection('users').doc(state.user.userID).get().then(doc => {
-        if (!doc.exists) { /* Se não existir: */
-          /* 1) Criar usuário no Firebase */
+        if (!doc.exists) {
+          /* 1) Set User Firestore */
           firebase.firestore().collection('users').doc(state.user.userID).set(state.user)
           .then(() => {
-            /* 2) Criar usuário no Airtable */
+            /* 2) Set User Airtable */
             this.$axios.$post('https://api.airtable.com/v0/app2VZONmWdcr8ybJ/Users?api_key=keyoOJ1ERQwpa2EIg', {
               'fields': {
                 'userID': state.user.userID,
@@ -965,52 +976,8 @@ const store = () => new Vuex.Store({
                 'photoURL': state.user.photoURL
               }
             })
-            /* 3) Criar contato no SendinBlue */
-            const configSendinBlue = {
-              headers: {
-                'content-type': 'application/json',
-                'api-key': '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'
-              }
-            }
-            this.$axios.post('https://api.sendinblue.com/v3/contacts', {
-              'email': state.user.email,
-              'attributes': {
-                'USERID': state.user.userID,
-                'FULLNAME': state.user.fullName,
-                'FIRSTNAME': state.user.firstName
-              }
-            }, configSendinBlue).then(() => {
-              /* 4) Enviar e-mail de Boas-Vindas */
-              this.$axios.post('https://api.sendinblue.com/v3/smtp/email', {
-                'sender.email': 'luiztsmelo@gmail.com',
-                'to': [{
-                  'email': state.user.email,
-                  'name': state.user.firstName
-                }],
-                'replyTo.email': 'luiztsmelo@gmail.com',
-                'templateId': 7
-              }, configSendinBlue)
-            })
           })
         }
-      })
-    },
-    /*
-    ########## SEND MESSAGE ##########
-    */
-    a_sendMessage ({ state }, routeName) {
-      state.message.timestamp = new Date().getTime()
-      state.message.from = state.user.userID
-      state.message.to = routeName === 'acomodacoes-id' || 'acomodacoes-reservar' ? state.acomod.userID : ''
-      state.message.about = routeName === 'acomodacoes-id' || 'acomodacoes-reservar' ? 'acomod' : ''
-      state.message.id = routeName === 'acomodacoes-id' || 'acomodacoes-reservar' ? state.acomod.acomodID : ''
-      state.message.checkIn = state.reservaAcomod.periodoReserva.start
-      state.message.checkOut = state.reservaAcomod.periodoReserva.end
-      state.message.totalHospedes = state.reservaAcomod.totalHospedes
-      /* Enviar mensagem para a firestore */
-      firebase.firestore().collection('messages').add(state.message)
-      .catch(err => {
-        console.log(err)
       })
     },
     /*

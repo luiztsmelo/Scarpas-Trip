@@ -115,13 +115,13 @@ export default {
       align-items: center;
       padding: 2.8rem 4rem 2.8rem 4rem;
       & .__img {
-        width: 4.2rem;
+        width: 62px;
         height: auto;
       }
       & .__title {
-        font-size: 32px;
+        font-size: 31px;
         text-align: center;
-        padding: .8rem 0 .3rem 0;
+        padding: .7rem 0 .3rem 0;
       }
       & .__subtitle {
         font-size: 15px;
@@ -159,7 +159,7 @@ export default {
         }
       }
       & .terms-of-service {
-        padding-top: .8rem;
+        padding-top: .7rem;
         text-decoration: underline;
         font-size: 15px;
       }

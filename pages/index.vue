@@ -24,7 +24,7 @@
         </div>
         
         <div class="cards-container">
-          <div class="card" v-for="evento in $store.state.eventos" :key="evento.eventoID" @click="$store.commit('m_loader', true)">
+          <div class="card" v-for="evento in $store.state.eventos" :key="evento.eventoID">
             <nuxt-link :to="'/eventos/' + evento.eventoID">
               <progressive-background class="__card-img" :src="imageEvH(evento)" :placeholder="evento.imageL1" :aspect-ratio="2/3"/>
               <span class="__card-info" style="color: #FF7D6C">{{ evento.date }}&#160;&#8231;&#160;{{ evento.hour }}</span>
@@ -55,7 +55,7 @@
         </div>
         
         <div class="cards-container">
-          <div class="card" v-for="acomod in $store.state.acomods" :key="acomod.acomodID" @click="$store.commit('m_loader', true)">
+          <div class="card" v-for="acomod in $store.state.acomods" :key="acomod.acomodID">
             <nuxt-link :to="'/acomodacoes/' + acomod.acomodID">
 
               <progressive-background class="__card-img" :src="imageAcH(acomod)" :placeholder="acomod.images[0].L" :aspect-ratio="2/3"/>
@@ -91,7 +91,7 @@
         </div>
         
         <div class="cards-container">
-          <div class="card" v-for="passeio in $store.state.passeios" :key="passeio.passeioID" @click="$store.commit('m_loader', true)">
+          <div class="card" v-for="passeio in $store.state.passeios" :key="passeio.passeioID">
             <nuxt-link :to="'/passeios/' + passeio.passeioID">
               <progressive-background class="__card-img" :src="imagePasH(passeio)" :placeholder="passeio.imageL1" :aspect-ratio="2/3"/>
               <span class="__card-info" style="color: #0784FD">{{ passeio.tipoPasseio }}</span>
@@ -122,7 +122,7 @@
         </div>
         
         <div class="cards-container">
-          <div class="card" v-for="atracao in $store.state.atracoes" :key="atracao.atracaoID" @click="$store.commit('m_loader', true)">
+          <div class="card" v-for="atracao in $store.state.atracoes" :key="atracao.atracaoID">
             <nuxt-link :to="'/atracoes/' + atracao.atracaoID">
               <progressive-background class="__card-img" :src="imageAtH(atracao)" :placeholder="atracao.imageL1" :aspect-ratio="2/3"/>
               <span class="__card-info" style="color: #81C784">{{ atracao.tipoAtracao }}</span>

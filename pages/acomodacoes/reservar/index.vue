@@ -318,7 +318,7 @@
           </div><!-- Payment -->
           
 
-          <button class="__next-btn" type="button" @click="concluirReserva">Confirmar Pedido</button>
+          <button class="__next-btn" type="button" @click="concluirReserva">Concluir Pedido</button>
 
 
         </div><!-- ******* ETAPA 3 ******* -->
@@ -812,10 +812,10 @@ export default {
         flex-flow: column;
         margin: 2.6rem 0;
         & label {
-          padding-bottom: .7rem;
+          padding-bottom: .6rem;
           user-select: none;
           font-weight: 600;
-          font-size: 16px;
+          font-size: 15px;
         }
         & input {
           cursor: text;
@@ -912,6 +912,7 @@ export default {
             }
           }
           & .__ver-detalhes {
+            user-select: none;
             cursor: pointer;
             font-size: 14px;
             font-weight: 500;
