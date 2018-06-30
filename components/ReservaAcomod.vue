@@ -213,7 +213,7 @@ export default {
           fontSize: '15px',
         },
         dayCellNotInMonth: {
-          color: '#DADADA'
+          opacity: 0
         },
         dayPopoverContent: {
           background: '#00D8C7',
