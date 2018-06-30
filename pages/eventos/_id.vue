@@ -21,7 +21,7 @@
 
     <!-- ####### IMAGE ####### -->
     <div class="image-box" ref="imageBox">
-      <swiper :options="swiperOption">
+      <swiper :options="swiperOptions">
 
         <swiper-slide class="slide">
           <progressive-background class="__img" :src="image1H(evento)" :placeholder="evento.imageL1" :aspect-ratio="2/3"/>
@@ -31,7 +31,6 @@
           <progressive-background class="__img" :src="image2H(evento)" :placeholder="evento.imageL2" :aspect-ratio="2/3"/>
         </swiper-slide>
 
-        <div class="swiper-pagination" slot="pagination"></div>
       </swiper>
     </div> 
     <!-- ####### IMAGE ####### -->
@@ -120,21 +119,18 @@
 </template>
 
 <script>
+import * as firebase from 'firebase'
+require('firebase/firestore')
 import { loaded } from '~/node_modules/vue2-google-maps/src/manager'
 import supportsWebP from 'supports-webp'
 import { mapstyle } from '../../mixins/mapstyle'
-import * as firebase from 'firebase'
-require('firebase/firestore')
+import { swiperOptions } from '../../mixins/swiper_id'
+
 
 export default {
-  mixins: [mapstyle],
+  mixins: [ mapstyle, swiperOptions ],
   data () {
     return {
-      swiperOption: {
-        pagination: '.swiper-pagination',
-        dynamicBullets: true,
-        autoplay: 2222
-      }
     }
   },
   head () {
@@ -260,7 +256,7 @@ export default {
       this.$store.commit('m_showFoobar', true)
       next()
     } else {
-      next(false)
+      next()
     }
   }
 }
@@ -268,7 +264,6 @@ export default {
 
 <style>
 @import url('../../assets/css/main.css');
-@import url('../../assets/css/pagination.css');
 @import url('../../assets/css/_id.css');
 
 .eventos-id {

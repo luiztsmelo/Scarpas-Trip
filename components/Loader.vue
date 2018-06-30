@@ -12,7 +12,7 @@
 export default {
   computed: {
     background () {
-      if (this.$route.name === 'acomodacoes-id' || 'acomodacoes-reservar') {
+      if (this.$route.name !== 'anunciar-acomodacao') {
         return 'background: rgba(255, 255, 255, .75)'
       } else {
         return 'background: #fff'
@@ -42,8 +42,8 @@ export default {
     & .spinner {
     }
     & .spinner > div {
-      width: 10px;
-      height: 10px;
+      width: 9px;
+      height: 9px;
       background-color: #2a2a2a;
       border-radius: 100%;
       display: inline-flex;

@@ -22,7 +22,7 @@
 
     <!-- ####### IMAGE ####### -->
     <div class="image-box" ref="imageBox">
-      <swiper :options="swiperOption">
+      <swiper :options="swiperOptions">
 
         <swiper-slide class="slide">
           <progressive-background class="__img" :src="image1H(passeio)" :placeholder="passeio.imageL1" :aspect-ratio="2/3"/>
@@ -32,7 +32,6 @@
           <progressive-background class="__img" :src="image2H(passeio)" :placeholder="passeio.imageL2" :aspect-ratio="2/3"/>
         </swiper-slide>
 
-        <div class="swiper-pagination" slot="pagination"></div>
       </swiper>
     </div> 
     <!-- ####### IMAGE ####### -->
@@ -163,16 +162,17 @@
 </template>
 
 <script>
+import * as firebase from 'firebase'
+require('firebase/firestore')
 import { loaded } from '~/node_modules/vue2-google-maps/src/manager'
 import Proprietario from '../../components/Proprietario'
 import supportsWebP from 'supports-webp'
 import { mapstyle } from '../../mixins/mapstyle'
-import * as firebase from 'firebase'
-require('firebase/firestore')
+import { swiperOptions } from '../../mixins/swiper_id'
 
 export default {
   components: { Proprietario },
-  mixins: [mapstyle],
+  mixins: [ mapstyle, swiperOptions ],
   data () {
     return {
       monthLabels: ['Janeiro','Favereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
@@ -292,25 +292,6 @@ export default {
     this.$store.state.heightImageBox === null ? this.$store.state.heightImageBox = this.$refs.imageBox.clientHeight : null
   },
   computed: {
-    swiperOption () {
-      if (this.$store.state.isMobile === true) {
-        return {
-          pagination: '.swiper-pagination',
-          dynamicBullets: true,
-          autoplay: 2300
-        }
-      } else {
-        return {
-          slidesPerView: 2.37,
-          spaceBetween: 7,
-          pagination: '',
-          dynamicBullets: true,
-          freeMode: true,
-          autoplay: 2300,
-          speed: 10000
-        }
-      }
-    },
     markerUrl () {
       return 'https://firebasestorage.googleapis.com/v0/b/escarpas-trip.appspot.com/o/utils%2Fmarker.svg?alt=media&token=fcbfd76e-ee93-41e8-a816-98906e19859b'
     },
@@ -342,7 +323,6 @@ export default {
 
 <style>
 @import url('../../assets/css/main.css');
-@import url('../../assets/css/pagination.css');
 @import url('../../assets/css/_id.css');
 
 .passeios-id {

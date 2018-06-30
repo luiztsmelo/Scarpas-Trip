@@ -24,7 +24,7 @@
     
     <!-- ####### IMAGE ####### -->
     <div class="image-box" ref="imageBox">
-      <swiper :options="swiperOption">
+      <swiper :options="swiperOptions">
         
         <swiper-slide class="slide" v-for="image in acomod.images" :key="image.id">
           <progressive-background class="__img" :src="imageH(image)" :placeholder="image.L" :aspect-ratio="2/3"/>
@@ -348,14 +348,15 @@ import ReservaAcomodDesktop from '../../components/reserva-acomod/ReservaAcomodD
 import Proprietario from '../../components/Proprietario'
 import supportsWebP from 'supports-webp'
 import { mapstyle } from '../../mixins/mapstyle'
+import { swiperOptions } from '../../mixins/swiper_id'
 
 export default {
   components: { ReservaAcomod, ReservaAcomodDesktop, Proprietario },
-  mixins: [mapstyle],
+  mixins: [ mapstyle, swiperOptions ],
   data () {
     return {
       showComods: false,
-
+      
       attributes: [
         {
           key: 'disabledDates',
@@ -632,25 +633,6 @@ export default {
     disabledDates () {
       return 
     },
-    swiperOption () {
-      if (this.$store.state.isMobile === true) {
-        return {
-          pagination: '.swiper-pagination',
-          dynamicBullets: true,
-          autoplay: 2300
-        }
-      } else {
-        return {
-          slidesPerView: 2.28,
-          spaceBetween: 7,
-          pagination: '',
-          dynamicBullets: true,
-          freeMode: true,
-          autoplay: 2300,
-          speed: 18000
-        }
-      }
-    },
     markerUrl () {
       return 'https://firebasestorage.googleapis.com/v0/b/escarpas-trip.appspot.com/o/utils%2Fmarker.svg?alt=media&token=fcbfd76e-ee93-41e8-a816-98906e19859b'
     },
@@ -725,7 +707,6 @@ export default {
 
 <style>
 @import url('~/assets/css/main.css');
-@import url('~/assets/css/pagination.css');
 @import url('~/assets/css/_id.css');
 
 .acomods-id {

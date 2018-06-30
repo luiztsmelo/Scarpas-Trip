@@ -363,7 +363,7 @@
               <h3 class="__valor-total">R${{ $store.state.reservaAcomod.valorReservaTotal.toLocaleString() }}</h3>
             </div>
 
-            <span class="__ver-detalhes" @click="$modal.show('detalhes-valor-modal')">Ver detalhes</span>
+            <span class="__ver-detalhes" @click="$modal.show('detalhes-valor-modal')">Detalhes do valor</span>
 
             <detalhes-valor/>
 
@@ -385,7 +385,7 @@
       <h1 class="__title">Pedido de reserva enviado</h1>
 
       <h3 class="__text">
-        {{ acomod.proprietario.split(' ')[0] }} irá analisar seu pedido e dentro de 48 horas você receberá um e-mail e SMS com a confirmação de sua reserva, juntamente com as informações de contato do anunciante.
+        {{ acomod.proprietario.split(' ')[0] }} irá analisar seu pedido e dentro de 48h você receberá um e-mail e SMS com a confirmação de sua reserva, juntamente com as informações de contato do anunciante.
       </h3>
 
       <h3 class="__subtitle">Código da Reserva</h3>
@@ -928,13 +928,13 @@ export default {
     flex-flow: column;
     align-items: center;
     & .__img {
-      width: 4.6rem;
+      width: 62px;
       height: auto;
     }
     & .__title {
       text-align: center;
-      font-size: 37px;
-      padding: 1.1rem 0 .7rem 0;
+      font-size: 36px;
+      padding: .8rem 0 .7rem 0;
     }
     & .__subtitle {
       padding-top: 2rem;
