@@ -13,7 +13,7 @@
   --colorRestaurante: #fc5656;
   --colorAtracao: #81C784;
   /* ******* MAIN TRANSITION ******* */
-  --main-transition: cubic-bezier(0.190, 1.000, 0.220, 1.000) all .4s;
+  --main-transition: cubic-bezier(0.190, 1.000, 0.220, 1.000) all .5s;
 }
 
 html 
