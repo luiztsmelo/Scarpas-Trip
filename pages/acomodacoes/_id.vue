@@ -260,8 +260,8 @@
                 <div>
                   <input
                     type="text"
-                    placeholder="Chegada - Partida"
-                    :value="inputValue"
+                    placeholder="Chegada  →  Partida"
+                    :value="inputDatePicker"
                     @change='updateValue($event.target.value)' 
                     class="reserva-input-date"
                   />
@@ -349,6 +349,9 @@ import Proprietario from '../../components/Proprietario'
 import supportsWebP from 'supports-webp'
 import { mapstyle } from '../../mixins/mapstyle'
 import { swiperOptions } from '../../mixins/swiper_id'
+import dayjs from 'dayjs'
+import 'dayjs/locale/pt-br'
+dayjs.locale('pt-br')
 
 export default {
   components: { ReservaAcomod, ReservaAcomodDesktop, Proprietario },
@@ -373,20 +376,10 @@ export default {
         popover: {
           hideIndicator: true,
           component: PopoverCalendar
-        },
-        /* contentStyle: {
-          color: 'white',
-          opacity: 1
-        }, */
-        /* contentHoverStyle: {
-          color: 'white'
-        },
-        highlight: {
-          color: 'white'
-        } */
+        }
       },
       formats: {
-        input: ['D MMM', 'D MMM']
+        input: ['WWW, DD MMM', 'WWW, DD MMM']
       },
       disabledAttribute: {
         contentStyle: {
@@ -637,6 +630,13 @@ export default {
     },
     disabledDates () {
       return 
+    },
+    inputDatePicker () {
+      if (this.$store.state.reservaAcomod.periodoReserva !== null) {
+        let start = new Date(this.$store.state.reservaAcomod.periodoReserva.start)
+        let end = this.$store.state.reservaAcomod.periodoReserva.end
+        return dayjs(start).format('ddd, DD MMM') + '  →  ' + dayjs(end).format('ddd, DD MMM')
+      }
     },
     markerUrl () {
       return 'https://firebasestorage.googleapis.com/v0/b/escarpas-trip.appspot.com/o/utils%2Fmarker.svg?alt=media&token=fcbfd76e-ee93-41e8-a816-98906e19859b'
@@ -1006,7 +1006,6 @@ export default {
               cursor: pointer;
               width: 100%;
               padding: .75rem .6rem;
-              color: #8B8B8C;
               border: 1px solid rgb(222,222,222);
               outline: none;
               background: white;
@@ -1019,14 +1018,12 @@ export default {
               cursor: pointer;
               width: 100%;
               padding: .75rem .6rem;
-              color: #8D8D8D;
               border: 1px solid rgb(222,222,222);
               outline: none;
               background: white;
               transition: .15s border ease;
               & option {
                 background: white;
-                color: #8D8D8D;
               }
             }
             & select:focus {
@@ -1034,12 +1031,9 @@ export default {
             }
             & .reserva-input-date {
               padding-left: .9rem;
-              color: #8D8D8D;
-              font-size: 16px;
-              font-weight: 400;
             }
             & .reserva-close-date {
-              width: .65rem;
+              width: .7rem;
               height: auto;
               position: absolute;
               right: 3%;

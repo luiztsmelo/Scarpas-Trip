@@ -13,11 +13,11 @@
       <div class="progress">
         <h3 class="__item-progress" :style="etapaProgressed1" @click="backEtapa1">1. Revisar Regras {{ tipoAcomodTitle }}</h3>
         
-        <img src="../../../assets/img/arrow-right.svg" class="__arrow-right">
+        <h3 class="__arrow-right">→</h3>
 
         <h3 class="__item-progress" :style="etapaProgressed2" @click="backEtapa2">2. Mensagem</h3>
 
-        <img src="../../../assets/img/arrow-right.svg" class="__arrow-right">
+        <h3 class="__arrow-right">→</h3>
 
         <h3 class="__item-progress" :style="etapaProgressed3" @click="backEtapa3">3. Pagamento e Confirmação</h3>
       </div>
@@ -344,8 +344,7 @@
 
             <div class="detalhes-reserva-data_item">
               <img src="../../../assets/img/calendar.svg" class="__img" style="transform: scale(.91)">
-              <h3>{{ checkIn }}&nbsp/&nbsp</h3>
-              <h3>{{ checkOut }}</h3>
+              <h3>{{ periodoReserva }}</h3>
             </div>
 
             <div class="detalhes-reserva-data_item">
@@ -661,16 +660,13 @@ export default {
     },
 
     /* ******************** DATES ******************** */
-    checkIn () {
-      const checkIn = new Date(this.$store.state.reservaAcomod.periodoReserva.start)
-      return dayjs(checkIn).format('ddd, DD MMM YYYY') 
-    },
-    checkOut () {
-      const checkOut = new Date(this.$store.state.reservaAcomod.periodoReserva.end)
-      return dayjs(checkOut).format('ddd, DD MMM YYYY')
+    periodoReserva () {
+      let checkIn = new Date(this.$store.state.reservaAcomod.periodoReserva.start)
+      let checkOut = new Date(this.$store.state.reservaAcomod.periodoReserva.end)
+      return dayjs(checkIn).format('ddd, DD MMM YYYY') + ' → ' + dayjs(checkOut).format('ddd, DD MMM YYYY')
     },
     dayAfterCheckin () {
-      const checkIn = new Date(this.$store.state.reservaAcomod.periodoReserva.start)
+      let checkIn = new Date(this.$store.state.reservaAcomod.periodoReserva.start)
       return dayjs(checkIn).add(1, 'day').format('DD/MM')
     },
 
@@ -765,9 +761,7 @@ export default {
         font-size: 14px;
       }
       & .__arrow-right {
-        width: .7rem; 
-        height: auto;
-        margin: 0 1.1rem;
+        margin: 0 1rem;
       }
     }
   }
