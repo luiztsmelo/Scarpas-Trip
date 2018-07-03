@@ -42,37 +42,26 @@ export default {
     & .spinner {
     }
     & .spinner > div {
-      width: 9px;
-      height: 9px;
+      width: 8px;
+      height: 8px;
       background-color: #2a2a2a;
       border-radius: 100%;
       display: inline-flex;
-      margin: 0 .16rem;
-      animation: sk-bouncedelay 1.2s infinite ease-in-out both;
+      margin: 0 .18rem;
+      animation: sk-bouncedelay 1s infinite ease-in-out both;
     }
     & .spinner .bounce1 {
-      -webkit-animation-delay: -0.32s;
-      animation-delay: -0.32s;
+      animation-delay: -0.34s;
     }
     & .spinner .bounce2 {
-      -webkit-animation-delay: -0.16s;
-      animation-delay: -0.16s;
+      animation-delay: -0.18s;
     }
   }
 }
 
-@-webkit-keyframes sk-bouncedelay {
-  0%, 80%, 100% { -webkit-transform: scale(0) }
-  40% { -webkit-transform: scale(1.0) }
-}
 @keyframes sk-bouncedelay {
-  0%, 80%, 100% { 
-    -webkit-transform: scale(0);
-    transform: scale(0);
-  } 40% { 
-    -webkit-transform: scale(1.0);
-    transform: scale(1.0);
-  }
+  0%, 80%, 100% { transform: scale(0) } 
+  40% { transform: scale(1.0) }
 }
 
 /* TRANSITIONS */

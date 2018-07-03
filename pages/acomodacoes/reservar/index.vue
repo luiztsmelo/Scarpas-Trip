@@ -242,7 +242,6 @@
                   <label>CEP</label>
                   <masked-input
                     :class="[ zipcodeError ? 'has-error' : '' ]"
-                    @blur="zipcodeInfo"
                     type="tel"
                     v-model="$store.state.reservaAcomod.billing.zipcode"
                     :mask="[/\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/]"
@@ -344,12 +343,12 @@
 
             <div class="detalhes-reserva-data_item">
               <img src="../../../assets/img/calendar.svg" class="__img" style="transform: scale(.91)">
-              <h3>{{ periodoReserva }}</h3>
+              <h3 style="font-size:15px">{{ periodoReserva }}</h3>
             </div>
 
             <div class="detalhes-reserva-data_item">
               <img src="../../../assets/img/guests.svg" class="__img">
-              <h3>{{ $store.state.reservaAcomod.totalHospedes == '1' ? $store.state.reservaAcomod.totalHospedes + ' hóspede' : $store.state.reservaAcomod.totalHospedes + ' hóspedes' }}</h3>
+              <h3 style="font-size:15px">{{ $store.state.reservaAcomod.totalHospedes == '1' ? $store.state.reservaAcomod.totalHospedes + ' hóspede' : $store.state.reservaAcomod.totalHospedes + ' hóspedes' }}</h3>
             </div>
 
           </div>
@@ -460,25 +459,6 @@ export default {
       } else {
         this.messageError = true
       }
-    },
-    zipcodeInfo () {
-      this.$store.commit('m_loader', true)
-      
-      const billing = this.$store.state.reservaAcomod.billing
-      const zipcode = billing.zipcode.replace(/[^0-9\.]+/g, '')
-
-      this.$axios.$get('https://api.pagar.me/1/zipcodes/' + zipcode)
-      .then(data => {
-        billing.state = data.state
-        billing.city = data.city
-        billing.neighborhood = data.neighborhood
-        billing.street = data.street
-        this.$store.commit('m_loader', false)
-      })
-      .catch(err => {
-        this.zipcodeError = true
-        this.$store.commit('m_loader', false)
-      })
     },
     concluirReserva () {
       this.$store.commit('m_loader', true)
@@ -706,7 +686,26 @@ export default {
           concludedReserva: true
         })
       }
-    } 
+    },
+    zipcode (value) { /* Get zipcode info */
+      if (value.length === 9) {
+        this.$store.commit('m_loader', true)
+        const billing = this.$store.state.reservaAcomod.billing
+        const zipcode = billing.zipcode.replace(/[^0-9\.]+/g, '')
+        this.$axios.$get('https://api.pagar.me/1/zipcodes/' + zipcode)
+        .then(data => {
+          billing.state = data.state
+          billing.city = data.city
+          billing.neighborhood = data.neighborhood
+          billing.street = data.street
+          this.$store.commit('m_loader', false)
+        })
+        .catch(err => {
+          this.zipcodeError = true
+          this.$store.commit('m_loader', false)
+        })
+      }
+    }
   },
   beforeRouteEnter (to, from, next) {
     next(vm => {
@@ -889,7 +888,7 @@ export default {
             padding: .3rem 0;
             & .__img {
               margin-right: .6rem;
-              width: 1.55rem;
+              width: 1.5rem;
               height: auto;
             }
           }

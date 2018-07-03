@@ -183,10 +183,10 @@
           is-inline
           is-double-paned
           is-expanded
-          :min-date='new Date()'
-          mode='single'
-          :theme-styles='themeStylesDesktop'
-          :attributes='attributes'>
+          :min-date="minDate"
+          mode="single"
+          :theme-styles="calendarDesktopStyle"
+          :attributes="attributesCalendar">
         </v-calendar>
         <!-- ####### DISPONIBILIDADE ####### -->
 
@@ -244,32 +244,31 @@
               ref="datePicker"
               mode="range"
               v-model="$store.state.reservaAcomod.periodoReserva"
-              :min-date="new Date()"
-              :pane-width="280"
-              :disabled-dates="disabledDates"
+              :min-date="minDate"
+              :pane-width="285"
+              :disabled-dates="$store.state.reservedDates"
               :drag-attribute="myAttribute"
               :select-attribute="myAttribute"
               :disabled-attribute="disabledAttribute"
-              :theme-styles="themeStylesReserva"
-              :formats="formats"
+              :theme-styles="datePickerDesktopStyle"
               tint-color="#00D8C7"
               show-caps
               popover-visibility="focus">
               <div
-                slot-scope="{ inputValue, updateValue }">
+                slot-scope="{ updateValue }">
                 <div>
                   <input
                     type="text"
                     placeholder="Chegada  →  Partida"
                     :value="inputDatePicker"
-                    @change='updateValue($event.target.value)' 
+                    @change="updateValue($event.target.value)"
                     class="reserva-input-date"
                   />
-                  <img 
+                  <img
                     src="../../assets/img/exit.svg"
                     v-if="$store.state.reservaAcomod.periodoReserva !== null"
                     class="reserva-close-date"
-                    @click='$store.state.reservaAcomod.periodoReserva = null'
+                    @click.stop="$store.state.reservaAcomod.periodoReserva = null"
                   >
                 </div>
               </div>
@@ -303,11 +302,6 @@
               <h3>Total</h3>
               <h3>R${{ valorReservaTotal.toLocaleString() }}</h3>
             </div>
-
-            <!-- <div class="reserva-info_item" v-if="$store.state.reservaAcomod.totalHospedes != 1">
-              <h3>Dividido para {{ $store.state.reservaAcomod.totalHospedes }}</h3>
-              <h3>R${{ valorReservaTotalDividido.toLocaleString() }}</h3>
-            </div> -->
 
           </div>
 
@@ -349,27 +343,36 @@ import Proprietario from '../../components/Proprietario'
 import supportsWebP from 'supports-webp'
 import { mapstyle } from '../../mixins/mapstyle'
 import { swiperOptions } from '../../mixins/swiper_id'
+import { stylesCalendar } from '../../mixins/stylesCalendar'
 import dayjs from 'dayjs'
 import 'dayjs/locale/pt-br'
 dayjs.locale('pt-br')
 
 export default {
   components: { ReservaAcomod, ReservaAcomodDesktop, Proprietario },
-  mixins: [ mapstyle, swiperOptions ],
+  mixins: [ mapstyle, swiperOptions, stylesCalendar ],
   data () {
     return {
       showComods: false,
-
-      attributes: [
+      attributesCalendar: [
         {
-          key: 'disabledDates',
+          key: 'minDate',
           contentStyle: {
-            opacity: .3
+            opacity: 0.2,
+            textDecoration: 'line-through'
           },
           dates: {
-            start: null, // From the beginning of time
-            end: new Date().setDate(new Date().getDate() - 1) // Until yesterday
+            start: null,
+            end: dayjs(new Date()).add(2, 'day')
           }
+        },
+        {
+          key: 'reservedDates',
+          contentStyle: {
+            opacity: 0.2,
+            textDecoration: 'line-through'
+          },
+          dates: this.$store.state.reservedDates
         }
       ],
       myAttribute: {
@@ -377,101 +380,7 @@ export default {
           hideIndicator: true,
           component: PopoverCalendar
         }
-      },
-      formats: {
-        input: ['WWW, DD MMM', 'WWW, DD MMM']
-      },
-      disabledAttribute: {
-        contentStyle: {
-          opacity: .3
-        },
-        contentHoverStyle: {
-          cursor: 'default',
-          backgroundColor: 'transparent',
-        }
-      },
-      themeStylesDesktop: {
-        wrapper: {
-          color: 'rgb(42, 42, 42)',
-          margin: '10px 0px 0 0px',
-          padding: '10px 0px 0 0px',
-          background: 'white',
-          width: '100%'
-        },
-        header: {
-          padding: '0 9px',
-        },
-        headerArrows: {
-          fontSize: '1.5rem',
-        },
-        headerTitle: {
-          fontSize: '17px',
-          fontWeight: '600'
-        },
-        weekdays: {
-          color: 'rgb(42, 42, 42)',
-          fontSize: '15px',
-          fontWeight: '600',
-          padding: '14px 5px 6px 5px',
-        },
-        dayCell: {
-          height: '38px'
-        },
-        dayContent: {
-          fontWeight: '400',
-          fontSize: '14px'
-        },
-        dayCellNotInMonth: {
-          opacity: 0
-        },
-        verticalDivider: {
-          borderLeft: 'none',
-        }
-      },
-      themeStylesReserva: {
-        wrapper: {
-          color: 'rgb(42, 42, 42)',
-          borderTop: '8px solid white',
-          borderBottom: '8px solid white',
-          borderLeft: '15px solid white',
-          borderRight: '15px solid white',
-          background: 'white',
-          boxShadow: '1px 1px 25px 2px rgba(0,0,0,0.1)'
-        },
-        header: {
-          padding: '10px 9px 0px 9px',
-        },
-        headerArrows: {
-          fontSize: '1.45rem',
-        },
-        headerTitle: {
-          fontSize: '16px',
-          fontWeight: '600'
-        },
-        weekdays: {
-          color: 'rgb(42, 42, 42)',
-          fontWeight: '600',
-          padding: '21px 5px 6px 5px',
-        },
-        dayCell: {
-          height: '34px'
-        },
-        dayContent: {
-          fontWeight: '400',
-          fontSize: '14px'
-        },
-        dayCellNotInMonth: {
-          opacity: 0
-        },
-        dayPopoverContent: {
-          background: '#00D8C7',
-          color: 'white',
-          border: 'none'
-        },
-        verticalDivider: {
-          borderLeft: 'none'
-        }
-      } 
+      }
     }
   },
   head () {
@@ -482,7 +391,7 @@ export default {
         { property: 'og:url', content: 'https://escarpastrip.com/acomods/' + this.$route.params.id },
         { property: 'og:title', content: this.$store.state.acomod.title },
         { property: 'og:description', content: this.$store.state.acomod.subtitle },
-        { property: 'og:image', content: this.$store.state.acomod.imageH1J },
+        { property: 'og:image', content: this.$store.state.acomod.images[0].HJ },
         { property: 'og:site_name', content: 'Escarpas Trip' }
       ]
     }
@@ -491,14 +400,26 @@ export default {
   transition: 'id',
   fetch ({ store, params }) {
     store.commit('m_loader', true)
+
+    /* Get acomod data */
     return firebase.firestore().collection('acomods').doc(params.id).get()
     .then(doc => {
       store.commit('m_acomod', doc.data())
       store.commit('m_loader', false)
+
       if (store.state.isMobile) {
         store.commit('m_showNavbar', false)
         store.commit('m_showFoobar', false)
       }
+
+      /* Get reservedDates FALTA CONDIÇÕES BASEADAS NO STATUS DA RESERVA */
+      firebase.firestore().collection('reservasAcomods').where("acomodID", "==", params.id).get()
+      .then(querySnapshot => {
+        const reservedDates = querySnapshot.docs.map(doc => doc.data().periodoReserva)
+        store.commit('m_reservedDates', reservedDates)
+      }).catch(err => console.log(err))
+
+      /* Add page visit */
       if (doc.exists) {
         firebase.firestore().collection('acomods').doc(params.id).collection('visits').add({ 
           date: new Date().getTime(),
@@ -510,6 +431,7 @@ export default {
         .then(doc => store.state.visitID = doc.id)
         .catch(err => console.log(err))
       }
+
     })
     .catch(err => {
       store.commit('m_loader', false)
@@ -622,14 +544,8 @@ export default {
       this.$store.commit('m_valorReservaTotal', valorReservaTotal)
       return valorReservaTotal
     },
-    valorReservaTotalDividido () {
-      return Math.round(this.valorReservaTotal/this.$store.state.reservaAcomod.totalHospedes)
-    },
     totalHospedesArray () {
       return Array.from({length: this.acomod.totalHospedes}, (v, k) => k+1)
-    },
-    disabledDates () {
-      return 
     },
     inputDatePicker () {
       if (this.$store.state.reservaAcomod.periodoReserva !== null) {
@@ -637,6 +553,9 @@ export default {
         let end = this.$store.state.reservaAcomod.periodoReserva.end
         return dayjs(start).format('ddd, DD MMM') + '  →  ' + dayjs(end).format('ddd, DD MMM')
       }
+    },
+    minDate () {
+      return dayjs(new Date()).add(2, 'day')
     },
     markerUrl () {
       return 'https://firebasestorage.googleapis.com/v0/b/escarpas-trip.appspot.com/o/utils%2Fmarker.svg?alt=media&token=fcbfd76e-ee93-41e8-a816-98906e19859b'
