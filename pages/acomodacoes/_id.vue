@@ -260,7 +260,7 @@
                   <input
                     type="text"
                     placeholder="Chegada  →  Partida"
-                    :value="inputDatePicker"
+                    :value="outputDatePicker"
                     @change="updateValue($event.target.value)"
                     class="reserva-input-date"
                   />
@@ -401,7 +401,7 @@ export default {
   fetch ({ store, params }) {
     store.commit('m_loader', true)
 
-    /* Get acomod data */
+    /* GET ACOMOD DATA */
     return firebase.firestore().collection('acomods').doc(params.id).get()
     .then(doc => {
       store.commit('m_acomod', doc.data())
@@ -411,13 +411,6 @@ export default {
         store.commit('m_showNavbar', false)
         store.commit('m_showFoobar', false)
       }
-
-      /* Get reservedDates FALTA CONDIÇÕES BASEADAS NO STATUS DA RESERVA */
-      firebase.firestore().collection('reservasAcomods').where("acomodID", "==", params.id).get()
-      .then(querySnapshot => {
-        const reservedDates = querySnapshot.docs.map(doc => doc.data().periodoReserva)
-        store.commit('m_reservedDates', reservedDates)
-      }).catch(err => console.log(err))
 
       /* Add page visit */
       if (doc.exists) {
@@ -432,11 +425,13 @@ export default {
         .catch(err => console.log(err))
       }
 
-    })
-    .catch(err => {
-      store.commit('m_loader', false)
-      console.log(err)
-    })
+    }).catch(err => { store.commit('m_loader', false), console.log(err) })
+
+    /* GET RESERVED DATES  !!! FALTA CONDIÇÕES BASEADAS NO STATUS DA RESERVA !!! */
+    && firebase.firestore().collection('reservasAcomods').where("acomodID", "==", params.id).get()
+    .then(snap => store.commit('m_reservedDates', snap.docs.map(doc => doc.data().periodoReserva)))
+    .catch(err => console.log(err))
+
   },
   methods: {
     imageH (image) {
@@ -547,7 +542,7 @@ export default {
     totalHospedesArray () {
       return Array.from({length: this.acomod.totalHospedes}, (v, k) => k+1)
     },
-    inputDatePicker () {
+    outputDatePicker () {
       if (this.$store.state.reservaAcomod.periodoReserva !== null) {
         let start = new Date(this.$store.state.reservaAcomod.periodoReserva.start)
         let end = this.$store.state.reservaAcomod.periodoReserva.end

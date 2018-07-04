@@ -181,17 +181,17 @@ export default {
     }
   },
   fetch ({ store }) {
-    firebase.firestore().collection('eventos').onSnapshot(snapshot => {
-      store.commit('m_eventos', snapshot.docs.map(doc => doc.data()))
-    }),
-    firebase.firestore().collection('acomods').onSnapshot(snapshot => {
-      store.commit('m_acomods', snapshot.docs.map(doc => doc.data()))
-    }),
-    firebase.firestore().collection('passeios').onSnapshot(snapshot => {
-      store.commit('m_passeios', snapshot.docs.map(doc => doc.data()))
-    }),
-    firebase.firestore().collection('atracoes').onSnapshot(snapshot => {
-      store.commit('m_atracoes', snapshot.docs.map(doc => doc.data()))
+    return firebase.firestore().collection('eventos').onSnapshot(snap => {
+      store.commit('m_eventos', snap.docs.map(doc => doc.data()))
+    })
+    && firebase.firestore().collection('acomods').onSnapshot(snap => {
+      store.commit('m_acomods', snap.docs.map(doc => doc.data()))
+    })
+    && firebase.firestore().collection('passeios').onSnapshot(snap => {
+      store.commit('m_passeios', snap.docs.map(doc => doc.data()))
+    })
+    && firebase.firestore().collection('atracoes').onSnapshot(snap => {
+      store.commit('m_atracoes', snap.docs.map(doc => doc.data()))
     })
   },
   beforeRouteEnter (to, from, next) {
