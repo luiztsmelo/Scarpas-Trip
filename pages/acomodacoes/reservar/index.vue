@@ -415,8 +415,8 @@ import 'firebase/functions'
 require('firebase/firestore')
 import supportsWebP from 'supports-webp'
 import MaskedInput from 'vue-text-mask'
-import detalhesValor from '@/components/detalhesValor'
-import { states } from '../../../mixins/statesBrazil'
+import detalhesValor from '@/components/reserva-acomod/detalhesValor'
+import { states } from '@/mixins/statesBrazil'
 import dayjs from 'dayjs'
 import 'dayjs/locale/pt-br'
 dayjs.locale('pt-br')
@@ -921,7 +921,7 @@ export default {
     flex-flow: column;
     align-items: center;
     & .__img {
-      width: 62px;
+      width: 60px;
       height: auto;
     }
     & .__title {

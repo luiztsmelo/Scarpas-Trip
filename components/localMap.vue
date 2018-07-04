@@ -117,7 +117,7 @@ export default {
 </script>
 
 <style>
-@import url('../assets/css/main.css');
+@import url('~/assets/css/main.css');
 
 .local-map-modal {
   z-index: 10000;

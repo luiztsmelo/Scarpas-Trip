@@ -872,8 +872,8 @@ export default {
 </script>
 
 <style>
-@import url('../../../assets/css/main.css');
-@import url('../../../assets/css/vue-simple-suggest.css');
+@import url('~/assets/css/main.css');
+@import url('~/assets/css/vue-simple-suggest.css');
 
 .anunciar-passeio {
   margin-top: 3.4rem;

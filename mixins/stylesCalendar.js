@@ -41,7 +41,7 @@ export const stylesCalendar = {
         },
         dayContent: {
           fontWeight: '400',
-          fontSize: '15px'
+          fontSize: '14px'
         },
         dayCellNotInMonth: {
           opacity: 0

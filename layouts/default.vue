@@ -45,16 +45,17 @@ import AskAcomod from '~/components/reserva-acomod/AskAcomod'
 
 export default {
   components: { Navbar, Foobar, SignIn, Menuu, Loader, Share, MapFull, AskAcomod },
+  
   beforeCreate () {
-    /* 
-    DETECT DEVICE
-    */
+
+    /*  DETECT DEVICE */
     if (isMobile.any) {
       this.$store.commit('m_isMobile', true)
     } else {
       this.$store.commit('m_isMobile', false)
     }
   }
+
 }
 </script>
 

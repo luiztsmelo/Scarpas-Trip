@@ -16,7 +16,7 @@ export default {
 </script>
 
 <style>
-@import url('../../assets/css/main.css');
+@import url('~/assets/css/main.css');
 
 .restaurantes {
   margin-top: 3.4rem;

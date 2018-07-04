@@ -247,8 +247,8 @@
               :min-date="minDate"
               :pane-width="285"
               :disabled-dates="$store.state.reservedDates"
-              :drag-attribute="myAttribute"
-              :select-attribute="myAttribute"
+              :drag-attribute="attribute"
+              :select-attribute="attribute"
               :disabled-attribute="disabledAttribute"
               :theme-styles="datePickerDesktopStyle"
               tint-color="#00D8C7"
@@ -278,7 +278,7 @@
           <div class="reserva-info" v-if="$store.state.reservaAcomod.periodoReserva !== null">
             
             <div class="reserva-info_item" style="padding-bottom: .2rem">
-              <h3>R${{ acomod.valorNoite.toLocaleString() }} x {{ $store.state.reservaAcomod.noites }} noites</h3>
+              <h3>R${{ acomod.valorNoite.toLocaleString() }} x {{ daySpan }} {{ daySpan == 1 ? 'noite' : 'noites'}}</h3>
               <h3 id="valor">R$ {{ valorNoitesTotal.toLocaleString() }}</h3>
             </div>
 
@@ -306,7 +306,6 @@
           </div>
 
           <button class="__reserva-desktop-btn" type="button" @click="reservar">Pedir Reserva</button>
-          <reserva-acomod-desktop/>
 
           <h4 class="__info">Você ainda não será cobrado.</h4>
 
@@ -319,14 +318,14 @@
     </div><!-- Desktop View -->
 
 
-    <!-- ####### RESERVA ####### --> 
+    <!-- ####### RESERVA MOBILE ####### --> 
     <div class="reserva">
       <div class="reserva-body">
         <h3 class="__reserva-valor">R${{ acomod.valorNoite }}<span class="__reserva-valor-pessoa">/noite</span></h3>
         <button class="__reserva-btn" @click="$store.commit('m_showReservaAcomod', true), hashReserva()">Pedir Reserva</button>
       </div>
     </div>
-    <reserva-acomod/><!-- ####### RESERVA ####### -->
+    <reserva-mobile/><!-- ####### RESERVA MOBILE ####### -->
 
     
   </div>
@@ -335,21 +334,19 @@
 <script>
 import * as firebase from 'firebase'
 require('firebase/firestore')
-import PopoverCalendar from '../../components/reserva-acomod/PopoverCalendar'
 import { loaded } from '~/node_modules/vue2-google-maps/src/manager'
-import ReservaAcomod from '../../components/ReservaAcomod'
-import ReservaAcomodDesktop from '../../components/reserva-acomod/ReservaAcomodDesktop'
-import Proprietario from '../../components/Proprietario'
+import ReservaMobile from '~/components/reserva-acomod/ReservaMobile'
+import Proprietario from '~/components/Proprietario'
 import supportsWebP from 'supports-webp'
-import { mapstyle } from '../../mixins/mapstyle'
-import { swiperOptions } from '../../mixins/swiper_id'
-import { stylesCalendar } from '../../mixins/stylesCalendar'
+import { mapstyle } from '~/mixins/mapstyle'
+import { swiperOptions } from '~/mixins/swiper_id'
+import { stylesCalendar } from '~/mixins/stylesCalendar'
 import dayjs from 'dayjs'
 import 'dayjs/locale/pt-br'
 dayjs.locale('pt-br')
 
 export default {
-  components: { ReservaAcomod, ReservaAcomodDesktop, Proprietario },
+  components: { ReservaMobile, Proprietario },
   mixins: [ mapstyle, swiperOptions, stylesCalendar ],
   data () {
     return {
@@ -363,7 +360,7 @@ export default {
           },
           dates: {
             start: null,
-            end: dayjs(new Date()).add(2, 'day')
+            end: dayjs(new Date()).add(1, 'day')
           }
         },
         {
@@ -375,10 +372,10 @@ export default {
           dates: this.$store.state.reservedDates
         }
       ],
-      myAttribute: {
+      attribute: {
         popover: {
           hideIndicator: true,
-          component: PopoverCalendar
+          visibility: 'none'
         }
       }
     }
@@ -524,8 +521,16 @@ export default {
     this.$store.state.heightImageBox === null ? this.$store.state.heightImageBox = this.$refs.imageBox.clientHeight : null
   },
   computed: {
+    daySpan () {
+      const oneDay = 24*60*60*1000
+      const checkIn = new Date(this.$store.state.reservaAcomod.periodoReserva.start)
+      const checkOut = new Date(this.$store.state.reservaAcomod.periodoReserva.end)
+      const daySpan = Math.round(Math.abs((checkIn.getTime() - checkOut.getTime())/(oneDay)))
+      this.$store.state.reservaAcomod.noites = daySpan
+      return daySpan
+    },
     valorNoitesTotal () {
-      let valorNoitesTotal = Math.round(this.acomod.valorNoite * this.$store.state.reservaAcomod.noites)
+      let valorNoitesTotal = Math.round(this.acomod.valorNoite * this.daySpan)
       this.$store.commit('m_valorNoitesTotal', valorNoitesTotal)
       return valorNoitesTotal
     },
@@ -550,7 +555,7 @@ export default {
       }
     },
     minDate () {
-      return dayjs(new Date()).add(2, 'day')
+      return dayjs(new Date()).add(2, 'day').toDate()
     },
     markerUrl () {
       return 'https://firebasestorage.googleapis.com/v0/b/escarpas-trip.appspot.com/o/utils%2Fmarker.svg?alt=media&token=fcbfd76e-ee93-41e8-a816-98906e19859b'

@@ -23,7 +23,7 @@ export default {
 </script>
 
 <style scoped>
-@import url('../assets/css/main.css');
+@import url('~/assets/css/main.css');
 
 .loader {
   position: fixed;

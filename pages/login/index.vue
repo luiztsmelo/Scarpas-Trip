@@ -47,7 +47,7 @@ export default {
 </script>
 
 <style>
-@import url('../../assets/css/main.css');
+@import url('~/assets/css/main.css');
 
 .login {
   margin-top: 3.4rem;

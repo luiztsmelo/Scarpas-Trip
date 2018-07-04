@@ -133,7 +133,7 @@ export default {
 </script>
 
 <style scoped>
-@import url('../../assets/css/main.css');
+@import url('~/assets/css/main.css');
 
 .ask-acomod-modal {
   z-index: 10000;
@@ -239,7 +239,7 @@ export default {
     align-items: center;
     padding: 3rem 23%;
     & .__img {
-      width: 62px;
+      width: 60px;
       height: auto;
     }
     & .__title {

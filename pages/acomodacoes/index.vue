@@ -269,9 +269,9 @@ export default {
 </script>
 
 <style>
-@import url('../../assets/css/main.css');
-@import url('../../assets/css/pagination.css');
-@import url('../../node_modules/vue-multiselect/dist/vue-multiselect.min.css');
+@import url('~/assets/css/main.css');
+@import url('~/assets/css/pagination.css');
+@import url('~/node_modules/vue-multiselect/dist/vue-multiselect.min.css');
 
 .acomods {
   margin: 3.4rem 0 5.4rem 0;

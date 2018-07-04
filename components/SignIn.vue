@@ -96,7 +96,7 @@ export default {
 </script>
 
 <style>
-@import url('../assets/css/main.css');
+@import url('~/assets/css/main.css');
 
 .sign-in-modal {
   z-index: 10000;
@@ -115,7 +115,7 @@ export default {
       align-items: center;
       padding: 2.8rem 4rem 2.8rem 4rem;
       & .__img {
-        width: 62px;
+        width: 60px;
         height: auto;
       }
       & .__title {

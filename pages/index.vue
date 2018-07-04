@@ -144,8 +144,8 @@
 import supportsWebP from 'supports-webp'
 import * as firebase from 'firebase'
 require('firebase/firestore')
-import Roteiro from '../components/Roteiro'
-import Footer from '../components/Footer'
+import Roteiro from '~/components/Roteiro'
+import Footer from '~/components/Footer'
 
 export default {
   components: { Roteiro, Footer },

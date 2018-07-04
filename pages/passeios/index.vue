@@ -107,8 +107,8 @@ export default {
 </script>
 
 <style>
-@import url('../../assets/css/main.css');
-@import url('../../assets/css/pagination.css');
+@import url('~/assets/css/main.css');
+@import url('~/assets/css/pagination.css');
 
 .passeios {
   margin: 3.4rem 0 5.4rem 0;

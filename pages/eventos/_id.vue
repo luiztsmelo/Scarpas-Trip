@@ -268,8 +268,8 @@ export default {
 </script>
 
 <style>
-@import url('../../assets/css/main.css');
-@import url('../../assets/css/_id.css');
+@import url('~/assets/css/main.css');
+@import url('~/assets/css/_id.css');
 
 .eventos-id {
   display: flex;

@@ -115,7 +115,7 @@ export default {
 </script>
 
 <style>
-@import url('../assets/css/main.css');
+@import url('~/assets/css/main.css');
 
 .profile {
   margin: 3.4rem 0 5rem 0;

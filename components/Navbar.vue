@@ -129,7 +129,7 @@ export default {
 </script>
 
 <style>
-@import url('../assets/css/main.css');
+@import url('~/assets/css/main.css');
 
 .navbar {
   position: fixed;

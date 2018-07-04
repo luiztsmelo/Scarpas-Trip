@@ -5,7 +5,7 @@
       <!-- BACK BUTTON -->
       <div class="back-bar">
         <div class="back-box" @click="backBtn">
-          <img class="__back-btn" src="../assets/img/back.svg" alt="voltar">
+          <img class="__back-btn" src="../../assets/img/back.svg" alt="voltar">
         </div>
       </div><!-- BACK BUTTON -->
 
@@ -69,11 +69,9 @@
             v-model='$store.state.reservaAcomod.periodoReserva'
             :min-date='Date.now()'
             :disabled-dates='disabledDates'
-            :drag-attribute='myAttribute'
-            :select-attribute='myAttribute'
+            :drag-attribute='attribute'
+            :select-attribute='attribute'
             :disabled-attribute='disabledAttribute'
-            :month-labels='monthLabels'
-            :weekday-labels='weekdayLabels'
             :theme-styles='themeStyles'
             tint-color='#00D8C7'
             show-caps>
@@ -148,7 +146,6 @@
 </template>
 
 <script>
-import PopoverCalendar from '~/components/reserva-acomod/PopoverCalendar.vue'
 import MaskedInput from 'vue-text-mask'
 
 export default {
@@ -163,10 +160,10 @@ export default {
         loader3: false,
         loader4: false,
       },
-      myAttribute: {
+      attribute: {
         popover: {
           hideIndicator: true,
-          component: PopoverCalendar
+          visibility: 'none'
         }
       },
       disabledAttribute: {
@@ -179,8 +176,6 @@ export default {
           backgroundColor: 'transparent',
         },
       },
-      monthLabels: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
-      weekdayLabels: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'],
       themeStyles: {
         wrapper: {
           color: 'rgb(42, 42, 42)',
@@ -350,7 +345,7 @@ export default {
 </script>
 
 <style>
-@import url('../assets/css/main.css');
+@import url('~/assets/css/main.css');
 
 .reserva-acomod {
   position: fixed;
