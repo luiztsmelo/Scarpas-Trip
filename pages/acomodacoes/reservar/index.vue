@@ -383,7 +383,7 @@
       <h1 class="__title">Pedido de reserva enviado</h1>
 
       <h3 class="__text">
-        {{ acomod.proprietario.split(' ')[0] }} irá analisar seu pedido e dentro de 48h você receberá um e-mail e SMS com a confirmação de sua reserva, juntamente com as informações de contato do anunciante.
+        {{ acomod.proprietario.split(' ')[0] }} irá analisar seu pedido e dentro de 24h você receberá um e-mail e SMS com a confirmação de sua reserva, juntamente com as informações de contato do anunciante.
       </h3>
 
       <h3 class="__subtitle">Código da Reserva</h3>
@@ -473,7 +473,9 @@ export default {
       reservaAcomod.hostID = this.acomod.userID
       reservaAcomod.hostEmail = this.acomod.email
       reservaAcomod.hostName = this.acomod.proprietario
+      reservaAcomod.hostPhoto = this.acomod.photoURL
       reservaAcomod.hostCelular = this.acomod.celular
+      reservaAcomod.whatsAppHREF = this.whatsAppHREF
 
       reservaAcomod.guestID = user.userID
       reservaAcomod.guestEmail = user.email
@@ -663,6 +665,14 @@ export default {
            : path === 'Fazenda' ? 'da Fazenda'
            : path === 'Hostel' ? 'do Hostel'
            : ''
+    },
+    whatsAppHREF () {
+      let celular = this.acomod.celular
+      let DDD = celular.slice(1, 3)
+      let firstNumber = celular.slice(5,10)
+      let lastNumber = celular.slice(11,15)
+      let whatsAppFormat = '+55' + DDD + firstNumber + lastNumber
+      return 'https://api.whatsapp.com/send?phone=' + whatsAppFormat
     }
   },
   watch: {
@@ -921,7 +931,7 @@ export default {
     flex-flow: column;
     align-items: center;
     & .__img {
-      width: 60px;
+      width: 57px;
       height: auto;
     }
     & .__title {

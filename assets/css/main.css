@@ -16,6 +16,10 @@
   --main-transition: cubic-bezier(0.190, 1.000, 0.220, 1.000) all .5s;
 }
 
+::selection {
+  background: #FCF133;
+}
+
 html 
 {
   font-family: var(--main-font);

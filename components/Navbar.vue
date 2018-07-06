@@ -43,7 +43,7 @@
 
           <li class="__nav-item-no-a" @click="$modal.show('sign-in-modal')" v-if="$store.state.user.email === null">Login</li>
 
-          <li><img class="__user-img" :src="$store.state.user.photoURL" :alt="$store.state.user.fullName" @click="userBox = !userBox" v-if="$store.state.user.email !== null"></li>
+          <li><img class="__user-img" :src="$store.state.user.photoURL" @click="userBox = !userBox" v-if="$store.state.user.email !== null"></li>
 
         </nav>
 
@@ -200,13 +200,11 @@ export default {
         color: rgb(152, 152, 152);
       }
       & .__nav-item {
-
         font-size: 14px;
         font-weight: 600;
         user-select: none;
       }
       & .__nav-item-no-a {
-  
         padding: 0 .8rem;
         cursor: pointer;
         font-size: 14px;

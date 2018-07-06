@@ -305,7 +305,7 @@
 
           </div>
 
-          <button class="__reserva-desktop-btn" type="button" @click="reservar">Pedir Reserva</button>
+          <button class="__reserva-desktop-btn" type="button" @click="reservar">Reservar</button>
 
           <h4 class="__info">Você ainda não será cobrado.</h4>
 
@@ -322,7 +322,7 @@
     <div class="reserva">
       <div class="reserva-body">
         <h3 class="__reserva-valor">R${{ acomod.valorNoite }}<span class="__reserva-valor-pessoa">/noite</span></h3>
-        <button class="__reserva-btn" @click="$store.commit('m_showReservaAcomod', true), hashReserva()">Pedir Reserva</button>
+        <button class="__reserva-btn" @click="$store.commit('m_showReservaAcomod', true), hashReserva()">Reservar</button>
       </div>
     </div>
     <reserva-mobile/><!-- ####### RESERVA MOBILE ####### -->
@@ -984,7 +984,7 @@ export default {
           & .__reserva-desktop-btn {
             margin-top: 1.3rem;
             font-size: 16px;
-            font-weight: 600;
+            font-weight: 700;
             background: var(--colorAcomod);
             color: white;
             height: 3.1rem;

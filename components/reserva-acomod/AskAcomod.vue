@@ -45,7 +45,7 @@
         </div>
 
         <div class="btns">
-          <button type="button" class="__book-btn" v-if="$route.name === 'acomodacoes-id'">Pedir Reserva</button>
+          <button type="button" class="__book-btn" v-if="$route.name === 'acomodacoes-id'">Reservar</button>
           <button type="button" class="__send-btn" @click="sendMessage()">Enviar Mensagem</button>
         </div>
 
@@ -58,7 +58,7 @@
     <div class="after-sent" v-else>
       <img class="__img" src="../../assets/img/brand.svg">
       <h1 class="__title">Mensagem enviada</h1>
-      <h3 class="__subtitle">Pediremos a {{ acomod.proprietario.split(' ')[0] }} que te responda o mais rápido possível. Dentro de 24-48h você receberá a resposta em seu e-mail.</h3>
+      <h3 class="__subtitle">Pediremos a {{ acomod.proprietario.split(' ')[0] }} que te responda em no máximo 24h. A resposta será enviada para seu e-mail.</h3>
       <button type="button" class="__close-btn" @click="$modal.hide('ask-acomod-modal')">Fechar</button>
     </div>
 
@@ -239,7 +239,7 @@ export default {
     align-items: center;
     padding: 3rem 23%;
     & .__img {
-      width: 60px;
+      width: 57px;
       height: auto;
     }
     & .__title {

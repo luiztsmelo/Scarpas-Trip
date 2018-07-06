@@ -239,6 +239,8 @@ exports.airtable_newReservaAcomod = functions.firestore
     delete reservaAcomod.message
     delete reservaAcomod.guestCPF
     delete reservaAcomod.billing
+    delete reservaAcomod.hostPhoto
+    delete reservaAcomod.whatsAppHREF
 
     /* Criar reserva no Airtable */
     return base('Acomods').create(reservaAcomod)
@@ -281,9 +283,9 @@ exports.email_newUser = functions.firestore
 
 
 
-exports.email_reservaAcomodConfirmed = functions.firestore
+exports.email_reservaAcceptedAcomod = functions.firestore
   .document('reservasAcomods/{reservaID}')
-  /* MUDAR PARA onUpdate() "when confirmed = true" */
+  /* MUDAR PARA onUpdate() "when accepted = true" */
   .onCreate(async snap => {
     const reservaAcomod = snap.data()
     try {
@@ -312,8 +314,12 @@ exports.email_reservaAcomodConfirmed = functions.firestore
             'acomodURL': 'https://www.escarpastrip.com/acomodacoes/' + reservaAcomod.acomodID,
             'guestFirstName': reservaAcomod.guestName.split(' ')[0],
             'hostFirstName': reservaAcomod.hostName.split(' ')[0],
+            'hostPhoto': reservaAcomod.hostPhoto,
+            'hostEmail': reservaAcomod.hostEmail,
+            'hostCelular': reservaAcomod.hostCelular,
+            'whatsAppHREF': reservaAcomod.whatsAppHREF,
             'title': acomod.title,
-            'imageURL': acomod.images[0].HJ,
+            'acomodPhoto': acomod.images[0].HJ,
             'address': acomod.address,
             'positionLAT': acomod.positionLAT,
             'positionLNG': acomod.positionLNG,
