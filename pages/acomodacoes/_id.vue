@@ -984,7 +984,7 @@ export default {
           & .__reserva-desktop-btn {
             margin-top: 1.3rem;
             font-size: 16px;
-            font-weight: 700;
+            font-weight: 600;
             background: var(--colorAcomod);
             color: white;
             height: 3.1rem;

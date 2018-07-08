@@ -16,6 +16,7 @@
     "firebase-admin": "~5.12.1",
     "firebase-functions": "^1.0.3",
     "node-mailjet": "^3.2.1",
+    "numeral": "^2.0.6",
     "pagarme": "^3.7.3"
   },
   "devDependencies": {

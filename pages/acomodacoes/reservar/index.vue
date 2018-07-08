@@ -475,10 +475,11 @@ export default {
       reservaAcomod.hostName = this.acomod.proprietario
       reservaAcomod.hostPhoto = this.acomod.photoURL
       reservaAcomod.hostCelular = this.acomod.celular
-      reservaAcomod.whatsAppHREF = this.whatsAppHREF
+      reservaAcomod.whatsAppHostHREF = this.whatsAppHostHREF
 
       reservaAcomod.guestID = user.userID
       reservaAcomod.guestEmail = user.email
+      reservaAcomod.guestPhoto = user.photoURL
 
       reservaAcomod.limpezaFee = this.acomod.limpezaFee
 
@@ -666,7 +667,7 @@ export default {
            : path === 'Hostel' ? 'do Hostel'
            : ''
     },
-    whatsAppHREF () {
+    whatsAppHostHREF () {
       let celular = this.acomod.celular
       let DDD = celular.slice(1, 3)
       let firstNumber = celular.slice(5,10)

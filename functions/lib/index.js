@@ -14,6 +14,8 @@ const Airtable = require("airtable");
 const pagarme = require("pagarme");
 const dayjs = require("dayjs");
 require("dayjs/locale/pt-br");
+const numeral = require("numeral");
+require("numeral/locales/pt-br");
 /* Firebase admin */
 admin.initializeApp(functions.config().firebase);
 /* Airtable */
@@ -24,6 +26,9 @@ const ESemail = 'contato@escarpastrip.com';
 const ESname = 'Escarpas Trip';
 /* Day.js */
 dayjs.locale('pt-br');
+/* Numeral */
+numeral.locale('pt-br');
+/* ________________________________________________ PAGARME ________________________________________________ */
 exports.pagarme_newAcomod = functions.https.onCall(data => {
     const bankAccount = data.bankAccount;
     return pagarme.client.connect({ api_key: 'ak_test_E3I46o4e7guZDqwRnSY9sW8o8HrL9D' })
@@ -77,7 +82,7 @@ exports.pagarme_newReservaAcomod = functions.https.onCall((data, context) => {
     const guestCPF = reservaAcomod.guestCPF.replace(/[^0-9\.]+/g, '').replace(/\./g, '');
     const guestCelular = '+55' + reservaAcomod.guestCelular.replace(/[^0-9\.]+/g, '');
     const zipcode = reservaAcomod.billing.zipcode.replace(/[^0-9\.]+/g, '');
-    /* ******************** CREDIT CARD ******************** */
+    /* ------------------- CREDIT CARD ------------------- */
     if (reservaAcomod.paymentMethod === 'credit_card') {
         const cardNumber = data.creditCard.cardNumber.replace(/[^0-9\.]+/g, '');
         const cardHolderName = data.creditCard.cardHolderName;
@@ -147,7 +152,7 @@ exports.pagarme_newReservaAcomod = functions.https.onCall((data, context) => {
                 throw new functions.https.HttpsError('invalid-argument', 'CPF inválido.', 'customer');
             }
         });
-        /* ******************** BOLETO ******************** */
+        /* ------------------- BOLETO ------------------- */
     }
     else {
         return pagarme.client.connect({ api_key: 'ak_test_E3I46o4e7guZDqwRnSY9sW8o8HrL9D' })
@@ -190,6 +195,7 @@ exports.pagarme_newReservaAcomod = functions.https.onCall((data, context) => {
 exports.pagarme_payHostAcomod = functions.https.onCall(data => {
     /* ENVIAR PAGAMENTO PARA O HOST NO DIA SEGUINTE DO CHECK-IN */
 });
+/* ________________________________________________ AIRTABLE ________________________________________________ */
 exports.airtable_newReservaAcomod = functions.firestore
     .document('reservasAcomods/{reservaID}')
     .onCreate(snap => {
@@ -209,12 +215,14 @@ exports.airtable_newReservaAcomod = functions.firestore
     delete reservaAcomod.periodoReserva;
     delete reservaAcomod.message;
     delete reservaAcomod.guestCPF;
+    delete reservaAcomod.guestPhoto;
     delete reservaAcomod.billing;
     delete reservaAcomod.hostPhoto;
-    delete reservaAcomod.whatsAppHREF;
+    delete reservaAcomod.whatsAppHostHREF;
     /* Criar reserva no Airtable */
     return base('Acomods').create(reservaAcomod);
 });
+/* ________________________________________________ E-MAILS ________________________________________________ */
 exports.email_newUser = functions.firestore
     .document('users/{userID}')
     .onCreate(snap => {
@@ -241,17 +249,25 @@ exports.email_newUser = functions.firestore
         .then(result => console.log(result.body))
         .catch(err => console.log(err.statusCode));
 });
-exports.email_reservaAcceptedAcomod = functions.firestore
+exports.email_newReservaToHost = functions.firestore
     .document('reservasAcomods/{reservaID}')
-    /* MUDAR PARA onUpdate() "when accepted = true" */
     .onCreate((snap) => __awaiter(this, void 0, void 0, function* () {
     const reservaAcomod = snap.data();
     try {
         /* Get acomod data */
         const docAcomod = yield admin.firestore().collection('acomods').doc(reservaAcomod.acomodID).get();
         const acomod = docAcomod.data();
-        const checkIn = new Date(reservaAcomod.periodoReserva.start);
-        const checkOut = new Date(reservaAcomod.periodoReserva.end);
+        /* Ajustar datas */
+        const startDate = new Date(reservaAcomod.periodoReserva.start);
+        const endDate = new Date(reservaAcomod.periodoReserva.end);
+        const checkIn = dayjs(startDate).format('ddd, DD MMM YYYY');
+        const checkOut = dayjs(endDate).format('ddd, DD MMM YYYY');
+        const dayAfterCheckin = dayjs(startDate).add(1, 'day').format('DD/MM/YYYY');
+        /* Ajustar valores */
+        const valorNoite = numeral(acomod.valorNoite).format('$0,0');
+        const valorNoitesTotal = numeral(reservaAcomod.valorNoitesTotal).format('$0,0');
+        const limpezaFee = numeral(reservaAcomod.limpezaFee).format('$0,0');
+        const hostAmount = numeral(reservaAcomod.valorNoitesTotal + reservaAcomod.limpezaFee).format('$0,0');
         /* Send Email */
         const request = Mailjet
             .post('send', { 'version': 'v3.1' })
@@ -259,28 +275,29 @@ exports.email_reservaAcceptedAcomod = functions.firestore
             'Messages': [{
                     'From': { 'Email': ESemail, 'Name': ESname },
                     'To': [{
-                            'Email': reservaAcomod.guestEmail,
-                            'Name': reservaAcomod.guestName
+                            'Email': reservaAcomod.hostEmail,
+                            'Name': reservaAcomod.hostName
                         }],
-                    'TemplateID': 448210,
+                    'TemplateID': 477332,
                     'TemplateLanguage': true,
-                    'Subject': 'Ótimas notícias, ' + reservaAcomod.guestName.split(' ')[0],
+                    'Subject': 'Novo Pedido de Reserva',
                     'Variables': {
                         'reservaID': reservaAcomod.reservaID,
-                        'acomodURL': 'https://www.escarpastrip.com/acomodacoes/' + reservaAcomod.acomodID,
+                        'acomodURL': `https://www.escarpastrip.com/acomodacoes/${reservaAcomod.acomodID}`,
                         'guestFirstName': reservaAcomod.guestName.split(' ')[0],
                         'hostFirstName': reservaAcomod.hostName.split(' ')[0],
-                        'hostPhoto': reservaAcomod.hostPhoto,
-                        'hostEmail': reservaAcomod.hostEmail,
-                        'hostCelular': reservaAcomod.hostCelular,
-                        'whatsAppHREF': reservaAcomod.whatsAppHREF,
                         'title': acomod.title,
                         'acomodPhoto': acomod.images[0].HJ,
-                        'address': acomod.address,
-                        'positionLAT': acomod.positionLAT,
-                        'positionLNG': acomod.positionLNG,
-                        'checkIn': dayjs(checkIn).format('ddd, DD MMM YYYY'),
-                        'checkOut': dayjs(checkOut).format('ddd, DD MMM YYYY')
+                        'checkIn': checkIn,
+                        'checkOut': checkOut,
+                        'dayAfterCheckin': dayAfterCheckin,
+                        'noites': reservaAcomod.noites,
+                        'valorNoite': valorNoite,
+                        'valorNoitesTotal': valorNoitesTotal,
+                        'limpezaFee': limpezaFee,
+                        'hostAmount': hostAmount,
+                        'guestPhoto': reservaAcomod.guestPhoto,
+                        'message': reservaAcomod.message
                     }
                 }]
         });
@@ -290,6 +307,62 @@ exports.email_reservaAcceptedAcomod = functions.firestore
     }
     catch (err) {
         return err;
+    }
+}));
+exports.email_reservaAcceptedToGuest = functions.firestore
+    .document('reservasAcomods/{reservaID}')
+    /* Quando Status = 'accepted' */
+    .onUpdate((change) => __awaiter(this, void 0, void 0, function* () {
+    const reservaAcomod = change.after.data();
+    if (reservaAcomod.status === 'accepted') {
+        try {
+            /* Get acomod data */
+            const docAcomod = yield admin.firestore().collection('acomods').doc(reservaAcomod.acomodID).get();
+            const acomod = docAcomod.data();
+            /* Ajustar datas */
+            const startDate = new Date(reservaAcomod.periodoReserva.start);
+            const endDate = new Date(reservaAcomod.periodoReserva.end);
+            const checkIn = dayjs(startDate).format('ddd, DD MMM YYYY');
+            const checkOut = dayjs(endDate).format('ddd, DD MMM YYYY');
+            /* Send Email */
+            const request = Mailjet
+                .post('send', { 'version': 'v3.1' })
+                .request({
+                'Messages': [{
+                        'From': { 'Email': ESemail, 'Name': ESname },
+                        'To': [{
+                                'Email': reservaAcomod.guestEmail,
+                                'Name': reservaAcomod.guestName
+                            }],
+                        'TemplateID': 448210,
+                        'TemplateLanguage': true,
+                        'Subject': `Ótimas notícias, ${reservaAcomod.guestName.split(' ')[0]}`,
+                        'Variables': {
+                            'reservaID': reservaAcomod.reservaID,
+                            'acomodURL': `https://www.escarpastrip.com/acomodacoes/${reservaAcomod.acomodID}`,
+                            'guestFirstName': reservaAcomod.guestName.split(' ')[0],
+                            'hostFirstName': reservaAcomod.hostName.split(' ')[0],
+                            'hostPhoto': reservaAcomod.hostPhoto,
+                            'hostEmail': reservaAcomod.hostEmail,
+                            'hostCelular': reservaAcomod.hostCelular,
+                            'whatsAppHostHREF': reservaAcomod.whatsAppHostHREF,
+                            'title': acomod.title,
+                            'acomodPhoto': acomod.images[0].HJ,
+                            'address': acomod.address,
+                            'positionLAT': acomod.positionLAT,
+                            'positionLNG': acomod.positionLNG,
+                            'checkIn': checkIn,
+                            'checkOut': checkOut
+                        }
+                    }]
+            });
+            return request
+                .then(result => console.log(result.body))
+                .catch(err => console.log(err.statusCode));
+        }
+        catch (err) {
+            return err;
+        }
     }
 }));
 //# sourceMappingURL=index.js.map
