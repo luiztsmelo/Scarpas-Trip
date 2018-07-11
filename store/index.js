@@ -136,6 +136,7 @@ const store = () => new Vuex.Store({
     reservaAcomod: {/* Atualizar Action */
       reservaID: null,
       acomodID: null,
+      airtableID: null,
       requested: null,
       paymentMethod: 'credit_card',
       parcelas: '1',

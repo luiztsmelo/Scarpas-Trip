@@ -6,11 +6,22 @@ import * as dayjs from 'dayjs'
 import 'dayjs/locale/pt-br'
 import * as numeral from 'numeral'
 import 'numeral/locales/pt-br'
+import axios from 'axios'
 
 
 
 /* Firebase admin */
 admin.initializeApp(functions.config().firebase)
+
+
+/* Axios */
+const AirtableAcomodsURL = 'https://api.airtable.com/v0/appfQX2S7rMRlBWoh/Acomods'
+const AirtableConfig = {
+  headers: {
+    'Authorization': `Bearer ${functions.config().airtable.key}`,
+    'Content-type': 'application/json'
+  }
+}
 
 
 /* Airtable */
@@ -29,6 +40,58 @@ dayjs.locale('pt-br')
 
 /* Numeral */
 numeral.locale('pt-br')
+
+
+
+/* _______________________________________________ WATCHERS _______________________________________________ */
+
+/* TRIGGER URL GERAL: https://us-central1-escarpas-trip.cloudfunctions.net/<function-name> */
+
+exports.watch_reservaExpiration = functions.https.onRequest(async (req, res) => {
+  try {
+    const pendingReservas = await admin.firestore().collection('reservasAcomods').where("status", "==", "pending").get()
+
+    /* Para cada reserva com status 'pending' */
+    pendingReservas.docs.map(doc => doc.data()).forEach(reserva => {
+      const requestedDate = dayjs(reserva.requested)
+      const dateNow = dayjs()
+      console.log(requestedDate.diff(dateNow, 'day'))
+
+      /* Se feita a 2 dias atrás */
+      if (requestedDate.diff(dateNow, 'day') === 0) {
+
+        /* Update status para 'expired' Firestore */
+        try {
+          admin.firestore().collection('reservasAcomods').doc(reserva.reservaID).update({ status: 'expired' })
+          .catch(err => { throw new Error(err) })
+        } catch (err) {
+          console.error('Update status error Firestore', err.message)
+        }
+        
+        /* Update status para 'expired' Airtable */
+        try {
+          axios.patch(`${AirtableAcomodsURL}/${reserva.airtableID}`, { 'fields': { 'status': 'expired' } }, AirtableConfig)
+          .catch(err => { throw new Error(err) })
+        } catch (err) {
+          console.error('Update status error Airtable', err.message)
+        }
+
+        console.log(`Reserva ${reserva.reservaID} foi expirada.`)
+        return res.status(201).send(`Reserva ${reserva.reservaID} foi expirada.`)
+
+      } else {
+        console.log('Nenhuma reserva foi expirada.')
+        return res.status(200).send('Nenhuma reserva foi expirada.')
+      }
+    }) 
+  }
+  catch (err) {
+    console.log(err)
+    res.status(500).end()
+    return
+  }
+})
+
 
 
 
@@ -226,23 +289,21 @@ exports.pagarme_payHostAcomod = functions.https.onCall(data => {
 
 exports.airtable_newReservaAcomod = functions.firestore
   .document('reservasAcomods/{reservaID}')
-  .onCreate(snap => {
+  .onCreate(async snap => {
     const reservaAcomod = snap.data()
-    /* 
-    CORRIGIR VALORES
-    */
-    /* IDs: string to number */
+
+    /* Ajustar IDs: string to number */
     reservaAcomod.reservaID = Number(reservaAcomod.reservaID)
     reservaAcomod.acomodID = Number(reservaAcomod.acomodID)
 
-    /* Dates: converter para formato válido ao Airtable */
+    /* Ajustar datas: converter para formato válido ao Airtable */
     const checkIn = new Date(reservaAcomod.periodoReserva.start)
     reservaAcomod.checkIn = dayjs(checkIn).format('YYYY-MM-DD')
-
     const checkOut = new Date(reservaAcomod.periodoReserva.end)
     reservaAcomod.checkOut = dayjs(checkOut).format('YYYY-MM-DD')
 
     /* Deletar valores não suportados ou desnecessários para o Airtable */
+    delete reservaAcomod.airtableID
     delete reservaAcomod.periodoReserva
     delete reservaAcomod.message
     delete reservaAcomod.guestCPF
@@ -251,8 +312,11 @@ exports.airtable_newReservaAcomod = functions.firestore
     delete reservaAcomod.hostPhoto
     delete reservaAcomod.whatsAppHostHREF
 
-    /* Criar reserva no Airtable */
-    return base('Acomods').create(reservaAcomod)
+
+    const record = await axios.post(AirtableAcomodsURL, { 'fields': reservaAcomod }, AirtableConfig)
+
+    return admin.firestore().collection('reservasAcomods').doc(reservaAcomod.reservaID.toString()).update({ airtableID: record.data.id })
+    .catch(err => console.log(err))
   })
 
 
@@ -339,6 +403,7 @@ exports.email_newReservaToHost = functions.firestore
             'checkIn': checkIn,
             'checkOut': checkOut,
             'dayAfterCheckin': dayAfterCheckin,
+            'totalHospedes': reservaAcomod.totalHospedes,
             'noites': reservaAcomod.noites,
             'valorNoite': valorNoite,
             'valorNoitesTotal': valorNoitesTotal,
@@ -363,11 +428,11 @@ exports.email_newReservaToHost = functions.firestore
 
 exports.email_reservaAcceptedToGuest = functions.firestore
   .document('reservasAcomods/{reservaID}')
-  /* Quando Status = 'accepted' */
+  /* Quando Status = 'awaiting_payment' */
   .onUpdate(async change => {
     const reservaAcomod = change.after.data()
 
-    if (reservaAcomod.status === 'accepted') {
+    if (reservaAcomod.status === 'awaiting_payment') {
       try {
         /* Get acomod data */
         const docAcomod = await admin.firestore().collection('acomods').doc(reservaAcomod.acomodID).get()
