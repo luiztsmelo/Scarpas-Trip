@@ -11,7 +11,6 @@
   },
   "main": "lib/index.js",
   "dependencies": {
-    "airtable": "^0.5.6",
     "axios": "^0.18.0",
     "dayjs": "^1.6.9",
     "firebase-admin": "~5.12.1",

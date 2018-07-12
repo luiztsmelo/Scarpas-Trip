@@ -1,6 +1,5 @@
 import * as functions from 'firebase-functions'
 import * as admin from 'firebase-admin'
-import * as Airtable from 'airtable'
 import * as pagarme from 'pagarme'
 import * as dayjs from 'dayjs'
 import 'dayjs/locale/pt-br'
@@ -24,10 +23,6 @@ const AirtableConfig = {
 }
 
 
-/* Airtable */
-const base = new Airtable({ apiKey: functions.config().airtable.key }).base('appfQX2S7rMRlBWoh')
-
-
 /* Mailjet */
 const Mailjet = require ('node-mailjet').connect('2213afd9febdc226190169a58fc26afa', '74d6c365c8fa5de11a937017c5545165')
 const ESemail = 'contato@escarpastrip.com'
@@ -49,46 +44,52 @@ numeral.locale('pt-br')
 
 exports.watch_reservaExpiration = functions.https.onRequest(async (req, res) => {
   try {
-    const pendingReservas = await admin.firestore().collection('reservasAcomods').where("status", "==", "pending").get()
+    const snap = await admin.firestore().collection('reservasAcomods').where('status', '==', 'pending').get()
+    const pendingReservas = snap.docs.map(doc => doc.data())
 
-    /* Para cada reserva com status 'pending' */
-    pendingReservas.docs.map(doc => doc.data()).forEach(reserva => {
-      const requestedDate = dayjs(reserva.requested)
-      const dateNow = dayjs()
-      console.log(requestedDate.diff(dateNow, 'day'))
+    /* Para evitar bugs, checar se há alguma reserva pending primeiro */
+    if (pendingReservas.length > 0) {
 
-      /* Se feita a 2 dias atrás */
-      if (requestedDate.diff(dateNow, 'day') === 0) {
+      /* Para cada reserva pending */
+      pendingReservas.forEach(reserva => {
+        const requestedDate = dayjs(reserva.requested)
+        const dateNow = dayjs()
 
-        /* Update status para 'expired' Firestore */
-        try {
-          admin.firestore().collection('reservasAcomods').doc(reserva.reservaID).update({ status: 'expired' })
-          .catch(err => { throw new Error(err) })
-        } catch (err) {
-          console.error('Update status error Firestore', err.message)
+        /* Se feita a 2 dias atrás: (Obs: diff entre uma data passada retorna um valor negativo) */
+        if (requestedDate.diff(dateNow, 'day') <= -2) {
+
+          /* Update status para 'expired' Firestore */
+          try {
+            admin.firestore().collection('reservasAcomods').doc(reserva.reservaID).update({ status: 'expired' })
+            .catch(err => { throw new Error(err) })
+          } catch (err) {
+            console.log('Firestore: Update status error', err.message)
+          }
+          
+          /* Update status para 'expired' Airtable */
+          try {
+            axios.patch(`${AirtableAcomodsURL}/${reserva.airtableID}`, { 'fields': { 'status': 'expired' } }, AirtableConfig)
+            .catch(err => { throw new Error(err) })
+          } catch (err) {
+            console.log('Airtable: Update status error', err.message)
+          }
+
+          console.log(`Reserva ${reserva.reservaID} foi expirada.`)
+          res.status(201).send(`Reserva ${reserva.reservaID} foi expirada.`)
+
+        } else {
+          console.log(`Reserva ${reserva.reservaID} [${requestedDate.diff(dateNow, 'day')}] não precisa ser expirada.`)
+          res.status(200).send(`Reserva ${reserva.reservaID} [${requestedDate.diff(dateNow, 'day')}] não precisa ser expirada.`)
         }
-        
-        /* Update status para 'expired' Airtable */
-        try {
-          axios.patch(`${AirtableAcomodsURL}/${reserva.airtableID}`, { 'fields': { 'status': 'expired' } }, AirtableConfig)
-          .catch(err => { throw new Error(err) })
-        } catch (err) {
-          console.error('Update status error Airtable', err.message)
-        }
-
-        console.log(`Reserva ${reserva.reservaID} foi expirada.`)
-        return res.status(201).send(`Reserva ${reserva.reservaID} foi expirada.`)
-
-      } else {
-        console.log('Nenhuma reserva foi expirada.')
-        return res.status(200).send('Nenhuma reserva foi expirada.')
-      }
-    }) 
+      })
+    } else {
+      console.log('Nenhuma reserva pending encontrada. Operação abortada sem falhas.')
+      res.status(200).send('Nenhuma reserva pending encontrada. Operação abortada sem falhas.')
+    }
   }
   catch (err) {
     console.log(err)
     res.status(500).end()
-    return
   }
 })
 
