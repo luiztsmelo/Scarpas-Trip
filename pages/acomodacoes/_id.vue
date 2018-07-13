@@ -424,9 +424,22 @@ export default {
 
     }).catch(err => { store.commit('m_loader', false), console.log(err) })
 
-    /* GET RESERVED DATES  !!! FALTA CONDIÇÕES BASEADAS NO STATUS DA RESERVA !!! */
-    && firebase.firestore().collection('reservasAcomods').where("acomodID", "==", params.id).get()
-    .then(snap => store.commit('m_reservedDates', snap.docs.map(doc => doc.data().periodoReserva)))
+
+    && firebase.firestore().collection('reservasAcomods').where('acomodID', '==', params.id).get()
+    .then(snap => {
+      const reservas = snap.docs.map(doc => doc.data())
+
+      /* Filtrar por status */
+      const reservasPending = reservas.filter(reserva => reserva.status === 'pending')
+      const reservasAwaiting = reservas.filter(reserva => reserva.status === 'awaiting-payment')
+      const reservasPayed = reservas.filter(reserva => reserva.status === 'payed')
+
+      const filteredReservas = reservasPending.concat(reservasAwaiting, reservasPayed)
+
+      console.log(filteredReservas)
+
+      store.commit('m_reservedDates', filteredReservas.periodoReserva)
+    })
     .catch(err => console.log(err))
 
   },

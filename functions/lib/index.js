@@ -42,40 +42,35 @@ exports.watch_reservaExpiration = functions.https.onRequest((req, res) => __awai
         const pendingReservas = snap.docs.map(doc => doc.data());
         /* Para evitar bugs, checar se há alguma reserva pending primeiro */
         if (pendingReservas.length > 0) {
-            /* Para cada reserva pending */
-            pendingReservas.forEach(reserva => {
-                const requestedDate = dayjs(reserva.requested);
-                const dateNow = dayjs();
-                /* Se feita a 2 dias atrás: (Obs: diff entre uma data passada retorna um valor negativo) */
-                if (requestedDate.diff(dateNow, 'day') <= -2) {
-                    /* Update status para 'expired' Firestore */
-                    try {
+            try {
+                /* Para cada reserva pending */
+                pendingReservas.forEach(reserva => {
+                    const requestedDate = dayjs(reserva.requested);
+                    const dateNow = dayjs();
+                    /* Se feita a 2 dias atrás: (Obs: diff entre uma data passada retorna um valor negativo) */
+                    if (requestedDate.diff(dateNow, 'day') <= -2) {
+                        /* Update status para 'expired' Firestore */
                         admin.firestore().collection('reservasAcomods').doc(reserva.reservaID).update({ status: 'expired' })
                             .catch(err => { throw new Error(err); });
-                    }
-                    catch (err) {
-                        console.log('Firestore: Update status error', err.message);
-                    }
-                    /* Update status para 'expired' Airtable */
-                    try {
+                        /* Update status para 'expired' Airtable */
                         axios_1.default.patch(`${AirtableAcomodsURL}/${reserva.airtableID}`, { 'fields': { 'status': 'expired' } }, AirtableConfig)
                             .catch(err => { throw new Error(err); });
+                        console.log(`Reserva ${reserva.reservaID} [${requestedDate.diff(dateNow, 'day')}] foi expirada.`);
                     }
-                    catch (err) {
-                        console.log('Airtable: Update status error', err.message);
+                    else {
+                        console.log(`Reserva ${reserva.reservaID} [${requestedDate.diff(dateNow, 'day')}] não precisa ser expirada.`);
                     }
-                    console.log(`Reserva ${reserva.reservaID} foi expirada.`);
-                    res.status(201).send(`Reserva ${reserva.reservaID} foi expirada.`);
-                }
-                else {
-                    console.log(`Reserva ${reserva.reservaID} [${requestedDate.diff(dateNow, 'day')}] não precisa ser expirada.`);
-                    res.status(200).send(`Reserva ${reserva.reservaID} [${requestedDate.diff(dateNow, 'day')}] não precisa ser expirada.`);
-                }
-            });
+                });
+                res.status(200).end();
+            }
+            catch (err) {
+                console.log(err);
+                res.status(500).end();
+            }
         }
         else {
             console.log('Nenhuma reserva pending encontrada. Operação abortada sem falhas.');
-            res.status(200).send('Nenhuma reserva pending encontrada. Operação abortada sem falhas.');
+            res.status(200).end();
         }
     }
     catch (err) {
@@ -272,7 +267,9 @@ exports.airtable_newReservaAcomod = functions.firestore
     delete reservaAcomod.billing;
     delete reservaAcomod.hostPhoto;
     delete reservaAcomod.whatsAppHostHREF;
+    /* Criar reserva no Airtable */
     const record = yield axios_1.default.post(AirtableAcomodsURL, { 'fields': reservaAcomod }, AirtableConfig);
+    /* Update airtableID da reserva na Firestore */
     return admin.firestore().collection('reservasAcomods').doc(reservaAcomod.reservaID.toString()).update({ airtableID: record.data.id })
         .catch(err => console.log(err));
 }));
