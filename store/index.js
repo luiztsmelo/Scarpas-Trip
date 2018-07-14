@@ -92,7 +92,7 @@ const store = () => new Vuex.Store({
     acomodProgressBar: 0,
     acomodPlace: null,
     imageCountAc: 0,
-    reservedDates: null,
+    disabledDatesAcomod: null,
     acomodData: {/* Atualizar action */
       acomodID: null,
       userID: null,
@@ -141,6 +141,7 @@ const store = () => new Vuex.Store({
       paymentMethod: 'credit_card',
       parcelas: '1',
       status: 'pending',
+      isLive: true,
       totalHospedes: 1,
       periodoReserva: null,
       noites: null,
@@ -379,8 +380,8 @@ const store = () => new Vuex.Store({
     /*
     ########## Acomodação ##########
     */
-    m_reservedDates (state, payload) {
-      state.reservedDates = payload
+    m_disabledDatesAcomod (state, payload) {
+      state.disabledDatesAcomod = payload
     },
     m_showReservaAcomod (state, payload) {
       state.showReservaAcomod = payload
@@ -780,10 +781,12 @@ const store = () => new Vuex.Store({
       state.reservaAcomod = {
         reservaID: null,
         acomodID: null,
+        airtableID: null,
         requested: null,
         paymentMethod: 'credit_card',
         parcelas: '1',
         status: 'pending',
+        isLive: true,
         totalHospedes: 1,
         periodoReserva: null,
         noites: null,

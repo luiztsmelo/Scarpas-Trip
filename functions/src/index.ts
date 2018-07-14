@@ -61,11 +61,11 @@ exports.watch_reservaExpiration = functions.https.onRequest(async (req, res) => 
           if (requestedDate.diff(dateNow, 'day') <= -2) {
 
             /* Update status para 'expired' Firestore */
-            admin.firestore().collection('reservasAcomods').doc(reserva.reservaID).update({ status: 'expired' })
+            admin.firestore().collection('reservasAcomods').doc(reserva.reservaID).update({ status: 'expired', isLive: false })
             .catch(err => { throw new Error(err) })
           
             /* Update status para 'expired' Airtable */
-            axios.patch(`${AirtableAcomodsURL}/${reserva.airtableID}`, { 'fields': { 'status': 'expired' } }, AirtableConfig)
+            axios.patch(`${AirtableAcomodsURL}/${reserva.airtableID}`, { 'fields': { 'status': 'expired', 'isLive': 'false' } }, AirtableConfig)
             .catch(err => { throw new Error(err) })
 
             console.log(`Reserva ${reserva.reservaID} [${requestedDate.diff(dateNow, 'day')}] foi expirada.`)

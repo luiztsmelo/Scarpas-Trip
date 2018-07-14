@@ -246,7 +246,7 @@
               v-model="$store.state.reservaAcomod.periodoReserva"
               :min-date="minDate"
               :pane-width="285"
-              :disabled-dates="$store.state.reservedDates"
+              :disabled-dates="$store.state.disabledDatesAcomod"
               :drag-attribute="attribute"
               :select-attribute="attribute"
               :disabled-attribute="disabledAttribute"
@@ -351,27 +351,6 @@ export default {
   data () {
     return {
       showComods: false,
-      attributesCalendar: [
-        {
-          key: 'minDate',
-          contentStyle: {
-            opacity: 0.2,
-            textDecoration: 'line-through'
-          },
-          dates: {
-            start: null,
-            end: dayjs(new Date()).add(1, 'day')
-          }
-        },
-        {
-          key: 'reservedDates',
-          contentStyle: {
-            opacity: 0.2,
-            textDecoration: 'line-through'
-          },
-          dates: this.$store.state.reservedDates
-        }
-      ],
       attribute: {
         popover: {
           hideIndicator: true,
@@ -425,21 +404,8 @@ export default {
     }).catch(err => { store.commit('m_loader', false), console.log(err) })
 
 
-    && firebase.firestore().collection('reservasAcomods').where('acomodID', '==', params.id).get()
-    .then(snap => {
-      const reservas = snap.docs.map(doc => doc.data())
-
-      /* Filtrar por status */
-      const reservasPending = reservas.filter(reserva => reserva.status === 'pending')
-      const reservasAwaiting = reservas.filter(reserva => reserva.status === 'awaiting-payment')
-      const reservasPayed = reservas.filter(reserva => reserva.status === 'payed')
-
-      const filteredReservas = reservasPending.concat(reservasAwaiting, reservasPayed)
-
-      console.log(filteredReservas)
-
-      store.commit('m_reservedDates', filteredReservas.periodoReserva)
-    })
+    && firebase.firestore().collection('reservasAcomods').where('acomodID', '==', params.id).where('isLive', '==', true).get()
+    .then(snap => store.commit('m_disabledDatesAcomod', snap.docs.map(doc => doc.data().periodoReserva)))
     .catch(err => console.log(err))
 
   },
@@ -534,11 +500,33 @@ export default {
     this.$store.state.heightImageBox === null ? this.$store.state.heightImageBox = this.$refs.imageBox.clientHeight : null
   },
   computed: {
+    attributesCalendar () {
+      return [
+        {
+          key: 'minDate',
+          contentStyle: {
+            opacity: 0.2,
+            textDecoration: 'line-through'
+          },
+          dates: {
+            start: null,
+            end: dayjs(new Date()).add(1, 'day')
+          }
+        },
+        {
+          key: 'disabledDatesAcomod',
+          contentStyle: {
+            opacity: 0.2,
+            textDecoration: 'line-through'
+          },
+          dates: this.$store.state.disabledDatesAcomod
+        }
+      ]
+    },
     daySpan () {
-      const oneDay = 24*60*60*1000
-      const checkIn = new Date(this.$store.state.reservaAcomod.periodoReserva.start)
-      const checkOut = new Date(this.$store.state.reservaAcomod.periodoReserva.end)
-      const daySpan = Math.round(Math.abs((checkIn.getTime() - checkOut.getTime())/(oneDay)))
+      const checkIn = dayjs(new Date(this.$store.state.reservaAcomod.periodoReserva.start))
+      const checkOut = dayjs(new Date(this.$store.state.reservaAcomod.periodoReserva.end))
+      const daySpan = checkOut.diff(checkIn, 'day')
       this.$store.state.reservaAcomod.noites = daySpan
       return daySpan
     },

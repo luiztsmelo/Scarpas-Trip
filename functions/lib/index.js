@@ -27,7 +27,7 @@ const AirtableConfig = {
     }
 };
 /* Mailjet */
-const Mailjet = require('node-mailjet').connect('2213afd9febdc226190169a58fc26afa', '74d6c365c8fa5de11a937017c5545165');
+const Mailjet = require('node-mailjet').connect(`${functions.config().mailjetpublic.key}`, `${functions.config().mailjetprivate.key}`);
 const ESemail = 'contato@escarpastrip.com';
 const ESname = 'Escarpas Trip';
 /* Day.js */
@@ -50,10 +50,10 @@ exports.watch_reservaExpiration = functions.https.onRequest((req, res) => __awai
                     /* Se feita a 2 dias atrás: (Obs: diff entre uma data passada retorna um valor negativo) */
                     if (requestedDate.diff(dateNow, 'day') <= -2) {
                         /* Update status para 'expired' Firestore */
-                        admin.firestore().collection('reservasAcomods').doc(reserva.reservaID).update({ status: 'expired' })
+                        admin.firestore().collection('reservasAcomods').doc(reserva.reservaID).update({ status: 'expired', isLive: false })
                             .catch(err => { throw new Error(err); });
                         /* Update status para 'expired' Airtable */
-                        axios_1.default.patch(`${AirtableAcomodsURL}/${reserva.airtableID}`, { 'fields': { 'status': 'expired' } }, AirtableConfig)
+                        axios_1.default.patch(`${AirtableAcomodsURL}/${reserva.airtableID}`, { 'fields': { 'status': 'expired', 'isLive': 'false' } }, AirtableConfig)
                             .catch(err => { throw new Error(err); });
                         console.log(`Reserva ${reserva.reservaID} [${requestedDate.diff(dateNow, 'day')}] foi expirada.`);
                     }
