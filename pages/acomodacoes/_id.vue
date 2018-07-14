@@ -404,7 +404,7 @@ export default {
     }).catch(err => { store.commit('m_loader', false), console.log(err) })
 
 
-    && firebase.firestore().collection('reservasAcomods').where('acomodID', '==', params.id).where('isLive', '==', true).get()
+    && firebase.firestore().collection('reservasAcomods').where('acomodID', '==', params.id).where('isRunning', '==', true).get()
     .then(snap => store.commit('m_disabledDatesAcomod', snap.docs.map(doc => doc.data().periodoReserva)))
     .catch(err => console.log(err))
 
