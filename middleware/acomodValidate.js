@@ -1,14 +1,28 @@
 import * as firebase from 'firebase'
 require('firebase/firestore')
 
-export default function ({ store, route, redirect }) {
-  firebase.firestore().collection('acomods').doc(route.params.id).get()
-  .then(doc => {
-    if (!doc.exists) {
+export default async function ({ store, route, redirect }) {
+  try {
+    store.commit('m_loader', true)
+    const docAcomod = await firebase.firestore().collection('acomods').doc(route.params.id).get()
+    if (docAcomod.exists) {
+      firebase.firestore().collection('acomods').doc(route.params.id).collection('visits').add({
+        date: new Date().getTime(),
+        fromMobile: store.state.isMobile,
+        clickedReservaBtn: false,
+        wentToReservaPage: false,
+        concludedReserva: false
+      })
+      .then(doc => {
+        store.state.visitID = doc.id
+      }).catch(err => console.log(err))
+    } else {
       store.state.acomodRef = route.params.id
       store.state.error = true
       store.state.acomodPageError = true
-      return redirect('/')
+      redirect('/')
     }
-  })
+  } catch (err) {
+    console.log(err)
+  }
 }

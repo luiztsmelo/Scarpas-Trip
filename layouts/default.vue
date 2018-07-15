@@ -47,15 +47,26 @@ export default {
   components: { Navbar, Foobar, SignIn, Menuu, Loader, Share, MapFull, AskAcomod },
   
   beforeCreate () {
-
-    /*  DETECT DEVICE */
+    /* Detect Device */
     if (isMobile.any) {
       this.$store.commit('m_isMobile', true)
     } else {
       this.$store.commit('m_isMobile', false)
     }
+    /* Desativate loader on refresh */
+    if (performance.navigation.type == performance.navigation.TYPE_RELOAD) {
+      this.$store.commit('m_loader', false)
+    }
+  }, 
+  mounted () {
+    /* Check network status */
+    window.addEventListener('offline', event => {
+      this.$store.state.isOnline = false
+    })
+    window.addEventListener('online', event => {
+      this.$store.state.isOnline = true
+    })
   }
-
 }
 </script>
 

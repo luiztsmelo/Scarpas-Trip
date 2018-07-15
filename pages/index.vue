@@ -55,8 +55,8 @@
         </div>
         
         <div class="cards-container">
-          <div class="card" v-for="acomod in $store.state.acomods" :key="acomod.acomodID">
-            <nuxt-link :to="'/acomodacoes/' + acomod.acomodID">
+          <div class="card" v-for="acomod in $store.state.acomods" :key="acomod.acomodID" @click="checkNetwork">
+            <nuxt-link :to="$store.state.isOnline ? `/acomodacoes/${acomod.acomodID}` : '/'">
 
               <progressive-background class="__card-img" :src="imageAcH(acomod)" :placeholder="acomod.images[0].L" :aspect-ratio="2/3"/>
 
@@ -167,6 +167,9 @@ export default {
     }
   },
   methods: {
+    checkNetwork () {
+      this.$store.state.isOnline ? '' : alert('Sem conexão com a internet')
+    },
     imageEvH (evento) {
       return supportsWebP ? evento.imageH1W : evento.imageH1J
     },

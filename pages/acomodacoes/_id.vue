@@ -375,8 +375,6 @@ export default {
   middleware: 'acomodValidate',
   transition: 'id',
   fetch ({ store, params }) {
-    store.commit('m_loader', true)
-
     /* GET ACOMOD DATA */
     return firebase.firestore().collection('acomods').doc(params.id).get()
     .then(doc => {
@@ -386,19 +384,6 @@ export default {
       if (store.state.isMobile) {
         store.commit('m_showNavbar', false)
         store.commit('m_showFoobar', false)
-      }
-
-      /* Add page visit */
-      if (doc.exists) {
-        firebase.firestore().collection('acomods').doc(params.id).collection('visits').add({ 
-          date: new Date().getTime(),
-          fromMobile: store.state.isMobile,
-          clickedReservaBtn: false,
-          wentToReservaPage: false,
-          concludedReserva: false
-        })
-        .then(doc => store.state.visitID = doc.id)
-        .catch(err => console.log(err))
       }
 
     }).catch(err => { store.commit('m_loader', false), console.log(err) })
@@ -443,6 +428,7 @@ export default {
       firebase.firestore().collection('acomods').doc(this.$route.params.id).collection('visits').doc(this.$store.state.visitID).update({ 
         clickedReservaBtn: true
       })
+
       if (this.$store.state.reservaAcomod.periodoReserva === null) {
         this.$nextTick(() => this.$refs.datePicker.$el.focus())
       } else {

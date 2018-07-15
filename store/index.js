@@ -11,6 +11,7 @@ const store = () => new Vuex.Store({
     /*
     -------------------- GERAL --------------------
     */
+    isOnline: true,
     isMobile: false,
     isSignIn: true,
     showNavbar: true,
