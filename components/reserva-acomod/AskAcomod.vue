@@ -8,6 +8,7 @@
     :scrollable="true"
     @closed="closedModal">
 
+
     <img src="../../assets/img/close-modal.svg" style="cursor:pointer;position:absolute;top:1rem;right:1rem;width:1rem;height:auto" @click="$modal.hide('ask-acomod-modal')">
 
 
@@ -208,9 +209,9 @@ export default {
         justify-content: flex-end;
         height: 2.9rem;
         & .__book-btn {
-          padding: 0 1.3rem;
+          padding: 0 1.4rem;
           margin-right: 1rem;
-          font-size: 16px;
+          font-size: 17px;
           font-weight: 600;
           background: transparent;
           color: var(--colorAcomod);
@@ -218,8 +219,8 @@ export default {
           line-height: 2.8rem;
         }
         & .__send-btn {
-          padding: 0 1.3rem;
-          font-size: 16px;
+          padding: 0 1.4rem;
+          font-size: 17px;
           font-weight: 600;
           background: var(--colorAcomod);
           color: white;

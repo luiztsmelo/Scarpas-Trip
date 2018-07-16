@@ -55,8 +55,8 @@
         </div>
         
         <div class="cards-container">
-          <div class="card" v-for="acomod in $store.state.acomods" :key="acomod.acomodID" @click="checkNetwork">
-            <nuxt-link :to="$store.state.isOnline ? `/acomodacoes/${acomod.acomodID}` : '/'">
+          <div class="card" v-for="acomod in $store.state.acomods" :key="acomod.acomodID">
+            <nuxt-link :to="`/acomodacoes/${acomod.acomodID}`">
 
               <progressive-background class="__card-img" :src="imageAcH(acomod)" :placeholder="acomod.images[0].L" :aspect-ratio="2/3"/>
 
@@ -167,9 +167,6 @@ export default {
     }
   },
   methods: {
-    checkNetwork () {
-      this.$store.state.isOnline ? '' : alert('Sem conexão com a internet')
-    },
     imageEvH (evento) {
       return supportsWebP ? evento.imageH1W : evento.imageH1J
     },
@@ -204,12 +201,9 @@ export default {
       vm.$store.state.offFoobar3 = true
       vm.$store.state.offFoobar4 = true
       vm.$store.state.offFoobar5 = true
-      if (vm.$store.state.showFoobar === false) {
-        vm.$store.commit('m_showFoobar', true)
-      }
-      if (vm.$store.state.showNavbar === false) {
-        vm.$store.commit('m_showNavbar', true)
-      }
+      !vm.$store.state.isOnline ? vm.$modal.show('offline-modal') : ''
+      !vm.$store.state.showFoobar ? vm.$store.commit('m_showFoobar', true) : ''
+      !vm.$store.state.showNavbar ? vm.$store.commit('m_showNavbar', true) : ''
     })
   },
   beforeRouteLeave (to, from, next) {

@@ -593,6 +593,7 @@ export default {
   },
   beforeRouteEnter (to, from, next) {
     next(vm => {
+      !vm.$store.state.isOnline ? vm.$modal.show('offline-modal') : ''
       if (vm.$store.state.isMobile === false) {
         vm.$store.commit('m_showNavbar', true)
       } else {
@@ -829,7 +830,7 @@ export default {
         font-size: 13px;
       }
       & .__reserva-btn {
-        font-size: 15px;
+        font-size: 16px;
         font-weight: 600;
         background: var(--colorAcomod);
         color: white;
@@ -970,7 +971,7 @@ export default {
           }
           & .__reserva-desktop-btn {
             margin-top: 1.3rem;
-            font-size: 16px;
+            font-size: 17px;
             font-weight: 600;
             background: var(--colorAcomod);
             color: white;
@@ -983,7 +984,7 @@ export default {
             font-weight: 600;
             background: transparent;
             color: var(--colorAcomod);
-            height: 2rem;
+            height: 2.1rem;
             width: 100%;
           }
           & .__info {

@@ -330,6 +330,9 @@ const store = () => new Vuex.Store({
     /*
     -------------------- GERAL --------------------
     */
+    m_isOnline (state, payload) {
+      state.isOnline = payload
+    },
     m_isMobile (state, payload) {
       state.isMobile = payload
     },

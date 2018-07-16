@@ -24,7 +24,9 @@
 
       <SignIn/>
 
-      <ask-acomod/>
+      <AskAcomod/>
+
+      <Offline/>
     </div>
 
 
@@ -42,29 +44,26 @@ import Loader from '~/components/Loader.vue'
 import Share from '~/components/Share.vue'
 import MapFull from '~/components/MapFull.vue'
 import AskAcomod from '~/components/reserva-acomod/AskAcomod'
+import Offline from '~/components/Offline'
 
 export default {
-  components: { Navbar, Foobar, SignIn, Menuu, Loader, Share, MapFull, AskAcomod },
+  components: { Navbar, Foobar, SignIn, Menuu, Loader, Share, MapFull, AskAcomod, Offline },
   
   beforeCreate () {
     /* Detect Device */
-    if (isMobile.any) {
-      this.$store.commit('m_isMobile', true)
-    } else {
-      this.$store.commit('m_isMobile', false)
-    }
+    isMobile.any ? this.$store.commit('m_isMobile', true) : this.$store.commit('m_isMobile', false)
     /* Desativate loader on refresh */
-    if (performance.navigation.type == performance.navigation.TYPE_RELOAD) {
-      this.$store.commit('m_loader', false)
-    }
-  }, 
-  mounted () {
+    performance.navigation.type == performance.navigation.TYPE_RELOAD ? this.$store.commit('m_loader', false) : ''
     /* Check network status */
     window.addEventListener('offline', event => {
-      this.$store.state.isOnline = false
+      this.$store.commit('m_isOnline', false)
+      this.$modal.show('offline-modal')
     })
     window.addEventListener('online', event => {
-      this.$store.state.isOnline = true
+      this.$store.commit('m_isOnline', true)
+      location.reload()
+      this.$modal.hide('offline-modal')
+      
     })
   }
 }
