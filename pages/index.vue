@@ -315,14 +315,14 @@ export default {
       & .category-container {
         padding-bottom: 6rem;
         & .title-row {
-          padding: 0 7% 1.5rem 7%;
+          padding: 0 6% 1.2rem 6%;
           & .__title {
             font-size: 29px;
             font-weight: 700;
           }
         }
         & .cards-container {
-          padding: 0 6.5%;
+          padding: 0 5.5%;
           & .card {
             margin: 1.3rem .8%;
             flex: 0 1 23.4%;

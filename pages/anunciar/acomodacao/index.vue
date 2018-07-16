@@ -3,6 +3,7 @@
 
     <v-dialog style="z-index:10000"/>
 
+
     <!-- PLANO ACOMODAÇÃO MOBILE -->
     <div class="plano-acomodacao-mobile" v-show="$store.state.cadastroAcomod0">
       
@@ -13,6 +14,7 @@
       <button class="__anunciar-btn" @click="$store.commit('m_cadastroAcomod1', true), $store.commit('m_cadastroAcomod0', false), $store.commit('m_acomodProgressBar', (100/11)), hashAcomod()">Anunciar</button>
 
     </div><!-- PLANO ACOMODAÇÃO MOBILE -->
+
 
 
     <!-- PLANO ACOMODAÇÃO DESKTOP -->
@@ -1445,10 +1447,10 @@ export default {
       right: 0;
       margin: auto;
       height: 3rem;
-      color: white;
       width: 13rem;
+      color: white;
       background: var(--colorAcomod);
-      border-radius: 2rem;
+      border-radius: 5px;
       font-size: var(--fontSizeAnuncioText);
       font-weight: 600;
       box-shadow: 3px 3px 20px 1px rgba(0,0,0,0.18);
@@ -1857,17 +1859,17 @@ export default {
           font-weight: 400;
         }
         & .__anunciar-btn {
-          font-weight: 700;
           width: 13rem;
           height: 3rem;
           color: white;
           background: var(--colorAcomod);
-          border-radius: 2rem;
-          font-size: var(--fontSizeAnuncioText);
+          border-radius: 5px;
+          font-size: 17px;
+          font-weight: 600;
         }
       }
       & .__img-header {
-        flex: 30%;
+        flex: 25%;
         width: 1rem;
         height: auto;
       }

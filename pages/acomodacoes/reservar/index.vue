@@ -933,7 +933,7 @@ export default {
     flex-flow: column;
     align-items: center;
     & .__img {
-      width: 57px;
+      width: 54px;
       height: auto;
     }
     & .__title {

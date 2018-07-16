@@ -1183,17 +1183,17 @@ export default {
           font-weight: 400;
         }
         & .__anunciar-btn {
-          font-weight: 700;
           width: 13rem;
           height: 3rem;
           color: white;
           background: var(--colorPasseio);
-          border-radius: 2rem;
-          font-size: var(--fontSizeAnuncioText);
+          border-radius: 5px;
+          font-size: 17px;
+          font-weight: 600;
         }
       }
       & .__img-header {
-        flex: 30%;
+        flex: 25%;
         width: 1rem;
         height: auto;
       }

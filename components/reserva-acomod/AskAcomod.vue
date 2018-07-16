@@ -211,7 +211,7 @@ export default {
         & .__book-btn {
           padding: 0 1.4rem;
           margin-right: 1rem;
-          font-size: 17px;
+          font-size: 16px;
           font-weight: 600;
           background: transparent;
           color: var(--colorAcomod);
@@ -220,7 +220,7 @@ export default {
         }
         & .__send-btn {
           padding: 0 1.4rem;
-          font-size: 17px;
+          font-size: 16px;
           font-weight: 600;
           background: var(--colorAcomod);
           color: white;
@@ -240,15 +240,16 @@ export default {
     align-items: center;
     padding: 3rem 23%;
     & .__img {
-      width: 57px;
+      width: 54px;
       height: auto;
     }
     & .__title {
       text-align: center;
-      padding: .7rem 0 .4rem 0;
+      padding: .7rem 0 .5rem 0;
     }
     & .__subtitle {
       text-align: center;
+      line-height: 23px;
     }
     & .__close-btn {
       margin-top: 3rem;

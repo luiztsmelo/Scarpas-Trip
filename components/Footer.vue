@@ -68,16 +68,16 @@ export default {
   height: 18rem;
   padding: 3.2rem 7%;
   & .__img {
-    width: 4.5rem;
+    width: 4rem;
     height: auto;
-    margin-right: 3.5rem;
+    margin-right: 3.3rem;
     align-self: flex-start;
 
   }
   & .box {
     margin: 0 2.2rem;
     & .__title {
-      font-size: 15px;
+      font-size: 16px;
       padding-bottom: .5rem;
 
     }

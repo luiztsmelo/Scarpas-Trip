@@ -3,11 +3,11 @@
     <div class="menu" v-show="showMenu">
       <div class="menu-body">
 
-        <div style="border-bottom:1px solid rgb(222,222,222);padding-bottom:.6rem" @click="$store.commit('m_showMenu', false), $store.commit('m_menuIconAnime', false), $store.commit('m_showFoobar', false)">
-          <nuxt-link :to="pathProfile" class="menu-item">
+        <div style="border-bottom:1px solid rgb(222,222,222);padding-bottom:.6rem" @click="checkUser(), $store.commit('m_showMenu', false), $store.commit('m_menuIconAnime', false), $store.commit('m_showFoobar', false)">
+          <div class="menu-item">
             <img src="../assets/img/social.svg" class="__item-img-color">
             <h3>Minha Conta</h3>
-          </nuxt-link>
+          </div>
         </div>
 
         <div style="padding-top:.6rem" @click="$store.commit('m_showMenu', false), $store.commit('m_showFoobar', false), $store.commit('m_menuIconAnime', false), $store.commit('m_cadastroAcomod0', true)">
@@ -69,20 +69,21 @@
 
 <script>
 export default {
+  methods: {
+    checkUser () {
+      if (this.userEmail === null) {
+        this.$modal.show('sign-in-modal')
+      } else {
+        this.$router.push(`/@${this.userEmail.substring(0, this.userEmail.indexOf("@"))}`)
+      }
+    }
+  },
   computed: {
     showMenu () {
       return this.$store.state.showMenu
     },
     userEmail () {
       return this.$store.state.user.email 
-    },
-    pathProfile () {
-      if (this.userEmail === null) {
-        return '/login'
-      } else {
-        let shortEmail = this.userEmail.substring(0, this.userEmail.indexOf("@"))
-        return '/@' + shortEmail
-      }
     }
   }
 }

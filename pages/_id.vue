@@ -1,12 +1,16 @@
 <template>
   <div class="profile" v-if="user.email !== null">
 
+
+
     <!-- BACK BUTTON -->
     <div class="back-bar">
       <div class="back-box" @click="backBtn">
         <img class="__back-btn" src="../assets/img/back.svg" alt="voltar">
       </div>
     </div><!-- BACK BUTTON -->
+
+
 
     <div class="user-box">
       <div class="welcome">
@@ -19,7 +23,7 @@
   
     <div class="anuncios-box">
       
-      <h1 class="__title">Seus Anúncios</h1>
+      <h1 class="__title">Meus Anúncios</h1>
 
       <h3 v-if="filteredAcomods.length === 0 && filteredPasseios.length === 0 && filteredEventos.length === 0">Nenhum anúncio encontrado.</h3>
 
@@ -43,7 +47,7 @@
 
     <div class="reservas-box">
 
-      <h1 class="__title">Suas Reservas</h1>
+      <h1 class="__title">Minhas Reservas</h1>
 
       <h3>Nenhuma reserva encontrada.</h3>
 

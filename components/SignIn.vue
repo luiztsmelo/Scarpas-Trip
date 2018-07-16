@@ -2,8 +2,8 @@
   <modal
     name="sign-in-modal"
     class="sign-in-modal"
-    width="33%"
-    height="auto"
+    :width="$store.state.isMobile ? '100%' : '32%'"
+    :height="$store.state.isMobile ? '100%' : 'auto'"
     @closed="closedModal">
 
     <img src="../assets/img/close-modal.svg" class="close-btn" @click="$modal.hide('sign-in-modal')">
@@ -17,9 +17,9 @@
         <h1 class="__title">Acessar sua conta</h1>
         <h3 class="__subtitle">Acesse sua conta para acompanhar suas reservas ou gerenciar seus anúncios</h3>
 
-        <button type="button" class="facebook-btn" @click="facebookSignIn()">Continuar com Facebook</button>
-        <button type="button" class="google-btn" @click="googleSignIn()">Continuar com Google</button>
-        <button type="button" class="email-btn" @click="emailSignIn()">Continuar com E-mail</button>
+        <button type="button" class="facebook-btn" @click="$store.dispatch('a_facebookSignIn')">Continuar com Facebook</button>
+        <button type="button" class="google-btn" @click="$store.dispatch('a_googleSignIn')">Continuar com Google</button>
+        <button type="button" class="email-btn">Continuar com E-mail</button>
 
         <h3 class="if-have-account">Ainda não possui uma conta? <span class="underline" @click="$store.state.isSignIn = false">Cadastrar</span></h3>
 
@@ -56,12 +56,6 @@
 <script>
 export default {
   methods: {
-    googleSignIn () {
-      this.$store.dispatch('a_googleSignIn')
-    },
-    facebookSignIn () {
-      this.$store.dispatch('a_facebookSignIn')
-    },
     closedModal () {
       this.$store.state.clickedReservaAcomod = false
       this.$store.state.clickedAskAcomod = false
@@ -90,6 +84,11 @@ export default {
         this.$router.push('/acomodacoes/reservar')
         this.$store.commit('m_showNavbar', false)
       }
+      if (value !== null && this.$store.state.isMobile) {
+        this.$modal.hide('sign-in-modal')
+        const shortEmail = this.user.substring(0, this.user.indexOf("@"))
+        this.$router.push(`/@${shortEmail}`)
+      }
     }
   }
 }
@@ -115,7 +114,7 @@ export default {
       align-items: center;
       padding: 2.8rem 4rem 2.8rem 4rem;
       & .__img {
-        width: 57px;
+        width: 54px;
         height: auto;
       }
       & .__title {
@@ -151,6 +150,7 @@ export default {
         padding-left: 50px;
       }
       & .if-have-account {
+        text-align: center;
         padding-top: .6rem;
         font-size: 15px;
         & .underline {
@@ -159,9 +159,20 @@ export default {
         }
       }
       & .terms-of-service {
+        text-align: center;
         padding-top: .7rem;
         text-decoration: underline;
         font-size: 15px;
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .sign-in-modal {
+    & .sign-in-up {
+      & .sign-in-body {
+        padding: 4rem 7%;
       }
     }
   }

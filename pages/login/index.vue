@@ -1,8 +1,7 @@
 <template>
   <div class="login">
 
-    <img src="../../assets/img/login.svg" class="__img-header">
-    <h1 class="__title">Entrar usando sua conta:</h1>
+    <h1 class="__title">Acessar sua conta</h1>
 
     <div class="signin-btns">
       <button type="button" class="facebook-btn" @click="facebookSignIn()">Facebook</button>
@@ -55,19 +54,15 @@ export default {
   flex-flow: column;
   align-items: center;
   transition: var(--main-transition);
-  & .__img-header {
-    margin: 2rem 0;
-    width: 6rem;
-    height: auto;
-  }
   & .__title {
-    font-size: 27px;
+    font-size: 31px;
     font-weight: 700;
-    padding: 0 7%;
+    padding: 3rem 7% 1rem;
     text-align: center;
   }
   & .signin-btns {
     display: flex;
+    flex-flow: column;
     padding: 2rem 7%;
     width: 100%;
   }

@@ -48,10 +48,9 @@
         </nav>
 
         <div class="dropdown" v-show="userBox === true" @click="userBox = !userBox">
-          <div class="dropdown-body" style="right: 7%">
+          <div class="dropdown-body" style="right: 6%">
             <ul>
-              <li>Minhas reservas</li>
-              <li>Meus anúncios</li>
+              <li>Minha conta</li>
               <li>Editar perfil</li>
               <li @click="signOut()">Sair</li>
             </ul>
@@ -59,7 +58,7 @@
         </div>
 
         <div class="dropdown" v-show="anuncioDropdown === true" @click="anuncioDropdown = !anuncioDropdown">
-          <div class="dropdown-body" style="right: 11%">
+          <div class="dropdown-body" style="right: 10%">
             <ul>
               <nuxt-link to="/anunciar/acomodacao">
                 <li class="__nav-item">Acomodação</li>
@@ -238,7 +237,7 @@ export default {
         height: auto;
         box-shadow: 1px 1px 5px 0px rgba(0,0,0,0.2);
         & ul {
-          padding: .7rem 1.8rem .7rem 1.1rem;
+          padding: .7rem 2.2rem .7rem 1.2rem;
           & li {
             padding: .85rem 0;
             cursor: pointer;
@@ -266,7 +265,7 @@ export default {
 @media (min-width: 1024px) {
   .navbar {
     height: var(--navbarHeightDesktop);
-    padding: 0 7%;
+    padding: 0 6%;
     & .navbar-body {
       & .brand {
         & .__brand-img {
