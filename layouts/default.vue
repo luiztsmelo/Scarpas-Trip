@@ -9,6 +9,10 @@
     </div>
 
 
+    <!-- Preload -->
+    <img class="img" src="../assets/img/offline.svg" style="display:none">
+
+
     <div>
       <Loader/>
 
