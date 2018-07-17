@@ -32,8 +32,7 @@
             :select-attribute="attribute"
             :disabled-attribute="disabledAttribute"
             :theme-styles="datePickerMobileStyle"
-            tint-color="#00D8C7"
-            show-caps>
+            tint-color="#00D8C7">
           </v-date-picker>
 
 
@@ -309,6 +308,7 @@ export default {
         }
       }
       & .__next-btn {
+        z-index: 99999;
         position: fixed;
         bottom: 1.3rem;
         right: 7%;

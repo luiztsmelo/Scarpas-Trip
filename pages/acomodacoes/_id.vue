@@ -244,7 +244,7 @@
               ref="datePicker"
               mode="range"
               v-model="$store.state.reservaAcomod.periodoReserva"
-              :pane-width="285"
+              :pane-width="290"
               :min-date="minDate"
               :disabled-dates="$store.state.disabledDatesAcomod"
               :drag-attribute="attribute"

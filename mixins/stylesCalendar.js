@@ -28,19 +28,19 @@ export const stylesCalendar = {
           fontSize: '1.55rem'
         },
         headerTitle: {
-          fontSize: '17px',
+          fontSize: '18px',
           fontWeight: '700'
         },
         weekdays: {
           color: 'rgb(42, 42, 42)',
-          fontWeight: '600',
+          fontWeight: '400',
           padding: '21px 5px 6px 5px'
         },
         dayCell: {
-          height: '35px'
+          padding: '4px 0'
         },
         dayContent: {
-          fontWeight: '400',
+          fontWeight: '500',
           fontSize: '14px'
         },
         dayCellNotInMonth: {
@@ -69,23 +69,23 @@ export const stylesCalendar = {
         },
         headerArrows: {
           margin: '0 8px',
-          fontSize: '1.6rem'
+          fontSize: '1.65rem'
         },
         headerTitle: {
-          fontSize: '19px',
-          fontWeight: '700'
+          fontSize: '20px',
+          fontWeight: '600'
         },
         weekdays: {
           color: 'rgb(42, 42, 42)',
           fontSize: '16px',
-          fontWeight: '600',
+          fontWeight: '400',
           padding: '21px 5px 6px 5px'
         },
         dayCell: {
-          height: '35px'
+          padding: '6px 0'
         },
         dayContent: {
-          fontWeight: '400',
+          fontWeight: '500',
           fontSize: '15px'
         },
         dayCellNotInMonth: {
@@ -121,11 +121,11 @@ export const stylesCalendar = {
         weekdays: {
           color: 'rgb(42, 42, 42)',
           fontSize: '15px',
-          fontWeight: '600',
+          fontWeight: '500',
           padding: '14px 5px 6px 5px'
         },
         dayCell: {
-          height: '38px'
+          padding: '6px 0'
         },
         dayContent: {
           fontWeight: '400',
