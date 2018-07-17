@@ -11,6 +11,7 @@ export const stylesCalendar = {
           backgroundColor: 'transparent'
         }
       },
+      /* ____________________ Date Picker Desktop ____________________ */
       datePickerDesktopStyle: {
         wrapper: {
           color: 'rgb(42, 42, 42)',
@@ -55,20 +56,20 @@ export const stylesCalendar = {
           borderLeft: 'none'
         }
       },
+      /* ____________________ Date Picker Mobile ____________________ */
       datePickerMobileStyle: {
         wrapper: {
           color: 'rgb(42, 42, 42)',
           border: '0',
           padding: '0 7px',
           background: 'white',
-          width: '100%',
-          minHeight: '300px'
+          width: '100%'
         },
         header: {
-          padding: '10px 9px 0px 9px'
+          padding: '0'
         },
         headerArrows: {
-          margin: '0 8px',
+          margin: '0 16px',
           fontSize: '1.65rem'
         },
         headerTitle: {
@@ -77,29 +78,22 @@ export const stylesCalendar = {
         },
         weekdays: {
           color: 'rgb(42, 42, 42)',
-          fontSize: '16px',
+          fontSize: '15px',
           fontWeight: '400',
           padding: '21px 5px 6px 5px'
         },
         dayCell: {
-          padding: '6px 0'
+          padding: '8px 0'
         },
         dayContent: {
           fontWeight: '500',
-          fontSize: '15px'
+          fontSize: '16px'
         },
         dayCellNotInMonth: {
           opacity: 0
-        },
-        dayPopoverContent: {
-          background: '#00D8C7',
-          color: 'white',
-          border: 'none'
-        },
-        verticalDivider: {
-          borderLeft: 'none'
         }
       },
+      /* ____________________ Calendar Desktop ____________________ */
       calendarDesktopStyle: {
         wrapper: {
           color: 'rgb(42, 42, 42)',

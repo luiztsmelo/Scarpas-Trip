@@ -32,7 +32,8 @@
             :select-attribute="attribute"
             :disabled-attribute="disabledAttribute"
             :theme-styles="datePickerMobileStyle"
-            tint-color="#00D8C7">
+            tint-color="#00D8C7"
+            show-caps>
           </v-date-picker>
 
 
@@ -271,7 +272,7 @@ export default {
   & .reserva-acomod-body {
     display: flex;
     flex-flow: column;
-    margin: 1rem 0 0 0;
+    margin-top: .5rem;
     height: 100%;
     & .etapa-reserva-box {
       & .etapas {
@@ -281,7 +282,7 @@ export default {
         color: rgb(72, 72, 72);
       }
       & .__title {
-        padding: 0 7% 2rem 7%;
+        padding: 0 7% 1.8rem 7%;
         line-height: 35px;
         font-size: 29px;
         font-weight: 700;
