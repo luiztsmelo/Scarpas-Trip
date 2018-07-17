@@ -74,7 +74,7 @@ export const stylesCalendar = {
         },
         headerTitle: {
           fontSize: '20px',
-          fontWeight: '600'
+          fontWeight: '400'
         },
         weekdays: {
           color: 'rgb(42, 42, 42)',

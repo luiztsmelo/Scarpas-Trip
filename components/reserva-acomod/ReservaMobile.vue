@@ -1,13 +1,16 @@
 <template>
   <transition name="reserva-animation">
-    <div class="reserva-acomod" v-if="showReservaAcomod">
+    <div class="reserva-acomod" v-show="showReservaAcomod">
+
+
 
       <!-- BACK BUTTON -->
       <div class="back-bar">
         <div class="back-box" @click="backBtn">
-          <img class="__back-btn" src="../../assets/img/back.svg" alt="voltar">
+          <img class="__back-btn" src="../../assets/img/back.svg">
         </div>
       </div><!-- BACK BUTTON -->
+
 
 
       <div class="reserva-acomod-body">
