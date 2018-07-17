@@ -86,7 +86,7 @@
 
           <h3 class="etapas">4 de 4 etapas</h3>
 
-          <h1 class="__title">Pagamento e Confirmação</h1>
+          <h1 class="__title">Pagar e confirmar</h1>
 
         
 
@@ -277,29 +277,15 @@ export default {
     & .etapa-reserva-box {
       & .etapas {
         padding: 2.8rem 7% 0.2rem 7%;
-        font-size: 13px;
+        font-size: 14px;
         font-weight: 500;
         color: rgb(72, 72, 72);
       }
       & .__title {
         padding: 0 7% 2rem 7%;
         line-height: 35px;
-        font-size: 27px;
+        font-size: 29px;
         font-weight: 700;
-      }
-      & .__item {
-        padding: 0 7%;
-        & select {
-          width: 100%;
-          font-size: 17px;
-          font-weight: 400;
-          background: white;
-          color: var(--color01);
-          padding: .5rem 0 .6rem 0;
-          border: none;
-          border-bottom: 1px solid rgb(222,222,222);
-          outline: none;
-        }
       }
       & .item-form {
       padding: 0 7%;
@@ -322,23 +308,18 @@ export default {
           outline: none;
         }
       }
-      & .signin-btns {
-        display: flex;
-        padding: 0 7%;
-      }
       & .__next-btn {
         position: fixed;
         bottom: 1.3rem;
         right: 7%;
-        font-size: 16px;
+        font-size: 17px;
         font-weight: 600;
         background: rgb(222,222,222);
         color: white;
-        line-height: 2.6rem;
-        height: 2.7rem;
-        width:  9rem;
-        border-radius: 4px;
-        cursor: no-drop;
+        line-height: 2.7rem;
+        height: 2.8rem;
+        width: 9rem;
+        border-radius: 5px;
         transition: all .3s ease;
       }
     }

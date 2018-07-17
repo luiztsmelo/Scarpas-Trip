@@ -59,7 +59,7 @@ export const stylesCalendar = {
         wrapper: {
           color: 'rgb(42, 42, 42)',
           border: '0',
-          padding: '0',
+          padding: '0 7px',
           background: 'white',
           width: '100%',
           minHeight: '300px'
@@ -69,14 +69,15 @@ export const stylesCalendar = {
         },
         headerArrows: {
           margin: '0 8px',
-          fontSize: '1.55rem'
+          fontSize: '1.6rem'
         },
         headerTitle: {
-          fontSize: '17px',
+          fontSize: '19px',
           fontWeight: '700'
         },
         weekdays: {
           color: 'rgb(42, 42, 42)',
+          fontSize: '16px',
           fontWeight: '600',
           padding: '21px 5px 6px 5px'
         },
@@ -85,7 +86,7 @@ export const stylesCalendar = {
         },
         dayContent: {
           fontWeight: '400',
-          fontSize: '14px'
+          fontSize: '15px'
         },
         dayCellNotInMonth: {
           opacity: 0
