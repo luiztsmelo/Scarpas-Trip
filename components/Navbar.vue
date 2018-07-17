@@ -265,7 +265,7 @@ export default {
 @media (min-width: 1024px) {
   .navbar {
     height: var(--navbarHeightDesktop);
-    padding: 0 6%;
+    padding: 0 7%;
     & .navbar-body {
       & .brand {
         & .__brand-img {

@@ -14,128 +14,87 @@
         
 
 
-        <!-- ########## DICAS INICIAIS PG.0 ########## -->
-        <div class="etapa-reserva-box" v-if="$store.state.reservaAcomod0">
-
-          <h3 class="etapas">1 de 5 etapas</h3>
-
-          <h1 class="__title">Revisar regras da casa</h1>
-
-          
-
-          <button type="button" class="__next-btn" :style="form0ok" @click="nextBtn0">Continuar</button>
-      
-        </div><!-- ########## DICAS INICIAIS PG.0 ########## -->
-
-
-
-        <!-- ########## HÓSPEDES PG.1 ########## -->
+        <!-- ########## DATA PG.1 ########## -->
         <div class="etapa-reserva-box" v-if="$store.state.reservaAcomod1">
 
-          <h3 class="etapas">2 de 5 etapas</h3>
+          <h3 class="etapas">1 de 4 etapas</h3>
 
-          <h1 class="__title">Quantas pessoas irão se hospedar?</h1>
-
-
-          <div class="__item">
-            <select v-model="$store.state.reservaAcomod.totalHospedes">
-              <option v-for="n in totalHospedesArray">{{ n }}</option>
-            </select>
-          </div>
-
-
-          <button type="button" class="__next-btn" :style="form1ok" @click="nextBtn1">Continuar</button>
-
-          <!-- <button type="button" class="__next-btn" v-else>
-            <div class="spinner"></div>
-          </button> -->
-
-        </div><!-- ########## HÓSPEDES PG.1 ########## -->
-        
-
-
-        <!-- ########## DATA PG.2 ########## -->
-        <div class="etapa-reserva-box" v-if="$store.state.reservaAcomod2">
-
-          <h3 class="etapas">3 de 5 etapas</h3>
-
-          <h1 class="__title">Qual será o período da reserva?</h1>
-
+          <h1 class="__title">Período da reserva</h1>
 
           <v-date-picker
             is-inline
             is-required
-            mode='range'
-            v-model='$store.state.reservaAcomod.periodoReserva'
-            :min-date='Date.now()'
-            :disabled-dates='disabledDates'
-            :drag-attribute='attribute'
-            :select-attribute='attribute'
-            :disabled-attribute='disabledAttribute'
-            :theme-styles='themeStyles'
-            tint-color='#00D8C7'
+            mode="range"
+            v-model="$store.state.reservaAcomod.periodoReserva"
+            :min-date="minDate"
+            :disabled-dates="$store.state.disabledDatesAcomod"
+            :drag-attribute="attribute"
+            :select-attribute="attribute"
+            :disabled-attribute="disabledAttribute"
+            :theme-styles="datePickerMobileStyle"
+            tint-color="#00D8C7"
             show-caps>
           </v-date-picker>
 
 
+          <button type="button" class="__next-btn" :style="form1ok" @click="nextBtn1">Continuar</button>
+      
+        </div><!-- ########## DATA PG.1 ########## -->
+
+
+
+
+        <!-- ########## DETALHES PG.2 ########## -->
+        <div class="etapa-reserva-box" v-if="$store.state.reservaAcomod2">
+
+          <h3 class="etapas">2 de 4 etapas</h3>
+
+          <h1 class="__title">Revisar detalhes</h1>
+
+
+          <!-- <div class="__item">
+            <select v-model="$store.state.reservaAcomod.totalHospedes">
+              <option v-for="n in totalHospedesArray">{{ n }}</option>
+            </select>
+          </div> -->
+
+
           <button type="button" class="__next-btn" :style="form2ok" @click="nextBtn2">Continuar</button>
 
-        </div><!-- ########## DATA PG.2 ########## -->
+        </div><!-- ########## DETALHES PG.2 ########## -->
+        
 
 
 
-        <!-- ########## IDENTIFICAÇÃO PG.3 ########## -->
+        <!-- ########## MENSAGEM PG.3 ########## -->
         <div class="etapa-reserva-box" v-if="$store.state.reservaAcomod3">
 
-          <h3 class="etapas">4 de 5 etapas</h3>
+          <h3 class="etapas">3 de 4 etapas</h3>
 
-          <h1 class="__title">Sua identificação</h1>
-
-          <h3 style="padding: 0 7% .5rem 7%" v-if="this.$store.state.reservaAcomod.reservante === null">Obter dados com:</h3>
-
-          <div class="signin-btns" v-if="$store.state.reservaAcomod.reservante === null">
-            <button type="button" class="facebook-btn" @click="facebookSignIn()">Facebook</button>
-            <button type="button" class="google-btn" @click="googleSignIn()">Google</button>
-          </div>
-
-          <h3 style="padding: 1rem 7% 0 7%" v-if="this.$store.state.reservaAcomod.reservante === null">Não se preocupe, somente obteremos seu nome e e-mail.</h3>
-
-          <h3 style="padding: 0 7% 0 7%" v-if="$store.state.reservaAcomod.reservante !== null">Só mais algumas informações importantes:</h3>
-
-          <div v-if="$store.state.reservaAcomod.reservante !== null">
-            <div class="item-form">
-              <label>Celular</label>
-              <masked-input
-                type="tel"
-                v-model="$store.state.reservaAcomod.celular"
-                :mask="['(', /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]"
-                :guide="true"
-                placeholder="(__) _____-____"
-                placeholderChar="_">
-              </masked-input>
-            </div>
-          </div>
+          <h1 class="__title">Mensagem</h1>
 
 
           <button type="button" class="__next-btn" :style="form3ok" @click="nextBtn3">Continuar</button>
 
-        </div><!-- ########## IDENTIFICAÇÃO PG.3 ########## -->
+        </div><!-- ########## MENSAGEM PG.3 ########## -->
 
 
 
-        <!-- ########## FINALIZAR PG.4 ########## -->
+
+        <!-- ########## PAGAMENTO PG.3 ########## -->
         <div class="etapa-reserva-box" v-if="$store.state.reservaAcomod4">
 
-          <h3 class="etapas">5 de 5 etapas</h3>
+          <h3 class="etapas">4 de 4 etapas</h3>
 
-          <h1 class="__title">Excelente escolha {{ firstName }}! Veja se está tudo certo:</h1>
+          <h1 class="__title">Pagamento e Confirmação</h1>
 
         
 
 
-          <button type="button" class="__next-btn" :style="form4ok" @click="concluirReserva">Fechar Reserva</button>
+          <button type="button" class="__next-btn" :style="form4ok" @click="concluirReserva">Concluir Pedido</button>
 
-        </div><!-- ########## FINALIZAR PG.4 ########## -->
+        </div><!-- ########## PAGAMENTO PG.3 ########## -->
+
 
 
 
@@ -147,11 +106,14 @@
 
 <script>
 import MaskedInput from 'vue-text-mask'
+import { stylesCalendar } from '~/mixins/stylesCalendar'
+import dayjs from 'dayjs'
+import 'dayjs/locale/pt-br'
+dayjs.locale('pt-br')
 
 export default {
-  components: { 
-    MaskedInput
-  },
+  components: { MaskedInput },
+  mixins: [ stylesCalendar ],
   data() {
     return {
       loadingBtns: {
@@ -165,78 +127,14 @@ export default {
           hideIndicator: true,
           visibility: 'none'
         }
-      },
-      disabledAttribute: {
-        contentStyle: {
-          textDecoration: 'line-through',
-          color: '#DADADA'
-        },
-        contentHoverStyle: {
-          cursor: 'default',
-          backgroundColor: 'transparent',
-        },
-      },
-      themeStyles: {
-        wrapper: {
-          color: 'rgb(42, 42, 42)',
-          border: '0',
-          padding: '6px 9px 0 9px',
-          background: 'white',
-          width: '100%',
-          minHeight: '300px'
-        },
-        header: {
-          padding: '0 9px',
-        },
-        headerArrows: {
-          fontSize: '1.4rem',
-        },
-        headerTitle: {
-          fontSize: '16px',
-          fontWeight: '400'
-        },
-        weekdays: {
-          color: 'rgb(42, 42, 42)',
-          fontWeight: '700',
-          padding: '15px 5px 8px 5px',
-        },
-        dayCell: {
-          height: '30px'
-        },
-        dayContent: {
-          fontWeight: '400',
-          fontSize: '15px',
-        },
-        dayCellNotInMonth: {
-          opacity: 0
-        },
-        dayPopoverContent: {
-          background: '#00D8C7',
-          color: 'white',
-          border: 'none'
-        }
-      } 
+      }
     }
   },
   methods: {
-    googleSignIn () {
-      this.$store.dispatch('a_googleSignIn')
-    },
-    facebookSignIn () {
-      this.$store.dispatch('a_facebookSignIn')
-    },
-    hashProprietario () {
-       window.location.hash = "contato"
-    },
     backBtn () {
-      if (this.$store.state.reservaAcomod0 === true) {
-        window.history.back(1)
-        this.$store.commit('m_showReservaAcomod', false)
-      }
       if (this.$store.state.reservaAcomod1 === true) {
         window.history.back(1)
-        this.$store.commit('m_reservaAcomod1', false)
-        this.$store.commit('m_reservaAcomod0', true)
+        this.$store.commit('m_showReservaAcomod', false)
       }
       if (this.$store.state.reservaAcomod2 === true) {
         window.history.back(1)
@@ -254,28 +152,22 @@ export default {
         this.$store.commit('m_reservaAcomod3', true)
       }
     },
-    nextBtn0 () {
-      if (1<2) {
-        this.$store.commit('m_reservaAcomod0', false), this.$store.commit('m_reservaAcomod1', true), window.location.hash = "reserva2"
-      }
-    },
     nextBtn1 () {
       if (1<2) {
-        this.$store.commit('m_reservaAcomod1', false), this.$store.commit('m_reservaAcomod2', true), window.location.hash = "reserva3"
+        this.$store.commit('m_reservaAcomod1', false), this.$store.commit('m_reservaAcomod2', true), window.location.hash = "detalhes"
       }
     },
     nextBtn2 () {
       if (1<2) {
-        this.$store.commit('m_reservaAcomod2', false), this.$store.commit('m_reservaAcomod3', true), window.location.hash = "reserva4"
+        this.$store.commit('m_reservaAcomod2', false), this.$store.commit('m_reservaAcomod3', true), window.location.hash = "mensagem"
       }
     },
     nextBtn3 () {
       if (1<2) {
-        this.$store.commit('m_reservaAcomod3', false), this.$store.commit('m_reservaAcomod4', true), window.location.hash = "reserva5"
+        this.$store.commit('m_reservaAcomod3', false), this.$store.commit('m_reservaAcomod4', true), window.location.hash = "pagamento"
       }
     },
     concluirReserva () {
-
     }
   },
   computed: {
@@ -285,59 +177,60 @@ export default {
     showReservaAcomod () {
       return this.$store.state.showReservaAcomod
     },
-    firstName () {
-      let fullName = this.$store.state.reservaAcomod.reservante.split(' ')
-      let firstName = fullName[0]
-      return firstName
+    hash () {
+      return this.$route.hash
+    },
+    minDate () {
+      return dayjs(new Date()).add(2, 'day').toDate()
     },
     totalHospedesArray () {
       return Array.from({length: this.acomod.totalHospedes}, (v, k) => k+1)
     },
-    hash () {
-      return this.$route.hash
-    },
-    disabledDates () {
-      return 
-    },
-    form0ok () {
-      return 1<2 ? 'background:#FFA04F;cursor:pointer' : ''
-    },
     form1ok () {
-      return 1<2 ? 'background:#FFA04F;cursor:pointer' : ''
+      return this.$store.state.reservaAcomod.periodoReserva !== null ? 'background:#FFA04F; cursor:pointer' : ''
     },
     form2ok () {
-      return this.$store.state.reservaAcomod.periodoReserva !== null ? 'background:#FFA04F;cursor:pointer' : ''
+      return 1<2 ? 'background:#FFA04F; cursor:pointer' : ''
     },
+    form3ok () {
+      return 1<2 ? 'background:#FFA04F; cursor:pointer' : ''
+    },
+    form4ok () {
+      return 1<2 ? 'background:#FFA04F; cursor:pointer' : ''
+    }
   },
   watch: {
     hash (value) {
       if (value === '') {
         this.$store.commit('m_showReservaAcomod', false)
-        this.$store.commit('m_reservaAcomod0', false)
         this.$store.commit('m_reservaAcomod1', false)
         this.$store.commit('m_reservaAcomod2', false)
         this.$store.commit('m_reservaAcomod3', false)
         this.$store.commit('m_reservaAcomod4', false)
       } 
-      if (value === '#reserva1') {
-        this.$store.commit('m_showProprietario', false)
-        this.$store.commit('m_reservaAcomod0', true)
-        this.$store.commit('m_reservaAcomod1', false)
-      } 
-      if (value === '#reserva2') {
-        this.$store.commit('m_reservaAcomod0', false)
+      if (value === '#periodo') {
         this.$store.commit('m_reservaAcomod1', true)
         this.$store.commit('m_reservaAcomod2', false)
+        this.$store.commit('m_reservaAcomod3', false)
+        this.$store.commit('m_reservaAcomod4', false)
       } 
-      if (value === '#reserva3') {
+      if (value === '#detalhes') {
         this.$store.commit('m_reservaAcomod1', false)
         this.$store.commit('m_reservaAcomod2', true)
         this.$store.commit('m_reservaAcomod3', false)
+        this.$store.commit('m_reservaAcomod4', false)
       } 
-      if (value === '#reserva4') {
+      if (value === '#mensagem') {
+        this.$store.commit('m_reservaAcomod1', false)
         this.$store.commit('m_reservaAcomod2', false)
         this.$store.commit('m_reservaAcomod3', true)
         this.$store.commit('m_reservaAcomod4', false)
+      } 
+      if (value === '#pagamento') {
+        this.$store.commit('m_reservaAcomod1', false)
+        this.$store.commit('m_reservaAcomod2', false)
+        this.$store.commit('m_reservaAcomod3', false)
+        this.$store.commit('m_reservaAcomod4', true)
       } 
     }
   }
@@ -385,8 +278,8 @@ export default {
       & .etapas {
         padding: 2.8rem 7% 0.2rem 7%;
         font-size: 13px;
-        font-weight: 600;
-        color: rgb(140, 140, 140);
+        font-weight: 500;
+        color: rgb(72, 72, 72);
       }
       & .__title {
         padding: 0 7% 2rem 7%;

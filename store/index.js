@@ -185,8 +185,7 @@ const store = () => new Vuex.Store({
     cadastroAcomod10: false,
     cadastroAcomod11: false,
     cadastroAcomod12: false,
-    reservaAcomod0: false,
-    reservaAcomod1: false,
+    reservaAcomod1: true,
     reservaAcomod2: false,
     reservaAcomod3: false,
     reservaAcomod4: false,
@@ -473,9 +472,6 @@ const store = () => new Vuex.Store({
     },
     m_cadastroAcomod12 (state, payload) {
       state.cadastroAcomod12 = payload
-    },
-    m_reservaAcomod0 (state, payload) {
-      state.reservaAcomod0 = payload
     },
     m_reservaAcomod1 (state, payload) {
       state.reservaAcomod1 = payload

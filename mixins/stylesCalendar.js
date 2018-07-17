@@ -55,6 +55,50 @@ export const stylesCalendar = {
           borderLeft: 'none'
         }
       },
+      datePickerMobileStyle: {
+        wrapper: {
+          color: 'rgb(42, 42, 42)',
+          border: '0',
+          padding: '0',
+          background: 'white',
+          width: '100%',
+          minHeight: '300px'
+        },
+        header: {
+          padding: '10px 9px 0px 9px'
+        },
+        headerArrows: {
+          margin: '0 8px',
+          fontSize: '1.55rem'
+        },
+        headerTitle: {
+          fontSize: '17px',
+          fontWeight: '700'
+        },
+        weekdays: {
+          color: 'rgb(42, 42, 42)',
+          fontWeight: '600',
+          padding: '21px 5px 6px 5px'
+        },
+        dayCell: {
+          height: '35px'
+        },
+        dayContent: {
+          fontWeight: '400',
+          fontSize: '14px'
+        },
+        dayCellNotInMonth: {
+          opacity: 0
+        },
+        dayPopoverContent: {
+          background: '#00D8C7',
+          color: 'white',
+          border: 'none'
+        },
+        verticalDivider: {
+          borderLeft: 'none'
+        }
+      },
       calendarDesktopStyle: {
         wrapper: {
           color: 'rgb(42, 42, 42)',

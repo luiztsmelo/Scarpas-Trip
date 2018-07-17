@@ -244,8 +244,8 @@
               ref="datePicker"
               mode="range"
               v-model="$store.state.reservaAcomod.periodoReserva"
-              :min-date="minDate"
               :pane-width="285"
+              :min-date="minDate"
               :disabled-dates="$store.state.disabledDatesAcomod"
               :drag-attribute="attribute"
               :select-attribute="attribute"
@@ -305,7 +305,7 @@
 
           </div>
 
-          <button class="__reserva-desktop-btn" type="button" @click="reservar">Reservar</button>
+          <button class="__reserva-desktop-btn" type="button" @click="reservar">Pedir reserva</button>
 
           <h4 class="__info">Você ainda não será cobrado.</h4>
 
@@ -321,8 +321,8 @@
     <!-- ####### RESERVA MOBILE ####### --> 
     <div class="reserva">
       <div class="reserva-body">
-        <h3 class="__reserva-valor">R${{ acomod.valorNoite }}<span class="__reserva-valor-pessoa">/noite</span></h3>
-        <button class="__reserva-btn" @click="$store.commit('m_showReservaAcomod', true), hashReserva()">Reservar</button>
+        <h3 class="__reserva-valor">R${{ acomod.valorNoite.toLocaleString() }}<span class="__reserva-valor-pessoa">/noite</span></h3>
+        <button class="__reserva-btn" @click="$store.commit('m_showReservaAcomod', true), hashReserva()">Pedir reserva</button>
       </div>
     </div>
     <reserva-mobile/><!-- ####### RESERVA MOBILE ####### -->
@@ -467,7 +467,7 @@ export default {
       window.history.back(1)
     },
     hashReserva () {
-       window.location.hash = "reserva1"
+       window.location.hash = "periodo"
     },
     hashProprietario () {
        window.location.hash = "contato"
@@ -835,7 +835,7 @@ export default {
         background: var(--colorAcomod);
         color: white;
         height: 2.75rem;
-        width: 60%;
+        width: 11rem;
         border-radius: 5px;
       }
     }

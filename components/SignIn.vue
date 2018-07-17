@@ -38,9 +38,9 @@
         <h1 class="__title">{{ $store.state.clickedAskAcomod === true || $store.state.clickedReservaAcomod === true ? 'Antes, é preciso se cadastrar' : 'Cadastrar' }}</h1>
         <h3 class="__subtitle">{{ $store.state.clickedAskAcomod === true || $store.state.clickedReservaAcomod === true ? '' : 'Cadastre-se para fazer reservas ou anunciar na Escarpas Trip' }}</h3>
 
-        <button type="button" class="facebook-btn" @click="facebookSignIn()">Cadastrar com Facebook</button>
-        <button type="button" class="google-btn" @click="googleSignIn()">Cadastrar com Google</button>
-        <button type="button" class="email-btn" @click="emailSignIn()">Cadastrar com E-mail</button>
+        <button type="button" class="facebook-btn" @click="$store.dispatch('a_facebookSignIn')">Cadastrar com Facebook</button>
+        <button type="button" class="google-btn" @click="$store.dispatch('a_googleSignIn')">Cadastrar com Google</button>
+        <button type="button" class="email-btn">Cadastrar com E-mail</button>
 
         <h3 class="if-have-account">Já possui uma conta? <span class="underline" @click="$store.state.isSignIn = true">Entrar</span></h3>
         
@@ -112,7 +112,7 @@ export default {
       display: flex;
       flex-flow: column;
       align-items: center;
-      padding: 2.8rem 4rem 2.8rem 4rem;
+      padding: 3rem 4rem;
       & .__img {
         width: 54px;
         height: auto;
