@@ -25,7 +25,7 @@
           <h1 class="__title">Detalhes da reserva</h1>
 
 
-          <div class="item-detalhes">
+          <div class="item-detalhes" style="border-bottom: 1px solid rgb(222,222,222)">
             <h3 class="__item-text">Datas</h3>
             <h3 class="__item-btn">Selecionar datas</h3>
           </div>
@@ -34,6 +34,12 @@
           <div class="item-detalhes">
             <h3 class="__item-text">Hóspedes</h3>
             <h3 class="__item-btn">{{ $store.state.reservaAcomod.totalHospedes == '1' ? $store.state.reservaAcomod.totalHospedes + ' hóspede' : $store.state.reservaAcomod.totalHospedes + ' hóspedes' }}</h3>
+          </div>
+
+
+          <div class="item-detalhes" style="border-top: 1px solid rgb(222,222,222)">
+            <h3 class="__item-text">Valor por 4 noites</h3>
+            <h3 class="__item-valor">R$1.250</h3>
           </div>
 
 
@@ -205,13 +211,13 @@ export default {
       return Array.from({length: this.acomod.totalHospedes}, (v, k) => k+1)
     },
     form1ok () {
-      return this.$store.state.reservaAcomod.periodoReserva === null ? 'background:#03749C; cursor:pointer' : ''
+      return this.$store.state.reservaAcomod.periodoReserva === null ? 'background:#3B6378; cursor:pointer' : ''
     },
     form2ok () {
-      return 1<2 ? 'background:#FFA04F; cursor:pointer' : ''
+      return 1<2 ? 'background:#3B6378; cursor:pointer' : ''
     },
     form3ok () {
-      return 1<2 ? 'background:#FFA04F; cursor:pointer' : ''
+      return 1<2 ? 'background:#3B6378; cursor:pointer' : ''
     },
     form4ok () {
       return 1<2 ? 'background:#FFA04F; cursor:pointer' : ''
@@ -310,7 +316,7 @@ export default {
         padding: 1.4rem 0;
         display: flex;
         justify-content: space-between;
-        border-bottom: 1px solid rgb(222,222,222);
+        
         & .__item-text {
           font-size: 18px;
         }
@@ -318,6 +324,11 @@ export default {
           font-size: 17px;
           font-weight: 500;
           color: #16528E;
+          user-select: none;
+        }
+        & .__item-valor {
+          font-size: 18px;
+          font-weight: 600;
           user-select: none;
         }
       }
@@ -348,7 +359,7 @@ export default {
         padding: 0 1.1rem;
         bottom: 1rem;
         right: 7%;
-        font-size: 17px;
+        font-size: 16px;
         font-weight: 600;
         background: rgb(222,222,222);
         color: white;
