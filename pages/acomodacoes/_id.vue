@@ -467,16 +467,21 @@ export default {
       window.history.back(1)
     },
     hashReserva () {
-       window.location.hash = "detalhes"
+      this.$store.state.reservaAcomodHash1 = Math.floor((Math.random() * 9999999) + 1).toString()
+      this.$store.state.reservaAcomodHash2 = Math.floor((Math.random() * 9999999) + 1).toString()
+      this.$store.state.reservaAcomodHash3 = Math.floor((Math.random() * 9999999) + 1).toString()
+      this.$store.state.reservaAcomodHash4 = Math.floor((Math.random() * 9999999) + 1).toString()
+      this.$store.state.reservaAcomodHash5 = Math.floor((Math.random() * 9999999) + 1).toString()
+      window.location.hash = this.$store.state.reservaAcomodHash1
     },
     hashProprietario () {
-       window.location.hash = "contato"
+      window.location.hash = "contato"
     },
     hashComods () {
-       window.location.hash = "comodidades"
+      window.location.hash = "comodidades"
     },
     hashShare () {
-       window.location.hash = "compartilhar"
+      window.location.hash = "compartilhar"
     }
   },
   async mounted () {
@@ -594,6 +599,7 @@ export default {
   beforeRouteEnter (to, from, next) {
     next(vm => {
       !vm.$store.state.isOnline ? vm.$modal.show('offline-modal') : ''
+
       if (vm.$store.state.isMobile === false) {
         vm.$store.commit('m_showNavbar', true)
       } else {
@@ -603,6 +609,12 @@ export default {
     })
   },
   beforeRouteLeave (to, from, next) {
+    this.$store.state.reservaAcomodHash1 = null
+    this.$store.state.reservaAcomodHash2 = null
+    this.$store.state.reservaAcomodHash3 = null
+    this.$store.state.reservaAcomodHash4 = null
+    this.$store.state.reservaAcomodHash5 = null
+
     if (this.$store.state.isReservar === false) {
       this.$store.dispatch('a_resetReservaAcomod')
     }

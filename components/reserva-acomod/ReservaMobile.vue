@@ -89,7 +89,7 @@
 
           <h3 class="etapas">3 de 5 etapas</h3>
 
-          <h1 class="__title">Revise as regras da casa</h1>
+          <h1 class="__title">Revise os detalhes da reserva</h1>
 
 
           <!-- <div class="__item">
@@ -200,22 +200,22 @@ export default {
     },
     nextBtn1 () {
       if (this.$store.state.reservaAcomod.periodoReserva === null) {
-        this.$store.commit('m_reservaAcomod1', false), this.$store.commit('m_reservaAcomod2', true), window.location.hash = "identificacao"
+        this.$store.commit('m_reservaAcomod1', false), this.$store.commit('m_reservaAcomod2', true), window.location.hash = this.$store.state.reservaAcomodHash2
       }
     },
     nextBtn2 () {
       if (1<2) {
-        this.$store.commit('m_reservaAcomod2', false), this.$store.commit('m_reservaAcomod3', true), window.location.hash = "regras"
+        this.$store.commit('m_reservaAcomod2', false), this.$store.commit('m_reservaAcomod3', true), window.location.hash = this.$store.state.reservaAcomodHash3
       }
     },
     nextBtn3 () {
       if (1<2) {
-        this.$store.commit('m_reservaAcomod3', false), this.$store.commit('m_reservaAcomod4', true), window.location.hash = "mensagem"
+        this.$store.commit('m_reservaAcomod3', false), this.$store.commit('m_reservaAcomod4', true), window.location.hash = this.$store.state.reservaAcomodHash4
       }
     },
     nextBtn4 () {
       if (1<2) {
-        this.$store.commit('m_reservaAcomod4', false), this.$store.commit('m_reservaAcomod5', true), window.location.hash = "pagamento"
+        this.$store.commit('m_reservaAcomod4', false), this.$store.commit('m_reservaAcomod5', true), window.location.hash = this.$store.state.reservaAcomodHash5
       }
     },
     concluirReserva () {
@@ -236,6 +236,53 @@ export default {
     },
     totalHospedesArray () {
       return Array.from({length: this.acomod.totalHospedes}, (v, k) => k+1)
+    }
+  },
+  watch: {
+    hash (value) {
+      if (value === '') {
+        this.$store.commit('m_showReservaAcomod', false)
+        this.$store.commit('m_reservaAcomod1', false)
+        this.$store.commit('m_reservaAcomod2', false)
+        this.$store.commit('m_reservaAcomod3', false)
+        this.$store.commit('m_reservaAcomod4', false)
+        this.$store.commit('m_reservaAcomod5', false)
+      }
+      if (value === `#${this.$store.state.reservaAcomodHash1}`) {
+        this.$store.commit('m_reservaAcomod1', true)
+        this.$store.commit('m_reservaAcomod2', false)
+        this.$store.commit('m_reservaAcomod3', false)
+        this.$store.commit('m_reservaAcomod4', false)
+        this.$store.commit('m_reservaAcomod5', false)
+      }
+      if (value === `#${this.$store.state.reservaAcomodHash2}`) {
+        this.$store.commit('m_reservaAcomod1', false)
+        this.$store.commit('m_reservaAcomod2', true)
+        this.$store.commit('m_reservaAcomod3', false)
+        this.$store.commit('m_reservaAcomod4', false)
+        this.$store.commit('m_reservaAcomod5', false)
+      }
+      if (value === `#${this.$store.state.reservaAcomodHash3}`) {
+        this.$store.commit('m_reservaAcomod1', false)
+        this.$store.commit('m_reservaAcomod2', false)
+        this.$store.commit('m_reservaAcomod3', true)
+        this.$store.commit('m_reservaAcomod4', false)
+        this.$store.commit('m_reservaAcomod5', false)
+      }
+      if (value === `#${this.$store.state.reservaAcomodHash4}`) {
+        this.$store.commit('m_reservaAcomod1', false)
+        this.$store.commit('m_reservaAcomod2', false)
+        this.$store.commit('m_reservaAcomod3', false)
+        this.$store.commit('m_reservaAcomod4', true)
+        this.$store.commit('m_reservaAcomod5', false)
+      }
+      if (value === `#${this.$store.state.reservaAcomodHash5}`) {
+        this.$store.commit('m_reservaAcomod1', false)
+        this.$store.commit('m_reservaAcomod2', false)
+        this.$store.commit('m_reservaAcomod3', false)
+        this.$store.commit('m_reservaAcomod4', false)
+        this.$store.commit('m_reservaAcomod5', true)
+      }
     }
   }
 }
