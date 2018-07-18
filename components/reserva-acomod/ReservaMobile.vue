@@ -205,7 +205,7 @@ export default {
       return Array.from({length: this.acomod.totalHospedes}, (v, k) => k+1)
     },
     form1ok () {
-      return this.$store.state.reservaAcomod.periodoReserva === null ? 'background:#FFA04F; cursor:pointer' : ''
+      return this.$store.state.reservaAcomod.periodoReserva === null ? 'background:#03749C; cursor:pointer' : ''
     },
     form2ok () {
       return 1<2 ? 'background:#FFA04F; cursor:pointer' : ''
@@ -307,7 +307,7 @@ export default {
       }
       & .item-detalhes {
         margin: 0 7%;
-        padding: 1.3rem 0;
+        padding: 1.4rem 0;
         display: flex;
         justify-content: space-between;
         border-bottom: 1px solid rgb(222,222,222);
