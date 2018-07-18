@@ -20,27 +20,28 @@
         <!-- ########## DETALHES PG.1 ########## -->
         <div class="etapa-reserva-box" v-if="$store.state.reservaAcomod1">
 
-          <h3 class="etapas">1 de 4 etapas</h3>
+          <h3 class="etapas">1 de 5 etapas</h3>
 
-          <h1 class="__title">Detalhes da reserva</h1>
+          <h1 class="__title">Orçamento</h1>
 
 
-          <div class="item-detalhes" style="border-bottom: 1px solid rgb(222,222,222)">
-            <h3 class="__item-text">Datas</h3>
-            <h3 class="__item-btn">Selecionar datas</h3>
+          <div class="acomod-header">
+
           </div>
 
 
-          <div class="item-detalhes">
-            <h3 class="__item-text">Hóspedes</h3>
-            <h3 class="__item-btn">{{ $store.state.reservaAcomod.totalHospedes == '1' ? $store.state.reservaAcomod.totalHospedes + ' hóspede' : $store.state.reservaAcomod.totalHospedes + ' hóspedes' }}</h3>
+          <div class="periodo-reserva">
+            <h3 class="__btn">Chegada</h3>
+            <div class="__slash"></div>
+            <h3 class="__btn">Partida</h3>
           </div>
 
 
-          <div class="item-detalhes" style="border-top: 1px solid rgb(222,222,222)">
-            <h3 class="__item-text">Valor por 4 noites</h3>
+
+          <!-- <div class="item-detalhes" style="border-top: 1px solid rgb(222,222,222)">
+            <h3 class="__item-text">Total</h3>
             <h3 class="__item-valor">R$1.250</h3>
-          </div>
+          </div> -->
 
 
 
@@ -60,7 +61,7 @@
           </v-date-picker> -->
 
 
-          <button type="button" class="__next-btn" :style="form1ok" @click="nextBtn1">Continuar</button>
+          <button type="button" class="__next-btn" @click="nextBtn1">Continuar</button>
       
         </div><!-- ########## DETALHES PG.1 ########## -->
 
@@ -70,9 +71,25 @@
         <!-- ########## REGRAS PG.2 ########## -->
         <div class="etapa-reserva-box" v-if="$store.state.reservaAcomod2">
 
-          <h3 class="etapas">2 de 4 etapas</h3>
+          <h3 class="etapas">2 de 5 etapas</h3>
 
-          <h1 class="__title">Regras da casa</h1>
+          <h1 class="__title">Antes de continuar, precisamos que se cadastre</h1>
+
+
+
+          <button type="button" class="__next-btn" @click="nextBtn2">Continuar</button>
+
+        </div><!-- ########## REGRAS PG.2 ########## -->
+
+
+
+
+        <!-- ########## REGRAS PG.3 ########## -->
+        <div class="etapa-reserva-box" v-if="$store.state.reservaAcomod3">
+
+          <h3 class="etapas">3 de 5 etapas</h3>
+
+          <h1 class="__title">Revise as regras da casa</h1>
 
 
           <!-- <div class="__item">
@@ -82,23 +99,23 @@
           </div> -->
 
 
-          <button type="button" class="__next-btn" :style="form2ok" @click="nextBtn2">Continuar</button>
+          <button type="button" class="__next-btn" @click="nextBtn3">Continuar</button>
 
-        </div><!-- ########## REGRAS PG.2 ########## -->
+        </div><!-- ########## REGRAS PG.3 ########## -->
         
 
 
 
         <!-- ########## MENSAGEM PG.3 ########## -->
-        <div class="etapa-reserva-box" v-if="$store.state.reservaAcomod3">
+        <div class="etapa-reserva-box" v-if="$store.state.reservaAcomod4">
 
-          <h3 class="etapas">3 de 4 etapas</h3>
+          <h3 class="etapas">4 de 5 etapas</h3>
 
           <h1 class="__title">Mensagem</h1>
 
 
 
-          <button type="button" class="__next-btn" :style="form3ok" @click="nextBtn3">Continuar</button>
+          <button type="button" class="__next-btn" @click="nextBtn4">Continuar</button>
 
         </div><!-- ########## MENSAGEM PG.3 ########## -->
 
@@ -106,16 +123,16 @@
 
 
         <!-- ########## PAGAMENTO PG.3 ########## -->
-        <div class="etapa-reserva-box" v-if="$store.state.reservaAcomod4">
+        <div class="etapa-reserva-box" v-if="$store.state.reservaAcomod5">
 
-          <h3 class="etapas">4 de 4 etapas</h3>
+          <h3 class="etapas">5 de 5 etapas</h3>
 
           <h1 class="__title">Pagar e confirmar</h1>
 
         
 
 
-          <button type="button" class="__next-btn" :style="form4ok" @click="concluirReserva">Concluir Pedido</button>
+          <button type="button" class="__next-btn" style="background:#FFA04F" @click="concluirReserva">Concluir Pedido</button>
 
         </div><!-- ########## PAGAMENTO PG.3 ########## -->
 
@@ -175,20 +192,30 @@ export default {
         this.$store.commit('m_reservaAcomod4', false)
         this.$store.commit('m_reservaAcomod3', true)
       }
+      if (this.$store.state.reservaAcomod5 === true) {
+        window.history.back(1)
+        this.$store.commit('m_reservaAcomod5', false)
+        this.$store.commit('m_reservaAcomod4', true)
+      }
     },
     nextBtn1 () {
       if (this.$store.state.reservaAcomod.periodoReserva === null) {
-        this.$store.commit('m_reservaAcomod1', false), this.$store.commit('m_reservaAcomod2', true), window.location.hash = "regras"
+        this.$store.commit('m_reservaAcomod1', false), this.$store.commit('m_reservaAcomod2', true), window.location.hash = "identificacao"
       }
     },
     nextBtn2 () {
       if (1<2) {
-        this.$store.commit('m_reservaAcomod2', false), this.$store.commit('m_reservaAcomod3', true), window.location.hash = "mensagem"
+        this.$store.commit('m_reservaAcomod2', false), this.$store.commit('m_reservaAcomod3', true), window.location.hash = "regras"
       }
     },
     nextBtn3 () {
       if (1<2) {
-        this.$store.commit('m_reservaAcomod3', false), this.$store.commit('m_reservaAcomod4', true), window.location.hash = "pagamento"
+        this.$store.commit('m_reservaAcomod3', false), this.$store.commit('m_reservaAcomod4', true), window.location.hash = "mensagem"
+      }
+    },
+    nextBtn4 () {
+      if (1<2) {
+        this.$store.commit('m_reservaAcomod4', false), this.$store.commit('m_reservaAcomod5', true), window.location.hash = "pagamento"
       }
     },
     concluirReserva () {
@@ -209,53 +236,6 @@ export default {
     },
     totalHospedesArray () {
       return Array.from({length: this.acomod.totalHospedes}, (v, k) => k+1)
-    },
-    form1ok () {
-      return this.$store.state.reservaAcomod.periodoReserva === null ? 'background:#3B6378; cursor:pointer' : ''
-    },
-    form2ok () {
-      return 1<2 ? 'background:#3B6378; cursor:pointer' : ''
-    },
-    form3ok () {
-      return 1<2 ? 'background:#3B6378; cursor:pointer' : ''
-    },
-    form4ok () {
-      return 1<2 ? 'background:#FFA04F; cursor:pointer' : ''
-    }
-  },
-  watch: {
-    hash (value) {
-      if (value === '') {
-        this.$store.commit('m_showReservaAcomod', false)
-        this.$store.commit('m_reservaAcomod1', false)
-        this.$store.commit('m_reservaAcomod2', false)
-        this.$store.commit('m_reservaAcomod3', false)
-        this.$store.commit('m_reservaAcomod4', false)
-      } 
-      if (value === '#detalhes') {
-        this.$store.commit('m_reservaAcomod1', true)
-        this.$store.commit('m_reservaAcomod2', false)
-        this.$store.commit('m_reservaAcomod3', false)
-        this.$store.commit('m_reservaAcomod4', false)
-      } 
-      if (value === '#regras') {
-        this.$store.commit('m_reservaAcomod1', false)
-        this.$store.commit('m_reservaAcomod2', true)
-        this.$store.commit('m_reservaAcomod3', false)
-        this.$store.commit('m_reservaAcomod4', false)
-      } 
-      if (value === '#mensagem') {
-        this.$store.commit('m_reservaAcomod1', false)
-        this.$store.commit('m_reservaAcomod2', false)
-        this.$store.commit('m_reservaAcomod3', true)
-        this.$store.commit('m_reservaAcomod4', false)
-      } 
-      if (value === '#pagamento') {
-        this.$store.commit('m_reservaAcomod1', false)
-        this.$store.commit('m_reservaAcomod2', false)
-        this.$store.commit('m_reservaAcomod3', false)
-        this.$store.commit('m_reservaAcomod4', true)
-      } 
     }
   }
 }
@@ -311,24 +291,23 @@ export default {
         font-size: 29px;
         font-weight: 700;
       }
-      & .item-detalhes {
+      & .periodo-reserva {
         margin: 0 7%;
-        padding: 1.4rem 0;
+        padding: 1.5rem 0;
         display: flex;
+        align-items: center;
         justify-content: space-between;
-        
-        & .__item-text {
-          font-size: 18px;
+        border-bottom: 1px solid rgb(222,222,222);
+        & .__slash {
+          background: rgb(222,222,222);
+          width: 50px;
+          height: 1px;
+          transform: rotate(135deg);
         }
-        & .__item-btn {
-          font-size: 17px;
+        & .__btn {
+          font-size: 18px;
           font-weight: 500;
-          color: #16528E;
-          user-select: none;
-        }
-        & .__item-valor {
-          font-size: 18px;
-          font-weight: 600;
+          color: #3A6378;
           user-select: none;
         }
       }
@@ -355,18 +334,18 @@ export default {
       }
       & .__next-btn {
         z-index: 99999;
+        cursor: pointer;
         position: fixed;
-        padding: 0 1.1rem;
+        padding: 0 1.2rem;
         bottom: 1rem;
         right: 7%;
         font-size: 16px;
         font-weight: 600;
-        background: rgb(222,222,222);
+        background:#3A6378;
         color: white;
         line-height: 2.8rem;
         height: 2.9rem;
         border-radius: 5px;
-        transition: all .3s ease;
       }
     }
   }
