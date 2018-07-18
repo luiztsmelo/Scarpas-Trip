@@ -17,14 +17,28 @@
         
 
 
-        <!-- ########## DATA PG.1 ########## -->
+        <!-- ########## DETALHES PG.1 ########## -->
         <div class="etapa-reserva-box" v-if="$store.state.reservaAcomod1">
 
           <h3 class="etapas">1 de 4 etapas</h3>
 
-          <h1 class="__title">Data da reserva</h1>
+          <h1 class="__title">Detalhes da reserva</h1>
 
-          <v-date-picker
+
+          <div class="item-detalhes">
+            <h3>Datas</h3>
+            <h3 class="__item-btn">Selecionar datas</h3>
+          </div>
+
+
+          <div class="item-detalhes">
+            <h3>Hóspedes</h3>
+            <h3 class="__item-btn">{{ $store.state.reservaAcomod.totalHospedes == '1' ? $store.state.reservaAcomod.totalHospedes + ' hóspede' : $store.state.reservaAcomod.totalHospedes + ' hóspedes' }}</h3>
+          </div>
+
+
+
+          <!-- <v-date-picker
             is-inline
             is-required
             mode="range"
@@ -37,22 +51,22 @@
             :theme-styles="datePickerMobileStyle"
             tint-color="#00D8C7"
             show-caps>
-          </v-date-picker>
+          </v-date-picker> -->
 
 
           <button type="button" class="__next-btn" :style="form1ok" @click="nextBtn1">Continuar</button>
       
-        </div><!-- ########## DATA PG.1 ########## -->
+        </div><!-- ########## DETALHES PG.1 ########## -->
 
 
 
 
-        <!-- ########## DETALHES PG.2 ########## -->
+        <!-- ########## REGRAS PG.2 ########## -->
         <div class="etapa-reserva-box" v-if="$store.state.reservaAcomod2">
 
           <h3 class="etapas">2 de 4 etapas</h3>
 
-          <h1 class="__title">Revisar detalhes</h1>
+          <h1 class="__title">Regras da casa</h1>
 
 
           <!-- <div class="__item">
@@ -64,7 +78,7 @@
 
           <button type="button" class="__next-btn" :style="form2ok" @click="nextBtn2">Continuar</button>
 
-        </div><!-- ########## DETALHES PG.2 ########## -->
+        </div><!-- ########## REGRAS PG.2 ########## -->
         
 
 
@@ -157,8 +171,8 @@ export default {
       }
     },
     nextBtn1 () {
-      if (this.$store.state.reservaAcomod.periodoReserva !== null) {
-        this.$store.commit('m_reservaAcomod1', false), this.$store.commit('m_reservaAcomod2', true), window.location.hash = "detalhes"
+      if (this.$store.state.reservaAcomod.periodoReserva === null) {
+        this.$store.commit('m_reservaAcomod1', false), this.$store.commit('m_reservaAcomod2', true), window.location.hash = "regras"
       }
     },
     nextBtn2 () {
@@ -191,7 +205,7 @@ export default {
       return Array.from({length: this.acomod.totalHospedes}, (v, k) => k+1)
     },
     form1ok () {
-      return this.$store.state.reservaAcomod.periodoReserva !== null ? 'background:#FFA04F; cursor:pointer' : ''
+      return this.$store.state.reservaAcomod.periodoReserva === null ? 'background:#FFA04F; cursor:pointer' : ''
     },
     form2ok () {
       return 1<2 ? 'background:#FFA04F; cursor:pointer' : ''
@@ -212,13 +226,13 @@ export default {
         this.$store.commit('m_reservaAcomod3', false)
         this.$store.commit('m_reservaAcomod4', false)
       } 
-      if (value === '#periodo') {
+      if (value === '#detalhes') {
         this.$store.commit('m_reservaAcomod1', true)
         this.$store.commit('m_reservaAcomod2', false)
         this.$store.commit('m_reservaAcomod3', false)
         this.$store.commit('m_reservaAcomod4', false)
       } 
-      if (value === '#detalhes') {
+      if (value === '#regras') {
         this.$store.commit('m_reservaAcomod1', false)
         this.$store.commit('m_reservaAcomod2', true)
         this.$store.commit('m_reservaAcomod3', false)
@@ -286,10 +300,22 @@ export default {
         color: rgb(72, 72, 72);
       }
       & .__title {
-        padding: 0 7% 1.8rem 7%;
+        padding: 0 7% 1.9rem 7%;
         line-height: 35px;
         font-size: 29px;
         font-weight: 700;
+      }
+      & .item-detalhes {
+        margin: 0 7%;
+        padding: 1.2rem 0;
+        display: flex;
+        justify-content: space-between;
+        border-bottom: 1px solid rgb(222,222,222);
+        & .__item-btn {
+          font-weight: 500;
+          color: #107895;
+          user-select: none;
+        }
       }
       & .item-form {
       padding: 0 7%;
@@ -315,15 +341,15 @@ export default {
       & .__next-btn {
         z-index: 99999;
         position: fixed;
-        bottom: 1.3rem;
+        padding: 0 1.1rem;
+        bottom: 1rem;
         right: 7%;
         font-size: 17px;
         font-weight: 600;
         background: rgb(222,222,222);
         color: white;
-        line-height: 2.7rem;
-        height: 2.8rem;
-        width: 9rem;
+        line-height: 2.75rem;
+        height: 2.85rem;
         border-radius: 5px;
         transition: all .3s ease;
       }

@@ -467,7 +467,7 @@ export default {
       window.history.back(1)
     },
     hashReserva () {
-       window.location.hash = "periodo"
+       window.location.hash = "detalhes"
     },
     hashProprietario () {
        window.location.hash = "contato"
@@ -663,7 +663,7 @@ export default {
     }
     & .__anunciante-name {
       cursor: pointer;
-      color: #00BAAC;
+      color: #107895;
       user-select: none;
     }
   }/* ####### ANUNCIANTE BOX ####### */
@@ -809,7 +809,7 @@ export default {
     bottom: 0;
     left: 0;
     z-index: 8888;
-    height: 4.2rem;
+    height: 4.3rem;
     width:  100%;
     background: white;
     padding: 0 7%;
@@ -823,11 +823,14 @@ export default {
       top: 50%;
       transform: translateY(-50%);
       & .__reserva-valor {
-        font-size: 16px;
+        font-size: 17px;
         font-weight: 600;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
       & .__reserva-valor-pessoa {
-        font-size: 13px;
+        font-size: 14px;
         font-weight: 400;
       }
       & .__reserva-btn {
