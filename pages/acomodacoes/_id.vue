@@ -663,7 +663,7 @@ export default {
     }
     & .__anunciante-name {
       cursor: pointer;
-      color: #107895;
+      color: #16528E;
       user-select: none;
     }
   }/* ####### ANUNCIANTE BOX ####### */

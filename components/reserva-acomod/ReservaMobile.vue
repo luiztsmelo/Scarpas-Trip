@@ -26,13 +26,13 @@
 
 
           <div class="item-detalhes">
-            <h3>Datas</h3>
+            <h3 class="__item-text">Datas</h3>
             <h3 class="__item-btn">Selecionar datas</h3>
           </div>
 
 
           <div class="item-detalhes">
-            <h3>Hóspedes</h3>
+            <h3 class="__item-text">Hóspedes</h3>
             <h3 class="__item-btn">{{ $store.state.reservaAcomod.totalHospedes == '1' ? $store.state.reservaAcomod.totalHospedes + ' hóspede' : $store.state.reservaAcomod.totalHospedes + ' hóspedes' }}</h3>
           </div>
 
@@ -307,13 +307,17 @@ export default {
       }
       & .item-detalhes {
         margin: 0 7%;
-        padding: 1.2rem 0;
+        padding: 1.3rem 0;
         display: flex;
         justify-content: space-between;
         border-bottom: 1px solid rgb(222,222,222);
+        & .__item-text {
+          font-size: 18px;
+        }
         & .__item-btn {
+          font-size: 17px;
           font-weight: 500;
-          color: #107895;
+          color: #16528E;
           user-select: none;
         }
       }
@@ -348,8 +352,8 @@ export default {
         font-weight: 600;
         background: rgb(222,222,222);
         color: white;
-        line-height: 2.75rem;
-        height: 2.85rem;
+        line-height: 2.8rem;
+        height: 2.9rem;
         border-radius: 5px;
         transition: all .3s ease;
       }
