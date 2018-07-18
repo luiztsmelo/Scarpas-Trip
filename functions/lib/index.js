@@ -53,7 +53,7 @@ exports.watch_reservaExpiration = functions.https.onRequest((req, res) => __awai
                         admin.firestore().collection('reservasAcomods').doc(reserva.reservaID).update({ status: 'expired', isRunning: false })
                             .catch(err => { throw new Error(err); });
                         /* Update status para 'expired' Airtable */
-                        axios_1.default.patch(`${AirtableAcomodsURL}/${reserva.airtableID}`, { 'fields': { 'status': 'expired', 'isRunning': 'false' } }, AirtableConfig)
+                        axios_1.default.patch(`${AirtableAcomodsURL}/${reserva.airtableID}`, { 'fields': { 'status': 'expired', 'isRunning': false } }, AirtableConfig)
                             .catch(err => { throw new Error(err); });
                         console.log(`Reserva ${reserva.reservaID} [${requestedDate.diff(dateNow, 'day')}] foi expirada.`);
                     }

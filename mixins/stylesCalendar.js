@@ -30,7 +30,7 @@ export const stylesCalendar = {
         },
         headerTitle: {
           fontSize: '18px',
-          fontWeight: '700'
+          fontWeight: '400'
         },
         weekdays: {
           color: 'rgb(42, 42, 42)',
@@ -73,7 +73,7 @@ export const stylesCalendar = {
           fontSize: '1.65rem'
         },
         headerTitle: {
-          fontSize: '20px',
+          fontSize: '19px',
           fontWeight: '400'
         },
         weekdays: {

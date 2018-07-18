@@ -65,7 +65,7 @@ exports.watch_reservaExpiration = functions.https.onRequest(async (req, res) => 
             .catch(err => { throw new Error(err) })
           
             /* Update status para 'expired' Airtable */
-            axios.patch(`${AirtableAcomodsURL}/${reserva.airtableID}`, { 'fields': { 'status': 'expired', 'isRunning': 'false' } }, AirtableConfig)
+            axios.patch(`${AirtableAcomodsURL}/${reserva.airtableID}`, { 'fields': { 'status': 'expired', 'isRunning': false } }, AirtableConfig)
             .catch(err => { throw new Error(err) })
 
             console.log(`Reserva ${reserva.reservaID} [${requestedDate.diff(dateNow, 'day')}] foi expirada.`)

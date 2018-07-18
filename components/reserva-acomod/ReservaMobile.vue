@@ -22,7 +22,7 @@
 
           <h3 class="etapas">1 de 4 etapas</h3>
 
-          <h1 class="__title">Período da reserva</h1>
+          <h1 class="__title">Data da reserva</h1>
 
           <v-date-picker
             is-inline
@@ -75,6 +75,7 @@
           <h3 class="etapas">3 de 4 etapas</h3>
 
           <h1 class="__title">Mensagem</h1>
+
 
 
           <button type="button" class="__next-btn" :style="form3ok" @click="nextBtn3">Continuar</button>
@@ -156,7 +157,7 @@ export default {
       }
     },
     nextBtn1 () {
-      if (1<2) {
+      if (this.$store.state.reservaAcomod.periodoReserva !== null) {
         this.$store.commit('m_reservaAcomod1', false), this.$store.commit('m_reservaAcomod2', true), window.location.hash = "detalhes"
       }
     },
@@ -246,7 +247,7 @@ export default {
 .reserva-acomod {
   position: fixed;
   z-index: 9998;
-  width:  100%;
+  width: 100%;
   height: 100%;
   top: 0;
   left: 0;
@@ -256,7 +257,7 @@ export default {
     position: fixed;
     top: 0;
     left: 0;
-    width:  100%;
+    width: 100%;
     height: 3rem;
     background: white;
     & .back-box {

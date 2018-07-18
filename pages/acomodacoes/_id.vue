@@ -321,7 +321,7 @@
     <!-- ####### RESERVA MOBILE ####### --> 
     <div class="reserva">
       <div class="reserva-body">
-        <h3 class="__reserva-valor">R${{ acomod.valorNoite.toLocaleString() }}<span class="__reserva-valor-pessoa">/noite</span></h3>
+        <h3 class="__reserva-valor">R${{ acomod.valorNoite.toLocaleString() }}<span class="__reserva-valor-pessoa"> por noite</span></h3>
         <button class="__reserva-btn" @click="$store.commit('m_showReservaAcomod', true), hashReserva()">Pedir reserva</button>
       </div>
     </div>
@@ -809,7 +809,7 @@ export default {
     bottom: 0;
     left: 0;
     z-index: 8888;
-    height: 4rem;
+    height: 4.2rem;
     width:  100%;
     background: white;
     padding: 0 7%;
@@ -823,19 +823,20 @@ export default {
       top: 50%;
       transform: translateY(-50%);
       & .__reserva-valor {
-        font-size: 17px;
-        font-weight: 500;
+        font-size: 16px;
+        font-weight: 600;
       }
       & .__reserva-valor-pessoa {
         font-size: 13px;
+        font-weight: 400;
       }
       & .__reserva-btn {
         font-size: 16px;
         font-weight: 600;
         background: var(--colorAcomod);
         color: white;
-        height: 2.75rem;
-        width: 11rem;
+        height: 2.8rem;
+        width: 10rem;
         border-radius: 5px;
       }
     }
