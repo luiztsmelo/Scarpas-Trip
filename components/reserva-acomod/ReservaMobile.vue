@@ -384,7 +384,7 @@ export default {
         cursor: pointer;
         position: fixed;
         padding: 0 1.2rem;
-        bottom: 1rem;
+        bottom: .8rem;
         right: 7%;
         font-size: 16px;
         font-weight: 600;

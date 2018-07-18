@@ -821,7 +821,7 @@ export default {
     bottom: 0;
     left: 0;
     z-index: 8888;
-    height: 4.3rem;
+    height: 4.4rem;
     width:  100%;
     background: white;
     padding: 0 7%;
@@ -850,7 +850,7 @@ export default {
         font-weight: 600;
         background: var(--colorAcomod);
         color: white;
-        height: 2.8rem;
+        height: 2.9rem;
         width: 10rem;
         border-radius: 5px;
       }
