@@ -1,6 +1,6 @@
 <template>
   <transition name="reserva-animation">
-    <div class="reserva-acomod" v-show="showReservaAcomod">
+    <div class="reserva-acomod" v-show="$store.state.showReservaAcomod">
 
 
 
@@ -25,17 +25,13 @@
           <h1 class="__title">Orçamento</h1>
 
 
-          <div class="acomod-header">
-
-          </div>
-
-
-          <div class="periodo-reserva">
+          <div class="periodo-reserva" @click="$modal.show('datepicker')">
             <h3 class="__btn">Chegada</h3>
             <div class="__slash"></div>
             <h3 class="__btn">Partida</h3>
           </div>
 
+          <date-picker></date-picker>
 
 
           <!-- <div class="item-detalhes" style="border-top: 1px solid rgb(222,222,222)">
@@ -43,22 +39,6 @@
             <h3 class="__item-valor">R$1.250</h3>
           </div> -->
 
-
-
-          <!-- <v-date-picker
-            is-inline
-            is-required
-            mode="range"
-            v-model="$store.state.reservaAcomod.periodoReserva"
-            :min-date="minDate"
-            :disabled-dates="$store.state.disabledDatesAcomod"
-            :drag-attribute="attribute"
-            :select-attribute="attribute"
-            :disabled-attribute="disabledAttribute"
-            :theme-styles="datePickerMobileStyle"
-            tint-color="#00D8C7"
-            show-caps>
-          </v-date-picker> -->
 
 
           <button type="button" class="__next-btn" @click="nextBtn1">Continuar</button>
@@ -147,28 +127,15 @@
 
 <script>
 import MaskedInput from 'vue-text-mask'
-import { stylesCalendar } from '~/mixins/stylesCalendar'
+import DatePicker from '@/components/DatePicker'
 import dayjs from 'dayjs'
 import 'dayjs/locale/pt-br'
 dayjs.locale('pt-br')
 
 export default {
-  components: { MaskedInput },
-  mixins: [ stylesCalendar ],
+  components: { MaskedInput, DatePicker },
   data() {
     return {
-      loadingBtns: {
-        loader1: false,
-        loader2: false,
-        loader3: false,
-        loader4: false,
-      },
-      attribute: {
-        popover: {
-          hideIndicator: true,
-          visibility: 'none'
-        }
-      }
     }
   },
   methods: {
@@ -225,14 +192,8 @@ export default {
     acomod () {
       return this.$store.state.acomod
     },
-    showReservaAcomod () {
-      return this.$store.state.showReservaAcomod
-    },
     hash () {
       return this.$route.hash
-    },
-    minDate () {
-      return dayjs(new Date()).add(2, 'day').toDate()
     },
     totalHospedesArray () {
       return Array.from({length: this.acomod.totalHospedes}, (v, k) => k+1)
@@ -288,7 +249,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 @import url('~/assets/css/main.css');
 
 .reserva-acomod {
@@ -359,10 +320,10 @@ export default {
         }
       }
       & .item-form {
-      padding: 0 7%;
-      display: flex;
-      flex-flow: column;
-      margin: 1.7rem 0;
+        padding: 0 7%;
+        display: flex;
+        flex-flow: column;
+        margin: 1.7rem 0;
         & label {
           font-weight: 700;
           font-size: 15px;
