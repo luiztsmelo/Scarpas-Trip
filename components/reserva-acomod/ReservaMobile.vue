@@ -55,7 +55,7 @@
               <h3>R${{ acomod.limpezaFee.toLocaleString() }}</h3>
             </div>
 
-            <div class="item" style="padding-bottom: 1rem">
+            <div class="item" style="padding-bottom: 1.2rem">
               <div style="display:flex;flex:row;align-items:center">
                 <h3>Taxa de serviço</h3>
                 <img src="../../assets/img/info.svg" style="width:.95rem;height:auto;margin-left:.3rem;cursor:pointer" @click="serviceFeeDialog">
@@ -63,9 +63,9 @@
               <h3>R${{ reservaAcomod.serviceFeeTotal.toLocaleString() }}</h3>
             </div>
 
-            <div class="item" style="padding-top: 1rem; border-top: 1px solid rgb(232,232,232)">
+            <div class="item" style="padding-top: 1.2rem; border-top: 1px solid rgb(232,232,232)">
               <h3>Total</h3>
-              <h3 style="font-size: 18px; font-weight: 600">R${{ reservaAcomod.valorReservaTotal.toLocaleString() }}</h3>
+              <h3 style="font-size: 19px; font-weight: 600">R${{ reservaAcomod.valorReservaTotal.toLocaleString() }}</h3>
             </div>
 
           </div>
@@ -417,7 +417,7 @@ export default {
           display: flex;
           justify-content: space-between;
           align-items: center;
-          padding: .5rem 0;
+          padding: .6rem 0;
         }
       }
       & .item-form {
@@ -461,7 +461,7 @@ export default {
 }
 
 h3 {
-  font-size: 17px;
+  font-size: 18px;
 }
 
 /* TRANSITIONS */
