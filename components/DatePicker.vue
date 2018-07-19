@@ -83,7 +83,6 @@ export default {
 
 .datepicker-body {
   padding-top: 4.1rem;
-  
 }
 
 .buttons {
