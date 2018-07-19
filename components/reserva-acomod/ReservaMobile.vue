@@ -26,7 +26,7 @@
 
 
 
-          <div class="periodo-reserva" @click="$store.commit('m_loader', true), $modal.show('datepicker')">
+          <div class="periodo-reserva" @click="showDatePicker">
 
             <h3 class="__btn" style="text-align: left">{{ chegada }}</h3>
 
@@ -172,7 +172,7 @@ export default {
       }
     },
     nextBtn1 () {
-      if (this.$store.state.reservaAcomod.periodoReserva === null) {
+      if (this.$store.state.reservaAcomod.periodoReserva !== null) {
         this.$store.commit('m_reservaAcomod1', false), this.$store.commit('m_reservaAcomod2', true), window.location.hash = this.$store.state.reservaAcomodHash2
       }
     },
@@ -190,6 +190,11 @@ export default {
       if (1<2) {
         this.$store.commit('m_reservaAcomod4', false), this.$store.commit('m_reservaAcomod5', true), window.location.hash = this.$store.state.reservaAcomodHash5
       }
+    },
+    showDatePicker () {
+      this.$store.commit('m_loader', true) 
+      this.$modal.show('datepicker') 
+      window.location.hash = `${this.$store.state.reservaAcomodHash1}-datas`
     },
     concluirReserva () {
     }
@@ -232,6 +237,7 @@ export default {
         this.$store.commit('m_reservaAcomod5', false)
       }
       if (value === `#${this.$store.state.reservaAcomodHash1}`) {
+        this.$modal.hide('datepicker') 
         this.$store.commit('m_reservaAcomod1', true)
         this.$store.commit('m_reservaAcomod2', false)
         this.$store.commit('m_reservaAcomod3', false)

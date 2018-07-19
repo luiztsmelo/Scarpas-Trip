@@ -8,7 +8,7 @@
     @opened="$store.commit('m_loader', false)">
 
 
-    <img src="../assets/img/close-modal.svg" style="cursor:pointer;position:absolute;top:1.2rem;left:7%;width:1rem;height:auto" @click="$modal.hide('datepicker')">
+    <img src="../assets/img/close-modal.svg" style="cursor:pointer;position:absolute;top:1.2rem;left:7%;width:1rem;height:auto" @click="closeBtn">
 
 
 
@@ -39,7 +39,7 @@
 
         <button type="button" class="__apagar-btn" @click="$store.state.reservaAcomod.periodoReserva = null">Apagar</button>
 
-        <button type="button" class="__salvar-btn" :style="saveBtnStyle" @click="$modal.hide('datepicker')">Salvar</button>
+        <button type="button" class="__salvar-btn" :style="saveBtnStyle" @click="closeBtn">Salvar</button>
 
       </div>
     </div>
@@ -63,6 +63,12 @@ export default {
           visibility: 'none'
         }
       }
+    }
+  },
+  methods: {
+    closeBtn () {
+      this.$modal.hide('datepicker')
+      window.history.back(1)
     }
   },
   computed: {
