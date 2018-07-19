@@ -26,8 +26,8 @@
     <div class="image-box" ref="imageBox">
       <swiper :options="swiperOptions">
         
-        <swiper-slide class="slide" v-for="(image, index) in acomod.images" :key="image.id">
-          <progressive-background class="__img" :src="imageH(image)" :placeholder="index > 0 ? image.L : ''" :aspect-ratio="2/3"/>
+        <swiper-slide class="slide" v-for="image in acomod.images" :key="image.id">
+          <progressive-background class="__img" :src="imageH(image)" :placeholder="image.L" :aspect-ratio="2/3"/>
         </swiper-slide>
 
       </swiper>
@@ -822,7 +822,7 @@ export default {
     left: 0;
     z-index: 8888;
     height: 4.4rem;
-    width:  100%;
+    width: 100%;
     background: white;
     padding: 0 7%;
     box-shadow: 0px -1px 1px 0px rgba(0,0,0,0.1);

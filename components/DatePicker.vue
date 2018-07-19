@@ -8,7 +8,7 @@
     @opened="$store.commit('m_loader', false)">
 
 
-    <img src="../assets/img/close-modal.svg" style="cursor:pointer;position:absolute;top:1.2rem;left:7%;width:1.1rem;height:auto" @click="$modal.hide('datepicker')">
+    <img src="../assets/img/close-modal.svg" style="cursor:pointer;position:absolute;top:1.2rem;left:7%;width:1rem;height:auto" @click="$modal.hide('datepicker')">
 
 
 
@@ -29,9 +29,20 @@
         tint-color="#3A6378"
         show-caps>
       </v-date-picker>
-    </div>
-
     
+    
+      <div class="footer">
+        <div class="footer-body">
+
+          <button type="button" class="__apagar-btn" @click="$store.state.reservaAcomod.periodoReserva = null">Apagar</button>
+
+          <button type="button" class="__salvar-btn" :style="saveBtnStyle" @click="$modal.hide('datepicker')">Salvar</button>
+
+        </div>
+      </div>
+
+
+    </div>
     
   </modal>
 </template>
@@ -57,6 +68,11 @@ export default {
   computed: {
     minDate () {
       return dayjs(new Date()).add(2, 'day').toDate()
+    },
+    saveBtnStyle () {
+      if (this.$store.state.reservaAcomod.periodoReserva !== null) {
+        return 'background: #3A6378'
+      }
     }
   }
 }
@@ -66,12 +82,44 @@ export default {
 @import url('~/assets/css/main.css');
 
 .datepicker-body {
-  margin-top: 4rem;
-  & .__title {
-    padding: 0 7% 1.7rem 7%;
-    line-height: 31px;
-    font-size: 26px;
-    font-weight: 700;
+  margin-top: 4.1rem;
+  & .footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 8888;
+    height: 4.4rem;
+    width:  100%;
+    background: white;
+    padding: 0 7%;
+    & .footer-body {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+      top: 50%;
+      transform: translateY(-50%);
+      & .__apagar-btn {
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: 600;
+        background: transparent;
+        line-height: 2.8rem;
+        height: 2.9rem;
+      }
+      & .__salvar-btn {
+        cursor: pointer;
+        padding: 0 1.2rem;
+        font-size: 16px;
+        font-weight: 600;
+        background: rgb(212, 212, 212);
+        color: white;
+        line-height: 2.8rem;
+        height: 2.9rem;
+        border-radius: 5px;
+        transition: all .2s ease;
+      }
+    }
   }
 }
 

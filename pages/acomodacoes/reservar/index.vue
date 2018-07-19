@@ -644,12 +644,12 @@ export default {
 
     /* ******************** DATES ******************** */
     periodoReserva () {
-      let checkIn = new Date(this.$store.state.reservaAcomod.periodoReserva.start)
-      let checkOut = new Date(this.$store.state.reservaAcomod.periodoReserva.end)
+      const checkIn = new Date(this.$store.state.reservaAcomod.periodoReserva.start)
+      const checkOut = new Date(this.$store.state.reservaAcomod.periodoReserva.end)
       return dayjs(checkIn).format('ddd, DD MMM YYYY') + ' → ' + dayjs(checkOut).format('ddd, DD MMM YYYY')
     },
     dayAfterCheckin () {
-      let checkIn = new Date(this.$store.state.reservaAcomod.periodoReserva.start)
+      const checkIn = new Date(this.$store.state.reservaAcomod.periodoReserva.start)
       return dayjs(checkIn).add(1, 'day').format('DD/MM')
     },
 

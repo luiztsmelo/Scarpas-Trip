@@ -77,13 +77,13 @@ export const stylesCalendar = {
         },
         weekdays: {
           color: 'rgb(42, 42, 42)',
-          fontSize: '15px',
+          fontSize: '16px',
           fontWeight: '400',
           padding: '21px 5px 6px 5px'
         },
         dayCell: {
-          height: '53px',
-          padding: '10px 0'
+          height: '56px',
+          padding: '11px 0'
         },
         dayContent: {
           fontWeight: '600',

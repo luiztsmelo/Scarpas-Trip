@@ -26,9 +26,13 @@
 
 
           <div class="periodo-reserva" @click="$store.commit('m_loader', true), $modal.show('datepicker')">
-            <h3 class="__btn">Chegada</h3>
+
+            <h3 class="__btn" style="text-align: left">{{ chegada }}</h3>
+
             <div class="__slash"></div>
-            <h3 class="__btn">Partida</h3>
+
+            <h3 class="__btn" style="text-align: right">{{ partida }}</h3>
+
           </div>
 
           <date-picker></date-picker>
@@ -197,6 +201,22 @@ export default {
     },
     totalHospedesArray () {
       return Array.from({length: this.acomod.totalHospedes}, (v, k) => k+1)
+    },
+    chegada () {
+      if (this.$store.state.reservaAcomod.periodoReserva === null) {
+        return 'Chegada'
+      } else {
+        const checkIn = new Date(this.$store.state.reservaAcomod.periodoReserva.start)
+        return dayjs(checkIn).format('ddd, DD MMM')
+      }
+    },
+    partida () {
+      if (this.$store.state.reservaAcomod.periodoReserva === null) {
+        return 'Partida'
+      } else {
+        const checkOut = new Date(this.$store.state.reservaAcomod.periodoReserva.end)
+        return dayjs(checkOut).format('ddd, DD MMM')
+      }
     }
   },
   watch: {
