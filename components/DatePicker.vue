@@ -32,13 +32,11 @@
     
     
       <div class="footer">
-        <div class="footer-body">
 
-          <button type="button" class="__apagar-btn" @click="$store.state.reservaAcomod.periodoReserva = null">Apagar</button>
+        <button type="button" class="__apagar-btn" @click="$store.state.reservaAcomod.periodoReserva = null">Apagar</button>
 
-          <button type="button" class="__salvar-btn" :style="saveBtnStyle" @click="$modal.hide('datepicker')">Salvar</button>
+        <button type="button" class="__salvar-btn" :style="saveBtnStyle" @click="$modal.hide('datepicker')">Salvar</button>
 
-        </div>
       </div>
 
 
@@ -82,45 +80,35 @@ export default {
 @import url('~/assets/css/main.css');
 
 .datepicker-body {
-  position: relative;
+  display: flex;
+  flex-flow: column;
+  justify-content: space-between;
   padding-top: 4.1rem;
   height: 100%;
   & .footer {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    z-index: 8888;
-    height: 4.4rem;
-    width:  100%;
-    background: white;
-    padding: 0 7%;
-    & .footer-body {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      position: relative;
-      top: 50%;
-      transform: translateY(-50%);
-      & .__apagar-btn {
-        cursor: pointer;
-        font-size: 16px;
-        font-weight: 600;
-        background: transparent;
-        line-height: 2.8rem;
-        height: 2.9rem;
-      }
-      & .__salvar-btn {
-        cursor: pointer;
-        padding: 0 1.2rem;
-        font-size: 16px;
-        font-weight: 600;
-        background: rgb(212, 212, 212);
-        color: white;
-        line-height: 2.8rem;
-        height: 2.9rem;
-        border-radius: 5px;
-        transition: all .2s ease;
-      }
+    padding: 0 7% .8rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    & .__apagar-btn {
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: 600;
+      background: transparent;
+      line-height: 2.8rem;
+      height: 2.9rem;
+    }
+    & .__salvar-btn {
+      cursor: pointer;
+      padding: 0 1.2rem;
+      font-size: 16px;
+      font-weight: 600;
+      background: rgb(212, 212, 212);
+      color: white;
+      line-height: 2.8rem;
+      height: 2.9rem;
+      border-radius: 5px;
+      transition: all .2s ease;
     }
   }
 }
