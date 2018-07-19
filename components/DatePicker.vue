@@ -3,7 +3,9 @@
     name="datepicker"
     width="100%"
     height="100%"
-    transition="datepicker">
+    :adaptive="true"
+    transition="datepicker"
+    @opened="$store.commit('m_loader', false)">
 
 
     <img src="../assets/img/close-modal.svg" style="cursor:pointer;position:absolute;top:1.1rem;left:7%;width:1.1rem;height:auto" @click="$modal.hide('datepicker')">
@@ -12,11 +14,11 @@
 
     <div class="datepicker-body">
 
-      <h1 class="__title">Selecione o período da reserva</h1>
+      <h1 class="__title">Selecione o período</h1>
 
       <v-date-picker
         is-inline
-        is-required
+        is-expanded
         mode="range"
         v-model="$store.state.reservaAcomod.periodoReserva"
         :min-date="minDate"
@@ -65,12 +67,12 @@ export default {
 @import url('~/assets/css/main.css');
 
 .datepicker-body {
-  margin-top: 3.2rem;
+  margin-top: 4rem;
   & .__title {
-    padding: 0 7% 1.9rem 7%;
+    padding: 0 7% 1.8rem 7%;
     line-height: 31px;
     font-size: 26px;
-    font-weight: 600;
+    font-weight: 700;
   }
 }
 
