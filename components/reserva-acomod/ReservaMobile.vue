@@ -40,16 +40,43 @@
           <date-picker></date-picker>
 
 
-          <!-- <div class="item-detalhes" style="border-top: 1px solid rgb(222,222,222)">
-            <h3 class="__item-text">Total</h3>
-            <h3 class="__item-valor">R$1.250</h3>
-          </div> -->
+          <div class="valores-reserva" v-if="$store.state.reservaAcomod.periodoReserva !== null">
+
+            <div class="item">
+              <h3>R${{ acomod.valorNoite.toLocaleString() }} x {{ reservaAcomod.noites }} noites</h3>
+              <h3>R${{ reservaAcomod.valorNoitesTotal.toLocaleString() }}</h3>
+            </div>
+
+            <div class="item" v-if="acomod.limpezaFee !== 0">
+              <div style="display:flex;flex:row;align-items:center">
+                <h3>Taxa de limpeza</h3>
+                <img src="../../assets/img/info.svg" style="width:.95rem;height:auto;margin-left:.3rem;cursor:pointer" @click="limpezaFeeDialog">
+              </div>
+              <h3>R${{ acomod.limpezaFee.toLocaleString() }}</h3>
+            </div>
+
+            <div class="item" style="padding-bottom: 1rem">
+              <div style="display:flex;flex:row;align-items:center">
+                <h3>Taxa de serviço</h3>
+                <img src="../../assets/img/info.svg" style="width:.95rem;height:auto;margin-left:.3rem;cursor:pointer" @click="serviceFeeDialog">
+              </div>
+              <h3>R${{ reservaAcomod.serviceFeeTotal.toLocaleString() }}</h3>
+            </div>
+
+            <div class="item" style="padding-top: 1rem; border-top: 1px solid rgb(232,232,232)">
+              <h3>Total</h3>
+              <h3 style="font-size: 18px; font-weight: 600">R${{ reservaAcomod.valorReservaTotal.toLocaleString() }}</h3>
+            </div>
+
+          </div>
+          
 
 
 
           <button type="button" class="__next-btn" @click="nextBtn1">Continuar</button>
       
         </div><!-- ########## DETALHES PG.1 ########## -->
+
 
 
 
@@ -66,6 +93,8 @@
           <button type="button" class="__next-btn" @click="nextBtn2">Continuar</button>
 
         </div><!-- ########## REGRAS PG.2 ########## -->
+
+
 
 
 
@@ -92,6 +121,8 @@
 
 
 
+
+
         <!-- ########## MENSAGEM PG.3 ########## -->
         <div class="etapa-reserva-box" v-if="$store.state.reservaAcomod4">
 
@@ -104,6 +135,8 @@
           <button type="button" class="__next-btn" @click="nextBtn4">Continuar</button>
 
         </div><!-- ########## MENSAGEM PG.3 ########## -->
+
+
 
 
 
@@ -121,6 +154,7 @@
           <button type="button" class="__next-btn" style="background:#FFA04F" @click="concluirReserva">Concluir Pedido</button>
 
         </div><!-- ########## PAGAMENTO PG.3 ########## -->
+
 
 
 
@@ -145,6 +179,20 @@ export default {
     }
   },
   methods: {
+    limpezaFeeDialog () {
+      this.$modal.show('dialog', {
+        title: 'Taxa de Limpeza',
+        text: `Taxa cobrada pelo proprietário para arcar com os custos de limpeza ${this.tipoAcomod}.`,
+        buttons: [{ title: 'OK' }]
+      })
+    },
+    serviceFeeDialog () {
+      this.$modal.show('dialog', {
+        title: 'Taxa de Serviço',
+        text: `Taxa de ${Math.round(this.$store.state.serviceFeeAcomod * 100)}% cobrada com o intuito de garantir suporte e total segurança em sua estadia caso algum problema aconteça.`,
+        buttons: [{ title: 'OK' }]
+      })
+    },
     backBtn () {
       if (this.$store.state.reservaAcomod1 === true) {
         window.history.back(1)
@@ -203,6 +251,9 @@ export default {
     acomod () {
       return this.$store.state.acomod
     },
+    reservaAcomod () {
+      return this.$store.state.reservaAcomod
+    },
     hash () {
       return this.$route.hash
     },
@@ -224,6 +275,19 @@ export default {
         const checkOut = new Date(this.$store.state.reservaAcomod.periodoReserva.end)
         return dayjs(checkOut).format('ddd, DD MMM')
       }
+    },
+    tipoAcomod () {
+      const path = this.acomod.tipoAcomod
+      return path === 'Casa' ? 'da casa' 
+           : path === 'Apartamento' ? 'do apartamento'
+           : path === 'Rancho' ? 'do rancho'
+           : path === 'Chácara' ? 'da chácara'
+           : path === 'Pousada' ? 'da pousada'
+           : path === 'Camping' ? 'do camping'
+           : path === 'Sítio' ? 'do sítio'
+           : path === 'Fazenda' ? 'da fazenda'
+           : path === 'Hostel' ? 'do hostel'
+           : ''
     }
   },
   watch: {
@@ -341,10 +405,19 @@ export default {
           transform: rotate(135deg);
         }
         & .__btn {
-          font-size: 18px;
+          font-size: 19px;
           font-weight: 500;
-          color: #3A6378;
+          color: #374785;
           user-select: none;
+        }
+      }
+      & .valores-reserva {
+        padding: 1rem 7% 0;
+        & .item {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: .5rem 0;
         }
       }
       & .item-form {
@@ -377,7 +450,7 @@ export default {
         right: 7%;
         font-size: 16px;
         font-weight: 600;
-        background:#3A6378;
+        background:#374785;
         color: white;
         line-height: 2.8rem;
         height: 2.9rem;
@@ -387,6 +460,9 @@ export default {
   }
 }
 
+h3 {
+  font-size: 17px;
+}
 
 /* TRANSITIONS */
 .reserva-animation-enter {

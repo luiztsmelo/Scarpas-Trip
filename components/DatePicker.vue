@@ -26,7 +26,7 @@
         :select-attribute="attribute"
         :disabled-attribute="disabledAttribute"
         :theme-styles="datePickerMobileStyle"
-        tint-color="#3A6378"
+        tint-color="#374785"
         show-caps>
       </v-date-picker>
     
@@ -39,7 +39,7 @@
 
         <button type="button" class="__apagar-btn" @click="$store.state.reservaAcomod.periodoReserva = null">Apagar</button>
 
-        <button type="button" class="__salvar-btn" :style="saveBtnStyle" @click="closeBtn">Salvar</button>
+        <button type="button" class="__salvar-btn" :style="saveBtnStyle" @click="saveBtn">Salvar</button>
 
       </div>
     </div>
@@ -69,6 +69,12 @@ export default {
     closeBtn () {
       this.$modal.hide('datepicker')
       window.history.back(1)
+    },
+    saveBtn () {
+      if (this.$store.state.reservaAcomod.periodoReserva !== null) {
+        this.$modal.hide('datepicker')
+        window.history.back(1)
+      }
     }
   },
   computed: {
@@ -77,7 +83,7 @@ export default {
     },
     saveBtnStyle () {
       if (this.$store.state.reservaAcomod.periodoReserva !== null) {
-        return 'background: #3A6378'
+        return 'background: #374785'
       }
     }
   }
@@ -127,7 +133,6 @@ export default {
       line-height: 2.8rem;
       height: 2.9rem;
       border-radius: 5px;
-      transition: all .2s ease;
     }
   }
 }
