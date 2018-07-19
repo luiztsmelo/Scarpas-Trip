@@ -19,6 +19,7 @@ const store = () => new Vuex.Store({
     showFoobar: true,
     showShare: false,
     showProprietario: false,
+    showDatePicker: false,
     menuIconAnime: false,
     loader: false,
     miniLoader: false,
@@ -382,6 +383,9 @@ const store = () => new Vuex.Store({
     },
     m_showProprietario (state, payload) {
       state.showProprietario = payload
+    },
+    m_showDatePicker (state, payload) {
+      state.showDatePicker = payload
     },
     /*
     -------------------- ANÚNCIOS --------------------

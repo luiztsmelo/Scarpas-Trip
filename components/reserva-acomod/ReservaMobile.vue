@@ -25,7 +25,7 @@
           <h1 class="__title">Orçamento</h1>
 
 
-          <div class="periodo-reserva" @click="$store.commit('m_loader', true), $modal.show('datepicker')">
+          <div class="periodo-reserva" @click="$store.commit('m_loader', true), $store.commit('m_showDatePicker', true)">
 
             <h3 class="__btn" style="text-align: left">{{ chegada }}</h3>
 
@@ -361,7 +361,7 @@ export default {
         }
       }
       & .__next-btn {
-        z-index: 99999;
+        z-index: 9999;
         cursor: pointer;
         position: fixed;
         padding: 0 1.2rem;
