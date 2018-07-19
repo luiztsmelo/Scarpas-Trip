@@ -68,12 +68,12 @@ export const stylesCalendar = {
           padding: '0'
         },
         headerArrows: {
-          margin: '0 14px',
-          fontSize: '1.8rem'
+          margin: '0 13px',
+          fontSize: '2rem'
         },
         headerTitle: {
-          fontSize: '19px',
-          fontWeight: '400'
+          fontSize: '21px',
+          fontWeight: '700'
         },
         weekdays: {
           color: 'rgb(42, 42, 42)',
@@ -82,11 +82,11 @@ export const stylesCalendar = {
           padding: '21px 5px 6px 5px'
         },
         dayCell: {
-          height: '50px',
-          padding: '8px 0'
+          height: '53px',
+          padding: '10px 0'
         },
         dayContent: {
-          fontWeight: '500',
+          fontWeight: '600',
           fontSize: '16px'
         },
         dayCellNotInMonth: {

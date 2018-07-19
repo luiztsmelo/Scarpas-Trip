@@ -8,13 +8,12 @@
     @opened="$store.commit('m_loader', false)">
 
 
-    <img src="../assets/img/close-modal.svg" style="cursor:pointer;position:absolute;top:1.1rem;left:7%;width:1.1rem;height:auto" @click="$modal.hide('datepicker')">
+    <img src="../assets/img/close-modal.svg" style="cursor:pointer;position:absolute;top:1.2rem;left:7%;width:1.1rem;height:auto" @click="$modal.hide('datepicker')">
 
 
 
     <div class="datepicker-body">
 
-      <h1 class="__title">Selecione o período</h1>
 
       <v-date-picker
         is-inline
@@ -27,7 +26,7 @@
         :select-attribute="attribute"
         :disabled-attribute="disabledAttribute"
         :theme-styles="datePickerMobileStyle"
-        tint-color="#00D8C7"
+        tint-color="#3A6378"
         show-caps>
       </v-date-picker>
     </div>
@@ -69,7 +68,7 @@ export default {
 .datepicker-body {
   margin-top: 4rem;
   & .__title {
-    padding: 0 7% 1.8rem 7%;
+    padding: 0 7% 1.7rem 7%;
     line-height: 31px;
     font-size: 26px;
     font-weight: 700;
