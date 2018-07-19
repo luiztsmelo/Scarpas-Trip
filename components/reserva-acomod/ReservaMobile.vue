@@ -25,6 +25,7 @@
           <h1 class="__title">Orçamento</h1>
 
 
+
           <div class="periodo-reserva" @click="$store.commit('m_loader', true), $modal.show('datepicker')">
 
             <h3 class="__btn" style="text-align: left">{{ chegada }}</h3>
@@ -34,6 +35,7 @@
             <h3 class="__btn" style="text-align: right">{{ partida }}</h3>
 
           </div>
+
 
           <date-picker></date-picker>
 

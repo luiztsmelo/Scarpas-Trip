@@ -61,7 +61,7 @@ export const stylesCalendar = {
         wrapper: {
           color: 'rgb(42, 42, 42)',
           border: '0',
-          padding: '60px 4px 0',
+          padding: '0 4px',
           background: 'white'
         },
         header: {
@@ -82,8 +82,8 @@ export const stylesCalendar = {
           padding: '21px 5px 6px 5px'
         },
         dayCell: {
-          height: '56px',
-          padding: '11px 0'
+          height: '58px',
+          padding: '12px 0'
         },
         dayContent: {
           fontWeight: '600',

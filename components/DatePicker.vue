@@ -30,16 +30,18 @@
         show-caps>
       </v-date-picker>
     
-    
-      <div class="buttons">
+
+    </div>
+
+
+    <div class="buttons">
+      <div class="buttons-body">
 
         <button type="button" class="__apagar-btn" @click="$store.state.reservaAcomod.periodoReserva = null">Apagar</button>
 
         <button type="button" class="__salvar-btn" :style="saveBtnStyle" @click="$modal.hide('datepicker')">Salvar</button>
 
       </div>
-
-
     </div>
     
   </modal>
@@ -80,16 +82,27 @@ export default {
 @import url('~/assets/css/main.css');
 
 .datepicker-body {
-  display: flex;
-  flex-flow: column;
-  justify-content: space-between;
-  height: 100vh;
-  & .buttons {
+  padding-top: 4.1rem;
+  
+}
+
+.buttons {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  z-index: 999999;
+  height: 4.4rem;
+  width:  100%;
+  background: white;
+  padding: 0 7%;
+  overflow: hidden;
+  & .buttons-body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 7%;
-    transform: translateY(-.8rem);
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
     & .__apagar-btn {
       cursor: pointer;
       padding: 0;
