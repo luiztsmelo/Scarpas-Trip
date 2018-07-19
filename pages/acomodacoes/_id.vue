@@ -26,8 +26,8 @@
     <div class="image-box" ref="imageBox">
       <swiper :options="swiperOptions">
         
-        <swiper-slide class="slide" v-for="image in acomod.images" :key="image.id">
-          <progressive-background class="__img" :src="imageH(image)" :placeholder="image.L" :aspect-ratio="2/3"/>
+        <swiper-slide class="slide" v-for="(image, index) in acomod.images" :key="image.id">
+          <progressive-background class="__img" :src="imageH(image)" :placeholder="index > 0 ? image.L : ''" :aspect-ratio="2/3"/>
         </swiper-slide>
 
       </swiper>
