@@ -61,7 +61,7 @@ export const stylesCalendar = {
         wrapper: {
           color: 'rgb(42, 42, 42)',
           border: '0',
-          padding: '0 4px',
+          padding: '60px 4px 0',
           background: 'white'
         },
         header: {
