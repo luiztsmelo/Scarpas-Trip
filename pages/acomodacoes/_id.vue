@@ -522,17 +522,17 @@ export default {
       return daySpan
     },
     valorNoitesTotal () {
-      let valorNoitesTotal = Math.round(this.acomod.valorNoite * this.daySpan)
+      const valorNoitesTotal = Math.round(this.acomod.valorNoite * this.daySpan)
       this.$store.commit('m_valorNoitesTotal', valorNoitesTotal)
       return valorNoitesTotal
     },
     serviceFeeTotal () {
-      let serviceFeeTotal = Math.round(this.valorNoitesTotal * this.$store.state.serviceFeeAcomod)
+      const serviceFeeTotal = Math.round(this.valorNoitesTotal * this.$store.state.serviceFeeAcomod)
       this.$store.commit('m_serviceFeeTotal', serviceFeeTotal)
       return serviceFeeTotal
     },
     valorReservaTotal () {
-      let valorReservaTotal = this.valorNoitesTotal + this.acomod.limpezaFee + this.serviceFeeTotal
+      const valorReservaTotal = this.valorNoitesTotal + this.acomod.limpezaFee + this.serviceFeeTotal
       this.$store.commit('m_valorReservaTotal', valorReservaTotal)
       return valorReservaTotal
     },
@@ -541,8 +541,8 @@ export default {
     },
     outputDatePicker () {
       if (this.$store.state.reservaAcomod.periodoReserva !== null) {
-        let start = new Date(this.$store.state.reservaAcomod.periodoReserva.start)
-        let end = this.$store.state.reservaAcomod.periodoReserva.end
+        const start = new Date(this.$store.state.reservaAcomod.periodoReserva.start)
+        const end = this.$store.state.reservaAcomod.periodoReserva.end
         return dayjs(start).format('ddd, DD MMM') + '  →  ' + dayjs(end).format('ddd, DD MMM')
       }
     },

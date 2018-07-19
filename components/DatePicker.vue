@@ -5,12 +5,8 @@
       <div class="datepicker-body">
 
 
-        <!-- BACK BUTTON -->
-        <div class="back-bar">
-          <div class="back-box" @click="$store.commit('m_showDatePicker', false)">
-            <img class="__back-btn" src="../assets/img/back.svg" alt="voltar">
-          </div>
-        </div><!-- BACK BUTTON -->
+        <img src="../assets/img/close-modal.svg" style="cursor:pointer;position:absolute;top:1.2rem;left:7%;width:1rem;height:auto" @click="$store.commit('m_showDatePicker', false)">
+
 
 
         <v-date-picker
@@ -93,38 +89,19 @@ export default {
   left: 0;
   background: white;
   transition: var(--main-transition);
-  & .back-bar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width:  100%;
-    height: 3rem;
-    background: white;
-    & .back-box {
-      display: inline-flex;
-      align-items: center;
-      height: 100%;
-      padding: 0 7%;
-      & .__back-btn {
-        cursor: pointer;
-        width: 1.07rem;
-        height: auto;
-        filter: invert(75%);
-      }
-    }
-  }
   & .datepicker-body {
+    position: relative;
     display: flex;
     flex-flow: column;
     height: 100%;
-    padding-top: 4.1rem;
+    padding-top: 4.2rem;
     & .footer {
-      position: fixed;
+      position: absolute;
       bottom: 0;
       left: 0;
       z-index: 999999;
       height: 4.4rem;
-      width:  100%;
+      width: 100%;
       background: white;
       padding: 0 7%;
       & .footer-body {
