@@ -821,7 +821,7 @@ export default {
     bottom: 0;
     left: 0;
     z-index: 8888;
-    height: 4.4rem;
+    height: 4.5rem;
     width: 100%;
     background: white;
     padding: 0 7%;
@@ -835,7 +835,7 @@ export default {
       top: 50%;
       transform: translateY(-50%);
       & .__reserva-valor {
-        font-size: 17px;
+        font-size: 18px;
         font-weight: 600;
         white-space: nowrap;
         overflow: hidden;
@@ -850,7 +850,7 @@ export default {
         font-weight: 600;
         background: var(--colorAcomod);
         color: white;
-        height: 2.9rem;
+        height: 2.95rem;
         width: 10rem;
         border-radius: 5px;
       }

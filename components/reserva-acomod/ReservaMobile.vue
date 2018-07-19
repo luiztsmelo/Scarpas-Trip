@@ -17,7 +17,7 @@
         
 
 
-        <!-- ########## DETALHES PG.1 ########## -->
+        <!-- ########## COTAÇÃO PG.1 ########## -->
         <div class="etapa-reserva-box" v-if="$store.state.reservaAcomod1">
 
           <h3 class="etapas">1 de 5 etapas</h3>
@@ -43,7 +43,7 @@
           <div class="valores-reserva" v-if="$store.state.reservaAcomod.periodoReserva !== null">
 
             <div class="item">
-              <h3>R${{ acomod.valorNoite.toLocaleString() }} x {{ reservaAcomod.noites }} noites</h3>
+              <h3>R${{ acomod.valorNoite.toLocaleString() }} x {{ reservaAcomod.noites }} {{ reservaAcomod.noites == 1 ? 'noite' : 'noites'}}</h3>
               <h3>R${{ reservaAcomod.valorNoitesTotal.toLocaleString() }}</h3>
             </div>
 
@@ -73,15 +73,20 @@
 
 
 
-          <button type="button" class="__next-btn" @click="nextBtn1">Continuar</button>
+          <div class="buttons">
+            <div class="buttons-body">
+              <h3></h3>
+              <button type="button" class="__next-btn" @click="nextBtn1">Continuar</button>
+            </div>
+          </div>
       
-        </div><!-- ########## DETALHES PG.1 ########## -->
+        </div><!-- ########## COTAÇÃO PG.1 ########## -->
 
 
 
 
 
-        <!-- ########## REGRAS PG.2 ########## -->
+        <!-- ########## CADASTRO PG.2 ########## -->
         <div class="etapa-reserva-box" v-if="$store.state.reservaAcomod2">
 
           <h3 class="etapas">2 de 5 etapas</h3>
@@ -90,21 +95,49 @@
 
 
 
-          <button type="button" class="__next-btn" @click="nextBtn2">Continuar</button>
+          <div class="buttons">
+            <div class="buttons-body">
+              <h3 class="__valor">R${{ reservaAcomod.valorReservaTotal.toLocaleString() }}
+                <span class="__valor-noites"> por {{ reservaAcomod.noites }} {{ reservaAcomod.noites == 1 ? 'noite' : 'noites'}}</span>
+              </h3>
+              <button type="button" class="__next-btn" @click="nextBtn2">Continuar</button>
+            </div>
+          </div>
 
-        </div><!-- ########## REGRAS PG.2 ########## -->
+        </div><!-- ########## CADASTRO PG.2 ########## -->
 
 
 
 
 
 
-        <!-- ########## REGRAS PG.3 ########## -->
+        <!-- ########## DETALHES PG.3 ########## -->
         <div class="etapa-reserva-box" v-if="$store.state.reservaAcomod3">
 
           <h3 class="etapas">3 de 5 etapas</h3>
 
           <h1 class="__title">Revise os detalhes da reserva</h1>
+
+
+
+          <div class="check-in-out">
+
+            <div>
+              <h3 class="__title">Check-in</h3>
+              <h3 class="__text">{{ acomod.checkInTime === 'Horário Flexível' ? 'Horário Flexível' : `Depois das ${acomod.checkInTime}` }}</h3>
+              <h3 class="__text">{{ chegada }}</h3>
+            </div>
+
+            <div class="__slash"></div>
+
+            <div>
+              <h3 class="__title" style="text-align: right">Check-out</h3>
+              <h3 class="__text" style="text-align: right">{{ acomod.checkOutTime === 'Horário Flexível' ? 'Horário Flexível' : `Antes das ${acomod.checkOutTime}` }}</h3>
+              <h3 class="__text" style="text-align: right">{{ partida }}</h3>
+            </div>
+
+          </div>
+
 
 
           <!-- <div class="__item">
@@ -113,10 +146,16 @@
             </select>
           </div> -->
 
+          <div class="buttons">
+            <div class="buttons-body">
+              <h3 class="__valor">R${{ reservaAcomod.valorReservaTotal.toLocaleString() }}
+                <span class="__valor-noites"> por {{ reservaAcomod.noites }} {{ reservaAcomod.noites == 1 ? 'noite' : 'noites'}}</span>
+              </h3>
+              <button type="button" class="__next-btn" @click="nextBtn3">Continuar</button>
+            </div>
+          </div>
 
-          <button type="button" class="__next-btn" @click="nextBtn3">Continuar</button>
-
-        </div><!-- ########## REGRAS PG.3 ########## -->
+        </div><!-- ########## DETALHES PG.3 ########## -->
         
 
 
@@ -402,7 +441,7 @@ export default {
           background: rgb(222,222,222);
           width: 50px;
           height: 1px;
-          transform: rotate(135deg);
+          transform: rotate(130deg);
         }
         & .__btn {
           font-size: 19px;
@@ -418,6 +457,31 @@ export default {
           justify-content: space-between;
           align-items: center;
           padding: .6rem 0;
+        }
+      }
+      & .check-in-out {
+        margin: 0 7%;
+        padding: 1.5rem 0;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-bottom: 1px solid rgb(222,222,222);
+        border-top: 1px solid rgb(222,222,222);
+        & .__title {
+          font-size: 17px;
+          font-weight: 600;
+          padding: 0;
+          line-height: 28px
+        }
+        & .__text {
+          font-size: 16px;
+          line-height: 22px
+        }
+        & .__slash {
+          background: rgb(222,222,222);
+          width: 55px;
+          height: 1px;
+          transform: rotate(130deg);
         }
       }
       & .item-form {
@@ -441,20 +505,46 @@ export default {
           outline: none;
         }
       }
-      & .__next-btn {
-        z-index: 99999;
-        cursor: pointer;
+      & .buttons {
         position: fixed;
-        padding: 0 1.2rem;
-        bottom: .8rem;
-        right: 7%;
-        font-size: 16px;
-        font-weight: 600;
-        background:#374785;
-        color: white;
-        line-height: 2.8rem;
-        height: 2.9rem;
-        border-radius: 5px;
+        bottom: 0;
+        left: 0;
+        z-index: 999999;
+        height: 4.5rem;
+        width:  100%;
+        background: white;
+        padding: 0 7%;
+        overflow: hidden;
+        & .buttons-body {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          position: relative;
+          top: 50%;
+          transform: translateY(-50%);
+          & .__valor {
+            font-size: 18px;
+            font-weight: 600;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            & .__valor-noites {
+              font-size: 14px;
+              font-weight: 400;
+            }
+          }
+          & .__next-btn {
+            cursor: pointer;
+            padding: 0 1.2rem;
+            font-size: 16px;
+            font-weight: 600;
+            background:#374785;
+            color: white;
+            line-height: 2.85rem;
+            height: 2.95rem;
+            border-radius: 5px;
+          }
+        }
       }
     }
   }

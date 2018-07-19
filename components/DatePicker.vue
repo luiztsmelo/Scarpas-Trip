@@ -36,11 +36,8 @@
 
     <div class="buttons">
       <div class="buttons-body">
-
         <button type="button" class="__apagar-btn" @click="$store.state.reservaAcomod.periodoReserva = null">Apagar</button>
-
         <button type="button" class="__salvar-btn" :style="saveBtnStyle" @click="saveBtn">Salvar</button>
-
       </div>
     </div>
     
@@ -102,7 +99,7 @@ export default {
   bottom: 0;
   left: 0;
   z-index: 999999;
-  height: 4.4rem;
+  height: 4.5rem;
   width:  100%;
   background: white;
   padding: 0 7%;
@@ -130,8 +127,8 @@ export default {
       font-weight: 600;
       background: rgb(212, 212, 212);
       color: white;
-      line-height: 2.8rem;
-      height: 2.9rem;
+      line-height: 2.85rem;
+      height: 2.95rem;
       border-radius: 5px;
     }
   }

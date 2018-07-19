@@ -20,7 +20,7 @@
 
 
       <div class="item">
-        <h3>R${{ acomod.valorNoite.toLocaleString() }} x {{ reservaAcomod.noites }} noites</h3>
+        <h3>R${{ acomod.valorNoite.toLocaleString() }} x {{ reservaAcomod.noites }} {{ reservaAcomod.noites == 1 ? 'noite' : 'noites'}}</h3>
         <h3 id="valor">R${{ reservaAcomod.valorNoitesTotal.toLocaleString() }}</h3>
       </div>
 
