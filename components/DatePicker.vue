@@ -82,9 +82,11 @@ export default {
 @import url('~/assets/css/main.css');
 
 .datepicker-body {
-  margin-top: 4.1rem;
+  position: relative;
+  padding-top: 4.1rem;
+  height: 100%;
   & .footer {
-    position: fixed;
+    position: absolute;
     bottom: 0;
     left: 0;
     z-index: 8888;
