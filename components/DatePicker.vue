@@ -26,7 +26,7 @@
         :select-attribute="attribute"
         :disabled-attribute="disabledAttribute"
         :theme-styles="datePickerMobileStyle"
-        tint-color="#374785"
+        tint-color="#31CAE9"
         show-caps>
       </v-date-picker>
     
@@ -80,7 +80,7 @@ export default {
     },
     saveBtnStyle () {
       if (this.$store.state.reservaAcomod.periodoReserva !== null) {
-        return 'background: #374785'
+        return 'background: #50CB9D'
       }
     }
   }

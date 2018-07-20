@@ -65,7 +65,7 @@
 
             <div class="item" style="padding-top: 1.2rem; border-top: 1px solid rgb(232,232,232)">
               <h3>Total</h3>
-              <h3 style="font-size: 19px; font-weight: 600">R${{ reservaAcomod.valorReservaTotal.toLocaleString() }}</h3>
+              <h3 style="font-size: 18px; font-weight: 600">R${{ reservaAcomod.valorReservaTotal.toLocaleString() }}</h3>
             </div>
 
           </div>
@@ -124,7 +124,7 @@
 
             <div>
               <h3 class="__title">Check-in</h3>
-              <h3 class="__text">{{ acomod.checkInTime === 'Horário Flexível' ? 'Horário Flexível' : `Depois das ${acomod.checkInTime}` }}</h3>
+              <h3 class="__text">{{ acomod.checkInTime === 'Horário Flexível' ? 'Horário Flexível' : `Após as ${acomod.checkInTime}` }}</h3>
               <h3 class="__text">{{ chegada }}</h3>
             </div>
 
@@ -132,7 +132,7 @@
 
             <div>
               <h3 class="__title" style="text-align: right">Check-out</h3>
-              <h3 class="__text" style="text-align: right">{{ acomod.checkOutTime === 'Horário Flexível' ? 'Horário Flexível' : `Antes das ${acomod.checkOutTime}` }}</h3>
+              <h3 class="__text" style="text-align: right">{{ acomod.checkOutTime === 'Horário Flexível' ? 'Horário Flexível' : `Antes de ${acomod.checkOutTime}` }}</h3>
               <h3 class="__text" style="text-align: right">{{ partida }}</h3>
             </div>
 
@@ -444,9 +444,9 @@ export default {
           transform: rotate(130deg);
         }
         & .__btn {
-          font-size: 19px;
-          font-weight: 500;
-          color: #374785;
+          font-size: 18px;
+          font-weight: 600;
+          color: #31CAE9;
           user-select: none;
         }
       }
@@ -538,7 +538,7 @@ export default {
             padding: 0 1.2rem;
             font-size: 16px;
             font-weight: 600;
-            background:#374785;
+            background:#50CB9D;
             color: white;
             line-height: 2.85rem;
             height: 2.95rem;
@@ -551,7 +551,7 @@ export default {
 }
 
 h3 {
-  font-size: 18px;
+  font-size: 17px;
 }
 
 /* TRANSITIONS */
