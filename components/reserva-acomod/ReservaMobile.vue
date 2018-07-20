@@ -309,13 +309,7 @@
 
 
 
-
-          <div class="buttons" style="box-shadow: none">
-            <div class="buttons-body">
-              <h3></h3>
-              <button type="button" class="__next-btn" :style="formBoletoOk" @click="nextBtnBoleto">OK</button>
-            </div>
-          </div>
+          <div class="round-btn" @click="nextBtnBoleto">OK</div>
 
         </div><!-- ___________ BOLETO  ___________ -->
 
@@ -365,12 +359,7 @@
 
 
 
-          <div class="buttons" style="box-shadow: none">
-            <div class="buttons-body">
-              <h3></h3>
-              <button type="button" class="__next-btn" :style="formBillingOk" @click="nextBtnBilling">OK</button>
-            </div>
-          </div>
+          <div class="round-btn" @click="nextBtnBilling">OK</div>
 
         </div><!-- ___________ BILLING  ___________ -->
 
@@ -663,7 +652,7 @@ export default {
     height: 100%;
     overflow-y: auto;
     & .etapa-reserva-box {
-      padding: 2.9rem 0 5rem;
+      padding-top: 2.9rem;
       & .etapas {
         padding: 0 7% 0.2rem;
         font-size: 14px;
@@ -810,6 +799,20 @@ export default {
             transition: all .2s ease;
           }
         }
+      }
+      & .round-btn {
+        margin: 1rem 7%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        float: right;
+        font-size: 14px;
+        font-weight: 500;
+        color: white;
+        width: 2.8rem;
+        height: 2.8rem;
+        border-radius: 50%;
+        background:rgb(222, 222, 222);
       }
     }
   }
