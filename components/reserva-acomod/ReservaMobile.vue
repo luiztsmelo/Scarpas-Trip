@@ -165,7 +165,7 @@
 
 
 
-        <!-- ########## MENSAGEM PG.3 ########## -->
+        <!-- ########## MENSAGEM PG.4 ########## -->
         <div class="etapa-reserva-box" v-if="$store.state.reservaAcomod4">
 
           <h3 class="etapas">4 de 5 etapas</h3>
@@ -183,14 +183,14 @@
             </div>
           </div>
 
-        </div><!-- ########## MENSAGEM PG.3 ########## -->
+        </div><!-- ########## MENSAGEM PG.4 ########## -->
 
 
 
 
 
 
-        <!-- ########## PAGAMENTO PG.3 ########## -->
+        <!-- ########## PAGAMENTO PG.5 ########## -->
         <div class="etapa-reserva-box" v-if="$store.state.reservaAcomod5">
 
           <h3 class="etapas">5 de 5 etapas</h3>
@@ -200,7 +200,7 @@
 
           <h3 class="__subtitle">Você somente será cobrado caso {{ acomod.proprietario.split(' ')[0] }} confirme seu pedido de reserva. Para sua segurança, só liberaremos o pagamento para ele no dia seguinte de seu check-in, {{ dayAfterCheckin }}. Não se preocupe, seus dados estarão em total sigilo.</h3>
 
-          <div class="add-payment">
+          <div class="add-payment" @click="addPayment">
             <h3 class="__text">Adicionar pagamento</h3>
             <img src="../../assets/img/arrow-right.svg" alt="" style="width: 1.1rem; height: auto">
           </div>
@@ -216,7 +216,28 @@
             </div>
           </div>
 
-        </div><!-- ########## PAGAMENTO PG.3 ########## -->
+        </div><!-- ########## PAGAMENTO PG.5 ########## -->
+
+
+
+
+        <!-- ___________ PAYMENT METHOD  ___________ -->
+        <div class="etapa-reserva-box" v-if="$store.state.reservaAcomodPaymentMethod">
+
+          <h1 class="__title">Pagar com</h1>
+
+
+          <div class="add-payment" style="border-bottom: none">
+            <h3 class="__text">Cartão de Crédito</h3>
+            <img src="../../assets/img/arrow-right.svg" alt="" style="width: 1.1rem; height: auto">
+          </div>
+          <div class="add-payment">
+            <h3 class="__text">Boleto</h3>
+            <img src="../../assets/img/arrow-right.svg" alt="" style="width: 1.1rem; height: auto">
+          </div>
+
+
+        </div><!-- ___________ PAYMENT METHOD  ___________ -->
 
 
 
@@ -281,6 +302,11 @@ export default {
         this.$store.commit('m_reservaAcomod5', false)
         this.$store.commit('m_reservaAcomod4', true)
       }
+      if (this.$store.state.reservaAcomodPaymentMethod === true) {
+        window.history.back(1)
+        this.$store.commit('m_reservaAcomodPaymentMethod', false)
+        this.$store.commit('m_reservaAcomod5', true)
+      }
     },
     nextBtn1 () {
       if (this.$store.state.reservaAcomod.periodoReserva !== null) {
@@ -306,6 +332,9 @@ export default {
       this.$store.commit('m_loader', true) 
       this.$modal.show('datepicker') 
       window.location.hash = `${this.$store.state.reservaAcomodHash1}-datas`
+    },
+    addPayment () {
+      this.$store.commit('m_reservaAcomod5', false), this.$store.commit('m_reservaAcomodPaymentMethod', true), window.location.hash = `${this.$store.state.reservaAcomodHash5}-payment-method`
     },
     concluirReserva () {
     }
@@ -387,46 +416,30 @@ export default {
       if (value === '') {
         this.$store.commit('m_showReservaAcomod', false)
         this.$store.commit('m_reservaAcomod1', false)
-        this.$store.commit('m_reservaAcomod2', false)
-        this.$store.commit('m_reservaAcomod3', false)
-        this.$store.commit('m_reservaAcomod4', false)
-        this.$store.commit('m_reservaAcomod5', false)
       }
       if (value === `#${this.$store.state.reservaAcomodHash1}`) {
         this.$modal.hide('datepicker') 
         this.$store.commit('m_reservaAcomod1', true)
         this.$store.commit('m_reservaAcomod2', false)
-        this.$store.commit('m_reservaAcomod3', false)
-        this.$store.commit('m_reservaAcomod4', false)
-        this.$store.commit('m_reservaAcomod5', false)
       }
       if (value === `#${this.$store.state.reservaAcomodHash2}`) {
-        this.$store.commit('m_reservaAcomod1', false)
         this.$store.commit('m_reservaAcomod2', true)
         this.$store.commit('m_reservaAcomod3', false)
-        this.$store.commit('m_reservaAcomod4', false)
-        this.$store.commit('m_reservaAcomod5', false)
       }
       if (value === `#${this.$store.state.reservaAcomodHash3}`) {
-        this.$store.commit('m_reservaAcomod1', false)
-        this.$store.commit('m_reservaAcomod2', false)
         this.$store.commit('m_reservaAcomod3', true)
         this.$store.commit('m_reservaAcomod4', false)
-        this.$store.commit('m_reservaAcomod5', false)
       }
       if (value === `#${this.$store.state.reservaAcomodHash4}`) {
-        this.$store.commit('m_reservaAcomod1', false)
-        this.$store.commit('m_reservaAcomod2', false)
-        this.$store.commit('m_reservaAcomod3', false)
         this.$store.commit('m_reservaAcomod4', true)
         this.$store.commit('m_reservaAcomod5', false)
       }
       if (value === `#${this.$store.state.reservaAcomodHash5}`) {
-        this.$store.commit('m_reservaAcomod1', false)
-        this.$store.commit('m_reservaAcomod2', false)
-        this.$store.commit('m_reservaAcomod3', false)
-        this.$store.commit('m_reservaAcomod4', false)
         this.$store.commit('m_reservaAcomod5', true)
+        this.$store.commit('m_reservaAcomodPaymentMethod', false)
+      }
+      if (value === `#${this.$store.state.reservaAcomodHash5}-payment-method`) {
+        this.$store.commit('m_reservaAcomodPaymentMethod', true)
       }
     }
   }
@@ -471,8 +484,9 @@ export default {
     margin-top: .5rem;
     height: 100%;
     & .etapa-reserva-box {
+      padding-top: 3rem;
       & .etapas {
-        padding: 2.8rem 7% 0.2rem 7%;
+        padding: 0 7% 0.2rem;
         font-size: 14px;
         font-weight: 500;
         color: rgb(72, 72, 72);
@@ -484,7 +498,7 @@ export default {
         font-weight: 700;
       }
       & .__subtitle {
-        padding: 0 7%;
+        padding: 0 7% 1rem;
         font-size: 16px;
       }
       & .periodo-reserva {
@@ -542,7 +556,7 @@ export default {
         }
       }
       & .add-payment {
-        margin: 1.2rem 7%;
+        margin: 0 7%;
         padding: 1.4rem 0;
         display: flex;
         align-items: center;
@@ -551,8 +565,7 @@ export default {
         border-top: 1px solid rgb(222,222,222);
         & .__text {
           font-size: 17px;
-          font-weight: 600;
-          color: var(--colorAcomod)
+          font-weight: 500;
         }
       }
       & .item-form {
