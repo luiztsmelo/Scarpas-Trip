@@ -460,7 +460,7 @@ export default {
           transform: rotate(130deg);
         }
         & .__btn {
-          font-size: 18px;
+          font-size: 19px;
           font-weight: 600;
           color: #FFA04F;
           user-select: none;
@@ -554,9 +554,9 @@ export default {
           }
           & .__next-btn {
             cursor: pointer;
-            padding: 0 1.2rem;
+            padding: 0 1.3rem;
             font-size: 16px;
-            font-weight: 600;
+            font-weight: 700;
             background:#50CB9D;
             color: white;
             line-height: 2.9rem;

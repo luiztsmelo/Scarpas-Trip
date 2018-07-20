@@ -122,9 +122,9 @@ export default {
     }
     & .__confirm-btn {
       cursor: pointer;
-      padding: 0 1.2rem;
+      padding: 0 1.3rem;
       font-size: 16px;
-      font-weight: 600;
+      font-weight: 700;
       background: rgb(212, 212, 212);
       color: white;
       line-height: 2.9rem;
