@@ -531,6 +531,7 @@ export default {
         background: white;
         padding: 0 7%;
         overflow: hidden;
+        box-shadow: 0px -1px 1px 0px rgba(0,0,0,0.1);
         & .buttons-body {
           display: flex;
           justify-content: space-between;
