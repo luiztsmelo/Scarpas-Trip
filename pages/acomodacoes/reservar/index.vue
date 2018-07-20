@@ -158,8 +158,10 @@
                 </masked-input><!-- CARD NUMBER -->
 
 
-                <!-- CARD EXPIRATION -->
+                
                 <div class="flex" style="display:flex">
+
+                  <!-- CARD EXPIRATION -->
                   <masked-input
                     :class="[ cardExpirationDateError ? 'has-error' : '' ]"
                     style="border-right:none"

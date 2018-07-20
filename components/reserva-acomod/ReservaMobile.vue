@@ -26,7 +26,7 @@
 
 
 
-          <div class="periodo-reserva" @click="showDatePicker">
+          <div class="periodo-reserva" @click="openDatePicker">
 
             <h3 class="__btn" style="text-align: left; flex:49%">{{ checkIn }}</h3>
 
@@ -261,6 +261,36 @@
           </div><!-- CARD NUMBER -->
 
 
+          <transition name="opacity">
+            <div style="display:flex;transition:all .3s ease" v-show="$store.state.creditCard.cardNumber.length === 19">
+              
+              <!-- CARD EXPIRATION -->
+              <div class="item-form">
+                <label>Valido até</label>
+                <masked-input
+                  type="tel"
+                  v-model="$store.state.creditCard.cardExpirationDate"
+                  :mask="[/\d/, /\d/, '/', /\d/, /\d/]"
+                  :guide="false"
+                  placeholder="MM / AA">
+                </masked-input>
+              </div><!-- CARD EXPIRATION -->
+
+              <!-- CVV -->
+              <div class="item-form">
+                <label>CVV</label>
+                <masked-input
+                  type="tel"
+                  v-model="$store.state.creditCard.cardCVV"
+                  :mask="[/\d/, /\d/, /\d/, /\d/]"
+                  :guide="false"
+                  placeholder="123">
+                </masked-input>
+              </div><!-- CVV -->
+
+            </div>
+          </transition>
+
         </div><!-- ___________ CREDIT CARD  ___________ -->
 
 
@@ -364,10 +394,8 @@ export default {
         this.$store.commit('m_reservaAcomod4', false), this.$store.commit('m_reservaAcomod5', true), window.location.hash = this.$store.state.reservaAcomodHash5, this.scrollTop()
       }
     },
-    showDatePicker () {
-      this.$store.commit('m_loader', true) 
-      this.$modal.show('datepicker') 
-      window.location.hash = `${this.$store.state.reservaAcomodHash1}-datas`
+    openDatePicker () {
+      this.$store.commit('m_loader', true), this.$modal.show('datepicker'), window.location.hash = `${this.$store.state.reservaAcomodHash1}-datas`
     },
     openPaymentMethod () {
       this.$store.commit('m_reservaAcomod5', false), this.$store.commit('m_reservaAcomodPaymentMethod', true), window.location.hash = `${this.$store.state.reservaAcomodHash5}-payment-method`
@@ -600,7 +628,7 @@ export default {
         padding: 0 7%;
         display: flex;
         flex-flow: column;
-        margin-bottom: 1rem;
+        margin-bottom: 1.5rem;
         & label {
           font-weight: 600;
           font-size: 15px;
@@ -674,5 +702,11 @@ h3 {
 }
 .reserva-animation-leave-active {
   transform: translateX(100%);
+}
+.opacity-enter {
+  opacity: 0;
+}
+.opacity-leave-active {
+  opacity: 0;
 }
 </style>
