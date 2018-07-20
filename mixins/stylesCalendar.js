@@ -82,12 +82,12 @@ export const stylesCalendar = {
           padding: '21px 5px 6px 5px'
         },
         dayCell: {
-          height: '56px',
-          padding: '12px 0'
+          height: '60px',
+          padding: '13px 0'
         },
         dayContent: {
           fontWeight: '500',
-          fontSize: '16px'
+          fontSize: '17px'
         },
         dayCellNotInMonth: {
           opacity: 0

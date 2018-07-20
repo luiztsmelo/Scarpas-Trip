@@ -154,7 +154,7 @@
               <h3 class="__valor">R${{ reservaAcomod.valorReservaTotal.toLocaleString() }}
                 <span class="__valor-noites"> por {{ reservaAcomod.noites }} {{ reservaAcomod.noites == 1 ? 'noite' : 'noites'}}</span>
               </h3>
-              <button type="button" class="__next-btn" :style="form3ok" @click="nextBtn3">Continuar</button>
+              <button type="button" class="__next-btn" :style="form3ok" @click="nextBtn3">Concordar</button>
             </div>
           </div>
 
@@ -554,7 +554,7 @@ export default {
           transform: rotate(130deg);
         }
         & .__btn {
-          font-size: 19px;
+          font-size: 20px;
           font-weight: 500;
           user-select: none;
         }
