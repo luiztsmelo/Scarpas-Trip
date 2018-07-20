@@ -103,7 +103,7 @@
               <h3 class="__valor">R${{ reservaAcomod.valorReservaTotal.toLocaleString() }}
                 <span class="__valor-noites"> por {{ reservaAcomod.noites }} {{ reservaAcomod.noites == 1 ? 'noite' : 'noites'}}</span>
               </h3>
-              <button type="button" class="__next-btn" @click="nextBtn2">Continuar</button>
+              <button type="button" class="__next-btn" :style="form2ok" @click="nextBtn2">Continuar</button>
             </div>
           </div>
 
@@ -154,7 +154,7 @@
               <h3 class="__valor">R${{ reservaAcomod.valorReservaTotal.toLocaleString() }}
                 <span class="__valor-noites"> por {{ reservaAcomod.noites }} {{ reservaAcomod.noites == 1 ? 'noite' : 'noites'}}</span>
               </h3>
-              <button type="button" class="__next-btn" @click="nextBtn3">Continuar</button>
+              <button type="button" class="__next-btn" :style="form3ok" @click="nextBtn3">Continuar</button>
             </div>
           </div>
 
@@ -179,7 +179,7 @@
               <h3 class="__valor">R${{ reservaAcomod.valorReservaTotal.toLocaleString() }}
                 <span class="__valor-noites"> por {{ reservaAcomod.noites }} {{ reservaAcomod.noites == 1 ? 'noite' : 'noites'}}</span>
               </h3>
-              <button type="button" class="__next-btn" @click="nextBtn4">Continuar</button>
+              <button type="button" class="__next-btn" :style="form4ok" @click="nextBtn4">Continuar</button>
             </div>
           </div>
 
@@ -197,14 +197,22 @@
 
           <h1 class="__title">Pagar e confirmar</h1>
 
-        
+
+          <h3 class="__subtitle">Você somente será cobrado caso {{ acomod.proprietario.split(' ')[0] }} confirme seu pedido de reserva. Para sua segurança, só liberaremos o pagamento para ele no dia seguinte de seu check-in, {{ dayAfterCheckin }}. Não se preocupe, seus dados estarão em total sigilo.</h3>
+
+          <div class="add-payment">
+            <h3 class="__text">Adicionar pagamento</h3>
+            <img src="../../assets/img/arrow-right.svg" alt="" style="width: 1.2rem; height: auto; filter: invert(60%)">
+          </div>
+
+
 
           <div class="buttons">
             <div class="buttons-body">
               <h3 class="__valor">R${{ reservaAcomod.valorReservaTotal.toLocaleString() }}
                 <span class="__valor-noites"> por {{ reservaAcomod.noites }} {{ reservaAcomod.noites == 1 ? 'noite' : 'noites'}}</span>
               </h3>
-              <button type="button" class="__next-btn" style="background:#FFA04F" @click="concluirReserva">Concluir Pedido</button>
+              <button type="button" class="__next-btn" :style="form5ok" @click="concluirReserva">Concluir Pedido</button>
             </div>
           </div>
 
@@ -331,9 +339,33 @@ export default {
         return dayjs(checkOut).format('ddd, DD MMM')
       }
     },
+    dayAfterCheckin () {
+      const checkIn = new Date(this.reservaAcomod.periodoReserva.start)
+      return dayjs(checkIn).add(1, 'day').format('DD/MM')
+    },
     form1ok () {
       if (this.$store.state.reservaAcomod.periodoReserva !== null) {
         return 'background: #50CB9D'
+      }
+    },
+    form2ok () {
+      if (1>2) {
+        return 'background: #50CB9D'
+      }
+    },
+    form3ok () {
+      if (1>2) {
+        return 'background: #50CB9D'
+      }
+    },
+    form4ok () {
+      if (1>2) {
+        return 'background: #50CB9D'
+      }
+    },
+    form5ok () {
+      if (1>2) {
+        return 'background: #FFA04F'
       }
     },
     tipoAcomod () {
@@ -451,6 +483,10 @@ export default {
         font-size: 29px;
         font-weight: 700;
       }
+      & .__subtitle {
+        padding: 0 7%;
+        font-size: 16px;
+      }
       & .periodo-reserva {
         margin: 0 7%;
         padding: 1.4rem 0;
@@ -503,6 +539,20 @@ export default {
           width: 60px;
           height: 1px;
           transform: rotate(130deg);
+        }
+      }
+      & .add-payment {
+        margin: 1.2rem 7%;
+        padding: 1.2rem 0;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-bottom: 1px solid rgb(222,222,222);
+        border-top: 1px solid rgb(222,222,222);
+        & .__text {
+          font-size: 17px;
+          font-weight: 600;
+          color: var(--colorAcomod)
         }
       }
       & .item-form {
