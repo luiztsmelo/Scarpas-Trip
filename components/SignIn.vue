@@ -84,7 +84,8 @@ export default {
         this.$router.push('/acomodacoes/reservar')
         this.$store.commit('m_showNavbar', false)
       }
-      if (value !== null && this.$store.state.isMobile) {
+      /* MUDAR ISSO AQUI */
+      if (value !== null && this.$store.state.isMobile && this.$route.name !== 'anunciar-acomodacao') {
         this.$modal.hide('sign-in-modal')
         const shortEmail = this.user.substring(0, this.user.indexOf("@"))
         this.$router.push(`/@${shortEmail}`)

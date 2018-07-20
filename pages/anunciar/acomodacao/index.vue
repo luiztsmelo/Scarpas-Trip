@@ -1466,9 +1466,10 @@ export default {
     color: var(--color01);
     padding: 0 0 8rem 0;
     & .__form-title {
-      padding: 3rem 7% 1.5rem 7%;
-      line-height: 38px;
-      font-size: 27px;
+      padding: 2.7rem 7% 1.5rem 7%;
+      line-height: 35px;
+      font-size: 29px;
+      font-weight: 700;
       z-index: 999;
       user-select: none !important;
     }
@@ -1486,7 +1487,7 @@ export default {
       padding: 0 7%;
       margin-bottom: .5rem;
       width: 100%;
-      font-size: var(--fontSizeAnuncioText);
+      font-size: 17px;
       font-weight: 400;
       line-height: 26px;
       background: white;
@@ -1499,7 +1500,7 @@ export default {
       padding: 0 7%;
       padding-bottom: 6rem;
       z-index: 999;
-      font-size: var(--fontSizeAnuncioText);
+      font-size: 17px;
       font-weight: 600;
       color: rgb(92, 92, 92);
     }
@@ -1517,22 +1518,22 @@ export default {
         cursor: text;
         position: relative;
         width: 100%;
-        font-size: var(--fontSizeAnuncioText);
+        font-size: 17px;
         font-weight: 400;
         background: white;
         color: var(--color01);
-        padding: .6rem 0;
+        padding: 1rem 0;
         border: none;
         border-bottom: 1px solid rgb(222,222,222);
         outline: none;
       }
       & select {
         width: 100%;
-        font-size: var(--fontSizeAnuncioText);
+        font-size: 17px;
         font-weight: 400;
         background: white;
         color: var(--color01);
-        padding: .6rem 0;
+        padding: 1rem 0;
         border: none;
         border-bottom: 1px solid rgb(222,222,222);
         outline: none;
@@ -1547,10 +1548,10 @@ export default {
         justify-content: space-between;
         align-items: center;
         border-bottom: 1px solid rgb(222,222,222);
-        padding: 1.3rem 0;
+        padding: 1.6rem 0;
         & h3 {
           user-select: none;
-          font-size: var(--fontSizeAnuncioText);
+          font-size: 17px;
         }
       }
     }
@@ -1561,10 +1562,10 @@ export default {
         justify-content: space-between;
         align-items: center;
         border-bottom: 1px solid rgb(222,222,222);
-        padding: 1.1rem 0;
+        padding: 1.6rem 0;
         & h3 {
           user-select: none;
-          font-size: var(--fontSizeAnuncioText);
+          font-size: 17px;
         }
       }
       & .new-regras {
@@ -1573,7 +1574,7 @@ export default {
         align-items: center;
         padding: .5rem 0;
         & .__regra-text {
-          font-size: var(--fontSizeAnuncioText);
+          font-size: 17px;
           user-select: none;
         }
         & .__regra-remove {
@@ -1595,11 +1596,11 @@ export default {
           width: 100%;
           cursor: text;
           position: relative;
-          font-size: var(--fontSizeAnuncioText);
+          font-size: 17px;
           font-weight: 400;
           background: white;
           color: var(--color01);
-          padding: .5rem 0 .6rem 0;
+          padding: 1rem 0;
           border: none;
           border-bottom: 1px solid rgb(222,222,222);
           outline: none;
@@ -1608,7 +1609,7 @@ export default {
           background-image: url('./../../../assets/img/add-image.svg');
           background-position: 50%;
           background-repeat: no-repeat;
-          background-size: 20px;
+          background-size: 21px;
           background-color: white;
           font-weight: 500;
           border-bottom: 1px solid rgb(222,222,222);
@@ -1624,7 +1625,7 @@ export default {
       margin: 0 7%;
       font-size: 16px;
       font-weight: 500;
-      transform: translateY(-1.2rem);
+      transform: translateY(-1.1rem);
       color: #1E9297;
     }
     & .recebedor-box {
