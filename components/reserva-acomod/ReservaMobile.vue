@@ -200,7 +200,7 @@
 
           <h3 class="__subtitle">Você somente será cobrado caso {{ acomod.proprietario.split(' ')[0] }} confirme seu pedido de reserva. Para sua segurança, só liberaremos o pagamento para ele no dia seguinte de seu check-in, {{ dayAfterCheckin }}. Não se preocupe, seus dados estarão em total sigilo.</h3>
 
-          <div class="add-payment" @click="addPayment">
+          <div class="add-payment" @click="openPaymentMethod">
             <h3 class="__text">Adicionar pagamento</h3>
             <img src="../../assets/img/arrow-right.svg" alt="" style="width: 1.1rem; height: auto">
           </div>
@@ -227,17 +227,30 @@
           <h1 class="__title">Pagar com</h1>
 
 
-          <div class="add-payment" style="border-bottom: none">
+          <div class="add-payment" style="border-bottom: none" @click="openCreditCard">
             <h3 class="__text">Cartão de Crédito</h3>
             <img src="../../assets/img/arrow-right.svg" alt="" style="width: 1.1rem; height: auto">
           </div>
-          <div class="add-payment">
+          <div class="add-payment" @click="openBoleto">
             <h3 class="__text">Boleto</h3>
             <img src="../../assets/img/arrow-right.svg" alt="" style="width: 1.1rem; height: auto">
           </div>
 
 
         </div><!-- ___________ PAYMENT METHOD  ___________ -->
+
+
+
+
+        <!-- ___________ CREDIT CARD  ___________ -->
+        <div class="etapa-reserva-box" v-if="$store.state.reservaAcomodCreditCard">
+
+          <h1 class="__title">Insira as informações do seu cartão de crédito</h1>
+
+
+
+
+        </div><!-- ___________ CREDIT CARD  ___________ -->
 
 
 
@@ -307,6 +320,16 @@ export default {
         this.$store.commit('m_reservaAcomodPaymentMethod', false)
         this.$store.commit('m_reservaAcomod5', true)
       }
+      if (this.$store.state.reservaAcomodCreditCard === true) {
+        window.history.back(1)
+        this.$store.commit('m_reservaAcomodCreditCard', false)
+        this.$store.commit('m_reservaAcomodPaymentMethod', true)
+      }
+      if (this.$store.state.reservaAcomodBoleto === true) {
+        window.history.back(1)
+        this.$store.commit('m_reservaAcomodBoleto', false)
+        this.$store.commit('m_reservaAcomodPaymentMethod', true)
+      }
     },
     nextBtn1 () {
       if (this.$store.state.reservaAcomod.periodoReserva !== null) {
@@ -333,8 +356,14 @@ export default {
       this.$modal.show('datepicker') 
       window.location.hash = `${this.$store.state.reservaAcomodHash1}-datas`
     },
-    addPayment () {
+    openPaymentMethod () {
       this.$store.commit('m_reservaAcomod5', false), this.$store.commit('m_reservaAcomodPaymentMethod', true), window.location.hash = `${this.$store.state.reservaAcomodHash5}-payment-method`
+    },
+    openCreditCard () {
+      this.$store.commit('m_reservaAcomodPaymentMethod', false), this.$store.commit('m_reservaAcomodCreditCard', true), window.location.hash = `${this.$store.state.reservaAcomodHash5}-credit-card`
+    },
+    openBoleto () {
+      this.$store.commit('m_reservaAcomodPaymentMethod', false), this.$store.commit('m_reservaAcomodBoleto', true), window.location.hash = `${this.$store.state.reservaAcomodHash5}-boleto`
     },
     concluirReserva () {
     }
@@ -440,6 +469,16 @@ export default {
       }
       if (value === `#${this.$store.state.reservaAcomodHash5}-payment-method`) {
         this.$store.commit('m_reservaAcomodPaymentMethod', true)
+        this.$store.commit('m_reservaAcomodCreditCard', false)
+        this.$store.commit('m_reservaAcomodBoleto', false)
+      }
+      if (value === `#${this.$store.state.reservaAcomodHash5}-credit-card`) {
+        this.$store.commit('m_reservaAcomodCreditCard', true)
+        this.$store.commit('m_reservaAcomodPaymentMethod', false)
+      }
+      if (value === `#${this.$store.state.reservaAcomodHash5}-boleto`) {
+        this.$store.commit('m_reservaAcomodBoleto', true)
+        this.$store.commit('m_reservaAcomodPaymentMethod', false)
       }
     }
   }
@@ -463,7 +502,7 @@ export default {
     top: 0;
     left: 0;
     width: 100%;
-    height: 3rem;
+    height: 3.2rem;
     background: white;
     & .back-box {
       display: inline-flex;
@@ -484,7 +523,7 @@ export default {
     margin-top: .5rem;
     height: 100%;
     & .etapa-reserva-box {
-      padding-top: 3rem;
+      padding-top: 2.9rem;
       & .etapas {
         padding: 0 7% 0.2rem;
         font-size: 14px;
@@ -624,7 +663,7 @@ export default {
             cursor: pointer;
             padding: 0 1.3rem;
             font-size: 16px;
-            font-weight: 700;
+            font-weight: 600;
             background:rgb(212, 212, 212);
             color: white;
             height: 3.1rem;
