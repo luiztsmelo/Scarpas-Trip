@@ -245,9 +245,20 @@
         <!-- ___________ CREDIT CARD  ___________ -->
         <div class="etapa-reserva-box" v-if="$store.state.reservaAcomodCreditCard">
 
-          <h1 class="__title">Insira as informações do seu cartão de crédito</h1>
+          <h1 class="__title">Insira as informações do seu cartão</h1>
 
 
+          <!-- CARD NUMBER -->
+          <div class="item-form">
+            <label>Número do Cartão</label>
+            <masked-input
+              type="tel"
+              v-model="$store.state.creditCard.cardNumber"
+              :mask="[/\d/, /\d/, /\d/, /\d/, ' ', /\d/, /\d/, /\d/, /\d/, ' ', /\d/, /\d/, /\d/, /\d/, ' ', /\d/, /\d/, /\d/, /\d/]"
+              :guide="false"
+              placeholder="0000 0000 0000 0000">
+            </masked-input>
+          </div><!-- CARD NUMBER -->
 
 
         </div><!-- ___________ CREDIT CARD  ___________ -->
@@ -610,9 +621,9 @@ export default {
         padding: 0 7%;
         display: flex;
         flex-flow: column;
-        margin: 1.7rem 0;
+        margin-bottom: 1rem;
         & label {
-          font-weight: 700;
+          font-weight: 600;
           font-size: 15px;
         }
         & input {
@@ -621,7 +632,7 @@ export default {
           font-weight: 400;
           background: white;
           color: var(--color01);
-          padding: .6rem 0 .4rem 0;
+          padding: 1rem 0;
           border: none;
           border-bottom: 1px solid rgb(222,222,222);
           outline: none;
