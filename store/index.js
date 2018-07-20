@@ -193,6 +193,7 @@ const store = () => new Vuex.Store({
     reservaAcomodPaymentMethod: false,
     reservaAcomodCreditCard: false,
     reservaAcomodBoleto: false,
+    reservaAcomodBilling: false,
     reservaAcomodHash1: null,
     reservaAcomodHash2: null,
     reservaAcomodHash3: null,
@@ -505,6 +506,9 @@ const store = () => new Vuex.Store({
     },
     m_reservaAcomodBoleto (state, payload) {
       state.reservaAcomodBoleto = payload
+    },
+    m_reservaAcomodBilling (state, payload) {
+      state.reservaAcomodBilling = payload
     },
     m_reservaAcomodDesktop1 (state, payload) {
       state.reservaAcomodDesktop1 = payload

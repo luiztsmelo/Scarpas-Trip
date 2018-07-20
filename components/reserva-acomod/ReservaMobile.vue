@@ -261,37 +261,118 @@
           </div><!-- CARD NUMBER -->
 
 
-          <transition name="opacity">
-            <div style="display:flex;transition:all .3s ease" v-show="$store.state.creditCard.cardNumber.length === 19">
-              
-              <!-- CARD EXPIRATION -->
-              <div class="item-form">
-                <label>Valido até</label>
-                <masked-input
-                  type="tel"
-                  v-model="$store.state.creditCard.cardExpirationDate"
-                  :mask="[/\d/, /\d/, '/', /\d/, /\d/]"
-                  :guide="false"
-                  placeholder="MM / AA">
-                </masked-input>
-              </div><!-- CARD EXPIRATION -->
+          <div style="display:flex">
+            
+            <!-- CARD EXPIRATION -->
+            <div class="item-form">
+              <label>Valido até</label>
+              <masked-input
+                type="tel"
+                v-model="$store.state.creditCard.cardExpirationDate"
+                :mask="[/\d/, /\d/, '/', /\d/, /\d/]"
+                :guide="false"
+                placeholder="MM / AA">
+              </masked-input>
+            </div><!-- CARD EXPIRATION -->
 
-              <!-- CVV -->
-              <div class="item-form">
-                <label>CVV</label>
-                <masked-input
-                  type="tel"
-                  v-model="$store.state.creditCard.cardCVV"
-                  :mask="[/\d/, /\d/, /\d/, /\d/]"
-                  :guide="false"
-                  placeholder="123">
-                </masked-input>
-              </div><!-- CVV -->
+            <!-- CVV -->
+            <div class="item-form">
+              <label>CVV</label>
+              <masked-input
+                type="tel"
+                v-model="$store.state.creditCard.cardCVV"
+                :mask="[/\d/, /\d/, /\d/, /\d/]"
+                :guide="false"
+                placeholder="123">
+              </masked-input>
+            </div><!-- CVV -->
 
+          </div>
+
+
+          <div class="buttons" style="box-shadow: none">
+            <div class="buttons-body">
+              <h3></h3>
+              <button type="button" class="__next-btn" :style="formCreditCardOk" @click="nextBtnCreditCard">Próximo</button>
             </div>
-          </transition>
+          </div>
 
         </div><!-- ___________ CREDIT CARD  ___________ -->
+
+
+
+
+        <!-- ___________ BOLETO  ___________ -->
+        <div class="etapa-reserva-box" v-if="$store.state.reservaAcomodBoleto">
+
+          <h1 class="__title">Insira suas informações pessoais para a emissão do boleto</h1>
+
+
+
+
+          <div class="buttons" style="box-shadow: none">
+            <div class="buttons-body">
+              <h3></h3>
+              <button type="button" class="__next-btn" :style="formBoletoOk" @click="nextBtnBoleto">OK</button>
+            </div>
+          </div>
+
+        </div><!-- ___________ BOLETO  ___________ -->
+
+
+
+
+
+        <!-- ___________ BILLING  ___________ -->
+        <div class="etapa-reserva-box" v-if="$store.state.reservaAcomodBilling">
+
+          <h1 class="__title">Insira as informações pessoais do titular do cartão</h1>
+
+
+          <!-- NOME -->
+          <div class="item-form">
+            <label>Nome</label>
+            <input
+              type="text" pattern="[A-Za-z]"
+              v-model="$store.state.creditCard.cardHolderName">
+          </div><!-- NOME -->
+
+
+          <!-- CELULAR -->
+          <div class="item-form">
+            <label>Celular</label>
+            <masked-input
+              type="tel"
+              v-model="reservaAcomod.guestCelular"
+              :mask="['(', /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]"
+              :guide="false"
+              placeholder="(  )          ">
+            </masked-input>
+          </div><!-- CELULAR -->
+
+
+          <!-- CPF -->
+          <div class="item-form">
+            <label>CPF</label>
+            <masked-input
+              type="tel"
+              v-model="reservaAcomod.guestCPF"
+              :mask="[/\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '-', /\d/, /\d/]"
+              :guide="false"
+              placeholder="000.000.000-00">
+            </masked-input>
+          </div><!-- CPF -->
+
+
+
+          <div class="buttons" style="box-shadow: none">
+            <div class="buttons-body">
+              <h3></h3>
+              <button type="button" class="__next-btn" :style="formBillingOk" @click="nextBtnBilling">OK</button>
+            </div>
+          </div>
+
+        </div><!-- ___________ BILLING  ___________ -->
 
 
 
@@ -373,6 +454,11 @@ export default {
         this.$store.commit('m_reservaAcomodBoleto', false)
         this.$store.commit('m_reservaAcomodPaymentMethod', true)
       }
+      if (this.$store.state.reservaAcomodBilling === true) {
+        window.history.back(1)
+        this.$store.commit('m_reservaAcomodBilling', false)
+        this.$store.commit('m_reservaAcomodCreditCard', true)
+      }
     },
     nextBtn1 () {
       if (this.reservaAcomod.periodoReserva !== null) {
@@ -392,6 +478,21 @@ export default {
     nextBtn4 () {
       if (1<2) {
         this.$store.commit('m_reservaAcomod4', false), this.$store.commit('m_reservaAcomod5', true), window.location.hash = this.$store.state.reservaAcomodHash5, this.scrollTop()
+      }
+    },
+    nextBtnCreditCard () {
+      if (this.$store.state.creditCard.cardNumber.length === 19 && this.$store.state.creditCard.cardExpirationDate.length === 5 && this.$store.state.creditCard.cardCVV.length >= 3) {
+        this.$store.commit('m_reservaAcomodPaymentMethod', false), this.$store.commit('m_reservaAcomodBilling', true), window.location.hash = `${this.$store.state.reservaAcomodHash5}-billing`, this.scrollTop()
+      }
+    },
+    nextBtnBoleto () {
+      if (1<2) {
+        this.$store.commit('m_reservaAcomodBoleto', false), window.location.hash = this.$store.state.reservaAcomodHash5, this.scrollTop()
+      }
+    },
+    nextBtnBilling () {
+      if (1<2) {
+        this.$store.commit('m_reservaAcomodBilling', false), window.location.hash = this.$store.state.reservaAcomodHash5, this.scrollTop()
       }
     },
     openDatePicker () {
@@ -456,6 +557,21 @@ export default {
       if (1>2) {
         return 'background: #FFA04F'
       }
+    },
+    formCreditCardOk () {
+      if (this.$store.state.creditCard.cardNumber.length === 19 && this.$store.state.creditCard.cardExpirationDate.length === 5 && this.$store.state.creditCard.cardCVV.length >= 3) {
+        return 'background: #50CB9D'
+      }
+    },
+    formBoletoOk () {
+      if (1>2) {
+        return 'background: #50CB9D'
+      }
+    },
+    formBillingOk () {
+      if (1>2) {
+        return 'background: #50CB9D'
+      }
     }
   },
   watch: {
@@ -498,6 +614,10 @@ export default {
         this.$store.commit('m_reservaAcomodBoleto', true)
         this.$store.commit('m_reservaAcomodPaymentMethod', false)
       }
+      if (value === `#${this.$store.state.reservaAcomodHash5}-billing`) {
+        this.$store.commit('m_reservaAcomodBilling', true)
+        this.$store.commit('m_reservaAcomodCreditCard', false)
+      }
     }
   }
 }
@@ -514,6 +634,7 @@ export default {
   top: 0;
   left: 0;
   background: white;
+  overflow-y: auto;
   transition: var(--main-transition);
   & .back-bar {
     position: fixed;
@@ -540,8 +661,9 @@ export default {
     flex-flow: column;
     margin-top: .5rem;
     height: 100%;
+    overflow-y: auto;
     & .etapa-reserva-box {
-      padding-top: 2.9rem;
+      padding: 2.9rem 0 5rem;
       & .etapas {
         padding: 0 7% 0.2rem;
         font-size: 14px;
@@ -628,7 +750,7 @@ export default {
         padding: 0 7%;
         display: flex;
         flex-flow: column;
-        margin-bottom: 1.5rem;
+        margin-bottom: 1.7rem;
         & label {
           font-weight: 600;
           font-size: 15px;
@@ -639,7 +761,7 @@ export default {
           font-weight: 400;
           background: white;
           color: var(--color01);
-          padding: 1.2rem 0;
+          padding: 1.1rem 0;
           border: none;
           border-bottom: 1px solid rgb(222,222,222);
           outline: none;
@@ -681,10 +803,11 @@ export default {
             padding: 0 1.3rem;
             font-size: 16px;
             font-weight: 600;
-            background:rgb(212, 212, 212);
+            background:rgb(222, 222, 222);
             color: white;
             height: 3.1rem;
             border-radius: 5px;
+            transition: all .2s ease;
           }
         }
       }
@@ -702,11 +825,5 @@ h3 {
 }
 .reserva-animation-leave-active {
   transform: translateX(100%);
-}
-.opacity-enter {
-  opacity: 0;
-}
-.opacity-leave-active {
-  opacity: 0;
 }
 </style>
