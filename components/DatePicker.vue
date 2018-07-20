@@ -99,7 +99,7 @@ export default {
   bottom: 0;
   left: 0;
   z-index: 999999;
-  height: 4.5rem;
+  height: 4.6rem;
   width:  100%;
   background: white;
   padding: 0 7%;
@@ -117,18 +117,16 @@ export default {
       font-size: 16px;
       font-weight: 600;
       background: transparent;
-      line-height: 2.8rem;
-      height: 2.9rem;
+      height: 3.1rem;
     }
     & .__confirm-btn {
       cursor: pointer;
       padding: 0 1.3rem;
       font-size: 16px;
       font-weight: 700;
-      background: rgb(212, 212, 212);
+      background:rgb(212, 212, 212);
       color: white;
-      line-height: 2.9rem;
-      height: 3rem;
+      height: 3.1rem;
       border-radius: 5px;
     }
   }

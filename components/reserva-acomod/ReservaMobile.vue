@@ -79,7 +79,7 @@
                 <span class="__valor-noites"> por {{ reservaAcomod.noites }} {{ reservaAcomod.noites == 1 ? 'noite' : 'noites'}}</span>
               </h3>
               <h3 v-else></h3>
-              <button type="button" class="__next-btn" @click="nextBtn1">Continuar</button>
+              <button type="button" class="__next-btn" :style="form1ok" @click="nextBtn1">Continuar</button>
             </div>
           </div>
       
@@ -331,6 +331,11 @@ export default {
         return dayjs(checkOut).format('ddd, DD MMM')
       }
     },
+    form1ok () {
+      if (this.$store.state.reservaAcomod.periodoReserva !== null) {
+        return 'background: #50CB9D'
+      }
+    },
     tipoAcomod () {
       const path = this.acomod.tipoAcomod
       return path === 'Casa' ? 'da casa' 
@@ -526,7 +531,7 @@ export default {
         bottom: 0;
         left: 0;
         z-index: 999999;
-        height: 4.5rem;
+        height: 4.6rem;
         width:  100%;
         background: white;
         padding: 0 7%;
@@ -557,10 +562,9 @@ export default {
             padding: 0 1.3rem;
             font-size: 16px;
             font-weight: 700;
-            background:#50CB9D;
+            background:rgb(212, 212, 212);
             color: white;
-            line-height: 2.9rem;
-            height: 3rem;
+            height: 3.1rem;
             border-radius: 5px;
           }
         }
