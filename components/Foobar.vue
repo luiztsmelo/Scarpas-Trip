@@ -77,7 +77,7 @@ export default {
   z-index: 9997;
   bottom: 0;
   left: 0;
-  height: 3.2rem;
+  height: 3.4rem;
   width: 100%;
   background: white;
   transition: var(--main-transition);

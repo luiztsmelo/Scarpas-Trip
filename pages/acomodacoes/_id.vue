@@ -251,7 +251,7 @@
               :select-attribute="attribute"
               :disabled-attribute="disabledAttribute"
               :theme-styles="datePickerDesktopStyle"
-              tint-color="#00D8C7"
+              tint-color="#FFA04F"
               show-caps
               popover-visibility="focus">
               <div
@@ -988,7 +988,7 @@ export default {
           & .__reserva-desktop-btn {
             margin-top: 1.3rem;
             font-size: 17px;
-            font-weight: 600;
+            font-weight: 700;
             background: var(--colorAcomod);
             color: white;
             height: 3.1rem;

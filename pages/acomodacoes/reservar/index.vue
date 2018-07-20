@@ -317,7 +317,7 @@
           </div><!-- Payment -->
           
 
-          <button class="__next-btn" type="button" @click="concluirReserva">Concluir Pedido</button>
+          <button class="__next-btn" type="button" style="background: #FFA04F" @click="concluirReserva">Concluir Pedido</button>
 
 
         </div><!-- ******* ETAPA 3 ******* -->
@@ -956,15 +956,13 @@ export default {
 .__next-btn {
   position: relative;
   margin-top: 1rem;
-  padding: 0 1.5rem;
-  min-height: 3rem;
+  padding: 0 1.3rem;
+  height: 3.2rem;
   font-size: 17px;
-  font-weight: 600;
-  background: var(--colorAcomod);
+  font-weight: 700;
+  background: #50CB9D;
   color: white;
   border-radius: 5px;
-  line-height: 2.9rem;
-  transition: .3s all ease;
 }
 
 .has-error {
