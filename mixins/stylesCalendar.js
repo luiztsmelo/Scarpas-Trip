@@ -82,7 +82,7 @@ export const stylesCalendar = {
           padding: '21px 5px 6px 5px'
         },
         dayCell: {
-          height: '58px',
+          height: '60px',
           padding: '12px 0'
         },
         dayContent: {

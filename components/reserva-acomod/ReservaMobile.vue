@@ -40,7 +40,7 @@
           <date-picker></date-picker>
 
 
-          <div class="valores-reserva" v-if="$store.state.reservaAcomod.periodoReserva !== null">
+          <div class="valores-reserva" v-if="reservaAcomod.periodoReserva !== null">
 
             <div class="item">
               <h3>R${{ acomod.valorNoite.toLocaleString() }} x {{ reservaAcomod.noites }} {{ reservaAcomod.noites == 1 ? 'noite' : 'noites'}}</h3>
@@ -50,20 +50,20 @@
             <div class="item" v-if="acomod.limpezaFee !== 0">
               <div style="display:flex;flex:row;align-items:center">
                 <h3>Taxa de limpeza</h3>
-                <img src="../../assets/img/info.svg" style="width:.95rem;height:auto;margin-left:.3rem;cursor:pointer" @click="limpezaFeeDialog">
+                <img src="../../assets/img/info.svg" style="width:1rem;height:auto;margin-left:.3rem;cursor:pointer" @click="limpezaFeeDialog">
               </div>
               <h3>R${{ acomod.limpezaFee.toLocaleString() }}</h3>
             </div>
 
-            <div class="item" style="padding-bottom: 1.2rem">
+            <div class="item" style="padding-bottom: 1rem">
               <div style="display:flex;flex:row;align-items:center">
                 <h3>Taxa de serviço</h3>
-                <img src="../../assets/img/info.svg" style="width:.95rem;height:auto;margin-left:.3rem;cursor:pointer" @click="serviceFeeDialog">
+                <img src="../../assets/img/info.svg" style="width:1rem;height:auto;margin-left:.3rem;cursor:pointer" @click="serviceFeeDialog">
               </div>
               <h3>R${{ reservaAcomod.serviceFeeTotal.toLocaleString() }}</h3>
             </div>
 
-            <div class="item" style="padding-top: 1.2rem; border-top: 1px solid rgb(232,232,232)">
+            <div class="item" style="padding-top: 1rem; border-top: 1px solid rgb(232,232,232)">
               <h3>Total</h3>
               <h3 style="font-size: 18px; font-weight: 600">R${{ reservaAcomod.valorReservaTotal.toLocaleString() }}</h3>
             </div>
@@ -75,7 +75,10 @@
 
           <div class="buttons">
             <div class="buttons-body">
-              <h3></h3>
+              <h3 class="__valor" v-if="reservaAcomod.periodoReserva !== null">R${{ reservaAcomod.valorReservaTotal.toLocaleString() }}
+                <span class="__valor-noites"> por {{ reservaAcomod.noites }} {{ reservaAcomod.noites == 1 ? 'noite' : 'noites'}}</span>
+              </h3>
+              <h3 v-else></h3>
               <button type="button" class="__next-btn" @click="nextBtn1">Continuar</button>
             </div>
           </div>
@@ -122,7 +125,7 @@
 
           <div class="check-in-out">
 
-            <div>
+            <div style="flex:49%">
               <h3 class="__title">Check-in</h3>
               <h3 class="__text">{{ acomod.checkInTime === 'Horário Flexível' ? 'Horário Flexível' : `Após as ${acomod.checkInTime}` }}</h3>
               <h3 class="__text">{{ chegada }}</h3>
@@ -130,7 +133,7 @@
 
             <div class="__slash"></div>
 
-            <div>
+            <div style="flex:49%">
               <h3 class="__title" style="text-align: right">Check-out</h3>
               <h3 class="__text" style="text-align: right">{{ acomod.checkOutTime === 'Horário Flexível' ? 'Horário Flexível' : `Antes de ${acomod.checkOutTime}` }}</h3>
               <h3 class="__text" style="text-align: right">{{ partida }}</h3>
@@ -171,7 +174,14 @@
 
 
 
-          <button type="button" class="__next-btn" @click="nextBtn4">Continuar</button>
+          <div class="buttons">
+            <div class="buttons-body">
+              <h3 class="__valor">R${{ reservaAcomod.valorReservaTotal.toLocaleString() }}
+                <span class="__valor-noites"> por {{ reservaAcomod.noites }} {{ reservaAcomod.noites == 1 ? 'noite' : 'noites'}}</span>
+              </h3>
+              <button type="button" class="__next-btn" @click="nextBtn4">Continuar</button>
+            </div>
+          </div>
 
         </div><!-- ########## MENSAGEM PG.3 ########## -->
 
@@ -189,8 +199,14 @@
 
         
 
-
-          <button type="button" class="__next-btn" style="background:#FFA04F" @click="concluirReserva">Concluir Pedido</button>
+          <div class="buttons">
+            <div class="buttons-body">
+              <h3 class="__valor">R${{ reservaAcomod.valorReservaTotal.toLocaleString() }}
+                <span class="__valor-noites"> por {{ reservaAcomod.noites }} {{ reservaAcomod.noites == 1 ? 'noite' : 'noites'}}</span>
+              </h3>
+              <button type="button" class="__next-btn" style="background:#FFA04F" @click="concluirReserva">Concluir Pedido</button>
+            </div>
+          </div>
 
         </div><!-- ########## PAGAMENTO PG.3 ########## -->
 
@@ -300,18 +316,18 @@ export default {
       return Array.from({length: this.acomod.totalHospedes}, (v, k) => k+1)
     },
     chegada () {
-      if (this.$store.state.reservaAcomod.periodoReserva === null) {
+      if (this.reservaAcomod.periodoReserva === null) {
         return 'Chegada'
       } else {
-        const checkIn = new Date(this.$store.state.reservaAcomod.periodoReserva.start)
+        const checkIn = new Date(this.reservaAcomod.periodoReserva.start)
         return dayjs(checkIn).format('ddd, DD MMM')
       }
     },
     partida () {
-      if (this.$store.state.reservaAcomod.periodoReserva === null) {
+      if (this.reservaAcomod.periodoReserva === null) {
         return 'Partida'
       } else {
-        const checkOut = new Date(this.$store.state.reservaAcomod.periodoReserva.end)
+        const checkOut = new Date(this.reservaAcomod.periodoReserva.end)
         return dayjs(checkOut).format('ddd, DD MMM')
       }
     },
@@ -446,7 +462,7 @@ export default {
         & .__btn {
           font-size: 18px;
           font-weight: 600;
-          color: #31CAE9;
+          color: #FFA04F;
           user-select: none;
         }
       }
@@ -456,7 +472,7 @@ export default {
           display: flex;
           justify-content: space-between;
           align-items: center;
-          padding: .6rem 0;
+          padding: .5rem 0;
         }
       }
       & .check-in-out {
@@ -479,7 +495,7 @@ export default {
         }
         & .__slash {
           background: rgb(222,222,222);
-          width: 55px;
+          width: 60px;
           height: 1px;
           transform: rotate(130deg);
         }
@@ -523,6 +539,8 @@ export default {
           top: 50%;
           transform: translateY(-50%);
           & .__valor {
+            flex: 40%;
+            padding-right: 10px;
             font-size: 18px;
             font-weight: 600;
             white-space: nowrap;
