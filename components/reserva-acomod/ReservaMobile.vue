@@ -555,8 +555,7 @@ export default {
         }
         & .__btn {
           font-size: 19px;
-          font-weight: 600;
-          color: #FFA04F;
+          font-weight: 500;
           user-select: none;
         }
       }

@@ -26,7 +26,7 @@
         :select-attribute="attribute"
         :disabled-attribute="disabledAttribute"
         :theme-styles="datePickerMobileStyle"
-        tint-color="#FFA04F"
+        tint-color="#50CB9D"
         show-caps>
       </v-date-picker>
     
@@ -123,7 +123,7 @@ export default {
       cursor: pointer;
       padding: 0 1.3rem;
       font-size: 16px;
-      font-weight: 700;
+      font-weight: 600;
       background:rgb(212, 212, 212);
       color: white;
       height: 3.1rem;

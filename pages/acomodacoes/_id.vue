@@ -675,7 +675,7 @@ export default {
     }
     & .__anunciante-name {
       cursor: pointer;
-      color: #16528E;
+      color: var(--colorAcomod);
       user-select: none;
     }
   }/* ####### ANUNCIANTE BOX ####### */
