@@ -86,7 +86,7 @@ export const stylesCalendar = {
           padding: '12px 0'
         },
         dayContent: {
-          fontWeight: '600',
+          fontWeight: '500',
           fontSize: '16px'
         },
         dayCellNotInMonth: {

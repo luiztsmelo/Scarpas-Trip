@@ -91,7 +91,7 @@ export default {
 @import url('~/assets/css/main.css');
 
 .datepicker-body {
-  padding-top: 4.1rem;
+  padding-top: 4.2rem;
 }
 
 .buttons {
@@ -127,8 +127,8 @@ export default {
       font-weight: 600;
       background: rgb(212, 212, 212);
       color: white;
-      line-height: 2.85rem;
-      height: 2.95rem;
+      line-height: 2.9rem;
+      height: 3rem;
       border-radius: 5px;
     }
   }

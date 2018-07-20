@@ -28,11 +28,11 @@
 
           <div class="periodo-reserva" @click="showDatePicker">
 
-            <h3 class="__btn" style="text-align: left">{{ chegada }}</h3>
+            <h3 class="__btn" style="text-align: left; flex:49%">{{ chegada }}</h3>
 
             <div class="__slash"></div>
 
-            <h3 class="__btn" style="text-align: right">{{ partida }}</h3>
+            <h3 class="__btn" style="text-align: right; flex:49%">{{ partida }}</h3>
 
           </div>
 
@@ -317,7 +317,7 @@ export default {
     },
     chegada () {
       if (this.reservaAcomod.periodoReserva === null) {
-        return 'Chegada'
+        return 'Check-in'
       } else {
         const checkIn = new Date(this.reservaAcomod.periodoReserva.start)
         return dayjs(checkIn).format('ddd, DD MMM')
@@ -325,7 +325,7 @@ export default {
     },
     partida () {
       if (this.reservaAcomod.periodoReserva === null) {
-        return 'Partida'
+        return 'Check-out'
       } else {
         const checkOut = new Date(this.reservaAcomod.periodoReserva.end)
         return dayjs(checkOut).format('ddd, DD MMM')
@@ -448,14 +448,14 @@ export default {
       }
       & .periodo-reserva {
         margin: 0 7%;
-        padding: 1.5rem 0;
+        padding: 1.4rem 0;
         display: flex;
         align-items: center;
         justify-content: space-between;
         border-bottom: 1px solid rgb(222,222,222);
         & .__slash {
           background: rgb(222,222,222);
-          width: 50px;
+          width: 55px;
           height: 1px;
           transform: rotate(130deg);
         }
@@ -558,8 +558,8 @@ export default {
             font-weight: 600;
             background:#50CB9D;
             color: white;
-            line-height: 2.85rem;
-            height: 2.95rem;
+            line-height: 2.9rem;
+            height: 3rem;
             border-radius: 5px;
           }
         }
