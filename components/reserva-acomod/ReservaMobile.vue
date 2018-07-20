@@ -28,11 +28,11 @@
 
           <div class="periodo-reserva" @click="showDatePicker">
 
-            <h3 class="__btn" style="text-align: left; flex:49%">{{ chegada }}</h3>
+            <h3 class="__btn" style="text-align: left; flex:49%">{{ checkIn }}</h3>
 
             <div class="__slash"></div>
 
-            <h3 class="__btn" style="text-align: right; flex:49%">{{ partida }}</h3>
+            <h3 class="__btn" style="text-align: right; flex:49%">{{ checkOut }}</h3>
 
           </div>
 
@@ -276,12 +276,14 @@
 <script>
 import MaskedInput from 'vue-text-mask'
 import DatePicker from '@/components/DatePicker'
+import { reservaAcomod } from '@/mixins/reservaAcomod'
 import dayjs from 'dayjs'
 import 'dayjs/locale/pt-br'
 dayjs.locale('pt-br')
 
 export default {
   components: { MaskedInput, DatePicker },
+  mixins: [ reservaAcomod ],
   data() {
     return {
     }
@@ -343,23 +345,23 @@ export default {
       }
     },
     nextBtn1 () {
-      if (this.$store.state.reservaAcomod.periodoReserva !== null) {
-        this.$store.commit('m_reservaAcomod1', false), this.$store.commit('m_reservaAcomod2', true), window.location.hash = this.$store.state.reservaAcomodHash2
+      if (this.reservaAcomod.periodoReserva !== null) {
+        this.$store.commit('m_reservaAcomod1', false), this.$store.commit('m_reservaAcomod2', true), window.location.hash = this.$store.state.reservaAcomodHash2, this.scrollTop()
       }
     },
     nextBtn2 () {
       if (1<2) {
-        this.$store.commit('m_reservaAcomod2', false), this.$store.commit('m_reservaAcomod3', true), window.location.hash = this.$store.state.reservaAcomodHash3
+        this.$store.commit('m_reservaAcomod2', false), this.$store.commit('m_reservaAcomod3', true), window.location.hash = this.$store.state.reservaAcomodHash3, this.scrollTop()
       }
     },
     nextBtn3 () {
       if (1<2) {
-        this.$store.commit('m_reservaAcomod3', false), this.$store.commit('m_reservaAcomod4', true), window.location.hash = this.$store.state.reservaAcomodHash4
+        this.$store.commit('m_reservaAcomod3', false), this.$store.commit('m_reservaAcomod4', true), window.location.hash = this.$store.state.reservaAcomodHash4, this.scrollTop()
       }
     },
     nextBtn4 () {
       if (1<2) {
-        this.$store.commit('m_reservaAcomod4', false), this.$store.commit('m_reservaAcomod5', true), window.location.hash = this.$store.state.reservaAcomodHash5
+        this.$store.commit('m_reservaAcomod4', false), this.$store.commit('m_reservaAcomod5', true), window.location.hash = this.$store.state.reservaAcomodHash5, this.scrollTop()
       }
     },
     showDatePicker () {
@@ -380,19 +382,13 @@ export default {
     }
   },
   computed: {
-    acomod () {
-      return this.$store.state.acomod
-    },
-    reservaAcomod () {
-      return this.$store.state.reservaAcomod
-    },
     hash () {
       return this.$route.hash
     },
     totalHospedesArray () {
       return Array.from({length: this.acomod.totalHospedes}, (v, k) => k+1)
     },
-    chegada () {
+    checkIn () {
       if (this.reservaAcomod.periodoReserva === null) {
         return 'Check-in'
       } else {
@@ -400,7 +396,7 @@ export default {
         return dayjs(checkIn).format('ddd, DD MMM')
       }
     },
-    partida () {
+    checkOut () {
       if (this.reservaAcomod.periodoReserva === null) {
         return 'Check-out'
       } else {
@@ -408,12 +404,8 @@ export default {
         return dayjs(checkOut).format('ddd, DD MMM')
       }
     },
-    dayAfterCheckin () {
-      const checkIn = new Date(this.reservaAcomod.periodoReserva.start)
-      return dayjs(checkIn).add(1, 'day').format('DD/MM')
-    },
     form1ok () {
-      if (this.$store.state.reservaAcomod.periodoReserva !== null) {
+      if (this.reservaAcomod.periodoReserva !== null) {
         return 'background: #50CB9D'
       }
     },
@@ -436,19 +428,6 @@ export default {
       if (1>2) {
         return 'background: #FFA04F'
       }
-    },
-    tipoAcomod () {
-      const path = this.acomod.tipoAcomod
-      return path === 'Casa' ? 'da casa' 
-           : path === 'Apartamento' ? 'do apartamento'
-           : path === 'Rancho' ? 'do rancho'
-           : path === 'Chácara' ? 'da chácara'
-           : path === 'Pousada' ? 'da pousada'
-           : path === 'Camping' ? 'do camping'
-           : path === 'Sítio' ? 'do sítio'
-           : path === 'Fazenda' ? 'da fazenda'
-           : path === 'Hostel' ? 'do hostel'
-           : ''
     }
   },
   watch: {
@@ -628,11 +607,11 @@ export default {
         }
         & input {
           width: 100%;
-          font-size: var(--fontSizeAnuncioText);
+          font-size: 17px;
           font-weight: 400;
           background: white;
           color: var(--color01);
-          padding: 1rem 0;
+          padding: 1.2rem 0;
           border: none;
           border-bottom: 1px solid rgb(222,222,222);
           outline: none;

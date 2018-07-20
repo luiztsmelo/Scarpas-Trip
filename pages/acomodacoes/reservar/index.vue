@@ -1,5 +1,5 @@
 <template>
-  <div class="reservar" v-if="$store.state.reservaAcomod.periodoReserva !== null">
+  <div class="reservar" v-if="reservaAcomod.periodoReserva !== null">
     
 
 
@@ -89,7 +89,7 @@
               <label>Sua mensagem:</label>
               <textarea
                 :class="[ messageError ? 'has-error' : '' ]"
-                v-model="$store.state.reservaAcomod.message"
+                v-model="reservaAcomod.message"
                 maxlength="2000"
                 rows="5"
                 :placeholder="'Olá, ' + acomod.proprietario.split(' ')[0] + '! Não vejo a hora de conhecer Capitólio.'">
@@ -120,7 +120,7 @@
             <!-- PAYMENT METHOD -->
             <div class="item-form">
               <label>Pagar com</label>
-              <select v-model="$store.state.reservaAcomod.paymentMethod">
+              <select v-model="reservaAcomod.paymentMethod">
                 <option selected :value="'credit_card'">Cartão de Crédito</option>
                 <option :value="'boleto'">Boleto</option>
               </select>
@@ -129,16 +129,16 @@
 
             <!-- NAME -->
             <div class="item-form">
-              <label>{{ $store.state.reservaAcomod.paymentMethod === 'credit_card' ? 'Nome impresso no Cartão' : 'Nome Completo'}}</label>
+              <label>{{ reservaAcomod.paymentMethod === 'credit_card' ? 'Nome impresso no Cartão' : 'Nome Completo'}}</label>
               <input
                 :class="[ cardHolderNameError || guestNameError ? 'has-error' : '' ]"
                 type="text" pattern="[A-Za-z]"
-                v-model="$store.state.reservaAcomod.paymentMethod === 'credit_card' ? $store.state.creditCard.cardHolderName : $store.state.reservaAcomod.guestName">
+                v-model="reservaAcomod.paymentMethod === 'credit_card' ? $store.state.creditCard.cardHolderName : reservaAcomod.guestName">
             </div><!-- NAME -->
 
 
             <!-- ************** CREDIT CARD ************** -->
-            <div class="credit-card" v-show="$store.state.reservaAcomod.paymentMethod === 'credit_card'">
+            <div class="credit-card" v-show="reservaAcomod.paymentMethod === 'credit_card'">
 
               <div class="item-form">
                 <label>Dados do Cartão</label>
@@ -205,7 +205,7 @@
                   <masked-input
                     :class="[ cpfError ? 'has-error' : '' ]"
                     type="tel"
-                    v-model="$store.state.reservaAcomod.guestCPF"
+                    v-model="reservaAcomod.guestCPF"
                     :mask="[/\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '-', /\d/, /\d/]"
                     :guide="false"
                     placeholder="___.___.___-__">
@@ -219,7 +219,7 @@
                   <masked-input
                     :class="[ celularError ? 'has-error' : '' ]"
                     type="tel"
-                    v-model="$store.state.reservaAcomod.guestCelular"
+                    v-model="reservaAcomod.guestCelular"
                     :mask="['(', /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]"
                     :guide="false"
                     placeholder="(  )          ">
@@ -233,7 +233,7 @@
 
             
             <!-- ************** BILLING ************** -->
-            <div class="billing" v-show="$store.state.reservaAcomod.paymentMethod === 'credit_card'">
+            <div class="billing" v-show="reservaAcomod.paymentMethod === 'credit_card'">
 
               <div class="flex" style="display:flex; justify-content:space-between">
                 
@@ -243,7 +243,7 @@
                   <masked-input
                     :class="[ zipcodeError ? 'has-error' : '' ]"
                     type="tel"
-                    v-model="$store.state.reservaAcomod.billing.zipcode"
+                    v-model="reservaAcomod.billing.zipcode"
                     :mask="[/\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/]"
                     :guide="false"
                     placeholder="_____-___">
@@ -257,7 +257,7 @@
                   <input
                     :class="[ streetError ? 'has-error' : '' ]"
                     type="text" 
-                    v-model="$store.state.reservaAcomod.billing.street">
+                    v-model="reservaAcomod.billing.street">
                 </div><!-- ENDEREÇO -->
 
               </div>
@@ -271,7 +271,7 @@
                   <masked-input
                     :class="[ streetNumberError ? 'has-error' : '' ]"
                     type="tel"
-                    v-model="$store.state.reservaAcomod.billing.street_number"
+                    v-model="reservaAcomod.billing.street_number"
                     :mask="[/\d/, /\d/, /\d/, /\d/]"
                     :guide="false">
                   </masked-input>
@@ -284,7 +284,7 @@
                   <input
                     :class="[ neighborhoodError ? 'has-error' : '' ]"
                     type="text" 
-                    v-model="$store.state.reservaAcomod.billing.neighborhood">
+                    v-model="reservaAcomod.billing.neighborhood">
                 </div><!-- BAIRRO -->
 
               </div>
@@ -297,14 +297,14 @@
                   <input
                     :class="[ cityError ? 'has-error' : '' ]"
                     type="text" 
-                    v-model="$store.state.reservaAcomod.billing.city">
+                    v-model="reservaAcomod.billing.city">
                 </div><!-- CIDADE -->
 
 
                 <!-- ESTADO -->
                 <div class="item-form">
                   <label>Estado</label>
-                  <select :class="[ stateError ? 'has-error' : '' ]" v-model="$store.state.reservaAcomod.billing.state">
+                  <select :class="[ stateError ? 'has-error' : '' ]" v-model="reservaAcomod.billing.state">
                     <option v-for="state in states" :value="state.value">{{ state.name }}</option>
                   </select>
                 </div><!-- ESTADO -->
@@ -348,17 +348,17 @@
 
             <div class="detalhes-reserva-data_item">
               <img src="../../../assets/img/guests.svg" class="__img">
-              <h3 style="font-size:15px">{{ $store.state.reservaAcomod.totalHospedes == '1' ? $store.state.reservaAcomod.totalHospedes + ' hóspede' : $store.state.reservaAcomod.totalHospedes + ' hóspedes' }}</h3>
+              <h3 style="font-size:15px">{{ reservaAcomod.totalHospedes == '1' ? reservaAcomod.totalHospedes + ' hóspede' : reservaAcomod.totalHospedes + ' hóspedes' }}</h3>
             </div>
 
           </div>
 
 
-          <div class="detalhes-reserva-valor" v-if="$store.state.reservaAcomod.valorReservaTotal !== null">
+          <div class="detalhes-reserva-valor" v-if="reservaAcomod.valorReservaTotal !== null">
 
             <div class="detalhes-reserva-valor_item-total" style="padding-top: .8rem">
               <h3>Total</h3>
-              <h3 class="__valor-total">R${{ $store.state.reservaAcomod.valorReservaTotal.toLocaleString() }}</h3>
+              <h3 class="__valor-total">R${{ reservaAcomod.valorReservaTotal.toLocaleString() }}</h3>
             </div>
 
             <span class="__ver-detalhes" @click="$modal.show('detalhes-valor-modal')">Detalhes do valor</span>
@@ -387,7 +387,7 @@
       </h3>
 
       <h3 class="__subtitle">Código da Reserva</h3>
-      <h3 class="__text">{{ $store.state.reservaAcomod.reservaID }}</h3>
+      <h3 class="__text">{{ reservaAcomod.reservaID }}</h3>
 
       <h3 class="__subtitle">Cancelamento</h3>
       <h3 class="__text">
@@ -416,6 +416,7 @@ require('firebase/firestore')
 import supportsWebP from 'supports-webp'
 import MaskedInput from 'vue-text-mask'
 import detalhesValor from '@/components/reserva-acomod/detalhesValor'
+import { reservaAcomod } from '@/mixins/reservaAcomod'
 import { states } from '@/mixins/statesBrazil'
 import dayjs from 'dayjs'
 import 'dayjs/locale/pt-br'
@@ -423,7 +424,7 @@ dayjs.locale('pt-br')
 
 export default {
   components: { MaskedInput, detalhesValor },
-  mixins: [states],
+  mixins: [ reservaAcomod, states ],
   head () {
     return {
       title: 'Reservar: ' + this.acomod.title
@@ -454,7 +455,7 @@ export default {
       this.$store.state.etapaReserva2ok = true, this.$store.commit('m_reservaAcomodDesktop1', false), this.$store.commit('m_reservaAcomodDesktop2', true)
     },
     nextBtn2 () {
-      if (this.$store.state.reservaAcomod.message.length > 0) {
+      if (this.reservaAcomod.message.length > 0) {
         this.$store.state.etapaReserva3ok = true, this.$store.commit('m_reservaAcomodDesktop2', false), this.$store.commit('m_reservaAcomodDesktop3', true)
       } else {
         this.messageError = true
@@ -587,10 +588,6 @@ export default {
         }
       }
     },
-    scrollTop () {
-      document.body.scrollTop = 0; // For Safari
-      document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
-    },
     backEtapa1 () {
       if (this.$store.state.etapaReserva1ok === true) {
         this.$store.commit('m_reservaAcomodDesktop1', true), this.$store.commit('m_reservaAcomodDesktop2', false), this.$store.commit('m_reservaAcomodDesktop3', false)
@@ -609,22 +606,21 @@ export default {
   },
   computed: {
     /* ******************** PATHS ******************** */
-    acomod () { return this.$store.state.acomod },
     concludedReservaAcomod () { return this.$store.state.concludedReservaAcomod },
-    message () { return this.$store.state.reservaAcomod.message },
+    message () { return this.reservaAcomod.message },
     cardNumber () { return this.$store.state.creditCard.cardNumber },
     cardHolderName () { return this.$store.state.creditCard.cardHolderName },
     cardExpirationDate () { return this.$store.state.creditCard.cardExpirationDate },
     cardCVV () { return this.$store.state.creditCard.cardCVV },
-    guestName () { return this.$store.state.reservaAcomod.guestName },
-    guestCPF () { return this.$store.state.reservaAcomod.guestCPF },
-    guestCelular () { return this.$store.state.reservaAcomod.guestCelular },
-    zipcode () { return this.$store.state.reservaAcomod.billing.zipcode },
-    street () { return this.$store.state.reservaAcomod.billing.street },
-    streetNumber () { return this.$store.state.reservaAcomod.billing.street_number },
-    neighborhood () { return this.$store.state.reservaAcomod.billing.neighborhood },
-    city () { return this.$store.state.reservaAcomod.billing.city },
-    state () { return this.$store.state.reservaAcomod.billing.state },
+    guestName () { return this.reservaAcomod.guestName },
+    guestCPF () { return this.reservaAcomod.guestCPF },
+    guestCelular () { return this.reservaAcomod.guestCelular },
+    zipcode () { return this.reservaAcomod.billing.zipcode },
+    street () { return this.reservaAcomod.billing.street },
+    streetNumber () { return this.reservaAcomod.billing.street_number },
+    neighborhood () { return this.reservaAcomod.billing.neighborhood },
+    city () { return this.reservaAcomod.billing.city },
+    state () { return this.reservaAcomod.billing.state },
 
     /* ******************** PROGRESS ******************** */
     etapaProgressed1 () {
@@ -644,13 +640,9 @@ export default {
 
     /* ******************** DATES ******************** */
     periodoReserva () {
-      const checkIn = new Date(this.$store.state.reservaAcomod.periodoReserva.start)
-      const checkOut = new Date(this.$store.state.reservaAcomod.periodoReserva.end)
+      const checkIn = new Date(this.reservaAcomod.periodoReserva.start)
+      const checkOut = new Date(this.reservaAcomod.periodoReserva.end)
       return dayjs(checkIn).format('ddd, DD MMM YYYY') + ' → ' + dayjs(checkOut).format('ddd, DD MMM YYYY')
-    },
-    dayAfterCheckin () {
-      const checkIn = new Date(this.$store.state.reservaAcomod.periodoReserva.start)
-      return dayjs(checkIn).add(1, 'day').format('DD/MM')
     },
 
     /* ******************** FORMATTINGS ******************** */
@@ -701,7 +693,7 @@ export default {
     zipcode (value) { /* Get zipcode info */
       if (value.length === 9) {
         this.$store.commit('m_loader', true)
-        const billing = this.$store.state.reservaAcomod.billing
+        const billing = this.reservaAcomod.billing
         const zipcode = billing.zipcode.replace(/[^0-9\.]+/g, '')
         this.$axios.$get('https://api.pagar.me/1/zipcodes/' + zipcode)
         .then(data => {
@@ -959,7 +951,7 @@ export default {
   padding: 0 1.3rem;
   height: 3.2rem;
   font-size: 17px;
-  font-weight: 700;
+  font-weight: 600;
   background: #50CB9D;
   color: white;
   border-radius: 5px;
