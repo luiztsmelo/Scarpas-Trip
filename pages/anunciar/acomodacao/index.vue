@@ -1419,7 +1419,7 @@ export default {
   & .progress-bar {
     position: fixed;
     top: 3.4rem;
-    height: 3px;
+    height: 4px;
     z-index: 8888;
     background: var(--colorAcomod);
     transition: all .3s ease;
@@ -1450,9 +1450,9 @@ export default {
       width: 13rem;
       color: white;
       background: var(--colorAcomod);
-      border-radius: 5px;
+      border-radius: 2rem;
       font-size: var(--fontSizeAnuncioText);
-      font-weight: 600;
+      font-weight: 700;
       box-shadow: 3px 3px 20px 1px rgba(0,0,0,0.18);
     }
   }
@@ -1806,13 +1806,13 @@ export default {
         }
         & .__back {
           font-size: 16px;
-          font-weight: 500;
+          font-weight: 600;
           border-radius: 2rem 0 0 2rem;
           background: white;
         }
         & .__next {
           font-size: 16px;
-          font-weight: 500;
+          font-weight: 600;
           border-radius: 0 2rem 2rem 0;
           transition: all .3s ease;
           background: rgb(192,192,192);

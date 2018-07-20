@@ -318,7 +318,7 @@
 
 
         <!-- ___________ BILLING  ___________ -->
-        <div class="etapa-reserva-box" v-if="$store.state.reservaAcomodBilling">
+        <div class="etapa-reserva-box" v-if="$store.state.reservaAcomodBilling" style="padding: 2.9rem 0 0 0">
 
           <h1 class="__title">Insira as informações pessoais do titular do cartão</h1>
 
@@ -652,7 +652,7 @@ export default {
     height: 100%;
     overflow-y: auto;
     & .etapa-reserva-box {
-      padding-top: 2.9rem;
+      padding: 2.9rem 0 5rem 0;
       & .etapas {
         padding: 0 7% 0.2rem;
         font-size: 14px;
@@ -807,12 +807,12 @@ export default {
         justify-content: center;
         float: right;
         font-size: 14px;
-        font-weight: 500;
+        font-weight: 600;
         color: white;
-        width: 2.8rem;
-        height: 2.8rem;
+        width: 3.2rem;
+        height: 3.2rem;
         border-radius: 50%;
-        background:rgb(222, 222, 222);
+        background:#50CB9D;
       }
     }
   }
