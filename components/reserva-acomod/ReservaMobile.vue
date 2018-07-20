@@ -55,7 +55,7 @@
               <h3>R${{ acomod.limpezaFee.toLocaleString() }}</h3>
             </div>
 
-            <div class="item" style="padding-bottom: 1rem">
+            <div class="item" style="padding-bottom: .8rem">
               <div style="display:flex;flex:row;align-items:center">
                 <h3>Taxa de serviço</h3>
                 <img src="../../assets/img/info.svg" style="width:1rem;height:auto;margin-left:.3rem;cursor:pointer" @click="serviceFeeDialog">
@@ -63,7 +63,7 @@
               <h3>R${{ reservaAcomod.serviceFeeTotal.toLocaleString() }}</h3>
             </div>
 
-            <div class="item" style="padding-top: 1rem; border-top: 1px solid rgb(232,232,232)">
+            <div class="item" style="padding-top: .8rem; border-top: 1px solid rgb(232,232,232)">
               <h3>Total</h3>
               <h3 style="font-size: 18px; font-weight: 600">R${{ reservaAcomod.valorReservaTotal.toLocaleString() }}</h3>
             </div>
@@ -170,7 +170,7 @@
 
           <h3 class="etapas">4 de 5 etapas</h3>
 
-          <h1 class="__title">Mensagem</h1>
+          <h1 class="__title">Mensagem para {{ acomod.proprietario.split(' ')[0] }}</h1>
 
 
 
@@ -513,7 +513,7 @@ export default {
           display: flex;
           justify-content: space-between;
           align-items: center;
-          padding: .5rem 0;
+          padding: .4rem 0;
         }
       }
       & .check-in-out {
