@@ -26,7 +26,7 @@
         :select-attribute="attribute"
         :disabled-attribute="disabledAttribute"
         :theme-styles="datePickerMobileStyle"
-        tint-color="#50CB9D"
+        tint-color="#FFA04F"
         show-caps>
       </v-date-picker>
     

@@ -135,7 +135,7 @@
 
             <div style="flex:49%">
               <h3 class="__title" style="text-align: right">Check-out</h3>
-              <h3 class="__text" style="text-align: right">{{ acomod.checkOutTime === 'Horário Flexível' ? 'Horário Flexível' : `Antes de ${acomod.checkOutTime}` }}</h3>
+              <h3 class="__text" style="text-align: right">{{ acomod.checkOutTime === 'Horário Flexível' ? 'Horário Flexível' : `Até as ${acomod.checkOutTime}` }}</h3>
               <h3 class="__text" style="text-align: right">{{ partida }}</h3>
             </div>
 
@@ -683,7 +683,7 @@ export default {
           transform: rotate(130deg);
         }
         & .__btn {
-          font-size: 20px;
+          font-size: 19px;
           font-weight: 500;
           user-select: none;
         }
