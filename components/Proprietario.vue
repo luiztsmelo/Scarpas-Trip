@@ -15,7 +15,7 @@
           <h1 class="__name">{{ name }}</h1>
         </div>
 
-        <div class="info-contato">
+        <!-- <div class="info-contato">
           <h2 class="info-title">Mandar E-mail</h2>
           <h3 class="__email"><a :href="emailHREF" class="__email">{{ email }}</a></h3>
 
@@ -24,7 +24,7 @@
 
           <h2 class="info-title">Chamar no WhatsApp</h2>
           <h3><a :href="whatsAppHREF" class="__celular">{{ celular }}</a></h3>
-        </div>
+        </div> -->
 
       </div>
     </div>
@@ -126,7 +126,7 @@ export default {
     top: 0;
     left: 0;
     width:  100%;
-    height: 3rem;
+    height: 3.2rem;
     background: white;
     & .back-box {
       display: inline-flex;
@@ -150,14 +150,14 @@ export default {
       flex-flow: column;
       align-items: center;
       & .__img {
-        width: 6.8rem;
+        width: 6rem;
         height: auto;
         border-radius: 50%;
-        margin-top: 3.5rem;
+        margin-top: 3.6rem;
         text-align: center;
       }
       & .__name {
-        font-size: 27px;
+        font-size: 30px;
         padding: 1rem 0 1.8rem 0;
       }
     }

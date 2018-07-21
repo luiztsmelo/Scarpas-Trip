@@ -171,6 +171,7 @@ const store = () => new Vuex.Store({
     },
     clickedReservaAcomod: false,
     concludedReservaAcomod: false,
+    concludedNewAcomod: false,
     clickedAskAcomod: false,
     cadastroAcomod0: true,
     cadastroAcomod1: false,

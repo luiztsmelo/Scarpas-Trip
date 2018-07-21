@@ -5,6 +5,7 @@
 
     <v-dialog style="z-index:10000"/>
 
+
     <!-- ####### TOPBAR ####### -->
     <div class="topbar" v-scroll="scrollTopbarBg">
       <div class="topbar-body">
@@ -675,7 +676,8 @@ export default {
     }
     & .__anunciante-name {
       cursor: pointer;
-      color: var(--colorAcomod);
+      color: var(--colorAcomod);/* #00BAAC */
+      font-weight: 500;
       user-select: none;
     }
   }/* ####### ANUNCIANTE BOX ####### */
@@ -1024,8 +1026,6 @@ export default {
             margin-right: .7rem;
           }
           & .__anunciante-name {
-            color: #00BAAC;
-            user-select: none;
           }
         }/* ####### ANUNCIANTE BOX ####### */
 

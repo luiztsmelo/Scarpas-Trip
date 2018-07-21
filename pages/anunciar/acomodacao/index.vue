@@ -731,6 +731,7 @@ export default {
       title: 'Anunciar Acomodação em Capitólio ‒ Escarpas Trip'
     }
   },
+  middleware: 'newAcomodConcludedCheck',
   transition: 'opacity',
   data () {
     return {
@@ -994,8 +995,9 @@ export default {
 
           /* SET ACOMOD FIRESTORE */
           firebase.firestore().collection('acomods').doc(acomodData.acomodID).set(acomodData).then(() => {
+            this.$store.state.concludedNewAcomod = true /* Necessário para o correto funcionamento do backBtn _id */
             this.$router.push('/acomodacoes/' + acomodData.acomodID)
-
+            
             /* UPDATE USER */
             firebase.firestore().collection('users').doc(acomodData.userID).update({
               isAcomodHost: true,
