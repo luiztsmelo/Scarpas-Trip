@@ -123,7 +123,7 @@
 
           <div class="buttons">
             <div class="buttons-body">
-              <h3 class="__valor">R${{ reservaAcomod.valorReservaTotal.toLocaleString() }}
+              <h3 class="__valor" v-if="reservaAcomod.valorReservaTotal !== null">R${{ reservaAcomod.valorReservaTotal.toLocaleString() }}
                 <span class="__valor-noites"> por {{ reservaAcomod.noites }} {{ reservaAcomod.noites == 1 ? 'noite' : 'noites'}}</span>
               </h3>
               <button type="button" class="__next-btn" :style="form2ok" @click="nextBtn2">Continuar</button>
@@ -178,7 +178,7 @@
 
           <div class="buttons">
             <div class="buttons-body">
-              <h3 class="__valor">R${{ reservaAcomod.valorReservaTotal.toLocaleString() }}
+              <h3 class="__valor" v-if="reservaAcomod.valorReservaTotal !== null">R${{ reservaAcomod.valorReservaTotal.toLocaleString() }}
                 <span class="__valor-noites"> por {{ reservaAcomod.noites }} {{ reservaAcomod.noites == 1 ? 'noite' : 'noites'}}</span>
               </h3>
               <button type="button" class="__next-btn" :style="form3ok" @click="nextBtn3">Continuar</button>
@@ -205,7 +205,7 @@
 
           <div class="buttons">
             <div class="buttons-body">
-              <h3 class="__valor">R${{ reservaAcomod.valorReservaTotal.toLocaleString() }}
+              <h3 class="__valor" v-if="reservaAcomod.valorReservaTotal !== null">R${{ reservaAcomod.valorReservaTotal.toLocaleString() }}
                 <span class="__valor-noites"> por {{ reservaAcomod.noites }} {{ reservaAcomod.noites == 1 ? 'noite' : 'noites'}}</span>
               </h3>
               <button type="button" class="__next-btn" :style="form4ok" @click="nextBtn4">Continuar</button>
@@ -238,7 +238,7 @@
 
           <div class="buttons">
             <div class="buttons-body">
-              <h3 class="__valor">R${{ reservaAcomod.valorReservaTotal.toLocaleString() }}
+              <h3 class="__valor" v-if="reservaAcomod.valorReservaTotal !== null">R${{ reservaAcomod.valorReservaTotal.toLocaleString() }}
                 <span class="__valor-noites"> por {{ reservaAcomod.noites }} {{ reservaAcomod.noites == 1 ? 'noite' : 'noites'}}</span>
               </h3>
               <button type="button" class="__next-btn" :style="form5ok" @click="concluirReserva">Concluir Pedido</button>
