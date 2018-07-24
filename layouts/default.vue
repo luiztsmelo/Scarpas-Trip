@@ -52,7 +52,6 @@ import Offline from '~/components/Offline'
 
 export default {
   components: { Navbar, Foobar, SignIn, Menuu, Loader, Share, MapFull, AskAcomod, Offline },
-  
   beforeCreate () {
     /* Detect Device */
     isMobile.any ? this.$store.commit('m_isMobile', true) : this.$store.commit('m_isMobile', false)
@@ -71,7 +70,6 @@ export default {
     /* Get last hash. Mobile back button purposes */
     window.addEventListener('hashchange', event => {
       this.$store.state.lastHash = `#${event.oldURL.toString().split('#')[1]}`
-      console.log(this.$store.state.lastHash)
     })
   }
 }

@@ -95,7 +95,7 @@
           <h3 class="etapas">2 de 5 etapas</h3>
 
           <h1 class="__title">
-            {{ user.email === null ? 'Antes de continuar, precisamos que se cadastre' : `Ótimo ${user.firstName}, só precisamos de mais uma informação` }}
+            {{ user.email === null ? 'Antes de continuar, precisamos que se cadastre' : `Ótimo ${user.firstName}! Só mais uma informação` }}
           </h1>
 
 
@@ -710,25 +710,28 @@ export default {
       & .sign-in-btns {
         padding: 0 7%;
         & .facebook-btn {
-          width: 15.7rem;
+          width: 17rem;
           margin: .7rem 0;
-          height: 3rem;
+          height: 3.25rem;
           text-align: start;
           padding-left: 50px;
+          font-size: 15px;
         }
         & .google-btn {
-          width: 15.7rem;
+          width: 17rem;
           margin: .7rem 0;
-          height: 3rem;
+          height: 3.25rem;
           text-align: start;
           padding-left: 50px;
+          font-size: 15px;
         }
         & .email-btn {
-          width: 15.7rem;
+          width: 17rem;
           margin: .7rem 0;
-          height: 3rem;
+          height: 3.25rem;
           text-align: start;
           padding-left: 50px;
+          font-size: 15px;
         }
       }
       & .check-in-out {
