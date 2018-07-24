@@ -4,6 +4,7 @@ export const stylesCalendar = {
       disabledAttribute: {
         contentStyle: {
           opacity: 0.2,
+          fontWeight: '400',
           textDecoration: 'line-through'
         },
         contentHoverStyle: {
