@@ -95,7 +95,7 @@
           <h3 class="etapas">2 de 5 etapas</h3>
 
           <h1 class="__title">
-            {{ user.email === null ? 'Antes de continuar, precisamos que se cadastre' : `Ótimo ${user.firstName}! Só mais uma informação` }}
+            {{ user.email === null ? 'Antes de continuar, precisamos de seu cadastro' : `Ótimo ${user.firstName}! Só mais uma informação` }}
           </h1>
 
 
@@ -144,6 +144,8 @@
 
           <h1 class="__title">Revise os detalhes da reserva</h1>
 
+          <h3 class="__subtitle">Highlights da casa aqui</h3>
+
 
 
           <div class="check-in-out">
@@ -164,6 +166,8 @@
 
           </div>
 
+
+          <h3 class="__subtitle">Regras aqui</h3>
 
 
           <!-- <div class="__item">
@@ -708,35 +712,37 @@ export default {
         }
       }
       & .sign-in-btns {
+        display: flex;
+        flex-flow: column;
         padding: 0 7%;
         & .facebook-btn {
           width: 17rem;
-          margin: .7rem 0;
-          height: 3.25rem;
+          margin: .6rem 0;
+          height: 3.4rem;
           text-align: start;
           padding-left: 50px;
           font-size: 15px;
         }
         & .google-btn {
           width: 17rem;
-          margin: .7rem 0;
-          height: 3.25rem;
+          margin: .6rem 0;
+          height: 3.4rem;
           text-align: start;
           padding-left: 50px;
           font-size: 15px;
         }
         & .email-btn {
           width: 17rem;
-          margin: .7rem 0;
-          height: 3.25rem;
+          margin: .6rem 0;
+          height: 3.4rem;
           text-align: start;
           padding-left: 50px;
           font-size: 15px;
         }
       }
       & .check-in-out {
-        margin: 0 7%;
-        padding: 1.5rem 0;
+        margin: .2rem 7% 1.2rem;
+        padding: 1.2rem 0 1.35rem;
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -746,7 +752,7 @@ export default {
           font-size: 17px;
           font-weight: 600;
           padding: 0;
-          line-height: 28px
+          line-height: 32px
         }
         & .__text {
           font-size: 16px;
@@ -754,7 +760,7 @@ export default {
         }
         & .__slash {
           background: rgb(222,222,222);
-          width: 60px;
+          width: 65px;
           height: 1px;
           transform: rotate(130deg);
         }
