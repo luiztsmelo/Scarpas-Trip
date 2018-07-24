@@ -343,7 +343,7 @@ exports.email_newUser = functions.firestore
           'Email': user.email,
           'Name': user.fullName
         }],
-        'TemplateID': 448198,
+        'TemplateID': 492003,
         'TemplateLanguage': true,
         'Subject': 'Bem-vindo à Escarpas Trip!',
         'Variables': {

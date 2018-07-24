@@ -546,17 +546,18 @@
     <!-- ########## IDENTIFICAÇÃO PG.11 ########## -->
     <form class="cadastro-acomodacao" v-if="$store.state.cadastroAcomod11">
 
-      <h1 class="__form-title">Sua identificação</h1>   
+      <h1 class="__form-title">
+        {{ user.email === null ? 'Antes de continuar, precisamos de seu cadastro' : `Ótimo ${user.firstName}, só mais uma informação` }}
+      </h1> 
 
-      <div class="signin-btns" v-if="$store.state.user.email === null">
+      <div class="signin-btns" v-if="user.email === null">
         <button type="button" class="facebook-btn" @click="facebookSignIn()">Continuar com Facebook</button>
         <button type="button" class="google-btn" @click="googleSignIn()">Continuar com Google</button>
         <button type="button" class="email-btn" @click="emailSignIn()">Continuar com E-mail</button>
       </div>
 
-      <h3 class="__form-text" v-if="$store.state.user.email !== null">Ótimo {{ $store.state.user.firstName }}! Só mais algumas informações:</h3>
 
-      <div v-if="$store.state.user.email !== null">
+      <div v-else>
 
         <div class="item-form">
           <label>Celular / WhatsApp</label>
@@ -570,7 +571,7 @@
         </div>
 
         <div class="item-form">
-          <label>Celular / WhatsApp 2 (Opcional)</label>
+          <label>Celular / WhatsApp 2 <span style="font-weight:400">(Opcional)</span></label>
           <masked-input
             type="tel"
             v-model="$store.state.acomodData.celular2"
@@ -877,27 +878,27 @@ export default {
     /* ******************** NEXT BUTTONS ******************** */
     nextBtn1 () {
       if (this.$store.state.acomodData.tipoAcomod !== null) {
-        this.$store.commit('m_cadastroAcomod1', false), this.$store.commit('m_cadastroAcomod2', true), this.$store.commit('m_acomodProgressBar', (100/12)*2), this.scrollTop(), window.location.hash = "capacidade"
+        this.$store.commit('m_cadastroAcomod1', false), this.$store.commit('m_cadastroAcomod2', true), this.$store.commit('m_acomodProgressBar', (100/12)*2), this.scrollTop(), window.location.hash = `${this.randomHashs[2]}`
       }
     },
     nextBtn2 () {
       if (this.$store.state.acomodData.totalHospedes !== null) {
-        this.$store.commit('m_cadastroAcomod2', false), this.$store.commit('m_cadastroAcomod3', true), this.$store.commit('m_acomodProgressBar', (100/12)*3), this.scrollTop(), window.location.hash = "caracteristicas"
+        this.$store.commit('m_cadastroAcomod2', false), this.$store.commit('m_cadastroAcomod3', true), this.$store.commit('m_acomodProgressBar', (100/12)*3), this.scrollTop(), window.location.hash = `${this.randomHashs[3]}`
       }
     },
     nextBtn3 () {
       if (1<2) {
-        this.$store.commit('m_cadastroAcomod3', false), this.$store.commit('m_cadastroAcomod4', true), this.$store.commit('m_acomodProgressBar', (100/12)*4), this.scrollTop(), window.location.hash = "comodidades"
+        this.$store.commit('m_cadastroAcomod3', false), this.$store.commit('m_cadastroAcomod4', true), this.$store.commit('m_acomodProgressBar', (100/12)*4), this.scrollTop(), window.location.hash = `${this.randomHashs[4]}`
       }
     },
     nextBtn4 () {
       if (1<2) {
-        this.$store.commit('m_cadastroAcomod4', false), this.$store.commit('m_cadastroAcomod5', true), this.$store.commit('m_acomodProgressBar', (100/12)*5), this.scrollTop(), window.location.hash = "local"
+        this.$store.commit('m_cadastroAcomod4', false), this.$store.commit('m_cadastroAcomod5', true), this.$store.commit('m_acomodProgressBar', (100/12)*5), this.scrollTop(), window.location.hash = `${this.randomHashs[5]}`
       }
     },
     nextBtn5 () {
       if (this.$store.state.acomodPlace !== null || this.$store.state.acomodData.positionLAT !== -20.6141320) {
-        this.$store.commit('m_cadastroAcomod5', false), this.$store.commit('m_cadastroAcomod6', true), this.$store.commit('m_acomodProgressBar', (100/12)*6), this.scrollTop(), window.location.hash = "imagens"
+        this.$store.commit('m_cadastroAcomod5', false), this.$store.commit('m_cadastroAcomod6', true), this.$store.commit('m_acomodProgressBar', (100/12)*6), this.scrollTop(), window.location.hash = `${this.randomHashs[6]}`
       } else {
         this.$modal.show('dialog', {
           title: 'Ops',
@@ -908,7 +909,7 @@ export default {
     },
     nextBtn6 () {
       if (this.$store.state.acomodData.images.length >= 1) {
-        this.$store.commit('m_cadastroAcomod6', false), this.$store.commit('m_cadastroAcomod7', true), this.$store.commit('m_acomodProgressBar', (100/12)*7), this.scrollTop(), window.location.hash = "valor"
+        this.$store.commit('m_cadastroAcomod6', false), this.$store.commit('m_cadastroAcomod7', true), this.$store.commit('m_acomodProgressBar', (100/12)*7), this.scrollTop(), window.location.hash = `${this.randomHashs[7]}`
       } else {
         this.$modal.show('dialog', {
           title: 'Ops',
@@ -919,7 +920,7 @@ export default {
     },
     nextBtn7 () {
       if (this.$store.state.acomodData.valorNoite !== 0) {
-        this.$store.commit('m_cadastroAcomod7', false), this.$store.commit('m_cadastroAcomod8', true), this.$store.commit('m_acomodProgressBar', (100/12)*8), this.scrollTop(), window.location.hash = "regras"
+        this.$store.commit('m_cadastroAcomod7', false), this.$store.commit('m_cadastroAcomod8', true), this.$store.commit('m_acomodProgressBar', (100/12)*8), this.scrollTop(), window.location.hash = `${this.randomHashs[8]}`
       } else {
         this.$modal.show('dialog', {
           title: 'Ops',
@@ -930,7 +931,7 @@ export default {
     },
     nextBtn8 () {
       if (1<2) {
-        this.$store.commit('m_cadastroAcomod8', false), this.$store.commit('m_cadastroAcomod9', true), this.$store.commit('m_acomodProgressBar', (100/12)*9), this.scrollTop(), window.location.hash = "titulo"
+        this.$store.commit('m_cadastroAcomod8', false), this.$store.commit('m_cadastroAcomod9', true), this.$store.commit('m_acomodProgressBar', (100/12)*9), this.scrollTop(), window.location.hash = `${this.randomHashs[9]}`
       } else {
         this.$modal.show('dialog', {
           title: 'Ops',
@@ -941,7 +942,7 @@ export default {
     },
     nextBtn9 () {
       if (this.$store.state.acomodData.title !== '') {
-        this.$store.commit('m_cadastroAcomod9', false), this.$store.commit('m_cadastroAcomod10', true), this.$store.commit('m_acomodProgressBar', (100/12)*10), this.scrollTop(), window.location.hash = "subtitulo"
+        this.$store.commit('m_cadastroAcomod9', false), this.$store.commit('m_cadastroAcomod10', true), this.$store.commit('m_acomodProgressBar', (100/12)*10), this.scrollTop(), window.location.hash = `${this.randomHashs[10]}`
       } else {
         this.$modal.show('dialog', {
           title: 'Ops',
@@ -952,7 +953,7 @@ export default {
     },
     nextBtn10 () {
       if (this.$store.state.acomodData.subtitle !== '') {
-        this.$store.commit('m_cadastroAcomod10', false), this.$store.commit('m_cadastroAcomod11', true), this.$store.commit('m_acomodProgressBar', (100/12)*11), this.scrollTop(), window.location.hash = "identificacao"
+        this.$store.commit('m_cadastroAcomod10', false), this.$store.commit('m_cadastroAcomod11', true), this.$store.commit('m_acomodProgressBar', (100/12)*11), this.scrollTop(), window.location.hash = `${this.randomHashs[11]}`
       } else {
         this.$modal.show('dialog', {
           title: 'Ops',
@@ -969,7 +970,7 @@ export default {
         })
       }
       if (this.$store.state.acomodData.celular.length === 15) {
-        this.$store.commit('m_cadastroAcomod11', false), this.$store.commit('m_cadastroAcomod12', true), this.$store.commit('m_acomodProgressBar', (100/12)*12), this.scrollTop(), window.location.hash = "dados"
+        this.$store.commit('m_cadastroAcomod11', false), this.$store.commit('m_cadastroAcomod12', true), this.$store.commit('m_acomodProgressBar', (100/12)*12), this.scrollTop(), window.location.hash = `${this.randomHashs[12]}`
       } else {
         this.$modal.show('dialog', {
           title: 'Ops',
@@ -979,7 +980,8 @@ export default {
       }
     },
     hashAcomod () {
-      window.location.hash = "tipo"
+      this.$store.dispatch('a_generateRandomHashs')
+      window.location.hash = this.randomHashs[1]
     },
     concluir () {
       const acomodData = this.$store.state.acomodData
@@ -1047,9 +1049,9 @@ export default {
     })
   },
   computed: {
-    hash () {
-      return this.$route.hash
-    },
+    user () { return this.$store.state.user },
+    hash () { return this.$route.hash },
+    randomHashs () { return this.$store.state.randomHashs },
     /* ******************** BANK ACCOUNT ******************** */
     bankCode () { return this.$store.state.bankAccount.bankCode },
     type () { return this.$store.state.bankAccount.type },
@@ -1192,195 +1194,53 @@ export default {
       if (value === '') {
         this.$store.commit('m_cadastroAcomod0', true)
         this.$store.commit('m_cadastroAcomod1', false)
-        this.$store.commit('m_cadastroAcomod2', false)
-        this.$store.commit('m_cadastroAcomod3', false)
-        this.$store.commit('m_cadastroAcomod4', false)
-        this.$store.commit('m_cadastroAcomod5', false)
-        this.$store.commit('m_cadastroAcomod6', false)
-        this.$store.commit('m_cadastroAcomod7', false)
-        this.$store.commit('m_cadastroAcomod8', false)
-        this.$store.commit('m_cadastroAcomod9', false)
-        this.$store.commit('m_cadastroAcomod10', false)
-        this.$store.commit('m_cadastroAcomod11', false)
-        this.$store.commit('m_cadastroAcomod12', false)
       } 
-      if (value === '#tipo') {
-        this.$store.commit('m_cadastroAcomod0', false)
+      if (value === `#${this.randomHashs[1]}`) {
         this.$store.commit('m_cadastroAcomod1', true)
         this.$store.commit('m_cadastroAcomod2', false)
-        this.$store.commit('m_cadastroAcomod3', false)
-        this.$store.commit('m_cadastroAcomod4', false)
-        this.$store.commit('m_cadastroAcomod5', false)
-        this.$store.commit('m_cadastroAcomod6', false)
-        this.$store.commit('m_cadastroAcomod7', false)
-        this.$store.commit('m_cadastroAcomod8', false)
-        this.$store.commit('m_cadastroAcomod9', false)
-        this.$store.commit('m_cadastroAcomod10', false)
-        this.$store.commit('m_cadastroAcomod11', false)
-        this.$store.commit('m_cadastroAcomod12', false)
       } 
-      if (value === '#capacidade') {
-        this.$store.commit('m_cadastroAcomod0', false)
-        this.$store.commit('m_cadastroAcomod1', false)
+      if (value === `#${this.randomHashs[2]}`) {
         this.$store.commit('m_cadastroAcomod2', true)
         this.$store.commit('m_cadastroAcomod3', false)
-        this.$store.commit('m_cadastroAcomod4', false)
-        this.$store.commit('m_cadastroAcomod5', false)
-        this.$store.commit('m_cadastroAcomod6', false)
-        this.$store.commit('m_cadastroAcomod7', false)
-        this.$store.commit('m_cadastroAcomod8', false)
-        this.$store.commit('m_cadastroAcomod9', false)
-        this.$store.commit('m_cadastroAcomod10', false)
-        this.$store.commit('m_cadastroAcomod11', false)
-        this.$store.commit('m_cadastroAcomod12', false)
+
       } 
-      if (value === '#caracteristicas') {
-        this.$store.commit('m_cadastroAcomod0', false)
-        this.$store.commit('m_cadastroAcomod1', false)
-        this.$store.commit('m_cadastroAcomod2', false)
+      if (value === `#${this.randomHashs[3]}`) {
         this.$store.commit('m_cadastroAcomod3', true)
         this.$store.commit('m_cadastroAcomod4', false)
-        this.$store.commit('m_cadastroAcomod5', false)
-        this.$store.commit('m_cadastroAcomod6', false)
-        this.$store.commit('m_cadastroAcomod7', false)
-        this.$store.commit('m_cadastroAcomod8', false)
-        this.$store.commit('m_cadastroAcomod9', false)
-        this.$store.commit('m_cadastroAcomod10', false)
-        this.$store.commit('m_cadastroAcomod11', false)
-        this.$store.commit('m_cadastroAcomod12', false)
       } 
-      if (value === '#comodidades') {
-        this.$store.commit('m_cadastroAcomod0', false)
-        this.$store.commit('m_cadastroAcomod1', false)
-        this.$store.commit('m_cadastroAcomod2', false)
-        this.$store.commit('m_cadastroAcomod3', false)
+      if (value === `#${this.randomHashs[4]}`) {
         this.$store.commit('m_cadastroAcomod4', true)
         this.$store.commit('m_cadastroAcomod5', false)
-        this.$store.commit('m_cadastroAcomod6', false)
-        this.$store.commit('m_cadastroAcomod7', false)
-        this.$store.commit('m_cadastroAcomod8', false)
-        this.$store.commit('m_cadastroAcomod9', false)
-        this.$store.commit('m_cadastroAcomod10', false)
-        this.$store.commit('m_cadastroAcomod11', false)
-        this.$store.commit('m_cadastroAcomod12', false)
       } 
-      if (value === '#local') {
-        this.$store.commit('m_cadastroAcomod0', false)
-        this.$store.commit('m_cadastroAcomod1', false)
-        this.$store.commit('m_cadastroAcomod2', false)
-        this.$store.commit('m_cadastroAcomod3', false)
-        this.$store.commit('m_cadastroAcomod4', false)
+      if (value === `#${this.randomHashs[5]}`) {
         this.$store.commit('m_cadastroAcomod5', true)
         this.$store.commit('m_cadastroAcomod6', false)
-        this.$store.commit('m_cadastroAcomod7', false)
-        this.$store.commit('m_cadastroAcomod8', false)
-        this.$store.commit('m_cadastroAcomod9', false)
-        this.$store.commit('m_cadastroAcomod10', false)
-        this.$store.commit('m_cadastroAcomod11', false)
-        this.$store.commit('m_cadastroAcomod12', false)
       } 
-      if (value === '#imagens') {
-        this.$store.commit('m_cadastroAcomod0', false)
-        this.$store.commit('m_cadastroAcomod1', false)
-        this.$store.commit('m_cadastroAcomod2', false)
-        this.$store.commit('m_cadastroAcomod3', false)
-        this.$store.commit('m_cadastroAcomod4', false)
-        this.$store.commit('m_cadastroAcomod5', false)
+      if (value === `#${this.randomHashs[6]}`) {
         this.$store.commit('m_cadastroAcomod6', true)
         this.$store.commit('m_cadastroAcomod7', false)
-        this.$store.commit('m_cadastroAcomod8', false)
-        this.$store.commit('m_cadastroAcomod9', false)
-        this.$store.commit('m_cadastroAcomod10', false)
-        this.$store.commit('m_cadastroAcomod11', false)
-        this.$store.commit('m_cadastroAcomod12', false)
       } 
-      if (value === '#valor') {
-        this.$store.commit('m_cadastroAcomod0', false)
-        this.$store.commit('m_cadastroAcomod1', false)
-        this.$store.commit('m_cadastroAcomod2', false)
-        this.$store.commit('m_cadastroAcomod3', false)
-        this.$store.commit('m_cadastroAcomod4', false)
-        this.$store.commit('m_cadastroAcomod5', false)
-        this.$store.commit('m_cadastroAcomod6', false)
+      if (value === `#${this.randomHashs[7]}`) {
         this.$store.commit('m_cadastroAcomod7', true)
         this.$store.commit('m_cadastroAcomod8', false)
-        this.$store.commit('m_cadastroAcomod9', false)
-        this.$store.commit('m_cadastroAcomod10', false)
-        this.$store.commit('m_cadastroAcomod11', false)
-        this.$store.commit('m_cadastroAcomod12', false)
       } 
-      if (value === '#regras') {
-        this.$store.commit('m_cadastroAcomod0', false)
-        this.$store.commit('m_cadastroAcomod1', false)
-        this.$store.commit('m_cadastroAcomod2', false)
-        this.$store.commit('m_cadastroAcomod3', false)
-        this.$store.commit('m_cadastroAcomod4', false)
-        this.$store.commit('m_cadastroAcomod5', false)
-        this.$store.commit('m_cadastroAcomod6', false)
-        this.$store.commit('m_cadastroAcomod7', false)
+      if (value === `#${this.randomHashs[8]}`) {
         this.$store.commit('m_cadastroAcomod8', true)
         this.$store.commit('m_cadastroAcomod9', false)
-        this.$store.commit('m_cadastroAcomod10', false)
-        this.$store.commit('m_cadastroAcomod11', false)
-        this.$store.commit('m_cadastroAcomod12', false)
       } 
-      if (value === '#titulo') {
-        this.$store.commit('m_cadastroAcomod0', false)
-        this.$store.commit('m_cadastroAcomod1', false)
-        this.$store.commit('m_cadastroAcomod2', false)
-        this.$store.commit('m_cadastroAcomod3', false)
-        this.$store.commit('m_cadastroAcomod4', false)
-        this.$store.commit('m_cadastroAcomod5', false)
-        this.$store.commit('m_cadastroAcomod6', false)
-        this.$store.commit('m_cadastroAcomod7', false)
-        this.$store.commit('m_cadastroAcomod8', false)
+      if (value === `#${this.randomHashs[9]}`) {
         this.$store.commit('m_cadastroAcomod9', true)
         this.$store.commit('m_cadastroAcomod10', false)
-        this.$store.commit('m_cadastroAcomod11', false)
-        this.$store.commit('m_cadastroAcomod12', false)
       } 
-      if (value === '#subtitulo') {
-        this.$store.commit('m_cadastroAcomod0', false)
-        this.$store.commit('m_cadastroAcomod1', false)
-        this.$store.commit('m_cadastroAcomod2', false)
-        this.$store.commit('m_cadastroAcomod3', false)
-        this.$store.commit('m_cadastroAcomod4', false)
-        this.$store.commit('m_cadastroAcomod5', false)
-        this.$store.commit('m_cadastroAcomod6', false)
-        this.$store.commit('m_cadastroAcomod7', false)
-        this.$store.commit('m_cadastroAcomod8', false)
-        this.$store.commit('m_cadastroAcomod9', false)
+      if (value === `#${this.randomHashs[10]}`) {
         this.$store.commit('m_cadastroAcomod10', true)
         this.$store.commit('m_cadastroAcomod11', false)
-        this.$store.commit('m_cadastroAcomod12', false)
       } 
-      if (value === '#identificacao') {
-        this.$store.commit('m_cadastroAcomod0', false)
-        this.$store.commit('m_cadastroAcomod1', false)
-        this.$store.commit('m_cadastroAcomod2', false)
-        this.$store.commit('m_cadastroAcomod3', false)
-        this.$store.commit('m_cadastroAcomod4', false)
-        this.$store.commit('m_cadastroAcomod5', false)
-        this.$store.commit('m_cadastroAcomod6', false)
-        this.$store.commit('m_cadastroAcomod7', false)
-        this.$store.commit('m_cadastroAcomod8', false)
-        this.$store.commit('m_cadastroAcomod9', false)
-        this.$store.commit('m_cadastroAcomod10', false)
+      if (value === `#${this.randomHashs[11]}`) {
         this.$store.commit('m_cadastroAcomod11', true)
         this.$store.commit('m_cadastroAcomod12', false)
       } 
-      if (value === '#dados') {
-        this.$store.commit('m_cadastroAcomod0', false)
-        this.$store.commit('m_cadastroAcomod1', false)
-        this.$store.commit('m_cadastroAcomod2', false)
-        this.$store.commit('m_cadastroAcomod3', false)
-        this.$store.commit('m_cadastroAcomod4', false)
-        this.$store.commit('m_cadastroAcomod5', false)
-        this.$store.commit('m_cadastroAcomod6', false)
-        this.$store.commit('m_cadastroAcomod7', false)
-        this.$store.commit('m_cadastroAcomod8', false)
-        this.$store.commit('m_cadastroAcomod9', false)
-        this.$store.commit('m_cadastroAcomod10', false)
+      if (value === `#${this.randomHashs[12]}`) {
         this.$store.commit('m_cadastroAcomod11', false)
         this.$store.commit('m_cadastroAcomod12', true)
       } 
@@ -1765,24 +1625,24 @@ export default {
       padding: 0 7%;
       & .facebook-btn {
         width: 17rem;
-        margin: .7rem 0;
-        height: 2.9rem;
+        margin: .6rem 0;
+        height: 3.4rem;
         text-align: start;
         padding-left: 50px;
         font-size: 15px;
       }
       & .google-btn {
         width: 17rem;
-        margin: .7rem 0;
-        height: 2.9rem;
+        margin: .6rem 0;
+        height: 3.4rem;
         text-align: start;
         padding-left: 50px;
         font-size: 15px;
       }
       & .email-btn {
         width: 17rem;
-        margin: .7rem 0;
-        height: 2.9rem;
+        margin: .6rem 0;
+        height: 3.4rem;
         text-align: start;
         padding-left: 50px;
         font-size: 15px;
@@ -1818,7 +1678,7 @@ export default {
           font-weight: 600;
           border-radius: 0 2rem 2rem 0;
           transition: all .3s ease;
-          background: rgb(192,192,192);
+          background: rgb(212,212,212);
           color: white;
         }
       }

@@ -47,7 +47,7 @@
         
 
           <div class="etapa-1-item" v-show="!acomod.allowFestas || !acomod.allowPets || !acomod.allowBabys || !acomod.allowFumar">
-            <h3 class="__subtitle">Nesta casa não é adequado:</h3>
+            <h3 class="__subtitle">Nesta casa não é permitido:</h3>
             <h3>{{ !acomod.allowFestas ? 'Festas' : '' }}</h3>
             <h3>{{ !acomod.allowPets ? 'Animais de estimação' : '' }}</h3>
             <h3>{{ !acomod.allowBabys ? 'Bebês de até 2 anos' : '' }}</h3>

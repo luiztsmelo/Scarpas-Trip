@@ -468,12 +468,8 @@ export default {
       window.history.back(1)
     },
     hashReserva () {
-      this.$store.state.reservaAcomodHash1 = Math.floor((Math.random() * 9999999) + 1).toString()
-      this.$store.state.reservaAcomodHash2 = Math.floor((Math.random() * 9999999) + 1).toString()
-      this.$store.state.reservaAcomodHash3 = Math.floor((Math.random() * 9999999) + 1).toString()
-      this.$store.state.reservaAcomodHash4 = Math.floor((Math.random() * 9999999) + 1).toString()
-      this.$store.state.reservaAcomodHash5 = Math.floor((Math.random() * 9999999) + 1).toString()
-      window.location.hash = this.$store.state.reservaAcomodHash1
+      this.$store.dispatch('a_generateRandomHashs')
+      window.location.hash = this.$store.state.randomHashs[1]
     },
     hashProprietario () {
       window.location.hash = "contato"
@@ -610,12 +606,6 @@ export default {
     })
   },
   beforeRouteLeave (to, from, next) {
-    this.$store.state.reservaAcomodHash1 = null
-    this.$store.state.reservaAcomodHash2 = null
-    this.$store.state.reservaAcomodHash3 = null
-    this.$store.state.reservaAcomodHash4 = null
-    this.$store.state.reservaAcomodHash5 = null
-
     if (this.$store.state.isReservar === false) {
       this.$store.dispatch('a_resetReservaAcomod')
     }

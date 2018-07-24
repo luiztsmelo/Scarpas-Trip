@@ -47,6 +47,7 @@ const store = () => new Vuex.Store({
       cardExpirationDate: '',
       cardCVV: ''
     },
+    randomHashs: null,
     /*
     -------------------- ERRORS --------------------
     */
@@ -196,11 +197,6 @@ const store = () => new Vuex.Store({
     reservaAcomodCreditCard: false,
     reservaAcomodBoleto: false,
     reservaAcomodBilling: false,
-    reservaAcomodHash1: null,
-    reservaAcomodHash2: null,
-    reservaAcomodHash3: null,
-    reservaAcomodHash4: null,
-    reservaAcomodHash5: null,
     reservaAcomodDesktop1: true,
     reservaAcomodDesktop2: false,
     reservaAcomodDesktop3: false,
@@ -735,8 +731,17 @@ const store = () => new Vuex.Store({
   /* ________________________________________________ ACTIONS ________________________________________________ */
   actions: {
     /*
-    ########## Error ##########
+    #################### GERAL ####################
     */
+    a_generateRandomHashs ({ state }) {
+      let randomHashs = []
+      while (randomHashs.length < 15) {
+        let randomNumber = Math.floor(Math.random() * (999999 - 100000 + 1) + 100000).toString()
+        if (randomHashs.indexOf(randomNumber) > -1) continue
+        randomHashs[randomHashs.length] = randomNumber
+      }
+      state.randomHashs = randomHashs
+    },
     a_resetError ({ state }) {
       state.error = false
       state.reservaPageError = false
@@ -744,7 +749,7 @@ const store = () => new Vuex.Store({
       state.acomodRef = null
     },
     /*
-    ########## Acomodações ##########
+    #################### ACOMODS ####################
     */
     a_resetAcomodData ({ state, commit }) {
       /* Resetar valores */
@@ -848,7 +853,7 @@ const store = () => new Vuex.Store({
       state.etapaReserva3ok = false
     },
     /*
-    ########## Eventos ##########
+    #################### EVENTOS ####################
     */
     a_uploadEvento ({ state, commit }) {
       firebase.firestore().collection('eventos').doc(state.eventoID).set(state.eventoData).then(() => {
@@ -877,7 +882,7 @@ const store = () => new Vuex.Store({
       })
     },
     /*
-    ########## Passeios ##########
+    #################### PASSEIOS ####################
     */
     a_uploadPasseio ({ state, commit }) {
       firebase.firestore().collection('passeios').doc(state.passeioID).set(state.passeioData).then(() => {
@@ -911,7 +916,7 @@ const store = () => new Vuex.Store({
       })
     },
     /*
-    ########## Atracões ##########
+    #################### ATRAÇÕES ####################
     */
     a_uploadAtracao ({ state, commit }) {
       firebase.firestore().collection('atracoes').doc(state.atracaoID).set(state.atracaoData).then(() => {
@@ -939,24 +944,18 @@ const store = () => new Vuex.Store({
       })
     },
     /*
-    ########## GOOGLE SIGN IN ##########
+    #################### SIGN IN ####################
     */
     a_googleSignIn ({ dispatch }) {
       const provider = new firebase.auth.GoogleAuthProvider()
       firebase.auth().signInWithPopup(provider)
       dispatch('a_authStateObserver')
     },
-    /*
-    ########## FACEBOOK SIGN IN ##########
-    */
     a_facebookSignIn ({ dispatch }) {
       const provider = new firebase.auth.FacebookAuthProvider()
       firebase.auth().signInWithPopup(provider)
       dispatch('a_authStateObserver')
     },
-    /*
-    ########## AUTH STATE OBSERVER ##########
-    */
     a_authStateObserver ({ dispatch, state }) {
       firebase.auth().onAuthStateChanged(user => {
         state.user.firstName = user.displayName.split(' ')[0]
@@ -976,8 +975,11 @@ const store = () => new Vuex.Store({
         dispatch('a_setUser')
       })
     },
+    a_signOut ({ commit }) {
+      firebase.auth().signOut().then(() => commit('m_resetUser'))
+    },
     /*
-    ########## SET USER ##########
+    #################### SET USER ####################
     */
     a_setUser ({ state }) {
       /* Chechar se user já existe */
@@ -999,12 +1001,6 @@ const store = () => new Vuex.Store({
           })
         }
       })
-    },
-    /*
-    ########## SIGN OUT ##########
-    */
-    a_signOut ({ commit }) {
-      firebase.auth().signOut().then(() => commit('m_resetUser'))
     }
   }
 })
