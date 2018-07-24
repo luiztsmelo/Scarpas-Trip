@@ -1,6 +1,6 @@
 <template>
   <transition name="reserva-animation">
-    <div class="reserva-acomod" v-show="$store.state.showReservaAcomod">
+    <div class="reserva-acomod" v-if="$store.state.showReservaAcomod">
 
 
 
