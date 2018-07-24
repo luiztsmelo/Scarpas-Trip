@@ -1192,8 +1192,23 @@ export default {
     docNumber (value) { value !== '' ? this.docNumberError = false : ''},
     hash (value) {
       if (value === '') {
-        this.$store.commit('m_cadastroAcomod0', true)
-        this.$store.commit('m_cadastroAcomod1', false)
+        if (this.$store.state.lastHash === `#${this.randomHashs[1]}`) {
+          this.$store.commit('m_cadastroAcomod0', true)
+          this.$store.commit('m_cadastroAcomod1', false)
+        } else {
+          this.$store.commit('m_cadastroAcomod1', false)
+          this.$store.commit('m_cadastroAcomod2', false)
+          this.$store.commit('m_cadastroAcomod3', false)
+          this.$store.commit('m_cadastroAcomod4', false)
+          this.$store.commit('m_cadastroAcomod5', false)
+          this.$store.commit('m_cadastroAcomod6', false)
+          this.$store.commit('m_cadastroAcomod7', false)
+          this.$store.commit('m_cadastroAcomod8', false)
+          this.$store.commit('m_cadastroAcomod9', false)
+          this.$store.commit('m_cadastroAcomod10', false)
+          this.$store.commit('m_cadastroAcomod11', false)
+          this.$store.commit('m_cadastroAcomod12', false)
+        }
       } 
       if (value === `#${this.randomHashs[1]}`) {
         this.$store.commit('m_cadastroAcomod1', true)
@@ -1328,7 +1343,7 @@ export default {
     color: var(--color01);
     padding: 0 0 8rem 0;
     & .__form-title {
-      padding: 2.7rem 7% 1.5rem 7%;
+      padding: 2.7rem 7% 1.4rem 7%;
       line-height: 35px;
       font-size: 29px;
       font-weight: 700;
@@ -1595,7 +1610,7 @@ export default {
       & .__add-image {
         position: relative;
         cursor: pointer;
-        border: 2px dashed rgb(182,182,182);
+        border: 2px dashed rgb(192,192,192);
         border-radius: 4px;
         & .loader-svg {
           position: absolute;

@@ -69,7 +69,7 @@ export default {
     })
     /* Get last hash. Mobile back button purposes */
     window.addEventListener('hashchange', event => {
-      this.$store.state.lastHash = `#${event.oldURL.toString().split('#')[1]}`
+      this.$store.state.lastHash = this.$route.hash
     })
   }
 }
