@@ -21,6 +21,7 @@ const store = () => new Vuex.Store({
     showProprietario: false,
     menuIconAnime: false,
     loader: false,
+    lastHash: null,
     miniLoader: false,
     offFoobar1: true,
     offFoobar2: true,

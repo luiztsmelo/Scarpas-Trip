@@ -94,8 +94,31 @@
 
           <h3 class="etapas">2 de 5 etapas</h3>
 
-          <h1 class="__title">Antes de continuar, precisamos que se cadastre</h1>
+          <h1 class="__title">
+            {{ user.email === null ? 'Antes de continuar, precisamos que se cadastre' : `Ótimo ${user.firstName}, só precisamos de mais uma informação` }}
+          </h1>
 
+
+          <div class="sign-in-btns" v-if="user.email === null">
+            <button type="button" class="facebook-btn" @click="$store.dispatch('a_facebookSignIn')">Cadastrar com Facebook</button>
+            <button type="button" class="google-btn" @click="$store.dispatch('a_googleSignIn')">Cadastrar com Google</button>
+            <button type="button" class="email-btn">Cadastrar com E-mail</button>
+          </div>
+
+          <div class="after-sign-in" v-else>
+            <!-- CELULAR -->
+            <div class="item-form">
+              <label>Celular / WhatsApp</label>
+              <masked-input
+                type="tel"
+                v-model="reservaAcomod.guestCelular"
+                :mask="['(', /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]"
+                :guide="false"
+                placeholder="(  )          ">
+              </masked-input>
+            </div><!-- CELULAR -->
+          </div>
+          
 
 
           <div class="buttons">
@@ -332,19 +355,6 @@
           </div><!-- NOME -->
 
 
-          <!-- CELULAR -->
-          <div class="item-form">
-            <label>Celular</label>
-            <masked-input
-              type="tel"
-              v-model="reservaAcomod.guestCelular"
-              :mask="['(', /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]"
-              :guide="false"
-              placeholder="(  )          ">
-            </masked-input>
-          </div><!-- CELULAR -->
-
-
           <!-- CPF -->
           <div class="item-form">
             <label>CPF</label>
@@ -424,7 +434,7 @@ export default {
         this.$store.commit('m_reservaAcomod3', true)
       }
       if (this.$store.state.reservaAcomod5 === true) {
-        window.history.back(1)
+        this.$store.state.lastHash === `#${this.$store.state.reservaAcomodHash5}-billing` ? window.history.go(-4) : window.history.back(1)
         this.$store.commit('m_reservaAcomod5', false)
         this.$store.commit('m_reservaAcomod4', true)
       }
@@ -455,7 +465,7 @@ export default {
       }
     },
     nextBtn2 () {
-      if (1<2) {
+      if (this.reservaAcomod.guestCelular.length === 15) {
         this.$store.commit('m_reservaAcomod2', false), this.$store.commit('m_reservaAcomod3', true), window.location.hash = this.$store.state.reservaAcomodHash3, this.scrollTop()
       }
     },
@@ -528,12 +538,12 @@ export default {
       }
     },
     form2ok () {
-      if (1>2) {
+      if (this.reservaAcomod.guestCelular.length === 15) {
         return 'background: #50CB9D'
       }
     },
     form3ok () {
-      if (1>2) {
+      if (1<2) {
         return 'background: #50CB9D'
       }
     },
@@ -697,6 +707,30 @@ export default {
           padding: .4rem 0;
         }
       }
+      & .sign-in-btns {
+        padding: 0 7%;
+        & .facebook-btn {
+          width: 15.7rem;
+          margin: .7rem 0;
+          height: 3rem;
+          text-align: start;
+          padding-left: 50px;
+        }
+        & .google-btn {
+          width: 15.7rem;
+          margin: .7rem 0;
+          height: 3rem;
+          text-align: start;
+          padding-left: 50px;
+        }
+        & .email-btn {
+          width: 15.7rem;
+          margin: .7rem 0;
+          height: 3rem;
+          text-align: start;
+          padding-left: 50px;
+        }
+      }
       & .check-in-out {
         margin: 0 7%;
         padding: 1.5rem 0;
@@ -809,8 +843,8 @@ export default {
         font-size: 14px;
         font-weight: 600;
         color: white;
-        width: 3.2rem;
-        height: 3.2rem;
+        width: 3.3rem;
+        height: 3.3rem;
         border-radius: 50%;
         background:#50CB9D;
       }

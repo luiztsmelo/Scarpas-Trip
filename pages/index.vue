@@ -201,6 +201,7 @@ export default {
       vm.$store.state.offFoobar3 = true
       vm.$store.state.offFoobar4 = true
       vm.$store.state.offFoobar5 = true
+      vm.$store.state.concludedNewAcomod = false
       !vm.$store.state.isOnline ? vm.$modal.show('offline-modal') : ''
       !vm.$store.state.showFoobar ? vm.$store.commit('m_showFoobar', true) : ''
       !vm.$store.state.showNavbar ? vm.$store.commit('m_showNavbar', true) : ''

@@ -11,6 +11,7 @@ export const reservaAcomod = {
   },
   computed: {
     acomod () { return this.$store.state.acomod },
+    user () { return this.$store.state.user },
     reservaAcomod () { return this.$store.state.reservaAcomod },
     tipoAcomod () {
       const path = this.acomod.tipoAcomod

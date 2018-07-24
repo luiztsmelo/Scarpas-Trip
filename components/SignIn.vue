@@ -85,11 +85,11 @@ export default {
         this.$store.commit('m_showNavbar', false)
       }
       /* MUDAR ISSO AQUI */
-      if (value !== null && this.$store.state.isMobile && this.$route.name !== 'anunciar-acomodacao') {
+      /* if (value !== null && this.$store.state.isMobile && this.$route.name !== 'anunciar-acomodacao') {
         this.$modal.hide('sign-in-modal')
         const shortEmail = this.user.substring(0, this.user.indexOf("@"))
         this.$router.push(`/@${shortEmail}`)
-      }
+      } */
     }
   }
 }

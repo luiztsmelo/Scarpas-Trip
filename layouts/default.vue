@@ -67,7 +67,11 @@ export default {
       this.$store.commit('m_isOnline', true)
       location.reload()
       this.$modal.hide('offline-modal')
-      
+    })
+    /* Get last hash. Mobile back button purposes */
+    window.addEventListener('hashchange', event => {
+      this.$store.state.lastHash = `#${event.oldURL.toString().split('#')[1]}`
+      console.log(this.$store.state.lastHash)
     })
   }
 }
