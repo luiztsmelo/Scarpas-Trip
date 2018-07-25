@@ -446,7 +446,7 @@ export default {
         this.$store.commit('m_reservaAcomod3', true)
       }
       if (this.$store.state.reservaAcomod5 === true) {
-        this.$store.state.lastHash === `#${this.$store.state.randomHashs[5]}-billing` ? window.history.go(-4) : window.history.back(1)
+        window.history.back(1)
         this.$store.commit('m_reservaAcomod5', false)
         this.$store.commit('m_reservaAcomod4', true)
       }
