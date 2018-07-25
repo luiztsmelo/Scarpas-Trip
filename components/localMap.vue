@@ -153,6 +153,7 @@ export default {
         font-size: 17px;
       }
       & .__input-address {
+        padding-top: .3rem;
         cursor: text;
         border: none;
         outline: none;
@@ -168,7 +169,7 @@ export default {
       bottom: .9rem;
       color: white;
       width: 11rem;
-      height: 2.85rem;
+      height: 2.9rem;
       background: var(--color01);
       border-radius: 100px;
       font-size: 16px;
@@ -210,7 +211,6 @@ export default {
         }
         & .__input-address {
           margin: 0 7%;
-          cursor: text;
           border: none;
           outline: none;
           width: 100%;
@@ -221,8 +221,6 @@ export default {
         height: 71vh;
       }
       & .__confirm-btn {
-        font-size: 16px;
-        font-weight: 600;
       }
     }
   }

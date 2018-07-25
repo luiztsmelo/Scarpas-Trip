@@ -22,9 +22,8 @@
 
     <div class="box" style="margin-left: 4rem">
       <div class="follow">
-        <a href="https://www.instagram.com/escarpastrip/"><img class="__img-follow" src="../assets/img/instagram.svg"></a>
         <a href="https://www.facebook.com/escarpastrip/"><img class="__img-follow" src="../assets/img/facebookb.svg"></a>
-        <!-- <a href=""><img class="__img-follow" src="../assets/img/pinterest.svg" style="transform: scale(.98)"></a> -->
+        <a href="https://www.instagram.com/escarpastrip/"><img class="__img-follow" src="../assets/img/instagram.svg"></a>
       </div>
 
       <div class="imgs-payment">
@@ -126,9 +125,9 @@ export default {
       display: flex;
       align-items: center;
       & .__img-follow {
-        width: 1.5rem;
+        width: 2rem;
         height: auto;
-        margin-right: 1.8rem;
+        margin-right: 1.5rem;
 
       }
     }

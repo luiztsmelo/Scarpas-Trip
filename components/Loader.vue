@@ -42,9 +42,9 @@ export default {
     & .spinner {
     }
     & .spinner > div {
-      width: 8px;
-      height: 8px;
-      background-color: #2a2a2a;
+      width: 7px;
+      height: 7px;
+      background-color: rgb(72, 72, 72);
       border-radius: 100%;
       display: inline-flex;
       margin: 0 .18rem;

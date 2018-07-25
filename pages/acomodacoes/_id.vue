@@ -926,7 +926,7 @@ export default {
               background: white;
               transition: .15s border ease;
             }
-            & input:focus {
+            & input:hover {
               border: 1px solid rgb(72,72,72) !important;
             }
             & select {
@@ -941,7 +941,7 @@ export default {
                 background: white;
               }
             }
-            & select:focus {
+            & select:hover {
               border: 1px solid rgb(72,72,72) !important;
             }
             & .reserva-input-date {

@@ -2,7 +2,7 @@
   <modal
     name="detalhes-valor-modal"
     class="detalhes-valor"
-    width="25%"
+    width="24%"
     height="auto">
 
 
@@ -94,10 +94,10 @@ export default {
 
 .detalhes-valor {
   & .detalhes-valor-body {
-    margin: 2rem 1.7rem 1.2rem;
+    margin: 2rem 2.1rem 1.3rem;
     & .__title {
-      padding: .5rem 0 1.5rem 0;
-      font-size: 18px;
+      padding: .7rem 0 1.7rem 0;
+      font-size: 20px;
       font-weight: 600;
     }
     & .item {

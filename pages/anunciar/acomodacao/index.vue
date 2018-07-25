@@ -1403,6 +1403,10 @@ export default {
         border: none;
         border-bottom: 1px solid rgb(222,222,222);
         outline: none;
+        transition: .3s all ease;
+      }
+      & input:hover {
+        border-bottom: 1px solid rgb(72,72,72);
       }
       & select {
         width: 100%;
@@ -1414,6 +1418,10 @@ export default {
         border: none;
         border-bottom: 1px solid rgb(222,222,222);
         outline: none;
+        transition: .3s all ease;
+      }
+      & select:hover {
+        border-bottom: 1px solid rgb(72,72,72);
       }
     }
     
@@ -1504,6 +1512,10 @@ export default {
       font-weight: 500;
       transform: translateY(-1.1rem);
       color: #1E9297;
+      transition: .3s all ease;
+    }
+    & .without-address:hover {
+      color: var(--color01);
     }
     & .recebedor-box {
     }
@@ -1535,31 +1547,16 @@ export default {
         & canvas:active {
           cursor: grabbing;
         }
-        & .modal-croppa-btns {
-          display: flex;
-          flex-flow: column;
-          width: 70%;
-        }
-      }
-    }
-    & .before-choose-image {
-      & .__input-btn {
-        margin: 1rem 7%;
-        font-size: 16px;
-        font-weight: 600;
-        background: var(--colorAcomod);
-        color: white;
-        padding: .8rem 1.2rem;
-        border-radius: 2rem;
       }
     }
     & .__croppa-btn {
-      margin: .3rem 0;
+      margin: .4rem 0;
       font-size: 16px;
-      font-weight: 500;
+      font-weight: 600;
       background: var(--colorAcomod);
       color: white;
-      padding: .8rem 1.2rem;
+      height: 2.9rem;
+      padding: 0 1.5rem;
       border-radius: 2rem;
     }
     & .after-choose-image {
@@ -1611,7 +1608,7 @@ export default {
         position: relative;
         cursor: pointer;
         border: 2px dashed rgb(192,192,192);
-        border-radius: 4px;
+        border-radius: 5px;
         & .loader-svg {
           position: absolute;
           top: 0; left: 0; bottom: 0; right: 0;
@@ -1789,17 +1786,25 @@ export default {
       & .comodidades-box {
         padding: .6rem 28% 0;
         & .item-form-switches {
-          padding: 1.5rem 0;
+          padding: 1.7rem 0;
+          transition: .3s all ease;
           & h3 {
           }
+        }
+        & .item-form-switches:hover {
+          border-bottom: 1px solid rgb(72,72,72);
         }
       }
       & .regras-box {
         padding: .6rem 28% 0;
         & .item-form-regras {
-          padding: 1.5rem 0;
+          padding: 1.7rem 0;
+          transition: .3s all ease;
           & h3 {
           }
+        }
+        & .item-form-regras:hover {
+          border-bottom: 1px solid rgb(72,72,72);
         }
       }
       & .without-address {
@@ -1815,17 +1820,6 @@ export default {
           & canvas {
             border: 3px dashed white;
           }
-          & .modal-croppa-btns {
-            width: 50%
-          }
-        }
-      }
-      & .before-choose-image {
-        display: flex;
-        flex-flow: column;
-        align-items: center;
-        & .__input-btn {
-          margin: 2rem 0 0 0;
         }
       }
       & .__croppa-btn {
@@ -1866,6 +1860,7 @@ export default {
           display: initial;
         }
         & .__add-image {
+          transition: .3s all ease;
           & .loader-svg {
             width: 40px;
             height: 40px;
@@ -1875,6 +1870,9 @@ export default {
           & .__add-image-svg {
             width: 2.2rem;
           }
+        }
+        & .__add-image:hover {
+          border: 2px dashed rgb(72,72,72);
         }
       }
       & .center-first-image {
