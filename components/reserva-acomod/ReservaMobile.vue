@@ -484,10 +484,14 @@ export default {
       }
     },
     nextBtnCreditCard () {
-      if (valid.number(this.creditCard.cardNumber).isValid && valid.expirationDate(this.creditCard.cardExpirationDate).isValid && valid.cvv(this.creditCard.cardCVV).isValid) {
+      if (valid.number(this.cardNumber).isValid && valid.expirationDate(this.cardExpirationDate).isValid && valid.cvv(this.cardCVV).isValid) {
         this.$store.commit('m_reservaAcomodCreditCard', false), this.$store.commit('m_reservaAcomodBilling', true), this.scrollTop()
       } else {
-
+        this.$modal.show('dialog', {
+          title: 'Ops',
+          text: 'Cartão inválido.',
+          buttons: [{ title: 'OK' }]
+        })
       }
     },
     nextBtnBoleto () {
@@ -564,7 +568,7 @@ export default {
       }
     },
     formCreditCardOk () {
-      if (valid.number(this.creditCard.cardNumber).isValid && valid.expirationDate(this.creditCard.cardExpirationDate).isValid && valid.cvv(this.creditCard.cardCVV).isValid) {
+      if (valid.number(this.cardNumber).isValid && valid.expirationDate(this.cardExpirationDate).isValid && valid.cvv(this.cardCVV).isValid) {
         return 'background: #50CB9D'
       }
     },
