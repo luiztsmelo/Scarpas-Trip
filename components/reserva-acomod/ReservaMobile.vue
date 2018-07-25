@@ -279,8 +279,9 @@
 
           <!-- CARD NUMBER -->
           <div class="item-form">
-            <label>Número do Cartão</label>
+            <label :class="[ cardNumberError ? 'has-error-label' : '' ]">Número do Cartão</label>
             <masked-input
+              :class="[ cardNumberError ? 'has-error' : '' ]"
               type="tel"
               v-model="$store.state.creditCard.cardNumber"
               :mask="[/\d/, /\d/, /\d/, /\d/, ' ', /\d/, /\d/, /\d/, /\d/, ' ', /\d/, /\d/, /\d/, /\d/, ' ', /\d/, /\d/, /\d/, /\d/]"
@@ -294,8 +295,9 @@
             
             <!-- CARD EXPIRATION -->
             <div class="item-form">
-              <label>Valido até</label>
+              <label :class="[ cardExpirationDateError ? 'has-error-label' : '' ]">Valido até</label>
               <masked-input
+                :class="[ cardExpirationDateError ? 'has-error' : '' ]"
                 type="tel"
                 v-model="$store.state.creditCard.cardExpirationDate"
                 :mask="[/\d/, /\d/, '/', /\d/, /\d/]"
@@ -306,8 +308,9 @@
 
             <!-- CVV -->
             <div class="item-form">
-              <label>CVV</label>
+              <label :class="[ cardCvvError ? 'has-error-label' : '' ]">CVV</label>
               <masked-input
+                :class="[ cardCvvError ? 'has-error' : '' ]"
                 type="tel"
                 v-model="$store.state.creditCard.cardCVV"
                 :mask="[/\d/, /\d/, /\d/, /\d/]"
@@ -354,7 +357,7 @@
 
           <!-- NOME -->
           <div class="item-form">
-            <label>Nome</label>
+            <label>Nome Impresso no Cartão</label>
             <input
               type="text" pattern="[A-Za-z]"
               v-model="$store.state.creditCard.cardHolderName">
@@ -390,9 +393,12 @@
 </template>
 
 <script>
+import * as firebase from 'firebase'
+import 'firebase/functions'
 import MaskedInput from 'vue-text-mask'
 import DatePicker from '@/components/DatePicker'
 import { reservaAcomod } from '@/mixins/reservaAcomod'
+import valid from 'card-validator'
 import dayjs from 'dayjs'
 import 'dayjs/locale/pt-br'
 dayjs.locale('pt-br')
@@ -444,25 +450,12 @@ export default {
         this.$store.commit('m_reservaAcomod5', false)
         this.$store.commit('m_reservaAcomod4', true)
       }
-      if (this.$store.state.reservaAcomodPaymentMethod === true) {
+      if (this.$store.state.reservaAcomodPaymentMethod === true || this.$store.state.reservaAcomodCreditCard === true || this.$store.state.reservaAcomodBoleto === true || this.$store.state.reservaAcomodBilling === true) {
         window.history.back(1)
         this.$store.commit('m_reservaAcomodPaymentMethod', false)
-        this.$store.commit('m_reservaAcomod5', true)
-      }
-      if (this.$store.state.reservaAcomodCreditCard === true) {
-        window.history.back(1)
         this.$store.commit('m_reservaAcomodCreditCard', false)
-        this.$store.commit('m_reservaAcomodPaymentMethod', true)
-      }
-      if (this.$store.state.reservaAcomodBoleto === true) {
-        window.history.back(1)
         this.$store.commit('m_reservaAcomodBoleto', false)
-        this.$store.commit('m_reservaAcomodPaymentMethod', true)
-      }
-      if (this.$store.state.reservaAcomodBilling === true) {
-        window.history.back(1)
-        this.$store.commit('m_reservaAcomodBilling', false)
-        this.$store.commit('m_reservaAcomodCreditCard', true)
+        this.$store.commit('m_reservaAcomod5', true)
       }
     },
     nextBtn1 () {
@@ -472,7 +465,12 @@ export default {
     },
     nextBtn2 () {
       if (this.reservaAcomod.guestCelular.length === 15) {
-        this.$store.commit('m_reservaAcomod2', false), this.$store.commit('m_reservaAcomod3', true), window.location.hash = this.$store.state.randomHashs[3], this.scrollTop()
+        this.creditCard.cardHolderName = this.user.fullName
+        this.reservaAcomod.guestName = this.user.fullName
+        this.$store.commit('m_reservaAcomod2', false)
+        this.$store.commit('m_reservaAcomod3', true)
+        window.location.hash = this.$store.state.randomHashs[3]
+        this.scrollTop()
       }
     },
     nextBtn3 () {
@@ -486,31 +484,33 @@ export default {
       }
     },
     nextBtnCreditCard () {
-      if (this.$store.state.creditCard.cardNumber.length === 19 && this.$store.state.creditCard.cardExpirationDate.length === 5 && this.$store.state.creditCard.cardCVV.length >= 3) {
-        this.$store.commit('m_reservaAcomodPaymentMethod', false), this.$store.commit('m_reservaAcomodBilling', true), window.location.hash = `${this.$store.state.randomHashs[5]}-billing`, this.scrollTop()
+      if (valid.number(this.creditCard.cardNumber).isValid && valid.expirationDate(this.creditCard.cardExpirationDate).isValid && valid.cvv(this.creditCard.cardCVV).isValid) {
+        this.$store.commit('m_reservaAcomodCreditCard', false), this.$store.commit('m_reservaAcomodBilling', true), this.scrollTop()
+      } else {
+
       }
     },
     nextBtnBoleto () {
       if (1<2) {
-        this.$store.commit('m_reservaAcomodBoleto', false), window.location.hash = this.$store.state.randomHashs[5], this.scrollTop()
+        this.$store.commit('m_reservaAcomodBoleto', false), window.history.back(1), this.scrollTop()
       }
     },
     nextBtnBilling () {
       if (1<2) {
-        this.$store.commit('m_reservaAcomodBilling', false), window.location.hash = this.$store.state.randomHashs[5], this.scrollTop()
+        this.$store.commit('m_reservaAcomodBilling', false), window.history.back(1), this.scrollTop()
       }
     },
     openDatePicker () {
       this.$store.commit('m_loader', true), this.$modal.show('datepicker'), window.location.hash = `${this.$store.state.randomHashs[1]}-datas`
     },
     openPaymentMethod () {
-      this.$store.commit('m_reservaAcomod5', false), this.$store.commit('m_reservaAcomodPaymentMethod', true), window.location.hash = `${this.$store.state.randomHashs[5]}-payment-method`
+      this.$store.commit('m_reservaAcomod5', false), this.$store.commit('m_reservaAcomodPaymentMethod', true), window.location.hash = `${this.$store.state.randomHashs[6]}`
     },
     openCreditCard () {
-      this.$store.commit('m_reservaAcomodPaymentMethod', false), this.$store.commit('m_reservaAcomodCreditCard', true), window.location.hash = `${this.$store.state.randomHashs[5]}-credit-card`
+      this.$store.commit('m_reservaAcomodPaymentMethod', false), this.$store.commit('m_reservaAcomodCreditCard', true)
     },
     openBoleto () {
-      this.$store.commit('m_reservaAcomodPaymentMethod', false), this.$store.commit('m_reservaAcomodBoleto', true), window.location.hash = `${this.$store.state.randomHashs[5]}-boleto`
+      this.$store.commit('m_reservaAcomodPaymentMethod', false), this.$store.commit('m_reservaAcomodBoleto', true)
     },
     concluirReserva () {
     }
@@ -564,7 +564,7 @@ export default {
       }
     },
     formCreditCardOk () {
-      if (this.$store.state.creditCard.cardNumber.length === 19 && this.$store.state.creditCard.cardExpirationDate.length === 5 && this.$store.state.creditCard.cardCVV.length >= 3) {
+      if (valid.number(this.creditCard.cardNumber).isValid && valid.expirationDate(this.creditCard.cardExpirationDate).isValid && valid.cvv(this.creditCard.cardCVV).isValid) {
         return 'background: #50CB9D'
       }
     },
@@ -580,6 +580,22 @@ export default {
     }
   },
   watch: {
+    cardNumber (value) {
+      let cardNumber = valid.number(value)
+      cardNumber.isPotentiallyValid ? this.cardNumberError = false : this.cardNumberError = true
+      if (cardNumber.card) {
+        this.$store.state.cardType = cardNumber.card.type
+        this.$store.state.cardTypeNice = cardNumber.card.niceType
+      }
+    },
+    cardExpirationDate (value) {
+      let cardExpirationDate = valid.expirationDate(value)
+      cardExpirationDate.isPotentiallyValid ? this.cardExpirationDateError = false : this.cardExpirationDateError = true
+    },
+    cardCVV (value) {
+      let cardCVV = valid.cvv(value)
+      cardCVV.isPotentiallyValid ? this.cardCvvError = false : this.cardCvvError = true
+    },
     hash (value) {
       if (value === '') {
         this.$store.commit('m_showReservaAcomod', false)
@@ -606,22 +622,11 @@ export default {
         this.$store.commit('m_reservaAcomod5', true)
         this.$store.commit('m_reservaAcomodPaymentMethod', false)
       }
-      if (value === `#${this.$store.state.randomHashs[5]}-payment-method`) {
+      if (value === `#${this.$store.state.randomHashs[6]}`) {
         this.$store.commit('m_reservaAcomodPaymentMethod', true)
         this.$store.commit('m_reservaAcomodCreditCard', false)
         this.$store.commit('m_reservaAcomodBoleto', false)
-      }
-      if (value === `#${this.$store.state.randomHashs[5]}-credit-card`) {
-        this.$store.commit('m_reservaAcomodCreditCard', true)
-        this.$store.commit('m_reservaAcomodPaymentMethod', false)
-      }
-      if (value === `#${this.$store.state.randomHashs[5]}-boleto`) {
-        this.$store.commit('m_reservaAcomodBoleto', true)
-        this.$store.commit('m_reservaAcomodPaymentMethod', false)
-      }
-      if (value === `#${this.$store.state.randomHashs[5]}-billing`) {
-        this.$store.commit('m_reservaAcomodBilling', true)
-        this.$store.commit('m_reservaAcomodCreditCard', false)
+        this.$store.commit('m_reservaAcomodBilling', false)
       }
     }
   }
@@ -788,6 +793,7 @@ export default {
         & label {
           font-weight: 600;
           font-size: 15px;
+          transition: all .2s ease;
         }
         & input {
           width: 100%;
@@ -799,6 +805,7 @@ export default {
           border: none;
           border-bottom: 1px solid rgb(222,222,222);
           outline: none;
+          transition: all .2s ease;
         }
       }
       & .buttons {
@@ -873,5 +880,13 @@ h3 {
 }
 .reserva-animation-leave-active {
   transform: translateX(100%);
+}
+
+.has-error-label {
+  color: #F31431 !important;
+}
+.has-error {
+  color: #F31431 !important;
+  border-bottom: 1px solid #F31431 !important;
 }
 </style>

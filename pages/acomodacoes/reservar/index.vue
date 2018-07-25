@@ -434,22 +434,8 @@ export default {
   },
   middleware: 'reservaValidate',
   transition: 'opacity',
-  data() {
+  data () {
     return {
-      messageError: false,
-      cardNumberError: false,
-      cardHolderNameError: false,
-      cardExpirationDateError: false,
-      cardCvvError: false,
-      guestNameError: false,
-      cpfError: false,
-      celularError: false,
-      zipcodeError: false,
-      streetError: false,
-      streetNumberError: false,
-      neighborhoodError: false,
-      cityError: false,
-      stateError: false
     }
   },
   methods: {
@@ -607,23 +593,6 @@ export default {
     }
   },
   computed: {
-    /* ******************** PATHS ******************** */
-    concludedReservaAcomod () { return this.$store.state.concludedReservaAcomod },
-    message () { return this.reservaAcomod.message },
-    cardNumber () { return this.$store.state.creditCard.cardNumber },
-    cardHolderName () { return this.$store.state.creditCard.cardHolderName },
-    cardExpirationDate () { return this.$store.state.creditCard.cardExpirationDate },
-    cardCVV () { return this.$store.state.creditCard.cardCVV },
-    guestName () { return this.reservaAcomod.guestName },
-    guestCPF () { return this.reservaAcomod.guestCPF },
-    guestCelular () { return this.reservaAcomod.guestCelular },
-    zipcode () { return this.reservaAcomod.billing.zipcode },
-    street () { return this.reservaAcomod.billing.street },
-    streetNumber () { return this.reservaAcomod.billing.street_number },
-    neighborhood () { return this.reservaAcomod.billing.neighborhood },
-    city () { return this.reservaAcomod.billing.city },
-    state () { return this.reservaAcomod.billing.state },
-
     /* ******************** PROGRESS ******************** */
     etapaProgressed1 () {
       return this.$store.state.etapaReserva1ok === true ? 'font-weight: 600' : 'cursor: default'

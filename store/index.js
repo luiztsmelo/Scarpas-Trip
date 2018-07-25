@@ -47,6 +47,8 @@ const store = () => new Vuex.Store({
       cardExpirationDate: '',
       cardCVV: ''
     },
+    cardType: null,
+    cardTypeNice: null,
     randomHashs: null,
     /*
     -------------------- ERRORS --------------------

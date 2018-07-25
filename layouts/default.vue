@@ -67,7 +67,7 @@ export default {
       location.reload()
       this.$modal.hide('offline-modal')
     })
-    /* Get last hash. Mobile back button purposes */
+    /* Get last hash. Back button purposes */
     window.addEventListener('hashchange', event => {
       this.$store.state.lastHash = this.$route.hash
     })

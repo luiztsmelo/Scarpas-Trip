@@ -79,6 +79,28 @@ exports.watch_reservaExpiration = functions.https.onRequest((req, res) => __awai
     }
 }));
 /* ________________________________________________ PAGARME ________________________________________________ */
+exports.pagarme_newCreditCard = functions.https.onCall((data, context) => __awaiter(this, void 0, void 0, function* () {
+    const creditCard = data.creditCard;
+    try {
+        const card = yield pagarme.client.connect({ api_key: 'ak_test_E3I46o4e7guZDqwRnSY9sW8o8HrL9D' }).then(client => client.cards.create({
+            card_number: creditCard.cardNumber.replace(/[^0-9\.]+/g, ''),
+            card_holder_name: creditCard.cardHolderName,
+            card_expiration_date: creditCard.cardExpirationDate.replace(/[^0-9\.]+/g, ''),
+            card_cvv: creditCard.cardCVV
+        }));
+        console.log(card);
+        if (card.valid) {
+            yield admin.firestore().collection('users').doc(context.auth.token.uid).update({ card: card });
+            return { card: card };
+        }
+        else {
+            throw new Error();
+        }
+    }
+    catch (err) {
+        throw new functions.https.HttpsError('invalid-argument', 'Cartão inválido.');
+    }
+}));
 exports.pagarme_newAcomod = functions.https.onCall(data => {
     const bankAccount = data.bankAccount;
     return pagarme.client.connect({ api_key: 'ak_test_E3I46o4e7guZDqwRnSY9sW8o8HrL9D' })
@@ -288,7 +310,7 @@ exports.email_newUser = functions.firestore
                         'Email': user.email,
                         'Name': user.fullName
                     }],
-                'TemplateID': 448198,
+                'TemplateID': 492003,
                 'TemplateLanguage': true,
                 'Subject': 'Bem-vindo à Escarpas Trip!',
                 'Variables': {

@@ -99,6 +99,7 @@ exports.watch_reservaExpiration = functions.https.onRequest(async (req, res) => 
 
 /* ________________________________________________ PAGARME ________________________________________________ */
 
+
 exports.pagarme_newAcomod = functions.https.onCall(data => {
   const bankAccount = data.bankAccount
 
@@ -148,6 +149,7 @@ exports.pagarme_newAcomod = functions.https.onCall(data => {
     }
   })
 })
+
 
 
 
@@ -274,7 +276,6 @@ exports.pagarme_newReservaAcomod = functions.https.onCall((data, context) => {
     })
   }
 })
-
 
 
 
