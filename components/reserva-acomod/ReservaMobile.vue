@@ -455,6 +455,7 @@ export default {
         this.$store.commit('m_reservaAcomodPaymentMethod', false)
         this.$store.commit('m_reservaAcomodCreditCard', false)
         this.$store.commit('m_reservaAcomodBoleto', false)
+        this.$store.commit('m_reservaAcomodBilling', false)
         this.$store.commit('m_reservaAcomod5', true)
       }
     },
@@ -628,6 +629,9 @@ export default {
       if (value === `#${this.$store.state.randomHashs[5]}`) {
         this.$store.commit('m_reservaAcomod5', true)
         this.$store.commit('m_reservaAcomodPaymentMethod', false)
+        this.$store.commit('m_reservaAcomodCreditCard', false)
+        this.$store.commit('m_reservaAcomodBoleto', false)
+        this.$store.commit('m_reservaAcomodBilling', false)
       }
       if (value === `#${this.$store.state.randomHashs[6]}`) {
         this.$store.commit('m_reservaAcomodPaymentMethod', true)
