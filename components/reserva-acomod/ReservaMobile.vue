@@ -587,6 +587,9 @@ export default {
     cardNumber (value) {
       let cardNumber = valid.number(value)
       cardNumber.isPotentiallyValid ? this.cardNumberError = false : this.cardNumberError = true
+      if (value.length === 19) {
+        cardNumber.isValid ? this.cardNumberError = false : this.cardNumberError = true
+      }
       if (cardNumber.card) {
         this.$store.state.cardType = cardNumber.card.type
         this.$store.state.cardTypeNice = cardNumber.card.niceType

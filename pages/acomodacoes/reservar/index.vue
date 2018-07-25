@@ -420,6 +420,7 @@ import MaskedInput from 'vue-text-mask'
 import detalhesValor from '@/components/reserva-acomod/detalhesValor'
 import { reservaAcomod } from '@/mixins/reservaAcomod'
 import { states } from '@/mixins/statesBrazil'
+import valid from 'card-validator'
 import dayjs from 'dayjs'
 import 'dayjs/locale/pt-br'
 dayjs.locale('pt-br')
@@ -477,7 +478,7 @@ export default {
       if (reservaAcomod.paymentMethod === 'credit_card') {
         
         /* Checar se todos os dados foram preenchidos */
-        if (creditCard.cardNumber.length === 19 && creditCard.cardHolderName !== '' && creditCard.cardExpirationDate.length === 5 && creditCard.cardCVV.length >= 3 && reservaAcomod.guestCPF.length === 14 && reservaAcomod.guestCelular.length === 15) {
+        if (valid.number(this.cardNumber).isValid && valid.expirationDate(this.cardExpirationDate).isValid && valid.cvv(this.cardCVV).isValid && this.cardHolderName !== '' && this.guestCPF.length === 14 && this.guestCelular.length === 15 && this.zipcode.length === 9 && this.street !== '' && this.streetNumber !== '' && this.neighborhood !== '' && this.city !== '' && this.state !== '') {
           
           /* TRANSACTION PAGARME */
           firebase.functions().httpsCallable('pagarme_newReservaAcomod')({
@@ -506,9 +507,6 @@ export default {
           })
           .catch(err => { /* Transaction error */
             this.$store.commit('m_loader', false)
-            console.log(err.code)
-            console.log(err.message)
-            console.log(err.details)
             err.details === 'card_number' ? this.cardNumberError = true : this.cardNumberError = false
             err.details === 'card_holder_name' ? this.cardHolderNameError = true : this.cardHolderNameError = false
             err.details === 'card_expiration_date' ? this.cardExpirationDateError = true : this.cardExpirationDateError = false
@@ -518,18 +516,18 @@ export default {
 
         } else { /* Há dados incompletos */
           this.$store.commit('m_loader', false)
-          creditCard.cardNumber.length < 19 ? this.cardNumberError = true : this.cardNumberError = false
-          creditCard.cardHolderName.length < 3 ? this.cardHolderNameError = true : this.cardHolderNameError = false
-          creditCard.cardExpirationDate.length < 5 ?  this.cardExpirationDateError = true :  this.cardExpirationDateError = false
-          creditCard.cardCVV.length < 3 ? this.cardCvvError = true : this.cardCvvError = false
-          reservaAcomod.guestCPF.length < 14 ? this.cpfError = true : this.cpfError = false
-          reservaAcomod.guestCelular.length < 15 ? this.celularError = true : this.celularError = false
-          reservaAcomod.billing.zipcode.length < 9 ? this.zipcodeError = true : this.zipcodeError = false
-          reservaAcomod.billing.street === '' ? this.streetError = true : this.streetError = false
-          reservaAcomod.billing.street_number === '' ? this.streetNumberError = true : this.streetNumberError = false
-          reservaAcomod.billing.neighborhood === '' ? this.neighborhoodError = true : this.neighborhoodError = false
-          reservaAcomod.billing.city === '' ? this.cityError = true : this.cityError = false
-          reservaAcomod.billing.state === '' ? this.stateError = true : this.stateError = false
+          this.cardHolderName.length < 3 ? this.cardHolderNameError = true : this.cardHolderNameError = false
+          !valid.number(this.cardNumber).isValid ? this.cardNumberError = true : this.cardNumberError = false
+          !valid.expirationDate(this.cardExpirationDate).isValid ?  this.cardExpirationDateError = true :  this.cardExpirationDateError = false
+          !valid.cvv(this.cardCVV).isValid ? this.cardCvvError = true : this.cardCvvError = false
+          this.guestCPF.length < 14 ? this.cpfError = true : this.cpfError = false
+          this.guestCelular.length < 15 ? this.celularError = true : this.celularError = false
+          this.zipcode.length < 9 ? this.zipcodeError = true : this.zipcodeError = false
+          this.street === '' ? this.streetError = true : this.streetError = false
+          this.streetNumber === '' ? this.streetNumberError = true : this.streetNumberError = false
+          this.neighborhood === '' ? this.neighborhoodError = true : this.neighborhoodError = false
+          this.city === '' ? this.cityError = true : this.cityError = false
+          this.state === '' ? this.stateError = true : this.stateError = false
         }
 
       } else { /* ******************** BOLETO ******************** */
@@ -641,26 +639,34 @@ export default {
   },
   watch: {
     message (value) { value !== '' ? this.messageError = false : '' },
-    cardNumber (value) { value !== '' ? this.cardNumberError = false : '' },
+    cardNumber (value) {
+      let cardNumber = valid.number(value)
+      cardNumber.isPotentiallyValid ? this.cardNumberError = false : this.cardNumberError = true
+      if (value.length === 19) {
+        cardNumber.isValid ? this.cardNumberError = false : this.cardNumberError = true
+      }
+      if (cardNumber.card) {
+        this.$store.state.cardType = cardNumber.card.type
+        this.$store.state.cardTypeNice = cardNumber.card.niceType
+      }
+    },
+    cardExpirationDate (value) {
+      let cardExpirationDate = valid.expirationDate(value)
+      cardExpirationDate.isPotentiallyValid ? this.cardExpirationDateError = false : this.cardExpirationDateError = true
+    },
+    cardCVV (value) {
+      let cardCVV = valid.cvv(value)
+      cardCVV.isPotentiallyValid ? this.cardCvvError = false : this.cardCvvError = true
+    },
     cardHolderName (value) { value !== '' ? this.cardHolderNameError = false : '' },
-    cardExpirationDate (value) { value !== '' ? this.cardExpirationDateError = false : '' },
-    cardCVV (value) { value !== '' ? this.cardCvvError = false : '' },
     guestName (value) { value !== '' ? this.guestNameError = false : '' },
     guestCPF (value) { value !== '' ? this.cpfError = false : '' },
     guestCelular (value) { value !== '' ? this.celularError = false : '' },
-    zipcode (value) { value !== '' ? this.zipcodeError = false : '' },
     street (value) { value !== '' ? this.streetError = false : '' },
     streetNumber (value) { value !== '' ? this.streetNumberError = false : '' },
     neighborhood (value) { value !== '' ? this.neighborhoodError = false : '' },
     city (value) { value !== '' ? this.cityError = false : '' },
     state (value) { value !== '' ? this.stateError = false : '' },
-    concludedReservaAcomod (value) {
-      if (value === true) {
-        firebase.firestore().collection('acomods').doc(this.acomod.acomodID).collection('visits').doc(this.$store.state.visitID).update({ 
-          concludedReserva: true
-        })
-      }
-    },
     zipcode (value) { /* Get zipcode info */
       if (value.length === 9) {
         this.$store.commit('m_loader', true)
@@ -677,6 +683,15 @@ export default {
         .catch(err => {
           this.zipcodeError = true
           this.$store.commit('m_loader', false)
+        })
+      } else {
+        this.zipcodeError = false
+      }
+    },
+    concludedReservaAcomod (value) {
+      if (value === true) {
+        firebase.firestore().collection('acomods').doc(this.acomod.acomodID).collection('visits').doc(this.$store.state.visitID).update({ 
+          concludedReserva: true
         })
       }
     }
@@ -797,7 +812,7 @@ export default {
           outline: none;
           transition: .15s border ease;
         }
-        & input:focus {
+        & input:hover {
           border: 1px solid rgb(72,72,72) !important;
         }
         & select {
@@ -810,7 +825,7 @@ export default {
           outline: none;
           transition: .15s border ease;
         }
-        & select:focus {
+        & select:hover {
           border: 1px solid rgb(72,72,72) !important;
         }
         & textarea {
@@ -928,7 +943,11 @@ export default {
   border-radius: 5px;
 }
 
+.has-error-label {
+  color: #F31431 !important;
+}
 .has-error {
+  color: #F31431 !important;
   border: 1px solid #F31431 !important;
 }
 

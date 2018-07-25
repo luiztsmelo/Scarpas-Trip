@@ -4,7 +4,7 @@ module.exports = {
   ** Build configuration
   */
   build: {
-    vendor: ['firebase', 'supports-webp']
+    vendor: ['firebase', 'supports-webp', 'vue-text-mask', 'card-validator']
     /* analyze: true */
   },
   /*
