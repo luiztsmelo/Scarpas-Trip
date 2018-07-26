@@ -77,12 +77,12 @@ export default {
     align-items: center;
     align-content: center;
     height: 100%;
-    padding: 1.3rem 7%;
+    padding: 1.4rem 7%;
     & .alert-text {
       & .__message {
         font-size: 15px;
         font-weight: 500;
-        line-height: 1.2;
+        line-height: 1.25;
         & .__type {
           padding-right: 2px;
           font-size: 15px;
