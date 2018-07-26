@@ -25,15 +25,9 @@
 
 <script>
 export default {
-  updated () {
-    if (!this.isInfo) {
-      setTimeout(() => {
-        this.$store.commit('m_hideAlertMobile')
-      }, 3300)
-    }
-  },
   computed: {
     alertMobile () { return this.$store.state.alertMobile },
+    message () { return this.$store.state.alertMobile.message },
     isError () { return this.$store.state.alertMobile.type === 'error' },
     isWarning () { return this.$store.state.alertMobile.type === 'warning' },
     isInfo () { return this.$store.state.alertMobile.type === 'info' },
@@ -51,6 +45,15 @@ export default {
     },
     textColor () {
       return this.isInfo ? 'color: #2a2a2a' : 'color: #fff'
+    }
+  },
+  watch: {
+    message (value) {
+      if (value !== '') {
+        if (!this.isInfo) {
+          setTimeout(() => { this.$store.commit('m_hideAlertMobile') }, 3200)
+        }
+      }
     }
   }
 }
@@ -89,7 +92,7 @@ export default {
     }
     & .__close-img {
       align-self: flex-start;
-      margin-left: 1rem;
+      margin-left: 1.6rem;
       width: .95rem;
       height: auto;
       filter: invert(80%);
