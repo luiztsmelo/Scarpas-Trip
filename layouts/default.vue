@@ -14,6 +14,8 @@
 
 
     <div>
+      <AlertMobile/>
+      
       <Loader/>
 
       <Share/>
@@ -49,9 +51,10 @@ import Share from '~/components/Share.vue'
 import MapFull from '~/components/MapFull.vue'
 import AskAcomod from '~/components/reserva-acomod/AskAcomod'
 import Offline from '~/components/Offline'
+import AlertMobile from '~/components/AlertMobile'
 
 export default {
-  components: { Navbar, Foobar, SignIn, Menuu, Loader, Share, MapFull, AskAcomod, Offline },
+  components: { Navbar, Foobar, SignIn, Menuu, Loader, Share, MapFull, AskAcomod, Offline, AlertMobile },
   beforeCreate () {
     /* Detect Device */
     isMobile.any ? this.$store.commit('m_isMobile', true) : this.$store.commit('m_isMobile', false)

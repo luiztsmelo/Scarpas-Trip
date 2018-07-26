@@ -494,10 +494,10 @@ export default {
       if (valid.number(this.cardNumber).isValid && valid.expirationDate(this.cardExpirationDate).isValid && valid.cvv(this.cardCVV).isValid) {
         this.$store.commit('m_reservaAcomodCreditCard', false), this.$store.commit('m_reservaAcomodBilling', true), this.scrollTop()
       } else {
-        this.$modal.show('dialog', {
-          title: 'Ops',
-          text: 'Cartão inválido.',
-          buttons: [{ title: 'OK' }]
+        this.$store.commit('m_alertMobile', {
+          show: true,
+          type: 'Erro',
+          message: 'Ocorreu um erro ao validar seu cartão.'
         })
       }
     },
@@ -515,7 +515,7 @@ export default {
       this.$store.commit('m_loader', true), this.$modal.show('datepicker'), window.location.hash = `${this.$store.state.randomHashs[1]}-datas`
     },
     openPaymentMethod () {
-      this.$store.commit('m_reservaAcomod5', false), this.$store.commit('m_reservaAcomodPaymentMethod', true), window.location.hash = `${this.$store.state.randomHashs[6]}`
+      this.$store.commit('m_reservaAcomod5', false), this.$store.commit('m_reservaAcomodPaymentMethod', true), window.location.hash = this.$store.state.randomHashs[6]
     },
     openCreditCard () {
       this.$store.commit('m_reservaAcomodPaymentMethod', false), this.$store.commit('m_reservaAcomodCreditCard', true)

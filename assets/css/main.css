@@ -182,14 +182,14 @@ textarea {
   
 }
 @media (max-width: 425px) {
-  .v--modal-box {
+  .vue-dialog {
     left: 7% !important;
     max-width: 86% !important;
   }
 }
 
 .v--modal {
-  border-radius: 6px !important;
+  border-radius: 5px !important;
 }
 .v--modal-overlay {
   z-index: 9999999 !important;

@@ -51,8 +51,13 @@ const store = () => new Vuex.Store({
     cardTypeNice: null,
     randomHashs: null,
     /*
-    -------------------- ERRORS --------------------
+    -------------------- ALERTS --------------------
     */
+    alertMobile: {
+      show: false,
+      type: '',
+      message: ''
+    },
     error: false,
     reservaPageError: false,
     acomodPageError: false,
@@ -339,6 +344,15 @@ const store = () => new Vuex.Store({
     /*
     -------------------- GERAL --------------------
     */
+
+    m_alertMobile (state, payload) {
+      state.alertMobile = payload
+    },
+    m_hideAlertMobile (state) {
+      state.alertMobile.show = false
+      state.alertMobile.type = ''
+      state.alertMobile.message = ''
+    },
     m_isOnline (state, payload) {
       state.isOnline = payload
     },
