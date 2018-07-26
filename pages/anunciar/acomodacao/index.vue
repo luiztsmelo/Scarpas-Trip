@@ -390,7 +390,7 @@
           <div class="item-form" style="padding:0;margin:1rem .5rem 1.5rem 0;flex:50%">
             <label>Check-in após:</label>
             <select v-model="$store.state.acomodData.checkInTime">
-              <option>Horário Flexível</option>
+              <option>A qualquer hora</option>
               <option>8:00</option>
               <option>10:00</option>
               <option>12:00</option>
@@ -404,7 +404,7 @@
           <div class="item-form" style="padding:0;margin:1rem 0 1.5rem .5rem;flex:50%">
             <label>Check-out até:</label>
             <select v-model="$store.state.acomodData.checkOutTime">
-              <option>Horário Flexível</option>
+              <option>A qualquer hora</option>
               <option>8:00</option>
               <option>10:00</option>
               <option>12:00</option>

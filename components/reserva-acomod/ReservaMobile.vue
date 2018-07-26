@@ -152,7 +152,7 @@
 
             <div style="flex:49%">
               <h3 class="__title">Check-in</h3>
-              <h3 class="__text">{{ acomod.checkInTime === 'Horário Flexível' ? 'Horário Flexível' : `Após as ${acomod.checkInTime}` }}</h3>
+              <h3 class="__text">{{ acomod.checkInTime === 'A qualquer hora' ? 'A qualquer hora' : `Após as ${acomod.checkInTime}` }}</h3>
               <h3 class="__text">{{ checkIn }}</h3>
             </div>
 
@@ -160,7 +160,7 @@
 
             <div style="flex:49%">
               <h3 class="__title" style="text-align: right">Check-out</h3>
-              <h3 class="__text" style="text-align: right">{{ acomod.checkOutTime === 'Horário Flexível' ? 'Horário Flexível' : `Até as ${acomod.checkOutTime}` }}</h3>
+              <h3 class="__text" style="text-align: right">{{ acomod.checkOutTime === 'A qualquer hora' ? 'A qualquer hora' : `Até as ${acomod.checkOutTime}` }}</h3>
               <h3 class="__text" style="text-align: right">{{ checkOut }}</h3>
             </div>
 
