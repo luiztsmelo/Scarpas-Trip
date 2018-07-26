@@ -73,7 +73,6 @@ export default {
         window.history.back(1)
       } else {
         this.$store.commit('m_alertMobile', {
-          show: true,
           type: 'warning',
           message: 'Adicione as datas de sua viagem.',
         })

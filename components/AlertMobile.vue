@@ -1,8 +1,8 @@
 <template>
   <transition name="alert">
-    <div class="alert-modal" :style="modalStyle" v-if="alertMobile.show">
+    <div class="alert-modal" :style="bgColor" v-if="alertMobile.message !== ''">
 
-      <div class="alert-body">
+      <div class="alert-body" :style="bodyPosition">
         
         
         <div class="alert-text">
@@ -37,14 +37,17 @@ export default {
     isError () { return this.$store.state.alertMobile.type === 'error' },
     isWarning () { return this.$store.state.alertMobile.type === 'warning' },
     isInfo () { return this.$store.state.alertMobile.type === 'info' },
-    modalStyle () {
+    bgColor () {
       if (this.isError) {
-        return 'background: #FF0134; height: 4.6rem'
+        return 'background: #FF0134'
       } else if (this.isWarning) {
-        return 'background: #FFA04F; height: 4.6rem'
+        return 'background: #FFA04F'
       } else if (this.isInfo) {
-        return 'background: #FFF; height: 7rem'
+        return 'background: #FFF'
       }
+    },
+    bodyPosition () {
+      return this.isInfo ? '' : 'position: absolute'
     },
     textColor () {
       return this.isInfo ? 'color: #2a2a2a' : 'color: #fff'
@@ -60,17 +63,18 @@ export default {
   position: fixed;
   z-index: 99999999;
   overflow-y: auto;
-  width:  100%;
+  min-height: 4.6rem;
+  width: 100%;
   bottom: 0;
-  left: 0;
   box-shadow: 0px -1px 1px 0px rgba(0,0,0,0.1);
   transition: var(--main-transition);
   & .alert-body {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    align-content: center;
     height: 100%;
-    padding: 1.2rem 7%;
+    padding: 1.3rem 7%;
     & .alert-text {
       & .__message {
         font-size: 15px;

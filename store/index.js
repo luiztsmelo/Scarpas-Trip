@@ -54,7 +54,6 @@ const store = () => new Vuex.Store({
     -------------------- ALERTS --------------------
     */
     alertMobile: {
-      show: false,
       type: '', /* error, warning, info */
       title: '',
       message: ''
@@ -350,7 +349,6 @@ const store = () => new Vuex.Store({
       state.alertMobile = payload
     },
     m_hideAlertMobile (state) {
-      state.alertMobile.show = false
       state.alertMobile.type = ''
       state.alertMobile.title = ''
       state.alertMobile.message = ''

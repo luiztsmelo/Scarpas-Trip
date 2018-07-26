@@ -419,7 +419,6 @@ export default {
   methods: {
     limpezaFeeDialog () {
       this.$store.commit('m_alertMobile', {
-        show: true,
         type: 'info',
         title: 'Taxa de Limpeza',
         message: `Taxa cobrada pelo proprietário para arcar com os custos de limpeza ${this.tipoAcomod}.`,
@@ -427,7 +426,6 @@ export default {
     },
     serviceFeeDialog () {
       this.$store.commit('m_alertMobile', {
-        show: true,
         type: 'info',
         title: 'Taxa de Serviço',
         message: `Taxa de ${Math.round(this.$store.state.serviceFeeAcomod * 100)}% cobrada com o intuito de garantir suporte e total segurança em sua estadia caso algum problema aconteça.`,
@@ -472,7 +470,6 @@ export default {
         this.$store.commit('m_reservaAcomod1', false), this.$store.commit('m_reservaAcomod2', true), window.location.hash = this.$store.state.randomHashs[2], this.scrollTop()
       } else {
         this.$store.commit('m_alertMobile', {
-          show: true,
           type: 'warning',
           message: 'Adicione as datas de sua viagem.',
         })
@@ -488,7 +485,6 @@ export default {
         this.scrollTop()
       } else {
         this.$store.commit('m_alertMobile', {
-          show: true,
           type: 'warning',
           message: this.user.email === null ? 'É preciso se cadastrar.' : 'Adicione seu número de celular.',
         })
@@ -509,7 +505,6 @@ export default {
         this.$store.commit('m_reservaAcomodCreditCard', false), this.$store.commit('m_reservaAcomodBilling', true), this.scrollTop()
       } else {
         this.$store.commit('m_alertMobile', {
-          show: true,
           type: 'error',
           title: 'Erro',
           message: 'Cartão inválido.',
@@ -542,7 +537,6 @@ export default {
       if (1>2) {
       } else {
         this.$store.commit('m_alertMobile', {
-          show: true,
           type: 'warning',
           message: 'Adicione uma forma de pagamento.',
         })
