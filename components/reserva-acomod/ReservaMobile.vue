@@ -256,13 +256,19 @@
           <h1 class="__title">Pagar com</h1>
 
 
-          <div class="add-payment" style="border-bottom: none" @click="openCreditCard">
-            <h3 class="__text">Cartão de Crédito</h3>
-            <img src="../../assets/img/arrow-right.svg" alt="" style="width: 1.1rem; height: auto">
+          <div class="add-payment" style="border: none" @click="openCreditCard">
+            <div style="display:flex;align-items:center">
+              <img src="../../assets/img/credit-card.svg" class="__img">
+              <h3 class="__text">Cartão de Crédito</h3>
+            </div>
+            <img src="../../assets/img/arrow-right.svg" style="width: 1.1rem; height: auto">
           </div>
-          <div class="add-payment" @click="openBoleto">
-            <h3 class="__text">Boleto</h3>
-            <img src="../../assets/img/arrow-right.svg" alt="" style="width: 1.1rem; height: auto">
+          <div class="add-payment" style="border-bottom: none" @click="openBoleto">
+            <div style="display:flex;align-items:center">
+              <img src="../../assets/img/boleto.svg" class="__img">
+              <h3 class="__text">Boleto</h3>
+            </div>
+            <img src="../../assets/img/arrow-right.svg" style="width: 1.1rem; height: auto">
           </div>
 
 
@@ -300,7 +306,7 @@
                 :class="[ cardExpirationDateError ? 'has-error' : '' ]"
                 type="tel"
                 v-model="$store.state.creditCard.cardExpirationDate"
-                :mask="[/\d/, /\d/, '/', /\d/, /\d/]"
+                :mask="[/\d/, /\d/, ' ', '/', ' ', /\d/, /\d/]"
                 :guide="false"
                 placeholder="MM / AA">
               </masked-input>
@@ -791,6 +797,11 @@ export default {
         justify-content: space-between;
         border-bottom: 1px solid rgb(222,222,222);
         border-top: 1px solid rgb(222,222,222);
+        & .__img {
+          width: 1.9rem;
+          height: auto;
+          margin-right: .8rem;
+        }
         & .__text {
           font-size: 17px;
           font-weight: 500;
