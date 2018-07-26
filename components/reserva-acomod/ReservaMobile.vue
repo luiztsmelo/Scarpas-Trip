@@ -468,6 +468,12 @@ export default {
     nextBtn1 () {
       if (this.reservaAcomod.periodoReserva !== null) {
         this.$store.commit('m_reservaAcomod1', false), this.$store.commit('m_reservaAcomod2', true), window.location.hash = this.$store.state.randomHashs[2], this.scrollTop()
+      } else {
+        this.$store.commit('m_alertMobile', {
+          show: true,
+          type: 'warning',
+          message: 'Adicione as datas de sua viagem.',
+        })
       }
     },
     nextBtn2 () {
@@ -478,6 +484,12 @@ export default {
         this.$store.commit('m_reservaAcomod3', true)
         window.location.hash = this.$store.state.randomHashs[3]
         this.scrollTop()
+      } else {
+        this.$store.commit('m_alertMobile', {
+          show: true,
+          type: 'warning',
+          message: this.user.email === null ? 'É preciso se cadastrar.' : 'Adicione seu número de celular.',
+        })
       }
     },
     nextBtn3 () {
@@ -496,8 +508,8 @@ export default {
       } else {
         this.$store.commit('m_alertMobile', {
           show: true,
-          type: 'Erro',
-          message: 'Ocorreu um erro ao validar seu cartão.'
+          type: 'error',
+          message: 'Cartão inválido.',
         })
       }
     },
@@ -524,6 +536,14 @@ export default {
       this.$store.commit('m_reservaAcomodPaymentMethod', false), this.$store.commit('m_reservaAcomodBoleto', true)
     },
     concluirReserva () {
+      if (1>2) {
+      } else {
+        this.$store.commit('m_alertMobile', {
+          show: true,
+          type: 'warning',
+          message: 'Adicione uma forma de pagamento.',
+        })
+      }
     }
   },
   computed: {
@@ -858,7 +878,7 @@ export default {
             padding: 0 1.3rem;
             font-size: 16px;
             font-weight: 600;
-            background:rgb(222, 222, 222);
+            background:rgb(232, 232, 232);
             color: white;
             height: 3.1rem;
             border-radius: 5px;

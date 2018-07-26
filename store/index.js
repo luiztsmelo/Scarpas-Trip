@@ -55,7 +55,7 @@ const store = () => new Vuex.Store({
     */
     alertMobile: {
       show: false,
-      type: '',
+      type: '', /* error, warning */
       message: ''
     },
     error: false,

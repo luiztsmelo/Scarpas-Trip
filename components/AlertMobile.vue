@@ -4,14 +4,18 @@
 
       <div class="alert-body">
         
+        
         <div class="alert-text">
+
           <p class="__message">
-            <span class="__type">Erro</span>
+            <span class="__type" v-if="this.isError">Erro</span>
             {{ alertMobile.message }}
           </p>
+
         </div>
-        
-        <img class="__close-img" src="../assets/img/close-mobile.svg" @click="$store.commit('m_hideAlertMobile')">
+
+        <!-- <img class="__close-img" src="../assets/img/close-mobile.svg" @click="$store.commit('m_hideAlertMobile')"> -->
+
 
       </div>
 
@@ -21,8 +25,15 @@
 
 <script>
 export default {
+  updated () {
+    setTimeout(() => {
+      this.$store.commit('m_hideAlertMobile')
+    }, 3200)
+  },
   computed: {
-    alertMobile () { return this.$store.state.alertMobile }
+    alertMobile () { return this.$store.state.alertMobile },
+    isError () { return this.$store.state.alertMobile.type === 'error' },
+    isWarning () { return this.$store.state.alertMobile.type === 'warning' }
   }
 }
 </script>
@@ -32,7 +43,7 @@ export default {
 
 .alert-modal {
   position: fixed;
-  z-index: 999999;
+  z-index: 99999999;
   overflow-y: auto;
   width:  100%;
   height: 4.6rem;
@@ -57,6 +68,14 @@ export default {
           font-weight: 600;
           color: #FF0134;
         }
+      }
+      & .__action-btn {
+        padding: 2px 0 0 0;
+        font-size: 14px;
+        font-weight: 600;
+        background: white;
+        color: var(--colorAcomod);
+        text-align: left;
       }
     }
     & .__close-img {
