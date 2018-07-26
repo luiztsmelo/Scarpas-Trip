@@ -28,7 +28,7 @@ export default {
   updated () {
     setTimeout(() => {
       this.$store.commit('m_hideAlertMobile')
-    }, 3200)
+    }, 3300)
   },
   computed: {
     alertMobile () { return this.$store.state.alertMobile },
