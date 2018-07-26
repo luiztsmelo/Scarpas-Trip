@@ -550,29 +550,19 @@ export default {
       }
     },
     form1ok () {
-      if (this.reservaAcomod.periodoReserva !== null) {
-        return 'background: #50CB9D'
-      }
+      return this.reservaAcomod.periodoReserva !== null ? 'background: #50CB9D' : ''
     },
     form2ok () {
-      if (this.reservaAcomod.guestCelular.length === 15) {
-        return 'background: #50CB9D'
-      }
+      return this.reservaAcomod.guestCelular.length === 15 ? 'background: #50CB9D' : ''
     },
     form3ok () {
-      if (1<2) {
-        return 'background: #50CB9D'
-      }
+       return 1<2 ? 'background: #50CB9D' : ''
     },
     form4ok () {
-      if (1>2) {
-        return 'background: #50CB9D'
-      }
+      return 1<2 ? 'background: #50CB9D' : ''
     },
     form5ok () {
-      if (1>2) {
-        return 'background: #FFA04F'
-      }
+      return 1>2 ? 'background: #50CB9D' : ''
     },
     formCreditCardOk () {
       if (valid.number(this.cardNumber).isValid && valid.expirationDate(this.cardExpirationDate).isValid && valid.cvv(this.cardCVV).isValid) {
@@ -603,6 +593,8 @@ export default {
       }
     },
     cardExpirationDate (value) {
+      let firstDigit = value.charAt(0)
+      firstDigit > 1 ? this.$store.state.creditCard.cardExpirationDate = `0${firstDigit} / ` : ''
       let cardExpirationDate = valid.expirationDate(value)
       cardExpirationDate.isPotentiallyValid ? this.cardExpirationDateError = false : this.cardExpirationDateError = true
     },
