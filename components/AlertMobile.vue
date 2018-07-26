@@ -1,6 +1,6 @@
 <template>
   <transition name="alert">
-    <div class="alert-modal" v-if="alertMobile.show">
+    <div class="alert-modal" :style="bgColor" v-if="alertMobile.show">
 
       <div class="alert-body">
         
@@ -33,7 +33,10 @@ export default {
   computed: {
     alertMobile () { return this.$store.state.alertMobile },
     isError () { return this.$store.state.alertMobile.type === 'error' },
-    isWarning () { return this.$store.state.alertMobile.type === 'warning' }
+    isWarning () { return this.$store.state.alertMobile.type === 'warning' },
+    bgColor () {
+      return this.isError ? 'background: #FF0134' : 'background: #FFA04F'
+    }
   }
 }
 </script>
@@ -49,7 +52,6 @@ export default {
   height: 4.6rem;
   bottom: 0;
   left: 0;
-  background: white;
   box-shadow: 0px -1px 1px 0px rgba(0,0,0,0.1);
   transition: var(--main-transition);
   & .alert-body {
@@ -62,11 +64,12 @@ export default {
       & .__message {
         font-size: 14px;
         font-weight: 500;
+        color: white;
         & .__type {
           padding-right: 2px;
           font-size: 14px;
-          font-weight: 600;
-          color: #FF0134;
+          font-weight: 700;
+          color: white;
         }
       }
       & .__action-btn {
