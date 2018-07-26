@@ -55,7 +55,8 @@ const store = () => new Vuex.Store({
     */
     alertMobile: {
       show: false,
-      type: '', /* error, warning */
+      type: '', /* error, warning, info */
+      title: '',
       message: ''
     },
     error: false,
@@ -351,6 +352,7 @@ const store = () => new Vuex.Store({
     m_hideAlertMobile (state) {
       state.alertMobile.show = false
       state.alertMobile.type = ''
+      state.alertMobile.title = ''
       state.alertMobile.message = ''
     },
     m_isOnline (state, payload) {

@@ -71,6 +71,12 @@ export default {
       if (this.$store.state.reservaAcomod.periodoReserva !== null) {
         this.$modal.hide('datepicker')
         window.history.back(1)
+      } else {
+        this.$store.commit('m_alertMobile', {
+          show: true,
+          type: 'warning',
+          message: 'Adicione as datas de sua viagem.',
+        })
       }
     }
   },
@@ -124,7 +130,7 @@ export default {
       padding: 0 1.3rem;
       font-size: 16px;
       font-weight: 600;
-      background:rgb(212, 212, 212);
+      background:rgb(232, 232, 232);
       color: white;
       height: 3.1rem;
       border-radius: 5px;

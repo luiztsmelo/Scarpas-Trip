@@ -418,17 +418,19 @@ export default {
   },
   methods: {
     limpezaFeeDialog () {
-      this.$modal.show('dialog', {
+      this.$store.commit('m_alertMobile', {
+        show: true,
+        type: 'info',
         title: 'Taxa de Limpeza',
-        text: `Taxa cobrada pelo proprietário para arcar com os custos de limpeza ${this.tipoAcomod}.`,
-        buttons: [{ title: 'OK' }]
+        message: `Taxa cobrada pelo proprietário para arcar com os custos de limpeza ${this.tipoAcomod}.`,
       })
     },
     serviceFeeDialog () {
-      this.$modal.show('dialog', {
+      this.$store.commit('m_alertMobile', {
+        show: true,
+        type: 'info',
         title: 'Taxa de Serviço',
-        text: `Taxa de ${Math.round(this.$store.state.serviceFeeAcomod * 100)}% cobrada com o intuito de garantir suporte e total segurança em sua estadia caso algum problema aconteça.`,
-        buttons: [{ title: 'OK' }]
+        message: `Taxa de ${Math.round(this.$store.state.serviceFeeAcomod * 100)}% cobrada com o intuito de garantir suporte e total segurança em sua estadia caso algum problema aconteça.`,
       })
     },
     backBtn () {
@@ -509,6 +511,7 @@ export default {
         this.$store.commit('m_alertMobile', {
           show: true,
           type: 'error',
+          title: 'Erro',
           message: 'Cartão inválido.',
         })
       }
