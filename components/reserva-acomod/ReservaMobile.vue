@@ -83,63 +83,14 @@
 
 
 
-        <!-- ########## CADASTRO PG.2 ########## -->
+        <!-- ########## REGRAS PG.2 ########## -->
         <div class="etapa-reserva-box" v-if="$store.state.reservaAcomod2">
 
           <h3 class="etapas">2 de 5 etapas</h3>
 
-          <h1 class="__title">
-            {{ user.email === null ? 'Antes de continuar, precisamos de seu cadastro' : `Ótimo ${user.firstName}, só mais uma informação` }}
-          </h1>
-
-
-          <div class="sign-in-btns" v-if="user.email === null">
-            <button type="button" class="facebook-btn" @click="$store.dispatch('a_facebookSignIn')">Cadastrar com Facebook</button>
-            <button type="button" class="google-btn" @click="$store.dispatch('a_googleSignIn')">Cadastrar com Google</button>
-            <button type="button" class="email-btn">Cadastrar com E-mail</button>
-          </div>
-
-          <div class="after-sign-in" v-else>
-            <!-- CELULAR -->
-            <div class="item-form">
-              <label>Celular / WhatsApp</label>
-              <masked-input
-                type="tel"
-                v-model="reservaAcomod.guestCelular"
-                :mask="['(', /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]"
-                :guide="false"
-                placeholder="(  )          ">
-              </masked-input>
-            </div><!-- CELULAR -->
-          </div>
-          
-
-
-          <div class="buttons">
-            <div class="buttons-body">
-              <h3 class="__valor" v-if="reservaAcomod.valorReservaTotal !== null">R${{ reservaAcomod.valorReservaTotal.toLocaleString() }}
-                <span class="__valor-noites"> por {{ reservaAcomod.noites }} {{ reservaAcomod.noites == 1 ? 'noite' : 'noites'}}</span>
-              </h3>
-              <button type="button" class="__next-btn" :style="form2ok" @click="nextBtn2">Continuar</button>
-            </div>
-          </div>
-
-        </div><!-- ########## CADASTRO PG.2 ########## -->
-
-
-
-
-
-
-        <!-- ########## DETALHES PG.3 ########## -->
-        <div class="etapa-reserva-box" v-if="$store.state.reservaAcomod3">
-
-          <h3 class="etapas">3 de 5 etapas</h3>
-
           <h1 class="__title">Revise as regras da casa</h1>
 
           <h3 class="__subtitle">Highlights da casa aqui</h3>
-
 
 
           <div class="check-in-out">
@@ -175,12 +126,58 @@
               <h3 class="__valor" v-if="reservaAcomod.valorReservaTotal !== null">R${{ reservaAcomod.valorReservaTotal.toLocaleString() }}
                 <span class="__valor-noites"> por {{ reservaAcomod.noites }} {{ reservaAcomod.noites == 1 ? 'noite' : 'noites'}}</span>
               </h3>
-              <button type="button" class="__next-btn" :style="form3ok" @click="nextBtn3">Concordar</button>
+              <button type="button" class="__next-btn" :style="form2ok" @click="nextBtn2">Concordar</button>
             </div>
           </div>
 
-        </div><!-- ########## DETALHES PG.3 ########## -->
+        </div><!-- ########## REGRAS PG.2 ########## -->
         
+
+
+
+
+        <!-- ########## CADASTRO PG.3 ########## -->
+        <div class="etapa-reserva-box" v-if="$store.state.reservaAcomod3">
+
+          <h3 class="etapas">3 de 5 etapas</h3>
+
+          <h1 class="__title">
+            {{ user.email === null ? 'Antes de continuar, precisamos de seu cadastro' : `Ótimo ${user.firstName}, só mais uma informação` }}
+          </h1>
+
+
+          <div class="sign-in-btns" v-if="user.email === null">
+            <button type="button" class="facebook-btn" @click="$store.dispatch('a_facebookSignIn')">Cadastrar com Facebook</button>
+            <button type="button" class="google-btn" @click="$store.dispatch('a_googleSignIn')">Cadastrar com Google</button>
+            <button type="button" class="email-btn">Cadastrar com E-mail</button>
+          </div>
+
+          <div class="after-sign-in" v-else>
+            <!-- CELULAR -->
+            <div class="item-form">
+              <label>Celular / WhatsApp</label>
+              <masked-input
+                type="tel"
+                v-model="reservaAcomod.guestCelular"
+                :mask="['(', /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]"
+                :guide="false"
+                placeholder="(  )          ">
+              </masked-input>
+            </div><!-- CELULAR -->
+          </div>
+          
+
+          <div class="buttons">
+            <div class="buttons-body">
+              <h3 class="__valor" v-if="reservaAcomod.valorReservaTotal !== null">R${{ reservaAcomod.valorReservaTotal.toLocaleString() }}
+                <span class="__valor-noites"> por {{ reservaAcomod.noites }} {{ reservaAcomod.noites == 1 ? 'noite' : 'noites'}}</span>
+              </h3>
+              <button type="button" class="__next-btn" :style="form3ok" @click="nextBtn3">Continuar</button>
+            </div>
+          </div>
+
+        </div><!-- ########## CADASTRO PG.3 ########## -->
+
 
 
 
@@ -475,12 +472,15 @@ export default {
       }
     },
     nextBtn2 () {
+      this.$store.commit('m_reservaAcomod2', false), this.$store.commit('m_reservaAcomod3', true), window.location.hash = this.$store.state.randomHashs[3], this.scrollTop()
+    },
+    nextBtn3 () {
       if (this.reservaAcomod.guestCelular.length === 15) {
         this.creditCard.cardHolderName = this.user.fullName
         this.reservaAcomod.guestName = this.user.fullName
-        this.$store.commit('m_reservaAcomod2', false)
-        this.$store.commit('m_reservaAcomod3', true)
-        window.location.hash = this.$store.state.randomHashs[3]
+        this.$store.commit('m_reservaAcomod3', false)
+        this.$store.commit('m_reservaAcomod4', true)
+        window.location.hash = this.$store.state.randomHashs[4]
         this.scrollTop()
       } else {
         this.$store.commit('show_alert', {
@@ -488,11 +488,6 @@ export default {
           title: 'Ops',
           message: this.user.email === null ? 'É preciso se cadastrar.' : 'Adicione seu número de celular.',
         })
-      }
-    },
-    nextBtn3 () {
-      if (1<2) {
-        this.$store.commit('m_reservaAcomod3', false), this.$store.commit('m_reservaAcomod4', true), window.location.hash = this.$store.state.randomHashs[4], this.scrollTop()
       }
     },
     nextBtn4 () {
@@ -571,10 +566,10 @@ export default {
       return this.reservaAcomod.periodoReserva !== null ? 'background: #50CB9D' : ''
     },
     form2ok () {
-      return this.reservaAcomod.guestCelular.length === 15 ? 'background: #50CB9D' : ''
+      return 'background: #50CB9D'
     },
     form3ok () {
-      return 'background: #50CB9D'
+      return this.reservaAcomod.guestCelular.length === 15 ? 'background: #50CB9D' : ''
     },
     form4ok () {
       return 1<2 ? 'background: #50CB9D' : ''
