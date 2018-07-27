@@ -105,8 +105,8 @@
 
             <div style="flex:49%">
               <h3 class="__title" style="text-align: right">Check-out</h3>
-              <h3 class="__text" style="text-align: right">{{ acomod.checkOutTime === 'A qualquer hora' ? 'A qualquer hora' : `Até as ${acomod.checkOutTime}` }}</h3>
-              <h3 class="__text" style="text-align: right">{{ checkOut }}</h3>
+              <h3 class="__item-text" style="text-align: right">{{ acomod.checkOutTime === 'A qualquer hora' ? 'A qualquer hora' : `Até as ${acomod.checkOutTime}` }}</h3>
+              <h3 class="__item-text" style="text-align: right">{{ checkOut }}</h3>
             </div>
 
           </div>
@@ -716,6 +716,7 @@ export default {
       & .__text {
         padding: 0 7% 1rem;
         font-size: 16px;
+        font-weight: 500;
       }
       & .periodo-reserva {
         margin: 0 7%;
@@ -788,9 +789,9 @@ export default {
           padding: 0;
           line-height: 32px
         }
-        & .__text {
+        & .__item-text {
           font-size: 16px;
-          line-height: 22px
+          line-height: 22px;
         }
         & .__slash {
           background: rgb(222,222,222);
