@@ -23,6 +23,7 @@ export const reservaAcomod = {
   },
   methods: {
     scrollTop () {
+      console.log('ok')
       document.body.scrollTop = 0
       document.documentElement.scrollTop = 0
     }

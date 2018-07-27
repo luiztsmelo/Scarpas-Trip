@@ -224,7 +224,7 @@
 
 
           <div class="add-payment" style="margin-top: .3rem; margin-bottom: 1.3rem" @click="openPaymentMethod">
-            <h3 class="__item-text" style="color: #FFA04F">Forma de pagamento</h3>
+            <h3 class="__item-text" style="font-weight: 600; color: #FFA04F">Forma de pagamento</h3>
             <img src="../../assets/img/arrow-right.svg" alt="" style="width: 1.1rem; height: auto">
           </div>
 
@@ -434,31 +434,31 @@ export default {
       })
     },
     backBtn () {
-      if (this.$store.state.reservaAcomod1 === true) {
+      if (this.$store.state.reservaAcomod1) {
         window.history.back(1)
         this.$store.commit('m_showReservaAcomod', false)
       }
-      if (this.$store.state.reservaAcomod2 === true) {
+      if (this.$store.state.reservaAcomod2) {
         window.history.back(1)
         this.$store.commit('m_reservaAcomod2', false)
         this.$store.commit('m_reservaAcomod1', true)
       }
-      if (this.$store.state.reservaAcomod3 === true) {
+      if (this.$store.state.reservaAcomod3) {
         window.history.back(1)
         this.$store.commit('m_reservaAcomod3', false)
         this.$store.commit('m_reservaAcomod2', true)
       }
-      if (this.$store.state.reservaAcomod4 === true) {
+      if (this.$store.state.reservaAcomod4) {
         window.history.back(1)
         this.$store.commit('m_reservaAcomod4', false)
         this.$store.commit('m_reservaAcomod3', true)
       }
-      if (this.$store.state.reservaAcomod5 === true) {
+      if (this.$store.state.reservaAcomod5) {
         window.history.back(1)
         this.$store.commit('m_reservaAcomod5', false)
         this.$store.commit('m_reservaAcomod4', true)
       }
-      if (this.$store.state.reservaAcomodPaymentMethod === true || this.$store.state.reservaAcomodCreditCard === true || this.$store.state.reservaAcomodBoleto === true || this.$store.state.reservaAcomodBilling === true) {
+      if (this.$store.state.reservaAcomodPaymentMethod || this.$store.state.reservaAcomodCreditCard || this.$store.state.reservaAcomodBoleto || this.$store.state.reservaAcomodBilling) {
         window.history.back(1)
         this.$store.commit('m_reservaAcomodPaymentMethod', false)
         this.$store.commit('m_reservaAcomodCreditCard', false)
@@ -469,7 +469,7 @@ export default {
     },
     nextBtn1 () {
       if (this.reservaAcomod.periodoReserva !== null) {
-        this.$store.commit('m_reservaAcomod1', false), this.$store.commit('m_reservaAcomod2', true), window.location.hash = this.$store.state.randomHashs[2], this.scrollTop()
+        this.$store.commit('m_reservaAcomod1', false), this.$store.commit('m_reservaAcomod2', true), window.location.hash = this.$store.state.randomHashs[2]
       } else {
         this.$store.commit('show_alert', {
           type: 'warning',
@@ -479,7 +479,7 @@ export default {
       }
     },
     nextBtn2 () {
-      this.$store.commit('m_reservaAcomod2', false), this.$store.commit('m_reservaAcomod3', true), window.location.hash = this.$store.state.randomHashs[3], this.scrollTop()
+      this.$store.commit('m_reservaAcomod2', false), this.$store.commit('m_reservaAcomod3', true), window.location.hash = this.$store.state.randomHashs[3]
     },
     nextBtn3 () {
       if (this.reservaAcomod.guestCelular.length === 15) {
@@ -499,7 +499,7 @@ export default {
     },
     nextBtn4 () {
       if (1<2) {
-        this.$store.commit('m_reservaAcomod4', false), this.$store.commit('m_reservaAcomod5', true), window.location.hash = this.$store.state.randomHashs[5], this.scrollTop()
+        this.$store.commit('m_reservaAcomod4', false), this.$store.commit('m_reservaAcomod5', true), window.location.hash = this.$store.state.randomHashs[5]
       }
     },
     nextBtnCreditCard () {
@@ -515,19 +515,19 @@ export default {
     },
     nextBtnBoleto () {
       if (1<2) {
-        this.$store.commit('m_reservaAcomodBoleto', false), window.history.back(1), this.scrollTop()
+        this.$store.commit('m_reservaAcomodBoleto', false), window.history.back(1)
       }
     },
     nextBtnBilling () {
       if (1<2) {
-        this.$store.commit('m_reservaAcomodBilling', false), window.history.back(1), this.scrollTop()
+        this.$store.commit('m_reservaAcomodBilling', false), window.history.back(1)
       }
     },
     openDatePicker () {
       this.$store.commit('m_loader', true), this.$modal.show('datepicker'), window.location.hash = `${this.$store.state.randomHashs[1]}-datas`
     },
     openPaymentMethod () {
-      this.$store.commit('m_reservaAcomod5', false), this.$store.commit('m_reservaAcomodPaymentMethod', true), window.location.hash = this.$store.state.randomHashs[6], this.scrollTop()
+      this.$store.commit('m_reservaAcomod5', false), this.$store.commit('m_reservaAcomodPaymentMethod', true), window.location.hash = this.$store.state.randomHashs[6]
     },
     openCreditCard () {
       this.$store.commit('m_reservaAcomodPaymentMethod', false), this.$store.commit('m_reservaAcomodCreditCard', true), this.scrollTop()
@@ -633,21 +633,25 @@ export default {
         this.$store.commit('m_reservaAcomod1', true)
         this.$store.commit('m_reservaAcomod2', false)
         this.$store.commit('hide_alert')
+        this.scrollTop()
       }
       if (value === `#${this.$store.state.randomHashs[2]}`) {
         this.$store.commit('m_reservaAcomod2', true)
         this.$store.commit('m_reservaAcomod3', false)
         this.$store.commit('hide_alert')
+        this.scrollTop()
       }
       if (value === `#${this.$store.state.randomHashs[3]}`) {
         this.$store.commit('m_reservaAcomod3', true)
         this.$store.commit('m_reservaAcomod4', false)
         this.$store.commit('hide_alert')
+        this.scrollTop()
       }
       if (value === `#${this.$store.state.randomHashs[4]}`) {
         this.$store.commit('m_reservaAcomod4', true)
         this.$store.commit('m_reservaAcomod5', false)
         this.$store.commit('hide_alert')
+        this.scrollTop()
       }
       if (value === `#${this.$store.state.randomHashs[5]}`) {
         this.$store.commit('m_reservaAcomod5', true)
@@ -656,6 +660,7 @@ export default {
         this.$store.commit('m_reservaAcomodBoleto', false)
         this.$store.commit('m_reservaAcomodBilling', false)
         this.$store.commit('hide_alert')
+        this.scrollTop()
       }
       if (value === `#${this.$store.state.randomHashs[6]}`) {
         this.$store.commit('m_reservaAcomodPaymentMethod', true)
@@ -663,6 +668,7 @@ export default {
         this.$store.commit('m_reservaAcomodBoleto', false)
         this.$store.commit('m_reservaAcomodBilling', false)
         this.$store.commit('hide_alert')
+        this.scrollTop()
       }
     }
   }
@@ -716,7 +722,6 @@ export default {
       & .__text {
         padding: 0 7% 1rem;
         font-size: 16px;
-        font-weight: 500;
       }
       & .periodo-reserva {
         margin: 0 7%;
