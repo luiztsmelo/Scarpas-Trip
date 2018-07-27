@@ -4,7 +4,7 @@
 
 
 
-      <img class="__back-btn" src="../../assets/img/back.svg" @click="backBtn">
+      <img class="back-btn" src="../../assets/img/back.svg" @click="backBtn">
 
 
 
@@ -676,7 +676,7 @@ export default {
   background: white;
   overflow-y: auto;
   transition: var(--main-transition);
-  & .__back-btn {
+  & .back-btn {
     margin: 1.2rem 7% 1rem;
     cursor: pointer;
     width: 1.07rem;

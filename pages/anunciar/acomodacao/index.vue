@@ -645,6 +645,7 @@
                   :class="[ agenciaDVError ? 'has-error' : '' ]"
                   type="tel"
                   v-model="$store.state.bankAccount.agenciaDV"
+                  @focus="agenciaDVfocus"
                   :mask="[/\d/]"
                   :guide="false">
                 </masked-input>
@@ -762,6 +763,13 @@ export default {
     scrollTop () {
       document.body.scrollTop = 0; // For Safari
       document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+    },
+    agenciaDVfocus () {
+      this.$store.commit('m_alertMobile', {
+        type: 'info',
+        title: 'Atenção',
+        message: 'Se o número de sua agência não possuir dígito, ou for X, insira o número 0.',
+      })
     },
     /* ******************** IMAGE INPUT ******************** */
     async imageConfirm () {
