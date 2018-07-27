@@ -90,15 +90,15 @@
 
           <h1 class="__title">Revise as regras da casa</h1>
 
-          <h3 class="__subtitle">Highlights da casa aqui</h3>
+          <h3 class="__text">Highlights da casa aqui</h3>
 
 
           <div class="check-in-out">
 
             <div style="flex:49%">
               <h3 class="__title">Check-in</h3>
-              <h3 class="__text">{{ acomod.checkInTime === 'A qualquer hora' ? 'A qualquer hora' : `Após as ${acomod.checkInTime}` }}</h3>
-              <h3 class="__text">{{ checkIn }}</h3>
+              <h3 class="__item-text">{{ acomod.checkInTime === 'A qualquer hora' ? 'A qualquer hora' : `Após as ${acomod.checkInTime}` }}</h3>
+              <h3 class="__item-text">{{ checkIn }}</h3>
             </div>
 
             <div class="__slash"></div>
@@ -112,7 +112,7 @@
           </div>
 
 
-          <h3 class="__subtitle">Regras aqui</h3>
+          <h3 class="__text">Regras aqui</h3>
 
 
           <!-- <div class="__item">
@@ -190,7 +190,7 @@
 
           <h1 class="__title">Mensagem para {{ acomod.proprietario.split(' ')[0] }}</h1>
 
-          <h3 class="__subtitle">Texto aqui</h3>
+          <h3 class="__text">Texto aqui</h3>
 
 
 
@@ -218,20 +218,27 @@
           <h1 class="__title">Pagar e confirmar</h1>
 
 
-          <h3 class="__subtitle">Você somente será cobrado caso {{ acomod.proprietario.split(' ')[0] }} confirme seu pedido de reserva.</h3>
+          <h3 class="__text">Você somente será cobrado caso {{ acomod.proprietario.split(' ')[0] }} confirme seu pedido de reserva.</h3>
 
-          <h3 class="__subtitle">Para sua segurança, só liberaremos o pagamento para ele no dia seguinte de seu check-in, {{ dayAfterCheckin }}. Não se preocupe, seus dados estarão seguros.</h3>
+          <h3 class="__text">Para sua segurança, só liberaremos o pagamento para ele no dia seguinte de seu check-in, {{ dayAfterCheckin }}. Não se preocupe, seus dados estarão seguros.</h3>
 
 
-          <div class="add-payment" style="margin-bottom: 1.1rem" @click="openPaymentMethod">
-            <h3 class="__text" style="color:#FFA04F">Forma de pagamento</h3>
+          <div class="add-payment" style="margin-top: .3rem; margin-bottom: 1.3rem" @click="openPaymentMethod">
+            <h3 class="__item-text" style="color: #FFA04F">Forma de pagamento</h3>
             <img src="../../assets/img/arrow-right.svg" alt="" style="width: 1.1rem; height: auto">
           </div>
 
 
-          <h3 class="__subtitle">Política de cancelamento</h3>
+          <h3 class="__subtitle">Política de cancelamento: Flexível</h3>
+          <h3 class="__text">Cancele em 48h da reserva e até 7 dias antes do check-in para receber um reembolso integral.</h3>
+          
+
+          <div class="divider"></div>
 
 
+          <h3 class="__text">Eu concordo com os termos de serviço.</h3>
+
+          
           <div class="buttons">
             <div class="buttons-body">
               <h3 class="__valor" v-if="reservaAcomod.valorReservaTotal !== null">R${{ reservaAcomod.valorReservaTotal.toLocaleString() }}
@@ -255,14 +262,14 @@
           <div class="add-payment" style="border: none" @click="openCreditCard">
             <div style="display:flex;align-items:center">
               <img src="../../assets/img/credit-card.svg" class="__img">
-              <h3 class="__text">Cartão de Crédito</h3>
+              <h3 class="__item-text">Cartão de Crédito</h3>
             </div>
             <img src="../../assets/img/arrow-right.svg" style="width: 1.1rem; height: auto">
           </div>
           <div class="add-payment" style="border-bottom: none" @click="openBoleto">
             <div style="display:flex;align-items:center">
               <img src="../../assets/img/boleto.svg" class="__img">
-              <h3 class="__text">Boleto</h3>
+              <h3 class="__item-text">Boleto</h3>
             </div>
             <img src="../../assets/img/arrow-right.svg" style="width: 1.1rem; height: auto">
           </div>
@@ -686,9 +693,8 @@ export default {
     display: flex;
     flex-flow: column;
     height: 100%;
-    overflow-y: auto;
     & .etapa-reserva-box {
-      padding-bottom: 4rem;
+      padding-bottom: 5rem;
       & .etapas {
         padding: 0 7% 0.2rem;
         font-size: 14px;
@@ -702,7 +708,13 @@ export default {
         font-weight: 700;
       }
       & .__subtitle {
-        padding: 0 7% 1.1rem;
+        padding: 0 7% .3rem;
+        padding-bottom: .3rem;
+        font-size: 16px;
+        font-weight: 600;
+      }
+      & .__text {
+        padding: 0 7% 1rem;
         font-size: 16px;
       }
       & .periodo-reserva {
@@ -800,10 +812,16 @@ export default {
           height: auto;
           margin-right: .8rem;
         }
-        & .__text {
+        & .__item-text {
           font-size: 17px;
           font-weight: 500;
         }
+      }
+      & .divider {
+        margin: .2rem 7% 1rem;
+        height: 1px;
+        width: calc(100% - 14%);
+        background-color: rgb(222,222,222);
       }
       & .item-form {
         padding: 0 7%;
