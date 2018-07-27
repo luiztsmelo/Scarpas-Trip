@@ -4,18 +4,12 @@
 
 
 
-      <!-- BACK BUTTON -->
-      <div class="back-bar">
-        <div class="back-box" @click="backBtn">
-          <img class="__back-btn" src="../../assets/img/back.svg">
-        </div>
-      </div><!-- BACK BUTTON -->
+      <img class="__back-btn" src="../../assets/img/back.svg" @click="backBtn">
 
 
 
       <div class="reserva-acomod-body">
         
-
 
         <!-- ########## COTAÇÃO PG.1 ########## -->
         <div class="etapa-reserva-box" v-if="$store.state.reservaAcomod1">
@@ -471,6 +465,7 @@ export default {
       } else {
         this.$store.commit('m_alertMobile', {
           type: 'warning',
+          title: 'Ops',
           message: 'Adicione as datas de sua viagem.',
         })
       }
@@ -486,6 +481,7 @@ export default {
       } else {
         this.$store.commit('m_alertMobile', {
           type: 'warning',
+          title: 'Ops',
           message: this.user.email === null ? 'É preciso se cadastrar.' : 'Adicione seu número de celular.',
         })
       }
@@ -538,6 +534,7 @@ export default {
       } else {
         this.$store.commit('m_alertMobile', {
           type: 'warning',
+          title: 'Ops',
           message: 'Adicione uma forma de pagamento.',
         })
       }
@@ -679,25 +676,12 @@ export default {
   background: white;
   overflow-y: auto;
   transition: var(--main-transition);
-  & .back-bar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 3.2rem;
-    background: white;
-    & .back-box {
-      display: inline-flex;
-      align-items: center;
-      height: 100%;
-      padding: 0 7%;
-      & .__back-btn {
-        cursor: pointer;
-        width: 1.07rem;
-        height: auto;
-        filter: invert(75%);
-      }
-    }
+  & .__back-btn {
+    margin: 1.2rem 7% .5rem;
+    cursor: pointer;
+    width: 1.07rem;
+    height: auto;
+    filter: invert(75%);
   }
   & .reserva-acomod-body {
     display: flex;
@@ -706,7 +690,7 @@ export default {
     height: 100%;
     overflow-y: auto;
     & .etapa-reserva-box {
-      padding: 2.9rem 0 5rem 0;
+      padding-bottom: 5rem;
       & .etapas {
         padding: 0 7% 0.2rem;
         font-size: 14px;
@@ -720,7 +704,7 @@ export default {
         font-weight: 700;
       }
       & .__subtitle {
-        padding: 0 7% 1rem;
+        padding: 0 7% 1.1rem;
         font-size: 16px;
       }
       & .periodo-reserva {

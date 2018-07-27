@@ -74,6 +74,7 @@ export default {
       } else {
         this.$store.commit('m_alertMobile', {
           type: 'warning',
+          title: 'Ops',
           message: 'Adicione as datas de sua viagem.',
         })
       }

@@ -8,7 +8,7 @@
         <div class="alert-text">
 
           <p class="__message" :style="textColor">
-            <span class="__type" :style="textColor" v-if="this.isError || this.isInfo">{{ alertMobile.title }}</span>
+            <span class="__type" :style="textColor" v-if="this.alertMobile.title !== ''">{{ alertMobile.title }}</span>
             {{ alertMobile.message }}
           </p>
 
