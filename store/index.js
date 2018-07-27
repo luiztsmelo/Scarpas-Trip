@@ -104,7 +104,7 @@ const store = () => new Vuex.Store({
     acomodPlace: null,
     imageCountAc: 0,
     disabledDatesAcomod: null,
-    acomodData: {/* Atualizar action */
+    acomodData: { /* Atualizar action */
       acomodID: null,
       userID: null,
       recipientID: null,

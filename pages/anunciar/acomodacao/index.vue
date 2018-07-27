@@ -78,7 +78,7 @@
     <!-- ########## TOTAL DE HÓSPEDES PG.2 ########## -->
     <form class="cadastro-acomodacao" v-if="$store.state.cadastroAcomod2">
 
-      <h1 class="__form-title">Quantas pessoas {{ tipoAcomodSd }} consegue acomodar?</h1>
+      <h1 class="__form-title">Quantas pessoas {{ tipoAcomodSd }} pode acomodar?</h1>
 
       <div class="item-form">
         <label>Total de Hóspedes</label>
@@ -972,7 +972,12 @@ export default {
         })
       }
       if (this.$store.state.acomodData.celular.length === 15) {
-        this.$store.commit('m_cadastroAcomod11', false), this.$store.commit('m_cadastroAcomod12', true), this.$store.commit('m_acomodProgressBar', (100/12)*12), this.scrollTop(), window.location.hash = `${this.randomHashs[12]}`
+        this.$store.state.bankAccount.legalName = this.user.fullName
+        this.$store.commit('m_cadastroAcomod11', false)
+        this.$store.commit('m_cadastroAcomod12', true)
+        this.$store.commit('m_acomodProgressBar', (100/12)*12)
+        this.scrollTop()
+        window.location.hash = `${this.randomHashs[12]}`
       } else {
         this.$store.commit('show_alert', {
           type: 'warning',
@@ -1062,7 +1067,6 @@ export default {
   computed: {
     /* ******************** PATHS ******************** */
     user () { return this.$store.state.user },
-    userEmail () { return this.$store.state.user.email },
     hash () { return this.$route.hash },
     randomHashs () { return this.$store.state.randomHashs },
     /* Bank Account */
@@ -1151,11 +1155,6 @@ export default {
     contaDV (value) { value !== '' ? this.contaDVError = false : '' },
     legalName (value) { value !== '' ? this.legalNameError = false : '' },
     docNumber (value) { value !== '' ? this.docNumberError = false : ''},
-    userEmail (value) {
-      if (value !== null) {
-        this.$store.state.bankAccount.legalName = this.user.fullName
-      }
-    },
     hash (value) {
       if (value === '') {
         if (this.$store.state.lastHash === `#${this.randomHashs[1]}`) {
