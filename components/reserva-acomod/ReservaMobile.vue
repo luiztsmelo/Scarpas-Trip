@@ -499,12 +499,6 @@ export default {
     nextBtnCreditCard () {
       if (valid.number(this.cardNumber).isValid && valid.expirationDate(this.cardExpirationDate).isValid && valid.cvv(this.cardCVV).isValid) {
         this.$store.commit('m_reservaAcomodCreditCard', false), this.$store.commit('m_reservaAcomodBilling', true), this.scrollTop()
-      } else {
-        this.$store.commit('m_alertMobile', {
-          type: 'error',
-          title: 'Erro',
-          message: 'Cartão inválido.',
-        })
       }
     },
     nextBtnBoleto () {
@@ -521,13 +515,13 @@ export default {
       this.$store.commit('m_loader', true), this.$modal.show('datepicker'), window.location.hash = `${this.$store.state.randomHashs[1]}-datas`
     },
     openPaymentMethod () {
-      this.$store.commit('m_reservaAcomod5', false), this.$store.commit('m_reservaAcomodPaymentMethod', true), window.location.hash = this.$store.state.randomHashs[6]
+      this.$store.commit('m_reservaAcomod5', false), this.$store.commit('m_reservaAcomodPaymentMethod', true), window.location.hash = this.$store.state.randomHashs[6], this.scrollTop()
     },
     openCreditCard () {
-      this.$store.commit('m_reservaAcomodPaymentMethod', false), this.$store.commit('m_reservaAcomodCreditCard', true)
+      this.$store.commit('m_reservaAcomodPaymentMethod', false), this.$store.commit('m_reservaAcomodCreditCard', true), this.scrollTop()
     },
     openBoleto () {
-      this.$store.commit('m_reservaAcomodPaymentMethod', false), this.$store.commit('m_reservaAcomodBoleto', true)
+      this.$store.commit('m_reservaAcomodPaymentMethod', false), this.$store.commit('m_reservaAcomodBoleto', true), this.scrollTop()
     },
     concluirReserva () {
       if (1>2) {
@@ -597,10 +591,35 @@ export default {
   watch: {
     cardNumber (value) {
       let cardNumber = valid.number(value)
-      cardNumber.isPotentiallyValid ? this.cardNumberError = false : this.cardNumberError = true
-      if (value.length === 19) {
-        cardNumber.isValid ? this.cardNumberError = false : this.cardNumberError = true
+
+      if (cardNumber.isPotentiallyValid) {
+        this.cardNumberError = false
+        this.$store.commit('m_hideAlertMobile')
+      } else {
+        this.cardNumberError = true
+        this.$store.commit('m_alertMobile', {
+          type: 'error',
+          title: 'Erro',
+          message: 'Cartão inválido.',
+          persist: true
+        })
       }
+
+      if (value.length === 19) {
+        if (cardNumber.isValid) {
+          this.cardNumberError = false
+          this.$store.commit('m_hideAlertMobile')
+        } else {
+          this.cardNumberError = true
+          this.$store.commit('m_alertMobile', {
+            type: 'error',
+            title: 'Erro',
+            message: 'Cartão inválido.',
+            persist: true
+          })
+        }
+      }
+
       if (cardNumber.card) {
         this.$store.state.cardType = cardNumber.card.type
         this.$store.state.cardTypeNice = cardNumber.card.niceType
@@ -609,12 +628,35 @@ export default {
     cardExpirationDate (value) {
       let firstDigit = value.charAt(0)
       firstDigit > 1 ? this.$store.state.creditCard.cardExpirationDate = `0${firstDigit} / ` : ''
+
       let cardExpirationDate = valid.expirationDate(value)
-      cardExpirationDate.isPotentiallyValid ? this.cardExpirationDateError = false : this.cardExpirationDateError = true
+      if (cardExpirationDate.isPotentiallyValid) {
+        this.cardExpirationDateError = false
+        this.$store.commit('m_hideAlertMobile')
+      } else {
+        this.cardExpirationDateError = true
+        this.$store.commit('m_alertMobile', {
+          type: 'error',
+          title: 'Erro',
+          message: 'Cartão inválido.',
+          persist: true
+        })
+      }
     },
     cardCVV (value) {
       let cardCVV = valid.cvv(value)
-      cardCVV.isPotentiallyValid ? this.cardCvvError = false : this.cardCvvError = true
+      if (cardCVV.isPotentiallyValid) {
+        this.cardCvvError = false
+        this.$store.commit('m_hideAlertMobile')
+      } else {
+        this.cardCvvError = true
+        this.$store.commit('m_alertMobile', {
+          type: 'error',
+          title: 'Erro',
+          message: 'Cartão inválido.',
+          persist: true
+        })
+      }
     },
     hash (value) {
       if (value === '') {

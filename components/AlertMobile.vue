@@ -50,8 +50,10 @@ export default {
   watch: {
     message (value) {
       if (value !== '') {
-        if (!this.isInfo) {
-          setTimeout(() => { this.$store.commit('m_hideAlertMobile') }, 3200)
+        if (this.isError || this.isWarning) {
+          if (!this.alertMobile.persist) {
+            setTimeout(() => { this.$store.commit('m_hideAlertMobile') }, 3300)
+          }
         }
       }
     }

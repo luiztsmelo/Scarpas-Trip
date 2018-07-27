@@ -56,7 +56,8 @@ const store = () => new Vuex.Store({
     alertMobile: {
       type: '', /* error, warning, info */
       title: '',
-      message: ''
+      message: '',
+      persist: false /* Optional */
     },
     error: false,
     reservaPageError: false,
@@ -352,6 +353,7 @@ const store = () => new Vuex.Store({
       state.alertMobile.type = ''
       state.alertMobile.title = ''
       state.alertMobile.message = ''
+      state.alertMobile.persist = false
     },
     m_isOnline (state, payload) {
       state.isOnline = payload
