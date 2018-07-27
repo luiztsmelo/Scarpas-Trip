@@ -112,10 +112,10 @@ export default {
 
 @media (min-width: 1024px) {
   .alert-modal {
-    min-height: 5.8rem;
+    min-height: 5.7rem;
     & .alert-body {
       justify-content: center;
-      padding: 0 25%;
+      padding: 0 22%;
       & .alert-text {
         & .__message {
           font-size: 16px;

@@ -78,7 +78,7 @@
     <!-- ########## TOTAL DE HÓSPEDES PG.2 ########## -->
     <form class="cadastro-acomodacao" v-if="$store.state.cadastroAcomod2">
 
-      <h1 class="__form-title">Quantas pessoas {{ tipoAcomodTextLower }} consegue acomodar?</h1>
+      <h1 class="__form-title">Quantas pessoas {{ tipoAcomodSd }} consegue acomodar?</h1>
 
       <div class="item-form">
         <label>Total de Hóspedes</label>
@@ -102,7 +102,7 @@
     <!-- ########## CARACTERÍSTICAS PG.3 ########## -->
     <form class="cadastro-acomodacao" v-if="$store.state.cadastroAcomod3">
 
-      <h1 class="__form-title">Características físicas {{ tipoAcomodText }}</h1>
+      <h1 class="__form-title">Características físicas {{ tipoAcomodDd }}</h1>
 
       <div class="item-form">
         <label>Nº de Quartos</label>
@@ -257,7 +257,7 @@
       </div>
 
       <h3 class="without-address" @click="$modal.show('local-map-modal'), $store.state.fromWithoutAddress=true">
-        {{ tipoAcomodTextLocal }} não tem endereço?
+        {{ tipoAcomodSd.charAt(0).toUpperCase() + tipoAcomodSd.slice(1) }} não tem endereço?
       </h3>
 
       <localMap/>
@@ -277,7 +277,7 @@
     <!-- ########## IMAGEM E VÍDEOS PG.6 ########## -->
     <form class="cadastro-acomodacao" v-show="$store.state.cadastroAcomod6">
 
-      <h1 class="__form-title">Adicione imagens {{ tipoAcomodText }}</h1>
+      <h1 class="__form-title">Adicione imagens {{ tipoAcomodDd }}</h1>
 
 
       <div class="modal-croppa" v-show="showCroppaModal" @click="showCroppaModal=false">
@@ -378,7 +378,7 @@
     <!-- ########## REGRAS PG.8 ########## -->
     <form class="cadastro-acomodacao" v-if="$store.state.cadastroAcomod8">
 
-      <h1 class="__form-title">Quais são as regras {{ tipoAcomodText }}?</h1>
+      <h1 class="__form-title">Quais são as regras {{ tipoAcomodDd }}?</h1>
 
       <div class="regras-box">
 
@@ -494,7 +494,7 @@
       v-autosize="title"
       maxlength="60"
       rows="1"
-      :placeholder="'ex: ' + tipoAcomodTitulo + ' em Capitólio' + totalSuitesTitulo"
+      :placeholder="'ex: ' + tipoAcomodUpperLinda + ' em Capitólio' + totalSuitesTitulo"
       required>
       {{title}}</textarea>
 
@@ -515,7 +515,7 @@
     <!-- ########## DESCRIÇÃO PG.10 ########## -->
     <form class="cadastro-acomodacao" v-if="$store.state.cadastroAcomod10">
 
-      <h1 class="__form-title">Descreva melhor {{ tipoAcomodTextLower }}</h1>   
+      <h1 class="__form-title">Descreva melhor {{ tipoAcomodSd }}</h1>   
 
       <textarea 
       v-model="$store.state.acomodData.subtitle"
@@ -598,9 +598,9 @@
     <!-- ########## DADOS BANCÁRIOS PG.12 ########## -->
     <form class="cadastro-acomodacao" v-if="$store.state.cadastroAcomod12">
 
-      <h1 class="__form-title">Seus dados bancários para transferência</h1>   
+      <h1 class="__form-title">Insira suas informações bancárias</h1>   
 
-      <h3 class="__form-text">{{ $store.state.user.firstName }}, para finalizar precisamos dos dados de sua conta bancária para podermos transferir seus ganhos financeiros. Não se preocupe, suas informações estarão seguras.</h3>
+      <h3 class="__form-text">{{ $store.state.user.firstName }}, para finalizar precisamos dos dados de sua conta bancária para podermos transferir a você os seus ganhos financeiros. Não se preocupe, suas informações estarão seguras.</h3>
 
       <div class="recebedor-box">
 
@@ -608,6 +608,7 @@
             <label :class="[ bankCodeError ? 'has-error-label' : '' ]">Nome do Banco</label>
             <vue-simple-suggest
               :class="[ bankCodeError ? 'has-error' : '' ]"
+              style="color:#2a2a2a !important"
               mode="select"
               v-model="$store.state.bankAccount.bankCode"
               :list="bancos"
@@ -718,7 +719,8 @@ import 'firebase/functions'
 import isMobile from 'ismobilejs'
 import { loaded } from '~/node_modules/vue2-google-maps/src/manager'
 import MaskedInput from 'vue-text-mask'
-import { bancos } from '../../../mixins/bancos'
+import { bancos } from '@/mixins/bancos'
+import { tipoAcomod } from '@/mixins/tipoAcomod'
 import VueSimpleSuggest from 'vue-simple-suggest'
 import localMap from '~/components/localMap.vue'
 
@@ -726,7 +728,7 @@ export default {
   components: { 
     MaskedInput, VueSimpleSuggest, localMap
   },
-  mixins: [bancos],
+  mixins: [ bancos, tipoAcomod ],
   head () {
     return {
       title: 'Anunciar Acomodação em Capitólio ‒ Escarpas Trip'
@@ -981,7 +983,7 @@ export default {
     },
     agenciaDVfocus () {
       this.$store.commit('show_alert', {
-        type: 'warning',
+        type: 'info',
         title: 'Atenção',
         message: 'Se o número de sua agência não possuir dígito, ou for X, insira o número 0.',
         persist: true
@@ -1037,6 +1039,11 @@ export default {
           err.details === 'document_number' ? this.docNumberError = true : this.docNumberError = false
         })
       } else {
+        this.$store.commit('show_alert', {
+          type: 'error',
+          title: 'Erro',
+          message: 'Informações incorretas. Reveja por favor.'
+        })
         this.bankCode === '' ? this.bankCodeError = true : this.bankCodeError = false
         this.agencia === '' ? this.agenciaError = true : this.agenciaError = false
         this.agenciaDV === '' ?  this.agenciaDVError = true :  this.agenciaDVError = false
@@ -1053,10 +1060,12 @@ export default {
     })
   },
   computed: {
+    /* ******************** PATHS ******************** */
     user () { return this.$store.state.user },
+    userEmail () { return this.$store.state.user.email },
     hash () { return this.$route.hash },
     randomHashs () { return this.$store.state.randomHashs },
-    /* ******************** BANK ACCOUNT ******************** */
+    /* Bank Account */
     bankCode () { return this.$store.state.bankAccount.bankCode },
     type () { return this.$store.state.bankAccount.type },
     agencia () { return this.$store.state.bankAccount.agencia },
@@ -1074,58 +1083,6 @@ export default {
     },
     totalSuitesTitulo () {
       return this.$store.state.acomodData.totalSuites != 1 ? ' com ' + this.$store.state.acomodData.totalSuites + ' suítes' : ''
-    },
-    tipoAcomodText () {
-      const path = this.$store.state.acomodData.tipoAcomod
-      return path === 'Casa' ? 'da casa' 
-           : path === 'Apartamento' ? 'do apartamento'
-           : path === 'Rancho' ? 'do rancho'
-           : path === 'Chácara' ? 'da chácara'
-           : path === 'Pousada' ? 'da pousada'
-           : path === 'Camping' ? 'do camping'
-           : path === 'Sítio' ? 'do sítio'
-           : path === 'Fazenda' ? 'da fazenda'
-           : path === 'Hostel' ? 'do hostel'
-           : ''
-    },
-    tipoAcomodTextLower () {
-      const path = this.$store.state.acomodData.tipoAcomod
-      return path === 'Casa' ? 'sua casa' 
-           : path === 'Apartamento' ? 'seu apartamento'
-           : path === 'Rancho' ? 'seu rancho'
-           : path === 'Chácara' ? 'sua chácara'
-           : path === 'Pousada' ? 'sua pousada'
-           : path === 'Camping' ? 'seu camping'
-           : path === 'Sítio' ? 'seu sítio'
-           : path === 'Fazenda' ? 'sua fazenda'
-           : path === 'Hostel' ? 'seu hostel'
-           : ''
-    },
-    tipoAcomodTextLocal () {
-      const path = this.$store.state.acomodData.tipoAcomod
-      return path === 'Casa' ? 'Sua casa' 
-           : path === 'Apartamento' ? 'Seu apartamento'
-           : path === 'Rancho' ? 'Seu rancho'
-           : path === 'Chácara' ? 'Sua chácara'
-           : path === 'Pousada' ? 'Sua pousada'
-           : path === 'Camping' ? 'Seu camping'
-           : path === 'Sítio' ? 'Seu sítio'
-           : path === 'Fazenda' ? 'Sua fazenda'
-           : path === 'Hostel' ? 'Seu hostel'
-           : ''
-    },
-    tipoAcomodTitulo () {
-      const path = this.$store.state.acomodData.tipoAcomod
-      return path === 'Casa' ? 'Linda casa' 
-           : path === 'Apartamento' ? 'Lindo apartamento'
-           : path === 'Rancho' ? 'Lindo rancho'
-           : path === 'Chácara' ? 'Linda chácara'
-           : path === 'Pousada' ? 'Linda pousada'
-           : path === 'Camping' ? 'Lindo camping'
-           : path === 'Sítio' ? 'Lindo sítio'
-           : path === 'Fazenda' ? 'Linda fazenda'
-           : path === 'Hostel' ? 'Lindo hostel'
-           : ''
     },
     titleLength () {
       return 60 - this.$store.state.acomodData.title.length
@@ -1194,6 +1151,11 @@ export default {
     contaDV (value) { value !== '' ? this.contaDVError = false : '' },
     legalName (value) { value !== '' ? this.legalNameError = false : '' },
     docNumber (value) { value !== '' ? this.docNumberError = false : ''},
+    userEmail (value) {
+      if (value !== null) {
+        this.$store.state.bankAccount.legalName = this.user.fullName
+      }
+    },
     hash (value) {
       if (value === '') {
         if (this.$store.state.lastHash === `#${this.randomHashs[1]}`) {

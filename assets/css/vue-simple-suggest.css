@@ -32,6 +32,7 @@
   background-color: white;
   z-index: 10000;
   font-size: 15px;
+
 }
 
 .vue-simple-suggest.designed .suggestions .suggest-item {
@@ -40,7 +41,7 @@
 
 .vue-simple-suggest.designed .suggestions .suggest-item,
 .vue-simple-suggest.designed .suggestions .misc-item {
-  padding: 4px 4px;
+  padding: 8px 6px;
 }
 
 .vue-simple-suggest.designed .suggestions .suggest-item.hover {

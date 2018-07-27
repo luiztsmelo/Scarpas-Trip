@@ -57,7 +57,7 @@
 
         
         <!-- ####### SOBRE ####### -->
-        <h1 class="item-title">Sobre {{ tipoAcomodText }}</h1>
+        <h1 class="item-title">Sobre {{ tipoAcomodA }}</h1>
 
         <div class="sobre-box">
           <h3>{{ acomod.subtitle }}</h3>
@@ -338,16 +338,17 @@ import { loaded } from '~/node_modules/vue2-google-maps/src/manager'
 import ReservaMobile from '~/components/reserva-acomod/ReservaMobile'
 import Proprietario from '~/components/Proprietario'
 import supportsWebP from 'supports-webp'
-import { mapstyle } from '~/mixins/mapstyle'
-import { swiperOptions } from '~/mixins/swiper_id'
-import { stylesCalendar } from '~/mixins/stylesCalendar'
+import { mapstyle } from '@/mixins/mapstyle'
+import { swiperOptions } from '@/mixins/swiper_id'
+import { stylesCalendar } from '@/mixins/stylesCalendar'
+import { tipoAcomod } from '@/mixins/tipoAcomod'
 import dayjs from 'dayjs'
 import 'dayjs/locale/pt-br'
 dayjs.locale('pt-br')
 
 export default {
   components: { ReservaMobile, Proprietario },
-  mixins: [ mapstyle, swiperOptions, stylesCalendar ],
+  mixins: [ mapstyle, swiperOptions, stylesCalendar, tipoAcomod ],
   data () {
     return {
       showComods: false,
@@ -454,7 +455,7 @@ export default {
       this.$store.commit('show_alert', {
         type: 'info',
         title: 'Taxa de Limpeza',
-        message: `Taxa cobrada pelo proprietário para arcar com os custos de limpeza ${this.tipoAcomodLimpeza}.`,
+        message: `Taxa cobrada pelo proprietário para arcar com os custos de limpeza ${this.tipoAcomodD}.`,
         persist: true
       })
     },
@@ -532,32 +533,6 @@ export default {
     },
     markerSize () {
       return !this.$store.state.googleMapsInitialized ? null : new window.google.maps.Size(42, 42)
-    },
-    tipoAcomodText () {
-      const path = this.acomod.tipoAcomod
-      return path === 'Casa' ? 'a Casa' 
-           : path === 'Apartamento' ? 'o Apartamento'
-           : path === 'Rancho' ? 'o Rancho'
-           : path === 'Chácara' ? 'a Chácara'
-           : path === 'Pousada' ? 'a Pousada'
-           : path === 'Camping' ? 'o Camping'
-           : path === 'Sítio' ? 'o Sítio'
-           : path === 'Fazenda' ? 'a Fazenda'
-           : path === 'Hostel' ? 'o Hostel'
-           : ''
-    },
-    tipoAcomodLimpeza () {
-      const path = this.acomod.tipoAcomod
-      return path === 'Casa' ? 'da casa' 
-           : path === 'Apartamento' ? 'do apartamento'
-           : path === 'Rancho' ? 'do rancho'
-           : path === 'Chácara' ? 'da chácara'
-           : path === 'Pousada' ? 'da pousada'
-           : path === 'Camping' ? 'do camping'
-           : path === 'Sítio' ? 'do sítio'
-           : path === 'Fazenda' ? 'da fazenda'
-           : path === 'Hostel' ? 'do hostel'
-           : ''
     },
     acomod () {
       return this.$store.state.acomod
