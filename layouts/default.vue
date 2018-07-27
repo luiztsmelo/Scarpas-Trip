@@ -14,7 +14,7 @@
 
 
     <div>
-      <AlertMobile/>
+      <alert/>
       
       <Loader/>
 
@@ -51,15 +51,18 @@ import Share from '~/components/Share.vue'
 import MapFull from '~/components/MapFull.vue'
 import AskAcomod from '~/components/reserva-acomod/AskAcomod'
 import Offline from '~/components/Offline'
-import AlertMobile from '~/components/AlertMobile'
+import Alert from '~/components/Alert'
 
 export default {
-  components: { Navbar, Foobar, SignIn, Menuu, Loader, Share, MapFull, AskAcomod, Offline, AlertMobile },
+  components: { Navbar, Foobar, SignIn, Menuu, Loader, Share, MapFull, AskAcomod, Offline, Alert },
   beforeCreate () {
     /* Detect Device */
     isMobile.any ? this.$store.commit('m_isMobile', true) : this.$store.commit('m_isMobile', false)
     /* Desativate loader on refresh */
-    performance.navigation.type == performance.navigation.TYPE_RELOAD ? this.$store.commit('m_loader', false) : ''
+    if (performance.navigation.type == performance.navigation.TYPE_RELOAD) {
+      this.$store.commit('m_loader', false)
+      this.$store.commit('hide_alert')
+    }
     /* Check network status */
     window.addEventListener('offline', event => {
       this.$store.commit('m_isOnline', false)

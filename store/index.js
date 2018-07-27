@@ -53,10 +53,11 @@ const store = () => new Vuex.Store({
     /*
     -------------------- ALERTS --------------------
     */
-    alertMobile: {
+    alert: {
       type: '', /* error, warning, info */
       title: '',
-      message: ''
+      message: '',
+      persist: false
     },
     error: false,
     reservaPageError: false,
@@ -345,13 +346,14 @@ const store = () => new Vuex.Store({
     -------------------- GERAL --------------------
     */
 
-    m_alertMobile (state, payload) {
-      state.alertMobile = payload
+    show_alert (state, payload) {
+      state.alert = payload
     },
-    m_hideAlertMobile (state) {
-      state.alertMobile.type = ''
-      state.alertMobile.title = ''
-      state.alertMobile.message = ''
+    hide_alert (state) {
+      state.alert.type = ''
+      state.alert.title = ''
+      state.alert.message = ''
+      state.alert.persist = false
     },
     m_isOnline (state, payload) {
       state.isOnline = payload

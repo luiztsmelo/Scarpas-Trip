@@ -1,9 +1,8 @@
 <template>
   <div class="acomods-id">
 
-    <proprietario/>
 
-    <v-dialog style="z-index:10000"/>
+    <proprietario/>
 
 
     <!-- ####### TOPBAR ####### -->
@@ -452,17 +451,19 @@ export default {
       window.location.hash = this.$store.state.randomHashs[1]
     },
     limpezaFeeDialog () {
-      this.$modal.show('dialog', {
+      this.$store.commit('show_alert', {
+        type: 'info',
         title: 'Taxa de Limpeza',
-        text: `Taxa cobrada pelo proprietário para arcar com os custos de limpeza ${this.tipoAcomodLimpeza}.`,
-        buttons: [{ title: 'OK' }]
+        message: `Taxa cobrada pelo proprietário para arcar com os custos de limpeza ${this.tipoAcomodLimpeza}.`,
+        persist: true
       })
     },
     serviceFeeDialog () {
-      this.$modal.show('dialog', {
+      this.$store.commit('show_alert', {
+        type: 'info',
         title: 'Taxa de Serviço',
-        text: `Taxa de ${Math.round(this.$store.state.serviceFeeAcomod * 100)}% cobrada com o intuito de garantir suporte e total segurança em sua estadia caso algum problema aconteça.`,
-        buttons: [{ title: 'OK' }]
+        message: `Taxa de ${Math.round(this.$store.state.serviceFeeAcomod * 100)}% cobrada com o intuito de garantir suporte e total segurança em sua estadia caso algum problema aconteça.`,
+        persist: true
       })
     },
     backBtn () {

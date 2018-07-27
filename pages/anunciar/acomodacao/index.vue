@@ -1,8 +1,6 @@
 <template>
   <div class="anunciar-acomodacao">
 
-    <v-dialog style="z-index:10000"/>
-
 
     <!-- PLANO ACOMODAÇÃO MOBILE -->
     <div class="plano-acomodacao-mobile" v-show="$store.state.cadastroAcomod0">
@@ -551,9 +549,9 @@
       </h1> 
 
       <div class="signin-btns" v-if="user.email === null">
-        <button type="button" class="facebook-btn" @click="facebookSignIn()">Continuar com Facebook</button>
-        <button type="button" class="google-btn" @click="googleSignIn()">Continuar com Google</button>
-        <button type="button" class="email-btn" @click="emailSignIn()">Continuar com E-mail</button>
+        <button type="button" class="facebook-btn" @click="$store.dispatch('a_facebookSignIn')">Continuar com Facebook</button>
+        <button type="button" class="google-btn" @click="$store.dispatch('a_googleSignIn')">Continuar com Google</button>
+        <button type="button" class="email-btn">Continuar com E-mail</button>
       </div>
 
 
@@ -607,7 +605,7 @@
       <div class="recebedor-box">
 
           <div class="item-form">
-            <label>Nome do Banco</label>
+            <label :class="[ bankCodeError ? 'has-error-label' : '' ]">Nome do Banco</label>
             <vue-simple-suggest
               :class="[ bankCodeError ? 'has-error' : '' ]"
               mode="select"
@@ -630,7 +628,7 @@
           <div class="item-form">
             <div class="flex-row" style="display:flex">
               <div class="agencia" style="flex:50%; margin-right:.5rem">
-                <label>Agência</label>
+                <label :class="[ agenciaError ? 'has-error-label' : '' ]">Agência</label>
                 <masked-input
                   :class="[ agenciaError ? 'has-error' : '' ]"
                   type="tel"
@@ -640,7 +638,7 @@
                 </masked-input>
               </div>
               <div class="agencia-dv" style="flex:50%; margin-left:.5rem">
-                <label>Dígito</label>
+                <label :class="[ agenciaDVError ? 'has-error-label' : '' ]">Dígito</label>
                 <masked-input
                   :class="[ agenciaDVError ? 'has-error' : '' ]"
                   type="tel"
@@ -656,7 +654,7 @@
           <div class="item-form">
             <div class="flex-row" style="display:flex">
               <div class="conta" style="flex:50%; margin-right:.5rem">
-                <label>Conta Corrente</label>
+                <label :class="[ contaError ? 'has-error-label' : '' ]">Conta Corrente</label>
                 <masked-input
                   :class="[ contaError ? 'has-error' : '' ]"
                   type="tel"
@@ -666,7 +664,7 @@
                 </masked-input>
               </div>
               <div class="conta-dv" style="flex:50%; margin-left:.5rem">
-                <label>Dígito</label>
+                <label :class="[ contaDVError ? 'has-error-label' : '' ]">Dígito</label>
                 <masked-input
                 :class="[ contaDVError ? 'has-error' : '' ]"
                   type="tel"
@@ -679,18 +677,19 @@
           </div>
 
           <div class="item-form">
-            <label>Seu Nome Completo</label>
+            <label :class="[ legalNameError ? 'has-error-label' : '' ]">Seu Nome Completo</label>
             <input type="text" v-model="$store.state.bankAccount.legalName" :class="[ legalNameError ? 'has-error' : '' ]">
           </div>
 
           <div class="item-form">
-            <label>CPF</label>
+            <label :class="[ docNumberError ? 'has-error-label' : '' ]">CPF</label>
             <masked-input
               :class="[ docNumberError ? 'has-error' : '' ]"
               type="tel"
               v-model="$store.state.bankAccount.docNumber"
               :mask="[/\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '-', /\d/, /\d/]"
-              :guide="false">
+              :guide="false"
+              placeholder="000.000.000-00">
             </masked-input>
           </div>
 
@@ -754,22 +753,9 @@ export default {
     }
   },
   methods: {
-    googleSignIn () {
-      this.$store.dispatch('a_googleSignIn')
-    },
-    facebookSignIn () {
-      this.$store.dispatch('a_facebookSignIn')
-    },
     scrollTop () {
-      document.body.scrollTop = 0; // For Safari
-      document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
-    },
-    agenciaDVfocus () {
-      this.$store.commit('m_alertMobile', {
-        type: 'info',
-        title: 'Atenção',
-        message: 'Se o número de sua agência não possuir dígito, ou for X, insira o número 0.',
-      })
+      document.body.scrollTop = 0
+      document.documentElement.scrollTop = 0
     },
     /* ******************** IMAGE INPUT ******************** */
     async imageConfirm () {
@@ -778,7 +764,7 @@ export default {
       let blobL = await this.$refs.myCroppa.promisedBlob('image/jpeg', 0.01)
       let blobHJ = await this.$refs.myCroppa.promisedBlob('image/jpeg')
       let blobHW = await this.$refs.myCroppa.promisedBlob('image/webp')
-      this.uploadProgress = 60
+      this.uploadProgress = 80
       let n = this.$store.state.imageCountAc
       let key = this.$store.state.acomodData.images.length
       /* L */
@@ -786,7 +772,7 @@ export default {
         storageRef.child('L' + n + '.jpeg').getDownloadURL().then(url => {
           this.$store.state.acomodData.images.push({ id: null, L: null, HJ: null, HW: null })
           this.$store.state.acomodData.images[key].L = url
-          this.uploadProgress = 80
+          this.uploadProgress = 90
           /* HJ */
           storageRef.child('H' + n + 'J.jpeg').put(blobHJ).then(snapshot => {
             storageRef.child('H' + n + 'J.jpeg').getDownloadURL().then(url => {
@@ -884,6 +870,10 @@ export default {
       this.$store.commit('m_cadastroAcomod12', false), this.$store.commit('m_cadastroAcomod11', true), window.history.back(1)
     },
     /* ******************** NEXT BUTTONS ******************** */
+    hashAcomod () {
+      this.$store.dispatch('a_generateRandomHashs')
+      window.location.hash = this.randomHashs[1]
+    },
     nextBtn1 () {
       if (this.$store.state.acomodData.tipoAcomod !== null) {
         this.$store.commit('m_cadastroAcomod1', false), this.$store.commit('m_cadastroAcomod2', true), this.$store.commit('m_acomodProgressBar', (100/12)*2), this.scrollTop(), window.location.hash = `${this.randomHashs[2]}`
@@ -908,10 +898,10 @@ export default {
       if (this.$store.state.acomodPlace !== null || this.$store.state.acomodData.positionLAT !== -20.6141320) {
         this.$store.commit('m_cadastroAcomod5', false), this.$store.commit('m_cadastroAcomod6', true), this.$store.commit('m_acomodProgressBar', (100/12)*6), this.scrollTop(), window.location.hash = `${this.randomHashs[6]}`
       } else {
-        this.$modal.show('dialog', {
+        this.$store.commit('show_alert', {
+          type: 'warning',
           title: 'Ops',
-          text: 'Adicione um endereço.',
-          buttons: [{ title: 'OK' }]
+          message: 'Adicione um endereço.'
         })
       }
     },
@@ -919,10 +909,10 @@ export default {
       if (this.$store.state.acomodData.images.length >= 1) {
         this.$store.commit('m_cadastroAcomod6', false), this.$store.commit('m_cadastroAcomod7', true), this.$store.commit('m_acomodProgressBar', (100/12)*7), this.scrollTop(), window.location.hash = `${this.randomHashs[7]}`
       } else {
-        this.$modal.show('dialog', {
+        this.$store.commit('show_alert', {
+          type: 'warning',
           title: 'Ops',
-          text: 'Adicione pelo menos 3 imagens.',
-          buttons: [{ title: 'OK' }]
+          message: 'Adicione pelo menos 3 imagens.'
         })
       }
     },
@@ -930,10 +920,10 @@ export default {
       if (this.$store.state.acomodData.valorNoite !== 0) {
         this.$store.commit('m_cadastroAcomod7', false), this.$store.commit('m_cadastroAcomod8', true), this.$store.commit('m_acomodProgressBar', (100/12)*8), this.scrollTop(), window.location.hash = `${this.randomHashs[8]}`
       } else {
-        this.$modal.show('dialog', {
+        this.$store.commit('show_alert', {
+          type: 'warning',
           title: 'Ops',
-          text: 'O valor por noite não pode ser zero.',
-          buttons: [{ title: 'OK' }]
+          message: 'O valor por noite não pode ser zero.'
         })
       }
     },
@@ -941,10 +931,10 @@ export default {
       if (1<2) {
         this.$store.commit('m_cadastroAcomod8', false), this.$store.commit('m_cadastroAcomod9', true), this.$store.commit('m_acomodProgressBar', (100/12)*9), this.scrollTop(), window.location.hash = `${this.randomHashs[9]}`
       } else {
-        this.$modal.show('dialog', {
+        this.$store.commit('show_alert', {
+          type: 'warning',
           title: 'Ops',
-          text: 'É preciso definir as regras.',
-          buttons: [{ title: 'OK' }]
+          message: 'É preciso que defina as regras.'
         })
       }
     },
@@ -952,10 +942,10 @@ export default {
       if (this.$store.state.acomodData.title !== '') {
         this.$store.commit('m_cadastroAcomod9', false), this.$store.commit('m_cadastroAcomod10', true), this.$store.commit('m_acomodProgressBar', (100/12)*10), this.scrollTop(), window.location.hash = `${this.randomHashs[10]}`
       } else {
-        this.$modal.show('dialog', {
+        this.$store.commit('show_alert', {
+          type: 'warning',
           title: 'Ops',
-          text: 'Adicione um título.',
-          buttons: [{ title: 'OK' }]
+          message: 'Adicione um título.'
         })
       }
     },
@@ -963,33 +953,39 @@ export default {
       if (this.$store.state.acomodData.subtitle !== '') {
         this.$store.commit('m_cadastroAcomod10', false), this.$store.commit('m_cadastroAcomod11', true), this.$store.commit('m_acomodProgressBar', (100/12)*11), this.scrollTop(), window.location.hash = `${this.randomHashs[11]}`
       } else {
-        this.$modal.show('dialog', {
+        this.$store.commit('show_alert', {
+          type: 'warning',
           title: 'Ops',
-          text: 'Adicione uma descrição.',
-          buttons: [{ title: 'OK' }]
+          message: 'Adicione uma descrição.'
         })
       }
     },
     nextBtn11 () {
       if (this.$store.state.user.email === null) {
-        this.$modal.show('dialog', {
-          text: 'Conecte-se com uma de suas contas ou crie uma conta com seu e-mail.',
-          buttons: [{ title: 'Ok' }]
+        this.$store.commit('show_alert', {
+          type: 'warning',
+          title: 'Ops',
+          message: 'Conecte-se com uma de suas contas ou crie uma conta com seu e-mail.',
+          persist: true
         })
       }
       if (this.$store.state.acomodData.celular.length === 15) {
         this.$store.commit('m_cadastroAcomod11', false), this.$store.commit('m_cadastroAcomod12', true), this.$store.commit('m_acomodProgressBar', (100/12)*12), this.scrollTop(), window.location.hash = `${this.randomHashs[12]}`
       } else {
-        this.$modal.show('dialog', {
+        this.$store.commit('show_alert', {
+          type: 'warning',
           title: 'Ops',
-          text: 'Adicione pelo menos um número de celular.',
-          buttons: [{ title: 'OK' }]
+          message: 'Adicione pelo menos um número de celular.'
         })
       }
     },
-    hashAcomod () {
-      this.$store.dispatch('a_generateRandomHashs')
-      window.location.hash = this.randomHashs[1]
+    agenciaDVfocus () {
+      this.$store.commit('show_alert', {
+        type: 'warning',
+        title: 'Atenção',
+        message: 'Se o número de sua agência não possuir dígito, ou for X, insira o número 0.',
+        persist: true
+      })
     },
     concluir () {
       const acomodData = this.$store.state.acomodData
@@ -1441,7 +1437,7 @@ export default {
         justify-content: space-between;
         align-items: center;
         border-bottom: 1px solid rgb(222,222,222);
-        padding: 1.6rem 0;
+        padding: 1.7rem 0;
         & h3 {
           user-select: none;
           font-size: 17px;
@@ -1921,8 +1917,12 @@ export default {
   }
 }
 
+.has-error-label {
+  color:#FF0134 !important;
+}
 .has-error {
-  border-bottom: 2px solid #F31431 !important;
+  color:#FF0134 !important;
+  border-bottom: 1px solid #FF0134 !important;
 }
 
 </style>

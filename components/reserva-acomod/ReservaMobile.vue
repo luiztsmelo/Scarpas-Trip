@@ -412,17 +412,19 @@ export default {
   },
   methods: {
     limpezaFeeDialog () {
-      this.$store.commit('m_alertMobile', {
+      this.$store.commit('show_alert', {
         type: 'info',
         title: 'Taxa de Limpeza',
         message: `Taxa cobrada pelo proprietário para arcar com os custos de limpeza ${this.tipoAcomod}.`,
+        persist: true
       })
     },
     serviceFeeDialog () {
-      this.$store.commit('m_alertMobile', {
+      this.$store.commit('show_alert', {
         type: 'info',
         title: 'Taxa de Serviço',
         message: `Taxa de ${Math.round(this.$store.state.serviceFeeAcomod * 100)}% cobrada com o intuito de garantir suporte e total segurança em sua estadia caso algum problema aconteça.`,
+        persist: true
       })
     },
     backBtn () {
@@ -463,7 +465,7 @@ export default {
       if (this.reservaAcomod.periodoReserva !== null) {
         this.$store.commit('m_reservaAcomod1', false), this.$store.commit('m_reservaAcomod2', true), window.location.hash = this.$store.state.randomHashs[2], this.scrollTop()
       } else {
-        this.$store.commit('m_alertMobile', {
+        this.$store.commit('show_alert', {
           type: 'warning',
           title: 'Ops',
           message: 'Adicione as datas de sua viagem.',
@@ -479,7 +481,7 @@ export default {
         window.location.hash = this.$store.state.randomHashs[3]
         this.scrollTop()
       } else {
-        this.$store.commit('m_alertMobile', {
+        this.$store.commit('show_alert', {
           type: 'warning',
           title: 'Ops',
           message: this.user.email === null ? 'É preciso se cadastrar.' : 'Adicione seu número de celular.',
@@ -500,7 +502,7 @@ export default {
       if (valid.number(this.cardNumber).isValid && valid.expirationDate(this.cardExpirationDate).isValid && valid.cvv(this.cardCVV).isValid) {
         this.$store.commit('m_reservaAcomodCreditCard', false), this.$store.commit('m_reservaAcomodBilling', true), this.scrollTop()
       } else {
-        this.$store.commit('m_alertMobile', {
+        this.$store.commit('show_alert', {
           type: 'error',
           title: 'Erro',
           message: 'Cartão inválido.',
@@ -532,7 +534,7 @@ export default {
     concluirReserva () {
       if (1>2) {
       } else {
-        this.$store.commit('m_alertMobile', {
+        this.$store.commit('show_alert', {
           type: 'warning',
           title: 'Ops',
           message: 'Adicione uma forma de pagamento.',
@@ -620,28 +622,28 @@ export default {
       if (value === '') {
         this.$store.commit('m_showReservaAcomod', false)
         this.$store.commit('m_reservaAcomod1', false)
-        this.$store.commit('m_hideAlertMobile')
+        this.$store.commit('hide_alert')
       }
       if (value === `#${this.$store.state.randomHashs[1]}`) {
         this.$modal.hide('datepicker') 
         this.$store.commit('m_reservaAcomod1', true)
         this.$store.commit('m_reservaAcomod2', false)
-        this.$store.commit('m_hideAlertMobile')
+        this.$store.commit('hide_alert')
       }
       if (value === `#${this.$store.state.randomHashs[2]}`) {
         this.$store.commit('m_reservaAcomod2', true)
         this.$store.commit('m_reservaAcomod3', false)
-        this.$store.commit('m_hideAlertMobile')
+        this.$store.commit('hide_alert')
       }
       if (value === `#${this.$store.state.randomHashs[3]}`) {
         this.$store.commit('m_reservaAcomod3', true)
         this.$store.commit('m_reservaAcomod4', false)
-        this.$store.commit('m_hideAlertMobile')
+        this.$store.commit('hide_alert')
       }
       if (value === `#${this.$store.state.randomHashs[4]}`) {
         this.$store.commit('m_reservaAcomod4', true)
         this.$store.commit('m_reservaAcomod5', false)
-        this.$store.commit('m_hideAlertMobile')
+        this.$store.commit('hide_alert')
       }
       if (value === `#${this.$store.state.randomHashs[5]}`) {
         this.$store.commit('m_reservaAcomod5', true)
@@ -649,14 +651,14 @@ export default {
         this.$store.commit('m_reservaAcomodCreditCard', false)
         this.$store.commit('m_reservaAcomodBoleto', false)
         this.$store.commit('m_reservaAcomodBilling', false)
-        this.$store.commit('m_hideAlertMobile')
+        this.$store.commit('hide_alert')
       }
       if (value === `#${this.$store.state.randomHashs[6]}`) {
         this.$store.commit('m_reservaAcomodPaymentMethod', true)
         this.$store.commit('m_reservaAcomodCreditCard', false)
         this.$store.commit('m_reservaAcomodBoleto', false)
         this.$store.commit('m_reservaAcomodBilling', false)
-        this.$store.commit('m_hideAlertMobile')
+        this.$store.commit('hide_alert')
       }
     }
   }

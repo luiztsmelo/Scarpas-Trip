@@ -72,7 +72,7 @@ export default {
         this.$modal.hide('datepicker')
         window.history.back(1)
       } else {
-        this.$store.commit('m_alertMobile', {
+        this.$store.commit('show_alert', {
           type: 'warning',
           title: 'Ops',
           message: 'Adicione as datas de sua viagem.',
