@@ -677,7 +677,7 @@ export default {
   overflow-y: auto;
   transition: var(--main-transition);
   & .__back-btn {
-    margin: 1.2rem 7% .5rem;
+    margin: 1.2rem 7% 1rem;
     cursor: pointer;
     width: 1.07rem;
     height: auto;
@@ -686,11 +686,10 @@ export default {
   & .reserva-acomod-body {
     display: flex;
     flex-flow: column;
-    margin-top: .5rem;
     height: 100%;
     overflow-y: auto;
     & .etapa-reserva-box {
-      padding-bottom: 5rem;
+      padding-bottom: 4rem;
       & .etapas {
         padding: 0 7% 0.2rem;
         font-size: 14px;
@@ -698,7 +697,7 @@ export default {
         color: rgb(72, 72, 72);
       }
       & .__title {
-        padding: 0 7% 1.9rem 7%;
+        padding: 0 7% 1.9rem;
         line-height: 35px;
         font-size: 29px;
         font-weight: 700;
