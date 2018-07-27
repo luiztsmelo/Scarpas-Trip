@@ -2,7 +2,7 @@
   <modal
     name="sign-in-modal"
     class="sign-in-modal"
-    :width="$store.state.isMobile ? '100%' : '32%'"
+    :width="$store.state.isMobile ? '100%' : '34%'"
     :height="$store.state.isMobile ? '100%' : 'auto'"
     @closed="closedModal">
 

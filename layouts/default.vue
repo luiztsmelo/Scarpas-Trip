@@ -1,14 +1,6 @@
 <template>
   <div class="app">
 
-
-    <div class="alert-box" v-if="$store.state.error">
-      <h3 class="__text" v-if="$store.state.reservaPageError">Reserva não encontrada.</h3>
-      <h3 class="__text" v-if="$store.state.acomodPageError">A acomodação {{ this.$store.state.acomodRef }} não está listada.</h3>
-      <img src="../assets/img/exit.svg" class="__close" @click="$store.dispatch('a_resetError')">
-    </div>
-
-
     <!-- Preload -->
     <img class="img" src="../assets/img/offline.svg" style="display:none">
 
@@ -85,31 +77,5 @@ export default {
 .app {
   display: flex;
   flex-flow: column;
-  & .alert-box {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 7%;
-    position: fixed;
-    left:0;
-    top:0;
-    z-index: 999999;
-    height: 3rem;
-    width: 100%;
-    background: #EC407A;
-    color: white;
-    & .__text {
-      text-align: center;
-      font-size: 15px;
-      font-weight: 500;
-      width: 100%;
-    }
-    & .__close {
-      cursor: pointer;
-      width: .85rem;
-      height: auto;
-      filter: grayscale(100%) brightness(500%);
-    }
-  }
 }
 </style>

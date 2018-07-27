@@ -14,7 +14,7 @@
 
         </div>
 
-        <img class="__close-img" :style="closeBtnColor" src="../assets/img/close-mobile.svg" @click="$store.commit('hide_alert')" v-if="persist">
+        <img class="__close-img" :style="closeBtnColor" src="../assets/img/close-mobile.svg" @click="$store.commit('hide_alert')" v-if="alert.persist">
 
 
       </div>
@@ -32,7 +32,6 @@ export default {
     isError () { return this.alert.type === 'error' },
     isWarning () { return this.alert.type === 'warning' },
     isInfo () { return this.alert.type === 'info' },
-    persist () { return this.alert.persist },
     isMobile () { return this.$store.state.isMobile },
     bgColor () {
       if (this.isError) {
@@ -56,7 +55,7 @@ export default {
   watch: {
     message (value) {
       if (value !== '') {
-        if (!this.persist) {
+        if (!this.alert.persist) {
           setTimeout(() => { this.$store.commit('hide_alert') }, 3300)
         }
       }

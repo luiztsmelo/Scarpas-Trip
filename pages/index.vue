@@ -143,7 +143,6 @@
 <script>
 import supportsWebP from 'supports-webp'
 import * as firebase from 'firebase'
-require('firebase/firestore')
 import Roteiro from '~/components/Roteiro'
 import Footer from '~/components/Footer'
 
@@ -206,14 +205,6 @@ export default {
       !vm.$store.state.showFoobar ? vm.$store.commit('m_showFoobar', true) : ''
       !vm.$store.state.showNavbar ? vm.$store.commit('m_showNavbar', true) : ''
     })
-  },
-  beforeRouteLeave (to, from, next) {
-    if (this.$store.state.error === true) {
-      this.$store.dispatch('a_resetError')
-      next()
-    } else {
-      next()
-    }
   }
 }
 </script>

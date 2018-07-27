@@ -51,7 +51,7 @@ const store = () => new Vuex.Store({
     cardTypeNice: null,
     randomHashs: null,
     /*
-    -------------------- ALERTS --------------------
+    -------------------- ALERT --------------------
     */
     alert: {
       type: '', /* error, warning, info */
@@ -59,10 +59,6 @@ const store = () => new Vuex.Store({
       message: '',
       persist: false
     },
-    error: false,
-    reservaPageError: false,
-    acomodPageError: false,
-    acomodRef: null,
     /*
     -------------------- USER --------------------
     */
@@ -759,12 +755,6 @@ const store = () => new Vuex.Store({
         randomHashs[randomHashs.length] = randomNumber
       }
       state.randomHashs = randomHashs
-    },
-    a_resetError ({ state }) {
-      state.error = false
-      state.reservaPageError = false
-      state.acomodPageError = false
-      state.acomodRef = null
     },
     /*
     #################### ACOMODS ####################

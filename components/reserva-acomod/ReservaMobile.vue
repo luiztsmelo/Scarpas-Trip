@@ -136,7 +136,7 @@
 
           <h3 class="etapas">3 de 5 etapas</h3>
 
-          <h1 class="__title">Revise os detalhes da reserva</h1>
+          <h1 class="__title">Revise as regras da casa</h1>
 
           <h3 class="__subtitle">Highlights da casa aqui</h3>
 
@@ -175,7 +175,7 @@
               <h3 class="__valor" v-if="reservaAcomod.valorReservaTotal !== null">R${{ reservaAcomod.valorReservaTotal.toLocaleString() }}
                 <span class="__valor-noites"> por {{ reservaAcomod.noites }} {{ reservaAcomod.noites == 1 ? 'noite' : 'noites'}}</span>
               </h3>
-              <button type="button" class="__next-btn" :style="form3ok" @click="nextBtn3">Continuar</button>
+              <button type="button" class="__next-btn" :style="form3ok" @click="nextBtn3">Concordar</button>
             </div>
           </div>
 
@@ -221,13 +221,18 @@
           <h1 class="__title">Pagar e confirmar</h1>
 
 
-          <h3 class="__subtitle">Você somente será cobrado caso {{ acomod.proprietario.split(' ')[0] }} confirme seu pedido de reserva. Para sua segurança, só liberaremos o pagamento para ele no dia seguinte de seu check-in, {{ dayAfterCheckin }}. Não se preocupe, seus dados estarão em total sigilo.</h3>
+          <h3 class="__subtitle">Você somente será cobrado caso {{ acomod.proprietario.split(' ')[0] }} confirme seu pedido de reserva.</h3>
 
-          <div class="add-payment" @click="openPaymentMethod">
-            <h3 class="__text">Adicionar pagamento</h3>
+          <h3 class="__subtitle">Para sua segurança, só liberaremos o pagamento para ele no dia seguinte de seu check-in, {{ dayAfterCheckin }}. Não se preocupe, seus dados estarão seguros.</h3>
+
+
+          <div class="add-payment" style="margin-bottom: 1.1rem" @click="openPaymentMethod">
+            <h3 class="__text" style="color:#FFA04F">Forma de pagamento</h3>
             <img src="../../assets/img/arrow-right.svg" alt="" style="width: 1.1rem; height: auto">
           </div>
 
+
+          <h3 class="__subtitle">Política de cancelamento</h3>
 
 
           <div class="buttons">
@@ -398,24 +403,21 @@ import 'firebase/functions'
 import MaskedInput from 'vue-text-mask'
 import DatePicker from '@/components/DatePicker'
 import { reservaAcomod } from '@/mixins/reservaAcomod'
+import { tipoAcomod } from '@/mixins/tipoAcomod'
 import valid from 'card-validator'
 import dayjs from 'dayjs'
 import 'dayjs/locale/pt-br'
 dayjs.locale('pt-br')
 
 export default {
-  components: { MaskedInput, DatePicker },
+  components: { MaskedInput, DatePicker, tipoAcomod },
   mixins: [ reservaAcomod ],
-  data() {
-    return {
-    }
-  },
   methods: {
     limpezaFeeDialog () {
       this.$store.commit('show_alert', {
         type: 'info',
         title: 'Taxa de Limpeza',
-        message: `Taxa cobrada pelo proprietário para arcar com os custos de limpeza ${this.tipoAcomod}.`,
+        message: `Taxa cobrada pelo proprietário para arcar com os custos de limpeza ${this.tipoAcomodD}.`,
         persist: true
       })
     },
@@ -572,7 +574,7 @@ export default {
       return this.reservaAcomod.guestCelular.length === 15 ? 'background: #50CB9D' : ''
     },
     form3ok () {
-       return 1<2 ? 'background: #50CB9D' : ''
+      return 'background: #50CB9D'
     },
     form4ok () {
       return 1<2 ? 'background: #50CB9D' : ''

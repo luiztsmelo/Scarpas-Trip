@@ -600,7 +600,7 @@
 
       <h1 class="__form-title">Insira suas informações bancárias</h1>   
 
-      <h3 class="__form-text">{{ $store.state.user.firstName }}, para finalizar precisamos dos dados de sua conta bancária para podermos transferir a você os seus ganhos financeiros. Não se preocupe, suas informações estarão seguras.</h3>
+      <h3 class="__form-text">{{ user.firstName }}, para finalizar precisamos dos dados de sua conta bancária para podermos transferir a você os seus ganhos financeiros. Não se preocupe, suas informações estarão seguras.</h3>
 
       <div class="recebedor-box">
 
@@ -963,7 +963,7 @@ export default {
       }
     },
     nextBtn11 () {
-      if (this.$store.state.user.email === null) {
+      if (this.user.email === null) {
         this.$store.commit('show_alert', {
           type: 'warning',
           title: 'Ops',
@@ -971,7 +971,7 @@ export default {
           persist: true
         })
       }
-      if (this.$store.state.acomodData.celular.length === 15) {
+      if (this.$store.state.acomodData.celular.length === 15 && this.user.email !== null) {
         this.$store.state.bankAccount.legalName = this.user.fullName
         this.$store.commit('m_cadastroAcomod11', false)
         this.$store.commit('m_cadastroAcomod12', true)
@@ -1141,7 +1141,7 @@ export default {
       return this.$store.state.acomodData.subtitle !== '' ? 'background:#FFA04F' : ''
     },
     form11ok () {
-      return this.$store.state.acomodData.celular.length === 15 ? 'background:#FFA04F' : ''
+      return this.$store.state.acomodData.celular.length === 15 && this.user.email !== null ? 'background:#FFA04F' : ''
     },
     form12ok () {
       return this.bankCode !== null && this.agencia !== '' && this.agenciaDV !== '' && this.conta !== '' && this.contaDV !== '' && this.legalName !== '' && this.docNumber.length === 14 ? 'background:#FFA04F' : ''

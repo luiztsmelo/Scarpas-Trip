@@ -51,19 +51,6 @@ export const reservaAcomod = {
     city () { return this.reservaAcomod.billing.city },
     state () { return this.reservaAcomod.billing.state },
 
-    tipoAcomod () {
-      const path = this.acomod.tipoAcomod
-      return path === 'Casa' ? 'da casa'
-           : path === 'Apartamento' ? 'do apartamento'
-           : path === 'Rancho' ? 'do rancho'
-           : path === 'Chácara' ? 'da chácara'
-           : path === 'Pousada' ? 'da pousada'
-           : path === 'Camping' ? 'do camping'
-           : path === 'Sítio' ? 'do sítio'
-           : path === 'Fazenda' ? 'da fazenda'
-           : path === 'Hostel' ? 'do hostel'
-           : ''
-    },
     dayAfterCheckin () {
       if (this.reservaAcomod !== null) {
         const checkIn = new Date(this.reservaAcomod.periodoReserva.start)

@@ -1,10 +1,7 @@
 <template>
   <transition name="navbar-animation">
 
-    <div 
-      class="navbar" 
-      :class="[ $store.state.error ? 'error' : '' ]" 
-      v-show="showNavbar">
+    <div class="navbar" v-show="showNavbar">
       
       <div class="navbar-body">
         
@@ -47,17 +44,17 @@
 
         </nav>
 
-        <div class="dropdown" v-show="userBox === true" @click="userBox = !userBox">
+        <div class="dropdown" v-show="userBox" @click="userBox = !userBox">
           <div class="dropdown-body" style="right: 6%">
             <ul>
               <li>Minha conta</li>
               <li>Editar perfil</li>
-              <li @click="signOut()">Sair</li>
+              <li @click="$store.dispatch('a_signOut')">Sair</li>
             </ul>
           </div>
         </div>
 
-        <div class="dropdown" v-show="anuncioDropdown === true" @click="anuncioDropdown = !anuncioDropdown">
+        <div class="dropdown" v-show="anuncioDropdown" @click="anuncioDropdown = !anuncioDropdown">
           <div class="dropdown-body" style="right: 10%">
             <ul>
               <nuxt-link to="/anunciar/acomodacao">
@@ -97,12 +94,9 @@ export default {
         this.$store.commit('m_menuIconAnime', true)
       } else {
         this.$store.commit('m_showMenu', false)
-        window.history.back(1)
         this.$store.commit('m_menuIconAnime', false)
+        window.history.back(1)
       }
-    },
-    signOut () {
-      this.$store.dispatch('a_signOut')
     }
   },
   computed: {
@@ -287,10 +281,6 @@ export default {
       }
     }
   }
-}
-
-.error {
-  transform: translateY(3rem);
 }
 
 
