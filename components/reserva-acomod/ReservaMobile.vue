@@ -4,12 +4,12 @@
 
 
 
-      <img class="back-btn" src="../../assets/img/back.svg" @click="backBtn">
-
-
-
       <div class="reserva-acomod-body">
         
+
+        <img class="back-btn" src="../../assets/img/back.svg" @click="backBtn">
+
+
 
         <!-- ########## COTAÇÃO PG.1 ########## -->
         <div class="etapa-reserva-box" v-if="$store.state.reservaAcomod1">
@@ -30,8 +30,8 @@
 
           </div>
 
-
           <date-picker></date-picker>
+
 
 
           <div class="valores-reserva" v-if="reservaAcomod.periodoReserva !== null">
@@ -64,7 +64,6 @@
 
           </div>
           
-
 
 
           <div class="buttons">
@@ -266,6 +265,7 @@
             </div>
             <img src="../../assets/img/arrow-right.svg" style="width: 1.1rem; height: auto">
           </div>
+
           <div class="add-payment" style="border-bottom: none" @click="openBoleto">
             <div style="display:flex;align-items:center">
               <img src="../../assets/img/boleto.svg" class="__img">
@@ -390,7 +390,6 @@
           <div class="round-btn" @click="nextBtnBilling">OK</div>
 
         </div><!-- ___________ BILLING  ___________ -->
-
 
 
 
@@ -688,17 +687,17 @@ export default {
   background: white;
   overflow-y: auto;
   transition: var(--main-transition);
-  & .back-btn {
-    margin: 1.2rem 7% 1rem;
-    cursor: pointer;
-    width: 1.07rem;
-    height: auto;
-    filter: invert(75%);
-  }
   & .reserva-acomod-body {
     display: flex;
     flex-flow: column;
     height: 100%;
+    & .back-btn {
+      margin: 1.2rem 7% 1rem;
+      cursor: pointer;
+      width: 1.07rem;
+      height: auto;
+      filter: invert(75%);
+    }
     & .etapa-reserva-box {
       padding-bottom: 5rem;
       & .etapas {
@@ -888,11 +887,11 @@ export default {
             padding: 0 1.3rem;
             font-size: 16px;
             font-weight: 600;
-            background:rgb(232, 232, 232);
+            background:rgb(237, 237, 237);
             color: white;
             height: 3.1rem;
             border-radius: 5px;
-            transition: all .2s ease;
+            transition: var(--main-transition);
           }
         }
       }

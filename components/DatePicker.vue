@@ -130,10 +130,11 @@ export default {
       padding: 0 1.3rem;
       font-size: 16px;
       font-weight: 600;
-      background:rgb(232, 232, 232);
+      background:rgb(237, 237, 237);
       color: white;
       height: 3.1rem;
       border-radius: 5px;
+      transition: var(--main-transition);
     }
   }
 }
