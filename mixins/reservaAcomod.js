@@ -1,6 +1,33 @@
+import valid from 'card-validator'
 import dayjs from 'dayjs'
 import 'dayjs/locale/pt-br'
+
 dayjs.locale('pt-br')
+
+valid.creditCardType.addCard({ /* Add Elo */
+  niceType: 'Elo',
+  type: 'elo',
+  prefixPattern: /^((((636368)|(438935)|(504175)|(451416)|(636297))\d{0,10})|((5067)|(4576)|(4011))\d{0,12})$/,
+  exactPattern: /^((((636368)|(438935)|(504175)|(451416)|(636297))\d{0,10})|((5067)|(4576)|(4011))\d{0,12})$/,
+  gaps: [4, 8, 12],
+  lengths: [16],
+  code: {
+    name: 'CVV',
+    size: 3
+  }
+})
+valid.creditCardType.addCard({ /* Remove Maestro */
+  niceType: 'Maestro',
+  type: valid.creditCardType.types.MAESTRO,
+  prefixPattern: /^(000000)$/,
+  exactPattern: /^([0-1])\d*$/,
+  gaps: [4, 8, 12],
+  lengths: [16],
+  code: {
+    name: 'CVV',
+    size: 3
+  }
+})
 
 export const reservaAcomod = {
   data () {

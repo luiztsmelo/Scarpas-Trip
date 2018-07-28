@@ -222,7 +222,7 @@
           <h3 class="__text">Para sua segurança, só liberaremos o pagamento para ele no dia seguinte de seu check-in, {{ dayAfterCheckin }}. Não se preocupe, seus dados estarão seguros.</h3>
 
 
-          <div class="add-payment" style="margin-top: .3rem; margin-bottom: 1.3rem" @click="openPaymentMethod">
+          <div class="add-payment" style="margin-top: .4rem; margin-bottom: 1.4rem" @click="openPaymentMethod">
             <h3 class="__item-text" style="font-weight: 600; color: #FFA04F">Forma de pagamento</h3>
             <img src="../../assets/img/arrow-right.svg" alt="" style="width: 1.1rem; height: auto">
           </div>
@@ -290,7 +290,7 @@
           <div class="item-form">
             <label :class="[ cardNumberError ? 'has-error-label' : '' ]">Número do Cartão</label>
             <masked-input
-              :style="{ backgroundImage: 'url(' + cardBrand + ')', backgroundPosition: 0, backgroundRepeat: 'no-repeat', backgroundSize: '37px', paddingLeft: cardType !== null ? '47px' : '' }"
+              :style="{ backgroundImage: 'url(' + cardBrand + ')', backgroundPosition: 0, backgroundRepeat: 'no-repeat', backgroundSize: '36px', paddingLeft: cardType !== null ? '48px' : '' }"
               :class="[ cardNumberError ? 'has-error' : '' ]"
               type="tel"
               v-model="$store.state.creditCard.cardNumber"
