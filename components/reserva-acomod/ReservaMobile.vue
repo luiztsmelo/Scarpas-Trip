@@ -295,6 +295,7 @@
               v-model="$store.state.creditCard.cardNumber"
               :mask="[/\d/, /\d/, /\d/, /\d/, ' ', /\d/, /\d/, /\d/, /\d/, ' ', /\d/, /\d/, /\d/, /\d/, ' ', /\d/, /\d/, /\d/, /\d/]"
               :guide="false"
+              @focus="scrollBottom"
               placeholder="0000 0000 0000 0000">
             </masked-input>
           </div><!-- CARD NUMBER -->
@@ -331,7 +332,14 @@
           </div>
 
 
-          <button type="button" class="single-btn" :style="formCreditCardOk" @click="nextBtnCreditCard">Próximo</button>
+          <div class="buttons">
+            <div class="buttons-body">
+              <h3 class="__alert">
+                {{ cardNumberError || cardExpirationDateError || cardCvvError ? 'Cartão inválido' : '' }}
+              </h3>
+              <button type="button" class="__next-btn" :style="formCreditCardOk" @click="nextBtnCreditCard">Próximo</button>
+            </div>
+          </div>
 
         </div><!-- ___________ CREDIT CARD  ___________ -->
 
@@ -877,6 +885,12 @@ export default {
               font-weight: 400;
             }
           }
+          & .__alert {
+            font-weight: 500; 
+            font-size: 15px; 
+            color:#F31431;
+            transition: var(--main-transition);
+          }
           & .__next-btn {
             cursor: pointer;
             padding: 0 1.3rem;
@@ -890,22 +904,8 @@ export default {
           }
         }
       }
-      & .single-btn {
-        position: fixed;
-        right: 7%;
-        bottom: .8rem;
-        cursor: pointer;
-        padding: 0 1.3rem;
-        font-size: 16px;
-        font-weight: 600;
-        background:rgb(237, 237, 237);
-        color: white;
-        height: 3.1rem;
-        border-radius: 5px;
-        transition: var(--main-transition);
-      }
       & .round-btn {
-        margin: .8rem 7%;
+        margin: 1rem 7%;
         display: flex;
         align-items: center;
         justify-content: center;
