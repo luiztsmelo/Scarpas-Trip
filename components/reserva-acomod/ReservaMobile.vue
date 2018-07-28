@@ -290,6 +290,7 @@
           <div class="item-form">
             <label :class="[ cardNumberError ? 'has-error-label' : '' ]">Número do Cartão</label>
             <masked-input
+              :style="{ backgroundImage: 'url(' + cardBrand + ')', backgroundPosition: 0, backgroundRepeat: 'no-repeat', backgroundSize: '37px', paddingLeft: cardType !== null ? '47px' : '' }"
               :class="[ cardNumberError ? 'has-error' : '' ]"
               type="tel"
               v-model="$store.state.creditCard.cardNumber"
@@ -301,7 +302,7 @@
           </div><!-- CARD NUMBER -->
 
 
-          <div style="display:flex">
+          <div style="display:flex" v-show="cardNumberEntered">
             
             <!-- CARD EXPIRATION -->
             <div class="item-form">
@@ -418,6 +419,11 @@ dayjs.locale('pt-br')
 export default {
   components: { MaskedInput, DatePicker, tipoAcomod },
   mixins: [ reservaAcomod ],
+  data() {
+    return {
+      cardNumberEntered: false
+    }
+  },
   methods: {
     limpezaFeeDialog () {
       this.$store.commit('show_alert', {
@@ -549,6 +555,17 @@ export default {
     }
   },
   computed: {
+    cardBrand () {
+      const cardType = this.$store.state.cardType
+      return cardType === 'visa' ? require('@/assets/img/visa.svg')
+           : cardType === 'mastercard' ? require('@/assets/img/mastercard.svg')
+           : cardType === 'american-express' ? require('@/assets/img/amex.svg')
+           : cardType === 'elo' ? require('@/assets/img/elo.svg')
+           : cardType === 'discover' ? require('@/assets/img/discover.svg')
+           : cardType === 'diners-club' ? require('@/assets/img/diners.svg')
+           : cardType === 'jcb' ? require('@/assets/img/jcb.svg')
+           : ''
+    },
     hash () {
       return this.$route.hash
     },
@@ -606,10 +623,16 @@ export default {
     cardNumber (value) {
       let cardNumber = valid.number(value)
       cardNumber.isPotentiallyValid ? this.cardNumberError = false : this.cardNumberError = true
-      if (value.length === 19) {
-        cardNumber.isValid ? this.cardNumberError = false : this.cardNumberError = true
-      }
+      
       if (cardNumber.card) {
+        if (cardNumber.card.type === 'american-express' ? value.length === 18 : value.length === 19) {
+          if (cardNumber.isValid) {
+            this.cardNumberEntered = true
+            this.cardNumberError = false
+          } else {
+            this.cardNumberError = true
+          }
+        }
         this.$store.state.cardType = cardNumber.card.type
         this.$store.state.cardTypeNice = cardNumber.card.niceType
       }

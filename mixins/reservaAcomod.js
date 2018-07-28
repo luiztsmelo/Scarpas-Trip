@@ -43,6 +43,7 @@ export const reservaAcomod = {
     cardHolderName () { return this.$store.state.creditCard.cardHolderName },
     cardExpirationDate () { return this.$store.state.creditCard.cardExpirationDate },
     cardCVV () { return this.$store.state.creditCard.cardCVV },
+    cardType () { return this.$store.state.cardType },
     /* Billing */
     guestName () { return this.reservaAcomod.guestName },
     guestCPF () { return this.reservaAcomod.guestCPF },
