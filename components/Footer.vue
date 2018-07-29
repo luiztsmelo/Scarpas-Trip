@@ -7,9 +7,10 @@
       <h1 class="__title">Escarpas Trip</h1>
       <nuxt-link to="#"><h3 class="__subtitle">Sobre</h3></nuxt-link>
       <nuxt-link to="#"><h3 class="__subtitle">Contato</h3></nuxt-link>
-      <nuxt-link to="#"><h3 class="__subtitle">Termos de Serviço</h3></nuxt-link>
-      <nuxt-link to="#"><h3 class="__subtitle">Política de Reserva</h3></nuxt-link>
-      <nuxt-link to="#"><h3 class="__subtitle">Política de Cancelamento</h3></nuxt-link>
+      <nuxt-link to="/termos"><h3 class="__subtitle">Termos de Serviço</h3></nuxt-link>
+      <nuxt-link to="/termos#politica_privacidade"><h3 class="__subtitle">Política de Privacidade</h3></nuxt-link>
+      <nuxt-link to="/termos#politica_reserva"><h3 class="__subtitle">Política de Reserva</h3></nuxt-link>
+      <nuxt-link to="/termos#politica_cancelamento"><h3 class="__subtitle">Política de Cancelamento</h3></nuxt-link>
     </div>
 
     <div class="box">

@@ -658,7 +658,6 @@ export default {
         this.$store.commit('m_reservaAcomod1', true)
         this.$store.commit('m_reservaAcomod2', false)
         this.$store.commit('hide_alert')
-        this.scrollTop()
       }
       if (value === `#${this.$store.state.randomHashs[2]}`) {
         this.$store.commit('m_reservaAcomod2', true)

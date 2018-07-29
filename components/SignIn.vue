@@ -10,7 +10,7 @@
 
 
     <!-- SIGN IN -->
-    <div class="sign-in-up" v-if="$store.state.isSignIn === true">
+    <div class="sign-in-up" v-if="$store.state.isSignIn">
       <div class="sign-in-body">
         <img class="__img" src="../static/brand.svg">
 
@@ -23,7 +23,7 @@
 
         <h3 class="if-have-account">Ainda não possui uma conta? <span class="underline" @click="$store.state.isSignIn = false">Cadastrar</span></h3>
 
-        <nuxt-link to="#" class="terms-of-service">Termos de Serviço</nuxt-link>
+        <h3 class="terms-of-service">Ao entrar, você aceita nossos <nuxt-link to="/termos" style="text-decoration: underline">Termos de Serviço</nuxt-link> e <nuxt-link to="/termos#politica_privacidade" style="text-decoration: underline">Política de Privacidade</nuxt-link>.</h3>
 
       </div>
     </div><!-- SIGN IN -->
@@ -44,7 +44,7 @@
 
         <h3 class="if-have-account">Já possui uma conta? <span class="underline" @click="$store.state.isSignIn = true">Entrar</span></h3>
         
-        <nuxt-link to="#" class="terms-of-service">Termos de Serviço</nuxt-link>
+        <h3 class="terms-of-service">Ao cadastrar, você aceita nossos <nuxt-link to="/termos" style="text-decoration: underline">Termos de Serviço</nuxt-link> e <nuxt-link to="/termos#politica_privacidade" style="text-decoration: underline">Política de Privacidade</nuxt-link>.</h3>
 
       </div>
     </div> <!-- SIGN UP -->
@@ -113,7 +113,7 @@ export default {
       display: flex;
       flex-flow: column;
       align-items: center;
-      padding: 3rem 4rem;
+      padding: 2.7rem 4rem;
       & .__img {
         width: 54px;
         height: auto;
@@ -160,10 +160,10 @@ export default {
         }
       }
       & .terms-of-service {
-        text-align: center;
         padding-top: .7rem;
-        text-decoration: underline;
-        font-size: 15px;
+        text-align: center;
+        font-size: 14px;
+        line-height: 20px;
       }
     }
   }
