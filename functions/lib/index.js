@@ -15,7 +15,6 @@ const dayjs = require("dayjs");
 require("dayjs/locale/pt-br");
 const numeral = require("numeral");
 require("numeral/locales/pt-br");
-const axios_1 = require("axios");
 /* Firebase admin */
 admin.initializeApp(functions.config().firebase);
 /* Axios */
@@ -42,29 +41,21 @@ exports.watch_reservaExpiration = functions.https.onRequest((req, res) => __awai
         const pendingReservas = snap.docs.map(doc => doc.data());
         /* Para evitar bugs, checar se há alguma reserva pending primeiro */
         if (pendingReservas.length > 0) {
-            try {
-                /* Para cada reserva pending */
-                pendingReservas.forEach((reserva) => __awaiter(this, void 0, void 0, function* () {
-                    const requestedDate = dayjs(reserva.requested);
-                    const dateNow = dayjs();
-                    /* Se feita a 2 dias atrás: (Obs: diff entre uma data passada retorna um valor negativo) */
-                    if (requestedDate.diff(dateNow, 'day') <= -2) {
-                        /* Update status para 'expired' Firestore */
-                        yield admin.firestore().collection('reservasAcomods').doc(reserva.reservaID).update({ status: 'expired', isRunning: false });
-                        /* Update status para 'expired' Airtable */
-                        yield axios_1.default.patch(`${AirtableAcomodsURL}/${reserva.airtableID}`, { 'fields': { 'status': 'expired', 'isRunning': false } }, AirtableConfig);
-                        console.log(`Reserva ${reserva.reservaID} [${requestedDate.diff(dateNow, 'day')}] foi expirada.`);
-                    }
-                    else {
-                        console.log(`Reserva ${reserva.reservaID} [${requestedDate.diff(dateNow, 'day')}] não precisa ser expirada.`);
-                    }
-                }));
-                res.status(200).end();
-            }
-            catch (err) {
-                console.log(err);
-                res.status(500).end();
-            }
+            /* Para cada reserva pending */
+            pendingReservas.forEach((reserva) => __awaiter(this, void 0, void 0, function* () {
+                const requestedDate = dayjs(reserva.requested);
+                const dateNow = dayjs();
+                /* Se feita a 2 dias atrás */
+                if (requestedDate.diff(dateNow, 'day') <= -2) {
+                    /* Update status para 'expired' na Firestore */
+                    yield admin.firestore().collection('reservasAcomods').doc(reserva.reservaID).update({ status: 'expired', isRunning: false });
+                    console.log(`Reserva ${reserva.reservaID} [${requestedDate.diff(dateNow, 'day')}] foi expirada.`);
+                }
+                else {
+                    console.log(`Reserva ${reserva.reservaID} [${requestedDate.diff(dateNow, 'day')}] não precisa ser expirada.`);
+                }
+            }));
+            res.status(200).end();
         }
         else {
             console.log('Nenhuma reserva pending encontrada. Operação abortada sem falhas.');
@@ -74,6 +65,33 @@ exports.watch_reservaExpiration = functions.https.onRequest((req, res) => __awai
     catch (err) {
         console.log(err);
         res.status(500).end();
+    }
+}));
+/* _______________________________________________ NEW USER _______________________________________________ */
+exports.newUser = functions.https.onCall((data) => __awaiter(this, void 0, void 0, function* () {
+    const user = data.user;
+    try {
+        /* Criar user na Firestore */
+        yield admin.firestore().collection('users').doc(user.userID).set(user);
+        /* Enviar welcome e-mail */
+        yield Mailjet.post('send', { 'version': 'v3.1' }).request({
+            'Messages': [{
+                    'From': { 'Email': ESemail, 'Name': ESname },
+                    'To': [{
+                            'Email': user.email,
+                            'Name': user.fullName
+                        }],
+                    'TemplateID': 492003,
+                    'TemplateLanguage': true,
+                    'Subject': 'Bem-vindo à Escarpas Trip!',
+                    'Variables': {
+                        'firstName': user.firstName
+                    }
+                }]
+        });
+    }
+    catch (err) {
+        console.log(err);
     }
 }));
 /* ________________________________________________ PAGARME ________________________________________________ */
@@ -243,61 +261,7 @@ exports.pagarme_newReservaAcomod = functions.https.onCall((data, context) => {
 exports.pagarme_payHostAcomod = functions.https.onCall(data => {
     /* ENVIAR PAGAMENTO PARA O HOST NO DIA SEGUINTE DO CHECK-IN */
 });
-/* ________________________________________________ AIRTABLE ________________________________________________ */
-exports.airtable_newReservaAcomod = functions.firestore
-    .document('reservasAcomods/{reservaID}')
-    .onCreate((snap) => __awaiter(this, void 0, void 0, function* () {
-    const reservaAcomod = snap.data();
-    /* Ajustar IDs: string to number */
-    reservaAcomod.reservaID = Number(reservaAcomod.reservaID);
-    reservaAcomod.acomodID = Number(reservaAcomod.acomodID);
-    /* Ajustar datas: converter para formato válido ao Airtable */
-    const checkIn = new Date(reservaAcomod.periodoReserva.start);
-    reservaAcomod.checkIn = dayjs(checkIn).format('YYYY-MM-DD');
-    const checkOut = new Date(reservaAcomod.periodoReserva.end);
-    reservaAcomod.checkOut = dayjs(checkOut).format('YYYY-MM-DD');
-    /* Deletar valores não suportados ou desnecessários para o Airtable */
-    delete reservaAcomod.airtableID;
-    delete reservaAcomod.periodoReserva;
-    delete reservaAcomod.message;
-    delete reservaAcomod.guestCPF;
-    delete reservaAcomod.guestPhoto;
-    delete reservaAcomod.billing;
-    delete reservaAcomod.hostPhoto;
-    delete reservaAcomod.whatsAppHostHREF;
-    /* Criar reserva no Airtable */
-    const record = yield axios_1.default.post(AirtableAcomodsURL, { 'fields': reservaAcomod }, AirtableConfig);
-    /* Update airtableID da reserva na Firestore */
-    return admin.firestore().collection('reservasAcomods').doc(reservaAcomod.reservaID.toString()).update({ airtableID: record.data.id })
-        .catch(err => console.log(err));
-}));
 /* ________________________________________________ E-MAILS ________________________________________________ */
-exports.email_newUser = functions.firestore
-    .document('users/{userID}')
-    .onCreate(snap => {
-    const user = snap.data();
-    /* Send Email */
-    const request = Mailjet
-        .post('send', { 'version': 'v3.1' })
-        .request({
-        'Messages': [{
-                'From': { 'Email': ESemail, 'Name': ESname },
-                'To': [{
-                        'Email': user.email,
-                        'Name': user.fullName
-                    }],
-                'TemplateID': 492003,
-                'TemplateLanguage': true,
-                'Subject': 'Bem-vindo à Escarpas Trip!',
-                'Variables': {
-                    'firstName': user.firstName
-                }
-            }]
-    });
-    return request
-        .then(result => console.log(result.body))
-        .catch(err => console.log(err.statusCode));
-});
 exports.email_newReservaToHost = functions.firestore
     .document('reservasAcomods/{reservaID}')
     .onCreate((snap) => __awaiter(this, void 0, void 0, function* () {
@@ -311,16 +275,8 @@ exports.email_newReservaToHost = functions.firestore
         const endDate = new Date(reservaAcomod.periodoReserva.end);
         const checkIn = dayjs(startDate).format('ddd, DD MMM YYYY');
         const checkOut = dayjs(endDate).format('ddd, DD MMM YYYY');
-        const dayAfterCheckin = dayjs(startDate).add(1, 'day').format('DD/MM/YYYY');
-        /* Ajustar valores */
-        const valorNoite = numeral(acomod.valorNoite).format('$0,0');
-        const valorNoitesTotal = numeral(reservaAcomod.valorNoitesTotal).format('$0,0');
-        const limpezaFee = numeral(reservaAcomod.limpezaFee).format('$0,0');
-        const hostAmount = numeral(reservaAcomod.valorNoitesTotal + reservaAcomod.limpezaFee).format('$0,0');
-        /* Send Email */
-        const request = Mailjet
-            .post('send', { 'version': 'v3.1' })
-            .request({
+        /* Enviar e-mail */
+        yield Mailjet.post('send', { 'version': 'v3.1' }).request({
             'Messages': [{
                     'From': { 'Email': ESemail, 'Name': ESname },
                     'To': [{
@@ -339,24 +295,21 @@ exports.email_newReservaToHost = functions.firestore
                         'acomodPhoto': acomod.images[0].HJ,
                         'checkIn': checkIn,
                         'checkOut': checkOut,
-                        'dayAfterCheckin': dayAfterCheckin,
+                        'dayAfterCheckin': dayjs(startDate).add(1, 'day').format('DD/MM/YYYY'),
                         'totalHospedes': reservaAcomod.totalHospedes,
                         'noites': reservaAcomod.noites,
-                        'valorNoite': valorNoite,
-                        'valorNoitesTotal': valorNoitesTotal,
-                        'limpezaFee': limpezaFee,
-                        'hostAmount': hostAmount,
+                        'valorNoite': numeral(acomod.valorNoite).format('$0,0'),
+                        'valorNoitesTotal': numeral(reservaAcomod.valorNoitesTotal).format('$0,0'),
+                        'limpezaFee': numeral(reservaAcomod.limpezaFee).format('$0,0'),
+                        'hostAmount': numeral(reservaAcomod.valorNoitesTotal + reservaAcomod.limpezaFee).format('$0,0'),
                         'guestPhoto': reservaAcomod.guestPhoto,
                         'message': reservaAcomod.message
                     }
                 }]
         });
-        return request
-            .then(result => console.log(result.body))
-            .catch(err => console.log(err.statusCode));
     }
     catch (err) {
-        return err;
+        console.log(err);
     }
 }));
 exports.email_reservaAcceptedToGuest = functions.firestore
@@ -374,10 +327,8 @@ exports.email_reservaAcceptedToGuest = functions.firestore
             const endDate = new Date(reservaAcomod.periodoReserva.end);
             const checkIn = dayjs(startDate).format('ddd, DD MMM YYYY');
             const checkOut = dayjs(endDate).format('ddd, DD MMM YYYY');
-            /* Send Email */
-            const request = Mailjet
-                .post('send', { 'version': 'v3.1' })
-                .request({
+            /* Enviar e-mail */
+            yield Mailjet.post('send', { 'version': 'v3.1' }).request({
                 'Messages': [{
                         'From': { 'Email': ESemail, 'Name': ESname },
                         'To': [{
@@ -406,12 +357,9 @@ exports.email_reservaAcceptedToGuest = functions.firestore
                         }
                     }]
             });
-            return request
-                .then(result => console.log(result.body))
-                .catch(err => console.log(err.statusCode));
         }
         catch (err) {
-            return err;
+            console.log(err);
         }
     }
 }));

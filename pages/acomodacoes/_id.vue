@@ -278,7 +278,7 @@
           <div class="reserva-info" v-if="$store.state.reservaAcomod.periodoReserva !== null">
             
             <div class="reserva-info_item" style="padding-bottom: .2rem">
-              <h3>R${{ acomod.valorNoite.toLocaleString() }} x {{ $store.state.reservaAcomod.daySpan }} {{ $store.state.reservaAcomod.daySpan == 1 ? 'noite' : 'noites'}}</h3>
+              <h3>{{ `R$ ${acomod.valorNoite.toLocaleString()} x ${$store.state.reservaAcomod.noites} ${$store.state.reservaAcomod.noites == 1 ? 'noite' : 'noites'}` }}</h3>
               <h3 id="valor">R$ {{ $store.state.reservaAcomod.valorNoitesTotal.toLocaleString() }}</h3>
             </div>
 
@@ -547,10 +547,10 @@ export default {
         const checkIn = dayjs(new Date(this.$store.state.reservaAcomod.periodoReserva.start))
         const checkOut = dayjs(new Date(this.$store.state.reservaAcomod.periodoReserva.end))
 
-        const daySpan = checkOut.diff(checkIn, 'day')
-        this.$store.state.reservaAcomod.noites = daySpan
+        const noites = checkOut.diff(checkIn, 'day')
+        this.$store.commit('m_noites', noites)
 
-        const valorNoitesTotal = Math.round(this.acomod.valorNoite * daySpan)
+        const valorNoitesTotal = Math.round(this.acomod.valorNoite * noites)
         this.$store.commit('m_valorNoitesTotal', valorNoitesTotal)
 
         const serviceFeeTotal = Math.round(valorNoitesTotal * this.$store.state.serviceFeeAcomod)

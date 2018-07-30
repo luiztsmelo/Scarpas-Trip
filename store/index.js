@@ -143,7 +143,6 @@ const store = () => new Vuex.Store({
     reservaAcomod: {/* Atualizar Action */
       reservaID: null,
       acomodID: null,
-      airtableID: null,
       requested: null,
       paymentMethod: 'credit_card',
       parcelas: '1',
@@ -357,6 +356,9 @@ const store = () => new Vuex.Store({
     m_isMobile (state, payload) {
       state.isMobile = payload
     },
+    m_user (state, payload) {
+      state.user = payload
+    },
     m_resetUser (state) {
       state.user.userID = null
       state.user.firstName = null
@@ -419,6 +421,9 @@ const store = () => new Vuex.Store({
     },
     m_imageCountAc (state) {
       state.imageCountAc++
+    },
+    m_noites (state, payload) {
+      state.reservaAcomod.noites = payload
     },
     m_valorNoitesTotal (state, payload) {
       state.reservaAcomod.valorNoitesTotal = payload
@@ -821,7 +826,6 @@ const store = () => new Vuex.Store({
       state.reservaAcomod = {
         reservaID: null,
         acomodID: null,
-        airtableID: null,
         requested: null,
         paymentMethod: 'credit_card',
         parcelas: '1',
@@ -964,42 +968,29 @@ const store = () => new Vuex.Store({
       firebase.auth().signInWithPopup(provider)
       dispatch('a_authStateObserver')
     },
-    a_authStateObserver ({ dispatch, state }) {
-      firebase.auth().onAuthStateChanged(user => {
-        state.user.firstName = user.displayName.split(' ')[0]
-        state.user.fullName = user.displayName
-        state.user.userID = user.uid
-        state.user.email = user.email
-        state.user.photoURL = user.providerData[0].photoURL
-        dispatch('a_setUser')
+    a_authStateObserver ({ commit, state }) {
+      firebase.auth().onAuthStateChanged(async user => {
+        /* Se sign-in */
+        if (user !== null) {
+          try {
+            commit('m_user', {
+              userID: user.uid,
+              firstName: user.displayName.split(' ')[0],
+              fullName: user.displayName,
+              email: user.email,
+              photoURL: user.providerData[0].photoURL
+            })
+            /* Chechar se user já existe na Firestore */
+            const userDoc = await firebase.firestore().collection('users').doc(user.uid).get()
+            userDoc.exists ? '' : await firebase.functions().httpsCallable('newUser')({ user: state.user })
+          } catch (err) {
+            console.log(err)
+          }
+        }
       })
     },
     a_signOut ({ commit }) {
       firebase.auth().signOut().then(() => commit('m_resetUser'))
-    },
-    /*
-    #################### SET USER ####################
-    */
-    a_setUser ({ state }) {
-      /* Chechar se user já existe */
-      firebase.firestore().collection('users').doc(state.user.userID).get().then(doc => {
-        if (!doc.exists) {
-          /* 1) Set User Firestore */
-          firebase.firestore().collection('users').doc(state.user.userID).set(state.user)
-          .then(() => {
-            /* 2) Set User Airtable */
-            this.$axios.$post('https://api.airtable.com/v0/app2VZONmWdcr8ybJ/Users?api_key=keyoOJ1ERQwpa2EIg', {
-              'fields': {
-                'userID': state.user.userID,
-                'firstName': state.user.firstName,
-                'fullName': state.user.fullName,
-                'email': state.user.email,
-                'photoURL': state.user.photoURL
-              }
-            })
-          })
-        }
-      })
     }
   }
 })
