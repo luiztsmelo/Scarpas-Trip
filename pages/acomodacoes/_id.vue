@@ -375,25 +375,24 @@ export default {
   },
   middleware: 'acomodValidate',
   transition: 'id',
-  fetch ({ store, params }) {
-    /* GET ACOMOD DATA */
-    return firebase.firestore().collection('acomods').doc(params.id).get()
-    .then(doc => {
-      store.commit('m_acomod', doc.data())
+  async fetch ({ store, params }) {
+    try {
+      /* Pegar dados da acomod atual na Firestore */
+      const acomod = await firebase.firestore().collection('acomods').doc(params.id).get()
+      
+      /* Pegar as reservas dessa acomod na Firestore para desabilitar as datas ocupadas no date picker */
+      const reservas = await firebase.firestore().collection('reservasAcomods').where('acomodID', '==', params.id).where('isRunning', '==', true).get()
+
       store.commit('m_loader', false)
 
-      if (store.state.isMobile) {
-        store.commit('m_showNavbar', false)
-        store.commit('m_showFoobar', false)
-      }
+      store.commit('m_disabledDatesAcomod', reservas.docs.map(acomod => acomod.data().periodoReserva))
+      
+      return store.commit('m_acomod', acomod.data())
 
-    }).catch(err => { store.commit('m_loader', false), console.log(err) })
-
-
-    && firebase.firestore().collection('reservasAcomods').where('acomodID', '==', params.id).where('isRunning', '==', true).get()
-    .then(snap => store.commit('m_disabledDatesAcomod', snap.docs.map(doc => doc.data().periodoReserva)))
-    .catch(err => console.log(err))
-
+    } catch (err) {
+      store.commit('m_loader', false)
+      console.log(err)
+    }
   },
   methods: {
     imageH (image) {
@@ -485,9 +484,7 @@ export default {
     }
   },
   async mounted () {
-    loaded.then(() => {
-      this.$store.state.googleMapsInitialized = true
-    })
+    loaded.then(() =>  this.$store.state.googleMapsInitialized = true )
     this.$store.state.heightImageBox === null ? this.$store.state.heightImageBox = this.$refs.imageBox.clientHeight : null
   },
   computed: {
@@ -571,11 +568,11 @@ export default {
     next(vm => {
       !vm.$store.state.isOnline ? vm.$modal.show('offline-modal') : ''
 
-      if (vm.$store.state.isMobile === false) {
-        vm.$store.commit('m_showNavbar', true)
-      } else {
+      if (vm.$store.state.isMobile) {
         vm.$store.commit('m_showNavbar', false)
         vm.$store.commit('m_showFoobar', false)
+      } else {
+        vm.$store.commit('m_showNavbar', true)
       }
     })
   },

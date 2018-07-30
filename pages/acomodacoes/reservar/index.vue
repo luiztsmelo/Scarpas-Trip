@@ -450,128 +450,113 @@ export default {
         this.messageError = true
       }
     },
-    concluirReserva () {
-      this.$store.commit('m_loader', true)
+    async concluirReserva () {
+      try {
+        this.$store.commit('m_loader', true)
 
-      const reservaAcomod = this.$store.state.reservaAcomod
-      const creditCard = this.$store.state.creditCard
-      const user = this.$store.state.user
+        const reservaAcomod = this.$store.state.reservaAcomod
+        const creditCard = this.$store.state.creditCard
+        const user = this.$store.state.user
 
-      reservaAcomod.requested = new Date().getTime()
-      reservaAcomod.acomodID = this.acomod.acomodID
+        reservaAcomod.requested = new Date().getTime()
+        reservaAcomod.acomodID = this.acomod.acomodID
 
-      reservaAcomod.hostID = this.acomod.userID
-      reservaAcomod.hostEmail = this.acomod.email
-      reservaAcomod.hostName = this.acomod.proprietario
-      reservaAcomod.hostPhoto = this.acomod.photoURL
-      reservaAcomod.hostCelular = this.acomod.celular
-      reservaAcomod.whatsAppHostHREF = this.whatsAppHostHREF
+        reservaAcomod.hostID = this.acomod.userID
+        reservaAcomod.hostEmail = this.acomod.email
+        reservaAcomod.hostName = this.acomod.proprietario
+        reservaAcomod.hostPhoto = this.acomod.photoURL
+        reservaAcomod.hostCelular = this.acomod.celular
+        reservaAcomod.whatsAppHostHREF = this.whatsAppHostHREF
 
-      reservaAcomod.guestID = user.userID
-      reservaAcomod.guestEmail = user.email
-      reservaAcomod.guestPhoto = user.photoURL
+        reservaAcomod.guestID = user.userID
+        reservaAcomod.guestEmail = user.email
+        reservaAcomod.guestPhoto = user.photoURL
 
-      reservaAcomod.limpezaFee = this.acomod.limpezaFee
+        reservaAcomod.limpezaFee = this.acomod.limpezaFee
 
+        /* ******************** CREDIT CARD ******************** */
+        if (reservaAcomod.paymentMethod === 'credit_card') {
 
-      /* ******************** CREDIT CARD ******************** */
-      if (reservaAcomod.paymentMethod === 'credit_card') {
-        
-        /* Checar se todos os dados foram preenchidos */
-        if (valid.number(this.cardNumber).isValid && valid.expirationDate(this.cardExpirationDate).isValid && valid.cvv(this.cardCVV).isValid && this.cardHolderName !== '' && this.guestCPF.length === 14 && this.guestCelular.length === 15 && this.zipcode.length === 9 && this.street !== '' && this.streetNumber !== '' && this.neighborhood !== '' && this.city !== '' && this.state !== '') {
-          
-          /* TRANSACTION PAGARME */
-          firebase.functions().httpsCallable('pagarme_newReservaAcomod')({
-            reservaAcomod: reservaAcomod,
-            creditCard: creditCard,
-            acomod: this.acomod
-          })
-          .then(result => {
-            console.log(result.data)
+          /* Checar se todos os dados foram preenchidos */
+          if (valid.number(this.cardNumber).isValid && valid.expirationDate(this.cardExpirationDate).isValid && valid.cvv(this.cardCVV).isValid && this.cardHolderName !== '' && this.guestCPF.length === 14 && this.guestCelular.length === 15 && this.zipcode.length === 9 && this.street !== '' && this.streetNumber !== '' && this.neighborhood !== '' && this.city !== '' && this.state !== '') {
+
+            /* Criar transação no Pagarme */
+            const result = await firebase.functions().httpsCallable('pagarme_newReservaAcomod')({
+              reservaAcomod: reservaAcomod,
+              creditCard: creditCard,
+              acomod: this.acomod
+            })
+
             const reservaID = result.data.reservaID
             reservaAcomod.reservaID = reservaID
 
-            /* SET RESERVA FIRESTORE */
-            firebase.firestore().collection('reservasAcomods').doc(reservaID).set(reservaAcomod)
-            .then(() => {
-              this.$store.commit('m_loader', false)
-              this.scrollTop()
-              this.$store.state.concludedReservaAcomod = true
-              this.$store.commit('m_resetCreditCard')
-            })
-            .catch(err => {
-              console.log(err)
-              this.$store.commit('m_loader', false)
-            })
+            /* Criar reserva na Firestore */
+            await firebase.firestore().collection('reservasAcomods').doc(reservaID).set(reservaAcomod)
 
-          })
-          .catch(err => { /* Transaction error */
+            /* Atualizar visit */
+            await firebase.firestore().collection('acomods').doc(this.acomod.acomodID).collection('visits').doc(this.$store.state.visitID).update({ concludedReserva: true })
+
+            /* Resetar dados do cartão de crédito */
+            this.$store.commit('m_resetCreditCard')
+
+            this.$store.state.concludedReservaAcomod = true
+            this.scrollTop()
             this.$store.commit('m_loader', false)
-            err.details === 'card_number' ? this.cardNumberError = true : this.cardNumberError = false
-            err.details === 'card_holder_name' ? this.cardHolderNameError = true : this.cardHolderNameError = false
-            err.details === 'card_expiration_date' ? this.cardExpirationDateError = true : this.cardExpirationDateError = false
-            err.details === 'card_cvv' ? this.cardCvvError = true : this.cardCvvError = false
-            err.details === 'customer' ? this.cpfError = true : this.cpfError = false
-          })
+            
+          } else { /* Há dados incompletos */
+            this.$store.commit('m_loader', false)
+            this.cardHolderName.length < 3 ? this.cardHolderNameError = true : this.cardHolderNameError = false
+            !valid.number(this.cardNumber).isValid ? this.cardNumberError = true : this.cardNumberError = false
+            !valid.expirationDate(this.cardExpirationDate).isValid ?  this.cardExpirationDateError = true :  this.cardExpirationDateError = false
+            !valid.cvv(this.cardCVV).isValid ? this.cardCvvError = true : this.cardCvvError = false
+            this.guestCPF.length < 14 ? this.cpfError = true : this.cpfError = false
+            this.guestCelular.length < 15 ? this.celularError = true : this.celularError = false
+            this.zipcode.length < 9 ? this.zipcodeError = true : this.zipcodeError = false
+            this.street === '' ? this.streetError = true : this.streetError = false
+            this.streetNumber === '' ? this.streetNumberError = true : this.streetNumberError = false
+            this.neighborhood === '' ? this.neighborhoodError = true : this.neighborhoodError = false
+            this.city === '' ? this.cityError = true : this.cityError = false
+            this.state === '' ? this.stateError = true : this.stateError = false
+          }
+        } else { /* ******************** BOLETO ******************** */
 
-        } else { /* Há dados incompletos */
-          this.$store.commit('m_loader', false)
-          this.cardHolderName.length < 3 ? this.cardHolderNameError = true : this.cardHolderNameError = false
-          !valid.number(this.cardNumber).isValid ? this.cardNumberError = true : this.cardNumberError = false
-          !valid.expirationDate(this.cardExpirationDate).isValid ?  this.cardExpirationDateError = true :  this.cardExpirationDateError = false
-          !valid.cvv(this.cardCVV).isValid ? this.cardCvvError = true : this.cardCvvError = false
-          this.guestCPF.length < 14 ? this.cpfError = true : this.cpfError = false
-          this.guestCelular.length < 15 ? this.celularError = true : this.celularError = false
-          this.zipcode.length < 9 ? this.zipcodeError = true : this.zipcodeError = false
-          this.street === '' ? this.streetError = true : this.streetError = false
-          this.streetNumber === '' ? this.streetNumberError = true : this.streetNumberError = false
-          this.neighborhood === '' ? this.neighborhoodError = true : this.neighborhoodError = false
-          this.city === '' ? this.cityError = true : this.cityError = false
-          this.state === '' ? this.stateError = true : this.stateError = false
-        }
+          /* Checar se todos os dados foram preenchidos */
+          if (reservaAcomod.guestName !== '' && reservaAcomod.guestCPF.length === 14 && reservaAcomod.guestCelular.length === 15) {
 
-      } else { /* ******************** BOLETO ******************** */
+            /* Criar transação no Pagarme */
+            const result = await firebase.functions().httpsCallable('pagarme_newReservaAcomod')({
+              reservaAcomod: reservaAcomod,
+              acomod: this.acomod
+            })
 
-        /* Checar se todos os dados foram preenchidos */
-        if (reservaAcomod.guestName !== '' && reservaAcomod.guestCPF.length === 14 && reservaAcomod.guestCelular.length === 15) {
-
-          /* TRANSACTION PAGARME */
-          firebase.functions().httpsCallable('pagarme_newReservaAcomod')({
-            reservaAcomod: reservaAcomod,
-            acomod: this.acomod
-          })
-          .then(result => {
-            console.log(result.data)
             const reservaID = result.data.reservaID
             reservaAcomod.reservaID = reservaID
 
-            /* SET RESERVA FIRESTORE */
-            firebase.firestore().collection('reservasAcomods').doc(reservaID).set(reservaAcomod)
-            .then(() => {
-              this.$store.commit('m_loader', false)
-              this.scrollTop()
-              this.$store.state.concludedReservaAcomod = true
-            })
-            .catch(err => {
-              console.log(err)
-              this.$store.commit('m_loader', false)
-            })
+            /* Criar reserva na Firestore */
+            await firebase.firestore().collection('reservasAcomods').doc(reservaID).set(reservaAcomod)
 
-          })
-          .catch(err => { /* Transaction error */
+            /* Atualizar visit */
+            await firebase.firestore().collection('acomods').doc(this.acomod.acomodID).collection('visits').doc(this.$store.state.visitID).update({ concludedReserva: true })
+            
+            this.$store.state.concludedReservaAcomod = true
+            this.scrollTop()
             this.$store.commit('m_loader', false)
-            console.log(err.code)
-            console.log(err.message)
-            console.log(err.details)
-            err.details === 'customer' ? this.cpfError = true : this.cpfError = false
-          })
 
-        } else { /* Há dados incompletos */
-          this.$store.commit('m_loader', false)
-          reservaAcomod.guestName === '' ? this.guestNameError = true : this.guestNameError = false
-          reservaAcomod.guestCPF.length < 14 ? this.cpfError = true : this.cpfError = false
-          reservaAcomod.guestCelular.length < 15 ? this.celularError = true : this.celularError = false
+          } else { /* Há dados incompletos */
+            this.$store.commit('m_loader', false)
+            reservaAcomod.guestName === '' ? this.guestNameError = true : this.guestNameError = false
+            reservaAcomod.guestCPF.length < 14 ? this.cpfError = true : this.cpfError = false
+            reservaAcomod.guestCelular.length < 15 ? this.celularError = true : this.celularError = false
+          }
         }
+      } catch (err) {
+        console.log(err)
+        this.$store.commit('m_loader', false)
+        err.details === 'card_number' ? this.cardNumberError = true : this.cardNumberError = false
+        err.details === 'card_holder_name' ? this.cardHolderNameError = true : this.cardHolderNameError = false
+        err.details === 'card_expiration_date' ? this.cardExpirationDateError = true : this.cardExpirationDateError = false
+        err.details === 'card_cvv' ? this.cardCvvError = true : this.cardCvvError = false
+        err.details === 'customer' ? this.cpfError = true : this.cpfError = false
       }
     },
     backEtapa1 () {
@@ -686,13 +671,6 @@ export default {
         })
       } else {
         this.zipcodeError = false
-      }
-    },
-    concludedReservaAcomod (value) {
-      if (value === true) {
-        firebase.firestore().collection('acomods').doc(this.acomod.acomodID).collection('visits').doc(this.$store.state.visitID).update({ 
-          concludedReserva: true
-        })
       }
     }
   },
