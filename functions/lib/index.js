@@ -44,23 +44,21 @@ exports.watch_reservaExpiration = functions.https.onRequest((req, res) => __awai
         if (pendingReservas.length > 0) {
             try {
                 /* Para cada reserva pending */
-                pendingReservas.forEach(reserva => {
+                pendingReservas.forEach((reserva) => __awaiter(this, void 0, void 0, function* () {
                     const requestedDate = dayjs(reserva.requested);
                     const dateNow = dayjs();
                     /* Se feita a 2 dias atrás: (Obs: diff entre uma data passada retorna um valor negativo) */
                     if (requestedDate.diff(dateNow, 'day') <= -2) {
                         /* Update status para 'expired' Firestore */
-                        admin.firestore().collection('reservasAcomods').doc(reserva.reservaID).update({ status: 'expired', isRunning: false })
-                            .catch(err => { throw new Error(err); });
+                        yield admin.firestore().collection('reservasAcomods').doc(reserva.reservaID).update({ status: 'expired', isRunning: false });
                         /* Update status para 'expired' Airtable */
-                        axios_1.default.patch(`${AirtableAcomodsURL}/${reserva.airtableID}`, { 'fields': { 'status': 'expired', 'isRunning': false } }, AirtableConfig)
-                            .catch(err => { throw new Error(err); });
+                        yield axios_1.default.patch(`${AirtableAcomodsURL}/${reserva.airtableID}`, { 'fields': { 'status': 'expired', 'isRunning': false } }, AirtableConfig);
                         console.log(`Reserva ${reserva.reservaID} [${requestedDate.diff(dateNow, 'day')}] foi expirada.`);
                     }
                     else {
                         console.log(`Reserva ${reserva.reservaID} [${requestedDate.diff(dateNow, 'day')}] não precisa ser expirada.`);
                     }
-                });
+                }));
                 res.status(200).end();
             }
             catch (err) {

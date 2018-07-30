@@ -374,6 +374,7 @@ export default {
       }
     },
     concluir () {
+      this.$store.state.atracaoData.email = this.user.email
       if (this.$store.state.atracaoData.email === 'luiztsmelo@gmail.com') {/* IF ME */
         this.$store.commit('m_loader', true)
         const atracaoID = Math.floor(Math.random() * (99999 - 10000 + 1) + 10000).toString()

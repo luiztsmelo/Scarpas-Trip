@@ -53,7 +53,7 @@ exports.watch_reservaExpiration = functions.https.onRequest(async (req, res) => 
       try {
 
         /* Para cada reserva pending */
-        pendingReservas.forEach(reserva => {
+        pendingReservas.forEach(async reserva => {
           const requestedDate = dayjs(reserva.requested)
           const dateNow = dayjs()
 
@@ -61,12 +61,10 @@ exports.watch_reservaExpiration = functions.https.onRequest(async (req, res) => 
           if (requestedDate.diff(dateNow, 'day') <= -2) {
 
             /* Update status para 'expired' Firestore */
-            admin.firestore().collection('reservasAcomods').doc(reserva.reservaID).update({ status: 'expired', isRunning: false })
-            .catch(err => { throw new Error(err) })
+            await admin.firestore().collection('reservasAcomods').doc(reserva.reservaID).update({ status: 'expired', isRunning: false })
           
             /* Update status para 'expired' Airtable */
-            axios.patch(`${AirtableAcomodsURL}/${reserva.airtableID}`, { 'fields': { 'status': 'expired', 'isRunning': false } }, AirtableConfig)
-            .catch(err => { throw new Error(err) })
+            await axios.patch(`${AirtableAcomodsURL}/${reserva.airtableID}`, { 'fields': { 'status': 'expired', 'isRunning': false } }, AirtableConfig)
 
             console.log(`Reserva ${reserva.reservaID} [${requestedDate.diff(dateNow, 'day')}] foi expirada.`)
 
@@ -213,7 +211,7 @@ exports.pagarme_newReservaAcomod = functions.https.onCall((data, context) => {
         'quantity': reservaAcomod.noites,
         'tangible': false
       }]
-      }))
+    }))
     .then(transaction => {
       return { reservaID: transaction.id.toString() }
     })

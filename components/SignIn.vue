@@ -2,7 +2,7 @@
   <modal
     name="sign-in-modal"
     class="sign-in-modal"
-    :width="$store.state.isMobile ? '100%' : '34%'"
+    :width="$store.state.isMobile ? '100%' : '35%'"
     :height="$store.state.isMobile ? '100%' : 'auto'"
     @closed="closedModal">
 
@@ -113,7 +113,7 @@ export default {
       display: flex;
       flex-flow: column;
       align-items: center;
-      padding: 2.7rem 4rem;
+      padding: 3rem 4rem;
       & .__img {
         width: 54px;
         height: auto;
@@ -160,7 +160,7 @@ export default {
         }
       }
       & .terms-of-service {
-        padding-top: .7rem;
+        padding-top: .8rem;
         text-align: center;
         font-size: 14px;
         line-height: 20px;

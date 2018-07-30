@@ -659,8 +659,14 @@ export default {
       }
     },
     nextBtn10 () {
-      if (this.$store.state.passeioData.celular.length === 15) {
-        this.$store.commit('m_cadastroPasseio10', false), this.$store.commit('m_cadastroPasseio11', true), this.$store.commit('m_passeioProgressBar', (100/11)*11)
+      if (this.$store.state.acomodData.celular.length === 15 && this.user.email !== null) {
+        this.$store.state.passeioData.proprietario = this.user.fullName
+        this.$store.state.passeioData.email = this.user.email
+        this.$store.state.passeioData.photoURL = this.user.photoURL
+        this.$store.state.passeioData.userID = this.user.uid
+        this.$store.commit('m_cadastroPasseio10', false)
+        this.$store.commit('m_cadastroPasseio11', true)
+        this.$store.commit('m_passeioProgressBar', (100/11)*11)
       }
     },
     concluir () {

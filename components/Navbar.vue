@@ -100,15 +100,9 @@ export default {
     }
   },
   computed: {
-    hash () {
-      return this.$route.hash
-    },
-    showNavbar () {
-      return this.$store.state.showNavbar
-    },
-    menuIconAnime () {
-      return this.$store.state.menuIconAnime
-    }
+    hash () { return this.$route.hash },
+    showNavbar () { return this.$store.state.showNavbar },
+    menuIconAnime () { return this.$store.state.menuIconAnime }
   },
   watch: {
     hash (value) {

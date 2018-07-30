@@ -21,8 +21,9 @@ const store = () => new Vuex.Store({
     showProprietario: false,
     menuIconAnime: false,
     loader: false,
-    lastHash: null,
     miniLoader: false,
+    lastHash: null,
+    randomHashs: null,
     offFoobar1: true,
     offFoobar2: true,
     offFoobar3: true,
@@ -49,7 +50,6 @@ const store = () => new Vuex.Store({
     },
     cardType: null,
     cardTypeNice: null,
-    randomHashs: null,
     /*
     -------------------- ALERT --------------------
     */
@@ -970,16 +970,7 @@ const store = () => new Vuex.Store({
         state.user.fullName = user.displayName
         state.user.userID = user.uid
         state.user.email = user.email
-        state.user.photoURL = user.photoURL
-        state.acomodData.proprietario = user.displayName
-        state.acomodData.email = user.email
-        state.acomodData.photoURL = user.photoURL
-        state.acomodData.userID = user.uid
-        state.passeioData.proprietario = user.displayName
-        state.passeioData.email = user.email
-        state.passeioData.photoURL = user.photoURL
-        state.passeioData.userID = user.uid
-        state.atracaoData.email = user.email
+        state.user.photoURL = user.providerData[0].photoURL
         dispatch('a_setUser')
       })
     },

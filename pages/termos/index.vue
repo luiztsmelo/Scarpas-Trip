@@ -12,10 +12,6 @@
         <h3 class="__item" :class="[ this.isPrivacidade ? '__item-selected' : '' ]">Política de Privacidade</h3>
       </nuxt-link>
 
-      <nuxt-link to="/termos#politica_reserva">
-        <h3 class="__item" :class="[ this.isReserva ? '__item-selected' : '' ]">Política de Reserva</h3>
-      </nuxt-link>
-
       <nuxt-link to="/termos#politica_cancelamento">
         <h3 class="__item" :class="[ this.isCancelamento ? '__item-selected' : '' ]">Política de Cancelamento</h3>
       </nuxt-link>
@@ -35,6 +31,7 @@
 
         <h1>Política de Privacidade</h1>
 
+        <p>Última atualização: 29 de Julho, 2018.</p>
         <p>Obrigado por utilizar a plataforma Escarpas Trip!</p>
         <p>Esta Política de Privacidade descreve como coletamos, usamos, processamos e divulgamos seus dados, incluindo informações pessoais, em conjunto com o seu acesso e uso da plataforma Escarpas Trip e dos Serviços de Pagamento.</p>
         <p>Este site é operado pela empresa EscarpasTrip. Quando esta Política de Privacidade menciona "Escarpas Trip", "nós", "nós" ou "nosso", refere-se à empresa EscarpasTrip. Os termos "usuários" ou "você", referem-se a turistas e viajantes que usam este site para procurarem imóveis, passeios, eventos e restaurantes, bem como a proprietários e anunciantes que listam propriedades para aluguel, passeios, eventos e restaurantes nesta plataforma.</p>
@@ -49,7 +46,7 @@
 
 
 
-        <h2>3. Compartilhamento e divulgação dos dados</h2>
+        <h2>3. Divulgação dos dados</h2>
 
 
 
@@ -72,11 +69,6 @@
 
       </div>
 
-
-      <div class="politica_reserva" v-if="isReserva">
-        <h1>Política de Reserva</h1>
-        <p>Em construção</p>
-      </div>
 
 
       <div class="politica_cancelamento" v-if="isCancelamento">
@@ -104,13 +96,11 @@ export default {
     headTitle () {
       return this.$route.fullPath === '/termos' ? 'Termos de Serviço'
            : this.$route.fullPath === '/termos#politica_privacidade' ? 'Política de Privacidade'
-           : this.$route.fullPath === '/termos#politica_reserva' ? 'Política de Reserva'
            : this.$route.fullPath === '/termos#politica_cancelamento' ? 'Política de Cancelamento'
            : ''
     },
     isTermos () { return this.$route.fullPath === '/termos' },
     isPrivacidade () { return this.$route.fullPath === '/termos#politica_privacidade' },
-    isReserva () { return this.$route.fullPath === '/termos#politica_reserva' },
     isCancelamento () { return this.$route.fullPath === '/termos#politica_cancelamento' }
   },
   beforeRouteEnter (to, from, next) {
@@ -173,18 +163,18 @@ h3 {
 
 }
 p {
-  padding-top: .8rem;
+  padding-top: 1rem;
   font-size: 15px;
-  line-height: 23px;
+  line-height: 24px;
 }
 ul {
 
 }
 li {
   list-style-type: square;
-  padding-top: .8rem;
+  padding-top: 1rem;
   font-size: 15px;
-  line-height: 23px;
+  line-height: 24px;
 }
 strong {
   font-weight: 600;

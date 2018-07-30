@@ -723,6 +723,7 @@ import { bancos } from '@/mixins/bancos'
 import { tipoAcomod } from '@/mixins/tipoAcomod'
 import VueSimpleSuggest from 'vue-simple-suggest'
 import localMap from '~/components/localMap.vue'
+import { NotBeforeError } from 'jsonwebtoken';
 
 export default {
   components: { 
@@ -761,41 +762,55 @@ export default {
     },
     /* ******************** IMAGE INPUT ******************** */
     async imageConfirm () {
-      this.isUploading = true
-      const storageRef = firebase.storage().ref('acomods/' + this.$store.state.acomodData.acomodID + '/')
-      let blobL = await this.$refs.myCroppa.promisedBlob('image/jpeg', 0.01)
-      let blobHJ = await this.$refs.myCroppa.promisedBlob('image/jpeg')
-      let blobHW = await this.$refs.myCroppa.promisedBlob('image/webp')
-      this.uploadProgress = 80
-      let n = this.$store.state.imageCountAc
-      let key = this.$store.state.acomodData.images.length
-      /* L */
-      storageRef.child('L' + n + '.jpeg').put(blobL).then(snapshot => {
-        storageRef.child('L' + n + '.jpeg').getDownloadURL().then(url => {
-          this.$store.state.acomodData.images.push({ id: null, L: null, HJ: null, HW: null })
-          this.$store.state.acomodData.images[key].L = url
-          this.uploadProgress = 90
-          /* HJ */
-          storageRef.child('H' + n + 'J.jpeg').put(blobHJ).then(snapshot => {
-            storageRef.child('H' + n + 'J.jpeg').getDownloadURL().then(url => {
-              this.$store.state.acomodData.images[key].HJ = url
-              this.uploadProgress = 98
-              /* HW */
-              storageRef.child('H' + n + 'W.webp').put(blobHW).then(snapshot => {
-                storageRef.child('H' + n + 'W.webp').getDownloadURL().then(url => {
-                  this.$store.state.acomodData.images[key].HW = url
-                  this.$store.state.acomodData.images[key].id = n
-                  this.uploadProgress = 100
-                  this.$refs.myCroppa.remove()
-                  this.$store.commit('m_imageCountAc')
-                  this.isUploading = false
-                  this.uploadProgress = 0
-                })
-              })
-            })
-          })
-        })
-      })
+      try {
+        this.isUploading = true
+
+        /* Storage path */
+        const storageRef = firebase.storage().ref('acomods/' + this.$store.state.acomodData.acomodID + '/')
+
+        let blobL = await this.$refs.myCroppa.promisedBlob('image/jpeg', 0.01)
+        let blobHJ = await this.$refs.myCroppa.promisedBlob('image/jpeg')
+        let blobHW = await this.$refs.myCroppa.promisedBlob('image/webp')
+        
+        this.uploadProgress = 80
+
+        let n = this.$store.state.imageCountAc
+        let key = this.$store.state.acomodData.images.length
+
+        /* Criar objeto em branco para receber a imagem */
+        this.$store.state.acomodData.images.push({ id: null, L: null, HJ: null, HW: null })
+
+        /* Upload image L */
+        let snapL = await storageRef.child('L' + n + '.jpeg').put(blobL)
+        this.$store.state.acomodData.images[key].L = snapL.downloadURL
+        this.uploadProgress = 93
+        
+        /* Upload image HW */
+        let snapHW = await storageRef.child('H' + n + 'W.webp').put(blobHW)
+        this.$store.state.acomodData.images[key].HW = snapHW.downloadURL
+        this.uploadProgress = 98
+
+        /* Upload image HJ */
+        let snapHJ = await storageRef.child('H' + n + 'J.jpeg').put(blobHJ)
+        this.$store.state.acomodData.images[key].HJ = snapHJ.downloadURL
+        this.uploadProgress = 100
+
+        /* Definir id da imagem */
+        this.$store.state.acomodData.images[key].id = n
+
+        /* Remover imagem do croppa */
+        this.$refs.myCroppa.remove()
+        
+        /* Incrementar n */
+        this.$store.commit('m_imageCountAc')
+
+        this.isUploading = false
+        this.uploadProgress = 0
+      } catch (err) {
+        console.log(err)
+        this.isUploading = false
+        this.uploadProgress = 0
+      }
     },
     deleteImage (image, index) {
       const storageRef = firebase.storage().ref('acomods/' + this.$store.state.acomodData.acomodID + '/')
@@ -970,14 +985,8 @@ export default {
           message: 'Conecte-se com uma de suas contas ou crie uma conta com seu e-mail.',
           persist: true
         })
-      }
-      if (this.$store.state.acomodData.celular.length === 15 && this.user.email !== null) {
-        this.$store.state.bankAccount.legalName = this.user.fullName
-        this.$store.commit('m_cadastroAcomod11', false)
-        this.$store.commit('m_cadastroAcomod12', true)
-        this.$store.commit('m_acomodProgressBar', (100/12)*12)
-        this.scrollTop()
-        window.location.hash = `${this.randomHashs[12]}`
+      } else if (this.$store.state.acomodData.celular.length === 15 && this.user.email !== null) {
+          this.$store.commit('m_cadastroAcomod11', false), this.$store.commit('m_cadastroAcomod12', true), this.$store.commit('m_acomodProgressBar', (100/12)*12), this.scrollTop(), window.location.hash = `${this.randomHashs[12]}`, this.$store.state.bankAccount.legalName = this.user.fullName
       } else {
         this.$store.commit('show_alert', {
           type: 'warning',
@@ -994,47 +1003,53 @@ export default {
         persist: true
       })
     },
-    concluir () {
+    async concluir () {
       const acomodData = this.$store.state.acomodData
 
+      acomodData.proprietario = this.user.fullName
+      acomodData.email = this.user.email
+      acomodData.photoURL = this.user.photoURL
+      acomodData.userID = this.user.userID
+
+      /* Se todas as informações preenchidas */
       if (this.bankCode !== '' && this.agencia !== '' && this.agenciaDV !== '' && this.conta !== '' && this.contaDV !== '' && this.legalName !== '' && this.docNumber.length === 14) {
+        try {
+          this.$store.commit('m_loader', true)
 
-        this.$store.commit('m_loader', true)
-
-        /* RECIPIENT PAGARME */
-        firebase.functions().httpsCallable('pagarme_newAcomod')({ bankAccount: this.$store.state.bankAccount })
-        .then(result => {
+          /* Criar recebedor no Pagarme e capturar o id */
+          const result = await firebase.functions().httpsCallable('pagarme_newAcomod')({ bankAccount: this.$store.state.bankAccount })
           acomodData.recipientID = result.data.recipientID
 
-          /* SET ACOMOD FIRESTORE */
-          firebase.firestore().collection('acomods').doc(acomodData.acomodID).set(acomodData).then(() => {
-            this.$store.state.concludedNewAcomod = true /* Necessário para o correto funcionamento do backBtn _id */
-            this.$router.push('/acomodacoes/' + acomodData.acomodID)
-            
-            /* UPDATE USER */
-            firebase.firestore().collection('users').doc(acomodData.userID).update({
-              isAcomodHost: true,
-              celular: acomodData.celular
-            }).then(() => {
-              this.$store.dispatch('a_resetAcomodData')
-              this.$store.commit('m_loader', false)
-            })
-            .catch(err => { /* Update user error */
-              console.log(err)
-              this.$store.commit('m_loader', false)
-            })
+          /* Criar acomod na Firestore */
+          await firebase.firestore().collection('acomods').doc(acomodData.acomodID).set(acomodData)
 
-          })
-          .catch(err => { /* Set acomod error */
-            console.log(err)
-            this.$store.commit('m_loader', false)
-          })
-
-        })
-        .catch(err => { /* Recipient error */
-          console.log(err.details)
-          this.$store.commit('m_loader', false)
+          /* Necessário para o correto funcionamento do backBtn _id (Ver middleware: newAcomodConcludedCheck.js) */
+          this.$store.state.concludedNewAcomod = true 
           
+          /* Ir para página da acomod criada */
+          this.$router.push('/acomodacoes/' + acomodData.acomodID)
+
+          /* Atualizar user na Firestore */
+          await firebase.firestore().collection('users').doc(acomodData.userID).update({ 
+            isAcomodHost: true, 
+            celular: acomodData.celular 
+          })
+
+          /* Resetar acomodData */
+          this.$store.dispatch('a_resetAcomodData')
+
+          this.$store.commit('m_loader', false)
+
+        } catch (err) {
+          console.log(err)
+          
+          this.$store.commit('m_loader', false)
+
+          this.$store.commit('show_alert', {
+          type: 'error',
+          title: 'Erro',
+          message: 'Informações incorretas. Reveja por favor.'
+        })
           err.details === 'bank_code' ? this.bankCodeError = true : this.bankCodeError = false
           err.details === 'agencia' ? this.agenciaError = true : this.agenciaError = false
           err.details === 'agencia_dv' ? this.agenciaDVError = true : this.agenciaDVError = false
@@ -1042,12 +1057,12 @@ export default {
           err.details === 'conta_dv' ? this.contaDVError = true : this.contaDVError = false
           err.details === 'legal_name' ? this.legalNameError = true : this.legalNameError = false
           err.details === 'document_number' ? this.docNumberError = true : this.docNumberError = false
-        })
+        }
       } else {
         this.$store.commit('show_alert', {
           type: 'error',
           title: 'Erro',
-          message: 'Informações incorretas. Reveja por favor.'
+          message: 'Está faltando algumas informações. Reveja por favor.'
         })
         this.bankCode === '' ? this.bankCodeError = true : this.bankCodeError = false
         this.agencia === '' ? this.agenciaError = true : this.agenciaError = false
