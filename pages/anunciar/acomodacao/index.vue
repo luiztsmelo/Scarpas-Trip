@@ -772,7 +772,7 @@ export default {
         let blobHJ = await this.$refs.myCroppa.promisedBlob('image/jpeg')
         let blobHW = await this.$refs.myCroppa.promisedBlob('image/webp')
         
-        this.uploadProgress = 80
+        this.uploadProgress = 96
 
         let n = this.$store.state.imageCountAc
         let key = this.$store.state.acomodData.images.length
@@ -783,17 +783,18 @@ export default {
         /* Upload image L */
         let snapL = await storageRef.child('L' + n + '.jpeg').put(blobL)
         this.$store.state.acomodData.images[key].L = snapL.downloadURL
-        this.uploadProgress = 93
-        
-        /* Upload image HW */
-        let snapHW = await storageRef.child('H' + n + 'W.webp').put(blobHW)
-        this.$store.state.acomodData.images[key].HW = snapHW.downloadURL
         this.uploadProgress = 98
-
+        
         /* Upload image HJ */
         let snapHJ = await storageRef.child('H' + n + 'J.jpeg').put(blobHJ)
         this.$store.state.acomodData.images[key].HJ = snapHJ.downloadURL
+        this.uploadProgress = 99
+
+        /* Upload image HW */
+        let snapHW = await storageRef.child('H' + n + 'W.webp').put(blobHW)
+        this.$store.state.acomodData.images[key].HW = snapHW.downloadURL
         this.uploadProgress = 100
+
 
         /* Definir id da imagem */
         this.$store.state.acomodData.images[key].id = n

@@ -2,7 +2,7 @@
   <modal
     name="sign-in-modal"
     class="sign-in-modal"
-    :width="$store.state.isMobile ? '100%' : '35%'"
+    :width="$store.state.isMobile ? '100%' : '34%'"
     :height="$store.state.isMobile ? '100%' : 'auto'"
     @closed="closedModal">
 
@@ -21,9 +21,13 @@
         <button type="button" class="google-btn" @click="$store.dispatch('a_googleSignIn')">Continuar com Google</button>
         <button type="button" class="email-btn">Continuar com E-mail</button>
 
-        <h3 class="if-have-account">Ainda não possui uma conta? <span class="underline" @click="$store.state.isSignIn = false">Cadastrar</span></h3>
+        <h3 class="if-have-account">Não possui uma conta? <span class="underline" @click="$store.state.isSignIn = false">Cadastrar</span></h3>
 
-        <h3 class="terms-of-service">Ao entrar, você aceita nossos <nuxt-link to="/termos" style="text-decoration: underline">Termos de Serviço</nuxt-link> e <nuxt-link to="/termos#politica_privacidade" style="text-decoration: underline">Política de Privacidade</nuxt-link>.</h3>
+        <div class="terms-of-service" @click="$modal.hide('sign-in-modal')">
+          <nuxt-link to="/termos">Termos de Serviço</nuxt-link>
+          <h3 @click.stop>&nbsp|&nbsp</h3>
+          <nuxt-link to="/termos#politica_privacidade">Política de Privacidade</nuxt-link>
+        </div>
 
       </div>
     </div><!-- SIGN IN -->
@@ -44,7 +48,11 @@
 
         <h3 class="if-have-account">Já possui uma conta? <span class="underline" @click="$store.state.isSignIn = true">Entrar</span></h3>
         
-        <h3 class="terms-of-service">Ao cadastrar, você aceita nossos <nuxt-link to="/termos" style="text-decoration: underline">Termos de Serviço</nuxt-link> e <nuxt-link to="/termos#politica_privacidade" style="text-decoration: underline">Política de Privacidade</nuxt-link>.</h3>
+        <div class="terms-of-service" @click="$modal.hide('sign-in-modal')">
+          <nuxt-link to="/termos">Termos de Serviço</nuxt-link>
+          <h3 @click.stop>&nbsp|&nbsp</h3>
+          <nuxt-link to="/termos#politica_privacidade">Política de Privacidade</nuxt-link>
+        </div>
 
       </div>
     </div> <!-- SIGN UP -->
@@ -113,7 +121,7 @@ export default {
       display: flex;
       flex-flow: column;
       align-items: center;
-      padding: 3rem 4rem;
+      padding: 2.5rem 4rem;
       & .__img {
         width: 54px;
         height: auto;
@@ -152,18 +160,26 @@ export default {
       }
       & .if-have-account {
         text-align: center;
-        padding-top: .6rem;
+        padding-top: .7rem;
         font-size: 15px;
+        user-select: none;
         & .underline {
-          text-decoration: underline;
           cursor: pointer;
+        }
+        & .underline:hover {
+          text-decoration: underline;
         }
       }
       & .terms-of-service {
-        padding-top: .8rem;
+        display: flex;
+        align-items: center;
+        padding-top: .6rem;
         text-align: center;
         font-size: 14px;
-        line-height: 20px;
+        user-select: none;
+        & a:hover {
+          text-decoration: underline;
+        }
       }
     }
   }

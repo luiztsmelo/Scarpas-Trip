@@ -290,7 +290,7 @@
           <div class="item-form">
             <label :class="[ cardNumberError ? 'has-error-label' : '' ]">Número do Cartão</label>
             <masked-input
-              :style="{ backgroundImage: 'url(' + cardBrand + ')', backgroundPosition: 0, backgroundRepeat: 'no-repeat', backgroundSize: '36px', paddingLeft: cardType !== null ? '48px' : '' }"
+              :style="{ backgroundImage: 'url(' + cardBrand + ')', backgroundPosition: 0, backgroundRepeat: 'no-repeat', backgroundSize: '35px', paddingLeft: cardType !== null ? '48px' : '' }"
               :class="[ cardNumberError ? 'has-error' : '' ]"
               type="tel"
               v-model="$store.state.creditCard.cardNumber"
@@ -302,7 +302,7 @@
           </div><!-- CARD NUMBER -->
 
 
-          <div style="display:flex" v-show="cardNumberEntered">
+          <div style="display:flex">
             
             <!-- CARD EXPIRATION -->
             <div class="item-form">
@@ -421,7 +421,6 @@ export default {
   mixins: [ reservaAcomod ],
   data() {
     return {
-      cardNumberEntered: false
     }
   },
   methods: {
@@ -627,7 +626,6 @@ export default {
       if (cardNumber.card) {
         if (cardNumber.card.type === 'american-express' ? value.length === 18 : value.length === 19) {
           if (cardNumber.isValid) {
-            this.cardNumberEntered = true
             this.cardNumberError = false
           } else {
             this.cardNumberError = true
@@ -764,6 +762,7 @@ export default {
           font-size: 19px;
           font-weight: 500;
           user-select: none;
+          color: var(--colorAcomod);
         }
       }
       & .valores-reserva {
