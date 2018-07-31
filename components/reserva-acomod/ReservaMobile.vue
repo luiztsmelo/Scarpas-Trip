@@ -145,10 +145,25 @@
           </h1>
 
 
-          <div class="sign-in-btns" v-if="user.email === null">
-            <button type="button" class="facebook-btn" @click="$store.dispatch('a_facebookSignIn')">Cadastrar com Facebook</button>
-            <button type="button" class="google-btn" @click="$store.dispatch('a_googleSignIn')">Cadastrar com Google</button>
-            <button type="button" class="email-btn">Cadastrar com E-mail</button>
+          <div class="sign-in" v-if="user.email === null">
+
+            <!-- NOME -->
+            <div class="item-form">
+              <label>Nome completo</label>
+              <input type="text" pattern="[A-Za-z]" v-model="emailSignInData.fullName">
+            </div><!-- NOME -->
+
+            <!-- EMAIL -->
+            <div class="item-form">
+              <label>E-mail</label>
+              <input type="email" v-model="emailSignInData.email">
+            </div><!-- EMAIL -->
+
+
+
+            <!-- <button type="button" class="facebook-btn" @click="$store.dispatch('a_facebookSignIn')">Continuar com Facebook</button>
+            <button type="button" class="google-btn" @click="$store.dispatch('a_googleSignIn')">Continuar com Google</button> -->
+
           </div>
 
           <div class="after-sign-in" v-else>
@@ -371,9 +386,7 @@
           <!-- NOME -->
           <div class="item-form">
             <label>Nome Impresso no Cartão</label>
-            <input
-              type="text" pattern="[A-Za-z]"
-              v-model="$store.state.creditCard.cardHolderName">
+            <input type="text" pattern="[A-Za-z]" v-model="$store.state.creditCard.cardHolderName">
           </div><!-- NOME -->
 
 
@@ -421,6 +434,11 @@ export default {
   mixins: [ reservaAcomod ],
   data() {
     return {
+      emailSignInData: {
+        routeFullPath: this.$route.fullPath,
+        fullName: null,
+        email: null
+      }
     }
   },
   methods: {
@@ -489,7 +507,15 @@ export default {
       this.$store.commit('m_reservaAcomod2', false), this.$store.commit('m_reservaAcomod3', true), window.location.hash = this.$store.state.randomHashs[3]
     },
     nextBtn3 () {
-      if (this.reservaAcomod.guestCelular.length === 15) {
+      if (this.emailSignInData.email !== null && this.emailSignInData.fullName !== null) {
+        this.$store.dispatch('a_sendEmailLink', this.emailSignInData)
+        this.$store.commit('show_alert', {
+          type: 'info',
+          message: 'Um e-mail de confirmação foi enviado para seu e-mail.',
+          persist: true
+        })
+      }
+      /* if (this.reservaAcomod.guestCelular.length === 15) {
         this.creditCard.cardHolderName = this.user.fullName
         this.reservaAcomod.guestName = this.user.fullName
         this.$store.commit('m_reservaAcomod3', false)
@@ -502,7 +528,7 @@ export default {
           title: 'Ops',
           message: this.user.email === null ? 'É preciso se cadastrar.' : 'Adicione seu número de celular.',
         })
-      }
+      } */
     },
     nextBtn4 () {
       if (1<2) {
@@ -554,6 +580,8 @@ export default {
     }
   },
   computed: {
+    hash () { return this.$route.hash },
+    url () { return this.$route.fullPath },
     cardBrand () {
       const cardType = this.$store.state.cardType
       return cardType === 'visa' ? require('@/assets/img/visa.svg')
@@ -564,9 +592,6 @@ export default {
            : cardType === 'diners-club' ? require('@/assets/img/diners.svg')
            : cardType === 'jcb' ? require('@/assets/img/jcb.svg')
            : ''
-    },
-    hash () {
-      return this.$route.hash
     },
     totalHospedesArray () {
       return Array.from({length: this.acomod.totalHospedes}, (v, k) => k+1)
@@ -619,6 +644,22 @@ export default {
     }
   },
   watch: {
+    url (newVal, oldVal) {
+      console.log('oldVal: ', oldVal)
+      console.log('newVal: ', newVal)
+      if (oldVal !== newVal) {
+        if (firebase.auth().isSignInWithEmailLink(window.location.href)) {
+          alert('isSignInWithEmailLink!')
+
+          let email = window.localStorage.getItem('emailForSignIn')
+          if (!email) { email = window.prompt('Confirme seu e-mail:') }
+
+          firebase.auth().signInWithEmailLink(email, window.location.href)
+
+          window.localStorage.removeItem('emailForSignIn')
+        }
+      }
+    },
     cardNumber (value) {
       let cardNumber = valid.number(value)
       cardNumber.isPotentiallyValid ? this.cardNumberError = false : this.cardNumberError = true
@@ -774,10 +815,9 @@ export default {
           padding: .4rem 0;
         }
       }
-      & .sign-in-btns {
+      & .sign-in {
         display: flex;
         flex-flow: column;
-        padding: 0 7%;
         & .facebook-btn {
           width: 17rem;
           margin: .6rem 0;
@@ -787,14 +827,6 @@ export default {
           font-size: 15px;
         }
         & .google-btn {
-          width: 17rem;
-          margin: .6rem 0;
-          height: 3.4rem;
-          text-align: start;
-          padding-left: 50px;
-          font-size: 15px;
-        }
-        & .email-btn {
           width: 17rem;
           margin: .6rem 0;
           height: 3.4rem;

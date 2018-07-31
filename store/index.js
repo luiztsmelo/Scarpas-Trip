@@ -958,6 +958,18 @@ const store = () => new Vuex.Store({
     /*
     #################### SIGN IN ####################
     */
+    async a_sendEmailLink ({ state }, emailSignInData) {
+      try {
+        const actionCodeSettings = {
+          url: window.location.href,
+          handleCodeInApp: true
+        }
+        firebase.auth().sendSignInLinkToEmail(emailSignInData.email, actionCodeSettings)
+        window.localStorage.setItem('emailForSignIn', emailSignInData.email)
+      } catch (err) {
+        console.log(err)
+      }
+    },
     a_googleSignIn ({ dispatch }) {
       const provider = new firebase.auth.GoogleAuthProvider()
       firebase.auth().signInWithPopup(provider)
