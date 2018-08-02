@@ -155,7 +155,7 @@
 
           <div class="email-sign-in" v-if="isEmailSignIn && !userSignedUpWithEmail">
             
-            <div class="item-form">
+            <div class="item-form" v-if="!userSignedInWithEmail">
               <label 
               :class="[ emailErrorCode === 'auth/invalid-email' || emailErrorCode === 'auth/email-already-in-use' ? 'has-error-label' : '' ]">
               E-mail
@@ -166,7 +166,7 @@
                 v-model="$store.state.userData.email">
             </div>
 
-            <div class="item-form">
+            <div class="item-form" v-if="!userSignedInWithEmail">
               <label 
               :class="[ emailErrorCode === 'auth/wrong-password' || emailErrorCode === 'auth/weak-password' ? 'has-error-label' : '' ]">
               Senha
@@ -528,16 +528,20 @@ export default {
         /* E-mail sign-in */
         if (this.isEmailSignIn) {
           if (!this.userSignedUpWithEmail && this.$store.state.userData.email !== '' && this.$store.state.userData.password !== '') {
-            const snap = await firebase.firestore().collection('users').where('email', '==', this.$store.state.userData.email).get()
-            console.log(snap)
-            if (!snap.empty) {
-              this.$store.commit('m_loader', true)
-              this.$store.dispatch('a_emailSignIn')
-              console.log('User existe. Sign-in.')
+            if (this.userAlreadyExist) {
+              this.goNext4()
             } else {
-              this.$store.commit('m_loader', true)
-              this.$store.dispatch('a_emailSignUp')
-              console.log('User não existe. Sign-up.')
+              const snap = await firebase.firestore().collection('users').where('email', '==', this.$store.state.userData.email).get()
+              console.log('User existe?', snap)
+              if (!snap.empty) {
+                this.$store.commit('m_loader', true)
+                this.$store.dispatch('a_emailSignIn')
+                console.log('User existe. Sign-in.')
+              } else {
+                this.$store.commit('m_loader', true)
+                this.$store.dispatch('a_emailSignUp')
+                console.log('User não existe. Sign-up.')
+              }
             }
           } else if (this.userSignedUpWithEmail && this.$store.state.userData.fullName !== '' && this.reservaAcomod.guestCelular.length === 15) {
             this.goNext4()
@@ -637,6 +641,7 @@ export default {
     userAlreadyExist () { return this.$store.state.userAlreadyExist },
     isEmailSignIn () { return this.$store.state.isEmailSignIn },
     userSignedUpWithEmail () { return this.$store.state.userSignedUpWithEmail },
+    userSignedInWithEmail () { return this.$store.state.userSignedUpWithEmail },
     emailErrorCode () { return this.$store.state.emailErrorCode },
     userEmail () { return this.$store.state.userData.email },
     userPassword () { return this.$store.state.userData.password },

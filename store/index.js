@@ -67,6 +67,7 @@ const store = () => new Vuex.Store({
     userAlreadyExist: false,
     isEmailSignIn: false,
     userSignedUpWithEmail: false,
+    userSignedInWithEmail: false,
     emailErrorCode: null,
     userData: { /* Para e-mail sign-in */
       email: '',
@@ -372,6 +373,12 @@ const store = () => new Vuex.Store({
     },
     m_userAlreadyExist (state, payload) {
       state.userAlreadyExist = payload
+    },
+    m_userSignedUpWithEmail (state, payload) {
+      state.userSignedUpWithEmail = payload
+    },
+    m_userSignedInWithEmail (state, payload) {
+      state.userSignedInWithEmail = payload
     },
     m_authUser (state, payload) {
       state.authedUser = payload
@@ -986,7 +993,7 @@ const store = () => new Vuex.Store({
       try {
         await firebase.auth().createUserWithEmailAndPassword(state.userData.email, state.userData.password)
         dispatch('a_authStateObserver')
-        state.userSignedUpWithEmail = true
+        commit('m_userSignedUpWithEmail', true)
       } catch (err) {
         commit('m_loader', false)
         console.log(err.code)
@@ -997,6 +1004,7 @@ const store = () => new Vuex.Store({
       try {
         await firebase.auth().signInWithEmailAndPassword(state.userData.email, state.userData.password)
         dispatch('a_authStateObserver')
+        commit('m_userSignedInWithEmail', true)
       } catch (err) {
         commit('m_loader', false)
         console.log(err.code)
