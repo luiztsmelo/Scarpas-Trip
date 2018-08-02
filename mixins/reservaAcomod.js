@@ -60,6 +60,7 @@ export const reservaAcomod = {
   computed: {
     /* ******************** PATHS ******************** */
     acomod () { return this.$store.state.acomod },
+    authedUser () { return this.$store.state.authedUser },
     user () { return this.$store.state.user },
     reservaAcomod () { return this.$store.state.reservaAcomod },
     concludedReservaAcomod () { return this.$store.state.concludedReservaAcomod },

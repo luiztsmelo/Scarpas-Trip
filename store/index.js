@@ -62,6 +62,17 @@ const store = () => new Vuex.Store({
     /*
     -------------------- USER --------------------
     */
+    authedUser: false,
+    isNewUser: false,
+    userAlreadyExist: false,
+    isEmailSignIn: false,
+    userSignedUpWithEmail: false,
+    emailErrorCode: null,
+    userData: { /* Para e-mail sign-in */
+      email: '',
+      password: '',
+      fullName: ''
+    },
     user: {
       userID: null,
       firstName: null,
@@ -356,10 +367,23 @@ const store = () => new Vuex.Store({
     m_isMobile (state, payload) {
       state.isMobile = payload
     },
+    m_isNewUser (state, payload) {
+      state.isNewUser = payload
+    },
+    m_userAlreadyExist (state, payload) {
+      state.userAlreadyExist = payload
+    },
+    m_authUser (state, payload) {
+      state.authedUser = payload
+    },
     m_user (state, payload) {
       state.user = payload
     },
     m_resetUser (state) {
+      state.authedUser = false
+      state.isNewUser = false
+      state.userAlreadyExist = false
+      state.isEmailSignIn = false
       state.user.userID = null
       state.user.firstName = null
       state.user.fullName = null
@@ -958,45 +982,74 @@ const store = () => new Vuex.Store({
     /*
     #################### SIGN IN ####################
     */
-    async a_sendEmailLink ({ state }, emailSignInData) {
+    async a_emailSignUp ({ state, commit, dispatch }) {
       try {
-        const actionCodeSettings = {
-          url: window.location.href,
-          handleCodeInApp: true
-        }
-        firebase.auth().sendSignInLinkToEmail(emailSignInData.email, actionCodeSettings)
-        window.localStorage.setItem('emailForSignIn', emailSignInData.email)
+        await firebase.auth().createUserWithEmailAndPassword(state.userData.email, state.userData.password)
+        dispatch('a_authStateObserver')
+        state.userSignedUpWithEmail = true
+      } catch (err) {
+        commit('m_loader', false)
+        console.log(err.code)
+        state.emailErrorCode = err.code
+      }
+    },
+    async a_emailSignIn ({ state, commit, dispatch }) {
+      try {
+        await firebase.auth().signInWithEmailAndPassword(state.userData.email, state.userData.password)
+        dispatch('a_authStateObserver')
+      } catch (err) {
+        commit('m_loader', false)
+        console.log(err.code)
+        state.emailErrorCode = err.code
+      }
+    },
+    async a_googleSignIn ({ dispatch }) {
+      try {
+        const provider = new firebase.auth.GoogleAuthProvider()
+        await firebase.auth().signInWithPopup(provider)
+        dispatch('a_authStateObserver')
       } catch (err) {
         console.log(err)
       }
     },
-    a_googleSignIn ({ dispatch }) {
-      const provider = new firebase.auth.GoogleAuthProvider()
-      firebase.auth().signInWithPopup(provider)
-      dispatch('a_authStateObserver')
-    },
-    a_facebookSignIn ({ dispatch }) {
-      const provider = new firebase.auth.FacebookAuthProvider()
-      firebase.auth().signInWithPopup(provider)
-      dispatch('a_authStateObserver')
+    async a_facebookSignIn ({ dispatch }) {
+      try {
+        const provider = new firebase.auth.FacebookAuthProvider()
+        await firebase.auth().signInWithPopup(provider)
+        dispatch('a_authStateObserver')
+      } catch (err) {
+        console.log(err)
+      }
     },
     a_authStateObserver ({ commit, state }) {
       firebase.auth().onAuthStateChanged(async user => {
+        console.log(user)
         /* Se sign-in */
         if (user !== null) {
           try {
+            commit('m_authUser', true)
             commit('m_user', {
               userID: user.uid,
-              firstName: user.displayName.split(' ')[0],
-              fullName: user.displayName,
+              firstName: user.displayName !== null ? user.displayName.split(' ')[0] : null,
+              fullName: user.displayName !== null ? user.displayName : null,
               email: user.email,
-              photoURL: user.providerData[0].photoURL
+              photoURL: user.providerData[0].photoURL !== null ? user.providerData[0].photoURL : null
             })
-            /* Chechar se user já existe na Firestore */
+            /* Get user para chechar se já existe na Firestore */
             const userDoc = await firebase.firestore().collection('users').doc(user.uid).get()
-            userDoc.exists ? '' : await firebase.functions().httpsCallable('newUser')({ user: state.user })
+            commit('m_loader', false)
+            /* Se existir */
+            if (userDoc.exists) {
+              commit('m_userAlreadyExist', true)
+            } else {
+              /* Se não existir, criar user na Firestore e enviar welcome e-mail */
+              await firebase.functions().httpsCallable('newUser')({ user: state.user })
+              console.log('Novo user criado.')
+              commit('m_isNewUser', true)
+            }
           } catch (err) {
             console.log(err)
+            commit('m_loader', false)
           }
         }
       })

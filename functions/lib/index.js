@@ -15,16 +15,17 @@ const dayjs = require("dayjs");
 require("dayjs/locale/pt-br");
 const numeral = require("numeral");
 require("numeral/locales/pt-br");
+/* import axios from 'axios' */
 /* Firebase admin */
 admin.initializeApp(functions.config().firebase);
 /* Axios */
-const AirtableAcomodsURL = 'https://api.airtable.com/v0/appfQX2S7rMRlBWoh/Acomods';
+/* const AirtableAcomodsURL = 'https://api.airtable.com/v0/appfQX2S7rMRlBWoh/Acomods'
 const AirtableConfig = {
-    headers: {
-        'Authorization': `Bearer ${functions.config().airtable.key}`,
-        'Content-type': 'application/json'
-    }
-};
+  headers: {
+    'Authorization': `Bearer ${functions.config().airtable.key}`,
+    'Content-type': 'application/json'
+  }
+} */
 /* Mailjet */
 const Mailjet = require('node-mailjet').connect(`${functions.config().mailjetpublic.key}`, `${functions.config().mailjetprivate.key}`);
 const ESemail = 'contato@escarpastrip.com';
