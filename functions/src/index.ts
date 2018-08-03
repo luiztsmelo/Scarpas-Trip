@@ -38,6 +38,7 @@ numeral.locale('pt-br')
 
 
 
+
 /* _______________________________________________ WATCHERS _______________________________________________ */
 
 /* TRIGGER URL GERAL: https://us-central1-escarpas-trip.cloudfunctions.net/<function-name> */

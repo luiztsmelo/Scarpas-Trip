@@ -156,23 +156,7 @@ textarea {
 .facebook-btn:hover{
   border: 1px solid rgb(72,72,72);
 }
-/* ******* E-MAIL ******* */
-.instagram-btn {
-  background-image: url('../img/instagram-signin.svg');
-  background-position: 15px;
-  background-repeat: no-repeat;
-  background-size: 21px;
-  background-color: white;
-  border: 1px solid rgb(222,222,222);
-  height: 2.5rem;
-  border-radius: 5px;
-  font-size: 14px;
-  font-weight: 500;
-  transition: .15s border ease;
-}
-.email-btn:hover{
-  border: 1px solid rgb(72,72,72);
-}
+
 
 @media (min-width: 1024px) {
   h3 {
