@@ -141,7 +141,7 @@ textarea {
 }
 /* ******* FACEBOOK ******* */
 .facebook-btn {
-  background-image: url('../img/facebook.svg');
+  background-image: url('../img/facebook-signin.svg');
   background-position: 15px;
   background-repeat: no-repeat;
   background-size: 21px;
@@ -157,8 +157,8 @@ textarea {
   border: 1px solid rgb(72,72,72);
 }
 /* ******* E-MAIL ******* */
-.email-btn {
-  background-image: url('../img/email.svg');
+.instagram-btn {
+  background-image: url('../img/instagram-signin.svg');
   background-position: 15px;
   background-repeat: no-repeat;
   background-size: 21px;

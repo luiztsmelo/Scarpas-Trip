@@ -148,9 +148,10 @@
           <div class="sign-in-btns" v-if="!authUser">
             <button type="button" class="google-btn" @click="$store.dispatch('a_googleSignIn')">Continuar com Google</button>
             <button type="button" class="facebook-btn" @click="$store.dispatch('a_facebookSignIn')">Continuar com Facebook</button>
+            <button type="button" class="instagram-btn" @click="$store.dispatch('a_googleSignIn')">Continuar com Instagram</button>
           </div>
 
-          <h3 class="__text" style="padding-top: 1rem; font-size:15px" v-if="!authUser">Ao se cadastrar com uma das opções acima, somente seu e-mail, nome e foto de perfil serão requisitados. Para mais informações, leia nossa <span style="font-weight:500">Política de Privacidade</span>.</h3>
+          <h3 class="__text" style="padding-top:1rem; font-size:15px; line-height:24px" v-if="!authUser">Ao se cadastrar com uma das opções acima, somente seu e-mail, nome e foto de perfil serão requisitados. Para mais informações, leia nossa <span style="font-weight:500">Política de Privacidade</span>.</h3>
 
 
           <div class="after-sign-in" v-if="authUser">
@@ -786,24 +787,24 @@ export default {
         padding: 0 7%;
         & .facebook-btn {
           width: 17rem;
-          margin: .6rem 0;
-          height: 3.4rem;
+          margin: .5rem 0;
+          height: 3.5rem;
           text-align: start;
           padding-left: 50px;
           font-size: 15px;
         }
         & .google-btn {
           width: 17rem;
-          margin: .6rem 0;
-          height: 3.4rem;
+          margin: .5rem 0;
+          height: 3.5rem;
           text-align: start;
           padding-left: 50px;
           font-size: 15px;
         }
-        & .email-btn {
+        & .instagram-btn {
           width: 17rem;
-          margin: .6rem 0;
-          height: 3.4rem;
+          margin: .5rem 0;
+          height: 3.5rem;
           text-align: start;
           padding-left: 50px;
           font-size: 15px;
