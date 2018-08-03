@@ -141,53 +141,19 @@
           <h3 class="etapas">3 de 5 etapas</h3>
 
           <h1 class="__title">
-            {{ !authedUser ? 'Antes de continuar, precisamos de seu cadastro' : userAlreadyExist ? `Ótimo ${user.firstName}, você já está cadastrado` : isEmailSignIn ? 'Ótimo, só mais algumas informações' : `Ótimo ${user.firstName}, só mais uma informação` }}
+            {{ !authUser ? 'Antes de continuar, precisamos de seu cadastro' : `Ótimo ${user.firstName}, só mais uma informação` }}
           </h1>
 
 
-          <div class="sign-in-btns" v-if="!authedUser && !isEmailSignIn">
-            <button type="button" class="facebook-btn" @click="$store.dispatch('a_facebookSignIn')">Continuar com Facebook</button>
+          <div class="sign-in-btns" v-if="!authUser">
             <button type="button" class="google-btn" @click="$store.dispatch('a_googleSignIn')">Continuar com Google</button>
-            <button type="button" class="email-btn" @click="$store.state.isEmailSignIn = true">Continuar com E-mail</button>
+            <button type="button" class="facebook-btn" @click="$store.dispatch('a_facebookSignIn')">Continuar com Facebook</button>
           </div>
 
+          <h3 class="__text" style="padding-top: 1rem" v-if="!authUser">Ao se cadastrar com uma das opções acima, somente seu e-mail, nome e foto de perfil serão requisitados. Para mais informações, leia nossa Política de Privacidade.</h3>
 
 
-          <div class="email-sign-in" v-if="isEmailSignIn && !userSignedUpWithEmail">
-            
-            <div class="item-form" v-if="!userSignedInWithEmail">
-              <label 
-              :class="[ emailErrorCode === 'auth/invalid-email' || emailErrorCode === 'auth/email-already-in-use' ? 'has-error-label' : '' ]">
-              E-mail
-              </label>
-              <input 
-                :class="[ emailErrorCode === 'auth/invalid-email' || emailErrorCode === 'auth/email-already-in-use' ? 'has-error' : '' ]"
-                type="email" 
-                v-model="$store.state.userData.email">
-            </div>
-
-            <div class="item-form" v-if="!userSignedInWithEmail">
-              <label 
-              :class="[ emailErrorCode === 'auth/wrong-password' || emailErrorCode === 'auth/weak-password' ? 'has-error-label' : '' ]">
-              Senha
-              </label>
-              <input 
-                :class="[ emailErrorCode === 'auth/wrong-password' || emailErrorCode === 'auth/weak-password' ? 'has-error' : '' ]"
-                type="password" 
-                v-model="$store.state.userData.password">
-            </div>
-
-          </div>
-          
-
-
-          <div class="after-sign-in" v-if="authedUser && !userAlreadyExist">
-
-            <div class="item-form" v-if="isEmailSignIn">
-              <label>Nome completo</label>
-              <input type="text" pattern="[A-Za-z]" v-model="$store.state.userData.fullName">
-            </div>
-
+          <div class="after-sign-in" v-if="authUser">
             <div class="item-form">
               <label>Celular / WhatsApp</label>
               <masked-input
@@ -198,7 +164,6 @@
                 placeholder="(  )          ">
               </masked-input>
             </div>
-
           </div>
           
 
@@ -523,69 +488,29 @@ export default {
     nextBtn2 () {
       this.$store.commit('m_reservaAcomod2', false), this.$store.commit('m_reservaAcomod3', true), window.location.hash = this.$store.state.randomHashs[3]
     },
-    async nextBtn3 () {
-      try {
-        /* E-mail sign-in */
-        if (this.isEmailSignIn) {
-          if (!this.userSignedUpWithEmail && this.$store.state.userData.email !== '' && this.$store.state.userData.password !== '') {
-            if (this.userAlreadyExist) {
-              this.goNext4()
-            } else {
-              const snap = await firebase.firestore().collection('users').where('email', '==', this.$store.state.userData.email).get()
-              console.log('User existe?', snap)
-              if (!snap.empty) {
-                this.$store.commit('m_loader', true)
-                this.$store.dispatch('a_emailSignIn')
-                console.log('User existe. Sign-in.')
-              } else {
-                this.$store.commit('m_loader', true)
-                this.$store.dispatch('a_emailSignUp')
-                console.log('User não existe. Sign-up.')
-              }
-            }
-          } else if (this.userSignedUpWithEmail && this.$store.state.userData.fullName !== '' && this.reservaAcomod.guestCelular.length === 15) {
-            this.goNext4()
-            if (this.isNewUser) {
-              await firebase.firestore().collection('users').doc(this.user.userID).update({
-                fullName: this.$store.state.userData.fullName,
-                firstName: this.$store.state.userData.fullName.split(' ')[0],
-                celular: this.reservaAcomod.guestCelular
-              })
-              await firebase.auth().currentUser.updateProfile({
-                displayName: this.$store.state.userData.fullName
-              })
-              console.log('Nome e celular atualizados pelo nextBtn3')
-            }
-          /* Social sign-in */
-          }
-        }  else {
-          if (!this.userAlreadyExist && this.reservaAcomod.guestCelular.length === 15) {
-            this.goNext4()
-            if (this.isNewUser) {
-              await firebase.firestore().collection('users').doc(this.user.userID).update({ celular: this.reservaAcomod.guestCelular })
-              console.log('Celular atualizado pelo nextBtn3')
-            } 
-          } else if (this.userAlreadyExist) {
-            this.goNext4()
-          } else {
-            this.$store.commit('show_alert', {
-              type: 'warning',
-              title: 'Ops',
-              message: this.authedUser ? 'Adicione seu número de celular.' : 'É preciso se cadastrar.',
-            })
-          }
-        } 
-      } catch (err) {
-        console.log(err)
+    nextBtn3 () {
+      if (this.reservaAcomod.guestCelular.length === 15) {
+        this.creditCard.cardHolderName = this.user.fullName
+        this.reservaAcomod.guestName = this.user.fullName
+        this.$store.commit('m_reservaAcomod3', false)
+        this.$store.commit('m_reservaAcomod4', true)
+        window.location.hash = this.$store.state.randomHashs[4]
+        this.scrollTop()
+      } else {
+        if (this.authUser) {
+          this.$store.commit('show_alert', {
+            type: 'warning',
+            title: 'Ops',
+            message: 'Adicione um número de celular.',
+          })
+        } else {
+          this.$store.commit('show_alert', {
+            type: 'warning',
+            title: 'Ops',
+            message: 'Por favor, conecte-se com uma das contas acima.',
+          })
+        }
       }
-    },
-    goNext4 () {
-      this.creditCard.cardHolderName = this.user.fullName
-      this.reservaAcomod.guestName = this.user.fullName
-      this.$store.commit('m_reservaAcomod3', false)
-      this.$store.commit('m_reservaAcomod4', true)
-      window.location.hash = this.$store.state.randomHashs[4]
-      this.scrollTop()
     },
     nextBtn4 () {
       if (1<2) {
@@ -637,14 +562,6 @@ export default {
     }
   },
   computed: {
-    isNewUser () { return this.$store.state.isNewUser },
-    userAlreadyExist () { return this.$store.state.userAlreadyExist },
-    isEmailSignIn () { return this.$store.state.isEmailSignIn },
-    userSignedUpWithEmail () { return this.$store.state.userSignedUpWithEmail },
-    userSignedInWithEmail () { return this.$store.state.userSignedUpWithEmail },
-    emailErrorCode () { return this.$store.state.emailErrorCode },
-    userEmail () { return this.$store.state.userData.email },
-    userPassword () { return this.$store.state.userData.password },
     hash () { return this.$route.hash },
     cardBrand () {
       const cardType = this.$store.state.cardType
@@ -683,19 +600,7 @@ export default {
       return 'background: #50CB9D'
     },
     form3ok () {
-      /* E-mail sign-in */
-      if (this.isEmailSignIn) {
-        if (this.$store.state.userData.email !== '' && this.$store.state.userData.password !== '') {
-          return 'background: #50CB9D'
-        }
-      /* Social sign-in */
-      } else {
-        if (this.reservaAcomod.guestCelular.length === 15) {
-          return 'background: #50CB9D'
-        } else if (this.userAlreadyExist) {
-          return 'background: #50CB9D'
-        }
-      }
+      return this.reservaAcomod.guestCelular.length === 15 ? 'background: #50CB9D' : ''
     },
     form4ok () {
       return 1<2 ? 'background: #50CB9D' : ''
@@ -720,55 +625,6 @@ export default {
     }
   },
   watch: {
-    emailErrorCode (value) {
-      const errorMessage = value === 'auth/invalid-email' ? 'E-mail inválido.'
-                         : value === 'auth/email-already-in-use' ? 'Este e-mail já está sendo usado.'
-                         : value === 'auth/wrong-password' ? 'Senha incorreta.'
-                         : value === 'auth/weak-password' ? 'Senha fraca. Crie uma com no mínimo 6 dígitos.'
-                         : value === 'auth/user-disabled' ? 'Conta indisponível.'
-                         : value === 'auth/user-not-found' ? 'Conta não encontrada.'
-                         : value === 'auth/too-many-requests' ? 'Muitas tentativas seguidas. Aguarde um instante.'
-                         : '' 
-      if (value !== null) {
-        this.$store.commit('show_alert', {
-          type: 'error',
-          title: 'Ops',
-          message: errorMessage,
-          persist: true
-        })
-      }
-    },
-    userEmail (value) { return value !== '' ? this.$store.state.emailErrorCode = null : '' },
-    userPassword (value) { return value !== '' ? this.$store.state.emailErrorCode = null : '' },
-    async isNewUser (value) {
-      try {
-        if (this.isEmailSignIn) {
-          if (value && this.$store.state.userData.fullName !== '' && this.reservaAcomod.guestCelular.length === 15) {
-            await firebase.firestore().collection('users').doc(this.user.userID).update({
-              fullName: this.$store.state.userData.fullName,
-              firstName: this.$store.state.userData.fullName.split(' ')[0],
-              celular: this.reservaAcomod.guestCelular
-            })
-            await firebase.auth().currentUser.updateProfile({
-              displayName: this.$store.state.userData.fullName
-            })
-            console.log('Nome e celular atualizados pela watch')
-          }
-        } else {
-          if (value && this.reservaAcomod.guestCelular.length === 15) {
-            await firebase.firestore().collection('users').doc(this.user.userID).update({ celular: this.reservaAcomod.guestCelular })
-            console.log('Celular atualizado pela watch')
-          } 
-        }
-      } catch (err) {
-        console.log(err)
-      }
-    },
-    userAlreadyExist (value) {
-      if (value === true) {
-        this.goNext4()
-      }
-    },
     cardNumber (value) {
       let cardNumber = valid.number(value)
       cardNumber.isPotentiallyValid ? this.cardNumberError = false : this.cardNumberError = true

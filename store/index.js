@@ -62,18 +62,7 @@ const store = () => new Vuex.Store({
     /*
     -------------------- USER --------------------
     */
-    authedUser: false,
-    isNewUser: false,
-    userAlreadyExist: false,
-    isEmailSignIn: false,
-    userSignedUpWithEmail: false,
-    userSignedInWithEmail: false,
-    emailErrorCode: null,
-    userData: { /* Para e-mail sign-in */
-      email: '',
-      password: '',
-      fullName: ''
-    },
+    authUser: false,
     user: {
       userID: null,
       firstName: null,
@@ -368,29 +357,14 @@ const store = () => new Vuex.Store({
     m_isMobile (state, payload) {
       state.isMobile = payload
     },
-    m_isNewUser (state, payload) {
-      state.isNewUser = payload
-    },
-    m_userAlreadyExist (state, payload) {
-      state.userAlreadyExist = payload
-    },
-    m_userSignedUpWithEmail (state, payload) {
-      state.userSignedUpWithEmail = payload
-    },
-    m_userSignedInWithEmail (state, payload) {
-      state.userSignedInWithEmail = payload
-    },
     m_authUser (state, payload) {
-      state.authedUser = payload
+      state.authUser = payload
     },
     m_user (state, payload) {
       state.user = payload
     },
     m_resetUser (state) {
-      state.authedUser = false
-      state.isNewUser = false
-      state.userAlreadyExist = false
-      state.isEmailSignIn = false
+      state.authUser = false
       state.user.userID = null
       state.user.firstName = null
       state.user.fullName = null
@@ -989,28 +963,6 @@ const store = () => new Vuex.Store({
     /*
     #################### SIGN IN ####################
     */
-    async a_emailSignUp ({ state, commit, dispatch }) {
-      try {
-        await firebase.auth().createUserWithEmailAndPassword(state.userData.email, state.userData.password)
-        dispatch('a_authStateObserver')
-        commit('m_userSignedUpWithEmail', true)
-      } catch (err) {
-        commit('m_loader', false)
-        console.log(err.code)
-        state.emailErrorCode = err.code
-      }
-    },
-    async a_emailSignIn ({ state, commit, dispatch }) {
-      try {
-        await firebase.auth().signInWithEmailAndPassword(state.userData.email, state.userData.password)
-        dispatch('a_authStateObserver')
-        commit('m_userSignedInWithEmail', true)
-      } catch (err) {
-        commit('m_loader', false)
-        console.log(err.code)
-        state.emailErrorCode = err.code
-      }
-    },
     async a_googleSignIn ({ dispatch }) {
       try {
         const provider = new firebase.auth.GoogleAuthProvider()
@@ -1038,26 +990,20 @@ const store = () => new Vuex.Store({
             commit('m_authUser', true)
             commit('m_user', {
               userID: user.uid,
-              firstName: user.displayName !== null ? user.displayName.split(' ')[0] : null,
-              fullName: user.displayName !== null ? user.displayName : null,
+              firstName: user.displayName.split(' ')[0],
+              fullName: user.displayName,
               email: user.email,
-              photoURL: user.providerData[0].photoURL !== null ? user.providerData[0].photoURL : null
+              photoURL: user.providerData[0].photoURL
             })
             /* Get user para chechar se já existe na Firestore */
             const userDoc = await firebase.firestore().collection('users').doc(user.uid).get()
-            commit('m_loader', false)
             /* Se existir */
-            if (userDoc.exists) {
-              commit('m_userAlreadyExist', true)
-            } else {
-              /* Se não existir, criar user na Firestore e enviar welcome e-mail */
+            if (!userDoc.exists) {
               await firebase.functions().httpsCallable('newUser')({ user: state.user })
               console.log('Novo user criado.')
-              commit('m_isNewUser', true)
             }
           } catch (err) {
             console.log(err)
-            commit('m_loader', false)
           }
         }
       })
