@@ -150,7 +150,7 @@
             <button type="button" class="facebook-btn" @click="$store.dispatch('a_facebookSignIn')">Continuar com Facebook</button>
           </div>
 
-          <h3 class="__text" style="padding-top: 1rem" v-if="!authUser">Ao se cadastrar com uma das opções acima, somente seu e-mail, nome e foto de perfil serão requisitados. Para mais informações, leia nossa Política de Privacidade.</h3>
+          <h3 class="__text" style="padding-top: 1rem; font-size:15px" v-if="!authUser">Ao se cadastrar com uma das opções acima, somente seu e-mail, nome e foto de perfil serão requisitados. Para mais informações, leia nossa <span style="font-weight:500">Política de Privacidade</span>.</h3>
 
 
           <div class="after-sign-in" v-if="authUser">
@@ -507,7 +507,7 @@ export default {
           this.$store.commit('show_alert', {
             type: 'warning',
             title: 'Ops',
-            message: 'Por favor, conecte-se com uma das contas acima.',
+            message: 'Seu cadastro é necessário.',
           })
         }
       }
