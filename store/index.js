@@ -174,6 +174,7 @@ const store = () => new Vuex.Store({
         state: ''
       }
     },
+    validZipcode: false,
     clickedReservaAcomod: false,
     concludedReservaAcomod: false,
     concludedNewAcomod: false,

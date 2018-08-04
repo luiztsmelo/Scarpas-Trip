@@ -155,8 +155,9 @@
 
           <div class="after-sign-in" v-if="authUser">
             <div class="item-form">
-              <label>Celular / WhatsApp</label>
+              <label :class="[ celularError ? 'has-error-label' : '' ]">Celular / WhatsApp</label>
               <masked-input
+                :class="[ celularError ? 'has-error' : '' ]"
                 type="tel"
                 v-model="reservaAcomod.guestCelular"
                 :mask="['(', /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]"
@@ -372,15 +373,16 @@
 
           <!-- NOME -->
           <div class="item-form">
-            <label>Nome Impresso no Cartão</label>
-            <input type="text" pattern="[A-Za-z]" v-model="$store.state.creditCard.cardHolderName">
+            <label :class="[ cardHolderNameError ? 'has-error-label' : '' ]">Nome Impresso no Cartão</label>
+            <input :class="[ cardHolderNameError ? 'has-error' : '' ]" type="text" pattern="[A-Za-z]" v-model="$store.state.creditCard.cardHolderName">
           </div><!-- NOME -->
 
 
           <!-- CPF -->
           <div class="item-form">
-            <label>CPF</label>
+            <label :class="[ cpfError ? 'has-error-label' : '' ]">CPF</label>
             <masked-input
+              :class="[ cpfError ? 'has-error' : '' ]"
               type="tel"
               v-model="reservaAcomod.guestCPF"
               :mask="[/\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '-', /\d/, /\d/]"
@@ -390,12 +392,12 @@
           </div><!-- CPF -->
 
 
-          <h3 class="__text" style="font-size:15px; line-height:24px">A seguir, pediremos seu endereço apenas para garantir a segurança da transação e evitar possíveis fraudes ao sistema de pagamentos. Não se preocupe, {{ user.firstName }}.</h3>
+          <h3 class="__text" style="padding-bottom:1.2rem">{{ user.firstName }}, para garantirmos a segurança da transação, por favor, preencha a seguir seu endereço de cobrança.</h3>
 
 
           <!-- CEP -->
           <div class="item-form">
-            <label>CEP</label>
+            <label :class="[ zipcodeError ? 'has-error-label' : '' ]">CEP</label>
             <masked-input
               :class="[ zipcodeError ? 'has-error' : '' ]"
               type="tel"
@@ -410,7 +412,7 @@
           <div class="buttons">
             <div class="buttons-body">
               <h3 class="__alert">
-                {{ cardNumberError || cardExpirationDateError || cardCvvError ? 'Cartão inválido' : '' }}
+                {{ zipcodeError ? 'Informações inválidas' : '' }}
               </h3>
               <button type="button" class="__next-btn" :style="formBillingOk" @click="nextBtnBilling">Continuar</button>
             </div>
@@ -524,8 +526,9 @@ export default {
           this.$store.commit('show_alert', {
             type: 'warning',
             title: 'Ops',
-            message: 'Adicione um número de celular.'
+            message: 'Adicione um número de celular válido.'
           })
+          this.guestCelular.length < 15 ? this.celularError = true : this.celularError = false
         } else {
           this.$store.commit('show_alert', {
             type: 'warning',
@@ -546,9 +549,12 @@ export default {
       } else {
         this.$store.commit('show_alert', {
           type: 'error',
-          title: 'Erro',
+          title: 'Ops',
           message: 'Cartão inválido.',
         })
+        !valid.number(this.cardNumber).isValid ? this.cardNumberError = true : this.cardNumberError = false
+        !valid.expirationDate(this.cardExpirationDate).isValid ?  this.cardExpirationDateError = true :  this.cardExpirationDateError = false
+        !valid.cvv(this.cardCVV).isValid ? this.cardCvvError = true : this.cardCvvError = false
       }
     },
     nextBtnBoleto () {
@@ -557,8 +563,22 @@ export default {
       }
     },
     nextBtnBilling () {
-      if (1<2) {
+      if (this.cardHolderName !== '' && this.guestCPF.length === 14 && this.$store.state.validZipcode) {
         this.$store.commit('m_reservaAcomodBilling', false), window.history.back(1)
+      } else {
+        this.$store.commit('show_alert', {
+          type: 'error',
+          title: 'Ops',
+          message: 'Informações inválidas. Reveja por favor.',
+        })
+        this.cardHolderName.length < 3 ? this.cardHolderNameError = true : this.cardHolderNameError = false
+        this.guestCPF.length < 14 ? this.cpfError = true : this.cpfError = false
+        !this.$store.state.validZipcode ? this.zipcodeError = true : this.zipcodeError = false
+        this.street === '' ? this.streetError = true : this.streetError = false
+        this.streetNumber === '' ? this.streetNumberError = true : this.streetNumberError = false
+        this.neighborhood === '' ? this.neighborhoodError = true : this.neighborhoodError = false
+        this.city === '' ? this.cityError = true : this.cityError = false
+        this.state === '' ? this.stateError = true : this.stateError = false
       }
     },
     openDatePicker () {
@@ -651,7 +671,6 @@ export default {
     cardNumber (value) {
       let cardNumber = valid.number(value)
       cardNumber.isPotentiallyValid ? this.cardNumberError = false : this.cardNumberError = true
-      
       if (cardNumber.card) {
         if (cardNumber.card.type === 'american-express' ? value.length === 18 : value.length === 19) {
           if (cardNumber.isValid) {
@@ -673,6 +692,37 @@ export default {
     cardCVV (value) {
       let cardCVV = valid.cvv(value)
       cardCVV.isPotentiallyValid ? this.cardCvvError = false : this.cardCvvError = true
+    },
+    cardHolderName (value) { value !== '' ? this.cardHolderNameError = false : '' },
+    guestName (value) { value !== '' ? this.guestNameError = false : '' },
+    guestCPF (value) { value !== '' ? this.cpfError = false : '' },
+    guestCelular (value) { value !== '' ? this.celularError = false : '' },
+    street (value) { value !== '' ? this.streetError = false : '' },
+    streetNumber (value) { value !== '' ? this.streetNumberError = false : '' },
+    neighborhood (value) { value !== '' ? this.neighborhoodError = false : '' },
+    city (value) { value !== '' ? this.cityError = false : '' },
+    state (value) { value !== '' ? this.stateError = false : '' },
+    async zipcode (value) {
+      if (value.length === 9) {
+        try {
+          this.$store.commit('m_loader', true)
+          const billing = this.reservaAcomod.billing
+          const zipcode = billing.zipcode.replace(/[^0-9\.]+/g, '')
+          const zipcodeData = await this.$axios.$get('https://api.pagar.me/1/zipcodes/' + zipcode)
+          billing.state = zipcodeData.state
+          billing.city = zipcodeData.city
+          billing.neighborhood = zipcodeData.neighborhood
+          billing.street = zipcodeData.street
+          this.$store.state.validZipcode = true
+          this.$store.commit('m_loader', false)
+        } catch (err) {
+          this.zipcodeError = true
+          this.$store.state.validZipcode = false
+          this.$store.commit('m_loader', false)
+        }
+      } else {
+        this.zipcodeError = false
+      }
     },
     hash (value) {
       if (value === '') {

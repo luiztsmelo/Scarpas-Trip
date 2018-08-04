@@ -511,7 +511,7 @@ export default {
             !valid.cvv(this.cardCVV).isValid ? this.cardCvvError = true : this.cardCvvError = false
             this.guestCPF.length < 14 ? this.cpfError = true : this.cpfError = false
             this.guestCelular.length < 15 ? this.celularError = true : this.celularError = false
-            this.zipcode.length < 9 ? this.zipcodeError = true : this.zipcodeError = false
+            !this.$store.state.validZipcode ? this.zipcodeError = true : this.zipcodeError = false
             this.street === '' ? this.streetError = true : this.streetError = false
             this.streetNumber === '' ? this.streetNumberError = true : this.streetNumberError = false
             this.neighborhood === '' ? this.neighborhoodError = true : this.neighborhoodError = false
@@ -652,23 +652,24 @@ export default {
     neighborhood (value) { value !== '' ? this.neighborhoodError = false : '' },
     city (value) { value !== '' ? this.cityError = false : '' },
     state (value) { value !== '' ? this.stateError = false : '' },
-    zipcode (value) { /* Get zipcode info */
+    async zipcode (value) {
       if (value.length === 9) {
-        this.$store.commit('m_loader', true)
-        const billing = this.reservaAcomod.billing
-        const zipcode = billing.zipcode.replace(/[^0-9\.]+/g, '')
-        this.$axios.$get('https://api.pagar.me/1/zipcodes/' + zipcode)
-        .then(data => {
-          billing.state = data.state
-          billing.city = data.city
-          billing.neighborhood = data.neighborhood
-          billing.street = data.street
+        try {
+          this.$store.commit('m_loader', true)
+          const billing = this.reservaAcomod.billing
+          const zipcode = billing.zipcode.replace(/[^0-9\.]+/g, '')
+          const zipcodeData = await this.$axios.$get('https://api.pagar.me/1/zipcodes/' + zipcode)
+          billing.state = zipcodeData.state
+          billing.city = zipcodeData.city
+          billing.neighborhood = zipcodeData.neighborhood
+          billing.street = zipcodeData.street
+          this.$store.state.validZipcode = true
           this.$store.commit('m_loader', false)
-        })
-        .catch(err => {
+        } catch (err) {
           this.zipcodeError = true
+          this.$store.state.validZipcode = false
           this.$store.commit('m_loader', false)
-        })
+        }
       } else {
         this.zipcodeError = false
       }
