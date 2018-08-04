@@ -993,7 +993,7 @@ export default {
         flex-flow: column;
         margin-bottom: 1.8rem;
         & label {
-          font-weight: 400;
+          font-weight: 500;
           font-size: 14px;
           transition: all .2s ease;
         }
