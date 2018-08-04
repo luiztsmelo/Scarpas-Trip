@@ -392,7 +392,7 @@
           </div><!-- CPF -->
 
 
-          <h3 class="__text" style="padding-bottom:1.2rem">{{ user.firstName }}, para garantirmos a segurança da transação, por favor, preencha a seguir seu endereço de cobrança.</h3>
+          <h3 class="__text" style="padding-bottom:1.3rem">{{ user.firstName }}, para garantirmos a segurança da transação, por favor, preencha a seguir seu endereço de cobrança.</h3>
 
 
           <!-- CEP -->
@@ -549,7 +549,7 @@ export default {
       } else {
         this.$store.commit('show_alert', {
           type: 'error',
-          title: 'Ops',
+          title: 'Erro',
           message: 'Cartão inválido.',
         })
         !valid.number(this.cardNumber).isValid ? this.cardNumberError = true : this.cardNumberError = false
@@ -568,7 +568,7 @@ export default {
       } else {
         this.$store.commit('show_alert', {
           type: 'error',
-          title: 'Ops',
+          title: 'Erro',
           message: 'Informações inválidas. Reveja por favor.',
         })
         this.cardHolderName.length < 3 ? this.cardHolderNameError = true : this.cardHolderNameError = false
@@ -929,7 +929,7 @@ export default {
         flex-flow: column;
         margin-bottom: 1.7rem;
         & label {
-          font-weight: 600;
+          font-weight: 500;
           font-size: 15px;
           transition: all .2s ease;
         }

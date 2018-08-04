@@ -88,6 +88,11 @@ select {
 textarea {
   font-family: var(--main-font);
 }
+
+::placeholder {
+  color: rgb(162,162,162);
+  opacity: 1;
+}
 /* ******* CHECKBOX ******* */
 
 
