@@ -255,7 +255,7 @@
 
 
 
-        <!-- ___________ PAYMENT METHOD  ___________ -->
+        <!-- ______________________ PAYMENT METHOD  ______________________ -->
         <div class="etapa-reserva-box" v-if="$store.state.reservaAcomodPaymentMethod">
 
           <h1 class="__title">Pagar com</h1>
@@ -278,12 +278,13 @@
           </div>
 
 
-        </div><!-- ___________ PAYMENT METHOD  ___________ -->
+        </div><!-- ______________________ PAYMENT METHOD  ______________________ -->
 
 
 
 
-        <!-- ___________ CREDIT CARD  ___________ -->
+
+        <!-- ______________________ CREDIT CARD  ______________________ -->
         <div class="etapa-reserva-box" v-if="$store.state.reservaAcomodCreditCard">
 
           <h1 class="__title">Insira as informações do seu cartão</h1>
@@ -345,12 +346,14 @@
             </div>
           </div>
 
-        </div><!-- ___________ CREDIT CARD  ___________ -->
+        </div><!-- ______________________ CREDIT CARD  ______________________ -->
 
 
 
 
-        <!-- ___________ BOLETO  ___________ -->
+
+
+        <!-- ______________________ BOLETO  ______________________ -->
         <div class="etapa-reserva-box" v-if="$store.state.reservaAcomodBoleto">
 
           <h1 class="__title">Insira suas informações pessoais para a emissão do boleto</h1>
@@ -359,13 +362,14 @@
 
           <div class="round-btn" @click="nextBtnBoleto">OK</div>
 
-        </div><!-- ___________ BOLETO  ___________ -->
+        </div><!-- ______________________ BOLETO  ______________________ -->
 
 
 
 
 
-        <!-- ___________ BILLING  ___________ -->
+
+        <!-- ______________________ BILLING  ______________________ -->
         <div class="etapa-reserva-box" v-if="$store.state.reservaAcomodBilling">
 
           <h1 class="__title">Insira as informações pessoais do titular do cartão</h1>
@@ -392,7 +396,7 @@
           </div><!-- CPF -->
 
 
-          <h3 class="__text" style="padding-bottom:1.4rem">{{ user.firstName }}, para garantirmos a segurança da transação, por favor, preencha a seguir seu endereço de cobrança.</h3>
+          <h3 class="__text" style="padding-bottom:1.5rem">{{ user.firstName }}, para garantirmos a segurança da transação, por favor, preencha a seguir seu endereço de cobrança.</h3>
 
 
           <!-- CEP -->
@@ -424,19 +428,20 @@
 
             <div style="display:flex">
               <!-- NÚMERO -->
-              <div class="item-form">
+              <div class="item-form" style="flex:50%">
                 <label :class="[ streetNumberError ? 'has-error-label' : '' ]">Número</label>
                 <masked-input
                   :class="[ streetNumberError ? 'has-error' : '' ]"
                   type="tel"
                   v-model="reservaAcomod.billing.street_number"
                   :mask="[/\d/, /\d/, /\d/, /\d/]"
-                  :guide="false">
+                  :guide="false"
+                  placeholder="123">
                 </masked-input>
               </div><!-- NÚMERO -->
 
               <!-- BAIRRO -->
-              <div class="item-form">
+              <div class="item-form" style="flex:50%">
                 <label :class="[ neighborhoodError ? 'has-error-label' : '' ]">Bairro</label>
                 <input
                   :class="[ neighborhoodError ? 'has-error' : '' ]"
@@ -445,28 +450,27 @@
               </div><!-- BAIRRO -->
             </div>
           
+
+            <div style="display:flex">
+              <!-- CIDADE -->
+              <div class="item-form" style="flex:50%">
+                <label :class="[ cityError ? 'has-error-label' : '' ]">Cidade</label>
+                <input
+                  :class="[ cityError ? 'has-error' : '' ]"
+                  type="text" 
+                  v-model="reservaAcomod.billing.city">
+              </div><!-- CIDADE -->
+
+              <!-- ESTADO -->
+              <div class="item-form" style="flex:50%">
+                <label :class="[ stateError ? 'has-error-label' : '' ]">Estado</label>
+                <select :class="[ stateError ? 'has-error' : '' ]" v-model="reservaAcomod.billing.state">
+                  <option v-for="state in states" :value="state.value">{{ state.name }}</option>
+                </select>
+              </div><!-- ESTADO -->
+            </div>
+
           </div>
-
-
-          <div style="display:flex">
-            <!-- CIDADE -->
-            <div class="item-form">
-              <label :class="[ cityError ? 'has-error-label' : '' ]">Cidade</label>
-              <input
-                :class="[ cityError ? 'has-error' : '' ]"
-                type="text" 
-                v-model="reservaAcomod.billing.city">
-            </div><!-- CIDADE -->
-
-            <!-- ESTADO -->
-            <div class="item-form">
-              <label :class="[ stateError ? 'has-error-label' : '' ]">Estado</label>
-              <select :class="[ stateError ? 'has-error' : '' ]" v-model="reservaAcomod.billing.state">
-                <option v-for="state in states" :value="state.value">{{ state.name }}</option>
-              </select>
-            </div><!-- ESTADO -->
-          </div>
-
 
           <div class="buttons">
             <div class="buttons-body">
@@ -477,7 +481,7 @@
             </div>
           </div>
 
-        </div><!-- ___________ BILLING  ___________ -->
+        </div><!-- ______________________ BILLING  ______________________ -->
 
 
 
@@ -623,7 +627,7 @@ export default {
       }
     },
     nextBtnBilling () {
-      if (this.cardHolderName !== '' && this.guestCPF.length === 14 && this.zipcode.length === 9 && this.$store.state.validZipcode) {
+      if (this.cardHolderName !== '' && this.guestCPF.length === 14 && this.zipcode.length === 9 && this.$store.state.validZipcode && this.street !== '' && this.streetNumber !== '' && this.neighborhood !== '' && this.city !== '' && this.state !== '') {
         this.$store.commit('m_reservaAcomodBilling', false), window.history.back(1)
       } else {
         this.$store.commit('show_alert', {
@@ -987,15 +991,15 @@ export default {
         padding: 0 7%;
         display: flex;
         flex-flow: column;
-        margin-bottom: 1.7rem;
+        margin-bottom: 1.8rem;
         & label {
-          font-weight: 600;
-          font-size: 15px;
+          font-weight: 400;
+          font-size: 14px;
           transition: all .2s ease;
         }
         & input {
           width: 100%;
-          font-size: 17px;
+          font-size: 18px;
           font-weight: 400;
           background: white;
           color: var(--color01);
@@ -1007,7 +1011,7 @@ export default {
         }
         & select {
           width: 100%;
-          font-size: 17px;
+          font-size: 18px;
           font-weight: 400;
           background: white;
           color: var(--color01);
