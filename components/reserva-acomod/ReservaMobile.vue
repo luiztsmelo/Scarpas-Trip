@@ -475,7 +475,7 @@
           <div class="buttons">
             <div class="buttons-body">
               <h3 class="__alert">
-                {{ zipcodeError ? 'Informações inválidas' : '' }}
+                {{ cardHolderNameError || cpfError || zipcodeError || streetError || streetNumberError || neighborhoodError || cityError || stateError ? 'Informações inválidas' : '' }}
               </h3>
               <button type="button" class="__next-btn" :style="formBillingOk" @click="nextBtnBilling">Continuar</button>
             </div>
