@@ -392,7 +392,7 @@
           </div><!-- CPF -->
 
 
-          <h3 class="__text" style="padding-bottom:1.3rem">{{ user.firstName }}, para garantirmos a segurança da transação, por favor, preencha a seguir seu endereço de cobrança.</h3>
+          <h3 class="__text" style="padding-bottom:1.4rem">{{ user.firstName }}, para garantirmos a segurança da transação, por favor, preencha a seguir seu endereço de cobrança.</h3>
 
 
           <!-- CEP -->
@@ -407,6 +407,65 @@
               placeholder="00000-000">
             </masked-input>
           </div><!-- CEP -->
+
+
+          <div v-if="$store.state.validZipcode">
+
+            <!-- ENDEREÇO -->
+            <div class="item-form">
+              <label :class="[ streetError ? 'has-error-label' : '' ]">Rua</label>
+              <input
+                :class="[ streetError ? 'has-error' : '' ]"
+                type="text" 
+                v-model="reservaAcomod.billing.street"
+                placeholder="Endereço">
+            </div><!-- ENDEREÇO -->
+
+
+            <div style="display:flex">
+              <!-- NÚMERO -->
+              <div class="item-form">
+                <label :class="[ streetNumberError ? 'has-error-label' : '' ]">Número</label>
+                <masked-input
+                  :class="[ streetNumberError ? 'has-error' : '' ]"
+                  type="tel"
+                  v-model="reservaAcomod.billing.street_number"
+                  :mask="[/\d/, /\d/, /\d/, /\d/]"
+                  :guide="false">
+                </masked-input>
+              </div><!-- NÚMERO -->
+
+              <!-- BAIRRO -->
+              <div class="item-form">
+                <label :class="[ neighborhoodError ? 'has-error-label' : '' ]">Bairro</label>
+                <input
+                  :class="[ neighborhoodError ? 'has-error' : '' ]"
+                  type="text" 
+                  v-model="reservaAcomod.billing.neighborhood">
+              </div><!-- BAIRRO -->
+            </div>
+          
+          </div>
+
+
+          <div style="display:flex">
+            <!-- CIDADE -->
+            <div class="item-form">
+              <label :class="[ cityError ? 'has-error-label' : '' ]">Cidade</label>
+              <input
+                :class="[ cityError ? 'has-error' : '' ]"
+                type="text" 
+                v-model="reservaAcomod.billing.city">
+            </div><!-- CIDADE -->
+
+            <!-- ESTADO -->
+            <div class="item-form">
+              <label :class="[ stateError ? 'has-error-label' : '' ]">Estado</label>
+              <select :class="[ stateError ? 'has-error' : '' ]" v-model="reservaAcomod.billing.state">
+                <option v-for="state in states" :value="state.value">{{ state.name }}</option>
+              </select>
+            </div><!-- ESTADO -->
+          </div>
 
 
           <div class="buttons">
@@ -435,6 +494,7 @@ import 'firebase/functions'
 import MaskedInput from 'vue-text-mask'
 import DatePicker from '@/components/DatePicker'
 import { reservaAcomod } from '@/mixins/reservaAcomod'
+import { states } from '@/mixins/statesBrazil'
 import { tipoAcomod } from '@/mixins/tipoAcomod'
 import valid from 'card-validator'
 import dayjs from 'dayjs'
@@ -443,7 +503,7 @@ dayjs.locale('pt-br')
 
 export default {
   components: { MaskedInput, DatePicker, tipoAcomod },
-  mixins: [ reservaAcomod ],
+  mixins: [ reservaAcomod, states ],
   data() {
     return {
     }
@@ -563,7 +623,7 @@ export default {
       }
     },
     nextBtnBilling () {
-      if (this.cardHolderName !== '' && this.guestCPF.length === 14 && this.$store.state.validZipcode) {
+      if (this.cardHolderName !== '' && this.guestCPF.length === 14 && this.zipcode.length === 9 && this.$store.state.validZipcode) {
         this.$store.commit('m_reservaAcomodBilling', false), window.history.back(1)
       } else {
         this.$store.commit('show_alert', {
@@ -573,7 +633,7 @@ export default {
         })
         this.cardHolderName.length < 3 ? this.cardHolderNameError = true : this.cardHolderNameError = false
         this.guestCPF.length < 14 ? this.cpfError = true : this.cpfError = false
-        !this.$store.state.validZipcode ? this.zipcodeError = true : this.zipcodeError = false
+        this.zipcode.length < 9 || !this.$store.state.validZipcode? this.zipcodeError = true : this.zipcodeError = false
         this.street === '' ? this.streetError = true : this.streetError = false
         this.streetNumber === '' ? this.streetNumberError = true : this.streetNumberError = false
         this.neighborhood === '' ? this.neighborhoodError = true : this.neighborhoodError = false
@@ -929,11 +989,23 @@ export default {
         flex-flow: column;
         margin-bottom: 1.7rem;
         & label {
-          font-weight: 500;
+          font-weight: 600;
           font-size: 15px;
           transition: all .2s ease;
         }
         & input {
+          width: 100%;
+          font-size: 17px;
+          font-weight: 400;
+          background: white;
+          color: var(--color01);
+          padding: 1rem 0;
+          border: none;
+          border-bottom: 1px solid rgb(222,222,222);
+          outline: none;
+          transition: all .2s ease;
+        }
+        & select {
           width: 100%;
           font-size: 17px;
           font-weight: 400;
