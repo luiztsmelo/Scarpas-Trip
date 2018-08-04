@@ -150,7 +150,7 @@
             <button type="button" class="facebook-btn" @click="$store.dispatch('a_facebookSignIn')">Continuar com Facebook</button>
           </div>
 
-          <h3 class="__text" style="padding-top:1rem; font-size:15px; line-height:24px" v-if="!authUser">Ao se cadastrar com uma das opções acima, somente seu e-mail, nome e foto de perfil serão requisitados. Para mais informações, leia nossa <span style="font-weight:500">Política de Privacidade</span>.</h3>
+          <h3 class="__text" style="padding-top:1rem; font-size:15px; line-height:24px" v-if="!authUser">Ao se cadastrar com uma das opções acima, somente seu e-mail, nome e foto de perfil serão requisitados. Para mais informações, leia nossa <nuxt-link to="/termos#politica_privacidade" style="font-weight:500; cursor:pointer">Política de Privacidade</nuxt-link>.</h3>
 
 
           <div class="after-sign-in" v-if="authUser">
@@ -219,7 +219,7 @@
           <h1 class="__title">Pagar e confirmar</h1>
 
 
-          <h3 class="__text">Você somente será cobrado caso {{ acomod.proprietario.split(' ')[0] }} confirme seu pedido de reserva.</h3>
+          <h3 class="__text">{{ user.firstName }}, você somente será cobrado caso {{ acomod.proprietario.split(' ')[0] }} confirme seu pedido de reserva.</h3>
 
           <h3 class="__text">Para sua segurança, só liberaremos o pagamento para ele no dia seguinte de seu check-in, {{ dayAfterCheckin }}. Não se preocupe, seus dados estarão seguros.</h3>
 
@@ -340,7 +340,7 @@
               <h3 class="__alert">
                 {{ cardNumberError || cardExpirationDateError || cardCvvError ? 'Cartão inválido' : '' }}
               </h3>
-              <button type="button" class="__next-btn" :style="formCreditCardOk" @click="nextBtnCreditCard">Próximo</button>
+              <button type="button" class="__next-btn" :style="formCreditCardOk" @click="nextBtnCreditCard">Continuar</button>
             </div>
           </div>
 
@@ -390,8 +390,31 @@
           </div><!-- CPF -->
 
 
+          <h3 class="__text" style="font-size:15px; line-height:24px">A seguir, pediremos seu endereço apenas para garantir a segurança da transação e evitar possíveis fraudes ao sistema de pagamentos. Não se preocupe, {{ user.firstName }}.</h3>
 
-          <div class="round-btn" @click="nextBtnBilling">OK</div>
+
+          <!-- CEP -->
+          <div class="item-form">
+            <label>CEP</label>
+            <masked-input
+              :class="[ zipcodeError ? 'has-error' : '' ]"
+              type="tel"
+              v-model="reservaAcomod.billing.zipcode"
+              :mask="[/\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/]"
+              :guide="false"
+              placeholder="00000-000">
+            </masked-input>
+          </div><!-- CEP -->
+
+
+          <div class="buttons">
+            <div class="buttons-body">
+              <h3 class="__alert">
+                {{ cardNumberError || cardExpirationDateError || cardCvvError ? 'Cartão inválido' : '' }}
+              </h3>
+              <button type="button" class="__next-btn" :style="formBillingOk" @click="nextBtnBilling">Continuar</button>
+            </div>
+          </div>
 
         </div><!-- ___________ BILLING  ___________ -->
 
