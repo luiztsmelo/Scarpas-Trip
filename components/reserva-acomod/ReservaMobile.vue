@@ -141,7 +141,7 @@
           <h3 class="etapas">3 de 5 etapas</h3>
 
           <h1 class="__title">
-            {{ !authUser ? 'Antes de continuar, precisamos de seu cadastro' : `Ótimo ${user.firstName}, só mais uma informação` }}
+            {{ !authUser ? 'Antes de continuar, precisamos de seu cadastro ou login' : `Ótimo ${user.firstName}, só mais uma informação` }}
           </h1>
 
 
@@ -501,13 +501,13 @@ export default {
           this.$store.commit('show_alert', {
             type: 'warning',
             title: 'Ops',
-            message: 'Adicione um número de celular.',
+            message: 'Adicione um número de celular.'
           })
         } else {
           this.$store.commit('show_alert', {
             type: 'warning',
             title: 'Ops',
-            message: 'Seu cadastro é necessário.',
+            message: 'Seu cadastro é necessário.'
           })
         }
       }

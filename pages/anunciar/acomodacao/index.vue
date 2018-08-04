@@ -541,38 +541,30 @@
 
 
 
-    <!-- ########## IDENTIFICAÇÃO PG.11 ########## -->
+    <!-- ########## CADASTRO PG.11 ########## -->
     <form class="cadastro-acomodacao" v-if="$store.state.cadastroAcomod11">
 
       <h1 class="__form-title">
-        {{ user.email === null ? 'Antes de continuar, precisamos de seu cadastro' : `Ótimo ${user.firstName}, só mais uma informação` }}
+        {{ !authUser ? 'Antes de continuar, precisamos de seu cadastro' : `Ótimo ${user.firstName}, só mais uma informação` }}
       </h1> 
 
-      <div class="signin-btns" v-if="user.email === null">
-        <button type="button" class="facebook-btn" @click="$store.dispatch('a_facebookSignIn')">Continuar com Facebook</button>
+
+      <div class="signin-btns" v-if="!authUser">
         <button type="button" class="google-btn" @click="$store.dispatch('a_googleSignIn')">Continuar com Google</button>
-        <button type="button" class="email-btn">Continuar com E-mail</button>
+        <button type="button" class="facebook-btn" @click="$store.dispatch('a_facebookSignIn')">Continuar com Facebook</button>
       </div>
 
 
-      <div v-else>
+      <h3 class="__form-text" style="padding-top:1rem; font-size:15px; line-height:24px" v-if="!authUser">Ao se cadastrar com uma das opções acima, somente seu e-mail, nome e foto de perfil serão requisitados. Para mais informações, leia nossa <nuxt-link to="/termos#politica_privacidade" style="font-weight:500; cursor:pointer">Política de Privacidade</nuxt-link>.</h3>
+
+
+      <div v-if="authUser">
 
         <div class="item-form">
           <label>Celular / WhatsApp</label>
           <masked-input
             type="tel"
             v-model="$store.state.acomodData.celular"
-            :mask="['(', /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]"
-            :guide="false"
-            placeholder="(  )          ">
-          </masked-input>
-        </div>
-
-        <div class="item-form">
-          <label>Celular / WhatsApp 2 <span style="font-weight:400">(Opcional)</span></label>
-          <masked-input
-            type="tel"
-            v-model="$store.state.acomodData.celular2"
             :mask="['(', /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]"
             :guide="false"
             placeholder="(  )          ">
@@ -589,7 +581,7 @@
         </div>
       </div> 
     
-    </form><!-- ########## IDENTIFICAÇÃO PG.11 ########## -->
+    </form><!-- ########## CADASTRO PG.11 ########## -->
 
 
 
@@ -979,20 +971,19 @@ export default {
       }
     },
     nextBtn11 () {
-      if (this.user.email === null) {
+      if (!this.authUser) {
         this.$store.commit('show_alert', {
           type: 'warning',
           title: 'Ops',
-          message: 'Conecte-se com uma de suas contas ou crie uma conta com seu e-mail.',
-          persist: true
+          message: 'Conecte-se com uma de suas contas para continuar.'
         })
-      } else if (this.$store.state.acomodData.celular.length === 15 && this.user.email !== null) {
+      } else if (this.$store.state.acomodData.celular.length === 15 && this.authUser) {
           this.$store.commit('m_cadastroAcomod11', false), this.$store.commit('m_cadastroAcomod12', true), this.$store.commit('m_acomodProgressBar', (100/12)*12), this.scrollTop(), window.location.hash = `${this.randomHashs[12]}`, this.$store.state.bankAccount.legalName = this.user.fullName
       } else {
         this.$store.commit('show_alert', {
           type: 'warning',
           title: 'Ops',
-          message: 'Adicione pelo menos um número de celular.'
+          message: 'Adicione um número de celular.'
         })
       }
     },
@@ -1048,7 +1039,7 @@ export default {
 
           this.$store.commit('show_alert', {
           type: 'error',
-          title: 'Erro',
+          title: 'Ops',
           message: 'Informações incorretas. Reveja por favor.'
         })
           err.details === 'bank_code' ? this.bankCodeError = true : this.bankCodeError = false
@@ -1062,7 +1053,7 @@ export default {
       } else {
         this.$store.commit('show_alert', {
           type: 'error',
-          title: 'Erro',
+          title: 'Ops',
           message: 'Está faltando algumas informações. Reveja por favor.'
         })
         this.bankCode === '' ? this.bankCodeError = true : this.bankCodeError = false
@@ -1083,6 +1074,7 @@ export default {
   computed: {
     /* ******************** PATHS ******************** */
     user () { return this.$store.state.user },
+    authUser () { return this.$store.state.authUser },
     hash () { return this.$route.hash },
     randomHashs () { return this.$store.state.randomHashs },
     /* Bank Account */
@@ -1157,7 +1149,7 @@ export default {
       return this.$store.state.acomodData.subtitle !== '' ? 'background:#FFA04F' : ''
     },
     form11ok () {
-      return this.$store.state.acomodData.celular.length === 15 && this.user.email !== null ? 'background:#FFA04F' : ''
+      return this.$store.state.acomodData.celular.length === 15 && this.authUser ? 'background:#FFA04F' : ''
     },
     form12ok () {
       return this.bankCode !== null && this.agencia !== '' && this.agenciaDV !== '' && this.conta !== '' && this.contaDV !== '' && this.legalName !== '' && this.docNumber.length === 14 ? 'background:#FFA04F' : ''
@@ -1632,14 +1624,6 @@ export default {
         padding-left: 50px;
         font-size: 15px;
       }
-      & .email-btn {
-        width: 17rem;
-        margin: .6rem 0;
-        height: 3.4rem;
-        text-align: start;
-        padding-left: 50px;
-        font-size: 15px;
-      }
     }
     & .back-next {
       position: fixed;
@@ -1865,9 +1849,6 @@ export default {
           width: 100%;
         }
         & .google-btn {
-          width: 100%;
-        }
-        & .email-btn {
           width: 100%;
         }
       }

@@ -2,7 +2,7 @@
   <modal
     name="sign-in-modal"
     class="sign-in-modal"
-    :width="$store.state.isMobile ? '100%' : '34%'"
+    :width="$store.state.isMobile ? '100%' : '32%'"
     :height="$store.state.isMobile ? '100%' : 'auto'"
     @closed="closedModal">
 
@@ -17,10 +17,9 @@
         <h1 class="__title">Acessar sua conta</h1>
         <h3 class="__subtitle">Acesse sua conta para acompanhar suas reservas ou gerenciar seus anúncios</h3>
 
-        <button type="button" class="facebook-btn" @click="$store.dispatch('a_facebookSignIn')">Continuar com Facebook</button>
         <button type="button" class="google-btn" @click="$store.dispatch('a_googleSignIn')">Continuar com Google</button>
-        <button type="button" class="email-btn">Continuar com E-mail</button>
-
+        <button type="button" class="facebook-btn" @click="$store.dispatch('a_facebookSignIn')">Continuar com Facebook</button>
+        
         <h3 class="if-have-account">Não possui uma conta? <span class="underline" @click="$store.state.isSignIn = false">Cadastrar</span></h3>
 
         <div class="terms-of-service" @click="$modal.hide('sign-in-modal')">
@@ -42,9 +41,8 @@
         <h1 class="__title">{{ $store.state.clickedAskAcomod === true || $store.state.clickedReservaAcomod === true ? 'Antes, é preciso se cadastrar' : 'Cadastrar' }}</h1>
         <h3 class="__subtitle">{{ $store.state.clickedAskAcomod === true || $store.state.clickedReservaAcomod === true ? '' : 'Cadastre-se para fazer reservas ou anunciar na Escarpas Trip' }}</h3>
 
-        <button type="button" class="facebook-btn" @click="$store.dispatch('a_facebookSignIn')">Cadastrar com Facebook</button>
         <button type="button" class="google-btn" @click="$store.dispatch('a_googleSignIn')">Cadastrar com Google</button>
-        <button type="button" class="email-btn">Cadastrar com E-mail</button>
+        <button type="button" class="facebook-btn" @click="$store.dispatch('a_facebookSignIn')">Cadastrar com Facebook</button>
 
         <h3 class="if-have-account">Já possui uma conta? <span class="underline" @click="$store.state.isSignIn = true">Entrar</span></h3>
         
@@ -121,7 +119,7 @@ export default {
       display: flex;
       flex-flow: column;
       align-items: center;
-      padding: 2.5rem 4rem;
+      padding: 3.6rem 4rem;
       & .__img {
         width: 54px;
         height: auto;
@@ -134,7 +132,7 @@ export default {
       & .__subtitle {
         font-size: 15px;
         text-align: center;
-        padding: 0 0 1.1rem 0;
+        padding: 0 0 1.2rem 0;
         line-height: 22px;
       }
       & .facebook-btn {
@@ -151,16 +149,9 @@ export default {
         text-align: start;
         padding-left: 50px;
       }
-      & .email-btn {
-        width: 15.6rem;
-        margin: .6rem 0;
-        height: 2.9rem;
-        text-align: start;
-        padding-left: 50px;
-      }
       & .if-have-account {
         text-align: center;
-        padding-top: .7rem;
+        padding-top: .9rem;
         font-size: 15px;
         user-select: none;
         & .underline {
@@ -173,9 +164,10 @@ export default {
       & .terms-of-service {
         display: flex;
         align-items: center;
-        padding-top: .6rem;
+        padding-top: .8rem;
         text-align: center;
         font-size: 14px;
+        font-weight: 500;
         user-select: none;
         & a:hover {
           text-decoration: underline;

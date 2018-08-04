@@ -49,7 +49,7 @@ export default {
       return this.isInfo ? 'color: #2a2a2a' : 'color: #fff'
     },
     closeBtnColor () {
-      return this.isInfo ? 'filter: invert(80%)' : 'filter: invert(100%) brightness(200%)'
+      return this.isInfo ? 'filter: invert(70%)' : 'filter: invert(100%) brightness(200%)'
     }
   },
   watch: {

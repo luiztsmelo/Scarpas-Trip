@@ -339,7 +339,6 @@
       <div class="signin-btns" v-if="$store.state.user.email === null">
         <button type="button" class="facebook-btn" @click="facebookSignIn()">Continuar com Facebook</button>
         <button type="button" class="google-btn" @click="googleSignIn()">Continuar com Google</button>
-        <button type="button" class="email-btn" @click="emailSignIn()">Continuar com E-mail</button>
       </div>
 
       <h3 class="__form-text" v-if="$store.state.user.email !== null">Ótimo {{ firstName }}! Só mais algumas informações:</h3>
@@ -1106,14 +1105,6 @@ export default {
         padding-left: 50px;
         font-size: 15px;
       }
-      & .email-btn {
-        width: 17rem;
-        margin: .7rem 0;
-        height: 2.9rem;
-        text-align: start;
-        padding-left: 50px;
-        font-size: 15px;
-      }
     }
     & .back-next {
       position: fixed;
@@ -1280,9 +1271,6 @@ export default {
           width: 100%;
         }
         & .google-btn {
-          width: 100%;
-        }
-        & .email-btn {
           width: 100%;
         }
       }
