@@ -742,6 +742,7 @@ export default {
         if (cardNumber.card.type === 'american-express' ? value.length === 18 : value.length === 19) {
           if (cardNumber.isValid) {
             this.cardNumberError = false
+            window.scroll({ top: this.$refs.cardExpirationDate.$el.offsetTop, behavior: 'smooth' })
             this.$refs.cardExpirationDate.$el.focus()
           } else {
             this.cardNumberError = true
@@ -788,7 +789,10 @@ export default {
           billing.street = zipcodeData.street
           this.$store.state.validZipcode = true
           this.$store.commit('m_loader', false)
-          this.$nextTick(() => this.$refs.street.focus())
+          this.$nextTick(() => {
+            window.scroll({ top: this.$refs.street.offsetTop, behavior: 'smooth' })
+            this.$refs.street.focus()
+          })
         } catch (err) {
           console.log(err)
           this.zipcodeError = true
