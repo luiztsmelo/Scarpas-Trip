@@ -430,7 +430,7 @@
                 ref="street"
                 :class="[ streetError ? 'has-error' : '' ]"
                 type="text"
-                @keyup.enter="$refs.streetNumber.$el.focus()"
+                @keyup.enter="keyEnterStreet"
                 v-model="reservaAcomod.billing.street"
                 placeholder="Endereço">
             </div><!-- ENDEREÇO -->
@@ -531,6 +531,10 @@ export default {
     }
   },
   methods: {
+    keyEnterStreet () {
+      this.$refs.streetNumber.$el.focus()
+      scrollIntoView(this.$refs.streetNumber.$el)
+    },
     keyEnterBairro () {
       this.$refs.city.focus()
       scrollIntoView(this.$refs.city)
