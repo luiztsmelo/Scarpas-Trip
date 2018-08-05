@@ -312,6 +312,7 @@
             <div class="item-form">
               <label :class="[ cardExpirationDateError ? 'has-error-label' : '' ]">Valido até</label>
               <masked-input
+                ref="cardExpirationDate"
                 :class="[ cardExpirationDateError ? 'has-error' : '' ]"
                 type="tel"
                 v-model="$store.state.creditCard.cardExpirationDate"
@@ -396,7 +397,7 @@
           </div><!-- CPF -->
 
 
-          <h3 class="__text" style="padding-bottom:1.5rem">{{ user.firstName }}, para garantirmos a segurança da transação, por favor, preencha a seguir seu endereço de cobrança.</h3>
+          <!-- <h3 class="__text" style="padding-bottom:1.5rem">{{ user.firstName }}, para garantirmos a segurança da transação, por favor preencha a seguir seu endereço de cobrança.</h3> -->
 
 
           <!-- CEP -->
@@ -419,6 +420,7 @@
             <div class="item-form">
               <label :class="[ streetError ? 'has-error-label' : '' ]">Rua</label>
               <input
+                ref="street"
                 :class="[ streetError ? 'has-error' : '' ]"
                 type="text" 
                 v-model="reservaAcomod.billing.street"
@@ -740,6 +742,7 @@ export default {
         if (cardNumber.card.type === 'american-express' ? value.length === 18 : value.length === 19) {
           if (cardNumber.isValid) {
             this.cardNumberError = false
+            this.$refs.cardExpirationDate.$el.focus()
           } else {
             this.cardNumberError = true
           }
@@ -785,7 +788,9 @@ export default {
           billing.street = zipcodeData.street
           this.$store.state.validZipcode = true
           this.$store.commit('m_loader', false)
+          this.$nextTick(() => this.$refs.street.focus())
         } catch (err) {
+          console.log(err)
           this.zipcodeError = true
           this.$store.state.validZipcode = false
           this.$store.commit('m_loader', false)
