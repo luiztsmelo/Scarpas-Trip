@@ -326,6 +326,7 @@
             <div class="item-form">
               <label :class="[ cardCvvError ? 'has-error-label' : '' ]">CVV</label>
               <masked-input
+                ref="cvv"
                 :class="[ cardCvvError ? 'has-error' : '' ]"
                 type="tel"
                 v-model="$store.state.creditCard.cardCVV"
@@ -379,7 +380,11 @@
           <!-- NOME -->
           <div class="item-form">
             <label :class="[ cardHolderNameError ? 'has-error-label' : '' ]">Nome Impresso no Cartão</label>
-            <input :class="[ cardHolderNameError ? 'has-error' : '' ]" type="text" pattern="[A-Za-z]" v-model="$store.state.creditCard.cardHolderName">
+            <input 
+              :class="[ cardHolderNameError ? 'has-error' : '' ]" 
+              type="text" pattern="[A-Za-z]"
+              @keyup.enter="$refs.cpf.$el.focus()"
+              v-model="$store.state.creditCard.cardHolderName">
           </div><!-- NOME -->
 
 
@@ -387,6 +392,7 @@
           <div class="item-form">
             <label :class="[ cpfError ? 'has-error-label' : '' ]">CPF</label>
             <masked-input
+              ref="cpf"
               :class="[ cpfError ? 'has-error' : '' ]"
               type="tel"
               v-model="reservaAcomod.guestCPF"
@@ -404,6 +410,7 @@
           <div class="item-form">
             <label :class="[ zipcodeError ? 'has-error-label' : '' ]">CEP</label>
             <masked-input
+              ref="zipcode"
               :class="[ zipcodeError ? 'has-error' : '' ]"
               type="tel"
               v-model="reservaAcomod.billing.zipcode"
@@ -422,7 +429,8 @@
               <input
                 ref="street"
                 :class="[ streetError ? 'has-error' : '' ]"
-                type="text" 
+                type="text"
+                @keyup.enter="$refs.streetNumber.$el.focus()"
                 v-model="reservaAcomod.billing.street"
                 placeholder="Endereço">
             </div><!-- ENDEREÇO -->
@@ -433,8 +441,10 @@
               <div class="item-form" style="flex:50%">
                 <label :class="[ streetNumberError ? 'has-error-label' : '' ]">Número</label>
                 <masked-input
+                  ref="streetNumber"
                   :class="[ streetNumberError ? 'has-error' : '' ]"
                   type="tel"
+                  @keyup.enter="$refs.bairro.focus()"
                   v-model="reservaAcomod.billing.street_number"
                   :mask="[/\d/, /\d/, /\d/, /\d/]"
                   :guide="false"
@@ -446,8 +456,10 @@
               <div class="item-form" style="flex:50%">
                 <label :class="[ neighborhoodError ? 'has-error-label' : '' ]">Bairro</label>
                 <input
+                  ref="bairro"
                   :class="[ neighborhoodError ? 'has-error' : '' ]"
-                  type="text" 
+                  type="text"
+                  @keyup.enter="keyEnterBairro"
                   v-model="reservaAcomod.billing.neighborhood">
               </div><!-- BAIRRO -->
             </div>
@@ -458,15 +470,17 @@
               <div class="item-form" style="flex:50%">
                 <label :class="[ cityError ? 'has-error-label' : '' ]">Cidade</label>
                 <input
+                  ref="city"
                   :class="[ cityError ? 'has-error' : '' ]"
-                  type="text" 
+                  type="text"
+                  @keyup.enter="$refs.state.focus()"
                   v-model="reservaAcomod.billing.city">
               </div><!-- CIDADE -->
 
               <!-- ESTADO -->
               <div class="item-form" style="flex:50%">
                 <label :class="[ stateError ? 'has-error-label' : '' ]">Estado</label>
-                <select :class="[ stateError ? 'has-error' : '' ]" v-model="reservaAcomod.billing.state">
+                <select ref="state" :class="[ stateError ? 'has-error' : '' ]" v-model="reservaAcomod.billing.state">
                   <option v-for="state in states" :value="state.value">{{ state.name }}</option>
                 </select>
               </div><!-- ESTADO -->
@@ -517,6 +531,10 @@ export default {
     }
   },
   methods: {
+    keyEnterBairro () {
+      this.$refs.city.focus()
+      scrollIntoView(this.$refs.city)
+    },
     limpezaFeeDialog () {
       this.$store.commit('show_alert', {
         type: 'info',
@@ -759,6 +777,7 @@ export default {
       firstDigit > 1 ? this.$store.state.creditCard.cardExpirationDate = `0${firstDigit} / ` : ''
       let cardExpirationDate = valid.expirationDate(value)
       cardExpirationDate.isPotentiallyValid ? this.cardExpirationDateError = false : this.cardExpirationDateError = true
+      cardExpirationDate.isValid ? this.$refs.cvv.$el.focus() : ''
     },
     cardCVV (value) {
       let cardCVV = valid.cvv(value)
@@ -767,7 +786,13 @@ export default {
     guestCPF (value) {
       value !== '' ? this.cpfError = false : ''
       if (value.length === 14) {
-        CPF.validate(value) ? this.cpfError = false : this.cpfError = true
+        if (CPF.validate(value)) {
+          this.cpfError = false
+          this.$refs.zipcode.$el.focus()
+          scrollIntoView(this.$refs.zipcode.$el)
+        } else {
+          this.cpfError = true
+        }
       }
     },
     cardHolderName (value) { value !== '' ? this.cardHolderNameError = false : '' },
