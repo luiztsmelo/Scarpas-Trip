@@ -274,7 +274,7 @@
 
 
 
-    <!-- ########## IMAGEM E VÍDEOS PG.6 ########## -->
+    <!-- ########## IMAGENS PG.6 ########## -->
     <form class="cadastro-acomodacao" v-show="$store.state.cadastroAcomod6">
 
       <h1 class="__form-title">Adicione imagens {{ tipoAcomodDd }}</h1>
@@ -340,7 +340,7 @@
         </div>
       </div> 
     
-    </form><!-- ########## IMAGEM E VÍDEOS PG.6 ########## -->
+    </form><!-- ########## IMAGENS PG.6 ########## -->
 
 
 

@@ -501,6 +501,7 @@ import { reservaAcomod } from '@/mixins/reservaAcomod'
 import { states } from '@/mixins/statesBrazil'
 import { tipoAcomod } from '@/mixins/tipoAcomod'
 import valid from 'card-validator'
+import CPF from 'gerador-validador-cpf'
 import dayjs from 'dayjs'
 import 'dayjs/locale/pt-br'
 dayjs.locale('pt-br')
@@ -627,22 +628,22 @@ export default {
       }
     },
     nextBtnBilling () {
-      if (this.cardHolderName !== '' && this.guestCPF.length === 14 && this.zipcode.length === 9 && this.$store.state.validZipcode && this.street !== '' && this.streetNumber !== '' && this.neighborhood !== '' && this.city !== '' && this.state !== '') {
+      if (this.cardHolderName !== '' && CPF.validate(this.guestCPF) && this.guestCPF.length === 14 && this.zipcode.length === 9 && this.$store.state.validZipcode && this.street !== '' && this.streetNumber !== '' && this.neighborhood !== '' && this.city !== '' && this.state !== '') {
         this.$store.commit('m_reservaAcomodBilling', false), window.history.back(1)
       } else {
         this.$store.commit('show_alert', {
           type: 'error',
           title: 'Erro',
-          message: 'Informações inválidas. Reveja por favor.',
+          message: 'Informações inválidas.',
         })
         this.cardHolderName.length < 3 ? this.cardHolderNameError = true : this.cardHolderNameError = false
-        this.guestCPF.length < 14 ? this.cpfError = true : this.cpfError = false
-        this.zipcode.length < 9 || !this.$store.state.validZipcode? this.zipcodeError = true : this.zipcodeError = false
-        this.street === '' ? this.streetError = true : this.streetError = false
-        this.streetNumber === '' ? this.streetNumberError = true : this.streetNumberError = false
-        this.neighborhood === '' ? this.neighborhoodError = true : this.neighborhoodError = false
-        this.city === '' ? this.cityError = true : this.cityError = false
-        this.state === '' ? this.stateError = true : this.stateError = false
+        this.guestCPF.length < 14 || !CPF.validate(this.guestCPF) ? this.cpfError = true : this.cpfError = false
+        this.zipcode.length < 9 || !this.$store.state.validZipcode ? this.zipcodeError = true : this.zipcodeError = false
+        this.street === null || this.street === '' ? this.streetError = true : this.streetError = false
+        this.streetNumber === null || this.streetNumber === '' ? this.streetNumberError = true : this.streetNumberError = false
+        this.neighborhood === null || this.neighborhood === '' ? this.neighborhoodError = true : this.neighborhoodError = false
+        this.city === null || this.city === '' ? this.cityError = true : this.cityError = false
+        this.state === null || this.state === '' ? this.stateError = true : this.stateError = false
       }
     },
     openDatePicker () {
@@ -757,15 +758,20 @@ export default {
       let cardCVV = valid.cvv(value)
       cardCVV.isPotentiallyValid ? this.cardCvvError = false : this.cardCvvError = true
     },
+    guestCPF (value) {
+      value !== '' ? this.cpfError = false : ''
+      if (value.length === 14) {
+        CPF.validate(value) ? this.cpfError = false : this.cpfError = true
+      }
+    },
     cardHolderName (value) { value !== '' ? this.cardHolderNameError = false : '' },
     guestName (value) { value !== '' ? this.guestNameError = false : '' },
-    guestCPF (value) { value !== '' ? this.cpfError = false : '' },
     guestCelular (value) { value !== '' ? this.celularError = false : '' },
-    street (value) { value !== '' ? this.streetError = false : '' },
-    streetNumber (value) { value !== '' ? this.streetNumberError = false : '' },
-    neighborhood (value) { value !== '' ? this.neighborhoodError = false : '' },
-    city (value) { value !== '' ? this.cityError = false : '' },
-    state (value) { value !== '' ? this.stateError = false : '' },
+    street (value) { value !== null ? this.streetError = false : null },
+    streetNumber (value) { value !== null ? this.streetNumberError = false : null },
+    neighborhood (value) { value !== null ? this.neighborhoodError = false : null },
+    city (value) { value !== null ? this.cityError = false : null },
+    state (value) { value !== null ? this.stateError = false : null },
     async zipcode (value) {
       if (value.length === 9) {
         try {
@@ -923,7 +929,7 @@ export default {
         padding: 0 7%;
         & .facebook-btn {
           width: 17rem;
-          margin: .5rem 0;
+          margin: .6rem 0;
           height: 3.5rem;
           text-align: start;
           padding-left: 50px;
@@ -931,7 +937,7 @@ export default {
         }
         & .google-btn {
           width: 17rem;
-          margin: .5rem 0;
+          margin: .6rem 0;
           height: 3.5rem;
           text-align: start;
           padding-left: 50px;

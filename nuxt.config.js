@@ -4,7 +4,7 @@ module.exports = {
   ** Build configuration
   */
   build: {
-    vendor: ['firebase', 'supports-webp', 'card-validator']
+    vendor: ['firebase', 'supports-webp', 'card-validator', 'gerador-validador-cpf']
     /* analyze: true */
   },
   /*

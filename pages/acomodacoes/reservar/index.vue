@@ -421,6 +421,7 @@ import detalhesValor from '@/components/reserva-acomod/detalhesValor'
 import { reservaAcomod } from '@/mixins/reservaAcomod'
 import { states } from '@/mixins/statesBrazil'
 import valid from 'card-validator'
+import CPF from 'gerador-validador-cpf'
 import dayjs from 'dayjs'
 import 'dayjs/locale/pt-br'
 dayjs.locale('pt-br')
@@ -478,7 +479,7 @@ export default {
         if (reservaAcomod.paymentMethod === 'credit_card') {
 
           /* Checar se todos os dados foram preenchidos */
-          if (valid.number(this.cardNumber).isValid && valid.expirationDate(this.cardExpirationDate).isValid && valid.cvv(this.cardCVV).isValid && this.cardHolderName !== '' && this.guestCPF.length === 14 && this.guestCelular.length === 15 && this.zipcode.length === 9 && this.$store.state.validZipcode && this.street !== '' && this.streetNumber !== '' && this.neighborhood !== '' && this.city !== '' && this.state !== '') {
+          if (valid.number(this.cardNumber).isValid && valid.expirationDate(this.cardExpirationDate).isValid && valid.cvv(this.cardCVV).isValid && this.cardHolderName !== '' && CPF.validate(this.guestCPF) && this.guestCPF.length === 14 && this.guestCelular.length === 15 && this.zipcode.length === 9 && this.$store.state.validZipcode && this.street !== '' && this.streetNumber !== '' && this.neighborhood !== '' && this.city !== '' && this.state !== '') {
 
             /* Criar transação no Pagarme */
             const result = await firebase.functions().httpsCallable('pagarme_newReservaAcomod')({
@@ -509,14 +510,14 @@ export default {
             !valid.number(this.cardNumber).isValid ? this.cardNumberError = true : this.cardNumberError = false
             !valid.expirationDate(this.cardExpirationDate).isValid ?  this.cardExpirationDateError = true :  this.cardExpirationDateError = false
             !valid.cvv(this.cardCVV).isValid ? this.cardCvvError = true : this.cardCvvError = false
-            this.guestCPF.length < 14 ? this.cpfError = true : this.cpfError = false
+            this.guestCPF.length < 14 || !CPF.validate(this.guestCPF) ? this.cpfError = true : this.cpfError = false
             this.guestCelular.length < 15 ? this.celularError = true : this.celularError = false
-            this.zipcode.length < 9 || !this.$store.state.validZipcode? this.zipcodeError = true : this.zipcodeError = false
-            this.street === '' ? this.streetError = true : this.streetError = false
-            this.streetNumber === '' ? this.streetNumberError = true : this.streetNumberError = false
-            this.neighborhood === '' ? this.neighborhoodError = true : this.neighborhoodError = false
-            this.city === '' ? this.cityError = true : this.cityError = false
-            this.state === '' ? this.stateError = true : this.stateError = false
+            this.zipcode.length < 9 || !this.$store.state.validZipcode ? this.zipcodeError = true : this.zipcodeError = false
+            this.street === null || this.street === '' ? this.streetError = true : this.streetError = false
+            this.streetNumber === null || this.streetNumber === '' ? this.streetNumberError = true : this.streetNumberError = false
+            this.neighborhood === null || this.neighborhood === '' ? this.neighborhoodError = true : this.neighborhoodError = false
+            this.city === null || this.city === '' ? this.cityError = true : this.cityError = false
+            this.state === null || this.state === '' ? this.stateError = true : this.stateError = false
           }
         } else { /* ******************** BOLETO ******************** */
 
@@ -643,15 +644,20 @@ export default {
       let cardCVV = valid.cvv(value)
       cardCVV.isPotentiallyValid ? this.cardCvvError = false : this.cardCvvError = true
     },
+    guestCPF (value) {
+      value !== '' ? this.cpfError = false : ''
+      if (value.length === 14) {
+        CPF.validate(value) ? this.cpfError = false : this.cpfError = true
+      }
+    },
     cardHolderName (value) { value !== '' ? this.cardHolderNameError = false : '' },
     guestName (value) { value !== '' ? this.guestNameError = false : '' },
-    guestCPF (value) { value !== '' ? this.cpfError = false : '' },
     guestCelular (value) { value !== '' ? this.celularError = false : '' },
-    street (value) { value !== '' ? this.streetError = false : '' },
-    streetNumber (value) { value !== '' ? this.streetNumberError = false : '' },
-    neighborhood (value) { value !== '' ? this.neighborhoodError = false : '' },
-    city (value) { value !== '' ? this.cityError = false : '' },
-    state (value) { value !== '' ? this.stateError = false : '' },
+    street (value) { value !== null ? this.streetError = false : null },
+    streetNumber (value) { value !== null ? this.streetNumberError = false : null },
+    neighborhood (value) { value !== null ? this.neighborhoodError = false : null },
+    city (value) { value !== null ? this.cityError = false : null },
+    state (value) { value !== null ? this.stateError = false : null },
     async zipcode (value) {
       if (value.length === 9) {
         try {
