@@ -536,6 +536,7 @@ export default {
       if (this.$store.state.reservaAcomod1) {
         window.history.back(1)
         this.$store.commit('m_showReservaAcomod', false)
+        document.body.removeAttribute('style')
       }
       if (this.$store.state.reservaAcomod2) {
         window.history.back(1)
@@ -791,7 +792,7 @@ export default {
           this.$store.commit('m_loader', false)
           this.$nextTick(() => {
             this.$refs.street.focus()
-            this.$refs.street.scrollIntoView({ behavior: 'smooth' })
+            this.$refs.street.scrollIntoView({ block: 'start', inline : 'start', behavior: 'smooth' })
           })
         } catch (err) {
           console.log(err)
@@ -808,6 +809,7 @@ export default {
         this.$store.commit('m_showReservaAcomod', false)
         this.$store.commit('m_reservaAcomod1', false)
         this.$store.commit('hide_alert')
+        document.body.removeAttribute('style')
       }
       if (value === `#${this.$store.state.randomHashs[1]}`) {
         this.$modal.hide('datepicker') 

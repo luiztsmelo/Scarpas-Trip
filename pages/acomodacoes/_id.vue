@@ -446,6 +446,7 @@ export default {
       }
     },
     reservarMobile () {
+      document.body.setAttribute('style', 'overflow: hidden')
       this.$store.dispatch('a_generateRandomHashs')
       this.$store.commit('m_showReservaAcomod', true)
       window.location.hash = this.$store.state.randomHashs[1]
