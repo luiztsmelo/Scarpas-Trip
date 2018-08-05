@@ -414,7 +414,7 @@
           </div><!-- CEP -->
 
 
-          <div v-if="$store.state.validZipcode">
+          <div v-show="$store.state.validZipcode">
 
             <!-- ENDEREÇO -->
             <div class="item-form">
@@ -504,6 +504,7 @@ import { states } from '@/mixins/statesBrazil'
 import { tipoAcomod } from '@/mixins/tipoAcomod'
 import valid from 'card-validator'
 import CPF from 'gerador-validador-cpf'
+import scrollIntoView from 'scroll-into-view'
 import dayjs from 'dayjs'
 import 'dayjs/locale/pt-br'
 dayjs.locale('pt-br')
@@ -744,7 +745,7 @@ export default {
           if (cardNumber.isValid) {
             this.cardNumberError = false
             this.$refs.cardExpirationDate.$el.focus()
-            this.$refs.cardExpirationDate.$el.scrollIntoView({ behavior: 'smooth' })
+            scrollIntoView(this.$refs.cardExpirationDate.$el)
           } else {
             this.cardNumberError = true
           }
@@ -792,7 +793,7 @@ export default {
           this.$store.commit('m_loader', false)
           this.$nextTick(() => {
             this.$refs.street.focus()
-            this.$refs.street.scrollIntoView({ block: 'start', inline : 'start', behavior: 'smooth' })
+            scrollIntoView(this.$refs.street)
           })
         } catch (err) {
           console.log(err)
