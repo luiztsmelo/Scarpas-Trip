@@ -72,7 +72,7 @@
                 <span class="__valor-noites"> por {{ reservaAcomod.noites }} {{ reservaAcomod.noites == 1 ? 'noite' : 'noites'}}</span>
               </h3>
               <h3 v-else></h3>
-              <button type="button" class="__next-btn" :style="form1ok" @click="nextBtn1" v-ripple>Continuar</button>
+              <button type="button" class="__next-btn" :style="form1ok" @click="nextBtn1">Continuar</button>
             </div>
           </div>
       
@@ -125,7 +125,7 @@
               <h3 class="__valor" v-if="reservaAcomod.valorReservaTotal !== null">R${{ reservaAcomod.valorReservaTotal.toLocaleString() }}
                 <span class="__valor-noites"> por {{ reservaAcomod.noites }} {{ reservaAcomod.noites == 1 ? 'noite' : 'noites'}}</span>
               </h3>
-              <button type="button" class="__next-btn" :style="form2ok" @click="nextBtn2" v-ripple>Continuar</button>
+              <button type="button" class="__next-btn" :style="form2ok" @click="nextBtn2">Concordar</button>
             </div>
           </div>
 
@@ -174,7 +174,7 @@
               <h3 class="__valor" v-if="reservaAcomod.valorReservaTotal !== null">R${{ reservaAcomod.valorReservaTotal.toLocaleString() }}
                 <span class="__valor-noites"> por {{ reservaAcomod.noites }} {{ reservaAcomod.noites == 1 ? 'noite' : 'noites'}}</span>
               </h3>
-              <button type="button" class="__next-btn" :style="form3ok" @click="nextBtn3" v-ripple>Continuar</button>
+              <button type="button" class="__next-btn" :style="form3ok" @click="nextBtn3">Continuar</button>
             </div>
           </div>
 
@@ -201,7 +201,7 @@
               <h3 class="__valor" v-if="reservaAcomod.valorReservaTotal !== null">R${{ reservaAcomod.valorReservaTotal.toLocaleString() }}
                 <span class="__valor-noites"> por {{ reservaAcomod.noites }} {{ reservaAcomod.noites == 1 ? 'noite' : 'noites'}}</span>
               </h3>
-              <button type="button" class="__next-btn" :style="form4ok" @click="nextBtn4" v-ripple>Continuar</button>
+              <button type="button" class="__next-btn" :style="form4ok" @click="nextBtn4">Continuar</button>
             </div>
           </div>
 
@@ -244,7 +244,7 @@
               <h3 class="__valor" v-if="reservaAcomod.valorReservaTotal !== null">R${{ reservaAcomod.valorReservaTotal.toLocaleString() }}
                 <span class="__valor-noites"> por {{ reservaAcomod.noites }} {{ reservaAcomod.noites == 1 ? 'noite' : 'noites'}}</span>
               </h3>
-              <button type="button" class="__next-btn" :style="form5ok" @click="concluirReserva" v-ripple>Concluir Pedido</button>
+              <button type="button" class="__next-btn" :style="form5ok" @click="concluirReserva">Concluir Pedido</button>
             </div>
           </div>
 
@@ -1113,7 +1113,6 @@ export default {
             transition: var(--main-transition);
           }
           & .__next-btn {
-            position: relative;
             cursor: pointer;
             padding: 0 1.3rem;
             font-size: 16px;

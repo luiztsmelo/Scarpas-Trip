@@ -114,7 +114,7 @@
 
           <div class="payment">
 
-            <h3 class="__subtitle">Você somente será cobrado caso {{ acomod.proprietario.split(' ')[0] }} confirme seu pedido de reserva. Para sua segurança, só liberaremos o pagamento para ele no dia seguinte de seu check-in, {{ dayAfterCheckin }}. Não se preocupe, seus dados estarão em total sigilo.</h3>
+            <h3 class="__subtitle">{{ user.firstName }}, você somente será cobrado se {{ acomod.proprietario.split(' ')[0] }} aceitar seu pedido de reserva. Em caso positivo, para sua segurança nós só liberaremos o pagamento para ele no dia seguinte de seu check-in, {{ dayAfterCheckin }}.</h3>
 
 
             <!-- PAYMENT METHOD -->
@@ -597,7 +597,7 @@ export default {
     periodoReserva () {
       const checkIn = new Date(this.reservaAcomod.periodoReserva.start)
       const checkOut = new Date(this.reservaAcomod.periodoReserva.end)
-      return dayjs(checkIn).format('ddd, DD MMM YYYY') + ' → ' + dayjs(checkOut).format('ddd, DD MMM YYYY')
+      return dayjs(checkIn).format('ddd, DD MMM YYYY') + ' / ' + dayjs(checkOut).format('ddd, DD MMM YYYY')
     },
 
     /* ******************** FORMATTINGS ******************** */

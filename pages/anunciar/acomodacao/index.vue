@@ -350,7 +350,7 @@
 
       <h1 class="__form-title">Qual será o valor da estadia?</h1>
 
-      <h3 class="__form-text">Será possível ajustar o valor após a publicação do anúncio, para adequar a períodos de baixa e alta temporada. Também será possível oferecer descontos personalizados. A taxa de limpeza é opcional.</h3>
+      <h3 class="__form-text">Será possível ajustar o valor após a publicação do anúncio, para adequar a períodos de baixa e alta temporada. A taxa de limpeza é opcional.</h3>
 
       <div class="item-form">
         <label>Valor por noite</label>
@@ -610,7 +610,7 @@
 
           <div class="item-form">
             <label>Tipo de Conta</label>
-            <select v-model="$store.state.bankAccount.type">
+            <select v-model="$store.state.bankAccount.type" ref="type">
               <option selected :value="'conta_corrente'">Conta Corrente</option>
               <option :value="'conta_poupanca'">Conta Poupança</option>
               <option :value="'conta_corrente_conjunta'">Conta Corrente Conjunta</option>
@@ -623,8 +623,10 @@
               <div class="agencia" style="flex:50%; margin-right:.5rem">
                 <label :class="[ agenciaError ? 'has-error-label' : '' ]">Agência</label>
                 <masked-input
+                  ref="agencia"
                   :class="[ agenciaError ? 'has-error' : '' ]"
                   type="tel"
+                  @keypress="keyEnterAgencia"
                   v-model="$store.state.bankAccount.agencia"
                   :mask="[/\d/, /\d/, /\d/, /\d/, /\d/]"
                   :guide="false">
@@ -633,8 +635,10 @@
               <div class="agencia-dv" style="flex:50%; margin-left:.5rem">
                 <label :class="[ agenciaDVError ? 'has-error-label' : '' ]">Dígito</label>
                 <masked-input
+                  ref="agenciaDV"
                   :class="[ agenciaDVError ? 'has-error' : '' ]"
                   type="tel"
+                  @keypress="keyEnterAgenciaDV"
                   v-model="$store.state.bankAccount.agenciaDV"
                   @focus="agenciaDVfocus"
                   :mask="[/\d/]"
@@ -649,8 +653,10 @@
               <div class="conta" style="flex:50%; margin-right:.5rem">
                 <label :class="[ contaError ? 'has-error-label' : '' ]">Conta Corrente</label>
                 <masked-input
+                  ref="conta"
                   :class="[ contaError ? 'has-error' : '' ]"
                   type="tel"
+                  @keypress="keyEnterConta"
                   v-model="$store.state.bankAccount.conta"
                   :mask="[/\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/]"
                   :guide="false">
@@ -659,8 +665,10 @@
               <div class="conta-dv" style="flex:50%; margin-left:.5rem">
                 <label :class="[ contaDVError ? 'has-error-label' : '' ]">Dígito</label>
                 <masked-input
-                :class="[ contaDVError ? 'has-error' : '' ]"
+                  ref="contaDV"
+                  :class="[ contaDVError ? 'has-error' : '' ]"
                   type="tel"
+                  @keypress="keyEnterContaDV"
                   v-model="$store.state.bankAccount.contaDV"
                   :mask="[/\d/, /\d/]"
                   :guide="false">
@@ -671,12 +679,18 @@
 
           <div class="item-form">
             <label :class="[ legalNameError ? 'has-error-label' : '' ]">Seu Nome Completo</label>
-            <input type="text" v-model="$store.state.bankAccount.legalName" :class="[ legalNameError ? 'has-error' : '' ]">
+            <input 
+              ref="nome"
+              :class="[ legalNameError ? 'has-error' : '' ]"
+              type="text"
+              @keypress="keyEnterNome"
+              v-model="$store.state.bankAccount.legalName">
           </div>
 
           <div class="item-form">
             <label :class="[ docNumberError ? 'has-error-label' : '' ]">CPF</label>
             <masked-input
+              ref="cpf"
               :class="[ docNumberError ? 'has-error' : '' ]"
               type="tel"
               v-model="$store.state.bankAccount.docNumber"
@@ -715,7 +729,8 @@ import { bancos } from '@/mixins/bancos'
 import { tipoAcomod } from '@/mixins/tipoAcomod'
 import VueSimpleSuggest from 'vue-simple-suggest'
 import localMap from '~/components/localMap.vue'
-import { NotBeforeError } from 'jsonwebtoken';
+import CPF from 'gerador-validador-cpf'
+import scrollIntoView from 'scroll-into-view'
 
 export default {
   components: { 
@@ -748,6 +763,34 @@ export default {
     }
   },
   methods: {
+    keyEnterAgencia () {
+      if (event.key === 'Enter') {
+        this.$refs.agenciaDV.$el.focus()
+      }
+    },
+    keyEnterAgenciaDV () {
+      if (event.key === 'Enter') {
+        scrollIntoView(this.$refs.conta.$el)
+        this.$refs.conta.$el.focus()
+      }
+    },
+    keyEnterConta () {
+      if (event.key === 'Enter') {
+        this.$refs.contaDV.$el.focus()
+      }
+    },
+    keyEnterContaDV () {
+      if (event.key === 'Enter') {
+        scrollIntoView(this.$refs.nome)
+        this.$refs.nome.focus()
+      }
+    },
+    keyEnterNome () {
+      if (event.key === 'Enter') {
+        scrollIntoView(this.$refs.cpf.$el)
+        this.$refs.cpf.$el.focus()
+      }
+    },
     scrollTop () {
       document.body.scrollTop = 0
       document.documentElement.scrollTop = 0
@@ -983,7 +1026,7 @@ export default {
         this.$store.commit('show_alert', {
           type: 'warning',
           title: 'Ops',
-          message: 'Adicione um número de celular.'
+          message: 'Adicione um número válido.'
         })
       }
     },
@@ -1004,7 +1047,7 @@ export default {
       acomodData.userID = this.user.userID
 
       /* Se todas as informações preenchidas */
-      if (this.bankCode !== '' && this.agencia !== '' && this.agenciaDV !== '' && this.conta !== '' && this.contaDV !== '' && this.legalName !== '' && this.docNumber.length === 14) {
+      if (this.bankCode !== '' && this.agencia !== '' && this.agenciaDV !== '' && this.conta !== '' && this.contaDV !== '' && this.legalName !== '' && this.docNumber.length === 14 && CPF.validate(this.docNumber)) {
         try {
           this.$store.commit('m_loader', true)
 
@@ -1040,7 +1083,7 @@ export default {
           this.$store.commit('show_alert', {
           type: 'error',
           title: 'Ops',
-          message: 'Informações incorretas. Reveja por favor.'
+          message: 'Informações inválidas.'
         })
           err.details === 'bank_code' ? this.bankCodeError = true : this.bankCodeError = false
           err.details === 'agencia' ? this.agenciaError = true : this.agenciaError = false
@@ -1054,7 +1097,7 @@ export default {
         this.$store.commit('show_alert', {
           type: 'error',
           title: 'Ops',
-          message: 'Está faltando algumas informações. Reveja por favor.'
+          message: 'Informações inválidas.'
         })
         this.bankCode === '' ? this.bankCodeError = true : this.bankCodeError = false
         this.agencia === '' ? this.agenciaError = true : this.agenciaError = false
@@ -1062,7 +1105,7 @@ export default {
         this.conta === '' ? this.contaError = true : this.contaError = false
         this.contaDV === '' ? this.contaDVError = true : this.contaDVError = false
         this.legalName === '' ? this.legalNameError = true : this.legalNameError = false
-        this.docNumber.length !== 14 ? this.docNumberError = true : this.docNumberError = false
+        this.docNumber.length < 14 || !CPF.validate(this.docNumber) ? this.docNumberError = true : this.docNumberError = false
       }
     }
   },
@@ -1156,13 +1199,24 @@ export default {
     }
   },
   watch: {
-    bankCode (value) { value !== '' ? this.bankCodeError = false : '' },
+    bankCode (newVal, oldVal) { 
+      newVal !== '' ? this.bankCodeError = false : ''
+      if (newVal !== oldVal) {
+        scrollIntoView(this.$refs.type)
+        this.$refs.type.focus()
+      }
+    },
     agencia (value) { value !== '' ? this.agenciaError = false : '' },
     agenciaDV (value) { value !== '' ? this.agenciaDVError = false : '' },
     conta (value) { value !== '' ? this.contaError = false : '' },
     contaDV (value) { value !== '' ? this.contaDVError = false : '' },
     legalName (value) { value !== '' ? this.legalNameError = false : '' },
-    docNumber (value) { value !== '' ? this.docNumberError = false : ''},
+    docNumber (value) { 
+      value !== '' ? this.docNumberError = false : ''
+      if (value.length === 14) {
+        CPF.validate(value) ? this.docNumberError = false : this.docNumberError = true
+      }
+    },
     hash (value) {
       if (value === '') {
         if (this.$store.state.lastHash === `#${this.randomHashs[1]}`) {
@@ -1360,15 +1414,15 @@ export default {
       flex-flow: column;
       margin: 2.1rem 0;
       & label {
+        font-weight: 500;
+        font-size: 14px;
         user-select: none;
-        font-weight: 600;
-        font-size: 15px;
       }
       & input {
         cursor: text;
         position: relative;
         width: 100%;
-        font-size: 17px;
+        font-size: 18px;
         font-weight: 400;
         background: white;
         color: var(--color01);
@@ -1376,14 +1430,14 @@ export default {
         border: none;
         border-bottom: 1px solid rgb(222,222,222);
         outline: none;
-        transition: .3s all ease;
+        transition: .2s all ease;
       }
       & input:hover {
         border-bottom: 1px solid rgb(72,72,72);
       }
       & select {
         width: 100%;
-        font-size: 17px;
+        font-size: 18px;
         font-weight: 400;
         background: white;
         color: var(--color01);
@@ -1391,7 +1445,7 @@ export default {
         border: none;
         border-bottom: 1px solid rgb(222,222,222);
         outline: none;
-        transition: .3s all ease;
+        transition: .2s all ease;
       }
       & select:hover {
         border-bottom: 1px solid rgb(72,72,72);
@@ -1454,7 +1508,7 @@ export default {
           width: 100%;
           cursor: text;
           position: relative;
-          font-size: 17px;
+          font-size: 18px;
           font-weight: 400;
           background: white;
           color: var(--color01);
@@ -1485,7 +1539,7 @@ export default {
       font-weight: 500;
       transform: translateY(-1.1rem);
       color: #1E9297;
-      transition: .3s all ease;
+      transition: .2s all ease;
     }
     & .without-address:hover {
       color: var(--color01);
@@ -1741,6 +1795,7 @@ export default {
         padding: 0 28%;
         margin: 2.7rem 0;
         & label {
+          font-weight: 600;
           font-size: 16px;
         }
         & input {
@@ -1752,7 +1807,7 @@ export default {
         padding: .6rem 28% 0;
         & .item-form-switches {
           padding: 1.7rem 0;
-          transition: .3s all ease;
+          transition: .2s all ease;
           & h3 {
           }
         }
@@ -1764,7 +1819,7 @@ export default {
         padding: .6rem 28% 0;
         & .item-form-regras {
           padding: 1.7rem 0;
-          transition: .3s all ease;
+          transition: .2s all ease;
           & h3 {
           }
         }
@@ -1825,7 +1880,7 @@ export default {
           display: initial;
         }
         & .__add-image {
-          transition: .3s all ease;
+          transition: .2s all ease;
           & .loader-svg {
             width: 40px;
             height: 40px;

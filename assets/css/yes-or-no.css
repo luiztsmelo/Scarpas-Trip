@@ -31,7 +31,7 @@
     border-radius: 0 2rem 2rem 0;
   }
   & .is-false {
-    background: rgb(242,242,242);
+    background: rgb(247,247,247);
   }
   & .is-true {
     color: white;
