@@ -14,7 +14,7 @@
         <!-- ########## COTAÇÃO PG.1 ########## -->
         <div class="etapa-reserva-box" v-if="$store.state.reservaAcomod1">
 
-          <h3 class="etapas">1 de 5 etapas</h3>
+          <h3 class="etapas">Etapa 1 de 5</h3>
 
           <h1 class="__title">Orçamento</h1>
 
@@ -85,7 +85,7 @@
         <!-- ########## REGRAS PG.2 ########## -->
         <div class="etapa-reserva-box" v-if="$store.state.reservaAcomod2">
 
-          <h3 class="etapas">2 de 5 etapas</h3>
+          <h3 class="etapas">Etapa 2 de 5</h3>
 
           <h1 class="__title">Revise as regras da casa</h1>
 
@@ -138,7 +138,7 @@
         <!-- ########## CADASTRO PG.3 ########## -->
         <div class="etapa-reserva-box" v-if="$store.state.reservaAcomod3">
 
-          <h3 class="etapas">3 de 5 etapas</h3>
+          <h3 class="etapas">Etapa 3 de 5</h3>
 
           <h1 class="__title">
             {{ !authUser ? 'Antes de continuar, precisamos de seu cadastro ou login' : `Ótimo ${user.firstName}, só mais uma informação` }}
@@ -188,7 +188,7 @@
         <!-- ########## MENSAGEM PG.4 ########## -->
         <div class="etapa-reserva-box" v-if="$store.state.reservaAcomod4">
 
-          <h3 class="etapas">4 de 5 etapas</h3>
+          <h3 class="etapas">Etapa 4 de 5</h3>
 
           <h1 class="__title">Mensagem para {{ acomod.proprietario.split(' ')[0] }}</h1>
 
@@ -215,7 +215,7 @@
         <!-- ########## PAGAMENTO PG.5 ########## -->
         <div class="etapa-reserva-box" v-if="$store.state.reservaAcomod5">
 
-          <h3 class="etapas">5 de 5 etapas</h3>
+          <h3 class="etapas">Etapa 5 de 5</h3>
 
           <h1 class="__title">Detalhes sobre o pagamento</h1>
 
@@ -224,8 +224,8 @@
 
 
           <div class="add-payment" style="margin-top: .4rem; margin-bottom: 1.4rem" @click="openPaymentMethod">
-            <h3 class="__item-text" style="font-weight: 600; color: #FFA04F">Adicionar forma de pagamento</h3>
-            <img src="../../assets/img/arrow-right.svg" alt="" style="width: 1.1rem; height: auto">
+            <h3 class="__item-text" style="font-weight: 500; color: #FFA04F">Forma de pagamento</h3>
+            <img class="__arrow-right" src="../../assets/img/arrow-right.svg">
           </div>
 
 
@@ -264,7 +264,7 @@
               <img src="../../assets/img/credit-card.svg" class="__img">
               <h3 class="__item-text">Cartão de Crédito</h3>
             </div>
-            <img src="../../assets/img/arrow-right.svg" style="width: 1.1rem; height: auto">
+            <img class="__arrow-right" src="../../assets/img/arrow-right.svg">
           </div>
 
           <div class="add-payment" style="border-bottom: none" @click="openBoleto">
@@ -272,7 +272,7 @@
               <img src="../../assets/img/boleto.svg" class="__img">
               <h3 class="__item-text">Boleto</h3>
             </div>
-            <img src="../../assets/img/arrow-right.svg" style="width: 1.1rem; height: auto">
+            <img class="__arrow-right" src="../../assets/img/arrow-right.svg">
           </div>
 
 
@@ -304,39 +304,37 @@
           </div><!-- CARD NUMBER -->
 
 
-          <transition name="fadein">
-            <div style="display:flex; transition:all .3s ease" v-show="validCardNumber">
-              
-              <!-- CARD EXPIRATION -->
-              <div class="item-form">
-                <label :class="[ cardExpirationDateError ? 'has-error-label' : '' ]">Valido até</label>
-                <masked-input
-                  ref="cardExpirationDate"
-                  :class="[ cardExpirationDateError ? 'has-error' : '' ]"
-                  type="tel"
-                  v-model="$store.state.creditCard.cardExpirationDate"
-                  :mask="[/\d/, /\d/, ' ', '/', ' ', /\d/, /\d/]"
-                  :guide="false"
-                  placeholder="MM / AA">
-                </masked-input>
-              </div><!-- CARD EXPIRATION -->
+          <div style="display:flex" v-show="validCardNumber">
+            
+            <!-- CARD EXPIRATION -->
+            <div class="item-form">
+              <label :class="[ cardExpirationDateError ? 'has-error-label' : '' ]">Valido até</label>
+              <masked-input
+                ref="cardExpirationDate"
+                :class="[ cardExpirationDateError ? 'has-error' : '' ]"
+                type="tel"
+                v-model="$store.state.creditCard.cardExpirationDate"
+                :mask="[/\d/, /\d/, ' ', '/', ' ', /\d/, /\d/]"
+                :guide="false"
+                placeholder="MM / AA">
+              </masked-input>
+            </div><!-- CARD EXPIRATION -->
 
-              <!-- CVV -->
-              <div class="item-form">
-                <label :class="[ cardCvvError ? 'has-error-label' : '' ]">CVV</label>
-                <masked-input
-                  ref="cvv"
-                  :class="[ cardCvvError ? 'has-error' : '' ]"
-                  type="tel"
-                  v-model="$store.state.creditCard.cardCVV"
-                  :mask="[/\d/, /\d/, /\d/, /\d/]"
-                  :guide="false"
-                  placeholder="123">
-                </masked-input>
-              </div><!-- CVV -->
+            <!-- CVV -->
+            <div class="item-form">
+              <label :class="[ cardCvvError ? 'has-error-label' : '' ]">CVV</label>
+              <masked-input
+                ref="cvv"
+                :class="[ cardCvvError ? 'has-error' : '' ]"
+                type="tel"
+                v-model="$store.state.creditCard.cardCVV"
+                :mask="[/\d/, /\d/, /\d/, /\d/]"
+                :guide="false"
+                placeholder="123">
+              </masked-input>
+            </div><!-- CVV -->
 
-            </div>
-          </transition>
+          </div>
 
 
           <div class="buttons">
@@ -911,18 +909,17 @@ export default {
     flex-flow: column;
     height: 100%;
     & .back-btn {
-      margin: 1.2rem 7% 1rem;
+      margin: 1rem 7%;
       cursor: pointer;
-      width: 1.07rem;
+      width: 1.35rem;
       height: auto;
-      filter: invert(75%);
     }
     & .etapa-reserva-box {
       padding-bottom: 5rem;
       & .etapas {
         padding: 0 7% 0.2rem;
         font-size: 14px;
-        font-weight: 500;
+        font-weight: 400;
         color: rgb(72, 72, 72);
       }
       & .__title {
@@ -1032,6 +1029,10 @@ export default {
         & .__item-text {
           font-size: 18px;
           font-weight: 400;
+        }
+        & .__arrow-right {
+          width: 1.3rem; 
+          height: auto
         }
       }
       & .divider {
@@ -1151,9 +1152,7 @@ h3 {
 .reserva-animation-enter, .reserva-animation-leave-active {
   transform: translateX(100%);
 }
-.fadein-enter, .fadein-leave-active {
-  opacity: 0;
-}
+
 
 .has-error-label {
   color: #F31431 !important;

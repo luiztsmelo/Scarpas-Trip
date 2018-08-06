@@ -10,7 +10,7 @@
       <div class="topbar-body">
 
         <div class="back-box" @click="backBtn">
-          <img class="__back-btn" v-scroll="scrollTopbarBtns" src="../../assets/img/back.svg" alt="voltar">
+          <img class="__back-btn" v-scroll="scrollTopbarBtns" src="../../assets/img/back-w.svg" alt="voltar">
         </div>
         
         <div class="share-box" @click="$store.commit('m_showShare', true), hashShare()">
@@ -721,9 +721,8 @@ export default {
       padding: 0 7%;
       & .__back-btn {
         cursor: pointer;
-        width: 1.07rem;
+        width: 1.35rem;
         height: auto;
-        filter: invert(75%);
       }
     }
   }
@@ -1058,9 +1057,8 @@ export default {
               padding: 0 7%;
               & .__back-btn {
                 cursor: pointer;
-                width: 1.07rem;
+                width: 1.35rem;
                 height: auto;
-                filter: invert(75%);
               }
             }
           }

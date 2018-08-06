@@ -80,11 +80,10 @@ export default {
       width:  100%;
       & .__back-btn {
         align-items: center;
-        transform: translateY(2px);/* A imagem ta errada */
+        transform: translateY(2px);
         cursor: pointer;
-        width: 1.05rem;
+        width: 1.35rem;
         height: auto;
-        filter: invert(75%);
       }
     }
     & .__title {
