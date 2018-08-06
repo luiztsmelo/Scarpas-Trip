@@ -306,37 +306,39 @@
           </div><!-- CARD NUMBER -->
 
 
-          <div style="display:flex">
-            
-            <!-- CARD EXPIRATION -->
-            <div class="item-form">
-              <label :class="[ cardExpirationDateError ? 'has-error-label' : '' ]">Valido até</label>
-              <masked-input
-                ref="cardExpirationDate"
-                :class="[ cardExpirationDateError ? 'has-error' : '' ]"
-                type="tel"
-                v-model="$store.state.creditCard.cardExpirationDate"
-                :mask="[/\d/, /\d/, ' ', '/', ' ', /\d/, /\d/]"
-                :guide="false"
-                placeholder="MM / AA">
-              </masked-input>
-            </div><!-- CARD EXPIRATION -->
+          <transition name="fadein">
+            <div style="display:flex; transition:all .3s ease" v-show="validCardNumber">
+              
+              <!-- CARD EXPIRATION -->
+              <div class="item-form">
+                <label :class="[ cardExpirationDateError ? 'has-error-label' : '' ]">Valido até</label>
+                <masked-input
+                  ref="cardExpirationDate"
+                  :class="[ cardExpirationDateError ? 'has-error' : '' ]"
+                  type="tel"
+                  v-model="$store.state.creditCard.cardExpirationDate"
+                  :mask="[/\d/, /\d/, ' ', '/', ' ', /\d/, /\d/]"
+                  :guide="false"
+                  placeholder="MM / AA">
+                </masked-input>
+              </div><!-- CARD EXPIRATION -->
 
-            <!-- CVV -->
-            <div class="item-form">
-              <label :class="[ cardCvvError ? 'has-error-label' : '' ]">CVV</label>
-              <masked-input
-                ref="cvv"
-                :class="[ cardCvvError ? 'has-error' : '' ]"
-                type="tel"
-                v-model="$store.state.creditCard.cardCVV"
-                :mask="[/\d/, /\d/, /\d/, /\d/]"
-                :guide="false"
-                placeholder="123">
-              </masked-input>
-            </div><!-- CVV -->
+              <!-- CVV -->
+              <div class="item-form">
+                <label :class="[ cardCvvError ? 'has-error-label' : '' ]">CVV</label>
+                <masked-input
+                  ref="cvv"
+                  :class="[ cardCvvError ? 'has-error' : '' ]"
+                  type="tel"
+                  v-model="$store.state.creditCard.cardCVV"
+                  :mask="[/\d/, /\d/, /\d/, /\d/]"
+                  :guide="false"
+                  placeholder="123">
+                </masked-input>
+              </div><!-- CVV -->
 
-          </div>
+            </div>
+          </transition>
 
 
           <div class="buttons">
@@ -618,7 +620,7 @@ export default {
           this.$store.commit('show_alert', {
             type: 'warning',
             title: 'Ops',
-            message: 'Adicione um número de celular válido.'
+            message: 'Adicione um número válido.'
           })
           this.guestCelular.length < 15 ? this.celularError = true : this.celularError = false
         } else {
@@ -728,6 +730,9 @@ export default {
         return dayjs(checkOut).format('ddd, DD MMM')
       }
     },
+    validCardNumber () {
+      return valid.number(this.cardNumber).isValid ? true : false
+    },
     form1ok () {
       return this.reservaAcomod.periodoReserva !== null ? 'background: #50CB9D' : ''
     },
@@ -754,7 +759,7 @@ export default {
       }
     },
     formBillingOk () {
-      if (1>2) {
+      if (this.cardHolderName !== '' && CPF.validate(this.guestCPF) && this.guestCPF.length === 14 && this.zipcode.length === 9 && this.$store.state.validZipcode && this.street !== '' && this.streetNumber !== '' && this.neighborhood !== '' && this.city !== '' && this.state !== '') {
         return 'background: #50CB9D'
       }
     }
@@ -767,8 +772,10 @@ export default {
         if (cardNumber.card.type === 'american-express' ? value.length === 18 : value.length === 19) {
           if (cardNumber.isValid) {
             this.cardNumberError = false
-            scrollIntoView(this.$refs.cardExpirationDate.$el)
-            this.$refs.cardExpirationDate.$el.focus()
+            this.$nextTick(() => {
+              scrollIntoView(this.$refs.cardExpirationDate.$el)
+              this.$refs.cardExpirationDate.$el.focus()
+            })
           } else {
             this.cardNumberError = true
           }
@@ -1039,7 +1046,7 @@ export default {
         padding: 0 7%;
         display: flex;
         flex-flow: column;
-        margin-bottom: 1.8rem;
+        margin-bottom: 1.9rem;
         & label {
           font-weight: 500;
           font-size: 14px;
@@ -1143,11 +1150,11 @@ h3 {
 }
 
 /* TRANSITIONS */
-.reserva-animation-enter {
+.reserva-animation-enter, .reserva-animation-leave-active {
   transform: translateX(100%);
 }
-.reserva-animation-leave-active {
-  transform: translateX(100%);
+.fadein-enter, .fadein-leave-active {
+  opacity: 0;
 }
 
 .has-error-label {
