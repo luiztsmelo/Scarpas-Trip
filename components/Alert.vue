@@ -88,7 +88,7 @@ export default {
       & .__message {
         font-size: 15px;
         font-weight: 500;
-        line-height: 1.3;
+        line-height: 1.35;
         user-select: none;
         & .__type {
           padding-right: 2px;

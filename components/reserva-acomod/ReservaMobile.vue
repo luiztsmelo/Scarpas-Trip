@@ -44,7 +44,7 @@
             <div class="item" v-if="acomod.limpezaFee !== 0">
               <div style="display:flex;flex:row;align-items:center">
                 <h3>Taxa de limpeza</h3>
-                <img src="../../assets/img/info.svg" style="width:1rem;height:auto;margin-left:.3rem;cursor:pointer" @click="limpezaFeeDialog">
+                <img src="../../assets/img/info.svg" style="width:1.02rem;height:auto;margin-left:.3rem;cursor:pointer" @click="limpezaFeeDialog">
               </div>
               <h3>R${{ acomod.limpezaFee.toLocaleString() }}</h3>
             </div>
@@ -52,13 +52,13 @@
             <div class="item">
               <div style="display:flex;flex:row;align-items:center">
                 <h3>Taxa de serviço</h3>
-                <img src="../../assets/img/info.svg" style="width:1rem;height:auto;margin-left:.3rem;cursor:pointer" @click="serviceFeeDialog">
+                <img src="../../assets/img/info.svg" style="width:1.02rem;height:auto;margin-left:.3rem;cursor:pointer" @click="serviceFeeDialog">
               </div>
               <h3>R${{ reservaAcomod.serviceFeeTotal.toLocaleString() }}</h3>
             </div>
 
             <div class="item">
-              <h3>Total</h3>
+              <h3 style="font-size: 18px; font-weight: 600">Total</h3>
               <h3 style="font-size: 18px; font-weight: 600">R${{ reservaAcomod.valorReservaTotal.toLocaleString() }}</h3>
             </div>
 
@@ -967,7 +967,7 @@ export default {
           display: flex;
           justify-content: space-between;
           align-items: center;
-          padding: .4rem 0;
+          padding: .5rem 0;
         }
       }
       & .sign-in-btns {
