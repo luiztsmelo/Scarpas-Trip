@@ -217,16 +217,14 @@
 
           <h3 class="etapas">5 de 5 etapas</h3>
 
-          <h1 class="__title">Pagar e confirmar</h1>
+          <h1 class="__title">Detalhes sobre o pagamento</h1>
 
 
-          <h3 class="__text">{{ user.firstName }}, você somente será cobrado caso {{ acomod.proprietario.split(' ')[0] }} confirme seu pedido de reserva.</h3>
-
-          <h3 class="__text">Para sua segurança, só liberaremos o pagamento para ele no dia seguinte de seu check-in, {{ dayAfterCheckin }}. Não se preocupe, seus dados estarão seguros.</h3>
+          <h3 class="__text">{{ user.firstName }}, você somente será cobrado se {{ acomod.proprietario.split(' ')[0] }} aceitar seu pedido de reserva. Em caso positivo, para sua segurança nós só liberaremos o pagamento para ele no dia seguinte de seu check-in, {{ dayAfterCheckin }}.</h3>
 
 
           <div class="add-payment" style="margin-top: .4rem; margin-bottom: 1.4rem" @click="openPaymentMethod">
-            <h3 class="__item-text" style="font-weight: 600; color: #FFA04F">Forma de pagamento</h3>
+            <h3 class="__item-text" style="font-weight: 600; color: #FFA04F">Adicionar forma de pagamento</h3>
             <img src="../../assets/img/arrow-right.svg" alt="" style="width: 1.1rem; height: auto">
           </div>
 
@@ -1020,7 +1018,7 @@ export default {
       }
       & .add-payment {
         margin: 0 7%;
-        padding: 1.4rem 0;
+        padding: 1.5rem 0;
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -1032,8 +1030,8 @@ export default {
           margin-right: .8rem;
         }
         & .__item-text {
-          font-size: 17px;
-          font-weight: 500;
+          font-size: 18px;
+          font-weight: 400;
         }
       }
       & .divider {
