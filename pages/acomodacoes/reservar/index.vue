@@ -129,7 +129,7 @@
 
             <!-- NAME -->
             <div class="item-form">
-              <label>{{ reservaAcomod.paymentMethod === 'credit_card' ? 'Nome impresso no Cartão' : 'Nome Completo'}}</label>
+              <label :class="[ cardHolderNameError || guestNameError ? 'has-error-label' : '' ]">{{ reservaAcomod.paymentMethod === 'credit_card' ? 'Nome impresso no Cartão' : 'Nome Completo'}}</label>
               <input
                 :class="[ cardHolderNameError || guestNameError ? 'has-error' : '' ]"
                 type="text" pattern="[A-Za-z]"
@@ -140,43 +140,40 @@
             <!-- ************** CREDIT CARD ************** -->
             <div class="credit-card" v-show="reservaAcomod.paymentMethod === 'credit_card'">
 
+              <!-- CARD NUMBER -->
               <div class="item-form">
-                <label>Dados do Cartão</label>
-
-                <!-- CARD NUMBER -->
+                <label :class="[ cardNumberError ? 'has-error-label' : '' ]">Número do Cartão</label>
                 <masked-input
                   :class="[ cardNumberError ? 'has-error' : '' ]"
-                  style="border-bottom:none"
-                  ref="cardNumberInput"
+                  ref="cardNumber"
                   type="tel"
                   v-model="$store.state.creditCard.cardNumber"
                   :mask="[/\d/, /\d/, /\d/, /\d/, ' ', /\d/, /\d/, /\d/, /\d/, ' ', /\d/, /\d/, /\d/, /\d/, ' ', /\d/, /\d/, /\d/, /\d/]"
                   :guide="false"
-                  @focus="$refs.cardNumberInput.$el.placeholder = '0000 0000 0000 0000'"
-                  @blur="$refs.cardNumberInput.$el.placeholder = 'Número do Cartão'"
-                  placeholder="Número do Cartão">
+                  placeholder="0000 0000 0000 0000">
                 </masked-input><!-- CARD NUMBER -->
+              </div>
 
-
+           
+              <div style="display:flex; justify-content:space-between">
                 
-                <div class="flex" style="display:flex">
-
-                  <!-- CARD EXPIRATION -->
+                <!-- CARD EXPIRATION -->
+                <div class="item-form" style="flex: 50%; padding-right:.7rem">
+                  <label :class="[ cardExpirationDateError ? 'has-error-label' : '' ]">Validade</label>
                   <masked-input
                     :class="[ cardExpirationDateError ? 'has-error' : '' ]"
-                    style="border-right:none"
-                    ref="validadeInput"
+                    ref="cardExpirationDate"
                     type="tel"
                     v-model="$store.state.creditCard.cardExpirationDate"
                     :mask="[/\d/, /\d/, '/', /\d/, /\d/]"
                     :guide="false"
-                    @focus="$refs.validadeInput.$el.placeholder = 'MM / AA'"
-                    @blur="$refs.validadeInput.$el.placeholder = 'Validade'"
-                    placeholder="Validade">
-                  </masked-input><!-- CARD EXPIRATION -->
+                    placeholder="MM / AA">
+                  </masked-input>
+                </div><!-- CARD EXPIRATION -->
 
-
-                  <!-- CVV -->
+                <!-- CVV -->
+                <div class="item-form" style="flex:50%; padding-left:.7rem">
+                  <label :class="[ cardCvvError ? 'has-error-label' : '' ]">CVV</label>
                   <masked-input
                     :class="[ cardCvvError ? 'has-error' : '' ]"
                     ref="cvvInput"
@@ -184,40 +181,39 @@
                     v-model="$store.state.creditCard.cardCVV"
                     :mask="[/\d/, /\d/, /\d/, /\d/]"
                     :guide="false"
-                    @focus="$refs.cvvInput.$el.placeholder = ''"
-                    @blur="$refs.cvvInput.$el.placeholder = 'CVV'"
-                    placeholder="CVV">
-                  </masked-input><!-- CVV -->
-
-                </div>
+                    placeholder="123">
+                  </masked-input>
+                </div><!-- CVV -->
 
               </div>
-            </div><!-- ************** CREDIT CARD ************** -->
+
+            </div>
+            <!-- ************** CREDIT CARD ************** -->
 
 
 
             <!-- ************** CUSTOMER ************** -->
             <div class="customer">
 
-              <div class="flex" style="display:flex; justify-content:space-between">
+              <div style="display:flex; justify-content:space-between">
 
                 <!-- CPF -->
-                <div class="item-form" style="margin:0">
-                  <label>CPF</label>
+                <div class="item-form" style="flex:50%; padding-right:.7rem">
+                  <label :class="[ cpfError ? 'has-error-label' : '' ]">CPF</label>
                   <masked-input
                     :class="[ cpfError ? 'has-error' : '' ]"
                     type="tel"
                     v-model="reservaAcomod.guestCPF"
                     :mask="[/\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '-', /\d/, /\d/]"
                     :guide="false"
-                    placeholder="___.___.___-__">
+                    placeholder="000.000.000-00">
                   </masked-input>
                 </div><!-- CPF -->
 
 
                 <!-- CELULAR -->
-                <div class="item-form" style="margin:0">
-                  <label>Celular</label>
+                <div class="item-form" style="flex:50%; padding-left:.7rem">
+                  <label :class="[ celularError ? 'has-error-label' : '' ]">Celular</label>
                   <masked-input
                     :class="[ celularError ? 'has-error' : '' ]"
                     type="tel"
@@ -240,26 +236,27 @@
               <div class="flex" style="display:flex; justify-content:space-between">
                 
                 <!-- CEP -->
-                <div class="item-form">
-                  <label>CEP</label>
+                <div class="item-form" style="flex:50%; padding-right:.7rem">
+                  <label :class="[ zipcodeError ? 'has-error-label' : '' ]">CEP</label>
                   <masked-input
                     :class="[ zipcodeError ? 'has-error' : '' ]"
                     type="tel"
                     v-model="reservaAcomod.billing.zipcode"
                     :mask="[/\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/]"
                     :guide="false"
-                    placeholder="_____-___">
+                    placeholder="00000-000">
                   </masked-input>
                 </div><!-- CEP -->
 
 
                 <!-- ENDEREÇO -->
-                <div class="item-form">
-                  <label>Endereço</label>
+                <div class="item-form" style="flex:50%; padding-left:.7rem">
+                  <label :class="[ streetError ? 'has-error-label' : '' ]">Rua</label>
                   <input
                     :class="[ streetError ? 'has-error' : '' ]"
                     type="text" 
-                    v-model="reservaAcomod.billing.street">
+                    v-model="reservaAcomod.billing.street"
+                    placeholder="Endereço">
                 </div><!-- ENDEREÇO -->
 
               </div>
@@ -268,8 +265,8 @@
               <div class="flex" style="display:flex; justify-content:space-between">
 
                 <!-- NÚMERO -->
-                <div class="item-form" style="margin:0">
-                  <label>Número</label>
+                <div class="item-form" style="flex:50%; padding-right:.7rem">
+                  <label :class="[ streetNumberError ? 'has-error-label' : '' ]">Número</label>
                   <masked-input
                     :class="[ streetNumberError ? 'has-error' : '' ]"
                     type="tel"
@@ -281,8 +278,8 @@
 
 
                 <!-- BAIRRO -->
-                <div class="item-form" style="margin:0">
-                  <label>Bairro</label>
+                <div class="item-form" style="flex:50%; padding-left:.7rem">
+                  <label :class="[ neighborhoodError ? 'has-error-label' : '' ]">Bairro</label>
                   <input
                     :class="[ neighborhoodError ? 'has-error' : '' ]"
                     type="text" 
@@ -291,11 +288,11 @@
 
               </div>
 
-              <div class="flex" style="display:flex; justify-content:space-between">
+              <div class="flex" style="display:flex; justify-content:space-between; align-items:center">
 
                 <!-- CIDADE -->
-                <div class="item-form">
-                  <label>Cidade</label>
+                <div class="item-form" style="flex:50%; padding-right:.7rem">
+                  <label :class="[ cityError ? 'has-error-label' : '' ]">Cidade</label>
                   <input
                     :class="[ cityError ? 'has-error' : '' ]"
                     type="text" 
@@ -304,8 +301,8 @@
 
 
                 <!-- ESTADO -->
-                <div class="item-form">
-                  <label>Estado</label>
+                <div class="item-form" style="flex:50%; padding-left:.7rem">
+                  <label :class="[ stateError ? 'has-error-label' : '' ]">Estado</label>
                   <select :class="[ stateError ? 'has-error' : '' ]" v-model="reservaAcomod.billing.state">
                     <option v-for="state in states" :value="state.value">{{ state.name }}</option>
                   </select>
@@ -754,6 +751,7 @@ export default {
       }
       & .__subtitle {
         padding-top: .5rem;
+        font-size: 17px;
       }
       & .etapa-1-item {
         padding-top: 2rem;
@@ -780,44 +778,52 @@ export default {
         flex-flow: column;
         margin: 2.6rem 0;
         & label {
-          padding-bottom: .6rem;
           user-select: none;
           font-weight: 600;
           font-size: 15px;
         }
         & input {
           cursor: text;
-          position: relative;
           width: 100%;
+          font-size: 18px;
           font-weight: 400;
           background: white;
           color: var(--color01);
-          padding: .85rem .4rem .85rem .7rem;
-          border: 1px solid rgb(222,222,222);
+          padding: 1rem 0;
+          border: none;
+          border-bottom: 1px solid rgb(222,222,222);
           outline: none;
-          transition: .15s border ease;
+          transition: all .2s ease;
+        }
+        & input:focus {
+          border-bottom: 1px solid rgb(42,42,42) !important;
         }
         & input:hover {
-          border: 1px solid rgb(72,72,72) !important;
+          border-bottom: 1px solid rgb(42,42,42) !important;
         }
         & select {
           width: 100%;
+          font-size: 18px;
           font-weight: 400;
           background: white;
           color: var(--color01);
-          padding: .85rem 1.85rem .85rem .7rem;
-          border: 1px solid rgb(222,222,222);
+          padding: 1rem 0;
+          border: none;
+          border-bottom: 1px solid rgb(222,222,222);
           outline: none;
-          transition: .15s border ease;
+          transition: .2s all ease;
+        }
+        & select:focus {
+          border-bottom: 1px solid var(--color01) !important;
         }
         & select:hover {
-          border: 1px solid rgb(72,72,72) !important;
+          border-bottom: 1px solid var(--color01) !important;
         }
         & textarea {
           width: 100%;
           min-width: 100%;
           max-width: 100%;
-          font-size: 16px;
+          font-size: 17px;
           font-weight: 400;
           line-height: 26px;
           background: white;
@@ -826,7 +832,7 @@ export default {
           outline: none;
         }
         & textarea:focus {
-          border: 1px solid rgb(72,72,72) !important;
+          border: 1px solid var(--color01) !important;
         }
       }
     }
@@ -933,7 +939,7 @@ export default {
 }
 .has-error {
   color: #F31431 !important;
-  border: 1px solid #F31431 !important;
+  border-bottom: 1px solid #F31431 !important;
 }
 
 </style>

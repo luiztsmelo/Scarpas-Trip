@@ -599,6 +599,7 @@
           <div class="item-form">
             <label :class="[ bankCodeError ? 'has-error-label' : '' ]">Nome do Banco</label>
             <vue-simple-suggest
+              ref="bankCode"
               :class="[ bankCodeError ? 'has-error' : '' ]"
               style="color:#2a2a2a !important"
               mode="select"
@@ -735,9 +736,7 @@ import CPF from 'gerador-validador-cpf'
 import scrollIntoView from 'scroll-into-view'
 
 export default {
-  components: { 
-    MaskedInput, VueSimpleSuggest, localMap
-  },
+  components: { MaskedInput, VueSimpleSuggest, localMap },
   mixins: [ bancos, tipoAcomod ],
   head () {
     return {
@@ -1338,7 +1337,7 @@ export default {
       color: white;
       background: var(--colorAcomod);
       border-radius: 2rem;
-      font-size: var(--fontSizeAnuncioText);
+      font-size: 17px;
       font-weight: 700;
       box-shadow: 3px 3px 20px 1px rgba(0,0,0,0.18);
     }
@@ -1362,7 +1361,7 @@ export default {
     }
     & .__form-text {
       padding: .7rem 7%;
-      font-size: var(--fontSizeAnuncioText);
+      font-size: 17px;
     }
     & .__form-subtitle {
       padding-top: 1.1rem;
@@ -1415,8 +1414,8 @@ export default {
         outline: none;
         transition: .2s all ease;
       }
-      & input:hover {
-        border-bottom: 1px solid rgb(72,72,72);
+      & input:focus {
+        border-bottom: 1px solid var(--color01);
       }
       & select {
         width: 100%;
@@ -1430,8 +1429,8 @@ export default {
         outline: none;
         transition: .2s all ease;
       }
-      & select:hover {
-        border-bottom: 1px solid rgb(72,72,72);
+      & select:focus {
+        border-bottom: 1px solid var(--color01);
       }
     }
     
@@ -1778,12 +1777,17 @@ export default {
         padding: 0 28%;
         margin: 2.7rem 0;
         & label {
-          font-weight: 600;
-          font-size: 16px;
+          font-size: 15px;
         }
         & input {
         }
+        & input:hover {
+          border-bottom: 1px solid var(--color01);
+        }
         & select {
+        }
+        & select:hover {
+          border-bottom: 1px solid var(--color01);
         }
       }
       & .comodidades-box {
@@ -1795,7 +1799,7 @@ export default {
           }
         }
         & .item-form-switches:hover {
-          border-bottom: 1px solid rgb(72,72,72);
+          border-bottom: 1px solid var(--color01);
         }
       }
       & .regras-box {
@@ -1807,7 +1811,7 @@ export default {
           }
         }
         & .item-form-regras:hover {
-          border-bottom: 1px solid rgb(72,72,72);
+          border-bottom: 1px solid var(--color01);
         }
       }
       & .without-address {
@@ -1875,7 +1879,7 @@ export default {
           }
         }
         & .__add-image:hover {
-          border: 2px dashed rgb(72,72,72);
+          border: 2px dashed var(--color01);
         }
       }
       & .center-first-image {

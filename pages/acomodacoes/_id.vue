@@ -898,7 +898,7 @@ export default {
               transition: .15s border ease;
             }
             & input:hover {
-              border: 1px solid rgb(72,72,72) !important;
+              border: 1px solid var(--color01) !important;
             }
             & select {
               cursor: pointer;
@@ -913,7 +913,7 @@ export default {
               }
             }
             & select:hover {
-              border: 1px solid rgb(72,72,72) !important;
+              border: 1px solid var(--color01) !important;
             }
             & .reserva-input-date {
               padding-left: .9rem;

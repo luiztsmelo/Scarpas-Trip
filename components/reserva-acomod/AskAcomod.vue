@@ -186,7 +186,7 @@ export default {
           outline: none;
         }
         & select:focus {
-          border: 1px solid rgb(72,72,72) !important;
+          border: 1px solid var(--color01) !important;
         }
         & textarea {
           width: 100%;
@@ -201,7 +201,7 @@ export default {
           outline: none;
         }
         & textarea:focus {
-          border: 1px solid rgb(72,72,72) !important;
+          border: 1px solid var(--color01) !important;
         }
       }
       & .btns {

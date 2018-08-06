@@ -4,7 +4,6 @@
   --navbarHeightDesktop: 4.5rem;
   /* ******* FONTS ******* */
   --main-font: 'Montserrat', sans-serif !important;
-  --fontSizeAnuncioText: 16px;
   /* ******* COLOR PALETTE ******* */
   --color01: rgb(22, 22, 22);
   --colorAcomod: #FFA04F; /* #006561 for cards info #00D8C7*/ 
@@ -142,7 +141,7 @@ textarea {
   transition: .15s border ease;
 }
 .google-btn:hover{
-  border: 1px solid rgb(72,72,72);
+  border: 1px solid var(--color01);
 }
 /* ******* FACEBOOK ******* */
 .facebook-btn {
@@ -159,7 +158,7 @@ textarea {
   transition: .15s border ease;
 }
 .facebook-btn:hover{
-  border: 1px solid rgb(72,72,72);
+  border: 1px solid var(--color01);
 }
 
 
