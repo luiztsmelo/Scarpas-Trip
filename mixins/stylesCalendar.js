@@ -15,7 +15,7 @@ export const stylesCalendar = {
       /* ____________________ Date Picker Desktop ____________________ */
       datePickerDesktopStyle: {
         wrapper: {
-          color: 'rgb(42, 42, 42)',
+          color: 'rgb(22, 22, 22)',
           borderTop: '10px solid white',
           borderBottom: '8px solid white',
           borderLeft: '15px solid white',
@@ -34,7 +34,7 @@ export const stylesCalendar = {
           fontWeight: '400'
         },
         weekdays: {
-          color: 'rgb(42, 42, 42)',
+          color: 'rgb(22, 22, 22)',
           fontWeight: '400',
           padding: '21px 5px 6px 5px'
         },
@@ -60,7 +60,7 @@ export const stylesCalendar = {
       /* ____________________ Date Picker Mobile ____________________ */
       datePickerMobileStyle: {
         wrapper: {
-          color: 'rgb(42, 42, 42)',
+          color: 'rgb(22, 22, 22)',
           border: '0',
           padding: '0 4px',
           background: 'white'
@@ -77,7 +77,7 @@ export const stylesCalendar = {
           fontWeight: '700'
         },
         weekdays: {
-          color: 'rgb(42, 42, 42)',
+          color: 'rgb(22, 22, 22)',
           fontSize: '16px',
           fontWeight: '400',
           padding: '21px 5px 6px 5px'
@@ -97,7 +97,7 @@ export const stylesCalendar = {
       /* ____________________ Calendar Desktop ____________________ */
       calendarDesktopStyle: {
         wrapper: {
-          color: 'rgb(42, 42, 42)',
+          color: 'rgb(22, 22, 22)',
           margin: '10px 0px 0 0px',
           padding: '10px 0px 0 0px',
           background: 'white',
@@ -114,7 +114,7 @@ export const stylesCalendar = {
           fontWeight: '600'
         },
         weekdays: {
-          color: 'rgb(42, 42, 42)',
+          color: 'rgb(22, 22, 22)',
           fontSize: '15px',
           fontWeight: '500',
           padding: '14px 5px 6px 5px'
