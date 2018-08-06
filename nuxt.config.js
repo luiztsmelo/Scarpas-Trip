@@ -43,7 +43,8 @@ module.exports = {
     '~plugins/v-money',
     '~plugins/v-calendar',
     '~plugins/vue-js-modal',
-    '~plugins/scroll'
+    '~plugins/scroll',
+    '~plugins/vue-ripple-directive'
   ],
   /*
   ** Customize the progress-bar color
