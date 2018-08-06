@@ -383,7 +383,7 @@
             <input 
               :class="[ cardHolderNameError ? 'has-error' : '' ]" 
               type="text" pattern="[A-Za-z]"
-              @keyup.enter="$refs.cpf.$el.focus()"
+              @keyup.enter="keyEnterName"
               v-model="$store.state.creditCard.cardHolderName">
           </div><!-- NOME -->
 
@@ -440,16 +440,13 @@
               <!-- NÚMERO -->
               <div class="item-form" style="flex:50%">
                 <label :class="[ streetNumberError ? 'has-error-label' : '' ]">Número</label>
-                <masked-input
+                <input
                   ref="streetNumber"
                   :class="[ streetNumberError ? 'has-error' : '' ]"
-                  type="tel"
+                  type="number"
                   @keyup.enter="$refs.bairro.focus()"
                   v-model="reservaAcomod.billing.street_number"
-                  :mask="[/\d/, /\d/, /\d/, /\d/]"
-                  :guide="false"
                   placeholder="123">
-                </masked-input>
               </div><!-- NÚMERO -->
 
               <!-- BAIRRO -->
@@ -531,13 +528,17 @@ export default {
     }
   },
   methods: {
+    keyEnterName () {
+      scrollIntoView(this.$refs.cpf.$el)
+      this.$refs.cpf.$el.focus()
+    },
     keyEnterStreet () {
-      this.$refs.streetNumber.$el.focus()
-      scrollIntoView(this.$refs.streetNumber.$el)
+      scrollIntoView(this.$refs.streetNumber)
+      this.$refs.streetNumber.focus()   
     },
     keyEnterBairro () {
-      this.$refs.city.focus()
       scrollIntoView(this.$refs.city)
+      this.$refs.city.focus() 
     },
     limpezaFeeDialog () {
       this.$store.commit('show_alert', {
@@ -766,8 +767,8 @@ export default {
         if (cardNumber.card.type === 'american-express' ? value.length === 18 : value.length === 19) {
           if (cardNumber.isValid) {
             this.cardNumberError = false
-            this.$refs.cardExpirationDate.$el.focus()
             scrollIntoView(this.$refs.cardExpirationDate.$el)
+            this.$refs.cardExpirationDate.$el.focus()
           } else {
             this.cardNumberError = true
           }
@@ -792,8 +793,8 @@ export default {
       if (value.length === 14) {
         if (CPF.validate(value)) {
           this.cpfError = false
-          this.$refs.zipcode.$el.focus()
           scrollIntoView(this.$refs.zipcode.$el)
+          this.$refs.zipcode.$el.focus()
         } else {
           this.cpfError = true
         }
@@ -821,8 +822,8 @@ export default {
           this.$store.state.validZipcode = true
           this.$store.commit('m_loader', false)
           this.$nextTick(() => {
-            this.$refs.street.focus()
             scrollIntoView(this.$refs.street)
+            this.$refs.street.focus() 
           })
         } catch (err) {
           console.log(err)
