@@ -602,6 +602,7 @@
               :class="[ bankCodeError ? 'has-error' : '' ]"
               style="color:#2a2a2a !important"
               mode="select"
+              @select="onSelectBankCode"
               v-model="$store.state.bankAccount.bankCode"
               :list="bancos"
               :filter-by-query="true">
@@ -641,6 +642,7 @@
                   @keypress="keyEnterAgenciaDV"
                   v-model="$store.state.bankAccount.agenciaDV"
                   @focus="agenciaDVfocus"
+                  @blur="$store.commit('hide_alert')"
                   :mask="[/\d/]"
                   :guide="false">
                 </masked-input>
@@ -651,14 +653,14 @@
           <div class="item-form">
             <div class="flex-row" style="display:flex">
               <div class="conta" style="flex:50%; margin-right:.5rem">
-                <label :class="[ contaError ? 'has-error-label' : '' ]">Conta Corrente</label>
+                <label :class="[ contaError ? 'has-error-label' : '' ]">Conta</label>
                 <masked-input
                   ref="conta"
                   :class="[ contaError ? 'has-error' : '' ]"
                   type="tel"
                   @keypress="keyEnterConta"
                   v-model="$store.state.bankAccount.conta"
-                  :mask="[/\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/]"
+                  :mask="[/\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/]"
                   :guide="false">
                 </masked-input>
               </div>
@@ -763,6 +765,10 @@ export default {
     }
   },
   methods: {
+    onSelectBankCode () {
+      scrollIntoView(this.$refs.type)
+      this.$refs.type.focus()
+    },
     keyEnterAgencia () {
       if (event.key === 'Enter') {
         this.$refs.agenciaDV.$el.focus()
@@ -1145,22 +1151,6 @@ export default {
     subtitleLength () {
       return 1000 - this.$store.state.acomodData.subtitle.length
     },
-    yearsPermitted () {
-      let year = new Date().getFullYear().toString()
-      let shortYear = Number(year.slice(-2))
-      let n1 = shortYear + 1
-      let n2 = shortYear + 2
-      let n3 = shortYear + 3
-      let n4 = shortYear + 4
-      let n5 = shortYear + 5
-      let n6 = shortYear + 6
-      let n7 = shortYear + 7
-      let n8 = shortYear + 8
-      let n9 = shortYear + 9
-      let n10 = shortYear + 10
-      let yearsPermitted = [shortYear, n1, n2, n3, n4, n5, n6, n7, n8, n9, n10]
-      return yearsPermitted
-    },
     form1ok () {
       return this.$store.state.acomodData.tipoAcomod !== null ? 'background:#FFA04F' : ''
     },
@@ -1195,17 +1185,11 @@ export default {
       return this.$store.state.acomodData.celular.length === 15 && this.authUser ? 'background:#FFA04F' : ''
     },
     form12ok () {
-      return this.bankCode !== null && this.agencia !== '' && this.agenciaDV !== '' && this.conta !== '' && this.contaDV !== '' && this.legalName !== '' && this.docNumber.length === 14 ? 'background:#FFA04F' : ''
+      return this.bankCode !== null && this.agencia !== '' && this.agenciaDV !== '' && this.conta !== '' && this.contaDV !== '' && this.legalName !== '' && this.docNumber.length === 14 && CPF.validate(this.docNumber) ? 'background:#FFA04F' : ''
     }
   },
   watch: {
-    bankCode (newVal, oldVal) { 
-      newVal !== '' ? this.bankCodeError = false : ''
-      if (newVal !== oldVal) {
-        scrollIntoView(this.$refs.type)
-        this.$refs.type.focus()
-      }
-    },
+    bankCode (value) { value !== '' ? this.bankCodeError = false : '' },
     agencia (value) { value !== '' ? this.agenciaError = false : '' },
     agenciaDV (value) { value !== '' ? this.agenciaDVError = false : '' },
     conta (value) { value !== '' ? this.contaError = false : '' },
