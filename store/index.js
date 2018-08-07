@@ -860,6 +860,8 @@ const store = () => new Vuex.Store({
           state: ''
         }
       }
+      state.cardType = null
+      state.cardTypeNice = null
       state.reservaAcomodDesktop1 = true
       state.reservaAcomodDesktop2 = false
       state.reservaAcomodDesktop3 = false

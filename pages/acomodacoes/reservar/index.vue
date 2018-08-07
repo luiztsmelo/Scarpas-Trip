@@ -145,7 +145,7 @@
                 <label :class="[ cardNumberError ? 'has-error-label' : '' ]">Número do Cartão</label>
                 <masked-input
                   ref="cardNumber"
-                  :style="{ backgroundImage: 'url(' + cardBrand + ')', backgroundPosition: 0, backgroundRepeat: 'no-repeat', backgroundSize: '35px', paddingLeft: cardType !== null ? '48px' : '' }"
+                  :style="{ backgroundImage: 'url(' + cardBrand + ')', backgroundPosition: 0, backgroundRepeat: 'no-repeat', backgroundSize: '34px', paddingLeft: cardType !== null ? '48px' : '' }"
                   :class="[ cardNumberError ? 'has-error' : '' ]"
                   type="tel"
                   v-model="$store.state.creditCard.cardNumber"

@@ -292,7 +292,7 @@
           <div class="item-form">
             <label :class="[ cardNumberError ? 'has-error-label' : '' ]">Número do Cartão</label>
             <masked-input
-              :style="{ backgroundImage: 'url(' + cardBrand + ')', backgroundPosition: 0, backgroundRepeat: 'no-repeat', backgroundSize: '35px', paddingLeft: cardType !== null ? '48px' : '' }"
+              :style="{ backgroundImage: 'url(' + cardBrand + ')', backgroundPosition: 0, backgroundRepeat: 'no-repeat', backgroundSize: '34px', paddingLeft: cardType !== null ? '48px' : '' }"
               :class="[ cardNumberError ? 'has-error' : '' ]"
               type="tel"
               v-model="$store.state.creditCard.cardNumber"
@@ -381,7 +381,7 @@
             <input 
               :class="[ cardHolderNameError ? 'has-error' : '' ]" 
               type="text" pattern="[A-Za-z]"
-              @keyup.enter="keyEnterName"
+              @keypress="keyEnterName"
               v-model="$store.state.creditCard.cardHolderName">
           </div><!-- NOME -->
 
@@ -428,7 +428,7 @@
                 ref="street"
                 :class="[ streetError ? 'has-error' : '' ]"
                 type="text"
-                @keyup.enter="keyEnterStreet"
+                @keypress="keyEnterStreet"
                 v-model="reservaAcomod.billing.street"
                 placeholder="Endereço">
             </div><!-- ENDEREÇO -->
@@ -438,13 +438,15 @@
               <!-- NÚMERO -->
               <div class="item-form" style="flex:50%">
                 <label :class="[ streetNumberError ? 'has-error-label' : '' ]">Número</label>
-                <input
+                <masked-input
                   ref="streetNumber"
                   :class="[ streetNumberError ? 'has-error' : '' ]"
-                  type="number"
-                  @keyup.enter="$refs.bairro.focus()"
+                  type="tel"
+                  @keypress="keyEnterStreetNumber"
                   v-model="reservaAcomod.billing.street_number"
-                  placeholder="123">
+                  :mask="[/\d/, /\d/, /\d/, /\d/]"
+                  :guide="false">
+                </masked-input>
               </div><!-- NÚMERO -->
 
               <!-- BAIRRO -->
@@ -454,7 +456,7 @@
                   ref="bairro"
                   :class="[ neighborhoodError ? 'has-error' : '' ]"
                   type="text"
-                  @keyup.enter="keyEnterBairro"
+                  @keypress="keyEnterBairro"
                   v-model="reservaAcomod.billing.neighborhood">
               </div><!-- BAIRRO -->
             </div>
@@ -468,7 +470,7 @@
                   ref="city"
                   :class="[ cityError ? 'has-error' : '' ]"
                   type="text"
-                  @keyup.enter="$refs.state.focus()"
+                  @keypress="keyEnterCity"
                   v-model="reservaAcomod.billing.city">
               </div><!-- CIDADE -->
 
@@ -527,16 +529,33 @@ export default {
   },
   methods: {
     keyEnterName () {
-      scrollIntoView(this.$refs.cpf.$el)
-      this.$refs.cpf.$el.focus()
+      if (event.key === 'Enter') {
+        scrollIntoView(this.$refs.cpf.$el)
+        this.$refs.cpf.$el.focus()
+      }
     },
     keyEnterStreet () {
-      scrollIntoView(this.$refs.streetNumber)
-      this.$refs.streetNumber.focus()   
+      if (event.key === 'Enter') {
+        scrollIntoView(this.$refs.streetNumber.$el)
+        this.$refs.streetNumber.$el.focus() 
+      }  
+    },
+    keyEnterStreetNumber () {
+      if (event.key === 'Enter') {
+        this.$refs.bairro.focus()
+      } 
     },
     keyEnterBairro () {
-      scrollIntoView(this.$refs.city)
-      this.$refs.city.focus() 
+      if (event.key === 'Enter') {
+        scrollIntoView(this.$refs.city)
+        this.$refs.city.focus() 
+      }
+    },
+    keyEnterCity () {
+      if (event.key === 'Enter') {
+        scrollIntoView(this.$refs.state)
+        this.$refs.state.focus()
+      }
     },
     limpezaFeeDialog () {
       this.$store.commit('show_alert', {
@@ -1056,6 +1075,9 @@ export default {
           outline: none;
           transition: all .2s ease;
         }
+        & input:focus {
+          border-bottom: 1px solid var(--color01);
+        }
         & select {
           width: 100%;
           font-size: 18px;
@@ -1067,6 +1089,9 @@ export default {
           border-bottom: 1px solid rgb(222,222,222);
           outline: none;
           transition: all .2s ease;
+        }
+        & select:focus {
+          border-bottom: 1px solid var(--color01);
         }
       }
       & .buttons {
