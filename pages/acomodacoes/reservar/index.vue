@@ -11,7 +11,7 @@
       </nuxt-link>
 
       <div class="progress">
-        <h3 class="__item-progress" :style="etapaProgressed1" @click="backEtapa1">1. Revisar Regras {{ tipoAcomodTitle }}</h3>
+        <h3 class="__item-progress" :style="etapaProgressed1" @click="backEtapa1">1. Revisar regras {{ tipoAcomodD }}</h3>
         
         <h3 class="__arrow-right">→</h3>
 
@@ -19,7 +19,7 @@
 
         <h3 class="__arrow-right">→</h3>
 
-        <h3 class="__item-progress" :style="etapaProgressed3" @click="backEtapa3">3. Pagamento e Confirmação</h3>
+        <h3 class="__item-progress" :style="etapaProgressed3" @click="backEtapa3">3. Detalhes sobre o pagamento</h3>
       </div>
 
     </div><!-- ******* HEADER PROGRESS ******* -->
@@ -37,7 +37,7 @@
         <!-- ******* ETAPA 1 ******* -->
         <div class="etapa-1" v-if="$store.state.reservaAcomodDesktop1 === true">
 
-          <h1 class="__title">Revisar Regras {{ tipoAcomodTitle }}</h1>
+          <h1 class="__title">Revisar regras {{ tipoAcomodD }}</h1>
 
 
           <div class="etapa-1-item">
@@ -109,7 +109,7 @@
         <!-- ******* ETAPA 3 ******* -->
         <div class="etapa-3" v-if="$store.state.reservaAcomodDesktop3 === true">
 
-          <h1 class="__title">Pagamento e Confirmação</h1>
+          <h1 class="__title">Detalhes sobre o pagamento</h1>
 
 
           <div class="payment">
@@ -118,7 +118,7 @@
 
 
             <!-- PAYMENT METHOD -->
-            <div class="item-form">
+            <div class="item-form" style="padding-top: 1.2rem">
               <label>Pagar com</label>
               <select v-model="reservaAcomod.paymentMethod">
                 <option selected :value="'credit_card'">Cartão de Crédito</option>
@@ -144,8 +144,9 @@
               <div class="item-form">
                 <label :class="[ cardNumberError ? 'has-error-label' : '' ]">Número do Cartão</label>
                 <masked-input
-                  :class="[ cardNumberError ? 'has-error' : '' ]"
                   ref="cardNumber"
+                  :style="{ backgroundImage: 'url(' + cardBrand + ')', backgroundPosition: 0, backgroundRepeat: 'no-repeat', backgroundSize: '35px', paddingLeft: cardType !== null ? '48px' : '' }"
+                  :class="[ cardNumberError ? 'has-error' : '' ]"
                   type="tel"
                   v-model="$store.state.creditCard.cardNumber"
                   :mask="[/\d/, /\d/, /\d/, /\d/, ' ', /\d/, /\d/, /\d/, /\d/, ' ', /\d/, /\d/, /\d/, /\d/, ' ', /\d/, /\d/, /\d/, /\d/]"
@@ -161,8 +162,8 @@
                 <div class="item-form" style="flex: 50%; padding-right:.7rem">
                   <label :class="[ cardExpirationDateError ? 'has-error-label' : '' ]">Validade</label>
                   <masked-input
-                    :class="[ cardExpirationDateError ? 'has-error' : '' ]"
                     ref="cardExpirationDate"
+                    :class="[ cardExpirationDateError ? 'has-error' : '' ]"
                     type="tel"
                     v-model="$store.state.creditCard.cardExpirationDate"
                     :mask="[/\d/, /\d/, '/', /\d/, /\d/]"
@@ -175,8 +176,8 @@
                 <div class="item-form" style="flex:50%; padding-left:.7rem">
                   <label :class="[ cardCvvError ? 'has-error-label' : '' ]">CVV</label>
                   <masked-input
+                    ref="cvv"
                     :class="[ cardCvvError ? 'has-error' : '' ]"
-                    ref="cvvInput"
                     type="tel"
                     v-model="$store.state.creditCard.cardCVV"
                     :mask="[/\d/, /\d/, /\d/, /\d/]"
@@ -201,6 +202,7 @@
                 <div class="item-form" style="flex:50%; padding-right:.7rem">
                   <label :class="[ cpfError ? 'has-error-label' : '' ]">CPF</label>
                   <masked-input
+                    ref="cpf"
                     :class="[ cpfError ? 'has-error' : '' ]"
                     type="tel"
                     v-model="reservaAcomod.guestCPF"
@@ -215,6 +217,7 @@
                 <div class="item-form" style="flex:50%; padding-left:.7rem">
                   <label :class="[ celularError ? 'has-error-label' : '' ]">Celular</label>
                   <masked-input
+                    ref="celular"
                     :class="[ celularError ? 'has-error' : '' ]"
                     type="tel"
                     v-model="reservaAcomod.guestCelular"
@@ -239,6 +242,7 @@
                 <div class="item-form" style="flex:50%; padding-right:.7rem">
                   <label :class="[ zipcodeError ? 'has-error-label' : '' ]">CEP</label>
                   <masked-input
+                    ref="zipcode"
                     :class="[ zipcodeError ? 'has-error' : '' ]"
                     type="tel"
                     v-model="reservaAcomod.billing.zipcode"
@@ -253,6 +257,7 @@
                 <div class="item-form" style="flex:50%; padding-left:.7rem">
                   <label :class="[ streetError ? 'has-error-label' : '' ]">Rua</label>
                   <input
+                    ref="street"
                     :class="[ streetError ? 'has-error' : '' ]"
                     type="text" 
                     v-model="reservaAcomod.billing.street"
@@ -268,6 +273,7 @@
                 <div class="item-form" style="flex:50%; padding-right:.7rem">
                   <label :class="[ streetNumberError ? 'has-error-label' : '' ]">Número</label>
                   <masked-input
+                    ref="streetNumber"
                     :class="[ streetNumberError ? 'has-error' : '' ]"
                     type="tel"
                     v-model="reservaAcomod.billing.street_number"
@@ -342,12 +348,12 @@
 
             <div class="detalhes-reserva-data_item">
               <img src="../../../assets/img/calendar.svg" class="__img" style="transform: scale(.91)">
-              <h3 style="font-size:15px">{{ periodoReserva }}</h3>
+              <h3 style="font-size:16px">{{ periodoReserva }}</h3>
             </div>
 
             <div class="detalhes-reserva-data_item">
               <img src="../../../assets/img/guests.svg" class="__img">
-              <h3 style="font-size:15px">{{ reservaAcomod.totalHospedes == '1' ? reservaAcomod.totalHospedes + ' hóspede' : reservaAcomod.totalHospedes + ' hóspedes' }}</h3>
+              <h3 style="font-size:16px">{{ reservaAcomod.totalHospedes == '1' ? reservaAcomod.totalHospedes + ' hóspede' : reservaAcomod.totalHospedes + ' hóspedes' }}</h3>
             </div>
 
           </div>
@@ -356,7 +362,7 @@
           <div class="detalhes-reserva-valor" v-if="reservaAcomod.valorReservaTotal !== null">
 
             <div class="detalhes-reserva-valor_item-total" style="padding-top: .8rem">
-              <h3>Total</h3>
+              <h3 style="font-size:18px">Total</h3>
               <h3 class="__valor-total">R${{ reservaAcomod.valorReservaTotal.toLocaleString() }}</h3>
             </div>
 
@@ -417,15 +423,17 @@ import MaskedInput from 'vue-text-mask'
 import detalhesValor from '@/components/reserva-acomod/detalhesValor'
 import { reservaAcomod } from '@/mixins/reservaAcomod'
 import { states } from '@/mixins/statesBrazil'
+import { tipoAcomod } from '@/mixins/tipoAcomod'
 import valid from 'card-validator'
 import CPF from 'gerador-validador-cpf'
+import scrollIntoView from 'scroll-into-view'
 import dayjs from 'dayjs'
 import 'dayjs/locale/pt-br'
 dayjs.locale('pt-br')
 
 export default {
   components: { MaskedInput, detalhesValor },
-  mixins: [ reservaAcomod, states ],
+  mixins: [ reservaAcomod, states, tipoAcomod ],
   head () {
     return {
       title: 'Reservar: ' + this.acomod.title
@@ -598,19 +606,6 @@ export default {
     },
 
     /* ******************** FORMATTINGS ******************** */
-    tipoAcomodTitle () {
-      const path = this.acomod.tipoAcomod
-      return path === 'Casa' ? 'da Casa' 
-           : path === 'Apartamento' ? 'do Apartamento'
-           : path === 'Rancho' ? 'do Rancho'
-           : path === 'Chácara' ? 'da Chácara'
-           : path === 'Pousada' ? 'da Pousada'
-           : path === 'Camping' ? 'do Camping'
-           : path === 'Sítio' ? 'do Sítio'
-           : path === 'Fazenda' ? 'da Fazenda'
-           : path === 'Hostel' ? 'do Hostel'
-           : ''
-    },
     whatsAppHostHREF () {
       let celular = this.acomod.celular
       let DDD = celular.slice(1, 3)
@@ -622,39 +617,67 @@ export default {
   },
   watch: {
     message (value) { value !== '' ? this.messageError = false : '' },
+    cardHolderName (value) { value !== '' ? this.cardHolderNameError = false : '' },
+    guestName (value) { value !== '' ? this.guestNameError = false : '' },
     cardNumber (value) {
       let cardNumber = valid.number(value)
       cardNumber.isPotentiallyValid ? this.cardNumberError = false : this.cardNumberError = true
-      if (value.length === 19) {
-        cardNumber.isValid ? this.cardNumberError = false : this.cardNumberError = true
-      }
       if (cardNumber.card) {
+        if (cardNumber.card.type === 'american-express' ? value.length === 18 : value.length === 19) {
+          if (cardNumber.isValid) {
+            this.cardNumberError = false
+            this.$nextTick(() => {
+              scrollIntoView(this.$refs.cardExpirationDate.$el)
+              this.$refs.cardExpirationDate.$el.focus()
+            })
+          } else {
+            this.cardNumberError = true
+          }
+        }
         this.$store.state.cardType = cardNumber.card.type
         this.$store.state.cardTypeNice = cardNumber.card.niceType
       }
     },
     cardExpirationDate (value) {
+      let firstDigit = value.charAt(0)
+      firstDigit > 1 ? this.$store.state.creditCard.cardExpirationDate = `0${firstDigit} / ` : ''
       let cardExpirationDate = valid.expirationDate(value)
       cardExpirationDate.isPotentiallyValid ? this.cardExpirationDateError = false : this.cardExpirationDateError = true
+      cardExpirationDate.isValid ? this.$refs.cvv.$el.focus() : ''
     },
     cardCVV (value) {
       let cardCVV = valid.cvv(value)
       cardCVV.isPotentiallyValid ? this.cardCvvError = false : this.cardCvvError = true
+      if (this.$store.state.cardType !== 'american-express') {
+        if (value.length === 3 && cardCVV.isValid) {
+          scrollIntoView(this.$refs.cpf.$el)
+          this.$refs.cpf.$el.focus()
+        }
+      } else {
+        if (value.length === 4 && cardCVV.isValid) {
+          scrollIntoView(this.$refs.cpf.$el)
+          this.$refs.cpf.$el.focus()
+        }
+      }
     },
     guestCPF (value) {
       value !== '' ? this.cpfError = false : ''
       if (value.length === 14) {
-        CPF.validate(value) ? this.cpfError = false : this.cpfError = true
+        if (CPF.validate(value)) {
+          this.cpfError = false
+          this.$refs.celular.$el.focus()
+        } else {
+          this.cpfError = true
+        }
       }
     },
-    cardHolderName (value) { value !== '' ? this.cardHolderNameError = false : '' },
-    guestName (value) { value !== '' ? this.guestNameError = false : '' },
-    guestCelular (value) { value !== '' ? this.celularError = false : '' },
-    street (value) { value !== null ? this.streetError = false : null },
-    streetNumber (value) { value !== null ? this.streetNumberError = false : null },
-    neighborhood (value) { value !== null ? this.neighborhoodError = false : null },
-    city (value) { value !== null ? this.cityError = false : null },
-    state (value) { value !== null ? this.stateError = false : null },
+    guestCelular (value) { 
+      value !== '' ? this.celularError = false : '' 
+      if (value.length === 15) {
+        scrollIntoView(this.$refs.zipcode.$el)
+        this.$refs.zipcode.$el.focus()
+      }
+    },
     async zipcode (value) {
       if (value.length === 9) {
         try {
@@ -668,7 +691,17 @@ export default {
           billing.street = zipcodeData.street
           this.$store.state.validZipcode = true
           this.$store.commit('m_loader', false)
+          this.$nextTick(() => {
+            if (billing.street === null || billing.street === '') {
+              scrollIntoView(this.$refs.street)
+              this.$refs.street.focus()
+            } else {
+              scrollIntoView(this.$refs.streetNumber.$el)
+              this.$refs.streetNumber.$el.focus() 
+            }
+          })
         } catch (err) {
+          console.log(err)
           this.zipcodeError = true
           this.$store.state.validZipcode = false
           this.$store.commit('m_loader', false)
@@ -676,7 +709,12 @@ export default {
       } else {
         this.zipcodeError = false
       }
-    }
+    },
+    street (value) { value !== null ? this.streetError = false : null },
+    streetNumber (value) { value !== null ? this.streetNumberError = false : null },
+    neighborhood (value) { value !== null ? this.neighborhoodError = false : null },
+    city (value) { value !== null ? this.cityError = false : null },
+    state (value) { value !== null ? this.stateError = false : null }
   },
   beforeRouteEnter (to, from, next) {
     next(vm => {
@@ -743,7 +781,7 @@ export default {
     display: flex;
     /* ******* FLEX LEFT ******* */
     & .flex-left {
-      flex: 65%;
+      flex: 64%;
       & .__title {
         padding-bottom: 1.6rem;
         font-size: 32px;
@@ -761,7 +799,7 @@ export default {
         }
       }
       & .message {
-        margin-right: 28%;
+        margin-right: 25%;
         & .clique-aqui {
           cursor: pointer;
         }
@@ -771,15 +809,17 @@ export default {
         }
       }
       & .payment {
-        margin-right: 28%;
+        display: flex;
+        flex-flow: column;
+        margin-right: 25%;
       }
       & .item-form {
         display: flex;
         flex-flow: column;
-        margin: 2.6rem 0;
+        margin: 1.5rem 0;
         & label {
           user-select: none;
-          font-weight: 600;
+          font-weight: 500;
           font-size: 15px;
         }
         & input {
@@ -838,8 +878,8 @@ export default {
     }
     /* ******* FLEX RIGHT ******* */
     & .flex-right {
-      flex: 35%;
-      max-width: 35%;
+      flex: 36%;
+      max-width: 36%;
       align-self: flex-start;
       & .__acomod-image {
         width: 100%;
@@ -852,7 +892,7 @@ export default {
         & .__acomod-title {
           margin: 0 1.3rem;
           padding: 1.2rem 0;
-          font-size: 18px;
+          font-size: 19px;
           font-weight: 600;
           border-bottom: 1px solid rgb(222,222,222);
           white-space: nowrap;
@@ -881,14 +921,14 @@ export default {
             display: flex;
             justify-content: space-between;
             & .__valor-total {
-              font-size: 17px;
+              font-size: 18px;
               font-weight: 600;
             }
           }
           & .__ver-detalhes {
             user-select: none;
             cursor: pointer;
-            font-size: 14px;
+            font-size: 15px;
             font-weight: 500;
             color: var(--colorAcomod);
           }

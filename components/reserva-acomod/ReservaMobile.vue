@@ -696,17 +696,6 @@ export default {
   },
   computed: {
     hash () { return this.$route.hash },
-    cardBrand () {
-      const cardType = this.$store.state.cardType
-      return cardType === 'visa' ? require('@/assets/img/visa.svg')
-           : cardType === 'mastercard' ? require('@/assets/img/mastercard.svg')
-           : cardType === 'american-express' ? require('@/assets/img/amex.svg')
-           : cardType === 'elo' ? require('@/assets/img/elo.svg')
-           : cardType === 'discover' ? require('@/assets/img/discover.svg')
-           : cardType === 'diners-club' ? require('@/assets/img/diners.svg')
-           : cardType === 'jcb' ? require('@/assets/img/jcb.svg')
-           : ''
-    },
     totalHospedesArray () {
       return Array.from({length: this.acomod.totalHospedes}, (v, k) => k+1)
     },
@@ -825,8 +814,13 @@ export default {
           this.$store.state.validZipcode = true
           this.$store.commit('m_loader', false)
           this.$nextTick(() => {
-            scrollIntoView(this.$refs.street)
-            this.$refs.street.focus() 
+            if (billing.street === null || billing.street === '') {
+              scrollIntoView(this.$refs.street)
+              this.$refs.street.focus()
+            } else {
+              scrollIntoView(this.$refs.streetNumber.$el)
+              this.$refs.streetNumber.$el.focus() 
+            }
           })
         } catch (err) {
           console.log(err)

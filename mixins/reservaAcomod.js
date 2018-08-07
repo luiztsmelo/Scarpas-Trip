@@ -83,6 +83,18 @@ export const reservaAcomod = {
     city () { return this.reservaAcomod.billing.city },
     state () { return this.reservaAcomod.billing.state },
 
+    cardBrand () {
+      const cardType = this.$store.state.cardType
+      return cardType === 'visa' ? require('@/assets/img/visa.svg')
+           : cardType === 'mastercard' ? require('@/assets/img/mastercard.svg')
+           : cardType === 'american-express' ? require('@/assets/img/amex.svg')
+           : cardType === 'elo' ? require('@/assets/img/elo.svg')
+           : cardType === 'discover' ? require('@/assets/img/discover.svg')
+           : cardType === 'diners-club' ? require('@/assets/img/diners.svg')
+           : cardType === 'jcb' ? require('@/assets/img/jcb.svg')
+           : ''
+    },
+
     dayAfterCheckin () {
       if (this.reservaAcomod !== null) {
         const checkIn = new Date(this.reservaAcomod.periodoReserva.start)
