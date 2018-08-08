@@ -792,7 +792,7 @@ export default {
       }
     },
     form1ok () {
-      return this.reservaAcomod.periodoReserva !== null ? 'background: #161616' : ''
+      return this.reservaAcomod.periodoReserva !== null ? 'background: #161616' : this.$store.state.miniLoader ? 'background: #fff' : ''
     },
     form2ok () {
       return 'background: #161616'

@@ -817,7 +817,7 @@ export default {
         right: 7%;
         top: 50%;
         transform: translateY(-50%);
-        width: 8.2rem;
+        width: 10rem;
         height: 3.2rem;
         background:var(--colorAcomod);
         border-radius: 5px;
@@ -826,7 +826,7 @@ export default {
           text-transform: uppercase;
           letter-spacing: 0.5px;
           font-size: 13px;
-          font-weight: 600;
+          font-weight: 700;
           color: white;
           transition: var(--main-transition);
         }
