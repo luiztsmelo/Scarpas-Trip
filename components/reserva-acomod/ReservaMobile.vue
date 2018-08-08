@@ -261,8 +261,8 @@
               <h3 class="__valor" v-if="reservaAcomod.valorReservaTotal !== null">R${{ reservaAcomod.valorReservaTotal.toLocaleString() }}
                 <span class="__valor-noites"> por {{ reservaAcomod.noites }} {{ reservaAcomod.noites == 1 ? 'noite' : 'noites'}}</span>
               </h3>
-              <button type="button" class="__next-btn" :style="form5ok" @click="concluirReserva">
-                <span class="__next-btn-text" v-if="!$store.state.miniLoader">Concluir Pedido</span>
+              <button type="button" class="__next-btn" :style="form5ok" style="width:9rem" @click="concluirReserva">
+                <span class="__next-btn-text" style="font-weight:700" v-if="!$store.state.miniLoader">Concluir Pedido</span>
                 <mini-loader v-else></mini-loader>
               </button>
             </div>
@@ -1003,6 +1003,7 @@ export default {
         line-height: 35px;
         font-size: 29px;
         font-weight: 700;
+        user-select: none;
       }
       & .__subtitle {
         padding: 0 7% .3rem;
@@ -1197,7 +1198,7 @@ export default {
             right: 7%;
             top: 50%;
             transform: translateY(-50%);
-            width: 8.2rem;
+            width: 8.3rem;
             height: 3.2rem;
             background:rgb(237, 237, 237);
             border-radius: 5px;
