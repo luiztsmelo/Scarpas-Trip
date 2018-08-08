@@ -71,7 +71,7 @@ export default {
   position: fixed;
   z-index: 99999999;
   overflow-y: auto;
-  min-height: 4.6rem;
+  min-height: 4.7rem;
   width: 100%;
   bottom: 0;
   box-shadow: 0px -1px 1px 0px rgba(0,0,0,0.1);

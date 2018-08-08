@@ -135,7 +135,7 @@ export default {
       padding: 0 7%;
       & .__back-btn {
         cursor: pointer;
-        width: 1.35rem;
+        width: 1.3rem;
         height: auto;
       }
     }

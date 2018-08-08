@@ -105,7 +105,7 @@ export default {
   bottom: 0;
   left: 0;
   z-index: 999999;
-  height: 4.6rem;
+  height: 4.7rem;
   width:  100%;
   background: white;
   padding: 0 7%;
@@ -123,7 +123,7 @@ export default {
       font-size: 16px;
       font-weight: 600;
       background: transparent;
-      height: 3.1rem;
+      height: 3.2rem;
     }
     & .__confirm-btn {
       cursor: pointer;
@@ -132,7 +132,7 @@ export default {
       font-weight: 600;
       background:rgb(237, 237, 237);
       color: white;
-      height: 3.1rem;
+      height: 3.2rem;
       border-radius: 5px;
       transition: var(--main-transition);
     }

@@ -929,7 +929,7 @@ export default {
     & .back-btn {
       margin: 1rem 7%;
       cursor: pointer;
-      width: 1.35rem;
+      width: 1.3rem;
       height: auto;
     }
     & .etapa-reserva-box {
@@ -1104,7 +1104,7 @@ export default {
         bottom: 0;
         left: 0;
         z-index: 999999;
-        height: 4.6rem;
+        height: 4.7rem;
         width:  100%;
         background: white;
         padding: 0 7%;
@@ -1143,7 +1143,7 @@ export default {
             font-weight: 600;
             background:rgb(237, 237, 237);
             color: white;
-            height: 3.1rem;
+            height: 3.2rem;
             border-radius: 5px;
             transition: var(--main-transition);
           }
@@ -1156,8 +1156,8 @@ export default {
         display: flex;
         align-items: center;
         justify-content: center;
-        width: 3.2rem;
-        height: 3.2rem;
+        width: 3.3rem;
+        height: 3.3rem;
         border-radius: 50%;
         background:rgb(237, 237, 237);
         transition: var(--main-transition);
