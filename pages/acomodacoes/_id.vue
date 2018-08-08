@@ -809,8 +809,10 @@ export default {
         font-weight: 400;
       }
       & .__reserva-btn {
-        font-size: 16px;
-        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        font-size: 14px;
+        font-weight: 600;
         background: var(--colorAcomod);
         color: white;
         height: 3.2rem;

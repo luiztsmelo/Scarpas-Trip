@@ -733,19 +733,19 @@ export default {
       return valid.number(this.cardNumber).isValid ? true : false
     },
     form1ok () {
-      return this.reservaAcomod.periodoReserva !== null ? 'background: #50CB9D' : ''
+      return this.reservaAcomod.periodoReserva !== null ? 'background: rgb(72,72,72)' : ''
     },
     form2ok () {
-      return 'background: #50CB9D'
+      return 'background: rgb(72,72,72)'
     },
     form3ok () {
-      return this.reservaAcomod.guestCelular.length === 15 ? 'background: #50CB9D' : ''
+      return this.reservaAcomod.guestCelular.length === 15 ? 'background: rgb(72,72,72)' : ''
     },
     form4ok () {
-      return 1<2 ? 'background: #50CB9D' : ''
+      return 1<2 ? 'background: rgb(72,72,72)' : ''
     },
     form5ok () {
-      return 1>2 ? 'background: #50CB9D' : ''
+      return 1>2 ? 'background: rgb(72,72,72)' : ''
     },
     formCreditCardOk () {
       if (valid.number(this.cardNumber).isValid && valid.expirationDate(this.cardExpirationDate).isValid && valid.cvv(this.cardCVV).isValid) {
@@ -1137,10 +1137,11 @@ export default {
             transition: var(--main-transition);
           }
           & .__next-btn {
-            cursor: pointer;
-            padding: 0 1.3rem;
-            font-size: 16px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-size: 13px;
             font-weight: 600;
+            padding: 0 1.3rem;
             background:rgb(237, 237, 237);
             color: white;
             height: 3.2rem;
