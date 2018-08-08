@@ -770,48 +770,54 @@ export default {
   },
   watch: {
     cardNumber (value) {
-      let cardNumber = valid.number(value)
-      cardNumber.isPotentiallyValid ? this.cardNumberError = false : this.cardNumberError = true
-      if (cardNumber.card) {
-        if (cardNumber.card.type === 'american-express' ? value.length === 18 : value.length === 19) {
-          if (cardNumber.isValid) {
-            this.cardNumberError = false
-            this.$nextTick(() => {
-              scrollIntoView(this.$refs.cardExpirationDate.$el)
-              this.$refs.cardExpirationDate.$el.focus()
-            })
-          } else {
-            this.cardNumberError = true
+      if (this.$store.state.showReservaAcomod) { /* Prevenir watch duplicada Desktop */
+        let cardNumber = valid.number(value)
+        cardNumber.isPotentiallyValid ? this.cardNumberError = false : this.cardNumberError = true
+        if (cardNumber.card) {
+          if (cardNumber.card.type === 'american-express' ? value.length === 18 : value.length === 19) {
+            if (cardNumber.isValid) {
+              this.cardNumberError = false
+              this.$nextTick(() => {
+                scrollIntoView(this.$refs.cardExpirationDate.$el)
+                this.$refs.cardExpirationDate.$el.focus()
+              })
+            } else {
+              this.cardNumberError = true
+            }
           }
+          this.$store.state.cardType = cardNumber.card.type
+          this.$store.state.cardTypeNice = cardNumber.card.niceType
         }
-        this.$store.state.cardType = cardNumber.card.type
-        this.$store.state.cardTypeNice = cardNumber.card.niceType
       }
     },
     cardExpirationDate (value) {
-      let firstDigit = value.charAt(0)
-      firstDigit > 1 ? this.$store.state.creditCard.cardExpirationDate = `0${firstDigit} / ` : ''
-      let cardExpirationDate = valid.expirationDate(value)
-      cardExpirationDate.isPotentiallyValid ? this.cardExpirationDateError = false : this.cardExpirationDateError = true
-      cardExpirationDate.isValid ? this.$refs.cvv.$el.focus() : ''
+      if (this.$store.state.showReservaAcomod) { /* Prevenir watch duplicada Desktop */
+        let firstDigit = value.charAt(0)
+        firstDigit > 1 ? this.$store.state.creditCard.cardExpirationDate = `0${firstDigit} / ` : ''
+        let cardExpirationDate = valid.expirationDate(value)
+        cardExpirationDate.isPotentiallyValid ? this.cardExpirationDateError = false : this.cardExpirationDateError = true
+        cardExpirationDate.isValid ? this.$refs.cvv.$el.focus() : ''
+      }
     },
     cardCVV (value) {
       let cardCVV = valid.cvv(value)
       cardCVV.isPotentiallyValid ? this.cardCvvError = false : this.cardCvvError = true
     },
     guestCPF (value) {
-      if (value !== '' || value !== null) {
-        this.cpfError = false
-        if (value.length === 14) {
-          if (CPF.validate(value)) {
-            this.cpfError = false
-            scrollIntoView(this.$refs.zipcode.$el)
-            this.$refs.zipcode.$el.focus()
-          } else {
-            this.cpfError = true
+      if (this.$store.state.showReservaAcomod) { /* Prevenir watch duplicada Desktop */
+        if (value !== '' || value !== null) {
+          this.cpfError = false
+          if (value.length === 14) {
+            if (CPF.validate(value)) {
+              this.cpfError = false
+              scrollIntoView(this.$refs.zipcode.$el)
+              this.$refs.zipcode.$el.focus()
+            } else {
+              this.cpfError = true
+            }
           }
         }
-      }
+      } 
     },
     cardHolderName (value) { value !== '' ? this.cardHolderNameError = false : '' },
     guestName (value) { value !== '' ? this.guestNameError = false : '' },
@@ -822,35 +828,37 @@ export default {
     city (value) { value !== null ? this.cityError = false : null },
     state (value) { value !== null ? this.stateError = false : null },
     async zipcode (value) {
-      if (value.length === 9) {
-        try {
-          this.$store.commit('m_loader', true)
-          const billing = this.reservaAcomod.billing
-          const zipcode = billing.zipcode.replace(/[^0-9\.]+/g, '')
-          const zipcodeData = await this.$axios.$get('https://api.pagar.me/1/zipcodes/' + zipcode)
-          billing.state = zipcodeData.state
-          billing.city = zipcodeData.city
-          billing.neighborhood = zipcodeData.neighborhood
-          billing.street = zipcodeData.street
-          this.$store.state.validZipcode = true
-          this.$store.commit('m_loader', false)
-          this.$nextTick(() => {
-            if (billing.street === null || billing.street === '') {
-              scrollIntoView(this.$refs.street)
-              this.$refs.street.focus()
-            } else {
-              scrollIntoView(this.$refs.streetNumber.$el)
-              this.$refs.streetNumber.$el.focus() 
-            }
-          })
-        } catch (err) {
-          console.log(err)
-          this.zipcodeError = true
-          this.$store.state.validZipcode = false
-          this.$store.commit('m_loader', false)
+      if (this.$store.state.showReservaAcomod) { /* Prevenir watch duplicada Desktop */
+        if (value.length === 9) {
+          try {
+            this.$store.commit('m_loader', true)
+            const billing = this.reservaAcomod.billing
+            const zipcode = billing.zipcode.replace(/[^0-9\.]+/g, '')
+            const zipcodeData = await this.$axios.$get('https://api.pagar.me/1/zipcodes/' + zipcode)
+            billing.state = zipcodeData.state
+            billing.city = zipcodeData.city
+            billing.neighborhood = zipcodeData.neighborhood
+            billing.street = zipcodeData.street
+            this.$store.state.validZipcode = true
+            this.$store.commit('m_loader', false)
+            this.$nextTick(() => {
+              if (billing.street === null || billing.street === '') {
+                scrollIntoView(this.$refs.street)
+                this.$refs.street.focus()
+              } else {
+                scrollIntoView(this.$refs.streetNumber.$el)
+                this.$refs.streetNumber.$el.focus() 
+              }
+            })
+          } catch (err) {
+            console.log(err)
+            this.zipcodeError = true
+            this.$store.state.validZipcode = false
+            this.$store.commit('m_loader', false)
+          }
+        } else {
+          this.zipcodeError = false
         }
-      } else {
-        this.zipcodeError = false
       }
     },
     hash (value) {

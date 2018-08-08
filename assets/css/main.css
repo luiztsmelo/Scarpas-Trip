@@ -168,13 +168,6 @@ textarea {
     font-size: 16px;
     line-height: 28px;
   }
-  
-}
-@media (max-width: 425px) {
-  .vue-dialog {
-    left: 7% !important;
-    max-width: 86% !important;
-  }
 }
 
 .v--modal {
@@ -192,7 +185,7 @@ textarea {
 }
 .dialog-c-text {
   color: var(--color01) !important;
-  font-size: 16px !important;
+  font-size: 15px !important;
   line-height: 24px !important;
   padding-bottom: .5rem !important;
 }

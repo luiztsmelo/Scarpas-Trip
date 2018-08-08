@@ -641,9 +641,11 @@ export default {
 
     /* ******************** DATES ******************** */
     periodoReserva () {
-      const checkIn = new Date(this.reservaAcomod.periodoReserva.start)
-      const checkOut = new Date(this.reservaAcomod.periodoReserva.end)
-      return dayjs(checkIn).format('ddd, DD MMM YYYY') + ' / ' + dayjs(checkOut).format('ddd, DD MMM YYYY')
+      if (this.reservaAcomod.periodoReserva !== null) {
+        const checkIn = new Date(this.reservaAcomod.periodoReserva.start)
+        const checkOut = new Date(this.reservaAcomod.periodoReserva.end)
+        return dayjs(checkIn).format('ddd, DD MMM YYYY') + ' / ' + dayjs(checkOut).format('ddd, DD MMM YYYY')
+      }
     },
 
     /* ******************** FORMATTINGS ******************** */
@@ -702,21 +704,19 @@ export default {
       }
     },
     guestCPF (value) {
-      if (value !== '' || value !== null) {
-        this.cpfError = false
-        if (value.length === 14) {
-          if (CPF.validate(value)) {
-            this.cpfError = false
-            this.$refs.celular.$el.focus()
-          } else {
-            this.cpfError = true
-          }
+      value !== '' ? this.cpfError = false : '' 
+      if (value.length === 14) {
+        if (CPF.validate(value)) {
+          this.cpfError = false
+          this.$refs.celular.$el.focus()
+        } else {
+          this.cpfError = true
         }
       }
     },
     guestCelular (value) { 
       value !== '' ? this.celularError = false : '' 
-      if (value.length === 15) {
+      if (value.length === 15 && this.reservaAcomod.paymentMethod === 'credit_card') {
         scrollIntoView(this.$refs.zipcode.$el)
         this.$refs.zipcode.$el.focus()
       }

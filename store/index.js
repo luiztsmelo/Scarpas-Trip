@@ -163,7 +163,7 @@ const store = () => new Vuex.Store({
       guestID: null,
       guestEmail: null,
       guestName: null,
-      guestCPF: null,
+      guestCPF: '',
       guestCelular: '',
       billing: {
         zipcode: '',
@@ -849,7 +849,7 @@ const store = () => new Vuex.Store({
         guestID: null,
         guestEmail: null,
         guestName: null,
-        guestCPF: null,
+        guestCPF: '',
         guestCelular: '',
         billing: {
           zipcode: '',
