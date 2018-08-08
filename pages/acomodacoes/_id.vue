@@ -322,7 +322,10 @@
     <div class="reserva">
       <div class="reserva-body">
         <h3 class="__reserva-valor">R${{ acomod.valorNoite.toLocaleString() }}<span class="__reserva-valor-pessoa"> por noite</span></h3>
-        <button class="__reserva-btn" @click="reservarMobile">Reservar</button>
+        <button class="__reserva-btn" @click="reservarMobile">
+          <span class="__reserva-btn-text" v-if="!$store.state.miniLoader">Reservar</span>
+          <mini-loader v-else></mini-loader>
+        </button>
       </div>
     </div>
     <reserva-mobile/><!-- ####### RESERVA MOBILE ####### -->
@@ -334,9 +337,10 @@
 <script>
 import * as firebase from 'firebase'
 require('firebase/firestore')
-import { loaded } from '~/node_modules/vue2-google-maps/src/manager'
-import ReservaMobile from '~/components/reserva-acomod/ReservaMobile'
-import Proprietario from '~/components/Proprietario'
+import MiniLoader from '@/components/MiniLoader.vue'
+import { loaded } from '@/node_modules/vue2-google-maps/src/manager'
+import ReservaMobile from '@/components/reserva-acomod/ReservaMobile'
+import Proprietario from '@/components/Proprietario'
 import supportsWebP from 'supports-webp'
 import { mapstyle } from '@/mixins/mapstyle'
 import { swiperOptions } from '@/mixins/swiper_id'
@@ -347,7 +351,7 @@ import 'dayjs/locale/pt-br'
 dayjs.locale('pt-br')
 
 export default {
-  components: { ReservaMobile, Proprietario },
+  components: { MiniLoader, ReservaMobile, Proprietario },
   mixins: [ mapstyle, swiperOptions, stylesCalendar, tipoAcomod ],
   data () {
     return {
@@ -787,17 +791,17 @@ export default {
     height: 4.7rem;
     width: 100%;
     background: white;
-    padding: 0 7%;
+    overflow: hidden;
     box-shadow: 0px -1px 1px 0px rgba(0,0,0,0.1);
     user-select: none;
     & .reserva-body {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
       position: relative;
-      top: 50%;
-      transform: translateY(-50%);
+      height: 100%;
       & .__reserva-valor {
+        position: absolute;
+        left: 7%;
+        top: 50%;
+        transform: translateY(-50%);
         font-size: 18px;
         font-weight: 600;
         white-space: nowrap;
@@ -809,15 +813,23 @@ export default {
         font-weight: 400;
       }
       & .__reserva-btn {
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
-        font-size: 14px;
-        font-weight: 700;
-        background: var(--colorAcomod);
-        color: white;
+        position: absolute;
+        right: 7%;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 8.2rem;
         height: 3.2rem;
-        width: 10rem;
+        background:var(--colorAcomod);
         border-radius: 5px;
+        transition: var(--main-transition);
+        & .__reserva-btn-text {
+          text-transform: uppercase;
+          letter-spacing: 0.5px;
+          font-size: 13px;
+          font-weight: 600;
+          color: white;
+          transition: var(--main-transition);
+        }
       }
     }
   }/* ####### RESERVA ####### */

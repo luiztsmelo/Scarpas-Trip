@@ -72,7 +72,10 @@
                 <span class="__valor-noites"> por {{ reservaAcomod.noites }} {{ reservaAcomod.noites == 1 ? 'noite' : 'noites'}}</span>
               </h3>
               <h3 v-else></h3>
-              <button type="button" class="__next-btn" :style="form1ok" @click="nextBtn1">Continuar</button>
+              <button type="button" class="__next-btn" :style="form1ok" @click="nextBtn1">
+                <span class="__next-btn-text" v-if="!$store.state.miniLoader">Continuar</span>
+                <mini-loader v-else></mini-loader>
+              </button>
             </div>
           </div>
       
@@ -125,7 +128,10 @@
               <h3 class="__valor" v-if="reservaAcomod.valorReservaTotal !== null">R${{ reservaAcomod.valorReservaTotal.toLocaleString() }}
                 <span class="__valor-noites"> por {{ reservaAcomod.noites }} {{ reservaAcomod.noites == 1 ? 'noite' : 'noites'}}</span>
               </h3>
-              <button type="button" class="__next-btn" :style="form2ok" @click="nextBtn2">Concordar</button>
+              <button type="button" class="__next-btn" :style="form2ok" @click="nextBtn2">
+                <span class="__next-btn-text" v-if="!$store.state.miniLoader">Concordar</span>
+                <mini-loader v-else></mini-loader>
+              </button>
             </div>
           </div>
 
@@ -174,7 +180,10 @@
               <h3 class="__valor" v-if="reservaAcomod.valorReservaTotal !== null">R${{ reservaAcomod.valorReservaTotal.toLocaleString() }}
                 <span class="__valor-noites"> por {{ reservaAcomod.noites }} {{ reservaAcomod.noites == 1 ? 'noite' : 'noites'}}</span>
               </h3>
-              <button type="button" class="__next-btn" :style="form3ok" @click="nextBtn3">Continuar</button>
+              <button type="button" class="__next-btn" :style="form3ok" @click="nextBtn3">
+                <span class="__next-btn-text" v-if="!$store.state.miniLoader">Continuar</span>
+                <mini-loader v-else></mini-loader>
+              </button>
             </div>
           </div>
 
@@ -201,7 +210,10 @@
               <h3 class="__valor" v-if="reservaAcomod.valorReservaTotal !== null">R${{ reservaAcomod.valorReservaTotal.toLocaleString() }}
                 <span class="__valor-noites"> por {{ reservaAcomod.noites }} {{ reservaAcomod.noites == 1 ? 'noite' : 'noites'}}</span>
               </h3>
-              <button type="button" class="__next-btn" :style="form4ok" @click="nextBtn4">Continuar</button>
+              <button type="button" class="__next-btn" :style="form4ok" @click="nextBtn4">
+                <span class="__next-btn-text" v-if="!$store.state.miniLoader">Continuar</span>
+                <mini-loader v-else></mini-loader>
+              </button>
             </div>
           </div>
 
@@ -249,7 +261,10 @@
               <h3 class="__valor" v-if="reservaAcomod.valorReservaTotal !== null">R${{ reservaAcomod.valorReservaTotal.toLocaleString() }}
                 <span class="__valor-noites"> por {{ reservaAcomod.noites }} {{ reservaAcomod.noites == 1 ? 'noite' : 'noites'}}</span>
               </h3>
-              <button type="button" class="__next-btn" :style="form5ok" @click="concluirReserva">Concluir Pedido</button>
+              <button type="button" class="__next-btn" :style="form5ok" @click="concluirReserva">
+                <span class="__next-btn-text" v-if="!$store.state.miniLoader">Concluir Pedido</span>
+                <mini-loader v-else></mini-loader>
+              </button>
             </div>
           </div>
 
@@ -508,6 +523,7 @@
 <script>
 import * as firebase from 'firebase'
 import 'firebase/functions'
+import MiniLoader from '@/components/MiniLoader.vue'
 import MaskedInput from 'vue-text-mask'
 import DatePicker from '@/components/DatePicker'
 import { reservaAcomod } from '@/mixins/reservaAcomod'
@@ -521,7 +537,7 @@ import 'dayjs/locale/pt-br'
 dayjs.locale('pt-br')
 
 export default {
-  components: { MaskedInput, DatePicker, tipoAcomod },
+  components: { MiniLoader, MaskedInput, DatePicker, tipoAcomod },
   mixins: [ reservaAcomod, states ],
   data() {
     return {
@@ -610,7 +626,10 @@ export default {
     },
     nextBtn1 () {
       if (this.reservaAcomod.periodoReserva !== null) {
-        this.$store.commit('m_reservaAcomod1', false), this.$store.commit('m_reservaAcomod2', true), window.location.hash = this.$store.state.randomHashs[2]
+        this.$store.commit('m_miniLoader', true)
+        setTimeout(() => {
+          this.$store.commit('m_miniLoader', false), this.$store.commit('m_reservaAcomod1', false), this.$store.commit('m_reservaAcomod2', true), window.location.hash = this.$store.state.randomHashs[2]
+        }, Math.floor(Math.random() * (800 - 200 + 1) ) + 200)
       } else {
         this.$store.commit('show_alert', {
           type: 'warning',
@@ -620,16 +639,23 @@ export default {
       }
     },
     nextBtn2 () {
-      this.$store.commit('m_reservaAcomod2', false), this.$store.commit('m_reservaAcomod3', true), window.location.hash = this.$store.state.randomHashs[3]
+      this.$store.commit('m_miniLoader', true)
+      setTimeout(() => {
+        this.$store.commit('m_miniLoader', false), this.$store.commit('m_reservaAcomod2', false), this.$store.commit('m_reservaAcomod3', true), window.location.hash = this.$store.state.randomHashs[3]
+      }, Math.floor(Math.random() * (800 - 200 + 1) ) + 200)
     },
     nextBtn3 () {
       if (this.reservaAcomod.guestCelular.length === 15) {
-        this.creditCard.cardHolderName = this.user.fullName
-        this.reservaAcomod.guestName = this.user.fullName
-        this.$store.commit('m_reservaAcomod3', false)
-        this.$store.commit('m_reservaAcomod4', true)
-        window.location.hash = this.$store.state.randomHashs[4]
-        this.scrollTop()
+        this.$store.commit('m_miniLoader', true)
+        setTimeout(() => {
+          this.$store.commit('m_miniLoader', false)
+          this.creditCard.cardHolderName = this.user.fullName
+          this.reservaAcomod.guestName = this.user.fullName
+          this.$store.commit('m_reservaAcomod3', false)
+          this.$store.commit('m_reservaAcomod4', true)
+          window.location.hash = this.$store.state.randomHashs[4]
+          this.scrollTop()
+        }, Math.floor(Math.random() * (800 - 200 + 1) ) + 200)
       } else {
         if (this.authUser) {
           this.$store.commit('show_alert', {
@@ -649,7 +675,11 @@ export default {
     },
     nextBtn4 () {
       if (1<2) {
-        this.$store.commit('m_reservaAcomod4', false), this.$store.commit('m_reservaAcomod5', true), window.location.hash = this.$store.state.randomHashs[5]
+        this.$store.commit('m_miniLoader', true)
+        setTimeout(() => {
+          this.$store.commit('m_miniLoader', false), this.$store.commit('m_reservaAcomod4', false), this.$store.commit('m_reservaAcomod5', true), window.location.hash = this.$store.state.randomHashs[5]
+        }, Math.floor(Math.random() * (1500 - 800 + 1) ) + 800)
+      } else {
       }
     },
     nextBtnCreditCard () {
@@ -964,11 +994,9 @@ export default {
     & .etapa-reserva-box {
       padding-bottom: 5rem;
       & .etapas {
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
         padding: 0 7% 0.2rem;
-        font-size: 12px;
-        font-weight: 500;
+        font-size: 14px;
+        font-weight: 400;
       }
       & .__title {
         padding: 0 7% 1.9rem;
@@ -1136,21 +1164,18 @@ export default {
         left: 0;
         z-index: 999999;
         height: 4.7rem;
-        width:  100%;
+        width: 100%;
         background: white;
-        padding: 0 7%;
         overflow: hidden;
         box-shadow: 0px -1px 1px 0px rgba(0,0,0,0.1);
         & .buttons-body {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
           position: relative;
-          top: 50%;
-          transform: translateY(-50%);
+          height: 100%;
           & .__valor {
-            flex: 40%;
-            padding-right: 10px;
+            position: absolute;
+            left: 7%;
+            top: 50%;
+            transform: translateY(-50%);
             font-size: 18px;
             font-weight: 600;
             white-space: nowrap;
@@ -1168,16 +1193,23 @@ export default {
             transition: var(--main-transition);
           }
           & .__next-btn {
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            font-size: 13px;
-            font-weight: 600;
-            padding: 0 1.3rem;
-            background:rgb(237, 237, 237);
-            color: white;
+            position: absolute;
+            right: 7%;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 8.2rem;
             height: 3.2rem;
+            background:rgb(237, 237, 237);
             border-radius: 5px;
             transition: var(--main-transition);
+            & .__next-btn-text {
+              text-transform: uppercase;
+              letter-spacing: 0.5px;
+              font-size: 13px;
+              font-weight: 600;
+              color: white;
+              transition: var(--main-transition);
+            }
           }
         }
       }
