@@ -223,8 +223,13 @@
           <h3 class="__text">{{ user.firstName }}, você somente será cobrado se {{ acomod.proprietario.split(' ')[0] }} aceitar seu pedido de reserva. Em caso positivo, para sua segurança nós só liberaremos o pagamento para ele no dia seguinte de seu check-in, {{ dayAfterCheckin }}.</h3>
 
 
-          <div class="add-payment" style="margin-top: .4rem; margin-bottom: 1.4rem" @click="openPaymentMethod">
-            <h3 class="__item-text" :style="formaDePagamentoStyle">{{ formaDePagamentoText }}</h3>
+          <div class="add-payment" :style="formaDePagamentoStyle" @click="openPaymentMethod">
+            <h3 class="__item-text" :style="formaDePagamentoTextStyle">{{ formaDePagamentoText }}</h3>
+            <img class="__arrow-right" src="../../assets/img/arrow-right.svg">
+          </div>
+
+          <div class="add-payment" style="margin-bottom: 1.4rem" v-if="$store.state.paymentAdded">
+            <h3 class="__item-text" style="">1 parcela</h3>
             <img class="__arrow-right" src="../../assets/img/arrow-right.svg">
           </div>
 
@@ -700,7 +705,7 @@ export default {
       this.$store.commit('m_reservaAcomodPaymentMethod', false), this.$store.commit('m_reservaAcomodBoleto', true), this.scrollTop()
     },
     concluirReserva () {
-      if (1>2) {
+      if (this.$store.state.paymentAdded) {
       } else {
         this.$store.commit('show_alert', {
           type: 'warning',
@@ -742,11 +747,18 @@ export default {
         return 'Forma de pagamento'
       }
     },
-    formaDePagamentoStyle () {
+    formaDePagamentoTextStyle () {
       if (this.$store.state.paymentAdded) {
         return ''
       } else {
         return 'font-weight: 500; color: #FFA04F'
+      }
+    },
+    formaDePagamentoStyle () {
+      if (this.$store.state.paymentAdded) {
+        return 'margin-top: .4rem; border-bottom: none'
+      } else {
+        return 'margin-top: .4rem; margin-bottom: 1.4rem'
       }
     },
     form1ok () {
