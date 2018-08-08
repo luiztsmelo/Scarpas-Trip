@@ -224,7 +224,7 @@
 
 
           <div class="add-payment" style="margin-top: .4rem; margin-bottom: 1.4rem" @click="openPaymentMethod">
-            <h3 class="__item-text" style="font-weight: 500; color: #FFA04F">Forma de pagamento</h3>
+            <h3 class="__item-text" :style="formaDePagamentoStyle">{{ formaDePagamentoText }}</h3>
             <img class="__arrow-right" src="../../assets/img/arrow-right.svg">
           </div>
 
@@ -668,7 +668,9 @@ export default {
     },
     nextBtnBilling () {
       if (this.cardHolderName !== '' && CPF.validate(this.guestCPF) && this.guestCPF.length === 14 && this.zipcode.length === 9 && this.$store.state.validZipcode && this.street !== '' && this.street !== null && this.streetNumber !== '' && this.streetNumber !== null && this.neighborhood !== '' && this.neighborhood !== null && this.city !== '' && this.city !== null && this.state !== '' && this.state !== null) {
-        this.$store.commit('m_reservaAcomodBilling', false), window.history.back(1)
+        this.$store.state.paymentAdded = true
+        this.$store.commit('m_reservaAcomodBilling', false)
+        window.history.back(1)
       } else {
         this.$store.commit('show_alert', {
           type: 'error',
@@ -732,6 +734,21 @@ export default {
     validCardNumber () {
       return valid.number(this.cardNumber).isValid ? true : false
     },
+    formaDePagamentoText () {
+      if (this.$store.state.paymentAdded) {
+        const lastDigitsCardNumber = this.cardNumber.slice(15, 19)
+        return this.$store.state.cardTypeNice + ' ' + lastDigitsCardNumber
+      } else {
+        return 'Forma de pagamento'
+      }
+    },
+    formaDePagamentoStyle () {
+      if (this.$store.state.paymentAdded) {
+        return ''
+      } else {
+        return 'font-weight: 500; color: #FFA04F'
+      }
+    },
     form1ok () {
       return this.reservaAcomod.periodoReserva !== null ? 'background: #161616' : ''
     },
@@ -745,7 +762,7 @@ export default {
       return 1<2 ? 'background: #161616' : ''
     },
     form5ok () {
-      return 1>2 ? 'background: #FFA04F' : ''
+      return this.$store.state.paymentAdded ? 'background: #FFA04F; font-weight: 700' : ''
     },
     formCreditCardOk () {
       if (valid.number(this.cardNumber).isValid && valid.expirationDate(this.cardExpirationDate).isValid && valid.cvv(this.cardCVV).isValid) {
