@@ -22,7 +22,7 @@ export default {
   top: 0;
   width: 100%;
   height: 100%;
-  background: rgba(255, 255, 255, .75);
+  background: rgba(255, 255, 255, .6);
   transition: var(--main-transition);
   & .loader-body {
     position: relative;

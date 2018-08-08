@@ -1308,7 +1308,7 @@ export default {
     height: 4px;
     z-index: 8888;
     background: var(--colorAcomod);
-    transition: all .3s ease;
+    transition: var(--main-transition);
   }
   /* ******************** PLANO ACOMODAÇÃO ******************** */
   & .plano-acomodacao-mobile {

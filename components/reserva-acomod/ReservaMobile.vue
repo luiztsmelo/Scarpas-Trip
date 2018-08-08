@@ -800,14 +800,16 @@ export default {
       cardCVV.isPotentiallyValid ? this.cardCvvError = false : this.cardCvvError = true
     },
     guestCPF (value) {
-      value !== '' ? this.cpfError = false : ''
-      if (value.length === 14) {
-        if (CPF.validate(value)) {
-          this.cpfError = false
-          scrollIntoView(this.$refs.zipcode.$el)
-          this.$refs.zipcode.$el.focus()
-        } else {
-          this.cpfError = true
+      if (value !== '' || value !== null) {
+        this.cpfError = false
+        if (value.length === 14) {
+          if (CPF.validate(value)) {
+            this.cpfError = false
+            scrollIntoView(this.$refs.zipcode.$el)
+            this.$refs.zipcode.$el.focus()
+          } else {
+            this.cpfError = true
+          }
         }
       }
     },

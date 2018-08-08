@@ -1,5 +1,5 @@
 <template>
-  <div class="reservar" v-if="reservaAcomod.periodoReserva !== null">
+  <div class="reservar">
     
 
 
@@ -133,6 +133,7 @@
               <input
                 :class="[ cardHolderNameError || guestNameError ? 'has-error' : '' ]"
                 type="text" pattern="[A-Za-z]"
+                @keypress="keyEnterName"
                 v-model="reservaAcomod.paymentMethod === 'credit_card' ? $store.state.creditCard.cardHolderName : reservaAcomod.guestName">
             </div><!-- NAME -->
 
@@ -259,7 +260,8 @@
                   <input
                     ref="street"
                     :class="[ streetError ? 'has-error' : '' ]"
-                    type="text" 
+                    type="text"
+                    @keypress="keyEnterStreet"
                     v-model="reservaAcomod.billing.street"
                     placeholder="Endereço">
                 </div><!-- ENDEREÇO -->
@@ -276,6 +278,7 @@
                     ref="streetNumber"
                     :class="[ streetNumberError ? 'has-error' : '' ]"
                     type="tel"
+                    @keypress="keyEnterStreetNumber"
                     v-model="reservaAcomod.billing.street_number"
                     :mask="[/\d/, /\d/, /\d/, /\d/]"
                     :guide="false">
@@ -287,8 +290,10 @@
                 <div class="item-form" style="flex:50%; padding-left:.7rem">
                   <label :class="[ neighborhoodError ? 'has-error-label' : '' ]">Bairro</label>
                   <input
+                    ref="bairro"
                     :class="[ neighborhoodError ? 'has-error' : '' ]"
-                    type="text" 
+                    type="text"
+                    @keypress="keyEnterBairro"
                     v-model="reservaAcomod.billing.neighborhood">
                 </div><!-- BAIRRO -->
 
@@ -300,8 +305,10 @@
                 <div class="item-form" style="flex:50%; padding-right:.7rem">
                   <label :class="[ cityError ? 'has-error-label' : '' ]">Cidade</label>
                   <input
+                    ref="city"
                     :class="[ cityError ? 'has-error' : '' ]"
-                    type="text" 
+                    type="text"
+                    @keypress="keyEnterCity"
                     v-model="reservaAcomod.billing.city">
                 </div><!-- CIDADE -->
 
@@ -309,7 +316,7 @@
                 <!-- ESTADO -->
                 <div class="item-form" style="flex:50%; padding-left:.7rem">
                   <label :class="[ stateError ? 'has-error-label' : '' ]">Estado</label>
-                  <select :class="[ stateError ? 'has-error' : '' ]" v-model="reservaAcomod.billing.state">
+                  <select ref="state" :class="[ stateError ? 'has-error' : '' ]" v-model="reservaAcomod.billing.state">
                     <option v-for="state in states" :value="state.value">{{ state.name }}</option>
                   </select>
                 </div><!-- ESTADO -->
@@ -362,7 +369,7 @@
           <div class="detalhes-reserva-valor" v-if="reservaAcomod.valorReservaTotal !== null">
 
             <div class="detalhes-reserva-valor_item-total" style="padding-top: .8rem">
-              <h3 style="font-size:18px">Total</h3>
+              <h3 style="font-size:17px">Total</h3>
               <h3 class="__valor-total">R${{ reservaAcomod.valorReservaTotal.toLocaleString() }}</h3>
             </div>
 
@@ -446,6 +453,40 @@ export default {
     }
   },
   methods: {
+    keyEnterName () {
+      if (event.key === 'Enter') {
+        if (this.reservaAcomod.paymentMethod === 'credit_card') {
+          scrollIntoView(this.$refs.cardNumber.$el)
+          this.$refs.cardNumber.$el.focus()
+        } else {
+          scrollIntoView(this.$refs.cpf.$el)
+          this.$refs.cpf.$el.focus()
+        }
+      }
+    },
+    keyEnterStreet () {
+      if (event.key === 'Enter') {
+        scrollIntoView(this.$refs.streetNumber.$el)
+        this.$refs.streetNumber.$el.focus() 
+      }  
+    },
+    keyEnterStreetNumber () {
+      if (event.key === 'Enter') {
+        this.$refs.bairro.focus()
+      } 
+    },
+    keyEnterBairro () {
+      if (event.key === 'Enter') {
+        scrollIntoView(this.$refs.city)
+        this.$refs.city.focus() 
+      }
+    },
+    keyEnterCity () {
+      if (event.key === 'Enter') {
+        scrollIntoView(this.$refs.state)
+        this.$refs.state.focus()
+      }
+    },
     nextBtn1 () {
       this.$store.state.etapaReserva2ok = true, this.$store.commit('m_reservaAcomodDesktop1', false), this.$store.commit('m_reservaAcomodDesktop2', true)
     },
@@ -661,13 +702,15 @@ export default {
       }
     },
     guestCPF (value) {
-      value !== '' ? this.cpfError = false : ''
-      if (value.length === 14) {
-        if (CPF.validate(value)) {
-          this.cpfError = false
-          this.$refs.celular.$el.focus()
-        } else {
-          this.cpfError = true
+      if (value !== '' || value !== null) {
+        this.cpfError = false
+        if (value.length === 14) {
+          if (CPF.validate(value)) {
+            this.cpfError = false
+            this.$refs.celular.$el.focus()
+          } else {
+            this.cpfError = true
+          }
         }
       }
     },
@@ -789,7 +832,7 @@ export default {
       }
       & .__subtitle {
         padding-top: .5rem;
-        font-size: 17px;
+        font-size: 16px;
       }
       & .etapa-1-item {
         padding-top: 2rem;
@@ -820,12 +863,12 @@ export default {
         & label {
           user-select: none;
           font-weight: 500;
-          font-size: 15px;
+          font-size: 14px;
         }
         & input {
           cursor: text;
           width: 100%;
-          font-size: 18px;
+          font-size: 17px;
           font-weight: 400;
           background: white;
           color: var(--color01);
@@ -843,7 +886,7 @@ export default {
         }
         & select {
           width: 100%;
-          font-size: 18px;
+          font-size: 17px;
           font-weight: 400;
           background: white;
           color: var(--color01);
@@ -892,7 +935,7 @@ export default {
         & .__acomod-title {
           margin: 0 1.3rem;
           padding: 1.2rem 0;
-          font-size: 19px;
+          font-size: 18px;
           font-weight: 600;
           border-bottom: 1px solid rgb(222,222,222);
           white-space: nowrap;
