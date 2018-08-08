@@ -812,7 +812,7 @@ export default {
         text-transform: uppercase;
         letter-spacing: 0.5px;
         font-size: 14px;
-        font-weight: 600;
+        font-weight: 700;
         background: var(--colorAcomod);
         color: white;
         height: 3.2rem;

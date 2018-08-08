@@ -733,33 +733,33 @@ export default {
       return valid.number(this.cardNumber).isValid ? true : false
     },
     form1ok () {
-      return this.reservaAcomod.periodoReserva !== null ? 'background: rgb(72,72,72)' : ''
+      return this.reservaAcomod.periodoReserva !== null ? 'background: #161616' : ''
     },
     form2ok () {
-      return 'background: rgb(72,72,72)'
+      return 'background: #161616'
     },
     form3ok () {
-      return this.reservaAcomod.guestCelular.length === 15 ? 'background: rgb(72,72,72)' : ''
+      return this.reservaAcomod.guestCelular.length === 15 ? 'background: #161616' : ''
     },
     form4ok () {
-      return 1<2 ? 'background: rgb(72,72,72)' : ''
+      return 1<2 ? 'background: #161616' : ''
     },
     form5ok () {
-      return 1>2 ? 'background: rgb(72,72,72)' : ''
+      return 1>2 ? 'background: #FFA04F' : ''
     },
     formCreditCardOk () {
       if (valid.number(this.cardNumber).isValid && valid.expirationDate(this.cardExpirationDate).isValid && valid.cvv(this.cardCVV).isValid) {
-        return 'background: rgb(72,72,72)'
+        return 'background: #161616'
       }
     },
     formBoletoOk () {
       if (1>2) {
-        return 'background: rgb(72,72,72)'
+        return 'background: #161616'
       }
     },
     formBillingOk () {
       if (this.cardHolderName !== '' && CPF.validate(this.guestCPF) && this.guestCPF.length === 14 && this.zipcode.length === 9 && this.$store.state.validZipcode && this.street !== '' && this.street !== null && this.streetNumber !== '' && this.streetNumber !== null && this.neighborhood !== '' && this.neighborhood !== null && this.city !== '' && this.city !== null && this.state !== '' && this.state !== null) {
-        return 'background: rgb(72,72,72)'
+        return 'background: #161616'
       }
     }
   },
