@@ -292,7 +292,7 @@
           <div class="item-form">
             <label :class="[ cardNumberError ? 'has-error-label' : '' ]">Número do Cartão</label>
             <masked-input
-              :style="{ backgroundImage: 'url(' + cardBrand + ')', backgroundPosition: 0, backgroundRepeat: 'no-repeat', backgroundSize: '34px', paddingLeft: cardType !== null ? '48px' : '' }"
+              :style="{ backgroundImage: 'url(' + cardBrand + ')', backgroundPosition: 'left center', backgroundRepeat: 'no-repeat', backgroundSize: '34px', paddingLeft: cardType !== null ? '48px' : '' }"
               :class="[ cardNumberError ? 'has-error' : '' ]"
               type="tel"
               v-model="$store.state.creditCard.cardNumber"
@@ -337,14 +337,11 @@
           </div>
 
 
-          <div class="buttons">
-            <div class="buttons-body">
-              <h3 class="__alert">
-                {{ cardNumberError || cardExpirationDateError || cardCvvError ? 'Cartão inválido' : '' }}
-              </h3>
-              <button type="button" class="__next-btn" :style="formCreditCardOk" @click="nextBtnCreditCard">Continuar</button>
-            </div>
+          <div class="round-btn" :style="formCreditCardOk" @click="nextBtnCreditCard">
+            <img class="__arrow" src="../../assets/img/arrow-right.svg">
           </div>
+
+
 
         </div><!-- ______________________ CREDIT CARD  ______________________ -->
 
@@ -359,8 +356,9 @@
           <h1 class="__title">Insira suas informações pessoais para a emissão do boleto</h1>
 
 
-
-          <div class="round-btn" @click="nextBtnBoleto">OK</div>
+          <div class="round-btn" :style="formBoletoOk" @click="nextBtnBoleto">
+            <img class="__arrow" src="../../assets/img/arrow-right.svg">
+          </div>
 
         </div><!-- ______________________ BOLETO  ______________________ -->
 
@@ -380,7 +378,8 @@
             <label :class="[ cardHolderNameError ? 'has-error-label' : '' ]">Nome Impresso no Cartão</label>
             <input 
               :class="[ cardHolderNameError ? 'has-error' : '' ]" 
-              type="text" pattern="[A-Za-z]"
+              type="text" 
+              pattern="[A-Za-z]"
               @keypress="keyEnterName"
               v-model="$store.state.creditCard.cardHolderName">
           </div><!-- NOME -->
@@ -485,13 +484,9 @@
 
           </div>
 
-          <div class="buttons">
-            <div class="buttons-body">
-              <h3 class="__alert">
-                {{ cardHolderNameError || cpfError || zipcodeError || streetError || streetNumberError || neighborhoodError || cityError || stateError ? 'Informações inválidas' : '' }}
-              </h3>
-              <button type="button" class="__next-btn" :style="formBillingOk" @click="nextBtnBilling">Continuar</button>
-            </div>
+
+          <div class="round-btn" :style="formBillingOk" @click="nextBtnBilling">
+            <img class="__arrow" src="../../assets/img/arrow-right.svg">
           </div>
 
         </div><!-- ______________________ BILLING  ______________________ -->
@@ -672,7 +667,7 @@ export default {
       }
     },
     nextBtnBilling () {
-      if (this.cardHolderName !== '' && CPF.validate(this.guestCPF) && this.guestCPF.length === 14 && this.zipcode.length === 9 && this.$store.state.validZipcode && this.street !== '' && this.streetNumber !== '' && this.neighborhood !== '' && this.city !== '' && this.state !== '') {
+      if (this.cardHolderName !== '' && CPF.validate(this.guestCPF) && this.guestCPF.length === 14 && this.zipcode.length === 9 && this.$store.state.validZipcode && this.street !== '' && this.street !== null && this.streetNumber !== '' && this.streetNumber !== null && this.neighborhood !== '' && this.neighborhood !== null && this.city !== '' && this.city !== null && this.state !== '' && this.state !== null) {
         this.$store.commit('m_reservaAcomodBilling', false), window.history.back(1)
       } else {
         this.$store.commit('show_alert', {
@@ -754,17 +749,17 @@ export default {
     },
     formCreditCardOk () {
       if (valid.number(this.cardNumber).isValid && valid.expirationDate(this.cardExpirationDate).isValid && valid.cvv(this.cardCVV).isValid) {
-        return 'background: #50CB9D'
+        return 'background: rgb(72,72,72)'
       }
     },
     formBoletoOk () {
       if (1>2) {
-        return 'background: #50CB9D'
+        return 'background: rgb(72,72,72)'
       }
     },
     formBillingOk () {
-      if (this.cardHolderName !== '' && CPF.validate(this.guestCPF) && this.guestCPF.length === 14 && this.zipcode.length === 9 && this.$store.state.validZipcode && this.street !== '' && this.streetNumber !== '' && this.neighborhood !== '' && this.city !== '' && this.state !== '') {
-        return 'background: #50CB9D'
+      if (this.cardHolderName !== '' && CPF.validate(this.guestCPF) && this.guestCPF.length === 14 && this.zipcode.length === 9 && this.$store.state.validZipcode && this.street !== '' && this.street !== null && this.streetNumber !== '' && this.streetNumber !== null && this.neighborhood !== '' && this.neighborhood !== null && this.city !== '' && this.city !== null && this.state !== '' && this.state !== null) {
+        return 'background: rgb(72,72,72)'
       }
     }
   },
@@ -1155,18 +1150,22 @@ export default {
         }
       }
       & .round-btn {
-        margin: 1rem 7%;
+        position: fixed;
+        right: 7%;
+        bottom: 1rem;
         display: flex;
         align-items: center;
         justify-content: center;
-        float: right;
-        font-size: 14px;
-        font-weight: 600;
-        color: white;
-        width: 3.3rem;
-        height: 3.3rem;
+        width: 3.2rem;
+        height: 3.2rem;
         border-radius: 50%;
-        background:#50CB9D;
+        background:rgb(237, 237, 237);
+        transition: var(--main-transition);
+        & .__arrow {
+          width: 1.3rem;
+          height: auto;
+          filter: invert(100%) brightness(400%);
+        }
       }
     }
   }
