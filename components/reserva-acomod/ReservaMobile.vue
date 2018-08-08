@@ -935,9 +935,11 @@ export default {
     & .etapa-reserva-box {
       padding-bottom: 5rem;
       & .etapas {
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
         padding: 0 7% 0.2rem;
-        font-size: 14px;
-        font-weight: 400;
+        font-size: 12px;
+        font-weight: 500;
       }
       & .__title {
         padding: 0 7% 1.9rem;

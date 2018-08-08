@@ -36,7 +36,7 @@
 
     <div class="buttons">
       <div class="buttons-body">
-        <button type="button" class="__apagar-btn" @click="$store.state.reservaAcomod.periodoReserva = null">Apagar</button>
+        <button type="button" class="__apagar-btn" @click="$store.state.reservaAcomod.periodoReserva = null">Limpar</button>
         <button type="button" class="__confirm-btn" :style="confirmBtnStyle" @click="confirmBtn">Confirmar</button>
       </div>
     </div>
@@ -118,9 +118,10 @@ export default {
     top: 50%;
     transform: translateY(-50%);
     & .__apagar-btn {
-      cursor: pointer;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
       padding: 0;
-      font-size: 16px;
+      font-size: 14px;
       font-weight: 600;
       background: transparent;
       height: 3.2rem;
