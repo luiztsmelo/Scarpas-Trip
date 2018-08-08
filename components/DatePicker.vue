@@ -86,7 +86,7 @@ export default {
     },
     confirmBtnStyle () {
       if (this.$store.state.reservaAcomod.periodoReserva !== null) {
-        return 'background: #50CB9D'
+        return 'background: #161616'
       }
     }
   }
@@ -126,10 +126,11 @@ export default {
       height: 3.2rem;
     }
     & .__confirm-btn {
-      cursor: pointer;
-      padding: 0 1.3rem;
-      font-size: 16px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      font-size: 13px;
       font-weight: 600;
+      padding: 0 1.3rem;
       background:rgb(237, 237, 237);
       color: white;
       height: 3.2rem;
