@@ -1187,12 +1187,6 @@ export default {
               font-weight: 400;
             }
           }
-          & .__alert {
-            font-weight: 500; 
-            font-size: 15px; 
-            color:#F31431;
-            transition: var(--main-transition);
-          }
           & .__next-btn {
             position: absolute;
             right: 7%;
@@ -1202,14 +1196,12 @@ export default {
             height: 3.2rem;
             background:rgb(237, 237, 237);
             border-radius: 5px;
-            transition: var(--main-transition);
             & .__next-btn-text {
               text-transform: uppercase;
               letter-spacing: 0.5px;
               font-size: 13px;
               font-weight: 600;
               color: white;
-              transition: var(--main-transition);
             }
           }
         }
