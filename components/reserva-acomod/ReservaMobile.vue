@@ -156,7 +156,7 @@
             <button type="button" class="facebook-btn" @click="$store.dispatch('a_facebookSignIn')">Continuar com Facebook</button>
           </div>
 
-          <h3 class="__text" style="padding-top:1rem; font-size:15px; line-height:24px" v-if="!authUser">Ao se cadastrar com uma das opções acima, somente seu e-mail, nome e foto de perfil serão requisitados. Para mais informações, leia nossa <nuxt-link to="/termos#politica_privacidade" style="font-weight:500; cursor:pointer">Política de Privacidade</nuxt-link>.</h3>
+          <h3 class="__text" style="padding-top:1rem; font-size:14px; line-height:23px" v-if="!authUser">Ao se cadastrar com uma das opções acima, somente seu e-mail, nome e foto de perfil serão requisitados. Para mais informações, leia nossa <nuxt-link to="/termos#politica_privacidade" style="font-weight:500; cursor:pointer">Política de Privacidade</nuxt-link>.</h3>
 
 
           <div class="after-sign-in" v-if="authUser">
@@ -199,9 +199,25 @@
 
           <h3 class="etapas">Etapa 4 de 5</h3>
 
-          <h1 class="__title">Mensagem para {{ acomod.proprietario.split(' ')[0] }}</h1>
+          <h1 class="__title">Conte a {{ acomod.proprietario.split(' ')[0] }} sobre sua viagem</h1>
 
-          <h3 class="__text">Texto aqui</h3>
+          <h3 class="__text">Ajude {{ acomod.proprietario.split(' ')[0] }} a preparar {{ tipoAcomodA }} para sua estadia respondendo às suas perguntas</h3>
+
+
+          <div class="host-message">
+            <img class="__img" :src="acomod.photoURL">
+            <div class="message-box">
+              <h3 class="__message">Oi {{ user.firstName }}! Estou te aguardando ansiosamente por aqui. Por favor, me avise a hora em que irá chegar.</h3>
+            </div>
+          </div>
+
+          <textarea
+            :class="[ messageError ? 'has-error' : '' ]"
+            v-model="reservaAcomod.message"
+            maxlength="2000"
+            rows="4"
+            placeholder="Escreva sua resposta aqui">
+          </textarea>
 
 
 
@@ -537,9 +553,9 @@ import 'dayjs/locale/pt-br'
 dayjs.locale('pt-br')
 
 export default {
-  components: { MiniLoader, MaskedInput, DatePicker, tipoAcomod },
-  mixins: [ reservaAcomod, states ],
-  data() {
+  components: { MiniLoader, MaskedInput, DatePicker },
+  mixins: [ reservaAcomod, states, tipoAcomod ],
+  data () {
     return {
     }
   },
@@ -801,7 +817,7 @@ export default {
       return this.reservaAcomod.guestCelular.length === 15 ? 'background: #50CB9D' : ''
     },
     form4ok () {
-      return 1<2 ? 'background: #50CB9D' : ''
+      return this.reservaAcomod.message !== '' ? 'background: #50CB9D' : ''
     },
     form5ok () {
       return this.$store.state.paymentAdded ? 'background: #FFA04F; font-weight: 700' : ''
@@ -953,7 +969,6 @@ export default {
         this.$store.commit('m_reservaAcomodBoleto', false)
         this.$store.commit('m_reservaAcomodBilling', false)
         this.$store.commit('hide_alert')
-        this.scrollTop()
       }
       if (value === `#${this.$store.state.randomHashs[6]}`) {
         this.$store.commit('m_reservaAcomodPaymentMethod', true)
@@ -961,7 +976,6 @@ export default {
         this.$store.commit('m_reservaAcomodBoleto', false)
         this.$store.commit('m_reservaAcomodBilling', false)
         this.$store.commit('hide_alert')
-        this.scrollTop()
       }
     }
   }
@@ -1091,6 +1105,30 @@ export default {
           transform: rotate(130deg);
         }
       }
+      & .host-message {
+        display: flex;
+        margin: 0 7% .5rem 7%;
+        padding-bottom: 1rem;
+        border-bottom: 1px solid rgb(222,222,222);
+        & .__img { 
+          border-radius: 50%;
+          width: 2.4rem;
+          height: 2.4rem;
+          align-self: flex-end;
+        }
+        & .message-box {
+          width: 100%;
+          border-radius: 5px 5px 5px 0;
+          background: var(--colorAcomod);
+          padding: 1rem;
+          margin-left: 10px;
+          & .__message {
+            font-size: 15px;
+            line-height: 21px;
+            color: white;
+          }
+        }
+      }
       & .add-payment {
         margin: 0 7%;
         padding: 1.5rem 0;
@@ -1159,6 +1197,15 @@ export default {
         & select:focus {
           border-bottom: 1px solid var(--color01);
         }
+      }
+      & textarea {
+        width: 100%;
+        font-size: 16px;
+        font-weight: 400;
+        background: white;
+        padding: 1rem 7%;
+        outline: none;
+        border: none;
       }
       & .buttons {
         position: fixed;
