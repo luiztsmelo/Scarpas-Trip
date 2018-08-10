@@ -704,7 +704,7 @@ export default {
         this.$store.commit('show_alert', {
           type: 'warning',
           title: 'Ops',
-          message: 'Escreva sua resposta.',
+          message: 'Escreva sua resposta, por favor.',
         })
         scrollIntoView(this.$refs.message)
         this.$refs.message.focus()
@@ -1014,7 +1014,7 @@ export default {
     & .back-btn {
       margin: 1rem 7%;
       cursor: pointer;
-      width: 1.3rem;
+      width: 1.27rem;
       height: auto;
     }
     & .etapa-reserva-box {
@@ -1160,7 +1160,7 @@ export default {
           font-weight: 400;
         }
         & .__arrow-right {
-          width: 1.3rem; 
+          width: 1.27rem; 
           height: auto
         }
       }
@@ -1278,7 +1278,7 @@ export default {
         background:rgb(237, 237, 237);
         transition: var(--main-transition);
         & .__arrow {
-          width: 1.3rem;
+          width: 1.27rem;
           height: auto;
           filter: invert(100%) brightness(400%);
         }

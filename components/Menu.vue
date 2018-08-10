@@ -112,13 +112,13 @@ export default {
       align-items: center;
       padding: 0.7rem 0;
       & .__item-img-color {
-        width: 1.3rem;
+        width: 1.27rem;
         height: auto;
         margin-right: 1rem;
         filter: grayscale(100%) brightness(15%);
       }
       & .__item-img {
-        width: 1.3rem;
+        width: 1.27rem;
         height: auto;
         margin-right: 1rem;
         filter: brightness(25%);

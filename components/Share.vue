@@ -82,7 +82,7 @@ export default {
         align-items: center;
         transform: translateY(2px);
         cursor: pointer;
-        width: 1.3rem;
+        width: 1.27rem;
         height: auto;
       }
     }
