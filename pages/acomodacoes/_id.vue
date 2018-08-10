@@ -823,9 +823,7 @@ export default {
         border-radius: 5px;
         transition: var(--main-transition);
         & .__reserva-btn-text {
-          text-transform: uppercase;
-          letter-spacing: 0.5px;
-          font-size: 14px;
+          font-size: 16px;
           font-weight: 700;
           color: white;
           transition: var(--main-transition);

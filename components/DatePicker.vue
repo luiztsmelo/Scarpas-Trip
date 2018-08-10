@@ -86,7 +86,7 @@ export default {
     },
     confirmBtnStyle () {
       if (this.$store.state.reservaAcomod.periodoReserva !== null) {
-        return 'background: #161616'
+        return 'background: #50CB9D'
       }
     }
   }
@@ -118,22 +118,18 @@ export default {
     top: 50%;
     transform: translateY(-50%);
     & .__apagar-btn {
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
       padding: 0;
-      font-size: 14px;
+      font-size: 16px;
       font-weight: 600;
       background: transparent;
       height: 3.2rem;
     }
     & .__confirm-btn {
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      font-size: 13px;
+      font-size: 16px;
       font-weight: 600;
-      padding: 0 1.3rem;
       background:rgb(237, 237, 237);
       color: white;
+      width: 8.3rem;
       height: 3.2rem;
       border-radius: 5px;
       transition: var(--main-transition);

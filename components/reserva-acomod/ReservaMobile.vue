@@ -792,33 +792,33 @@ export default {
       }
     },
     form1ok () {
-      return this.reservaAcomod.periodoReserva !== null ? 'background: #161616' : this.$store.state.miniLoader ? 'background: #fff' : ''
+      return this.reservaAcomod.periodoReserva !== null ? 'background: #50CB9D' : this.$store.state.miniLoader ? 'background: #fff' : ''
     },
     form2ok () {
-      return 'background: #161616'
+      return 'background: #50CB9D'
     },
     form3ok () {
-      return this.reservaAcomod.guestCelular.length === 15 ? 'background: #161616' : ''
+      return this.reservaAcomod.guestCelular.length === 15 ? 'background: #50CB9D' : ''
     },
     form4ok () {
-      return 1<2 ? 'background: #161616' : ''
+      return 1<2 ? 'background: #50CB9D' : ''
     },
     form5ok () {
       return this.$store.state.paymentAdded ? 'background: #FFA04F; font-weight: 700' : ''
     },
     formCreditCardOk () {
       if (valid.number(this.cardNumber).isValid && valid.expirationDate(this.cardExpirationDate).isValid && valid.cvv(this.cardCVV).isValid) {
-        return 'background: #161616'
+        return 'background: #50CB9D'
       }
     },
     formBoletoOk () {
       if (1>2) {
-        return 'background: #161616'
+        return 'background: #50CB9D'
       }
     },
     formBillingOk () {
       if (this.cardHolderName !== '' && CPF.validate(this.guestCPF) && this.guestCPF.length === 14 && this.zipcode.length === 9 && this.$store.state.validZipcode && this.street !== '' && this.street !== null && this.streetNumber !== '' && this.streetNumber !== null && this.neighborhood !== '' && this.neighborhood !== null && this.city !== '' && this.city !== null && this.state !== '' && this.state !== null) {
-        return 'background: #161616'
+        return 'background: #50CB9D'
       }
     }
   },
@@ -997,6 +997,7 @@ export default {
         padding: 0 7% 0.2rem;
         font-size: 14px;
         font-weight: 400;
+        color: rgb(72,72,72);
       }
       & .__title {
         padding: 0 7% 1.9rem;
@@ -1197,9 +1198,7 @@ export default {
             background:rgb(237, 237, 237);
             border-radius: 5px;
             & .__next-btn-text {
-              text-transform: uppercase;
-              letter-spacing: 0.5px;
-              font-size: 13px;
+              font-size: 16px;
               font-weight: 600;
               color: white;
             }
