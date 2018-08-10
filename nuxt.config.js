@@ -27,6 +27,10 @@ module.exports = {
     ],
     link: [
       { rel: 'icon', type: 'image/png', sizes: '24x24', href: '/brand.png' }
+    ],
+    __dangerouslyDisableSanitizers: ['script'],
+    script: [
+      { innerHTML: '{ "@context": "http://schema.org", "@type": "Organization", "url": "https://www.escarpastrip.com/", "logo": "https://firebasestorage.googleapis.com/v0/b/escarpas-trip.appspot.com/o/utils%2Fbrand-512.png?alt=media&token=a13bf7e0-e31d-4b77-9d43-e32e6095c42b" }', type: 'application/ld+json' }
     ]
   },
   /*

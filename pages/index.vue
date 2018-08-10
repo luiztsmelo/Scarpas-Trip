@@ -151,25 +151,13 @@ export default {
   head () {
     return {
       meta: [
-        {
-          hid: 'description', 
-          name: 'description', 
-          content: 'Planeje sua viagem para Capitólio de forma simples, agradável e segura.' 
-        }
-      ],
-      __dangerouslyDisableSanitizers: ['script'],
-      script: [{ innerHTML: JSON.stringify(this.structuredData), type: 'application/ld+json' }]
+        { hid: 'description', name: 'description', content: 'Planeje sua viagem para Capitólio de forma simples, agradável e segura.' }
+      ]
     }
   },
   transition: 'opacity',
   data () {
     return {
-      structuredData: {
-        "@context": "http://schema.org",
-        "@type": "Organization",
-        "url": "https://www.escarpastrip.com/",
-        "logo": "https://firebasestorage.googleapis.com/v0/b/escarpas-trip.appspot.com/o/utils%2Fbrand-512.png?alt=media&token=a13bf7e0-e31d-4b77-9d43-e32e6095c42b"
-      }
     }
   },
   methods: {

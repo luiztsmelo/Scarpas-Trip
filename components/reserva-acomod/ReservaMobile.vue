@@ -232,7 +232,7 @@
           <h1 class="__title">Detalhes sobre o pagamento</h1>
 
 
-          <h3 class="__text">{{ user.firstName }}, você somente será cobrado se {{ acomod.proprietario.split(' ')[0] }} aceitar seu pedido de reserva. Em caso positivo, para sua segurança nós só liberaremos o pagamento para ele no dia seguinte de seu check-in, {{ dayAfterCheckin }}.</h3>
+          <h3 class="__text">{{ user.firstName }}, você somente será cobrado se {{ acomod.proprietario.split(' ')[0] }} aceitar seu pedido de reserva. Caso aceite, para sua segurança nós só liberaremos o pagamento para ele no dia seguinte de seu check-in, {{ dayAfterCheckin }}.</h3>
 
 
           <div class="add-payment" :style="formaDePagamentoStyle" @click="openPaymentMethod">
