@@ -1129,10 +1129,11 @@ export default {
           align-self: flex-end;
         }
         & .message-box {
+          position: relative;
           width: 100%;
-          border-radius: 5px 5px 5px 0;
+          border-radius: 6px 6px 6px 0;
           background: var(--colorAcomod);
-          padding: 1rem;
+          padding: 1.1rem;
           margin-left: 8px;
           & .__message {
             font-size: 15px;
@@ -1140,6 +1141,19 @@ export default {
             line-height: 22px;
             color: white;
           }
+        }
+        & .message-box::after {
+          content: '';
+          position: absolute;
+          left: 0;
+          bottom: 0;
+          width: 0;
+          height: 0;
+          border: 12px solid transparent;
+          border-right-color: var(--colorAcomod);
+          border-left: 0;
+          border-bottom: 0;
+          margin-left: -12px;
         }
       }
       & .add-payment {

@@ -983,7 +983,6 @@ const store = () => new Vuex.Store({
     },
     a_authStateObserver ({ commit, state }) {
       firebase.auth().onAuthStateChanged(async user => {
-        console.log(user)
         /* Se sign-in */
         if (user !== null) {
           try {
@@ -1000,7 +999,6 @@ const store = () => new Vuex.Store({
             /* Se existir */
             if (!userDoc.exists) {
               await firebase.functions().httpsCallable('newUser')({ user: state.user })
-              console.log('Novo user criado.')
             }
           } catch (err) {
             console.log(err)

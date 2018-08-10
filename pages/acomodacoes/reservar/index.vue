@@ -62,7 +62,7 @@
           <!-- <h3>Regras de Cancelamento</h3> -->
 
 
-          <button class="__next-btn" type="button" @click="nextBtn1">Concordar e Continuar</button>
+          <button class="__next-btn" type="button" @click="nextBtn1">Concordar</button>
 
         </div><!-- ******* ETAPA 1 ******* -->
 
@@ -72,27 +72,21 @@
         <!-- ******* ETAPA 2 ******* -->
         <div class="etapa-2" v-if="$store.state.reservaAcomodDesktop2 === true">
 
-          <h1 class="__title">Mensagem para {{ acomod.proprietario.split(' ')[0] }}</h1>
+          <h1 class="__title">Conte a {{ acomod.proprietario.split(' ')[0] }} sobre sua viagem</h1>
 
 
           <div class="message">
-
-            <h3 class="__subtitle">
-              Para sua segurança, somente divulgaremos as informações de contato do anunciante após ele confirmar seu pedido de reserva. Se precisar de uma resposta dele antes de decidir se irá concluir o pedido ou não,
-              <span class="clique-aqui" @click="$modal.show('ask-acomod-modal')"> clique aqui</span>.
-            </h3>
             
-            <h3 class="__subtitle">Diga</h3>
+            <h3 class="__subtitle">Ajude {{ acomod.proprietario.split(' ')[0] }} a preparar {{ tipoAcomodA }} para sua estadia respondendo às suas perguntas</h3>
 
 
             <div class="item-form">
-              <label>Sua mensagem:</label>
               <textarea
                 :class="[ messageError ? 'has-error' : '' ]"
                 v-model="reservaAcomod.message"
                 maxlength="2000"
-                rows="5"
-                :placeholder="'Olá, ' + acomod.proprietario.split(' ')[0] + '! Não vejo a hora de conhecer Capitólio.'">
+                rows="4"
+                placeholder="Escreva sua resposta aqui">
               </textarea>
             </div>
 
@@ -114,7 +108,7 @@
 
           <div class="payment">
 
-            <h3 class="__subtitle">{{ user.firstName }}, você somente será cobrado se {{ acomod.proprietario.split(' ')[0] }} aceitar seu pedido de reserva. Em caso positivo, para sua segurança nós só liberaremos o pagamento para ele no dia seguinte de seu check-in, {{ dayAfterCheckin }}.</h3>
+            <h3 class="__subtitle">{{ user.firstName }}, você somente será cobrado se {{ acomod.proprietario.split(' ')[0] }} aceitar seu pedido de reserva. Caso aceite, para sua segurança nós só liberaremos o pagamento para ele no dia seguinte de seu check-in, {{ dayAfterCheckin }}.</h3>
 
 
             <!-- PAYMENT METHOD -->
@@ -826,9 +820,10 @@ export default {
     & .flex-left {
       flex: 64%;
       & .__title {
-        padding-bottom: 1.6rem;
+        padding-bottom: 1.5rem;
         font-size: 32px;
         user-select: none;
+        margin-right: 25%;
       }
       & .__subtitle {
         padding-top: .5rem;
@@ -1008,7 +1003,7 @@ export default {
 .__next-btn {
   position: relative;
   margin-top: 1rem;
-  padding: 0 1.3rem;
+  padding: 0 1.5rem;
   height: 3.2rem;
   font-size: 17px;
   font-weight: 600;
