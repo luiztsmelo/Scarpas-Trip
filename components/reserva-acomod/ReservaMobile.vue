@@ -706,6 +706,8 @@ export default {
           title: 'Ops',
           message: 'Escreva sua resposta.',
         })
+        scrollIntoView(this.$refs.message)
+        this.$refs.message.focus()
       }
     },
     nextBtnCreditCard () {
