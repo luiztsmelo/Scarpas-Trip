@@ -212,10 +212,12 @@
           </div>
 
           <textarea
+            ref="message"
             :class="[ messageError ? 'has-error' : '' ]"
+            @focus="onFocusMessage"
             v-model="reservaAcomod.message"
             maxlength="2000"
-            rows="5"
+            rows="6"
             placeholder="Escreva sua resposta aqui">
           </textarea>
 
@@ -560,6 +562,9 @@ export default {
     }
   },
   methods: {
+    onFocusMessage () {
+      scrollIntoView(this.$refs.message)
+    },
     keyEnterName () {
       if (event.key === 'Enter') {
         scrollIntoView(this.$refs.cpf.$el)
@@ -690,12 +695,17 @@ export default {
       }
     },
     nextBtn4 () {
-      if (1<2) {
+      if (this.reservaAcomod.message !== '') {
         this.$store.commit('m_miniLoader', true)
         setTimeout(() => {
           this.$store.commit('m_miniLoader', false), this.$store.commit('m_reservaAcomod4', false), this.$store.commit('m_reservaAcomod5', true), window.location.hash = this.$store.state.randomHashs[5]
         }, Math.floor(Math.random() * (1500 - 800 + 1) ) + 800)
       } else {
+        this.$store.commit('show_alert', {
+          type: 'warning',
+          title: 'Ops',
+          message: 'Escreva sua resposta.',
+        })
       }
     },
     nextBtnCreditCard () {
