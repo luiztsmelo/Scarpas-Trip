@@ -447,6 +447,10 @@ export default {
     }
   },
   methods: {
+    scrollTop () {
+      document.body.scrollTop = 0
+      document.documentElement.scrollTop = 0
+    },
     keyEnterName () {
       if (event.key === 'Enter') {
         if (this.reservaAcomod.paymentMethod === 'credit_card') {

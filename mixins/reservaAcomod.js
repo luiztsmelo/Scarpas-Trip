@@ -48,15 +48,6 @@ export const reservaAcomod = {
       stateError: false
     }
   },
-  methods: {
-    scrollTop () {
-      document.body.scrollTop = 0
-      document.documentElement.scrollTop = 0
-    },
-    scrollBottom () {
-      window.scrollTo(0, document.body.scrollHeight)
-    }
-  },
   computed: {
     /* ******************** PATHS ******************** */
     acomod () { return this.$store.state.acomod },

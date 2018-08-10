@@ -7,7 +7,7 @@
       <div class="reserva-acomod-body">
         
 
-        <img class="back-btn" src="../../assets/img/back.svg" @click="backBtn">
+        <img class="back-btn" src="../../assets/img/back.svg" @click="backBtn" ref="backBtn">
 
 
 
@@ -336,7 +336,6 @@
               v-model="$store.state.creditCard.cardNumber"
               :mask="[/\d/, /\d/, /\d/, /\d/, ' ', /\d/, /\d/, /\d/, /\d/, ' ', /\d/, /\d/, /\d/, /\d/, ' ', /\d/, /\d/, /\d/, /\d/]"
               :guide="false"
-              @focus="scrollBottom"
               placeholder="0000 0000 0000 0000">
             </masked-input>
           </div><!-- CARD NUMBER -->
@@ -562,6 +561,9 @@ export default {
     }
   },
   methods: {
+    scrollTop () {
+      scrollIntoView(this.$refs.backBtn, {time: 0})
+    },
     onFocusMessage () {
       scrollIntoView(this.$refs.message)
     },
@@ -675,7 +677,6 @@ export default {
           this.$store.commit('m_reservaAcomod3', false)
           this.$store.commit('m_reservaAcomod4', true)
           window.location.hash = this.$store.state.randomHashs[4]
-          this.scrollTop()
         }, Math.floor(Math.random() * (800 - 200 + 1) ) + 200)
       } else {
         if (this.authUser) {
@@ -698,7 +699,7 @@ export default {
       if (this.reservaAcomod.message !== '') {
         this.$store.commit('m_miniLoader', true)
         setTimeout(() => {
-          this.$store.commit('m_miniLoader', false), this.$store.commit('m_reservaAcomod4', false), this.$store.commit('m_reservaAcomod5', true), window.location.hash = this.$store.state.randomHashs[5]
+          this.scrollTop(), this.$store.commit('m_miniLoader', false), this.$store.commit('m_reservaAcomod4', false), this.$store.commit('m_reservaAcomod5', true), window.location.hash = this.$store.state.randomHashs[5]
         }, Math.floor(Math.random() * (1500 - 800 + 1) ) + 800)
       } else {
         this.$store.commit('show_alert', {
@@ -712,7 +713,7 @@ export default {
     },
     nextBtnCreditCard () {
       if (valid.number(this.cardNumber).isValid && valid.expirationDate(this.cardExpirationDate).isValid && valid.cvv(this.cardCVV).isValid) {
-        this.$store.commit('m_reservaAcomodCreditCard', false), this.$store.commit('m_reservaAcomodBilling', true), this.scrollTop()
+        this.scrollTop(), this.$store.commit('m_reservaAcomodCreditCard', false), this.$store.commit('m_reservaAcomodBilling', true)
       } else {
         this.$store.commit('show_alert', {
           type: 'error',
@@ -754,13 +755,13 @@ export default {
       this.$store.commit('m_loader', true), this.$modal.show('datepicker'), window.location.hash = `${this.$store.state.randomHashs[1]}-datas`
     },
     openPaymentMethod () {
-      this.$store.commit('m_reservaAcomod5', false), this.$store.commit('m_reservaAcomodPaymentMethod', true), window.location.hash = this.$store.state.randomHashs[6]
+      this.scrollTop(), this.$store.commit('m_reservaAcomod5', false), this.$store.commit('m_reservaAcomodPaymentMethod', true), window.location.hash = this.$store.state.randomHashs[6]
     },
     openCreditCard () {
-      this.$store.commit('m_reservaAcomodPaymentMethod', false), this.$store.commit('m_reservaAcomodCreditCard', true), this.scrollTop()
+      this.scrollTop(), this.$store.commit('m_reservaAcomodPaymentMethod', false), this.$store.commit('m_reservaAcomodCreditCard', true)
     },
     openBoleto () {
-      this.$store.commit('m_reservaAcomodPaymentMethod', false), this.$store.commit('m_reservaAcomodBoleto', true), this.scrollTop()
+      this.scrollTop(), this.$store.commit('m_reservaAcomodPaymentMethod', false), this.$store.commit('m_reservaAcomodBoleto', true)
     },
     concluirReserva () {
       if (this.$store.state.paymentAdded) {
