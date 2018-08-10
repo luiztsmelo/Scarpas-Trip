@@ -215,7 +215,7 @@
             :class="[ messageError ? 'has-error' : '' ]"
             v-model="reservaAcomod.message"
             maxlength="2000"
-            rows="4"
+            rows="5"
             placeholder="Escreva sua resposta aqui">
           </textarea>
 
@@ -1107,13 +1107,13 @@ export default {
       }
       & .host-message {
         display: flex;
-        margin: 0 7% .5rem 7%;
+        margin: 0 7% .3rem 7%;
         padding-bottom: 1rem;
         border-bottom: 1px solid rgb(222,222,222);
         & .__img { 
           border-radius: 50%;
           width: 2.4rem;
-          height: 2.4rem;
+          height: auto;
           align-self: flex-end;
         }
         & .message-box {
@@ -1121,10 +1121,11 @@ export default {
           border-radius: 5px 5px 5px 0;
           background: var(--colorAcomod);
           padding: 1rem;
-          margin-left: 10px;
+          margin-left: 8px;
           & .__message {
             font-size: 15px;
-            line-height: 21px;
+            font-weight: 500;
+            line-height: 22px;
             color: white;
           }
         }
@@ -1200,7 +1201,7 @@ export default {
       }
       & textarea {
         width: 100%;
-        font-size: 16px;
+        font-size: 17px;
         font-weight: 400;
         background: white;
         padding: 1rem 7%;
