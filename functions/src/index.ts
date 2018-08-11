@@ -22,7 +22,6 @@ const AirtableConfig = {
   }
 } */
 
-
 /* Mailjet */
 const Mailjet = require ('node-mailjet').connect(`${functions.config().mailjetpublic.key}`, `${functions.config().mailjetprivate.key}`)
 const ESemail = 'contato@escarpastrip.com'
@@ -82,7 +81,7 @@ exports.watch_reservaExpiration = functions.https.onRequest(async (req, res) => 
 })
 
 
-/* _______________________________________________ NEW USER _______________________________________________ */
+/* ________________________________________________ USER ________________________________________________ */
 
 exports.newUser = functions.https.onCall(async data => {
   const user = data.user
@@ -109,6 +108,7 @@ exports.newUser = functions.https.onCall(async data => {
     })
   } catch (err) {
     console.log(err)
+    throw new functions.https.HttpsError('aborted', err.message, err)
   }
 })
 
@@ -117,14 +117,17 @@ exports.newUser = functions.https.onCall(async data => {
 
 
 
-/* ________________________________________________ PAGARME ________________________________________________ */
+/* ________________________________________________ ACOMODS ________________________________________________ */
 
 
-exports.pagarme_newAcomod = functions.https.onCall(data => {
+exports.newAcomod = functions.https.onCall(async data => {
+  const acomodData = data.acomodData
   const bankAccount = data.bankAccount
 
-  return pagarme.client.connect({ api_key: 'ak_test_E3I46o4e7guZDqwRnSY9sW8o8HrL9D' })
-    .then(client => client.recipients.create({
+  try {
+    const Pagarme = await pagarme.client.connect({ api_key: 'ak_test_E3I46o4e7guZDqwRnSY9sW8o8HrL9D' })
+    
+    const recipient = await Pagarme.recipients.create({
       transfer_enabled: false,
       transfer_interval: 'daily',
       automatic_anticipation_enabled: true,
@@ -140,167 +143,153 @@ exports.pagarme_newAcomod = functions.https.onCall(data => {
         document_number: bankAccount.docNumber.replace(/\./g, '').replace(/\-/g, '')
       }
     })
-  )
-  .then(recipient => {
-    return { recipientID: recipient.id }
-  })
-  .catch (err => {
-    console.log(err.response)
-    if (err.response.errors.some(e => e.parameter_name === 'bank_code')) {
-      throw new functions.https.HttpsError('invalid-argument', 'Banco não permitido.', 'bank_code')
-    }
-    if (err.response.errors.some(e => e.parameter_name === 'agencia')) {
-      throw new functions.https.HttpsError('invalid-argument', 'Agência incorreta.', 'agencia')
-    }
-    if (err.response.errors.some(e => e.parameter_name === 'agencia_dv')) {
-      throw new functions.https.HttpsError('invalid-argument', 'Dígito de agência incorreto.', 'agencia_dv')
-    }
-    if (err.response.errors.some(e => e.parameter_name === 'conta')) {
-      throw new functions.https.HttpsError('invalid-argument', 'Conta incorreta.', 'conta')
-    }
-    if (err.response.errors.some(e => e.parameter_name === 'conta_dv')) {
-      throw new functions.https.HttpsError('invalid-argument', 'Dígito de conta incorreto.', 'conta_dv')
-    }
-    if (err.response.errors.some(e => e.parameter_name === 'legal_name')) {
-      throw new functions.https.HttpsError('invalid-argument', 'Nome digitado incorretamente.', 'legal_name')
-    }
-    if (err.response.errors.some(e => e.parameter_name === 'document_number')) {
-      throw new functions.https.HttpsError('invalid-argument', 'CPF inválido.', 'document_number')
-    }
-  })
-})
+    
+    acomodData.recipientID = recipient.id
 
+    /* Criar acomod na Firestore */
+    await admin.firestore().collection('acomods').doc(acomodData.acomodID).set(acomodData)
 
-
-
-
-exports.pagarme_newReservaAcomod = functions.https.onCall((data, context) => {
-  const reservaAcomod = data.reservaAcomod
-  const acomod = data.acomod
- 
-  const guestCPF = reservaAcomod.guestCPF.replace(/[^0-9\.]+/g, '').replace(/\./g, '')
-  const guestCelular = '+55' + reservaAcomod.guestCelular.replace(/[^0-9\.]+/g, '')
-  const zipcode = reservaAcomod.billing.zipcode.replace(/[^0-9\.]+/g, '')
-
-  
-  /* ------------------- CREDIT CARD ------------------- */
-  if (reservaAcomod.paymentMethod === 'credit_card') {
-
-    const cardNumber = data.creditCard.cardNumber.replace(/[^0-9\.]+/g, '')
-    const cardHolderName = data.creditCard.cardHolderName
-    const cardExpirationDate = data.creditCard.cardExpirationDate.replace(/[^0-9\.]+/g, '')
-    const cardCVV = data.creditCard.cardCVV
-
-    return pagarme.client.connect({ api_key: 'ak_test_E3I46o4e7guZDqwRnSY9sW8o8HrL9D' })
-    .then(client => client.transactions.create({
-      'amount': reservaAcomod.valorReservaTotal * 100,
-      'capture': false,
-      'installments': reservaAcomod.parcelas,
-      'payment_method': 'credit_card',
-      'card_number': cardNumber,
-      'card_cvv': cardCVV,
-      'card_expiration_date': cardExpirationDate,
-      'card_holder_name': cardHolderName,
-      'customer': {
-        'external_id': context.auth.token.uid,
-        'name': context.auth.token.name,
-        'type': 'individual',
-        'country': 'br',
-        'email': context.auth.token.email,
-        'documents': [{
-          'type': 'cpf',
-          'number': guestCPF
-        }],
-        'phone_numbers': [ guestCelular ]
-      },
-      'billing': {
-        'name': context.auth.token.name,
-        'address': {
-          'country': 'br',
-          'state': reservaAcomod.billing.state,
-          'city': reservaAcomod.billing.city,
-          'neighborhood': reservaAcomod.billing.neighborhood,
-          'street': reservaAcomod.billing.street,
-          'street_number': reservaAcomod.billing.street_number,
-          'zipcode': zipcode
-        }
-      },
-      'items': [{
-        'id': acomod.acomodID,
-        'title': acomod.title,
-        'category': 'Acomod',
-        'unit_price': acomod.valorNoite * 100,
-        'quantity': reservaAcomod.noites,
-        'tangible': false
-      }]
-    }))
-    .then(transaction => {
-      return { reservaID: transaction.id.toString() }
-    })
-    .catch(err => {
-      console.log(err.response)
-      if (err.response.errors.some(e => e.type === 'action_forbidden' || e.parameter_name === 'card_number')) {
-        throw new functions.https.HttpsError('invalid-argument', 'Número do cartão inválido.', 'card_number')
-      }
-      if (err.response.errors.some(e => e.parameter_name === 'card_holder_name')) {
-        throw new functions.https.HttpsError('invalid-argument', 'Nome do portador inválido.', 'card_holder_name')
-      }
-      if (err.response.errors.some(e => e.parameter_name === 'card_expiration_date')) {
-        throw new functions.https.HttpsError('invalid-argument', 'Data de expiração inválida.', 'card_expiration_date')
-      }
-      if (err.response.errors.some(e => e.parameter_name === 'card_cvv')) {
-        throw new functions.https.HttpsError('invalid-argument', 'Código de segurança inválido.', 'card_cvv')
-      }
-      if (err.response.errors.some(e => e.parameter_name === 'customer')) {
-        throw new functions.https.HttpsError('invalid-argument', 'CPF inválido.', 'customer')
-      }
+    /* Atualizar user na Firestore */
+    await admin.firestore().collection('users').doc(acomodData.userID).update({ 
+      isAcomodHost: true, 
+      celular: acomodData.celular
     })
 
-    /* ------------------- BOLETO ------------------- */
-  } else {
-
-    return pagarme.client.connect({ api_key: 'ak_test_E3I46o4e7guZDqwRnSY9sW8o8HrL9D' })
-    .then(client => client.transactions.create({
-      'amount': reservaAcomod.valorReservaTotal * 100,
-      'capture': false,
-      'payment_method': 'boleto',
-      'customer': {
-        'external_id': context.auth.token.uid,
-        'name': reservaAcomod.guestName,
-        'type': 'individual',
-        'country': 'br',
-        'email': context.auth.token.email,
-        'documents': [{
-          'type': 'cpf',
-          'number': guestCPF
-        }],
-        'phone_numbers': [ guestCelular ]
-      },
-      'items': [{
-        'id': acomod.acomodID,
-        'title': acomod.title,
-        'category': 'Acomod',
-        'unit_price': acomod.valorNoite * 100,
-        'quantity': reservaAcomod.noites,
-        'tangible': false
-      }]
-    }))
-    .then(transaction => {
-      return { reservaID: transaction.id.toString() }
-    })
-    .catch(err => {
-      console.log(err.response)
-      if (err.response.errors.some(e => e.parameter_name === 'customer')) {
-        throw new functions.https.HttpsError('invalid-argument', 'CPF inválido.', 'customer')
-      }
-    })
+  } catch (err) {
+    console.log(err)
+    throw new functions.https.HttpsError('aborted', err.message, err)
   }
 })
 
 
 
 
-exports.pagarme_payHostAcomod = functions.https.onCall(data => {
+
+exports.newReservaAcomod = functions.https.onCall(async (data, context) => {
+  const reservaAcomod = data.reservaAcomod
+  const creditCard = data.creditCard
+  const acomod = data.acomod
+  const visitID = data.visitID
+ 
+  const guestCPF = reservaAcomod.guestCPF.replace(/[^0-9\.]+/g, '').replace(/\./g, '')
+  const guestCelular = '+55' + reservaAcomod.guestCelular.replace(/[^0-9\.]+/g, '')
+  const zipcode = reservaAcomod.billing.zipcode.replace(/[^0-9\.]+/g, '')
+
+  /* ------------------- CREDIT CARD ------------------- */
+  if (reservaAcomod.paymentMethod === 'credit_card') {
+    try {
+      const Pagarme = await pagarme.client.connect({ api_key: 'ak_test_E3I46o4e7guZDqwRnSY9sW8o8HrL9D' })
+
+      const transaction = await Pagarme.transactions.create({
+        'amount': reservaAcomod.valorReservaTotal * 100,
+        'capture': false,
+        'installments': reservaAcomod.parcelas,
+        'payment_method': 'credit_card',
+        'card_number': creditCard.cardNumber.replace(/[^0-9\.]+/g, ''),
+        'card_cvv': creditCard.cardCVV,
+        'card_expiration_date': creditCard.cardExpirationDate.replace(/[^0-9\.]+/g, ''),
+        'card_holder_name': creditCard.cardHolderName,
+        'customer': {
+          'external_id': context.auth.token.uid,
+          'name': context.auth.token.name,
+          'type': 'individual',
+          'country': 'br',
+          'email': context.auth.token.email,
+          'documents': [{
+            'type': 'cpf',
+            'number': guestCPF
+          }],
+          'phone_numbers': [ guestCelular ]
+        },
+        'billing': {
+          'name': context.auth.token.name,
+          'address': {
+            'country': 'br',
+            'state': reservaAcomod.billing.state,
+            'city': reservaAcomod.billing.city,
+            'neighborhood': reservaAcomod.billing.neighborhood,
+            'street': reservaAcomod.billing.street,
+            'street_number': reservaAcomod.billing.street_number,
+            'zipcode': zipcode
+          }
+        },
+        'items': [{
+          'id': acomod.acomodID,
+          'title': acomod.title,
+          'category': 'Acomod',
+          'unit_price': acomod.valorNoite * 100,
+          'quantity': reservaAcomod.noites,
+          'tangible': false
+        }]
+      })
+
+      reservaAcomod.reservaID = transaction.id.toString()
+
+      /* Criar reserva na Firestore */
+      await admin.firestore().collection('reservasAcomods').doc(reservaAcomod.reservaID).set(reservaAcomod)
+
+      /* Atualizar visit */
+      await admin.firestore().collection('acomods').doc(acomod.acomodID).collection('visits').doc(visitID).update({ concludedReserva: true })
+
+      return { reservaID: reservaAcomod.reservaID }
+
+    } catch (err) {
+      console.log(err)
+      throw new functions.https.HttpsError('aborted', err.message, err)
+    }
+
+  /* ------------------- BOLETO ------------------- */
+  } else {
+    try {
+      const Pagarme = await pagarme.client.connect({ api_key: 'ak_test_E3I46o4e7guZDqwRnSY9sW8o8HrL9D' })
+
+      const transaction = await Pagarme.transactions.create({
+        'amount': reservaAcomod.valorReservaTotal * 100,
+        'capture': false,
+        'payment_method': 'boleto',
+        'customer': {
+          'external_id': context.auth.token.uid,
+          'name': reservaAcomod.guestName,
+          'type': 'individual',
+          'country': 'br',
+          'email': context.auth.token.email,
+          'documents': [{
+            'type': 'cpf',
+            'number': guestCPF
+          }],
+          'phone_numbers': [ guestCelular ]
+        },
+        'items': [{
+          'id': acomod.acomodID,
+          'title': acomod.title,
+          'category': 'Acomod',
+          'unit_price': acomod.valorNoite * 100,
+          'quantity': reservaAcomod.noites,
+          'tangible': false
+        }]
+      })
+      
+      reservaAcomod.reservaID = transaction.id.toString()
+
+      /* Criar reserva na Firestore */
+      await admin.firestore().collection('reservasAcomods').doc(reservaAcomod.reservaID).set(reservaAcomod)
+
+      /* Atualizar visit */
+      await admin.firestore().collection('acomods').doc(acomod.acomodID).collection('visits').doc(visitID).update({ concludedReserva: true })
+
+      return { reservaID: reservaAcomod.reservaID }
+      
+    } catch (err) {
+      console.log(err)
+      throw new functions.https.HttpsError('aborted', err.message, err)
+    }
+  }
+})
+
+
+
+
+exports.payHostAcomod = functions.https.onCall(async data => {
   /* ENVIAR PAGAMENTO PARA O HOST NO DIA SEGUINTE DO CHECK-IN */
 })
 
@@ -321,11 +310,8 @@ exports.email_newReservaToHost = functions.firestore
       const docAcomod = await admin.firestore().collection('acomods').doc(reservaAcomod.acomodID).get()
       const acomod = docAcomod.data()
 
-      /* Ajustar datas */
       const startDate = new Date(reservaAcomod.periodoReserva.start)
       const endDate = new Date(reservaAcomod.periodoReserva.end)
-      const checkIn = dayjs(startDate).format('ddd, DD MMM YYYY')
-      const checkOut = dayjs(endDate).format('ddd, DD MMM YYYY')
 
       /* Enviar e-mail */
       await Mailjet.post('send', {'version': 'v3.1'}).request({
@@ -345,8 +331,8 @@ exports.email_newReservaToHost = functions.firestore
             'hostFirstName': reservaAcomod.hostName.split(' ')[0],
             'title': acomod.title,
             'acomodPhoto': acomod.images[0].HJ,
-            'checkIn': checkIn,
-            'checkOut': checkOut,
+            'checkIn': dayjs(startDate).format('ddd, DD MMM YYYY'),
+            'checkOut': dayjs(endDate).format('ddd, DD MMM YYYY'),
             'dayAfterCheckin': dayjs(startDate).add(1, 'day').format('DD/MM/YYYY'),
             'totalHospedes': reservaAcomod.totalHospedes,
             'noites': reservaAcomod.noites,

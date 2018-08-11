@@ -1052,15 +1052,15 @@ export default {
 
       /* Se todas as informações preenchidas */
       if (this.bankCode !== '' && this.agencia !== '' && this.agenciaDV !== '' && this.conta !== '' && this.contaDV !== '' && this.legalName !== '' && this.docNumber.length === 14 && CPF.validate(this.docNumber)) {
+
         try {
           this.$store.commit('m_loader', true)
 
-          /* Criar recebedor no Pagarme e capturar o id */
-          const result = await firebase.functions().httpsCallable('pagarme_newAcomod')({ bankAccount: this.$store.state.bankAccount })
-          acomodData.recipientID = result.data.recipientID
-
-          /* Criar acomod na Firestore */
-          await firebase.firestore().collection('acomods').doc(acomodData.acomodID).set(acomodData)
+          /* Criar recebedor no Pagarme, criar acomod na Firestore e atualizar user */
+          await firebase.functions().httpsCallable('newAcomod')({
+            acomodData: acomodData,
+            bankAccount: this.$store.state.bankAccount
+          })
 
           /* Necessário para o correto funcionamento do backBtn _id (Ver middleware: newAcomodConcludedCheck.js) */
           this.$store.state.concludedNewAcomod = true 
@@ -1068,40 +1068,25 @@ export default {
           /* Ir para página da acomod criada */
           this.$router.push('/acomodacoes/' + acomodData.acomodID)
 
-          /* Atualizar user na Firestore */
-          await firebase.firestore().collection('users').doc(acomodData.userID).update({ 
-            isAcomodHost: true, 
-            celular: acomodData.celular 
-          })
-
           /* Resetar acomodData */
           this.$store.dispatch('a_resetAcomodData')
 
           this.$store.commit('m_loader', false)
 
         } catch (err) {
-          console.log(err)
-          
           this.$store.commit('m_loader', false)
-
+          console.log(err)
           this.$store.commit('show_alert', {
-          type: 'error',
-          title: 'Ops',
-          message: 'Informações inválidas.'
-        })
-          err.details === 'bank_code' ? this.bankCodeError = true : this.bankCodeError = false
-          err.details === 'agencia' ? this.agenciaError = true : this.agenciaError = false
-          err.details === 'agencia_dv' ? this.agenciaDVError = true : this.agenciaDVError = false
-          err.details === 'conta' ? this.contaError = true : this.contaError = false
-          err.details === 'conta_dv' ? this.contaDVError = true : this.contaDVError = false
-          err.details === 'legal_name' ? this.legalNameError = true : this.legalNameError = false
-          err.details === 'document_number' ? this.docNumberError = true : this.docNumberError = false
+            type: 'error',
+            title: 'Erro',
+            message: 'Informações inválidas.'
+          })
         }
       } else {
         this.$store.commit('show_alert', {
           type: 'error',
           title: 'Ops',
-          message: 'Informações inválidas.'
+          message: 'Preencha as informações restantes.'
         })
         this.bankCode === '' ? this.bankCodeError = true : this.bankCodeError = false
         this.agencia === '' ? this.agenciaError = true : this.agenciaError = false

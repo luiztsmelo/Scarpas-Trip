@@ -525,21 +525,15 @@ export default {
           /* Checar se todos os dados foram preenchidos */
           if (valid.number(this.cardNumber).isValid && valid.expirationDate(this.cardExpirationDate).isValid && valid.cvv(this.cardCVV).isValid && this.cardHolderName !== '' && CPF.validate(this.guestCPF) && this.guestCPF.length === 14 && this.guestCelular.length === 15 && this.zipcode.length === 9 && this.$store.state.validZipcode && this.street !== '' && this.streetNumber !== '' && this.neighborhood !== '' && this.city !== '' && this.state !== '') {
 
-            /* Criar transação no Pagarme */
-            const result = await firebase.functions().httpsCallable('pagarme_newReservaAcomod')({
+            /* Criar transação no Pagarme e reserva na Firestore */
+            const result = await firebase.functions().httpsCallable('newReservaAcomod')({
               reservaAcomod: reservaAcomod,
               creditCard: creditCard,
-              acomod: this.acomod
+              acomod: this.acomod,
+              visitID: this.$store.state.visitID
             })
 
-            const reservaID = result.data.reservaID
-            reservaAcomod.reservaID = reservaID
-
-            /* Criar reserva na Firestore */
-            await firebase.firestore().collection('reservasAcomods').doc(reservaID).set(reservaAcomod)
-
-            /* Atualizar visit */
-            await firebase.firestore().collection('acomods').doc(this.acomod.acomodID).collection('visits').doc(this.$store.state.visitID).update({ concludedReserva: true })
+            reservaAcomod.reservaID = result.data.reservaID
 
             /* Resetar dados do cartão de crédito */
             this.$store.commit('m_resetCreditCard')
@@ -568,20 +562,14 @@ export default {
           /* Checar se todos os dados foram preenchidos */
           if (reservaAcomod.guestName !== '' && reservaAcomod.guestCPF.length === 14 && reservaAcomod.guestCelular.length === 15) {
 
-            /* Criar transação no Pagarme */
-            const result = await firebase.functions().httpsCallable('pagarme_newReservaAcomod')({
+            /* Criar transação no Pagarme e reserva na Firestore */
+            const result = await firebase.functions().httpsCallable('newReservaAcomod')({
               reservaAcomod: reservaAcomod,
-              acomod: this.acomod
+              acomod: this.acomod,
+              visitID: this.$store.state.visitID
             })
-
-            const reservaID = result.data.reservaID
-            reservaAcomod.reservaID = reservaID
-
-            /* Criar reserva na Firestore */
-            await firebase.firestore().collection('reservasAcomods').doc(reservaID).set(reservaAcomod)
-
-            /* Atualizar visit */
-            await firebase.firestore().collection('acomods').doc(this.acomod.acomodID).collection('visits').doc(this.$store.state.visitID).update({ concludedReserva: true })
+            
+            reservaAcomod.reservaID = result.data.reservaID
             
             this.$store.state.concludedReservaAcomod = true
             this.scrollTop()
@@ -597,11 +585,6 @@ export default {
       } catch (err) {
         console.log(err)
         this.$store.commit('m_loader', false)
-        err.details === 'card_number' ? this.cardNumberError = true : this.cardNumberError = false
-        err.details === 'card_holder_name' ? this.cardHolderNameError = true : this.cardHolderNameError = false
-        err.details === 'card_expiration_date' ? this.cardExpirationDateError = true : this.cardExpirationDateError = false
-        err.details === 'card_cvv' ? this.cardCvvError = true : this.cardCvvError = false
-        err.details === 'customer' ? this.cpfError = true : this.cpfError = false
       }
     },
     backEtapa1 () {
