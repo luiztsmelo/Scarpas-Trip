@@ -13,15 +13,6 @@ import 'numeral/locales/pt-br'
 admin.initializeApp(functions.config().firebase)
 
 
-/* Axios */
-/* const AirtableAcomodsURL = 'https://api.airtable.com/v0/appfQX2S7rMRlBWoh/Acomods'
-const AirtableConfig = {
-  headers: {
-    'Authorization': `Bearer ${functions.config().airtable.key}`,
-    'Content-type': 'application/json'
-  }
-} */
-
 /* Mailjet */
 const Mailjet = require ('node-mailjet').connect(`${functions.config().mailjetpublic.key}`, `${functions.config().mailjetprivate.key}`)
 const ESemail = 'contato@escarpastrip.com'
@@ -34,6 +25,41 @@ dayjs.locale('pt-br')
 
 /* Numeral */
 numeral.locale('pt-br')
+
+
+/* Axios */
+/* const AirtableAcomodsURL = 'https://api.airtable.com/v0/appfQX2S7rMRlBWoh/Acomods'
+const AirtableConfig = {
+  headers: {
+    'Authorization': `Bearer ${functions.config().airtable.key}`,
+    'Content-type': 'application/json'
+  }
+} */
+
+
+
+/* ________________________________________________ UTILS ________________________________________________ */
+
+exports.calcValorParcelas = functions.https.onCall(async data => {
+  try {
+    const amount = data.amount
+
+    const Pagarme = await pagarme.client.connect({ api_key: 'ak_test_E3I46o4e7guZDqwRnSY9sW8o8HrL9D' })
+
+    const installments = await Pagarme.transactions.calculateInstallmentsAmount({
+      max_installments: 12,
+      free_installments: 1,
+      interest_rate: 2.5,
+      amount: amount
+    })
+
+    return { parcelas: installments }
+
+  } catch (err) {
+    console.log(err)
+    throw new functions.https.HttpsError('aborted', err.message, err)
+  }
+})
 
 
 
@@ -126,7 +152,7 @@ exports.newAcomod = functions.https.onCall(async data => {
 
   try {
     const Pagarme = await pagarme.client.connect({ api_key: 'ak_test_E3I46o4e7guZDqwRnSY9sW8o8HrL9D' })
-    
+
     const recipient = await Pagarme.recipients.create({
       transfer_enabled: false,
       transfer_interval: 'daily',
@@ -146,14 +172,16 @@ exports.newAcomod = functions.https.onCall(async data => {
     
     acomodData.recipientID = recipient.id
 
-    /* Criar acomod na Firestore */
-    await admin.firestore().collection('acomods').doc(acomodData.acomodID).set(acomodData)
-
-    /* Atualizar user na Firestore */
-    await admin.firestore().collection('users').doc(acomodData.userID).update({ 
-      isAcomodHost: true, 
-      celular: acomodData.celular
+    /* Update user Firestore */
+    await admin.firestore().collection('users').doc(acomodData.hostID).update({ 
+      ishost: true,
+      celular: '+55' + acomodData.celular.replace(/[^0-9\.]+/g, '')
     })
+
+    delete acomodData.celular
+
+    /* Set acomod Firestore */
+    await admin.firestore().collection('acomods').doc(acomodData.acomodID).set(acomodData)
 
   } catch (err) {
     console.log(err)
@@ -165,22 +193,28 @@ exports.newAcomod = functions.https.onCall(async data => {
 
 
 
-exports.newReservaAcomod = functions.https.onCall(async (data, context) => {
-  const reservaAcomod = data.reservaAcomod
-  const creditCard = data.creditCard
-  const acomod = data.acomod
-  const visitID = data.visitID
- 
-  const guestCPF = reservaAcomod.guestCPF.replace(/[^0-9\.]+/g, '').replace(/\./g, '')
-  const guestCelular = '+55' + reservaAcomod.guestCelular.replace(/[^0-9\.]+/g, '')
-  const zipcode = reservaAcomod.billing.zipcode.replace(/[^0-9\.]+/g, '')
+exports.newReservaAcomod = functions.https.onCall(async data => {
+  try {
+    const reservaAcomod = data.reservaAcomod
+    const creditCard = data.creditCard
+    const customer = data.customer
+    const acomod = data.acomod
+    const host = data.host
+    const visitID = data.visitID
 
-  /* ------------------- CREDIT CARD ------------------- */
-  if (reservaAcomod.paymentMethod === 'credit_card') {
-    try {
-      const Pagarme = await pagarme.client.connect({ api_key: 'ak_test_E3I46o4e7guZDqwRnSY9sW8o8HrL9D' })
+    /* Get guest */
+    const guestSnap = await admin.firestore().collection('users').doc(reservaAcomod.guestID).get()
+    const guest = guestSnap.data()
 
-      const transaction = await Pagarme.transactions.create({
+    reservaAcomod.requested = new Date().getTime()
+    reservaAcomod.acomodID = acomod.acomodID
+    
+    const Pagarme = await pagarme.client.connect({ api_key: 'ak_test_E3I46o4e7guZDqwRnSY9sW8o8HrL9D' })
+
+    let transaction = null
+
+    if (reservaAcomod.paymentMethod === 'credit_card') {
+      transaction = await Pagarme.transactions.create({
         'amount': reservaAcomod.valorReservaTotal * 100,
         'capture': false,
         'installments': reservaAcomod.parcelas,
@@ -190,27 +224,27 @@ exports.newReservaAcomod = functions.https.onCall(async (data, context) => {
         'card_expiration_date': creditCard.cardExpirationDate.replace(/[^0-9\.]+/g, ''),
         'card_holder_name': creditCard.cardHolderName,
         'customer': {
-          'external_id': context.auth.token.uid,
-          'name': context.auth.token.name,
+          'external_id': guest.userID,
+          'name': guest.fullName,
           'type': 'individual',
           'country': 'br',
-          'email': context.auth.token.email,
+          'email': guest.email,
           'documents': [{
             'type': 'cpf',
-            'number': guestCPF
+            'number': customer.cpf.replace(/[^0-9\.]+/g, '').replace(/\./g, '')
           }],
-          'phone_numbers': [ guestCelular ]
+          'phone_numbers': [ customer.celular ]
         },
         'billing': {
-          'name': context.auth.token.name,
+          'name': guest.fullName,
           'address': {
             'country': 'br',
-            'state': reservaAcomod.billing.state,
-            'city': reservaAcomod.billing.city,
-            'neighborhood': reservaAcomod.billing.neighborhood,
-            'street': reservaAcomod.billing.street,
-            'street_number': reservaAcomod.billing.street_number,
-            'zipcode': zipcode
+            'state': customer.state,
+            'city': customer.city,
+            'neighborhood': customer.neighborhood,
+            'street': customer.street,
+            'street_number': customer.street_number,
+            'zipcode': customer.zipcode.replace(/[^0-9\.]+/g, '')
           }
         },
         'items': [{
@@ -222,42 +256,22 @@ exports.newReservaAcomod = functions.https.onCall(async (data, context) => {
           'tangible': false
         }]
       })
-
-      reservaAcomod.reservaID = transaction.id.toString()
-
-      /* Criar reserva na Firestore */
-      await admin.firestore().collection('reservasAcomods').doc(reservaAcomod.reservaID).set(reservaAcomod)
-
-      /* Atualizar visit */
-      await admin.firestore().collection('acomods').doc(acomod.acomodID).collection('visits').doc(visitID).update({ concludedReserva: true })
-
-      return { reservaID: reservaAcomod.reservaID }
-
-    } catch (err) {
-      console.log(err)
-      throw new functions.https.HttpsError('aborted', err.message, err)
-    }
-
-  /* ------------------- BOLETO ------------------- */
-  } else {
-    try {
-      const Pagarme = await pagarme.client.connect({ api_key: 'ak_test_E3I46o4e7guZDqwRnSY9sW8o8HrL9D' })
-
-      const transaction = await Pagarme.transactions.create({
+    } else {
+      transaction = await Pagarme.transactions.create({
         'amount': reservaAcomod.valorReservaTotal * 100,
         'capture': false,
         'payment_method': 'boleto',
         'customer': {
-          'external_id': context.auth.token.uid,
-          'name': reservaAcomod.guestName,
+          'external_id': guest.userID,
+          'name': guest.fullName,
           'type': 'individual',
           'country': 'br',
-          'email': context.auth.token.email,
+          'email': guest.email,
           'documents': [{
             'type': 'cpf',
-            'number': guestCPF
+            'number': customer.cpf.replace(/[^0-9\.]+/g, '').replace(/\./g, '')
           }],
-          'phone_numbers': [ guestCelular ]
+          'phone_numbers': [ customer.celular ]
         },
         'items': [{
           'id': acomod.acomodID,
@@ -268,21 +282,54 @@ exports.newReservaAcomod = functions.https.onCall(async (data, context) => {
           'tangible': false
         }]
       })
-      
-      reservaAcomod.reservaID = transaction.id.toString()
-
-      /* Criar reserva na Firestore */
-      await admin.firestore().collection('reservasAcomods').doc(reservaAcomod.reservaID).set(reservaAcomod)
-
-      /* Atualizar visit */
-      await admin.firestore().collection('acomods').doc(acomod.acomodID).collection('visits').doc(visitID).update({ concludedReserva: true })
-
-      return { reservaID: reservaAcomod.reservaID }
-      
-    } catch (err) {
-      console.log(err)
-      throw new functions.https.HttpsError('aborted', err.message, err)
     }
+
+    reservaAcomod.reservaID = await transaction.id.toString()
+
+    /* Criar reserva na Firestore */
+    await admin.firestore().collection('reservasAcomods').doc(reservaAcomod.reservaID).set(reservaAcomod)
+
+    /* Atualizar visit */
+    await admin.firestore().collection('acomods').doc(acomod.acomodID).collection('visits').doc(visitID).update({ concludedReserva: true })
+
+    /* Enviar e-mail para Host */
+    await Mailjet.post('send', {'version': 'v3.1'}).request({
+      'Messages': [{
+        'From': { 'Email': ESemail, 'Name': ESname },
+        'To': [{
+          'Email': host.email,
+          'Name': host.fullName
+        }],
+        'TemplateID': 477332,
+        'TemplateLanguage': true,
+        'Subject': 'Novo Pedido de Reserva',
+        'Variables': {
+          'reservaID': reservaAcomod.reservaID,
+          'acomodURL': `https://www.escarpastrip.com/acomodacoes/${reservaAcomod.acomodID}`,
+          'guestFirstName': guest.firstName,
+          'hostFirstName': host.firstName,
+          'title': acomod.title,
+          'acomodPhoto': acomod.images[0].HJ,
+          'checkIn': dayjs(reservaAcomod.periodoReserva.start).format('ddd, DD MMM YYYY'),
+          'checkOut': dayjs(reservaAcomod.periodoReserva.end).format('ddd, DD MMM YYYY'),
+          'dayAfterCheckin': dayjs(reservaAcomod.periodoReserva.start).add(1, 'day').format('DD/MM/YYYY'),
+          'totalHospedes': reservaAcomod.totalHospedes,
+          'noites': reservaAcomod.noites,
+          'valorNoite': numeral(acomod.valorNoite).format('$0,0'),
+          'valorNoitesTotal': numeral(reservaAcomod.valorNoitesTotal).format('$0,0'),
+          'limpezaFee': numeral(reservaAcomod.limpezaFee).format('$0,0'),
+          'hostAmount': numeral(reservaAcomod.valorNoitesTotal + reservaAcomod.limpezaFee).format('$0,0'),
+          'guestPhoto': guest.photoURL,
+          'message': reservaAcomod.message
+        }
+      }]
+    })
+
+    return { reservaID: reservaAcomod.reservaID }
+
+  } catch (err) {
+    console.log(err.response)
+    throw new functions.https.HttpsError('aborted', err.message, err)
   }
 })
 
@@ -298,59 +345,6 @@ exports.payHostAcomod = functions.https.onCall(async data => {
 
 
 /* ________________________________________________ E-MAILS ________________________________________________ */
-
-
-exports.email_newReservaToHost = functions.firestore
-  .document('reservasAcomods/{reservaID}')
-  .onCreate(async snap => {
-    const reservaAcomod = snap.data()
-
-    try {
-      /* Get acomod data */
-      const docAcomod = await admin.firestore().collection('acomods').doc(reservaAcomod.acomodID).get()
-      const acomod = docAcomod.data()
-
-      const startDate = new Date(reservaAcomod.periodoReserva.start)
-      const endDate = new Date(reservaAcomod.periodoReserva.end)
-
-      /* Enviar e-mail */
-      await Mailjet.post('send', {'version': 'v3.1'}).request({
-        'Messages': [{
-          'From': { 'Email': ESemail, 'Name': ESname },
-          'To': [{
-            'Email': reservaAcomod.hostEmail,
-            'Name': reservaAcomod.hostName
-          }],
-          'TemplateID': 477332,
-          'TemplateLanguage': true,
-          'Subject': 'Novo Pedido de Reserva',
-          'Variables': {
-            'reservaID': reservaAcomod.reservaID,
-            'acomodURL': `https://www.escarpastrip.com/acomodacoes/${reservaAcomod.acomodID}`,
-            'guestFirstName': reservaAcomod.guestName.split(' ')[0],
-            'hostFirstName': reservaAcomod.hostName.split(' ')[0],
-            'title': acomod.title,
-            'acomodPhoto': acomod.images[0].HJ,
-            'checkIn': dayjs(startDate).format('ddd, DD MMM YYYY'),
-            'checkOut': dayjs(endDate).format('ddd, DD MMM YYYY'),
-            'dayAfterCheckin': dayjs(startDate).add(1, 'day').format('DD/MM/YYYY'),
-            'totalHospedes': reservaAcomod.totalHospedes,
-            'noites': reservaAcomod.noites,
-            'valorNoite': numeral(acomod.valorNoite).format('$0,0'),
-            'valorNoitesTotal': numeral(reservaAcomod.valorNoitesTotal).format('$0,0'),
-            'limpezaFee': numeral(reservaAcomod.limpezaFee).format('$0,0'),
-            'hostAmount': numeral(reservaAcomod.valorNoitesTotal + reservaAcomod.limpezaFee).format('$0,0'),
-            'guestPhoto': reservaAcomod.guestPhoto,
-            'message': reservaAcomod.message
-          }
-        }]
-      })
-    } 
-    catch (err) {
-      console.log(err)
-    }
-  })
-
 
 
 exports.email_reservaAcceptedToGuest = functions.firestore

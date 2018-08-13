@@ -19,6 +19,7 @@ const store = () => new Vuex.Store({
     showFoobar: true,
     showShare: false,
     showProprietario: false,
+    showParcelas: false,
     menuIconAnime: false,
     loader: false,
     miniLoader: false,
@@ -46,7 +47,19 @@ const store = () => new Vuex.Store({
       cardNumber: '',
       cardHolderName: '',
       cardExpirationDate: '',
-      cardCVV: ''
+      cardCVV: '',
+      parcelas: null
+    },
+    customer: {
+      name: '',
+      cpf: '',
+      celular: '',
+      zipcode: '',
+      street: '',
+      street_number: '',
+      neighborhood: '',
+      city: '',
+      state: ''
     },
     cardType: null,
     cardTypeNice: null,
@@ -96,6 +109,7 @@ const store = () => new Vuex.Store({
     visitID: null,
     acomods: null,
     acomod: null,
+    host: null,
     acomodMap: null,
     acomodProgressBar: 0,
     acomodPlace: null,
@@ -103,12 +117,9 @@ const store = () => new Vuex.Store({
     disabledDatesAcomod: null,
     acomodData: { /* Atualizar action */
       acomodID: null,
-      userID: null,
+      hostID: null,
       recipientID: null,
-      proprietario: null,
-      email: null,
       celular: '',
-      photoURL: null,
       tipoAcomod: 'Casa',
       title: '',
       subtitle: '',
@@ -157,22 +168,7 @@ const store = () => new Vuex.Store({
       valorReservaTotal: null,
       message: '',
       hostID: null,
-      hostEmail: null,
-      hostName: null,
-      hostCelular: null,
-      guestID: null,
-      guestEmail: null,
-      guestName: null,
-      guestCPF: '',
-      guestCelular: '',
-      billing: {
-        zipcode: '',
-        street: '',
-        street_number: '',
-        neighborhood: '',
-        city: '',
-        state: ''
-      }
+      guestID: null
     },
     paymentAdded: false,
     validZipcode: false,
@@ -406,6 +402,9 @@ const store = () => new Vuex.Store({
     m_showProprietario (state, payload) {
       state.showProprietario = payload
     },
+    m_showParcelas (state, payload) {
+      state.showParcelas = payload
+    },
     /*
     -------------------- ANÚNCIOS --------------------
     */
@@ -444,6 +443,7 @@ const store = () => new Vuex.Store({
       state.creditCard.cardHolderName = ''
       state.creditCard.cardExpirationDate = ''
       state.creditCard.cardCVV = ''
+      state.creditCard.parcelas = null
     },
     m_bankAccount (state, payload) {
       state.bankAccount = payload
@@ -459,6 +459,9 @@ const store = () => new Vuex.Store({
     },
     m_acomod (state, payload) {
       state.acomod = payload
+    },
+    m_host (state, payload) {
+      state.host = payload
     },
     m_acomodMap (state, payload) {
       state.acomodMap = payload
@@ -787,14 +790,10 @@ const store = () => new Vuex.Store({
       /* Resetar acomodData */
       commit('m_acomodData', {
         acomodID: null,
-        userID: null,
+        hostID: null,
         recipientID: null,
-        proprietario: null,
-        email: null,
         celular: '',
-        photoURL: null,
         tipoAcomod: 'Casa',
-        local: null,
         title: '',
         subtitle: '',
         valorNoite: 0,
@@ -844,22 +843,18 @@ const store = () => new Vuex.Store({
         valorReservaTotal: null,
         message: '',
         hostID: null,
-        hostEmail: null,
-        hostName: null,
-        hostCelular: null,
-        guestID: null,
-        guestEmail: null,
-        guestName: null,
-        guestCPF: '',
-        guestCelular: '',
-        billing: {
-          zipcode: '',
-          street: '',
-          street_number: '',
-          neighborhood: '',
-          city: '',
-          state: ''
-        }
+        guestID: null
+      }
+      state.customer = {
+        name: '',
+        cpf: '',
+        celular: '',
+        zipcode: '',
+        street: '',
+        street_number: '',
+        neighborhood: '',
+        city: '',
+        state: ''
       }
       state.cardType = null
       state.cardTypeNice = null

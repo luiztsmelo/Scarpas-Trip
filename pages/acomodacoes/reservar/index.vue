@@ -72,12 +72,12 @@
         <!-- ******* ETAPA 2 ******* -->
         <div class="etapa-2" v-if="$store.state.reservaAcomodDesktop2 === true">
 
-          <h1 class="__title">Conte a {{ acomod.proprietario.split(' ')[0] }} sobre sua viagem</h1>
+          <h1 class="__title">Conte a {{ host.firstName }} sobre sua viagem</h1>
 
 
           <div class="message">
             
-            <h3 class="__subtitle">Ajude {{ acomod.proprietario.split(' ')[0] }} a preparar {{ tipoAcomodA }} para sua estadia respondendo às suas perguntas</h3>
+            <h3 class="__subtitle">Ajude {{ host.firstName }} a preparar {{ tipoAcomodA }} para sua estadia respondendo às suas perguntas</h3>
 
 
             <div class="item-form">
@@ -108,7 +108,7 @@
 
           <div class="payment">
 
-            <h3 class="__subtitle">{{ user.firstName }}, você somente será cobrado se {{ acomod.proprietario.split(' ')[0] }} aceitar seu pedido de reserva. Caso aceite, para sua segurança nós só liberaremos o pagamento para ele no dia seguinte de seu check-in, {{ dayAfterCheckin }}.</h3>
+            <h3 class="__subtitle">{{ user.firstName }}, você somente será cobrado se {{ host.firstName }} aceitar seu pedido de reserva. Caso aceite, para sua segurança nós só liberaremos o pagamento para ele no dia seguinte de seu check-in, {{ dayAfterCheckin }}.</h3>
 
 
             <!-- PAYMENT METHOD -->
@@ -123,12 +123,12 @@
 
             <!-- NAME -->
             <div class="item-form">
-              <label :class="[ cardHolderNameError || guestNameError ? 'has-error-label' : '' ]">{{ reservaAcomod.paymentMethod === 'credit_card' ? 'Nome impresso no Cartão' : 'Nome Completo'}}</label>
+              <label :class="[ cardHolderNameError || nameError ? 'has-error-label' : '' ]">{{ reservaAcomod.paymentMethod === 'credit_card' ? 'Nome impresso no Cartão' : 'Nome Completo'}}</label>
               <input
-                :class="[ cardHolderNameError || guestNameError ? 'has-error' : '' ]"
+                :class="[ cardHolderNameError || nameError ? 'has-error' : '' ]"
                 type="text" pattern="[A-Za-z]"
                 @keypress="keyEnterName"
-                v-model="reservaAcomod.paymentMethod === 'credit_card' ? $store.state.creditCard.cardHolderName : reservaAcomod.guestName">
+                v-model="reservaAcomod.paymentMethod === 'credit_card' ? creditCard.cardHolderName : $store.state.customer.name">
             </div><!-- NAME -->
 
 
@@ -200,7 +200,7 @@
                     ref="cpf"
                     :class="[ cpfError ? 'has-error' : '' ]"
                     type="tel"
-                    v-model="reservaAcomod.guestCPF"
+                    v-model="$store.state.customer.cpf"
                     :mask="[/\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '-', /\d/, /\d/]"
                     :guide="false"
                     placeholder="000.000.000-00">
@@ -215,7 +215,7 @@
                     ref="celular"
                     :class="[ celularError ? 'has-error' : '' ]"
                     type="tel"
-                    v-model="reservaAcomod.guestCelular"
+                    v-model="$store.state.customer.celular"
                     :mask="['(', /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]"
                     :guide="false"
                     placeholder="(  )          ">
@@ -240,7 +240,7 @@
                     ref="zipcode"
                     :class="[ zipcodeError ? 'has-error' : '' ]"
                     type="tel"
-                    v-model="reservaAcomod.billing.zipcode"
+                    v-model="$store.state.customer.zipcode"
                     :mask="[/\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/]"
                     :guide="false"
                     placeholder="00000-000">
@@ -256,7 +256,7 @@
                     :class="[ streetError ? 'has-error' : '' ]"
                     type="text"
                     @keypress="keyEnterStreet"
-                    v-model="reservaAcomod.billing.street"
+                    v-model="$store.state.customer.street"
                     placeholder="Endereço">
                 </div><!-- ENDEREÇO -->
 
@@ -273,7 +273,7 @@
                     :class="[ streetNumberError ? 'has-error' : '' ]"
                     type="tel"
                     @keypress="keyEnterStreetNumber"
-                    v-model="reservaAcomod.billing.street_number"
+                    v-model="$store.state.customer.street_number"
                     :mask="[/\d/, /\d/, /\d/, /\d/]"
                     :guide="false">
                   </masked-input>
@@ -288,7 +288,7 @@
                     :class="[ neighborhoodError ? 'has-error' : '' ]"
                     type="text"
                     @keypress="keyEnterBairro"
-                    v-model="reservaAcomod.billing.neighborhood">
+                    v-model="$store.state.customer.neighborhood">
                 </div><!-- BAIRRO -->
 
               </div>
@@ -303,14 +303,14 @@
                     :class="[ cityError ? 'has-error' : '' ]"
                     type="text"
                     @keypress="keyEnterCity"
-                    v-model="reservaAcomod.billing.city">
+                    v-model="$store.state.customer.city">
                 </div><!-- CIDADE -->
 
 
                 <!-- ESTADO -->
                 <div class="item-form" style="flex:50%; padding-left:.7rem">
                   <label :class="[ stateError ? 'has-error-label' : '' ]">Estado</label>
-                  <select ref="state" :class="[ stateError ? 'has-error' : '' ]" v-model="reservaAcomod.billing.state">
+                  <select ref="state" :class="[ stateError ? 'has-error' : '' ]" v-model="$store.state.customer.state">
                     <option v-for="state in states" :value="state.value">{{ state.name }}</option>
                   </select>
                 </div><!-- ESTADO -->
@@ -389,7 +389,7 @@
       <h1 class="__title">Pedido de reserva enviado</h1>
 
       <h3 class="__text">
-        {{ acomod.proprietario.split(' ')[0] }} irá analisar seu pedido e dentro de 24h você receberá um e-mail e SMS com a confirmação de sua reserva, juntamente com as informações de contato do anunciante.
+        {{ host.firstName }} irá analisar seu pedido e dentro de 24h você receberá um e-mail e SMS com a confirmação de sua reserva, juntamente com as informações de contato do anunciante.
       </h3>
 
       <h3 class="__subtitle">Código da Reserva</h3>
@@ -499,48 +499,29 @@ export default {
       try {
         this.$store.commit('m_loader', true)
 
-        const reservaAcomod = this.$store.state.reservaAcomod
-        const creditCard = this.$store.state.creditCard
-        const user = this.$store.state.user
+        this.reservaAcomod.hostID = this.acomod.hostID
+        this.reservaAcomod.guestID = this.user.userID
 
-        reservaAcomod.requested = new Date().getTime()
-        reservaAcomod.acomodID = this.acomod.acomodID
+        await firebase.firestore().collection('users').doc(this.user.userID).update({
+          celular: '+55' + this.celular.replace(/[^0-9\.]+/g, '')
+        })
 
-        reservaAcomod.hostID = this.acomod.userID
-        reservaAcomod.hostEmail = this.acomod.email
-        reservaAcomod.hostName = this.acomod.proprietario
-        reservaAcomod.hostPhoto = this.acomod.photoURL
-        reservaAcomod.hostCelular = this.acomod.celular
-        reservaAcomod.whatsAppHostHREF = this.whatsAppHostHREF
+        let result = null
 
-        reservaAcomod.guestID = user.userID
-        reservaAcomod.guestEmail = user.email
-        reservaAcomod.guestPhoto = user.photoURL
-
-        reservaAcomod.limpezaFee = this.acomod.limpezaFee
-
-        /* ******************** CREDIT CARD ******************** */
-        if (reservaAcomod.paymentMethod === 'credit_card') {
+        if (this.reservaAcomod.paymentMethod === 'credit_card') {
 
           /* Checar se todos os dados foram preenchidos */
-          if (valid.number(this.cardNumber).isValid && valid.expirationDate(this.cardExpirationDate).isValid && valid.cvv(this.cardCVV).isValid && this.cardHolderName !== '' && CPF.validate(this.guestCPF) && this.guestCPF.length === 14 && this.guestCelular.length === 15 && this.zipcode.length === 9 && this.$store.state.validZipcode && this.street !== '' && this.streetNumber !== '' && this.neighborhood !== '' && this.city !== '' && this.state !== '') {
+          if (valid.number(this.cardNumber).isValid && valid.expirationDate(this.cardExpirationDate).isValid && valid.cvv(this.cardCVV).isValid && this.cardHolderName !== '' && CPF.validate(this.cpf) && this.cpf.length === 14 && this.celular.length === 15 && this.zipcode.length === 9 && this.$store.state.validZipcode && this.street !== '' && this.streetNumber !== '' && this.neighborhood !== '' && this.city !== '' && this.state !== '') {
 
             /* Criar transação no Pagarme e reserva na Firestore */
-            const result = await firebase.functions().httpsCallable('newReservaAcomod')({
-              reservaAcomod: reservaAcomod,
-              creditCard: creditCard,
+            result = await firebase.functions().httpsCallable('newReservaAcomod')({
+              reservaAcomod: this.reservaAcomod,
+              creditCard: this.creditCard,
+              customer: this.customer,
               acomod: this.acomod,
+              host: this.host,
               visitID: this.$store.state.visitID
             })
-
-            reservaAcomod.reservaID = result.data.reservaID
-
-            /* Resetar dados do cartão de crédito */
-            this.$store.commit('m_resetCreditCard')
-
-            this.$store.state.concludedReservaAcomod = true
-            this.scrollTop()
-            this.$store.commit('m_loader', false)
             
           } else { /* Há dados incompletos */
             this.$store.commit('m_loader', false)
@@ -548,8 +529,8 @@ export default {
             !valid.number(this.cardNumber).isValid ? this.cardNumberError = true : this.cardNumberError = false
             !valid.expirationDate(this.cardExpirationDate).isValid ?  this.cardExpirationDateError = true :  this.cardExpirationDateError = false
             !valid.cvv(this.cardCVV).isValid ? this.cardCvvError = true : this.cardCvvError = false
-            this.guestCPF.length < 14 || !CPF.validate(this.guestCPF) ? this.cpfError = true : this.cpfError = false
-            this.guestCelular.length < 15 ? this.celularError = true : this.celularError = false
+            this.cpf.length < 14 || !CPF.validate(this.cpf) ? this.cpfError = true : this.cpfError = false
+            this.celular.length < 15 ? this.celularError = true : this.celularError = false
             this.zipcode.length < 9 || !this.$store.state.validZipcode ? this.zipcodeError = true : this.zipcodeError = false
             this.street === null || this.street === '' ? this.streetError = true : this.streetError = false
             this.streetNumber === null || this.streetNumber === '' ? this.streetNumberError = true : this.streetNumberError = false
@@ -557,31 +538,36 @@ export default {
             this.city === null || this.city === '' ? this.cityError = true : this.cityError = false
             this.state === null || this.state === '' ? this.stateError = true : this.stateError = false
           }
-        } else { /* ******************** BOLETO ******************** */
-
+        } else {
           /* Checar se todos os dados foram preenchidos */
-          if (reservaAcomod.guestName !== '' && reservaAcomod.guestCPF.length === 14 && reservaAcomod.guestCelular.length === 15) {
+          if (this.name !== '' && CPF.validate(this.cpf) && this.cpf.length === 14 && this.celular.length === 15) {
 
             /* Criar transação no Pagarme e reserva na Firestore */
-            const result = await firebase.functions().httpsCallable('newReservaAcomod')({
-              reservaAcomod: reservaAcomod,
+            result = await firebase.functions().httpsCallable('newReservaAcomod')({
+              reservaAcomod: this.reservaAcomod,
+              customer: this.customer,
               acomod: this.acomod,
+              host: this.host,
               visitID: this.$store.state.visitID
             })
             
-            reservaAcomod.reservaID = result.data.reservaID
-            
-            this.$store.state.concludedReservaAcomod = true
-            this.scrollTop()
-            this.$store.commit('m_loader', false)
-
           } else { /* Há dados incompletos */
             this.$store.commit('m_loader', false)
-            reservaAcomod.guestName === '' ? this.guestNameError = true : this.guestNameError = false
-            reservaAcomod.guestCPF.length < 14 ? this.cpfError = true : this.cpfError = false
-            reservaAcomod.guestCelular.length < 15 ? this.celularError = true : this.celularError = false
+            this.name === '' ? this.nameError = true : this.nameError = false
+            this.cpf.length < 14 || !CPF.validate(this.cpf) ? this.cpfError = true : this.cpfError = false
+            this.celular.length < 15 ? this.celularError = true : this.celularError = false
           }
         }
+
+      this.reservaAcomod.reservaID = await result.data.reservaID
+
+      /* Resetar dados do cartão de crédito */
+      this.$store.commit('m_resetCreditCard')
+
+      this.$store.state.concludedReservaAcomod = true
+      this.scrollTop()
+      this.$store.commit('m_loader', false)
+
       } catch (err) {
         console.log(err)
         this.$store.commit('m_loader', false)
@@ -623,26 +609,14 @@ export default {
     /* ******************** DATES ******************** */
     periodoReserva () {
       if (this.reservaAcomod.periodoReserva !== null) {
-        const checkIn = new Date(this.reservaAcomod.periodoReserva.start)
-        const checkOut = new Date(this.reservaAcomod.periodoReserva.end)
-        return dayjs(checkIn).format('ddd, DD MMM YYYY') + ' / ' + dayjs(checkOut).format('ddd, DD MMM YYYY')
+        return dayjs(this.reservaAcomod.periodoReserva.start).format('ddd, DD MMM YYYY') + ' / ' + dayjs(this.reservaAcomod.periodoReserva.end).format('ddd, DD MMM YYYY')
       }
-    },
-
-    /* ******************** FORMATTINGS ******************** */
-    whatsAppHostHREF () {
-      let celular = this.acomod.celular
-      let DDD = celular.slice(1, 3)
-      let firstNumber = celular.slice(5,10)
-      let lastNumber = celular.slice(11,15)
-      let whatsAppFormat = '+55' + DDD + firstNumber + lastNumber
-      return 'https://api.whatsapp.com/send?phone=' + whatsAppFormat
     }
   },
   watch: {
     message (value) { value !== '' ? this.messageError = false : '' },
     cardHolderName (value) { value !== '' ? this.cardHolderNameError = false : '' },
-    guestName (value) { value !== '' ? this.guestNameError = false : '' },
+    name (value) { value !== '' ? this.nameError = false : '' },
     cardNumber (value) {
       let cardNumber = valid.number(value)
       cardNumber.isPotentiallyValid ? this.cardNumberError = false : this.cardNumberError = true
@@ -684,7 +658,7 @@ export default {
         }
       }
     },
-    guestCPF (value) {
+    cpf (value) {
       value !== '' ? this.cpfError = false : '' 
       if (value.length === 14) {
         if (CPF.validate(value)) {
@@ -695,7 +669,7 @@ export default {
         }
       }
     },
-    guestCelular (value) { 
+    celular (value) { 
       value !== '' ? this.celularError = false : '' 
       if (value.length === 15 && this.reservaAcomod.paymentMethod === 'credit_card') {
         scrollIntoView(this.$refs.zipcode.$el)
@@ -706,17 +680,16 @@ export default {
       if (value.length === 9) {
         try {
           this.$store.commit('m_loader', true)
-          const billing = this.reservaAcomod.billing
-          const zipcode = billing.zipcode.replace(/[^0-9\.]+/g, '')
+          const zipcode = this.zipcode.replace(/[^0-9\.]+/g, '')
           const zipcodeData = await this.$axios.$get('https://api.pagar.me/1/zipcodes/' + zipcode)
-          billing.state = zipcodeData.state
-          billing.city = zipcodeData.city
-          billing.neighborhood = zipcodeData.neighborhood
-          billing.street = zipcodeData.street
+          this.$store.state.customer.state = zipcodeData.state
+          this.$store.state.customer.city = zipcodeData.city
+          this.$store.state.customer.neighborhood = zipcodeData.neighborhood
+          this.$store.state.customer.street = zipcodeData.street
           this.$store.state.validZipcode = true
           this.$store.commit('m_loader', false)
           this.$nextTick(() => {
-            if (billing.street === null || billing.street === '') {
+            if (this.street === null || this.street === '') {
               scrollIntoView(this.$refs.street)
               this.$refs.street.focus()
             } else {

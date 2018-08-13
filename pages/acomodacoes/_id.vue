@@ -47,10 +47,10 @@
 
         <!-- ####### ANUNCIANTE ####### -->
         <div class="anunciante-box">
-          <img class="__anunciante-img" :src="acomod.photoURL" @click="$store.commit('m_showProprietario', true), hashProprietario()">
+          <img class="__anunciante-img" :src="host.photoURL" @click="$store.commit('m_showProprietario', true), hashProprietario()">
           <div class="box-flex-column">
             <h3 style="user-select:none">Hospedado por</h3>
-            <a class="__anunciante-name" @click="$store.commit('m_showProprietario', true), hashProprietario()">{{ acomod.proprietario }}</a>
+            <a class="__anunciante-name" @click="$store.commit('m_showProprietario', true), hashProprietario()">{{ host.fullName }}</a>
           </div>
         </div><!-- ####### ANUNCIANTE ####### -->
 
@@ -266,7 +266,7 @@
                   />
                   <img
                     src="../../assets/img/exit.svg"
-                    v-if="$store.state.reservaAcomod.periodoReserva !== null"
+                    v-if="periodoReserva !== null"
                     class="reserva-close-date"
                     @click.stop="$store.state.reservaAcomod.periodoReserva = null"
                   >
@@ -275,7 +275,7 @@
             </v-date-picker>
           </div>
 
-          <div class="reserva-info" v-if="$store.state.reservaAcomod.periodoReserva !== null">
+          <div class="reserva-info" v-if="periodoReserva !== null">
             
             <div class="reserva-info_item" style="padding-bottom: .2rem">
               <h3>{{ `R$ ${acomod.valorNoite.toLocaleString()} x ${$store.state.reservaAcomod.noites} ${$store.state.reservaAcomod.noites == 1 ? 'noite' : 'noites'}` }}</h3>
@@ -381,13 +381,18 @@ export default {
   transition: 'id',
   async fetch ({ store, params }) {
     try {
-      /* Pegar dados da acomod atual na Firestore */
+      /* Get acomod */
       const acomod = await firebase.firestore().collection('acomods').doc(params.id).get()
+
+      /* Get host */
+      const host = await firebase.firestore().collection('users').doc(acomod.data().hostID).get()
       
-      /* Pegar as reservas dessa acomod na Firestore para desabilitar as datas ocupadas no date picker */
+      /* Get reservas em andamento p/ desabilitar datas no datePicker */
       const reservas = await firebase.firestore().collection('reservasAcomods').where('acomodID', '==', params.id).where('isRunning', '==', true).get()
 
       store.commit('m_loader', false)
+
+      store.commit('m_host', host.data())
 
       store.commit('m_disabledDatesAcomod', reservas.docs.map(acomod => acomod.data().periodoReserva))
       
@@ -432,8 +437,7 @@ export default {
       firebase.firestore().collection('acomods').doc(this.$route.params.id).collection('visits').doc(this.$store.state.visitID).update({ 
         clickedReservaBtn: true
       })
-
-      if (this.$store.state.reservaAcomod.periodoReserva === null) {
+      if (this.periodoReserva === null) {
         this.$nextTick(() => this.$refs.datePicker.$el.focus())
       } else {
         if (this.$store.state.user.email === null) {
@@ -442,7 +446,6 @@ export default {
           this.$modal.show('sign-in-modal')
         } else {
           this.$store.state.creditCard.cardHolderName = this.$store.state.user.fullName
-          this.$store.state.reservaAcomod.guestName = this.$store.state.user.fullName
           this.$store.commit('m_isReservar', true)
           this.$router.push('/acomodacoes/reservar')
           this.$store.commit('m_showNavbar', false)
@@ -450,6 +453,9 @@ export default {
       }
     },
     reservarMobile () {
+      firebase.firestore().collection('acomods').doc(this.$route.params.id).collection('visits').doc(this.$store.state.visitID).update({ 
+        clickedReservaBtn: true
+      })
       document.body.setAttribute('style', 'overflow: hidden')
       this.$store.dispatch('a_generateRandomHashs')
       this.$store.commit('m_showReservaAcomod', true)
@@ -493,6 +499,10 @@ export default {
     this.$store.state.heightImageBox === null ? this.$store.state.heightImageBox = this.$refs.imageBox.clientHeight : null
   },
   computed: {
+    acomod () { return this.$store.state.acomod },
+    showShare () { return this.$store.state.showShare },
+    hash () { return this.$route.hash },
+    host () {return this.$store.state.host },
     periodoReserva () {return this.$store.state.reservaAcomod.periodoReserva },
     attributesCalendar () {
       return [
@@ -521,10 +531,8 @@ export default {
       return Array.from({length: this.acomod.totalHospedes}, (v, k) => k+1)
     },
     outputDatePicker () {
-      if (this.$store.state.reservaAcomod.periodoReserva !== null) {
-        const start = new Date(this.$store.state.reservaAcomod.periodoReserva.start)
-        const end = this.$store.state.reservaAcomod.periodoReserva.end
-        return dayjs(start).format('ddd, DD MMM') + '  →  ' + dayjs(end).format('ddd, DD MMM')
+      if (this.periodoReserva !== null) {
+        return dayjs(this.periodoReserva.start).format('ddd, DD MMM') + '  →  ' + dayjs(this.periodoReserva.end).format('ddd, DD MMM')
       }
     },
     minDate () {
@@ -535,22 +543,16 @@ export default {
     },
     markerSize () {
       return !this.$store.state.googleMapsInitialized ? null : new window.google.maps.Size(42, 42)
-    },
-    acomod () {
-      return this.$store.state.acomod
-    },
-    showShare () {
-      return this.$store.state.showShare
-    },
-    hash () {
-      return this.$route.hash
     }
   },
   watch: {
     periodoReserva (newVal, oldVal) {
       if (newVal !== oldVal && newVal !== null) {
-        const checkIn = dayjs(new Date(this.$store.state.reservaAcomod.periodoReserva.start))
-        const checkOut = dayjs(new Date(this.$store.state.reservaAcomod.periodoReserva.end))
+        this.periodoReserva.start = Date.parse(this.periodoReserva.start)
+        this.periodoReserva.end = Date.parse(this.periodoReserva.end)
+   
+        const checkIn = dayjs(this.periodoReserva.start)
+        const checkOut = dayjs(this.periodoReserva.end)
 
         const noites = checkOut.diff(checkIn, 'day')
         this.$store.commit('m_noites', noites)
@@ -563,6 +565,8 @@ export default {
 
         const valorReservaTotal = valorNoitesTotal + this.acomod.limpezaFee + serviceFeeTotal
         this.$store.commit('m_valorReservaTotal', valorReservaTotal)
+
+        this.$store.state.reservaAcomod.limpezaFee = this.acomod.limpezaFee
       }
     },
     hash (value) {

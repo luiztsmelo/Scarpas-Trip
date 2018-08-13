@@ -1045,10 +1045,7 @@ export default {
     async concluir () {
       const acomodData = this.$store.state.acomodData
 
-      acomodData.proprietario = this.user.fullName
-      acomodData.email = this.user.email
-      acomodData.photoURL = this.user.photoURL
-      acomodData.userID = this.user.userID
+      acomodData.hostID = this.user.userID
 
       /* Se todas as informações preenchidas */
       if (this.bankCode !== '' && this.agencia !== '' && this.agenciaDV !== '' && this.conta !== '' && this.contaDV !== '' && this.legalName !== '' && this.docNumber.length === 14 && CPF.validate(this.docNumber)) {

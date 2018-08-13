@@ -18,7 +18,7 @@
       <!-- LEFT CONTAINER -->
       <div class="left-container">
 
-        <h1 class="__title">Enviar uma mensagem para {{ acomod.proprietario.split(' ')[0] }}</h1>
+        <h1 class="__title">Enviar uma mensagem para {{ host.firstName }}</h1>
 
         <h3 class="__subtitle">Para sua segurança, recomendamos que não faça reservas diretamente com o anunciante, fora desse site. Você poderá se prejudicar caso algum problema aconteça. Portanto, nunca divulgue suas informações de contato. Somente após seu pedido de reserva tais informações serão fornecidas.</h3>
 
@@ -59,7 +59,7 @@
     <div class="after-sent" v-else>
       <img class="__img" src="../../assets/img/brand.svg">
       <h1 class="__title">Mensagem enviada</h1>
-      <h3 class="__subtitle">Pediremos a {{ acomod.proprietario.split(' ')[0] }} que te responda em no máximo 24h. A resposta será enviada para seu e-mail.</h3>
+      <h3 class="__subtitle">Pediremos a {{ host.firstName }} que te responda em no máximo 24h. A resposta será enviada para seu e-mail.</h3>
       <button type="button" class="__close-btn" @click="$modal.hide('ask-acomod-modal')">Fechar</button>
     </div>
 
@@ -117,15 +117,10 @@ export default {
     }
   },
   computed: {
-    acomod () {
-      return this.$store.state.acomod
-    },
-    user () {
-      return this.$store.state.user
-    },
-    reservaAcomod () {
-      return this.$store.state.reservaAcomod
-    },
+    acomod () { return this.$store.state.acomod },
+    host () { return this.$store.state.host },
+    user () { return this.$store.state.user },
+    reservaAcomod () { return this.$store.state.reservaAcomod },
     totalHospedesArray () {
       return Array.from({length: this.acomod.totalHospedes}, (v, k) => k+1)
     }

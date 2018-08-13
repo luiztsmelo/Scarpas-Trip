@@ -84,7 +84,6 @@ export default {
       }
       if (value !== null && this.$store.state.clickedReservaAcomod === true && this.$route.name === 'acomodacoes-id') {
         this.$store.state.creditCard.cardHolderName = this.$store.state.user.fullName
-        this.$store.state.reservaAcomod.guestName = this.$store.state.user.fullName
         this.$modal.hide('sign-in-modal')
         this.$store.commit('m_isReservar', true)
         this.$router.push('/acomodacoes/reservar')

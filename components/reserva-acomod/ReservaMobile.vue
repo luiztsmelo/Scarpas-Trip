@@ -165,7 +165,7 @@
               <masked-input
                 :class="[ celularError ? 'has-error' : '' ]"
                 type="tel"
-                v-model="reservaAcomod.guestCelular"
+                v-model="$store.state.customer.celular"
                 :mask="['(', /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]"
                 :guide="false"
                 placeholder="(  )          ">
@@ -199,13 +199,13 @@
 
           <h3 class="etapas">Etapa 4 de 5</h3>
 
-          <h1 class="__title">Conte a {{ acomod.proprietario.split(' ')[0] }} sobre sua viagem</h1>
+          <h1 class="__title">Conte a {{ host.firstName }} sobre sua viagem</h1>
 
-          <h3 class="__text">Ajude {{ acomod.proprietario.split(' ')[0] }} a preparar {{ tipoAcomodA }} para sua estadia respondendo às suas perguntas</h3>
+          <h3 class="__text">Ajude {{ host.firstName }} a preparar {{ tipoAcomodA }} para sua estadia respondendo às suas perguntas</h3>
 
 
           <div class="host-message">
-            <img class="__img" :src="acomod.photoURL">
+            <img class="__img" :src="host.photoURL">
             <div class="message-box">
               <h3 class="__message">Oi {{ user.firstName }}! Estou te aguardando ansiosamente por aqui. Por favor, me avise a hora em que irá chegar.</h3>
             </div>
@@ -250,7 +250,7 @@
           <h1 class="__title">Detalhes sobre o pagamento</h1>
 
 
-          <h3 class="__text">{{ user.firstName }}, você somente será cobrado se {{ acomod.proprietario.split(' ')[0] }} aceitar seu pedido de reserva. Caso aceite, para sua segurança nós só liberaremos o pagamento para ele no dia seguinte de seu check-in, {{ dayAfterCheckin }}.</h3>
+          <h3 class="__text">{{ user.firstName }}, você somente será cobrado se {{ host.firstName }} aceitar seu pedido de reserva. Caso aceite, para sua segurança nós só liberaremos o pagamento para ele no dia seguinte de seu check-in, {{ dayAfterCheckin }}.</h3>
 
 
           <div class="add-payment" :style="formaDePagamentoStyle" @click="openPaymentMethod">
@@ -258,10 +258,15 @@
             <img class="__arrow-right" src="../../assets/img/arrow-right.svg">
           </div>
 
-          <div class="add-payment" style="margin-bottom: 1.4rem" v-if="$store.state.paymentAdded">
-            <h3 class="__item-text" style="">1 parcela</h3>
+          <div class="add-payment" style="margin-bottom: 1.4rem" v-if="$store.state.paymentAdded" @click="$store.state.showParcelas = true">
+            <h3 class="__item-text" style="font-weight: 500">
+              {{ `${reservaAcomod.parcelas} ${reservaAcomod.parcelas === '1' ? 'parcela' : 'parcelas'}` }}
+              <span style="font-size: 16px; font-weight: 400">{{ parcelasText }}</span>
+            </h3>
             <img class="__arrow-right" src="../../assets/img/arrow-right.svg">
           </div>
+
+          <Parcelas/>
 
 
           <h3 class="__subtitle">Política de cancelamento: Flexível</h3>
@@ -429,7 +434,7 @@
               ref="cpf"
               :class="[ cpfError ? 'has-error' : '' ]"
               type="tel"
-              v-model="reservaAcomod.guestCPF"
+              v-model="$store.state.customer.cpf"
               :mask="[/\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '-', /\d/, /\d/]"
               :guide="false"
               placeholder="000.000.000-00">
@@ -447,7 +452,7 @@
               ref="zipcode"
               :class="[ zipcodeError ? 'has-error' : '' ]"
               type="tel"
-              v-model="reservaAcomod.billing.zipcode"
+              v-model="$store.state.customer.zipcode"
               :mask="[/\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/]"
               :guide="false"
               placeholder="00000-000">
@@ -465,7 +470,7 @@
                 :class="[ streetError ? 'has-error' : '' ]"
                 type="text"
                 @keypress="keyEnterStreet"
-                v-model="reservaAcomod.billing.street"
+                v-model="$store.state.customer.street"
                 placeholder="Endereço">
             </div><!-- ENDEREÇO -->
 
@@ -479,7 +484,7 @@
                   :class="[ streetNumberError ? 'has-error' : '' ]"
                   type="tel"
                   @keypress="keyEnterStreetNumber"
-                  v-model="reservaAcomod.billing.street_number"
+                  v-model="$store.state.customer.street_number"
                   :mask="[/\d/, /\d/, /\d/, /\d/]"
                   :guide="false">
                 </masked-input>
@@ -493,7 +498,7 @@
                   :class="[ neighborhoodError ? 'has-error' : '' ]"
                   type="text"
                   @keypress="keyEnterBairro"
-                  v-model="reservaAcomod.billing.neighborhood">
+                  v-model="$store.state.customer.neighborhood">
               </div><!-- BAIRRO -->
             </div>
           
@@ -507,13 +512,13 @@
                   :class="[ cityError ? 'has-error' : '' ]"
                   type="text"
                   @keypress="keyEnterCity"
-                  v-model="reservaAcomod.billing.city">
+                  v-model="$store.state.customer.city">
               </div><!-- CIDADE -->
 
               <!-- ESTADO -->
               <div class="item-form" style="flex:50%">
                 <label :class="[ stateError ? 'has-error-label' : '' ]">Estado</label>
-                <select ref="state" :class="[ stateError ? 'has-error' : '' ]" v-model="reservaAcomod.billing.state">
+                <select ref="state" :class="[ stateError ? 'has-error' : '' ]" v-model="$store.state.customer.state">
                   <option v-for="state in states" :value="state.value">{{ state.name }}</option>
                 </select>
               </div><!-- ESTADO -->
@@ -543,6 +548,7 @@ import 'firebase/functions'
 import MiniLoader from '@/components/MiniLoader.vue'
 import MaskedInput from 'vue-text-mask'
 import DatePicker from '@/components/DatePicker'
+import Parcelas from '@/components/Parcelas'
 import { reservaAcomod } from '@/mixins/reservaAcomod'
 import { states } from '@/mixins/statesBrazil'
 import { tipoAcomod } from '@/mixins/tipoAcomod'
@@ -554,7 +560,7 @@ import 'dayjs/locale/pt-br'
 dayjs.locale('pt-br')
 
 export default {
-  components: { MiniLoader, MaskedInput, DatePicker },
+  components: { MiniLoader, MaskedInput, DatePicker, Parcelas },
   mixins: [ reservaAcomod, states, tipoAcomod ],
   data () {
     return {
@@ -668,12 +674,11 @@ export default {
       }, Math.floor(Math.random() * (800 - 200 + 1) ) + 200)
     },
     nextBtn3 () {
-      if (this.reservaAcomod.guestCelular.length === 15) {
+      if (this.celular.length === 15) {
         this.$store.commit('m_miniLoader', true)
         setTimeout(() => {
           this.$store.commit('m_miniLoader', false)
           this.creditCard.cardHolderName = this.user.fullName
-          this.reservaAcomod.guestName = this.user.fullName
           this.$store.commit('m_reservaAcomod3', false)
           this.$store.commit('m_reservaAcomod4', true)
           window.location.hash = this.$store.state.randomHashs[4]
@@ -685,7 +690,7 @@ export default {
             title: 'Ops',
             message: 'Adicione um número válido.'
           })
-          this.guestCelular.length < 15 ? this.celularError = true : this.celularError = false
+          this.celular.length < 15 ? this.celularError = true : this.celularError = false
         } else {
           this.$store.commit('show_alert', {
             type: 'warning',
@@ -730,25 +735,41 @@ export default {
         this.$store.commit('m_reservaAcomodBoleto', false), window.history.back(1)
       }
     },
-    nextBtnBilling () {
-      if (this.cardHolderName !== '' && CPF.validate(this.guestCPF) && this.guestCPF.length === 14 && this.zipcode.length === 9 && this.$store.state.validZipcode && this.street !== '' && this.street !== null && this.streetNumber !== '' && this.streetNumber !== null && this.neighborhood !== '' && this.neighborhood !== null && this.city !== '' && this.city !== null && this.state !== '' && this.state !== null) {
-        this.$store.state.paymentAdded = true
-        this.$store.commit('m_reservaAcomodBilling', false)
-        window.history.back(1)
-      } else {
-        this.$store.commit('show_alert', {
-          type: 'error',
-          title: 'Erro',
-          message: 'Informações inválidas.',
-        })
-        this.cardHolderName.length < 3 ? this.cardHolderNameError = true : this.cardHolderNameError = false
-        this.guestCPF.length < 14 || !CPF.validate(this.guestCPF) ? this.cpfError = true : this.cpfError = false
-        this.zipcode.length < 9 || !this.$store.state.validZipcode ? this.zipcodeError = true : this.zipcodeError = false
-        this.street === null || this.street === '' ? this.streetError = true : this.streetError = false
-        this.streetNumber === null || this.streetNumber === '' ? this.streetNumberError = true : this.streetNumberError = false
-        this.neighborhood === null || this.neighborhood === '' ? this.neighborhoodError = true : this.neighborhoodError = false
-        this.city === null || this.city === '' ? this.cityError = true : this.cityError = false
-        this.state === null || this.state === '' ? this.stateError = true : this.stateError = false
+    async nextBtnBilling () {
+      try {
+        this.$store.commit('m_loader', true)
+
+        if (this.cardHolderName !== '' && CPF.validate(this.cpf) && this.cpf.length === 14 && this.zipcode.length === 9 && this.$store.state.validZipcode && this.street !== '' && this.street !== null && this.streetNumber !== '' && this.streetNumber !== null && this.neighborhood !== '' && this.neighborhood !== null && this.city !== '' && this.city !== null && this.state !== '' && this.state !== null) {
+
+          const parcelas = await firebase.functions().httpsCallable('calcValorParcelas')({
+            amount: this.reservaAcomod.valorReservaTotal,
+          })
+          console.log(parcelas.data.parcelas.installments)
+          this.$store.state.creditCard.parcelas = parcelas.data.parcelas.installments
+
+          this.$store.state.paymentAdded = true
+          this.$store.commit('m_reservaAcomodBilling', false)
+          window.history.back(1)
+        } else {
+          this.$store.commit('show_alert', {
+            type: 'error',
+            title: 'Erro',
+            message: 'Informações inválidas.',
+          })
+          this.cardHolderName.length < 3 ? this.cardHolderNameError = true : this.cardHolderNameError = false
+          this.cpf.length < 14 || !CPF.validate(this.cpf) ? this.cpfError = true : this.cpfError = false
+          this.zipcode.length < 9 || !this.$store.state.validZipcode ? this.zipcodeError = true : this.zipcodeError = false
+          this.street === null || this.street === '' ? this.streetError = true : this.streetError = false
+          this.streetNumber === null || this.streetNumber === '' ? this.streetNumberError = true : this.streetNumberError = false
+          this.neighborhood === null || this.neighborhood === '' ? this.neighborhoodError = true : this.neighborhoodError = false
+          this.city === null || this.city === '' ? this.cityError = true : this.cityError = false
+          this.state === null || this.state === '' ? this.stateError = true : this.stateError = false
+        }
+
+        this.$store.commit('m_loader', false)
+      } catch (err) {
+        this.$store.commit('m_loader', false)
+        console.log(err)
       }
     },
     openDatePicker () {
@@ -763,8 +784,41 @@ export default {
     openBoleto () {
       this.scrollTop(), this.$store.commit('m_reservaAcomodPaymentMethod', false), this.$store.commit('m_reservaAcomodBoleto', true)
     },
-    concluirReserva () {
+    async concluirReserva () {
       if (this.$store.state.paymentAdded) {
+        try {
+          this.$store.commit('m_loader', true)
+
+          this.reservaAcomod.hostID = this.acomod.hostID
+          this.reservaAcomod.guestID = this.user.userID
+
+          await firebase.firestore().collection('users').doc(this.user.userID).update({ 
+            celular: '+55' + this.celular.replace(/[^0-9\.]+/g, '')
+          })
+
+          /* Criar transação no Pagarme e reserva na Firestore */
+          const result = await firebase.functions().httpsCallable('newReservaAcomod')({
+            reservaAcomod: this.reservaAcomod,
+            creditCard: this.creditCard,
+            customer: this.customer,
+            acomod: this.acomod,
+            host: this.host,
+            visitID: this.$store.state.visitID
+          })
+
+          this.reservaAcomod.reservaID = await result.data.reservaID
+
+          /* Resetar dados do cartão de crédito */
+          this.$store.commit('m_resetCreditCard')
+
+          this.$store.state.concludedReservaAcomod = true
+          this.scrollTop()
+          this.$store.commit('m_loader', false)
+          
+        } catch (err) {
+          console.log(err)
+          this.$store.commit('m_loader', false)
+        }
       } else {
         this.$store.commit('show_alert', {
           type: 'warning',
@@ -806,9 +860,14 @@ export default {
         return 'Forma de pagamento'
       }
     },
+    parcelasText () {
+      const numeroParcelas = this.reservaAcomod.parcelas
+      const valorParcela = this.$store.state.creditCard.parcelas[numeroParcelas].installment_amount.toLocaleString()
+      return `(${numeroParcelas}x R$${valorParcela})`
+    },
     formaDePagamentoTextStyle () {
       if (this.$store.state.paymentAdded) {
-        return ''
+        return 'font-weight: 500'
       } else {
         return 'font-weight: 500; color: #FFA04F'
       }
@@ -827,7 +886,7 @@ export default {
       return 'background: #50CB9D'
     },
     form3ok () {
-      return this.reservaAcomod.guestCelular.length === 15 ? 'background: #50CB9D' : ''
+      return this.celular.length === 15 ? 'background: #50CB9D' : ''
     },
     form4ok () {
       return this.reservaAcomod.message !== '' ? 'background: #50CB9D' : ''
@@ -846,7 +905,7 @@ export default {
       }
     },
     formBillingOk () {
-      if (this.cardHolderName !== '' && CPF.validate(this.guestCPF) && this.guestCPF.length === 14 && this.zipcode.length === 9 && this.$store.state.validZipcode && this.street !== '' && this.street !== null && this.streetNumber !== '' && this.streetNumber !== null && this.neighborhood !== '' && this.neighborhood !== null && this.city !== '' && this.city !== null && this.state !== '' && this.state !== null) {
+      if (this.cardHolderName !== '' && CPF.validate(this.cpf) && this.cpf.length === 14 && this.zipcode.length === 9 && this.$store.state.validZipcode && this.street !== '' && this.street !== null && this.streetNumber !== '' && this.streetNumber !== null && this.neighborhood !== '' && this.neighborhood !== null && this.city !== '' && this.city !== null && this.state !== '' && this.state !== null) {
         return 'background: #50CB9D'
       }
     }
@@ -886,7 +945,7 @@ export default {
       let cardCVV = valid.cvv(value)
       cardCVV.isPotentiallyValid ? this.cardCvvError = false : this.cardCvvError = true
     },
-    guestCPF (value) {
+    cpf (value) {
       if (this.$store.state.showReservaAcomod) { /* Prevenir watch duplicada Desktop */
         if (value !== '' || value !== null) {
           this.cpfError = false
@@ -903,8 +962,7 @@ export default {
       } 
     },
     cardHolderName (value) { value !== '' ? this.cardHolderNameError = false : '' },
-    guestName (value) { value !== '' ? this.guestNameError = false : '' },
-    guestCelular (value) { value !== '' ? this.celularError = false : '' },
+    celular (value) { value !== '' ? this.celularError = false : '' },
     street (value) { value !== null ? this.streetError = false : null },
     streetNumber (value) { value !== null ? this.streetNumberError = false : null },
     neighborhood (value) { value !== null ? this.neighborhoodError = false : null },
@@ -915,17 +973,16 @@ export default {
         if (value.length === 9) {
           try {
             this.$store.commit('m_loader', true)
-            const billing = this.reservaAcomod.billing
-            const zipcode = billing.zipcode.replace(/[^0-9\.]+/g, '')
+            const zipcode = this.zipcode.replace(/[^0-9\.]+/g, '')
             const zipcodeData = await this.$axios.$get('https://api.pagar.me/1/zipcodes/' + zipcode)
-            billing.state = zipcodeData.state
-            billing.city = zipcodeData.city
-            billing.neighborhood = zipcodeData.neighborhood
-            billing.street = zipcodeData.street
+            this.$store.state.customer.state = zipcodeData.state
+            this.$store.state.customer.city = zipcodeData.city
+            this.$store.state.customer.neighborhood = zipcodeData.neighborhood
+            this.$store.state.customer.street = zipcodeData.street
             this.$store.state.validZipcode = true
             this.$store.commit('m_loader', false)
             this.$nextTick(() => {
-              if (billing.street === null || billing.street === '') {
+              if (this.street === null || this.street === '') {
                 scrollIntoView(this.$refs.street)
                 this.$refs.street.focus()
               } else {

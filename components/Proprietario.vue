@@ -10,21 +10,12 @@
           </div>
         </div><!-- BACK BUTTON -->
 
+
         <div class="info-header">
-          <img class="__img" :src="photoURL">
-          <h1 class="__name">{{ name }}</h1>
+          <img class="__img" :src="host.photoURL">
+          <h1 class="__name">{{ host.fullName }}</h1>
         </div>
 
-        <!-- <div class="info-contato">
-          <h2 class="info-title">Mandar E-mail</h2>
-          <h3 class="__email"><a :href="emailHREF" class="__email">{{ email }}</a></h3>
-
-          <h2 class="info-title">Ligar no Celular</h2>
-          <h3><a :href="celularHREF" class="__celular">{{ celular }}</a></h3>
-
-          <h2 class="info-title">Chamar no WhatsApp</h2>
-          <h3><a :href="whatsAppHREF" class="__celular">{{ celular }}</a></h3>
-        </div> -->
 
       </div>
     </div>
@@ -40,63 +31,9 @@ export default {
     }
   },
   computed: {
-    hash () {
-      return this.$route.hash
-    },
-    acomod () {
-      return this.$store.state.acomod
-    },
-    passeio () {
-      return this.$store.state.passeio
-    },
-    photoURL () {
-      return this.$route.name === 'acomodacoes-id' ? this.acomod.photoURL 
-           : this.$route.name === 'passeios-id' ? this.passeio.photoURL
-           : ''
-    },
-    name () {
-      return this.$route.name === 'acomodacoes-id' ? this.acomod.proprietario 
-           : this.$route.name === 'passeios-id' ? this.passeio.proprietario
-           : ''
-    },
-    email () {
-      return this.$route.name === 'acomodacoes-id' ? this.acomod.email 
-           : this.$route.name === 'passeios-id' ? this.passeio.email
-           : ''
-    },
-    emailHREF () {
-      return this.$route.name === 'acomodacoes-id' ? 'mailto:' + this.acomod.email 
-           : this.$route.name === 'passeios-id' ? 'mailto:' + this.passeio.email
-           : ''
-    },
-    celular () {
-      return this.$route.name === 'acomodacoes-id' ? this.acomod.celular 
-           : this.$route.name === 'passeios-id' ? this.passeio.celular
-           : ''
-    },
-    celularHREF () {
-      return this.$route.name === 'acomodacoes-id' ? 'tel:' + this.acomod.celular 
-           : this.$route.name === 'passeios-id' ? 'tel:' + this.passeio.celular
-           : ''
-    },
-    whatsAppHREF () {
-      if (this.$route.name === 'acomodacoes-id') {
-        let tel = this.acomod.celular
-        let DDD = tel.slice(1, 3)
-        let firstNumber = tel.slice(5,10)
-        let lastNumber = tel.slice(11,15)
-        let whatsAppTelFormat = '+55' + DDD + firstNumber + lastNumber
-        return 'https://api.whatsapp.com/send?phone=' + whatsAppTelFormat
-      }
-      if (this.$route.name === 'passeios-id') {
-        let tel = this.passeio.celular
-        let DDD = tel.slice(1, 3)
-        let firstNumber = tel.slice(5,10)
-        let lastNumber = tel.slice(11,15)
-        let whatsAppTelFormat = '+55' + DDD + firstNumber + lastNumber
-        return 'https://api.whatsapp.com/send?phone=' + whatsAppTelFormat
-      }
-    }
+    hash () { return this.$route.hash },
+    acomod () { return this.$store.state.acomod },
+    host () { return this.$store.state.host },
   }, 
   watch: {
     hash (value) {

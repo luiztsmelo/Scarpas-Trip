@@ -37,7 +37,7 @@ export const reservaAcomod = {
       cardHolderNameError: false,
       cardExpirationDateError: false,
       cardCvvError: false,
-      guestNameError: false,
+      nameError: false,
       cpfError: false,
       celularError: false,
       zipcodeError: false,
@@ -51,6 +51,7 @@ export const reservaAcomod = {
   computed: {
     /* ******************** PATHS ******************** */
     acomod () { return this.$store.state.acomod },
+    host () { return this.$store.state.host },
     authUser () { return this.$store.state.authUser },
     user () { return this.$store.state.user },
     reservaAcomod () { return this.$store.state.reservaAcomod },
@@ -63,16 +64,17 @@ export const reservaAcomod = {
     cardExpirationDate () { return this.$store.state.creditCard.cardExpirationDate },
     cardCVV () { return this.$store.state.creditCard.cardCVV },
     cardType () { return this.$store.state.cardType },
-    /* Billing */
-    guestName () { return this.reservaAcomod.guestName },
-    guestCPF () { return this.reservaAcomod.guestCPF },
-    guestCelular () { return this.reservaAcomod.guestCelular },
-    zipcode () { return this.reservaAcomod.billing.zipcode },
-    street () { return this.reservaAcomod.billing.street },
-    streetNumber () { return this.reservaAcomod.billing.street_number },
-    neighborhood () { return this.reservaAcomod.billing.neighborhood },
-    city () { return this.reservaAcomod.billing.city },
-    state () { return this.reservaAcomod.billing.state },
+    /* Customer */
+    customer () { return this.$store.state.customer },
+    name () { return this.$store.state.customer.name },
+    cpf () { return this.$store.state.customer.cpf },
+    celular () { return this.$store.state.customer.celular },
+    zipcode () { return this.$store.state.customer.zipcode },
+    street () { return this.$store.state.customer.street },
+    streetNumber () { return this.$store.state.customer.street_number },
+    neighborhood () { return this.$store.state.customer.neighborhood },
+    city () { return this.$store.state.customer.city },
+    state () { return this.$store.state.customer.state },
 
     cardBrand () {
       const cardType = this.$store.state.cardType
