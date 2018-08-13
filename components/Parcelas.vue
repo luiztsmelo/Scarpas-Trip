@@ -8,8 +8,23 @@
 
         <img class="back-btn" src="../assets/img/back.svg" @click="backBtn" ref="backBtn">
 
-        <h1 class="__title">Quantas Parcelas?</h1>
+        <h1 class="__title">Em quantas parcelas deseja pagar?</h1>
 
+
+        <div class="parcela" v-for="(parcela, index) in $store.state.creditCard.parcelas" :key="parcela.installment" @click="$refs.radioRef[parcela.installment - 1].click()" @change="backBtn">
+
+          <div style="display: flex; align-items: center">
+            <span class="__numero">{{ `${parcela.installment}x` }}</span>
+
+            <div>
+              <h3 class="__valor">{{ `R$${parcela.installment_amount.toLocaleString()}` }}</h3>
+              <span class="__taxas">{{ parcela.installment === 1 ? 'Sem taxas' : 'Com taxas' }}</span>
+            </div>
+          </div>
+
+          <input ref="radioRef" class="radio" type="radio" :value="parcela.installment.toString()" v-model="$store.state.reservaAcomod.parcelas">
+
+        </div>
 
 
       </div>
@@ -42,6 +57,7 @@ export default {
 
 <style>
 @import url('~/assets/css/main.css');
+@import url('~/assets/css/radio.css');
 
 .parcelas-modal {
   position: fixed;
@@ -69,6 +85,26 @@ export default {
       font-size: 29px;
       font-weight: 700;
       user-select: none;
+    }
+    & .parcela {
+      margin: 0 7%;
+      padding: 3rem 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid rgb(222,222,222);
+      & .__numero {
+        width: 2.5rem;
+        font-size: 17px;
+        font-weight: 400;
+      }
+      & .__valor {
+        font-size: 18px;
+        font-weight: 600;
+      }
+      & .__taxas {
+        font-size: 14px;
+      }
     }
   }
 }

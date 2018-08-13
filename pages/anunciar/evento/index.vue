@@ -573,7 +573,6 @@ export default {
 
 <style>
 @import url('~/assets/css/main.css');
-@import url('~/assets/css/illustrations.css');
 
 .anunciar-evento {
   margin-top: 3.4rem;

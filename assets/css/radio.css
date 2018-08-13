@@ -1,0 +1,12 @@
+.radio {
+  appearance: none;
+  background: rgb(237,237,237);
+  width: 1.8rem;
+  height: 1.8rem;
+  border-radius: 50%;
+  border: 1px solid rgb(222,222,222);
+}
+
+.radio:checked {
+  background-color: #50CB9D;
+}

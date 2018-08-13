@@ -261,7 +261,7 @@
           <div class="add-payment" style="margin-bottom: 1.4rem" v-if="$store.state.paymentAdded" @click="$store.state.showParcelas = true">
             <h3 class="__item-text" style="font-weight: 500">
               {{ `${reservaAcomod.parcelas} ${reservaAcomod.parcelas === '1' ? 'parcela' : 'parcelas'}` }}
-              <span style="font-size: 16px; font-weight: 400">{{ parcelasText }}</span>
+              <span style="font-weight: 400">{{ parcelasText }}</span>
             </h3>
             <img class="__arrow-right" src="../../assets/img/arrow-right.svg">
           </div>
@@ -863,7 +863,7 @@ export default {
     parcelasText () {
       const numeroParcelas = this.reservaAcomod.parcelas
       const valorParcela = this.$store.state.creditCard.parcelas[numeroParcelas].installment_amount.toLocaleString()
-      return `(${numeroParcelas}x R$${valorParcela})`
+      return `(R$${valorParcela})`
     },
     formaDePagamentoTextStyle () {
       if (this.$store.state.paymentAdded) {
