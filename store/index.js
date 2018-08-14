@@ -445,6 +445,9 @@ const store = () => new Vuex.Store({
       state.creditCard.cardCVV = ''
       state.creditCard.parcelas = null
     },
+    m_parcelas (state, payload) {
+      state.creditCard.parcelas = payload
+    },
     m_bankAccount (state, payload) {
       state.bankAccount = payload
     },

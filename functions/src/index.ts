@@ -38,32 +38,6 @@ const AirtableConfig = {
 
 
 
-/* ________________________________________________ UTILS ________________________________________________ */
-
-exports.calcValorParcelas = functions.https.onCall(async data => {
-  try {
-    const amount = data.amount
-
-    const Pagarme = await pagarme.client.connect({ api_key: 'ak_test_E3I46o4e7guZDqwRnSY9sW8o8HrL9D' })
-
-    const installments = await Pagarme.transactions.calculateInstallmentsAmount({
-      max_installments: 12,
-      free_installments: 1,
-      interest_rate: 2.5,
-      amount: amount
-    })
-
-    return { parcelas: installments }
-
-  } catch (err) {
-    console.log(err)
-    throw new functions.https.HttpsError('aborted', err.message, err)
-  }
-})
-
-
-
-
 /* _______________________________________________ WATCHERS _______________________________________________ */
 
 /* TRIGGER URL GERAL: https://us-central1-escarpas-trip.cloudfunctions.net/<function-name> */
@@ -174,7 +148,7 @@ exports.newAcomod = functions.https.onCall(async data => {
 
     /* Update user Firestore */
     await admin.firestore().collection('users').doc(acomodData.hostID).update({ 
-      ishost: true,
+      isAcomodHost: true,
       celular: '+55' + acomodData.celular.replace(/[^0-9\.]+/g, '')
     })
 
@@ -233,7 +207,7 @@ exports.newReservaAcomod = functions.https.onCall(async data => {
             'type': 'cpf',
             'number': customer.cpf.replace(/[^0-9\.]+/g, '').replace(/\./g, '')
           }],
-          'phone_numbers': [ customer.celular ]
+          'phone_numbers': [ guest.celular ]
         },
         'billing': {
           'name': guest.fullName,
@@ -271,7 +245,7 @@ exports.newReservaAcomod = functions.https.onCall(async data => {
             'type': 'cpf',
             'number': customer.cpf.replace(/[^0-9\.]+/g, '').replace(/\./g, '')
           }],
-          'phone_numbers': [ customer.celular ]
+          'phone_numbers': [ guest.celular ]
         },
         'items': [{
           'id': acomod.acomodID,

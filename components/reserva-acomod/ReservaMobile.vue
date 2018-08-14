@@ -72,10 +72,7 @@
                 <span class="__valor-noites"> por {{ reservaAcomod.noites }} {{ reservaAcomod.noites == 1 ? 'noite' : 'noites'}}</span>
               </h3>
               <h3 v-else></h3>
-              <button type="button" class="__next-btn" :style="form1ok" @click="nextBtn1">
-                <span class="__next-btn-text" v-if="!$store.state.miniLoader">Continuar</span>
-                <mini-loader v-else></mini-loader>
-              </button>
+              <button type="button" class="__next-btn" :style="form1ok" @click="nextBtn1">Continuar</button>
             </div>
           </div>
       
@@ -128,10 +125,7 @@
               <h3 class="__valor" v-if="reservaAcomod.valorReservaTotal !== null">R${{ reservaAcomod.valorReservaTotal.toLocaleString() }}
                 <span class="__valor-noites"> por {{ reservaAcomod.noites }} {{ reservaAcomod.noites == 1 ? 'noite' : 'noites'}}</span>
               </h3>
-              <button type="button" class="__next-btn" :style="form2ok" @click="nextBtn2">
-                <span class="__next-btn-text" v-if="!$store.state.miniLoader">Concordar</span>
-                <mini-loader v-else></mini-loader>
-              </button>
+              <button type="button" class="__next-btn" :style="form2ok" @click="nextBtn2">Concordar</button>
             </div>
           </div>
 
@@ -180,10 +174,7 @@
               <h3 class="__valor" v-if="reservaAcomod.valorReservaTotal !== null">R${{ reservaAcomod.valorReservaTotal.toLocaleString() }}
                 <span class="__valor-noites"> por {{ reservaAcomod.noites }} {{ reservaAcomod.noites == 1 ? 'noite' : 'noites'}}</span>
               </h3>
-              <button type="button" class="__next-btn" :style="form3ok" @click="nextBtn3">
-                <span class="__next-btn-text" v-if="!$store.state.miniLoader">Continuar</span>
-                <mini-loader v-else></mini-loader>
-              </button>
+              <button type="button" class="__next-btn" :style="form3ok" @click="nextBtn3">Continuar</button>
             </div>
           </div>
 
@@ -215,9 +206,10 @@
             ref="message"
             :class="[ messageError ? 'has-error' : '' ]"
             @focus="onFocusMessage"
+            v-autosize="messageAutosize"
             v-model="reservaAcomod.message"
-            maxlength="2000"
-            rows="6"
+            maxlength="1000"
+            rows="4"
             placeholder="Escreva sua resposta aqui">
           </textarea>
 
@@ -228,10 +220,7 @@
               <h3 class="__valor" v-if="reservaAcomod.valorReservaTotal !== null">R${{ reservaAcomod.valorReservaTotal.toLocaleString() }}
                 <span class="__valor-noites"> por {{ reservaAcomod.noites }} {{ reservaAcomod.noites == 1 ? 'noite' : 'noites'}}</span>
               </h3>
-              <button type="button" class="__next-btn" :style="form4ok" @click="nextBtn4">
-                <span class="__next-btn-text" v-if="!$store.state.miniLoader">Continuar</span>
-                <mini-loader v-else></mini-loader>
-              </button>
+              <button type="button" class="__next-btn" :style="form4ok" @click="nextBtn4">Continuar</button>
             </div>
           </div>
 
@@ -258,7 +247,7 @@
             <img class="__arrow-right" src="../../assets/img/arrow-right.svg">
           </div>
 
-          <div class="add-payment" style="margin-bottom: 1.4rem" v-if="$store.state.paymentAdded" @click="$store.state.showParcelas = true">
+          <div class="add-payment" style="margin-bottom: 1.4rem" v-if="$store.state.paymentAdded" @click="openParcelas">
             <h3 class="__item-text" style="font-weight: 500">
               {{ `${reservaAcomod.parcelas} ${reservaAcomod.parcelas === '1' ? 'parcela' : 'parcelas'}` }}
               <span style="font-weight: 400">{{ parcelasText }}</span>
@@ -284,10 +273,7 @@
               <h3 class="__valor" v-if="reservaAcomod.valorReservaTotal !== null">R${{ reservaAcomod.valorReservaTotal.toLocaleString() }}
                 <span class="__valor-noites"> por {{ reservaAcomod.noites }} {{ reservaAcomod.noites == 1 ? 'noite' : 'noites'}}</span>
               </h3>
-              <button type="button" class="__next-btn" :style="form5ok" style="width:9rem" @click="concluirReserva">
-                <span class="__next-btn-text" style="font-weight:700" v-if="!$store.state.miniLoader">Concluir Pedido</span>
-                <mini-loader v-else></mini-loader>
-              </button>
+              <button type="button" class="__next-btn" style="width: 13rem; font-weight:700" :style="form5ok" @click="concluirReserva">Concluir Pedido</button>
             </div>
           </div>
 
@@ -655,10 +641,7 @@ export default {
     },
     nextBtn1 () {
       if (this.reservaAcomod.periodoReserva !== null) {
-        this.$store.commit('m_miniLoader', true)
-        setTimeout(() => {
-          this.$store.commit('m_miniLoader', false), this.$store.commit('m_reservaAcomod1', false), this.$store.commit('m_reservaAcomod2', true), window.location.hash = this.$store.state.randomHashs[2]
-        }, Math.floor(Math.random() * (800 - 200 + 1) ) + 200)
+        this.$store.commit('m_miniLoader', false), this.$store.commit('m_reservaAcomod1', false), this.$store.commit('m_reservaAcomod2', true), window.location.hash = this.$store.state.randomHashs[2]
       } else {
         this.$store.commit('show_alert', {
           type: 'warning',
@@ -668,21 +651,15 @@ export default {
       }
     },
     nextBtn2 () {
-      this.$store.commit('m_miniLoader', true)
-      setTimeout(() => {
-        this.$store.commit('m_miniLoader', false), this.$store.commit('m_reservaAcomod2', false), this.$store.commit('m_reservaAcomod3', true), window.location.hash = this.$store.state.randomHashs[3]
-      }, Math.floor(Math.random() * (800 - 200 + 1) ) + 200)
+      this.$store.commit('m_miniLoader', false), this.$store.commit('m_reservaAcomod2', false), this.$store.commit('m_reservaAcomod3', true), window.location.hash = this.$store.state.randomHashs[3]
     },
     nextBtn3 () {
       if (this.celular.length === 15) {
-        this.$store.commit('m_miniLoader', true)
-        setTimeout(() => {
-          this.$store.commit('m_miniLoader', false)
-          this.creditCard.cardHolderName = this.user.fullName
-          this.$store.commit('m_reservaAcomod3', false)
-          this.$store.commit('m_reservaAcomod4', true)
-          window.location.hash = this.$store.state.randomHashs[4]
-        }, Math.floor(Math.random() * (800 - 200 + 1) ) + 200)
+        this.$store.commit('m_miniLoader', false)
+        this.creditCard.cardHolderName = this.user.fullName
+        this.$store.commit('m_reservaAcomod3', false)
+        this.$store.commit('m_reservaAcomod4', true)
+        window.location.hash = this.$store.state.randomHashs[4]
       } else {
         if (this.authUser) {
           this.$store.commit('show_alert', {
@@ -702,10 +679,7 @@ export default {
     },
     nextBtn4 () {
       if (this.reservaAcomod.message !== '') {
-        this.$store.commit('m_miniLoader', true)
-        setTimeout(() => {
-          this.scrollTop(), this.$store.commit('m_miniLoader', false), this.$store.commit('m_reservaAcomod4', false), this.$store.commit('m_reservaAcomod5', true), window.location.hash = this.$store.state.randomHashs[5]
-        }, Math.floor(Math.random() * (1500 - 800 + 1) ) + 800)
+        this.scrollTop(), this.$store.commit('m_miniLoader', false), this.$store.commit('m_reservaAcomod4', false), this.$store.commit('m_reservaAcomod5', true), window.location.hash = this.$store.state.randomHashs[5]
       } else {
         this.$store.commit('show_alert', {
           type: 'warning',
@@ -735,41 +709,25 @@ export default {
         this.$store.commit('m_reservaAcomodBoleto', false), window.history.back(1)
       }
     },
-    async nextBtnBilling () {
-      try {
-        this.$store.commit('m_loader', true)
-
-        if (this.cardHolderName !== '' && CPF.validate(this.cpf) && this.cpf.length === 14 && this.zipcode.length === 9 && this.$store.state.validZipcode && this.street !== '' && this.street !== null && this.streetNumber !== '' && this.streetNumber !== null && this.neighborhood !== '' && this.neighborhood !== null && this.city !== '' && this.city !== null && this.state !== '' && this.state !== null) {
-
-          const parcelas = await firebase.functions().httpsCallable('calcValorParcelas')({
-            amount: this.reservaAcomod.valorReservaTotal,
-          })
-          console.log(parcelas.data.parcelas.installments)
-          this.$store.state.creditCard.parcelas = parcelas.data.parcelas.installments
-
-          this.$store.state.paymentAdded = true
-          this.$store.commit('m_reservaAcomodBilling', false)
-          window.history.back(1)
-        } else {
-          this.$store.commit('show_alert', {
-            type: 'error',
-            title: 'Erro',
-            message: 'Informações inválidas.',
-          })
-          this.cardHolderName.length < 3 ? this.cardHolderNameError = true : this.cardHolderNameError = false
-          this.cpf.length < 14 || !CPF.validate(this.cpf) ? this.cpfError = true : this.cpfError = false
-          this.zipcode.length < 9 || !this.$store.state.validZipcode ? this.zipcodeError = true : this.zipcodeError = false
-          this.street === null || this.street === '' ? this.streetError = true : this.streetError = false
-          this.streetNumber === null || this.streetNumber === '' ? this.streetNumberError = true : this.streetNumberError = false
-          this.neighborhood === null || this.neighborhood === '' ? this.neighborhoodError = true : this.neighborhoodError = false
-          this.city === null || this.city === '' ? this.cityError = true : this.cityError = false
-          this.state === null || this.state === '' ? this.stateError = true : this.stateError = false
-        }
-
-        this.$store.commit('m_loader', false)
-      } catch (err) {
-        this.$store.commit('m_loader', false)
-        console.log(err)
+    nextBtnBilling () {
+      if (this.cardHolderName !== '' && CPF.validate(this.cpf) && this.cpf.length === 14 && this.zipcode.length === 9 && this.$store.state.validZipcode && this.street !== '' && this.street !== null && this.streetNumber !== '' && this.streetNumber !== null && this.neighborhood !== '' && this.neighborhood !== null && this.city !== '' && this.city !== null && this.state !== '' && this.state !== null) {
+        this.$store.state.paymentAdded = true
+        this.$store.commit('m_reservaAcomodBilling', false)
+        window.history.back(1)
+      } else {
+        this.$store.commit('show_alert', {
+          type: 'error',
+          title: 'Erro',
+          message: 'Informações inválidas.',
+        })
+        this.cardHolderName.length < 3 ? this.cardHolderNameError = true : this.cardHolderNameError = false
+        this.cpf.length < 14 || !CPF.validate(this.cpf) ? this.cpfError = true : this.cpfError = false
+        this.zipcode.length < 9 || !this.$store.state.validZipcode ? this.zipcodeError = true : this.zipcodeError = false
+        this.street === null || this.street === '' ? this.streetError = true : this.streetError = false
+        this.streetNumber === null || this.streetNumber === '' ? this.streetNumberError = true : this.streetNumberError = false
+        this.neighborhood === null || this.neighborhood === '' ? this.neighborhoodError = true : this.neighborhoodError = false
+        this.city === null || this.city === '' ? this.cityError = true : this.cityError = false
+        this.state === null || this.state === '' ? this.stateError = true : this.stateError = false
       }
     },
     openDatePicker () {
@@ -783,6 +741,9 @@ export default {
     },
     openBoleto () {
       this.scrollTop(), this.$store.commit('m_reservaAcomodPaymentMethod', false), this.$store.commit('m_reservaAcomodBoleto', true)
+    },
+    openParcelas () {
+      this.$store.state.showParcelas = true, window.location.hash = `${this.$store.state.randomHashs[5]}-parcelas`
     },
     async concluirReserva () {
       if (this.$store.state.paymentAdded) {
@@ -861,9 +822,9 @@ export default {
       }
     },
     parcelasText () {
-      const numeroParcelas = this.reservaAcomod.parcelas
-      const valorParcela = this.$store.state.creditCard.parcelas[numeroParcelas].installment_amount.toLocaleString()
-      return `(R$${valorParcela})`
+      if (this.$store.state.creditCard.parcelas !== null) {
+        return `(R$${this.$store.state.creditCard.parcelas[Number(this.reservaAcomod.parcelas)-1].valorParcela.toLocaleString()})`
+      }
     },
     formaDePagamentoTextStyle () {
       if (this.$store.state.paymentAdded) {
@@ -1038,6 +999,7 @@ export default {
         this.$store.commit('m_reservaAcomodCreditCard', false)
         this.$store.commit('m_reservaAcomodBoleto', false)
         this.$store.commit('m_reservaAcomodBilling', false)
+        this.$store.commit('m_showParcelas', false)
         this.$store.commit('hide_alert')
       }
       if (value === `#${this.$store.state.randomHashs[6]}`) {
@@ -1291,6 +1253,7 @@ export default {
         padding: 1rem 7%;
         outline: none;
         border: none;
+        resize: none;
       }
       & .buttons {
         position: fixed;
@@ -1303,13 +1266,13 @@ export default {
         overflow: hidden;
         box-shadow: 0px -1px 1px 0px rgba(0,0,0,0.1);
         & .buttons-body {
-          position: relative;
+          padding: 0 7%;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
           height: 100%;
           & .__valor {
-            position: absolute;
-            left: 7%;
-            top: 50%;
-            transform: translateY(-50%);
+            padding-right: 15px;
             font-size: 18px;
             font-weight: 600;
             white-space: nowrap;
@@ -1321,19 +1284,14 @@ export default {
             }
           }
           & .__next-btn {
-            position: absolute;
-            right: 7%;
-            top: 50%;
-            transform: translateY(-50%);
             width: 8.3rem;
             height: 3.2rem;
             background:rgb(237, 237, 237);
             border-radius: 5px;
-            & .__next-btn-text {
-              font-size: 16px;
-              font-weight: 600;
-              color: white;
-            }
+            font-size: 16px;
+            font-weight: 600;
+            color: white;
+            transition: var(--main-transition);
           }
         }
       }

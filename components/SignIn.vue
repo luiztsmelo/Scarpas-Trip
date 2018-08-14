@@ -131,26 +131,26 @@ export default {
       & .__subtitle {
         font-size: 15px;
         text-align: center;
-        padding: 0 0 1.2rem 0;
+        padding: 0 0 1.3rem 0;
         line-height: 22px;
       }
       & .facebook-btn {
         width: 15.6rem;
         margin: .6rem 0;
-        height: 2.9rem;
+        height: 3rem;
         text-align: start;
         padding-left: 50px;
       }
       & .google-btn {
         width: 15.6rem;
         margin: .6rem 0;
-        height: 2.9rem;
+        height: 3rem;
         text-align: start;
         padding-left: 50px;
       }
       & .if-have-account {
         text-align: center;
-        padding-top: .9rem;
+        padding-top: 1.1rem;
         font-size: 15px;
         user-select: none;
         & .underline {

@@ -32,6 +32,7 @@ valid.creditCardType.addCard({ /* Remove Maestro */
 export const reservaAcomod = {
   data () {
     return {
+      messageAutosize: '', /* Vue Autosize */
       messageError: false,
       cardNumberError: false,
       cardHolderNameError: false,

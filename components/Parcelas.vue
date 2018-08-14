@@ -5,27 +5,25 @@
 
       <div class="parcelas-body">
 
-
-        <img class="back-btn" src="../assets/img/back.svg" @click="backBtn" ref="backBtn">
+        <img class="back-btn" src="../assets/img/back.svg" @click="backBtn">
 
         <h1 class="__title">Em quantas parcelas deseja pagar?</h1>
 
 
-        <div class="parcela" v-for="(parcela, index) in $store.state.creditCard.parcelas" :key="parcela.installment" @click="$refs.radioRef[parcela.installment - 1].click()" @change="backBtn">
+        <div class="parcela" v-for="(parcela, index) in $store.state.creditCard.parcelas" :key="parcela.id" @click="$refs.radioRef[parcela.id-1].click()" @change="backBtn">
 
           <div style="display: flex; align-items: center">
-            <span class="__numero">{{ `${parcela.installment}x` }}</span>
+            <span class="__numero">{{ `${parcela.id}x` }}</span>
 
             <div>
-              <h3 class="__valor">{{ `R$${parcela.installment_amount.toLocaleString()}` }}</h3>
-              <span class="__taxas">{{ parcela.installment === 1 ? 'Sem taxas' : 'Com taxas' }}</span>
+              <h3 class="__valor">{{ `R$${parcela.valorParcela.toLocaleString()}` }}</h3>
+              <span class="__juros">Sem juros</span>
             </div>
           </div>
 
-          <input ref="radioRef" class="radio" type="radio" :value="parcela.installment.toString()" v-model="$store.state.reservaAcomod.parcelas">
+          <input ref="radioRef" class="radio" type="radio" :value="parcela.id.toString()" v-model="$store.state.reservaAcomod.parcelas">
 
         </div>
-
 
       </div>
 
@@ -39,17 +37,7 @@ export default {
   methods: {
     backBtn () {
       this.$store.commit('m_showParcelas', false)
-      /* window.history.back(1) */
-    }
-  },
-  computed: {
-    hash () { return this.$route.hash }
-  }, 
-  watch: {
-    hash (value) {
-      if (value === '') {
-        this.$store.commit('m_showParcelas', false)
-      }
+      window.history.back(1)
     }
   }
 }
@@ -102,7 +90,7 @@ export default {
         font-size: 18px;
         font-weight: 600;
       }
-      & .__taxas {
+      & .__juros {
         font-size: 14px;
       }
     }

@@ -322,10 +322,7 @@
     <div class="reserva">
       <div class="reserva-body">
         <h3 class="__reserva-valor">R${{ acomod.valorNoite.toLocaleString() }}<span class="__reserva-valor-pessoa"> por noite</span></h3>
-        <button class="__reserva-btn" @click="reservarMobile">
-          <span class="__reserva-btn-text" v-if="!$store.state.miniLoader">Reservar</span>
-          <mini-loader v-else></mini-loader>
-        </button>
+        <button class="__reserva-btn" @click="reservarMobile">Reservar</button>
       </div>
     </div>
     <reserva-mobile/><!-- ####### RESERVA MOBILE ####### -->
@@ -567,6 +564,14 @@ export default {
         this.$store.commit('m_valorReservaTotal', valorReservaTotal)
 
         this.$store.state.reservaAcomod.limpezaFee = this.acomod.limpezaFee
+
+        const parcelas = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map(x => {
+          return {
+            id: x,
+            valorParcela: Number(valorReservaTotal/x).toFixed(2)
+          }
+        })
+        this.$store.commit('m_parcelas', parcelas)
       }
     },
     hash (value) {
@@ -799,13 +804,13 @@ export default {
     box-shadow: 0px -1px 1px 0px rgba(0,0,0,0.1);
     user-select: none;
     & .reserva-body {
-      position: relative;
+      padding: 0 7%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
       height: 100%;
       & .__reserva-valor {
-        position: absolute;
-        left: 7%;
-        top: 50%;
-        transform: translateY(-50%);
+        padding-right: 15px;
         font-size: 18px;
         font-weight: 600;
         white-space: nowrap;
@@ -817,21 +822,14 @@ export default {
         font-weight: 400;
       }
       & .__reserva-btn {
-        position: absolute;
-        right: 7%;
-        top: 50%;
-        transform: translateY(-50%);
         width: 10rem;
         height: 3.2rem;
         background:var(--colorAcomod);
         border-radius: 5px;
+        font-size: 16px;
+        font-weight: 700;
+        color: white;
         transition: var(--main-transition);
-        & .__reserva-btn-text {
-          font-size: 16px;
-          font-weight: 700;
-          color: white;
-          transition: var(--main-transition);
-        }
       }
     }
   }/* ####### RESERVA ####### */

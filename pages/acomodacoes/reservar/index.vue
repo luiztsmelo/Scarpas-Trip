@@ -62,7 +62,7 @@
           <!-- <h3>Regras de Cancelamento</h3> -->
 
 
-          <button class="__next-btn" type="button" @click="nextBtn1">Concordar</button>
+          <button class="__next-btn" type="button" :style="form1ok" @click="nextBtn1">Concordar</button>
 
         </div><!-- ******* ETAPA 1 ******* -->
 
@@ -79,21 +79,28 @@
             
             <h3 class="__subtitle">Ajude {{ host.firstName }} a preparar {{ tipoAcomodA }} para sua estadia respondendo às suas perguntas</h3>
 
-
-            <div class="item-form">
-              <textarea
-                :class="[ messageError ? 'has-error' : '' ]"
-                v-model="reservaAcomod.message"
-                maxlength="2000"
-                rows="4"
-                placeholder="Escreva sua resposta aqui">
-              </textarea>
+            <div class="host-message">
+              <img class="__img" :src="host.photoURL">
+              <div class="message-box">
+                <h3 class="__message">Oi {{ user.firstName }}! </h3>
+                <h3 class="__message">Estou te aguardando ansiosamente por aqui. Por favor, me avise a hora em que irá chegar.</h3>
+                <h3 class="__message">{{ host.firstName }}.</h3>
+              </div>
             </div>
+
+            <textarea
+              :class="[ messageError ? 'has-error-textarea' : '' ]"
+              v-model="reservaAcomod.message"
+              v-autosize="messageAutosize"
+              maxlength="1000"
+              rows="4"
+              placeholder="Escreva sua resposta aqui">
+            {{message}}</textarea>
 
           </div>
 
 
-          <button class="__next-btn" type="button" @click="nextBtn2">Continuar</button>
+          <button class="__next-btn" type="button" :style="form2ok" @click="nextBtn2">Continuar</button>
 
         </div><!-- ******* ETAPA 2 ******* -->
 
@@ -323,7 +330,7 @@
           </div><!-- Payment -->
           
 
-          <button class="__next-btn" type="button" style="background: #FFA04F" @click="concluirReserva">Concluir Pedido</button>
+          <button class="__next-btn" type="button" style="font-weight: 700" :style="form3ok" @click="concluirReserva">Concluir Pedido</button>
 
 
         </div><!-- ******* ETAPA 3 ******* -->
@@ -590,6 +597,23 @@ export default {
     }
   },
   computed: {
+    form1ok () {
+      return 'background: #50CB9D'
+    },
+    form2ok () {
+      return this.reservaAcomod.message !== '' ? 'background: #50CB9D' : ''
+    },
+    form3ok () {
+      if (this.reservaAcomod.paymentMethod === 'credit_card') {
+        if (this.cardHolderName !== '' && CPF.validate(this.cpf) && this.cpf.length === 14 && this.zipcode.length === 9 && this.$store.state.validZipcode && this.street !== '' && this.street !== null && this.streetNumber !== '' && this.streetNumber !== null && this.neighborhood !== '' && this.neighborhood !== null && this.city !== '' && this.city !== null && this.state !== '' && this.state !== null) {
+          return 'background: #FFA04F'
+        }
+      } else {
+        if (this.name !== '' && CPF.validate(this.cpf) && this.cpf.length === 14 && this.celular.length === 15) {
+          return 'background: #FFA04F'
+        }
+      }
+    },
     /* ******************** PROGRESS ******************** */
     etapaProgressed1 () {
       return this.$store.state.etapaReserva1ok === true ? 'font-weight: 600' : 'cursor: default'
@@ -798,12 +822,45 @@ export default {
       }
       & .message {
         margin-right: 25%;
-        & .clique-aqui {
-          cursor: pointer;
-        }
-        & .clique-aqui:hover {
-          cursor: pointer;
-          text-decoration: underline;
+        & .host-message {
+          display: flex;
+          margin: 1.7rem 0 1rem 0;
+          padding-bottom: 1.5rem;
+          border-bottom: 1px solid rgb(222,222,222);
+          & .__img { 
+            border-radius: 50%;
+            width: 2.6rem;
+            height: auto;
+            align-self: flex-end;
+          }
+          & .message-box {
+            position: relative;
+            width: 100%;
+            border-radius: 6px 6px 6px 0;
+            background: var(--colorAcomod);
+            padding: 1rem 1.2rem;
+            margin-left: 8px;
+            & .__message {
+              padding: .2rem 0;
+              font-size: 15px;
+              font-weight: 500;
+              line-height: 22px;
+              color: white;
+            }
+          }
+          & .message-box::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 0;
+            border: 12px solid transparent;
+            border-right-color: var(--colorAcomod);
+            border-left: 0;
+            border-bottom: 0;
+            margin-left: -12px;
+          }
         }
       }
       & .payment {
@@ -857,21 +914,19 @@ export default {
         & select:hover {
           border-bottom: 1px solid var(--color01) !important;
         }
-        & textarea {
-          width: 100%;
-          min-width: 100%;
-          max-width: 100%;
-          font-size: 17px;
-          font-weight: 400;
-          line-height: 26px;
-          background: white;
-          padding: .8rem;
-          border: 1px solid rgb(222,222,222);
-          outline: none;
-        }
-        & textarea:focus {
-          border: 1px solid var(--color01) !important;
-        }
+      }
+      & textarea {
+        width: 100%;
+        min-width: 100%;
+        max-width: 100%;
+        font-size: 17px;
+        font-weight: 400;
+        line-height: 26px;
+        background: white;
+        padding: 0;
+        border: none;
+        outline: none;
+        resize: none;
       }
     }
     /* ******* FLEX RIGHT ******* */
@@ -967,9 +1022,10 @@ export default {
   height: 3.2rem;
   font-size: 17px;
   font-weight: 600;
-  background: #50CB9D;
+  background:rgb(237, 237, 237);
   color: white;
   border-radius: 5px;
+  transition: var(--main-transition);
 }
 
 .has-error-label {
@@ -978,6 +1034,10 @@ export default {
 .has-error {
   color: #F31431 !important;
   border-bottom: 1px solid #F31431 !important;
+}
+.has-error-textarea {
+  color: #F31431 !important;
+  border: 1px solid #F31431 !important;
 }
 
 </style>

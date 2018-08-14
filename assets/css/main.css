@@ -16,8 +16,7 @@
 }
 
 ::selection {
-  color: white;
-  background: #FFA04F;
+  background: #FFF59D;
 }
 
 html 
@@ -175,7 +174,7 @@ textarea {
 }
 .v--modal-overlay {
   z-index: 9999999 !important;
-  background: rgba(0, 0, 0, .14) !important; 
+  background: rgba(255, 255, 255, .6) !important; 
 }
 .dialog-c-title {
   padding-top: .2rem !important;

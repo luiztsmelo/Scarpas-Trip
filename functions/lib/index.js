@@ -34,24 +34,6 @@ const AirtableConfig = {
     'Content-type': 'application/json'
   }
 } */
-/* ________________________________________________ UTILS ________________________________________________ */
-exports.calcValorParcelas = functions.https.onCall((data) => __awaiter(this, void 0, void 0, function* () {
-    try {
-        const amount = data.amount;
-        const Pagarme = yield pagarme.client.connect({ api_key: 'ak_test_E3I46o4e7guZDqwRnSY9sW8o8HrL9D' });
-        const installments = yield Pagarme.transactions.calculateInstallmentsAmount({
-            max_installments: 12,
-            free_installments: 1,
-            interest_rate: 2.5,
-            amount: amount
-        });
-        return { parcelas: installments };
-    }
-    catch (err) {
-        console.log(err);
-        throw new functions.https.HttpsError('aborted', err.message, err);
-    }
-}));
 /* _______________________________________________ WATCHERS _______________________________________________ */
 /* TRIGGER URL GERAL: https://us-central1-escarpas-trip.cloudfunctions.net/<function-name> */
 exports.watch_reservaExpiration = functions.https.onRequest((req, res) => __awaiter(this, void 0, void 0, function* () {
@@ -139,7 +121,7 @@ exports.newAcomod = functions.https.onCall((data) => __awaiter(this, void 0, voi
         acomodData.recipientID = recipient.id;
         /* Update user Firestore */
         yield admin.firestore().collection('users').doc(acomodData.hostID).update({
-            ishost: true,
+            isAcomodHost: true,
             celular: '+55' + acomodData.celular.replace(/[^0-9\.]+/g, '')
         });
         delete acomodData.celular;
@@ -186,7 +168,7 @@ exports.newReservaAcomod = functions.https.onCall((data) => __awaiter(this, void
                             'type': 'cpf',
                             'number': customer.cpf.replace(/[^0-9\.]+/g, '').replace(/\./g, '')
                         }],
-                    'phone_numbers': [customer.celular]
+                    'phone_numbers': [guest.celular]
                 },
                 'billing': {
                     'name': guest.fullName,
@@ -225,7 +207,7 @@ exports.newReservaAcomod = functions.https.onCall((data) => __awaiter(this, void
                             'type': 'cpf',
                             'number': customer.cpf.replace(/[^0-9\.]+/g, '').replace(/\./g, '')
                         }],
-                    'phone_numbers': [customer.celular]
+                    'phone_numbers': [guest.celular]
                 },
                 'items': [{
                         'id': acomod.acomodID,
