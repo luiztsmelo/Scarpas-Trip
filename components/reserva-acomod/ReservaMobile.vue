@@ -214,15 +214,7 @@
           </textarea>
 
 
-
-          <div class="buttons">
-            <div class="buttons-body">
-              <h3 class="__valor" v-if="reservaAcomod.valorReservaTotal !== null">R${{ reservaAcomod.valorReservaTotal.toLocaleString() }}
-                <span class="__valor-noites"> por {{ reservaAcomod.noites }} {{ reservaAcomod.noites == 1 ? 'noite' : 'noites'}}</span>
-              </h3>
-              <button type="button" class="__next-btn" :style="form4ok" @click="nextBtn4">Continuar</button>
-            </div>
-          </div>
+          <button type="button" class="__next-btn-small" @click="nextBtn4">Continuar</button>
 
         </div><!-- ########## MENSAGEM PG.4 ########## -->
 
@@ -684,7 +676,8 @@ export default {
         this.$store.commit('show_alert', {
           type: 'warning',
           title: 'Ops',
-          message: 'Escreva sua resposta, por favor.',
+          message: 'Adicione uma resposta, por favor.',
+          persist: true
         })
         scrollIntoView(this.$refs.message)
         this.$refs.message.focus()
@@ -695,7 +688,7 @@ export default {
         this.scrollTop(), this.$store.commit('m_reservaAcomodCreditCard', false), this.$store.commit('m_reservaAcomodBilling', true)
       } else {
         this.$store.commit('show_alert', {
-          type: 'error',
+          type: 'warning',
           title: 'Erro',
           message: 'Cartão inválido.',
         })
@@ -716,7 +709,7 @@ export default {
         window.history.back(1)
       } else {
         this.$store.commit('show_alert', {
-          type: 'error',
+          type: 'warning',
           title: 'Erro',
           message: 'Informações inválidas.',
         })
@@ -1249,6 +1242,7 @@ export default {
         width: 100%;
         font-size: 17px;
         font-weight: 400;
+        line-height: 24px;
         background: white;
         padding: 1rem 7%;
         outline: none;
@@ -1294,6 +1288,17 @@ export default {
             transition: var(--main-transition);
           }
         }
+      }
+      & .__next-btn-small {
+        position: fixed;
+        padding: 0;
+        right: 7%;
+        bottom: 0;
+        height: 3.4rem;
+        background: transparent;
+        color: #50CB9D;
+        font-size: 17px;
+        font-weight: 600;
       }
       & .round-btn {
         position: fixed;

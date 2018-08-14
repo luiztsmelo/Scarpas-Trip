@@ -1,20 +1,20 @@
 <template>
   <transition name="alert">
-    <div class="alert-modal" :style="bgColor" v-if="message !== ''">
+    <div class="alert-modal" v-if="message !== ''">
 
       <div class="alert-body" :style="bodyPosition">
         
         
         <div class="alert-text">
 
-          <p class="__message" :style="textColor">
-            <span class="__type" :style="textColor" v-if="title !== ''">{{ title }}</span>
+          <p class="__message">
+            <span class="__title" :style="titleColor" v-if="title !== ''">{{ title }}</span>
             {{ message }}
           </p>
 
         </div>
 
-        <img class="__close-img" :style="closeBtnColor" src="../assets/img/close-mobile.svg" @click="$store.commit('hide_alert')" v-if="alert.persist">
+        <img class="__close-img" src="../assets/img/close-mobile.svg" @click="$store.commit('hide_alert')" v-if="alert.persist">
 
 
       </div>
@@ -29,27 +29,14 @@ export default {
     alert () { return this.$store.state.alert },
     title () { return this.alert.title },
     message () { return this.alert.message },
-    isError () { return this.alert.type === 'error' },
     isWarning () { return this.alert.type === 'warning' },
     isInfo () { return this.alert.type === 'info' },
     isMobile () { return this.$store.state.isMobile },
-    bgColor () {
-      if (this.isError) {
-        return 'background: #FF0134'
-      } else if (this.isWarning) {
-        return 'background: #FFA04F'
-      } else if (this.isInfo) {
-        return 'background: #FFF'
-      }
-    },
     bodyPosition () {
       return this.isInfo && this.isMobile ? '' : 'position: absolute'
     },
-    textColor () {
-      return this.isInfo ? 'color: #2a2a2a' : 'color: #fff'
-    },
-    closeBtnColor () {
-      return this.isInfo ? 'filter: invert(70%)' : 'filter: invert(100%) brightness(200%)'
+    titleColor () {
+       return this.isWarning ? 'color: #F31431' : ''
     }
   },
   watch: {
@@ -74,6 +61,7 @@ export default {
   min-height: 4.7rem;
   width: 100%;
   bottom: 0;
+  background: #fff;
   box-shadow: 0px -1px 1px 0px rgba(0,0,0,0.1);
   transition: var(--main-transition);
   & .alert-body {
@@ -90,7 +78,7 @@ export default {
         font-weight: 500;
         line-height: 1.35;
         user-select: none;
-        & .__type {
+        & .__title {
           padding-right: 2px;
           font-size: 15px;
           font-weight: 700;
@@ -103,7 +91,7 @@ export default {
       margin-left: 1.6rem;
       width: .95rem;
       height: auto;
-      filter: invert(70%);
+      filter: invert(50%);
     }
   }
 }
@@ -118,7 +106,7 @@ export default {
       & .alert-text {
         & .__message {
           font-size: 16px;
-          & .__type {
+          & .__title {
             padding-right: 2px;
             font-size: 16px;
           }
