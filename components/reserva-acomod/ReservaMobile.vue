@@ -211,7 +211,7 @@
             maxlength="1000"
             rows="4"
             placeholder="Escreva sua resposta aqui">
-          </textarea>
+          {{messageAutosize}}</textarea>
 
 
           <button type="button" class="__next-btn-small" @click="nextBtn4">Continuar</button>
@@ -260,12 +260,9 @@
           <h3 class="__text">Eu concordo com os termos de serviço.</h3>
 
           
-          <div class="buttons">
+          <div class="buttons" v-if="$store.state.paymentAdded">
             <div class="buttons-body">
-              <h3 class="__valor" v-if="reservaAcomod.valorReservaTotal !== null">R${{ reservaAcomod.valorReservaTotal.toLocaleString() }}
-                <span class="__valor-noites"> por {{ reservaAcomod.noites }} {{ reservaAcomod.noites == 1 ? 'noite' : 'noites'}}</span>
-              </h3>
-              <button type="button" class="__next-btn" style="width: 13rem; font-weight:700" :style="form5ok" @click="concluirReserva">Concluir Pedido</button>
+              <button type="button" class="__next-btn" style="width: 100%; font-weight:700" :style="form5ok" @click="concluirReserva">Concluir Pedido</button>
             </div>
           </div>
 
@@ -866,7 +863,7 @@ export default {
   watch: {
     cardNumber (value) {
       if (this.$store.state.showReservaAcomod) { /* Prevenir watch duplicada Desktop */
-        let cardNumber = valid.number(value)
+        const cardNumber = valid.number(value)
         cardNumber.isPotentiallyValid ? this.cardNumberError = false : this.cardNumberError = true
         if (cardNumber.card) {
           if (cardNumber.card.type === 'american-express' ? value.length === 18 : value.length === 19) {
@@ -878,6 +875,11 @@ export default {
               })
             } else {
               this.cardNumberError = true
+              this.$store.commit('show_alert', {
+                type: 'warning',
+                title: 'Erro',
+                message: 'Número inválido.',
+              })
             }
           }
           this.$store.state.cardType = cardNumber.card.type
@@ -887,16 +889,34 @@ export default {
     },
     cardExpirationDate (value) {
       if (this.$store.state.showReservaAcomod) { /* Prevenir watch duplicada Desktop */
-        let firstDigit = value.charAt(0)
+        const firstDigit = value.charAt(0)
         firstDigit > 1 ? this.$store.state.creditCard.cardExpirationDate = `0${firstDigit} / ` : ''
-        let cardExpirationDate = valid.expirationDate(value)
-        cardExpirationDate.isPotentiallyValid ? this.cardExpirationDateError = false : this.cardExpirationDateError = true
+        const cardExpirationDate = valid.expirationDate(value)
+        if (cardExpirationDate.isPotentiallyValid) {
+          this.cardExpirationDateError = false
+        } else {
+          this.cardExpirationDateError = true
+          this.$store.commit('show_alert', {
+            type: 'warning',
+            title: 'Erro',
+            message: 'Data inválida.'
+          })
+        }
         cardExpirationDate.isValid ? this.$refs.cvv.$el.focus() : ''
       }
     },
     cardCVV (value) {
-      let cardCVV = valid.cvv(value)
-      cardCVV.isPotentiallyValid ? this.cardCvvError = false : this.cardCvvError = true
+      const cardCVV = valid.cvv(value)
+      if (cardCVV.isPotentiallyValid) {
+        this.cardCvvError = false
+      } else {
+        this.cardCvvError = true
+        this.$store.commit('show_alert', {
+          type: 'warning',
+          title: 'Erro',
+          message: 'Código de segurança inválido.'
+        })
+      }
     },
     cpf (value) {
       if (this.$store.state.showReservaAcomod) { /* Prevenir watch duplicada Desktop */
@@ -909,6 +929,11 @@ export default {
               this.$refs.zipcode.$el.focus()
             } else {
               this.cpfError = true
+              this.$store.commit('show_alert', {
+                type: 'warning',
+                title: 'Erro',
+                message: 'CPF inválido.',
+              })
             }
           }
         }
@@ -944,7 +969,19 @@ export default {
               }
             })
           } catch (err) {
-            console.log(err)
+            if (err.response.status === 404) {
+              this.$store.commit('show_alert', {
+                type: 'warning',
+                title: 'Erro',
+                message: 'CEP inválido.',
+              })
+            } else {
+              this.$store.commit('show_alert', {
+                type: 'warning',
+                title: 'Erro',
+                message: 'Falha na conexão. Tente novamente.',
+              })
+            }
             this.zipcodeError = true
             this.$store.state.validZipcode = false
             this.$store.commit('m_loader', false)
@@ -1030,7 +1067,7 @@ export default {
       height: auto;
     }
     & .etapa-reserva-box {
-      padding-bottom: 5rem;
+      padding-bottom: 3.5rem;
       & .etapas {
         padding: 0 7% 0.2rem;
         font-size: 14px;

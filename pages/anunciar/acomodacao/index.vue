@@ -1074,14 +1074,14 @@ export default {
           this.$store.commit('m_loader', false)
           console.log(err)
           this.$store.commit('show_alert', {
-            type: 'warning',
+            type: 'error',
             title: 'Erro',
             message: 'Informações inválidas.'
           })
         }
       } else {
         this.$store.commit('show_alert', {
-          type: 'warning',
+          type: 'error',
           title: 'Ops',
           message: 'Preencha as informações restantes.'
         })

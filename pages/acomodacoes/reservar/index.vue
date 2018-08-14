@@ -89,13 +89,15 @@
             </div>
 
             <textarea
+              ref="message"
               :class="[ messageError ? 'has-error-textarea' : '' ]"
               v-model="reservaAcomod.message"
+              @focus="onFocusMessage"
               v-autosize="messageAutosize"
               maxlength="1000"
-              rows="4"
+              rows="6"
               placeholder="Escreva sua resposta aqui">
-            {{message}}</textarea>
+            {{messageAutosize}}</textarea>
 
           </div>
 
@@ -168,7 +170,7 @@
                     :class="[ cardExpirationDateError ? 'has-error' : '' ]"
                     type="tel"
                     v-model="$store.state.creditCard.cardExpirationDate"
-                    :mask="[/\d/, /\d/, '/', /\d/, /\d/]"
+                    :mask="[/\d/, /\d/, ' ', '/', ' ', /\d/, /\d/]"
                     :guide="false"
                     placeholder="MM / AA">
                   </masked-input>
@@ -181,6 +183,7 @@
                     ref="cvv"
                     :class="[ cardCvvError ? 'has-error' : '' ]"
                     type="tel"
+                    @keypress="keyEnterCVV"
                     v-model="$store.state.creditCard.cardCVV"
                     :mask="[/\d/, /\d/, /\d/, /\d/]"
                     :guide="false"
@@ -412,7 +415,7 @@
       
       
       <nuxt-link to="/" style="margin-top:4rem">
-        <button class="__next-btn" type="button" style="margin:0">Acessar Página Pessoal</button>
+        <button class="__next-btn" type="button" style="background: #50CB9D; margin:0">Acessar Página Pessoal</button>
       </nuxt-link>
       
 
@@ -457,6 +460,18 @@ export default {
     scrollTop () {
       document.body.scrollTop = 0
       document.documentElement.scrollTop = 0
+    },
+    onFocusMessage () {
+      scrollIntoView(this.$refs.message)
+    },
+    keyEnterCVV () {
+      if (event.key === 'Enter') {
+        const cardCVV = valid.cvv(this.cardCVV)
+        if (cardCVV.isPotentiallyValid) {
+          scrollIntoView(this.$refs.cpf.$el)
+          this.$refs.cpf.$el.focus() 
+        }
+      }  
     },
     keyEnterName () {
       if (event.key === 'Enter') {
@@ -532,6 +547,11 @@ export default {
             
           } else { /* Há dados incompletos */
             this.$store.commit('m_loader', false)
+            this.$store.commit('show_alert', {
+              type: 'warning',
+              title: 'Erro',
+              message: 'Informações inválidas.'
+            })
             this.cardHolderName.length < 3 ? this.cardHolderNameError = true : this.cardHolderNameError = false
             !valid.number(this.cardNumber).isValid ? this.cardNumberError = true : this.cardNumberError = false
             !valid.expirationDate(this.cardExpirationDate).isValid ?  this.cardExpirationDateError = true :  this.cardExpirationDateError = false
@@ -560,24 +580,34 @@ export default {
             
           } else { /* Há dados incompletos */
             this.$store.commit('m_loader', false)
+            this.$store.commit('show_alert', {
+              type: 'warning',
+              title: 'Erro',
+              message: 'Informações inválidas.'
+            })
             this.name === '' ? this.nameError = true : this.nameError = false
             this.cpf.length < 14 || !CPF.validate(this.cpf) ? this.cpfError = true : this.cpfError = false
             this.celular.length < 15 ? this.celularError = true : this.celularError = false
           }
         }
 
-      this.reservaAcomod.reservaID = await result.data.reservaID
+        this.reservaAcomod.reservaID = await result.data.reservaID
 
-      /* Resetar dados do cartão de crédito */
-      this.$store.commit('m_resetCreditCard')
+        /* Resetar dados do cartão de crédito */
+        this.$store.commit('m_resetCreditCard')
 
-      this.$store.state.concludedReservaAcomod = true
-      this.scrollTop()
-      this.$store.commit('m_loader', false)
+        this.$store.state.concludedReservaAcomod = true
+        this.scrollTop()
+        this.$store.commit('m_loader', false)
 
       } catch (err) {
         console.log(err)
         this.$store.commit('m_loader', false)
+        this.$store.commit('show_alert', {
+          type: 'warning',
+          title: 'Erro',
+          message: 'Informações inválidas.'
+        })
       }
     },
     backEtapa1 () {
@@ -642,7 +672,7 @@ export default {
     cardHolderName (value) { value !== '' ? this.cardHolderNameError = false : '' },
     name (value) { value !== '' ? this.nameError = false : '' },
     cardNumber (value) {
-      let cardNumber = valid.number(value)
+      const cardNumber = valid.number(value)
       cardNumber.isPotentiallyValid ? this.cardNumberError = false : this.cardNumberError = true
       if (cardNumber.card) {
         if (cardNumber.card.type === 'american-express' ? value.length === 18 : value.length === 19) {
@@ -654,6 +684,11 @@ export default {
             })
           } else {
             this.cardNumberError = true
+            this.$store.commit('show_alert', {
+              type: 'warning',
+              title: 'Erro',
+              message: 'Número inválido.',
+            })
           }
         }
         this.$store.state.cardType = cardNumber.card.type
@@ -661,25 +696,32 @@ export default {
       }
     },
     cardExpirationDate (value) {
-      let firstDigit = value.charAt(0)
+      const firstDigit = value.charAt(0)
       firstDigit > 1 ? this.$store.state.creditCard.cardExpirationDate = `0${firstDigit} / ` : ''
-      let cardExpirationDate = valid.expirationDate(value)
-      cardExpirationDate.isPotentiallyValid ? this.cardExpirationDateError = false : this.cardExpirationDateError = true
+      const cardExpirationDate = valid.expirationDate(value)
+      if (cardExpirationDate.isPotentiallyValid) {
+        this.cardExpirationDateError = false
+      } else {
+        this.cardExpirationDateError = true
+        this.$store.commit('show_alert', {
+          type: 'warning',
+          title: 'Erro',
+          message: 'Data inválida.'
+        })
+      }
       cardExpirationDate.isValid ? this.$refs.cvv.$el.focus() : ''
     },
     cardCVV (value) {
-      let cardCVV = valid.cvv(value)
-      cardCVV.isPotentiallyValid ? this.cardCvvError = false : this.cardCvvError = true
-      if (this.$store.state.cardType !== 'american-express') {
-        if (value.length === 3 && cardCVV.isValid) {
-          scrollIntoView(this.$refs.cpf.$el)
-          this.$refs.cpf.$el.focus()
-        }
+      const cardCVV = valid.cvv(value)
+      if (cardCVV.isPotentiallyValid) {
+        this.cardCvvError = false
       } else {
-        if (value.length === 4 && cardCVV.isValid) {
-          scrollIntoView(this.$refs.cpf.$el)
-          this.$refs.cpf.$el.focus()
-        }
+        this.cardCvvError = true
+        this.$store.commit('show_alert', {
+          type: 'warning',
+          title: 'Erro',
+          message: 'Código de segurança inválido.'
+        })
       }
     },
     cpf (value) {
@@ -690,6 +732,11 @@ export default {
           this.$refs.celular.$el.focus()
         } else {
           this.cpfError = true
+          this.$store.commit('show_alert', {
+            type: 'warning',
+            title: 'Erro',
+            message: 'CPF inválido.',
+          })
         }
       }
     },
@@ -722,7 +769,19 @@ export default {
             }
           })
         } catch (err) {
-          console.log(err)
+          if (err.response.status === 404) {
+            this.$store.commit('show_alert', {
+              type: 'warning',
+              title: 'Erro',
+              message: 'CEP inválido.',
+            })
+          } else {
+            this.$store.commit('show_alert', {
+              type: 'warning',
+              title: 'Erro',
+              message: 'Falha na conexão. Tente novamente.',
+            })
+          }
           this.zipcodeError = true
           this.$store.state.validZipcode = false
           this.$store.commit('m_loader', false)
