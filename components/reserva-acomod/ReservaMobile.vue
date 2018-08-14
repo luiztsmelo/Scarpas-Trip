@@ -676,8 +676,7 @@ export default {
         this.$store.commit('show_alert', {
           type: 'warning',
           title: 'Ops',
-          message: 'Adicione uma resposta, por favor.',
-          persist: true
+          message: 'Adicione uma resposta, por favor.'
         })
         scrollIntoView(this.$refs.message)
         this.$refs.message.focus()
@@ -1294,11 +1293,11 @@ export default {
         padding: 0;
         right: 7%;
         bottom: 0;
-        height: 3.4rem;
+        height: 3.5rem;
         background: transparent;
         color: #50CB9D;
         font-size: 17px;
-        font-weight: 600;
+        font-weight: 700;
       }
       & .round-btn {
         position: fixed;
