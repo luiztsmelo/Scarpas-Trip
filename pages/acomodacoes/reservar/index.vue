@@ -508,11 +508,11 @@ export default {
       }
     },
     nextBtn1 () {
-      this.$store.state.etapaReserva2ok = true, this.$store.commit('m_reservaAcomodDesktop1', false), this.$store.commit('m_reservaAcomodDesktop2', true)
+      this.$store.state.etapaReserva2ok = true, this.$store.commit('m_reservaAcomodDesktop1', false), this.$store.commit('m_reservaAcomodDesktop2', true), this.scrollTop()
     },
     nextBtn2 () {
       if (this.reservaAcomod.message.length > 0) {
-        this.$store.state.etapaReserva3ok = true, this.$store.commit('m_reservaAcomodDesktop2', false), this.$store.commit('m_reservaAcomodDesktop3', true)
+        this.$store.state.etapaReserva3ok = true, this.$store.commit('m_reservaAcomodDesktop2', false), this.$store.commit('m_reservaAcomodDesktop3', true), this.scrollTop()
       } else {
         this.messageError = true
       }
@@ -524,19 +524,14 @@ export default {
         this.reservaAcomod.hostID = this.acomod.hostID
         this.reservaAcomod.guestID = this.user.userID
 
-        await firebase.firestore().collection('users').doc(this.user.userID).update({
-          celular: '+55' + this.celular.replace(/[^0-9\.]+/g, '')
-        })
+        let transaction = null
 
-        let result = null
-
+        /* ________________________________________ CREDIT CARD ________________________________________ */
         if (this.reservaAcomod.paymentMethod === 'credit_card') {
 
-          /* Checar se todos os dados foram preenchidos */
           if (valid.number(this.cardNumber).isValid && valid.expirationDate(this.cardExpirationDate).isValid && valid.cvv(this.cardCVV).isValid && this.cardHolderName !== '' && CPF.validate(this.cpf) && this.cpf.length === 14 && this.celular.length === 15 && this.zipcode.length === 9 && this.$store.state.validZipcode && this.street !== '' && this.streetNumber !== '' && this.neighborhood !== '' && this.city !== '' && this.state !== '') {
 
-            /* Criar transação no Pagarme e reserva na Firestore */
-            result = await firebase.functions().httpsCallable('newReservaAcomod')({
+            transaction = await firebase.functions().httpsCallable('newReservaAcomod')({
               reservaAcomod: this.reservaAcomod,
               creditCard: this.creditCard,
               customer: this.customer,
@@ -544,13 +539,13 @@ export default {
               host: this.host,
               visitID: this.$store.state.visitID
             })
-            
-          } else { /* Há dados incompletos */
+
+          } else { /* Informações incompletas */
             this.$store.commit('m_loader', false)
             this.$store.commit('show_alert', {
               type: 'warning',
               title: 'Erro',
-              message: 'Informações inválidas.'
+              message: 'Informações incompletas.'
             })
             this.cardHolderName.length < 3 ? this.cardHolderNameError = true : this.cardHolderNameError = false
             !valid.number(this.cardNumber).isValid ? this.cardNumberError = true : this.cardNumberError = false
@@ -565,12 +560,12 @@ export default {
             this.city === null || this.city === '' ? this.cityError = true : this.cityError = false
             this.state === null || this.state === '' ? this.stateError = true : this.stateError = false
           }
+        /* ________________________________________ BOLETO ________________________________________ */
         } else {
-          /* Checar se todos os dados foram preenchidos */
+
           if (this.name !== '' && CPF.validate(this.cpf) && this.cpf.length === 14 && this.celular.length === 15) {
 
-            /* Criar transação no Pagarme e reserva na Firestore */
-            result = await firebase.functions().httpsCallable('newReservaAcomod')({
+            transaction = await firebase.functions().httpsCallable('newReservaAcomod')({
               reservaAcomod: this.reservaAcomod,
               customer: this.customer,
               acomod: this.acomod,
@@ -578,27 +573,26 @@ export default {
               visitID: this.$store.state.visitID
             })
             
-          } else { /* Há dados incompletos */
+          } else { /* Informações incompletas */
             this.$store.commit('m_loader', false)
             this.$store.commit('show_alert', {
               type: 'warning',
               title: 'Erro',
-              message: 'Informações inválidas.'
+              message: 'Informações incompletas.'
             })
             this.name === '' ? this.nameError = true : this.nameError = false
             this.cpf.length < 14 || !CPF.validate(this.cpf) ? this.cpfError = true : this.cpfError = false
             this.celular.length < 15 ? this.celularError = true : this.celularError = false
           }
+        }/* ______________________________________________________________________________________ */
+
+        if (transaction !== null) {
+          this.reservaAcomod.reservaID = transaction.data.reservaID
+          this.$store.commit('m_resetCreditCard')
+          this.$store.state.concludedReservaAcomod = true
+          this.scrollTop()
+          this.$store.commit('m_loader', false)
         }
-
-        this.reservaAcomod.reservaID = await result.data.reservaID
-
-        /* Resetar dados do cartão de crédito */
-        this.$store.commit('m_resetCreditCard')
-
-        this.$store.state.concludedReservaAcomod = true
-        this.scrollTop()
-        this.$store.commit('m_loader', false)
 
       } catch (err) {
         console.log(err)
@@ -606,7 +600,7 @@ export default {
         this.$store.commit('show_alert', {
           type: 'warning',
           title: 'Erro',
-          message: 'Informações inválidas.'
+          message: 'Falha no servidor. Tente novamente.'
         })
       }
     },

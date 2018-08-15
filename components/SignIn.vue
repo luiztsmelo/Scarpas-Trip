@@ -120,7 +120,7 @@ export default {
       align-items: center;
       padding: 3.6rem 4rem;
       & .__img {
-        width: 54px;
+        width: 52px;
         height: auto;
       }
       & .__title {

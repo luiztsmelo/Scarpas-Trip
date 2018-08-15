@@ -707,7 +707,7 @@ export default {
         this.$store.commit('show_alert', {
           type: 'warning',
           title: 'Erro',
-          message: 'Informações inválidas.',
+          message: 'Informações incompletas.',
         })
         this.cardHolderName.length < 3 ? this.cardHolderNameError = true : this.cardHolderNameError = false
         this.cpf.length < 14 || !CPF.validate(this.cpf) ? this.cpfError = true : this.cpfError = false
@@ -742,12 +742,7 @@ export default {
           this.reservaAcomod.hostID = this.acomod.hostID
           this.reservaAcomod.guestID = this.user.userID
 
-          await firebase.firestore().collection('users').doc(this.user.userID).update({ 
-            celular: '+55' + this.celular.replace(/[^0-9\.]+/g, '')
-          })
-
-          /* Criar transação no Pagarme e reserva na Firestore */
-          const result = await firebase.functions().httpsCallable('newReservaAcomod')({
+          const transaction = await firebase.functions().httpsCallable('newReservaAcomod')({
             reservaAcomod: this.reservaAcomod,
             creditCard: this.creditCard,
             customer: this.customer,
@@ -756,17 +751,19 @@ export default {
             visitID: this.$store.state.visitID
           })
 
-          this.reservaAcomod.reservaID = await result.data.reservaID
-
-          /* Resetar dados do cartão de crédito */
+          this.reservaAcomod.reservaID = transaction.data.reservaID
           this.$store.commit('m_resetCreditCard')
-
           this.$store.state.concludedReservaAcomod = true
           this.scrollTop()
           this.$store.commit('m_loader', false)
           
         } catch (err) {
           console.log(err)
+          this.$store.commit('show_alert', {
+            type: 'warning',
+            title: 'Erro',
+            message: 'Falha no servidor. Tente novamente.'
+          })
           this.$store.commit('m_loader', false)
         }
       } else {
@@ -1067,7 +1064,7 @@ export default {
       height: auto;
     }
     & .etapa-reserva-box {
-      padding-bottom: 3.5rem;
+      padding-bottom: 5rem;
       & .etapas {
         padding: 0 7% 0.2rem;
         font-size: 14px;

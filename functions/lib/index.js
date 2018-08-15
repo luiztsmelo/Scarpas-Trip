@@ -141,6 +141,10 @@ exports.newReservaAcomod = functions.https.onCall((data) => __awaiter(this, void
         const acomod = data.acomod;
         const host = data.host;
         const visitID = data.visitID;
+        /* Update celular guest */
+        yield admin.firestore().collection('users').doc(reservaAcomod.guestID).update({
+            celular: '+55' + customer.celular.replace(/[^0-9\.]+/g, '')
+        });
         /* Get guest */
         const guestSnap = yield admin.firestore().collection('users').doc(reservaAcomod.guestID).get();
         const guest = guestSnap.data();
