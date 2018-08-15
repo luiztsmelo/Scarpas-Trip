@@ -349,9 +349,9 @@
           <masked-input
             type="tel"
             v-model="$store.state.passeioData.celular"
-            :mask="['(', /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]"
+            :mask="['+', 5, 5, ' ', /\d/, /\d/, ' ', /\d/, /\d/, /\d/, /\d/, /\d/, ' ', /\d/, /\d/, /\d/, /\d/]"
             :guide="false"
-            placeholder="(  )      -    ">
+            placeholder="+55">
           </masked-input>
         </div>
       </div>
@@ -658,7 +658,7 @@ export default {
       }
     },
     nextBtn10 () {
-      if (this.$store.state.acomodData.celular.length === 15 && this.user.email !== null) {
+      if (this.$store.state.acomodData.celular.length === 17 && this.user.email !== null) {
         this.$store.state.passeioData.proprietario = this.user.fullName
         this.$store.state.passeioData.email = this.user.email
         this.$store.state.passeioData.photoURL = this.user.photoURL
@@ -845,7 +845,7 @@ export default {
       return this.$store.state.passeioData.subtitle !== '' ? 'background:#198CFE' : ''
     },
     form10ok () {
-      return this.$store.state.passeioData.celular.length === 15 ? 'background:#198CFE' : ''
+      return this.$store.state.passeioData.celular.length === 17 ? 'background:#198CFE' : ''
     },
     form11ok () {
       return this.bankCode !== null && this.agencia !== '' && this.agenciaDV !== '' && this.conta !== '' && this.contaDV !== '' && this.legalName !== '' && this.docNumber.length === 14 ? 'background:#198CFE' : ''

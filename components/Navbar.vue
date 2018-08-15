@@ -257,11 +257,11 @@ export default {
     & .navbar-body {
       & .brand {
         & .__brand-img {
-          width: 2.55rem;
+          width: 2.45rem;
           height: auto;
         }
         & .__brand-name {
-          font-size: 21px;
+          font-size: 20px;
           font-weight: 500;
           line-height: var(--navbarHeightDesktop);
         }

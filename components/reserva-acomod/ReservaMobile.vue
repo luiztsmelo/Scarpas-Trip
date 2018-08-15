@@ -160,9 +160,9 @@
                 :class="[ celularError ? 'has-error' : '' ]"
                 type="tel"
                 v-model="$store.state.customer.celular"
-                :mask="['(', /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]"
+                :mask="['+', 5, 5, ' ', /\d/, /\d/, ' ', /\d/, /\d/, /\d/, /\d/, /\d/, ' ', /\d/, /\d/, /\d/, /\d/]"
                 :guide="false"
-                placeholder="(  )          ">
+                placeholder="+55">
               </masked-input>
             </div>
           </div>
@@ -641,7 +641,7 @@ export default {
       this.$store.commit('m_miniLoader', false), this.$store.commit('m_reservaAcomod2', false), this.$store.commit('m_reservaAcomod3', true), window.location.hash = this.$store.state.randomHashs[3]
     },
     nextBtn3 () {
-      if (this.celular.length === 15) {
+      if (this.celular.length === 17) {
         this.$store.commit('m_miniLoader', false)
         this.creditCard.cardHolderName = this.user.fullName
         this.$store.commit('m_reservaAcomod3', false)
@@ -654,7 +654,7 @@ export default {
             title: 'Ops',
             message: 'Adicione um número válido.'
           })
-          this.celular.length < 15 ? this.celularError = true : this.celularError = false
+          this.celular.length < 17 ? this.celularError = true : this.celularError = false
         } else {
           this.$store.commit('show_alert', {
             type: 'warning',
@@ -831,7 +831,7 @@ export default {
       return 'background: #50CB9D'
     },
     form3ok () {
-      return this.celular.length === 15 ? 'background: #50CB9D' : ''
+      return this.celular.length === 17 ? 'background: #50CB9D' : ''
     },
     form4ok () {
       return this.reservaAcomod.message !== '' ? 'background: #50CB9D' : ''

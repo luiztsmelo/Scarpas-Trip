@@ -226,9 +226,9 @@
                     :class="[ celularError ? 'has-error' : '' ]"
                     type="tel"
                     v-model="$store.state.customer.celular"
-                    :mask="['(', /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]"
+                    :mask="['+', 5, 5, ' ', /\d/, /\d/, ' ', /\d/, /\d/, /\d/, /\d/, /\d/, ' ', /\d/, /\d/, /\d/, /\d/]"
                     :guide="false"
-                    placeholder="(  )          ">
+                    placeholder="+55">
                   </masked-input>
                 </div><!-- CELULAR -->
 
@@ -409,7 +409,7 @@
 
     </div>
 
-    <div class="footer">
+    <div class="footer" v-if="!$store.state.concludedReservaAcomod">
       <div style="display: flex; align-items: center">
         <img class="__img" src="../../../assets/img/brand.svg">
         <h3 class="__text">&copy Escarpas Trip</h3>
@@ -429,15 +429,15 @@
         {{ host.firstName }} irá analisar seu pedido e dentro de 24h você receberá um e-mail e SMS com a confirmação de sua reserva, juntamente com as informações de contato do anunciante.
       </h3>
 
-      <h3 class="__text">Código da Reserva</h3>
+      <h3 class="__subtitle">Código da Reserva</h3>
       <h3 class="__text">{{ reservaAcomod.reservaID }}</h3>
 
-      <h3 class="__text">Cancelamento</h3>
+      <h3 class="__subtitle">Cancelamento</h3>
       <h3 class="__text">
         É possível cancelar sua reserva, com reembolso total, até dia tal, acessando sua <nuxt-link to="/@name" style="text-decoration:underline">página pessoal</nuxt-link>. Para mais detalhes, leia nossa <nuxt-link to="/" style="text-decoration:underline">Política de Cancelamento</nuxt-link>.
       </h3>
 
-      <h3 class="__text">Dúvidas?</h3>
+      <h3 class="__subtitle">Dúvidas?</h3>
       <h3 class="__text">Entre em contato conosco pelo nosso WhatsApp: (34) 99141-0085 ou e-mail: contato@escarpastrip.com.</h3>
       
       
@@ -556,7 +556,7 @@ export default {
         /* ________________________________________ CREDIT CARD ________________________________________ */
         if (this.reservaAcomod.paymentMethod === 'credit_card') {
 
-          if (valid.number(this.cardNumber).isValid && valid.expirationDate(this.cardExpirationDate).isValid && valid.cvv(this.cardCVV).isValid && this.cardHolderName !== '' && CPF.validate(this.cpf) && this.cpf.length === 14 && this.celular.length === 15 && this.zipcode.length === 9 && this.$store.state.validZipcode && this.street !== '' && this.streetNumber !== '' && this.neighborhood !== '' && this.city !== '' && this.state !== '') {
+          if (valid.number(this.cardNumber).isValid && valid.expirationDate(this.cardExpirationDate).isValid && valid.cvv(this.cardCVV).isValid && this.cardHolderName !== '' && CPF.validate(this.cpf) && this.cpf.length === 14 && this.celular.length === 17 && this.zipcode.length === 9 && this.$store.state.validZipcode && this.street !== '' && this.streetNumber !== '' && this.neighborhood !== '' && this.city !== '' && this.state !== '') {
 
             transaction = await firebase.functions().httpsCallable('newReservaAcomod')({
               reservaAcomod: this.reservaAcomod,
@@ -579,7 +579,7 @@ export default {
             !valid.expirationDate(this.cardExpirationDate).isValid ?  this.cardExpirationDateError = true :  this.cardExpirationDateError = false
             !valid.cvv(this.cardCVV).isValid ? this.cardCvvError = true : this.cardCvvError = false
             this.cpf.length < 14 || !CPF.validate(this.cpf) ? this.cpfError = true : this.cpfError = false
-            this.celular.length < 15 ? this.celularError = true : this.celularError = false
+            this.celular.length < 17 ? this.celularError = true : this.celularError = false
             this.zipcode.length < 9 || !this.$store.state.validZipcode ? this.zipcodeError = true : this.zipcodeError = false
             this.street === null || this.street === '' ? this.streetError = true : this.streetError = false
             this.streetNumber === null || this.streetNumber === '' ? this.streetNumberError = true : this.streetNumberError = false
@@ -590,7 +590,7 @@ export default {
         /* ________________________________________ BOLETO ________________________________________ */
         } else {
 
-          if (this.name !== '' && CPF.validate(this.cpf) && this.cpf.length === 14 && this.celular.length === 15) {
+          if (this.name !== '' && CPF.validate(this.cpf) && this.cpf.length === 14 && this.celular.length === 17) {
 
             transaction = await firebase.functions().httpsCallable('newReservaAcomod')({
               reservaAcomod: this.reservaAcomod,
@@ -609,7 +609,7 @@ export default {
             })
             this.name === '' ? this.nameError = true : this.nameError = false
             this.cpf.length < 14 || !CPF.validate(this.cpf) ? this.cpfError = true : this.cpfError = false
-            this.celular.length < 15 ? this.celularError = true : this.celularError = false
+            this.celular.length < 17 ? this.celularError = true : this.celularError = false
           }
         }/* ______________________________________________________________________________________ */
 
@@ -660,7 +660,7 @@ export default {
           return 'background: #FFA04F'
         }
       } else {
-        if (this.name !== '' && CPF.validate(this.cpf) && this.cpf.length === 14 && this.celular.length === 15) {
+        if (this.name !== '' && CPF.validate(this.cpf) && this.cpf.length === 14 && this.celular.length === 17) {
           return 'background: #FFA04F'
         }
       }
@@ -763,7 +763,7 @@ export default {
     },
     celular (value) { 
       value !== '' ? this.celularError = false : '' 
-      if (value.length === 15 && this.reservaAcomod.paymentMethod === 'credit_card') {
+      if (value.length === 17 && this.reservaAcomod.paymentMethod === 'credit_card') {
         scrollIntoView(this.$refs.zipcode.$el)
         this.$refs.zipcode.$el.focus()
       }
@@ -1119,7 +1119,7 @@ export default {
       font-size: 36px;
       padding: .8rem 0 .7rem 0;
     }
-    & .__text {
+    & .__subtitle {
       padding-top: 2rem;
       text-align: center;
       font-size: 18px;

@@ -555,7 +555,7 @@
       </div>
 
 
-      <h3 class="__form-text" style="padding-top:1rem; font-size:15px; line-height:24px" v-if="!authUser">Ao se cadastrar com uma das opções acima, somente seu e-mail, nome e foto de perfil serão requisitados. Para mais informações, leia nossa <nuxt-link to="/termos#politica_privacidade" style="font-weight:500; cursor:pointer">Política de Privacidade</nuxt-link>.</h3>
+      <h4 class="__termos" style="padding-top:1rem" v-if="!authUser">Ao se cadastrar com uma das opções acima, somente seu e-mail, nome e foto de perfil serão requisitados. Para mais informações, leia nossa <nuxt-link to="/termos#politica_privacidade">Política de Privacidade</nuxt-link>.</h4>
 
 
       <div v-if="authUser">
@@ -565,9 +565,9 @@
           <masked-input
             type="tel"
             v-model="$store.state.acomodData.celular"
-            :mask="['(', /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]"
+            :mask="['+', 5, 5, ' ', /\d/, /\d/, ' ', /\d/, /\d/, /\d/, /\d/, /\d/, ' ', /\d/, /\d/, /\d/, /\d/]"
             :guide="false"
-            placeholder="(  )          ">
+            placeholder="+55">
           </masked-input>
         </div>
 
@@ -1024,7 +1024,7 @@ export default {
           title: 'Ops',
           message: 'Conecte-se com uma de suas contas para continuar.'
         })
-      } else if (this.$store.state.acomodData.celular.length === 15 && this.authUser) {
+      } else if (this.$store.state.acomodData.celular.length === 17 && this.authUser) {
           this.$store.commit('m_cadastroAcomod11', false), this.$store.commit('m_cadastroAcomod12', true), this.$store.commit('m_acomodProgressBar', (100/12)*12), this.scrollTop(), window.location.hash = `${this.randomHashs[12]}`, this.$store.state.bankAccount.legalName = this.user.fullName
       } else {
         this.$store.commit('show_alert', {
@@ -1074,16 +1074,16 @@ export default {
           this.$store.commit('m_loader', false)
           console.log(err)
           this.$store.commit('show_alert', {
-            type: 'error',
+            type: 'warning',
             title: 'Erro',
-            message: 'Informações inválidas.'
+            message: 'Falha no servidor. Tente novamente.'
           })
         }
       } else {
         this.$store.commit('show_alert', {
-          type: 'error',
-          title: 'Ops',
-          message: 'Preencha as informações restantes.'
+          type: 'warning',
+          title: 'Erro',
+          message: 'Informações incompletas.'
         })
         this.bankCode === '' ? this.bankCodeError = true : this.bankCodeError = false
         this.agencia === '' ? this.agenciaError = true : this.agenciaError = false
@@ -1162,7 +1162,7 @@ export default {
       return this.$store.state.acomodData.subtitle !== '' ? 'background:#FFA04F' : ''
     },
     form11ok () {
-      return this.$store.state.acomodData.celular.length === 15 && this.authUser ? 'background:#FFA04F' : ''
+      return this.$store.state.acomodData.celular.length === 17 && this.authUser ? 'background:#FFA04F' : ''
     },
     form12ok () {
       return this.bankCode !== null && this.agencia !== '' && this.agenciaDV !== '' && this.conta !== '' && this.contaDV !== '' && this.legalName !== '' && this.docNumber.length === 14 && CPF.validate(this.docNumber) ? 'background:#FFA04F' : ''
@@ -1178,7 +1178,16 @@ export default {
     docNumber (value) { 
       value !== '' ? this.docNumberError = false : ''
       if (value.length === 14) {
-        CPF.validate(value) ? this.docNumberError = false : this.docNumberError = true
+        if (CPF.validate(value)) {
+          this.docNumberError = false
+        } else {
+          this.docNumberError = true
+          this.$store.commit('show_alert', {
+            type: 'warning',
+            title: 'Erro',
+            message: 'CPF inválido.',
+          })
+        }
       }
     },
     hash (value) {
@@ -1350,6 +1359,15 @@ export default {
       font-size: 18px;
       font-weight: 600;
       user-select: none;
+    }
+    & .__termos {
+      padding: 0 7%;
+      font-size: 14px;
+      font-weight: 500;
+      line-height: 20px;
+      & a {
+        color: var(--colorAcomod);
+      }
     }
     & textarea {
       padding: 0 7%;
@@ -1747,6 +1765,10 @@ export default {
       & .__form-subtitle {
         padding-top: 1.5rem;
         font-size: 19px;
+      }
+      & .__termos {
+        padding: 0 35%;
+        text-align: center
       }
       & textarea {
         padding: 0 28%;

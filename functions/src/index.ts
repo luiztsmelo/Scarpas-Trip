@@ -149,7 +149,7 @@ exports.newAcomod = functions.https.onCall(async data => {
     /* Update user Firestore */
     await admin.firestore().collection('users').doc(acomodData.hostID).update({ 
       isAcomodHost: true,
-      celular: '+55' + acomodData.celular.replace(/[^0-9\.]+/g, '')
+      celular: acomodData.celular.replace(/[^0-9\.]+/g, '')
     })
 
     delete acomodData.celular
@@ -178,7 +178,7 @@ exports.newReservaAcomod = functions.https.onCall(async data => {
 
     /* Update celular guest */
     await admin.firestore().collection('users').doc(reservaAcomod.guestID).update({
-      celular: '+55' + customer.celular.replace(/[^0-9\.]+/g, '')
+      celular: customer.celular.replace(/\s/g, '')
     })
 
     /* Get guest */
