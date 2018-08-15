@@ -41,13 +41,13 @@
 
 
           <div class="etapa-1-item">
-            <h3 class="__subtitle">Horário para Check-in:</h3>
+            <h3 class="__text">Horário para Check-in:</h3>
             <!-- <h3>{{ 'Entre ' + acomod.checkinFrom + ' e ' + acomod.checkinTo }}</h3> MUDAR ISSO AQUI-->
           </div>
         
 
           <div class="etapa-1-item" v-show="!acomod.allowFestas || !acomod.allowPets || !acomod.allowBabys || !acomod.allowFumar">
-            <h3 class="__subtitle">Nesta casa não é permitido:</h3>
+            <h3 class="__text">Nesta casa não é permitido:</h3>
             <h3>{{ !acomod.allowFestas ? 'Festas' : '' }}</h3>
             <h3>{{ !acomod.allowPets ? 'Animais de estimação' : '' }}</h3>
             <h3>{{ !acomod.allowBabys ? 'Bebês de até 2 anos' : '' }}</h3>
@@ -55,7 +55,7 @@
           </div>
 
           <div class="etapa-1-item" v-show="acomod.regrasAdicionais.length !== 0">
-            <h3 class="__subtitle">Lembretes adicionais:</h3>
+            <h3 class="__text">Lembretes adicionais:</h3>
             <h3 v-for="regra in acomod.regrasAdicionais">{{ regra }}</h3>
           </div>
           
@@ -77,7 +77,7 @@
 
           <div class="message">
             
-            <h3 class="__subtitle">Ajude {{ host.firstName }} a preparar {{ tipoAcomodA }} para sua estadia respondendo às suas perguntas</h3>
+            <h3 class="__text">Ajude {{ host.firstName }} a preparar {{ tipoAcomodA }} para sua estadia respondendo às suas perguntas</h3>
 
             <div class="host-message">
               <img class="__img" :src="host.photoURL">
@@ -117,7 +117,7 @@
 
           <div class="payment">
 
-            <h3 class="__subtitle">{{ user.firstName }}, você somente será cobrado se {{ host.firstName }} aceitar seu pedido de reserva. Caso aceite, para sua segurança nós só liberaremos o pagamento para ele no dia seguinte de seu check-in, {{ dayAfterCheckin }}.</h3>
+            <h3 class="__text">{{ user.firstName }}, você somente será cobrado se {{ host.firstName }} aceitar seu pedido de reserva. Caso aceite, para sua segurança nós só liberaremos o pagamento para ele no dia seguinte de seu check-in, {{ dayAfterCheckin }}.</h3>
 
 
             <!-- PAYMENT METHOD -->
@@ -330,6 +330,25 @@
             </div><!-- ************** BILLING ************** -->
 
 
+            <!-- PARCELAS -->
+            <div class="item-form" style="padding-top: 1.2rem" v-show="reservaAcomod.paymentMethod === 'credit_card'">
+              <label>Deseja pagar em quantas parcelas, sem juros?</label>
+              <select v-model="$store.state.reservaAcomod.parcelas">
+                <option v-for="parcela in $store.state.creditCard.parcelas" :value="parcela.id.toString()">
+                  {{ `${parcela.id}x R$${parcela.valorParcela.toLocaleString('pt-BR', {minimumFractionDigits: 2})}` }}
+                </option>
+              </select>
+            </div><!-- PARCELAS -->
+
+
+            <div class="politica-cancelamento" style="padding-top: 1.2rem">
+              <h3 class="__subtitle">Política de cancelamento: Flexível</h3>
+              <h3 class="__text">Cancele em 48h da reserva e até 7 dias antes do check-in para receber um reembolso integral.</h3>
+            </div>
+
+            <h4 class="__termos">Eu concordo com as regras {{ tipoAcomodD }}, <a href="/termos#politica_cancelamento" target="_blank">Política de Cancelamento</a> e <a href="/termos" target="_blank">Termos de Serviço</a>. Eu também concordo em pagar o valor total apresentado, que inclui a Taxa de Serviço.</h4>
+
+
           </div><!-- Payment -->
           
 
@@ -402,15 +421,15 @@
         {{ host.firstName }} irá analisar seu pedido e dentro de 24h você receberá um e-mail e SMS com a confirmação de sua reserva, juntamente com as informações de contato do anunciante.
       </h3>
 
-      <h3 class="__subtitle">Código da Reserva</h3>
+      <h3 class="__text">Código da Reserva</h3>
       <h3 class="__text">{{ reservaAcomod.reservaID }}</h3>
 
-      <h3 class="__subtitle">Cancelamento</h3>
+      <h3 class="__text">Cancelamento</h3>
       <h3 class="__text">
         É possível cancelar sua reserva, com reembolso total, até dia tal, acessando sua <nuxt-link to="/@name" style="text-decoration:underline">página pessoal</nuxt-link>. Para mais detalhes, leia nossa <nuxt-link to="/" style="text-decoration:underline">Política de Cancelamento</nuxt-link>.
       </h3>
 
-      <h3 class="__subtitle">Dúvidas?</h3>
+      <h3 class="__text">Dúvidas?</h3>
       <h3 class="__text">Entre em contato conosco pelo nosso WhatsApp: (34) 99141-0085 ou e-mail: contato@escarpastrip.com.</h3>
       
       
@@ -860,21 +879,32 @@ export default {
         padding-bottom: 1.5rem;
         font-size: 32px;
         user-select: none;
-        margin-right: 25%;
+        margin-right: 24%;
       }
       & .__subtitle {
         padding-top: .5rem;
         font-size: 16px;
+        font-weight: 600;
+      }
+      & .__text {
+        padding-top: .5rem;
+        font-size: 16px;
+      }
+      & .__termos {
+        padding-top: 3rem;
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 20px;
       }
       & .etapa-1-item {
         padding-top: 2rem;
-        & .__subtitle {
+        & .__text {
           font-size: 17px;
           font-weight: 600;
         }
       }
       & .message {
-        margin-right: 25%;
+        margin-right: 24%;
         & .host-message {
           display: flex;
           margin: 1.7rem 0 1rem 0;
@@ -919,7 +949,7 @@ export default {
       & .payment {
         display: flex;
         flex-flow: column;
-        margin-right: 25%;
+        margin-right: 24%;
       }
       & .item-form {
         display: flex;
@@ -1056,7 +1086,7 @@ export default {
       font-size: 36px;
       padding: .8rem 0 .7rem 0;
     }
-    & .__subtitle {
+    & .__text {
       padding-top: 2rem;
       text-align: center;
       font-size: 18px;
@@ -1070,7 +1100,7 @@ export default {
 
 .__next-btn {
   position: relative;
-  margin-top: 1rem;
+  margin-top: 2.5rem;
   padding: 0 1.5rem;
   height: 3.2rem;
   font-size: 17px;

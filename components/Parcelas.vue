@@ -16,7 +16,7 @@
             <span class="__numero">{{ `${parcela.id}x` }}</span>
 
             <div>
-              <h3 class="__valor">{{ `R$${parcela.valorParcela.toLocaleString()}` }}</h3>
+              <h3 class="__valor">{{ `R$${parcela.valorParcela.toLocaleString('pt-BR', {minimumFractionDigits: 2})}` }}</h3>
               <span class="__juros">Sem juros</span>
             </div>
           </div>

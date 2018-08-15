@@ -150,7 +150,7 @@
             <button type="button" class="facebook-btn" @click="$store.dispatch('a_facebookSignIn')">Continuar com Facebook</button>
           </div>
 
-          <h3 class="__text" style="padding-top:1rem; font-size:14px; line-height:23px" v-if="!authUser">Ao se cadastrar com uma das opções acima, somente seu e-mail, nome e foto de perfil serão requisitados. Para mais informações, leia nossa <nuxt-link to="/termos#politica_privacidade" style="font-weight:500; cursor:pointer">Política de Privacidade</nuxt-link>.</h3>
+          <h3 class="__text" style="padding-top:1rem; font-size:13px; line-height:23px; font-weight:500" v-if="!authUser">Ao se cadastrar com uma das opções acima, somente seu e-mail, nome e foto de perfil serão requisitados. Para mais informações, leia nossa <nuxt-link to="/termos#politica_privacidade" style="font-weight:600; cursor:pointer">Política de Privacidade</nuxt-link>.</h3>
 
 
           <div class="after-sign-in" v-if="authUser">
@@ -241,8 +241,7 @@
 
           <div class="add-payment" style="margin-bottom: 1.4rem" v-if="$store.state.paymentAdded" @click="openParcelas">
             <h3 class="__item-text" style="font-weight: 500">
-              {{ `${reservaAcomod.parcelas} ${reservaAcomod.parcelas === '1' ? 'parcela' : 'parcelas'}` }}
-              <span style="font-weight: 400">{{ parcelasText }}</span>
+              {{ parcelasText }}
             </h3>
             <img class="__arrow-right" src="../../assets/img/arrow-right.svg">
           </div>
@@ -809,7 +808,7 @@ export default {
     },
     parcelasText () {
       if (this.$store.state.creditCard.parcelas !== null) {
-        return `(R$${this.$store.state.creditCard.parcelas[Number(this.reservaAcomod.parcelas)-1].valorParcela.toLocaleString()})`
+        return `${this.reservaAcomod.parcelas}x R$${this.$store.state.creditCard.parcelas[Number(this.reservaAcomod.parcelas)-1].valorParcela.toLocaleString('pt-BR', {minimumFractionDigits: 2})}`
       }
     },
     formaDePagamentoTextStyle () {

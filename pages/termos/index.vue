@@ -102,7 +102,12 @@ export default {
     isTermos () { return this.$route.fullPath === '/termos' },
     isPrivacidade () { return this.$route.fullPath === '/termos#politica_privacidade' },
     isCancelamento () { return this.$route.fullPath === '/termos#politica_cancelamento' }
-  }
+  },
+  beforeRouteEnter (to, from, next) {
+    next(vm => {
+      vm.$store.commit('m_showNavbar', true)
+    })
+  },
 }
 </script>
 
