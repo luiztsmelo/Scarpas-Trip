@@ -7,7 +7,7 @@
 
         <img class="back-btn" src="../assets/img/back.svg" @click="backBtn">
 
-        <h1 class="__title">Em quantas parcelas deseja pagar?</h1>
+        <h1 class="__title">Deseja pagar em quantas parcelas?</h1>
 
 
         <div class="parcela" v-for="(parcela, index) in $store.state.creditCard.parcelas" :key="parcela.id" @click="$refs.radioRef[parcela.id-1].click()" @change="backBtn">

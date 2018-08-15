@@ -150,7 +150,7 @@
             <button type="button" class="facebook-btn" @click="$store.dispatch('a_facebookSignIn')">Continuar com Facebook</button>
           </div>
 
-          <h3 class="__text" style="padding-top:1rem; font-size:13px; line-height:23px; font-weight:500" v-if="!authUser">Ao se cadastrar com uma das opções acima, somente seu e-mail, nome e foto de perfil serão requisitados. Para mais informações, leia nossa <nuxt-link to="/termos#politica_privacidade" style="font-weight:600; cursor:pointer">Política de Privacidade</nuxt-link>.</h3>
+          <h4 class="__termos" style="padding-top:1rem" v-if="!authUser">Ao se cadastrar com uma das opções acima, somente seu e-mail, nome e foto de perfil serão requisitados. Para mais informações, leia nossa <nuxt-link to="/termos#politica_privacidade">Política de Privacidade</nuxt-link>.</h4>
 
 
           <div class="after-sign-in" v-if="authUser">
@@ -224,7 +224,7 @@
 
 
         <!-- ########## PAGAMENTO PG.5 ########## -->
-        <div class="etapa-reserva-box" v-if="$store.state.reservaAcomod5">
+        <div class="etapa-reserva-box" v-if="$store.state.reservaAcomod5" style="padding-bottom: 1rem">
 
           <h3 class="etapas">Etapa 5 de 5</h3>
 
@@ -256,14 +256,13 @@
           <div class="divider"></div>
 
 
-          <h3 class="__text">Eu concordo com os termos de serviço.</h3>
+          <h4 class="__termos">Eu concordo com as regras {{ tipoAcomodD }}, <a href="/termos#politica_cancelamento" target="_blank">Política de Cancelamento</a> e <a href="/termos" target="_blank">Termos de Serviço</a>. Eu também concordo em pagar o valor total apresentado, que inclui a Taxa de Serviço.</h4>
 
           
-          <div class="buttons" v-if="$store.state.paymentAdded">
-            <div class="buttons-body">
-              <button type="button" class="__next-btn" style="width: 100%; font-weight:700" :style="form5ok" @click="concluirReserva">Concluir Pedido</button>
-            </div>
-          </div>
+          <button type="button" class="__next-btn-payment" @click="concluirReserva" v-if="$store.state.paymentAdded">Concluir Pedido</button>
+
+          <button type="button" class="__next-btn-payment" style="font-weight: 600" @click="openPaymentMethod" v-else>Adicionar Pagamento</button>
+
 
         </div><!-- ########## PAGAMENTO PG.5 ########## -->
 
@@ -803,7 +802,7 @@ export default {
         const lastDigitsCardNumber = this.cardNumber.slice(15, 19)
         return this.$store.state.cardTypeNice + ' ' + lastDigitsCardNumber
       } else {
-        return 'Forma de pagamento'
+        return 'Adicionar pagamento'
       }
     },
     parcelasText () {
@@ -836,9 +835,6 @@ export default {
     },
     form4ok () {
       return this.reservaAcomod.message !== '' ? 'background: #50CB9D' : ''
-    },
-    form5ok () {
-      return this.$store.state.paymentAdded ? 'background: #FFA04F; font-weight: 700' : ''
     },
     formCreditCardOk () {
       if (valid.number(this.cardNumber).isValid && valid.expirationDate(this.cardExpirationDate).isValid && valid.cvv(this.cardCVV).isValid) {
@@ -1063,12 +1059,12 @@ export default {
       height: auto;
     }
     & .etapa-reserva-box {
-      padding-bottom: 5rem;
+      padding-bottom: 6rem;
       & .etapas {
         padding: 0 7% 0.2rem;
-        font-size: 14px;
-        font-weight: 400;
-        color: rgb(72,72,72);
+        font-size: 13px;
+        font-weight: 500;
+        color: rgb(82,82,82);
       }
       & .__title {
         padding: 0 7% 1.9rem;
@@ -1086,6 +1082,15 @@ export default {
       & .__text {
         padding: 0 7% 1rem;
         font-size: 16px;
+      }
+      & .__termos {
+        padding: 0 7%;
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 20px;
+        & a {
+          color: var(--colorAcomod);
+        }
       }
       & .periodo-reserva {
         margin: 0 7%;
@@ -1219,12 +1224,12 @@ export default {
           font-weight: 400;
         }
         & .__arrow-right {
-          width: 1.27rem; 
+          width: 1.3rem; 
           height: auto
         }
       }
       & .divider {
-        margin: .2rem 7% 1rem;
+        margin: .5rem 7% 1.3rem;
         height: 1px;
         width: calc(100% - 14%);
         background-color: rgb(222,222,222);
@@ -1332,6 +1337,18 @@ export default {
         font-size: 17px;
         font-weight: 700;
       }
+      & .__next-btn-payment {
+        margin: 2rem 0 0 7%;
+        padding: 0;
+        width: 86%;
+        bottom: 1rem;
+        height: 3.2rem;
+        background: var(--colorAcomod);
+        color: white;
+        font-size: 16px;
+        font-weight: 700;
+        border-radius: 5px;
+      }
       & .round-btn {
         position: fixed;
         right: 7%;
@@ -1345,7 +1362,7 @@ export default {
         background:rgb(237, 237, 237);
         transition: var(--main-transition);
         & .__arrow {
-          width: 1.27rem;
+          width: 1.3rem;
           height: auto;
           filter: invert(100%) brightness(400%);
         }
