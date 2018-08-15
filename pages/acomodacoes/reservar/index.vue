@@ -409,6 +409,14 @@
 
     </div>
 
+    <div class="footer">
+      <div style="display: flex; align-items: center">
+        <img class="__img" src="../../../assets/img/brand.svg">
+        <h3 class="__text">&copy Escarpas Trip</h3>
+      </div>
+      <a class="__ajuda" href="/ajuda" target="_blank" >Ajuda</a>
+    </div>
+
 
 
     <div class="concluded-reserva" v-if="$store.state.concludedReservaAcomod">
@@ -870,8 +878,10 @@ export default {
 
   /* ******* BODY ******* */
   & .reserva-body {
-    padding: 1.2rem 12% 5rem;
+    padding-bottom: 4rem;
+    margin: 1.2rem 12% 0;
     display: flex;
+    border-bottom: 1px solid rgb(232,232,232);
     /* ******* FLEX LEFT ******* */
     & .flex-left {
       flex: 64%;
@@ -895,6 +905,9 @@ export default {
         font-size: 14px;
         font-weight: 500;
         line-height: 20px;
+        & a {
+          color: var(--colorAcomod);
+        }
       }
       & .etapa-1-item {
         padding-top: 2rem;
@@ -909,7 +922,7 @@ export default {
           display: flex;
           margin: 1.7rem 0 1rem 0;
           padding-bottom: 1.5rem;
-          border-bottom: 1px solid rgb(222,222,222);
+          border-bottom: 1px solid rgb(232,232,232);
           & .__img { 
             border-radius: 50%;
             width: 2.6rem;
@@ -969,7 +982,7 @@ export default {
           color: var(--color01);
           padding: 1rem 0;
           border: none;
-          border-bottom: 1px solid rgb(222,222,222);
+          border-bottom: 1px solid rgb(232,232,232);
           outline: none;
           transition: all .2s ease;
         }
@@ -987,7 +1000,7 @@ export default {
           color: var(--color01);
           padding: 1rem 0;
           border: none;
-          border-bottom: 1px solid rgb(222,222,222);
+          border-bottom: 1px solid rgb(232,232,232);
           outline: none;
           transition: .2s all ease;
         }
@@ -1022,15 +1035,15 @@ export default {
         height: auto;
       }
       & .card-body {
-        border-left: 1px solid rgb(222,222,222);
-        border-right: 1px solid rgb(222,222,222);
-        border-bottom: 1px solid rgb(222,222,222);
+        border-left: 1px solid rgb(232,232,232);
+        border-right: 1px solid rgb(232,232,232);
+        border-bottom: 1px solid rgb(232,232,232);
         & .__acomod-title {
           margin: 0 1.3rem;
           padding: 1.2rem 0;
           font-size: 18px;
           font-weight: 600;
-          border-bottom: 1px solid rgb(222,222,222);
+          border-bottom: 1px solid rgb(232,232,232);
           white-space: nowrap;
           overflow: hidden;
           text-overflow: ellipsis;
@@ -1038,7 +1051,7 @@ export default {
         & .detalhes-reserva-data {
           padding: .8rem 0;
           margin: 0 1.3rem;
-          border-bottom: 1px solid rgb(222,222,222);
+          border-bottom: 1px solid rgb(232,232,232);
           & .detalhes-reserva-data_item {
             display: flex;
             align-items: center;
@@ -1070,6 +1083,26 @@ export default {
           }
         }
       }
+    }
+  }
+  & .footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: .9rem 12% .7rem;
+    height: 100%;
+    & .__img {
+      margin-right: .7rem;
+      width: 1.4rem;
+      height: auto;
+
+    }
+    & .__text {
+      font-size: 14px;
+    }
+    & .__ajuda {
+      font-size: 15px;
+      font-weight: 600;
     }
   }
   & .concluded-reserva {

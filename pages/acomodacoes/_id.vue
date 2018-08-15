@@ -750,7 +750,7 @@ export default {
       flex-flow: row;
       align-items: center;
       padding: 1.1rem 0;
-      border-bottom: 1px solid rgb(222,222,222);
+      border-bottom: 1px solid rgb(232,232,232);
       & .__img {
         margin-right: 1rem;
         width: 1.8rem;
@@ -880,7 +880,7 @@ export default {
       margin: 1.7rem 8% 0 8%;
       & .reserva-desktop {
         flex-basis: 31%;
-        border: 1px solid rgb(222,222,222);
+        border: 1px solid rgb(232,232,232);
         align-self: flex-start;
         & .reserva-desktop-form {
           padding: 1rem 1.4rem;
@@ -905,7 +905,7 @@ export default {
               cursor: pointer;
               width: 100%;
               padding: .75rem .6rem;
-              border: 1px solid rgb(222,222,222);
+              border: 1px solid rgb(232,232,232);
               outline: none;
               background: white;
               transition: .15s border ease;
@@ -917,7 +917,7 @@ export default {
               cursor: pointer;
               width: 100%;
               padding: .75rem .6rem;
-              border: 1px solid rgb(222,222,222);
+              border: 1px solid rgb(232,232,232);
               outline: none;
               background: white;
               transition: .15s border ease;
@@ -954,7 +954,7 @@ export default {
             & .reserva-info_item-total {
               display: flex;
               justify-content: space-between;
-              border-top: 1px solid rgb(222,222,222);
+              border-top: 1px solid rgb(232,232,232);
               & h3 {
                 font-size: 17px;
                 font-weight: 500;
@@ -1087,7 +1087,7 @@ export default {
               flex-flow: row;
               align-items: center;
               padding: 1.1rem 0;
-              border-bottom: 1px solid rgb(222,222,222);
+              border-bottom: 1px solid rgb(232,232,232);
               & .__img {
                 margin-right: 1rem;
                 width: 1.8rem;

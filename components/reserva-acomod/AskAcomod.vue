@@ -177,7 +177,7 @@ export default {
           background: white;
           color: var(--color01);
           padding: .75rem .6rem;
-          border: 1px solid rgb(222,222,222);
+          border: 1px solid rgb(232,232,232);
           outline: none;
         }
         & select:focus {
@@ -192,7 +192,7 @@ export default {
           line-height: 26px;
           background: white;
           padding: .8rem;
-          border: 1px solid rgb(222,222,222);
+          border: 1px solid rgb(232,232,232);
           outline: none;
         }
         & textarea:focus {

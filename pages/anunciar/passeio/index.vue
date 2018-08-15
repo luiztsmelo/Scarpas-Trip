@@ -983,7 +983,7 @@ export default {
         color: var(--color01);
         padding: .5rem 0 .6rem 0;
         border: none;
-        border-bottom: 1px solid rgb(222,222,222);
+        border-bottom: 1px solid rgb(232,232,232);
         outline: none;
       }
       & select {
@@ -994,12 +994,12 @@ export default {
         color: var(--color01);
         padding: .5rem 0 .6rem 0;
         border: none;
-        border-bottom: 1px solid rgb(222,222,222);
+        border-bottom: 1px solid rgb(232,232,232);
         outline: none;
       }
       & .__local-saida-text {
         padding: .5rem 0 .6rem 0;
-        border-bottom: 1px solid rgb(222,222,222);
+        border-bottom: 1px solid rgb(232,232,232);
       }
     }
     & .recebedor-box {
@@ -1136,7 +1136,7 @@ export default {
           font-weight: 500;
           border-radius: 0 2rem 2rem 0;
           transition: all .3s ease;
-          background: rgb(222,222,222);
+          background: rgb(232,232,232);
           color: white;
         }
       }

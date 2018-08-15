@@ -146,7 +146,7 @@
           :height="214"
           :quality="3"
           :placeholder="'Carregando...'"
-          :placeholder-color="'rgb(222,222,222)'"
+          :placeholder-color="'rgb(232,232,232)'"
           :accept="'image/*'"
           :zoom-speed="2"
           :prevent-white-space="true"
@@ -170,7 +170,7 @@
           :height="214"
           :quality="3"
           :placeholder="'Carregando...'"
-          :placeholder-color="'rgb(222,222,222)'"
+          :placeholder-color="'rgb(232,232,232)'"
           :accept="'image/*'"
           :prevent-white-space="true"
           :show-remove-button="false"
@@ -692,7 +692,7 @@ export default {
         color: var(--color01);
         padding: .5rem 0 .6rem 0;
         border: none;
-        border-bottom: 1px solid rgb(222,222,222);
+        border-bottom: 1px solid rgb(232,232,232);
         outline: none;
       }
     }
@@ -759,7 +759,7 @@ export default {
           border-radius: 0 2rem 2rem 0;
           transition: all .3s ease;
           cursor: no-drop;
-          background: rgb(222,222,222);
+          background: rgb(232,232,232);
           color: white;
         }
       }
@@ -770,7 +770,7 @@ export default {
       color: var(--color01);
       width: 100%;
       border: none;
-      border-bottom: 1px solid rgb(222,222,222);
+      border-bottom: 1px solid rgb(232,232,232);
       margin: 1.5rem 0 1rem 0;
       padding: .5rem 0 .6rem 0;
       outline: none;
