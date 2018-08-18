@@ -62,23 +62,21 @@ export default {
 .footer {
   position: relative;
   display: flex;
-  margin-top: 4.3rem;
+  margin-top: 4.5rem;
   width: 100%;
-  height: 18rem;
+  height: 17rem;
   padding: 3.2rem 7%;
   & .__img {
-    width: 3.5rem;
+    width: 3.4rem;
     height: auto;
-    margin-right: 3rem;
+    margin-right: 2.8rem;
     align-self: flex-start;
-
   }
   & .box {
-    margin: 0 2.2rem;
+    margin: 0 2.3rem;
     & .__title {
-      font-size: 16px;
+      font-size: 15px;
       padding-bottom: .5rem;
-
     }
     & .__subtitle {
       font-size: 14px;
@@ -91,17 +89,15 @@ export default {
       display: flex;
       align-items: center;
       & .__img-lock {
-        width: 2rem;
+        width: 1.9rem;
         height: auto;
-        margin-right: .5rem;
-
+        margin-right: .6rem;
       }
       & .trust-text {
         & h2 {
-          font-size: 14px;
+          font-size: 13px;
           font-weight: 700;
           line-height: 17px;
-
         }
         & h3 {
           font-size: 12px;
@@ -113,10 +109,10 @@ export default {
     & .imgs-payment {
       display: flex;
       align-items: center;
-      margin: 1.2rem 0;
+      margin: 1.1rem 0;
       transform: translateX(-0.3rem);
       & .__img-payment {
-        width: 2.4rem;
+        width: 2.2rem;
         height: auto;
         margin-right: .6rem;
       }
@@ -125,10 +121,9 @@ export default {
       display: flex;
       align-items: center;
       & .__img-follow {
-        width: 2rem;
+        width: 1.9rem;
         height: auto;
         margin-right: 1.5rem;
-
       }
     }
   }

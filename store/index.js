@@ -33,6 +33,18 @@ const store = () => new Vuex.Store({
     heightImageBox: null,
     googleMapsInitialized: false,
     fromWithoutAddress: false,
+    perfil: {
+      reservas: {
+        acomods: null
+      },
+      anuncios: {
+        acomods: null
+      },
+      showReservas: true,
+      showAnuncios: false,
+      showMessages: false,
+      showEdit: false
+    },
     bankAccount: {
       bankCode: '',
       type: 'conta_corrente',
@@ -170,7 +182,6 @@ const store = () => new Vuex.Store({
       hostID: null,
       guestID: null
     },
-    reservas: null,
     paymentAdded: false,
     validZipcode: false,
     clickedReservaAcomod: false,
@@ -398,6 +409,24 @@ const store = () => new Vuex.Store({
     m_showParcelas (state, payload) {
       state.showParcelas = payload
     },
+    m_perfil (state, payload) {
+      state.perfil = payload
+    },
+    m_perfilReservasAcomods (state, payload) {
+      state.perfil.reservas.acomods = payload
+    },
+    m_perfilShowReservas (state, payload) {
+      state.perfil.showReservas = payload
+    },
+    m_perfilShowAnuncios (state, payload) {
+      state.perfil.showAnuncios = payload
+    },
+    m_perfilShowMessages (state, payload) {
+      state.perfil.showMessages = payload
+    },
+    m_perfilShowEdit (state, payload) {
+      state.perfil.showEdit = payload
+    },
     /*
     -------------------- ANÚNCIOS --------------------
     */
@@ -446,9 +475,6 @@ const store = () => new Vuex.Store({
     },
     m_acomodData (state, payload) {
       state.acomodData = payload
-    },
-    m_reservas (state, payload) {
-      state.reservas = payload
     },
     m_acomodPlace (state, payload) {
       state.acomodPlace = payload
@@ -1005,6 +1031,7 @@ const store = () => new Vuex.Store({
     async a_signOut ({ commit }) {
       try {
         await firebase.auth().signOut()
+        commit('m_authUser', false)
         commit('m_user', {
           userID: null,
           firstName: null,
@@ -1012,7 +1039,18 @@ const store = () => new Vuex.Store({
           email: null,
           photoURL: null
         })
-        commit('m_authUser', false)
+        commit('m_perfil', {
+          reservas: {
+            acomods: null
+          },
+          anuncios: {
+            acomods: null
+          },
+          showReservas: true,
+          showAnuncios: false,
+          showMessages: false,
+          showEdit: false
+        })
       } catch (err) {
         console.log(err)
       }

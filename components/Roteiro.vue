@@ -3,7 +3,7 @@
     
     <div class="chegada-partida-container">
       
-      <h1 class="__title">Tudo para sua viagem a Capitólio</h1>
+      <h1 class="__title">Reserve casas e passeios em Capitólio</h1>
   
     </div>
 
@@ -60,7 +60,7 @@ export default {
       & .__title {
         padding: 0 6%;
         width: 100%;
-        font-size: 42px;
+        font-size: 36px;
         font-weight: 600;
       }
     }

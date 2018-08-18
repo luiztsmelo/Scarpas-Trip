@@ -2,39 +2,54 @@
   <div class="perfil">
 
 
-
-    <div class="sidebox">
-
-      <img class="__userPhoto" :src="user.photoURL">
-
-      <h1 class="__userName">{{ user.fullName }}</h1>
-
-      <nav>
-        <li>Reservas</li>
-        <li>Anúncios</li>
-        <li>Editar perfil</li>
-        <li @click="$store.dispatch('a_signOut')">Sair</li>
-      </nav>
-
-    </div>
-
-
-
-
     <div class="perfil-body">
 
-      <h1 class="__title">Suas reservas</h1>
 
 
-      <div class="reservas">
+      <div class="side-box">
 
-        <nuxt-link :to="`/perfil/${reserva.reservaID}`" class="card" v-for="reserva in reservas.reservasAcomods" :key="reserva.reservaID">
+        <img class="__userPhoto" :src="user.photoURL">
+
+        <h1 class="__userName">{{ user.fullName }}</h1>
+
+        <nav>
+          <li @click="openReservas" :style="liStyleReservas">Reservas</li>
+          <li @click="openAnuncios" :style="liStyleAnuncios">Anúncios</li>
+          <li @click="openMessages" :style="liStyleMessages">Mensagens</li>
+          <li @click="openEdit" :style="liStyleEdit">Editar perfil</li>
+          <li @click="$store.dispatch('a_signOut')">Sair</li>
+        </nav>
+
+      </div>
+
+
+
+
+      <div class="category-box" v-if="perfil.showReservas">
+
+        <h1 class="__title">Suas reservas</h1>
+
+
+        <nuxt-link :to="`/perfil/${reserva.reservaID}`" class="card" v-for="reserva in perfil.reservas.acomods" :key="reserva.reservaID" v-if="perfil.reservas.acomods !== null">
 
           <img class="__card-img" :src="imageAcH(reserva)">
           
           <div class="card-info">
-            <h1 class="__card-title">{{ reserva.acomod.title }}</h1>
-            <h3>STATUS:</h3>
+
+            <h1 class="__card-title">{{ reserva.acomod.title }}</h1><!-- nome grande fica zuado. corrigir width -->
+
+            <h3 class="__card-subtitle">Período:
+              <span style="font-weight: 400">{{ periodoReserva(reserva) }}</span>
+            </h3>
+
+            <h3 class="__card-subtitle">Código da reserva:
+              <span style="font-weight: 400">{{ reserva.reservaID }}</span>
+            </h3>
+
+            <h3 class="__card-subtitle">Condição:
+              <span style="font-weight: 400">{{ reserva.status }}</span>
+            </h3>
+
           </div>
 
         </nuxt-link> 
@@ -42,37 +57,35 @@
       </div>
 
 
-    </div>
 
+      <div class="category-box" v-if="perfil.showAnuncios">
 
-
-
-    <!-- <div class="reservas">
-
-      <h1>Suas reservas</h1>
-
-
-      <div class="cards-container" v-if="$store.state.reservas !== null">
-
-        <div class="card" v-for="reserva in reservas.reservasAcomods" :key="reserva.reservaID">
-          <nuxt-link :to="`/perfil/${reserva.reservaID}`">
-
-            <progressive-background class="__card-img" :src="imageAcH(reserva)" :aspect-ratio="2/3"/>
-
-            <h3>{{ reserva.acomod.title }}</h3>
-
-            <h3>{{ reserva.reservaID }}</h3>
-
-            
-          </nuxt-link> 
-        </div>
+        <h1 class="__title">Seus anúncios</h1>
 
       </div>
 
 
-    </div> -->
-    
 
+      <div class="category-box" v-if="perfil.showMessages">
+
+        <h1 class="__title">Suas mensagens</h1>
+
+      </div>
+
+
+
+      <div class="category-box" v-if="perfil.showEdit">
+
+        <h1 class="__title">Editar perfil</h1>
+
+      </div>
+
+
+
+    </div>
+
+
+    <Footer/>
 
   </div>
 </template>
@@ -81,8 +94,13 @@
 import * as firebase from 'firebase'
 require('firebase/firestore')
 import supportsWebP from 'supports-webp'
+import Footer from '~/components/Footer'
+import dayjs from 'dayjs'
+import 'dayjs/locale/pt-br'
+dayjs.locale('pt-br')
 
 export default {
+  components: { Footer },
   head () {
     return {
       title: `${this.user.firstName} ‒ Escarpas Trip`
@@ -91,14 +109,53 @@ export default {
   transition: 'opacity',
   middleware: 'perfilValidate',
   methods: {
+    openReservas () {
+      this.$store.commit('m_perfilShowReservas', true)
+      this.$store.commit('m_perfilShowAnuncios', false)
+      this.$store.commit('m_perfilShowMessages', false)
+      this.$store.commit('m_perfilShowEdit', false)
+    },
+    openAnuncios () {
+      this.$store.commit('m_perfilShowReservas', false)
+      this.$store.commit('m_perfilShowAnuncios', true)
+      this.$store.commit('m_perfilShowMessages', false)
+      this.$store.commit('m_perfilShowEdit', false)
+    },
+    openMessages () {
+      this.$store.commit('m_perfilShowReservas', false)
+      this.$store.commit('m_perfilShowAnuncios', false)
+      this.$store.commit('m_perfilShowMessages', true)
+      this.$store.commit('m_perfilShowEdit', false)
+    },
+    openEdit () {
+      this.$store.commit('m_perfilShowReservas', false)
+      this.$store.commit('m_perfilShowAnuncios', false)
+      this.$store.commit('m_perfilShowMessages', false)
+      this.$store.commit('m_perfilShowEdit', true)
+    },
     imageAcH (reserva) {
       return supportsWebP ? reserva.acomod.images[0].HW : reserva.acomod.images[0].HJ
+    },
+    periodoReserva (reserva) {
+      return dayjs(reserva.periodoReserva.start).format('DD/MM/YYYY') + ' - ' + dayjs(reserva.periodoReserva.end).format('DD/MM/YYYY')
     }
   },
   computed: {
     authUser () { return this.$store.state.authUser },
     user () { return this.$store.state.user },
-    reservas () { return this.$store.state.reservas }
+    perfil () { return this.$store.state.perfil },
+    liStyleReservas () {
+      return this.perfil.showReservas ? 'border-left: 3px solid #FFA04F' : ''
+    },
+    liStyleAnuncios () {
+      return this.perfil.showAnuncios ? 'border-left: 3px solid #FFA04F' : ''
+    },
+    liStyleMessages () {
+      return this.perfil.showMessages ? 'border-left: 3px solid #FFA04F' : ''
+    },
+    liStyleEdit () {
+      return this.perfil.showEdit ? 'border-left: 3px solid #FFA04F' : ''
+    }
   },
   watch: {
     authUser (value) {
@@ -116,8 +173,8 @@ export default {
           const acomod = await firebase.firestore().collection('acomods').doc(reserva.acomodID).get()
           Object.assign(reserva, { acomod: acomod.data() })
         }
-
-        vm.$store.commit('m_reservas', { reservasAcomods: reservasAcomods })
+        
+        vm.$store.commit('m_perfilReservasAcomods', reservasAcomods)
 
       } catch (err) {
         console.log(err)
@@ -132,54 +189,56 @@ export default {
 
 .perfil {
   display: flex;
+  flex-flow: column;
   transition: var(--main-transition);
-  padding: 7rem 10% 4rem;
-  & .sidebox {
-    display: flex;
-    flex-flow: column;
-    flex: 20%;
-    margin-right: 2.3rem;
-    & .__userName {
-      padding: 1rem;
-      font-size: 16px;
-      font-weight: 700;
-      background: rgb(222,222,222);
-      color: white;
-      border-left: 1px solid rgb(232,232,232);
-      border-right: 1px solid rgb(232,232,232);
-    }
-    & nav {
-      border-left: 1px solid rgb(232,232,232);
-      border-right: 1px solid rgb(232,232,232);
-      border-bottom: 1px solid rgb(232,232,232);
-      & li {
-        cursor: pointer;
-        padding: 1rem;
-        transition: var(--main-transition);
-      }
-      & li:hover {
-        background: rgb(247,247,247);
-      }
-    }
-    & .__userPhoto {
-      width: 100%;
-      height: auto;
-    }
-  }
   & .perfil-body {
-    flex: 80%;
     display: flex;
-    flex-flow: column;
-    & .__title {
-      font-size: 36px;
-      font-weight: 700;
-      padding-bottom: 2.3rem;
+    padding: 6.5rem 10% 4rem;
+    & .side-box {
+      display: flex;
+      flex-flow: column;
+      flex: 0 0 20%;
+      margin-right: 2.3rem;
+      & .__userPhoto {
+        width: 100%;
+        height: auto;
+      }
+      & .__userName {
+        padding: 1rem;
+        font-size: 19px;
+        font-weight: 600;
+        text-align: center;
+        border-left: 1px solid rgb(232,232,232);
+        border-right: 1px solid rgb(232,232,232);
+        border-bottom: 1px solid rgb(232,232,232);
+      }
+      & nav {
+        margin-top: .8rem;
+        border: 1px solid rgb(232,232,232);
+        & li {
+          cursor: pointer;
+          font-size: 15px;
+          font-weight: 500;
+          padding: 1rem;
+        }
+        & li:hover {
+          border-left: 3px solid rgb(242,242,242);
+        }
+      }
     }
-    & .reservas {
+    & .category-box {
+      flex: 80%;
+      display: flex;
+      flex-flow: column;
+      & .__title {
+        font-size: 32px;
+        font-weight: 700;
+        padding-bottom: 2.3rem;
+      }
       & .card {
         display: flex;
         margin-bottom: 2rem;
-        height: 11rem;
+        height: 10rem;
         width: 100%;
         & .__card-img {
           height: 100%;
@@ -194,7 +253,17 @@ export default {
           border-right: 1px solid rgb(232,232,232);
           border-bottom: 1px solid rgb(232,232,232);
           & .__card-title {
-            font-size: 17px;
+            padding-bottom: .2rem;
+            font-size: 16px;
+            font-weight: 600;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+          }
+          & .__card-subtitle {
+            padding: .1rem 0;
+            font-size: 15px;
+            font-weight: 500;
           }
         }
       }
