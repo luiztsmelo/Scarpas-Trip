@@ -51,7 +51,7 @@ exports.watch_reservaExpiration = functions.https.onRequest(async (req, res) => 
     if (pendingReservas.length > 0) {
 
       /* Para cada reserva pending */
-      pendingReservas.forEach(async reserva => {
+      for (const reserva of pendingReservas) {
         const requestedDate = dayjs(reserva.requested)
         const dateNow = dayjs()
 
@@ -65,7 +65,7 @@ exports.watch_reservaExpiration = functions.https.onRequest(async (req, res) => 
         } else {
           console.log(`Reserva ${reserva.reservaID} [${requestedDate.diff(dateNow, 'day')}] não precisa ser expirada.`)
         }
-      })
+      }
 
       res.status(200).end()
 
@@ -307,6 +307,7 @@ exports.newReservaAcomod = functions.https.onCall(async data => {
     return { reservaID: reservaAcomod.reservaID }
 
   } catch (err) {
+    /* ENVIAR MENSAGEM P/ MIM CASO ALGUM PROBLEMA ACONTEÇA */
     console.log(err.response)
     throw new functions.https.HttpsError('aborted', err.message, err)
   }

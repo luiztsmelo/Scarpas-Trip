@@ -151,7 +151,7 @@ const store = () => new Vuex.Store({
       regrasAdicionais: [],
       images: []
     },
-    reservaAcomod: {/* Atualizar Action */
+    reservaAcomod: { /* Atualizar Action */
       reservaID: null,
       acomodID: null,
       requested: null,
@@ -170,6 +170,7 @@ const store = () => new Vuex.Store({
       hostID: null,
       guestID: null
     },
+    reservas: null,
     paymentAdded: false,
     validZipcode: false,
     clickedReservaAcomod: false,
@@ -359,14 +360,6 @@ const store = () => new Vuex.Store({
     m_user (state, payload) {
       state.user = payload
     },
-    m_resetUser (state) {
-      state.authUser = false
-      state.user.userID = null
-      state.user.firstName = null
-      state.user.fullName = null
-      state.user.email = null
-      state.user.photoURL = null
-    },
     m_resetMessage (state) {
       state.message.timestamp = null
       state.message.from = null
@@ -453,6 +446,9 @@ const store = () => new Vuex.Store({
     },
     m_acomodData (state, payload) {
       state.acomodData = payload
+    },
+    m_reservas (state, payload) {
+      state.reservas = payload
     },
     m_acomodPlace (state, payload) {
       state.acomodPlace = payload
@@ -984,18 +980,20 @@ const store = () => new Vuex.Store({
         /* Se sign-in */
         if (user !== null) {
           try {
-            commit('m_authUser', true)
             commit('m_user', {
               userID: user.uid,
               firstName: user.displayName.split(' ')[0],
               fullName: user.displayName,
               email: user.email,
-              photoURL: user.providerData[0].photoURL
+              photoURL: user.providerData[0].providerId === 'facebook.com' ? `${user.photoURL}?height=250` : user.photoURL
             })
+            commit('m_authUser', true)
             /* Get user para chechar se já existe na Firestore */
             const userDoc = await firebase.firestore().collection('users').doc(user.uid).get()
             /* Se existir */
-            if (!userDoc.exists) {
+            if (userDoc.exists) {
+              commit('m_user', userDoc.data())
+            } else {
               await firebase.functions().httpsCallable('newUser')({ user: state.user })
             }
           } catch (err) {
@@ -1004,8 +1002,20 @@ const store = () => new Vuex.Store({
         }
       })
     },
-    a_signOut ({ commit }) {
-      firebase.auth().signOut().then(() => commit('m_resetUser'))
+    async a_signOut ({ commit }) {
+      try {
+        await firebase.auth().signOut()
+        commit('m_user', {
+          userID: null,
+          firstName: null,
+          fullName: null,
+          email: null,
+          photoURL: null
+        })
+        commit('m_authUser', false)
+      } catch (err) {
+        console.log(err)
+      }
     }
   }
 })

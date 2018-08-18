@@ -441,7 +441,7 @@
       <h3 class="__text">Entre em contato conosco pelo nosso WhatsApp: (34) 99141-0085 ou e-mail: contato@escarpastrip.com.</h3>
       
       
-      <nuxt-link to="/" style="margin-top:4rem">
+      <nuxt-link to="/perfil" style="margin-top:4rem">
         <button class="__next-btn" type="button" style="background: #50CB9D; margin:0">Acessar Página Pessoal</button>
       </nuxt-link>
       

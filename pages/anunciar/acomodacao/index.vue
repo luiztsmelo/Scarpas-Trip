@@ -1296,7 +1296,7 @@ export default {
   & .progress-bar {
     position: fixed;
     top: 3.4rem;
-    height: 4px;
+    height: 5px;
     z-index: 8888;
     background: var(--colorAcomod);
     transition: var(--main-transition);

@@ -40,19 +40,14 @@
 
           <li class="__nav-item-no-a" @click="$modal.show('sign-in-modal')" v-if="$store.state.user.email === null">Login</li>
 
-          <li><img class="__user-img" :src="$store.state.user.photoURL" @click="userBox = !userBox" v-if="$store.state.user.email !== null"></li>
+          <nuxt-link to="/perfil" style="padding-left:0">
+            <li>
+              <img class="__user-img" :src="$store.state.user.photoURL" @click="userBox = !userBox" v-if="$store.state.user.email !== null">
+            </li>
+          </nuxt-link>
 
         </nav>
 
-        <div class="dropdown" v-show="userBox" @click="userBox = !userBox">
-          <div class="dropdown-body" style="right: 6%">
-            <ul>
-              <li>Minha conta</li>
-              <li>Editar perfil</li>
-              <li @click="$store.dispatch('a_signOut')">Sair</li>
-            </ul>
-          </div>
-        </div>
 
         <div class="dropdown" v-show="anuncioDropdown" @click="anuncioDropdown = !anuncioDropdown">
           <div class="dropdown-body" style="right: 10%">
@@ -101,6 +96,7 @@ export default {
   },
   computed: {
     hash () { return this.$route.hash },
+    user () { return this.$store.state.user },
     showNavbar () { return this.$store.state.showNavbar },
     menuIconAnime () { return this.$store.state.menuIconAnime }
   },
@@ -203,8 +199,8 @@ export default {
       }
       & .__user-img {
         cursor: pointer;
-        margin: 0 .8rem;
-        width: 2.1rem;
+        margin-left: .8rem;
+        width: 1.9rem;
         height: auto;
         border-radius: 50%;
       }

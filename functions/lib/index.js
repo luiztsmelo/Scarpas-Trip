@@ -43,7 +43,7 @@ exports.watch_reservaExpiration = functions.https.onRequest((req, res) => __awai
         /* Para evitar bugs, checar se há alguma reserva pending primeiro */
         if (pendingReservas.length > 0) {
             /* Para cada reserva pending */
-            pendingReservas.forEach((reserva) => __awaiter(this, void 0, void 0, function* () {
+            for (const reserva of pendingReservas) {
                 const requestedDate = dayjs(reserva.requested);
                 const dateNow = dayjs();
                 /* Se feita a 2 dias atrás */
@@ -55,7 +55,7 @@ exports.watch_reservaExpiration = functions.https.onRequest((req, res) => __awai
                 else {
                     console.log(`Reserva ${reserva.reservaID} [${requestedDate.diff(dateNow, 'day')}] não precisa ser expirada.`);
                 }
-            }));
+            }
             res.status(200).end();
         }
         else {
@@ -263,6 +263,7 @@ exports.newReservaAcomod = functions.https.onCall((data) => __awaiter(this, void
         return { reservaID: reservaAcomod.reservaID };
     }
     catch (err) {
+        /* ENVIAR MENSAGEM P/ MIM CASO ALGUM PROBLEMA ACONTEÇA */
         console.log(err.response);
         throw new functions.https.HttpsError('aborted', err.message, err);
     }

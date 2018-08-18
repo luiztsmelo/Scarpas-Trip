@@ -60,6 +60,9 @@
 </template>
 
 <script>
+import * as firebase from 'firebase'
+require('firebase/firestore')
+
 export default {
   methods: {
     closedModal () {
@@ -69,20 +72,19 @@ export default {
     }
   },
   computed: {
-    user () {
-      return this.$store.state.user.email
-    }
+    authUser () { return this.$store.state.authUser }
   },
   watch: {
-    user (value) {
-      if (value !== null) {
+    authUser (value) {
+      if (value) {
         this.$modal.hide('sign-in-modal')
+        this.$router.push('/perfil')
       }
-      if (value !== null && this.$store.state.clickedAskAcomod === true && this.$route.name === 'acomodacoes-id') {
+      if (value && this.$store.state.clickedAskAcomod === true && this.$route.name === 'acomodacoes-id') {
         this.$modal.hide('sign-in-modal')
         this.$modal.show('ask-acomod-modal')
       }
-      if (value !== null && this.$store.state.clickedReservaAcomod === true && this.$route.name === 'acomodacoes-id') {
+      if (value && this.$store.state.clickedReservaAcomod === true && this.$route.name === 'acomodacoes-id') {
         this.$store.state.creditCard.cardHolderName = this.$store.state.user.fullName
         this.$modal.hide('sign-in-modal')
         this.$store.commit('m_isReservar', true)
