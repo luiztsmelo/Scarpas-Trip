@@ -380,21 +380,18 @@ export default {
   async fetch ({ store, params }) {
     try {
       /* Get acomod */
-      const acomod = firebase.firestore().collection('acomods').doc(params.id).get()
+      const acomod = await firebase.firestore().doc(`acomods/${params.id}`).get()
 
       /* Get host */
-      const host = firebase.firestore().collection('users').doc(acomod.data().hostID).get()
+      const host = await firebase.firestore().doc(`users/${acomod.data().hostID}`).get()
       
       /* Get reservas em andamento p/ desabilitar datas no datePicker */
-      const reservas = firebase.firestore().collection('reservasAcomods').where('acomodID', '==', params.id).where('isRunning', '==', true).get()
-
-      store.commit('m_loader', false)
-
-      store.commit('m_host', host.data())
-
-      store.commit('m_disabledDatesAcomod', reservas.docs.map(acomod => acomod.data().periodoReserva))
+      const reservas = await firebase.firestore().collection('reservasAcomods').where('acomodID', '==', params.id).where('isRunning', '==', true).get()
       
-      return store.commit('m_acomod', acomod.data())
+      return store.commit('m_acomod', acomod.data()),
+             store.commit('m_host', host.data()),
+             store.commit('m_disabledDatesAcomod', reservas.docs.map(acomod => acomod.data().periodoReserva)),
+             store.commit('m_loader', false)
 
     } catch (err) {
       store.commit('m_loader', false)
@@ -432,7 +429,7 @@ export default {
       }
     },
     reservarDesktop () {
-      firebase.firestore().collection('acomods').doc(this.$route.params.id).collection('visits').doc(this.$store.state.visitID).update({ 
+      firebase.firestore().doc(`acomods/${this.$route.params.id}/visits/${this.$store.state.visitID}`).update({ 
         clickedReservaBtn: true
       })
       if (this.periodoReserva === null) {
@@ -451,7 +448,7 @@ export default {
       }
     },
     reservarMobile () {
-      firebase.firestore().collection('acomods').doc(this.$route.params.id).collection('visits').doc(this.$store.state.visitID).update({ 
+      firebase.firestore().doc(`acomods/${this.$route.params.id}/visits/${this.$store.state.visitID}`).update({ 
         clickedReservaBtn: true
       })
       document.body.setAttribute('style', 'overflow: hidden')

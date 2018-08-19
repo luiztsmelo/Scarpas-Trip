@@ -1262,22 +1262,25 @@ export default {
     }
   },
   beforeRouteEnter (to, from, next) {
-    next(vm => {
-      if (vm.$store.state.showFoobar === true) {
-        vm.$store.commit('m_showFoobar', false)
-      }
-      if (vm.$store.state.acomodData.acomodID === null) {
-        let acomodID = Math.floor(Math.random() * (9999 - 1000 + 1) + 1000).toString()
-        firebase.firestore().collection('acomods').doc(acomodID).get().then(doc => {
-          if (doc.exists) {
+    next(async vm => {
+      try {
+        if (vm.$store.state.showFoobar === true) {
+          vm.$store.commit('m_showFoobar', false)
+        }
+        if (vm.$store.state.acomodData.acomodID === null) {
+          let acomodID = await Math.floor(Math.random() * (9999 - 1000 + 1) + 1000).toString()
+          const acomod = await firebase.firestore().doc(`acomods/${acomodID}`).get()
+          if (acomod.exists) {
             do {
               acomodID = Math.floor(Math.random() * (9999 - 1000 + 1) + 1000).toString()
               vm.$store.commit('m_acomodID', acomodID)
-            } while (!doc.exists)
+            } while (!acomod.exists)
           } else {
             vm.$store.commit('m_acomodID', acomodID)
           }
-        })
+        }
+      } catch (err) {
+        console.log(err)
       }
     })
   }

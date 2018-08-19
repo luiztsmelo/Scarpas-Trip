@@ -4,17 +4,17 @@ export default async function ({ store, route, redirect }) {
   try {
     store.commit('m_loader', true)
 
-    const docAcomod = await firebase.firestore().collection('acomods').doc(route.params.id).get()
+    const docAcomod = await firebase.firestore().doc(`acomods/${route.params.id}`).get()
 
     if (docAcomod.exists) {
-      firebase.firestore().collection('acomods').doc(route.params.id).collection('visits').add({
+      const visit = await firebase.firestore().collection(`acomods/${route.params.id}/visits`).add({
         date: new Date().getTime(),
         fromMobile: store.state.isMobile,
         clickedReservaBtn: false,
         wentToReservaPage: false,
         concludedReserva: false
       })
-      .then(doc => { store.state.visitID = doc.id }).catch(err => console.log(err))
+      store.state.visitID = visit.id
     } else {
       store.commit('m_loader', false)
       store.commit('show_alert', {
@@ -26,6 +26,7 @@ export default async function ({ store, route, redirect }) {
       redirect('/acomodacoes/')
     }
   } catch (err) {
+    redirect('/')
     store.commit('m_loader', false)
     console.log(err)
   }

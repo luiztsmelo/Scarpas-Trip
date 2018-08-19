@@ -170,7 +170,7 @@ export default {
         const reservasAcomods = reservasAcomodsSnap.docs.map(reserva => reserva.data())
 
         for (let reserva of reservasAcomods) {
-          const acomod = await firebase.firestore().collection('acomods').doc(reserva.acomodID).get()
+          const acomod = await firebase.firestore().doc(`acomods/${reserva.acomodID}`).get()
           Object.assign(reserva, { acomod: acomod.data() })
         }
         
@@ -217,6 +217,7 @@ export default {
         border: 1px solid rgb(232,232,232);
         & li {
           cursor: pointer;
+          user-select: none;
           font-size: 15px;
           font-weight: 500;
           padding: 1rem;
