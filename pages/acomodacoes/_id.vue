@@ -380,13 +380,13 @@ export default {
   async fetch ({ store, params }) {
     try {
       /* Get acomod */
-      const acomod = await firebase.firestore().collection('acomods').doc(params.id).get()
+      const acomod = firebase.firestore().collection('acomods').doc(params.id).get()
 
       /* Get host */
-      const host = await firebase.firestore().collection('users').doc(acomod.data().hostID).get()
+      const host = firebase.firestore().collection('users').doc(acomod.data().hostID).get()
       
       /* Get reservas em andamento p/ desabilitar datas no datePicker */
-      const reservas = await firebase.firestore().collection('reservasAcomods').where('acomodID', '==', params.id).where('isRunning', '==', true).get()
+      const reservas = firebase.firestore().collection('reservasAcomods').where('acomodID', '==', params.id).where('isRunning', '==', true).get()
 
       store.commit('m_loader', false)
 
