@@ -76,7 +76,7 @@ export default {
   },
   watch: {
     authUser (value) {
-      if (value) {
+      if (value && this.$route.path === '/') {
         this.$modal.hide('sign-in-modal')
         this.$router.push('/perfil')
       }

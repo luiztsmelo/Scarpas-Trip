@@ -33,6 +33,8 @@ const store = () => new Vuex.Store({
     heightImageBox: null,
     googleMapsInitialized: false,
     fromWithoutAddress: false,
+    visitID: null,
+    visits: null,
     perfil: {
       reservas: {
         acomods: null
@@ -118,7 +120,6 @@ const store = () => new Vuex.Store({
     */
     showReservaAcomod: false,
     isReservar: false,
-    visitID: null,
     acomods: null,
     acomod: null,
     host: null,
@@ -408,6 +409,9 @@ const store = () => new Vuex.Store({
     },
     m_showParcelas (state, payload) {
       state.showParcelas = payload
+    },
+    m_visits (state, payload) {
+      state.visits = payload
     },
     m_perfil (state, payload) {
       state.perfil = payload
@@ -1011,11 +1015,11 @@ const store = () => new Vuex.Store({
               firstName: user.displayName.split(' ')[0],
               fullName: user.displayName,
               email: user.email,
-              photoURL: user.providerData[0].providerId === 'facebook.com' ? `${user.photoURL}?height=250` : user.photoURL
+              photoURL: user.providerData[0].providerId === 'facebook.com' ? `${user.photoURL}?height=300` : user.photoURL
             })
             commit('m_authUser', true)
             /* Get user para chechar se já existe na Firestore */
-            const userDoc = await firebase.firestore().collection('users').doc(user.uid).get()
+            const userDoc = await firebase.firestore().doc(`users/${user.uid}`).get()
             /* Se existir */
             if (userDoc.exists) {
               commit('m_user', userDoc.data())

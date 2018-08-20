@@ -49,7 +49,7 @@ exports.watch_reservaExpiration = functions.https.onRequest((req, res) => __awai
                 /* Se feita a 2 dias atrás */
                 if (requestedDate.diff(dateNow, 'day') <= -2) {
                     /* Update status para 'expired' na Firestore */
-                    yield admin.firestore().collection('reservasAcomods').doc(reserva.reservaID).update({ status: 'expired', isRunning: false });
+                    yield admin.firestore().doc(`reservasAcomods/${reserva.reservaID}`).update({ status: 'expired', isRunning: false });
                     console.log(`Reserva ${reserva.reservaID} [${requestedDate.diff(dateNow, 'day')}] foi expirada.`);
                 }
                 else {
@@ -73,7 +73,7 @@ exports.newUser = functions.https.onCall((data) => __awaiter(this, void 0, void 
     const user = data.user;
     try {
         /* Criar user na Firestore */
-        yield admin.firestore().collection('users').doc(user.userID).set(user);
+        yield admin.firestore().doc(`users/${user.userID}`).set(user);
         /* Enviar welcome e-mail */
         yield Mailjet.post('send', { 'version': 'v3.1' }).request({
             'Messages': [{
@@ -120,13 +120,13 @@ exports.newAcomod = functions.https.onCall((data) => __awaiter(this, void 0, voi
         });
         acomodData.recipientID = recipient.id;
         /* Update user Firestore */
-        yield admin.firestore().collection('users').doc(acomodData.hostID).update({
+        yield admin.firestore().doc(`users/${acomodData.hostID}`).update({
             isAcomodHost: true,
             celular: acomodData.celular.replace(/[^0-9\.]+/g, '')
         });
         delete acomodData.celular;
         /* Set acomod Firestore */
-        yield admin.firestore().collection('acomods').doc(acomodData.acomodID).set(acomodData);
+        yield admin.firestore().doc(`acomods/${acomodData.acomodID}`).set(acomodData);
     }
     catch (err) {
         console.log(err);
@@ -142,11 +142,11 @@ exports.newReservaAcomod = functions.https.onCall((data) => __awaiter(this, void
         const host = data.host;
         const visitID = data.visitID;
         /* Update celular guest */
-        yield admin.firestore().collection('users').doc(reservaAcomod.guestID).update({
+        yield admin.firestore().doc(`users/${reservaAcomod.guestID}`).update({
             celular: customer.celular.replace(/\s/g, '')
         });
         /* Get guest */
-        const guestSnap = yield admin.firestore().collection('users').doc(reservaAcomod.guestID).get();
+        const guestSnap = yield admin.firestore().doc(`users/${reservaAcomod.guestID}`).get();
         const guest = guestSnap.data();
         reservaAcomod.requested = new Date().getTime();
         reservaAcomod.acomodID = acomod.acomodID;
@@ -225,9 +225,9 @@ exports.newReservaAcomod = functions.https.onCall((data) => __awaiter(this, void
         }
         reservaAcomod.reservaID = yield transaction.id.toString();
         /* Criar reserva na Firestore */
-        yield admin.firestore().collection('reservasAcomods').doc(reservaAcomod.reservaID).set(reservaAcomod);
+        yield admin.firestore().doc(`reservasAcomods/${reservaAcomod.reservaID}`).set(reservaAcomod);
         /* Atualizar visit */
-        yield admin.firestore().collection('acomods').doc(acomod.acomodID).collection('visits').doc(visitID).update({ concludedReserva: true });
+        yield admin.firestore().doc(`acomods/${acomod.acomodID}/visits/${visitID}`).update({ concludedReserva: true });
         /* Enviar e-mail para Host */
         yield Mailjet.post('send', { 'version': 'v3.1' }).request({
             'Messages': [{
@@ -280,7 +280,7 @@ exports.email_reservaAcceptedToGuest = functions.firestore
     if (reservaAcomod.status === 'awaiting_payment') {
         try {
             /* Get acomod data */
-            const docAcomod = yield admin.firestore().collection('acomods').doc(reservaAcomod.acomodID).get();
+            const docAcomod = yield admin.firestore().doc(`acomods/${reservaAcomod.acomodID}`).get();
             const acomod = docAcomod.data();
             /* Ajustar datas */
             const startDate = new Date(reservaAcomod.periodoReserva.start);

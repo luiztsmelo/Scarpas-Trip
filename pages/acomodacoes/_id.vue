@@ -245,6 +245,7 @@
               ref="datePicker"
               mode="range"
               v-model="$store.state.reservaAcomod.periodoReserva"
+              @input="inputDate"
               :pane-width="290"
               :min-date="minDate"
               :disabled-dates="$store.state.disabledDatesAcomod"
@@ -385,12 +386,8 @@ export default {
       /* Get host */
       const host = await firebase.firestore().doc(`users/${acomod.data().hostID}`).get()
       
-      /* Get reservas em andamento p/ desabilitar datas no datePicker */
-      const reservas = await firebase.firestore().collection('reservasAcomods').where('acomodID', '==', params.id).where('isRunning', '==', true).get()
-      
       return store.commit('m_acomod', acomod.data()),
              store.commit('m_host', host.data()),
-             store.commit('m_disabledDatesAcomod', reservas.docs.map(acomod => acomod.data().periodoReserva)),
              store.commit('m_loader', false)
 
     } catch (err) {
@@ -401,6 +398,35 @@ export default {
   methods: {
     imageH (image) {
       return supportsWebP ? image.HW : image.HJ
+    },
+    inputDate () {
+      this.periodoReserva.start = Date.parse(this.periodoReserva.start)
+      this.periodoReserva.end = Date.parse(this.periodoReserva.end)
+  
+      const checkIn = dayjs(this.periodoReserva.start)
+      const checkOut = dayjs(this.periodoReserva.end)
+
+      const noites = checkOut.diff(checkIn, 'day')
+      this.$store.commit('m_noites', noites)
+
+      const valorNoitesTotal = Math.round(this.acomod.valorNoite * noites)
+      this.$store.commit('m_valorNoitesTotal', valorNoitesTotal)
+
+      const serviceFeeTotal = Math.round(valorNoitesTotal * this.$store.state.serviceFeeAcomod)
+      this.$store.commit('m_serviceFeeTotal', serviceFeeTotal)
+
+      const valorReservaTotal = valorNoitesTotal + this.acomod.limpezaFee + serviceFeeTotal
+      this.$store.commit('m_valorReservaTotal', valorReservaTotal)
+
+      this.$store.state.reservaAcomod.limpezaFee = this.acomod.limpezaFee
+
+      const parcelas = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map(x => {
+        return {
+          id: x,
+          valorParcela: Number( (valorReservaTotal/x).toFixed(2) )
+        }
+      })
+      this.$store.commit('m_parcelas', parcelas)
     },
     scrollTopbarBg (evt, el) {
       return window.scrollY >= this.$store.state.heightImageBox
@@ -539,37 +565,6 @@ export default {
     }
   },
   watch: {
-    periodoReserva (newVal, oldVal) {
-      if (newVal !== oldVal && newVal !== null) {
-        this.periodoReserva.start = Date.parse(this.periodoReserva.start)
-        this.periodoReserva.end = Date.parse(this.periodoReserva.end)
-   
-        const checkIn = dayjs(this.periodoReserva.start)
-        const checkOut = dayjs(this.periodoReserva.end)
-
-        const noites = checkOut.diff(checkIn, 'day')
-        this.$store.commit('m_noites', noites)
-
-        const valorNoitesTotal = Math.round(this.acomod.valorNoite * noites)
-        this.$store.commit('m_valorNoitesTotal', valorNoitesTotal)
-
-        const serviceFeeTotal = Math.round(valorNoitesTotal * this.$store.state.serviceFeeAcomod)
-        this.$store.commit('m_serviceFeeTotal', serviceFeeTotal)
-
-        const valorReservaTotal = valorNoitesTotal + this.acomod.limpezaFee + serviceFeeTotal
-        this.$store.commit('m_valorReservaTotal', valorReservaTotal)
-
-        this.$store.state.reservaAcomod.limpezaFee = this.acomod.limpezaFee
-
-        const parcelas = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map(x => {
-          return {
-            id: x,
-            valorParcela: Number( (valorReservaTotal/x).toFixed(2) )
-          }
-        })
-        this.$store.commit('m_parcelas', parcelas)
-      }
-    },
     hash (value) {
       value === '' ? this.showComods = false : ''
     }
@@ -874,7 +869,7 @@ export default {
     }/* ####### IMAGE BOX ####### */
     & .desktop-view {
       display: flex;
-      margin: 1.7rem 8% 0 8%;
+      margin: 1.7rem 8% 0;
       & .reserva-desktop {
         flex-basis: 31%;
         border: 1px solid rgb(222,222,222);

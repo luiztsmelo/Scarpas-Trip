@@ -47,7 +47,7 @@
             </h3>
 
             <h3 class="__card-subtitle">Condição:
-              <span style="font-weight: 400">{{ reserva.status }}</span>
+              <span style="font-weight: 400">{{ status(reserva) }}</span>
             </h3>
 
           </div>
@@ -138,6 +138,13 @@ export default {
     },
     periodoReserva (reserva) {
       return dayjs(reserva.periodoReserva.start).format('DD/MM/YYYY') + ' - ' + dayjs(reserva.periodoReserva.end).format('DD/MM/YYYY')
+    },
+    status (reserva) {
+      const status = reserva.status
+      return status === 'pending' ? 'Aguardando confirmação' 
+           : status === 'awaiting-payment' ? 'Aguardando pagamento'
+           : status === 'expired' ? 'Pedido expirado'
+           : ''
     }
   },
   computed: {
@@ -165,6 +172,8 @@ export default {
   beforeRouteEnter (to, from, next) {
     next(async vm => {
       try {
+        vm.$store.commit('m_showNavbar', true)
+
         const reservasAcomodsSnap = await firebase.firestore().collection('reservasAcomods').where('guestID', '==', vm.$store.state.user.userID).get()
 
         const reservasAcomods = reservasAcomodsSnap.docs.map(reserva => reserva.data())
@@ -205,7 +214,7 @@ export default {
       }
       & .__userName {
         padding: 1rem;
-        font-size: 19px;
+        font-size: 18px;
         font-weight: 600;
         text-align: center;
         border-left: 1px solid rgb(232,232,232);
@@ -256,7 +265,7 @@ export default {
           & .__card-title {
             padding-bottom: .2rem;
             font-size: 16px;
-            font-weight: 600;
+            font-weight: 700;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
@@ -264,7 +273,7 @@ export default {
           & .__card-subtitle {
             padding: .1rem 0;
             font-size: 15px;
-            font-weight: 500;
+            font-weight: 600;
           }
         }
       }

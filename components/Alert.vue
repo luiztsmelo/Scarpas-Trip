@@ -99,7 +99,7 @@ export default {
 
 @media (min-width: 1024px) {
   .alert-modal {
-    min-height: 5.5rem;
+    min-height: 5.2rem;
     & .alert-body {
       justify-content: center;
       padding: 0 22%;

@@ -8,7 +8,6 @@ import 'numeral/locales/pt-br'
 /* import axios from 'axios' */
 
 
-
 /* Firebase admin */
 admin.initializeApp(functions.config().firebase)
 
@@ -59,7 +58,7 @@ exports.watch_reservaExpiration = functions.https.onRequest(async (req, res) => 
         if (requestedDate.diff(dateNow, 'day') <= -2) {
 
           /* Update status para 'expired' na Firestore */
-          await admin.firestore().collection('reservasAcomods').doc(reserva.reservaID).update({ status: 'expired', isRunning: false })
+          await admin.firestore().doc(`reservasAcomods/${reserva.reservaID}`).update({ status: 'expired', isRunning: false })
 
           console.log(`Reserva ${reserva.reservaID} [${requestedDate.diff(dateNow, 'day')}] foi expirada.`)
         } else {
@@ -88,7 +87,7 @@ exports.newUser = functions.https.onCall(async data => {
 
   try {
     /* Criar user na Firestore */
-    await admin.firestore().collection('users').doc(user.userID).set(user)
+    await admin.firestore().doc(`users/${user.userID}`).set(user)
 
     /* Enviar welcome e-mail */
     await Mailjet.post('send', {'version': 'v3.1'}).request({
@@ -147,7 +146,7 @@ exports.newAcomod = functions.https.onCall(async data => {
     acomodData.recipientID = recipient.id
 
     /* Update user Firestore */
-    await admin.firestore().collection('users').doc(acomodData.hostID).update({ 
+    await admin.firestore().doc(`users/${acomodData.hostID}`).update({ 
       isAcomodHost: true,
       celular: acomodData.celular.replace(/[^0-9\.]+/g, '')
     })
@@ -155,7 +154,7 @@ exports.newAcomod = functions.https.onCall(async data => {
     delete acomodData.celular
 
     /* Set acomod Firestore */
-    await admin.firestore().collection('acomods').doc(acomodData.acomodID).set(acomodData)
+    await admin.firestore().doc(`acomods/${acomodData.acomodID}`).set(acomodData)
 
   } catch (err) {
     console.log(err)
@@ -177,12 +176,12 @@ exports.newReservaAcomod = functions.https.onCall(async data => {
     const visitID = data.visitID
 
     /* Update celular guest */
-    await admin.firestore().collection('users').doc(reservaAcomod.guestID).update({
+    await admin.firestore().doc(`users/${reservaAcomod.guestID}`).update({
       celular: customer.celular.replace(/\s/g, '')
     })
 
     /* Get guest */
-    const guestSnap = await admin.firestore().collection('users').doc(reservaAcomod.guestID).get()
+    const guestSnap = await admin.firestore().doc(`users/${reservaAcomod.guestID}`).get()
     const guest = guestSnap.data()
 
     reservaAcomod.requested = new Date().getTime()
@@ -266,10 +265,10 @@ exports.newReservaAcomod = functions.https.onCall(async data => {
     reservaAcomod.reservaID = await transaction.id.toString()
 
     /* Criar reserva na Firestore */
-    await admin.firestore().collection('reservasAcomods').doc(reservaAcomod.reservaID).set(reservaAcomod)
+    await admin.firestore().doc(`reservasAcomods/${reservaAcomod.reservaID}`).set(reservaAcomod)
 
     /* Atualizar visit */
-    await admin.firestore().collection('acomods').doc(acomod.acomodID).collection('visits').doc(visitID).update({ concludedReserva: true })
+    await admin.firestore().doc(`acomods/${acomod.acomodID}/visits/${visitID}`).update({ concludedReserva: true })
 
     /* Enviar e-mail para Host */
     await Mailjet.post('send', {'version': 'v3.1'}).request({
@@ -336,7 +335,7 @@ exports.email_reservaAcceptedToGuest = functions.firestore
     if (reservaAcomod.status === 'awaiting_payment') {
       try {
         /* Get acomod data */
-        const docAcomod = await admin.firestore().collection('acomods').doc(reservaAcomod.acomodID).get()
+        const docAcomod = await admin.firestore().doc(`acomods/${reservaAcomod.acomodID}`).get()
         const acomod = docAcomod.data()
 
         /* Ajustar datas */

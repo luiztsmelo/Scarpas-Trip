@@ -39,11 +39,7 @@
 
           <h1 class="__title">Revisar regras {{ tipoAcomodD }}</h1>
 
-
-          <div class="etapa-1-item">
-            <h3 class="__text">Horário para Check-in:</h3>
-            <!-- <h3>{{ 'Entre ' + acomod.checkinFrom + ' e ' + acomod.checkinTo }}</h3> MUDAR ISSO AQUI-->
-          </div>
+          <h3 class="__text">{{ $store.state.visits }} pessoas visualizaram {{ tipoAcomodE }} na última semana.</h3>
         
 
           <div class="etapa-1-item" v-show="!acomod.allowFestas || !acomod.allowPets || !acomod.allowBabys || !acomod.allowFumar">
@@ -53,6 +49,7 @@
             <h3>{{ !acomod.allowBabys ? 'Bebês de até 2 anos' : '' }}</h3>
             <h3>{{ !acomod.allowFumar ? 'Fumar dentro de casa' : '' }}</h3>
           </div>
+
 
           <div class="etapa-1-item" v-show="acomod.regrasAdicionais.length !== 0">
             <h3 class="__text">Lembretes adicionais:</h3>
@@ -77,7 +74,7 @@
 
           <div class="message">
             
-            <h3 class="__text">Ajude {{ host.firstName }} a preparar {{ tipoAcomodA }} para sua estadia respondendo às suas perguntas</h3>
+            <h3 class="__text">Ajude {{ host.firstName }} a preparar {{ tipoAcomodA }} para sua estadia respondendo às suas perguntas:</h3>
 
             <div class="host-message">
               <img class="__img" :src="host.photoURL">
@@ -332,7 +329,7 @@
 
             <!-- PARCELAS -->
             <div class="item-form" style="padding-top: 1.2rem" v-show="reservaAcomod.paymentMethod === 'credit_card'">
-              <label>Deseja pagar em quantas parcelas, sem juros?</label>
+              <label>Deseja pagar em quantas parcelas sem juros?</label>
               <select v-model="$store.state.reservaAcomod.parcelas">
                 <option v-for="parcela in $store.state.creditCard.parcelas" :value="parcela.id.toString()">
                   {{ `${parcela.id}x R$${parcela.valorParcela.toLocaleString('pt-BR', {minimumFractionDigits: 2})}` }}
@@ -412,7 +409,7 @@
     <div class="footer" v-if="!$store.state.concludedReservaAcomod">
       <div style="display: flex; align-items: center">
         <img class="__img" src="../../../assets/img/brand.svg">
-        <h3 class="__text">&copy Escarpas Trip</h3>
+        <h3 class="__text">&copy Escarpas Trip. Capitólio/MG - Brasil. CNPJ: 99.999.999/9999-99.</h3>
       </div>
       <a class="__ajuda" href="/ajuda" target="_blank" >Ajuda</a>
     </div>
@@ -1093,15 +1090,15 @@ export default {
     height: 100%;
     & .__img {
       margin-right: .7rem;
-      width: 1.4rem;
+      width: 1.2rem;
       height: auto;
-
+      align-self: center;
     }
     & .__text {
-      font-size: 14px;
+      font-size: 13px;
     }
     & .__ajuda {
-      font-size: 15px;
+      font-size: 14px;
       font-weight: 600;
     }
   }
