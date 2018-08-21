@@ -40,7 +40,7 @@
         <h3>R${{ reservaAcomod.serviceFeeTotal.toLocaleString() }}</h3>
       </div>
 
-      <div class="item" style="padding-top: .8rem; border-top: 1px solid rgb(232,232,232)">
+      <div class="item" style="padding-top: .8rem; border-top: 1px solid rgb(222,222,222)">
         <h3>Total</h3>
         <h3 style="font-weight:600">R${{ reservaAcomod.valorReservaTotal.toLocaleString() }}</h3>
       </div>

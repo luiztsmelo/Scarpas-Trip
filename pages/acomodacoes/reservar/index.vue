@@ -878,7 +878,7 @@ export default {
     padding-bottom: 4rem;
     margin: 1.2rem 12% 0;
     display: flex;
-    border-bottom: 1px solid rgb(232,232,232);
+    border-bottom: 1px solid rgb(222,222,222);
     /* ******* FLEX LEFT ******* */
     & .flex-left {
       flex: 64%;
@@ -919,7 +919,7 @@ export default {
           display: flex;
           margin: 1.7rem 0 1rem 0;
           padding-bottom: 1.5rem;
-          border-bottom: 1px solid rgb(232,232,232);
+          border-bottom: 1px solid rgb(222,222,222);
           & .__img { 
             border-radius: 50%;
             width: 2.6rem;
@@ -979,7 +979,7 @@ export default {
           color: var(--color01);
           padding: 1rem 0;
           border: none;
-          border-bottom: 1px solid rgb(232,232,232);
+          border-bottom: 1px solid rgb(222,222,222);
           outline: none;
           transition: all .2s ease;
         }
@@ -997,7 +997,7 @@ export default {
           color: var(--color01);
           padding: 1rem 0;
           border: none;
-          border-bottom: 1px solid rgb(232,232,232);
+          border-bottom: 1px solid rgb(222,222,222);
           outline: none;
           transition: .2s all ease;
         }
@@ -1032,15 +1032,15 @@ export default {
         height: auto;
       }
       & .card-body {
-        border-left: 1px solid rgb(232,232,232);
-        border-right: 1px solid rgb(232,232,232);
-        border-bottom: 1px solid rgb(232,232,232);
+        border-left: 1px solid rgb(222,222,222);
+        border-right: 1px solid rgb(222,222,222);
+        border-bottom: 1px solid rgb(222,222,222);
         & .__acomod-title {
           margin: 0 1.3rem;
           padding: 1.2rem 0;
           font-size: 18px;
           font-weight: 600;
-          border-bottom: 1px solid rgb(232,232,232);
+          border-bottom: 1px solid rgb(222,222,222);
           white-space: nowrap;
           overflow: hidden;
           text-overflow: ellipsis;
@@ -1048,7 +1048,7 @@ export default {
         & .detalhes-reserva-data {
           padding: .8rem 0;
           margin: 0 1.3rem;
-          border-bottom: 1px solid rgb(232,232,232);
+          border-bottom: 1px solid rgb(222,222,222);
           & .detalhes-reserva-data_item {
             display: flex;
             align-items: center;

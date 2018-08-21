@@ -80,7 +80,7 @@ export default {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      border-bottom: 1px solid rgb(232,232,232);
+      border-bottom: 1px solid rgb(222,222,222);
       & .__numero {
         width: 2.5rem;
         font-size: 17px;

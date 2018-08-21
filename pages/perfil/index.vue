@@ -30,29 +30,39 @@
         <h1 class="__title">Suas reservas</h1>
 
 
-        <nuxt-link :to="`/perfil/${reserva.reservaID}`" class="card" v-for="reserva in perfil.reservas.acomods" :key="reserva.reservaID" v-if="perfil.reservas.acomods !== null">
+        <!-- CARD -->
+        <div class="card" v-for="reserva in perfil.reservas.acomods" :key="reserva.reservaID" v-if="perfil.reservas.acomods !== null">
 
           <img class="__card-img" :src="imageAcH(reserva)">
           
+
           <div class="card-info">
 
             <h1 class="__card-title">{{ reserva.acomod.title }}</h1><!-- nome grande fica zuado. corrigir width -->
 
-            <h3 class="__card-subtitle">Período:
-              <span style="font-weight: 400">{{ periodoReserva(reserva) }}</span>
-            </h3>
+            <div class="item">
+              <h3 class="__item-title">Datas:&nbsp;</h3> 
+              <h3 class="__item-text">{{ periodoReserva(reserva) }}</h3>
+            </div>
+            <div class="item">
+              <h3 class="__item-title">Valor total:&nbsp;</h3> 
+              <h3 class="__item-text">{{ reserva.valorReservaTotal.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL', minimumFractionDigits: 2}) }}</h3>
+            </div>
 
-            <h3 class="__card-subtitle">Código da reserva:
-              <span style="font-weight: 400">{{ reserva.reservaID }}</span>
-            </h3>
+            <div class="item">
+              <h3 class="__item-title">Situação:&nbsp;</h3> 
+              <h3 class="__item-text">{{ status(reserva) }}</h3>
+              <img class="__item-info" src="../../assets/img/info.svg">
+            </div>
 
-            <h3 class="__card-subtitle">Condição:
-              <span style="font-weight: 400">{{ status(reserva) }}</span>
-            </h3>
+            <div class="buttons">
+              <button class="__btn">Enviar mensagem</button>
+              <button class="__btn">Cancelar pedido</button>
+            </div>
 
           </div>
 
-        </nuxt-link> 
+        </div><!-- CARD -->
 
       </div>
 
@@ -152,16 +162,16 @@ export default {
     user () { return this.$store.state.user },
     perfil () { return this.$store.state.perfil },
     liStyleReservas () {
-      return this.perfil.showReservas ? 'border-left: 3px solid #FFA04F' : ''
+      return this.perfil.showReservas ? 'font-weight:600' : ''
     },
     liStyleAnuncios () {
-      return this.perfil.showAnuncios ? 'border-left: 3px solid #FFA04F' : ''
+      return this.perfil.showAnuncios ? 'font-weight:600' : ''
     },
     liStyleMessages () {
-      return this.perfil.showMessages ? 'border-left: 3px solid #FFA04F' : ''
+      return this.perfil.showMessages ? 'font-weight:600' : ''
     },
     liStyleEdit () {
-      return this.perfil.showEdit ? 'border-left: 3px solid #FFA04F' : ''
+      return this.perfil.showEdit ? 'font-weight:600' : ''
     }
   },
   watch: {
@@ -197,8 +207,6 @@ export default {
 @import url('~/assets/css/main.css');
 
 .perfil {
-  display: flex;
-  flex-flow: column;
   transition: var(--main-transition);
   & .perfil-body {
     display: flex;
@@ -206,7 +214,7 @@ export default {
     & .side-box {
       display: flex;
       flex-flow: column;
-      flex: 0 0 20%;
+      flex: 0 0 19%;
       margin-right: 2.3rem;
       & .__userPhoto {
         width: 100%;
@@ -217,27 +225,27 @@ export default {
         font-size: 18px;
         font-weight: 600;
         text-align: center;
-        border-left: 1px solid rgb(232,232,232);
-        border-right: 1px solid rgb(232,232,232);
-        border-bottom: 1px solid rgb(232,232,232);
+        border-left: 1px solid rgb(222,222,222);
+        border-right: 1px solid rgb(222,222,222);
+        border-bottom: 1px solid rgb(222,222,222);
       }
       & nav {
         margin-top: .8rem;
-        border: 1px solid rgb(232,232,232);
+        border: 1px solid rgb(222,222,222);
         & li {
           cursor: pointer;
           user-select: none;
-          font-size: 15px;
-          font-weight: 500;
+          font-size: 16px;
+          font-weight: 400;
           padding: 1rem;
         }
         & li:hover {
-          border-left: 3px solid rgb(242,242,242);
+          font-weight: 500;
         }
       }
     }
     & .category-box {
-      flex: 80%;
+      flex: 81%;
       display: flex;
       flex-flow: column;
       & .__title {
@@ -248,32 +256,62 @@ export default {
       & .card {
         display: flex;
         margin-bottom: 2rem;
-        height: 10rem;
+        height: 13rem;
         width: 100%;
         & .__card-img {
           height: 100%;
-          width: auto;
+          width: 25%;
+          object-fit: cover;
         }
         & .card-info {
           display: flex;
           flex-flow: column;
+          position: relative;
           width: 100%;
           padding: 1rem;
-          border-top: 1px solid rgb(232,232,232);
-          border-right: 1px solid rgb(232,232,232);
-          border-bottom: 1px solid rgb(232,232,232);
+          border-top: 1px solid rgb(222,222,222);
+          border-right: 1px solid rgb(222,222,222);
+          border-bottom: 1px solid rgb(222,222,222);
           & .__card-title {
-            padding-bottom: .2rem;
+            padding-bottom: .4rem;
             font-size: 16px;
             font-weight: 700;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
           }
-          & .__card-subtitle {
+          & .item {
             padding: .1rem 0;
-            font-size: 15px;
-            font-weight: 600;
+            display: flex;
+            align-items: center;
+            & .__item-title {
+              font-size: 15px;
+              font-weight: 500;
+            }
+            & .__item-text {
+              font-size: 15px;
+            }
+            & .__item-info {
+              width: .9rem;
+              height: auto;
+              margin-left: .3rem;
+              cursor: pointer;
+            }
+          }
+          & .buttons {
+            display: flex;
+            align-items: center;
+            position: absolute;
+            bottom: 0;
+            border-top: 1px solid rgb(222,222,222);
+            width: 94.5%;
+            padding: 1rem 0;
+            & .__btn {
+              padding: 0 1.2rem 0 0;
+              font-size: 15px;
+              font-weight: 500;
+              background: transparent;
+            }
           }
         }
       }

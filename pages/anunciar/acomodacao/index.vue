@@ -1413,7 +1413,7 @@ export default {
         color: var(--color01);
         padding: 1rem 0;
         border: none;
-        border-bottom: 1px solid rgb(232,232,232);
+        border-bottom: 1px solid rgb(222,222,222);
         outline: none;
         transition: .2s all ease;
       }
@@ -1428,7 +1428,7 @@ export default {
         color: var(--color01);
         padding: 1rem 0;
         border: none;
-        border-bottom: 1px solid rgb(232,232,232);
+        border-bottom: 1px solid rgb(222,222,222);
         outline: none;
         transition: .2s all ease;
       }
@@ -1444,7 +1444,7 @@ export default {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        border-bottom: 1px solid rgb(232,232,232);
+        border-bottom: 1px solid rgb(222,222,222);
         padding: 1.7rem 0;
         & h3 {
           user-select: none;
@@ -1458,7 +1458,7 @@ export default {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        border-bottom: 1px solid rgb(232,232,232);
+        border-bottom: 1px solid rgb(222,222,222);
         padding: 1.6rem 0;
         & h3 {
           user-select: none;
@@ -1499,7 +1499,7 @@ export default {
           color: var(--color01);
           padding: 1rem 0;
           border: none;
-          border-bottom: 1px solid rgb(232,232,232);
+          border-bottom: 1px solid rgb(222,222,222);
           outline: none;
         }
         & .__add-btn {
@@ -1509,7 +1509,7 @@ export default {
           background-size: 21px;
           background-color: white;
           font-weight: 500;
-          border-bottom: 1px solid rgb(232,232,232);
+          border-bottom: 1px solid rgb(222,222,222);
           width: 3rem;
           min-width: 3rem;
         }

@@ -96,7 +96,7 @@ export default {
       flex-flow: row;
       align-items: center;
       padding: 1.1rem 0;
-      border-bottom: 1px solid rgb(232,232,232);
+      border-bottom: 1px solid rgb(222,222,222);
       & .__img {
         margin-right: 1rem;
         width: 1.8rem;

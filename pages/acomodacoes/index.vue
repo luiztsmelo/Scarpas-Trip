@@ -1,31 +1,40 @@
 <template>
   <div class="acomods">
 
-      <ul class="acomods-container">
-        <li class="card" v-for="acomod in acomods" :key="acomod.acomodID">
-          <nuxt-link :to="'/acomodacoes/' + acomod.acomodID">
 
-            <div class="image-box">
-              <swiper :options="swiperOption">
+      <div class="acomods-container">
 
-                <swiper-slide class="slide" v-for="image in acomod.images" :key="image.id">
-                  <progressive-background class="__img" :src="imageH(image)" :placeholder="image.L" :aspect-ratio="2/3"/>
-                </swiper-slide>
+        <nuxt-link class="card" v-for="acomod in $store.state.filteredAcomods" :key="acomod.acomodID" :to="`/acomodacoes/${acomod.acomodID}`">
 
-                <div class="swiper-pagination" slot="pagination"></div>
-              </swiper>
-            </div>
+          <div class="image-box">
+            <swiper :options="swiperOption">
 
-            <div class="card-details">
-              <span class="__card-tipo-acomod">{{ acomod.tipoAcomod }}</span>
-              <span class="__card-title">{{ acomod.title }}</span>
-              <span class="__card-valor">R${{ acomod.valorNoite }}<span class="__card-valor-dia"> por noite</span></span>
-            </div>
-            
-          </nuxt-link> 
-        </li>
-      </ul>
+              <swiper-slide class="slide" v-for="image in acomod.images" :key="image.id">
+                <progressive-background class="__img" :src="imageH(image)" :placeholder="image.L" :aspect-ratio="2/3"/>
+              </swiper-slide>
+              
+              <div class="swiper-pagination" slot="pagination"></div>
+            </swiper>
+          </div>
 
+          <div class="card-details">
+            <span class="__card-tipo-acomod">{{ acomod.tipoAcomod }}</span>
+            <span class="__card-title">{{ acomod.title }}</span>
+            <span class="__card-valor">R${{ acomod.valorNoite }}<span class="__card-valor-dia"> por noite</span></span>
+          </div>
+          
+        </nuxt-link> 
+
+
+        <h1 v-if="$store.state.filteredAcomods.length === 0">
+          Nenhuma acomodação encontrada.
+        </h1>
+
+      </div>
+
+
+
+      <!-- ___________________________ FILTRAR DESKTOP ___________________________ -->
       <div class="filtrar-desktop">
         <form class="filtrar-desktop-form">
           
@@ -35,20 +44,17 @@
               is-linked
               mode='range'
               @drag='drag = $event'
-              v-model='filter.date'
+              v-model='$store.state.filters.date'
               :show-popover='false'
               :min-date='new Date()'
-              :pane-width='280'
-              :disabled-dates='disabledDates'
-              :disabled-attribute='disabledAttribute'
-              :drag-attribute='myAttribute'
-              :select-attribute='myAttribute'
-              :theme-styles='themeStylesDesktop'
-              tint-color='#00D8C7'
+              :pane-width="290"
+              :drag-attribute="attribute"
+              :select-attribute="attribute"
+              :disabled-attribute="disabledAttribute"
+              :theme-styles="datePickerDesktopStyle"
+              tint-color='#FFA04F'
               show-caps
-              style='width:100%'
               :formats='formats'
-              popover-align='right'
               popover-visibility='focus'>
               <div
                 slot-scope='{ inputValue, updateValue }'>
@@ -67,74 +73,63 @@
             </v-date-picker>
           </div>
 
-          <div class="item-form">
-            <multiselect
-              v-model="filter.tipoAcomod"
-              :multiple="true"
-              :options="tiposAcomods"
-              :hide-selected="true"
-              :preserve-search="false"
-              :searchable="false" 
-              :show-labels="false" 
-              placeholder="Tipo de Acomodação">
-            </multiselect>
-          </div>
 
           <div class="item-form">
-            <multiselect
-              :type='Array'
-              v-model="filter.local"
-              :multiple="true"
-              :options="localidades"
-              :hide-selected="true"
-              :preserve-search="false"
-              :searchable="false" 
-              :show-labels="false" 
-              placeholder="Local">
-            </multiselect>
+            <select v-model="$store.state.filters.tipoAcomod">
+              <option :value="null" disabled hidden>Tipo de acomodação</option>
+              <option>Casa</option>
+              <option>Apartamento</option>
+              <option>Rancho</option>
+              <option>Chácara</option>
+              <option>Pousada</option>
+              <option>Camping</option>
+              <option>Sítio</option>
+              <option>Fazenda</option>
+              <option>Hostel</option>
+            </select>
           </div>
 
-          <div class="item-form" >
-            <vue-slider
-              v-model='filter.valorDiaria'
-              style="margin-top:2.2rem"
-              width='90%'
-              tooltip='always'
-              formatter='R${value}'
-              :interval='50'
-              :min='0'
-              :max='2000'
-              :disabled='false'
-              :lazy='true'
-              :tooltipStyle='{ "backgroundColor": "white", "color": "#7E7E7E", "borderColor": "white", "fontWeight": "600", "fontSize": "15px" }'
-              :bgStyle='{ "backgroundColor": "rgb(237,237,237)" }'
-              :processStyle='{ "backgroundColor": "transparent" }'>
-            </vue-slider>
-          </div>
+          <button class="__limpar-btn">Limpar filtros</button>
+
 
         </form>
-      </div>
+      </div><!-- ___________________________ FILTRAR DESKTOP ___________________________ -->
 
 
+
+
+
+    <!-- ___________________________ FILTRAR MOBILE ___________________________ -->
     <div class="filtrar-mobile">
       <div class="filtrar-body">
         <span class="__filtrar-text">Filtrar</span>
         <img class="__filtrar-img" src="../../assets/img/filter.svg">
       </div>
-    </div>
+    </div><!-- ___________________________ FILTRAR MOBILE ___________________________ -->
 
+
+
+    <gmap-map
+      class="map-desktop"
+      :center="{ lat: -20.6259183, lng: -46.0336799 }"
+      :zoom="12"
+      :options="{ styles: styles, draggable:  true, fullscreenControl: false , zoomControl: $store.state.isMobile ? false : true, mapTypeControl: false, streetViewControl: false }">
+    </gmap-map>
 
   </div>
 </template>
 
 <script>
 import vueSlider from 'vue-slider-component'
-import Multiselect from 'vue-multiselect'
 import supportsWebP from 'supports-webp'
 import * as firebase from 'firebase'
+import { mapstyle } from '@/mixins/mapstyle'
+import { swiperOptions } from '@/mixins/swiper_id'
+import { stylesCalendar } from '@/mixins/stylesCalendar'
 
 export default {
-  components: { Multiselect, vueSlider },
+  components: { vueSlider },
+  mixins: [ mapstyle, swiperOptions, stylesCalendar ],
   head () {
     return {
       title: 'Acomodações em Capitólio ‒ Escarpas Trip'
@@ -144,90 +139,24 @@ export default {
   data () {
     return {
       drag: null,
-      filter: {
-        date: null,
-        tipoAcomod: [],
-        local: [],
-        valorDiaria: [0, 2000]
+      attribute: {
+        popover: {
+          hideIndicator: true,
+          visibility: 'none'
+        }
       },
-      tiposAcomods: [
-        'Casa',
-        'Rancho'
-      ],
-      localidades: [
-        'Escarpas do Lago',
-        'Capitólio'
-      ],
       swiperOption: {
         slidesPerView: 1,
         pagination: '.swiper-pagination'
       },
       formats: {
         input: ['D MMM', 'D MMM']
-      },
-      myAttribute: {
-        popover: {
-          visibility: 'hidden'
-        }
-      },
-      disabledAttribute: {
-        contentStyle: {
-          opacity: .3
-        },
-        contentHoverStyle: {
-          cursor: 'default',
-          backgroundColor: 'transparent',
-        }
-      },
-      themeStylesDesktop: {
-        wrapper: {
-          color: 'rgb(42, 42, 42)',
-          borderTop: '8px solid white',
-          borderBottom: '8px solid white',
-          borderLeft: '15px solid white',
-          borderRight: '15px solid white',
-          background: 'white',
-          boxShadow: '1px 1px 25px 2px rgba(0,0,0,0.1)'
-        },
-        header: {
-          padding: '12px 9px 0px 9px',
-        },
-        headerArrows: {
-          fontSize: '1.4rem',
-        },
-        headerTitle: {
-          fontSize: '16px',
-          fontWeight: '400'
-        },
-        weekdays: {
-          color: 'rgb(42, 42, 42)',
-          fontWeight: '600',
-          padding: '14px 5px 6px 5px',
-        },
-        dayCell: {
-          height: '32px'
-        },
-        dayContent: {
-          fontWeight: '400',
-          fontSize: '14px'
-        },
-        dayCellNotInMonth: {
-          opacity: 0
-        },
-        dayPopoverContent: {
-          background: '#00D8C7',
-          color: 'white',
-          border: 'none'
-        },
-        verticalDivider: {
-          borderLeft: 'none'
-        }
       }
     }
   },
   fetch ({ store }) {
     return firebase.firestore().collection('acomods').onSnapshot(snapshot => {
-      store.commit('m_acomods', snapshot.docs.map(doc => doc.data()))
+      store.commit('m_filteredAcomods', snapshot.docs.map(acomod => acomod.data()))
     })
   },
   methods: {
@@ -239,15 +168,25 @@ export default {
     }
   },
   computed: {
-    acomods () {
-      return this.$store.state.acomods
-    },
+    filters () { return this.$store.state.filters },
     noites () {
-      const span = this.getNoites(this.drag || this.filter.date)
+      const span = this.getNoites(this.drag || this.$store.state.filters.date)
       return (span && `${span} noites`) || ''
-    },
-    disabledDates () {
-      return 
+    }
+  },
+  watch: {
+    filters: {
+      handler: async function (filter) { 
+        try {
+          console.log(filter)
+          const filteredAcomods = await firebase.firestore().collection('acomods').where('tipoAcomod', '==', filter.tipoAcomod).get()
+          console.log(filteredAcomods)
+          return this.$store.commit('m_filteredAcomods', filteredAcomods.docs.map(acomod => acomod.data()))
+        } catch (err) {
+          console.log(err)
+        }
+      },
+      deep: true
     }
   },
   beforeRouteEnter (to, from, next) {
@@ -268,7 +207,6 @@ export default {
 <style>
 @import url('~/assets/css/main.css');
 @import url('~/assets/css/pagination.css');
-@import url('~/node_modules/vue-multiselect/dist/vue-multiselect.min.css');
 
 .acomods {
   margin: 3.4rem 0 5.4rem 0;
@@ -363,6 +301,9 @@ export default {
   .filtrar-desktop {
     display: none;
   }
+  .map-desktop {
+    display: none;
+  }
 }
 @media (min-width: 1024px) {
   .acomods {
@@ -370,14 +311,14 @@ export default {
     display: flex;
     flex-flow: row;
     & .acomods-container {
-      margin-top: 6.5rem;
-      width: 67.3%;
+      margin-top: calc(var(--navbarHeightDesktop) + 3.8rem + 1.5rem);
+      width: 64.6%;
       padding-left: 7%;
       display: flex;
       flex-flow: row wrap;
       justify-content: space-between;
       & .card {
-        width: 48.7%;
+        width: 49.1%;
         min-height: 21rem;
         padding: 0;
         margin-bottom: 2rem;
@@ -393,7 +334,7 @@ export default {
                 & .__img {
                   width: 100%;
                   height: auto;
-                  border-radius: 1px;
+                  border-radius: 4px;
                 }
               }
             }
@@ -403,16 +344,16 @@ export default {
           display: flex;
           flex-flow: column;
           & .__card-tipo-acomod {
-            font-size: 12px;
+            font-size: 11px;
             font-weight: 600;
           }
           & .__card-title {
             padding: .4rem 0 .5rem 0;
-            font-size: 17px;
+            font-size: 16px;
             font-weight: 700;
           }
           & .__card-valor {
-            font-size: 16px;
+            font-size: 15px;
             font-weight: 400;
             & .__card-valor-dia {
               font-size: 14px;
@@ -423,86 +364,84 @@ export default {
     }
     & .filtrar-desktop {
       position: fixed;
-      width: 24%;
       top: var(--navbarHeightDesktop);
-      bottom: 0;
-      right: 7%;
-      border-left: 1px solid rgb(232,232,232);
-      border-right: 1px solid rgb(232,232,232);
+      left: 0;
+      width: 100%;
       & .filtrar-desktop-form {
-        padding: 2.9rem 1.4rem;
+        position: relative;
+        padding: 0 7%;
+        height: 3.8rem;
+        display: flex;
+        align-items: center;
+        border-bottom: 1px solid rgb(222,222,222);
+        background: white;
         & .item-form {
-          display: flex;
-          flex-flow: column;
-          align-items: center;
-          margin: 0 0 1.5rem 0;
+          margin-right: 1rem;
           & input {
             cursor: pointer;
-            width: 100%;
-            height: 2.7rem;
+            height: 2.3rem;
             font-size: 14px;
-            font-weight: 500;
-            padding-left: .6rem;
-            border: 1px solid rgb(232,232,232);
+            font-weight: 400;
+            padding: 0 .7rem;
+            border: 1px solid rgb(222,222,222);
             outline: none;
-            background: white;
+            border-radius: 5px;
             color: var(--color01);
           }
-          & .multiselect {
+          & select {
             cursor: pointer;
-            & .multiselect__tags {
-              border-radius: 0;
-              & .multiselect__tags-wrap {
-                & .multiselect__tag {
-                  background: #00D8C7;
-                  font-size: 14px;
-                  font-weight: 600;
-                }
-                
-              }
-              & .multiselect__single {
-                font-size: 14px;
-                font-weight: 500;
-                color: var(--color01);
-              }
-              
-            }
-            
-            & .multiselect__content-wrapper {
-              & .multiselect__content {
-                
-                & .multiselect__element {
-                  font-size: 14px;
-                  font-weight: 500;
-                  & .multiselect__option--highlight {
-                    background: #00D8C7;
-                  }
-                }
-              }
-            }
+            height: 2.3rem;
+            font-size: 14px;
+            font-weight: 400;
+            padding: 0 .3rem;
+            border: 1px solid rgb(222,222,222);
+            outline: none;
+            border-radius: 5px;
+            color: var(--color01);
           }
-          & .multiselect--active {
-            z-index: 9900;
-          }
+        }
+        & .__limpar-btn {
+          position: absolute;
+          right: 7%;
+          background: white;
+          font-size: 14px;
+          font-weight: 500;
         }
       }
     }
     & .filtrar-mobile {
       display: none;
     }
+    & .map-desktop {
+      position: fixed;
+      bottom: 1.5rem;
+      right: 7%;
+      width: 26.5%;
+      height: calc(100% - var(--navbarHeightDesktop) - 3.8rem - 3rem);
+    }
+    & .map-desktop > div > div {
+      background-color: #fff !important;
+    }
   }
 }
 
 .is-drag {
-  color: #999999 !important;
+  color: var(--color01);
+  font-weight: 500;
 }
 .day-span {
-  font-size: 14px;
+  font-size: 15px;
+  font-weight: 500;
   position: absolute;
   right: 5%;
   top: 50%;
   transform: translateY(-50%);
-  color: #999999;
+  color: var(--color01);
+}
+
+::placeholder {
+  color: var(--color01);
+  opacity: 1;
 }
 
 </style>

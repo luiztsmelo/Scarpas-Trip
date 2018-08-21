@@ -64,6 +64,8 @@ const store = () => new Vuex.Store({
       cardCVV: '',
       parcelas: null
     },
+    cardType: null,
+    cardTypeNice: null,
     customer: {
       name: '',
       cpf: '',
@@ -75,8 +77,11 @@ const store = () => new Vuex.Store({
       city: '',
       state: ''
     },
-    cardType: null,
-    cardTypeNice: null,
+    filters: {
+      date: null,
+      tipoAcomod: null
+    },
+    filteredAcomods: null,
     /*
     -------------------- ALERT --------------------
     */
@@ -412,6 +417,9 @@ const store = () => new Vuex.Store({
     },
     m_visits (state, payload) {
       state.visits = payload
+    },
+    m_filteredAcomods (state, payload) {
+      state.filteredAcomods = payload
     },
     m_perfil (state, payload) {
       state.perfil = payload
