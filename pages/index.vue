@@ -23,7 +23,7 @@
           </nuxt-link>
         </div>
         
-        <div class="cards-container">
+        <div class="cards-container" v-if="$store.state.eventos !== null">
           <div class="card" v-for="evento in $store.state.eventos" :key="evento.eventoID">
             <nuxt-link :to="'/eventos/' + evento.eventoID">
               <progressive-background class="__card-img" :src="imageEvH(evento)" :placeholder="evento.imageL1" :aspect-ratio="2/3"/>
@@ -54,7 +54,7 @@
           </nuxt-link> 
         </div>
         
-        <div class="cards-container">
+        <div class="cards-container" v-if="$store.state.acomods !== null">
           <div class="card" v-for="acomod in $store.state.acomods" :key="acomod.acomodID">
             <nuxt-link :to="`/acomodacoes/${acomod.acomodID}`">
 
@@ -90,7 +90,7 @@
           </nuxt-link> 
         </div>
         
-        <div class="cards-container">
+        <div class="cards-container" v-if="$store.state.passeios !== null">
           <div class="card" v-for="passeio in $store.state.passeios" :key="passeio.passeioID">
             <nuxt-link :to="'/passeios/' + passeio.passeioID">
               <progressive-background class="__card-img" :src="imagePasH(passeio)" :placeholder="passeio.imageL1" :aspect-ratio="2/3"/>
@@ -121,7 +121,7 @@
           </nuxt-link> 
         </div>
         
-        <div class="cards-container">
+        <div class="cards-container" v-if="$store.state.atracoes !== null">
           <div class="card" v-for="atracao in $store.state.atracoes" :key="atracao.atracaoID">
             <nuxt-link :to="'/atracoes/' + atracao.atracaoID">
               <progressive-background class="__card-img" :src="imageAtH(atracao)" :placeholder="atracao.imageL1" :aspect-ratio="2/3"/>
@@ -156,10 +156,6 @@ export default {
     }
   },
   transition: 'opacity',
-  data () {
-    return {
-    }
-  },
   methods: {
     imageEvH (evento) {
       return supportsWebP ? evento.imageH1W : evento.imageH1J
@@ -174,31 +170,33 @@ export default {
       return supportsWebP ? atracao.imageH1W : atracao.imageH1J
     }
   },
-  fetch ({ store }) {
-    return firebase.firestore().collection('eventos').onSnapshot(snap => {
-      store.commit('m_eventos', snap.docs.map(doc => doc.data()))
-    })
-    && firebase.firestore().collection('acomods').onSnapshot(snap => {
-      store.commit('m_acomods', snap.docs.map(doc => doc.data()))
-    })
-    && firebase.firestore().collection('passeios').onSnapshot(snap => {
-      store.commit('m_passeios', snap.docs.map(doc => doc.data()))
-    })
-    && firebase.firestore().collection('atracoes').onSnapshot(snap => {
-      store.commit('m_atracoes', snap.docs.map(doc => doc.data()))
-    })
-  },
   beforeRouteEnter (to, from, next) {
-    next(vm => {
-      vm.$store.state.offFoobar1 = true
-      vm.$store.state.offFoobar2 = true
-      vm.$store.state.offFoobar3 = true
-      vm.$store.state.offFoobar4 = true
-      vm.$store.state.offFoobar5 = true
-      vm.$store.state.concludedNewAcomod = false
-      !vm.$store.state.isOnline ? vm.$modal.show('offline-modal') : ''
-      !vm.$store.state.showFoobar ? vm.$store.commit('m_showFoobar', true) : ''
-      !vm.$store.state.showNavbar ? vm.$store.commit('m_showNavbar', true) : ''
+    next(async vm => {
+      try {
+        vm.$store.state.offFoobar1 = true
+        vm.$store.state.offFoobar2 = true
+        vm.$store.state.offFoobar3 = true
+        vm.$store.state.offFoobar4 = true
+        vm.$store.state.offFoobar5 = true
+        vm.$store.state.concludedNewAcomod = false
+        !vm.$store.state.isOnline ? vm.$modal.show('offline-modal') : ''
+        !vm.$store.state.showFoobar ? vm.$store.commit('m_showFoobar', true) : ''
+        !vm.$store.state.showNavbar ? vm.$store.commit('m_showNavbar', true) : ''
+
+        /* Fetch data */
+        const [ eventos, acomods, passeios, atracoes] = await Promise.all([ 
+          firebase.firestore().collection('eventos').get(),
+          firebase.firestore().collection('acomods').get(),
+          firebase.firestore().collection('passeios').get(),
+          firebase.firestore().collection('atracoes').get()
+        ])
+        vm.$store.commit('m_eventos', eventos.docs.map(evento => evento.data()))
+        vm.$store.commit('m_acomods', acomods.docs.map(acomod => acomod.data()))
+        vm.$store.commit('m_passeios', passeios.docs.map(passeio => passeio.data()))
+        vm.$store.commit('m_atracoes', atracoes.docs.map(atracao => atracao.data()))
+      } catch (err) {
+        console.log(err)
+      }
     })
   }
 }

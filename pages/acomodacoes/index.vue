@@ -89,7 +89,7 @@
             </select>
           </div>
 
-          <button class="__limpar-btn">Limpar filtros</button>
+          <button type="button" class="__limpar-btn">Limpar filtros</button>
 
 
         </form>
@@ -154,10 +154,9 @@ export default {
       }
     }
   },
-  fetch ({ store }) {
-    return firebase.firestore().collection('acomods').onSnapshot(snapshot => {
-      store.commit('m_filteredAcomods', snapshot.docs.map(acomod => acomod.data()))
-    })
+  async fetch ({ store }) {
+    const acomods = await firebase.firestore().collection('acomods').get()
+    store.commit('m_filteredAcomods', acomods.docs.map(acomod => acomod.data()))
   },
   methods: {
     getNoites (range) {
