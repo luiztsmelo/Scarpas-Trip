@@ -399,7 +399,7 @@ export default {
     imageH (image) {
       return supportsWebP ? image.HW : image.HJ
     },
-    inputDate () {
+    inputDate () { /* Em caso de alterações, lembrar também de alterar DatePicker.vue */
       this.periodoReserva.start = Date.parse(this.periodoReserva.start)
       this.periodoReserva.end = Date.parse(this.periodoReserva.end)
   

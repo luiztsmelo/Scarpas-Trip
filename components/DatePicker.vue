@@ -19,6 +19,7 @@
         is-inline
         is-expanded
         mode="range"
+        @input="inputDate"
         v-model="$store.state.reservaAcomod.periodoReserva"
         :min-date="minDate"
         :disabled-dates="$store.state.disabledDatesAcomod"
@@ -67,6 +68,35 @@ export default {
       this.$modal.hide('datepicker')
       window.history.back(1)
     },
+    inputDate () { /* Em caso de alterações, lembrar também de alterar _id */
+      this.periodoReserva.start = Date.parse(this.periodoReserva.start)
+      this.periodoReserva.end = Date.parse(this.periodoReserva.end)
+  
+      const checkIn = dayjs(this.periodoReserva.start)
+      const checkOut = dayjs(this.periodoReserva.end)
+
+      const noites = checkOut.diff(checkIn, 'day')
+      this.$store.commit('m_noites', noites)
+
+      const valorNoitesTotal = Math.round(this.acomod.valorNoite * noites)
+      this.$store.commit('m_valorNoitesTotal', valorNoitesTotal)
+
+      const serviceFeeTotal = Math.round(valorNoitesTotal * this.$store.state.serviceFeeAcomod)
+      this.$store.commit('m_serviceFeeTotal', serviceFeeTotal)
+
+      const valorReservaTotal = valorNoitesTotal + this.acomod.limpezaFee + serviceFeeTotal
+      this.$store.commit('m_valorReservaTotal', valorReservaTotal)
+
+      this.$store.state.reservaAcomod.limpezaFee = this.acomod.limpezaFee
+
+      const parcelas = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map(x => {
+        return {
+          id: x,
+          valorParcela: Number( (valorReservaTotal/x).toFixed(2) )
+        }
+      })
+      this.$store.commit('m_parcelas', parcelas)
+    },
     confirmBtn () {
       if (this.$store.state.reservaAcomod.periodoReserva !== null) {
         this.$modal.hide('datepicker')
@@ -81,6 +111,8 @@ export default {
     }
   },
   computed: {
+    acomod () { return this.$store.state.acomod },
+    periodoReserva () {return this.$store.state.reservaAcomod.periodoReserva },
     minDate () {
       return dayjs(new Date()).add(2, 'day').toDate()
     },

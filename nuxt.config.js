@@ -3,7 +3,18 @@ module.exports = {
   ** Build configuration
   */
   build: {
-    vendor: ['firebase', 'supports-webp', 'card-validator', 'gerador-validador-cpf']
+    vendor: ['firebase', 'supports-webp', 'card-validator', 'gerador-validador-cpf'],
+    extend (config, { isClient }) {
+      if (!isClient) {
+        config.externals.splice(0, 0, function (context, request, callback) {
+          if (/^vue2-google-maps($|\/)/.test(request)) {
+            callback(null, false)
+          } else {
+            callback()
+          }
+        })
+      }
+    }
     /* analyze: true */
   },
   /*
@@ -39,7 +50,7 @@ module.exports = {
     { src: '~plugins/firebase' },
     { src: '~/plugins/vuex-persistedstate', ssr: false },
     { src: '~plugins/vue-progressive-image', ssr: false },
-    { src: '~plugins/vue-google-maps', ssr: false },
+    { src: '~plugins/vue-google-maps' },
     { src: '~plugins/vue-croppa', ssr: false },
     { src: '~plugins/vue-autosize', ssr: false },
     { src: '~plugins/webfontloader', ssr: false },

@@ -120,15 +120,13 @@
 </template>
 
 <script>
-import vueSlider from 'vue-slider-component'
-import supportsWebP from 'supports-webp'
 import * as firebase from 'firebase'
+import supportsWebP from 'supports-webp'
 import { mapstyle } from '@/mixins/mapstyle'
 import { swiperOptions } from '@/mixins/swiper_id'
 import { stylesCalendar } from '@/mixins/stylesCalendar'
 
 export default {
-  components: { vueSlider },
   mixins: [ mapstyle, swiperOptions, stylesCalendar ],
   head () {
     return {
