@@ -1,5 +1,4 @@
 module.exports = {
-  mode: 'spa',
   /*
   ** Build configuration
   */
@@ -37,17 +36,18 @@ module.exports = {
   ** Plugins
   */
   plugins: [
-    '~/plugins/firebase',
-    '~plugins/vue-progressive-image',
-    '~plugins/vue-google-maps',
-    '~plugins/vue-croppa',
-    '~plugins/vue-autosize',
-    '~plugins/webfontloader',
-    '~plugins/vue-awesome-swiper',
-    '~plugins/v-money',
-    '~plugins/v-calendar',
-    '~plugins/vue-js-modal',
-    '~plugins/scroll'
+    { src: '~plugins/firebase' },
+    { src: '~/plugins/vuex-persistedstate', ssr: false },
+    { src: '~plugins/vue-progressive-image', ssr: false },
+    { src: '~plugins/vue-google-maps', ssr: false },
+    { src: '~plugins/vue-croppa', ssr: false },
+    { src: '~plugins/vue-autosize', ssr: false },
+    { src: '~plugins/webfontloader', ssr: false },
+    { src: '~plugins/vue-awesome-swiper', ssr: false },
+    { src: '~plugins/v-money', ssr: false },
+    { src: '~plugins/v-calendar', ssr: false },
+    { src: '~plugins/scroll', ssr: false },
+    { src: '~plugins/vue-js-modal', ssr: false }
   ],
   /*
   ** Customize the progress-bar color

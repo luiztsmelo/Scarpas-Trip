@@ -50,25 +50,27 @@ export default {
   beforeCreate () {
     /* Detect Device */
     isMobile.any ? this.$store.commit('m_isMobile', true) : this.$store.commit('m_isMobile', false)
-    /* Desativate loader on refresh */
-    if (performance.navigation.type == performance.navigation.TYPE_RELOAD) {
-      this.$store.commit('m_loader', false)
-      this.$store.commit('hide_alert')
+    if (process.browser) {
+      /* Desativate loader on refresh */
+      if (performance.navigation.type == performance.navigation.TYPE_RELOAD) {
+        this.$store.commit('m_loader', false)
+        this.$store.commit('hide_alert')
+      }
+      /* Check network status */
+      window.addEventListener('offline', event => {
+        this.$store.commit('m_isOnline', false)
+        this.$modal.show('offline-modal')
+      })
+      window.addEventListener('online', event => {
+        this.$store.commit('m_isOnline', true)
+        location.reload()
+        this.$modal.hide('offline-modal')
+      })
+      /* Get last hash. Back button purposes */
+      window.addEventListener('hashchange', event => {
+        this.$store.state.lastHash = this.$route.hash
+      })
     }
-    /* Check network status */
-    window.addEventListener('offline', event => {
-      this.$store.commit('m_isOnline', false)
-      this.$modal.show('offline-modal')
-    })
-    window.addEventListener('online', event => {
-      this.$store.commit('m_isOnline', true)
-      location.reload()
-      this.$modal.hide('offline-modal')
-    })
-    /* Get last hash. Back button purposes */
-    window.addEventListener('hashchange', event => {
-      this.$store.state.lastHash = this.$route.hash
-    })
   }
 }
 </script>
