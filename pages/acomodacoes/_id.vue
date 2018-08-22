@@ -121,7 +121,7 @@
         </div>
 
         <transition name="comods-animation">
-          <div class="comods-details" v-show="showComods">
+          <div class="comods-details" v-if="showComods">
 
             <div class="back-bar">
               <div class="back-box" @click="backBtn">
@@ -365,10 +365,10 @@ export default {
   },
   head () {
     return {
-      title: this.$store.state.acomod.title + ' ‒ ' + 'Escarpas Trip',
+      title: `${this.$store.state.acomod.title} ‒ Escarpas Trip`,
       meta: [
         { hid: 'description', name: 'description', content: this.$store.state.acomod.subtitle },
-        { property: 'og:url', content: 'https://escarpastrip.com/acomods/' + this.$route.params.id },
+        { property: 'og:url', content: `https://escarpastrip.com/acomods/${this.$route.params.id}` },
         { property: 'og:title', content: this.$store.state.acomod.title },
         { property: 'og:description', content: this.$store.state.acomod.subtitle },
         { property: 'og:image', content: this.$store.state.acomod.images[0].HJ },

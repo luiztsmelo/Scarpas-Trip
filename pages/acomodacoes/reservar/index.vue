@@ -42,7 +42,7 @@
           <h3 class="__text">{{ $store.state.visits }} pessoas visualizaram {{ tipoAcomodE }} na última semana.</h3>
         
 
-          <div class="etapa-1-item" v-show="!acomod.allowFestas || !acomod.allowPets || !acomod.allowBabys || !acomod.allowFumar">
+          <div class="etapa-1-item" v-if="!acomod.allowFestas || !acomod.allowPets || !acomod.allowBabys || !acomod.allowFumar">
             <h3 class="__text">Nesta casa não é permitido:</h3>
             <h3>{{ !acomod.allowFestas ? 'Festas' : '' }}</h3>
             <h3>{{ !acomod.allowPets ? 'Animais de estimação' : '' }}</h3>
@@ -51,7 +51,7 @@
           </div>
 
 
-          <div class="etapa-1-item" v-show="acomod.regrasAdicionais.length !== 0">
+          <div class="etapa-1-item" v-if="acomod.regrasAdicionais.length !== 0">
             <h3 class="__text">Lembretes adicionais:</h3>
             <h3 v-for="regra in acomod.regrasAdicionais">{{ regra }}</h3>
           </div>
@@ -139,7 +139,7 @@
 
 
             <!-- ************** CREDIT CARD ************** -->
-            <div class="credit-card" v-show="reservaAcomod.paymentMethod === 'credit_card'">
+            <div class="credit-card" v-if="reservaAcomod.paymentMethod === 'credit_card'">
 
               <!-- CARD NUMBER -->
               <div class="item-form">
@@ -236,7 +236,7 @@
 
             
             <!-- ************** BILLING ************** -->
-            <div class="billing" v-show="reservaAcomod.paymentMethod === 'credit_card'">
+            <div class="billing" v-if="reservaAcomod.paymentMethod === 'credit_card'">
 
               <div class="flex" style="display:flex; justify-content:space-between">
                 
@@ -328,7 +328,7 @@
 
 
             <!-- PARCELAS -->
-            <div class="item-form" style="padding-top: 1.2rem" v-show="reservaAcomod.paymentMethod === 'credit_card'">
+            <div class="item-form" style="padding-top: 1.2rem" v-if="reservaAcomod.paymentMethod === 'credit_card'">
               <label>Deseja pagar em quantas parcelas sem juros?</label>
               <select v-model="$store.state.reservaAcomod.parcelas">
                 <option v-for="parcela in $store.state.creditCard.parcelas" :value="parcela.id.toString()">

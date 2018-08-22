@@ -1,6 +1,6 @@
 <template>
   <transition name="menu-animation">
-    <div class="menu" v-show="showMenu">
+    <div class="menu" v-if="showMenu">
       <div class="menu-body">
 
         <div style="border-bottom:1px solid rgb(222,222,222);padding-bottom:.6rem" @click="checkUser(), $store.commit('m_showMenu', false), $store.commit('m_menuIconAnime', false), $store.commit('m_showFoobar', false)">

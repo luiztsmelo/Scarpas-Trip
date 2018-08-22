@@ -3,7 +3,7 @@
 
 
     <!-- PLANO PASSEIO MOBILE -->
-    <div class="plano-passeio-mobile" v-show="$store.state.cadastroPasseio0">
+    <div class="plano-passeio-mobile" v-if="$store.state.cadastroPasseio0">
       
       <img class="__img-header" src="../../../assets/img/anuncio-passeio.svg">
       
@@ -15,7 +15,7 @@
 
 
     <!-- PLANO PASSEIO DESKTOP -->
-    <div class="plano-passeio-desktop" v-show="$store.state.cadastroPasseio0">
+    <div class="plano-passeio-desktop" v-if="$store.state.cadastroPasseio0">
       
       <img class="__img-header" src="../../../assets/img/anuncio-passeio.svg">
 
@@ -32,7 +32,7 @@
 
 
 
-    <div class="progress-bar" v-show="!$store.state.cadastroPasseio0" :style="'width:' + $store.state.passeioProgressBar + '%'"></div>
+    <div class="progress-bar" v-if="!$store.state.cadastroPasseio0" :style="'width:' + $store.state.passeioProgressBar + '%'"></div>
 
 
 
@@ -115,7 +115,7 @@
 
 
     <!-- ########## LOCAL DE SAÍDA PG.4 ########## -->
-    <form class="cadastro-passeio" v-show="$store.state.cadastroPasseio4">
+    <form class="cadastro-passeio" v-if="$store.state.cadastroPasseio4">
 
       <h1 class="__form-title">O passeio sairá de onde?</h1>
 
@@ -144,7 +144,7 @@
 
 
     <!-- ########## PONTOS VISITADOS PG.5 ########## -->
-    <form class="cadastro-passeio" v-show="$store.state.cadastroPasseio5">
+    <form class="cadastro-passeio" v-if="$store.state.cadastroPasseio5">
 
       <h1 class="__form-title">Quais serão os pontos visitados?</h1>
 
@@ -190,15 +190,15 @@
 
 
     <!-- ########## IMAGENS E VÍDEO PG.7 ########## -->
-    <form class="cadastro-passeio" v-show="$store.state.cadastroPasseio7">
+    <form class="cadastro-passeio" v-if="$store.state.cadastroPasseio7">
 
       <h1 class="__form-title">Adicione imagens e vídeo</h1>
 
-      <div class="before-choose-image" v-show="imageURL1 === null">
+      <div class="before-choose-image" v-if="imageURL1 === null">
         <button class="__input-btn" type="button" @click="$refs.myCroppa1.chooseFile()">Adicionar Imagem</button>
       </div>
       
-      <div class="modal-croppa" v-show="showCroppaModal1" @click="showCroppaModal1=false">
+      <div class="modal-croppa" v-if="showCroppaModal1" @click="showCroppaModal1=false">
         <div class="modal-croppa-body" @click.stop>
           <h1>Ajustar imagem</h1>
           <croppa
@@ -222,7 +222,7 @@
         </div>
       </div>
 
-      <div class="modal-croppa" v-show="showCroppaModal2" @click="showCroppaModal2=false">
+      <div class="modal-croppa" v-if="showCroppaModal2" @click="showCroppaModal2=false">
         <div class="modal-croppa-body" @click.stop>
           <h1>Ajustar imagem</h1>
           <croppa
@@ -247,7 +247,7 @@
       </div>
 
       <!-- Preview Image -->
-      <div class="after-choose-image" v-show="imageURL1 !== null">
+      <div class="after-choose-image" v-if="imageURL1 !== null">
 
         <div class="image-box">
           <div class="__foto-principal">Imagem de Capa</div>

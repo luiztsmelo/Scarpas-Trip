@@ -1,6 +1,6 @@
 <template>
   <transition name="foobar-animation">  
-    <div class="foobar" v-show="showFoobar">
+    <div class="foobar" v-if="showFoobar">
       <div class="foobar-body">
 
           <nuxt-link to="/acomodacoes">

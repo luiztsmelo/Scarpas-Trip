@@ -2,7 +2,7 @@
   <div class="anunciar-evento">
 
     <!-- PLANO EVENTO -->
-    <div class="plano-evento" v-show="$store.state.cadastroEvento0">
+    <div class="plano-evento" v-if="$store.state.cadastroEvento0">
       
       <img class="__img-header" src="../../../assets/img/eventos.svg">
 
@@ -27,7 +27,7 @@
 
 
 
-    <div class="progress-bar" v-show="!$store.state.cadastroEvento0" :style="'width:' + $store.state.eventoProgressBar + '%'"></div>
+    <div class="progress-bar" v-if="!$store.state.cadastroEvento0" :style="'width:' + $store.state.eventoProgressBar + '%'"></div>
 
 
     
@@ -37,7 +37,7 @@
 
 
     <!-- ########## DATA E HORÁRIO PG.1 ########## -->
-    <form class="cadastro-evento" v-show="$store.state.cadastroEvento1">
+    <form class="cadastro-evento" v-if="$store.state.cadastroEvento1">
 
       <h1 class="__form-title">Quando será o evento?</h1>
 
@@ -65,7 +65,7 @@
 
 
     <!-- ########## LOCAL PG.2 ########## -->
-    <form class="cadastro-evento" v-show="$store.state.cadastroEvento2">
+    <form class="cadastro-evento" v-if="$store.state.cadastroEvento2">
 
       <h1 class="__form-title">Qual será o Local?</h1>
 
@@ -104,7 +104,7 @@
 
 
     <!-- ########## VALOR DO INGRESSO PG.3 ########## -->
-    <form class="cadastro-evento" v-show="$store.state.cadastroEvento3">
+    <form class="cadastro-evento" v-if="$store.state.cadastroEvento3">
 
       <h1 class="__form-title">Qual será o Valor do Ingresso?</h1>
 
@@ -129,15 +129,15 @@
 
 
     <!-- ########## IMAGEM E VÍDEOS PG.4 ########## -->
-    <form class="cadastro-evento" v-show="$store.state.cadastroEvento4">
+    <form class="cadastro-evento" v-if="$store.state.cadastroEvento4">
 
       <h1 class="__form-title">Adicione Imagens e Vídeo</h1>
 
-      <div class="before-choose-image" v-show="imageURL1 === null">
+      <div class="before-choose-image" v-if="imageURL1 === null">
         <button class="__input-btn" type="button" @click="$refs.myCroppa1.chooseFile()">Adicionar Imagem</button>
       </div>
       
-      <div class="modal-croppa" v-show="showCroppaModal1" @click="showCroppaModal1=false">
+      <div class="modal-croppa" v-if="showCroppaModal1" @click="showCroppaModal1=false">
         <div class="modal-croppa-body" @click.stop>
           <h1>Ajustar imagem</h1>
           <croppa
@@ -161,7 +161,7 @@
         </div>
       </div>
 
-      <div class="modal-croppa" v-show="showCroppaModal2" @click="showCroppaModal2=false">
+      <div class="modal-croppa" v-if="showCroppaModal2" @click="showCroppaModal2=false">
         <div class="modal-croppa-body" @click.stop>
           <h1>Ajustar imagem</h1>
           <croppa
@@ -185,7 +185,7 @@
       </div>
 
       <!-- Preview Image -->
-      <div class="after-choose-image" v-show="imageURL1 !== null">
+      <div class="after-choose-image" v-if="imageURL1 !== null">
         <img :src="imageURL1" class="__preview-img" @click="showCroppaModal1=true">
         <div class="image2">
           <img src="./../../../assets/img/add-image.svg" class="__preview-img" v-if="imageURL2 === null" @click="$refs.myCroppa2.chooseFile()" style="padding:2rem">
@@ -207,7 +207,7 @@
 
 
     <!-- ########## TÍTULO PG.5 ########## -->
-    <form class="cadastro-evento" v-show="$store.state.cadastroEvento5">
+    <form class="cadastro-evento" v-if="$store.state.cadastroEvento5">
 
       <h1 class="__form-title">Dê um título para seu evento</h1>  
       
@@ -235,7 +235,7 @@
 
 
     <!-- ########## DESCRIÇÃO PG.6 ########## -->
-    <form class="cadastro-evento" v-show="$store.state.cadastroEvento6">
+    <form class="cadastro-evento" v-if="$store.state.cadastroEvento6">
 
       <h1 class="__form-title">Descreva seu evento</h1>   
 
@@ -263,7 +263,7 @@
 
 
     <!-- ########## INVESTIMENTO PG.7 ########## -->
-    <form class="cadastro-evento" v-show="$store.state.cadastroEvento7">
+    <form class="cadastro-evento" v-if="$store.state.cadastroEvento7">
 
       <h1 class="__form-title">Investimento</h1>
 

@@ -319,7 +319,7 @@
           </div><!-- CARD NUMBER -->
 
 
-          <div style="display:flex" v-show="validCardNumber">
+          <div style="display:flex" v-if="validCardNumber">
             
             <!-- CARD EXPIRATION -->
             <div class="item-form">
@@ -433,7 +433,7 @@
           </div><!-- CEP -->
 
 
-          <div v-show="$store.state.validZipcode">
+          <div v-if="$store.state.validZipcode">
 
             <!-- ENDEREÇO -->
             <div class="item-form">

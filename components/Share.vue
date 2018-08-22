@@ -1,6 +1,6 @@
 <template>
   <transition name="share-animation">
-    <div class="share" v-show="showShare">
+    <div class="share" v-if="showShare">
       <div class="share-body">
 
         <div class="back-bar">

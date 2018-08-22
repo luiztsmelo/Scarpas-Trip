@@ -3,7 +3,7 @@
 
 
     <!-- PLANO ACOMODAÇÃO MOBILE -->
-    <div class="plano-acomodacao-mobile" v-show="$store.state.cadastroAcomod0">
+    <div class="plano-acomodacao-mobile" v-if="$store.state.cadastroAcomod0">
       
       <img class="__img-header" src="../../../assets/img/anuncio-acomod.svg">
       
@@ -16,7 +16,7 @@
 
 
     <!-- PLANO ACOMODAÇÃO DESKTOP -->
-    <div class="plano-acomodacao-desktop" v-show="$store.state.cadastroAcomod0">
+    <div class="plano-acomodacao-desktop" v-if="$store.state.cadastroAcomod0">
       
       <img class="__img-header" src="../../../assets/img/anuncio-acomod.svg">
 
@@ -34,7 +34,7 @@
 
 
 
-    <div class="progress-bar" v-show="!$store.state.cadastroAcomod0" :style="'width:' + $store.state.acomodProgressBar + '%'"></div>
+    <div class="progress-bar" v-if="!$store.state.cadastroAcomod0" :style="'width:' + $store.state.acomodProgressBar + '%'"></div>
 
 
 
@@ -243,7 +243,7 @@
 
 
     <!-- ########## LOCAL PG.5 ########## -->
-    <form class="cadastro-acomodacao" v-show="$store.state.cadastroAcomod5">
+    <form class="cadastro-acomodacao" v-if="$store.state.cadastroAcomod5">
 
       <h1 class="__form-title">Qual a localização?</h1>
 
@@ -275,12 +275,12 @@
 
 
     <!-- ########## IMAGENS PG.6 ########## -->
-    <form class="cadastro-acomodacao" v-show="$store.state.cadastroAcomod6">
+    <form class="cadastro-acomodacao" v-if="$store.state.cadastroAcomod6">
 
       <h1 class="__form-title">Adicione imagens {{ tipoAcomodDd }}</h1>
 
 
-      <div class="modal-croppa" v-show="showCroppaModal" @click="showCroppaModal=false">
+      <div class="modal-croppa" v-if="showCroppaModal" @click="showCroppaModal=false">
         <div class="modal-croppa-body" @click.stop>
           <h1>Ajustar imagem</h1>
           <croppa

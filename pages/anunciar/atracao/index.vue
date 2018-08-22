@@ -5,7 +5,7 @@
 
 
     <!-- ########## TIPO DE ATRACÃO PG.1 ########## -->
-    <form class="cadastro-atracao" v-show="$store.state.cadastroAtracao1">
+    <form class="cadastro-atracao" v-if="$store.state.cadastroAtracao1">
 
       <h1 class="__form-title">Que tipo de atração?</h1>
 
@@ -31,7 +31,7 @@
 
 
     <!-- ########## LOCAL PG.2 ########## -->
-    <form class="cadastro-atracao" v-show="$store.state.cadastroAtracao2">
+    <form class="cadastro-atracao" v-if="$store.state.cadastroAtracao2">
 
       <h1 class="__form-title">Qual a localização?</h1>
 
@@ -77,15 +77,15 @@
 
 
     <!-- ########## IMAGEM E VÍDEOS PG.3 ########## -->
-    <form class="cadastro-atracao" v-show="$store.state.cadastroAtracao3">
+    <form class="cadastro-atracao" v-if="$store.state.cadastroAtracao3">
 
       <h1 class="__form-title">Adicione Imagens e Vídeo</h1>
 
-      <div class="before-choose-image" v-show="imageURL1 === null">
+      <div class="before-choose-image" v-if="imageURL1 === null">
         <button class="__input-btn" type="button" @click="$refs.myCroppa1.chooseFile()">Adicionar Imagem</button>
       </div>
 
-      <div class="modal-croppa" v-show="showCroppaModal1" @click="showCroppaModal1=false">
+      <div class="modal-croppa" v-if="showCroppaModal1" @click="showCroppaModal1=false">
         <div class="modal-croppa-body" @click.stop>
           <h1>Ajustar imagem</h1>
           <croppa
@@ -109,7 +109,7 @@
         </div>
       </div>
 
-      <div class="modal-croppa" v-show="showCroppaModal2" @click="showCroppaModal2=false">
+      <div class="modal-croppa" v-if="showCroppaModal2" @click="showCroppaModal2=false">
         <div class="modal-croppa-body" @click.stop>
           <h1>Ajustar imagem</h1>
           <croppa
@@ -133,7 +133,7 @@
       </div>
 
       <!-- Preview Image -->
-      <div class="after-choose-image" v-show="imageURL1 !== null">
+      <div class="after-choose-image" v-if="imageURL1 !== null">
         <img :src="imageURL1" class="__preview-img" @click="showCroppaModal1=true">
 
         <div class="image2">
@@ -156,7 +156,7 @@
 
 
     <!-- ########## TÍTULO PG.4 ########## -->
-    <form class="cadastro-atracao" v-show="$store.state.cadastroAtracao4">
+    <form class="cadastro-atracao" v-if="$store.state.cadastroAtracao4">
 
       <h1 class="__form-title">Título para a atração</h1>
 
@@ -184,7 +184,7 @@
 
 
     <!-- ########## DESCRIÇÃO PG.5 ########## -->
-    <form class="cadastro-atracao" v-show="$store.state.cadastroAtracao5">
+    <form class="cadastro-atracao" v-if="$store.state.cadastroAtracao5">
 
       <h1 class="__form-title">Descreva a atração</h1>   
 
@@ -212,7 +212,7 @@
 
 
     <!-- ########## IDENTIFICAÇÃO PG.6 ########## -->
-    <form class="cadastro-atracao" v-show="$store.state.cadastroAtracao6">
+    <form class="cadastro-atracao" v-if="$store.state.cadastroAtracao6">
 
       <h1 class="__form-title">Identificação</h1>   
 

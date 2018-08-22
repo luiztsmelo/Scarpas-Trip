@@ -1,7 +1,7 @@
 <template>
   <transition name="navbar-animation">
 
-    <div class="navbar" v-show="showNavbar">
+    <div class="navbar" v-if="showNavbar">
       
       <div class="navbar-body">
         
@@ -49,7 +49,7 @@
         </nav>
 
 
-        <div class="dropdown" v-show="anuncioDropdown" @click="anuncioDropdown = !anuncioDropdown">
+        <div class="dropdown" v-if="anuncioDropdown" @click="anuncioDropdown = !anuncioDropdown">
           <div class="dropdown-body" style="right: 10%">
             <ul>
               <nuxt-link to="/anunciar/acomodacao">
