@@ -3,7 +3,8 @@ module.exports = {
   ** Build configuration
   */
   build: {
-    vendor: ['firebase', 'supports-webp', 'dayjs', 'card-validator', 'gerador-validador-cpf'],
+    vendor: ['supports-webp', 'dayjs', 'card-validator', 'gerador-validador-cpf'],
+    /* analyze: true, */
     extend (config, { isClient }) {
       if (!isClient) {
         config.externals.splice(0, 0, function (context, request, callback) {
@@ -15,7 +16,6 @@ module.exports = {
         })
       }
     }
-    /* analyze: true */
   },
   /*
   ** Headers

@@ -68,9 +68,8 @@
 </template>
 
 <script>
-import * as firebase from 'firebase'
-import 'firebase/functions'
-require('firebase/firestore')
+import firebase from 'firebase/app'
+import 'firebase/firestore'
 
 export default {
   data() {

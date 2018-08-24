@@ -1,4 +1,5 @@
-import * as firebase from 'firebase'
+import firebase from 'firebase/app'
+import 'firebase/firestore'
 
 export default async function ({ store, route, redirect }) {
   try {

@@ -33,8 +33,9 @@
 </template>
 
 <script>
+import firebase from 'firebase/app'
+import 'firebase/firestore'
 import supportsWebP from 'supports-webp'
-import * as firebase from 'firebase'
 
 export default {
   head () {

@@ -1,5 +1,5 @@
-import * as firebase from 'firebase'
-import 'firebase/functions'
+import firebase from 'firebase/app'
+import 'firebase/firestore'
 
 try {
   firebase.initializeApp({

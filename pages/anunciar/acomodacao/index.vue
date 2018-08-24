@@ -723,7 +723,9 @@
 </template>
 
 <script>
-import * as firebase from 'firebase'
+import firebase from 'firebase/app'
+import 'firebase/firestore'
+import 'firebase/storage'
 import 'firebase/functions'
 import isMobile from 'ismobilejs'
 import { loaded } from '~/node_modules/vue2-google-maps/src/manager'

@@ -60,8 +60,6 @@
 </template>
 
 <script>
-import * as firebase from 'firebase'
-require('firebase/firestore')
 
 export default {
   methods: {

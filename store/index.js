@@ -1,6 +1,7 @@
 import Vuex from 'vuex'
-import * as firebase from 'firebase'
-require('firebase/firestore')
+import firebase from 'firebase/app'
+import 'firebase/firestore'
+import 'firebase/auth'
 
 const store = () => new Vuex.Store({
   /* ________________________________________________ STATE ________________________________________________ */

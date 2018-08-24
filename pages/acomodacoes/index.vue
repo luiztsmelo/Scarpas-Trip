@@ -140,7 +140,8 @@
 </template>
 
 <script>
-import * as firebase from 'firebase'
+import firebase from 'firebase/app'
+import 'firebase/firestore'
 import supportsWebP from 'supports-webp'
 import { mapstyle } from '@/mixins/mapstyle'
 import { stylesCalendar } from '@/mixins/stylesCalendar'
@@ -166,8 +167,7 @@ export default {
         }
       },
       swiperOption: {
-        slidesPerView: 1,
-        lazy: true
+        slidesPerView: 1
       }
     }
   },

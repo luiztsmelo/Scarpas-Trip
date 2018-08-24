@@ -450,9 +450,9 @@
 </template>
 
 <script>
-import * as firebase from 'firebase'
+import firebase from 'firebase/app'
+import 'firebase/firestore'
 import 'firebase/functions'
-require('firebase/firestore')
 import supportsWebP from 'supports-webp'
 import MaskedInput from 'vue-text-mask'
 import detalhesValor from '@/components/reserva-acomod/detalhesValor'

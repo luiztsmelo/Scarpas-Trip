@@ -487,8 +487,11 @@
 </template>
 
 <script>
+import firebase from 'firebase/app'
+import 'firebase/firestore'
+import 'firebase/storage'
+import 'firebase/functions'
 import isMobile from 'ismobilejs'
-import * as firebase from 'firebase'
 import MaskedInput from 'vue-text-mask'
 import { bancos } from '../../../mixins/bancos'
 import VueSimpleSuggest from 'vue-simple-suggest'

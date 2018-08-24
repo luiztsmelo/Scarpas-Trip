@@ -162,8 +162,8 @@
 </template>
 
 <script>
-import * as firebase from 'firebase'
-require('firebase/firestore')
+import firebase from 'firebase/app'
+import 'firebase/firestore'
 import { loaded } from '~/node_modules/vue2-google-maps/src/manager'
 import Proprietario from '../../components/Proprietario'
 import supportsWebP from 'supports-webp'

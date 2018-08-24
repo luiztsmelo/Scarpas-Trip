@@ -110,8 +110,8 @@
 </template>
 
 <script>
-import * as firebase from 'firebase'
-require('firebase/firestore')
+import firebase from 'firebase/app'
+import 'firebase/firestore'
 import { loaded } from '~/node_modules/vue2-google-maps/src/manager'
 import supportsWebP from 'supports-webp'
 import { mapstyle } from '../../mixins/mapstyle'
