@@ -3,7 +3,8 @@ export const swiperOptions = {
     swiperOptions () {
       if (this.$store.state.isMobile === true) {
         return {
-          autoplay: 2300
+          autoplay: 2300,
+          lazy: true
         }
       } else {
         return {
@@ -11,7 +12,8 @@ export const swiperOptions = {
           spaceBetween: 7,
           freeMode: true,
           autoplay: 2300,
-          speed: 18000
+          speed: 18000,
+          lazy: true
         }
       }
     }

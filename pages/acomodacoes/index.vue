@@ -2,99 +2,124 @@
   <div class="acomods">
 
 
-      <div class="acomods-container">
+    <div class="acomods-container">
 
-        <nuxt-link class="card" v-for="acomod in $store.state.filteredAcomods" :key="acomod.acomodID" :to="`/acomodacoes/${acomod.acomodID}`">
+      <nuxt-link class="card" v-for="acomod in $store.state.filteredAcomods" :key="acomod.acomodID" :to="`/acomodacoes/${acomod.acomodID}`">
 
-          <div class="image-box">
-            <swiper :options="swiperOption">
+        <div class="image-box">
+          <swiper :options="swiperOption">
 
-              <swiper-slide class="slide" v-for="image in acomod.images" :key="image.id">
-                <progressive-background class="__img" :src="imageH(image)" :placeholder="image.L" :aspect-ratio="2/3"/>
-              </swiper-slide>
-              
-              <div class="swiper-pagination" slot="pagination"></div>
-            </swiper>
-          </div>
+            <swiper-slide class="slide" v-for="image in acomod.images" :key="image.id">
+              <progressive-background class="__img" :src="imageH(image)" :placeholder="image.L" :aspect-ratio="2/3"/>
+            </swiper-slide>
+      
+          </swiper>
+        </div>
 
-          <div class="card-details">
-            <span class="__card-tipo-acomod">{{ acomod.tipoAcomod }}</span>
-            <span class="__card-title">{{ acomod.title }}</span>
-            <span class="__card-valor">R${{ acomod.valorNoite }}<span class="__card-valor-dia"> por noite</span></span>
-          </div>
-          
-        </nuxt-link> 
-
-
-        <h1 v-if="$store.state.filteredAcomods.length === 0">
-          Nenhuma acomodação encontrada.
-        </h1>
-
-      </div>
+        <div class="card-details">
+          <span class="__card-tipo-acomod">{{ acomod.tipoAcomod }}</span>
+          <span class="__card-title">{{ acomod.title }}</span>
+          <span class="__card-valor">R${{ acomod.valorNoite }}<span class="__card-valor-dia"> por noite</span></span>
+        </div>
+        
+      </nuxt-link> 
 
 
+      <h1 v-if="$store.state.filteredAcomods.length === 0">
+        Nenhuma acomodação encontrada.
+      </h1>
 
-      <!-- ___________________________ FILTRAR DESKTOP ___________________________ -->
-      <div class="filtrar-desktop">
-        <form class="filtrar-desktop-form">
-          
-          <div class="item-form">
-            <v-date-picker
-              is-double-paned
-              is-linked
-              mode='range'
-              @drag='drag = $event'
-              v-model='$store.state.filters.date'
-              :show-popover='false'
-              :min-date='new Date()'
-              :pane-width="290"
-              :drag-attribute="attribute"
-              :select-attribute="attribute"
-              :disabled-attribute="disabledAttribute"
-              :theme-styles="datePickerDesktopStyle"
-              tint-color='#FFA04F'
-              show-caps
-              :formats='formats'
-              popover-visibility='focus'>
-              <div
-                slot-scope='{ inputValue, updateValue }'>
-                <div>
-                  <input
-                    type='text'
-                    placeholder='Chegada - Partida'
-                    :class='["input", { "is-drag": !!drag }]'
-                    :value="inputValue"
-                    @change='updateValue($event.target.value)' />
-                  <span class='day-span'>
-                    {{ noites }}
-                  </span>
-                </div>
+    </div>
+
+
+
+    <!-- ___________________________ FILTRAR DESKTOP ___________________________ -->
+    <div class="filtrar-desktop">
+      <form class="filtrar-desktop-form">
+        
+        <div class="item-form">
+          <v-date-picker
+            v-if="$store.state.filters.date === null"
+            mode='range'
+            @drag='drag = $event'
+            v-model='$store.state.filters.date'
+            :show-popover='false'
+            :min-date='new Date()'
+            :pane-width="290"
+            :drag-attribute="attribute"
+            :select-attribute="attribute"
+            :disabled-attribute="disabledAttribute"
+            :theme-styles="datePickerDesktopStyle"
+            tint-color='#FFA04F'
+            show-caps
+            popover-visibility='focus'>
+            <div
+              slot-scope="{ updateValue }">
+              <div>
+                <input
+                  type="text"
+                  value="Datas"
+                  @change="updateValue($event.target.value)"
+                  class="inputDatePicker"
+                  disabled
+                />
               </div>
-            </v-date-picker>
+            </div>
+          </v-date-picker>
+
+          <div class="filter-choosed" v-else>
+            <h3 class="__text">{{ outputDatePicker }}</h3>
+            <img class="__limpar-img" src="../../assets/img/close-mobile.svg" @click="$store.state.filters.date = null">
+          </div>
+        </div>
+
+
+        <div class="item-form">
+
+          <select v-model="$store.state.filters.tipoAcomod" v-if="$store.state.filters.tipoAcomod === null">
+            <option :value="null" disabled hidden>Tipo de acomodação</option>
+            <option>Casa</option>
+            <option>Apartamento</option>
+            <option>Rancho</option>
+            <option>Chácara</option>
+            <option>Pousada</option>
+            <option>Camping</option>
+            <option>Sítio</option>
+            <option>Fazenda</option>
+            <option>Hostel</option>
+          </select>
+
+          <div class="filter-choosed" v-else>
+            <h3 class="__text">{{ $store.state.filters.tipoAcomod }}</h3>
+            <img class="__limpar-img" src="../../assets/img/close-mobile.svg" @click="$store.state.filters.tipoAcomod = null">
           </div>
 
-
-          <div class="item-form">
-            <select v-model="$store.state.filters.tipoAcomod">
-              <option :value="null" disabled hidden>Tipo de acomodação</option>
-              <option>Casa</option>
-              <option>Apartamento</option>
-              <option>Rancho</option>
-              <option>Chácara</option>
-              <option>Pousada</option>
-              <option>Camping</option>
-              <option>Sítio</option>
-              <option>Fazenda</option>
-              <option>Hostel</option>
-            </select>
-          </div>
-
-          <button type="button" class="__limpar-btn">Limpar filtros</button>
+        </div>
 
 
-        </form>
-      </div><!-- ___________________________ FILTRAR DESKTOP ___________________________ -->
 
+      </form>
+    </div><!-- ___________________________ FILTRAR DESKTOP ___________________________ -->
+
+
+
+
+    <gmap-map
+      class="map-desktop"
+      :center="{ lat: -20.6259183, lng: -46.0336799 }"
+      :zoom="12"
+      :options="{ styles: styles, draggable:  true, fullscreenControl: false , zoomControl: false , mapTypeControl: false, streetViewControl: false, gestureHandling: 'greedy' }">
+
+      <GmapInfoWindow
+        v-for="acomod in $store.state.filteredAcomods"
+        :key="acomod.acomodID"
+        :position="{lat: acomod.positionLAT, lng: acomod.positionLNG}">
+
+        <h3 class="__valor">R${{ acomod.valorNoite }}</h3>
+
+      </GmapInfoWindow>
+
+    </gmap-map>
 
 
 
@@ -109,12 +134,7 @@
 
 
 
-    <gmap-map
-      class="map-desktop"
-      :center="{ lat: -20.6259183, lng: -46.0336799 }"
-      :zoom="12"
-      :options="{ styles: styles, draggable:  true, fullscreenControl: false , zoomControl: $store.state.isMobile ? false : true, mapTypeControl: false, streetViewControl: false }">
-    </gmap-map>
+    
 
   </div>
 </template>
@@ -123,11 +143,13 @@
 import * as firebase from 'firebase'
 import supportsWebP from 'supports-webp'
 import { mapstyle } from '@/mixins/mapstyle'
-import { swiperOptions } from '@/mixins/swiper_id'
 import { stylesCalendar } from '@/mixins/stylesCalendar'
+import dayjs from 'dayjs'
+import 'dayjs/locale/pt-br'
+dayjs.locale('pt-br')
 
 export default {
-  mixins: [ mapstyle, swiperOptions, stylesCalendar ],
+  mixins: [ mapstyle, stylesCalendar ],
   head () {
     return {
       title: 'Acomodações em Capitólio ‒ Escarpas Trip'
@@ -145,10 +167,7 @@ export default {
       },
       swiperOption: {
         slidesPerView: 1,
-        pagination: '.swiper-pagination'
-      },
-      formats: {
-        input: ['D MMM', 'D MMM']
+        lazy: true
       }
     }
   },
@@ -157,18 +176,20 @@ export default {
     store.commit('m_filteredAcomods', acomods.docs.map(acomod => acomod.data()))
   },
   methods: {
-    getNoites (range) {
-      return !range ? 0 : (range.end - range.start)/(1000*60*60*24)
-    },
     imageH (image) {
       return supportsWebP ? image.HW : image.HJ
     }
   },
   computed: {
     filters () { return this.$store.state.filters },
-    noites () {
-      const span = this.getNoites(this.drag || this.$store.state.filters.date)
-      return (span && `${span} noites`) || ''
+    outputDatePicker () {
+      if (this.filters.date !== null) {
+        const dayStart = dayjs(this.filters.date.start).format('D')
+        const monthStart = dayjs(this.filters.date.start).format('MMM')
+        const dayEnd = dayjs(this.filters.date.end).format('D')
+        const monthEnd = dayjs(this.filters.date.end).format('MMM')
+        return  `${dayStart} de ${monthStart} - ${dayEnd} de ${monthEnd}`
+      }
     }
   },
   watch: {
@@ -176,8 +197,13 @@ export default {
       handler: async function (filter) { 
         try {
           console.log(filter)
-          const filteredAcomods = await firebase.firestore().collection('acomods').where('tipoAcomod', '==', filter.tipoAcomod).get()
+
+          const filteredAcomods = await firebase.firestore().collection('acomods')
+            .where('tipoAcomod', '==', filter.tipoAcomod)
+            .get()
+
           console.log(filteredAcomods)
+          
           return this.$store.commit('m_filteredAcomods', filteredAcomods.docs.map(acomod => acomod.data()))
         } catch (err) {
           console.log(err)
@@ -308,7 +334,7 @@ export default {
     display: flex;
     flex-flow: row;
     & .acomods-container {
-      margin-top: calc(var(--navbarHeightDesktop) + 3.8rem + 1.5rem);
+      margin-top: calc(var(--navbarHeightDesktop) + 3.9rem + 1rem);
       width: 64.6%;
       padding-left: 7%;
       display: flex;
@@ -345,15 +371,15 @@ export default {
             font-weight: 600;
           }
           & .__card-title {
-            padding: .4rem 0 .5rem 0;
+            padding: .3em 0;
             font-size: 16px;
             font-weight: 700;
           }
           & .__card-valor {
-            font-size: 15px;
+            font-size: 14px;
             font-weight: 400;
             & .__card-valor-dia {
-              font-size: 14px;
+              font-size: 13px;
             }
           }
         }
@@ -363,46 +389,74 @@ export default {
       position: fixed;
       top: var(--navbarHeightDesktop);
       left: 0;
+      z-index: 20;
       width: 100%;
+      background: white;
       & .filtrar-desktop-form {
         position: relative;
         padding: 0 7%;
-        height: 3.8rem;
+        height: 3.9rem;
         display: flex;
         align-items: center;
         border-bottom: 1px solid rgb(222,222,222);
-        background: white;
         & .item-form {
-          margin-right: 1rem;
+          margin-right: .8rem;
           & input {
             cursor: pointer;
             height: 2.3rem;
             font-size: 14px;
             font-weight: 400;
-            padding: 0 .7rem;
+            padding: 0 .8rem;
             border: 1px solid rgb(222,222,222);
             outline: none;
             border-radius: 5px;
+            background: white;
             color: var(--color01);
           }
+          & input:hover {
+            background: rgb(250,250,250);
+          }
           & select {
+            appearance: none;
             cursor: pointer;
             height: 2.3rem;
             font-size: 14px;
             font-weight: 400;
-            padding: 0 .3rem;
+            padding: 0 .8rem;
             border: 1px solid rgb(222,222,222);
             outline: none;
             border-radius: 5px;
+            background: white;
             color: var(--color01);
           }
-        }
-        & .__limpar-btn {
-          position: absolute;
-          right: 7%;
-          background: white;
-          font-size: 14px;
-          font-weight: 500;
+          & select:hover {
+            background: rgb(250,250,250);
+          }
+          & .inputDatePicker {
+            max-width: 4.4rem;
+          }
+          & .filter-choosed {
+            display: flex;
+            align-items: center;
+            height: 2.3rem; 
+            background: var(--colorAcomod);
+            border-radius: 5px;
+            transition: var(--main-transition);
+            & .__text {
+              user-select: none;
+              padding: 0 .7rem;
+              font-size: 14px;
+              font-weight: 500;
+              color: white;
+            }
+            & .__limpar-img {
+              cursor: pointer;
+              margin: 0 .8rem 0 .2rem;
+              width: .7rem;
+              height: auto;
+              filter: invert(100%) brightness(300%);
+            }
+          }
         }
       }
     }
@@ -411,34 +465,29 @@ export default {
     }
     & .map-desktop {
       position: fixed;
-      bottom: 1.5rem;
+      bottom: 1rem;
       right: 7%;
       width: 26.5%;
-      height: calc(100% - var(--navbarHeightDesktop) - 3.8rem - 3rem);
+      height: calc(100% - var(--navbarHeightDesktop) - 3.9rem - 2rem);
     }
     & .map-desktop > div > div {
       background-color: #fff !important;
     }
+    & .gm-style-iw {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      & .__valor {
+        font-size: 14px;
+        font-weight: 600;
+      }
+    }
+    & .gm-style-iw + div { /* Remove close button */
+      display: none;
+    }
   }
 }
 
-.is-drag {
-  color: var(--color01);
-  font-weight: 500;
-}
-.day-span {
-  font-size: 15px;
-  font-weight: 500;
-  position: absolute;
-  right: 5%;
-  top: 50%;
-  transform: translateY(-50%);
-  color: var(--color01);
-}
 
-::placeholder {
-  color: var(--color01);
-  opacity: 1;
-}
 
 </style>

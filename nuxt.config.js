@@ -3,7 +3,7 @@ module.exports = {
   ** Build configuration
   */
   build: {
-    vendor: ['firebase', 'supports-webp', 'card-validator', 'gerador-validador-cpf'],
+    vendor: ['firebase', 'supports-webp', 'dayjs', 'card-validator', 'gerador-validador-cpf'],
     extend (config, { isClient }) {
       if (!isClient) {
         config.externals.splice(0, 0, function (context, request, callback) {
@@ -63,7 +63,10 @@ module.exports = {
   /*
   ** Customize the progress-bar color
   */
-  loading: true,
+  loading: {
+    height: '4px',
+    color: '#FFA04F'
+  },
   /*
   ** Customize app manifest
   */
