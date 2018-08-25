@@ -58,7 +58,7 @@ module.exports = {
     { src: '~plugins/v-money', ssr: false },
     { src: '~plugins/v-calendar', ssr: false },
     { src: '~plugins/scroll', ssr: false },
-    { src: '~plugins/vue-js-modal', ssr: false }
+    { src: '~plugins/vue-js-modal' }
   ],
   /*
   ** Customize the progress-bar color

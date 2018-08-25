@@ -10,8 +10,10 @@
           <swiper :options="swiperOption">
 
             <swiper-slide class="slide" v-for="image in acomod.images" :key="image.id">
-              <progressive-background class="__img" :src="imageH(image)" :placeholder="image.L" :aspect-ratio="2/3"/>
+              <progressive-img class="__img" :src="imageH(image)" :placeholder="image.L" :aspect-ratio="2/3"/>
             </swiper-slide>
+
+            <div class="swiper-pagination" slot="pagination"></div>
       
           </swiper>
         </div>
@@ -167,7 +169,13 @@ export default {
         }
       },
       swiperOption: {
-        slidesPerView: 1
+        slidesPerView: 1,
+        pagination: {
+          el: '.swiper-pagination',
+          type: 'bullets',
+          dynamicBullets: true,
+          dynamicMainBullets: 5
+        }
       }
     }
   },
@@ -198,10 +206,18 @@ export default {
         try {
           console.log(filter)
 
-          const filteredAcomods = await firebase.firestore().collection('acomods')
-            .where('tipoAcomod', '==', filter.tipoAcomod)
-            .get()
+          let acomods = firebase.firestore().collection('acomods')
 
+          if (filter.date !== null) {
+
+          }
+
+          if (filter.tipoAcomod !== null) {
+            acomods = acomods.where('tipoAcomod', '==', filter.tipoAcomod)
+          }
+
+          const filteredAcomods = await acomods.get()
+          
           console.log(filteredAcomods)
           
           return this.$store.commit('m_filteredAcomods', filteredAcomods.docs.map(acomod => acomod.data()))
@@ -334,14 +350,14 @@ export default {
     display: flex;
     flex-flow: row;
     & .acomods-container {
-      margin-top: calc(var(--navbarHeightDesktop) + 3.9rem + 1rem);
-      width: 64.6%;
+      margin-top: calc(var(--navbarHeightDesktop) + 3.7rem + 1rem);
+      width: 64.7%;
       padding-left: 7%;
       display: flex;
       flex-flow: row wrap;
       justify-content: space-between;
       & .card {
-        width: 49.1%;
+        width: 49%;
         min-height: 21rem;
         padding: 0;
         margin-bottom: 2rem;
@@ -357,7 +373,6 @@ export default {
                 & .__img {
                   width: 100%;
                   height: auto;
-                  border-radius: 4px;
                 }
               }
             }
@@ -395,7 +410,7 @@ export default {
       & .filtrar-desktop-form {
         position: relative;
         padding: 0 7%;
-        height: 3.9rem;
+        height: 3.7rem;
         display: flex;
         align-items: center;
         border-bottom: 1px solid rgb(222,222,222);
@@ -403,7 +418,7 @@ export default {
           margin-right: .8rem;
           & input {
             cursor: pointer;
-            height: 2.3rem;
+            height: 2.1rem;
             font-size: 14px;
             font-weight: 400;
             padding: 0 .8rem;
@@ -414,12 +429,12 @@ export default {
             color: var(--color01);
           }
           & input:hover {
-            background: rgb(250,250,250);
+            border: 1px solid var(--color01);
           }
           & select {
             appearance: none;
             cursor: pointer;
-            height: 2.3rem;
+            height: 2.1rem;
             font-size: 14px;
             font-weight: 400;
             padding: 0 .8rem;
@@ -430,7 +445,7 @@ export default {
             color: var(--color01);
           }
           & select:hover {
-            background: rgb(250,250,250);
+            border: 1px solid var(--color01);
           }
           & .inputDatePicker {
             max-width: 4.4rem;
@@ -438,7 +453,7 @@ export default {
           & .filter-choosed {
             display: flex;
             align-items: center;
-            height: 2.3rem; 
+            height: 2.1rem; 
             background: var(--colorAcomod);
             border-radius: 5px;
             transition: var(--main-transition);
@@ -468,7 +483,7 @@ export default {
       bottom: 1rem;
       right: 7%;
       width: 26.5%;
-      height: calc(100% - var(--navbarHeightDesktop) - 3.9rem - 2rem);
+      height: calc(100% - var(--navbarHeightDesktop) - 3.7rem - 2rem);
     }
     & .map-desktop > div > div {
       background-color: #fff !important;

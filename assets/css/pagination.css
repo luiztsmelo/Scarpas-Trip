@@ -9,16 +9,15 @@
   width: 100%;
   height: 1rem;
   & .swiper-pagination-bullet {
-    width: 5px;
-    height: 5px;
-    margin: 0 .17rem;
+    width: 6px;
+    height: 6px;
+    margin: 0 .25rem;
     border-radius: 50%;
     background: #EBEBEB;
   }
   & .swiper-pagination-bullet-active {
     transition: all .17s ease-in;
-    width: 7px;
-    height: 7px;
+    transform: scale(1.22);
     background: #fff;
     opacity: 1;
   }

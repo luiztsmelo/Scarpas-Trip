@@ -1,0 +1,15 @@
+.swiper-button-prev {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  left: 0;
+  width: 4rem;
+  height: 100%;
+  background: black;
+}
+
+.swiper-button-next {
+
+}
