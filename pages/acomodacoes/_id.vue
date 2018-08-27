@@ -201,15 +201,17 @@
           <h3 class="__adress">{{ acomod.address }}</h3>
 
           <gmap-map
+          ref="gmap"
           :center="{lat: acomod.positionLAT, lng: acomod.positionLNG}"
           :zoom="15"
           :options="{styles: styles, draggable: $store.state.isMobile ? false : true, fullscreenControl: $store.state.isMobile ? false : true, zoomControl: $store.state.isMobile ? false : true, mapTypeControl:false, streetViewControl:false}"
           @click="fullscreenMobile">
             <Gmap-Marker
-            :position="{lat: acomod.positionLAT, lng: acomod.positionLNG}"
-            :icon="{url: markerUrl, scaledSize: markerSize}"
-            ></Gmap-Marker>
+              :position="{lat: acomod.positionLAT, lng: acomod.positionLNG}"
+              :icon="{url: $store.state.markerUrl, scaledSize: $store.state.markerSize}">
+            </Gmap-Marker>
           </gmap-map>
+
         </div><!-- ####### LOCALIZAÇÃO ####### -->
 
 
@@ -337,7 +339,6 @@
 import firebase from 'firebase/app'
 import 'firebase/firestore'
 import MiniLoader from '@/components/MiniLoader.vue'
-import { loaded } from '@/node_modules/vue2-google-maps/src/manager'
 import ReservaMobile from '@/components/reserva-acomod/ReservaMobile'
 import Proprietario from '@/components/Proprietario'
 import supportsWebP from 'supports-webp'
@@ -400,13 +401,13 @@ export default {
       return supportsWebP ? image.HW : image.HJ
     },
     inputDate () { /* Em caso de alterações, lembrar também de alterar DatePicker.vue */
-      this.periodoReserva.start = Date.parse(this.periodoReserva.start)
-      this.periodoReserva.end = Date.parse(this.periodoReserva.end)
-  
-      const checkIn = dayjs(this.periodoReserva.start)
-      const checkOut = dayjs(this.periodoReserva.end)
+      const startDate = dayjs(this.periodoReserva.start)
+      const endDate = dayjs(this.periodoReserva.end)
 
-      const noites = checkOut.diff(checkIn, 'day')
+      this.periodoReserva.start = startDate.unix()
+      this.periodoReserva.end = endDate.unix()
+
+      const noites = startDate.diff(endDate, 'day')
       this.$store.commit('m_noites', noites)
 
       const valorNoitesTotal = Math.round(this.acomod.valorNoite * noites)
@@ -420,10 +421,10 @@ export default {
 
       this.$store.state.reservaAcomod.limpezaFee = this.acomod.limpezaFee
 
-      const parcelas = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map(x => {
+      const parcelas = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map(n => {
         return {
-          id: x,
-          valorParcela: Number( (valorReservaTotal/x).toFixed(2) )
+          id: n,
+          valorParcela: Number( (valorReservaTotal/n).toFixed(2) )
         }
       })
       this.$store.commit('m_parcelas', parcelas)
@@ -514,7 +515,6 @@ export default {
     }
   },
   async mounted () {
-    loaded.then(() =>  this.$store.state.googleMapsInitialized = true )
     this.$store.state.heightImageBox === null ? this.$store.state.heightImageBox = this.$refs.imageBox.clientHeight : null
   },
   computed: {
@@ -556,12 +556,6 @@ export default {
     },
     minDate () {
       return dayjs(new Date()).add(2, 'day').toDate()
-    },
-    markerUrl () {
-      return 'https://firebasestorage.googleapis.com/v0/b/escarpas-trip.appspot.com/o/utils%2Fmarker.svg?alt=media&token=fcbfd76e-ee93-41e8-a816-98906e19859b'
-    },
-    markerSize () {
-      return !this.$store.state.googleMapsInitialized ? null : new window.google.maps.Size(42, 42)
     }
   },
   watch: {

@@ -29,7 +29,6 @@ const store = () => new Vuex.Store({
     offFoobar4: true,
     offFoobar5: true,
     heightImageBox: null,
-    googleMapsInitialized: false,
     fromWithoutAddress: false,
     visitID: null,
     visits: null,
@@ -80,6 +79,13 @@ const store = () => new Vuex.Store({
       tipoAcomod: null
     },
     filteredAcomods: null,
+    /*
+    -------------------- GOOGLE MAPS --------------------
+    */
+    markerUrl: 'https://firebasestorage.googleapis.com/v0/b/escarpas-trip.appspot.com/o/utils%2Fmarker.svg?alt=media&token=fcbfd76e-ee93-41e8-a816-98906e19859b',
+    markerUrlPartida: 'https://firebasestorage.googleapis.com/v0/b/escarpas-trip.appspot.com/o/utils%2Fmarker-partida.svg?alt=media&token=bd41c89e-33ea-4899-bb5a-4f2fc2d936cb',
+    markerUrlChegada: 'https://firebasestorage.googleapis.com/v0/b/escarpas-trip.appspot.com/o/utils%2Fmarker-chegada.svg?alt=media&token=b5b52bc5-a65f-4136-9c31-57830b969067',
+    markerSize: null,
     /*
     -------------------- ALERT --------------------
     */

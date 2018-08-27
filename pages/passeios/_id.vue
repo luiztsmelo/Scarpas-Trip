@@ -164,7 +164,6 @@
 <script>
 import firebase from 'firebase/app'
 import 'firebase/firestore'
-import { loaded } from '~/node_modules/vue2-google-maps/src/manager'
 import Proprietario from '../../components/Proprietario'
 import supportsWebP from 'supports-webp'
 import { mapstyle } from '../../mixins/mapstyle'
@@ -291,18 +290,9 @@ export default {
     }
   },
   async mounted () {
-    loaded.then(() => {
-      this.$store.state.googleMapsInitialized = true
-    })
     this.$store.state.heightImageBox === null ? this.$store.state.heightImageBox = this.$refs.imageBox.clientHeight : null
   },
   computed: {
-    markerUrl () {
-      return 'https://firebasestorage.googleapis.com/v0/b/escarpas-trip.appspot.com/o/utils%2Fmarker.svg?alt=media&token=fcbfd76e-ee93-41e8-a816-98906e19859b'
-    },
-    markerSize () {
-      return !this.$store.state.googleMapsInitialized ? null : new window.google.maps.Size(38, 38)
-    },
     passeio () {
       return this.$store.state.passeio
     },

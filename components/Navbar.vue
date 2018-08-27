@@ -184,14 +184,14 @@ export default {
       }
       & .__nav-item {
         font-size: 14px;
-        font-weight: 600;
+        font-weight: 500;
         user-select: none;
       }
       & .__nav-item-no-a {
         padding: 0 .8rem;
         cursor: pointer;
         font-size: 14px;
-        font-weight: 600;
+        font-weight: 500;
         user-select: none;
       }
       & .__nav-item-no-a:hover {
@@ -226,7 +226,7 @@ export default {
             padding: .85rem 0;
             cursor: pointer;
             font-size: 14px;
-            font-weight: 600;
+            font-weight: 500;
             user-select: none;
           }
           & li:hover {

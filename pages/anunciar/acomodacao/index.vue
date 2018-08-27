@@ -728,7 +728,6 @@ import 'firebase/firestore'
 import 'firebase/storage'
 import 'firebase/functions'
 import isMobile from 'ismobilejs'
-import { loaded } from '~/node_modules/vue2-google-maps/src/manager'
 import MaskedInput from 'vue-text-mask'
 import { bancos } from '@/mixins/bancos'
 import { tipoAcomod } from '@/mixins/tipoAcomod'
@@ -1096,11 +1095,6 @@ export default {
         this.docNumber.length < 14 || !CPF.validate(this.docNumber) ? this.docNumberError = true : this.docNumberError = false
       }
     }
-  },
-  async mounted () {
-    loaded.then(() => {
-      this.$store.state.googleMapsInitialized = true
-    })
   },
   computed: {
     /* ******************** PATHS ******************** */

@@ -46,7 +46,7 @@
             :animation="4"
             @dragend="newPosition"
             :position="{lat: $store.state.acomodData.positionLAT, lng: $store.state.acomodData.positionLNG}"
-            :icon="{url: markerUrl, scaledSize: markerSize}">
+            :icon="{url: $store.state.markerUrl, scaledSize: $store.state.markerSize}">
           </Gmap-Marker>
       </gmap-map>
 
@@ -105,12 +105,6 @@ export default {
     },
     mapZoom () {
       return this.$store.state.acomodPlace !== null ? 16 : 14
-    },
-    markerUrl () {
-      return 'https://firebasestorage.googleapis.com/v0/b/escarpas-trip.appspot.com/o/utils%2Fmarker.svg?alt=media&token=fcbfd76e-ee93-41e8-a816-98906e19859b'
-    },
-    markerSize () {
-      return !this.$store.state.googleMapsInitialized ? null : new window.google.maps.Size(48, 48)
     }
   }
 }

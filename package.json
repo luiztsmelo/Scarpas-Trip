@@ -38,7 +38,7 @@
     "vue-simple-suggest": "^1.6.2",
     "vue-slider-component": "^2.5.7",
     "vue-text-mask": "^5.2.0",
-    "vue2-google-maps": "^0.8.11",
+    "vue2-google-maps": "^0.10.2",
     "vuex-persistedstate": "^2.5.4",
     "webfontloader": "^1.6.28"
   },

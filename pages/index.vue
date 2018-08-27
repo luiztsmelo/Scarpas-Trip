@@ -235,13 +235,13 @@ export default {
           text-align: end;
           & .__see-all-text {
             font-size: 14px;
-            font-weight: 600;
-            padding-right: 3px;
+            font-weight: 500;
+            padding-right: 4px;
             color: #1E9297;
           }
           & .__see-all-arrow {
             opacity: .6;
-            width: .7rem;
+            width: .56rem;
             height: auto;
           }
         }
@@ -318,16 +318,16 @@ export default {
             }
             & .__card-info {
               text-transform: uppercase;
-              font-size: 12px;
+              font-size: 11px;
               font-weight: 600;
             }
             & .__card-title {
-              margin: .3rem 0 .4rem 0;
+              margin: .3rem 0;
               font-size: 16px;
               font-weight: 700;
             }
             & .__card-subtitle {
-              font-size: 16px;
+              font-size: 15px;
               font-weight: 400;
               & .__card-valor-noite {
                 font-size: 14px;

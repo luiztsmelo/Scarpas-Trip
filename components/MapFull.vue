@@ -13,7 +13,7 @@
       style="width: 100vh; height: 100vh">
       <Gmap-Marker
         :position="{lat: acomodMap.positionLAT, lng: acomodMap.positionLNG}"
-        :icon="{url: markerUrl, scaledSize: markerSize}">
+        :icon="{url: $store.state.markerUrl, scaledSize: $store.state.markerSize}">
       </Gmap-Marker>
     </gmap-map>
 
@@ -21,7 +21,6 @@
 </template>
 
 <script>
-import { loaded } from '~/node_modules/vue2-google-maps/src/manager'
 import { mapstyle } from '../mixins/mapstyle'
 
 export default {
@@ -37,21 +36,8 @@ export default {
       }
     }
   },
-  computed: {
-    markerUrl () {
-      return 'https://firebasestorage.googleapis.com/v0/b/escarpas-trip.appspot.com/o/utils%2Fmarker.svg?alt=media&token=fcbfd76e-ee93-41e8-a816-98906e19859b'
-    },
-    markerSize () {
-      return !this.$store.state.googleMapsInitialized ? null : new window.google.maps.Size(38, 38)
-    },
-    acomodMap () {
-      return this.$store.state.acomodMap
-    }
-  },
-  async mounted () {
-    loaded.then(() => {
-      this.$store.state.googleMapsInitialized = true
-    })
+  computed: { 
+    acomodMap () { return this.$store.state.acomodMap } 
   },
   watch: {
     acomodMap (value) {

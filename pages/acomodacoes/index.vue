@@ -350,7 +350,7 @@ export default {
     display: flex;
     flex-flow: row;
     & .acomods-container {
-      margin-top: calc(var(--navbarHeightDesktop) + 3.7rem + 1rem);
+      margin-top: calc(var(--navbarHeightDesktop) + 3.6rem + 1rem);
       width: 64.7%;
       padding-left: 7%;
       display: flex;
@@ -410,7 +410,7 @@ export default {
       & .filtrar-desktop-form {
         position: relative;
         padding: 0 7%;
-        height: 3.7rem;
+        height: 3.6rem;
         display: flex;
         align-items: center;
         border-bottom: 1px solid rgb(222,222,222);
@@ -483,7 +483,7 @@ export default {
       bottom: 1rem;
       right: 7%;
       width: 26.5%;
-      height: calc(100% - var(--navbarHeightDesktop) - 3.7rem - 2rem);
+      height: calc(100% - var(--navbarHeightDesktop) - 3.6rem - 2rem);
     }
     & .map-desktop > div > div {
       background-color: #fff !important;

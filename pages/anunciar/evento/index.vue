@@ -76,19 +76,19 @@
       </gmap-autocomplete>
 
       <gmap-map
-      v-if="$store.state.cadastroEvento2"
-      :center="{lat: $store.state.eventoData.positionLAT, lng: $store.state.eventoData.positionLNG}"
-      :zoom="mapZoom"
-      :options="{styles: styles, mapTypeControl:false, streetViewControl:false}"
-      style="width: 100%; height: 230px;margin-bottom:2rem">
+        v-if="$store.state.cadastroEvento2"
+        :center="{lat: $store.state.eventoData.positionLAT, lng: $store.state.eventoData.positionLNG}"
+        :zoom="mapZoom"
+        :options="{styles: styles, mapTypeControl:false, streetViewControl:false}"
+        style="width: 100%; height: 230px;margin-bottom:2rem">
         <Gmap-Marker
-        v-if="$store.state.eventoPlace"
-        :clickable="true"
-        :draggable="true"
-        :animation="4"
-        :position="{lat: $store.state.eventoData.positionLAT, lng: $store.state.eventoData.positionLNG}"
-        :icon="{url: markerUrl, scaledSize: markerSize}"
-        ></Gmap-Marker>
+          v-if="$store.state.eventoPlace"
+          :clickable="true"
+          :draggable="true"
+          :animation="4"
+          :position="{lat: $store.state.eventoData.positionLAT, lng: $store.state.eventoData.positionLNG}"
+          :icon="{url: $store.state.markerUrl, scaledSize: $store.state.markerSize}">
+        </Gmap-Marker>
       </gmap-map>
 
       <div class="back-next"> 
@@ -285,7 +285,6 @@
 import firebase from 'firebase/app'
 import 'firebase/firestore'
 import 'firebase/storage'
-import { loaded } from '~/node_modules/vue2-google-maps/src/manager'
 import { mapstyle } from '../../../mixins/mapstyle'
 
 export default {
@@ -298,8 +297,8 @@ export default {
   transition: 'opacity',
   data () {
     return {
-      title: '',/* Vue Autosize */
-      subtitle: '',/* Vue Autosize */
+      title: '', /* Vue Autosize */
+      subtitle: '', /* Vue Autosize */
       showCroppaModal1: false,
       showCroppaModal2: false,
       date: null,
@@ -512,18 +511,7 @@ export default {
       }
     }
   },
-  async mounted () {
-    loaded.then(() => {
-      this.$store.state.googleMapsInitialized = true
-    })
-  },
   computed: {
-    markerUrl () {
-      return 'https://firebasestorage.googleapis.com/v0/b/escarpas-trip.appspot.com/o/utils%2Fmarker.svg?alt=media&token=fcbfd76e-ee93-41e8-a816-98906e19859b'
-    },
-    markerSize () {
-      return !this.$store.state.googleMapsInitialized ? null : new window.google.maps.Size(38, 38)
-    },
     titleLength () {
       return 50 - this.$store.state.eventoData.title.length
     },

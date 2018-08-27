@@ -47,6 +47,9 @@ import Alert from '~/components/Alert'
 
 export default {
   components: { Navbar, Foobar, SignIn, Menuu, Loader, Share, MapFull, AskAcomod, Offline, Alert },
+  async mounted () {
+    this.$gmapApiPromiseLazy().then(() => { this.$store.state.markerSize = new google.maps.Size(42, 42) })
+  },
   beforeCreate () {
     /* Detect Device */
     isMobile.any ? this.$store.commit('m_isMobile', true) : this.$store.commit('m_isMobile', false)

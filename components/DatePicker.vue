@@ -69,13 +69,13 @@ export default {
       window.history.back(1)
     },
     inputDate () { /* Em caso de alterações, lembrar também de alterar _id */
-      this.periodoReserva.start = Date.parse(this.periodoReserva.start)
-      this.periodoReserva.end = Date.parse(this.periodoReserva.end)
-  
-      const checkIn = dayjs(this.periodoReserva.start)
-      const checkOut = dayjs(this.periodoReserva.end)
+      const startDate = dayjs(this.periodoReserva.start)
+      const endDate = dayjs(this.periodoReserva.end)
 
-      const noites = checkOut.diff(checkIn, 'day')
+      this.periodoReserva.start = startDate.unix()
+      this.periodoReserva.end = endDate.unix()
+
+      const noites = startDate.diff(endDate, 'day')
       this.$store.commit('m_noites', noites)
 
       const valorNoitesTotal = Math.round(this.acomod.valorNoite * noites)
@@ -89,10 +89,10 @@ export default {
 
       this.$store.state.reservaAcomod.limpezaFee = this.acomod.limpezaFee
 
-      const parcelas = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map(x => {
+      const parcelas = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map(n => {
         return {
-          id: x,
-          valorParcela: Number( (valorReservaTotal/x).toFixed(2) )
+          id: n,
+          valorParcela: Number( (valorReservaTotal/n).toFixed(2) )
         }
       })
       this.$store.commit('m_parcelas', parcelas)

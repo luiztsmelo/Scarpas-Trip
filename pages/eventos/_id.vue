@@ -90,15 +90,15 @@
       <h3 class="__adress">{{ evento.address }}</h3>
 
       <gmap-map
-      :center="{lat: evento.positionLAT, lng: evento.positionLNG}"
-      :zoom="15"
-      :options="{styles: styles, draggable:false, fullscreenControl:false, zoomControl:false, mapTypeControl:false, streetViewControl:false}"
-      style="width: 100%; height: 250px"
-      @click="$store.commit('m_eventoMap', evento), enterFullscreen()">
+        :center="{lat: evento.positionLAT, lng: evento.positionLNG}"
+        :zoom="15"
+        :options="{styles: styles, draggable:false, fullscreenControl:false, zoomControl:false, mapTypeControl:false, streetViewControl:false}"
+        style="width: 100%; height: 250px"
+        @click="$store.commit('m_eventoMap', evento), enterFullscreen()">
         <Gmap-Marker
-        :position="{lat: evento.positionLAT, lng: evento.positionLNG}"
-        :icon="{url: markerUrl, scaledSize: markerSize}"
-        ></Gmap-Marker>
+          :position="{lat: evento.positionLAT, lng: evento.positionLNG}"
+          :icon="{url: $store.state.markerUrl, scaledSize: $store.state.markerSize}">
+        </Gmap-Marker>
       </gmap-map>
     </div><!-- ####### LOCAL ####### -->
     
@@ -121,7 +121,6 @@
 <script>
 import firebase from 'firebase/app'
 import 'firebase/firestore'
-import { loaded } from '~/node_modules/vue2-google-maps/src/manager'
 import supportsWebP from 'supports-webp'
 import { mapstyle } from '../../mixins/mapstyle'
 import { swiperOptions } from '../../mixins/swiper_id'
@@ -211,18 +210,9 @@ export default {
     }
   },
   async mounted () {
-    loaded.then(() => {
-      this.$store.state.googleMapsInitialized = true
-    })
     this.$store.state.heightImageBox === null ? this.$store.state.heightImageBox = this.$refs.imageBox.clientHeight : null
   },
   computed: {
-    markerUrl () {
-      return 'https://firebasestorage.googleapis.com/v0/b/escarpas-trip.appspot.com/o/utils%2Fmarker.svg?alt=media&token=fcbfd76e-ee93-41e8-a816-98906e19859b'
-    },
-    markerSize () {
-      return !this.$store.state.googleMapsInitialized ? null : new window.google.maps.Size(38, 38)
-    },
     date () {
       const eventoDate = this.$store.state.evento.date
       let d = eventoDate.slice(0, 2)

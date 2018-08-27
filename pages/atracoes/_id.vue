@@ -57,27 +57,27 @@
 
     <div class="local-box">
       <gmap-map
-      :center="{lat: atracao.rota.slice(-1)[0].lat, lng: atracao.rota.slice(-1)[0].lng}"
-      :zoom="12"
-      :options="{styles: styles, mapTypeControl:false, streetViewControl:false}"
-      style="width: 100%; height: 280px">
+        :center="{lat: atracao.rota.slice(-1)[0].lat, lng: atracao.rota.slice(-1)[0].lng}"
+        :zoom="12"
+        :options="{styles: styles, mapTypeControl:false, streetViewControl:false}"
+        style="width: 100%; height: 280px">
         <!-- Rota -->
         <gmap-polyline 
-        :path="atracao.rota"
-        :options="polylineOptions">
+          :path="atracao.rota"
+          :options="polylineOptions">
         </gmap-polyline>
         <!-- Marcador partida -->
         <gmap-marker
-        v-if="atracao.rota !== {}"
-        :position="atracao.rota[0]"
-        :icon="{url: markerUrlPartida, scaledSize: markerSizePartida}"
-        ></gmap-marker>
+          v-if="atracao.rota !== {}"
+          :position="atracao.rota[0]"
+          :icon="{ url: $store.state.markerUrlPartida, scaledSize: $store.state.markerSize }">
+        </gmap-marker>
         <!-- Marcador chegada -->
         <gmap-marker
-        v-if="atracao.rota !== {}"
-        :position="atracao.rota.slice(-1)[0]"
-        :icon="{url: markerUrlChegada, scaledSize: markerSizeChegada}"
-        ></gmap-marker>
+          v-if="atracao.rota !== {}"
+          :position="atracao.rota.slice(-1)[0]"
+          :icon="{ url: $store.state.markerUrlChegada, scaledSize: $store.state.markerSize }">
+        </gmap-marker>
       </gmap-map>
     </div><!-- ####### LOCALIZAÇÃO ####### -->
 
@@ -112,7 +112,6 @@
 <script>
 import firebase from 'firebase/app'
 import 'firebase/firestore'
-import { loaded } from '~/node_modules/vue2-google-maps/src/manager'
 import supportsWebP from 'supports-webp'
 import { mapstyle } from '../../mixins/mapstyle'
 import { swiperOptions } from '../../mixins/swiper_id'
@@ -207,24 +206,9 @@ export default {
     }
   },
   async mounted () {
-    loaded.then(() => {
-      this.$store.state.googleMapsInitialized = true
-    })
     this.$store.state.heightImageBox === null ? this.$store.state.heightImageBox = this.$refs.imageBox.clientHeight : null
   },
   computed: {
-    markerUrlPartida () {
-      return 'https://firebasestorage.googleapis.com/v0/b/escarpas-trip.appspot.com/o/utils%2Fmarker-partida.svg?alt=media&token=bd41c89e-33ea-4899-bb5a-4f2fc2d936cb'
-    },
-    markerSizePartida () {
-      return !this.$store.state.googleMapsInitialized ? null : new window.google.maps.Size(34, 34)
-    },
-    markerUrlChegada () {
-      return 'https://firebasestorage.googleapis.com/v0/b/escarpas-trip.appspot.com/o/utils%2Fmarker-chegada.svg?alt=media&token=b5b52bc5-a65f-4136-9c31-57830b969067'
-    },
-    markerSizeChegada () {
-      return !this.$store.state.googleMapsInitialized ? null : new window.google.maps.Size(34, 34)
-    },
     atracao () {
       return this.$store.state.atracao
     },

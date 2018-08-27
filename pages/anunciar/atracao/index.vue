@@ -36,29 +36,29 @@
       <h1 class="__form-title">Qual a localização?</h1>
 
       <gmap-map
-      v-if="$store.state.cadastroAtracao2"
-      :center="{lat: $store.state.atracaoData.positionLAT, lng: $store.state.atracaoData.positionLNG}"
-      :zoom="15"
-      :options="{styles: styles, mapTypeControl:false, streetViewControl:false}"
-      style="width: 100%; height: 280px"
-      @click="addPointRota">
-        <!-- Rota -->
-        <gmap-polyline 
-        :path="$store.state.atracaoData.rota"
-        :options="polylineOptions">
-        </gmap-polyline>
-        <!-- Marcador partida -->
-        <gmap-marker
-        v-if="$store.state.atracaoData.rota !== {}"
-        :position="$store.state.atracaoData.rota[0]"
-        :icon="{url: markerUrlPartida, scaledSize: markerSizePartida}"
-        ></gmap-marker>
-        <!-- Marcador chegada -->
-        <gmap-marker
-        v-if="$store.state.atracaoData.rota !== {}"
-        :position="$store.state.atracaoData.rota.slice(-1)[0]"
-        :icon="{url: markerUrlChegada, scaledSize: markerSizeChegada}"
-        ></gmap-marker>
+        v-if="$store.state.cadastroAtracao2"
+        :center="{lat: $store.state.atracaoData.positionLAT, lng: $store.state.atracaoData.positionLNG}"
+        :zoom="15"
+        :options="{styles: styles, mapTypeControl:false, streetViewControl:false}"
+        style="width: 100%; height: 280px"
+        @click="addPointRota">
+          <!-- Rota -->
+          <gmap-polyline 
+            :path="$store.state.atracaoData.rota"
+            :options="polylineOptions">
+          </gmap-polyline>
+          <!-- Marcador partida -->
+          <gmap-marker
+            v-if="$store.state.atracaoData.rota !== {}"
+            :position="$store.state.atracaoData.rota[0]"
+            :icon="{url: $store.state.markerUrlPartida, scaledSize: $store.state.markerSize}">
+          </gmap-marker>
+          <!-- Marcador chegada -->
+          <gmap-marker
+            v-if="$store.state.atracaoData.rota !== {}"
+            :position="$store.state.atracaoData.rota.slice(-1)[0]"
+            :icon="{url: $store.state.markerUrlPartida, scaledSize: $store.state.markerSize}">
+          </gmap-marker>
       </gmap-map>
 
       <button class="__map-btn-reset" type="button" @click="resetRota">Reset</button>
@@ -241,7 +241,6 @@
 <script>
 import firebase from 'firebase/app'
 import 'firebase/firestore'
-import { loaded } from '~/node_modules/vue2-google-maps/src/manager'
 import { mapstyle } from '../../../mixins/mapstyle'
 
 export default {
@@ -254,8 +253,8 @@ export default {
   transition: 'opacity',
   data() {
     return {
-      title: '',/* Vue Autosize */
-      subtitle: '',/* Vue Autosize */
+      title: '', /* Vue Autosize */
+      subtitle: '', /* Vue Autosize */
       polylineOptions: {
         strokeColor: '#2a2a2a',
         strokeOpacity: 1,
@@ -454,24 +453,7 @@ export default {
       }
     }
   },
-  async mounted () {
-    loaded.then(() => {
-      this.$store.state.googleMapsInitialized = true
-    })
-  },
   computed: {
-    markerUrlPartida () {
-      return 'https://firebasestorage.googleapis.com/v0/b/escarpas-trip.appspot.com/o/utils%2Fmarker-partida.svg?alt=media&token=bd41c89e-33ea-4899-bb5a-4f2fc2d936cb'
-    },
-    markerSizePartida () {
-      return !this.$store.state.googleMapsInitialized ? null : new window.google.maps.Size(34, 34)
-    },
-    markerUrlChegada () {
-      return 'https://firebasestorage.googleapis.com/v0/b/escarpas-trip.appspot.com/o/utils%2Fmarker-chegada.svg?alt=media&token=b5b52bc5-a65f-4136-9c31-57830b969067'
-    },
-    markerSizeChegada () {
-      return !this.$store.state.googleMapsInitialized ? null : new window.google.maps.Size(34, 34)
-    },
     titleLength () {
       return 50 - this.$store.state.atracaoData.title.length
     },

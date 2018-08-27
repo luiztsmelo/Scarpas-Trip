@@ -3,19 +3,8 @@ module.exports = {
   ** Build configuration
   */
   build: {
-    vendor: ['supports-webp', 'dayjs', 'card-validator', 'gerador-validador-cpf'],
-    /* analyze: true, */
-    extend (config, { isClient }) {
-      if (!isClient) {
-        config.externals.splice(0, 0, function (context, request, callback) {
-          if (/^vue2-google-maps($|\/)/.test(request)) {
-            callback(null, false)
-          } else {
-            callback()
-          }
-        })
-      }
-    }
+    vendor: ['supports-webp', 'dayjs', 'card-validator', 'gerador-validador-cpf']
+    /* analyze: true */
   },
   /*
   ** Headers
@@ -50,7 +39,7 @@ module.exports = {
     { src: '~plugins/firebase' },
     { src: '~/plugins/vuex-persistedstate', ssr: false },
     { src: '~plugins/vue-progressive-image', ssr: false },
-    { src: '~plugins/vue-google-maps' },
+    { src: '~plugins/vue-google-maps', ssr: false },
     { src: '~plugins/vue-croppa', ssr: false },
     { src: '~plugins/vue-autosize', ssr: false },
     { src: '~plugins/webfontloader', ssr: false },
@@ -64,7 +53,7 @@ module.exports = {
   ** Customize the progress-bar color
   */
   loading: {
-    height: '4px',
+    height: '3px',
     color: '#FFA04F'
   },
   /*
