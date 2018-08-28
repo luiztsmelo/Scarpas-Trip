@@ -1,5 +1,5 @@
 <template>
-  <div class="acomods">
+  <div class="acomods" @click="showPreco = false">
 
 
     <div class="acomods-container">
@@ -39,6 +39,8 @@
     <div class="filtrar-desktop">
       <form class="filtrar-desktop-form">
         
+
+        <!-- Datas -->
         <div class="item-form">
           <v-date-picker
             v-if="$store.state.filters.date === null"
@@ -73,9 +75,12 @@
             <h3 class="__text">{{ outputDatePicker }}</h3>
             <img class="__limpar-img" src="../../assets/img/close-mobile.svg" @click="$store.state.filters.date = null">
           </div>
-        </div>
+
+        </div><!-- Datas -->
 
 
+
+        <!-- Tipo acomod -->
         <div class="item-form">
 
           <select v-model="$store.state.filters.tipoAcomod" v-if="$store.state.filters.tipoAcomod === null">
@@ -96,7 +101,36 @@
             <img class="__limpar-img" src="../../assets/img/close-mobile.svg" @click="$store.state.filters.tipoAcomod = null">
           </div>
 
-        </div>
+        </div><!-- Tipo acomod -->
+
+
+
+        <!-- Preço -->
+        <div class="item-form">
+          
+          <div class="dropdown" @click.stop>
+
+            <button type="button" class="dropdown-btn" :style="onDropBtn" @click="showPreco = !showPreco">Preço</button>
+
+            <transition name="dropdown-animation">
+              <div class="dropdown-body" v-show="showPreco">
+                
+                <h3 class="__text">R$50 - R$2000</h3>
+
+                <div class="slider">
+                  <div class="__btn"></div>
+                  <div class="__bar"></div>
+                  <div class="__btn"></div>
+                </div>
+
+                <button type="button" class="__filtrar-btn" @click="showPreco = false">Filtrar</button>
+                
+              </div>
+            </transition>
+
+          </div>
+
+        </div><!-- Preço -->
 
 
 
@@ -117,8 +151,8 @@
         :key="acomod.acomodID"
         :position="{lat: acomod.positionLAT, lng: acomod.positionLNG}">
 
-        <h3 class="__valor">R${{ acomod.valorNoite }}</h3>
-
+        <nuxt-link :to="`/acomodacoes/${acomod.acomodID}`" class="__valor">R${{ acomod.valorNoite }}</nuxt-link>
+        
       </GmapInfoWindow>
 
     </gmap-map>
@@ -161,6 +195,7 @@ export default {
   transition: 'opacity',
   data () {
     return {
+      showPreco: false,
       drag: null,
       attribute: {
         popover: {
@@ -198,6 +233,9 @@ export default {
         const monthEnd = dayjs(this.filters.date.end).format('MMM')
         return  `${dayStart} de ${monthStart} - ${dayEnd} de ${monthEnd}`
       }
+    },
+    onDropBtn () {
+      return this.showPreco ? 'font-weight: 500; background: #FFA04F; color: white; border: none' : ''
     }
   },
   watch: {
@@ -351,16 +389,16 @@ export default {
     flex-flow: row;
     & .acomods-container {
       margin-top: calc(var(--navbarHeightDesktop) + 3.6rem + 1rem);
-      width: 64.7%;
+      width: 64.8%;
       padding-left: 7%;
       display: flex;
       flex-flow: row wrap;
       justify-content: space-between;
       & .card {
-        width: 49%;
+        width: 49.1%;
         min-height: 21rem;
         padding: 0;
-        margin-bottom: 2rem;
+        margin-bottom: 1rem;
         & .image-box {
           overflow: hidden;
           margin-bottom: .3rem;
@@ -386,8 +424,8 @@ export default {
             font-weight: 600;
           }
           & .__card-title {
-            padding: .3em 0;
-            font-size: 16px;
+            padding: .3rem 0;
+            font-size: 15px;
             font-weight: 700;
           }
           & .__card-valor {
@@ -424,7 +462,7 @@ export default {
             padding: 0 .8rem;
             border: 1px solid rgb(222,222,222);
             outline: none;
-            border-radius: 5px;
+            border-radius: 4px;
             background: white;
             color: var(--color01);
           }
@@ -440,7 +478,7 @@ export default {
             padding: 0 .8rem;
             border: 1px solid rgb(222,222,222);
             outline: none;
-            border-radius: 5px;
+            border-radius: 4px;
             background: white;
             color: var(--color01);
           }
@@ -450,12 +488,15 @@ export default {
           & .inputDatePicker {
             max-width: 4.4rem;
           }
+          & .fake-input:hover {
+            border: 1px solid var(--color01);
+          }
           & .filter-choosed {
             display: flex;
             align-items: center;
             height: 2.1rem; 
             background: var(--colorAcomod);
-            border-radius: 5px;
+            border-radius: 4px;
             transition: var(--main-transition);
             & .__text {
               user-select: none;
@@ -470,6 +511,70 @@ export default {
               width: .7rem;
               height: auto;
               filter: invert(100%) brightness(300%);
+            }
+          }
+          & .dropdown {
+            position: relative;
+            display: inline-flex;
+            & .dropdown-btn {
+              cursor: pointer;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              height: 2.1rem;
+              font-size: 14px;
+              font-weight: 400;
+              padding: 0 .8rem;
+              border: 1px solid rgb(222,222,222);
+              outline: none;
+              border-radius: 4px;
+              background: white;
+              color: var(--color01);
+            }
+            & .dropdown-btn:hover {
+              border: 1px solid var(--color01);
+            }
+            & .dropdown-body {
+              display: flex;
+              flex-flow: column;
+              position: absolute;
+              top: 2.7rem;
+              min-width: 20rem;
+              background-color: white;
+              padding: 1.4rem;
+              border-radius: 4px;
+              box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+              z-index: 100;
+              transition: var(--main-transition);
+              & .__text {
+                font-size: 16px;
+              }
+              & .slider {
+                display: flex;
+                align-items: center;
+                width: 100%;
+                margin: 1.5rem 0;
+                & .__btn {
+                  cursor: pointer;
+                  width: 1.7rem;
+                  height: 1.7rem;
+                  border-radius: 50%;
+                  background: white;
+                  border: 1px solid black;
+                }
+                & .__bar {
+                  width: calc(100% - 1.7rem);
+                  height: 3px;
+                  background: rgb(122,122,122);
+                  border-radius: 30px;
+                }
+              }
+              & .__filtrar-btn {
+                align-self: flex-end;
+                background: white;
+                font-size: 15px;
+                font-weight: 500;
+              }
             }
           }
         }
@@ -493,7 +598,8 @@ export default {
       align-items: center;
       justify-content: center;
       & .__valor {
-        font-size: 14px;
+        cursor: pointer;
+        font-size: 13px;
         font-weight: 600;
       }
     }
@@ -504,5 +610,10 @@ export default {
 }
 
 
+/* TRANSITIONS */
+.dropdown-animation-enter, .dropdown-animation-leave-active {
+  opacity: 0;
+  transform: translateY(-1rem);
+}
 
 </style>

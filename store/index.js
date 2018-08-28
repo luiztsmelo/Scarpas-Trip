@@ -76,7 +76,8 @@ const store = () => new Vuex.Store({
     },
     filters: {
       date: null,
-      tipoAcomod: null
+      tipoAcomod: null,
+      preco: null
     },
     filteredAcomods: null,
     /*

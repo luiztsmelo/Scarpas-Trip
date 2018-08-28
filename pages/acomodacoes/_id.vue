@@ -201,15 +201,14 @@
           <h3 class="__adress">{{ acomod.address }}</h3>
 
           <gmap-map
-          ref="gmap"
-          :center="{lat: acomod.positionLAT, lng: acomod.positionLNG}"
-          :zoom="15"
-          :options="{styles: styles, draggable: $store.state.isMobile ? false : true, fullscreenControl: $store.state.isMobile ? false : true, zoomControl: $store.state.isMobile ? false : true, mapTypeControl:false, streetViewControl:false}"
-          @click="fullscreenMobile">
-            <Gmap-Marker
-              :position="{lat: acomod.positionLAT, lng: acomod.positionLNG}"
-              :icon="{url: $store.state.markerUrl, scaledSize: $store.state.markerSize}">
-            </Gmap-Marker>
+            :center="{lat: acomod.positionLAT, lng: acomod.positionLNG}"
+            :zoom="15"
+            :options="{styles: styles, draggable: $store.state.isMobile ? false : true, fullscreenControl: $store.state.isMobile ? false : true, zoomControl: $store.state.isMobile ? false : true, mapTypeControl:false, streetViewControl:false}"
+            @click="fullscreenMobile">
+              <Gmap-Marker
+                :position="{lat: acomod.positionLAT, lng: acomod.positionLNG}"
+                :icon="{url: $store.state.markerUrl, scaledSize: $store.state.markerSize}">
+              </Gmap-Marker>
           </gmap-map>
 
         </div><!-- ####### LOCALIZAÇÃO ####### -->
