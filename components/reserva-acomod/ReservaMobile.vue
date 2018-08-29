@@ -1099,9 +1099,9 @@ export default {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        border-bottom: 1px solid rgb(222,222,222);
+        border-bottom: 1px solid #dedede;
         & .__slash {
-          background: rgb(222,222,222);
+          background: #dedede;
           width: 55px;
           height: 1px;
           transform: rotate(130deg);
@@ -1149,8 +1149,8 @@ export default {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        border-bottom: 1px solid rgb(222,222,222);
-        border-top: 1px solid rgb(222,222,222);
+        border-bottom: 1px solid #dedede;
+        border-top: 1px solid #dedede;
         & .__title {
           font-size: 17px;
           font-weight: 600;
@@ -1162,7 +1162,7 @@ export default {
           line-height: 22px;
         }
         & .__slash {
-          background: rgb(222,222,222);
+          background: #dedede;
           width: 65px;
           height: 1px;
           transform: rotate(130deg);
@@ -1172,7 +1172,7 @@ export default {
         display: flex;
         margin: 0 7% .3rem 7%;
         padding-bottom: 1rem;
-        border-bottom: 1px solid rgb(222,222,222);
+        border-bottom: 1px solid #dedede;
         & .__img { 
           border-radius: 50%;
           width: 2.4rem;
@@ -1213,8 +1213,8 @@ export default {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        border-bottom: 1px solid rgb(222,222,222);
-        border-top: 1px solid rgb(222,222,222);
+        border-bottom: 1px solid #dedede;
+        border-top: 1px solid #dedede;
         & .__img {
           width: 1.9rem;
           height: auto;
@@ -1233,7 +1233,7 @@ export default {
         margin: .5rem 7% 1.3rem;
         height: 1px;
         width: calc(100% - 14%);
-        background-color: rgb(222,222,222);
+        background-color: #dedede;
       }
       & .item-form {
         padding: 0 7%;
@@ -1253,7 +1253,7 @@ export default {
           color: var(--color01);
           padding: 1rem 0;
           border: none;
-          border-bottom: 1px solid rgb(222,222,222);
+          border-bottom: 1px solid #dedede;
           outline: none;
           transition: all .2s ease;
         }
@@ -1268,7 +1268,7 @@ export default {
           color: var(--color01);
           padding: 1rem 0;
           border: none;
-          border-bottom: 1px solid rgb(222,222,222);
+          border-bottom: 1px solid #dedede;
           outline: none;
           transition: all .2s ease;
         }

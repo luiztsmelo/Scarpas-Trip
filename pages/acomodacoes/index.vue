@@ -1,5 +1,5 @@
 <template>
-  <div class="acomods" @click="showPreco = false">
+  <div class="acomods" @click="showPreco = false, showTipoAcomod = false">
 
 
     <div class="acomods-container">
@@ -10,7 +10,7 @@
           <swiper :options="swiperOption">
 
             <swiper-slide class="slide" v-for="image in acomod.images" :key="image.id">
-              <progressive-img class="__img" :src="imageH(image)" :placeholder="image.L" :aspect-ratio="2/3"/>
+              <img class="__img" v-lazy="imgObj(image)"/>
             </swiper-slide>
 
             <div class="swiper-pagination" slot="pagination"></div>
@@ -82,24 +82,33 @@
 
         <!-- Tipo acomod -->
         <div class="item-form">
+          
+          <div class="dropdown" @click.stop>
 
-          <select v-model="$store.state.filters.tipoAcomod" v-if="$store.state.filters.tipoAcomod === null">
-            <option :value="null" disabled hidden>Tipo de acomodação</option>
-            <option>Casa</option>
-            <option>Apartamento</option>
-            <option>Rancho</option>
-            <option>Chácara</option>
-            <option>Pousada</option>
-            <option>Camping</option>
-            <option>Sítio</option>
-            <option>Fazenda</option>
-            <option>Hostel</option>
-          </select>
+            <button type="button" class="dropdown-btn" :style="onDropBtn" @click="showTipoAcomod = !showTipoAcomod">Tipo de acomodação</button>
 
-          <div class="filter-choosed" v-else>
+            <transition name="dropdown-animation">
+              <div class="dropdown-body" v-show="showTipoAcomod">
+
+                <div class="select-box">
+                  <div class="option" v-for="(tipoAcomod, index) in tiposAcomods" :key="tipoAcomod.name">
+                    <input type="checkbox" ref="tipoAcomodCheckbox" :value="tipoAcomod.name" v-model="$store.state.filters.tipoAcomod">
+                    <h3 class="__text" @click="$refs.tipoAcomodCheckbox[index].click()">{{ tipoAcomod.name }}</h3>
+                  </div>
+                </div>
+
+                <button type="button" class="__filtrar-btn" @click="filtrar">Filtrar</button>
+                
+              </div>
+            </transition>
+
+          </div>
+
+
+          <!-- <div class="filter-choosed" v-else>
             <h3 class="__text">{{ $store.state.filters.tipoAcomod }}</h3>
             <img class="__limpar-img" src="../../assets/img/close-mobile.svg" @click="$store.state.filters.tipoAcomod = null">
-          </div>
+          </div> -->
 
         </div><!-- Tipo acomod -->
 
@@ -115,15 +124,19 @@
             <transition name="dropdown-animation">
               <div class="dropdown-body" v-show="showPreco">
                 
-                <h3 class="__text">R$50 - R$2000</h3>
 
-                <div class="slider">
-                  <div class="__btn"></div>
-                  <div class="__bar"></div>
-                  <div class="__btn"></div>
+                <div class="preco-box">
+                  <h3 class="__text">R$50 - R$2000</h3>
+
+                  <div class="slider">
+                    <div class="__btn" id="min" ref="minBtn" @click="sliderBtnMin"></div>
+                    <div class="__bar"></div>
+                    <div class="__btn" id="max" ref="maxBtn"></div>
+                  </div>
                 </div>
 
-                <button type="button" class="__filtrar-btn" @click="showPreco = false">Filtrar</button>
+
+                <button type="button" class="__filtrar-btn" @click="filtrar">Filtrar</button>
                 
               </div>
             </transition>
@@ -152,7 +165,7 @@
         :position="{lat: acomod.positionLAT, lng: acomod.positionLNG}">
 
         <nuxt-link :to="`/acomodacoes/${acomod.acomodID}`" class="__valor">R${{ acomod.valorNoite }}</nuxt-link>
-        
+
       </GmapInfoWindow>
 
     </gmap-map>
@@ -195,6 +208,18 @@ export default {
   transition: 'opacity',
   data () {
     return {
+      tiposAcomods: [
+        { 'name': 'Casa' },
+        { 'name': 'Apartamento' },
+        { 'name': 'Rancho' },
+        { 'name': 'Chácara' },
+        { 'name': 'Pousada' },
+        { 'name': 'Camping' },
+        { 'name': 'Sítio' },
+        { 'name': 'Fazenda' },
+        { 'name': 'Hostel' }
+      ],
+      showTipoAcomod: false,
       showPreco: false,
       drag: null,
       attribute: {
@@ -215,12 +240,60 @@ export default {
     }
   },
   async fetch ({ store }) {
-    const acomods = await firebase.firestore().collection('acomods').get()
-    store.commit('m_filteredAcomods', acomods.docs.map(acomod => acomod.data()))
+    if (store.state.filteredAcomods === null) {
+      const acomods = await firebase.firestore().collection('acomods').get()
+      store.commit('m_filteredAcomods', acomods.docs.map(acomod => acomod.data()))
+    }
   },
   methods: {
-    imageH (image) {
-      return supportsWebP ? image.HW : image.HJ
+    async filtrar () {
+      try {
+        this.showTipoAcomod = false
+        this.showPreco = false
+        
+        this.$store.commit('m_loader', true)
+
+        const filters = this.$store.state.filters
+
+        let acomods = firebase.firestore().collection('acomods')
+
+        if (filters.date !== null) {
+
+        }
+
+        if (filters.tipoAcomod.length > 0) {
+          filters.tipoAcomod.forEach(tipoAcomod => {
+            acomods = acomods.where('tipoAcomod', '==', tipoAcomod)
+          })
+        }
+
+        console.log(acomods)
+
+        const filteredAcomods = await acomods.get()
+        
+        console.log(filteredAcomods)
+        
+        this.$store.commit('m_filteredAcomods', filteredAcomods.docs.map(acomod => acomod.data()))
+        
+        this.$store.commit('m_loader', false)
+      } catch (err) {
+        console.log(err)
+        this.$store.commit('m_loader', false)
+      }
+    },
+    imgObj (image) {
+      return {
+        src: supportsWebP ? image.HW : image.HJ,
+        loading: image.L
+      }
+    },
+    sliderBtnMin () {
+      this.$refs.minBtn.addEventListener('touchmove', e => {
+        const minBtnPosition = this.$refs
+        console.log(minBtnPosition)
+        console.log(e)
+        console.log(e.targetTouches[0].screenX)
+      }, false)
     }
   },
   computed: {
@@ -236,34 +309,6 @@ export default {
     },
     onDropBtn () {
       return this.showPreco ? 'font-weight: 500; background: #FFA04F; color: white; border: none' : ''
-    }
-  },
-  watch: {
-    filters: {
-      handler: async function (filter) { 
-        try {
-          console.log(filter)
-
-          let acomods = firebase.firestore().collection('acomods')
-
-          if (filter.date !== null) {
-
-          }
-
-          if (filter.tipoAcomod !== null) {
-            acomods = acomods.where('tipoAcomod', '==', filter.tipoAcomod)
-          }
-
-          const filteredAcomods = await acomods.get()
-          
-          console.log(filteredAcomods)
-          
-          return this.$store.commit('m_filteredAcomods', filteredAcomods.docs.map(acomod => acomod.data()))
-        } catch (err) {
-          console.log(err)
-        }
-      },
-      deep: true
     }
   },
   beforeRouteEnter (to, from, next) {
@@ -451,7 +496,7 @@ export default {
         height: 3.6rem;
         display: flex;
         align-items: center;
-        border-bottom: 1px solid rgb(222,222,222);
+        border-bottom: 1px solid #dedede;
         & .item-form {
           margin-right: .8rem;
           & input {
@@ -460,7 +505,7 @@ export default {
             font-size: 14px;
             font-weight: 400;
             padding: 0 .8rem;
-            border: 1px solid rgb(222,222,222);
+            border: 1px solid #dedede;
             outline: none;
             border-radius: 4px;
             background: white;
@@ -476,7 +521,7 @@ export default {
             font-size: 14px;
             font-weight: 400;
             padding: 0 .8rem;
-            border: 1px solid rgb(222,222,222);
+            border: 1px solid #dedede;
             outline: none;
             border-radius: 4px;
             background: white;
@@ -525,7 +570,7 @@ export default {
               font-size: 14px;
               font-weight: 400;
               padding: 0 .8rem;
-              border: 1px solid rgb(222,222,222);
+              border: 1px solid #dedede;
               outline: none;
               border-radius: 4px;
               background: white;
@@ -539,38 +584,76 @@ export default {
               flex-flow: column;
               position: absolute;
               top: 2.7rem;
-              min-width: 20rem;
               background-color: white;
               padding: 1.4rem;
               border-radius: 4px;
               box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
               z-index: 100;
               transition: var(--main-transition);
-              & .__text {
-                font-size: 16px;
-              }
-              & .slider {
+              & .select-box {
                 display: flex;
-                align-items: center;
-                width: 100%;
-                margin: 1.5rem 0;
-                & .__btn {
+                flex-flow: row wrap;
+                width: 300px;
+                & .option {
                   cursor: pointer;
-                  width: 1.7rem;
-                  height: 1.7rem;
-                  border-radius: 50%;
-                  background: white;
-                  border: 1px solid black;
+                  display: flex;
+                  align-items: center;
+                  width: 50%;
+                  & input[type='checkbox'] {
+                    appearance: none;
+                    transform: scale(.6);
+                    transition: var(--main-transition);
+                  }
+                  & input[type='checkbox']:checked {
+                    background: var(--colorAcomod);
+                  }
+                  & .__text {
+                    user-select: none;
+                    padding-left: 7px;
+                    font-size: 15px;
+                  }
                 }
-                & .__bar {
-                  width: calc(100% - 1.7rem);
-                  height: 3px;
-                  background: rgb(122,122,122);
-                  border-radius: 30px;
+              }
+              & .preco-box {
+                display: flex;
+                flex-flow: column;
+                width: 270px;
+                & .__text {
+                  font-size: 15px;
+                }
+                & .slider {
+                  position: relative;
+                  width: 100%;
+                  margin: 1.5rem 0 2rem;
+                  & .__btn {
+                    position: absolute;
+                    cursor: pointer;
+                    width: 26px;
+                    height: 26px;
+                    border-radius: 50%;
+                    background: white;
+                    border: 1px solid black;
+                    z-index: 10;
+                  }
+                  & #min { left: 0; }
+                  & #max { right: 0; }
+                  & .__bar {
+                    position: absolute;
+                    width: calc(100% - 26px);
+                    top: 13px;
+                    left: 0;
+                    right: 0;
+                    margin: 0 auto;
+                    height: 3px;
+                    background: rgb(132,132,132);
+                    border-radius: 30px;
+                  }
                 }
               }
               & .__filtrar-btn {
                 align-self: flex-end;
+                padding: 0;
+                margin-top: 1rem;
                 background: white;
                 font-size: 15px;
                 font-weight: 500;

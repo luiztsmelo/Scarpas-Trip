@@ -69,13 +69,13 @@ export default {
       window.history.back(1)
     },
     inputDate () { /* Em caso de alterações, lembrar também de alterar _id */
+      this.periodoReserva.start = Date.parse(this.periodoReserva.start)
+      this.periodoReserva.end = Date.parse(this.periodoReserva.end)
+
       const startDate = dayjs(this.periodoReserva.start)
       const endDate = dayjs(this.periodoReserva.end)
 
-      this.periodoReserva.start = startDate.unix()
-      this.periodoReserva.end = endDate.unix()
-
-      const noites = startDate.diff(endDate, 'day')
+      const noites = endDate.diff(startDate, 'day')
       this.$store.commit('m_noites', noites)
 
       const valorNoitesTotal = Math.round(this.acomod.valorNoite * noites)

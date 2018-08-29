@@ -58,7 +58,7 @@
           <div class="card" v-for="acomod in $store.state.acomods" :key="acomod.acomodID">
             <nuxt-link :to="`/acomodacoes/${acomod.acomodID}`">
 
-              <progressive-background class="__card-img" :src="imageAcH(acomod)" :placeholder="acomod.images[0].L" :aspect-ratio="2/3"/>
+              <img class="__card-img" v-lazy="imgObj(acomod)"/>
 
               <span class="__card-info" style="color: #FFA04F">{{ acomod.tipoAcomod }}</span>
 
@@ -161,8 +161,11 @@ export default {
     imageEvH (evento) {
       return supportsWebP ? evento.imageH1W : evento.imageH1J
     },
-    imageAcH (acomod) {
-      return supportsWebP ? acomod.images[0].HW : acomod.images[0].HJ
+    imgObj (acomod) {
+      return {
+        src: supportsWebP ? acomod.images[0].HW : acomod.images[0].HJ,
+        loading: acomod.images[0].L
+      } 
     },
     imagePasH (passeio) {
       return supportsWebP ? passeio.imageH1W : passeio.imageH1J

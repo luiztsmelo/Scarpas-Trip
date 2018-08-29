@@ -365,7 +365,7 @@
       <!-- ******* Flex Right ******* -->
       <div class="flex-right">
 
-        <progressive-background  class="__acomod-image" :src="imageH" :placeholder="acomod.images[0].L" :aspect-ratio="2/3"/>
+        <img class="__acomod-img" v-lazy="imgObj"/>
 
         <div class="card-body">
 
@@ -674,8 +674,11 @@ export default {
     },
 
     /* ******************** IMAGES ******************** */
-    imageH () {
-      return supportsWebP ? this.acomod.images[0].HW : this.acomod.images[0].HJ
+    imgObj () {
+      return {
+        src: supportsWebP ? this.acomod.images[0].HW : this.acomod.images[0].HJ,
+        loading: this.acomod.images[0].L
+      } 
     },
 
     /* ******************** DATES ******************** */
@@ -878,7 +881,7 @@ export default {
     padding-bottom: 4rem;
     margin: 1.2rem 12% 0;
     display: flex;
-    border-bottom: 1px solid rgb(222,222,222);
+    border-bottom: 1px solid #dedede;
     /* ******* FLEX LEFT ******* */
     & .flex-left {
       flex: 64%;
@@ -919,7 +922,7 @@ export default {
           display: flex;
           margin: 1.7rem 0 1rem 0;
           padding-bottom: 1.5rem;
-          border-bottom: 1px solid rgb(222,222,222);
+          border-bottom: 1px solid #dedede;
           & .__img { 
             border-radius: 50%;
             width: 2.6rem;
@@ -979,7 +982,7 @@ export default {
           color: var(--color01);
           padding: 1rem 0;
           border: none;
-          border-bottom: 1px solid rgb(222,222,222);
+          border-bottom: 1px solid #dedede;
           outline: none;
           transition: all .2s ease;
         }
@@ -997,7 +1000,7 @@ export default {
           color: var(--color01);
           padding: 1rem 0;
           border: none;
-          border-bottom: 1px solid rgb(222,222,222);
+          border-bottom: 1px solid #dedede;
           outline: none;
           transition: .2s all ease;
         }
@@ -1027,20 +1030,20 @@ export default {
       flex: 36%;
       max-width: 36%;
       align-self: flex-start;
-      & .__acomod-image {
+      & .__acomod-img {
         width: 100%;
         height: auto;
       }
       & .card-body {
-        border-left: 1px solid rgb(222,222,222);
-        border-right: 1px solid rgb(222,222,222);
-        border-bottom: 1px solid rgb(222,222,222);
+        border-left: 1px solid #dedede;
+        border-right: 1px solid #dedede;
+        border-bottom: 1px solid #dedede;
         & .__acomod-title {
           margin: 0 1.3rem;
           padding: 1.2rem 0;
           font-size: 18px;
           font-weight: 600;
-          border-bottom: 1px solid rgb(222,222,222);
+          border-bottom: 1px solid #dedede;
           white-space: nowrap;
           overflow: hidden;
           text-overflow: ellipsis;
@@ -1048,7 +1051,7 @@ export default {
         & .detalhes-reserva-data {
           padding: .8rem 0;
           margin: 0 1.3rem;
-          border-bottom: 1px solid rgb(222,222,222);
+          border-bottom: 1px solid #dedede;
           & .detalhes-reserva-data_item {
             display: flex;
             align-items: center;

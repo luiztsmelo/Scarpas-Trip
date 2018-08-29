@@ -38,6 +38,7 @@ module.exports = {
   plugins: [
     { src: '~plugins/firebase' },
     { src: '~/plugins/vuex-persistedstate', ssr: false },
+    { src: '~plugins/vue-lazyload', ssr: false },
     { src: '~plugins/vue-progressive-image', ssr: false },
     { src: '~plugins/vue-google-maps', ssr: false },
     { src: '~plugins/vue-croppa', ssr: false },

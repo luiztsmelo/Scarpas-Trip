@@ -225,13 +225,13 @@ export default {
         font-size: 18px;
         font-weight: 600;
         text-align: center;
-        border-left: 1px solid rgb(222,222,222);
-        border-right: 1px solid rgb(222,222,222);
-        border-bottom: 1px solid rgb(222,222,222);
+        border-left: 1px solid #dedede;
+        border-right: 1px solid #dedede;
+        border-bottom: 1px solid #dedede;
       }
       & nav {
         margin-top: .8rem;
-        border: 1px solid rgb(222,222,222);
+        border: 1px solid #dedede;
         & li {
           cursor: pointer;
           user-select: none;
@@ -269,9 +269,9 @@ export default {
           position: relative;
           width: 100%;
           padding: 1rem;
-          border-top: 1px solid rgb(222,222,222);
-          border-right: 1px solid rgb(222,222,222);
-          border-bottom: 1px solid rgb(222,222,222);
+          border-top: 1px solid #dedede;
+          border-right: 1px solid #dedede;
+          border-bottom: 1px solid #dedede;
           & .__card-title {
             padding-bottom: .4rem;
             font-size: 16px;
@@ -303,7 +303,7 @@ export default {
             align-items: center;
             position: absolute;
             bottom: 0;
-            border-top: 1px solid rgb(222,222,222);
+            border-top: 1px solid #dedede;
             width: 94.5%;
             padding: 1rem 0;
             & .__btn {

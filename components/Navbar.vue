@@ -124,7 +124,7 @@ export default {
   background: white;
   transition: var(--main-transition);
   padding: 0 7%;
-  border-bottom: 1px solid rgb(222,222,222);
+  border-bottom: 1px solid #dedede;
   & .navbar-body {
     display: flex;
     justify-content: space-between;

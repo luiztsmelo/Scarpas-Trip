@@ -3,7 +3,7 @@
     <div class="menu" v-if="showMenu">
       <div class="menu-body">
 
-        <div style="border-bottom:1px solid rgb(222,222,222);padding-bottom:.6rem" @click="checkUser(), $store.commit('m_showMenu', false), $store.commit('m_menuIconAnime', false), $store.commit('m_showFoobar', false)">
+        <div style="border-bottom:1px solid #dedede;padding-bottom:.6rem" @click="checkUser(), $store.commit('m_showMenu', false), $store.commit('m_menuIconAnime', false), $store.commit('m_showFoobar', false)">
           <div class="menu-item">
             <img src="../assets/img/social.svg" class="__item-img-color">
             <h3>Minha Conta</h3>
@@ -31,7 +31,7 @@
           </nuxt-link>
         </div>
 
-        <div style="border-bottom:1px solid rgb(222,222,222);padding-bottom:.6rem" @click="$store.commit('m_showMenu', false), $store.commit('m_showFoobar', false), $store.commit('m_menuIconAnime', false)">
+        <div style="border-bottom:1px solid #dedede;padding-bottom:.6rem" @click="$store.commit('m_showMenu', false), $store.commit('m_showFoobar', false), $store.commit('m_menuIconAnime', false)">
           <nuxt-link to="/anunciar/restaurante" class="menu-item">
             <img src="../assets/img/restaurantes.svg" class="__item-img-color">
             <h3>Anunciar Restaurante</h3>

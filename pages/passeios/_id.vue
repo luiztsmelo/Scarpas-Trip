@@ -503,7 +503,7 @@ export default {
       margin: 1.7rem 8% 0 8%;
       & .reserva-desktop {
         flex-basis: 31%;
-        border: 1px solid rgb(222,222,222);
+        border: 1px solid #dedede;
         align-self: flex-start;
       }
       & .desktop-view-info {

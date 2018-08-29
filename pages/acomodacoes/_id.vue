@@ -28,7 +28,7 @@
       <swiper :options="swiperOptions">
         
         <swiper-slide class="slide" v-for="image in acomod.images" :key="image.id">
-          <progressive-background class="__img" :src="imageH(image)" :placeholder="image.L" :aspect-ratio="2/3"/>
+          <img class="__img" v-lazy="imgObj(image)"/>
         </swiper-slide>
 
       </swiper>
@@ -396,17 +396,20 @@ export default {
     }
   },
   methods: {
-    imageH (image) {
-      return supportsWebP ? image.HW : image.HJ
+    imgObj (image) {
+      return {
+        src: supportsWebP ? image.HW : image.HJ,
+        loading: image.L
+      }
     },
     inputDate () { /* Em caso de alterações, lembrar também de alterar DatePicker.vue */
+      this.periodoReserva.start = Date.parse(this.periodoReserva.start)
+      this.periodoReserva.end = Date.parse(this.periodoReserva.end)
+
       const startDate = dayjs(this.periodoReserva.start)
       const endDate = dayjs(this.periodoReserva.end)
 
-      this.periodoReserva.start = startDate.unix()
-      this.periodoReserva.end = endDate.unix()
-
-      const noites = startDate.diff(endDate, 'day')
+      const noites = endDate.diff(startDate, 'day')
       this.$store.commit('m_noites', noites)
 
       const valorNoitesTotal = Math.round(this.acomod.valorNoite * noites)
@@ -735,7 +738,7 @@ export default {
       flex-flow: row;
       align-items: center;
       padding: 1.1rem 0;
-      border-bottom: 1px solid rgb(222,222,222);
+      border-bottom: 1px solid #dedede;
       & .__img {
         margin-right: 1rem;
         width: 1.8rem;
@@ -865,7 +868,7 @@ export default {
       margin: 1.7rem 8% 0;
       & .reserva-desktop {
         flex-basis: 31%;
-        border: 1px solid rgb(222,222,222);
+        border: 1px solid #dedede;
         align-self: flex-start;
         & .reserva-desktop-form {
           padding: 1rem 1.4rem;
@@ -890,7 +893,7 @@ export default {
               cursor: pointer;
               width: 100%;
               padding: .75rem .6rem;
-              border: 1px solid rgb(222,222,222);
+              border: 1px solid #dedede;
               outline: none;
               background: white;
               transition: .15s border ease;
@@ -902,7 +905,7 @@ export default {
               cursor: pointer;
               width: 100%;
               padding: .75rem .6rem;
-              border: 1px solid rgb(222,222,222);
+              border: 1px solid #dedede;
               outline: none;
               background: white;
               transition: .15s border ease;
@@ -939,7 +942,7 @@ export default {
             & .reserva-info_item-total {
               display: flex;
               justify-content: space-between;
-              border-top: 1px solid rgb(222,222,222);
+              border-top: 1px solid #dedede;
               & h3 {
                 font-size: 17px;
                 font-weight: 500;
@@ -1072,7 +1075,7 @@ export default {
               flex-flow: row;
               align-items: center;
               padding: 1.1rem 0;
-              border-bottom: 1px solid rgb(222,222,222);
+              border-bottom: 1px solid #dedede;
               & .__img {
                 margin-right: 1rem;
                 width: 1.8rem;
