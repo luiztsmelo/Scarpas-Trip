@@ -11,13 +11,13 @@
   & .swiper-pagination-bullet {
     width: 6px;
     height: 6px;
-    margin: 0 .25rem;
+    margin: 0 .27rem;
     border-radius: 50%;
-    background: #EBEBEB;
+    background: #dedede;
   }
   & .swiper-pagination-bullet-active {
     transition: all .17s ease-in;
-    transform: scale(1.22);
+    transform: scale(1.23);
     background: #fff;
     opacity: 1;
   }

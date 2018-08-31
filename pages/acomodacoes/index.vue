@@ -1,5 +1,5 @@
 <template>
-  <div class="acomods" @click="showPreco = false, showTipoAcomod = false">
+  <div class="acomods" @click="showHospedes = false, showTipoAcomod = false, showPreco = false">
 
 
     <div class="acomods-container">
@@ -80,12 +80,49 @@
 
 
 
+        <!-- Hóspedes -->
+        <div class="item-form">
+          
+          <div class="dropdown" @click.stop>
+
+            <button type="button" class="dropdown-btn" :style="onHospedesBtn" @click="showHospedes = !showHospedes">Hóspedes</button>
+
+            <transition name="dropdown-animation">
+              <div class="dropdown-body" v-show="showHospedes">
+
+                <div class="number-box">
+                  <h3>Quantos hóspedes?</h3>
+                  <div class="input-number">
+                    <div class="__btn" @click="$store.commit('m_decrementHospedes')"><div class="minus"></div></div>
+                    <h3>{{ $store.state.filters.hospedes }}</h3>
+                    <div class="__btn" @click="$store.commit('m_incrementHospedes')"><div class="plus-horiz"></div><div class="plus-vert"></div></div>
+                  </div>
+                </div>
+
+
+                <button type="button" class="__filtrar-btn" @click="filtrar">Filtrar</button>
+
+              </div>
+            </transition>
+
+          </div>
+
+
+          <!-- <div class="filter-choosed" v-else>
+            <h3 class="__text">{{ $store.state.filters.tipoAcomod }}</h3>
+            <img class="__limpar-img" src="../../assets/img/close-mobile.svg" @click="$store.state.filters.tipoAcomod = null">
+          </div> -->
+
+        </div><!-- Hóspedes -->
+
+
+
         <!-- Tipo acomod -->
         <div class="item-form">
           
           <div class="dropdown" @click.stop>
 
-            <button type="button" class="dropdown-btn" :style="onDropBtn" @click="showTipoAcomod = !showTipoAcomod">Tipo de acomodação</button>
+            <button type="button" class="dropdown-btn" :style="onTipoAcomodBtn" @click="showTipoAcomod = !showTipoAcomod">Tipo de acomodação</button>
 
             <transition name="dropdown-animation">
               <div class="dropdown-body" v-show="showTipoAcomod">
@@ -97,8 +134,9 @@
                   </div>
                 </div>
 
+
                 <button type="button" class="__filtrar-btn" @click="filtrar">Filtrar</button>
-                
+
               </div>
             </transition>
 
@@ -119,22 +157,28 @@
           
           <div class="dropdown" @click.stop>
 
-            <button type="button" class="dropdown-btn" :style="onDropBtn" @click="showPreco = !showPreco">Preço</button>
+            <button type="button" class="dropdown-btn" :style="onPrecoBtn" @click="showPreco = !showPreco">Preço</button>
 
             <transition name="dropdown-animation">
               <div class="dropdown-body" v-show="showPreco">
-                
+
+                <h3 style="font-size: 15px">Quanto está disposto a pagar por noite?</h3>
 
                 <div class="preco-box">
-                  <h3 class="__text">R$50 - R$2000</h3>
-
-                  <div class="slider">
-                    <div class="__btn" id="min" ref="minBtn" @click="sliderBtnMin"></div>
-                    <div class="__bar"></div>
-                    <div class="__btn" id="max" ref="maxBtn"></div>
+                  <div class="quantia" @click="$store.state.filters.preco.low = !$store.state.filters.preco.low" :class="[ $store.state.filters.preco.low ? 'quantia-checked' : '' ]">
+                    <h1 class="__cifra">$</h1>
+                    <h3 class="__valor">± R$150</h3>
+                  </div>
+                  <div class="quantia" @click="$store.state.filters.preco.mid = !$store.state.filters.preco.mid" :class="[ $store.state.filters.preco.mid ? 'quantia-checked' : '' ]">
+                    <h1 class="__cifra">$$</h1>
+                    <h3 class="__valor">± R$350</h3>
+                  </div>
+                  <div class="quantia" @click="$store.state.filters.preco.high = !$store.state.filters.preco.high" :class="[ $store.state.filters.preco.high ? 'quantia-checked' : '' ]">
+                    <h1 class="__cifra">$$$</h1>
+                    <h3 class="__valor">± R$550</h3>
                   </div>
                 </div>
-
+                
 
                 <button type="button" class="__filtrar-btn" @click="filtrar">Filtrar</button>
                 
@@ -208,6 +252,9 @@ export default {
   transition: 'opacity',
   data () {
     return {
+      showHospedes: false,
+      showTipoAcomod: false,
+      showPreco: false,
       tiposAcomods: [
         { 'name': 'Casa' },
         { 'name': 'Apartamento' },
@@ -219,8 +266,6 @@ export default {
         { 'name': 'Fazenda' },
         { 'name': 'Hostel' }
       ],
-      showTipoAcomod: false,
-      showPreco: false,
       drag: null,
       attribute: {
         popover: {
@@ -253,18 +298,23 @@ export default {
         
         this.$store.commit('m_loader', true)
 
-        const filters = this.$store.state.filters
-
         let acomods = firebase.firestore().collection('acomods')
 
-        if (filters.date !== null) {
+        /* Datas */
+        if (this.filters.date !== null) {
 
         }
 
-        if (filters.tipoAcomod.length > 0) {
-          filters.tipoAcomod.forEach(tipoAcomod => {
+        /* Tipo de acomodação */
+        if (this.filters.tipoAcomod.length > 0) {
+          this.filters.tipoAcomod.forEach(tipoAcomod => {
             acomods = acomods.where('tipoAcomod', '==', tipoAcomod)
           })
+        }
+
+        /* Preço */
+        if (this.filters.preco.low || this.filters.preco.mid || this.filters.preco.high) {
+          
         }
 
         console.log(acomods)
@@ -286,14 +336,6 @@ export default {
         src: supportsWebP ? image.HW : image.HJ,
         loading: image.L
       }
-    },
-    sliderBtnMin () {
-      this.$refs.minBtn.addEventListener('touchmove', e => {
-        const minBtnPosition = this.$refs
-        console.log(minBtnPosition)
-        console.log(e)
-        console.log(e.targetTouches[0].screenX)
-      }, false)
     }
   },
   computed: {
@@ -307,8 +349,14 @@ export default {
         return  `${dayStart} de ${monthStart} - ${dayEnd} de ${monthEnd}`
       }
     },
-    onDropBtn () {
-      return this.showPreco ? 'font-weight: 500; background: #FFA04F; color: white; border: none' : ''
+    onHospedesBtn () {
+      return this.showHospedes ? 'font-weight: 400; background: #161616; color: white; border: 1px solid #161616' : ''
+    },
+    onTipoAcomodBtn () {
+      return this.showTipoAcomod ? 'font-weight: 400; background: #161616; color: white; border: 1px solid #161616' : ''
+    },
+    onPrecoBtn () {
+      return this.showPreco ? 'font-weight: 400; background: #161616; color: white; border: 1px solid #161616' : ''
     }
   },
   beforeRouteEnter (to, from, next) {
@@ -574,7 +622,7 @@ export default {
               outline: none;
               border-radius: 4px;
               background: white;
-              color: var(--color01);
+              transition: var(--main-transition);
             }
             & .dropdown-btn:hover {
               border: 1px solid var(--color01);
@@ -584,16 +632,55 @@ export default {
               flex-flow: column;
               position: absolute;
               top: 2.7rem;
+              width: 22rem;
               background-color: white;
-              padding: 1.4rem;
+              padding: 1.5rem;
               border-radius: 4px;
               box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
               z-index: 100;
               transition: var(--main-transition);
+              & .number-box {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                & .input-number {
+                  display: flex;
+                  align-items: center;
+                  justify-content: space-between;
+                  width: 6.8rem;
+                  & .__btn {
+                    position: relative;
+                    cursor: pointer;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    width: 2rem;
+                    height: 2rem;
+                    border: 1px solid #161616;
+                    border-radius: 50%;
+                    & .minus {
+                      width: 8px;
+                      height: 1px;
+                      background: #161616;
+                    }
+                    & .plus-horiz {
+                      width: 10px;
+                      height: 1px;
+                      background: #161616;
+                    }
+                    & .plus-vert {
+                      position: absolute;
+                      transform: rotate(90deg);
+                      width: 10px;
+                      height: 1px;
+                      background: #161616;
+                    }
+                  }
+                }
+              }
               & .select-box {
                 display: flex;
                 flex-flow: row wrap;
-                width: 300px;
                 & .option {
                   cursor: pointer;
                   display: flex;
@@ -616,47 +703,46 @@ export default {
               }
               & .preco-box {
                 display: flex;
-                flex-flow: column;
-                width: 270px;
-                & .__text {
-                  font-size: 15px;
+                align-items: center;
+                justify-content: space-between;
+                margin: 1.5rem 0 1rem;
+                & .quantia {
+                  cursor: pointer;
+                  display: flex;
+                  flex-flow: column;
+                  align-items: center;
+                  justify-content: center;
+                  width: 5.7rem;
+                  height: 4.3rem;
+                  border: 1px solid #dedede;
+                  border-radius: 4px;
+                  user-select: none;
+                  transition: var(--main-transition);
+                  & .__cifra {
+                    font-size: 17px;
+                    font-weight: 600;
+                    padding-bottom: .2rem;
+                  }
+                  & .__valor {
+                    font-size: 14px;
+                  }
                 }
-                & .slider {
-                  position: relative;
-                  width: 100%;
-                  margin: 1.5rem 0 2rem;
-                  & .__btn {
-                    position: absolute;
-                    cursor: pointer;
-                    width: 26px;
-                    height: 26px;
-                    border-radius: 50%;
-                    background: white;
-                    border: 1px solid black;
-                    z-index: 10;
-                  }
-                  & #min { left: 0; }
-                  & #max { right: 0; }
-                  & .__bar {
-                    position: absolute;
-                    width: calc(100% - 26px);
-                    top: 13px;
-                    left: 0;
-                    right: 0;
-                    margin: 0 auto;
-                    height: 3px;
-                    background: rgb(132,132,132);
-                    border-radius: 30px;
-                  }
+                & .quantia-checked {
+                  background: var(--colorAcomod);
+                  color: white;
+                  border: none;
+                }
+                & .quantia:hover {
+                  border: 1px solid var(--color01);
                 }
               }
               & .__filtrar-btn {
                 align-self: flex-end;
+                margin-top: 1.5rem;
                 padding: 0;
-                margin-top: 1rem;
                 background: white;
                 font-size: 15px;
-                font-weight: 500;
+                font-weight: 600;
               }
             }
           }

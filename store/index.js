@@ -76,8 +76,13 @@ const store = () => new Vuex.Store({
     },
     filters: {
       date: null,
+      hospedes: 1,
       tipoAcomod: [],
-      preco: null
+      preco: {
+        low: false,
+        mid: false,
+        high: false
+      }
     },
     filteredAcomods: null,
     /*
@@ -425,6 +430,16 @@ const store = () => new Vuex.Store({
     },
     m_filteredAcomods (state, payload) {
       state.filteredAcomods = payload
+    },
+    m_decrementHospedes (state) {
+      if (state.filters.hospedes > 1) {
+        state.filters.hospedes--
+      }
+    },
+    m_incrementHospedes (state) {
+      if (state.filters.hospedes < 25) {
+        state.filters.hospedes++
+      }
     },
     m_perfil (state, payload) {
       state.perfil = payload
