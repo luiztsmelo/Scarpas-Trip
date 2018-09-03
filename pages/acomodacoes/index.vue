@@ -93,9 +93,9 @@
                 <div class="number-box">
                   <h3>Quantos hóspedes?</h3>
                   <div class="input-number">
-                    <div class="__btn" @click="$store.commit('m_decrementHospedes')"><div class="minus"></div></div>
+                    <div class="__btn" :class="$store.state.filters.hospedes === 1 ? '__btn-disabled' : ''" @click="$store.commit('m_decrementHospedes')"><div class="minus"></div></div>
                     <h3>{{ $store.state.filters.hospedes }}</h3>
-                    <div class="__btn" @click="$store.commit('m_incrementHospedes')"><div class="plus-horiz"></div><div class="plus-vert"></div></div>
+                    <div class="__btn" :class="$store.state.filters.hospedes === 25 ? '__btn-disabled' : ''" @click="$store.commit('m_incrementHospedes')"><div class="plus-horiz"></div><div class="plus-vert"></div></div>
                   </div>
                 </div>
 
@@ -303,6 +303,11 @@ export default {
         /* Datas */
         if (this.filters.date !== null) {
 
+        }
+
+        /* Hóspedes */
+        if (this.filters.hospedes > 0) {
+          acomods = acomods.where('totalHospedes', '<=', this.filters.hospedes)
         }
 
         /* Tipo de acomodação */
@@ -656,25 +661,28 @@ export default {
                     justify-content: center;
                     width: 2rem;
                     height: 2rem;
-                    border: 1px solid #161616;
+                    border: 1px solid var(--color01);
                     border-radius: 50%;
                     & .minus {
                       width: 8px;
                       height: 1px;
-                      background: #161616;
+                      background: var(--color01);
                     }
                     & .plus-horiz {
                       width: 10px;
                       height: 1px;
-                      background: #161616;
+                      background: var(--color01);
                     }
                     & .plus-vert {
                       position: absolute;
                       transform: rotate(90deg);
                       width: 10px;
                       height: 1px;
-                      background: #161616;
+                      background: var(--color01);
                     }
+                  }
+                  & .__btn-disabled {
+                    opacity: .2;
                   }
                 }
               }
