@@ -167,15 +167,15 @@
                 <div class="preco-box">
                   <div class="quantia" @click="$store.state.filters.preco.low = !$store.state.filters.preco.low" :class="[ $store.state.filters.preco.low ? 'quantia-checked' : '' ]">
                     <h1 class="__cifra">$</h1>
-                    <h3 class="__valor">± R$150</h3>
+                    <h3 class="__valor">± R$100</h3>
                   </div>
                   <div class="quantia" @click="$store.state.filters.preco.mid = !$store.state.filters.preco.mid" :class="[ $store.state.filters.preco.mid ? 'quantia-checked' : '' ]">
                     <h1 class="__cifra">$$</h1>
-                    <h3 class="__valor">± R$350</h3>
+                    <h3 class="__valor">± R$300</h3>
                   </div>
                   <div class="quantia" @click="$store.state.filters.preco.high = !$store.state.filters.preco.high" :class="[ $store.state.filters.preco.high ? 'quantia-checked' : '' ]">
                     <h1 class="__cifra">$$$</h1>
-                    <h3 class="__valor">± R$550</h3>
+                    <h3 class="__valor">± R$500</h3>
                   </div>
                 </div>
                 
