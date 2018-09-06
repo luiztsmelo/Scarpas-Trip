@@ -175,7 +175,7 @@
                   </div>
                   <div class="quantia" @click="$store.state.filters.preco.high = !$store.state.filters.preco.high" :class="[ $store.state.filters.preco.high ? 'quantia-checked' : '' ]">
                     <h1 class="__cifra">$$$</h1>
-                    <h3 class="__valor">± R$500</h3>
+                    <h3 class="__valor">± R$550</h3>
                   </div>
                 </div>
                 
