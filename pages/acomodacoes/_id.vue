@@ -28,7 +28,7 @@
       <swiper :options="swiperOptions">
         
         <swiper-slide class="slide" v-for="image in acomod.images" :key="image.id">
-          <img class="__img" v-lazy="imgObj(image)"/>
+          <progressive-background class="__img" :src="imageH(image)" :placeholder="image.L" :aspect-ratio="2/3"/>
         </swiper-slide>
 
       </swiper>
@@ -396,11 +396,8 @@ export default {
     }
   },
   methods: {
-    imgObj (image) {
-      return {
-        src: supportsWebP ? image.HW : image.HJ,
-        loading: image.L
-      }
+    imageH (image) {
+      return supportsWebP ? image.HW : image.HJ
     },
     inputDate () { /* Em caso de alterações, lembrar também de alterar DatePicker.vue */
       this.periodoReserva.start = Date.parse(this.periodoReserva.start)

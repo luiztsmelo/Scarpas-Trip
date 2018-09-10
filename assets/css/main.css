@@ -188,7 +188,7 @@ textarea {
 
 
 /* vue-lazyload */
-img[lazy=loading] {
+/* img[lazy=loading] {
   transform: translateZ(0);
   filter: blur(7px);
 }
@@ -209,4 +209,5 @@ img[lazy='loaded'] {
   100% {
     filter: blur(0);
   }
-}/* vue-lazyload */
+} */
+/* vue-lazyload */

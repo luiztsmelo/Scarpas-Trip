@@ -364,8 +364,8 @@
 
       <!-- ******* Flex Right ******* -->
       <div class="flex-right">
-
-        <img class="__acomod-img" v-lazy="imgObj"/>
+        
+        <progressive-background class="__img" :src="imageH" :placeholder="acomod.images[0].L" :aspect-ratio="2/3"/>
 
         <div class="card-body">
 
@@ -674,11 +674,8 @@ export default {
     },
 
     /* ******************** IMAGES ******************** */
-    imgObj () {
-      return {
-        src: supportsWebP ? this.acomod.images[0].HW : this.acomod.images[0].HJ,
-        loading: this.acomod.images[0].L
-      } 
+    imageH () {
+      return supportsWebP ? this.acomod.images[0].HW : this.acomod.images[0].HJ
     },
 
     /* ******************** DATES ******************** */

@@ -4,13 +4,14 @@
 
     <div class="acomods-container">
 
+
       <nuxt-link class="card" v-for="acomod in $store.state.filteredAcomods" :key="acomod.acomodID" :to="`/acomodacoes/${acomod.acomodID}`">
 
         <div class="image-box">
           <swiper :options="swiperOption">
 
             <swiper-slide class="slide" v-for="image in acomod.images" :key="image.id">
-              <img class="__img" v-lazy="imgObj(image)"/>
+              <progressive-background class="__img" :src="imageH(image)" :placeholder="image.L" :aspect-ratio="2/3"/>
             </swiper-slide>
 
             <div class="swiper-pagination" slot="pagination"></div>
@@ -175,7 +176,7 @@
                   </div>
                   <div class="quantia" @click="$store.state.filters.preco.high = !$store.state.filters.preco.high" :class="[ $store.state.filters.preco.high ? 'quantia-checked' : '' ]">
                     <h1 class="__cifra">$$$</h1>
-                    <h3 class="__valor">± R$550</h3>
+                    <h3 class="__valor">± R$500</h3>
                   </div>
                 </div>
                 
@@ -336,11 +337,8 @@ export default {
         this.$store.commit('m_loader', false)
       }
     },
-    imgObj (image) {
-      return {
-        src: supportsWebP ? image.HW : image.HJ,
-        loading: image.L
-      }
+    imageH (image) {
+      return supportsWebP ? image.HW : image.HJ
     }
   },
   computed: {
@@ -637,9 +635,9 @@ export default {
               flex-flow: column;
               position: absolute;
               top: 2.7rem;
-              width: 22rem;
+              width: 23rem;
               background-color: white;
-              padding: 1.5rem;
+              padding: 1.6rem;
               border-radius: 4px;
               box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
               z-index: 100;
