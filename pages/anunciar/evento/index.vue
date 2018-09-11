@@ -792,7 +792,7 @@ export default {
         margin: 0 .3rem;
         width: 145px;
         height: 97px;
-        border-radius: 4px;
+        border-radius: 5px;
       }
     }
   }

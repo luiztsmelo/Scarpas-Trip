@@ -380,7 +380,7 @@ export default {
         line-height: 2.6rem;
         height: 2.7rem;
         width:  11rem;
-        border-radius: 4px;
+        border-radius: 5px;
       }
     }
   }/* ####### RESERVA ####### */

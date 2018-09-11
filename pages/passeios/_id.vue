@@ -457,7 +457,7 @@ export default {
         color: white;
         height: 2.7rem;
         width:  50%;
-        border-radius: 4px;
+        border-radius: 5px;
       }
     }
   }/* ####### RESERVA ####### */

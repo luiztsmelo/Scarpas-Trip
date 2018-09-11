@@ -1,8 +1,8 @@
 <template>
-  <div class="acomods" @click="showHospedes = false, showTipoAcomod = false, showPreco = false">
+  <div class="acomods" @click="dropdownBtnIsOpen = false, showHospedes = false, showTipoAcomod = false, showPreco = false">
 
 
-    <div class="acomods-container">
+    <div class="acomods-container" :class="[ dropdownBtnIsOpen === true ? 'blur' : '' ]" v-if="$store.state.filteredAcomods !== null">
 
 
       <nuxt-link class="card" v-for="acomod in $store.state.filteredAcomods" :key="acomod.acomodID" :to="`/acomodacoes/${acomod.acomodID}`">
@@ -92,7 +92,7 @@
               <div class="dropdown-body" v-show="showHospedes">
 
                 <div class="number-box">
-                  <h3>Quantos hóspedes?</h3>
+                  <h3>Número de hóspedes</h3>
                   <div class="input-number">
                     <div class="__btn" :class="$store.state.filters.hospedes === 1 ? '__btn-disabled' : ''" @click="$store.commit('m_decrementHospedes')"><div class="minus"></div></div>
                     <h3>{{ $store.state.filters.hospedes }}</h3>
@@ -101,7 +101,9 @@
                 </div>
 
 
-                <button type="button" class="__filtrar-btn" @click="filtrar">Filtrar</button>
+                <div class="buttons">
+                  <button type="button" class="__filtrar-btn" @click="filtrar()">Filtrar</button>
+                </div>
 
               </div>
             </transition>
@@ -123,7 +125,7 @@
           
           <div class="dropdown" @click.stop>
 
-            <button type="button" class="dropdown-btn" :style="onTipoAcomodBtn" @click="showTipoAcomod = !showTipoAcomod">Tipo de acomodação</button>
+            <button type="button" class="dropdown-btn" :style="onTipoAcomodBtn" @click="onClickTipoAcomodBtn">Tipo de acomodação</button>
 
             <transition name="dropdown-animation">
               <div class="dropdown-body" v-show="showTipoAcomod">
@@ -136,7 +138,13 @@
                 </div>
 
 
-                <button type="button" class="__filtrar-btn" @click="filtrar">Filtrar</button>
+                <div class="buttons">
+
+                  <button type="button" class="__limpar-btn" :class="[ $store.state.filters.tipoAcomod.length === 0 ? '__limpar-btn-disabled' : '']" @click="$store.state.filters.tipoAcomod = []">Limpar</button>
+
+                  <button type="button" class="__filtrar-btn" :class="[ $store.state.filters.tipoAcomod.length === 0 ? '__filtrar-btn-disabled' : '']" @click="$store.state.filters.tipoAcomod.length > 0 ? filtrar() : []">Filtrar</button>
+
+                </div>
 
               </div>
             </transition>
@@ -158,30 +166,48 @@
           
           <div class="dropdown" @click.stop>
 
-            <button type="button" class="dropdown-btn" :style="onPrecoBtn" @click="showPreco = !showPreco">Preço</button>
+            <button type="button" class="dropdown-btn" :style="onPrecoBtn" @click="onClickPrecoBtn">Preço por noite</button>
 
             <transition name="dropdown-animation">
               <div class="dropdown-body" v-show="showPreco">
 
-                <h3 style="font-size: 15px">Quanto está disposto a pagar por noite?</h3>
-
                 <div class="preco-box">
-                  <div class="quantia" @click="$store.state.filters.preco.low = !$store.state.filters.preco.low" :class="[ $store.state.filters.preco.low ? 'quantia-checked' : '' ]">
-                    <h1 class="__cifra">$</h1>
-                    <h3 class="__valor">± R$100</h3>
+
+                  <div class="quantia" @click="$store.state.filters.preco = 'low'">
+                    <div class="radio">
+                      <div :class="[ $store.state.filters.preco === 'low' ? 'radio-checkmark' : '' ]"></div>
+                    </div>
+                    <h1 class="__text">Econômico</h1>
+                    <h3 class="__valor">Até R$199</h3>
                   </div>
-                  <div class="quantia" @click="$store.state.filters.preco.mid = !$store.state.filters.preco.mid" :class="[ $store.state.filters.preco.mid ? 'quantia-checked' : '' ]">
-                    <h1 class="__cifra">$$</h1>
-                    <h3 class="__valor">± R$300</h3>
+
+                  <div class="quantia" @click="$store.state.filters.preco = 'mid'">
+                    <div class="radio">
+                      <div :class="[ $store.state.filters.preco === 'mid' ? 'radio-checkmark' : '' ]"></div>
+                    </div>
+                    <h1 class="__text">Custo-benefício</h1>
+                    <h3 class="__valor">R$200 - R$399</h3>
                   </div>
-                  <div class="quantia" @click="$store.state.filters.preco.high = !$store.state.filters.preco.high" :class="[ $store.state.filters.preco.high ? 'quantia-checked' : '' ]">
-                    <h1 class="__cifra">$$$</h1>
-                    <h3 class="__valor">± R$500</h3>
+
+                  <div class="quantia" @click="$store.state.filters.preco = 'high'">
+                    <div class="radio">
+                      <div :class="[ $store.state.filters.preco === 'high' ? 'radio-checkmark' : '' ]"></div>
+                    </div>
+                    <h1 class="__text">Luxo</h1>
+                    <h3 class="__valor">R$400+</h3>
                   </div>
+
                 </div>
                 
 
-                <button type="button" class="__filtrar-btn" @click="filtrar">Filtrar</button>
+                <div class="buttons">
+
+                  <button type="button" class="__limpar-btn" :class="[ $store.state.filters.preco === null ? '__limpar-btn-disabled' : '']" @click="$store.state.filters.preco = null">Limpar</button>
+
+                  <button type="button" class="__filtrar-btn" :class="[ $store.state.filters.preco === null ? '__filtrar-btn-disabled' : '']" @click="$store.state.filters.preco !== null ? filtrar() : null">Filtrar</button>
+
+                </div>
+                
                 
               </div>
             </transition>
@@ -200,11 +226,13 @@
 
     <gmap-map
       class="map-desktop"
+      :class="[ dropdownBtnIsOpen === true ? 'blur' : '' ]"
       :center="{ lat: -20.6259183, lng: -46.0336799 }"
       :zoom="12"
       :options="{ styles: styles, draggable:  true, fullscreenControl: false , zoomControl: false , mapTypeControl: false, streetViewControl: false, gestureHandling: 'greedy' }">
 
       <GmapInfoWindow
+        v-if="$store.state.filteredAcomods !== null"
         v-for="acomod in $store.state.filteredAcomods"
         :key="acomod.acomodID"
         :position="{lat: acomod.positionLAT, lng: acomod.positionLNG}">
@@ -253,6 +281,7 @@ export default {
   transition: 'opacity',
   data () {
     return {
+      dropdownBtnIsOpen: false,
       showHospedes: false,
       showTipoAcomod: false,
       showPreco: false,
@@ -285,15 +314,23 @@ export default {
       }
     }
   },
-  async fetch ({ store }) {
-    if (store.state.filteredAcomods === null) {
-      const acomods = await firebase.firestore().collection('acomods').get()
-      store.commit('m_filteredAcomods', acomods.docs.map(acomod => acomod.data()))
-    }
-  },
   methods: {
+    onClickTipoAcomodBtn () {
+      this.dropdownBtnIsOpen = true
+      this.showHospedes = false
+      this.showTipoAcomod = !this.showTipoAcomod
+      this.showPreco = false
+    },
+    onClickPrecoBtn () {
+      this.dropdownBtnIsOpen = true
+      this.showHospedes = false
+      this.showTipoAcomod = false
+      this.showPreco = !this.showPreco
+    },
     async filtrar () {
       try {
+        this.dropdownBtnIsOpen = false
+        this.showHospedes = false
         this.showTipoAcomod = false
         this.showPreco = false
         
@@ -319,7 +356,7 @@ export default {
         }
 
         /* Preço */
-        if (this.filters.preco.low || this.filters.preco.mid || this.filters.preco.high) {
+        if (this.filters.preco !== null) {
           
         }
 
@@ -353,17 +390,21 @@ export default {
       }
     },
     onHospedesBtn () {
-      return this.showHospedes ? 'font-weight: 400; background: #161616; color: white; border: 1px solid #161616' : ''
+      return this.showHospedes ? 'background: #161616; color: white; border: 1px solid #161616' : ''
     },
     onTipoAcomodBtn () {
-      return this.showTipoAcomod ? 'font-weight: 400; background: #161616; color: white; border: 1px solid #161616' : ''
+      return this.showTipoAcomod ? 'background: #161616; color: white; border: 1px solid #161616' : ''
     },
     onPrecoBtn () {
-      return this.showPreco ? 'font-weight: 400; background: #161616; color: white; border: 1px solid #161616' : ''
+      return this.showPreco ? 'background: #161616; color: white; border: 1px solid #161616' : ''
     }
   },
   beforeRouteEnter (to, from, next) {
-    next(vm => {
+    next(async vm => {
+      if (vm.$store.state.filteredAcomods === null) {
+        const acomods = await firebase.firestore().collection('acomods').get()
+        vm.$store.commit('m_filteredAcomods', acomods.docs.map(acomod => acomod.data()))
+      }
       vm.$store.state.offFoobar1 = false
       vm.$store.state.offFoobar2 = true
       vm.$store.state.offFoobar3 = true
@@ -391,6 +432,7 @@ export default {
     margin-bottom: 1rem;
     display: flex;
     flex-flow: column;
+    transition: var(--main-transition);
     & .card {
       width: 93%;
       padding: 7% 0 1.5rem 7%;
@@ -484,7 +526,7 @@ export default {
     display: flex;
     flex-flow: row;
     & .acomods-container {
-      margin-top: calc(var(--navbarHeightDesktop) + 3.6rem + 1rem);
+      margin-top: calc(var(--navbarHeightDesktop) + 3.7rem + 1rem);
       width: 64.8%;
       padding-left: 7%;
       display: flex;
@@ -544,7 +586,7 @@ export default {
       & .filtrar-desktop-form {
         position: relative;
         padding: 0 7%;
-        height: 3.6rem;
+        height: 3.7rem;
         display: flex;
         align-items: center;
         border-bottom: 1px solid #dedede;
@@ -555,10 +597,10 @@ export default {
             height: 2.1rem;
             font-size: 14px;
             font-weight: 400;
-            padding: 0 .8rem;
+            padding: 0 .9rem;
             border: 1px solid #dedede;
             outline: none;
-            border-radius: 4px;
+            border-radius: 100px;
             background: white;
             color: var(--color01);
           }
@@ -574,7 +616,7 @@ export default {
             padding: 0 .8rem;
             border: 1px solid #dedede;
             outline: none;
-            border-radius: 4px;
+            border-radius: 5px;
             background: white;
             color: var(--color01);
           }
@@ -582,7 +624,7 @@ export default {
             border: 1px solid var(--color01);
           }
           & .inputDatePicker {
-            max-width: 4.4rem;
+            max-width: 4.6rem;
           }
           & .fake-input:hover {
             border: 1px solid var(--color01);
@@ -592,7 +634,7 @@ export default {
             align-items: center;
             height: 2.1rem; 
             background: var(--colorAcomod);
-            border-radius: 4px;
+            border-radius: 5px;
             transition: var(--main-transition);
             & .__text {
               user-select: none;
@@ -620,12 +662,11 @@ export default {
               height: 2.1rem;
               font-size: 14px;
               font-weight: 400;
-              padding: 0 .8rem;
+              padding: 0 .9rem;
               border: 1px solid #dedede;
               outline: none;
-              border-radius: 4px;
+              border-radius: 100px;
               background: white;
-              transition: var(--main-transition);
             }
             & .dropdown-btn:hover {
               border: 1px solid var(--color01);
@@ -634,11 +675,11 @@ export default {
               display: flex;
               flex-flow: column;
               position: absolute;
-              top: 2.7rem;
+              top: 2.8rem;
               width: 23rem;
               background-color: white;
               padding: 1.6rem;
-              border-radius: 4px;
+              border-radius: 5px;
               box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
               z-index: 100;
               transition: var(--main-transition);
@@ -691,6 +732,7 @@ export default {
                   cursor: pointer;
                   display: flex;
                   align-items: center;
+                  padding: .2rem 0;
                   width: 50%;
                   & input[type='checkbox'] {
                     appearance: none;
@@ -709,46 +751,86 @@ export default {
               }
               & .preco-box {
                 display: flex;
-                align-items: center;
-                justify-content: space-between;
-                margin: 1.5rem 0 1rem;
+                flex-flow: column;
                 & .quantia {
+                  position: relative;
                   cursor: pointer;
                   display: flex;
-                  flex-flow: column;
                   align-items: center;
-                  justify-content: center;
-                  width: 5.7rem;
-                  height: 4.3rem;
-                  border: 1px solid #dedede;
-                  border-radius: 4px;
+                  justify-content: space-between;
+                  height: 3rem;
                   user-select: none;
-                  transition: var(--main-transition);
-                  & .__cifra {
-                    font-size: 17px;
+                  & .radio {
+                    position: relative;
+                    width: 1.3rem;
+                    height: 1.3rem;
+                    border-radius: 50%;
+                    border: 1px solid #dedede;
+                    transition: var(--main-transition);
+                  }
+                  & .radio-checkmark {
+                    position: absolute;
+                    top: 0;
+                    bottom: 0;
+                    left: 0;
+                    right: 0;
+                    margin: auto;
+                    width: 7px;
+                    height: 7px;
+                    border-radius: 50%;
+                    background: var(--colorAcomod) !important;
+                    transition: var(--main-transition);
+                  }
+                  & .__text {
+                    position: absolute;
+                    left: 2rem;
+                    font-size: 15px;
                     font-weight: 600;
                     padding-bottom: .2rem;
                   }
                   & .__valor {
-                    font-size: 14px;
+                    font-size: 15px;
                   }
                 }
-                & .quantia-checked {
-                  background: var(--colorAcomod);
-                  color: white;
-                  border: none;
-                }
-                & .quantia:hover {
-                  border: 1px solid var(--color01);
+                & .quantia:hover > .radio {
+                  border: 1px solid #161616;
                 }
               }
-              & .__filtrar-btn {
-                align-self: flex-end;
-                margin-top: 1.5rem;
-                padding: 0;
-                background: white;
-                font-size: 15px;
-                font-weight: 600;
+              & .buttons {
+                display: flex;
+                align-items: center;
+                position: relative;
+                margin-top: 3.5rem;
+                & .__limpar-btn {
+                  position: absolute;
+                  left: 0;
+                  bottom: 0;
+                  padding: 0;
+                  height: 2.1rem;
+                  background: transparent;
+                  font-size: 15px;
+                  font-weight: 500;
+                  transition: var(--main-transition);
+                }
+                & .__limpar-btn-disabled {
+                  display: none;
+                }
+                & .__filtrar-btn {
+                  position: absolute;
+                  right: 0;
+                  bottom: 0;
+                  height: 2.1rem;
+                  width: 4.6rem;
+                  background: var(--colorAcomod);
+                  border-radius: 100px;
+                  color: white;
+                  font-size: 15px;
+                  font-weight: 500;
+                  transition: var(--main-transition);
+                }
+                & .__filtrar-btn-disabled {
+                  background: rgb(232,232,232);
+                }
               }
             }
           }
@@ -763,7 +845,7 @@ export default {
       bottom: 1rem;
       right: 7%;
       width: 26.5%;
-      height: calc(100% - var(--navbarHeightDesktop) - 3.6rem - 2rem);
+      height: calc(100% - var(--navbarHeightDesktop) - 3.7rem - 2rem);
     }
     & .map-desktop > div > div {
       background-color: #fff !important;
@@ -784,6 +866,11 @@ export default {
   }
 }
 
+.blur {
+  opacity: .2;
+  pointer-events: none;
+  user-select: none;
+}
 
 /* TRANSITIONS */
 .dropdown-animation-enter, .dropdown-animation-leave-active {
