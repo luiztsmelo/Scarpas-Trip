@@ -86,10 +86,10 @@
           
           <div class="dropdown" @click.stop>
 
-            <button type="button" class="dropdown-btn" :style="onHospedesBtn" @click="showHospedes = !showHospedes">Hóspedes</button>
+            <button type="button" class="dropdown-btn" :style="onHospedesBtn" @click="onClickHospedesBtn">Hóspedes</button>
 
             <transition name="dropdown-animation">
-              <div class="dropdown-body" v-show="showHospedes">
+              <div class="dropdown-body" v-if="showHospedes">
 
                 <div class="number-box">
                   <h3>Número de hóspedes</h3>
@@ -128,21 +128,26 @@
             <button type="button" class="dropdown-btn" :style="onTipoAcomodBtn" @click="onClickTipoAcomodBtn">Tipo de acomodação</button>
 
             <transition name="dropdown-animation">
-              <div class="dropdown-body" v-show="showTipoAcomod">
+              <div class="dropdown-body" v-if="showTipoAcomod">
 
-                <div class="select-box">
-                  <div class="option" v-for="(tipoAcomod, index) in tiposAcomods" :key="tipoAcomod.name">
-                    <input type="checkbox" ref="tipoAcomodCheckbox" :value="tipoAcomod.name" v-model="$store.state.filters.tipoAcomod">
-                    <h3 class="__text" @click="$refs.tipoAcomodCheckbox[index].click()">{{ tipoAcomod.name }}</h3>
+                <div class="tipo-acomod-box">
+
+                  <div class="option" v-for="(tipoAcomod, index) in tiposAcomods" :key="tipoAcomod.name" @click="$store.state.filters.tipoAcomod = tipoAcomod.name">
+
+                    <div class="radio"><div :class="[ $store.state.filters.tipoAcomod === tipoAcomod.name ? 'radio-checkmark' : '' ]"></div></div>
+
+                    <h3 class="__text" >{{ tipoAcomod.name }}</h3>
+
                   </div>
+
                 </div>
 
 
                 <div class="buttons">
 
-                  <button type="button" class="__limpar-btn" :class="[ $store.state.filters.tipoAcomod.length === 0 ? '__limpar-btn-disabled' : '']" @click="$store.state.filters.tipoAcomod = []">Limpar</button>
+                  <button type="button" class="__limpar-btn" :class="[ $store.state.filters.tipoAcomod === null ? '__limpar-btn-disabled' : '']" @click="$store.state.filters.tipoAcomod = null">Limpar</button>
 
-                  <button type="button" class="__filtrar-btn" :class="[ $store.state.filters.tipoAcomod.length === 0 ? '__filtrar-btn-disabled' : '']" @click="$store.state.filters.tipoAcomod.length > 0 ? filtrar() : []">Filtrar</button>
+                  <button type="button" class="__filtrar-btn" :class="[ $store.state.filters.tipoAcomod === null ? '__filtrar-btn-disabled' : '']" @click="$store.state.filters.tipoAcomod.length > 0 ? filtrar() : null">Filtrar</button>
 
                 </div>
 
@@ -169,30 +174,24 @@
             <button type="button" class="dropdown-btn" :style="onPrecoBtn" @click="onClickPrecoBtn">Preço por noite</button>
 
             <transition name="dropdown-animation">
-              <div class="dropdown-body" v-show="showPreco">
+              <div class="dropdown-body" v-if="showPreco">
 
                 <div class="preco-box">
 
                   <div class="quantia" @click="$store.state.filters.preco = 'low'">
-                    <div class="radio">
-                      <div :class="[ $store.state.filters.preco === 'low' ? 'radio-checkmark' : '' ]"></div>
-                    </div>
+                    <div class="radio"><div :class="[ $store.state.filters.preco === 'low' ? 'radio-checkmark' : '' ]"></div></div>
                     <h1 class="__text">Econômico</h1>
                     <h3 class="__valor">Até R$199</h3>
                   </div>
 
                   <div class="quantia" @click="$store.state.filters.preco = 'mid'">
-                    <div class="radio">
-                      <div :class="[ $store.state.filters.preco === 'mid' ? 'radio-checkmark' : '' ]"></div>
-                    </div>
+                    <div class="radio"><div :class="[ $store.state.filters.preco === 'mid' ? 'radio-checkmark' : '' ]"></div></div>
                     <h1 class="__text">Custo-benefício</h1>
                     <h3 class="__valor">R$200 - R$399</h3>
                   </div>
 
                   <div class="quantia" @click="$store.state.filters.preco = 'high'">
-                    <div class="radio">
-                      <div :class="[ $store.state.filters.preco === 'high' ? 'radio-checkmark' : '' ]"></div>
-                    </div>
+                    <div class="radio"><div :class="[ $store.state.filters.preco === 'high' ? 'radio-checkmark' : '' ]"></div></div>
                     <h1 class="__text">Luxo</h1>
                     <h3 class="__valor">R$400+</h3>
                   </div>
@@ -315,6 +314,12 @@ export default {
     }
   },
   methods: {
+    onClickHospedesBtn () {
+      this.dropdownBtnIsOpen = true
+      this.showHospedes = !this.showHospedes
+      this.showTipoAcomod = false
+      this.showPreco = false
+    },
     onClickTipoAcomodBtn () {
       this.dropdownBtnIsOpen = true
       this.showHospedes = false
@@ -340,24 +345,33 @@ export default {
 
         /* Datas */
         if (this.filters.date !== null) {
-
+          console.log('preco')
         }
 
         /* Hóspedes */
-        if (this.filters.hospedes > 0) {
+        if (this.filters.hospedes > 1) {
+          console.log('hospedes')
           acomods = acomods.where('totalHospedes', '<=', this.filters.hospedes)
         }
 
         /* Tipo de acomodação */
-        if (this.filters.tipoAcomod.length > 0) {
-          this.filters.tipoAcomod.forEach(tipoAcomod => {
-            acomods = acomods.where('tipoAcomod', '==', tipoAcomod)
-          })
+        if (this.filters.tipoAcomod !== null) {
+          console.log('tipoAcomod')
+          acomods = acomods.where('tipoAcomod', '==', this.filters.tipoAcomod)
         }
 
         /* Preço */
         if (this.filters.preco !== null) {
-          
+          console.log('preco')
+          if (this.filters.preco === 'low') {
+            acomods = acomods.where('valorNoite', '<', 200)
+          }
+          if (this.filters.preco === 'mid') {
+            acomods = acomods.where('valorNoite', '>=', 200).where('valorNoite', '<', 400)
+          }
+          if (this.filters.preco === 'high') {
+            acomods = acomods.where('valorNoite', '>', 399)
+          }
         }
 
         console.log(acomods)
@@ -421,6 +435,7 @@ export default {
 <style>
 @import url('~/assets/css/main.css');
 @import url('~/assets/css/pagination.css');
+@import url('~/assets/css/radio-desktop.css');
 
 .acomods {
   margin: 3.4rem 0 5.4rem 0;
@@ -513,13 +528,10 @@ export default {
 }
 
 @media (max-width: 1023px) {
-  .filtrar-desktop {
-    display: none;
-  }
-  .map-desktop {
-    display: none;
-  }
+  .filtrar-desktop { display: none; }
+  .map-desktop { display: none; }
 }
+
 @media (min-width: 1024px) {
   .acomods {
     margin: 0;
@@ -725,28 +737,23 @@ export default {
                   }
                 }
               }
-              & .select-box {
+              & .tipo-acomod-box {
                 display: flex;
                 flex-flow: row wrap;
                 & .option {
                   cursor: pointer;
                   display: flex;
                   align-items: center;
-                  padding: .2rem 0;
+                  padding: .6rem 0;
                   width: 50%;
-                  & input[type='checkbox'] {
-                    appearance: none;
-                    transform: scale(.6);
-                    transition: var(--main-transition);
-                  }
-                  & input[type='checkbox']:checked {
-                    background: var(--colorAcomod);
-                  }
                   & .__text {
                     user-select: none;
                     padding-left: 7px;
                     font-size: 15px;
                   }
+                }
+                & .option:hover > .radio {
+                  border: 1px solid #161616;
                 }
               }
               & .preco-box {
@@ -760,27 +767,6 @@ export default {
                   justify-content: space-between;
                   height: 3rem;
                   user-select: none;
-                  & .radio {
-                    position: relative;
-                    width: 1.3rem;
-                    height: 1.3rem;
-                    border-radius: 50%;
-                    border: 1px solid #dedede;
-                    transition: var(--main-transition);
-                  }
-                  & .radio-checkmark {
-                    position: absolute;
-                    top: 0;
-                    bottom: 0;
-                    left: 0;
-                    right: 0;
-                    margin: auto;
-                    width: 7px;
-                    height: 7px;
-                    border-radius: 50%;
-                    background: var(--colorAcomod) !important;
-                    transition: var(--main-transition);
-                  }
                   & .__text {
                     position: absolute;
                     left: 2rem;
@@ -812,6 +798,9 @@ export default {
                   font-weight: 500;
                   transition: var(--main-transition);
                 }
+                & .__limpar-btn:hover {
+                  text-decoration: underline;
+                }
                 & .__limpar-btn-disabled {
                   display: none;
                 }
@@ -819,17 +808,19 @@ export default {
                   position: absolute;
                   right: 0;
                   bottom: 0;
+                  padding: 0;
                   height: 2.1rem;
-                  width: 4.6rem;
-                  background: var(--colorAcomod);
-                  border-radius: 100px;
-                  color: white;
+                  background: transparent;
+                  color: var(--colorAcomod);
                   font-size: 15px;
-                  font-weight: 500;
+                  font-weight: 600;
                   transition: var(--main-transition);
                 }
+                & .__filtrar-btn:hover {
+                  text-decoration: underline;
+                }
                 & .__filtrar-btn-disabled {
-                  background: rgb(232,232,232);
+                  color: #dedede;
                 }
               }
             }
