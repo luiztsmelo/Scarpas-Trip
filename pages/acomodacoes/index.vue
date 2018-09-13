@@ -2,10 +2,10 @@
   <div class="acomods" @click="dropdownBtnIsOpen = false, showHospedes = false, showTipoAcomod = false, showPreco = false">
 
 
-    <div class="acomods-container" :class="[ dropdownBtnIsOpen === true ? 'blur' : '' ]" v-if="$store.state.filteredAcomods !== null">
+    <div class="acomods-container" :class="[ dropdownBtnIsOpen === true ? 'blur' : '' ]" v-if="$store.state.allAcomods !== null">
 
 
-      <nuxt-link class="card" v-for="acomod in $store.state.filteredAcomods" :key="acomod.acomodID" :to="`/acomodacoes/${acomod.acomodID}`">
+      <nuxt-link class="card" v-for="(acomod, index) in $store.state.filteredAcomods !== null ? $store.state.filteredAcomods : $store.state.allAcomods" :key="acomod.acomodID" @mouseover.native="mouseOverCard(index)" @mouseout.native="mouseOutCard(index)" :to="`/acomodacoes/${acomod.acomodID}`">
 
         <div class="image-box">
           <swiper :options="swiperOption">
@@ -28,9 +28,9 @@
       </nuxt-link> 
 
 
-      <h1 v-if="$store.state.filteredAcomods.length === 0">
+      <!-- <h1 v-if="$store.state.filteredAcomods.length === 0">
         Nenhuma acomodação encontrada.
-      </h1>
+      </h1> -->
 
     </div>
 
@@ -145,7 +145,7 @@
 
                 <div class="buttons">
 
-                  <button type="button" class="__limpar-btn" :class="[ $store.state.filters.tipoAcomod === null ? '__limpar-btn-disabled' : '']" @click="$store.state.filters.tipoAcomod = null">Limpar</button>
+                  <button type="button" class="__limpar-btn" :class="[ $store.state.filters.tipoAcomod === null ? '__limpar-btn-disabled' : '']" @click="$store.state.filters.tipoAcomod = null, filtrar()">Limpar</button>
 
                   <button type="button" class="__filtrar-btn" :class="[ $store.state.filters.tipoAcomod === null ? '__filtrar-btn-disabled' : '']" @click="$store.state.filters.tipoAcomod.length > 0 ? filtrar() : null">Filtrar</button>
 
@@ -231,8 +231,9 @@
       :options="{ styles: styles, draggable:  true, fullscreenControl: false , zoomControl: false , mapTypeControl: false, streetViewControl: false, gestureHandling: 'greedy' }">
 
       <GmapInfoWindow
-        v-if="$store.state.filteredAcomods !== null"
-        v-for="acomod in $store.state.filteredAcomods"
+        ref="infoWindow"
+        v-if="$store.state.allAcomods !== null"
+        v-for="acomod in $store.state.filteredAcomods !== null ? $store.state.filteredAcomods : $store.state.allAcomods"
         :key="acomod.acomodID"
         :position="{lat: acomod.positionLAT, lng: acomod.positionLNG}">
 
@@ -314,6 +315,12 @@ export default {
     }
   },
   methods: {
+    mouseOverCard (index) {
+      this.$refs.infoWindow[index].$children[0].$el.style.color = '#FFA04F'
+    },
+    mouseOutCard (index) {
+      this.$refs.infoWindow[index].$children[0].$el.style.color = '#161616'
+    },
     onClickHospedesBtn () {
       this.dropdownBtnIsOpen = true
       this.showHospedes = !this.showHospedes
@@ -332,60 +339,40 @@ export default {
       this.showTipoAcomod = false
       this.showPreco = !this.showPreco
     },
-    async filtrar () {
+    filterByTipoAcomod (acomod) {
+      return acomod.tipoAcomod === this.filters.tipoAcomod
+    },
+    filterByPreco (acomod) {
+      if (this.filters.preco === 'low') {
+        return acomod.valorNoite <= 199
+      }
+      if (this.filters.preco === 'mid') {
+        return acomod.valorNoite >= 200 && acomod.valorNoite <= 399
+      }
+      if (this.filters.preco === 'high') {
+        return acomod.valorNoite >= 400
+      }
+    },
+    filtrar () {
       try {
         this.dropdownBtnIsOpen = false
         this.showHospedes = false
         this.showTipoAcomod = false
         this.showPreco = false
         
-        this.$store.commit('m_loader', true)
+        const allAcomods = this.$store.state.allAcomods
 
-        let acomods = firebase.firestore().collection('acomods')
+        const filteredAcomods = allAcomods.filter(acomod => {
+          return this.filters.tipoAcomod !== null ? this.filterByTipoAcomod(acomod) : '' && 
+                 this.filters.preco !== null ? this.filterByPreco(acomod) : ''
+        })
 
-        /* Datas */
-        if (this.filters.date !== null) {
-          console.log('preco')
-        }
-
-        /* Hóspedes */
-        if (this.filters.hospedes > 1) {
-          console.log('hospedes')
-          acomods = acomods.where('totalHospedes', '<=', this.filters.hospedes)
-        }
-
-        /* Tipo de acomodação */
-        if (this.filters.tipoAcomod !== null) {
-          console.log('tipoAcomod')
-          acomods = acomods.where('tipoAcomod', '==', this.filters.tipoAcomod)
-        }
-
-        /* Preço */
-        if (this.filters.preco !== null) {
-          console.log('preco')
-          if (this.filters.preco === 'low') {
-            acomods = acomods.where('valorNoite', '<', 200)
-          }
-          if (this.filters.preco === 'mid') {
-            acomods = acomods.where('valorNoite', '>=', 200).where('valorNoite', '<', 400)
-          }
-          if (this.filters.preco === 'high') {
-            acomods = acomods.where('valorNoite', '>', 399)
-          }
-        }
-
-        console.log(acomods)
-
-        const filteredAcomods = await acomods.get()
-        
         console.log(filteredAcomods)
+
+        this.$store.commit('m_filteredAcomods', filteredAcomods)
         
-        this.$store.commit('m_filteredAcomods', filteredAcomods.docs.map(acomod => acomod.data()))
-        
-        this.$store.commit('m_loader', false)
       } catch (err) {
         console.log(err)
-        this.$store.commit('m_loader', false)
       }
     },
     imageH (image) {
@@ -415,9 +402,9 @@ export default {
   },
   beforeRouteEnter (to, from, next) {
     next(async vm => {
-      if (vm.$store.state.filteredAcomods === null) {
+      if (vm.$store.state.allAcomods === null) {
         const acomods = await firebase.firestore().collection('acomods').get()
-        vm.$store.commit('m_filteredAcomods', acomods.docs.map(acomod => acomod.data()))
+        vm.$store.commit('m_allAcomods', acomods.docs.map(acomod => acomod.data()))
       }
       vm.$store.state.offFoobar1 = false
       vm.$store.state.offFoobar2 = true
@@ -842,17 +829,29 @@ export default {
       background-color: #fff !important;
     }
     & .gm-style-iw {
+      padding: .4rem 0 .3rem;
+      background: #fff;
       display: flex;
       align-items: center;
       justify-content: center;
+      border-radius: 100px;
+      transform: translateY(22px);
       & .__valor {
         cursor: pointer;
-        font-size: 13px;
-        font-weight: 600;
+        font-size: 14px;
+        font-weight: 500;
+        transition: var(--main-transition);
       }
     }
     & .gm-style-iw + div { /* Remove close button */
-      display: none;
+      display: none !important;
+    }
+    & .gm-style > div > div > div > div > div > div > div { /* Remove white borders */
+      background-color: transparent !important;
+      box-shadow: none !important;
+    }
+    & .gm-style div div div div div div div div { /* Remove shadow of down arrow */
+      box-shadow: none !important;
     }
   }
 }

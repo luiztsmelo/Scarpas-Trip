@@ -80,6 +80,7 @@ const store = () => new Vuex.Store({
       tipoAcomod: null,
       preco: null
     },
+    allAcomods: null,
     filteredAcomods: null,
     /*
     -------------------- GOOGLE MAPS --------------------
@@ -423,6 +424,9 @@ const store = () => new Vuex.Store({
     },
     m_visits (state, payload) {
       state.visits = payload
+    },
+    m_allAcomods (state, payload) {
+      state.allAcomods = payload
     },
     m_filteredAcomods (state, payload) {
       state.filteredAcomods = payload
