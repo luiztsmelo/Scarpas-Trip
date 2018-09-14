@@ -856,16 +856,16 @@ export default {
       background-color: #fff !important;
     }
     & .gm-style-iw {
-      padding: .4rem 0 .3rem;
+      padding: .3rem 0 .2rem 0;
       background: #fff;
       display: flex;
       align-items: center;
       justify-content: center;
       border-radius: 100px;
-      transform: translateY(22px);
+      transform: translateY(24px);
       & .__valor {
         cursor: pointer;
-        font-size: 14px;
+        font-size: 13px;
         font-weight: 500;
         transition: var(--main-transition);
       }
