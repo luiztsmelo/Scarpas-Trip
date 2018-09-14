@@ -1,5 +1,5 @@
 <template>
-  <div class="acomods" @click="dropdownBtnIsOpen = false, showHospedes = false, showTipoAcomod = false, showPreco = false">
+  <div class="acomods" @click="closeFilterBtns">
 
 
     <div class="acomods-container" :class="[ dropdownBtnIsOpen === true ? 'blur' : '' ]" v-if="$store.state.allAcomods !== null">
@@ -72,11 +72,6 @@
             </div>
           </v-date-picker>
 
-          <div class="filter-choosed" v-else>
-            <h3 class="__text">{{ outputDatePicker }}</h3>
-            <img class="__limpar-img" src="../../assets/img/close-mobile.svg" @click="$store.state.filters.date = null">
-          </div>
-
         </div><!-- Datas -->
 
 
@@ -86,7 +81,9 @@
           
           <div class="dropdown" @click.stop>
 
-            <button type="button" class="dropdown-btn" :style="onHospedesBtn" @click="onClickHospedesBtn">Hóspedes</button>
+            <button type="button" class="dropdown-btn" :style="onHospedesBtn" @click="onClickHospedesBtn">
+              {{ $store.state.filters.hospedes > 0 ? `${$store.state.filters.hospedes} hóspedes` : 'Hóspedes' }}
+            </button>
 
             <transition name="dropdown-animation">
               <div class="dropdown-body" v-if="showHospedes">
@@ -108,22 +105,17 @@
 
                 <div class="buttons">
 
-                  <button type="button" class="__limpar-btn" :class="[ $store.state.filters.hospedes === 0 ? '__limpar-btn-disabled' : '']" @click="$store.state.filters.hospedes = 0, filtrar()">Limpar</button>
+                  <button type="button" class="__limpar-btn" :class="[ $store.state.filters.hospedes === 0 ? '__limpar-btn-disabled' : '']" @click="$store.state.filters.hospedes = 0">Limpar</button>
 
-                  <button type="button" class="__filtrar-btn" :class="[ $store.state.filters.hospedes === 0 ? '__filtrar-btn-disabled' : '']" @click="$store.state.filters.hospedes > 0 ? filtrar() : null">Filtrar</button>
+                  <button type="button" class="__filtrar-btn" @click="filtrar">Filtrar</button>
 
                 </div>
+
 
               </div>
             </transition>
 
           </div>
-
-
-          <!-- <div class="filter-choosed" v-else>
-            <h3 class="__text">{{ $store.state.filters.tipoAcomod }}</h3>
-            <img class="__limpar-img" src="../../assets/img/close-mobile.svg" @click="$store.state.filters.tipoAcomod = null">
-          </div> -->
 
         </div><!-- Hóspedes -->
 
@@ -134,7 +126,9 @@
           
           <div class="dropdown" @click.stop>
 
-            <button type="button" class="dropdown-btn" :style="onTipoAcomodBtn" @click="onClickTipoAcomodBtn">Tipo de acomodação</button>
+            <button type="button" class="dropdown-btn" :style="onTipoAcomodBtn" @click="onClickTipoAcomodBtn">
+              {{ $store.state.filters.tipoAcomod === null ? 'Tipo de acomodação' : $store.state.filters.tipoAcomod }}
+            </button>
 
             <transition name="dropdown-animation">
               <div class="dropdown-body" v-if="showTipoAcomod">
@@ -154,22 +148,17 @@
 
                 <div class="buttons">
 
-                  <button type="button" class="__limpar-btn" :class="[ $store.state.filters.tipoAcomod === null ? '__limpar-btn-disabled' : '']" @click="$store.state.filters.tipoAcomod = null, filtrar()">Limpar</button>
+                  <button type="button" class="__limpar-btn" :class="[ $store.state.filters.tipoAcomod === null ? '__limpar-btn-disabled' : '']" @click="$store.state.filters.tipoAcomod = null">Limpar</button>
 
-                  <button type="button" class="__filtrar-btn" :class="[ $store.state.filters.tipoAcomod === null ? '__filtrar-btn-disabled' : '']" @click="$store.state.filters.tipoAcomod.length > 0 ? filtrar() : null">Filtrar</button>
+                  <button type="button" class="__filtrar-btn" @click="filtrar">Filtrar</button>
 
                 </div>
+
 
               </div>
             </transition>
 
           </div>
-
-
-          <!-- <div class="filter-choosed" v-else>
-            <h3 class="__text">{{ $store.state.filters.tipoAcomod }}</h3>
-            <img class="__limpar-img" src="../../assets/img/close-mobile.svg" @click="$store.state.filters.tipoAcomod = null">
-          </div> -->
 
         </div><!-- Tipo acomod -->
 
@@ -180,7 +169,9 @@
           
           <div class="dropdown" @click.stop>
 
-            <button type="button" class="dropdown-btn" :style="onPrecoBtn" @click="onClickPrecoBtn">Preço por noite</button>
+            <button type="button" class="dropdown-btn" :style="onPrecoBtn" @click="onClickPrecoBtn">
+              {{ $store.state.filters.preco === 'low' ? 'Até R$199' : $store.state.filters.preco === 'mid' ? 'R$200 - R$399' : $store.state.filters.preco === 'high' ? 'R$400+' : 'Preço por noite'}}
+            </button>
 
             <transition name="dropdown-animation">
               <div class="dropdown-body" v-if="showPreco">
@@ -210,9 +201,9 @@
 
                 <div class="buttons">
 
-                  <button type="button" class="__limpar-btn" :class="[ $store.state.filters.preco === null ? '__limpar-btn-disabled' : '']" @click="$store.state.filters.preco = null, filtrar()">Limpar</button>
+                  <button type="button" class="__limpar-btn" :class="[ $store.state.filters.preco === null ? '__limpar-btn-disabled' : '']" @click="$store.state.filters.preco = null">Limpar</button>
 
-                  <button type="button" class="__filtrar-btn" :class="[ $store.state.filters.preco === null ? '__filtrar-btn-disabled' : '']" @click="$store.state.filters.preco !== null ? filtrar() : null">Filtrar</button>
+                  <button type="button" class="__filtrar-btn" @click="filtrar">Filtrar</button>
 
                 </div>
                 
@@ -223,6 +214,40 @@
           </div>
 
         </div><!-- Preço -->
+
+
+
+        <!-- Avaliação -->
+        <div class="item-form">
+          
+          <div class="dropdown" @click.stop>
+
+            <button type="button" class="dropdown-btn" :style="onAvaliacaoBtn" @click="onClickAvaliacaoBtn">Avaliação</button>
+
+            <transition name="dropdown-animation">
+              <div class="dropdown-body" v-if="showAvaliacao">
+
+                <div class="avaliacao-box">
+
+
+                </div>
+                
+
+                <div class="buttons">
+
+                  <button type="button" class="__limpar-btn" :class="[ $store.state.filters.avaliacao === null ? '__limpar-btn-disabled' : '']" @click="$store.state.filters.avaliacao = null">Limpar</button>
+
+                  <button type="button" class="__filtrar-btn" @click="filtrar">Filtrar</button>
+
+                </div>
+                
+                
+              </div>
+            </transition>
+
+          </div>
+
+        </div><!-- Avaliação -->
 
 
 
@@ -294,6 +319,7 @@ export default {
       showHospedes: false,
       showTipoAcomod: false,
       showPreco: false,
+      showAvaliacao: false,
       tiposAcomods: [
         { 'name': 'Casa' },
         { 'name': 'Apartamento' },
@@ -331,23 +357,40 @@ export default {
       this.$refs.infoWindow[index].$children[0].$el.style.color = '#161616'
     },
     /* __________ FILTERS BUTTONS __________ */
+    closeFilterBtns () {
+      this.dropdownBtnIsOpen = false
+      this.showHospedes = false
+      this.showTipoAcomod = false
+      this.showPreco = false
+      this.showAvaliacao = false
+    },
     onClickHospedesBtn () {
       this.dropdownBtnIsOpen = true
       this.showHospedes = !this.showHospedes
       this.showTipoAcomod = false
       this.showPreco = false
+      this.showAvaliacao = false
     },
     onClickTipoAcomodBtn () {
       this.dropdownBtnIsOpen = true
       this.showHospedes = false
       this.showTipoAcomod = !this.showTipoAcomod
       this.showPreco = false
+      this.showAvaliacao = false
     },
     onClickPrecoBtn () {
       this.dropdownBtnIsOpen = true
       this.showHospedes = false
       this.showTipoAcomod = false
       this.showPreco = !this.showPreco
+      this.showAvaliacao = false
+    },
+    onClickAvaliacaoBtn () {
+      this.dropdownBtnIsOpen = true
+      this.showHospedes = false
+      this.showTipoAcomod = false
+      this.showPreco = false
+      this.showAvaliacao = !this.showAvaliacao
     },
     /* __________ FILTERS __________ */
     filterByHospedes (acomod) {
@@ -418,13 +461,24 @@ export default {
       }
     },
     onHospedesBtn () {
-      return this.showHospedes ? 'background: #161616; color: white; border: 1px solid #161616' : ''
+      if (this.showHospedes || this.filters.hospedes > 0) {
+         return 'background: #FFA04F; color: white; border: 1px solid #FFA04F'
+      }
     },
     onTipoAcomodBtn () {
-      return this.showTipoAcomod ? 'background: #161616; color: white; border: 1px solid #161616' : ''
+      if (this.showTipoAcomod || this.filters.tipoAcomod !== null) {
+         return 'background: #FFA04F; color: white; border: 1px solid #FFA04F'
+      }
     },
     onPrecoBtn () {
-      return this.showPreco ? 'background: #161616; color: white; border: 1px solid #161616' : ''
+      if (this.showPreco || this.filters.preco !== null) {
+         return 'background: #FFA04F; color: white; border: 1px solid #FFA04F'
+      }
+    },
+    onAvaliacaoBtn () {
+      if (this.showAvaliacao || this.filters.avaliacao !== null) {
+         return 'background: #FFA04F; color: white; border: 1px solid #FFA04F'
+      }
     }
   },
   beforeRouteEnter (to, from, next) {
@@ -655,28 +709,6 @@ export default {
           & .fake-input:hover {
             border: 1px solid var(--color01);
           }
-          & .filter-choosed {
-            display: flex;
-            align-items: center;
-            height: 2.1rem; 
-            background: var(--colorAcomod);
-            border-radius: 5px;
-            transition: var(--main-transition);
-            & .__text {
-              user-select: none;
-              padding: 0 .7rem;
-              font-size: 14px;
-              font-weight: 500;
-              color: white;
-            }
-            & .__limpar-img {
-              cursor: pointer;
-              margin: 0 .8rem 0 .2rem;
-              width: .7rem;
-              height: auto;
-              filter: invert(100%) brightness(300%);
-            }
-          }
           & .dropdown {
             position: relative;
             display: inline-flex;
@@ -695,7 +727,8 @@ export default {
               background: white;
             }
             & .dropdown-btn:hover {
-              border: 1px solid var(--color01);
+              border: 1px solid rgb(245,245,245);
+              filter: invert(4%);
             }
             & .dropdown-body {
               display: flex;
@@ -832,9 +865,6 @@ export default {
                 }
                 & .__filtrar-btn:hover {
                   text-decoration: underline;
-                }
-                & .__filtrar-btn-disabled {
-                  color: #dedede;
                 }
               }
             }

@@ -78,7 +78,8 @@ const store = () => new Vuex.Store({
       date: null,
       hospedes: 0,
       tipoAcomod: null,
-      preco: null
+      preco: null,
+      avaliacao: null
     },
     allAcomods: null,
     filteredAcomods: null,
