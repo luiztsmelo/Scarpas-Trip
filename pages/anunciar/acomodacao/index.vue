@@ -82,10 +82,10 @@
 
       <div class="item-form">
         <label>Total de Hóspedes</label>
-        <select v-model="$store.state.acomodData.totalHospedes">
+        <select v-model.number="$store.state.acomodData.totalHospedes">
           <option v-for="n in 25">{{ n }}</option>
         </select>
-      </div> 
+      </div>
 
       <div class="back-next"> 
         <div class="back-next-body">
@@ -938,7 +938,7 @@ export default {
       }
     },
     nextBtn2 () {
-      if (this.$store.state.acomodData.totalHospedes !== null) {
+      if (this.$store.state.acomodData.totalHospedes > 0) {
         this.$store.commit('m_cadastroAcomod2', false), this.$store.commit('m_cadastroAcomod3', true), this.$store.commit('m_acomodProgressBar', (100/12)*3), this.scrollTop(), window.location.hash = `${this.randomHashs[3]}`
       }
     },
@@ -1131,7 +1131,7 @@ export default {
       return this.$store.state.acomodData.tipoAcomod !== null ? 'background:#FFA04F' : ''
     },
     form2ok () {
-      return this.$store.state.acomodData.totalHospedes !== null ? 'background:#FFA04F' : ''
+      return this.$store.state.acomodData.totalHospedes > 0 ? 'background:#FFA04F' : ''
     },
     form3ok () {
       return 1<2 ? 'background:#FFA04F' : ''
@@ -1326,7 +1326,7 @@ export default {
       width: 13rem;
       color: white;
       background: var(--colorAcomod);
-      border-radius: 2rem;
+      border-radius: 100px;
       font-size: 17px;
       font-weight: 700;
       box-shadow: 3px 3px 20px 1px rgba(0,0,0,0.18);
@@ -1738,7 +1738,7 @@ export default {
           height: 3rem;
           color: white;
           background: var(--colorAcomod);
-          border-radius: 5px;
+          border-radius: 100px;
           font-size: 17px;
           font-weight: 600;
         }

@@ -92,17 +92,26 @@
               <div class="dropdown-body" v-if="showHospedes">
 
                 <div class="number-box">
+
                   <h3>Número de hóspedes</h3>
+
                   <div class="input-number">
-                    <div class="__btn" :class="$store.state.filters.hospedes === 1 ? '__btn-disabled' : ''" @click="$store.commit('m_decrementHospedes')"><div class="minus"></div></div>
+                    <div class="__btn" :class="$store.state.filters.hospedes === 0 ? '__btn-disabled' : ''" @click="$store.commit('m_decrementHospedes')"><div class="minus"></div></div>
+
                     <h3>{{ $store.state.filters.hospedes }}</h3>
+
                     <div class="__btn" :class="$store.state.filters.hospedes === 25 ? '__btn-disabled' : ''" @click="$store.commit('m_incrementHospedes')"><div class="plus-horiz"></div><div class="plus-vert"></div></div>
                   </div>
+
                 </div>
 
 
                 <div class="buttons">
-                  <button type="button" class="__filtrar-btn" @click="filtrar()">Filtrar</button>
+
+                  <button type="button" class="__limpar-btn" :class="[ $store.state.filters.hospedes === 0 ? '__limpar-btn-disabled' : '']" @click="$store.state.filters.hospedes = 0, filtrar()">Limpar</button>
+
+                  <button type="button" class="__filtrar-btn" :class="[ $store.state.filters.hospedes === 0 ? '__filtrar-btn-disabled' : '']" @click="$store.state.filters.hospedes > 0 ? filtrar() : null">Filtrar</button>
+
                 </div>
 
               </div>
@@ -201,7 +210,7 @@
 
                 <div class="buttons">
 
-                  <button type="button" class="__limpar-btn" :class="[ $store.state.filters.preco === null ? '__limpar-btn-disabled' : '']" @click="$store.state.filters.preco = null">Limpar</button>
+                  <button type="button" class="__limpar-btn" :class="[ $store.state.filters.preco === null ? '__limpar-btn-disabled' : '']" @click="$store.state.filters.preco = null, filtrar()">Limpar</button>
 
                   <button type="button" class="__filtrar-btn" :class="[ $store.state.filters.preco === null ? '__filtrar-btn-disabled' : '']" @click="$store.state.filters.preco !== null ? filtrar() : null">Filtrar</button>
 
@@ -321,6 +330,7 @@ export default {
     mouseOutCard (index) {
       this.$refs.infoWindow[index].$children[0].$el.style.color = '#161616'
     },
+    /* __________ FILTERS BUTTONS __________ */
     onClickHospedesBtn () {
       this.dropdownBtnIsOpen = true
       this.showHospedes = !this.showHospedes
@@ -339,18 +349,34 @@ export default {
       this.showTipoAcomod = false
       this.showPreco = !this.showPreco
     },
+    /* __________ FILTERS __________ */
+    filterByHospedes (acomod) {
+      if (this.filters.hospedes > 0) {
+        return acomod.totalHospedes >= this.filters.hospedes
+      } else {
+        return []
+      }
+    },
     filterByTipoAcomod (acomod) {
-      return acomod.tipoAcomod === this.filters.tipoAcomod
+      if (this.filters.tipoAcomod !== null) {
+        return acomod.tipoAcomod === this.filters.tipoAcomod
+      } else {
+        return []
+      }
     },
     filterByPreco (acomod) {
-      if (this.filters.preco === 'low') {
-        return acomod.valorNoite <= 199
-      }
-      if (this.filters.preco === 'mid') {
-        return acomod.valorNoite >= 200 && acomod.valorNoite <= 399
-      }
-      if (this.filters.preco === 'high') {
-        return acomod.valorNoite >= 400
+      if (this.filters.preco !== null) {
+        if (this.filters.preco === 'low') {
+          return acomod.valorNoite <= 199
+        } 
+        else if (this.filters.preco === 'mid') {
+          return acomod.valorNoite >= 200 && acomod.valorNoite <= 399
+        } 
+        else if (this.filters.preco === 'high') {
+          return acomod.valorNoite >= 400
+        }
+      } else {
+        return []
       }
     },
     filtrar () {
@@ -363,8 +389,9 @@ export default {
         const allAcomods = this.$store.state.allAcomods
 
         const filteredAcomods = allAcomods.filter(acomod => {
-          return this.filters.tipoAcomod !== null ? this.filterByTipoAcomod(acomod) : '' && 
-                 this.filters.preco !== null ? this.filterByPreco(acomod) : ''
+          return this.filterByHospedes(acomod) && 
+                 this.filterByTipoAcomod(acomod) && 
+                 this.filterByPreco(acomod)
         })
 
         console.log(filteredAcomods)

@@ -76,7 +76,7 @@ const store = () => new Vuex.Store({
     },
     filters: {
       date: null,
-      hospedes: 1,
+      hospedes: 0,
       tipoAcomod: null,
       preco: null
     },
@@ -150,7 +150,7 @@ const store = () => new Vuex.Store({
       subtitle: '',
       valorNoite: 0,
       limpezaFee: 0,
-      totalHospedes: '1',
+      totalHospedes: 1,
       totalQuartos: '1',
       totalSuites: '1',
       totalBanheiros: '1',
@@ -432,7 +432,7 @@ const store = () => new Vuex.Store({
       state.filteredAcomods = payload
     },
     m_decrementHospedes (state) {
-      if (state.filters.hospedes > 1) {
+      if (state.filters.hospedes > 0) {
         state.filters.hospedes--
       }
     },
@@ -855,7 +855,7 @@ const store = () => new Vuex.Store({
         subtitle: '',
         valorNoite: 0,
         limpezaFee: 0,
-        totalHospedes: '1',
+        totalHospedes: 1,
         totalQuartos: '1',
         totalSuites: '1',
         totalBanheiros: '1',

@@ -380,7 +380,7 @@
 
             <div class="detalhes-reserva-data_item">
               <img src="../../../assets/img/guests.svg" class="__img">
-              <h3 style="font-size:16px">{{ reservaAcomod.totalHospedes == '1' ? reservaAcomod.totalHospedes + ' hóspede' : reservaAcomod.totalHospedes + ' hóspedes' }}</h3>
+              <h3 style="font-size:16px">{{ reservaAcomod.totalHospedes === 1 ? reservaAcomod.totalHospedes + ' hóspede' : reservaAcomod.totalHospedes + ' hóspedes' }}</h3>
             </div>
 
           </div>
