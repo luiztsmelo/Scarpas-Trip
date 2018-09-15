@@ -23,14 +23,28 @@
           <span class="__card-tipo-acomod">{{ acomod.tipoAcomod }}</span>
           <span class="__card-title">{{ acomod.title }}</span>
           <span class="__card-valor">R${{ acomod.valorNoite }}<span class="__card-valor-dia"> por noite</span></span>
+          <star-rating
+            :rating="3.5"
+            :increment="0.1"
+            :read-only="true" 
+            :show-rating="false"
+            active-color="#161616"
+            inactive-color="#dedede"
+            :star-size="10"
+            :padding="2">
+          </star-rating>
         </div>
         
       </nuxt-link> 
 
 
-      <!-- <h1 v-if="$store.state.filteredAcomods.length === 0">
-        Nenhuma acomodação encontrada.
-      </h1> -->
+      <div class="empty-state" v-show="$store.state.filteredAcomods !== null && $store.state.filteredAcomods.length === 0">
+        <img src="../../assets/img/empty-state.svg" class="__img">
+        <h1 class="__title">Nenhuma acomodação encontrada :(</h1>
+        <h3>Tente ajustar os filtros para obter um melhor resultado.</h3>
+        <button class="__limpar-filtros-btn" @click="$store.commit('m_resetFilters')">Limpar filtros</button>
+      </div>
+      
 
     </div>
 
@@ -283,7 +297,6 @@
     <!-- ___________________________ FILTRAR MOBILE ___________________________ -->
     <div class="filtrar-mobile">
       <div class="filtrar-body">
-        <span class="__filtrar-text">Filtrar</span>
         <img class="__filtrar-img" src="../../assets/img/filter.svg">
       </div>
     </div><!-- ___________________________ FILTRAR MOBILE ___________________________ -->
@@ -516,9 +529,32 @@ export default {
     display: flex;
     flex-flow: column;
     transition: var(--main-transition);
+    & .empty-state {
+      display: flex;
+      flex-flow: column;
+      align-items: flex-start;
+      width: 100%;
+      height: calc(100vh - var(--navbarHeightDesktop) - 3.7rem - 2rem);
+      padding: 1rem 0;
+      & .__img {
+        width: 7rem;
+        height: auto;
+      }
+      & .__title {
+        font-size: 27px;
+        padding: .4rem 0;
+      }
+      & .__limpar-filtros-btn {
+        background: white;
+        color: var(--colorAcomod);
+        font-weight: 600;
+        padding: 0;
+        margin: 1.2rem 0;
+      }
+    }
     & .card {
       width: 93%;
-      padding: 7% 0 1.5rem 7%;
+      padding: 7% 0 1rem 7%;
       & .image-box {
         overflow: hidden;
         margin-bottom: .3rem;
@@ -542,16 +578,17 @@ export default {
         & .__card-tipo-acomod {
           text-transform: uppercase;
           font-size: 11px;
-          font-weight: 700;
+          font-weight: 600;
           color: var(--colorAcomod);
         }
         & .__card-title {
           padding: .3rem 0;
-          font-size: 18px;
+          font-size: 17px;
           font-weight: 700;
         }
         & .__card-valor {
-          font-size: 16px;
+          padding-bottom: .1rem;
+          font-size: 15px;
           font-weight: 400;
           & .__card-valor-dia {
             font-size: 14px;
@@ -564,15 +601,13 @@ export default {
     position: fixed;
     z-index: 8888;
     bottom: 4rem;
-    left: 0;
-    right: 0;
-    margin: 0 auto;
-    height: 2.1rem;
-    width: 7rem;
+    right: 8%;
+    height: 3rem;
+    width: 3rem;
     background: white;
     transition: all .3s ease;
-    box-shadow: 2px 2px 6px 1px rgba(0,0,0,0.27);
-    border-radius: 17px;
+    box-shadow: 1px 1px 8px 2px rgba(0,0,0,0.2);
+    border-radius: 50%;
     & .filtrar-body {
       height: 100%;
       position: relative;
@@ -582,13 +617,8 @@ export default {
       padding: 0 .7rem;
       justify-content: space-around;
       align-items: center;
-      & .__filtrar-text {
-        text-transform: uppercase;
-        font-size: 12px;
-        font-weight: 700;
-      }
       & .__filtrar-img {
-        width: 1.05rem;
+        width: 1.2rem;
         height: auto;
       }
     }
@@ -647,6 +677,7 @@ export default {
             font-weight: 700;
           }
           & .__card-valor {
+            padding-bottom: .1rem;
             font-size: 14px;
             font-weight: 400;
             & .__card-valor-dia {
@@ -895,7 +926,7 @@ export default {
       transform: translateY(24px);
       & .__valor {
         cursor: pointer;
-        font-size: 13px;
+        font-size: 14px;
         font-weight: 500;
         transition: var(--main-transition);
       }

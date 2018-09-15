@@ -442,6 +442,15 @@ const store = () => new Vuex.Store({
         state.filters.hospedes++
       }
     },
+    m_resetFilters (state) {
+      state.filteredAcomods = null
+      state.filters.date = null
+      state.filters.hospedes = 0
+      state.filters.tipoAcomod = null
+      state.filters.tipoAcomod = null
+      state.filters.preco = null
+      state.filters.avaliacao = null
+    },
     m_perfil (state, payload) {
       state.perfil = payload
     },
