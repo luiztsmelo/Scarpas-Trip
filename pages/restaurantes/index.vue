@@ -1,6 +1,6 @@
 <template>
   <div class="restaurantes">
-    <h1>Restaurantes</h1>
+    <h1 class="__title">Em breve os melhores restaurantes de Capitólio</h1>
   </div>
 </template>
 
@@ -24,5 +24,8 @@ export default {
   flex-flow: column;
   padding: 3rem 7%;
   transition: var(--main-transition);
+  & .__title {
+    font-size: 27px;
+  }
 }
 </style>

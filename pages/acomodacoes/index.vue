@@ -554,7 +554,7 @@ export default {
     }
     & .card {
       width: 93%;
-      padding: 7% 0 1rem 7%;
+      padding: 7% 0 0 7%;
       & .image-box {
         overflow: hidden;
         margin-bottom: .3rem;
@@ -582,12 +582,12 @@ export default {
           color: var(--colorAcomod);
         }
         & .__card-title {
-          padding: .3rem 0;
+          padding: .3rem 0 .2rem;
           font-size: 17px;
           font-weight: 700;
         }
         & .__card-valor {
-          padding-bottom: .1rem;
+          padding-bottom: .2rem;
           font-size: 15px;
           font-weight: 400;
           & .__card-valor-dia {
@@ -600,13 +600,13 @@ export default {
   & .filtrar-mobile {
     position: fixed;
     z-index: 8888;
-    bottom: 4rem;
-    right: 8%;
-    height: 3rem;
-    width: 3rem;
+    bottom: 4.5rem;
+    right: 7%;
+    height: 3.2rem;
+    width: 3.2rem;
     background: white;
     transition: all .3s ease;
-    box-shadow: 1px 1px 8px 2px rgba(0,0,0,0.2);
+    box-shadow: 1px 1px 7px 1px rgba(0,0,0,0.2);
     border-radius: 50%;
     & .filtrar-body {
       height: 100%;
@@ -618,7 +618,7 @@ export default {
       justify-content: space-around;
       align-items: center;
       & .__filtrar-img {
-        width: 1.2rem;
+        width: 1.3rem;
         height: auto;
       }
     }

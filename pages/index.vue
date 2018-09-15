@@ -65,6 +65,17 @@
               <h1 class="__card-title">{{ acomod.title }}</h1>
 
               <span class="__card-subtitle">R${{ acomod.valorNoite.toLocaleString() }}<span class="__card-valor-noite"> por noite</span></span>
+
+              <star-rating
+                :rating="3.5"
+                :increment="0.1"
+                :read-only="true" 
+                :show-rating="false"
+                active-color="#161616"
+                inactive-color="#dedede"
+                :star-size="10"
+                :padding="2">
+              </star-rating>
               
             </nuxt-link> 
           </div>
