@@ -66,16 +66,19 @@
 
               <span class="__card-subtitle">R${{ acomod.valorNoite.toLocaleString() }}<span class="__card-valor-noite"> por noite</span></span>
 
-              <star-rating
-                :rating="3.5"
-                :increment="0.1"
-                :read-only="true" 
-                :show-rating="false"
-                active-color="#161616"
-                inactive-color="#dedede"
-                :star-size="10"
-                :padding="2">
-              </star-rating>
+              <div class="rating">
+                <star-rating
+                  :rating="3.7"
+                  :increment="0.1"
+                  :read-only="true"
+                  :show-rating="false"
+                  active-color="#161616"
+                  inactive-color="#dedede"
+                  :star-size="10"
+                  :padding="2">
+                </star-rating>
+                <span class="rating-number">3.7</span>
+              </div>
               
             </nuxt-link> 
           </div>
@@ -286,6 +289,15 @@ export default {
             font-weight: 400;
             & .__card-valor-noite {
               font-size: 12px;
+            }
+          }
+          & .rating {
+            display: flex;
+            align-items: center;
+            & .rating-number {
+              font-size: 11px;
+              font-weight: 600;
+              padding-left: 2px;
             }
           }
         }

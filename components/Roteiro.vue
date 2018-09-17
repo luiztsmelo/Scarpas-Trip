@@ -3,7 +3,7 @@
     
     <div class="chegada-partida-container">
       
-      <h1 class="__title">Reserve casas e passeios em Capitólio</h1>
+      <h1 class="__title">Tudo para sua viagem a Capitólio e região</h1>
   
     </div>
 
@@ -41,7 +41,7 @@ export default {
       color: white;
       font-size: 20px;
       font-weight: 600;
-      line-height: 27px;
+      line-height: 26px;
       user-select: none;
     }
   }
@@ -58,9 +58,9 @@ export default {
     & .chegada-partida-container {
       background: rgba(0,0,0, 0);
       & .__title {
-        padding: 0 7%;
+        padding: 0 24% 0 7%;
         width: 100%;
-        font-size: 37px;
+        font-size: 36px;
         font-weight: 600;
       }
     }

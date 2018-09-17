@@ -1,5 +1,5 @@
 <template>
-  <div class="acomods" @click="closeFilterBtns">
+  <div class="acomods" @click="closeFilterBtns(), filtrar()">
 
 
     <div class="acomods-container" :class="[ dropdownBtnIsOpen === true ? 'blur' : '' ]" v-if="$store.state.allAcomods !== null">
@@ -23,19 +23,23 @@
           <span class="__card-tipo-acomod">{{ acomod.tipoAcomod }}</span>
           <span class="__card-title">{{ acomod.title }}</span>
           <span class="__card-valor">R${{ acomod.valorNoite }}<span class="__card-valor-dia"> por noite</span></span>
-          <star-rating
-            :rating="3.5"
-            :increment="0.1"
-            :read-only="true" 
-            :show-rating="false"
-            active-color="#161616"
-            inactive-color="#dedede"
-            :star-size="10"
-            :padding="2">
-          </star-rating>
+          <div class="rating">
+            <star-rating
+              :rating="3.7"
+              :increment="0.1"
+              :read-only="true"
+              :show-rating="false"
+              active-color="#161616"
+              inactive-color="#dedede"
+              :star-size="10"
+              :padding="2">
+            </star-rating>
+            <span class="rating-number">3.7</span>
+          </div>
+          
         </div>
         
-      </nuxt-link> 
+      </nuxt-link>
 
 
       <div class="empty-state" v-show="$store.state.filteredAcomods !== null && $store.state.filteredAcomods.length === 0">
@@ -262,7 +266,15 @@
           </div>
 
         </div><!-- Avaliação -->
+        
 
+        <button 
+          type="button" 
+          class="__limpar-filtros-btn" 
+          v-if="$store.state.filters.date !== null || $store.state.filters.hospedes > 0 || $store.state.filters.tipoAcomod !== null || $store.state.filters.preco !== null || $store.state.filters.avaliacao !== null"
+          @click="$store.commit('m_resetFilters')">
+          Limpar Filtros
+        </button>
 
 
       </form>
@@ -295,11 +307,12 @@
 
 
     <!-- ___________________________ FILTRAR MOBILE ___________________________ -->
-    <div class="filtrar-mobile">
-      <div class="filtrar-body">
-        <img class="__filtrar-img" src="../../assets/img/filter.svg">
-      </div>
-    </div><!-- ___________________________ FILTRAR MOBILE ___________________________ -->
+    <div class="filtrar-mobile-btn" @click="openFiltrarAcomods">
+      <img class="__img" src="../../assets/img/filter.svg">
+    </div>
+    
+    <filtrar-acomods/>
+    <!-- ___________________________ FILTRAR MOBILE ___________________________ -->
 
 
 
@@ -314,11 +327,13 @@ import 'firebase/firestore'
 import supportsWebP from 'supports-webp'
 import { mapstyle } from '@/mixins/mapstyle'
 import { stylesCalendar } from '@/mixins/stylesCalendar'
+import FiltrarAcomods from '@/components/FiltrarAcomods'
 import dayjs from 'dayjs'
 import 'dayjs/locale/pt-br'
 dayjs.locale('pt-br')
 
 export default {
+  components: { FiltrarAcomods },
   mixins: [ mapstyle, stylesCalendar ],
   head () {
     return {
@@ -363,13 +378,20 @@ export default {
     }
   },
   methods: {
+    imageH (image) {
+      return supportsWebP ? image.HW : image.HJ
+    },
     mouseOverCard (index) {
       this.$refs.infoWindow[index].$children[0].$el.style.color = '#FFA04F'
     },
     mouseOutCard (index) {
       this.$refs.infoWindow[index].$children[0].$el.style.color = '#161616'
     },
-    /* __________ FILTERS BUTTONS __________ */
+    /* __________ FILTERS __________ */
+    openFiltrarAcomods () {
+      this.$store.commit('m_showFiltrarAcomods', true)
+      window.location.hash = 'filtrar'
+    },
     closeFilterBtns () {
       this.dropdownBtnIsOpen = false
       this.showHospedes = false
@@ -405,7 +427,6 @@ export default {
       this.showPreco = false
       this.showAvaliacao = !this.showAvaliacao
     },
-    /* __________ FILTERS __________ */
     filterByHospedes (acomod) {
       if (this.filters.hospedes > 0) {
         return acomod.totalHospedes >= this.filters.hospedes
@@ -436,30 +457,17 @@ export default {
       }
     },
     filtrar () {
-      try {
-        this.dropdownBtnIsOpen = false
-        this.showHospedes = false
-        this.showTipoAcomod = false
-        this.showPreco = false
-        
-        const allAcomods = this.$store.state.allAcomods
+      this.closeFilterBtns()
+      
+      const allAcomods = this.$store.state.allAcomods
 
-        const filteredAcomods = allAcomods.filter(acomod => {
-          return this.filterByHospedes(acomod) && 
-                 this.filterByTipoAcomod(acomod) && 
-                 this.filterByPreco(acomod)
-        })
+      const filteredAcomods = allAcomods.filter(acomod => {
+        return this.filterByHospedes(acomod) && 
+                this.filterByTipoAcomod(acomod) && 
+                this.filterByPreco(acomod)
+      })
 
-        console.log(filteredAcomods)
-
-        this.$store.commit('m_filteredAcomods', filteredAcomods)
-        
-      } catch (err) {
-        console.log(err)
-      }
-    },
-    imageH (image) {
-      return supportsWebP ? image.HW : image.HJ
+      this.$store.commit('m_filteredAcomods', filteredAcomods)
     }
   },
   computed: {
@@ -594,11 +602,23 @@ export default {
             font-size: 14px;
           }
         }
+        & .rating {
+          display: flex;
+          align-items: center;
+          & .rating-number {
+            font-size: 11px;
+            font-weight: 600;
+            padding-left: 2px;
+          }
+        }
       }
     }
   }
-  & .filtrar-mobile {
+  & .filtrar-mobile-btn {
     position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     z-index: 8888;
     bottom: 4.5rem;
     right: 7%;
@@ -608,19 +628,9 @@ export default {
     transition: all .3s ease;
     box-shadow: 1px 1px 7px 1px rgba(0,0,0,0.2);
     border-radius: 50%;
-    & .filtrar-body {
-      height: 100%;
-      position: relative;
-      top: 50%;
-      transform: translateY(-50%);
-      display: flex;
-      padding: 0 .7rem;
-      justify-content: space-around;
-      align-items: center;
-      & .__filtrar-img {
-        width: 1.3rem;
-        height: auto;
-      }
+    & .__img {
+      width: 1.3rem;
+      height: auto;
     }
   }
 }
@@ -900,6 +910,14 @@ export default {
               }
             }
           }
+        }
+        & .__limpar-filtros-btn {
+          position: absolute;
+          right: 7%;
+          background: transparent;
+          color: var(--colorAcomod);
+          font-size: 15px;
+          font-weight: 500;
         }
       }
     }

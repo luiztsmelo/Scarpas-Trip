@@ -18,6 +18,7 @@ const store = () => new Vuex.Store({
     showShare: false,
     showProprietario: false,
     showParcelas: false,
+    showFiltrarAcomods: false,
     menuIconAnime: false,
     loader: false,
     miniLoader: false,
@@ -423,6 +424,9 @@ const store = () => new Vuex.Store({
     m_showParcelas (state, payload) {
       state.showParcelas = payload
     },
+    m_showFiltrarAcomods (state, payload) {
+      state.showFiltrarAcomods = payload
+    },
     m_visits (state, payload) {
       state.visits = payload
     },
@@ -446,7 +450,6 @@ const store = () => new Vuex.Store({
       state.filteredAcomods = null
       state.filters.date = null
       state.filters.hospedes = 0
-      state.filters.tipoAcomod = null
       state.filters.tipoAcomod = null
       state.filters.preco = null
       state.filters.avaliacao = null
