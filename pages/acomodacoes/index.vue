@@ -2,8 +2,12 @@
   <div class="acomods" @click="closeFilterBtns(), filtrar()">
 
 
-    <div class="acomods-container" :class="[ dropdownBtnIsOpen === true ? 'blur' : '' ]" v-if="$store.state.allAcomods !== null">
+    <div class="loader" v-if="$store.state.allAcomods === null">
+      <div class="spinner"><div class="bounce1"></div><div class="bounce2"></div><div class="bounce3"></div></div>
+    </div>
+    
 
+    <div class="acomods-container" :class="[ dropdownBtnIsOpen === true ? 'blur' : '' ]" v-if="$store.state.allAcomods !== null">
 
       <nuxt-link class="card" v-for="(acomod, index) in $store.state.filteredAcomods !== null ? $store.state.filteredAcomods : $store.state.allAcomods" :key="acomod.acomodID" @mouseover.native="mouseOverCard(index)" @mouseout.native="mouseOutCard(index)" :to="`/acomodacoes/${acomod.acomodID}`">
 
@@ -307,7 +311,7 @@
 
 
     <!-- ___________________________ FILTRAR MOBILE ___________________________ -->
-    <div class="filtrar-mobile-btn" @click="openFiltrarAcomods">
+    <div class="filtrar-mobile-btn" @click="openFiltrarAcomods" v-if="$store.state.allAcomods !== null">
       <img class="__img" src="../../assets/img/filter.svg">
     </div>
     
@@ -527,10 +531,34 @@ export default {
 @import url('~/assets/css/radio-desktop.css');
 
 .acomods {
+  position: relative;
   margin: 3.4rem 0 5.4rem 0;
   display: flex;
   flex-flow: column;
   transition: var(--main-transition);
+  & .loader {
+    position: absolute;
+    top: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    & .spinner > div {
+      width: 6px;
+      height: 6px;
+      background-color: #161616;
+      border-radius: 100%;
+      display: inline-flex;
+      margin: 0 .16rem;
+      animation: sk-bouncedelay 1.2s infinite ease-in-out both;
+    }
+    & .spinner .bounce1 {
+      -webkit-animation-delay: -0.32s;
+      animation-delay: -0.32s;
+    }
+    & .spinner .bounce2 {
+      -webkit-animation-delay: -0.16s;
+      animation-delay: -0.16s;
+    }
+  }
   & .acomods-container {
     padding: 0;
     margin-bottom: 1rem;
@@ -622,14 +650,14 @@ export default {
     z-index: 8888;
     bottom: 4.5rem;
     right: 7%;
-    height: 3.2rem;
-    width: 3.2rem;
+    height: 3.3rem;
+    width: 3.3rem;
     background: white;
     transition: all .3s ease;
     box-shadow: 1px 1px 7px 1px rgba(0,0,0,0.2);
     border-radius: 50%;
     & .__img {
-      width: 1.3rem;
+      width: 1.4rem;
       height: auto;
     }
   }
@@ -645,6 +673,11 @@ export default {
     margin: 0;
     display: flex;
     flex-flow: row;
+    & .loader {
+      top: 11rem;
+      left: 34.4%;
+      transform: translateX(0%);
+    }
     & .acomods-container {
       margin-top: calc(var(--navbarHeightDesktop) + 3.7rem + 1rem);
       width: 64.8%;
@@ -966,6 +999,20 @@ export default {
   opacity: .2;
   pointer-events: none;
   user-select: none;
+}
+
+@-webkit-keyframes sk-bouncedelay {
+  0%, 80%, 100% { -webkit-transform: scale(0) }
+  40% { -webkit-transform: scale(1.0) }
+}
+@keyframes sk-bouncedelay {
+  0%, 80%, 100% { 
+    -webkit-transform: scale(0);
+    transform: scale(0);
+  } 40% { 
+    -webkit-transform: scale(1.0);
+    transform: scale(1.0);
+  }
 }
 
 /* TRANSITIONS */
