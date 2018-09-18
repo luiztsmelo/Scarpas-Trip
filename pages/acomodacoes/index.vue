@@ -648,20 +648,16 @@ export default {
     z-index: 8888;
     bottom: 4.5rem;
     right: 7%;
-    height: 3.3rem;
-    width: 3.3rem;
+    height: 3.4rem;
+    width: 3.4rem;
     background: white;
     transition: all .3s ease;
     box-shadow: 1px 1px 7px 1px rgba(0,0,0,0.2);
-    border: 2px solid white;
     border-radius: 50%;
     & .__img {
       width: 1.4rem;
       height: auto;
     }
-  }
-  & .filtrar-mobile-btn:focus {
-    background: rgb(232,232,232);
   }
 }
 
