@@ -3,12 +3,12 @@
     <div class="filtrar-acomods-modal" v-if="$store.state.showFiltrarAcomods">
       <div class="filtrar-acomods-body">
 
-        <img class="back-btn" src="../assets/img/back.svg" @click="backBtn">
+        <img src="../assets/img/close-mobile.svg" style="cursor:pointer;position:absolute;top:1.2rem;left:7%;width:1rem;height:auto" @click="closeBtn">
 
 
-        <h1 class="__title">Filtrar por:</h1>
+        <h1 class="__title">Filtrar acomodações por:</h1>
         
-
+        <button class="__filtrar-btn">Filtrar</button>
 
       </div>
     </div>
@@ -18,7 +18,7 @@
 <script>
 export default {
   methods: {
-    backBtn () {
+    closeBtn () {
       this.$store.commit('m_showFiltrarAcomods', false)
       window.history.back(1)
     }
@@ -49,20 +49,25 @@ export default {
   left: 0;
   background: white;
   transition: var(--main-transition) !important;
-  & .back-btn {
-    margin: 1rem 0;
-    cursor: pointer;
-    width: 1.27rem;
-    height: auto;
-  }
   & .filtrar-acomods-body {
     display: flex;
     flex-flow: column;
     height: 100%;
-    padding: 0 7%;
+    padding: 4rem 7% 0;
     & .__title {
-      padding: 2rem 0;
-      font-size: 27px;
+      line-height: 35px;
+      font-size: 29px;
+    }
+    & .__filtrar-btn {
+      position: fixed;
+      left: 7%;
+      bottom: 1rem;
+      height: 3.1rem;
+      width: 86%;
+      background: var(--colorAcomod);
+      color: white;
+      font-weight: 600;
+      border-radius: 5px;
     }
   }
 }

@@ -309,9 +309,9 @@
 
 
     <!-- ___________________________ FILTRAR MOBILE ___________________________ -->
-    <div class="filtrar-mobile-btn" @click="openFiltrarAcomods" v-show="$store.state.allAcomods !== null">
+    <button class="filtrar-mobile-btn" @click="openFiltrarAcomods" v-show="$store.state.allAcomods !== null">
       <img class="__img" src="../../assets/img/filter.svg">
-    </div>
+    </button>
     
     <filtrar-acomods/>
     <!-- ___________________________ FILTRAR MOBILE ___________________________ -->
@@ -542,7 +542,7 @@ export default {
     transition: var(--main-transition);
     & .loader {
       position: absolute;
-      top: 2rem;
+      top: 3rem;
       left: 50%;
       transform: translateX(-50%);
       & .spinner > div {
@@ -653,11 +653,15 @@ export default {
     background: white;
     transition: all .3s ease;
     box-shadow: 1px 1px 7px 1px rgba(0,0,0,0.2);
+    border: 2px solid white;
     border-radius: 50%;
     & .__img {
       width: 1.4rem;
       height: auto;
     }
+  }
+  & .filtrar-mobile-btn:focus {
+    background: rgb(232,232,232);
   }
 }
 
