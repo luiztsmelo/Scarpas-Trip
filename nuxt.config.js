@@ -25,7 +25,8 @@ module.exports = {
       { name: 'apple-mobile-web-app-status-bar-style', content: '#fff' }
     ],
     link: [
-      { rel: 'icon', type: 'image/png', sizes: '24x24', href: '/brand.png' }
+      { rel: 'icon', type: 'image/png', sizes: '24x24', href: '/brand.png' },
+      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700' }
     ],
     __dangerouslyDisableSanitizers: ['script'],
     script: [
