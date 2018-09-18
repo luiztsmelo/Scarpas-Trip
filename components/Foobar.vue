@@ -5,7 +5,7 @@
 
           <nuxt-link to="/acomodacoes">
           <div class="foobar-box" @click="$store.state.offFoobar1=false, $store.state.offFoobar2=true, $store.state.offFoobar3=true, $store.state.offFoobar4=true, $store.state.offFoobar5=true">
-            <img src="../assets/img/estadia.svg" class="__foobar1-icon" :class="{ coloricon: offFoobar1 }">
+            <img src="../assets/img/acomods.svg" class="__foobar1-icon" :class="{ coloricon: offFoobar1 }">
             <!-- <h1 class="__foobar-title" :class="{ colortitle: offFoobar1 }">Acomodações</h1> -->
           </div>
         </nuxt-link>
