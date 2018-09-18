@@ -42,7 +42,6 @@ module.exports = {
     { src: '~plugins/vue-google-maps', ssr: false },
     { src: '~plugins/vue-croppa', ssr: false },
     { src: '~plugins/vue-autosize', ssr: false },
-    { src: '~plugins/webfontloader', ssr: false },
     { src: '~plugins/vue-awesome-swiper', ssr: false },
     { src: '~plugins/v-money', ssr: false },
     { src: '~plugins/v-calendar', ssr: false },

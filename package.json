@@ -39,8 +39,7 @@
     "vue-star-rating": "^1.6.0",
     "vue-text-mask": "^5.2.0",
     "vue2-google-maps": "^0.10.2",
-    "vuex-persistedstate": "^2.5.4",
-    "webfontloader": "^1.6.28"
+    "vuex-persistedstate": "^2.5.4"
   },
   "scripts": {
     "dev": "nuxt",
