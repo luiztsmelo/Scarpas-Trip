@@ -111,7 +111,7 @@ export default {
         color: var(--color01);
       }
       & img {
-        width: 1.4rem;
+        width: 1.42rem;
         height: auto;
       }
       & .coloricon {
