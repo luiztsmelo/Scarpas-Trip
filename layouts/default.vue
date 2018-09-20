@@ -1,10 +1,6 @@
 <template>
   <div class="app">
 
-    <!-- Preload -->
-    <img class="img" src="../assets/img/offline.svg" style="display:none">
-
-
     <div>
       <alert/>
       
