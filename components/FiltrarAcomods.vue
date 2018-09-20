@@ -32,7 +32,10 @@
         </div>
         
 
-        <button class="__filtrar-btn">Filtrar</button>
+        <div class="filter-btn">
+          <button class="__btn" @click="$store.state.showFiltrarAcomods = false">Filtrar</button>
+        </div>
+        
 
       </div>
     </div>
@@ -107,16 +110,25 @@ export default {
       font-size: 29px;
       padding-bottom: 1.5rem;
     }
-    & .__filtrar-btn {
+    & .filter-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
       position: fixed;
-      left: 7%;
-      bottom: 1rem;
-      height: 3.1rem;
-      width: 86%;
-      background: var(--colorAcomod);
-      color: white;
-      font-weight: 700;
-      border-radius: 5px;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      height: 4.7rem;
+      background: #fff;
+      box-shadow: 0px -1px 1px 0px rgba(0,0,0,0.1);
+      & .__btn {
+        height: 3.2rem;
+        width: 86%;
+        background: var(--colorAcomod);
+        color: white;
+        font-weight: 700;
+        border-radius: 5px;
+      }
     }
     & .filter-box {
       padding: 1rem 0;
@@ -124,7 +136,7 @@ export default {
       & .__filter-title {
         font-size: 18px;
         font-weight: 600;
-        padding-bottom: .6rem;
+        padding-bottom: .8rem;
       }
       & .select {
         & .option {
