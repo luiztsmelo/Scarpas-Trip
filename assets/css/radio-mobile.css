@@ -1,0 +1,21 @@
+.radio {
+  position: relative;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  border: 1px solid #dedede;
+  transition: var(--main-transition);
+}
+.radio-checkmark {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--colorAcomod) !important;
+  transition: var(--main-transition);
+}

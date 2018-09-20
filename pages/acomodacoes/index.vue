@@ -1,8 +1,6 @@
 <template>
   <div class="acomods" @click="closeFilterBtns(), filtrar()">
 
-    <h1 class="__page-title" v-show="$store.state.allAcomods !== null">Acomodações</h1>
-
     <div class="acomods-container" :class="[ dropdownBtnIsOpen === true ? 'blur' : '' ]">
 
       <div class="loader" v-show="$store.state.allAcomods === null">
@@ -535,10 +533,6 @@ export default {
   display: flex;
   flex-flow: column;
   transition: var(--main-transition);
-  & .__page-title {
-    padding: 2rem 7% 1rem;
-    font-size: 27px;
-  }
   & .acomods-container {
     position: relative;
     padding: 0;
@@ -677,9 +671,6 @@ export default {
     margin: 0;
     display: flex;
     flex-flow: row;
-    & .__page-title {
-      display: none;
-    }
     & .acomods-container {
       margin-top: calc(var(--navbarHeightDesktop) + 3.7rem + 1rem);
       width: 64.8%;
