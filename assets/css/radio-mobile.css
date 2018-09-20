@@ -1,7 +1,7 @@
 .radio {
   position: relative;
-  width: 25px;
-  height: 25px;
+  width: 26px;
+  height: 26px;
   border-radius: 50%;
   border: 1px solid #dedede;
   transition: var(--main-transition);
@@ -13,8 +13,8 @@
   left: 0;
   right: 0;
   margin: auto;
-  width: 9px;
-  height: 9px;
+  width: 10px;
+  height: 10px;
   border-radius: 50%;
   background: var(--colorAcomod) !important;
   transition: var(--main-transition);

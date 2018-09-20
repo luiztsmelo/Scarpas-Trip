@@ -8,7 +8,7 @@
     @opened="$store.commit('m_loader', false)">
 
 
-    <img src="../assets/img/close-mobile.svg" style="cursor:pointer;position:absolute;top:1.2rem;left:7%;width:1rem;height:auto" @click="closeBtn">
+    <img src="../assets/img/close-mobile.svg" style="cursor:pointer;position:absolute;top:1.2rem;left:7%;width:1.1rem;height:auto" @click="closeBtn">
 
 
 

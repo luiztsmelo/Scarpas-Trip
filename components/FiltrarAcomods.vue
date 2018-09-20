@@ -3,7 +3,7 @@
     <div class="filtrar-acomods-modal" v-if="$store.state.showFiltrarAcomods">
       <div class="filtrar-acomods-body">
 
-        <img src="../assets/img/close-mobile.svg" style="cursor:pointer;position:absolute;top:1.2rem;left:7%;width:1rem;height:auto" @click="closeBtn">
+        <img src="../assets/img/close-mobile.svg" style="cursor:pointer;position:absolute;top:1.2rem;left:7%;width:1.1rem;height:auto" @click="closeBtn">
 
         <button class="limpar-btn" @click="$store.commit('m_resetFilters')">Limpar</button>
 
@@ -92,7 +92,7 @@ export default {
   & .filtrar-acomods-body {
     display: flex;
     flex-flow: column;
-    padding: 4.5rem 7%;
+    padding: 4.8rem 7%;
     & .limpar-btn {
       position: absolute;
       top: 1.2rem;
@@ -100,12 +100,12 @@ export default {
       padding: 0;
       background: white;
       font-size: 15px;
-      font-weight: 500;
+      font-weight: 600;
     }
     & .__title {
       line-height: 35px;
       font-size: 29px;
-      padding-bottom: 1.2rem;
+      padding-bottom: 1.5rem;
     }
     & .__filtrar-btn {
       position: fixed;
@@ -115,14 +115,14 @@ export default {
       width: 86%;
       background: var(--colorAcomod);
       color: white;
-      font-weight: 600;
+      font-weight: 700;
       border-radius: 5px;
     }
     & .filter-box {
       padding: 1rem 0;
       border-bottom: 1px solid #dedede;
       & .__filter-title {
-        font-size: 17px;
+        font-size: 18px;
         font-weight: 600;
         padding-bottom: .6rem;
       }
