@@ -1,6 +1,6 @@
 <template>
   <transition name="filtrar-acomods-animation">
-    <div class="filtrar-acomods-modal" v-if="$store.state.showFiltrarAcomods">
+    <div class="filtrar-acomods-modal" v-show="$store.state.showFiltrarAcomods">
       <div class="filtrar-acomods-body">
 
         <img src="../assets/img/close-mobile.svg" style="cursor:pointer;position:absolute;top:1.2rem;left:7%;width:1.1rem;height:auto" @click="closeBtn">
@@ -48,10 +48,10 @@ export default {
     return {
       tiposAcomods: [
         { 'name': 'Casa' },
-        { 'name': 'Apartamento' },
         { 'name': 'Rancho' },
-        { 'name': 'Chácara' },
         { 'name': 'Pousada' },
+        { 'name': 'Chácara' },
+        { 'name': 'Apartamento' },
         { 'name': 'Camping' },
         { 'name': 'Sítio' },
         { 'name': 'Fazenda' },

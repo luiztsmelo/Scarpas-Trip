@@ -991,45 +991,47 @@ export default {
         this.$store.commit('hide_alert')
         document.body.removeAttribute('style')
       }
-      if (value === `#${this.$store.state.randomHashs[1]}`) {
-        this.$modal.hide('datepicker') 
-        this.$store.commit('m_reservaAcomod1', true)
-        this.$store.commit('m_reservaAcomod2', false)
-        this.$store.commit('hide_alert')
-      }
-      if (value === `#${this.$store.state.randomHashs[2]}`) {
-        this.$store.commit('m_reservaAcomod2', true)
-        this.$store.commit('m_reservaAcomod3', false)
-        this.$store.commit('hide_alert')
-        this.scrollTop()
-      }
-      if (value === `#${this.$store.state.randomHashs[3]}`) {
-        this.$store.commit('m_reservaAcomod3', true)
-        this.$store.commit('m_reservaAcomod4', false)
-        this.$store.commit('hide_alert')
-        this.scrollTop()
-      }
-      if (value === `#${this.$store.state.randomHashs[4]}`) {
-        this.$store.commit('m_reservaAcomod4', true)
-        this.$store.commit('m_reservaAcomod5', false)
-        this.$store.commit('hide_alert')
-        this.scrollTop()
-      }
-      if (value === `#${this.$store.state.randomHashs[5]}`) {
-        this.$store.commit('m_reservaAcomod5', true)
-        this.$store.commit('m_reservaAcomodPaymentMethod', false)
-        this.$store.commit('m_reservaAcomodCreditCard', false)
-        this.$store.commit('m_reservaAcomodBoleto', false)
-        this.$store.commit('m_reservaAcomodBilling', false)
-        this.$store.commit('m_showParcelas', false)
-        this.$store.commit('hide_alert')
-      }
-      if (value === `#${this.$store.state.randomHashs[6]}`) {
-        this.$store.commit('m_reservaAcomodPaymentMethod', true)
-        this.$store.commit('m_reservaAcomodCreditCard', false)
-        this.$store.commit('m_reservaAcomodBoleto', false)
-        this.$store.commit('m_reservaAcomodBilling', false)
-        this.$store.commit('hide_alert')
+      if (this.$store.state.randomHashs !== null) {
+        if (value === `#${this.$store.state.randomHashs[1]}`) {
+          this.$modal.hide('datepicker') 
+          this.$store.commit('m_reservaAcomod1', true)
+          this.$store.commit('m_reservaAcomod2', false)
+          this.$store.commit('hide_alert')
+        }
+        if (value === `#${this.$store.state.randomHashs[2]}`) {
+          this.$store.commit('m_reservaAcomod2', true)
+          this.$store.commit('m_reservaAcomod3', false)
+          this.$store.commit('hide_alert')
+          this.scrollTop()
+        }
+        if (value === `#${this.$store.state.randomHashs[3]}`) {
+          this.$store.commit('m_reservaAcomod3', true)
+          this.$store.commit('m_reservaAcomod4', false)
+          this.$store.commit('hide_alert')
+          this.scrollTop()
+        }
+        if (value === `#${this.$store.state.randomHashs[4]}`) {
+          this.$store.commit('m_reservaAcomod4', true)
+          this.$store.commit('m_reservaAcomod5', false)
+          this.$store.commit('hide_alert')
+          this.scrollTop()
+        }
+        if (value === `#${this.$store.state.randomHashs[5]}`) {
+          this.$store.commit('m_reservaAcomod5', true)
+          this.$store.commit('m_reservaAcomodPaymentMethod', false)
+          this.$store.commit('m_reservaAcomodCreditCard', false)
+          this.$store.commit('m_reservaAcomodBoleto', false)
+          this.$store.commit('m_reservaAcomodBilling', false)
+          this.$store.commit('m_showParcelas', false)
+          this.$store.commit('hide_alert')
+        }
+        if (value === `#${this.$store.state.randomHashs[6]}`) {
+          this.$store.commit('m_reservaAcomodPaymentMethod', true)
+          this.$store.commit('m_reservaAcomodCreditCard', false)
+          this.$store.commit('m_reservaAcomodBoleto', false)
+          this.$store.commit('m_reservaAcomodBilling', false)
+          this.$store.commit('hide_alert')
+        }
       }
     }
   }
