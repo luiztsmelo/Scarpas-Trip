@@ -29,6 +29,7 @@
 
         <div class="filter-box" >
           <h2 class="__filter-title">Preço por noite</h2>
+          
         </div>
         
 
