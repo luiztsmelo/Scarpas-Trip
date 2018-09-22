@@ -204,7 +204,6 @@ export default {
 </script>
 
 <style scoped>
-@import url('~/assets/css/main.css');
 
 .perfil {
   transition: var(--main-transition);

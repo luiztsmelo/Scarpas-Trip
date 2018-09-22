@@ -218,7 +218,6 @@ export default {
 </script>
 
 <style scoped>
-@import url('~/assets/css/main.css');
 
 .home {
   margin-top: 3.4rem;

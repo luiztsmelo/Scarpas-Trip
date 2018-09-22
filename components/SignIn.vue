@@ -101,7 +101,6 @@ export default {
 </script>
 
 <style>
-@import url('~/assets/css/main.css');
 
 .sign-in-modal {
   z-index: 10000;

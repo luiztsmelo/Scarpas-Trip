@@ -50,7 +50,6 @@ export default {
 </script>
 
 <style>
-@import url('~/assets/css/main.css');
 
 .anunciar-restaurante {
   margin-top: 3.4rem;

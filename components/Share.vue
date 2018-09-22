@@ -58,7 +58,6 @@ export default {
 </script>
 
 <style>
-@import url('~/assets/css/main.css');
 
 .share {
   position: fixed;

@@ -46,7 +46,6 @@ export default {
 </script>
 
 <style>
-@import url('~/assets/css/main.css');
 
 .proprietario-modal {
   position: fixed;

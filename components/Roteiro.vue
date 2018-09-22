@@ -16,7 +16,6 @@ export default {
 </script>
 
 <style>
-@import url('~/assets/css/main.css');
 
 .roteiro-home {
   width: 100%;

@@ -128,7 +128,6 @@ export default {
 </script>
 
 <style scoped>
-@import url('~/assets/css/main.css');
 
 .ask-acomod-modal {
   z-index: 10000;

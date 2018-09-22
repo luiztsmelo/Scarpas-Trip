@@ -90,7 +90,6 @@ export default {
 </script>
 
 <style>
-@import url('~/assets/css/main.css');
 
 .menu {
   position: fixed;

@@ -90,7 +90,6 @@ export default {
 </script>
 
 <style scoped>
-@import url('~/assets/css/main.css');
 
 .detalhes-valor {
   & .detalhes-valor-body {

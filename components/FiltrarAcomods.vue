@@ -80,7 +80,6 @@ export default {
 </script>
 
 <style scoped>
-@import url('~/assets/css/main.css');
 @import url('~/assets/css/radio-mobile.css');
 
 .filtrar-acomods-modal {

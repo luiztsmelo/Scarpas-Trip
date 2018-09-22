@@ -1039,7 +1039,6 @@ export default {
 </script>
 
 <style scoped>
-@import url('~/assets/css/main.css');
 
 .reserva-acomod {
   position: fixed;

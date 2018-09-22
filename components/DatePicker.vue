@@ -126,7 +126,6 @@ export default {
 </script>
 
 <style scoped>
-@import url('~/assets/css/main.css');
 
 .datepicker-body {
   padding-top: 4.2rem;

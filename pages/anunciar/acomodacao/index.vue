@@ -1284,7 +1284,6 @@ export default {
 </script>
 
 <style>
-@import url('~/assets/css/main.css');
 @import url('~/assets/css/switcher.css');
 @import url('~/assets/css/yes-or-no.css');
 @import url('~/assets/css/vue-simple-suggest.css');

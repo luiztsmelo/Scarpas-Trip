@@ -30,7 +30,6 @@ export default {
 </script>
 
 <style>
-@import url('~/assets/css/main.css');
 
 .roteiro {
   margin-top: 3.4rem;

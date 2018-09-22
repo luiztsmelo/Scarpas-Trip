@@ -44,7 +44,6 @@ export default {
 </script>
 
 <style>
-@import url('~/assets/css/main.css');
 @import url('~/assets/css/radio.css');
 
 .parcelas-modal {

@@ -112,7 +112,6 @@ export default {
 </script>
 
 <style scoped>
-@import url('~/assets/css/main.css');
 
 .termos {
   margin-top: 3.4rem;

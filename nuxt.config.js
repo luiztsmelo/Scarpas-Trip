@@ -10,6 +10,10 @@ module.exports = {
     }
     /* analyze: true */
   },
+  css: [
+    '@/assets/css/main.css',
+    '@/assets/css/normalize.css'
+  ],
   /*
   ** Headers
   ** Common headers are already provided by @nuxtjs/pwa preset
