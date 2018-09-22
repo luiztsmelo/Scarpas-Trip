@@ -3,7 +3,11 @@ module.exports = {
   ** Build configuration
   */
   build: {
-    vendor: ['supports-webp', 'dayjs', 'card-validator', 'gerador-validador-cpf']
+    postcss: {
+      preset: {
+        stage: 0
+      }
+    }
     /* analyze: true */
   },
   /*
@@ -37,18 +41,18 @@ module.exports = {
   ** Plugins
   */
   plugins: [
-    { src: '~plugins/firebase' },
+    { src: '~/plugins/firebase' },
     { src: '~/plugins/vuex-persistedstate', ssr: false },
-    { src: '~plugins/vue-progressive-image', ssr: false },
-    { src: '~plugins/vue-google-maps', ssr: false },
-    { src: '~plugins/vue-croppa', ssr: false },
-    { src: '~plugins/vue-autosize', ssr: false },
-    { src: '~plugins/vue-awesome-swiper', ssr: false },
-    { src: '~plugins/v-money', ssr: false },
-    { src: '~plugins/v-calendar', ssr: false },
-    { src: '~plugins/scroll', ssr: false },
-    { src: '~plugins/vue-js-modal' },
-    { src: '~plugins/vue-star-rating', ssr: false }
+    { src: '~/plugins/vue-progressive-image', ssr: false },
+    { src: '~/plugins/vue-google-maps', ssr: false },
+    { src: '~/plugins/vue-croppa', ssr: false },
+    { src: '~/plugins/vue-autosize', ssr: false },
+    { src: '~/plugins/vue-awesome-swiper', ssr: false },
+    { src: '~/plugins/v-money', ssr: false },
+    { src: '~/plugins/v-calendar', ssr: false },
+    { src: '~/plugins/scroll', ssr: false },
+    { src: '~/plugins/vue-js-modal' },
+    { src: '~/plugins/vue-star-rating', ssr: false }
   ],
   /*
   ** Customize the progress-bar color
