@@ -9,42 +9,14 @@
 
 
 
-      <!-- ####### EVENTOS ####### -->
-      <div class="category-container">
-
-        <div class="title-row">
-          <h1 class="__title" id="eventos">Próximos Eventos</h1>
-
-          <nuxt-link to="/eventos">
-            <div class="see-all">
-              <span class="__see-all-text">Ver mais</span>
-              <img class="__see-all-arrow" src="../assets/img/see-all-arrow.svg">
-            </div>
-          </nuxt-link>
-        </div>
-        
-        <div class="cards-container" v-if="$store.state.eventos !== null">
-          <div class="card" v-for="evento in $store.state.eventos" :key="evento.eventoID">
-            <nuxt-link :to="'/eventos/' + evento.eventoID">
-              <progressive-background class="__card-img" :src="imageEvH(evento)" :placeholder="evento.imageL1" :aspect-ratio="2/3"/>
-              <span class="__card-info" style="color: #FF7D6C">{{ evento.date }}&#160;&#8231;&#160;{{ evento.hour }}</span>
-              <h1 class="__card-title">{{ evento.title }}</h1>
-              <span class="__card-subtitle">{{ evento.subtitle }}</span>
-            </nuxt-link> 
-          </div>
-        </div>
-
-      </div><!-- ####### EVENTOS ####### -->
-
-
-
-
 
       <!-- ####### ACOMODAÇÕES ####### -->
       <div class="category-container">
 
+
         <div class="title-row">
-          <h1 class="__title" id="acomods">Acomodações</h1>
+
+          <h1 class="__title">Acomodações</h1>
 
           <nuxt-link to="/acomodacoes">
             <div class="see-all">
@@ -52,37 +24,38 @@
               <img class="__see-all-arrow" src="../assets/img/see-all-arrow.svg">
             </div>
           </nuxt-link> 
+
         </div>
         
+
         <div class="cards-container" v-if="$store.state.acomods !== null">
-          <div class="card" v-for="acomod in $store.state.acomods" :key="acomod.acomodID">
-            <nuxt-link :to="`/acomodacoes/${acomod.acomodID}`">
+          <nuxt-link :to="`/acomodacoes/${acomod.acomodID}`" class="card" v-for="acomod in $store.state.acomods" :key="acomod.acomodID">
 
-              <progressive-background class="__card-img" :src="imageAcH(acomod)" :placeholder="acomod.images[0].L" :aspect-ratio="2/3"/>
+            <progressive-background class="__card-img" :src="imageAcH(acomod)" :placeholder="acomod.images[0].L" :aspect-ratio="2/3"/>
 
-              <span class="__card-info" style="color: #FFA04F">{{ acomod.tipoAcomod }}</span>
+            <span class="__card-info" style="color: #FFA04F">{{ acomod.tipoAcomod }}</span>
 
-              <h1 class="__card-title">{{ acomod.title }}</h1>
+            <h1 class="__card-title">{{ acomod.title }}</h1>
 
-              <span class="__card-subtitle">R${{ acomod.valorNoite.toLocaleString() }}<span class="__card-valor-noite"> por noite</span></span>
+            <span class="__card-subtitle">R${{ acomod.valorNoite.toLocaleString() }}<span class="__card-valor-noite"> por noite</span></span>
 
-              <div class="rating">
-                <star-rating
-                  :rating="3.7"
-                  :increment="0.1"
-                  :read-only="true"
-                  :show-rating="false"
-                  active-color="#161616"
-                  inactive-color="#dedede"
-                  :star-size="10"
-                  :padding="2">
-                </star-rating>
-                <span class="rating-number">3.7</span>
-              </div>
-              
-            </nuxt-link> 
-          </div>
+            <div class="rating">
+              <star-rating
+                :rating="3.7"
+                :increment="0.1"
+                :read-only="true"
+                :show-rating="false"
+                active-color="#161616"
+                inactive-color="#dedede"
+                :star-size="10"
+                :padding="2">
+              </star-rating>
+              <span class="rating-number">3.7</span>
+            </div>
+            
+          </nuxt-link> 
         </div>
+
 
       </div><!-- ####### ACOMODAÇÕES ####### -->
 
@@ -93,8 +66,10 @@
       <!-- ####### PASSEIOS ####### -->
       <div class="category-container">
 
+
         <div class="title-row">
-          <h1 class="__title" id="passeios">Passeios</h1>
+
+          <h1 class="__title">Passeios</h1>
 
           <nuxt-link to="/passeios">
             <div class="see-all">
@@ -102,20 +77,65 @@
               <img class="__see-all-arrow" src="../assets/img/see-all-arrow.svg">
             </div>
           </nuxt-link> 
+
         </div>
         
+
         <div class="cards-container" v-if="$store.state.passeios !== null">
-          <div class="card" v-for="passeio in $store.state.passeios" :key="passeio.passeioID">
-            <nuxt-link :to="'/passeios/' + passeio.passeioID">
-              <progressive-background class="__card-img" :src="imagePasH(passeio)" :placeholder="passeio.imageL1" :aspect-ratio="2/3"/>
-              <span class="__card-info" style="color: #0784FD">{{ passeio.tipoPasseio }}</span>
-              <h1 class="__card-title">{{ passeio.title }}</h1>
-              <span class="__card-subtitle">R${{ passeio.valorPasseio.toLocaleString() }}<span class="__card-valor-noite"> por pessoa</span></span>
-            </nuxt-link> 
-          </div>
+          <nuxt-link :to="'/passeios/' + passeio.passeioID" class="card" v-for="passeio in $store.state.passeios" :key="passeio.passeioID">
+
+            <progressive-background class="__card-img" :src="imagePasH(passeio)" :placeholder="passeio.imageL1" :aspect-ratio="2/3"/>
+
+            <span class="__card-info" style="color: #0784FD">{{ passeio.tipoPasseio }}</span>
+
+            <h1 class="__card-title">{{ passeio.title }}</h1>
+
+            <span class="__card-subtitle">R${{ passeio.valorPasseio.toLocaleString() }}<span class="__card-valor-noite"> por pessoa</span></span>
+            
+          </nuxt-link> 
         </div>
 
+
       </div><!-- ####### PASSEIOS ####### -->
+
+
+
+
+
+      <!-- ####### EVENTOS ####### -->
+      <div class="category-container">
+
+
+        <div class="title-row">
+
+          <h1 class="__title">Próximos Eventos</h1>
+
+          <nuxt-link to="/eventos">
+            <div class="see-all">
+              <span class="__see-all-text">Ver mais</span>
+              <img class="__see-all-arrow" src="../assets/img/see-all-arrow.svg">
+            </div>
+          </nuxt-link>
+
+        </div>
+        
+
+        <div class="cards-container" v-if="$store.state.eventos !== null">
+          <nuxt-link :to="'/eventos/' + evento.eventoID" class="card" v-for="evento in $store.state.eventos" :key="evento.eventoID">
+
+            <progressive-background class="__card-img" :src="imageEvH(evento)" :placeholder="evento.imageL1" :aspect-ratio="2/3"/>
+
+            <span class="__card-info" style="color: #FF7D6C">{{ evento.date }}&#160;&#8231;&#160;{{ evento.hour }}</span>
+
+            <h1 class="__card-title">{{ evento.title }}</h1>
+
+            <span class="__card-subtitle">{{ evento.subtitle }}</span>
+
+          </nuxt-link> 
+        </div>
+
+
+      </div><!-- ####### EVENTOS ####### -->
 
 
 
@@ -124,28 +144,61 @@
       <!-- ####### ATRAÇÕES ####### -->
       <div class="category-container">
 
+
         <div class="title-row">
-          <h1 class="__title" id="atracoes">Atrações</h1>
+
+          <h1 class="__title">Atrações</h1>
 
           <nuxt-link to="/atracoes">
             <div class="see-all">
               <span class="__see-all-text">Ver mais</span>
               <img class="__see-all-arrow" src="../assets/img/see-all-arrow.svg">
             </div>
-          </nuxt-link> 
+          </nuxt-link>
+
         </div>
         
+
         <div class="cards-container" v-if="$store.state.atracoes !== null">
-          <div class="card" v-for="atracao in $store.state.atracoes" :key="atracao.atracaoID">
-            <nuxt-link :to="'/atracoes/' + atracao.atracaoID">
-              <progressive-background class="__card-img" :src="imageAtH(atracao)" :placeholder="atracao.imageL1" :aspect-ratio="2/3"/>
-              <span class="__card-info" style="color: #81C784">{{ atracao.tipoAtracao }}</span>
-              <h1 class="__card-title">{{ atracao.title }}</h1>
-            </nuxt-link> 
-          </div>
+          <nuxt-link :to="'/atracoes/' + atracao.atracaoID" class="card" v-for="atracao in $store.state.atracoes" :key="atracao.atracaoID">
+
+            <progressive-background class="__card-img" :src="imageAtH(atracao)" :placeholder="atracao.imageL1" :aspect-ratio="2/3"/>
+
+            <span class="__card-info" style="color: #81C784">{{ atracao.tipoAtracao }}</span>
+
+            <h1 class="__card-title">{{ atracao.title }}</h1>
+
+          </nuxt-link> 
         </div>
 
+
       </div><!-- ####### ATRAÇÕES ####### -->
+
+
+
+
+      <!-- ####### RESTAURANTES ####### -->
+      <div class="category-container">
+
+
+        <div class="title-row">
+
+          <h1 class="__title">Restaurantes</h1>
+
+          <nuxt-link to="/restaurantes">
+            <div class="see-all">
+              <span class="__see-all-text">Ver mais</span>
+              <img class="__see-all-arrow" src="../assets/img/see-all-arrow.svg">
+            </div>
+          </nuxt-link> 
+
+        </div>
+        
+
+        <h3 class="__subtitle">Em breve os melhores restaurantes de Capitólio.</h3>
+
+
+      </div><!-- ####### RESTAURANTES ####### -->
 
 
       <Footer/>
@@ -259,6 +312,9 @@ export default {
           }
         }
       }
+      & .__subtitle {
+        padding: 0 7%;
+      }
       & .cards-container {
         padding: 0 5%;
         display: flex;
@@ -328,6 +384,8 @@ export default {
             font-size: 29px;
             font-weight: 700;
           }
+        }
+        & .__subtitle {
         }
         & .cards-container {
           padding: 0 6.5%;
