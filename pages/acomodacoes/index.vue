@@ -1,5 +1,5 @@
 <template>
-  <div class="acomods" @click="closeFilterBtns(), filtrar()">
+  <div class="acomods" @click="closeFilterBtns(), $store.state.isMobile ? '' : filtrar()">
 
     <div class="acomods-container" :class="[ dropdownBtnIsOpen === true ? 'blur' : '' ]">
 
@@ -127,7 +127,7 @@
 
                   <button type="button" class="__limpar-btn" :class="[ $store.state.filters.hospedes === 0 ? '__limpar-btn-disabled' : '']" @click="$store.state.filters.hospedes = 0">Limpar</button>
 
-                  <button type="button" class="__filtrar-btn" @click="filtrar">Filtrar</button>
+                  <button type="button" class="__filtrar-btn" @click="filtrar()">Filtrar</button>
 
                 </div>
 
@@ -170,7 +170,7 @@
 
                   <button type="button" class="__limpar-btn" :class="[ $store.state.filters.tipoAcomod === null ? '__limpar-btn-disabled' : '']" @click="$store.state.filters.tipoAcomod = null">Limpar</button>
 
-                  <button type="button" class="__filtrar-btn" @click="filtrar">Filtrar</button>
+                  <button type="button" class="__filtrar-btn" @click="filtrar()">Filtrar</button>
 
                 </div>
 
@@ -223,7 +223,7 @@
 
                   <button type="button" class="__limpar-btn" :class="[ $store.state.filters.preco === null ? '__limpar-btn-disabled' : '']" @click="$store.state.filters.preco = null">Limpar</button>
 
-                  <button type="button" class="__filtrar-btn" @click="filtrar">Filtrar</button>
+                  <button type="button" class="__filtrar-btn" @click="filtrar()">Filtrar</button>
 
                 </div>
                 
@@ -257,7 +257,7 @@
 
                   <button type="button" class="__limpar-btn" :class="[ $store.state.filters.avaliacao === null ? '__limpar-btn-disabled' : '']" @click="$store.state.filters.avaliacao = null">Limpar</button>
 
-                  <button type="button" class="__filtrar-btn" @click="filtrar">Filtrar</button>
+                  <button type="button" class="__filtrar-btn" @click="filtrar()">Filtrar</button>
 
                 </div>
                 
@@ -275,7 +275,7 @@
           class="__limpar-filtros-btn" 
           v-if="$store.state.filters.date !== null || $store.state.filters.hospedes > 0 || $store.state.filters.tipoAcomod !== null || $store.state.filters.preco !== null || $store.state.filters.avaliacao !== null"
           @click="$store.commit('m_resetFilters')">
-          Limpar Filtros
+        Limpar Filtros
         </button>
 
 
@@ -309,8 +309,8 @@
 
 
     <!-- ___________________________ FILTRAR MOBILE ___________________________ -->
-    <button class="filtrar-mobile-btn" @click="openFiltrarAcomods" v-show="$store.state.allAcomods !== null">
-      <img class="__img" src="../../assets/img/filter.svg">
+    <button class="filtrar-mobile-btn" :class="[ $store.state.filteredAcomods !== null ? 'filtrar-mobile-btn-active' : '']" @click="openFiltrarAcomods" v-show="$store.state.allAcomods !== null">
+      <img class="__img" :class="[ $store.state.filteredAcomods !== null ? '__img-active' : '']" src="../../assets/img/filter.svg">
     </button>
     
     <filtrar-acomods/>
@@ -461,9 +461,7 @@ export default {
     filtrar () {
       this.closeFilterBtns()
       
-      const allAcomods = this.$store.state.allAcomods
-
-      const filteredAcomods = allAcomods.filter(acomod => {
+      const filteredAcomods = this.$store.state.allAcomods.filter(acomod => {
         return this.filterByHospedes(acomod) && 
                 this.filterByTipoAcomod(acomod) && 
                 this.filterByPreco(acomod)
@@ -647,15 +645,21 @@ export default {
     z-index: 8888;
     bottom: 4.5rem;
     right: 7%;
-    height: 3.4rem;
-    width: 3.4rem;
+    height: 3.6rem;
+    width: 3.6rem;
     background: white;
     transition: all .3s ease;
     box-shadow: 1px 1px 7px 1px rgba(0,0,0,0.2);
     border-radius: 50%;
     & .__img {
-      width: 1.4rem;
+      width: 1.5rem;
       height: auto;
+    }
+  }
+  & .filtrar-mobile-btn-active {
+    background: var(--colorAcomod);
+    & .__img-active {
+      filter: invert(100%) brightness(200%);
     }
   }
 }

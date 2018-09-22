@@ -61,7 +61,7 @@
           <option>Fazenda</option>
           <option>Hostel</option>
         </select>
-      </div> 
+      </div>
 
       <div class="back-next"> 
         <div class="back-next-body">

@@ -3,9 +3,12 @@
     <div class="filtrar-acomods-modal" v-show="$store.state.showFiltrarAcomods">
       <div class="filtrar-acomods-body">
 
-        <img src="../assets/img/close-mobile.svg" style="cursor:pointer;position:absolute;top:1.2rem;left:7%;width:1.1rem;height:auto" @click="closeBtn">
 
-        <button class="limpar-btn" @click="$store.commit('m_resetFilters')">Limpar</button>
+        <div class="topbar">
+          <img src="../assets/img/close-mobile.svg" class="close-btn" @click="closeBtn">
+          <button class="limpar-btn" @click="$store.commit('m_resetFilters')">Limpar</button>
+        </div>
+        
 
 
         <h1 class="__title">Filtrar por:</h1>
@@ -14,15 +17,18 @@
         <div class="filter-box">
           <h2 class="__filter-title">Tipo de acomodação</h2>
 
-          <div class="select">
-            <div class="option" v-for="(tipoAcomod, index) in tiposAcomods" :key="tipoAcomod.name" @click="$store.state.filters.tipoAcomod = tipoAcomod.name">
-              
-              <h3 class="__text" >{{ tipoAcomod.name }}</h3>
-
-              <div class="radio"><div :class="[ $store.state.filters.tipoAcomod === tipoAcomod.name ? 'radio-checkmark' : '' ]"></div></div>
-
-            </div>
-          </div>
+          <select v-model="$store.state.filters.tipoAcomod" :class="[ $store.state.filters.tipoAcomod !== null ? 'select-active' : '' ]" >
+            <option :value="null" selected>Qualquer</option>
+            <option>Casa</option>
+            <option>Apartamento</option>
+            <option>Rancho</option>
+            <option>Chácara</option>
+            <option>Pousada</option>
+            <option>Camping</option>
+            <option>Sítio</option>
+            <option>Fazenda</option>
+            <option>Hostel</option>
+          </select>
 
         </div>
 
@@ -34,7 +40,12 @@
         
 
         <div class="filter-btn">
-          <button class="__btn" @click="$store.state.showFiltrarAcomods = false">Filtrar</button>
+          <button 
+            class="__btn"
+            :class="[ $store.state.filters.date !== null || $store.state.filters.hospedes > 0 || $store.state.filters.tipoAcomod !== null || $store.state.filters.preco !== null || $store.state.filters.avaliacao !== null ? '__btn-active' : '' ]" 
+            @click="$store.state.showFiltrarAcomods = false">
+          Filtrar
+          </button>
         </div>
         
 
@@ -47,17 +58,6 @@
 export default {
   data () {
     return {
-      tiposAcomods: [
-        { 'name': 'Casa' },
-        { 'name': 'Rancho' },
-        { 'name': 'Pousada' },
-        { 'name': 'Chácara' },
-        { 'name': 'Apartamento' },
-        { 'name': 'Camping' },
-        { 'name': 'Sítio' },
-        { 'name': 'Fazenda' },
-        { 'name': 'Hostel' }
-      ]
     }
   },
   methods: {
@@ -80,7 +80,6 @@ export default {
 </script>
 
 <style scoped>
-@import url('~/assets/css/radio-mobile.css');
 
 .filtrar-acomods-modal {
   position: fixed;
@@ -95,22 +94,39 @@ export default {
   & .filtrar-acomods-body {
     display: flex;
     flex-flow: column;
-    padding: 4.8rem 7%;
-    & .limpar-btn {
-      position: absolute;
-      top: 1.2rem;
-      right: 7%;
-      padding: 0;
-      background: white;
-      font-size: 15px;
-      font-weight: 600;
+    padding: 5.5rem 7%;
+    & .topbar {
+      z-index: 99999;
+      position: fixed;
+      top: 0;
+      left: 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 7%;
+      height: 3.3rem;
+      width: 100%;
+      background: #fff;
+      box-shadow: 0px 1px 1px 0px rgba(0,0,0,0.1);
+      & .close-btn {
+        cursor: pointer;
+        width: 1.1rem;
+        height: auto;
+      }
+      & .limpar-btn {
+        padding: 0;
+        background: #fff;
+        font-size: 15px;
+        font-weight: 600;
+      }
     }
     & .__title {
       line-height: 35px;
       font-size: 29px;
-      padding-bottom: 1.5rem;
+      padding-bottom: 1.2rem;
     }
     & .filter-btn {
+      z-index: 99999;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -124,30 +140,40 @@ export default {
       & .__btn {
         height: 3.2rem;
         width: 86%;
-        background: var(--colorAcomod);
+        background: #dedede;
         color: white;
         font-weight: 700;
         border-radius: 5px;
+        transition: var(--main-transition);
+      }
+      & .__btn-active {
+        background: var(--colorAcomod);
       }
     }
     & .filter-box {
-      padding: 1rem 0;
-      border-bottom: 1px solid #dedede;
+      padding: 1.5rem 0;
       & .__filter-title {
-        font-size: 18px;
-        font-weight: 600;
-        padding-bottom: .8rem;
+        font-size: 17px;
+        font-weight: 500;
+        padding-bottom: .5rem;
       }
-      & .select {
-        & .option {
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          padding: .9rem 0;
-          & .__text {
-            font-size: 17px;
-          }
+      & select {
+        width: 100%;
+        font-size: 18px;
+        font-weight: 400;
+        background: white;
+        color: var(--color01);
+        padding: 1rem 0;
+        border: none;
+        border-bottom: 1px solid #dedede;
+        outline: none;
+        & option {
+          color: var(--color01);
         }
+      }
+      & .select-active {
+        font-weight: 500;
+        color: var(--colorAcomod);
       }
     }
   }

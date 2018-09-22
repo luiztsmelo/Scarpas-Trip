@@ -239,32 +239,29 @@ export default {
     }
   },
   beforeRouteEnter (to, from, next) {
-    next(async vm => {
-      try {
-        vm.$store.state.offFoobar1 = true
-        vm.$store.state.offFoobar2 = true
-        vm.$store.state.offFoobar3 = true
-        vm.$store.state.offFoobar4 = true
-        vm.$store.state.offFoobar5 = true
-        vm.$store.state.concludedNewAcomod = false
-        !vm.$store.state.isOnline ? vm.$modal.show('offline-modal') : ''
-        !vm.$store.state.showFoobar ? vm.$store.commit('m_showFoobar', true) : ''
-        !vm.$store.state.showNavbar ? vm.$store.commit('m_showNavbar', true) : ''
-
-        /* Fetch data */
-        const [ eventos, acomods, passeios, atracoes] = await Promise.all([ 
-          firebase.firestore().collection('eventos').get(),
-          firebase.firestore().collection('acomods').get(),
-          firebase.firestore().collection('passeios').get(),
-          firebase.firestore().collection('atracoes').get()
-        ])
-        vm.$store.commit('m_eventos', eventos.docs.map(evento => evento.data()))
+    next(vm => {
+      vm.$store.state.offFoobar1 = true
+      vm.$store.state.offFoobar2 = true
+      vm.$store.state.offFoobar3 = true
+      vm.$store.state.offFoobar4 = true
+      vm.$store.state.offFoobar5 = true
+      vm.$store.state.concludedNewAcomod = false
+      !vm.$store.state.isOnline ? vm.$modal.show('offline-modal') : ''
+      !vm.$store.state.showFoobar ? vm.$store.commit('m_showFoobar', true) : ''
+      !vm.$store.state.showNavbar ? vm.$store.commit('m_showNavbar', true) : ''
+      
+      firebase.firestore().collection('acomods').get().then(acomods => {
         vm.$store.commit('m_acomods', acomods.docs.map(acomod => acomod.data()))
+      })
+      firebase.firestore().collection('passeios').get().then(passeios => {
         vm.$store.commit('m_passeios', passeios.docs.map(passeio => passeio.data()))
+      })
+      firebase.firestore().collection('eventos').get().then(eventos => {
+        vm.$store.commit('m_eventos', eventos.docs.map(evento => evento.data()))
+      })
+      firebase.firestore().collection('atracoes').get().then(atracoes => {
         vm.$store.commit('m_atracoes', atracoes.docs.map(atracao => atracao.data()))
-      } catch (err) {
-        console.log(err)
-      }
+      })
     })
   }
 }
