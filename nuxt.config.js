@@ -7,8 +7,8 @@ module.exports = {
       preset: {
         stage: 0
       }
-    },
-    analyze: true
+    }
+    /* analyze: true */
   },
   css: [
     '@/assets/css/normalize.css',
