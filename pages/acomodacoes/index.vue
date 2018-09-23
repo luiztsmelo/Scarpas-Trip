@@ -3,9 +3,13 @@
 
     <div class="acomods-container" :class="[ dropdownBtnIsOpen === true ? 'blur' : '' ]">
 
+
+
       <div class="loader" v-show="$store.state.allAcomods === null">
         <div class="spinner"><div class="bounce1"></div><div class="bounce2"></div><div class="bounce3"></div></div>
       </div>
+
+
 
       <nuxt-link class="card" v-for="(acomod, index) in $store.state.filteredAcomods !== null ? $store.state.filteredAcomods : $store.state.allAcomods" :key="acomod.acomodID" @mouseover.native="mouseOverCard(index)" @mouseout.native="mouseOutCard(index)" :to="`/acomodacoes/${acomod.acomodID}`" v-show="$store.state.allAcomods !== null">
 
@@ -42,6 +46,7 @@
         </div>
         
       </nuxt-link>
+
 
 
       <div class="empty-state" v-show="$store.state.filteredAcomods !== null && $store.state.filteredAcomods.length === 0">
@@ -588,7 +593,9 @@ export default {
       padding: 7% 0 0 7%;
       & .image-box {
         overflow: hidden;
-        margin-bottom: .3rem;
+        line-height: 0;
+        margin-bottom: .5rem;
+        border-radius: 5px;
         & .swiper-container {
           position: relative;
           & .swiper-wrapper {
@@ -688,7 +695,6 @@ export default {
         margin-bottom: 1rem;
         & .image-box {
           overflow: hidden;
-          margin-bottom: .3rem;
           & .swiper-container {
             position: relative;
             & .swiper-wrapper {
@@ -959,6 +965,9 @@ export default {
       right: 7%;
       width: 26.5%;
       height: calc(100% - var(--navbarHeightDesktop) - 3.7rem - 2rem);
+    }
+    & .map-desktop > div {
+      border-radius: 5px !important;
     }
     & .map-desktop > div > div {
       background-color: #fff !important;

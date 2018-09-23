@@ -322,7 +322,7 @@ export default {
           & .__card-img {
             width: 100%; 
             height: auto;
-            border-radius: 2px;
+            border-radius: 5px;
             margin-bottom: .2rem;
           }
           & .__card-info {
@@ -391,7 +391,6 @@ export default {
             flex: 0 1 23.4%;
             & .__card-img {
               margin-bottom: .3rem;
-              border-radius: 2px;
             }
             & .__card-info {
               text-transform: uppercase;
