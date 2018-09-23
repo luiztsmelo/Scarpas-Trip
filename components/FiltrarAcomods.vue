@@ -14,6 +14,14 @@
         <h1 class="__title">Filtrar por:</h1>
 
 
+
+        <div class="filter-box">
+          <h2 class="__filter-title">Datas</h2>
+        </div>
+
+
+
+
         <div class="filter-box">
           <h2 class="__filter-title">Tipo de acomodação</h2>
 
@@ -33,11 +41,14 @@
         </div>
 
 
-        <div class="filter-box" >
+
+
+        <div class="filter-box">
           <h2 class="__filter-title">Preço por noite</h2>
-          
         </div>
         
+
+
 
         <div class="filter-btn">
           <button 
@@ -94,7 +105,7 @@ export default {
   & .filtrar-acomods-body {
     display: flex;
     flex-flow: column;
-    padding: 5.5rem 7%;
+    padding: 5.3rem 7%;
     & .topbar {
       z-index: 99999;
       position: fixed;
@@ -107,7 +118,6 @@ export default {
       height: 3.3rem;
       width: 100%;
       background: #fff;
-      box-shadow: 0px 1px 1px 0px rgba(0,0,0,0.1);
       & .close-btn {
         cursor: pointer;
         width: 1.1rem;
@@ -154,8 +164,8 @@ export default {
       padding: 1.5rem 0;
       & .__filter-title {
         font-size: 17px;
-        font-weight: 500;
-        padding-bottom: .5rem;
+        font-weight: 600;
+        padding-bottom: .4rem;
       }
       & select {
         width: 100%;
