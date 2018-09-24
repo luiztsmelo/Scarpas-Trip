@@ -22,6 +22,17 @@
 
 
 
+        <!-- <div class="filter-box">
+          <h2 class="__filter-title">Capacidade hóspedes</h2>
+
+          <select v-model="$store.state.filters.hospedes" :class="[ $store.state.filters.hospedes > 0 ? 'select-active' : '' ]" >
+            <option :value="null" selected>Qualquer</option>
+            <option>Casa</option>
+          </select>
+
+        </div> -->
+
+
         <div class="filter-box">
           <h2 class="__filter-title">Tipo de acomodação</h2>
 
@@ -45,20 +56,28 @@
 
         <div class="filter-box">
           <h2 class="__filter-title">Preço por noite</h2>
+
+          <select v-model="$store.state.filters.preco" :class="[ $store.state.filters.preco !== null ? 'select-active' : '' ]" >
+            <option :value="null" selected>R$0+</option>
+            <option value="low">Até R$199</option>
+            <option value="mid">R$200 - R$399</option>
+            <option value="high">R$400+</option>
+          </select>
+
         </div>
         
 
 
 
-        <div class="filter-btn">
-          <button 
-            class="__btn"
-            :class="[ selectedSomeFilter ? '__btn-active' : '' ]" 
-            @click="filtrar">
-          Filtrar
+        <div class="filter-btn" v-if="$store.state.allAcomods !== null">
+          <button class="__btn" @click="$store.state.showFiltrarAcomods = false">
+            Mostrar 
+            {{ $store.state.filteredAcomods !== null ? $store.state.filteredAcomods.length : $store.state.allAcomods.length }}
+            acomodações
           </button>
         </div>
         
+
 
       </div>
     </div>
@@ -96,19 +115,6 @@ export default {
       } else {
         return []
       }
-    },
-    filtrar () {
-      if (this.selectedSomeFilter) {
-        this.$store.state.showFiltrarAcomods = false
-      
-        const filteredAcomods = this.$store.state.allAcomods.filter(acomod => {
-          return this.filterByHospedes(acomod) && 
-                  this.filterByTipoAcomod(acomod) && 
-                  this.filterByPreco(acomod)
-        })
-
-        this.$store.commit('m_filteredAcomods', filteredAcomods)
-      }
     }
   },
   computed: {
@@ -127,6 +133,24 @@ export default {
       if (value === '') {
         this.$store.commit('m_showFiltrarAcomods', false)
       }
+    },
+    filters: {
+      handler (filter) {
+        if (this.$store.state.isMobile) {
+          if (this.selectedSomeFilter) {
+            const filteredAcomods = this.$store.state.allAcomods.filter(acomod => {
+              return this.filterByHospedes(acomod) && 
+                      this.filterByTipoAcomod(acomod) && 
+                      this.filterByPreco(acomod)
+            })
+            this.$store.commit('m_filteredAcomods', filteredAcomods)
+          }
+          if (!this.selectedSomeFilter) {
+            this.$store.state.filteredAcomods = null
+          }
+        }
+      },
+      deep: true
     }
   }
 }
@@ -192,14 +216,11 @@ export default {
       & .__btn {
         height: 3.2rem;
         width: 86%;
-        background: #dedede;
+        background: var(--colorAcomod);
         color: white;
         font-weight: 700;
         border-radius: 5px;
         transition: var(--main-transition);
-      }
-      & .__btn-active {
-        background: var(--colorAcomod);
       }
     }
     & .filter-box {
