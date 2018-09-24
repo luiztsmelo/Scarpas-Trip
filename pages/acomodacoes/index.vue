@@ -31,7 +31,7 @@
           <span class="__card-valor">R${{ acomod.valorNoite }}<span class="__card-valor-dia"> por noite</span></span>
           <div class="rating">
             <star-rating
-              :rating="3.7"
+              :rating="4.2"
               :increment="0.1"
               :read-only="true"
               :show-rating="false"
@@ -40,7 +40,7 @@
               :star-size="10"
               :padding="2">
             </star-rating>
-            <span class="rating-number">3.7</span>
+            <span class="rating-number">4.2</span>
           </div>
           
         </div>
@@ -278,7 +278,7 @@
         <button 
           type="button" 
           class="__limpar-filtros-btn" 
-          v-if="$store.state.filters.date !== null || $store.state.filters.hospedes > 0 || $store.state.filters.tipoAcomod !== null || $store.state.filters.preco !== null || $store.state.filters.avaliacao !== null"
+          v-if="selectedSomeFilter"
           @click="$store.commit('m_resetFilters')">
         Limpar Filtros
         </button>
@@ -435,18 +435,10 @@ export default {
       this.showAvaliacao = !this.showAvaliacao
     },
     filterByHospedes (acomod) {
-      if (this.filters.hospedes > 0) {
-        return acomod.totalHospedes >= this.filters.hospedes
-      } else {
-        return []
-      }
+      return this.filters.hospedes > 0 ? acomod.totalHospedes >= this.filters.hospedes : []
     },
     filterByTipoAcomod (acomod) {
-      if (this.filters.tipoAcomod !== null) {
-        return acomod.tipoAcomod === this.filters.tipoAcomod
-      } else {
-        return []
-      }
+      return this.filters.tipoAcomod !== null ? acomod.tipoAcomod === this.filters.tipoAcomod : []
     },
     filterByPreco (acomod) {
       if (this.filters.preco !== null) {
@@ -477,6 +469,13 @@ export default {
   },
   computed: {
     filters () { return this.$store.state.filters },
+    selectedSomeFilter () {
+      if (this.filters.date !== null || this.filters.hospedes > 0 || this.filters.tipoAcomod !== null || this.filters.preco !== null || this.filters.avaliacao !== null) {
+        return true
+      } else {
+        return false
+      }
+    },
     outputDatePicker () {
       if (this.filters.date !== null) {
         const dayStart = dayjs(this.filters.date.start).format('D')
@@ -571,13 +570,13 @@ export default {
       align-items: flex-start;
       width: 100%;
       height: calc(100vh - var(--navbarHeightDesktop) - 3.7rem - 2rem);
-      padding: 1rem 0;
+      padding: 1rem 7%;
       & .__img {
         width: 7rem;
         height: auto;
       }
       & .__title {
-        font-size: 27px;
+        font-size: 25px;
         padding: .4rem 0;
       }
       & .__limpar-filtros-btn {
@@ -688,6 +687,16 @@ export default {
       display: flex;
       flex-flow: row wrap;
       justify-content: space-between;
+      & .empty-state {
+        padding: 1rem 0;
+        & .__img {
+        }
+        & .__title {
+          font-size: 27px;
+        }
+        & .__limpar-filtros-btn {
+        }
+      }
       & .card {
         width: 49.1%;
         min-height: 21rem;

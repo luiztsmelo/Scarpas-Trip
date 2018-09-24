@@ -53,8 +53,8 @@
         <div class="filter-btn">
           <button 
             class="__btn"
-            :class="[ $store.state.filters.date !== null || $store.state.filters.hospedes > 0 || $store.state.filters.tipoAcomod !== null || $store.state.filters.preco !== null || $store.state.filters.avaliacao !== null ? '__btn-active' : '' ]" 
-            @click="$store.state.showFiltrarAcomods = false">
+            :class="[ selectedSomeFilter ? '__btn-active' : '' ]" 
+            @click="filtrar">
           Filtrar
           </button>
         </div>
@@ -75,10 +75,52 @@ export default {
     closeBtn () {
       this.$store.commit('m_showFiltrarAcomods', false)
       window.history.back(1)
+    },
+    filterByHospedes (acomod) {
+      return this.filters.hospedes > 0 ? acomod.totalHospedes >= this.filters.hospedes : []
+    },
+    filterByTipoAcomod (acomod) {
+      return this.filters.tipoAcomod !== null ? acomod.tipoAcomod === this.filters.tipoAcomod : []
+    },
+    filterByPreco (acomod) {
+      if (this.filters.preco !== null) {
+        if (this.filters.preco === 'low') {
+          return acomod.valorNoite <= 199
+        } 
+        else if (this.filters.preco === 'mid') {
+          return acomod.valorNoite >= 200 && acomod.valorNoite <= 399
+        } 
+        else if (this.filters.preco === 'high') {
+          return acomod.valorNoite >= 400
+        }
+      } else {
+        return []
+      }
+    },
+    filtrar () {
+      if (this.selectedSomeFilter) {
+        this.$store.state.showFiltrarAcomods = false
+      
+        const filteredAcomods = this.$store.state.allAcomods.filter(acomod => {
+          return this.filterByHospedes(acomod) && 
+                  this.filterByTipoAcomod(acomod) && 
+                  this.filterByPreco(acomod)
+        })
+
+        this.$store.commit('m_filteredAcomods', filteredAcomods)
+      }
     }
   },
   computed: {
-    hash () { return this.$route.hash }
+    hash () { return this.$route.hash },
+    filters () { return this.$store.state.filters },
+    selectedSomeFilter () {
+      if (this.filters.date !== null || this.filters.hospedes > 0 || this.filters.tipoAcomod !== null || this.filters.preco !== null || this.filters.avaliacao !== null) {
+        return true
+      } else {
+        return false
+      }
+    }
   }, 
   watch: {
     hash (value) {

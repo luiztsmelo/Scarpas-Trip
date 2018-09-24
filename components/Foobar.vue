@@ -105,7 +105,7 @@ export default {
       & .__foobar-title {
         font-size: 10px;
         font-weight: 500;
-        color: #ff5858;
+        color: var(--colorAcomod);
       }
       & .colortitle {
         color: var(--color01);

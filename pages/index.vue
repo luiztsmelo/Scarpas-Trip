@@ -92,6 +92,20 @@
 
             <span class="__card-subtitle">R${{ passeio.valorPasseio.toLocaleString() }}<span class="__card-valor-noite"> por pessoa</span></span>
             
+            <div class="rating">
+              <star-rating
+                :rating="4.6"
+                :increment="0.1"
+                :read-only="true"
+                :show-rating="false"
+                active-color="#161616"
+                inactive-color="#dedede"
+                :star-size="10"
+                :padding="2">
+              </star-rating>
+              <span class="rating-number">4.6</span>
+            </div>
+
           </nuxt-link> 
         </div>
 
