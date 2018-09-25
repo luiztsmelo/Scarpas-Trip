@@ -390,7 +390,7 @@
 
             <div class="detalhes-reserva-valor_item-total" style="padding-top: .8rem">
               <h3 style="font-size:17px">Total</h3>
-              <h3 class="__valor-total">R${{ reservaAcomod.valorReservaTotal.toLocaleString() }}</h3>
+              <h3 class="__valor-total">R${{ reservaAcomod.valorReservaTotal.toLocaleString('pt-BR', { minimumFractionDigits: 2 }) }}</h3>
             </div>
 
             <span class="__ver-detalhes" @click="$modal.show('detalhes-valor-modal')">Detalhes do valor</span>

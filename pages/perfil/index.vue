@@ -6,31 +6,38 @@
 
 
 
-      <div class="side-box">
 
-        <img class="__userPhoto" :src="user.photoURL">
 
-        <h1 class="__userName">{{ user.fullName }}</h1>
+      <!-- ________________________________________ SIDEBAR ________________________________________ -->
+      <div class="sidebar">
+
+        <img class="__user-photo" :src="user.photoURL">
+
+        <h1 class="__user-name">{{ user.fullName }}</h1>
 
         <nav>
-          <li @click="openReservas" :style="liStyleReservas">Reservas</li>
-          <li @click="openAnuncios" :style="liStyleAnuncios">Anúncios</li>
-          <li @click="openMessages" :style="liStyleMessages">Mensagens</li>
-          <li @click="openEdit" :style="liStyleEdit">Editar perfil</li>
+          <li @click="openReservas" :class="[ perfil.showReservas ? 'li-active' : '' ]">Reservas</li>
+          <li @click="openAnuncios" :class="[ perfil.showAnuncios ? 'li-active' : '' ]">Anúncios</li>
+          <li @click="openMessages" :class="[ perfil.showMessages ? 'li-active' : '' ]">Mensagens</li>
+          <li @click="openEdit" :class="[ perfil.showEdit ? 'li-active' : '' ]">Editar perfil</li>
           <li @click="$store.dispatch('a_signOut')">Sair</li>
         </nav>
 
-      </div>
+      </div><!-- ________________________________________ SIDEBAR ________________________________________ -->
 
 
 
 
+
+
+
+      <!-- ________________________________________ RESERVAS ________________________________________ -->
       <div class="category-box" v-if="perfil.showReservas">
 
         <h1 class="__title">Suas reservas</h1>
 
 
-        <!-- CARD -->
+        <!-- Card -->
         <div class="card" v-for="reserva in perfil.reservas.acomods" :key="reserva.reservaID" v-if="perfil.reservas.acomods !== null">
 
           <img class="__card-img" :src="imageAcH(reserva)">
@@ -46,7 +53,7 @@
             </div>
             <div class="item">
               <h3 class="__item-title">Valor total:&nbsp;</h3> 
-              <h3 class="__item-text">{{ reserva.valorReservaTotal.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL', minimumFractionDigits: 2}) }}</h3>
+              <h3 class="__item-text">R${{ reserva.valorReservaTotal.toLocaleString('pt-BR', { minimumFractionDigits: 2 }) }}</h3>
             </div>
 
             <div class="item">
@@ -62,33 +69,54 @@
 
           </div>
 
-        </div><!-- CARD -->
-
-      </div>
+        </div><!-- Card -->
 
 
+      </div><!-- ________________________________________ RESERVAS ________________________________________ -->
 
+
+
+
+
+
+
+      <!-- ________________________________________ ANÚNCIOS ________________________________________ -->
       <div class="category-box" v-if="perfil.showAnuncios">
 
         <h1 class="__title">Seus anúncios</h1>
 
-      </div>
+
+      </div><!-- ________________________________________ ANÚNCIOS ________________________________________ -->
 
 
 
+
+
+
+
+      <!-- ________________________________________ MESSAGES ________________________________________ -->
       <div class="category-box" v-if="perfil.showMessages">
 
         <h1 class="__title">Suas mensagens</h1>
 
-      </div>
+
+      </div><!-- ________________________________________ MESSAGES ________________________________________ -->
 
 
 
+
+
+
+
+      <!-- ________________________________________ EDITAR PERFIL ________________________________________ -->
       <div class="category-box" v-if="perfil.showEdit">
 
         <h1 class="__title">Editar perfil</h1>
 
-      </div>
+
+      </div><!-- ________________________________________ EDITAR PERFIL ________________________________________ -->
+
+
 
 
 
@@ -160,19 +188,7 @@ export default {
   computed: {
     authUser () { return this.$store.state.authUser },
     user () { return this.$store.state.user },
-    perfil () { return this.$store.state.perfil },
-    liStyleReservas () {
-      return this.perfil.showReservas ? 'font-weight:600' : ''
-    },
-    liStyleAnuncios () {
-      return this.perfil.showAnuncios ? 'font-weight:600' : ''
-    },
-    liStyleMessages () {
-      return this.perfil.showMessages ? 'font-weight:600' : ''
-    },
-    liStyleEdit () {
-      return this.perfil.showEdit ? 'font-weight:600' : ''
-    }
+    perfil () { return this.$store.state.perfil }
   },
   watch: {
     authUser (value) {
@@ -210,16 +226,17 @@ export default {
   & .perfil-body {
     display: flex;
     padding: 6.5rem 10% 4rem;
-    & .side-box {
+    & .sidebar {
       display: flex;
       flex-flow: column;
-      flex: 0 0 19%;
+      flex: 0 0 20%;
       margin-right: 2.3rem;
-      & .__userPhoto {
+      & .__user-photo {
         width: 100%;
         height: auto;
+        border-radius: 7px 7px 0 0;
       }
-      & .__userName {
+      & .__user-name {
         padding: 1rem;
         font-size: 18px;
         font-weight: 600;
@@ -234,23 +251,26 @@ export default {
         & li {
           cursor: pointer;
           user-select: none;
-          font-size: 16px;
-          font-weight: 400;
+          font-size: 15px;
+          font-weight: 500;
           padding: 1rem;
         }
         & li:hover {
-          font-weight: 500;
+          font-weight: 600;
+        }
+        & .li-active {
+          font-weight: 700;
         }
       }
     }
     & .category-box {
-      flex: 81%;
+      flex: 80%;
       display: flex;
       flex-flow: column;
       & .__title {
-        font-size: 32px;
-        font-weight: 700;
-        padding-bottom: 2.3rem;
+        font-size: 37px;
+        font-weight: 300;
+        padding-bottom: 2.4rem;
       }
       & .card {
         display: flex;
@@ -259,8 +279,9 @@ export default {
         width: 100%;
         & .__card-img {
           height: 100%;
-          width: 25%;
+          width: 26%;
           object-fit: cover;
+          border-radius: 7px 0 0 7px;
         }
         & .card-info {
           display: flex;
@@ -271,6 +292,7 @@ export default {
           border-top: 1px solid #dedede;
           border-right: 1px solid #dedede;
           border-bottom: 1px solid #dedede;
+          border-radius: 0 7px 7px 0;
           & .__card-title {
             padding-bottom: .4rem;
             font-size: 16px;
@@ -285,10 +307,11 @@ export default {
             align-items: center;
             & .__item-title {
               font-size: 15px;
-              font-weight: 500;
+              font-weight: 400;
             }
             & .__item-text {
               font-size: 15px;
+              font-weight: 500;
             }
             & .__item-info {
               width: .9rem;
@@ -310,6 +333,9 @@ export default {
               font-size: 15px;
               font-weight: 500;
               background: transparent;
+            }
+            & .__btn:hover {
+              font-weight: 600;
             }
           }
         }

@@ -336,7 +336,7 @@ export default {
           & .__card-img {
             width: 100%; 
             height: auto;
-            border-radius: 5px;
+            border-radius: 4px;
             margin-bottom: .2rem;
           }
           & .__card-info {
