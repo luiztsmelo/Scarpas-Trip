@@ -21,7 +21,7 @@ export default {
 .dashboard {
   margin-top: 7rem;
   display: flex;
-  transition: var(--main-transition);
+  transition: var(--pages-transition);
   padding: 0 7%;
 }
 </style>

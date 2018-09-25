@@ -884,7 +884,7 @@ export default {
 
 .anunciar-passeio {
   margin-top: var(--navbarHeightMobile);
-  transition: var(--main-transition);
+  transition: var(--pages-transition);
   & .progress-bar {
     position: fixed;
     top: var(--navbarHeightMobile);

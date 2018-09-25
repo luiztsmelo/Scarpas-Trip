@@ -567,7 +567,7 @@ export default {
   margin-top: var(--navbarHeightMobile);
   background: #FF7D6C;
   color: white;
-  transition: var(--main-transition);
+  transition: var(--pages-transition);
   & .progress-bar {
     position: fixed;
     top: var(--navbarHeightMobile);

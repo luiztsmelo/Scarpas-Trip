@@ -22,7 +22,7 @@ export default {
   display: flex;
   flex-flow: column;
   padding: 3rem 7%;
-  transition: var(--main-transition);
+  transition: var(--pages-transition);
   & .__title {
     font-size: 27px;
   }

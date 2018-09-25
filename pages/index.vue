@@ -287,7 +287,7 @@ export default {
   margin-top: var(--navbarHeightMobile);
   display: flex;
   flex-flow: column;
-  transition: var(--main-transition);
+  transition: var(--pages-transition);
   & .home-body {
     display: flex;
     flex-flow: column;

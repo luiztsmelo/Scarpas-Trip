@@ -206,7 +206,7 @@ export default {
 <style scoped>
 
 .perfil {
-  transition: var(--main-transition);
+  transition: var(--pages-transition);
   & .perfil-body {
     display: flex;
     padding: 6.5rem 10% 4rem;

@@ -533,7 +533,7 @@ export default {
   margin: var(--navbarHeightMobile) 0 5.4rem 0;
   display: flex;
   flex-flow: column;
-  transition: var(--main-transition);
+  transition: var(--pages-transition);
   & .acomods-container {
     position: relative;
     padding: 0;

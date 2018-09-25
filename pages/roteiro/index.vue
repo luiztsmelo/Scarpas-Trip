@@ -38,7 +38,7 @@ export default {
   background: linear-gradient(40deg, #93EDC7, #00CFC7);
   color: white;
   height: calc(100vh - var(--navbarHeightMobile));
-  transition: var(--main-transition);
+  transition: var(--pages-transition);
   & .roteiro-header {
     display: flex;
     flex-flow: column;
