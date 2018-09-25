@@ -215,6 +215,10 @@ export default {
 <style scoped>
 @import url('~/assets/css/radio-mobile.css');
 
+h3 {
+  font-size: 17px;
+}
+
 .filtrar-acomods-modal {
   position: fixed;
   z-index: 9999;
@@ -303,7 +307,7 @@ export default {
           display: flex;
           align-items: center;
           justify-content: space-between;
-          width: 12rem;
+          width: 14rem;
           margin-left: 1rem;
           & .__btn {
             position: relative;
@@ -311,8 +315,8 @@ export default {
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 2rem;
-            height: 2rem;
+            width: 32px;
+            height: 32px;
             border: 1px solid var(--color01);
             border-radius: 50%;
             & .minus {
