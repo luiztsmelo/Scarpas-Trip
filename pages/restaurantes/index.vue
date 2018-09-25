@@ -18,7 +18,7 @@ export default {
 <style>
 
 .restaurantes {
-  margin-top: 3.4rem;
+  margin-top: var(--navbarHeightMobile);
   display: flex;
   flex-flow: column;
   padding: 3rem 7%;

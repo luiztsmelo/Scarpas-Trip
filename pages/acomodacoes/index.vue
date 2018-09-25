@@ -530,7 +530,7 @@ export default {
 @import url('~/assets/css/radio-desktop.css');
 
 .acomods {
-  margin: 3.4rem 0 5.4rem 0;
+  margin: var(--navbarHeightMobile) 0 5.4rem 0;
   display: flex;
   flex-flow: column;
   transition: var(--main-transition);
@@ -649,7 +649,7 @@ export default {
     align-items: center;
     justify-content: center;
     z-index: 8888;
-    bottom: 4.5rem;
+    bottom: 4.6rem;
     right: 7%;
     height: 3.6rem;
     width: 3.6rem;

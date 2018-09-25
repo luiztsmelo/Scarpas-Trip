@@ -19,12 +19,12 @@ export default {
 
 .roteiro-home {
   width: 100%;
-  height: 12rem;
+  height: 13rem;
   background-image: url('~assets/img/bgimg.jpg');
   background-repeat: no-repeat;
   background-size: cover;
   & .chegada-partida-container {
-    background: rgba(0,0,0,.5);
+    background: rgba(0,0,0,.6);
     padding: 1rem 0;
     position: relative;
     display: flex;
@@ -39,8 +39,8 @@ export default {
       padding: 0 7%;
       color: white;
       font-size: 20px;
-      font-weight: 600;
-      line-height: 26px;
+      font-weight: 700;
+      line-height: 30px;
       user-select: none;
     }
   }

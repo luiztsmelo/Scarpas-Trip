@@ -52,13 +52,13 @@ export default {
 <style>
 
 .anunciar-restaurante {
-  margin-top: 3.4rem;
+  margin-top: var(--navbarHeightMobile);
   background: #feb47b;
   color: white;
   transition: var(--main-transition);
   & .progress-bar {
     position: fixed;
-    top: 3.4rem;
+    top: var(--navbarHeightMobile);
     height: 3px;
     z-index: 8888;
     background: linear-gradient(80deg, #feb47b, #ff7e5f);

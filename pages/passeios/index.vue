@@ -111,7 +111,7 @@ export default {
 @import url('~/assets/css/pagination.css');
 
 .passeios {
-  margin: 3.4rem 0 5.4rem 0;
+  margin: var(--navbarHeightMobile) 0 5.4rem 0;
   display: flex;
   flex-flow: column;
   transition: all .2s ease-in-out;

@@ -1289,11 +1289,11 @@ export default {
 @import url('~/assets/css/vue-simple-suggest.css');
 
 .anunciar-acomodacao {
-  margin-top: 3.4rem;
+  margin-top: var(--navbarHeightMobile);
   transition: var(--main-transition);
   & .progress-bar {
     position: fixed;
-    top: 3.4rem;
+    top: var(--navbarHeightMobile);
     height: 5px;
     z-index: 8888;
     background: var(--colorAcomod);

@@ -504,10 +504,10 @@ export default {
 <style>
 
 .anunciar-atracao {
-  margin-top: 3.4rem;
+  margin-top: var(--navbarHeightMobile);
   & .progress-bar {
     position: fixed;
-    top: 3.4rem;
+    top: var(--navbarHeightMobile);
     height: 3px;
     z-index: 8888;
     background: #81C784;

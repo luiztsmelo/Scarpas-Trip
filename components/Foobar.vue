@@ -76,7 +76,7 @@ export default {
   z-index: 9997;
   bottom: 0;
   left: 0;
-  height: 3.4rem;
+  height: 3.5rem;
   width: 100%;
   background: white;
   transition: var(--main-transition);
@@ -95,7 +95,7 @@ export default {
       width: 45%;
     }
     & .foobar-box {
-      margin-top: 4px;
+      margin-top: 3px;
       height: 100%;
       display: flex;
       flex-flow: column;

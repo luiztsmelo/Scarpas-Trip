@@ -41,7 +41,7 @@
 
             <div class="rating">
               <star-rating
-                :rating="3.7"
+                :rating="4.2"
                 :increment="0.1"
                 :read-only="true"
                 :show-rating="false"
@@ -50,7 +50,7 @@
                 :star-size="10"
                 :padding="2">
               </star-rating>
-              <span class="rating-number">3.7</span>
+              <span class="rating-number">4.2</span>
             </div>
             
           </nuxt-link> 
@@ -284,7 +284,7 @@ export default {
 <style scoped>
 
 .home {
-  margin-top: 3.4rem;
+  margin-top: var(--navbarHeightMobile);
   display: flex;
   flex-flow: column;
   transition: var(--main-transition);
@@ -301,9 +301,9 @@ export default {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: 0 7% 1.2rem 7%;
+        padding: 0 7% 1.1rem 7%;
         & .__title {
-          font-size: 22px;
+          font-size: 23px;
           font-weight: 700;
         }
         & .see-all {

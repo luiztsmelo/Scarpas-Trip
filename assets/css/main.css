@@ -1,4 +1,5 @@
 :root {
+  --navbarHeightMobile: 3.5rem;
   --navbarHeightDesktop: 4.5rem;
   /* ******* FONTS ******* */
   --main-font: 'Montserrat', sans-serif;

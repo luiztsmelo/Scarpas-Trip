@@ -564,13 +564,13 @@ export default {
 <style>
 
 .anunciar-evento {
-  margin-top: 3.4rem;
+  margin-top: var(--navbarHeightMobile);
   background: #FF7D6C;
   color: white;
   transition: var(--main-transition);
   & .progress-bar {
     position: fixed;
-    top: 3.4rem;
+    top: var(--navbarHeightMobile);
     height: 3px;
     z-index: 8888;
     background: #FF7D6C;

@@ -114,7 +114,7 @@ export default {
 <style scoped>
 
 .termos {
-  margin-top: 3.4rem;
+  margin-top: var(--navbarHeightMobile);
   display: flex;
   transition: var(--main-transition);
   padding: 0 7%;

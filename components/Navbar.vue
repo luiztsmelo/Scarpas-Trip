@@ -118,7 +118,7 @@ export default {
   top: 0;
   left: 0;
   z-index: 9997;
-  height: 3.4rem;
+  height: var(--navbarHeightMobile);
   width:  100%;
   background: white;
   transition: var(--main-transition);

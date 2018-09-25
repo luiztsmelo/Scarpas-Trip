@@ -32,12 +32,12 @@ export default {
 <style>
 
 .roteiro {
-  margin-top: 3.4rem;
+  margin-top: var(--navbarHeightMobile);
   display: flex;
   flex-flow: column;
   background: linear-gradient(40deg, #93EDC7, #00CFC7);
   color: white;
-  height: calc(100vh - 3.4rem);
+  height: calc(100vh - var(--navbarHeightMobile));
   transition: var(--main-transition);
   & .roteiro-header {
     display: flex;
