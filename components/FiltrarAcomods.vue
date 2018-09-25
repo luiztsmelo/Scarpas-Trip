@@ -15,57 +15,96 @@
 
 
 
+
+        <!-- Datas -->
         <div class="filter-box">
+
           <h2 class="__filter-title">Datas</h2>
-        </div>
+
+
+          <h3 style="padding: .8rem 0">Chegada / Partida</h3>
+
+        </div><!-- Datas -->
 
 
 
 
-        <!-- <div class="filter-box">
+
+        <!-- Hóspedes -->
+        <div class="filter-box">
+
           <h2 class="__filter-title">Capacidade hóspedes</h2>
 
-          <select v-model="$store.state.filters.hospedes" :class="[ $store.state.filters.hospedes > 0 ? 'select-active' : '' ]" >
-            <option :value="null" selected>Qualquer</option>
-            <option>Casa</option>
-          </select>
 
-        </div> -->
+          <div class="number-select">
+
+            <h3>Adultos e crianças</h3>
+
+            <div class="input-number">
+              <div class="__btn" :class="$store.state.filters.hospedes === 0 ? '__btn-disabled' : ''" @click="$store.commit('m_decrementHospedes')"><div class="minus"></div></div>
+
+              <h3>Acima de {{ $store.state.filters.hospedes }}</h3>
+
+              <div class="__btn" :class="$store.state.filters.hospedes === 25 ? '__btn-disabled' : ''" @click="$store.commit('m_incrementHospedes')"><div class="plus-horiz"></div><div class="plus-vert"></div></div>
+            </div>
+
+          </div>
+
+        </div><!-- Hóspedes -->
 
 
+
+
+
+        <!-- Tipo acomod -->
         <div class="filter-box">
+
           <h2 class="__filter-title">Tipo de acomodação</h2>
 
-          <select v-model="$store.state.filters.tipoAcomod" :class="[ $store.state.filters.tipoAcomod !== null ? 'select-active' : '' ]" >
-            <option :value="null" selected>Qualquer</option>
-            <option>Casa</option>
-            <option>Apartamento</option>
-            <option>Rancho</option>
-            <option>Chácara</option>
-            <option>Pousada</option>
-            <option>Camping</option>
-            <option>Sítio</option>
-            <option>Fazenda</option>
-            <option>Hostel</option>
-          </select>
 
-        </div>
+          <div class="option" v-for="(tipoAcomod, index) in tiposAcomods" :key="tipoAcomod.name" @click="$store.state.filters.tipoAcomod = tipoAcomod.name">
+            
+            <h3 class="__text" >{{ tipoAcomod.name }}</h3>
+
+            <div class="radio"><div :class="[ $store.state.filters.tipoAcomod === tipoAcomod.name ? 'radio-checkmark' : '' ]"></div></div>
+
+          </div>
+
+        </div><!-- Tipo acomod -->
 
 
 
 
+
+        <!-- Preço -->
         <div class="filter-box">
+
           <h2 class="__filter-title">Preço por noite</h2>
 
-          <select v-model="$store.state.filters.preco" :class="[ $store.state.filters.preco !== null ? 'select-active' : '' ]" >
-            <option :value="null" selected>R$0+</option>
-            <option value="low">Até R$199</option>
-            <option value="mid">R$200 - R$399</option>
-            <option value="high">R$400+</option>
-          </select>
 
-        </div>
+          <div class="option" v-for="(preco, index) in precos" :key="preco.name" @click="$store.state.filters.preco = preco.value">
+            
+            <h3 class="__text" >{{ preco.name }}</h3>
+
+            <div class="radio"><div :class="[ $store.state.filters.preco === preco.value ? 'radio-checkmark' : '' ]"></div></div>
+
+          </div>
+
+        </div><!-- Preço -->
+
+
+
+
+
+        <!-- Avaliação -->
+        <div class="filter-box">
+
+          <h2 class="__filter-title">Avaliação</h2>
+
+
+        </div><!-- Avaliação -->
         
+
 
 
 
@@ -79,6 +118,7 @@
         
 
 
+
       </div>
     </div>
   </transition>
@@ -88,6 +128,22 @@
 export default {
   data () {
     return {
+      tiposAcomods: [
+        { 'name': 'Casa' },
+        { 'name': 'Apartamento' },
+        { 'name': 'Rancho' },
+        { 'name': 'Chácara' },
+        { 'name': 'Pousada' },
+        { 'name': 'Camping' },
+        { 'name': 'Sítio' },
+        { 'name': 'Fazenda' },
+        { 'name': 'Hostel' }
+      ],
+      precos: [
+        { 'name': 'Até R$199', 'value': 'low' },
+        { 'name': 'R$200 - R$399', 'value': 'mid' },
+        { 'name': 'R$400+', 'value': 'high' }
+      ],
     }
   },
   methods: {
@@ -157,6 +213,7 @@ export default {
 </script>
 
 <style scoped>
+@import url('~/assets/css/radio-mobile.css');
 
 .filtrar-acomods-modal {
   position: fixed;
@@ -224,29 +281,62 @@ export default {
       }
     }
     & .filter-box {
-      padding: 1.5rem 0;
+      padding: 2.3rem 0 1.5rem;
+      border-bottom: 1px solid #dedede;
       & .__filter-title {
         font-size: 17px;
         font-weight: 600;
-        padding-bottom: .4rem;
+        padding-bottom: .8rem;
       }
-      & select {
-        width: 100%;
-        font-size: 18px;
-        font-weight: 400;
-        background: white;
-        color: var(--color01);
-        padding: 1rem 0;
-        border: none;
-        border-bottom: 1px solid #dedede;
-        outline: none;
-        & option {
-          color: var(--color01);
+      & .option {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: .8rem 0;
+      }
+      & .number-select {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: .8rem 0;
+        & .input-number {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          width: 12rem;
+          margin-left: 1rem;
+          & .__btn {
+            position: relative;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 2rem;
+            height: 2rem;
+            border: 1px solid var(--color01);
+            border-radius: 50%;
+            & .minus {
+              width: 8px;
+              height: 1px;
+              background: var(--color01);
+            }
+            & .plus-horiz {
+              width: 10px;
+              height: 1px;
+              background: var(--color01);
+            }
+            & .plus-vert {
+              position: absolute;
+              transform: rotate(90deg);
+              width: 10px;
+              height: 1px;
+              background: var(--color01);
+            }
+          }
+          & .__btn-disabled {
+            opacity: .2;
+          }
         }
-      }
-      & .select-active {
-        font-weight: 500;
-        color: var(--colorAcomod);
       }
     }
   }

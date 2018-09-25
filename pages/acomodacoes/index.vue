@@ -991,7 +991,6 @@ export default {
       transform: translateY(24px);
       & .__valor {
         cursor: pointer;
-        font-family: var(--main-font);
         font-size: 13px;
         font-weight: 600;
         transition: var(--main-transition);
