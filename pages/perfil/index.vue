@@ -32,13 +32,13 @@
 
 
       <!-- ________________________________________ RESERVAS ________________________________________ -->
-      <div class="category-box" v-if="perfil.showReservas">
+      <div class="category-box" v-show="perfil.showReservas">
 
         <h1 class="__title">Suas reservas</h1>
 
 
         <!-- Card -->
-        <div class="card" v-for="reserva in perfil.reservas.acomods" :key="reserva.reservaID" v-if="perfil.reservas.acomods !== null">
+        <div class="card" v-for="reserva in perfil.reservas.acomods" :key="reserva.reservaID" v-show="perfil.reservas.acomods !== null">
 
           <img class="__card-img" :src="imageAcH(reserva)">
           
@@ -81,7 +81,7 @@
 
 
       <!-- ________________________________________ ANÚNCIOS ________________________________________ -->
-      <div class="category-box" v-if="perfil.showAnuncios">
+      <div class="category-box" v-show="perfil.showAnuncios">
 
         <h1 class="__title">Seus anúncios</h1>
 
@@ -95,7 +95,7 @@
 
 
       <!-- ________________________________________ MESSAGES ________________________________________ -->
-      <div class="category-box" v-if="perfil.showMessages">
+      <div class="category-box" v-show="perfil.showMessages">
 
         <h1 class="__title">Suas mensagens</h1>
 
@@ -109,7 +109,7 @@
 
 
       <!-- ________________________________________ EDITAR PERFIL ________________________________________ -->
-      <div class="category-box" v-if="perfil.showEdit">
+      <div class="category-box" v-show="perfil.showEdit">
 
         <h1 class="__title">Editar perfil</h1>
 

@@ -69,7 +69,7 @@
         <!-- Datas -->
         <div class="item-form">
           <v-date-picker
-            v-if="$store.state.filters.date === null"
+            v-show="$store.state.filters.date === null"
             mode='range'
             @drag='drag = $event'
             v-model='$store.state.filters.date'
@@ -111,7 +111,7 @@
             </button>
 
             <transition name="dropdown-animation">
-              <div class="dropdown-body" v-if="showHospedes">
+              <div class="dropdown-body" v-show="showHospedes">
 
                 <div class="number-box">
 
@@ -156,7 +156,7 @@
             </button>
 
             <transition name="dropdown-animation">
-              <div class="dropdown-body" v-if="showTipoAcomod">
+              <div class="dropdown-body" v-show="showTipoAcomod">
 
                 <div class="tipo-acomod-box">
 
@@ -199,7 +199,7 @@
             </button>
 
             <transition name="dropdown-animation">
-              <div class="dropdown-body" v-if="showPreco">
+              <div class="dropdown-body" v-show="showPreco">
 
                 <div class="preco-box">
 
@@ -250,7 +250,7 @@
             <button type="button" class="dropdown-btn" :style="onAvaliacaoBtn" @click="onClickAvaliacaoBtn">Avaliação</button>
 
             <transition name="dropdown-animation">
-              <div class="dropdown-body" v-if="showAvaliacao">
+              <div class="dropdown-body" v-show="showAvaliacao">
 
                 <div class="avaliacao-box">
 
@@ -278,7 +278,7 @@
         <button 
           type="button" 
           class="__limpar-filtros-btn" 
-          v-if="selectedSomeFilter"
+          v-show="selectedSomeFilter"
           @click="$store.commit('m_resetFilters')">
         Limpar Filtros
         </button>
@@ -299,7 +299,7 @@
 
       <GmapInfoWindow
         ref="infoWindow"
-        v-if="$store.state.allAcomods !== null"
+        v-show="$store.state.allAcomods !== null"
         v-for="acomod in $store.state.filteredAcomods !== null ? $store.state.filteredAcomods : $store.state.allAcomods"
         :key="acomod.acomodID"
         :position="{lat: acomod.positionLAT, lng: acomod.positionLNG}">
@@ -991,6 +991,7 @@ export default {
       transform: translateY(24px);
       & .__valor {
         cursor: pointer;
+        font-family: var(--main-font) !important;
         font-size: 13px;
         font-weight: 600;
         transition: var(--main-transition);
