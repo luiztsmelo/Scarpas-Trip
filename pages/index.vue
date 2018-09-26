@@ -222,7 +222,7 @@
 </template>
 
 <script>
-import firebase from 'firebase/app'
+import firebase from '@firebase/app'
 import 'firebase/firestore'
 import supportsWebP from 'supports-webp'
 import Roteiro from '~/components/Roteiro'

@@ -335,7 +335,7 @@
 </template>
 
 <script>
-import firebase from 'firebase/app'
+import firebase from '@firebase/app'
 import 'firebase/firestore'
 import MiniLoader from '@/components/MiniLoader.vue'
 import ReservaMobile from '@/components/reserva-acomod/ReservaMobile'

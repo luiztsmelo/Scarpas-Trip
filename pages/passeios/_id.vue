@@ -162,7 +162,7 @@
 </template>
 
 <script>
-import firebase from 'firebase/app'
+import firebase from '@firebase/app'
 import 'firebase/firestore'
 import Proprietario from '../../components/Proprietario'
 import supportsWebP from 'supports-webp'
