@@ -74,7 +74,7 @@ export default {
       if (this.userEmail === null) {
         this.$modal.show('sign-in-modal')
       } else {
-        this.$router.push(`/@${this.userEmail.substring(0, this.userEmail.indexOf("@"))}`)
+        this.$router.push('/perfil')
       }
     }
   },
