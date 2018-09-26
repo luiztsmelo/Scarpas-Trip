@@ -5,12 +5,13 @@
 
 
 
+
       <Roteiro/>
 
 
 
 
-      <!-- ####### ACOMODAÇÕES ####### -->
+      <!-- ______________________________ ACOMODAÇÕES ______________________________ -->
       <div class="category-container">
 
 
@@ -28,7 +29,7 @@
         </div>
         
 
-        <div class="cards-container" v-if="$store.state.acomods !== null">
+        <div class="cards-container" v-show="$store.state.acomods !== null">
           <nuxt-link :to="`/acomodacoes/${acomod.acomodID}`" class="card" v-for="acomod in $store.state.acomods" :key="acomod.acomodID">
 
             <progressive-background class="__card-img" :src="imageAcH(acomod)" :placeholder="acomod.images[0].L" :aspect-ratio="2/3"/>
@@ -57,13 +58,14 @@
         </div>
 
 
-      </div><!-- ####### ACOMODAÇÕES ####### -->
+      </div><!-- ______________________________ ACOMODAÇÕES ______________________________ -->
 
 
 
 
 
-      <!-- ####### PASSEIOS ####### -->
+
+      <!-- ______________________________ PASSEIOS ______________________________ -->
       <div class="category-container">
 
 
@@ -81,7 +83,7 @@
         </div>
         
 
-        <div class="cards-container" v-if="$store.state.passeios !== null">
+        <div class="cards-container" v-show="$store.state.passeios !== null">
           <nuxt-link :to="'/passeios/' + passeio.passeioID" class="card" v-for="passeio in $store.state.passeios" :key="passeio.passeioID">
 
             <progressive-background class="__card-img" :src="imagePasH(passeio)" :placeholder="passeio.imageL1" :aspect-ratio="2/3"/>
@@ -110,13 +112,14 @@
         </div>
 
 
-      </div><!-- ####### PASSEIOS ####### -->
+      </div><!-- ______________________________ PASSEIOS ______________________________ -->
 
 
 
 
 
-      <!-- ####### EVENTOS ####### -->
+
+      <!-- ______________________________ EVENTOS ______________________________ -->
       <div class="category-container">
 
 
@@ -134,7 +137,7 @@
         </div>
         
 
-        <div class="cards-container" v-if="$store.state.eventos !== null">
+        <div class="cards-container" v-show="$store.state.eventos !== null">
           <nuxt-link :to="'/eventos/' + evento.eventoID" class="card" v-for="evento in $store.state.eventos" :key="evento.eventoID">
 
             <progressive-background class="__card-img" :src="imageEvH(evento)" :placeholder="evento.imageL1" :aspect-ratio="2/3"/>
@@ -149,13 +152,14 @@
         </div>
 
 
-      </div><!-- ####### EVENTOS ####### -->
+      </div><!-- ______________________________ EVENTOS ______________________________ -->
 
 
 
 
 
-      <!-- ####### ATRAÇÕES ####### -->
+
+      <!-- ______________________________ ATRAÇÕES ______________________________ -->
       <div class="category-container">
 
 
@@ -173,7 +177,7 @@
         </div>
         
 
-        <div class="cards-container" v-if="$store.state.atracoes !== null">
+        <div class="cards-container" v-show="$store.state.atracoes !== null">
           <nuxt-link :to="'/atracoes/' + atracao.atracaoID" class="card" v-for="atracao in $store.state.atracoes" :key="atracao.atracaoID">
 
             <progressive-background class="__card-img" :src="imageAtH(atracao)" :placeholder="atracao.imageL1" :aspect-ratio="2/3"/>
@@ -186,12 +190,13 @@
         </div>
 
 
-      </div><!-- ####### ATRAÇÕES ####### -->
+      </div><!-- ______________________________ ATRAÇÕES ______________________________ -->
 
 
 
 
-      <!-- ####### RESTAURANTES ####### -->
+
+      <!-- ______________________________ RESTAURANTES ______________________________ -->
       <div class="category-container">
 
 
@@ -212,7 +217,10 @@
         <h3 class="__subtitle">Em breve os melhores restaurantes de Capitólio.</h3>
 
 
-      </div><!-- ####### RESTAURANTES ####### -->
+      </div><!-- ______________________________ RESTAURANTES ______________________________ -->
+
+
+
 
 
       <Footer/>

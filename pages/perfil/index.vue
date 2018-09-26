@@ -239,14 +239,14 @@ export default {
       & .__user-name {
         padding: 1rem;
         font-size: 18px;
-        font-weight: 600;
+        font-weight: 500;
         text-align: center;
         border-left: 1px solid #dedede;
         border-right: 1px solid #dedede;
         border-bottom: 1px solid #dedede;
       }
       & nav {
-        margin-top: .8rem;
+        margin-top: 1rem;
         border: 1px solid #dedede;
         & li {
           cursor: pointer;

@@ -45,7 +45,7 @@ module.exports = {
   ** Plugins
   */
   plugins: [
-    { src: '~/plugins/firebase' },
+    { src: '~/plugins/firebase', ssr: false },
     { src: '~/plugins/vuex-persistedstate', ssr: false },
     { src: '~/plugins/vue-progressive-image', ssr: false },
     { src: '~/plugins/vue-google-maps', ssr: false },
@@ -55,7 +55,7 @@ module.exports = {
     { src: '~/plugins/v-money', ssr: false },
     { src: '~/plugins/v-calendar', ssr: false },
     { src: '~/plugins/scroll', ssr: false },
-    { src: '~/plugins/vue-js-modal' },
+    { src: '~/plugins/vue-js-modal', ssr: false },
     { src: '~/plugins/vue-star-rating', ssr: false }
   ],
   /*
