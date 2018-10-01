@@ -21,7 +21,7 @@
 
           <nuxt-link to="/acomodacoes">
             <div class="see-all">
-              <span class="__see-all-text">Ver mais</span>
+              <h3 class="__see-all-text">Ver mais</h3>
               <img class="__see-all-arrow" src="../assets/img/see-all-arrow.svg">
             </div>
           </nuxt-link> 
@@ -30,15 +30,16 @@
         
 
         <div class="cards-container" v-show="$store.state.acomods !== null">
+
           <nuxt-link :to="`/acomodacoes/${acomod.acomodID}`" class="card" v-for="acomod in $store.state.acomods" :key="acomod.acomodID">
 
             <progressive-background class="__card-img" :src="imageAcH(acomod)" :placeholder="acomod.images[0].L" :aspect-ratio="2/3"/>
 
-            <span class="__card-info" style="color: #FFA04F">{{ acomod.tipoAcomod }}</span>
+            <h3 class="__card-info" style="color: #FFA04F">{{ acomod.tipoAcomod }}</h3>
 
             <h1 class="__card-title">{{ acomod.title }}</h1>
 
-            <span class="__card-subtitle">R${{ acomod.valorNoite.toLocaleString() }}<span class="__card-valor-noite"> por noite</span></span>
+            <h3 class="__card-subtitle">R${{ acomod.valorNoite.toLocaleString() }}<span class="__card-valor-noite"> por noite</span></h3>
 
             <div class="rating">
               <star-rating
@@ -51,10 +52,11 @@
                 :star-size="10"
                 :padding="2">
               </star-rating>
-              <span class="rating-number">4.2</span>
+              <h3 class="rating-number">4.2</h3>
             </div>
             
-          </nuxt-link> 
+          </nuxt-link>
+
         </div>
 
 
@@ -75,7 +77,7 @@
 
           <nuxt-link to="/passeios">
             <div class="see-all">
-              <span class="__see-all-text">Ver mais</span>
+              <h3 class="__see-all-text">Ver mais</h3>
               <img class="__see-all-arrow" src="../assets/img/see-all-arrow.svg">
             </div>
           </nuxt-link> 
@@ -88,11 +90,11 @@
 
             <progressive-background class="__card-img" :src="imagePasH(passeio)" :placeholder="passeio.imageL1" :aspect-ratio="2/3"/>
 
-            <span class="__card-info" style="color: #0784FD">{{ passeio.tipoPasseio }}</span>
+            <h3 class="__card-info" style="color: #0784FD">{{ passeio.tipoPasseio }}</h3>
 
             <h1 class="__card-title">{{ passeio.title }}</h1>
 
-            <span class="__card-subtitle">R${{ passeio.valorPasseio.toLocaleString() }}<span class="__card-valor-noite"> por pessoa</span></span>
+            <h3 class="__card-subtitle">R${{ passeio.valorPasseio.toLocaleString() }}<span class="__card-valor-noite"> por pessoa</span></h3>
             
             <div class="rating">
               <star-rating
@@ -105,7 +107,7 @@
                 :star-size="10"
                 :padding="2">
               </star-rating>
-              <span class="rating-number">4.6</span>
+              <h3 class="rating-number">4.6</h3>
             </div>
 
           </nuxt-link> 
@@ -129,7 +131,7 @@
 
           <nuxt-link to="/eventos">
             <div class="see-all">
-              <span class="__see-all-text">Ver mais</span>
+              <h3 class="__see-all-text">Ver mais</h3>
               <img class="__see-all-arrow" src="../assets/img/see-all-arrow.svg">
             </div>
           </nuxt-link>
@@ -142,11 +144,11 @@
 
             <progressive-background class="__card-img" :src="imageEvH(evento)" :placeholder="evento.imageL1" :aspect-ratio="2/3"/>
 
-            <span class="__card-info" style="color: #FF7D6C">{{ evento.date }}&#160;&#8231;&#160;{{ evento.hour }}</span>
+            <h3 class="__card-info" style="color: #FF7D6C">{{ evento.date }}&#160;&#8231;&#160;{{ evento.hour }}</h3>
 
             <h1 class="__card-title">{{ evento.title }}</h1>
 
-            <span class="__card-subtitle">{{ evento.subtitle }}</span>
+            <h3 class="__card-subtitle">{{ evento.subtitle }}</h3>
 
           </nuxt-link> 
         </div>
@@ -169,7 +171,7 @@
 
           <nuxt-link to="/atracoes">
             <div class="see-all">
-              <span class="__see-all-text">Ver mais</span>
+              <h3 class="__see-all-text">Ver mais</h3>
               <img class="__see-all-arrow" src="../assets/img/see-all-arrow.svg">
             </div>
           </nuxt-link>
@@ -182,7 +184,7 @@
 
             <progressive-background class="__card-img" :src="imageAtH(atracao)" :placeholder="atracao.imageL1" :aspect-ratio="2/3"/>
 
-            <span class="__card-info" style="color: #81C784">{{ atracao.tipoAtracao }}</span>
+            <h3 class="__card-info" style="color: #81C784">{{ atracao.tipoAtracao }}</h3>
 
             <h1 class="__card-title">{{ atracao.title }}</h1>
 
@@ -206,7 +208,7 @@
 
           <nuxt-link to="/restaurantes">
             <div class="see-all">
-              <span class="__see-all-text">Ver mais</span>
+              <h3 class="__see-all-text">Ver mais</h3>
               <img class="__see-all-arrow" src="../assets/img/see-all-arrow.svg">
             </div>
           </nuxt-link> 
@@ -315,9 +317,9 @@ export default {
           font-weight: 700;
         }
         & .see-all {
-          width: 6rem;
+          display: flex;
+          align-items: center;
           cursor: pointer;
-          text-align: end;
           & .__see-all-text {
             font-size: 14px;
             font-weight: 500;
@@ -420,7 +422,7 @@ export default {
               font-weight: 600;
             }
             & .__card-title {
-              margin: .2rem 0;
+              margin: .1rem 0;
               font-size: 16px;
               font-weight: 700;
             }

@@ -8,7 +8,7 @@
 
         <nuxt-link to="/" class="brand" @click="$store.commit('m_showMenu', false), $store.commit('m_menuIconAnime', false)">
           <img class="__brand-img" src="../static/brand.svg" draggable="false">
-          <span class="__brand-name">Escarpas Trip</span>
+          <h1 class="__brand-name">Escarpas Trip</h1>
         </nuxt-link>
         
 

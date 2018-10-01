@@ -9,8 +9,9 @@
         <div class="spinner"><div class="bounce1"></div><div class="bounce2"></div><div class="bounce3"></div></div>
       </div>
 
+    
 
-
+      <!-- Card -->
       <nuxt-link class="card" v-for="(acomod, index) in $store.state.filteredAcomods !== null ? $store.state.filteredAcomods : $store.state.allAcomods" :key="acomod.acomodID" @mouseover.native="mouseOverCard(index)" @mouseout.native="mouseOutCard(index)" :to="`/acomodacoes/${acomod.acomodID}`" v-show="$store.state.allAcomods !== null">
 
         <div class="image-box">
@@ -26,9 +27,9 @@
         </div>
 
         <div class="card-details">
-          <span class="__card-tipo-acomod">{{ acomod.tipoAcomod }}</span>
-          <span class="__card-title">{{ acomod.title }}</span>
-          <span class="__card-valor">R${{ acomod.valorNoite }}<span class="__card-valor-dia"> por noite</span></span>
+          <p class="__card-tipo-acomod">{{ acomod.tipoAcomod }}</p>
+          <p class="__card-title">{{ acomod.title }}</p>
+          <p class="__card-valor">R${{ acomod.valorNoite }}<span class="__card-valor-dia"> por noite</span></p>
           <div class="rating">
             <star-rating
               :rating="4.2"
@@ -40,12 +41,12 @@
               :star-size="10"
               :padding="2">
             </star-rating>
-            <span class="rating-number">4.2</span>
+            <p class="rating-number">4.2</p>
           </div>
           
         </div>
         
-      </nuxt-link>
+      </nuxt-link><!-- Card -->
 
 
 
@@ -613,18 +614,18 @@ export default {
         display: flex;
         flex-flow: column;
         & .__card-tipo-acomod {
+          padding-top: .1rem;
           text-transform: uppercase;
           font-size: 11px;
           font-weight: 600;
           color: var(--colorAcomod);
         }
         & .__card-title {
-          padding: .3rem 0 .2rem;
+          padding: .4rem 0 .5rem;
           font-size: 17px;
           font-weight: 700;
         }
         & .__card-valor {
-          padding-bottom: .2rem;
           font-size: 15px;
           font-weight: 400;
           & .__card-valor-dia {
@@ -632,6 +633,7 @@ export default {
           }
         }
         & .rating {
+          padding-top: .3rem;
           display: flex;
           align-items: center;
           & .rating-number {
@@ -726,12 +728,10 @@ export default {
             font-weight: 600;
           }
           & .__card-title {
-            padding: .3rem 0;
             font-size: 15px;
             font-weight: 700;
           }
           & .__card-valor {
-            padding-bottom: .1rem;
             font-size: 14px;
             font-weight: 400;
             & .__card-valor-dia {

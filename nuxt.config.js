@@ -1,23 +1,32 @@
 module.exports = {
-  /*
-  ** Build configuration
-  */
+  /* ________________________________________ BUILD ________________________________________ */
   build: {
     postcss: {
       preset: {
         stage: 0
       }
+    },
+    extend (config, { isDev, isClient }) {
+      if (isDev && isClient) {
+        if (!isClient) {
+          config.externals.splice(0, 0, function (context, request, callback) {
+            if (/^vue2-google-maps($|\/)/.test(request)) {
+              callback(null, false)
+            } else {
+              callback()
+            }
+          })
+        }
+      }
     }
     /* analyze: true */
   },
+  /* ________________________________________ CSS ________________________________________ */
   css: [
     '@/assets/css/normalize.css',
     '@/assets/css/main.css'
   ],
-  /*
-  ** Headers
-  ** Common headers are already provided by @nuxtjs/pwa preset
-  */
+  /* _______________________________________ HEAD ________________________________________ */
   head: {
     title: 'Escarpas Trip: Casas, Passeios, Atrações, Eventos e Restaurantes em Capitólio e Região',
     meta: [
@@ -41,14 +50,12 @@ module.exports = {
       { innerHTML: '{ "@context": "http://schema.org", "@type": "Organization", "url": "https://www.escarpastrip.com/", "logo": "https://firebasestorage.googleapis.com/v0/b/escarpas-trip.appspot.com/o/utils%2Fbrand-512.png?alt=media&token=a13bf7e0-e31d-4b77-9d43-e32e6095c42b" }', type: 'application/ld+json' }
     ]
   },
-  /*
-  ** Plugins
-  */
+  /* ________________________________________ PLUGINS ________________________________________ */
   plugins: [
     { src: '~/plugins/firebase' },
     { src: '~/plugins/vuex-persistedstate', ssr: false },
     { src: '~/plugins/vue-progressive-image', ssr: false },
-    { src: '~/plugins/vue-google-maps', ssr: false },
+    { src: '~/plugins/vue-google-maps' },
     { src: '~/plugins/vue-croppa', ssr: false },
     { src: '~/plugins/vue-autosize', ssr: false },
     { src: '~/plugins/vue-awesome-swiper', ssr: false },
@@ -58,16 +65,9 @@ module.exports = {
     { src: '~/plugins/vue-js-modal' },
     { src: '~/plugins/vue-star-rating', ssr: false }
   ],
-  /*
-  ** Customize the progress-bar color
-  */
-  loading: false, /* {
-    height: '3px',
-    color: '#FFA04F'
-  }, */
-  /*
-  ** Customize app manifest
-  */
+  /* _________________________________________ LOADING __________________________________________ */
+  loading: false,
+  /* _______________________________________ APP MANIFEST _______________________________________ */
   manifest: {
     name: 'Escarpas Trip',
     ogTitle: 'Escarpas Trip',
@@ -77,9 +77,7 @@ module.exports = {
     lang: 'pt-br',
     iconSrc: './static/brand.png'
   },
- /*
-  ** Sitemap
-  */
+  /* _________________________________________ SITEMAP _________________________________________ */
   sitemap: {
     path: '/sitemap.xml',
     hostname: 'https://www.escarpastrip.com',
@@ -96,9 +94,7 @@ module.exports = {
       }
     ]
   },
-  /*
-  ** Modules
-  */
+  /* ________________________________________ MODULES ________________________________________ */
   modules: [
     '@nuxtjs/pwa',
     '@nuxtjs/sitemap',
