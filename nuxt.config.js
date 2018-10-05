@@ -1,4 +1,5 @@
 module.exports = {
+  mode: 'spa',
   /* ________________________________________ BUILD ________________________________________ */
   build: {
     postcss: {
@@ -65,8 +66,13 @@ module.exports = {
     { src: '~/plugins/vue-js-modal' },
     { src: '~/plugins/vue-star-rating', ssr: false }
   ],
-  /* _________________________________________ LOADING __________________________________________ */
+  /* _________________________________________ LOADINGS __________________________________________ */
   loading: false,
+  loadingIndicator: {
+    name: 'pulse',
+    color: '#dedede',
+    background: 'white'
+  },
   /* _______________________________________ APP MANIFEST _______________________________________ */
   manifest: {
     name: 'Escarpas Trip',

@@ -29,7 +29,8 @@
 
     <div class="reserva-body" v-if="!$store.state.concludedReservaAcomod">
 
-      <!-- ******* Flex Left ******* -->
+
+      <!-- ________________________________________ FLEX LEFT ________________________________________ -->
       <div class="flex-left">
 
 
@@ -339,7 +340,7 @@
 
 
             <div class="politica-cancelamento" style="padding-top: 1.2rem">
-              <h3 class="__subtitle">Política de cancelamento: Flexível</h3>
+              <h3 class="__subtitle">Política de cancelamento: ???</h3>
               <h3 class="__text">Cancele em 48h da reserva e até 7 dias antes do check-in para receber um reembolso integral.</h3>
             </div>
 
@@ -355,35 +356,39 @@
         </div><!-- ******* ETAPA 3 ******* -->
         
 
-      </div><!-- ******* Flex Left ******* -->
+      </div><!-- ________________________________________ FLEX LEFT ________________________________________ -->
 
 
 
 
 
 
-      <!-- ******* Flex Right ******* -->
+      <!-- ________________________________________ FLEX RIGHT ________________________________________ -->
       <div class="flex-right">
         
         <progressive-background class="__img" :src="imageH" :placeholder="acomod.images[0].L" :aspect-ratio="2/3"/>
 
         <div class="card-body">
 
+
           <h1 class="__acomod-title">{{ acomod.title }}</h1>
           
+
+
           <div class="detalhes-reserva-data">
 
             <div class="detalhes-reserva-data_item">
               <img src="../../../assets/img/calendar.svg" class="__img" style="transform: scale(.91)">
-              <h3 style="font-size:16px">{{ periodoReserva }}</h3>
+              <h3 style="font-size:15px">{{ periodoReserva }}</h3>
             </div>
 
             <div class="detalhes-reserva-data_item">
               <img src="../../../assets/img/guests.svg" class="__img">
-              <h3 style="font-size:16px">{{ reservaAcomod.totalHospedes === 1 ? reservaAcomod.totalHospedes + ' hóspede' : reservaAcomod.totalHospedes + ' hóspedes' }}</h3>
+              <h3 style="font-size:15px">{{ reservaAcomod.totalHospedes === 1 ? reservaAcomod.totalHospedes + ' hóspede' : reservaAcomod.totalHospedes + ' hóspedes' }}</h3>
             </div>
 
           </div>
+
 
 
           <div class="detalhes-reserva-valor" v-if="reservaAcomod.valorReservaTotal !== null">
@@ -399,12 +404,24 @@
 
           </div>
 
+
+
+          <div class="detalhes-reserva-cancelamento">
+            <img src="../../../assets/img/shield.svg" class="__cancelamento-img">
+            <h3 class="__cancelamento-text">Cancelamento com devolução integral do valor pago até dia ???.</h3>
+          </div>
+          
+
+
         </div>
 
-      </div><!-- ******* Flex Right ******* -->
+      </div><!-- ________________________________________ FLEX RIGHT ________________________________________ -->
 
 
     </div>
+
+
+
 
     <div class="footer" v-if="!$store.state.concludedReservaAcomod">
       <div style="display: flex; align-items: center">
@@ -413,6 +430,7 @@
       </div>
       <a class="__ajuda" href="/ajuda" target="_blank" >Ajuda</a>
     </div>
+
 
 
 
@@ -444,6 +462,7 @@
       
 
     </div>
+
 
 
   </div>
@@ -1060,7 +1079,7 @@ export default {
           }
         }
         & .detalhes-reserva-valor {
-          padding-bottom: .8rem;
+          padding-bottom: 1rem;
           margin: 0 1.3rem;
           & .detalhes-reserva-valor_item-total {
             display: flex;
@@ -1073,9 +1092,25 @@ export default {
           & .__ver-detalhes {
             user-select: none;
             cursor: pointer;
-            font-size: 15px;
+            font-size: 14px;
             font-weight: 500;
             color: var(--colorAcomod);
+          }
+        }
+        & .detalhes-reserva-cancelamento {
+          display: flex;
+          align-items: center;
+          padding-bottom: .8rem;
+          margin: 0 1.3rem;
+          & .__cancelamento-img {
+            margin-right: .6rem;
+            width: 1.5rem;
+            height: auto;
+          }
+          & .__cancelamento-text {
+            font-size: 13px; 
+            font-weight: 500;
+            line-height: 16px;
           }
         }
       }
@@ -1095,6 +1130,7 @@ export default {
     }
     & .__text {
       font-size: 13px;
+      font-weight: 500;
     }
     & .__ajuda {
       font-size: 14px;

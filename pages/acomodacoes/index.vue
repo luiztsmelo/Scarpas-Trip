@@ -41,7 +41,7 @@
               :star-size="10"
               :padding="2">
             </star-rating>
-            <p class="rating-number">4.2</p>
+            <p class="rating-number">4,2</p>
           </div>
           
         </div>
@@ -99,6 +99,40 @@
           </v-date-picker>
 
         </div><!-- Datas -->
+
+
+        
+        <!-- Local -->
+        <div class="item-form">
+          
+          <div class="dropdown" @click.stop>
+
+            <button type="button" class="dropdown-btn" :style="onLocalBtn" @click="onClickLocalBtn">Local</button>
+
+            <transition name="dropdown-animation">
+              <div class="dropdown-body" v-show="showLocal">
+
+                <div class="local-box">
+
+
+                </div>
+                
+
+                <div class="buttons">
+
+                  <button type="button" class="__limpar-btn" :class="[ $store.state.filters.local === null ? '__limpar-btn-disabled' : '']" @click="$store.state.filters.local = null">Limpar</button>
+
+                  <button type="button" class="__filtrar-btn" @click="filtrar()">Filtrar</button>
+
+                </div>
+                
+                
+              </div>
+            </transition>
+
+          </div>
+
+        </div><!-- Local -->
 
 
 
@@ -276,13 +310,11 @@
         </div><!-- Avaliação -->
         
 
-        <button 
-          type="button" 
-          class="__limpar-filtros-btn" 
-          v-show="selectedSomeFilter"
-          @click="$store.commit('m_resetFilters')">
-        Limpar Filtros
+
+        <button type="button" class="__limpar-filtros-btn" v-show="selectedSomeFilter" @click="$store.commit('m_resetFilters')">
+          Limpar Filtros
         </button>
+
 
 
       </form>
@@ -291,11 +323,12 @@
 
 
 
+
     <gmap-map
       class="map-desktop"
       :class="[ dropdownBtnIsOpen === true ? 'blur' : '' ]"
-      :center="{ lat: -20.6259183, lng: -46.0336799 }"
-      :zoom="12"
+      :center="{ lat: -20.6138638, lng: -46.0677806 }"
+      :zoom="13"
       :options="{ styles: styles, draggable:  true, fullscreenControl: false , zoomControl: false , mapTypeControl: false, streetViewControl: false, gestureHandling: 'greedy' }">
 
       <GmapInfoWindow
@@ -310,6 +343,7 @@
       </GmapInfoWindow>
 
     </gmap-map>
+
 
 
 
@@ -352,6 +386,7 @@ export default {
   data () {
     return {
       dropdownBtnIsOpen: false,
+      showLocal: false,
       showHospedes: false,
       showTipoAcomod: false,
       showPreco: false,
@@ -402,6 +437,15 @@ export default {
     },
     closeFilterBtns () {
       this.dropdownBtnIsOpen = false
+      this.showLocal = false
+      this.showHospedes = false
+      this.showTipoAcomod = false
+      this.showPreco = false
+      this.showAvaliacao = false
+    },
+    onClickLocalBtn () {
+      this.dropdownBtnIsOpen = true
+      this.showLocal = !this.showLocal
       this.showHospedes = false
       this.showTipoAcomod = false
       this.showPreco = false
@@ -409,6 +453,7 @@ export default {
     },
     onClickHospedesBtn () {
       this.dropdownBtnIsOpen = true
+      this.showLocal = false
       this.showHospedes = !this.showHospedes
       this.showTipoAcomod = false
       this.showPreco = false
@@ -416,6 +461,7 @@ export default {
     },
     onClickTipoAcomodBtn () {
       this.dropdownBtnIsOpen = true
+      this.showLocal = false
       this.showHospedes = false
       this.showTipoAcomod = !this.showTipoAcomod
       this.showPreco = false
@@ -423,6 +469,7 @@ export default {
     },
     onClickPrecoBtn () {
       this.dropdownBtnIsOpen = true
+      this.showLocal = false
       this.showHospedes = false
       this.showTipoAcomod = false
       this.showPreco = !this.showPreco
@@ -430,6 +477,7 @@ export default {
     },
     onClickAvaliacaoBtn () {
       this.dropdownBtnIsOpen = true
+      this.showLocal = false
       this.showHospedes = false
       this.showTipoAcomod = false
       this.showPreco = false
@@ -484,6 +532,11 @@ export default {
         const dayEnd = dayjs(this.filters.date.end).format('D')
         const monthEnd = dayjs(this.filters.date.end).format('MMM')
         return  `${dayStart} de ${monthStart} - ${dayEnd} de ${monthEnd}`
+      }
+    },
+    onLocalBtn () {
+      if (this.showLocal || this.filters.local !== null) {
+         return 'background: #FFA04F; color: white; border: 1px solid #FFA04F'
       }
     },
     onHospedesBtn () {
@@ -728,7 +781,7 @@ export default {
             font-weight: 600;
           }
           & .__card-title {
-            font-size: 15px;
+            font-size: 16px;
             font-weight: 700;
           }
           & .__card-valor {

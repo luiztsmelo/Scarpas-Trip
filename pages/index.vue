@@ -35,11 +35,11 @@
 
             <progressive-background class="__card-img" :src="imageAcH(acomod)" :placeholder="acomod.images[0].L" :aspect-ratio="2/3"/>
 
-            <h3 class="__card-info" style="color: #FFA04F">{{ acomod.tipoAcomod }}</h3>
+            <p class="__card-info" style="color: #FFA04F">{{ acomod.tipoAcomod }}</p>
 
-            <h1 class="__card-title">{{ acomod.title }}</h1>
+            <p class="__card-title">{{ acomod.title }}</p>
 
-            <h3 class="__card-subtitle">R${{ acomod.valorNoite.toLocaleString() }}<span class="__card-valor-noite"> por noite</span></h3>
+            <p class="__card-subtitle">R${{ acomod.valorNoite.toLocaleString() }}<span class="__card-valor-noite"> por noite</span></p>
 
             <div class="rating">
               <star-rating
@@ -52,7 +52,7 @@
                 :star-size="10"
                 :padding="2">
               </star-rating>
-              <h3 class="rating-number">4.2</h3>
+              <p class="rating-number">4,2</p>
             </div>
             
           </nuxt-link>
@@ -350,13 +350,14 @@ export default {
             margin-bottom: .2rem;
           }
           & .__card-info {
+            padding-top: .3rem;
             text-transform: uppercase;
             font-size: 10px;
-            font-weight: 700;
+            font-weight: 600;
             color: #007B77;
           }
           & .__card-title {
-            margin: .1rem 0 .2rem 0;
+            padding: .3rem 0;
             font-size: 14px;
             font-weight: 700;
           }
@@ -368,6 +369,7 @@ export default {
             }
           }
           & .rating {
+            padding-top: .1rem;
             display: flex;
             align-items: center;
             & .rating-number {
@@ -417,12 +419,13 @@ export default {
               margin-bottom: .3rem;
             }
             & .__card-info {
+              padding-top: .3rem;
               text-transform: uppercase;
               font-size: 11px;
               font-weight: 600;
             }
             & .__card-title {
-              margin: .1rem 0;
+              padding: .4rem 0;
               font-size: 16px;
               font-weight: 700;
             }
@@ -431,6 +434,11 @@ export default {
               font-weight: 400;
               & .__card-valor-noite {
                 font-size: 14px;
+              }
+            }
+            & .rating {
+              padding-top: .1rem;
+              & .rating-number {
               }
             }
           }

@@ -3,7 +3,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  bottom: .6rem;
+  bottom: .5rem;
   left: 50%;
   transform: translateX(-50%);
   width: 100%;
