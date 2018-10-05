@@ -90,11 +90,11 @@
 
             <progressive-background class="__card-img" :src="imagePasH(passeio)" :placeholder="passeio.imageL1" :aspect-ratio="2/3"/>
 
-            <h3 class="__card-info" style="color: #0784FD">{{ passeio.tipoPasseio }}</h3>
+            <p class="__card-info" style="color: #0784FD">{{ passeio.tipoPasseio }}</p>
 
-            <h1 class="__card-title">{{ passeio.title }}</h1>
+            <p class="__card-title">{{ passeio.title }}</p>
 
-            <h3 class="__card-subtitle">R${{ passeio.valorPasseio.toLocaleString() }}<span class="__card-valor-noite"> por pessoa</span></h3>
+            <p class="__card-subtitle">R${{ passeio.valorPasseio.toLocaleString() }}<span class="__card-valor-noite"> por pessoa</span></p>
             
             <div class="rating">
               <star-rating
@@ -107,7 +107,7 @@
                 :star-size="10"
                 :padding="2">
               </star-rating>
-              <h3 class="rating-number">4.6</h3>
+              <p class="rating-number">4,6</p>
             </div>
 
           </nuxt-link> 
@@ -144,11 +144,11 @@
 
             <progressive-background class="__card-img" :src="imageEvH(evento)" :placeholder="evento.imageL1" :aspect-ratio="2/3"/>
 
-            <h3 class="__card-info" style="color: #FF7D6C">{{ evento.date }}&#160;&#8231;&#160;{{ evento.hour }}</h3>
+            <p class="__card-info" style="color: #FF7D6C">{{ evento.date }}&#160;&#8231;&#160;{{ evento.hour }}</p>
 
-            <h1 class="__card-title">{{ evento.title }}</h1>
+            <p class="__card-title">{{ evento.title }}</p>
 
-            <h3 class="__card-subtitle">{{ evento.subtitle }}</h3>
+            <p class="__card-subtitle">{{ evento.subtitle }}</p>
 
           </nuxt-link> 
         </div>
@@ -184,9 +184,9 @@
 
             <progressive-background class="__card-img" :src="imageAtH(atracao)" :placeholder="atracao.imageL1" :aspect-ratio="2/3"/>
 
-            <h3 class="__card-info" style="color: #81C784">{{ atracao.tipoAtracao }}</h3>
+            <p class="__card-info" style="color: #81C784">{{ atracao.tipoAtracao }}</p>
 
-            <h1 class="__card-title">{{ atracao.title }}</h1>
+            <p class="__card-title">{{ atracao.title }}</p>
 
           </nuxt-link> 
         </div>
