@@ -13,9 +13,9 @@ export const swiperOptions = {
           spaceBetween: 6,
           freeMode: true,
           autoplay: {
-            delay: 2500
+            delay: 3000
           },
-          speed: 18000
+          speed: 20000
         }
       }
     }

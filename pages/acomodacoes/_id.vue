@@ -1,12 +1,15 @@
 <template>
   <div class="acomods-id">
 
+
     <v-dialog style="z-index:10000"/>
+
 
     <proprietario/>
 
 
-    <!-- ####### TOPBAR ####### -->
+
+    <!-- ______________________________ TOPBAR ______________________________ -->
     <div class="topbar" v-scroll="scrollTopbarBg">
       <div class="topbar-body">
 
@@ -19,11 +22,13 @@
         </div>
         
       </div>
-    </div><!-- ####### TOPBAR ####### -->
+    </div><!-- ______________________________ TOPBAR ______________________________ -->
     
 
+
+
     
-    <!-- ####### IMAGE ####### -->
+    <!-- ______________________________ IMAGE ______________________________ -->
     <div class="image-box" ref="imageBox">
       <swiper :options="swiperOptions">
         
@@ -33,40 +38,80 @@
 
       </swiper>
     </div> 
-    <!-- ####### IMAGE ####### -->
+    <!-- ______________________________ IMAGE ______________________________ -->
+
+
 
 
 
     <div class="desktop-view"><!-- Desktop View -->
 
+
+
       
 
       <div class="desktop-view-info"><!-- Desktop View Info -->
 
+
+
+
+        <!-- ______________________________ INFO ______________________________ -->
+        <div class="info-box">
+
+          <h3 class="__info-tipo" style="color: #FFA04F">{{ acomod.tipoAcomod }}</h3>
+
+          <div class="rating">
+            <star-rating
+              :rating="4.7"
+              :increment="0.1"
+              :read-only="true"
+              :show-rating="false"
+              active-color="#161616"
+              inactive-color="#dedede"
+              :star-size="11"
+              :padding="3">
+            </star-rating>
+            <p class="rating-number">4,7</p>
+          </div>
+
+        </div><!-- ______________________________ INFO ______________________________ -->
+        
+
+
+
+
         <h1 class="id-title">{{ acomod.title }}</h1>
 
 
-        <!-- ####### ANUNCIANTE ####### -->
+
+
+        <!-- ______________________________ ANUNCIANTE ______________________________ -->
         <div class="anunciante-box">
           <img class="__anunciante-img" :src="host.photoURL" @click="$store.commit('m_showProprietario', true), hashProprietario()">
           <div class="box-flex-column">
             <h3 style="user-select:none">Hospedado por</h3>
             <a class="__anunciante-name" @click="$store.commit('m_showProprietario', true), hashProprietario()">{{ host.fullName }}</a>
           </div>
-        </div><!-- ####### ANUNCIANTE ####### -->
+        </div><!-- ______________________________ ANUNCIANTE ______________________________ -->
 
 
         
-        <!-- ####### SOBRE ####### -->
+
+
+
+        <!-- ______________________________ SOBRE ______________________________ -->
         <h1 class="item-title">Sobre {{ tipoAcomodA }}</h1>
 
         <div class="sobre-box">
           <h3>{{ acomod.subtitle }}</h3>
-        </div><!-- ####### SOBRE ####### -->
+        </div><!-- ______________________________ SOBRE ______________________________ -->
 
 
 
-        <!-- ####### CARACTERÍSTICAS ####### -->
+
+
+
+        <!-- ______________________________ CARACTERÍSTICAS ______________________________ -->
         <h1 class="item-title">Características</h1>
 
         <div class="caracteristicas-box">
@@ -92,20 +137,24 @@
             </h3>
           </div>
 
-        </div><!-- ####### CARACTERÍSTICAS ####### -->
+        </div><!-- ______________________________ CARACTERÍSTICAS ______________________________ -->
 
 
 
-        <!-- ####### CAPACIDADE ####### -->
+
+
+        <!-- ______________________________ CAPACIDADE ______________________________ -->
         <h1 class="item-title">Capacidade</h1>
 
         <div class="capacidade-box">
           <h3>{{ acomod.totalHospedes }} pessoas</h3>
-        </div><!-- ####### CAPACIDADE ####### -->
+        </div><!-- ______________________________ CAPACIDADE ______________________________ -->
 
 
 
-        <!-- ####### COMODIDADES ####### -->
+
+
+        <!-- ______________________________ COMODIDADES ______________________________ -->
         <h1 class="item-title">Comodidades</h1>
 
         <div class="comodidades-box" @click="showComods = true, hashComods()">
@@ -172,11 +221,13 @@
 
             </div> 
           </div>
-        </transition><!-- ####### COMODIDADES ####### -->
+        </transition><!-- ______________________________ COMODIDADES ______________________________ -->
 
 
 
-        <!-- ####### DISPONIBILIDADE ####### -->
+
+
+        <!-- ______________________________ DISPONIBILIDADE ______________________________ -->
         <h1 class="item-title">Disponibilidade</h1>
 
         <v-calendar
@@ -189,11 +240,13 @@
           :theme-styles="calendarDesktopStyle"
           :attributes="attributesCalendar">
         </v-calendar>
-        <!-- ####### DISPONIBILIDADE ####### -->
+        <!-- ______________________________ DISPONIBILIDADE ______________________________ -->
 
 
 
-        <!-- ####### LOCALIZAÇÃO ####### -->
+
+
+        <!-- ______________________________ LOCAL ______________________________ -->
         <h1 class="item-title">Local</h1>
 
         <div class="local-box">
@@ -211,20 +264,27 @@
               </Gmap-Marker>
           </gmap-map>
 
-        </div><!-- ####### LOCALIZAÇÃO ####### -->
+        </div><!-- ______________________________ LOCAL ______________________________ -->
+
+
+
 
 
       
-        <!-- ####### AVALIAÇÕES ####### -->
+        <!-- ______________________________ AVALIAÇÕES ______________________________ -->
         <h1 class="item-title">Avaliações</h1>
 
         <div class="avaliacoes-box">
           <h3>Comentários aqui...</h3>
-        </div><!-- ####### AVALIAÇÕES ####### -->
+        </div><!-- ______________________________ AVALIAÇÕES ______________________________ -->
+
+
 
 
 
       </div><!-- Desktop View Info -->
+
+
 
 
 
@@ -321,16 +381,25 @@
     </div><!-- Desktop View -->
 
 
-    <!-- ####### RESERVA MOBILE ####### --> 
+
+
+
+
+    <!-- ______________________________ RESERVA MOBILE ______________________________ --> 
     <div class="reserva">
       <div class="reserva-body">
         <h3 class="__reserva-valor">R${{ acomod.valorNoite.toLocaleString() }}<span class="__reserva-valor-pessoa"> por noite</span></h3>
         <button class="__reserva-btn" @click="reservarMobile">Reservar</button>
       </div>
     </div>
-    <reserva-mobile/><!-- ####### RESERVA MOBILE ####### -->
+
+    <reserva-mobile/>
+    <!-- ______________________________ RESERVA MOBILE ______________________________ -->
 
     
+
+
+
   </div>
 </template>
 
@@ -598,7 +667,8 @@ export default {
   transition: all .27s cubic-bezier(.15,.97,.43,.93);
   
 
-  /* ####### IMAGE BOX ####### */
+
+  /* __________ IMAGE BOX __________ */
   & .image-box {
     overflow: hidden;
     & .swiper-container {
@@ -614,12 +684,35 @@ export default {
         }
       }
     }
-  }/* ####### IMAGE BOX ####### */
+  }/* __________ IMAGE BOX __________ */
 
 
 
+  /* __________ INFO BOX __________ */
+  & .info-box {
+    padding: 0 7%;
+    margin-top: .5rem;
+    display: flex;
+    align-items: center;
+    & .__info-tipo {
+      padding-right: 1rem;
+      font-size: 15px;
+      font-weight: 600;
+    }
+    & .rating {
+      display: flex;
+      align-items: center;
+      & .rating-number {
+        font-size: 13px;
+        font-weight: 600;
+        padding-left: 3px;
+      }
+    }
+  }/* __________ INFO BOX __________ */
   
-  /* ####### ANUNCIANTE BOX ####### */
+
+
+  /* __________ ANUNCIANTE BOX __________ */
   & .anunciante-box {
     display: flex;
     padding: 2rem 7% 0 7%;
@@ -634,26 +727,22 @@ export default {
     }
     & .__anunciante-name {
       cursor: pointer;
-      color: var(--colorAcomod);/* #00BAAC */
+      color: var(--colorAcomod);
       font-weight: 500;
       user-select: none;
     }
-  }/* ####### ANUNCIANTE BOX ####### */
+  }/* __________ ANUNCIANTE BOX __________ */
 
 
 
-
-
-  /* ####### SOBRE BOX ####### */
+  /* __________ SOBRE BOX __________ */
   & .sobre-box {
     padding: 0 7%;
-  }/* ####### SOBRE BOX ####### */
+  }/* __________ SOBRE BOX __________ */
 
 
 
-
-
-  /* ####### CARACTERÍSTICAS BOX ####### */
+  /* __________ CARACTERÍSTICAS BOX __________ */
   & .caracteristicas-box {
     padding: 0 7%;
     transform: translateY(-.3rem);
@@ -668,22 +757,18 @@ export default {
         margin-right: .7rem;
       }
     }
-  }/* ####### CARACTERÍSTICAS BOX ####### */
+  }/* __________ CARACTERÍSTICAS BOX __________ */
 
 
 
-
-
-  /* ####### CAPACIDADE BOX ####### */
+  /* __________ CAPACIDADE BOX __________ */
   & .capacidade-box {
     padding: 0 7%;
-  }/* ####### CAPACIDADE BOX ####### */
+  }/* __________ CAPACIDADE BOX __________ */
 
 
 
-
-
-  /* ####### COMODIDADES ####### */
+  /* __________ COMODIDADES __________ */
   & .comodidades-box {
     padding: 0 4.5%;
     transform: translateY(-.2rem);
@@ -693,7 +778,6 @@ export default {
       margin: .7rem .8rem 0 .8rem;
     }
   }
-  
   & .comods-details {
   position: fixed;
   z-index: 9999;
@@ -742,18 +826,18 @@ export default {
       }
     }
   }
-}/* ####### COMODIDADES ####### */
+}/* __________ COMODIDADES __________ */
 
 
 
 
 
-  /* ####### DISPONIBILIDADE ####### */
+  /* __________ DISPONIBILIDADE __________ */
 
 
 
 
-  /* ####### LOCAL ####### */
+  /* __________ LOCAL __________ */
   & .local-box {
     & .__adress {
       padding: 0 7% .6rem 7%;
@@ -762,19 +846,21 @@ export default {
       width: 100%; 
       height: 250px;
     }
-  }/* ####### LOCAL ####### */
+  }/* __________ LOCAL __________ */
 
 
 
 
 
-  /* ####### AVALIAÇÕES ####### */
+  /* __________ AVALIAÇÕES __________ */
   & .avaliacoes-box {
     padding: 0 7%;
-  }/* ####### AVALIAÇÕES ####### */
+  }/* __________ AVALIAÇÕES __________ */
 
 
-  /* ####### RESERVA ####### */
+
+
+  /* __________ RESERVA __________ */
   & .reserva {
     position: fixed;
     bottom: 0;
@@ -815,7 +901,7 @@ export default {
         transition: var(--main-transition);
       }
     }
-  }/* ####### RESERVA ####### */
+  }/* __________ RESERVA __________ */
 }
 
 
@@ -838,7 +924,7 @@ export default {
   .acomods-id {
     margin-top: var(--navbarHeightDesktop);
 
-    /* ####### IMAGE BOX ####### */
+    /* __________ IMAGE BOX __________ */
     & .image-box {
       cursor: grab;
       overflow: hidden;
@@ -858,7 +944,9 @@ export default {
     }
     & .image-box:active {
       cursor: grabbing;
-    }/* ####### IMAGE BOX ####### */
+    }/* __________ IMAGE BOX __________ */
+
+
     & .desktop-view {
       display: flex;
       margin: 1.7rem 8% 0;
@@ -966,16 +1054,43 @@ export default {
           & .__info {
             margin: .5rem 0 .8rem;
             text-align: center;
-            font-size: 13px;
-            font-weight: 400;
+            font-size: 12px;
+            font-weight: 500;
             line-height: 17px;
           }
         }
       }
+
+
       & .desktop-view-info {
         margin-right: 5%;
         flex-basis: 69%;
-        /* ####### ANUNCIANTE BOX ####### */
+
+
+
+        /* __________ INFO BOX __________ */
+        & .info-box {
+          padding: 0;
+          margin-top: 0;
+          & .__info-tipo {
+            padding-right: 1rem;
+            font-size: 16px;
+            font-weight: 600;
+          }
+          & .rating {
+            display: flex;
+            align-items: center;
+            & .rating-number {
+              font-size: 14px;
+              font-weight: 600;
+              padding-left: 3px;
+            }
+          }
+        }/* __________ INFO BOX __________ */
+
+
+
+        /* __________ ANUNCIANTE BOX __________ */
         & .anunciante-box {
           padding: 1.5rem 0 0 0;
           & .__anunciante-img {
@@ -985,16 +1100,18 @@ export default {
           }
           & .__anunciante-name {
           }
-        }/* ####### ANUNCIANTE BOX ####### */
+        }/* __________ ANUNCIANTE BOX __________ */
 
 
-        /* ####### SOBRE BOX ####### */
+
+        /* __________ SOBRE BOX __________ */
         & .sobre-box {
           padding: 0;
-        }/* ####### SOBRE BOX ####### */
+        }/* __________ SOBRE BOX __________ */
 
 
-        /* ####### CARACTERÍSTICAS BOX ####### */
+
+        /* __________ CARACTERÍSTICAS BOX __________ */
         & .caracteristicas-box {
           padding: 0; 
           display: flex;
@@ -1010,16 +1127,18 @@ export default {
               margin-bottom: .7rem;
             }
           }
-        }/* ####### CARACTERÍSTICAS BOX ####### */
+        }/* __________ CARACTERÍSTICAS BOX __________ */
 
 
-        /* ####### CAPACIDADE BOX ####### */
+
+        /* __________ CAPACIDADE BOX __________ */
         & .capacidade-box {
           padding: 0;
-        }/* ####### CAPACIDADE BOX ####### */
+        }/* __________ CAPACIDADE BOX __________ */
 
 
-        /* ####### COMODIDADES ####### */
+
+        /* __________ COMODIDADES __________ */
         & .comodidades-box {
           padding: 0;
           display: flex;
@@ -1079,10 +1198,11 @@ export default {
               }
             }
           }
-        }/* ####### COMODIDADES ####### */
+        }/* __________ COMODIDADES __________ */
 
 
-        /* ####### LOCAL ####### */
+
+        /* __________ LOCAL __________ */
         & .local-box {
           & .__adress {
             padding: 0 0 .6rem 0;
@@ -1090,22 +1210,23 @@ export default {
           & .vue-map-container {
             height: 400px;
           }
-        }/* ####### LOCAL ####### */
+        }/* __________ LOCAL __________ */
 
 
-        /* ####### AVALIAÇÕES ####### */
+
+        /* __________ AVALIAÇÕES __________ */
         & .avaliacoes-box {
           padding: 0;
-        }/* ####### AVALIAÇÕES ####### */
+        }/* __________ AVALIAÇÕES __________ */
       }
     }
     
   
 
-    /* ####### RESERVA ####### */
+    /* __________ RESERVA __________ */
     & .reserva {
       display: none;
-    }/* ####### RESERVA ####### */
+    }/* __________ RESERVA __________ */
   }
 }
 

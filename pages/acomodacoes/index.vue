@@ -142,7 +142,7 @@
           <div class="dropdown" @click.stop>
 
             <button type="button" class="dropdown-btn" :style="onHospedesBtn" @click="onClickHospedesBtn">
-              {{ $store.state.filters.hospedes > 0 ? `${$store.state.filters.hospedes} hóspedes` : 'Hóspedes' }}
+              {{ $store.state.filters.hospedes > 0 ? `acomoda até ${$store.state.filters.hospedes} hóspedes` : 'Hóspedes' }}
             </button>
 
             <transition name="dropdown-animation">
@@ -640,6 +640,9 @@ export default {
         padding: 0;
         margin: 1.2rem 0;
       }
+      & .__limpar-filtros-btn:hover {
+        text-decoration: underline;
+      }
     }
     & .card {
       width: 93%;
@@ -648,7 +651,7 @@ export default {
         overflow: hidden;
         line-height: 0;
         margin-bottom: .5rem;
-        border-radius: 5px;
+        border-radius: 3px;
         & .swiper-container {
           position: relative;
           & .swiper-wrapper {
@@ -1012,9 +1015,11 @@ export default {
           position: absolute;
           right: 7%;
           background: transparent;
-          color: var(--colorAcomod);
           font-size: 15px;
           font-weight: 500;
+        }
+        & .__limpar-filtros-btn:hover {
+          text-decoration: underline;
         }
       }
     }
@@ -1029,7 +1034,7 @@ export default {
       height: calc(100% - var(--navbarHeightDesktop) - 3.7rem - 2rem);
     }
     & .map-desktop > div {
-      border-radius: 5px !important;
+      border-radius: 3px !important;
     }
     & .map-desktop > div > div {
       background-color: #fff !important;
