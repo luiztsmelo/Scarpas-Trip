@@ -43,7 +43,8 @@
 
 
 
-    <!-- ########## TIPO DE ACOMODAÇÃO PG.1 ########## -->
+
+    <!-- ________________________________________ 1 - TIPO DE ACOMODAÇÃO ________________________________________ -->
     <form class="cadastro-acomodacao" v-if="$store.state.cadastroAcomod1">
 
       <h1 class="__form-title">Que tipo de propriedade deseja anunciar?</h1>
@@ -70,19 +71,20 @@
         </div>
       </div>
     
-    </form><!-- ########## TIPO DE ACOMODAÇÃO PG.1 ########## -->
+    </form><!-- ________________________________________ 1 - TIPO DE ACOMODAÇÃO ________________________________________ -->
 
 
 
 
-    <!-- ########## TOTAL DE HÓSPEDES PG.2 ########## -->
+
+    <!-- ________________________________________ 2 - TOTAL DE HÓSPEDES ________________________________________ -->
     <form class="cadastro-acomodacao" v-if="$store.state.cadastroAcomod2">
 
       <h1 class="__form-title">Quantas pessoas {{ tipoAcomodSd }} pode acomodar?</h1>
 
       <div class="item-form">
         <label>Total de Hóspedes</label>
-        <select v-model.number="$store.state.acomodData.totalHospedes">
+        <select v-model="$store.state.acomodData.totalHospedes">
           <option v-for="n in 25">{{ n }}</option>
         </select>
       </div>
@@ -94,12 +96,13 @@
         </div>
       </div> 
 
-    </form><!-- ########## TOTAL DE HÓSPEDES PG.2 ########## -->
+    </form><!-- ________________________________________ 2 - TOTAL DE HÓSPEDES ________________________________________ -->
 
 
 
 
-    <!-- ########## CARACTERÍSTICAS PG.3 ########## -->
+
+    <!-- ________________________________________ 3 - CARACTERÍSTICAS ________________________________________ -->
     <form class="cadastro-acomodacao" v-if="$store.state.cadastroAcomod3">
 
       <h1 class="__form-title">Características físicas {{ tipoAcomodDd }}</h1>
@@ -142,12 +145,13 @@
         </div>
       </div> 
     
-    </form><!-- ########## CARACTERÍSTICAS PG.3 ########## -->
+    </form><!-- ________________________________________ 3 - CARACTERÍSTICAS ________________________________________ -->
 
 
 
 
-    <!-- ########## COMODIDADES PG.4 ########## -->
+
+    <!-- ________________________________________ 4 - COMODIDADES ________________________________________ -->
     <form class="cadastro-acomodacao" v-if="$store.state.cadastroAcomod4">
 
       <h1 class="__form-title">Quais comodidades são oferecidas?</h1>
@@ -237,12 +241,13 @@
         </div>
       </div> 
     
-    </form><!-- ########## COMODIDADES PG.4 ########## -->
+    </form><!-- ________________________________________ 4 - COMODIDADES ________________________________________ -->
 
 
 
 
-    <!-- ########## LOCAL PG.5 ########## -->
+
+    <!-- ________________________________________ 5 - LOCAL ________________________________________ -->
     <form class="cadastro-acomodacao" v-if="$store.state.cadastroAcomod5">
 
       <h1 class="__form-title">Qual a localização?</h1>
@@ -269,12 +274,13 @@
         </div>
       </div> 
     
-    </form><!-- ########## LOCAL PG.5 ########## -->
+    </form><!-- ________________________________________ 5 - LOCAL ________________________________________ -->
 
 
 
 
-    <!-- ########## IMAGENS PG.6 ########## -->
+
+    <!-- ________________________________________ 6 - IMAGENS ________________________________________ -->
     <form class="cadastro-acomodacao" v-if="$store.state.cadastroAcomod6">
 
       <h1 class="__form-title">Adicione imagens {{ tipoAcomodDd }}</h1>
@@ -340,12 +346,13 @@
         </div>
       </div> 
     
-    </form><!-- ########## IMAGENS PG.6 ########## -->
+    </form><!-- ________________________________________ 6 - IMAGENS ________________________________________ -->
 
 
 
 
-    <!-- ########## VALOR DA ESTADIA PG.7 ########## -->
+
+    <!-- ________________________________________ 7 - VALOR DA ESTADIA ________________________________________ -->
     <form class="cadastro-acomodacao" v-if="$store.state.cadastroAcomod7">
 
       <h1 class="__form-title">Qual será o valor da estadia?</h1>
@@ -370,12 +377,13 @@
         </div>
       </div> 
     
-    </form><!-- ########## VALOR DA ESTADIA PG.7 ########## -->
+    </form><!-- ________________________________________ 7 - VALOR DA ESTADIA ________________________________________ -->
 
 
 
 
-    <!-- ########## REGRAS PG.8 ########## -->
+
+    <!-- ________________________________________ 8 - REGRAS ________________________________________ -->
     <form class="cadastro-acomodacao" v-if="$store.state.cadastroAcomod8">
 
       <h1 class="__form-title">Quais são as regras {{ tipoAcomodDd }}?</h1>
@@ -479,12 +487,13 @@
         </div>
       </div> 
     
-    </form><!-- ########## REGRAS PG.8 ########## -->
+    </form><!-- ________________________________________ 8 - REGRAS ________________________________________ -->
 
 
 
 
-    <!-- ########## TÍTULO PG.9 ########## -->
+
+    <!-- ________________________________________ 9 - TÍTULO ________________________________________ -->
     <form class="cadastro-acomodacao" v-if="$store.state.cadastroAcomod9">
 
       <h1 class="__form-title">Dê um título para seu anúncio</h1>
@@ -507,12 +516,13 @@
         </div>
       </div> 
     
-    </form><!-- ########## TÍTULO PG.9 ########## -->
+    </form><!-- ________________________________________ 9 - TÍTULO ________________________________________ -->
 
 
 
 
-    <!-- ########## DESCRIÇÃO PG.10 ########## -->
+
+    <!-- ________________________________________ 10 - DESCRIÇÃO ________________________________________ -->
     <form class="cadastro-acomodacao" v-if="$store.state.cadastroAcomod10">
 
       <h1 class="__form-title">Descreva melhor {{ tipoAcomodSd }}</h1>   
@@ -535,13 +545,14 @@
         </div>
       </div> 
     
-    </form><!-- ########## DESCRIÇÃO PG.10 ########## -->
+    </form><!-- ________________________________________ 10 - DESCRIÇÃO ________________________________________ -->
 
 
 
 
 
-    <!-- ########## CADASTRO PG.11 ########## -->
+
+    <!-- ________________________________________ 11 - CADASTRO ________________________________________ -->
     <form class="cadastro-acomodacao" v-if="$store.state.cadastroAcomod11">
 
       <h1 class="__form-title">
@@ -581,13 +592,13 @@
         </div>
       </div> 
     
-    </form><!-- ########## CADASTRO PG.11 ########## -->
+    </form><!-- ________________________________________ 11 - CADASTRO ________________________________________ -->
 
 
 
 
 
-    <!-- ########## DADOS BANCÁRIOS PG.12 ########## -->
+    <!-- ________________________________________ 12 - DADOS BANCÁRIOS ________________________________________ -->
     <form class="cadastro-acomodacao" v-if="$store.state.cadastroAcomod12">
 
       <h1 class="__form-title">Insira suas informações bancárias</h1>   
@@ -713,7 +724,9 @@
         </div>
       </div> 
     
-    </form><!-- ########## DADOS BANCÁRIOS PG.12 ########## -->
+    </form><!-- ________________________________________ 12 - DADOS BANCÁRIOS ________________________________________ -->
+
+
 
 
     <!-- CADASTRO ACOMODAÇÃO -->
@@ -821,18 +834,18 @@ export default {
         this.$store.state.acomodData.images.push({ id: null, L: null, HJ: null, HW: null })
 
         /* Upload image L */
-        let snapL = await storageRef.child('L' + n + '.jpeg').put(blobL)
-        this.$store.state.acomodData.images[key].L = snapL.downloadURL
+        await storageRef.child('L' + n + '.jpeg').put(blobL)
+        this.$store.state.acomodData.images[key].L = await storageRef.child('L' + n + '.jpeg').getDownloadURL()
         this.uploadProgress = 98
         
         /* Upload image HJ */
-        let snapHJ = await storageRef.child('H' + n + 'J.jpeg').put(blobHJ)
-        this.$store.state.acomodData.images[key].HJ = snapHJ.downloadURL
+        await storageRef.child('H' + n + 'J.jpeg').put(blobHJ)
+        this.$store.state.acomodData.images[key].HJ = await storageRef.child('H' + n + 'J.jpeg').getDownloadURL()
         this.uploadProgress = 99
 
         /* Upload image HW */
-        let snapHW = await storageRef.child('H' + n + 'W.webp').put(blobHW)
-        this.$store.state.acomodData.images[key].HW = snapHW.downloadURL
+        await storageRef.child('H' + n + 'W.webp').put(blobHW)
+        this.$store.state.acomodData.images[key].HW = await storageRef.child('H' + n + 'W.webp').getDownloadURL()
         this.uploadProgress = 100
 
 
@@ -1047,6 +1060,8 @@ export default {
       const acomodData = this.$store.state.acomodData
 
       acomodData.hostID = this.user.userID
+
+      acomodData.totalHospedes = Number(acomodData.totalHospedes)
 
       /* Se todas as informações preenchidas */
       if (this.bankCode !== '' && this.agencia !== '' && this.agenciaDV !== '' && this.conta !== '' && this.contaDV !== '' && this.legalName !== '' && this.docNumber.length === 14 && CPF.validate(this.docNumber)) {

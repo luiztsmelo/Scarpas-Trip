@@ -1,9 +1,11 @@
 import Vuex from 'vuex'
+import createPersistedState from 'vuex-persistedstate'
 import firebase from '@firebase/app'
 import 'firebase/firestore'
 import 'firebase/auth'
 
 const store = () => new Vuex.Store({
+  plugins: [ createPersistedState({ storage: window.sessionStorage }) ],
   /* ________________________________________________ STATE ________________________________________________ */
   state: {
     /*
@@ -126,7 +128,7 @@ const store = () => new Vuex.Store({
     /*
     -------------------- CONFIGS --------------------
     */
-    serviceFeeAcomod: 0.08,
+    serviceFeeAcomod: 0.1,
     /*
     -------------------- ANÚNCIOS --------------------
     */

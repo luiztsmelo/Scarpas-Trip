@@ -588,7 +588,7 @@ export default {
       this.$store.commit('show_alert', {
         type: 'info',
         title: 'Taxa de Serviço',
-        message: `Taxa de ${Math.round(this.$store.state.serviceFeeAcomod * 100)}% cobrada com o intuito de garantir suporte e total segurança em sua estadia caso algum problema aconteça.`,
+        message: `Taxa cobrada com o intuito de garantir suporte e total segurança em sua estadia caso algum problema aconteça.`,
         persist: true
       })
     },

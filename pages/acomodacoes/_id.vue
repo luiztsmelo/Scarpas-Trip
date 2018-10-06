@@ -341,8 +341,8 @@
           <div class="reserva-info" v-if="periodoReserva !== null">
             
             <div class="reserva-info_item" style="padding-bottom: .2rem">
-              <h3>{{ `R$ ${acomod.valorNoite.toLocaleString()} x ${$store.state.reservaAcomod.noites} ${$store.state.reservaAcomod.noites == 1 ? 'noite' : 'noites'}` }}</h3>
-              <h3 id="valor">R$ {{ $store.state.reservaAcomod.valorNoitesTotal.toLocaleString() }}</h3>
+              <h3>{{ `R$${acomod.valorNoite.toLocaleString()} x ${$store.state.reservaAcomod.noites} ${$store.state.reservaAcomod.noites == 1 ? 'noite' : 'noites'}` }}</h3>
+              <h3 id="valor">R${{ $store.state.reservaAcomod.valorNoitesTotal.toLocaleString() }}</h3>
             </div>
 
             <div class="reserva-info_item" style="padding-bottom: .2rem" v-if="acomod.limpezaFee !== 0">
@@ -561,7 +561,7 @@ export default {
     serviceFeeDialog () {
       this.$modal.show('dialog', {
         title: 'Taxa de Serviço',
-        text: `Taxa de ${Math.round(this.$store.state.serviceFeeAcomod * 100)}% cobrada com o intuito de garantir suporte e total segurança em sua estadia caso algum problema aconteça.`,
+        text: `Taxa cobrada com o intuito de garantir suporte e total segurança em sua estadia caso algum problema aconteça.`,
         buttons: [{ title: 'OK' }]
       })
     },

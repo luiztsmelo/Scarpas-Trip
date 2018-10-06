@@ -53,18 +53,17 @@ module.exports = {
   },
   /* ________________________________________ PLUGINS ________________________________________ */
   plugins: [
-    { src: '~/plugins/firebase' },
-    { src: '~/plugins/vuex-persistedstate', ssr: false },
-    { src: '~/plugins/vue-progressive-image', ssr: false },
-    { src: '~/plugins/vue-google-maps' },
-    { src: '~/plugins/vue-croppa', ssr: false },
-    { src: '~/plugins/vue-autosize', ssr: false },
-    { src: '~/plugins/vue-awesome-swiper', ssr: false },
-    { src: '~/plugins/v-money', ssr: false },
-    { src: '~/plugins/v-calendar', ssr: false },
-    { src: '~/plugins/scroll', ssr: false },
-    { src: '~/plugins/vue-js-modal' },
-    { src: '~/plugins/vue-star-rating', ssr: false }
+    '~/plugins/firebase',
+    '~/plugins/vue-progressive-image',
+    '~/plugins/vue-google-maps',
+    '~/plugins/vue-croppa',
+    '~/plugins/vue-autosize',
+    '~/plugins/vue-awesome-swiper',
+    '~/plugins/v-money',
+    '~/plugins/v-calendar',
+    '~/plugins/scroll',
+    '~/plugins/vue-js-modal',
+    '~/plugins/vue-star-rating'
   ],
   /* _________________________________________ LOADINGS __________________________________________ */
   loading: false,

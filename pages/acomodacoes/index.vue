@@ -142,7 +142,7 @@
           <div class="dropdown" @click.stop>
 
             <button type="button" class="dropdown-btn" :style="onHospedesBtn" @click="onClickHospedesBtn">
-              {{ $store.state.filters.hospedes > 0 ? `acomoda até ${$store.state.filters.hospedes} hóspedes` : 'Hóspedes' }}
+              {{ $store.state.filters.hospedes > 0 ? `Acomoda até ${$store.state.filters.hospedes} hóspedes` : 'Hóspedes' }}
             </button>
 
             <transition name="dropdown-animation">
