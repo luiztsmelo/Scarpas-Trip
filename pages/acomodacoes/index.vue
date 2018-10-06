@@ -589,7 +589,7 @@ export default {
   transition: var(--pages-transition);
   & .acomods-container {
     position: relative;
-    padding: 0;
+    padding: 3% 0;
     margin-bottom: 1rem;
     display: flex;
     flex-flow: column;
@@ -645,7 +645,7 @@ export default {
     }
     & .card {
       width: 93%;
-      padding: 7% 0 0 7%;
+      padding: 4% 0 0 7%;
       & .image-box {
         overflow: hidden;
         line-height: 0;
@@ -676,15 +676,17 @@ export default {
           color: var(--colorAcomod);
         }
         & .__card-title {
-          padding: .4rem 0 .5rem;
-          font-size: 17px;
+          padding: .4rem 0;
+          font-size: 18px;
           font-weight: 700;
+          line-height: 1.3;
         }
         & .__card-valor {
           font-size: 15px;
-          font-weight: 400;
+          font-weight: 500;
           & .__card-valor-dia {
-            font-size: 14px;
+            font-size: 15px;
+            font-weight: 400;
           }
         }
         & .rating {
@@ -692,8 +694,8 @@ export default {
           display: flex;
           align-items: center;
           & .rating-number {
-            font-size: 11px;
-            font-weight: 600;
+            font-size: 12px;
+            font-weight: 500;
             padding-left: 2px;
           }
         }
@@ -740,7 +742,7 @@ export default {
     & .acomods-container {
       margin-top: calc(var(--navbarHeightDesktop) + 3.7rem + 1rem);
       width: 64.8%;
-      padding-left: 7%;
+      padding: 0 0 0 7%;
       display: flex;
       flex-flow: row wrap;
       justify-content: space-between;
@@ -788,9 +790,10 @@ export default {
           }
           & .__card-valor {
             font-size: 14px;
-            font-weight: 400;
+            font-weight: 500;
             & .__card-valor-dia {
-              font-size: 13px;
+              font-size: 14px;
+              font-weight: 400;
             }
           }
         }
@@ -1049,8 +1052,8 @@ export default {
       & .__valor {
         cursor: pointer;
         font-family: var(--main-font) !important;
-        font-size: 13px;
-        font-weight: 600;
+        font-size: 14px;
+        font-weight: 500;
         transition: var(--main-transition);
       }
     }

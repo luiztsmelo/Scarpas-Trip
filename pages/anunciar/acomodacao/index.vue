@@ -262,7 +262,7 @@
       </div>
 
       <h3 class="without-address" @click="$modal.show('local-map-modal'), $store.state.fromWithoutAddress=true">
-        {{ tipoAcomodSd.charAt(0).toUpperCase() + tipoAcomodSd.slice(1) }} não tem endereço?
+        {{ tipoAcomodSd.charAt(0).toUpperCase() + tipoAcomodSd.slice(1) }} não possui endereço?
       </h3>
 
       <localMap/>
@@ -323,7 +323,7 @@
             <circle
               class="__circle"
               :stroke-width="$store.state.isMobile ? 3 : 4"
-              stroke="#484848"
+              stroke="#161616"
               :stroke-dasharray="$store.state.isMobile ? `${14.5*2*Math.PI} ${14.5*2*Math.PI}` : `${18*2*Math.PI} ${18*2*Math.PI}`"
               :stroke-dashoffset="$store.state.isMobile ? 14.5*2*Math.PI - this.uploadProgress/100*14.5*2*Math.PI : 18*2*Math.PI - this.uploadProgress/100*18*2*Math.PI"
               fill="transparent"
@@ -1535,11 +1535,11 @@ export default {
       font-size: 16px;
       font-weight: 500;
       transform: translateY(-1.1rem);
-      color: #1E9297;
+      color: var(--colorAcomod);
       transition: .2s all ease;
     }
     & .without-address:hover {
-      color: var(--color01);
+      text-decoration: underline;
     }
     & .recebedor-box {
     }
@@ -1631,7 +1631,7 @@ export default {
       & .__add-image {
         position: relative;
         cursor: pointer;
-        border: 2px dashed rgb(192,192,192);
+        border: 2px dashed rgb(202,202,202);
         border-radius: 5px;
         & .loader-svg {
           position: absolute;

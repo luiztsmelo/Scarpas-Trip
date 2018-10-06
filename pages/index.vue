@@ -337,12 +337,12 @@ export default {
         padding: 0 7%;
       }
       & .cards-container {
-        padding: 0 5%;
+        padding: 0 5.9%;
         display: flex;
         flex-flow: row wrap;
         & .card {
-          margin: .7rem 1.8%;
-          flex: 0 1 46%;
+          margin: .6rem 1.3%;
+          flex: 0 1 47%;
           & .__card-img {
             width: 100%; 
             height: auto;
@@ -363,9 +363,10 @@ export default {
           }
           & .__card-subtitle {
             font-size: 14px;
-            font-weight: 400;
+            font-weight: 500;
             & .__card-valor-noite {
-              font-size: 12px;
+              font-size: 14px;
+              font-weight: 400;
             }
           }
           & .rating {
@@ -373,8 +374,8 @@ export default {
             display: flex;
             align-items: center;
             & .rating-number {
-              font-size: 11px;
-              font-weight: 600;
+              font-size: 12px;
+              font-weight: 500;
               padding-left: 2px;
             }
           }
@@ -413,8 +414,8 @@ export default {
         & .cards-container {
           padding: 0 6.5%;
           & .card {
-            margin: 1.3rem .8%;
-            flex: 0 1 23.4%;
+            margin: 1rem .6%;
+            flex: 0 1 23.8%;
             & .__card-img {
               margin-bottom: .3rem;
             }
@@ -425,19 +426,21 @@ export default {
               font-weight: 600;
             }
             & .__card-title {
-              padding: .4rem 0;
+              padding: .4rem 0 .3rem 0;
               font-size: 16px;
               font-weight: 700;
+              line-height: 1.3;
             }
             & .__card-subtitle {
               font-size: 15px;
-              font-weight: 400;
+              font-weight: 500;
               & .__card-valor-noite {
-                font-size: 14px;
+                font-size: 15px;
+                font-weight: 400;
               }
             }
             & .rating {
-              padding-top: .1rem;
+              padding-top: .2rem;
               & .rating-number {
               }
             }

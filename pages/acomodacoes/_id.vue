@@ -287,19 +287,22 @@
 
 
 
-
+      <!-- ______________________________ RESERVA DESKTOP ______________________________ -->
       <div class="reserva-desktop">
         <form class="reserva-desktop-form">
+
 
           <div class="valor-box">
             <h1 class="__valor">R${{ acomod.valorNoite.toLocaleString() }}<span class="__valor-noite"> por noite</span></h1>
           </div>
+
 
           <div class="item-form">
             <select v-model="$store.state.reservaAcomod.totalHospedes">
               <option :value="n" v-for="n in totalHospedesArray">{{ n }} {{ n === 1 ? 'hóspede' : 'hóspedes' }}</option>
             </select>
           </div>
+
 
           <div class="item-form">
             <v-date-picker
@@ -338,6 +341,7 @@
             </v-date-picker>
           </div>
 
+
           <div class="reserva-info" v-if="periodoReserva !== null">
             
             <div class="reserva-info_item" style="padding-bottom: .2rem">
@@ -368,14 +372,20 @@
 
           </div>
 
+
           <button class="__reserva-desktop-btn" type="button" @click="reservarDesktop">Reservar</button>
 
           <h4 class="__info">Você ainda não será cobrado.</h4>
 
+
           <button class="__reserva-desktop-btn-ask" type="button" @click="$store.state.user.email === null ? $modal.show('sign-in-modal') : $modal.show('ask-acomod-modal'), $store.state.clickedAskAcomod = true, $store.state.isSignIn = false">Falar com {{ host.firstName }}</button>
 
+
         </form>
-      </div>
+
+      </div><!-- ______________________________ RESERVA DESKTOP ______________________________ -->
+
+
 
 
     </div><!-- Desktop View -->
