@@ -1059,6 +1059,8 @@ export default {
     async concluir () {
       const acomodData = this.$store.state.acomodData
 
+      acomodData.createdAt = Date.now()
+
       acomodData.hostID = this.user.userID
 
       acomodData.totalHospedes = Number(acomodData.totalHospedes)

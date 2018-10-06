@@ -372,7 +372,7 @@
 
           <h4 class="__info">Você ainda não será cobrado.</h4>
 
-          <button class="__reserva-desktop-btn-ask" type="button" @click="$store.state.user.email === null ? $modal.show('sign-in-modal') : $modal.show('ask-acomod-modal'), $store.state.clickedAskAcomod = true, $store.state.isSignIn = false">Falar com Anunciante</button>
+          <button class="__reserva-desktop-btn-ask" type="button" @click="$store.state.user.email === null ? $modal.show('sign-in-modal') : $modal.show('ask-acomod-modal'), $store.state.clickedAskAcomod = true, $store.state.isSignIn = false">Falar com {{ host.firstName }}</button>
 
         </form>
       </div>
@@ -1081,7 +1081,7 @@ export default {
             display: flex;
             align-items: center;
             & .rating-number {
-              font-size: 14px;
+              font-size: 16px;
               font-weight: 600;
               padding-left: 3px;
             }

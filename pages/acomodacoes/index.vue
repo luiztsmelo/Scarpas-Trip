@@ -562,10 +562,6 @@ export default {
   },
   beforeRouteEnter (to, from, next) {
     next(async vm => {
-      if (vm.$store.state.allAcomods === null) {
-        const acomods = await firebase.firestore().collection('acomods').get()
-        vm.$store.commit('m_allAcomods', acomods.docs.map(acomod => acomod.data()))
-      }
       vm.$store.state.offFoobar1 = false
       vm.$store.state.offFoobar2 = true
       vm.$store.state.offFoobar3 = true
@@ -574,6 +570,9 @@ export default {
       !vm.$store.state.isOnline ? vm.$modal.show('offline-modal') : ''
       !vm.$store.state.showFoobar ? vm.$store.commit('m_showFoobar', true) : ''
       !vm.$store.state.showNavbar ? vm.$store.commit('m_showNavbar', true) : ''
+
+      const acomods = await firebase.firestore().collection('acomods').get()
+      vm.$store.commit('m_allAcomods', acomods.docs.map(acomod => acomod.data()))
     })
   }
 }

@@ -10,7 +10,7 @@ export const swiperOptions = {
       } else {
         return {
           slidesPerView: 2.28,
-          spaceBetween: 6,
+          spaceBetween: 5,
           freeMode: true,
           autoplay: {
             delay: 3000

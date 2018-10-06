@@ -146,6 +146,7 @@ const store = () => new Vuex.Store({
     imageCountAc: 0,
     disabledDatesAcomod: null,
     acomodData: { /* Atualizar action */
+      createdAt: null,
       acomodID: null,
       hostID: null,
       recipientID: null,
@@ -862,6 +863,7 @@ const store = () => new Vuex.Store({
       })
       /* Resetar acomodData */
       commit('m_acomodData', {
+        createdAt: null,
         acomodID: null,
         hostID: null,
         recipientID: null,
