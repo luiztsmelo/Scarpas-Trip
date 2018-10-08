@@ -9,7 +9,8 @@
       
       <h1 class="__title">Ainda gasta anunciando seu passeio? Aqui é gratuito.</h1>
       
-      <button class="__anunciar-btn" @click="$store.commit('m_cadastroPasseio1', true), $store.commit('m_cadastroPasseio0', false), $store.commit('m_acomodProgressBar', (100/11))">Anunciar</button>
+
+      <button class="__anunciar-btn" @click="$store.commit('m_cadastroPasseio1', true), $store.commit('m_cadastroPasseio0', false), $store.commit('m_acomodProgressBar', (100/11)), hashPasseio()">Anunciar</button>
 
     </div><!-- PLANO PASSEIO MOBILE -->
 
@@ -25,10 +26,13 @@
 
         <h3 class="__text">Além disso...</h3>
         
-        <button class="__anunciar-btn" @click="$store.commit('m_cadastroPasseio1', true), $store.commit('m_cadastroPasseio0', false), $store.commit('m_acomodProgressBar', (100/11))">Anunciar</button>
+
+        <button class="__anunciar-btn" @click="$store.commit('m_cadastroPasseio1', true), $store.commit('m_cadastroPasseio0', false), $store.commit('m_acomodProgressBar', (100/11)), hashPasseio()">Anunciar</button>
       </div>
 
     </div><!-- PLANO PASSEIO DESKTOP -->
+
+
 
 
 
@@ -37,11 +41,15 @@
 
 
 
-    <!-- CADASTRO EVENTO -->
+
+
+    <!-- CADASTRO PASSEIO -->
 
 
 
-    <!-- ########## TIPO DE PASSEIO PG.1 ########## -->
+
+
+    <!-- ________________________________________ 1 - TIPO DE PASSEIO ________________________________________ -->
     <form class="cadastro-passeio" v-if="$store.state.cadastroPasseio1">
 
       <h1 class="__form-title">Que tipo de passeio deseja anunciar?</h1>
@@ -63,12 +71,15 @@
         </div>
       </div> 
     
-    </form><!-- ########## TIPO DE PASSEIO PG.1 ########## -->
+    </form><!-- ________________________________________ 1 - TIPO DE PASSEIO ________________________________________ -->
 
 
 
 
-    <!-- ########## CAPACIDADE PG.2 ########## -->
+
+
+
+    <!-- ________________________________________ 2 - CAPACIDADE ________________________________________ -->
     <form class="cadastro-passeio" v-if="$store.state.cadastroPasseio2">
 
       <h1 class="__form-title">Passeio para até quantas pessoas?</h1>
@@ -76,9 +87,10 @@
       <div class="item-form">
         <label>Capacidade</label>
         <select v-model="$store.state.passeioData.capacidade">
-          <option v-for="n in 20">{{ n }}</option>
+          <option v-for="n in 25">{{ n }}</option>
         </select>
       </div> 
+
 
       <div class="back-next"> 
         <div class="back-next-body">
@@ -87,20 +99,24 @@
         </div>
       </div> 
     
-    </form><!-- ########## CAPACIDADE PG.2 ########## -->
+    </form><!-- ________________________________________ 2 - CAPACIDADE ________________________________________ -->
 
 
 
 
-    <!-- ########## DURAÇÃO PG.3 ########## -->
+
+
+
+    <!-- ________________________________________ 3 - DURAÇÃO ________________________________________ -->
     <form class="cadastro-passeio" v-if="$store.state.cadastroPasseio3">
 
-      <h1 class="__form-title">Quanto tempo de passeio?</h1>
+      <h1 class="__form-title">Qual o tempo de duração do passeio?</h1>
 
       <div class="item-form">
         <label>Duração</label>
         <input type="time" v-model="$store.state.passeioData.duracao" required>
       </div> 
+
 
       <div class="back-next"> 
         <div class="back-next-body">
@@ -109,15 +125,18 @@
         </div>
       </div> 
     
-    </form><!-- ########## DURAÇÃO PG.3 ########## -->
+    </form><!-- ________________________________________ 3 - DURAÇÃO ________________________________________ -->
 
 
 
 
-    <!-- ########## LOCAL DE SAÍDA PG.4 ########## -->
+
+
+
+    <!-- ________________________________________ 4 - LOCAL DE SAÍDA ________________________________________ -->
     <form class="cadastro-passeio" v-if="$store.state.cadastroPasseio4">
 
-      <h1 class="__form-title">O passeio sairá de onde?</h1>
+      <h1 class="__form-title">O passeio sai de onde?</h1>
 
       <div class="item-form">
         <label>Local de Saída</label>
@@ -131,6 +150,7 @@
         <textarea class="__local-saida-text" v-model="localSaida" rows="1" v-if="$store.state.passeioData.localSaida === 'Outro'" autofocus></textarea>
       </div> 
 
+
       <div class="back-next"> 
         <div class="back-next-body">
           <button type="button" class="__back" @click="backBtn4">Voltar</button>
@@ -138,15 +158,18 @@
         </div>
       </div> 
     
-    </form><!-- ########## LOCAL DE SAÍDA PG.4 ########## -->
+    </form><!-- ________________________________________ 4 - LOCAL DE SAÍDA ________________________________________ -->
 
 
 
 
-    <!-- ########## PONTOS VISITADOS PG.5 ########## -->
+
+
+
+    <!-- ________________________________________ 5 - PONTOS VISITADOS ________________________________________ -->
     <form class="cadastro-passeio" v-if="$store.state.cadastroPasseio5">
 
-      <h1 class="__form-title">Quais serão os pontos visitados?</h1>
+      <h1 class="__form-title">Quais pontos turísticos você visita?</h1>
 
  
 
@@ -157,15 +180,18 @@
         </div>
       </div> 
     
-    </form><!-- ########## PONTOS VISITADOS PG.5 ########## -->
+    </form><!-- ________________________________________ 5 - PONTOS VISITADOS ________________________________________ -->
 
 
 
 
-    <!-- ########## VALOR PASSEIO PG.6 ########## -->
+
+
+
+    <!-- ________________________________________ 6 - VALOR ________________________________________ -->
     <form class="cadastro-passeio" v-if="$store.state.cadastroPasseio6">
 
-      <h1 class="__form-title">Qual será o valor por pessoa?</h1>
+      <h1 class="__form-title">Quanto você cobra por pessoa?</h1>
 
       <div class="item-form">
         <label>Valor</label>
@@ -184,15 +210,19 @@
         </div>
       </div> 
     
-    </form><!-- ########## VALOR PASSEIO PG.6 ########## -->
+    </form><!-- ________________________________________ 6 - VALOR ________________________________________ -->
 
 
 
 
-    <!-- ########## IMAGENS E VÍDEO PG.7 ########## -->
+
+
+
+    <!-- ________________________________________ 7 - IMAGENS ________________________________________ -->
     <form class="cadastro-passeio" v-if="$store.state.cadastroPasseio7">
 
-      <h1 class="__form-title">Adicione imagens e vídeo</h1>
+      <h1 class="__form-title">Adicione imagens</h1>
+
 
       <div class="before-choose-image" v-if="imageURL1 === null">
         <button class="__input-btn" type="button" @click="$refs.myCroppa1.chooseFile()">Adicionar Imagem</button>
@@ -270,12 +300,15 @@
         </div>
       </div> 
     
-    </form><!-- ########## IMAGENS E VÍDEO PG.7 ########## -->
+    </form><!-- ________________________________________ 7 - IMAGENS ________________________________________ -->
 
 
 
 
-    <!-- ########## TÍTULO PG.8 ########## -->
+
+
+
+    <!-- ________________________________________ 8 - TÍTULO ________________________________________ -->
     <form class="cadastro-passeio" v-if="$store.state.cadastroPasseio8">
 
       <h1 class="__form-title">Dê um título para seu passeio</h1>
@@ -291,6 +324,7 @@
 
       <span class="__lenght-calc">{{ titleLength }}</span>
 
+
       <div class="back-next"> 
         <div class="back-next-body">
           <button type="button" class="__back" @click="backBtn8">Voltar</button>
@@ -298,12 +332,15 @@
         </div>
       </div> 
     
-    </form><!-- ########## TÍTULO PG.8 ########## -->
+    </form><!-- ________________________________________ 8 - TÍTULO ________________________________________ -->
 
 
 
 
-    <!-- ########## DESCRIÇÃO PG.9 ########## -->
+
+
+
+    <!-- ________________________________________ 9 - DESCRIÇÃO ________________________________________ -->
     <form class="cadastro-passeio" v-if="$store.state.cadastroPasseio9">
 
       <h1 class="__form-title">Descreva seu passeio</h1>   
@@ -319,6 +356,7 @@
 
       <span class="__lenght-calc">{{ subtitleLength }}</span> 
 
+
       <div class="back-next"> 
         <div class="back-next-body">
           <button type="button" class="__back" @click="backBtn9">Voltar</button>
@@ -326,12 +364,16 @@
         </div>
       </div> 
     
-    </form><!-- ########## DESCRIÇÃO PG.9 ########## -->
+    </form><!-- ________________________________________ 9 - DESCRIÇÃO ________________________________________ -->
 
 
 
 
-    <!-- ########## IDENTIFICAÇÃO PG.10 ########## -->
+
+
+
+
+    <!-- ________________________________________ 10 - CADASTRO ________________________________________ -->
     <form class="cadastro-passeio" v-if="$store.state.cadastroPasseio10">
 
       <h1 class="__form-title">Sua identificação</h1>   
@@ -365,12 +407,15 @@
         </div>
       </div> 
     
-    </form><!-- ########## IDENTIFICAÇÃO PG.10 ########## -->
+    </form><!-- ________________________________________ 10 - CADASTRO ________________________________________ -->
 
 
 
 
-    <!-- ########## DADOS BANCÁRIOS PG.11 ########## -->
+
+
+
+    <!-- ________________________________________ 11 - DADOS BANCÁRIOS ________________________________________ -->
     <form class="cadastro-passeio" v-if="$store.state.cadastroPasseio11">
 
       <h1 class="__form-title">Seus dados bancários para transferência</h1>
@@ -476,12 +521,12 @@
         </div>
       </div> 
     
-    </form><!-- ########## DADOS BANCÁRIOS PG.11 ########## -->
+    </form><!-- ________________________________________ 11 - DADOS BANCÁRIOS ________________________________________ -->
 
 
 
 
-    <!-- CADASTRO EVENTO -->
+    <!-- CADASTRO PASSEIO -->
 
   </div>
 </template>
@@ -491,17 +536,14 @@ import firebase from '@firebase/app'
 import 'firebase/firestore'
 import 'firebase/storage'
 import 'firebase/functions'
-import isMobile from 'ismobilejs'
 import MaskedInput from 'vue-text-mask'
 import { bancos } from '../../../mixins/bancos'
 import VueSimpleSuggest from 'vue-simple-suggest'
 
 
 export default {
-  components: { 
-    MaskedInput, VueSimpleSuggest
-  },
-  mixins: [bancos],
+  components: { MaskedInput, VueSimpleSuggest },
+  mixins: [ bancos ],
   head () {
     return {
       title: 'Anunciar Passeio em Capitólio ‒ Escarpas Trip'
@@ -510,8 +552,8 @@ export default {
   transition: 'opacity',
   data () {
     return {
-      title: '',/* Vue Autosize */
-      subtitle: '',/* Vue Autosize */
+      title: '', /* Vue Autosize */
+      subtitle: '', /* Vue Autosize */
       localSaida: '',
       showCroppaModal1: false,
       showCroppaModal2: false,
@@ -532,6 +574,10 @@ export default {
     },
     facebookSignIn () {
       this.$store.dispatch('a_facebookSignIn')
+    },
+    scrollTop () {
+      document.body.scrollTop = 0
+      document.documentElement.scrollTop = 0
     },
     /* ******************** IMAGE INPUT ******************** */
     /* --- Image 1 --- */
@@ -580,84 +626,112 @@ export default {
     },
     /* ******************** BACK BUTTONS ******************** */
     backBtn1 () {
-      this.$store.commit('m_cadastroPasseio1', false), this.$store.commit('m_cadastroPasseio0', true)
+      this.$store.commit('m_cadastroPasseio1', false), this.$store.commit('m_cadastroPasseio0', true), window.history.back(1)
     },
     backBtn2 () {
-      this.$store.commit('m_cadastroPasseio2', false), this.$store.commit('m_cadastroPasseio1', true)
+      this.$store.commit('m_cadastroPasseio2', false), this.$store.commit('m_cadastroPasseio1', true), window.history.back(1)
     },
     backBtn3 () {
-      this.$store.commit('m_cadastroPasseio3', false), this.$store.commit('m_cadastroPasseio2', true)
+      this.$store.commit('m_cadastroPasseio3', false), this.$store.commit('m_cadastroPasseio2', true), window.history.back(1)
     },
     backBtn4 () {
-      this.$store.commit('m_cadastroPasseio4', false), this.$store.commit('m_cadastroPasseio3', true)
+      this.$store.commit('m_cadastroPasseio4', false), this.$store.commit('m_cadastroPasseio3', true), window.history.back(1)
     },
     backBtn5 () {
-      this.$store.commit('m_cadastroPasseio5', false), this.$store.commit('m_cadastroPasseio4', true)
+      this.$store.commit('m_cadastroPasseio5', false), this.$store.commit('m_cadastroPasseio4', true), window.history.back(1)
     },
     backBtn6 () {
-      this.$store.commit('m_cadastroPasseio6', false), this.$store.commit('m_cadastroPasseio5', true)
+      this.$store.commit('m_cadastroPasseio6', false), this.$store.commit('m_cadastroPasseio5', true), window.history.back(1)
     },
     backBtn7 () {
-      this.$store.commit('m_cadastroPasseio7', false), this.$store.commit('m_cadastroPasseio6', true)
+      this.$store.commit('m_cadastroPasseio7', false), this.$store.commit('m_cadastroPasseio6', true), window.history.back(1)
     },
     backBtn8 () {
-      this.$store.commit('m_cadastroPasseio8', false), this.$store.commit('m_cadastroPasseio7', true)
+      this.$store.commit('m_cadastroPasseio8', false), this.$store.commit('m_cadastroPasseio7', true), window.history.back(1)
     },
     backBtn9 () {
-      this.$store.commit('m_cadastroPasseio9', false), this.$store.commit('m_cadastroPasseio8', true)
+      this.$store.commit('m_cadastroPasseio9', false), this.$store.commit('m_cadastroPasseio8', true), window.history.back(1)
     },
     backBtn10 () {
-      this.$store.commit('m_cadastroPasseio10', false), this.$store.commit('m_cadastroPasseio9', true)
+      this.$store.commit('m_cadastroPasseio10', false), this.$store.commit('m_cadastroPasseio9', true), window.history.back(1)
     },
     backBtn11 () {
-      this.$store.commit('m_cadastroPasseio11', false), this.$store.commit('m_cadastroPasseio10', true)
+      this.$store.commit('m_cadastroPasseio11', false), this.$store.commit('m_cadastroPasseio10', true), window.history.back(1)
     },
     /* ******************** NEXT BUTTONS ******************** */
+    hashPasseio () {
+      this.$store.dispatch('a_generateRandomHashs')
+      window.location.hash = this.randomHashs[1]
+    },
     nextBtn1 () {
       if (this.$store.state.passeioData.tipoPasseio !== null) {
-        this.$store.commit('m_cadastroPasseio1', false), this.$store.commit('m_cadastroPasseio2', true), this.$store.commit('m_passeioProgressBar', (100/11)*2)
+        this.$store.commit('m_cadastroPasseio1', false), this.$store.commit('m_cadastroPasseio2', true), this.$store.commit('m_passeioProgressBar', (100/11)*2), this.scrollTop(), window.location.hash = `${this.randomHashs[2]}`
       }
     },
     nextBtn2 () {
       if (this.$store.state.passeioData.capacidade !== null) {
-        this.$store.commit('m_cadastroPasseio2', false), this.$store.commit('m_cadastroPasseio3', true), this.$store.commit('m_passeioProgressBar', (100/11)*3)
+        this.$store.commit('m_cadastroPasseio2', false), this.$store.commit('m_cadastroPasseio3', true), this.$store.commit('m_passeioProgressBar', (100/11)*3), this.scrollTop(), window.location.hash = `${this.randomHashs[3]}`
       }
     },
     nextBtn3 () {
       if (this.$store.state.passeioData.duracao !== null) {
-        this.$store.commit('m_cadastroPasseio3', false), this.$store.commit('m_cadastroPasseio4', true), this.$store.commit('m_passeioProgressBar', (100/11)*4)
+        this.$store.commit('m_cadastroPasseio3', false), this.$store.commit('m_cadastroPasseio4', true), this.$store.commit('m_passeioProgressBar', (100/11)*4), this.scrollTop(), window.location.hash = `${this.randomHashs[4]}`
+      } else {
+        this.$store.commit('show_alert', {
+          type: 'warning',
+          title: 'Ops',
+          message: 'Adicione a duração do passeio.'
+        })
       }
     },
     nextBtn4 () {
       if (this.$store.state.passeioData.localSaida !== null && this.$store.state.passeioData.localSaida !== 'Outro') {
-        this.$store.commit('m_cadastroPasseio4', false), this.$store.commit('m_cadastroPasseio5', true), this.$store.commit('m_passeioProgressBar', (100/11)*5)
+        this.$store.commit('m_cadastroPasseio4', false), this.$store.commit('m_cadastroPasseio5', true), this.$store.commit('m_passeioProgressBar', (100/11)*5), this.scrollTop(), window.location.hash = `${this.randomHashs[5]}`
       } else if (this.localSaida !== '') {
-        this.$store.commit('m_cadastroPasseio4', false), this.$store.commit('m_cadastroPasseio5', true), this.$store.commit('m_passeioProgressBar', (100/11)*5), this.$store.commit('m_localSaida', this.localSaida)
+        this.$store.commit('m_cadastroPasseio4', false), this.$store.commit('m_cadastroPasseio5', true), this.$store.commit('m_passeioProgressBar', (100/11)*5), this.$store.commit('m_localSaida', this.localSaida), this.scrollTop(), window.location.hash = `${this.randomHashs[5]}`
+      } else {
+        this.$store.commit('show_alert', {
+          type: 'warning',
+          title: 'Ops',
+          message: 'Adicione o local de saída do passeio.'
+        })
       }
     },
     nextBtn5 () {
       if (1<2) {
-        this.$store.commit('m_cadastroPasseio5', false), this.$store.commit('m_cadastroPasseio6', true), this.$store.commit('m_passeioProgressBar', (100/11)*6)
+        this.$store.commit('m_cadastroPasseio5', false), this.$store.commit('m_cadastroPasseio6', true), this.$store.commit('m_passeioProgressBar', (100/11)*6), this.scrollTop(), window.location.hash = `${this.randomHashs[6]}`
       }
     },
     nextBtn6 () {
       if (this.$store.state.passeioData.valorPasseio !== 0) {
-        this.$store.commit('m_cadastroPasseio6', false), this.$store.commit('m_cadastroPasseio7', true), this.$store.commit('m_passeioProgressBar', (100/11)*7)
+        this.$store.commit('m_cadastroPasseio6', false), this.$store.commit('m_cadastroPasseio7', true), this.$store.commit('m_passeioProgressBar', (100/11)*7), this.scrollTop(), window.location.hash = `${this.randomHashs[7]}`
+      } else {
+        this.$store.commit('show_alert', {
+          type: 'warning',
+          title: 'Ops',
+          message: 'Adicione o valor por pessoa.'
+        })
       }
     },
     nextBtn7 () {
       if (this.imageURL1 !== null) {
-        this.$store.commit('m_cadastroPasseio7', false), this.$store.commit('m_cadastroPasseio8', true), this.$store.commit('m_passeioProgressBar', (100/11)*8)
+        this.$store.commit('m_cadastroPasseio7', false), this.$store.commit('m_cadastroPasseio8', true), this.$store.commit('m_passeioProgressBar', (100/11)*8), this.scrollTop(), window.location.hash = `${this.randomHashs[8]}`
+      } else {
+        this.$store.commit('show_alert', {
+          type: 'warning',
+          title: 'Ops',
+          message: 'Adicione pelo menos 3 imagens.'
+        })
       }
     },
     nextBtn8 () {
       if (this.$store.state.passeioData.title !== '') {
-        this.$store.commit('m_cadastroPasseio8', false), this.$store.commit('m_cadastroPasseio9', true), this.$store.commit('m_passeioProgressBar', (100/11)*9)
+        this.$store.commit('m_cadastroPasseio8', false), this.$store.commit('m_cadastroPasseio9', true), this.$store.commit('m_passeioProgressBar', (100/11)*9), this.scrollTop(), window.location.hash = `${this.randomHashs[9]}`
       }
     },
     nextBtn9 () {
       if (this.$store.state.passeioData.subtitle !== '') {
-        this.$store.commit('m_cadastroPasseio9', false), this.$store.commit('m_cadastroPasseio10', true), this.$store.commit('m_passeioProgressBar', (100/11)*10)
+        this.$store.commit('m_cadastroPasseio9', false), this.$store.commit('m_cadastroPasseio10', true), this.$store.commit('m_passeioProgressBar', (100/11)*10), this.scrollTop(), window.location.hash = `${this.randomHashs[10]}`
       }
     },
     nextBtn10 () {
@@ -669,6 +743,8 @@ export default {
         this.$store.commit('m_cadastroPasseio10', false)
         this.$store.commit('m_cadastroPasseio11', true)
         this.$store.commit('m_passeioProgressBar', (100/11)*11)
+        this.scrollTop()
+        window.location.hash = `${this.randomHashs[11]}`
       }
     },
     concluir () {
@@ -799,6 +875,13 @@ export default {
     }
   },
   computed: {
+    /* ******************** PATHS ******************** */
+    user () { return this.$store.state.user },
+    authUser () { return this.$store.state.authUser },
+    hash () { return this.$route.hash },
+    randomHashs () { return this.$store.state.randomHashs },
+    passeioCreated () { return this.$store.state.passeioCreated },
+    /* Bank Account */
     bankCode () { return this.$store.state.bankAccount.bankCode },
     type () { return this.$store.state.bankAccount.type },
     agencia () { return this.$store.state.bankAccount.agencia },
@@ -852,9 +935,6 @@ export default {
     },
     form11ok () {
       return this.bankCode !== null && this.agencia !== '' && this.agenciaDV !== '' && this.conta !== '' && this.contaDV !== '' && this.legalName !== '' && this.docNumber.length === 14 ? 'background:#198CFE' : ''
-    },
-    passeioCreated () {
-      return this.$store.state.passeioCreated
     }
   },
   watch: {
@@ -868,11 +948,87 @@ export default {
     contaDV (value) { value !== '' ? this.contaDVError = false : '' },
     legalName (value) { value !== '' ? this.legalNameError = false : '' },
     docNumber (value) { value !== '' ? this.docNumberError = false : ''},
+    hash (value) {
+      if (value === '') {
+        if (this.$store.state.lastHash === `#${this.randomHashs[1]}`) {
+          this.$store.commit('m_cadastroPasseio0', true)
+          this.$store.commit('m_cadastroPasseio1', false)
+        } else {
+          this.$store.commit('m_cadastroPasseio1', false)
+          this.$store.commit('m_cadastroPasseio2', false)
+          this.$store.commit('m_cadastroPasseio3', false)
+          this.$store.commit('m_cadastroPasseio4', false)
+          this.$store.commit('m_cadastroPasseio5', false)
+          this.$store.commit('m_cadastroPasseio6', false)
+          this.$store.commit('m_cadastroPasseio7', false)
+          this.$store.commit('m_cadastroPasseio8', false)
+          this.$store.commit('m_cadastroPasseio9', false)
+          this.$store.commit('m_cadastroPasseio10', false)
+          this.$store.commit('m_cadastroPasseio11', false)
+        }
+      } 
+      if (value === `#${this.randomHashs[1]}`) {
+        this.$store.commit('m_cadastroPasseio1', true)
+        this.$store.commit('m_cadastroPasseio2', false)
+      } 
+      if (value === `#${this.randomHashs[2]}`) {
+        this.$store.commit('m_cadastroPasseio2', true)
+        this.$store.commit('m_cadastroPasseio3', false)
+      } 
+      if (value === `#${this.randomHashs[3]}`) {
+        this.$store.commit('m_cadastroPasseio3', true)
+        this.$store.commit('m_cadastroPasseio4', false)
+      } 
+      if (value === `#${this.randomHashs[4]}`) {
+        this.$store.commit('m_cadastroPasseio4', true)
+        this.$store.commit('m_cadastroPasseio5', false)
+      } 
+      if (value === `#${this.randomHashs[5]}`) {
+        this.$store.commit('m_cadastroPasseio5', true)
+        this.$store.commit('m_cadastroPasseio6', false)
+      } 
+      if (value === `#${this.randomHashs[6]}`) {
+        this.$store.commit('m_cadastroPasseio6', true)
+        this.$store.commit('m_cadastroPasseio7', false)
+      } 
+      if (value === `#${this.randomHashs[7]}`) {
+        this.$store.commit('m_cadastroPasseio7', true)
+        this.$store.commit('m_cadastroPasseio8', false)
+      } 
+      if (value === `#${this.randomHashs[8]}`) {
+        this.$store.commit('m_cadastroPasseio8', true)
+        this.$store.commit('m_cadastroPasseio9', false)
+      } 
+      if (value === `#${this.randomHashs[9]}`) {
+        this.$store.commit('m_cadastroPasseio9', true)
+        this.$store.commit('m_cadastroPasseio10', false)
+      } 
+      if (value === `#${this.randomHashs[10]}`) {
+        this.$store.commit('m_cadastroPasseio10', true)
+        this.$store.commit('m_cadastroPasseio11', false)
+      }
+    }
   },
   beforeRouteEnter (to, from, next) {
-    next(vm => {
-      if (vm.$store.state.showFoobar === true) {
-        vm.$store.commit('m_showFoobar', false)
+    next(async vm => {
+      try {
+        if (vm.$store.state.showFoobar === true) {
+          vm.$store.commit('m_showFoobar', false)
+        }
+        if (vm.$store.state.passeioData.passeioID === null) {
+          let passeioID = await Math.floor(Math.random() * (9999 - 1000 + 1) + 1000).toString()
+          const passeio = await firebase.firestore().doc(`passeios/${passeioID}`).get()
+          if (passeio.exists) {
+            do {
+              passeioID = Math.floor(Math.random() * (9999 - 1000 + 1) + 1000).toString()
+              vm.$store.commit('m_passeioID', passeioID)
+            } while (!passeio.exists)
+          } else {
+            vm.$store.commit('m_passeioID', passeioID)
+          }
+        }
+      } catch (err) {
+        console.log(err)
       }
     })
   }
@@ -888,10 +1044,10 @@ export default {
   & .progress-bar {
     position: fixed;
     top: var(--navbarHeightMobile);
-    height: 3px;
+    height: 4px;
     z-index: 8888;
     background: var(--colorPasseio);
-    transition: all .3s ease;
+    transition: var(--main-transition);
   }
   /* ******************** PLANO PASSEIO ******************** */
   & .plano-passeio-mobile {
@@ -936,21 +1092,28 @@ export default {
     color: var(--color01);
     padding: 0 0 3rem 0;
     & .__form-title {
-      padding: 3rem 7% 1.5rem 7%;
-      line-height: 35px;
-      font-size: 27px;
+      padding: 2.7rem 7% 1.4rem 7%;
+      line-height: 1.25;
+      font-size: 29px;
       font-weight: 700;
       z-index: 999;
+      user-select: none !important;
     }
     & .__form-text {
-      padding: 0 7%;
-      font-size: var(--fontSizeAnuncioText);
+      padding: .7rem 7%;
+      font-size: 17px;
+    }
+    & .__form-subtitle {
+      padding-top: 1.1rem;
+      font-size: 18px;
+      font-weight: 600;
+      user-select: none;
     }
     & textarea {
       padding: 0 7%;
       margin-bottom: .5rem;
       width: 100%;
-      font-size: var(--fontSizeAnuncioText);
+      font-size: 17px;
       font-weight: 400;
       line-height: 26px;
       background: white;
@@ -963,7 +1126,7 @@ export default {
       padding: 0 7%;
       padding-bottom: 6rem;
       z-index: 999;
-      font-size: var(--fontSizeAnuncioText);
+      font-size: 17px;
       font-weight: 600;
       color: rgb(92, 92, 92);
     }
@@ -971,37 +1134,43 @@ export default {
       padding: 0 7%;
       display: flex;
       flex-flow: column;
-      margin: 1.8rem 0;
+      margin: 2.1rem 0;
       & label {
-        font-weight: 600;
-        font-size: 15px;
+        font-weight: 500;
+        font-size: 14px;
+        user-select: none;
       }
       & input {
         cursor: text;
+        position: relative;
         width: 100%;
-        font-size: var(--fontSizeAnuncioText);
+        font-size: 18px;
         font-weight: 400;
         background: white;
         color: var(--color01);
-        padding: .5rem 0 .6rem 0;
+        padding: 1rem 0;
         border: none;
         border-bottom: 1px solid #dedede;
         outline: none;
+        transition: .2s all ease;
+      }
+      & input:focus {
+        border-bottom: 1px solid var(--color01);
       }
       & select {
         width: 100%;
-        font-size: var(--fontSizeAnuncioText);
+        font-size: 18px;
         font-weight: 400;
         background: white;
         color: var(--color01);
-        padding: .5rem 0 .6rem 0;
+        padding: 1rem 0;
         border: none;
         border-bottom: 1px solid #dedede;
         outline: none;
+        transition: .2s all ease;
       }
-      & .__local-saida-text {
-        padding: .5rem 0 .6rem 0;
-        border-bottom: 1px solid #dedede;
+      & select:focus {
+        border-bottom: 1px solid var(--color01);
       }
     }
     & .recebedor-box {
@@ -1129,16 +1298,16 @@ export default {
         }
         & .__back {
           font-size: 16px;
-          font-weight: 500;
+          font-weight: 600;
           border-radius: 2rem 0 0 2rem;
           background: white;
         }
         & .__next {
           font-size: 16px;
-          font-weight: 500;
+          font-weight: 600;
           border-radius: 0 2rem 2rem 0;
           transition: all .3s ease;
-          background: #dedede;
+          background: rgb(212,212,212);
           color: white;
         }
       }
@@ -1186,7 +1355,7 @@ export default {
           height: 3rem;
           color: white;
           background: var(--colorPasseio);
-          border-radius: 5px;
+          border-radius: 100px;
           font-size: 17px;
           font-weight: 600;
         }
@@ -1198,16 +1367,19 @@ export default {
       }
     }
     & .cadastro-passeio {
-      padding: 0 0 7rem 0;
+      padding: 0 0 9rem 0;
       & .__form-title {
-        padding: 3.5rem 26% 1.2rem;
+        padding: 3.5rem 28% 1.3rem;
         font-size: 32px;
         font-weight: 700;
         text-align: center;
       }
       & .__form-text {
-        padding: 1.4rem 26% 0;
-        font-size: 17px;
+        padding: 1.4rem 28% 0;
+      }
+      & .__form-subtitle {
+        padding-top: 1.5rem;
+        font-size: 19px;
       }
       & textarea {
         padding: 0 26%;
@@ -1217,20 +1389,20 @@ export default {
         padding: 0 26%;
       }
       & .item-form {
-        padding: 0 26%;
-        margin: 2.6rem 0;
+        padding: 0 28%;
+        margin: 2.7rem 0;
         & label {
-          font-size: 16px;
+          font-size: 15px;
         }
         & input {
-          font-size: 17px;
-          font-weight: 400;
-          padding: .5rem 0 .6rem 0;
+        }
+        & input:hover {
+          border-bottom: 1px solid var(--color01);
         }
         & select {
-          font-size: 17px;
-          font-weight: 400;
-          padding: .5rem 0 .6rem 0;
+        }
+        & select:hover {
+          border-bottom: 1px solid var(--color01);
         }
       }
       & .modal-croppa {
@@ -1288,7 +1460,6 @@ export default {
           & .__back {
             font-size: 17px;
             font-weight: 500;
-            cursor: pointer;
           }
           & .__next {
             font-size: 17px;

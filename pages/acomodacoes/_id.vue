@@ -160,40 +160,40 @@
 
 
         <div class="comodidades-box-desktop">
-          <div class="item">
-            <img class="__img" v-if="acomod.hasRoupasCama" src="../../assets/img/hasRoupasCama.svg" style="transform: scale(1.01)">
+          <div class="item" v-if="acomod.hasRoupasCama">
+            <img class="__img" src="../../assets/img/hasRoupasCama.svg" style="transform: scale(1.01)">
             <h3>Roupas de Cama</h3>
           </div>
-          <div class="item">
-            <img class="__img" v-if="acomod.hasPiscina" src="../../assets/img/hasPiscina.svg">
+          <div class="item" v-if="acomod.hasPiscina">
+            <img class="__img" src="../../assets/img/hasPiscina.svg">
             <h3>Piscina</h3>
           </div>
-          <div class="item">
-            <img class="__img" v-if="acomod.hasChurrasqueira" src="../../assets/img/hasChurrasqueira.svg">
+          <div class="item" v-if="acomod.hasChurrasqueira">
+            <img class="__img" src="../../assets/img/hasChurrasqueira.svg">
             <h3>Churrasqueira</h3>
           </div>
-          <div class="item">
-            <img class="__img" v-if="acomod.hasCozinha" src="../../assets/img/hasCozinha.svg" style="transform: scale(1.07)">
+          <div class="item" v-if="acomod.hasCozinha">
+            <img class="__img" src="../../assets/img/hasCozinha.svg" style="transform: scale(1.07)">
             <h3>Cozinha preparada</h3>
           </div>
-          <div class="item">
-            <img class="__img" v-if="acomod.hasWifi" src="../../assets/img/hasWifi.svg" style="transform: scale(.98)">
+          <div class="item" v-if="acomod.hasWifi">
+            <img class="__img" src="../../assets/img/hasWifi.svg" style="transform: scale(.98)">
             <h3>Wi-Fi</h3>
           </div>
-          <div class="item">
-            <img class="__img" v-if="acomod.hasArCond" src="../../assets/img/hasArCond.svg">
+          <div class="item" v-if="acomod.hasArCond">
+            <img class="__img" src="../../assets/img/hasArCond.svg">
             <h3>Ar condicionado</h3>
           </div>
-          <div class="item">
-            <img class="__img" v-if="acomod.hasCaixaSom" src="../../assets/img/hasCaixaSom.svg" style="transform: scale(.92)">
+          <div class="item" v-if="acomod.hasCaixaSom">
+            <img class="__img" src="../../assets/img/hasCaixaSom.svg" style="transform: scale(.92)">
             <h3>Caixa de Som</h3>
           </div>
-          <div class="item">
-            <img class="__img" v-if="acomod.hasBarracas" src="../../assets/img/hasBarracas.svg" style="transform: scale(1.1)">
+          <div class="item" v-if="acomod.hasBarracas">
+            <img class="__img" src="../../assets/img/hasBarracas.svg" style="transform: scale(1.1)">
             <h3>Barracas</h3>
           </div>
-          <div class="item">
-            <img class="__img" v-if="acomod.hasPier" src="../../assets/img/hasPier.svg">
+          <div class="item" v-if="acomod.hasPier">
+            <img class="__img" src="../../assets/img/hasPier.svg">
             <h3>Pier</h3>
           </div>
         </div>
@@ -287,7 +287,7 @@
 
           <gmap-map
             :center="{lat: acomod.positionLAT, lng: acomod.positionLNG}"
-            :zoom="15"
+            :zoom="14"
             :options="{ styles: styles, draggable: $store.state.isMobile ? false : true, fullscreenControl: $store.state.isMobile ? false : true, zoomControl: $store.state.isMobile ? false : true, mapTypeControl: false, streetViewControl: false }"
             @click="fullscreenMobile">
               <Gmap-Marker
@@ -1186,7 +1186,6 @@ export default {
         & .comodidades-box-desktop {
           display: flex;
           flex-flow: row wrap;
-          justify-content: space-between;
           & .item {
             display: flex;
             align-items: center;

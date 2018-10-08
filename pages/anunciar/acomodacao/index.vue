@@ -9,7 +9,8 @@
       
       <h1 class="__title">Ainda gasta anunciando sua casa? Aqui é gratuito.</h1>
       
-      <button class="__anunciar-btn" @click="$store.commit('m_cadastroAcomod1', true), $store.commit('m_cadastroAcomod0', false), $store.commit('m_acomodProgressBar', (100/11)), hashAcomod()">Anunciar</button>
+
+      <button class="__anunciar-btn" @click="$store.commit('m_cadastroAcomod1', true), $store.commit('m_cadastroAcomod0', false), $store.commit('m_acomodProgressBar', (100/12)), hashAcomod()">Anunciar</button>
 
     </div><!-- PLANO ACOMODAÇÃO MOBILE -->
 
@@ -26,7 +27,8 @@
 
         <h3 class="__text">Além disso...</h3>
         
-        <button class="__anunciar-btn" @click="$store.commit('m_cadastroAcomod1', true), $store.commit('m_cadastroAcomod0', false), $store.commit('m_acomodProgressBar', (100/11)), hashAcomod()">Anunciar</button>
+
+        <button class="__anunciar-btn" @click="$store.commit('m_cadastroAcomod1', true), $store.commit('m_cadastroAcomod0', false), $store.commit('m_acomodProgressBar', (100/12)), hashAcomod()">Anunciar</button>
       </div>
 
     </div><!-- PLANO ACOMODAÇÃO DESKTOP -->
@@ -1230,7 +1232,6 @@ export default {
       if (value === `#${this.randomHashs[2]}`) {
         this.$store.commit('m_cadastroAcomod2', true)
         this.$store.commit('m_cadastroAcomod3', false)
-
       } 
       if (value === `#${this.randomHashs[3]}`) {
         this.$store.commit('m_cadastroAcomod3', true)
@@ -1311,7 +1312,7 @@ export default {
   & .progress-bar {
     position: fixed;
     top: var(--navbarHeightMobile);
-    height: 5px;
+    height: 4px;
     z-index: 8888;
     background: var(--colorAcomod);
     transition: var(--main-transition);
@@ -1359,7 +1360,7 @@ export default {
     padding: 0 0 8rem 0;
     & .__form-title {
       padding: 2.7rem 7% 1.4rem 7%;
-      line-height: 35px;
+      line-height: 1.25;
       font-size: 29px;
       font-weight: 700;
       z-index: 999;
@@ -1775,7 +1776,6 @@ export default {
       }
       & .__form-text {
         padding: 1.4rem 28% 0;
-
       }
       & .__form-subtitle {
         padding-top: 1.5rem;
