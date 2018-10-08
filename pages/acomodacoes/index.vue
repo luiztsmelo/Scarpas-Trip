@@ -1,65 +1,67 @@
 <template>
   <div class="acomods" @click="closeFilterBtns(), $store.state.isMobile ? '' : filtrar()">
 
-    <div class="acomods-container" :class="[ dropdownBtnIsOpen === true ? 'blur' : '' ]">
+    <no-ssr>
+      <div class="acomods-container" :class="[ dropdownBtnIsOpen === true ? 'blur' : '' ]">
 
 
 
-      <div class="loader" v-show="$store.state.allAcomods === null">
-        <div class="spinner"><div class="bounce1"></div><div class="bounce2"></div><div class="bounce3"></div></div>
-      </div>
-
-    
-
-      <!-- Card -->
-      <nuxt-link class="card" v-for="(acomod, index) in $store.state.filteredAcomods !== null ? $store.state.filteredAcomods : $store.state.allAcomods" :key="acomod.acomodID" @mouseover.native="mouseOverCard(index)" @mouseout.native="mouseOutCard(index)" :to="`/acomodacoes/${acomod.acomodID}`" v-show="$store.state.allAcomods !== null">
-
-        <div class="image-box">
-          <swiper :options="swiperOption">
-
-            <swiper-slide class="slide" v-for="image in acomod.images" :key="image.id">
-              <progressive-background class="__img" :src="imageH(image)" :placeholder="image.L" :aspect-ratio="2/3"/>
-            </swiper-slide>
-
-            <div class="swiper-pagination" slot="pagination"></div>
-      
-          </swiper>
+        <div class="loader" v-show="$store.state.allAcomods === null">
+          <div class="spinner"><div class="bounce1"></div><div class="bounce2"></div><div class="bounce3"></div></div>
         </div>
 
-        <div class="card-details">
-          <p class="__card-tipo-acomod">{{ acomod.tipoAcomod }}</p>
-          <p class="__card-title">{{ acomod.title }}</p>
-          <p class="__card-valor">R${{ acomod.valorNoite }}<span class="__card-valor-dia"> por noite</span></p>
-          <div class="rating">
-            <star-rating
-              :rating="4.2"
-              :increment="0.1"
-              :read-only="true"
-              :show-rating="false"
-              active-color="#161616"
-              inactive-color="#dedede"
-              :star-size="10"
-              :padding="2">
-            </star-rating>
-            <p class="rating-number">4,2</p>
+      
+
+        <!-- Card -->
+        
+        <nuxt-link class="card" v-for="(acomod, index) in $store.state.filteredAcomods !== null ? $store.state.filteredAcomods : $store.state.allAcomods" :key="acomod.acomodID" @mouseover.native="mouseOverCard(index)" @mouseout.native="mouseOutCard(index)" :to="`/acomodacoes/${acomod.acomodID}`" v-show="$store.state.allAcomods !== null">
+
+          <div class="image-box">
+            <swiper :options="swiperOption">
+
+              <swiper-slide class="slide" v-for="image in acomod.images" :key="image.id">
+                <progressive-background class="__img" :src="imageH(image)" :placeholder="image.L" :aspect-ratio="2/3"/>
+              </swiper-slide>
+
+              <div class="swiper-pagination" slot="pagination"></div>
+        
+            </swiper>
+          </div>
+
+          <div class="card-details">
+            <p class="__card-tipo-acomod">{{ acomod.tipoAcomod }}</p>
+            <p class="__card-title">{{ acomod.title }}</p>
+            <p class="__card-valor">R${{ acomod.valorNoite }}<span class="__card-valor-dia"> por noite</span></p>
+            <div class="rating">
+              <star-rating
+                :rating="4.2"
+                :increment="0.1"
+                :read-only="true"
+                :show-rating="false"
+                active-color="#161616"
+                inactive-color="#dedede"
+                :star-size="10"
+                :padding="2">
+              </star-rating>
+              <p class="rating-number">4,2</p>
+            </div>
+            
           </div>
           
+        </nuxt-link><!-- Card -->
+
+
+
+        <div class="empty-state" v-show="$store.state.filteredAcomods !== null && $store.state.filteredAcomods.length === 0">
+          <img src="../../assets/img/empty-state.svg" class="__img">
+          <h1 class="__title">Nenhuma acomodação encontrada :(</h1>
+          <h3>Tente ajustar os filtros para obter um melhor resultado.</h3>
+          <button class="__limpar-filtros-btn" @click="$store.commit('m_resetFilters')">Limpar filtros</button>
         </div>
         
-      </nuxt-link><!-- Card -->
 
-
-
-      <div class="empty-state" v-show="$store.state.filteredAcomods !== null && $store.state.filteredAcomods.length === 0">
-        <img src="../../assets/img/empty-state.svg" class="__img">
-        <h1 class="__title">Nenhuma acomodação encontrada :(</h1>
-        <h3>Tente ajustar os filtros para obter um melhor resultado.</h3>
-        <button class="__limpar-filtros-btn" @click="$store.commit('m_resetFilters')">Limpar filtros</button>
       </div>
-      
-
-    </div>
-
+    </no-ssr>
 
 
     <!-- ___________________________ FILTRAR DESKTOP ___________________________ -->
