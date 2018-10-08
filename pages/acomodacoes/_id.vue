@@ -60,19 +60,18 @@
 
           <h3 class="__info-tipo" style="color: #FFA04F">{{ acomod.tipoAcomod }}</h3>
 
-          <div class="rating">
-            <star-rating
-              :rating="4.7"
-              :increment="0.1"
-              :read-only="true"
-              :show-rating="false"
-              active-color="#161616"
-              inactive-color="#dedede"
-              :star-size="11"
-              :padding="3">
-            </star-rating>
-            <p class="rating-number">4,7</p>
-          </div>
+          <star-rating
+            :rating="4.7"
+            :increment="0.1"
+            :read-only="true"
+            :show-rating="false"
+            active-color="#161616"
+            inactive-color="#dedede"
+            :star-size="11"
+            :padding="3">
+          </star-rating>
+
+          <p class="__rating-number">4,7</p>
 
         </div><!-- ______________________________ INFO ______________________________ -->
         
@@ -709,14 +708,10 @@ export default {
       font-size: 15px;
       font-weight: 600;
     }
-    & .rating {
-      display: flex;
-      align-items: center;
-      & .rating-number {
-        font-size: 13px;
-        font-weight: 600;
-        padding-left: 3px;
-      }
+    & .__rating-number {
+      font-size: 13px;
+      font-weight: 600;
+      padding-left: 3px;
     }
   }/* __________ INFO BOX __________ */
   
@@ -1087,14 +1082,10 @@ export default {
             font-size: 16px;
             font-weight: 600;
           }
-          & .rating {
-            display: flex;
-            align-items: center;
-            & .rating-number {
-              font-size: 16px;
-              font-weight: 600;
-              padding-left: 3px;
-            }
+          & .__rating-number {
+            font-size: 16px;
+            font-weight: 600;
+            padding-left: 3px;
           }
         }/* __________ INFO BOX __________ */
 

@@ -1,11 +1,9 @@
 import Vuex from 'vuex'
-import createPersistedState from 'vuex-persistedstate'
 import firebase from '@firebase/app'
 import 'firebase/firestore'
 import 'firebase/auth'
 
 const store = () => new Vuex.Store({
-  plugins: [ createPersistedState({ storage: window.sessionStorage }) ],
   /* ________________________________________________ STATE ________________________________________________ */
   state: {
     /*
