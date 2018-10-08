@@ -159,7 +159,7 @@
       <div class="comodidades-box">
 
         <div class="item-form-switches" @click="sliderRoupasCama">
-          <h3>Roupas de Cama e Toalhas</h3>
+          <h3>Roupas de Cama</h3>
           <label class="switch" ref="sliderRoupasCama" @click="sliderRoupasCama">
             <input type="checkbox" v-model="$store.state.acomodData.hasRoupasCama">
             <span class="slider round"></span>

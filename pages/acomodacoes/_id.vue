@@ -61,18 +61,16 @@
           <h3 class="__info-tipo" style="color: #FFA04F">{{ acomod.tipoAcomod }}</h3>
 
           <div class="rating">
-            <no-ssr>
-              <star-rating
-                :rating="4.7"
-                :increment="0.1"
-                :read-only="true"
-                :show-rating="false"
-                active-color="#161616"
-                inactive-color="#dedede"
-                :star-size="11"
-                :padding="3">
-              </star-rating>
-            </no-ssr>
+            <star-rating
+              :rating="4.7"
+              :increment="0.1"
+              :read-only="true"
+              :show-rating="false"
+              active-color="#161616"
+              inactive-color="#dedede"
+              :star-size="11"
+              :padding="3">
+            </star-rating>
             <p class="rating-number">4,7</p>
           </div>
 
@@ -83,6 +81,7 @@
 
 
         <h1 class="id-title">{{ acomod.title }}</h1>
+
 
 
 
@@ -101,6 +100,36 @@
 
 
 
+        <!-- ______________________________ CARACTERÍSTICAS ______________________________ -->
+        <div class="caracteristicas-box">
+          
+          <div class="item">
+            <img class="__img" src="../../assets/img/guests.svg">
+            <h3>{{ acomod.totalHospedes }} {{ acomod.totalHospedes == '1' ? 'hóspede' : 'hóspedes' }}</h3>
+          </div>
+
+          <div class="item">
+            <img class="__img" src="../../assets/img/quarto.svg">
+            <h3>{{ acomod.totalQuartos }} {{ acomod.totalQuartos == '1' ? 'quarto' : 'quartos' }} ({{ acomod.totalSuites }} {{ acomod.totalSuites == '1' ? 'suíte' : 'suítes' }})</h3>
+          </div>
+
+          <div class="item">
+            <img class="__img" src="../../assets/img/banheiro.svg" style="transform: scale(1.06)">
+            <h3>{{ acomod.totalBanheiros }} {{ acomod.totalBanheiros == '1' ? 'banheiro' : 'banheiros' }}</h3>
+          </div>
+
+          <div class="item">
+            <img class="__img" src="../../assets/img/garagem.svg" style="transform: scale(1.01)">
+            <h3>{{ acomod.totalGaragem }} {{ acomod.totalGaragem == '1' ? 'vaga' : 'vagas' }} garagem</h3>
+          </div>
+
+        </div><!-- ______________________________ CARACTERÍSTICAS ______________________________ -->
+
+
+
+
+
+
         <!-- ______________________________ SOBRE ______________________________ -->
         <h1 class="item-title">Sobre {{ tipoAcomodA }}</h1>
 
@@ -113,63 +142,62 @@
 
 
 
-        <!-- ______________________________ CARACTERÍSTICAS ______________________________ -->
-        <h1 class="item-title">Características</h1>
-
-        <div class="caracteristicas-box">
-          
-          <div class="__item-caracteristica">
-            <img class="__img-caracteristica" src="../../assets/img/quarto.svg">
-            <h3>
-              {{ acomod.totalQuartos }} {{ acomod.totalQuartos == '1' ? 'quarto' : 'quartos' }} ({{ acomod.totalSuites }} {{ acomod.totalSuites == '1' ? 'suíte' : 'suítes' }})
-            </h3>
-          </div>
-
-          <div class="__item-caracteristica">
-            <img class="__img-caracteristica" src="../../assets/img/banheiro.svg" style="transform: scale(1.06)">
-            <h3>
-              {{ acomod.totalBanheiros }} {{ acomod.totalBanheiros == '1' ? 'banheiro' : 'banheiros' }}
-            </h3>
-          </div>
-
-          <div class="__item-caracteristica">
-            <img class="__img-caracteristica" src="../../assets/img/garagem.svg" style="transform: scale(1.01)">
-            <h3>
-              {{ acomod.totalGaragem }} {{ acomod.totalGaragem == '1' ? 'vaga' : 'vagas' }} garagem
-            </h3>
-          </div>
-
-        </div><!-- ______________________________ CARACTERÍSTICAS ______________________________ -->
-
-
-
-
-
-        <!-- ______________________________ CAPACIDADE ______________________________ -->
-        <h1 class="item-title">Capacidade</h1>
-
-        <div class="capacidade-box">
-          <h3>{{ acomod.totalHospedes }} pessoas</h3>
-        </div><!-- ______________________________ CAPACIDADE ______________________________ -->
-
-
-
-
-
         <!-- ______________________________ COMODIDADES ______________________________ -->
         <h1 class="item-title">Comodidades</h1>
 
-        <div class="comodidades-box" @click="showComods = true, hashComods()">
-          <img class="__img-comodidade" v-if="acomod.hasRoupasCama" src="../../assets/img/hasRoupasCama.svg" style="transform: scale(1.01)">
-          <img class="__img-comodidade" v-if="acomod.hasPiscina" src="../../assets/img/hasPiscina.svg">
-          <img class="__img-comodidade" v-if="acomod.hasChurrasqueira" src="../../assets/img/hasChurrasqueira.svg">
-          <img class="__img-comodidade" v-if="acomod.hasCozinha" src="../../assets/img/hasCozinha.svg" style="transform: scale(1.07)">
-          <img class="__img-comodidade" v-if="acomod.hasWifi" src="../../assets/img/hasWifi.svg" style="transform: scale(.98)">
-          <img class="__img-comodidade" v-if="acomod.hasArCond" src="../../assets/img/hasArCond.svg">
-          <img class="__img-comodidade" v-if="acomod.hasCaixaSom" src="../../assets/img/hasCaixaSom.svg" style="transform: scale(.92)">
-          <img class="__img-comodidade" v-if="acomod.hasBarracas" src="../../assets/img/hasBarracas.svg" style="transform: scale(1.1)">
-          <img class="__img-comodidade" v-if="acomod.hasPier" src="../../assets/img/hasPier.svg">
+
+        <div class="comodidades-box-mobile" @click="showComods = true, hashComods()">
+          <img class="__img" v-if="acomod.hasRoupasCama" src="../../assets/img/hasRoupasCama.svg" style="transform: scale(1.01)">
+          <img class="__img" v-if="acomod.hasPiscina" src="../../assets/img/hasPiscina.svg">
+          <img class="__img" v-if="acomod.hasChurrasqueira" src="../../assets/img/hasChurrasqueira.svg">
+          <img class="__img" v-if="acomod.hasCozinha" src="../../assets/img/hasCozinha.svg" style="transform: scale(1.07)">
+          <img class="__img" v-if="acomod.hasWifi" src="../../assets/img/hasWifi.svg" style="transform: scale(.98)">
+          <img class="__img" v-if="acomod.hasArCond" src="../../assets/img/hasArCond.svg">
+          <img class="__img" v-if="acomod.hasCaixaSom" src="../../assets/img/hasCaixaSom.svg" style="transform: scale(.92)">
+          <img class="__img" v-if="acomod.hasBarracas" src="../../assets/img/hasBarracas.svg" style="transform: scale(1.1)">
+          <img class="__img" v-if="acomod.hasPier" src="../../assets/img/hasPier.svg">
         </div>
+
+
+        <div class="comodidades-box-desktop">
+          <div class="item">
+            <img class="__img" v-if="acomod.hasRoupasCama" src="../../assets/img/hasRoupasCama.svg" style="transform: scale(1.01)">
+            <h3>Roupas de Cama</h3>
+          </div>
+          <div class="item">
+            <img class="__img" v-if="acomod.hasPiscina" src="../../assets/img/hasPiscina.svg">
+            <h3>Piscina</h3>
+          </div>
+          <div class="item">
+            <img class="__img" v-if="acomod.hasChurrasqueira" src="../../assets/img/hasChurrasqueira.svg">
+            <h3>Churrasqueira</h3>
+          </div>
+          <div class="item">
+            <img class="__img" v-if="acomod.hasCozinha" src="../../assets/img/hasCozinha.svg" style="transform: scale(1.07)">
+            <h3>Cozinha preparada</h3>
+          </div>
+          <div class="item">
+            <img class="__img" v-if="acomod.hasWifi" src="../../assets/img/hasWifi.svg" style="transform: scale(.98)">
+            <h3>Wi-Fi</h3>
+          </div>
+          <div class="item">
+            <img class="__img" v-if="acomod.hasArCond" src="../../assets/img/hasArCond.svg">
+            <h3>Ar condicionado</h3>
+          </div>
+          <div class="item">
+            <img class="__img" v-if="acomod.hasCaixaSom" src="../../assets/img/hasCaixaSom.svg" style="transform: scale(.92)">
+            <h3>Caixa de Som</h3>
+          </div>
+          <div class="item">
+            <img class="__img" v-if="acomod.hasBarracas" src="../../assets/img/hasBarracas.svg" style="transform: scale(1.1)">
+            <h3>Barracas</h3>
+          </div>
+          <div class="item">
+            <img class="__img" v-if="acomod.hasPier" src="../../assets/img/hasPier.svg">
+            <h3>Pier</h3>
+          </div>
+        </div>
+
 
         <transition name="comods-animation">
           <div class="comods-details" v-if="showComods">
@@ -186,7 +214,7 @@
 
               <div class="comods-item" v-if="acomod.hasRoupasCama">
                 <img src="../../assets/img/hasRoupasCama.svg" class="__img" style="transform: scale(1.01)">
-                <h3>Roupas de Cama e Toalhas</h3>
+                <h3>Roupas de Cama</h3>
               </div>
               <div class="comods-item" v-if="acomod.hasPiscina">
                 <img src="../../assets/img/hasPiscina.svg" class="__img">
@@ -229,6 +257,7 @@
 
 
 
+
         <!-- ______________________________ DISPONIBILIDADE ______________________________ -->
         <h1 class="item-title">Disponibilidade</h1>
 
@@ -243,6 +272,7 @@
           :attributes="attributesCalendar">
         </v-calendar>
         <!-- ______________________________ DISPONIBILIDADE ______________________________ -->
+
 
 
 
@@ -284,7 +314,9 @@
 
 
 
+
       </div><!-- Desktop View Info -->
+
 
 
 
@@ -386,6 +418,7 @@
         </form>
 
       </div><!-- ______________________________ RESERVA DESKTOP ______________________________ -->
+
 
 
 
@@ -727,7 +760,7 @@ export default {
   /* __________ ANUNCIANTE BOX __________ */
   & .anunciante-box {
     display: flex;
-    padding: 2rem 7% 0 7%;
+    padding: 2rem 7%;
     align-items: center;
     & .__anunciante-img {
       cursor: pointer;
@@ -757,34 +790,31 @@ export default {
   /* __________ CARACTERÍSTICAS BOX __________ */
   & .caracteristicas-box {
     padding: 0 7%;
-    transform: translateY(-.3rem);
-    & .__item-caracteristica {
+    & .item {
       display: flex;
       flex-flow: row;
       align-items: center;
-      margin-top: .8rem;
-      & .__img-caracteristica {
+      margin-top: 1.2rem;
+      & .__img {
         width: 1.6rem;
         height: auto;
-        margin-right: .7rem;
+        margin-right: .8rem;
       }
     }
   }/* __________ CARACTERÍSTICAS BOX __________ */
 
 
 
-  /* __________ CAPACIDADE BOX __________ */
-  & .capacidade-box {
-    padding: 0 7%;
-  }/* __________ CAPACIDADE BOX __________ */
-
 
 
   /* __________ COMODIDADES __________ */
-  & .comodidades-box {
+  & .comodidades-box-desktop {
+    display: none;
+  }
+  & .comodidades-box-mobile {
     padding: 0 4.5%;
     transform: translateY(-.2rem);
-    & .__img-comodidade {
+    & .__img {
       width: 1.8rem;
       height: auto;
       margin: .7rem .8rem 0 .8rem;
@@ -821,19 +851,19 @@ export default {
   & .comods-body {
     padding: 0 7% 3rem 7%;
     & .__title {
-      margin: 5rem 0 2rem 0;
-      font-size: 27px;
+      margin: 5rem 0 1.5rem 0;
+      font-size: 29px;
       font-weight: 700;
     }
     & .comods-item { 
       display: flex;
       flex-flow: row;
       align-items: center;
-      padding: 1.1rem 0;
+      padding: 1.6rem 0;
       border-bottom: 1px solid #dedede;
       & .__img {
         margin-right: 1rem;
-        width: 1.8rem;
+        width: 1.9rem;
         height: auto;
       }
     }
@@ -1080,7 +1110,8 @@ export default {
 
 
 
-        /* __________ INFO BOX __________ */
+
+        /* __________ INFO __________ */
         & .info-box {
           padding: 0;
           margin-top: 0;
@@ -1098,13 +1129,14 @@ export default {
               padding-left: 3px;
             }
           }
-        }/* __________ INFO BOX __________ */
+        }/* __________ INFO __________ */
 
 
 
-        /* __________ ANUNCIANTE BOX __________ */
+
+        /* __________ ANUNCIANTE __________ */
         & .anunciante-box {
-          padding: 1.5rem 0 0 0;
+          padding: 1.5rem 0 2.5rem;
           & .__anunciante-img {
             width: 4rem;
             height: 4rem;
@@ -1112,112 +1144,69 @@ export default {
           }
           & .__anunciante-name {
           }
-        }/* __________ ANUNCIANTE BOX __________ */
+        }/* __________ ANUNCIANTE __________ */
 
 
 
-        /* __________ SOBRE BOX __________ */
-        & .sobre-box {
-          padding: 0;
-        }/* __________ SOBRE BOX __________ */
 
-
-
-        /* __________ CARACTERÍSTICAS BOX __________ */
+        /* __________ CARACTERÍSTICAS __________ */
         & .caracteristicas-box {
           padding: 0; 
           display: flex;
           justify-content: space-between;
-          & .__item-caracteristica {
+          & .item {
             display: flex;
             flex-flow: column;
             align-items: center;
             margin-top: .8rem;
-            & .__img-caracteristica {
+            & .__img {
               width: 2.2rem;
               height: auto;
               margin-bottom: .7rem;
             }
           }
-        }/* __________ CARACTERÍSTICAS BOX __________ */
+        }/* __________ CARACTERÍSTICAS __________ */
 
 
 
-        /* __________ CAPACIDADE BOX __________ */
-        & .capacidade-box {
+
+        /* __________ SOBRE __________ */
+        & .sobre-box {
           padding: 0;
-        }/* __________ CAPACIDADE BOX __________ */
+        }/* __________ SOBRE __________ */
 
+
+      
 
 
         /* __________ COMODIDADES __________ */
-        & .comodidades-box {
-          padding: 0;
-          display: flex;
-          height: 4rem;
-          justify-content: space-between;
-          & .__img-comodidade {
-            width: 2.2rem;
-            height: auto;
-            margin: 0;
-          }
+        & .comodidades-box-mobile {
+          display: none;
         }
-        & .comods-details {
-          position: fixed;
-          z-index: 9999;
-          width:  100%;
-          height: 100%;
-          top: 0;
-          background: white;
-          overflow-y: auto;
-          transition: var(--main-transition);
-          & .back-bar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width:  100%;
-            height: 3rem;
-            background: white;
-            & .back-box {
-              display: inline-flex;
-              align-items: center;
-              height: 100%;
-              padding: 0 7%;
-              & .__back-btn {
-                cursor: pointer;
-                width: 1.27rem;
-                height: auto;
-              }
-            }
-          }
-          & .comods-body {
-            padding: 0 7% 3rem 7%;
-            & .__title {
-              margin: 5rem 0 2rem 0;
-              font-size: 27px;
-              font-weight: 700;
-            }
-            & .comods-item { 
-              display: flex;
-              flex-flow: row;
-              align-items: center;
-              padding: 1.1rem 0;
-              border-bottom: 1px solid #dedede;
-              & .__img {
-                margin-right: 1rem;
-                width: 1.8rem;
-                height: auto;
-              }
+        & .comodidades-box-desktop {
+          display: flex;
+          flex-flow: row wrap;
+          justify-content: space-between;
+          & .item {
+            display: flex;
+            align-items: center;
+            width: calc(100%/3);
+            margin-bottom: 1.2rem;
+            & .__img {
+              width: 1.7rem;
+              height: auto;
+              margin-right: .8rem;
             }
           }
         }/* __________ COMODIDADES __________ */
 
 
 
+
         /* __________ LOCAL __________ */
         & .local-box {
           & .__adress {
-            padding: 0 0 .6rem 0;
+            padding: 0 0 1rem 0;
           }
           & .vue-map-container {
             height: 400px;
@@ -1226,10 +1215,13 @@ export default {
 
 
 
+
         /* __________ AVALIAÇÕES __________ */
         & .avaliacoes-box {
           padding: 0;
         }/* __________ AVALIAÇÕES __________ */
+
+
       }
     }
     

@@ -1,139 +1,135 @@
 <template>
   <transition name="filtrar-acomods-animation">
     <div class="filtrar-acomods-modal" v-show="$store.state.showFiltrarAcomods">
+      <div class="filtrar-acomods-body">
 
-      <no-ssr>
-        <div class="filtrar-acomods-body">
 
-
-          <div class="topbar">
-            <img src="../assets/img/close-mobile.svg" class="close-btn" @click="closeBtn">
-            <button class="limpar-btn" @click="$store.commit('m_resetFilters')">Limpar</button>
-          </div>
-          
-
-
-          <h1 class="__title">Filtrar por:</h1>
-
-
-
-
-
-
-          <!-- ________________________________________ DATAS ________________________________________ -->
-          <div class="filter-box">
-
-            <h2 class="__filter-title">Datas</h2>
-
-
-            <h3 style="padding: .8rem 0">Chegada / Partida</h3>
-
-          </div><!-- ________________________________________ DATAS ________________________________________ -->
-
-
-
-
-
-
-
-          <!-- ________________________________________ HÓSPEDES ________________________________________ -->
-          <div class="filter-box">
-
-            <h2 class="__filter-title">Capacidade hóspedes</h2>
-
-
-            <div class="number-select">
-
-              <h3>Adultos e crianças</h3>
-
-              <div class="input-number">
-                <div class="__btn" :class="$store.state.filters.hospedes === 0 ? '__btn-disabled' : ''" @click="$store.commit('m_decrementHospedes')"><div class="minus"></div></div>
-
-                <h3>Acima de {{ $store.state.filters.hospedes }}</h3>
-
-                <div class="__btn" :class="$store.state.filters.hospedes === 25 ? '__btn-disabled' : ''" @click="$store.commit('m_incrementHospedes')"><div class="plus-horiz"></div><div class="plus-vert"></div></div>
-              </div>
-
-            </div>
-
-          </div><!-- ________________________________________ HÓSPEDES ________________________________________ -->
-
-
-
-
-
-
-
-          <!-- ________________________________________ TIPO ACOMOD ________________________________________ -->
-          <div class="filter-box">
-
-            <h2 class="__filter-title">Tipo de acomodação</h2>
-
-
-            <div class="option" v-for="(tipoAcomod, index) in tiposAcomods" :key="tipoAcomod.name" @click="$store.state.filters.tipoAcomod = tipoAcomod.name">
-              
-              <h3 class="__text" >{{ tipoAcomod.name }}</h3>
-
-              <div class="radio"><div :class="[ $store.state.filters.tipoAcomod === tipoAcomod.name ? 'radio-checkmark' : '' ]"></div></div>
-
-            </div>
-
-          </div><!-- ________________________________________ TIPO ACOMOD ________________________________________ -->
-
-
-
-
-
-
-          <!-- ________________________________________ PREÇO ________________________________________ -->
-          <div class="filter-box">
-
-            <h2 class="__filter-title">Preço por noite</h2>
-
-
-            <div class="option" v-for="(preco, index) in precos" :key="preco.name" @click="$store.state.filters.preco = preco.value">
-              
-              <h3 class="__text" >{{ preco.name }}</h3>
-
-              <div class="radio"><div :class="[ $store.state.filters.preco === preco.value ? 'radio-checkmark' : '' ]"></div></div>
-
-            </div>
-
-          </div><!-- ________________________________________ PREÇO ________________________________________ -->
-
-
-
-
-
-
-
-          <!-- ________________________________________ AVALIAÇÃO ________________________________________ -->
-          <div class="filter-box">
-
-            <h2 class="__filter-title">Avaliação</h2>
-
-
-          </div><!-- ________________________________________ AVALIAÇÃO ________________________________________ -->
-          
-
-
-
-
-
-          <div class="filter-btn" v-if="$store.state.allAcomods !== null">
-            <button class="__btn" @click="$store.state.showFiltrarAcomods = false">
-              Mostrar 
-              {{ $store.state.filteredAcomods !== null ? $store.state.filteredAcomods.length : $store.state.allAcomods.length }}
-              acomodações
-            </button>
-          </div>
-          
-
-
-
+        <div class="topbar">
+          <img src="../assets/img/close-mobile.svg" class="close-btn" @click="closeBtn">
+          <button class="limpar-btn" @click="$store.commit('m_resetFilters')">Limpar</button>
         </div>
-      </no-ssr>
-      
+        
+
+
+        <h1 class="__title">Filtrar por:</h1>
+
+
+
+
+
+
+        <!-- ________________________________________ DATAS ________________________________________ -->
+        <div class="filter-box">
+
+          <h2 class="__filter-title">Datas</h2>
+
+
+          <h3 style="padding: .8rem 0">Chegada / Partida</h3>
+
+        </div><!-- ________________________________________ DATAS ________________________________________ -->
+
+
+
+
+
+
+
+        <!-- ________________________________________ HÓSPEDES ________________________________________ -->
+        <div class="filter-box">
+
+          <h2 class="__filter-title">Capacidade hóspedes</h2>
+
+
+          <div class="number-select">
+
+            <h3>Adultos e crianças</h3>
+
+            <div class="input-number">
+              <div class="__btn" :class="$store.state.filters.hospedes === 0 ? '__btn-disabled' : ''" @click="$store.commit('m_decrementHospedes')"><div class="minus"></div></div>
+
+              <h3>Acima de {{ $store.state.filters.hospedes }}</h3>
+
+              <div class="__btn" :class="$store.state.filters.hospedes === 25 ? '__btn-disabled' : ''" @click="$store.commit('m_incrementHospedes')"><div class="plus-horiz"></div><div class="plus-vert"></div></div>
+            </div>
+
+          </div>
+
+        </div><!-- ________________________________________ HÓSPEDES ________________________________________ -->
+
+
+
+
+
+
+
+        <!-- ________________________________________ TIPO ACOMOD ________________________________________ -->
+        <div class="filter-box">
+
+          <h2 class="__filter-title">Tipo de acomodação</h2>
+
+
+          <div class="option" v-for="(tipoAcomod, index) in tiposAcomods" :key="tipoAcomod.name" @click="$store.state.filters.tipoAcomod = tipoAcomod.name">
+            
+            <h3 class="__text" >{{ tipoAcomod.name }}</h3>
+
+            <div class="radio"><div :class="[ $store.state.filters.tipoAcomod === tipoAcomod.name ? 'radio-checkmark' : '' ]"></div></div>
+
+          </div>
+
+        </div><!-- ________________________________________ TIPO ACOMOD ________________________________________ -->
+
+
+
+
+
+
+        <!-- ________________________________________ PREÇO ________________________________________ -->
+        <div class="filter-box">
+
+          <h2 class="__filter-title">Preço por noite</h2>
+
+
+          <div class="option" v-for="(preco, index) in precos" :key="preco.name" @click="$store.state.filters.preco = preco.value">
+            
+            <h3 class="__text" >{{ preco.name }}</h3>
+
+            <div class="radio"><div :class="[ $store.state.filters.preco === preco.value ? 'radio-checkmark' : '' ]"></div></div>
+
+          </div>
+
+        </div><!-- ________________________________________ PREÇO ________________________________________ -->
+
+
+
+
+
+
+
+        <!-- ________________________________________ AVALIAÇÃO ________________________________________ -->
+        <div class="filter-box">
+
+          <h2 class="__filter-title">Avaliação</h2>
+
+
+        </div><!-- ________________________________________ AVALIAÇÃO ________________________________________ -->
+        
+
+
+
+
+
+        <div class="filter-btn" v-if="$store.state.allAcomods !== null">
+          <button class="__btn" @click="$store.state.showFiltrarAcomods = false">
+            Mostrar 
+            {{ $store.state.filteredAcomods !== null ? $store.state.filteredAcomods.length : $store.state.allAcomods.length }}
+            acomodações
+          </button>
+        </div>
+        
+
+
+
+      </div>
     </div>
   </transition>
 </template>
