@@ -154,8 +154,8 @@
                   :mask="[/\d/, /\d/, /\d/, /\d/, ' ', /\d/, /\d/, /\d/, /\d/, ' ', /\d/, /\d/, /\d/, /\d/, ' ', /\d/, /\d/, /\d/, /\d/]"
                   :guide="false"
                   placeholder="0000 0000 0000 0000">
-                </masked-input><!-- CARD NUMBER -->
-              </div>
+                </masked-input>
+              </div><!-- CARD NUMBER -->
 
            
               <div style="display:flex; justify-content:space-between">

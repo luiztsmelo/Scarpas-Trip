@@ -87,7 +87,7 @@
       <div class="item-form">
         <label>Total de Hóspedes</label>
         <select v-model="$store.state.acomodData.totalHospedes">
-          <option v-for="n in 25">{{ n }}</option>
+          <option v-for="n in 25" :value="n">{{ n }}</option>
         </select>
       </div>
 
@@ -722,7 +722,7 @@
       <div class="back-next"> 
         <div class="back-next-body">
           <button type="button" class="__back" @click="backBtn12">Voltar</button>
-          <button type="button" class="__next" :style="form12ok" @click="concluir">Publicar</button>
+          <button type="button" class="__next" :style="form12ok" @click="concluir">Anunciar</button>
         </div>
       </div> 
     
@@ -763,8 +763,8 @@ export default {
   transition: 'opacity',
   data () {
     return {
-      title: '',/* Vue Autosize */
-      subtitle: '',/* Vue Autosize */
+      title: '', /* Vue Autosize */
+      subtitle: '', /* Vue Autosize */
       showCroppaModal: false,
       isUploading: false,
       uploadProgress: 0,
@@ -1064,8 +1064,6 @@ export default {
       acomodData.createdAt = Date.now()
 
       acomodData.hostID = this.user.userID
-
-      acomodData.totalHospedes = Number(acomodData.totalHospedes)
 
       /* Se todas as informações preenchidas */
       if (this.bankCode !== '' && this.agencia !== '' && this.agenciaDV !== '' && this.conta !== '' && this.contaDV !== '' && this.legalName !== '' && this.docNumber.length === 14 && CPF.validate(this.docNumber)) {
@@ -1783,7 +1781,7 @@ export default {
       }
       & .__termos {
         padding: 0 35%;
-        text-align: center
+        text-align: center;
       }
       & textarea {
         padding: 0 28%;

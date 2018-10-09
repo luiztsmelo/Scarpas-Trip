@@ -409,7 +409,7 @@
 
           <button class="__reserva-desktop-btn" type="button" @click="reservarDesktop">Reservar</button>
 
-          <h4 class="__info">Você ainda não será cobrado.</h4>
+          <h4 class="__info">Não se preocupe, você não será cobrado.</h4>
 
 
           <button class="__reserva-desktop-btn-ask" type="button" @click="$store.state.user.email === null ? $modal.show('sign-in-modal') : $modal.show('ask-acomod-modal'), $store.state.clickedAskAcomod = true, $store.state.isSignIn = false">Falar com {{ host.firstName }}</button>
@@ -1160,7 +1160,7 @@ export default {
             align-items: center;
             margin-top: .8rem;
             & .__img {
-              width: 2.2rem;
+              width: 2.1rem;
               height: auto;
               margin-bottom: .7rem;
             }

@@ -12,12 +12,12 @@
   "main": "lib/index.js",
   "dependencies": {
     "axios": "^0.18.0",
-    "dayjs": "^1.6.9",
+    "dayjs": "^1.7.7",
     "firebase-admin": "~5.12.1",
-    "firebase-functions": "^1.0.3",
-    "node-mailjet": "^3.2.1",
+    "firebase-functions": "^2.0.5",
+    "node-mailjet": "^3.3.0",
     "numeral": "^2.0.6",
-    "pagarme": "^3.7.3"
+    "pagarme": "^3.8.0"
   },
   "devDependencies": {
     "tslint": "^5.8.0",

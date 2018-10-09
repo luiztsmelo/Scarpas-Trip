@@ -68,6 +68,7 @@ const store = () => new Vuex.Store({
     cardTypeNice: null,
     customer: {
       name: '',
+      email: '',
       cpf: '',
       celular: '',
       zipcode: '',
@@ -278,38 +279,24 @@ const store = () => new Vuex.Store({
     /*
     ########## Passeio ##########
     */
-    passeioCreated: false,
     passeios: null,
     passeio: null,
     passeioProgressBar: 0,
-    blobPasL1: null,
-    blobPasH1J: null,
-    blobPasH1W: null,
-    blobPasL2: null,
-    blobPasH2J: null,
-    blobPasH2W: null,
+    imageCountPas: 0,
     passeioData: { /* Atualizar a action */
+      createdAt: null,
       passeioID: null,
-      userID: null,
-      recipientID: null,
-      proprietario: null,
-      email: null,
+      hostID: null,
       celular: '',
-      photoURL: null,
       tipoPasseio: 'Lancha',
-      localSaida: null,
-      title: '',
-      subtitle: '',
-      valorPasseio: 0,
-      capacidade: '1',
+      capacidade: 1,
       duracao: null,
       pontosVisitados: null,
-      imageL1: null,
-      imageH1J: null,
-      imageH1W: null,
-      imageL2: null,
-      imageH2J: null,
-      imageH2W: null
+      localSaida: null,
+      valorPasseio: 0,
+      images: [],
+      title: '',
+      subtitle: ''
     },
     cadastroPasseio0: true,
     cadastroPasseio1: false,
@@ -687,9 +674,6 @@ const store = () => new Vuex.Store({
     /*
     ########## Passeio ##########
     */
-    m_passeioCreated (state, payload) {
-      state.passeioCreated = payload
-    },
     m_passeioID (state, payload) {
       state.passeioData.passeioID = payload
     },
@@ -699,23 +683,8 @@ const store = () => new Vuex.Store({
     m_localSaida (state, payload) {
       state.passeioData.localSaida = payload
     },
-    m_imagePasL1 (state, payload) {
-      state.passeioData.imageL1 = payload
-    },
-    m_imagePasH1J (state, payload) {
-      state.passeioData.imageH1J = payload
-    },
-    m_imagePasH1W (state, payload) {
-      state.passeioData.imageH1W = payload
-    },
-    m_imagePasL2 (state, payload) {
-      state.passeioData.imageL2 = payload
-    },
-    m_imagePasH2J (state, payload) {
-      state.passeioData.imageH2J = payload
-    },
-    m_imagePasH2W (state, payload) {
-      state.passeioData.imageH2W = payload
+    m_imageCountPas (state) {
+      state.imageCountPas++
     },
     m_passeios (state, payload) {
       state.passeios = payload
@@ -970,34 +939,23 @@ const store = () => new Vuex.Store({
     /*
     #################### PASSEIOS ####################
     */
-    a_uploadPasseio ({ state, commit }) {
-      firebase.firestore().collection('passeios').doc(state.passeioID).set(state.passeioData).then(() => {
-        /* Resetar states */
-        commit('m_passeioData', {
-          passeioID: null,
-          userID: null,
-          proprietario: null,
-          email: null,
-          celular: '',
-          photoURL: null,
-          tipoPasseio: 'Lancha',
-          localSaida: null,
-          title: '',
-          subtitle: '',
-          valorPasseio: 0,
-          capacidade: '1',
-          duracao: null,
-          pontosVisitados: null,
-          imageL1: null,
-          imageH1J: null,
-          imageH1W: null,
-          imageL2: null,
-          imageH2J: null,
-          imageH2W: null
-        })
-        commit('m_loader', false)
-        commit('m_cadastroPasseio11', false)
-        commit('m_cadastroPasseio0', true)
+    a_resetPasseioData ({ state, commit }) {
+      state.imageCountPas = 0
+      commit('m_resetCreditCard')
+      commit('m_passeioData', {
+        createdAt: null,
+        passeioID: null,
+        hostID: null,
+        celular: '',
+        tipoPasseio: 'Lancha',
+        capacidade: 1,
+        duracao: null,
+        pontosVisitados: null,
+        localSaida: null,
+        valorPasseio: 0,
+        images: [],
+        title: '',
+        subtitle: ''
       })
     },
     /*

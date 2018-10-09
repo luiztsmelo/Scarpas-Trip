@@ -88,7 +88,7 @@
         <div class="cards-container" v-show="$store.state.passeios !== null">
           <nuxt-link :to="'/passeios/' + passeio.passeioID" class="card" v-for="passeio in $store.state.passeios" :key="passeio.passeioID">
 
-            <progressive-background class="__card-img" :src="imagePasH(passeio)" :placeholder="passeio.imageL1" :aspect-ratio="2/3"/>
+            <progressive-background class="__card-img" :src="imagePasH(passeio)" :placeholder="passeio.images[0].L" :aspect-ratio="2/3"/>
 
             <p class="__card-info" style="color: #0784FD">{{ passeio.tipoPasseio }}</p>
 
@@ -256,7 +256,7 @@ export default {
       return supportsWebP ? acomod.images[0].HW : acomod.images[0].HJ
     },
     imagePasH (passeio) {
-      return supportsWebP ? passeio.imageH1W : passeio.imageH1J
+      return supportsWebP ? passeio.images[0].HW : passeio.images[0].HJ
     },
     imageAtH (atracao) {
       return supportsWebP ? atracao.imageH1W : atracao.imageH1J

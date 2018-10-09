@@ -10,7 +10,7 @@
       <h1 class="__title">Ainda gasta anunciando seu passeio? Aqui é gratuito.</h1>
       
 
-      <button class="__anunciar-btn" @click="$store.commit('m_cadastroPasseio1', true), $store.commit('m_cadastroPasseio0', false), $store.commit('m_acomodProgressBar', (100/11)), hashPasseio()">Anunciar</button>
+      <button class="__anunciar-btn" @click="$store.commit('m_cadastroPasseio1', true), $store.commit('m_cadastroPasseio0', false), $store.commit('m_passeioProgressBar', (100/11)), hashPasseio()">Anunciar</button>
 
     </div><!-- PLANO PASSEIO MOBILE -->
 
@@ -27,7 +27,7 @@
         <h3 class="__text">Além disso...</h3>
         
 
-        <button class="__anunciar-btn" @click="$store.commit('m_cadastroPasseio1', true), $store.commit('m_cadastroPasseio0', false), $store.commit('m_acomodProgressBar', (100/11)), hashPasseio()">Anunciar</button>
+        <button class="__anunciar-btn" @click="$store.commit('m_cadastroPasseio1', true), $store.commit('m_cadastroPasseio0', false), $store.commit('m_passeioProgressBar', (100/11)), hashPasseio()">Anunciar</button>
       </div>
 
     </div><!-- PLANO PASSEIO DESKTOP -->
@@ -87,7 +87,7 @@
       <div class="item-form">
         <label>Capacidade</label>
         <select v-model="$store.state.passeioData.capacidade">
-          <option v-for="n in 25">{{ n }}</option>
+          <option v-for="n in 25" :value="n">{{ n }}</option>
         </select>
       </div> 
 
@@ -142,6 +142,7 @@
         <label>Local de Saída</label>
         <select v-model="$store.state.passeioData.localSaida" @input="setLocalSaida" v-if="$store.state.passeioData.localSaida !== 'Outro'">
           <option>Capitólio</option>
+          <option>Escarpas do Lago</option>
           <option>Ponte do Turvo</option>
           <option>Barragem do Dique</option>
           <option>Kanto da Ilha</option>
@@ -169,7 +170,7 @@
     <!-- ________________________________________ 5 - PONTOS VISITADOS ________________________________________ -->
     <form class="cadastro-passeio" v-if="$store.state.cadastroPasseio5">
 
-      <h1 class="__form-title">Quais pontos turísticos você visita?</h1>
+      <h1 class="__form-title">Quais pontos turísticos são visitados?</h1>
 
  
 
@@ -224,73 +225,57 @@
       <h1 class="__form-title">Adicione imagens</h1>
 
 
-      <div class="before-choose-image" v-if="imageURL1 === null">
-        <button class="__input-btn" type="button" @click="$refs.myCroppa1.chooseFile()">Adicionar Imagem</button>
-      </div>
-      
-      <div class="modal-croppa" v-if="showCroppaModal1" @click="showCroppaModal1=false">
+      <div class="modal-croppa" v-show="showCroppaModal" @click="showCroppaModal=false">
         <div class="modal-croppa-body" @click.stop>
           <h1>Ajustar imagem</h1>
           <croppa
-            ref="myCroppa1"
-            @file-choose="showCroppaModal1 = true"
-            :width="$store.state.isMobile === true ? 720/2.25 : 720/1.5"
-            :height="$store.state.isMobile === true ? 480/2.25 : 480/1.5"
-            :quality="$store.state.isMobile === true ? 2.25 : 1.5"
+            ref="myCroppa"
+            @file-choose="showCroppaModal = true"
+            :width="$store.state.isMobile ? 639/2 : 639"
+            :height="$store.state.isMobile ? 426/2 : 426"
+            :quality="$store.state.isMobile ? 2 : 1"
             :placeholder="'Carregando...'"
             :placeholder-color="'white'"
             :accept="'.jpg, .jpeg, .png, .webp'"
-            :zoom-speed="$store.state.isMobile === true ? 2 : 4"
+            :zoom-speed="$store.state.isMobile ? 2 : 4"
             :prevent-white-space="true"
             :show-remove-button="false">
           </croppa>
-          <div class="modal-croppa-btns">
-            <button class="__croppa-btn" type="button" @click="showCroppaModal1=false, imageConfirmed1()">Confirmar</button>
-            <button class="__croppa-btn" type="button" @click="$refs.myCroppa1.chooseFile(), $refs.myCroppa1.remove(), imageURL1 = null"  style="background:transparent">Escolher outra</button>
-            <button class="__croppa-btn" type="button" @click="removeImage1()" style="background:transparent">Remover</button>
-          </div>
+          <button class="__croppa-btn" type="button" @click="showCroppaModal=false, imageConfirm()">Confirmar</button>
         </div>
       </div>
 
-      <div class="modal-croppa" v-if="showCroppaModal2" @click="showCroppaModal2=false">
-        <div class="modal-croppa-body" @click.stop>
-          <h1>Ajustar imagem</h1>
-          <croppa
-            ref="myCroppa2"
-            @file-choose="showCroppaModal2 = true"
-            :width="$store.state.isMobile === true ? 720/2.25 : 720/1.5"
-            :height="$store.state.isMobile === true ? 480/2.25 : 480/1.5"
-            :quality="$store.state.isMobile === true ? 2.25 : 1.5"
-            :placeholder="'Carregando...'"
-            :placeholder-color="'white'"
-            :accept="'.jpg, .jpeg, .png, .webp'"
-            :zoom-speed="$store.state.isMobile === true ? 2 : 4"
-            :prevent-white-space="true"
-            :show-remove-button="false">
-          </croppa>
-          <div class="modal-croppa-btns">
-            <button class="__croppa-btn" type="button" @click="showCroppaModal2=false, imageConfirmed2()">Confirmar</button>
-            <button class="__croppa-btn" type="button" @click="$refs.myCroppa2.chooseFile(), $refs.myCroppa2.remove(), imageURL2 = null"  style="background:transparent">Escolher outra</button>
-            <button class="__croppa-btn" type="button" @click="removeImage2()" style="background:transparent">Remover</button>
+
+      <!-- Preview images -->
+      <div class="after-choose-image" :class="[ $store.state.passeioData.images.length == 0 ? 'center-first-image' : '' ]">
+
+        <div class="image-box" v-for="(image, index) in $store.state.passeioData.images">
+          <div class="delete" @click="!isUploading ? deleteImage(image, index) : ''">
+            <img src="../../../assets/img/delete.svg" class="__delete-img">
           </div>
-        </div>
-      </div>
-
-      <!-- Preview Image -->
-      <div class="after-choose-image" v-if="imageURL1 !== null">
-
-        <div class="image-box">
-          <div class="__foto-principal">Imagem de Capa</div>
-          <img :src="imageURL1" class="__preview-img" @click="showCroppaModal1=true">
-        </div>
-        
-        <div class="image-box">
-          <img src="./../../../assets/img/add-image.svg" class="__preview-img" v-if="imageURL2 === null" @click="$refs.myCroppa2.chooseFile()" style="padding:26%">
-          <img :src="imageURL2" class="__preview-img" @click="showCroppaModal2=true" v-else>
+          <progressive-background class="__image" :src="image.HJ" :placeholder="image.L" :aspect-ratio="2/3"/>
         </div>
 
-      </div><!-- Preview Image -->
 
+        <div class="image-box __add-image" @click="!isUploading ? $refs.myCroppa.chooseFile() : ''">
+          <svg class="loader-svg" v-if="isUploading">
+            <circle
+              class="__circle"
+              :stroke-width="$store.state.isMobile ? 3 : 4"
+              stroke="#161616"
+              :stroke-dasharray="$store.state.isMobile ? `${14.5*2*Math.PI} ${14.5*2*Math.PI}` : `${18*2*Math.PI} ${18*2*Math.PI}`"
+              :stroke-dashoffset="$store.state.isMobile ? 14.5*2*Math.PI - this.uploadProgress/100*14.5*2*Math.PI : 18*2*Math.PI - this.uploadProgress/100*18*2*Math.PI"
+              fill="transparent"
+              :r="$store.state.isMobile ? 14.5 : 18"
+              :cx="$store.state.isMobile ? 16 : 20"
+              :cy="$store.state.isMobile ? 16 : 20"
+            />
+          </svg>
+          <img src="../../../assets/img/add-image.svg" class="__add-image-svg" v-else>
+          <progressive-background src="../../../assets/img/add-image.png" :aspect-ratio="2/3"/>
+        </div>
+
+      </div><!-- Preview images -->
 
 
       <div class="back-next"> 
@@ -316,13 +301,13 @@
       <textarea 
       v-model="$store.state.passeioData.title"
       v-autosize="title"
-      maxlength="50"
+      maxlength="60"
       rows="1"
       placeholder="ex: Passeio de Lancha no Lago de Furnas"
       required>
       {{title}}</textarea>
 
-      <span class="__lenght-calc">{{ titleLength }}</span>
+      <span class="__lenght-calc">{{ 60 - this.$store.state.passeioData.title.length }}</span>
 
 
       <div class="back-next"> 
@@ -348,13 +333,13 @@
       <textarea 
       v-model="$store.state.passeioData.subtitle"
       v-autosize="subtitle"
-      maxlength="600"
+      maxlength="1000"
       rows="1"
       placeholder="Coloque informações importantes aqui, que não foram perguntadas antes"
       required>
       {{subtitle}}</textarea>
 
-      <span class="__lenght-calc">{{ subtitleLength }}</span> 
+      <span class="__lenght-calc">{{ 1000 - this.$store.state.passeioData.subtitle.length }}</span> 
 
 
       <div class="back-next"> 
@@ -376,18 +361,24 @@
     <!-- ________________________________________ 10 - CADASTRO ________________________________________ -->
     <form class="cadastro-passeio" v-if="$store.state.cadastroPasseio10">
 
-      <h1 class="__form-title">Sua identificação</h1>   
+      <h1 class="__form-title">
+        {{ !authUser ? 'Antes de continuar, precisamos de seu cadastro' : `Ótimo ${user.firstName}, só mais uma informação` }}
+      </h1> 
 
-      <div class="signin-btns" v-if="$store.state.user.email === null">
-        <button type="button" class="facebook-btn" @click="facebookSignIn()">Continuar com Facebook</button>
-        <button type="button" class="google-btn" @click="googleSignIn()">Continuar com Google</button>
+
+      <div class="signin-btns" v-if="!authUser">
+        <button type="button" class="google-btn" @click="$store.dispatch('a_googleSignIn')">Continuar com Google</button>
+        <button type="button" class="facebook-btn" @click="$store.dispatch('a_facebookSignIn')">Continuar com Facebook</button>
       </div>
 
-      <h3 class="__form-text" v-if="$store.state.user.email !== null">Ótimo {{ firstName }}! Só mais algumas informações:</h3>
 
-      <div v-if="$store.state.user.email !== null">
+      <h4 class="__termos" style="padding-top:1rem" v-if="!authUser">Ao se cadastrar com uma das opções acima, somente seu e-mail, nome e foto de perfil serão requisitados. Para mais informações, leia nossa <nuxt-link to="/termos#politica_privacidade">Política de Privacidade</nuxt-link>.</h4>
+
+
+      <div v-if="authUser">
+
         <div class="item-form">
-          <label>Celular</label>
+          <label>Celular / WhatsApp</label>
           <masked-input
             type="tel"
             v-model="$store.state.passeioData.celular"
@@ -396,9 +387,9 @@
             placeholder="+55">
           </masked-input>
         </div>
+
       </div>
 
-      <!-- <h3 style="padding: .5rem 7%;font-size:16px;line-height:22px">Ao prosseguir você concorda com nossos <span style="color:#198CFE">Termos de Serviço</span>.</h3> -->
 
       <div class="back-next"> 
         <div class="back-next-body">
@@ -415,101 +406,94 @@
 
 
 
-    <!-- ________________________________________ 11 - DADOS BANCÁRIOS ________________________________________ -->
+    <!-- ________________________________________ 11 - PAGAMENTO ________________________________________ -->
     <form class="cadastro-passeio" v-if="$store.state.cadastroPasseio11">
 
-      <h1 class="__form-title">Seus dados bancários para transferência</h1>
+      <h1 class="__form-title">Pagamento</h1>
 
-      <h3 class="__form-text">{{ firstName }}, para finalizar precisamos dos dados de sua conta bancária para podermos transferir seus ganhos financeiros. Não se preocupe, suas informações estarão seguras.</h3>
+      <h3 class="__form-text">{{ user.firstName }}, será cobrada uma mensalidade de <span style="font-weight:600">R$49,00</span> em seu cartão de crédito. Não se preocupe, não cobramos multa em caso de cancelamento.</h3>
 
-      <div class="recebedor-box">
 
-          <div class="item-form">
-            <label>Nome do Banco</label>
-            <vue-simple-suggest
-              :class="[ bankCodeError ? 'has-error' : '' ]"
-              mode="select"
-              v-model="$store.state.bankAccount.bankCode"
-              :list="bancos"
-              :filter-by-query="true">
-            </vue-simple-suggest>
-          </div>
+      <div class="payment-box">
+        
 
-          <div class="item-form">
-            <label>Tipo de Conta</label>
-            <select v-model="$store.state.bankAccount.type">
-              <option selected :value="'conta_corrente'">Conta Corrente</option>
-              <option :value="'conta_poupanca'">Conta Poupança</option>
-              <option :value="'conta_corrente_conjunta'">Conta Corrente Conjunta</option>
-              <option :value="'conta_poupanca_conjunta'">Conta Poupança Conjunta</option>
-            </select>
-          </div>
+        <!-- CARD HOLDER NAME -->
+        <div class="item-form">
+          <label :class="[ cardHolderNameError ? 'has-error-label' : '' ]">Nome impresso no Cartão</label>
+          <input
+            :class="[ cardHolderNameError ? 'has-error' : '' ]"
+            type="text" pattern="[A-Za-z]"
+            @keypress="keyEnterName"
+            v-model="$store.state.creditCard.cardHolderName">
+        </div><!-- CARD HOLDER NAME -->
 
-          <div class="item-form">
-            <div class="flex-row" style="display:flex">
-              <div class="agencia" style="flex:50%; margin-right:1rem">
-                <label>Agência</label>
-                <masked-input
-                  :class="[ agenciaError ? 'has-error' : '' ]"
-                  type="tel"
-                  v-model="$store.state.bankAccount.agencia"
-                  :mask="[/\d/, /\d/, /\d/, /\d/, /\d/]"
-                  :guide="false">
-                </masked-input>
-              </div>
-              <div class="agencia-dv" style="flex:50%">
-                <label>Dígito</label>
-                <masked-input
-                  :class="[ agenciaDVError ? 'has-error' : '' ]"
-                  type="tel"
-                  v-model="$store.state.bankAccount.agenciaDV"
-                  :mask="[/\d/]"
-                  :guide="false">
-                </masked-input>
-              </div>
-            </div>
-          </div>
 
-          <div class="item-form">
-            <div class="flex-row" style="display:flex">
-              <div class="conta" style="flex:50%; margin-right:1rem">
-                <label>Conta Corrente</label>
-                <masked-input
-                  :class="[ contaError ? 'has-error' : '' ]"
-                  type="tel"
-                  v-model="$store.state.bankAccount.conta"
-                  :mask="[/\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/]"
-                  :guide="false">
-                </masked-input>
-              </div>
-              <div class="conta-dv" style="flex:50%">
-                <label>Dígito</label>
-                <masked-input
-                :class="[ contaDVError ? 'has-error' : '' ]"
-                  type="tel"
-                  v-model="$store.state.bankAccount.contaDV"
-                  :mask="[/\d/, /\d/]"
-                  :guide="false">
-                </masked-input>
-              </div>
-            </div>
-          </div>
+        <!-- CARD NUMBER -->
+        <div class="item-form">
+          <label :class="[ cardNumberError ? 'has-error-label' : '' ]">Número do Cartão</label>
+          <masked-input
+            ref="cardNumber"
+            :style="{ backgroundImage: 'url(' + cardBrand + ')', backgroundPosition: 'left center', backgroundRepeat: 'no-repeat', backgroundSize: '34px', paddingLeft: cardType !== null ? '48px' : '' }"
+            :class="[ cardNumberError ? 'has-error' : '' ]"
+            type="tel"
+            v-model="$store.state.creditCard.cardNumber"
+            :mask="[/\d/, /\d/, /\d/, /\d/, ' ', /\d/, /\d/, /\d/, /\d/, ' ', /\d/, /\d/, /\d/, /\d/, ' ', /\d/, /\d/, /\d/, /\d/]"
+            :guide="false"
+            placeholder="0000 0000 0000 0000">
+          </masked-input>
+        </div><!-- CARD NUMBER -->
 
-          <div class="item-form">
-            <label>Seu Nome Completo</label>
-            <input type="text" v-model="$store.state.bankAccount.legalName" :class="[ legalNameError ? 'has-error' : '' ]">
-          </div>
 
-          <div class="item-form">
-            <label>CPF</label>
+        <div style="display:flex; justify-content:space-between">
+                
+          <!-- CARD EXPIRATION -->
+          <div class="item-form" style="flex: 50%; padding-right:.7rem">
+            <label :class="[ cardExpirationDateError ? 'has-error-label' : '' ]">Validade</label>
             <masked-input
-              :class="[ docNumberError ? 'has-error' : '' ]"
+              ref="cardExpirationDate"
+              :class="[ cardExpirationDateError ? 'has-error' : '' ]"
               type="tel"
-              v-model="$store.state.bankAccount.docNumber"
-              :mask="[/\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '-', /\d/, /\d/]"
-              :guide="false">
+              v-model="$store.state.creditCard.cardExpirationDate"
+              :mask="[/\d/, /\d/, ' ', '/', ' ', /\d/, /\d/]"
+              :guide="false"
+              placeholder="MM / AA">
             </masked-input>
-          </div>
+          </div><!-- CARD EXPIRATION -->
+
+          <!-- CVV -->
+          <div class="item-form" style="flex:50%; padding-left:.7rem">
+            <label :class="[ cardCvvError ? 'has-error-label' : '' ]">CVV</label>
+            <masked-input
+              ref="cvv"
+              :class="[ cardCvvError ? 'has-error' : '' ]"
+              type="tel"
+              @keypress="keyEnterCVV"
+              v-model="$store.state.creditCard.cardCVV"
+              :mask="[/\d/, /\d/, /\d/, /\d/]"
+              :guide="false"
+              placeholder="123">
+            </masked-input>
+          </div><!-- CVV -->
+
+        </div>
+
+
+        <!-- CPF -->
+        <div class="item-form">
+          <label :class="[ cpfError ? 'has-error-label' : '' ]">CPF</label>
+          <masked-input
+            ref="cpf"
+            :class="[ cpfError ? 'has-error' : '' ]"
+            type="tel"
+            v-model="$store.state.customer.cpf"
+            :mask="[/\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '-', /\d/, /\d/]"
+            :guide="false"
+            placeholder="000.000.000-00">
+          </masked-input>
+        </div><!-- CPF -->
+
+
+        <h4 class="__termos">Ao anunciar, você concorda com a nossa <a href="/termos#politica_privacidade" target="_blank">Política de Privacidade</a> e <a href="/termos" target="_blank">Termos de Serviço</a>.</h4>
 
       </div> 
 
@@ -521,7 +505,7 @@
         </div>
       </div> 
     
-    </form><!-- ________________________________________ 11 - DADOS BANCÁRIOS ________________________________________ -->
+    </form><!-- ________________________________________ 11 - PAGAMENTO ________________________________________ -->
 
 
 
@@ -538,11 +522,12 @@ import 'firebase/storage'
 import 'firebase/functions'
 import MaskedInput from 'vue-text-mask'
 import { bancos } from '../../../mixins/bancos'
-import VueSimpleSuggest from 'vue-simple-suggest'
-
+import valid from 'card-validator'
+import CPF from 'gerador-validador-cpf'
+import scrollIntoView from 'scroll-into-view'
 
 export default {
-  components: { MaskedInput, VueSimpleSuggest },
+  components: { MaskedInput },
   mixins: [ bancos ],
   head () {
     return {
@@ -555,70 +540,93 @@ export default {
       title: '', /* Vue Autosize */
       subtitle: '', /* Vue Autosize */
       localSaida: '',
-      showCroppaModal1: false,
-      showCroppaModal2: false,
-      imageURL1: null,
-      imageURL2: null,
-      bankCodeError: false,
-      agenciaError: false,
-      agenciaDVError: false,
-      contaError: false,
-      contaDVError: false,
-      legalNameError: false,
-      docNumberError: false
+      showCroppaModal: false,
+      isUploading: false,
+      uploadProgress: 0,
+      cpfError: false,
+      cardNumberError: false,
+      cardHolderNameError: false,
+      cardExpirationDateError: false,
+      cardCvvError: false
     }
   },
   methods: {
-    googleSignIn () {
-      this.$store.dispatch('a_googleSignIn')
+    keyEnterName () {
+      if (event.key === 'Enter') {
+        scrollIntoView(this.$refs.cardNumber.$el)
+        this.$refs.cardNumber.$el.focus()
+      }
     },
-    facebookSignIn () {
-      this.$store.dispatch('a_facebookSignIn')
+    keyEnterCVV () {
+      if (event.key === 'Enter') {
+        scrollIntoView(this.$refs.cpf.$el)
+        this.$refs.cpf.$el.focus()
+      }
     },
     scrollTop () {
       document.body.scrollTop = 0
       document.documentElement.scrollTop = 0
     },
     /* ******************** IMAGE INPUT ******************** */
-    /* --- Image 1 --- */
-    imageChoose1 () {
-      this.showCroppaModal1 = true
-    },
-    async imageConfirmed1 () {
-      if (this.imageURL1 === null) {
-        const blobPasL1 = await this.$refs.myCroppa1.promisedBlob('image/jpeg', 0.01)
-        const blobPasH1J = await this.$refs.myCroppa1.promisedBlob('image/jpeg')
-        const blobPasH1W = await this.$refs.myCroppa1.promisedBlob('image/webp')
-        this.imageURL1 = URL.createObjectURL(blobPasH1J)
-        this.$store.state.blobPasL1 = blobPasL1
-        this.$store.state.blobPasH1J = blobPasH1J
-        this.$store.state.blobPasH1W = blobPasH1W 
+    async imageConfirm () {
+      try {
+        this.isUploading = true
+
+        /* Storage path */
+        const storageRef = firebase.storage().ref('passeios/' + this.$store.state.passeioData.passeioID + '/')
+
+        let blobL = await this.$refs.myCroppa.promisedBlob('image/jpeg', 0.01)
+        let blobHJ = await this.$refs.myCroppa.promisedBlob('image/jpeg')
+        let blobHW = await this.$refs.myCroppa.promisedBlob('image/webp')
+        
+        this.uploadProgress = 96
+
+        let n = this.$store.state.imageCountPas
+        let key = this.$store.state.passeioData.images.length
+
+        /* Criar objeto em branco para receber a imagem */
+        this.$store.state.passeioData.images.push({ id: null, L: null, HJ: null, HW: null })
+
+        /* Upload image L */
+        await storageRef.child('L' + n + '.jpeg').put(blobL)
+        this.$store.state.passeioData.images[key].L = await storageRef.child('L' + n + '.jpeg').getDownloadURL()
+        this.uploadProgress = 98
+        
+        /* Upload image HJ */
+        await storageRef.child('H' + n + 'J.jpeg').put(blobHJ)
+        this.$store.state.passeioData.images[key].HJ = await storageRef.child('H' + n + 'J.jpeg').getDownloadURL()
+        this.uploadProgress = 99
+
+        /* Upload image HW */
+        await storageRef.child('H' + n + 'W.webp').put(blobHW)
+        this.$store.state.passeioData.images[key].HW = await storageRef.child('H' + n + 'W.webp').getDownloadURL()
+        this.uploadProgress = 100
+
+
+        /* Definir id da imagem */
+        this.$store.state.passeioData.images[key].id = n
+
+        /* Remover imagem do croppa */
+        this.$refs.myCroppa.remove()
+        
+        /* Incrementar n */
+        this.$store.commit('m_imageCountPas')
+
+        this.isUploading = false
+        this.uploadProgress = 0
+      } catch (err) {
+        console.log(err)
+        this.isUploading = false
+        this.uploadProgress = 0
       }
     },
-    removeImage1 () {
-      this.imageURL1 = null
-      this.$refs.myCroppa1.remove()
-      this.showCroppaModal1 = false
-    },
-    /* --- Image 2 --- */
-    imageChoose2 () {
-      this.showCroppaModal2 = true
-    },
-    async imageConfirmed2 () {
-      if (this.imageURL2 === null) {
-        const blobPasL2 = await this.$refs.myCroppa2.promisedBlob('image/jpeg', 0.01)
-        const blobPasH2J = await this.$refs.myCroppa2.promisedBlob('image/jpeg')
-        const blobPasH2W = await this.$refs.myCroppa2.promisedBlob('image/webp')
-        this.imageURL2 = URL.createObjectURL(blobPasH2J)
-        this.$store.state.blobPasL2 = blobPasL2
-        this.$store.state.blobPasH2J = blobPasH2J
-        this.$store.state.blobPasH2W = blobPasH2W 
-      }
-    },
-    removeImage2 () {
-      this.imageURL2 = null
-      this.$refs.myCroppa2.remove()
-      this.showCroppaModal2 = false
+    deleteImage (image, index) {
+      const storageRef = firebase.storage().ref('passeios/' + this.$store.state.passeioData.passeioID + '/')
+      storageRef.child('L' + image.id + '.jpeg').delete()
+      storageRef.child('H' + image.id + 'J.jpeg').delete()
+      storageRef.child('H' + image.id + 'W.webp').delete()
+      this.$store.state.passeioData.images.splice(index, 1)
+      this.$refs.myCroppa.remove()
     },
     /* ******************** LOCAL SAÍDA ******************** */
     setLocalSaida (e) {
@@ -735,144 +743,84 @@ export default {
       }
     },
     nextBtn10 () {
-      if (this.$store.state.acomodData.celular.length === 17 && this.user.email !== null) {
-        this.$store.state.passeioData.proprietario = this.user.fullName
-        this.$store.state.passeioData.email = this.user.email
-        this.$store.state.passeioData.photoURL = this.user.photoURL
-        this.$store.state.passeioData.userID = this.user.uid
-        this.$store.commit('m_cadastroPasseio10', false)
-        this.$store.commit('m_cadastroPasseio11', true)
-        this.$store.commit('m_passeioProgressBar', (100/11)*11)
-        this.scrollTop()
-        window.location.hash = `${this.randomHashs[11]}`
-      }
-    },
-    concluir () {
-      if (this.bankCode !== '' && this.agencia !== '' && this.agenciaDV !== '' && this.conta !== '' && this.contaDV !== '' && this.legalName !== '' && this.docNumber.length === 14) {
-        this.$store.commit('m_loader', true)
-        const passeioID = Math.floor(Math.random() * (99999 - 10000 + 1) + 10000).toString()
-        this.$store.commit('m_passeioID', passeioID)
-        const storageRef = firebase.storage().ref('passeios/' + passeioID + '/')
-        /* 
-        CRIAR RECEBEDOR
-        */
-        /* pagarme.client.connect({ api_key: 'ak_test_E3I46o4e7guZDqwRnSY9sW8o8HrL9D' })
-          .then(client => client.recipients.create({
-            transfer_enabled: false,
-            transfer_interval: "daily",
-            automatic_anticipation_enabled: true,
-            anticipatable_volume_percentage: 100,
-            bank_account: {
-              bank_code: this.bankCode.substring(0, 3),
-              type: this.type,
-              agencia: this.agencia,
-              agencia_dv: this.agenciaDV,
-              conta: this.conta,
-              conta_dv: this.contaDV,
-              legal_name: this.legalName,
-              document_number: this.docNumber.replace(/\./g, '').replace(/\-/g, '')
-            }
-          })
-        ) */
-        .then(recipient => {
-          console.log(recipient)
-          this.$store.state.passeioData.recipientID = recipient.id.toString()
-          /* 
-          UPLOAD IMAGE 1 
-          */
-          /* imagePasL1 */
-          storageRef.child('imageL1.jpeg').put(this.$store.state.blobPasL1).then(snapshot => {
-            console.log(passeioID + 'L1' + '.jpeg')
-            storageRef.child('imageL1.jpeg').getDownloadURL().then(url => {
-              this.$store.commit('m_imagePasL1', url)
-              this.ifUpload1()
-            })
-          })
-          /* imagePasH1J */
-          storageRef.child('imageH1J.jpeg').put(this.$store.state.blobPasH1J).then(snapshot => {
-            console.log(passeioID + 'H1J' + '.jpeg')
-            storageRef.child('imageH1J.jpeg').getDownloadURL().then(url => {
-              this.$store.commit('m_imagePasH1J', url)
-              this.ifUpload1()
-            })
-          })
-          /* imagePasH1W */
-          storageRef.child('imageH1W.webp').put(this.$store.state.blobPasH1W).then(snapshot => {
-            console.log(passeioID + 'H1W' + '.webp')
-            storageRef.child('imageH1W.webp').getDownloadURL().then(url => {
-              this.$store.commit('m_imagePasH1W', url)
-              this.ifUpload1()
-            })
-          })
-          /* 
-          UPLOAD IMAGE 2 
-          */
-          if (this.$store.state.blobPasH2J !== null) {
-            /* imagePasL2 */
-            storageRef.child('imageL2.jpeg').put(this.$store.state.blobPasL2).then(snapshot => {
-              console.log(passeioID + 'L2' + '.jpeg')
-              storageRef.child('imageL2.jpeg').getDownloadURL().then(url => {
-                this.$store.commit('m_imagePasL2', url)
-                this.ifUpload2()
-              })
-            })
-            /* imagePasH2J */
-            storageRef.child('imageH2J.jpeg').put(this.$store.state.blobPasH2J).then(snapshot => {
-              console.log(passeioID + 'H2J' + '.jpeg')
-              storageRef.child('imageH2J.jpeg').getDownloadURL().then(url => {
-                this.$store.commit('m_imagePasH2J', url)
-                this.ifUpload2()
-              })
-            })
-            /* imagePasH2W */
-            storageRef.child('imageH2W.webp').put(this.$store.state.blobPasH2W).then(snapshot => {
-              console.log(passeioID + 'H2W' + '.webp')
-              storageRef.child('imageH2W.webp').getDownloadURL().then(url => {
-                this.$store.commit('m_imagePasH2W', url)
-                this.ifUpload2()
-              })
-            })
-          }
-          this.$store.commit('m_passeioCreated', true)
-          /* Resetar imagens */
-          this.imageURL1 = null,
-          this.imageURL2 = null
+      if (!this.authUser) {
+        this.$store.commit('show_alert', {
+          type: 'warning',
+          title: 'Ops',
+          message: 'Conecte-se com uma de suas contas para continuar.'
         })
-        .catch(err => {
-          if (err) {
-            console.log(err.response.errors)
-            this.$store.commit('m_loader', false)
-            err.response.errors.some(e => e.parameter_name === 'bank_code') ? this.bankCodeError = true : this.bankCodeError = false
-            err.response.errors.some(e => e.parameter_name === 'agencia') ? this.agenciaError = true : this.agenciaError = false
-            err.response.errors.some(e => e.parameter_name === 'agencia_dv') ?  this.agenciaDVError = true :  this.agenciaDVError = false
-            err.response.errors.some(e => e.parameter_name === 'conta') ? this.contaError = true : this.contaError = false
-            err.response.errors.some(e => e.parameter_name === 'conta_dv') ? this.contaDVError = true : this.contaDVError = false
-            err.response.errors.some(e => e.parameter_name === 'legal_name') ? this.legalNameError = true : this.legalNameError = false
-            err.response.errors.some(e => e.parameter_name === 'document_number') ? this.docNumberError = true : this.docNumberError = false
-          }
-        })
+      } else if (this.$store.state.passeioData.celular.length === 17 && this.authUser) {
+          this.$store.commit('m_cadastroPasseio10', false)
+          this.$store.commit('m_cadastroPasseio11', true)
+          this.$store.commit('m_passeioProgressBar', (100/11)*11)
+          this.scrollTop()
+          window.location.hash = `${this.randomHashs[11]}`
+          this.$store.state.creditCard.cardHolderName = this.user.fullName
+          this.$store.state.customer.name = this.user.fullName
+          this.$store.state.customer.email = this.user.email
       } else {
-        this.bankCode === '' ? this.bankCodeError = true : this.bankCodeError = false
-        this.agencia === '' ? this.agenciaError = true : this.agenciaError = false
-        this.agenciaDV === '' ?  this.agenciaDVError = true :  this.agenciaDVError = false
-        this.conta === '' ? this.contaError = true : this.contaError = false
-        this.contaDV === '' ? this.contaDVError = true : this.contaDVError = false
-        this.legalName === '' ? this.legalNameError = true : this.legalNameError = false
-        this.docNumber.length !== 14 ? this.docNumberError = true : this.docNumberError = false
+        this.$store.commit('show_alert', {
+          type: 'warning',
+          title: 'Ops',
+          message: 'Adicione um número válido.'
+        })
       }
     },
-    ifUpload1 () {
-      if (this.$store.state.passeioData.imageL1 !== null && this.$store.state.passeioData.imageH1J !== null && this.$store.state.passeioData.imageH1W !== null) {
-        this.$store.dispatch('a_uploadPasseio')
-        this.$router.push('/passeios/' + this.$store.state.passeioData.passeioID)
+    async concluir () {
+      const passeioData = this.$store.state.passeioData
+
+      passeioData.createdAt = Date.now()
+
+      passeioData.hostID = this.user.userID
+
+      /* Se todas as informações preenchidas */
+      if (this.cardHolderName !== '' && valid.number(this.cardNumber).isValid && valid.expirationDate(this.cardExpirationDate).isValid && valid.cvv(this.cardCVV).isValid && CPF.validate(this.cpf) && this.cpf.length === 14) {
+
+        try {
+          this.$store.commit('m_loader', true)
+
+          /* Criar assinatura no Pagarme, criar passeio na Firestore e atualizar user */
+          const subscription = await firebase.functions().httpsCallable('newPasseio')({
+            passeioData: passeioData,
+            creditCard: this.$store.state.creditCard,
+            customer: this.$store.state.customer
+          })
+
+          console.log(subscription)
+
+          /* Necessário para o correto funcionamento do backBtn _id (Ver middleware: newAcomodConcludedCheck.js) */
+          this.$store.state.concludedNewAcomod = true
+          
+          /* Ir para página do passeio criado */
+          this.$router.push('/passeios/' + passeioData.passeioID)
+
+          /* Resetar passeioData */
+          this.$store.dispatch('a_resetPasseioData')
+
+          this.$store.commit('m_loader', false)
+
+        } catch (err) {
+          this.$store.commit('m_loader', false)
+          console.log(err)
+          this.$store.commit('show_alert', {
+            type: 'warning',
+            title: 'Erro',
+            message: 'Falha no servidor. Tente novamente.'
+          })
+        }
+      } else {
+        this.$store.commit('show_alert', {
+          type: 'warning',
+          title: 'Erro',
+          message: 'Informações incompletas.'
+        })
+        this.cardHolderName.length < 3 ? this.cardHolderNameError = true : this.cardHolderNameError = false
+        !valid.number(this.cardNumber).isValid ? this.cardNumberError = true : this.cardNumberError = false
+        !valid.expirationDate(this.cardExpirationDate).isValid ?  this.cardExpirationDateError = true :  this.cardExpirationDateError = false
+        !valid.cvv(this.cardCVV).isValid ? this.cardCvvError = true : this.cardCvvError = false
+        this.cpf.length < 14 || !CPF.validate(this.cpf) ? this.cpfError = true : this.cpfError = false
       }
     },
-    ifUpload2 () {
-      if (this.$store.state.passeioData.imageL1 !== null && this.$store.state.passeioData.imageH1J !== null && this.$store.state.passeioData.imageH1W !== null && this.$store.state.passeioData.imageL2 !== null && this.$store.state.passeioData.imageH2J !== null && this.$store.state.passeioData.imageH2W !== null) {
-        this.$store.dispatch('a_uploadPasseio')
-        this.$router.push('/passeios/' + this.$store.state.passeioData.passeioID)
-      }
-    }
   },
   computed: {
     /* ******************** PATHS ******************** */
@@ -880,74 +828,133 @@ export default {
     authUser () { return this.$store.state.authUser },
     hash () { return this.$route.hash },
     randomHashs () { return this.$store.state.randomHashs },
-    passeioCreated () { return this.$store.state.passeioCreated },
-    /* Bank Account */
-    bankCode () { return this.$store.state.bankAccount.bankCode },
-    type () { return this.$store.state.bankAccount.type },
-    agencia () { return this.$store.state.bankAccount.agencia },
-    agenciaDV () { return this.$store.state.bankAccount.agenciaDV },
-    conta () { return this.$store.state.bankAccount.conta },
-    contaDV () { return this.$store.state.bankAccount.contaDV },
-    legalName () { return this.$store.state.bankAccount.legalName },
-    docNumber () { return this.$store.state.bankAccount.docNumber },
-    titleLength () {
-      return 50 - this.$store.state.passeioData.title.length
+    creditCard () { return this.$store.state.creditCard },
+    cardNumber () { return this.$store.state.creditCard.cardNumber },
+    cardHolderName () { return this.$store.state.creditCard.cardHolderName },
+    cardExpirationDate () { return this.$store.state.creditCard.cardExpirationDate },
+    cardCVV () { return this.$store.state.creditCard.cardCVV },
+    cardType () { return this.$store.state.cardType },
+    cpf () { return this.$store.state.customer.cpf },
+    /* ******************** CREDIT CARD ******************** */
+    cardBrand () {
+      const cardType = this.$store.state.cardType
+      return cardType === 'visa' ? require('@/assets/img/visa.svg')
+           : cardType === 'mastercard' ? require('@/assets/img/mastercard.svg')
+           : cardType === 'american-express' ? require('@/assets/img/amex.svg')
+           : cardType === 'elo' ? require('@/assets/img/elo.svg')
+           : cardType === 'discover' ? require('@/assets/img/discover.svg')
+           : cardType === 'diners-club' ? require('@/assets/img/diners.svg')
+           : cardType === 'jcb' ? require('@/assets/img/jcb.svg')
+           : ''
     },
-    subtitleLength () {
-      return 600 - this.$store.state.passeioData.subtitle.length
-    },
-    firstName () {
-      let fullName = this.$store.state.passeioData.proprietario.split(' ')
-      let firstName = fullName[0]
-      return firstName
-    },
+    /* ******************** FORM STYLES ******************** */
     form1ok () {
-      return this.$store.state.passeioData.tipoPasseio !== null ? 'background:#198CFE' : ''
+      return this.$store.state.passeioData.tipoPasseio !== null ? 'background: #198CFE' : ''
     },
     form2ok () {
-      return this.$store.state.passeioData.capacidade !== null ? 'background:#198CFE' : ''
+      return this.$store.state.passeioData.capacidade !== null ? 'background: #198CFE' : ''
     },
     form3ok () {
-      return this.$store.state.passeioData.duracao !== null ? 'background:#198CFE' : ''
+      return this.$store.state.passeioData.duracao !== null ? 'background: #198CFE' : ''
     },
     form4ok () {
-      return this.$store.state.passeioData.localSaida !== null && this.$store.state.passeioData.localSaida !== 'Outro' ? 'background:#198CFE'
-      : this.localSaida !== '' ? 'background:#198CFE' 
+      return this.$store.state.passeioData.localSaida !== null && this.$store.state.passeioData.localSaida !== 'Outro' ? 'background: #198CFE'
+      : this.localSaida !== '' ? 'background: #198CFE' 
       : ''
     },
     form5ok () {
-      return 1<2 ? 'background:#198CFE' : ''
+      return 1<2 ? 'background: #198CFE' : ''
     },
     form6ok () {
-      return this.$store.state.passeioData.valorPasseio !== 0 ? 'background:#198CFE' : ''
+      return this.$store.state.passeioData.valorPasseio !== 0 ? 'background: #198CFE' : ''
     },
     form7ok () {
-      return this.imageURL1 !== null ? 'background:#198CFE' : ''
+      return this.$store.state.passeioData.images.length >= 1 ? 'background: #198CFE' : ''
     },
     form8ok () {
-      return this.$store.state.passeioData.title !== '' ? 'background:#198CFE' : ''
+      return this.$store.state.passeioData.title !== '' ? 'background: #198CFE' : ''
     },
     form9ok () {
-      return this.$store.state.passeioData.subtitle !== '' ? 'background:#198CFE' : ''
+      return this.$store.state.passeioData.subtitle !== '' ? 'background: #198CFE' : ''
     },
     form10ok () {
-      return this.$store.state.passeioData.celular.length === 17 ? 'background:#198CFE' : ''
+      return this.$store.state.passeioData.celular.length === 17 && this.authUser ? 'background: #198CFE' : ''
     },
     form11ok () {
-      return this.bankCode !== null && this.agencia !== '' && this.agenciaDV !== '' && this.conta !== '' && this.contaDV !== '' && this.legalName !== '' && this.docNumber.length === 14 ? 'background:#198CFE' : ''
+      if (this.cardHolderName !== '' && valid.number(this.cardNumber).isValid && valid.expirationDate(this.cardExpirationDate).isValid && valid.cvv(this.cardCVV).isValid && CPF.validate(this.cpf) && this.cpf.length === 14) {
+        return 'background: #198CFE'
+      }
     }
   },
   watch: {
-    passeioCreated (value) {
-      value === true ? this.$router.push('/') : ''
+    cardNumber (value) {
+      const cardNumber = valid.number(value)
+      cardNumber.isPotentiallyValid ? this.cardNumberError = false : this.cardNumberError = true
+      if (cardNumber.card) {
+        if (cardNumber.card.type === 'american-express' ? value.length === 18 : value.length === 19) {
+          if (cardNumber.isValid) {
+            this.cardNumberError = false
+            this.$nextTick(() => {
+              scrollIntoView(this.$refs.cardExpirationDate.$el)
+              this.$refs.cardExpirationDate.$el.focus()
+            })
+          } else {
+            this.cardNumberError = true
+            this.$store.commit('show_alert', {
+              type: 'warning',
+              title: 'Erro',
+              message: 'Número inválido.',
+            })
+          }
+        }
+        this.$store.state.cardType = cardNumber.card.type
+        this.$store.state.cardTypeNice = cardNumber.card.niceType
+      }
     },
-    bankCode (value) { value !== '' ? this.bankCodeError = false : '' },
-    agencia (value) { value !== '' ? this.agenciaError = false : '' },
-    agenciaDV (value) { value !== '' ? this.agenciaDVError = false : '' },
-    conta (value) { value !== '' ? this.contaError = false : '' },
-    contaDV (value) { value !== '' ? this.contaDVError = false : '' },
-    legalName (value) { value !== '' ? this.legalNameError = false : '' },
-    docNumber (value) { value !== '' ? this.docNumberError = false : ''},
+    cardExpirationDate (value) {
+      const firstDigit = value.charAt(0)
+      firstDigit > 1 ? this.$store.state.creditCard.cardExpirationDate = `0${firstDigit} / ` : ''
+      const cardExpirationDate = valid.expirationDate(value)
+      if (cardExpirationDate.isPotentiallyValid) {
+        this.cardExpirationDateError = false
+      } else {
+        this.cardExpirationDateError = true
+        this.$store.commit('show_alert', {
+          type: 'warning',
+          title: 'Erro',
+          message: 'Data inválida.'
+        })
+      }
+      cardExpirationDate.isValid ? this.$refs.cvv.$el.focus() : ''
+    },
+    cardCVV (value) {
+      const cardCVV = valid.cvv(value)
+      if (cardCVV.isPotentiallyValid) {
+        this.cardCvvError = false
+      } else {
+        this.cardCvvError = true
+        this.$store.commit('show_alert', {
+          type: 'warning',
+          title: 'Erro',
+          message: 'Código de segurança inválido.'
+        })
+      }
+    },
+    cpf (value) {
+      value !== '' ? this.cpfError = false : '' 
+      if (value.length === 14) {
+        if (CPF.validate(value)) {
+          this.cpfError = false
+        } else {
+          this.cpfError = true
+          this.$store.commit('show_alert', {
+            type: 'warning',
+            title: 'Erro',
+            message: 'CPF inválido.',
+          })
+        }
+      }
+    },
     hash (value) {
       if (value === '') {
         if (this.$store.state.lastHash === `#${this.randomHashs[1]}`) {
@@ -1036,7 +1043,6 @@ export default {
 </script>
 
 <style>
-@import url('~/assets/css/vue-simple-suggest.css');
 
 .anunciar-passeio {
   margin-top: var(--navbarHeightMobile);
@@ -1089,8 +1095,7 @@ export default {
   & .cadastro-passeio {
     height: 100%;
     background: white;
-    color: var(--color01);
-    padding: 0 0 3rem 0;
+    padding: 0 0 6rem 0;
     & .__form-title {
       padding: 2.7rem 7% 1.4rem 7%;
       line-height: 1.25;
@@ -1100,7 +1105,7 @@ export default {
       user-select: none !important;
     }
     & .__form-text {
-      padding: .7rem 7%;
+      padding: 1rem 7%;
       font-size: 17px;
     }
     & .__form-subtitle {
@@ -1108,6 +1113,15 @@ export default {
       font-size: 18px;
       font-weight: 600;
       user-select: none;
+    }
+    & .__termos {
+      padding: 0 7%;
+      font-size: 14px;
+      font-weight: 500;
+      line-height: 20px;
+      & a {
+        color: var(--colorPasseio);
+      }
     }
     & textarea {
       padding: 0 7%;
@@ -1134,7 +1148,7 @@ export default {
       padding: 0 7%;
       display: flex;
       flex-flow: column;
-      margin: 2.1rem 0;
+      margin: 1.2rem 0;
       & label {
         font-weight: 500;
         font-size: 14px;
@@ -1173,7 +1187,9 @@ export default {
         border-bottom: 1px solid var(--color01);
       }
     }
-    & .recebedor-box {
+    & .payment-box {
+      display: flex;
+      flex-flow: column;
       padding-top: 1rem;
     }
     & .modal-croppa {
@@ -1204,42 +1220,53 @@ export default {
         & canvas:active {
           cursor: grabbing;
         }
-        & .modal-croppa-btns {
-          display: flex;
-          flex-flow: column;
-          width: 70%;
-        }
       }
     }
-    & .__input-btn {
-      margin: 1rem 7%;
-      font-size: 15px;
-      font-weight: 600;
-      background: #198CFE;
-      color: white;
-      padding: .8rem 1.2rem;
-      border-radius: 2rem;
-    }
     & .__croppa-btn {
-      margin: .3rem 0;
+      margin: .4rem 0;
       font-size: 16px;
-      font-weight: 500;
+      font-weight: 600;
       background: var(--colorPasseio);
       color: white;
-      padding: .8rem 1.2rem;
+      height: 2.9rem;
+      padding: 0 1.5rem;
       border-radius: 2rem;
     }
     & .after-choose-image {
-      margin-top: 1.5rem;
-      padding: 0 calc(7% - .3rem);
+      margin-top: 1.4rem;
+      padding: 0 calc(7% - 1%);
       display: flex;
       flex-flow: row wrap;
+      align-items: center;
+      align-content: flex-start;
       & .image-box {
-        cursor: pointer;
         position: relative;
-        margin: .3rem;
-        width: 145px;
-        height: 97px;
+        margin: 1%;
+        width: 48%;
+        height: auto;
+        & .__image {
+          width: 100%;
+          height: 100%;
+          border-radius: 5px;
+        }
+        & .delete {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
+          position: absolute;
+          top: .4rem;
+          right: .4rem;
+          z-index: 5;
+          width: 2rem;
+          height: 2rem;
+          background: rgba(0, 0, 0, 0.5);
+          border-radius: 50%;
+          & .__delete-img {
+            width: 1rem;
+            height: auto;
+          }
+        }
         & .__foto-principal {
           position: absolute;
           color: white;
@@ -1249,10 +1276,31 @@ export default {
           width: 100%;
           text-align: center;
         }
-        & .__preview-img {
-          width: 100%;
-          height: 100%;
-          border-radius: 2px;
+      }
+      & .__add-image {
+        position: relative;
+        cursor: pointer;
+        border: 2px dashed rgb(202,202,202);
+        border-radius: 5px;
+        & .loader-svg {
+          position: absolute;
+          top: 0; left: 0; bottom: 0; right: 0;
+          margin: auto;
+          width: 32px;
+          height: 32px;
+          & .__circle {
+            transition: stroke-dashoffset .8s ease;
+            transform: rotate(-90deg);
+            transform-origin: 50% 50%;
+          }
+        }
+        & .__add-image-svg {
+          position: absolute;
+          width: 1.8rem;
+          height: auto;
+          top: 0; left: 0; bottom: 0; right: 0;
+          margin: auto;
+          z-index: 5;
         }
       }
     }
@@ -1262,16 +1310,16 @@ export default {
       padding: 0 7%;
       & .facebook-btn {
         width: 17rem;
-        margin: .7rem 0;
-        height: 2.9rem;
+        margin: .6rem 0;
+        height: 3.4rem;
         text-align: start;
         padding-left: 50px;
         font-size: 15px;
       }
       & .google-btn {
         width: 17rem;
-        margin: .7rem 0;
-        height: 2.9rem;
+        margin: .6rem 0;
+        height: 3.4rem;
         text-align: start;
         padding-left: 50px;
         font-size: 15px;
@@ -1375,11 +1423,15 @@ export default {
         text-align: center;
       }
       & .__form-text {
-        padding: 1.4rem 28% 0;
+        padding: 1.6rem 28% 1rem;
       }
       & .__form-subtitle {
         padding-top: 1.5rem;
         font-size: 19px;
+      }
+      & .__termos {
+        padding: 0 35%;
+        text-align: center;
       }
       & textarea {
         padding: 0 26%;
@@ -1390,7 +1442,7 @@ export default {
       }
       & .item-form {
         padding: 0 28%;
-        margin: 2.7rem 0;
+        margin: 1.5rem 0;
         & label {
           font-size: 15px;
         }
@@ -1412,32 +1464,63 @@ export default {
           & canvas {
             border: 3px dashed white;
           }
-          & .modal-croppa-btns {
-            width: 50%
-          }
-        }
-      }
-      & .before-choose-image {
-        display: flex;
-        flex-flow: column;
-        align-items: center;
-        & .__input-btn {
-          margin: 2rem 0 0 0;
         }
       }
       & .__croppa-btn {
       }
       & .after-choose-image {
         margin-top: 2rem;
-        padding: 0 calc(26% - .3rem);
+        padding: 0 calc(28% - 1%);
         & .image-box {
-          width: 165px;
-          height: 110px;
-          & .__foto-principal {
+          margin: 1%;
+          width: 48%;
+          & .__image {
           }
-          & .__preview-img {
+          & .delete {
+            display: none;
+            top: .7rem;
+            right: .7rem;
+            width: 2.3rem;
+            height: 2.3rem;
+            & .__delete-img {
+              display: none;
+              width: 1.2rem;
+            }
+          }
+          & .__foto-principal {
+            position: absolute;
+            color: white;
+            background: rgba(0, 0, 0, 0.4);
+            font-size: 12px;
+            padding: .2rem 0;
+            width: 100%;
+            text-align: center;
           }
         }
+        & .image-box:hover .delete {
+          display: flex;
+        }
+        & .image-box:hover .__delete-img {
+          display: initial;
+        }
+        & .__add-image {
+          transition: .2s all ease;
+          & .loader-svg {
+            width: 40px;
+            height: 40px;
+            & .__circle {
+            }
+          }
+          & .__add-image-svg {
+            width: 2.2rem;
+          }
+        }
+        & .__add-image:hover {
+          border: 2px dashed var(--color01);
+        }
+      }
+      & .center-first-image {
+        flex-flow: column wrap;
       }
       & .signin-btns {
         padding: .8rem 40% 0;
@@ -1470,4 +1553,13 @@ export default {
     }
   }
 }
+
+.has-error-label {
+  color: #F31431 !important;
+}
+.has-error {
+  color: #F31431 !important;
+  border-bottom: 1px solid #F31431 !important;
+}
+
 </style>

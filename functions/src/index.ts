@@ -323,6 +323,64 @@ exports.payHostAcomod = functions.https.onCall(async data => {
 
 
 
+
+/* ________________________________________________ PASSEIOS ________________________________________________ */
+
+exports.newPasseio = functions.https.onCall(async data => {
+  const passeioData = data.passeioData
+  const creditCard = data.creditCard
+  const customer = data.customer
+
+  try {
+    const Pagarme = await pagarme.client.connect({ api_key: 'ak_test_E3I46o4e7guZDqwRnSY9sW8o8HrL9D' })
+
+    const subscription = await Pagarme.subscriptions.create({
+      'plan_id': 375944,
+      'card_holder_name': creditCard.cardHolderName,
+      'card_number': creditCard.cardNumber.replace(/[^0-9\.]+/g, ''),
+      'card_cvv': creditCard.cardCVV,
+      'card_expiration_date': creditCard.cardExpirationDate.replace(/[^0-9\.]+/g, ''),
+      'customer': {
+        'name': customer.name,
+        'email': customer.email,
+        'document_number': customer.cpf.replace(/[^0-9\.]+/g, '').replace(/\./g, ''),
+        'address': {
+          'zipcode': '37930000',
+          'street': 'Ruela',
+          'street_number': '123',
+          'neighborhood': 'Centro'
+        },
+        'phone': {
+          'ddd': '11',
+          'number': '999999999'
+        }
+      }
+    })
+
+    /* Update user Firestore */
+    await admin.firestore().doc(`users/${passeioData.hostID}`).update({ 
+      celular: passeioData.celular.replace(/[^0-9\.]+/g, '')
+    })
+
+    delete passeioData.celular
+
+    /* Set acomod Firestore */
+    await admin.firestore().doc(`passeios/${passeioData.passeioID}`).set(passeioData)
+
+    return { subscription: subscription }
+
+  } catch (err) {
+    console.log(err)
+    throw new functions.https.HttpsError('aborted', err.message, err)
+  }
+})
+
+
+
+
+
+
+
 /* ________________________________________________ E-MAILS ________________________________________________ */
 
 
