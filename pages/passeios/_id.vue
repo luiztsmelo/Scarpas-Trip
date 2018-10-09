@@ -183,7 +183,7 @@
     <!-- ______________________________ RESERVA MOBILE ______________________________ --> 
     <div class="reserva">
       <div class="reserva-body">
-        <h3 class="__reserva-valor">R${{ passeio.valorPasseio }}<span class="__reserva-valor-pessoa">/pessoa</span></h3>
+        <h3 class="__reserva-valor">R${{ passeio.valorPasseio }}<span class="__reserva-valor-pessoa"> por pessoa</span></h3>
         <button class="__reserva-btn">Reservar</button>
       </div>
     </div>
@@ -480,7 +480,7 @@ export default {
       & .__reserva-btn {
         width: 10rem;
         height: 3.2rem;
-        background:var(--colorAcomod);
+        background:var(--colorPasseio);
         border-radius: 5px;
         font-size: 16px;
         font-weight: 700;
