@@ -6,12 +6,15 @@
 
 
 
+
+
+
     <!-- ______________________________ TOPBAR ______________________________ -->
     <div class="topbar" v-scroll="scrollTopbarBg">
       <div class="topbar-body">
 
         <div class="back-box" @click="backBtn">
-          <img class="__back-btn" v-scroll="scrollTopbarBtns" src="../../assets/img/back.svg" alt="voltar">
+          <img class="__back-btn" v-scroll="scrollTopbarBtns" src="../../assets/img/back-w.svg" alt="voltar">
         </div>
         
         <div class="share-box" @click="$store.commit('m_showShare', true), hashShare()">
@@ -54,6 +57,31 @@
 
 
 
+        <!-- ______________________________ RATING ______________________________ -->
+        <div class="rating-box">
+
+          <h3 class="__tipo" style="color: #198CFE">{{ passeio.tipoPasseio }}</h3>
+
+          <div class="rating">
+            <star-rating
+              :rating="4.7"
+              :increment="0.1"
+              :read-only="true"
+              :show-rating="false"
+              active-color="#161616"
+              inactive-color="#dedede"
+              :star-size="11"
+              :padding="3">
+            </star-rating>
+            <p class="rating-number">4,7</p>
+          </div>
+
+        </div><!-- ______________________________ RATING ______________________________ -->
+
+
+
+
+
         <h1 class="id-title">{{ passeio.title }}</h1>
 
 
@@ -62,15 +90,36 @@
 
         <!-- ______________________________ ANUNCIANTE ______________________________ -->
         <div class="anunciante-box" @click="$store.commit('m_showProprietario', true), hashProprietario()">
-          <img class="__anunciante-img" :src="passeio.photoURL" alt="">
+          <img class="__anunciante-img" :src="host.photoURL" alt="">
           <div class="box-flex-column">
             <h3 style="user-select:none">Guiado por</h3>
-            <a class="__anunciante-name">{{ passeio.proprietario }}</a>
+            <a class="__anunciante-name">{{ host.fullName }}</a>
           </div>
         </div><!-- ______________________________ ANUNCIANTE ______________________________ -->
 
 
         
+
+
+
+        <!-- ______________________________ INFO ______________________________ -->
+        <div class="info-box">
+          
+          <div class="item">
+            <img class="__img" src="../../assets/img/guests.svg">
+            <h3>{{ passeio.capacidade }} {{ passeio.capacidade === 1 ? 'pessoa' : 'pessoas' }}</h3>
+          </div>
+
+          <div class="item">
+            <img class="__img" src="../../assets/img/clock.svg">
+            <h3>{{ passeio.duracao }}</h3>
+          </div>
+
+
+        </div><!-- ______________________________ INFO ______________________________ -->
+
+
+
 
 
 
@@ -85,32 +134,13 @@
 
 
 
-        <!-- ______________________________ CAPACIDADE ______________________________ -->
-        <h1 class="item-title">Capacidade</h1>
-
-        <div class="capacidade-box">
-          <h3>{{ passeio.capacidade }}</h3>
-        </div><!-- ______________________________ CAPACIDADE ______________________________ -->
-
-
-
-
-
-        <!-- ______________________________ DURAÇÃO ______________________________ -->
-        <h1 class="item-title">Duração</h1>
-
-        <div class="duracao-box">
-          <h3>{{ passeio.duracao }}</h3>
-        </div><!-- ______________________________ DURAÇÃO ______________________________ -->
-
-
 
 
         <!-- ______________________________ PONTOS VISITADOS ______________________________ -->
         <h1 class="item-title">Pontos Visitados</h1>
 
         <div class="pontos-box">
-          <h3>Pontos aqui...</h3>
+          <h3>Imagens dos pontos turísticos visitados</h3>
         </div><!-- ______________________________ PONTOS VISITADOS ______________________________ -->
 
 
@@ -120,14 +150,17 @@
         <h1 class="item-title">Disponibilidade</h1>
 
         <v-calendar
-          mode='single'
-          :month-labels='monthLabels'
-          :weekday-labels='weekdayLabels'
-          :theme-styles='themeStyles'
+          is-linked
           is-inline
-          >
+          is-double-paned
+          is-expanded
+          :min-date="minDate"
+          mode="single"
+          :theme-styles="calendarDesktopStyle"
+          :attributes="attributesCalendar">
         </v-calendar>
         <!-- ______________________________ DISPONIBILIDADE ______________________________ -->
+
 
 
 
@@ -184,7 +217,7 @@
     <div class="reserva">
       <div class="reserva-body">
         <h3 class="__reserva-valor">R${{ passeio.valorPasseio }}<span class="__reserva-valor-pessoa"> por pessoa</span></h3>
-        <button class="__reserva-btn">Reservar</button>
+        <button class="__reserva-btn">Falar com {{ host.firstName }}</button>
       </div>
     </div>
     <!-- ______________________________ RESERVA MOBILE ______________________________ -->
@@ -201,45 +234,22 @@ import Proprietario from '../../components/Proprietario'
 import supportsWebP from 'supports-webp'
 import { mapstyle } from '../../mixins/mapstyle'
 import { swiperOptions } from '../../mixins/swiper_id'
+import { stylesCalendar } from '@/mixins/stylesCalendar'
+import dayjs from 'dayjs'
+import 'dayjs/locale/pt-br'
+dayjs.locale('pt-br')
 
 export default {
   components: { Proprietario },
-  mixins: [ mapstyle, swiperOptions ],
+  mixins: [ mapstyle, swiperOptions, stylesCalendar ],
   data () {
     return {
-      monthLabels: ['Janeiro','Favereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
-      weekdayLabels: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'],
-      themeStyles: {
-        wrapper: {
-          color: 'rgb(62, 62, 62)',
-          border: '0',
-          padding: '6px 9px 0 9px',
-          background: 'white',
-          width: '100%'
-        },
-        header: {
-          padding: '0 9px',
-        },
-        headerArrows: {
-          fontSize: '1.4rem',
-        },
-        headerTitle: {
-          fontSize: '16px',
-          fontWeight: '400'
-        },
-        weekdays: {
-          color: 'rgb(62, 62, 62)',
-          fontWeight: '700',
-          padding: '15px 5px 8px 5px',
-        },
-        dayCell: {
-          height: '30px'
-        },
-        dayContent: {
-          fontWeight: '400',
-          fontSize: '15px',
+      attribute: {
+        popover: {
+          hideIndicator: true,
+          visibility: 'none'
         }
-      }  
+      }
     }
   },
   head () {
@@ -256,32 +266,25 @@ export default {
     }
   },
   transition: 'id',
-  fetch ({ store, params }) {
-    store.commit('m_loader', true)
-    return firebase.firestore().collection('passeios').doc(params.id).get()
-    .then(doc => {
-      store.commit('m_passeio', doc.data())
+  async fetch ({ store, params }) {
+    try {
+      store.commit('m_loader', true)
+
+      /* Get acomod */
+      const passeio = await firebase.firestore().doc(`passeios/${params.id}`).get()
+
+      /* Get host */
+      const host = await firebase.firestore().doc(`users/${passeio.data().hostID}`).get()
+      
+      store.commit('m_passeio', passeio.data())
+      store.commit('m_host', host.data())
+
       store.commit('m_loader', false)
-      if (store.state.isMobile === true) {
-        store.commit('m_showNavbar', false)
-        store.commit('m_showFoobar', false)
-      }
-      if (doc.exists) {
-        firebase.firestore().collection('passeios').doc(params.id).collection('visits').add({ 
-          date: new Date().getTime(),
-          fromMobile: store.state.isMobile,
-          clickedReservaBtn: false,
-          wentToReservaPage: false,
-          concludedReserva: false
-        })
-        .then(doc => store.state.visitID = doc.id)
-        .catch(err => console.log(err))
-      }
-    })
-    .catch(err => {
+
+    } catch (err) {
       store.commit('m_loader', false)
       console.log(err)
-    })
+    }
   },
   methods: {
     scrollTopbarBg (evt, el) {
@@ -324,10 +327,25 @@ export default {
   },
   computed: {
     passeio () { return this.$store.state.passeio },
-    showShare () { return this.$store.state.showShare }
+    host () {return this.$store.state.host },
+    showShare () { return this.$store.state.showShare },
+    minDate () {
+      return dayjs(new Date()).add(2, 'day').toDate()
+    }
+  },
+  beforeRouteEnter (to, from, next) {
+    next(vm => {
+      !vm.$store.state.isOnline ? vm.$modal.show('offline-modal') : ''
+
+      if (vm.$store.state.isMobile) {
+        vm.$store.commit('m_showNavbar', false)
+        vm.$store.commit('m_showFoobar', false)
+      } else {
+        vm.$store.commit('m_showNavbar', true)
+      }
+    })
   },
   beforeRouteLeave (to, from, next) {
-    this.$store.commit('m_loader', false) /* Evitar bugs com o loader */
     if (this.$store.state.showNavbar === false && this.$store.state.showFoobar === false) {
       this.$store.commit('m_showNavbar', true)
       this.$store.commit('m_showFoobar', true)
@@ -351,7 +369,7 @@ export default {
   
 
 
-  /* ####### IMAGE BOX ####### */
+  /* __________ IMAGE BOX __________ */
   & .image-box {
     overflow: hidden;
     & .swiper-container {
@@ -367,82 +385,122 @@ export default {
         }
       }
     }
-  }/* ####### IMAGE BOX ####### */
+  }/* __________ IMAGE BOX __________ */
 
+
+
+
+  /* __________ RATING BOX __________ */
+  & .rating-box {
+    padding: 0 7%;
+    margin-top: .5rem;
+    display: flex;
+    align-items: center;
+    & .__tipo {
+      padding-right: 1rem;
+      font-size: 15px;
+      font-weight: 600;
+    }
+    & .rating {
+      display: flex;
+      align-items: center;
+      & .rating-number {
+        font-size: 13px;
+        font-weight: 600;
+        padding-left: 3px;
+      }
+    }
+  }/* __________ RATING BOX __________ */
 
   
-  /* ####### ANUNCIANTE BOX ####### */
+
+
+  /* __________ ANUNCIANTE BOX __________ */
   & .anunciante-box {
     display: flex;
-    padding: 1.5rem 7% 0 7%;
+    padding: 2rem 7%;
     align-items: center;
     & .__anunciante-img {
-      width: 3.3rem;
-      height: 3.3rem;
+      cursor: pointer;
+      width: 3.4rem;
+      height: 3.4rem;
       border-radius: 50%;
       user-select: none;
       margin-right: .6rem;
     }
     & .__anunciante-name {
-      color: #00BAAC;
+      cursor: pointer;
+      color: var(--colorPasseio);
+      font-weight: 500;
       user-select: none;
     }
-  }/* ####### ANUNCIANTE BOX ####### */
+    & .__anunciante-name:hover {
+      text-decoration: underline;
+    }
+  }/* __________ ANUNCIANTE BOX __________ */
 
 
 
 
-  /* ####### SOBRE BOX ####### */
+
+  /* __________ INFO BOX __________ */
+  & .info-box {
+    padding: 0 7%;
+    & .item {
+      display: flex;
+      flex-flow: row;
+      align-items: center;
+      margin-top: 1.2rem;
+      & .__img {
+        width: 1.6rem;
+        height: auto;
+        margin: 0 .7rem 0 0;
+      }
+    }
+  }/* __________ INFO BOX __________ */
+
+
+
+
+
+  /* __________ SOBRE BOX __________ */
   & .sobre-box {
     padding: 0 7%;
-  }/* ####### SOBRE BOX ####### */
-
-
-
-
-  /* ####### CAPACIDADE BOX ####### */
-  & .capacidade-box {
-    padding: 0 7%;
-  }/* ####### CAPACIDADE BOX ####### */
+  }/* __________ SOBRE BOX __________ */
 
 
 
 
 
-  /* ####### DURAÇÃO ####### */
-  & .duracao-box {
-    padding: 0 7%;
-  }/* ####### DURAÇÃO ####### */
 
-
-
-
-  /* ####### PONTOS VISITADOS ####### */
+  /* __________ PONTOS VISITADOS BOX __________ */
   & .pontos-box {
     padding: 0 7%;
-  }/* ####### PONTOS VISITADOS ####### */
+  }/* __________ PONTOS VISITADOS BOX __________ */
 
 
 
 
-  /* ####### DISPONIBILIDADE ####### */
+
+  /* __________ DISPONIBILIDADE __________ */
 
 
 
 
-  /* ####### LOCAL SAÍDA ####### */
+
+  /* __________ LOCAL SAÍDA BOX __________ */
   & .local-saida-box {
     padding: 0 7%;
-  }/* ####### LOCAL SAÍDA ####### */
+  }/* __________ LOCAL SAÍDA BOX __________ */
 
 
 
 
 
-  /* ####### AVALIAÇÕES ####### */
+  /* __________ AVALIAÇÕES BOX __________ */
   & .avaliacoes-box {
     padding: 0 7%;
-  }/* ####### AVALIAÇÕES ####### */
+  }/* __________ AVALIAÇÕES BOX __________ */
 
 
 
@@ -505,7 +563,7 @@ export default {
   .passeios-id {
     margin-top: var(--navbarHeightDesktop);
 
-    /* ####### IMAGE BOX ####### */
+    /* __________ IMAGE BOX __________ */
     & .image-box {
       cursor: grab;
       overflow: hidden;
@@ -525,10 +583,12 @@ export default {
     }
     & .image-box:active {
       cursor: grabbing;
-    }/* ####### IMAGE BOX ####### */
+    }/* __________ IMAGE BOX __________ */
+
+
     & .desktop-view {
       display: flex;
-      margin: 1.7rem 8% 0 8%;
+      margin: 1.7rem 8% 0;
       & .reserva-desktop {
         flex-basis: 31%;
         border: 1px solid #dedede;
@@ -642,51 +702,99 @@ export default {
       & .desktop-view-info {
         margin-right: 5%;
         flex-basis: 69%;
-        /* ####### ANUNCIANTE BOX ####### */
+
+
+
+        /* __________ RATING BOX __________ */
+        & .rating-box {
+          padding: 0;
+          margin-top: 0;
+          & .__tipo {
+            padding-right: 1rem;
+            font-size: 16px;
+            font-weight: 600;
+          }
+          & .rating {
+            display: flex;
+            align-items: center;
+            & .rating-number {
+              font-size: 16px;
+              font-weight: 600;
+              padding-left: 3px;
+            }
+          }
+        }/* __________ RATING BOX __________ */
+
+
+
+
+        /* __________ ANUNCIANTE BOX __________ */
         & .anunciante-box {
-          padding: 1.5rem 0 0 0;
+          padding: 1.5rem 0 2.5rem;
           & .__anunciante-img {
             width: 4rem;
             height: 4rem;
             margin-right: .7rem;
           }
           & .__anunciante-name {
-            color: #00BAAC;
-            user-select: none;
           }
-        }/* ####### ANUNCIANTE BOX ####### */
+        }/* __________ ANUNCIANTE BOX __________ */
 
 
-        /* ####### SOBRE BOX ####### */
+
+
+        /* __________ INFO BOX __________ */
+        & .info-box {
+          padding: 0; 
+          display: flex;
+          justify-content: space-between;
+          & .item {
+            display: flex;
+            flex-flow: column;
+            align-items: center;
+            margin-top: .8rem;
+            & .__img {
+              width: 2.1rem;
+              height: auto;
+              margin: 0 0 .7rem 0;
+            }
+          }
+        }/* __________ INFO BOX __________ */
+
+
+
+
+
+        /* __________ SOBRE BOX __________ */
         & .sobre-box {
           padding: 0;
-        }/* ####### SOBRE BOX ####### */
+        }/* __________ SOBRE BOX __________ */
 
 
 
 
-        /* ####### CAPACIDADE BOX ####### */
-        & .capacidade-box {
+
+        /* __________ PONTOS VISITADOS BOX __________ */
+        & .pontos-box {
           padding: 0;
-        }/* ####### CAPACIDADE BOX ####### */
+        }/* __________ PONTOS VISITADOS BOX __________ */
 
 
 
-        /* ####### LOCAL ####### */
-        & .local-box {
-          & .__adress {
-            padding: 0 0 .6rem 0;
-          }
-          & .vue-map-container {
-            height: 400px;
-          }
-        }/* ####### LOCAL ####### */
 
 
-        /* ####### AVALIAÇÕES ####### */
+        /* __________ LOCAL SAÍDA BOX __________ */
+        & .local-saida-box {
+          padding: 0;
+        }/* __________ LOCAL SAÍDA BOX __________ */
+
+
+
+
+        /* __________ AVALIAÇÕES BOX __________ */
         & .avaliacoes-box {
           padding: 0;
-        }/* ####### AVALIAÇÕES ####### */
+        }/* __________ AVALIAÇÕES BOX __________ */
       }
     }
     

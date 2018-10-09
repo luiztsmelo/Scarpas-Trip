@@ -55,10 +55,10 @@
 
 
 
-        <!-- ______________________________ INFO ______________________________ -->
-        <div class="info-box">
+        <!-- ______________________________ RATING ______________________________ -->
+        <div class="rating-box">
 
-          <h3 class="__info-tipo" style="color: #FFA04F">{{ acomod.tipoAcomod }}</h3>
+          <h3 class="__tipo" style="color: #FFA04F">{{ acomod.tipoAcomod }}</h3>
 
           <div class="rating">
             <star-rating
@@ -74,7 +74,7 @@
             <p class="rating-number">4,7</p>
           </div>
 
-        </div><!-- ______________________________ INFO ______________________________ -->
+        </div><!-- ______________________________ RATING ______________________________ -->
         
 
 
@@ -100,8 +100,8 @@
 
 
 
-        <!-- ______________________________ CARACTERÍSTICAS ______________________________ -->
-        <div class="caracteristicas-box">
+        <!-- ______________________________ INFO ______________________________ -->
+        <div class="info-box">
           
           <div class="item">
             <img class="__img" src="../../assets/img/guests.svg">
@@ -123,7 +123,7 @@
             <h3>{{ acomod.totalGaragem }} {{ acomod.totalGaragem == '1' ? 'vaga' : 'vagas' }} garagem</h3>
           </div>
 
-        </div><!-- ______________________________ CARACTERÍSTICAS ______________________________ -->
+        </div><!-- ______________________________ INFO ______________________________ -->
 
 
 
@@ -733,13 +733,13 @@ export default {
 
 
 
-  /* __________ INFO BOX __________ */
-  & .info-box {
+  /* __________ RATING BOX __________ */
+  & .rating-box {
     padding: 0 7%;
     margin-top: .5rem;
     display: flex;
     align-items: center;
-    & .__info-tipo {
+    & .__tipo {
       padding-right: 1rem;
       font-size: 15px;
       font-weight: 600;
@@ -753,7 +753,7 @@ export default {
         padding-left: 3px;
       }
     }
-  }/* __________ INFO BOX __________ */
+  }/* __________ RATING BOX __________ */
   
 
 
@@ -776,19 +776,16 @@ export default {
       font-weight: 500;
       user-select: none;
     }
+    & .__anunciante-name:hover {
+      text-decoration: underline;
+    }
   }/* __________ ANUNCIANTE BOX __________ */
 
 
 
-  /* __________ SOBRE BOX __________ */
-  & .sobre-box {
-    padding: 0 7%;
-  }/* __________ SOBRE BOX __________ */
 
-
-
-  /* __________ CARACTERÍSTICAS BOX __________ */
-  & .caracteristicas-box {
+  /* __________ INFO BOX __________ */
+  & .info-box {
     padding: 0 7%;
     & .item {
       display: flex;
@@ -798,10 +795,19 @@ export default {
       & .__img {
         width: 1.6rem;
         height: auto;
-        margin-right: .8rem;
+        margin: 0 .7rem 0 0;
       }
     }
-  }/* __________ CARACTERÍSTICAS BOX __________ */
+  }/* __________ INFO BOX __________ */
+
+
+
+
+  /* __________ SOBRE BOX __________ */
+  & .sobre-box {
+    padding: 0 7%;
+  }/* __________ SOBRE BOX __________ */
+
 
 
 
@@ -875,6 +881,7 @@ export default {
 
 
   /* __________ DISPONIBILIDADE __________ */
+
 
 
 
@@ -1111,11 +1118,11 @@ export default {
 
 
 
-        /* __________ INFO __________ */
-        & .info-box {
+        /* __________ RATING __________ */
+        & .rating-box {
           padding: 0;
           margin-top: 0;
-          & .__info-tipo {
+          & .__tipo {
             padding-right: 1rem;
             font-size: 16px;
             font-weight: 600;
@@ -1129,7 +1136,7 @@ export default {
               padding-left: 3px;
             }
           }
-        }/* __________ INFO __________ */
+        }/* __________ RATING __________ */
 
 
 
@@ -1149,8 +1156,8 @@ export default {
 
 
 
-        /* __________ CARACTERÍSTICAS __________ */
-        & .caracteristicas-box {
+        /* __________ INFO __________ */
+        & .info-box {
           padding: 0; 
           display: flex;
           justify-content: space-between;
@@ -1162,10 +1169,10 @@ export default {
             & .__img {
               width: 2.1rem;
               height: auto;
-              margin-bottom: .7rem;
+              margin: 0 0 .7rem 0;
             }
           }
-        }/* __________ CARACTERÍSTICAS __________ */
+        }/* __________ INFO __________ */
 
 
 
