@@ -28,7 +28,32 @@
             <p class="rating-number">Ótimo</p>
           </div>
 
-          <h3 class="__subtitle">Entre em contato com {{ host.firstName }} para negociarem os detalhes da reserva.</h3>
+          <h3 class="__subtitle">Entre em contato com {{ host.firstName }} para negociar os detalhes da reserva.</h3>
+        </div>
+
+
+        <div class="contatos">
+
+          <div class="contato">
+            <h3 class="__label">WhatsApp</h3>
+            <a class="__link" href="https://api.whatsapp.com/send?phone=5534991410085" target="_blank">+5534991410085</a>
+          </div>
+
+          <div class="contato">
+            <h3 class="__label">Celular</h3>
+            <a class="__link" href="tel:+5534991410085" target="_blank">+5534991410085</a>
+          </div>
+
+          <div class="contato">
+            <h3 class="__label">Instagram</h3>
+            <a class="__link" href="https://www.instagram.com/tarcisiosmelo/" target="_blank">@tarcisiosmelo</a>
+          </div>
+
+          <div class="contato" style="border:none">
+            <h3 class="__label">E-mail</h3>
+            <a class="__link" :href="`mailto:${host.email}`" target="_blank">{{ host.email }}</a>
+          </div>
+
         </div>
 
 
@@ -75,9 +100,9 @@ export default {
 .host-modal {
   position: fixed;
   z-index: 9999;
+  max-height: 100%;
   overflow-y: auto;
-  width:  100%;
-  height: 100%;
+  width: 100%;
   top: 0;
   left: 0;
   background: white;
@@ -91,7 +116,7 @@ export default {
   & .host-body {
     display: flex;
     flex-flow: column;
-    height: 100%;
+    padding-bottom: 4rem;
     & .head {
       display: flex;
       flex-flow: column;
@@ -124,6 +149,26 @@ export default {
       }
       & .__subtitle {
         text-align: center;
+      }
+    }
+    & .contatos {
+      padding: .8rem 7% 0;
+      & .contato {
+        display: flex;
+        flex-flow: column;
+        align-items: center;
+        padding: 1.5rem 0;
+        border-bottom: 1px solid #dedede;
+        & .__label {
+          padding-bottom: .5rem;
+          font-size: 15px;
+          font-weight: 500;
+        }
+        & .__link {
+          font-size: 18px;
+          font-weight: 500;
+          color: var(--colorPasseio);
+        }
       }
     }
   }

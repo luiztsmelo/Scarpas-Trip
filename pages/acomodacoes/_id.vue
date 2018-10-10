@@ -326,9 +326,7 @@
         <form class="reserva-desktop-form">
 
 
-          <div class="valor-box">
-            <h1 class="__valor">R${{ acomod.valorNoite.toLocaleString() }}<span class="__valor-noite"> por noite</span></h1>
-          </div>
+          <h1 class="__valor">R${{ acomod.valorNoite.toLocaleString() }}<span class="__valor-noite"> por noite</span></h1>
 
 
           <div class="item-form">
@@ -431,7 +429,7 @@
 
 
     <!-- ______________________________ RESERVA MOBILE ______________________________ --> 
-    <div class="reserva">
+    <div class="reserva-mobile">
       <div class="reserva-body">
         <h3 class="__reserva-valor">R${{ acomod.valorNoite.toLocaleString() }}<span class="__reserva-valor-pessoa"> por noite</span></h3>
         <button class="__reserva-btn" @click="reservarMobile">Reservar</button>
@@ -910,7 +908,7 @@ export default {
 
 
   /* __________ RESERVA __________ */
-  & .reserva {
+  & .reserva-mobile {
     position: fixed;
     bottom: 0;
     left: 0;
@@ -1005,17 +1003,13 @@ export default {
         align-self: flex-start;
         & .reserva-desktop-form {
           padding: 1rem 1.4rem;
-          & .valor-box {
-            display: flex;
-            align-items: flex-end;
+          & .__valor {
+            font-size: 34px;
+            font-weight: 400;
             padding-bottom: 1.2rem;
-            & .__valor {
-              font-size: 34px;
+            & .__valor-noite {
+              font-size: 16px;
               font-weight: 400;
-              & .__valor-noite {
-                font-size: 16px;
-                font-weight: 400;
-              }
             }
           }
           & .item-form {
@@ -1234,7 +1228,7 @@ export default {
   
 
     /* __________ RESERVA __________ */
-    & .reserva {
+    & .reserva-mobile {
       display: none;
     }/* __________ RESERVA __________ */
   }

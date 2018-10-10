@@ -194,15 +194,13 @@
 
       <!-- ______________________________ RESERVA DESKTOP ______________________________ -->
       <div class="reserva-desktop">
-        <form class="reserva-desktop-form">
-          
 
-          <div class="valor-box">
-            <h1 class="__valor">R${{ passeio.valorPasseio.toLocaleString() }}<span class="__valor-pessoa"> por pessoa</span></h1>
-          </div>
+        <h1 class="__valor">R${{ passeio.valorPasseio.toLocaleString() }}<span class="__valor-pessoa"> por pessoa</span></h1>
 
+        <button class="__reserva-desktop-btn" type="button">Reservar</button>
 
-        </form>
+        <h4 class="__info">Não se preocupe, você não será cobrado.</h4>
+
       </div><!-- ______________________________ RESERVA DESKTOP ______________________________ -->
 
 
@@ -214,7 +212,7 @@
 
 
     <!-- ______________________________ RESERVA MOBILE ______________________________ --> 
-    <div class="reserva">
+    <div class="reserva-mobile">
       <div class="reserva-body">
         <h3 class="__reserva-valor">R${{ passeio.valorPasseio }}<span class="__reserva-valor-pessoa"> por pessoa</span></h3>
         <button class="__reserva-btn" @click="$store.commit('m_showHost', true), hashHost()">
@@ -517,7 +515,7 @@ export default {
 
 
   /* __________ RESERVA __________ */
-  & .reserva {
+  & .reserva-mobile {
     position: fixed;
     bottom: 0;
     left: 0;
@@ -604,110 +602,32 @@ export default {
         flex-basis: 31%;
         border: 1px solid #dedede;
         align-self: flex-start;
-        & .reserva-desktop-form {
-          padding: 1rem 1.4rem;
-          & .valor-box {
-            display: flex;
-            align-items: flex-end;
-            padding-bottom: 1.2rem;
-            & .__valor {
-              font-size: 34px;
-              font-weight: 400;
-              & .__valor-pessoa {
-                font-size: 16px;
-                font-weight: 400;
-              }
-            }
-          }
-          & .item-form {
-            display: flex;
-            flex-flow: column;
-            margin-top: 1.2rem;
-            & input {
-              cursor: pointer;
-              width: 100%;
-              padding: .75rem .6rem;
-              border: 1px solid #dedede;
-              outline: none;
-              background: white;
-              transition: .15s border ease;
-            }
-            & input:hover {
-              border: 1px solid var(--color01) !important;
-            }
-            & select {
-              cursor: pointer;
-              width: 100%;
-              padding: .75rem .6rem;
-              border: 1px solid #dedede;
-              outline: none;
-              background: white;
-              transition: .15s border ease;
-              & option {
-                background: white;
-              }
-            }
-            & select:hover {
-              border: 1px solid var(--color01) !important;
-            }
-            & .reserva-input-date {
-              padding-left: .9rem;
-            }
-            & .reserva-close-date {
-              width: .7rem;
-              height: auto;
-              position: absolute;
-              right: 3%;
-              top: 50%;
-              transform: translateY(-50%);
-              cursor: pointer;
-            }
-          }
-          & .reserva-info {
-            margin-top: .9rem;
-            & .reserva-info_item {
-              display: flex;
-              justify-content: space-between;
-              align-items: center;
-              & h3 {
-                font-size: 15px;
-              }
-            }
-            & .reserva-info_item-total {
-              display: flex;
-              justify-content: space-between;
-              border-top: 1px solid #dedede;
-              & h3 {
-                font-size: 17px;
-                font-weight: 500;
-              }
-            }
-          }
-          & .__reserva-desktop-btn {
-            margin-top: 1.3rem;
-            font-size: 17px;
-            font-weight: 700;
-            background: var(--colorAcomod);
-            color: white;
-            height: 3.2rem;
-            width: 100%;
-            border-radius: 5px;
-          }
-          & .__reserva-desktop-btn-ask {
+        padding: 1rem 1.4rem;
+        & .__valor {
+          font-size: 34px;
+          font-weight: 400;
+          padding-bottom: 1.2rem;
+          & .__valor-pessoa {
             font-size: 16px;
-            font-weight: 600;
-            background: transparent;
-            color: var(--colorAcomod);
-            height: 2.1rem;
-            width: 100%;
+            font-weight: 400;
           }
-          & .__info {
-            margin: .5rem 0 .8rem;
-            text-align: center;
-            font-size: 12px;
-            font-weight: 500;
-            line-height: 17px;
-          }
+        }
+        & .__reserva-desktop-btn {
+          margin-top: 1.3rem;
+          font-size: 17px;
+          font-weight: 700;
+          background: var(--colorPasseio);
+          color: white;
+          height: 3.2rem;
+          width: 100%;
+          border-radius: 5px;
+        }
+        & .__info {
+          margin: .5rem 0 .8rem;
+          text-align: center;
+          font-size: 12px;
+          font-weight: 500;
+          line-height: 17px;
         }
       }
       & .desktop-view-info {
@@ -812,7 +732,7 @@ export default {
   
 
     /* __________ RESERVA __________ */
-    & .reserva {
+    & .reserva-mobile {
       display: none;
     }/* __________ RESERVA __________ */
   }
