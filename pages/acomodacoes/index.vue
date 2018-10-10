@@ -1057,7 +1057,7 @@ export default {
         transition: var(--main-transition);
       }
     }
-    & .gm-style-iw + div { /* Remove close button */
+    & .gm-style > div > div > div > div > div > button { /* Remove close button */
       display: none !important;
     }
     & .gm-style > div > div > div > div > div > div > div { /* Remove white borders */

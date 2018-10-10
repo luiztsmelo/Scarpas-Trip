@@ -154,8 +154,9 @@
           is-inline
           is-double-paned
           is-expanded
+          :min-date="minDate"
           mode="single"
-          :theme-styles="calendarDesktopStyle"
+          :theme-styles="calendarMobileStyle"
           :attributes="attributesCalendar">
         </v-calendar>
         <!-- ______________________________ DISPONIBILIDADE ______________________________ -->
@@ -324,6 +325,9 @@ export default {
     passeio () { return this.$store.state.passeio },
     host () {return this.$store.state.host },
     showShare () { return this.$store.state.showShare },
+    minDate () {
+      return dayjs(new Date()).subtract(1, 'day').toDate()
+    },
     attributesCalendar () {
       return [
         {

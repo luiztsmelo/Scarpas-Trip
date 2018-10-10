@@ -12,11 +12,11 @@
 
           <h1 class="__host-name">{{ host.fullName }}</h1>
 
-          <p class="__host-member">Membro desde janeiro de 2018</p>
+          <p class="__host-member">Membro desde {{ createdAt }}</p>
 
           <div class="rating">
             <star-rating
-              :rating="4.8"
+              :rating="4.5"
               :increment="0.1"
               :read-only="true"
               :show-rating="false"
@@ -25,7 +25,7 @@
               :star-size="18"
               :padding="3">
             </star-rating>
-            <p class="rating-number">4,8</p>
+            <p class="rating-number">Ótimo</p>
           </div>
 
           <h3 class="__subtitle">Entre em contato com {{ host.firstName }} para negociarem os detalhes da reserva.</h3>
@@ -39,6 +39,10 @@
 </template>
 
 <script>
+import dayjs from 'dayjs'
+import 'dayjs/locale/pt-br'
+dayjs.locale('pt-br')
+
 export default {
   methods: {
     backBtn () {
@@ -50,6 +54,11 @@ export default {
     hash () { return this.$route.hash },
     acomod () { return this.$store.state.acomod },
     host () { return this.$store.state.host },
+    createdAt () {
+      const month = dayjs(this.host.createdAt).format('MMMM')
+      const year = dayjs(this.host.createdAt).format('YYYY')
+      return month.toLowerCase() + ' de ' + year
+    }
   }, 
   watch: {
     hash (value) {
@@ -89,7 +98,7 @@ export default {
       align-items: center;
       padding: 1rem 7% 0;
       & .__host-img {
-        width: 5.8rem;
+        width: 6rem;
         height: auto;
         border-radius: 50%;
         text-align: center;

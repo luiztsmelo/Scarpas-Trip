@@ -89,6 +89,9 @@ exports.newUser = functions.https.onCall(async data => {
     /* Criar user na Firestore */
     await admin.firestore().doc(`users/${user.userID}`).set(user)
 
+    /* Adicionar createdAt ao user */
+    await admin.firestore().doc(`users/${user.userID}`).set({ createdAt: Date.now() }, { merge: true })
+
     /* Enviar welcome e-mail */
     await Mailjet.post('send', {'version': 'v3.1'}).request({
       'Messages': [{

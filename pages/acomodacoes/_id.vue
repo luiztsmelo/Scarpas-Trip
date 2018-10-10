@@ -268,7 +268,7 @@
           is-expanded
           :min-date="minDate"
           mode="single"
-          :theme-styles="calendarDesktopStyle"
+          :theme-styles="calendarMobileStyle"
           :attributes="attributesCalendar">
         </v-calendar>
         <!-- ______________________________ DISPONIBILIDADE ______________________________ -->

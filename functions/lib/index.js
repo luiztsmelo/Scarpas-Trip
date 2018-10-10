@@ -74,6 +74,8 @@ exports.newUser = functions.https.onCall((data) => __awaiter(this, void 0, void 
     try {
         /* Criar user na Firestore */
         yield admin.firestore().doc(`users/${user.userID}`).set(user);
+        /* Adicionar createdAt ao user */
+        yield admin.firestore().doc(`users/${user.userID}`).set({ createdAt: Date.now() }, { merge: true });
         /* Enviar welcome e-mail */
         yield Mailjet.post('send', { 'version': 'v3.1' }).request({
             'Messages': [{
