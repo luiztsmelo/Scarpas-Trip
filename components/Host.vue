@@ -1,20 +1,18 @@
 <template>
-  <transition name="proprietario-animation">
-    <div class="proprietario-modal" v-if="$store.state.showProprietario">
-      <div class="proprietario-body">
-
-        <!-- BACK BUTTON -->
-        <div class="back-bar">
-          <div class="back-box" @click="backBtn">
-            <img class="__back-btn" src="../assets/img/back.svg" alt="voltar">
-          </div>
-        </div><!-- BACK BUTTON -->
+  <transition name="host-animation">
+    <div class="host-modal" v-if="$store.state.showHost">
+      <div class="host-body">
 
 
-        <div class="info-header">
-          <img class="__img" :src="host.photoURL">
-          <h1 class="__name">{{ host.fullName }}</h1>
+        <img class="back-btn" src="../assets/img/back.svg" @click="backBtn" ref="backBtn">
+
+
+        <div class="head">
+          <img class="__host-img" :src="host.photoURL">
+          <h1 class="__host-name">{{ host.fullName }}</h1>
+          <h3 class="__subtitle">Entre em contato para negociarem os detalhes da reserva do passeio.</h3>
         </div>
+
 
 
       </div>
@@ -26,7 +24,7 @@
 export default {
   methods: {
     backBtn () {
-      this.$store.commit('m_showProprietario', false)
+      this.$store.commit('m_showHost', false)
       window.history.back(1)
     }
   },
@@ -38,7 +36,7 @@ export default {
   watch: {
     hash (value) {
       if (value === '') {
-        this.$store.commit('m_showProprietario', false)
+        this.$store.commit('m_showHost', false)
       }
     }
   }
@@ -47,7 +45,7 @@ export default {
 
 <style>
 
-.proprietario-modal {
+.host-modal {
   position: fixed;
   z-index: 9999;
   overflow-y: auto;
@@ -57,43 +55,34 @@ export default {
   left: 0;
   background: white;
   transition: var(--main-transition);
-  & .back-bar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width:  100%;
-    height: 3.3rem;
-    background: white;
-    & .back-box {
-      display: inline-flex;
-      align-items: center;
-      height: 100%;
-      padding: 0 7%;
-      & .__back-btn {
-        cursor: pointer;
-        width: 1.27rem;
-        height: auto;
-      }
-    }
+  & .back-btn {
+    margin: 1rem 7%;
+    cursor: pointer;
+    width: 1.27rem;
+    height: auto;
   }
-  & .proprietario-body {
+  & .host-body {
     display: flex;
     flex-flow: column;
     height: 100%;
-    & .info-header {
+    & .head {
       display: flex;
       flex-flow: column;
       align-items: center;
-      & .__img {
-        width: 6rem;
+      padding: 1.5rem 7% 0;
+      & .__host-img {
+        width: 5.5rem;
         height: auto;
         border-radius: 50%;
-        margin-top: 3.6rem;
         text-align: center;
       }
-      & .__name {
-        font-size: 30px;
-        padding: 1rem 0 1.8rem 0;
+      & .__host-name {
+        font-size: 31px;
+        padding: 1rem 0;
+        text-align: center;
+      }
+      & .__subtitle {
+        text-align: center;
       }
     }
     & .info-contato {
@@ -120,10 +109,10 @@ export default {
 }
 
 /* TRANSITIONS */
-.proprietario-animation-enter {
+.host-animation-enter {
   transform: translateY(100%);
 }
-.proprietario-animation-leave-active {
+.host-animation-leave-active {
   transform: translateY(100%);
 }
 </style>

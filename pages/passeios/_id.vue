@@ -2,7 +2,7 @@
   <div class="passeios-id">
     
 
-    <proprietario/>
+    <host/>
 
 
 
@@ -89,11 +89,11 @@
 
 
         <!-- ______________________________ ANUNCIANTE ______________________________ -->
-        <div class="anunciante-box" @click="$store.commit('m_showProprietario', true), hashProprietario()">
-          <img class="__anunciante-img" :src="host.photoURL" alt="">
+        <div class="anunciante-box">
+          <img class="__anunciante-img" :src="host.photoURL" @click="$store.commit('m_showHost', true), hashHost()">
           <div class="box-flex-column">
             <h3 style="user-select:none">Guiado por</h3>
-            <a class="__anunciante-name">{{ host.fullName }}</a>
+            <p class="__anunciante-name" @click="$store.commit('m_showHost', true), hashHost()">{{ host.fullName }}</p>
           </div>
         </div><!-- ______________________________ ANUNCIANTE ______________________________ -->
 
@@ -154,7 +154,6 @@
           is-inline
           is-double-paned
           is-expanded
-          :min-date="minDate"
           mode="single"
           :theme-styles="calendarDesktopStyle"
           :attributes="attributesCalendar">
@@ -217,7 +216,9 @@
     <div class="reserva">
       <div class="reserva-body">
         <h3 class="__reserva-valor">R${{ passeio.valorPasseio }}<span class="__reserva-valor-pessoa"> por pessoa</span></h3>
-        <button class="__reserva-btn">Falar com {{ host.firstName }}</button>
+        <button class="__reserva-btn" @click="$store.commit('m_showHost', true), hashHost()">
+          Reservar
+        </button>
       </div>
     </div>
     <!-- ______________________________ RESERVA MOBILE ______________________________ -->
@@ -230,7 +231,7 @@
 <script>
 import firebase from '@firebase/app'
 import 'firebase/firestore'
-import Proprietario from '../../components/Proprietario'
+import Host from '../../components/Host'
 import supportsWebP from 'supports-webp'
 import { mapstyle } from '../../mixins/mapstyle'
 import { swiperOptions } from '../../mixins/swiper_id'
@@ -240,16 +241,10 @@ import 'dayjs/locale/pt-br'
 dayjs.locale('pt-br')
 
 export default {
-  components: { Proprietario },
+  components: { Host },
   mixins: [ mapstyle, swiperOptions, stylesCalendar ],
   data () {
     return {
-      attribute: {
-        popover: {
-          hideIndicator: true,
-          visibility: 'none'
-        }
-      }
     }
   },
   head () {
@@ -300,7 +295,7 @@ export default {
     backBtn () {
       window.history.back(1)
     },
-    hashProprietario () {
+    hashHost () {
        window.location.hash = "contato"
     },
     hashShare () {
@@ -329,8 +324,20 @@ export default {
     passeio () { return this.$store.state.passeio },
     host () {return this.$store.state.host },
     showShare () { return this.$store.state.showShare },
-    minDate () {
-      return dayjs(new Date()).add(2, 'day').toDate()
+    attributesCalendar () {
+      return [
+        {
+          key: 'minDate',
+          contentStyle: {
+            opacity: 0.2,
+            textDecoration: 'line-through'
+          },
+          dates: {
+            start: null,
+            end: dayjs(new Date()).subtract(1, 'day')
+          }
+        }
+      ]
     }
   },
   beforeRouteEnter (to, from, next) {

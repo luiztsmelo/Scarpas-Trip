@@ -5,7 +5,7 @@
     <v-dialog style="z-index:10000"/>
 
 
-    <proprietario/>
+    <host/>
 
 
 
@@ -88,10 +88,10 @@
 
         <!-- ______________________________ ANUNCIANTE ______________________________ -->
         <div class="anunciante-box">
-          <img class="__anunciante-img" :src="host.photoURL" @click="$store.commit('m_showProprietario', true), hashProprietario()">
+          <img class="__anunciante-img" :src="host.photoURL" @click="$store.commit('m_showHost', true), hashHost()">
           <div class="box-flex-column">
             <h3 style="user-select:none">Hospedado por</h3>
-            <a class="__anunciante-name" @click="$store.commit('m_showProprietario', true), hashProprietario()">{{ host.fullName }}</a>
+            <p class="__anunciante-name" @click="$store.commit('m_showHost', true), hashHost()">{{ host.fullName }}</p>
           </div>
         </div><!-- ______________________________ ANUNCIANTE ______________________________ -->
 
@@ -453,7 +453,7 @@ import firebase from '@firebase/app'
 import 'firebase/firestore'
 import MiniLoader from '@/components/MiniLoader.vue'
 import ReservaMobile from '@/components/reserva-acomod/ReservaMobile'
-import Proprietario from '@/components/Proprietario'
+import Host from '@/components/Host'
 import supportsWebP from 'supports-webp'
 import { mapstyle } from '@/mixins/mapstyle'
 import { swiperOptions } from '@/mixins/swiper_id'
@@ -464,7 +464,7 @@ import 'dayjs/locale/pt-br'
 dayjs.locale('pt-br')
 
 export default {
-  components: { MiniLoader, ReservaMobile, Proprietario },
+  components: { MiniLoader, ReservaMobile, Host },
   mixins: [ mapstyle, swiperOptions, stylesCalendar, tipoAcomod ],
   data () {
     return {
@@ -617,7 +617,7 @@ export default {
       this.showComods = false
       window.history.back(1)
     },
-    hashProprietario () {
+    hashHost () {
       window.location.hash = "contato"
     },
     hashComods () {

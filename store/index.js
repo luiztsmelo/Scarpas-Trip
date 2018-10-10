@@ -18,7 +18,7 @@ const store = () => new Vuex.Store({
     showMenu: false,
     showFoobar: true,
     showShare: false,
-    showProprietario: false,
+    showHost: false,
     showParcelas: false,
     showFiltrarAcomods: false,
     menuIconAnime: false,
@@ -408,8 +408,8 @@ const store = () => new Vuex.Store({
     m_miniLoader (state, payload) {
       state.miniLoader = payload
     },
-    m_showProprietario (state, payload) {
-      state.showProprietario = payload
+    m_showHost (state, payload) {
+      state.showHost = payload
     },
     m_showParcelas (state, payload) {
       state.showParcelas = payload

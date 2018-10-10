@@ -79,7 +79,7 @@ export default {
     }
     & .__subtitle {
       font-size: 14px;
-      line-height: 25px;
+      line-height: 26px;
     }
     & .__subtitle:hover {
       text-decoration: underline;
