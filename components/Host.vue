@@ -9,8 +9,26 @@
 
         <div class="head">
           <img class="__host-img" :src="host.photoURL">
+
           <h1 class="__host-name">{{ host.fullName }}</h1>
-          <h3 class="__subtitle">Entre em contato para negociarem os detalhes da reserva do passeio.</h3>
+
+          <p class="__host-member">Membro desde janeiro de 2018</p>
+
+          <div class="rating">
+            <star-rating
+              :rating="4.8"
+              :increment="0.1"
+              :read-only="true"
+              :show-rating="false"
+              active-color="#161616"
+              inactive-color="#dedede"
+              :star-size="18"
+              :padding="3">
+            </star-rating>
+            <p class="rating-number">4,8</p>
+          </div>
+
+          <h3 class="__subtitle">Entre em contato com {{ host.firstName }} para negociarem os detalhes da reserva.</h3>
         </div>
 
 
@@ -69,40 +87,34 @@ export default {
       display: flex;
       flex-flow: column;
       align-items: center;
-      padding: 1.5rem 7% 0;
+      padding: 1rem 7% 0;
       & .__host-img {
-        width: 5.5rem;
+        width: 5.8rem;
         height: auto;
         border-radius: 50%;
         text-align: center;
       }
       & .__host-name {
         font-size: 31px;
-        padding: 1rem 0;
+        padding: 1rem 0 .2rem;
         text-align: center;
+      }
+      & .__host-member {
+        text-align: center;
+        font-size: 15px;
+      }
+      & .rating {
+        display: flex;
+        align-items: center;
+        margin: 1rem 0;
+        & .rating-number {
+          font-size: 16px;
+          font-weight: 600;
+          padding-left: 3px;
+        }
       }
       & .__subtitle {
         text-align: center;
-      }
-    }
-    & .info-contato {
-      padding: 0 7%;
-      display: flex;
-      flex-flow: column;
-      align-items: center;
-      & .info-title {
-        font-size: 15px;
-        padding: 1.5rem 0 .1rem 0;
-      }
-      & .__email {
-        font-size: 17px;
-        color: #00BAAC;
-        user-select: none;
-      }
-      & .__celular {
-        font-size: 16px;
-        color: #00BAAC;
-        user-select: none;
       }
     }
   }
@@ -110,9 +122,9 @@ export default {
 
 /* TRANSITIONS */
 .host-animation-enter {
-  transform: translateY(100%);
+  transform: translateX(100%);
 }
 .host-animation-leave-active {
-  transform: translateY(100%);
+  transform: translateX(100%);
 }
 </style>
