@@ -36,17 +36,17 @@
 
           <div class="contato">
             <h3 class="__label">WhatsApp</h3>
-            <a class="__link" href="https://api.whatsapp.com/send?phone=5534991410085" target="_blank">+5534991410085</a>
+            <a class="__link" :href="`https://api.whatsapp.com/send?phone=${host.celular.replace(/[^0-9\.]+/g, '')}`" target="_blank">{{ host.celular }}</a>
           </div>
 
           <div class="contato">
             <h3 class="__label">Celular</h3>
-            <a class="__link" href="tel:+5534991410085" target="_blank">+5534991410085</a>
+            <a class="__link" :href="`tel:+${host.celular.replace(/[^0-9\.]+/g, '')}`" target="_blank">{{ host.celular }}</a>
           </div>
 
-          <div class="contato">
+          <div class="contato" v-if="host.instagram !== undefined">
             <h3 class="__label">Instagram</h3>
-            <a class="__link" href="https://www.instagram.com/tarcisiosmelo/" target="_blank">@tarcisiosmelo</a>
+            <a class="__link" :href="`https://www.instagram.com/${host.instagram.substring(1)}/`" target="_blank">{{ host.instagram }}</a>
           </div>
 
           <div class="contato" style="border:none">

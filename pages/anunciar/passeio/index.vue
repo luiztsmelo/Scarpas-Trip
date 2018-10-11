@@ -362,7 +362,7 @@
     <form class="cadastro-passeio" v-if="$store.state.cadastroPasseio10">
 
       <h1 class="__form-title">
-        {{ !authUser ? 'Antes de continuar, precisamos de seu cadastro' : `Ótimo ${user.firstName}, só mais uma informação` }}
+        {{ !authUser ? 'Antes de continuar, precisamos de seu cadastro' : `Ótimo ${user.firstName}, só mais algumas informações de contato` }}
       </h1> 
 
 
@@ -377,16 +377,31 @@
 
       <div v-if="authUser">
 
+        <!-- CELULAR -->
         <div class="item-form">
           <label>Celular / WhatsApp</label>
           <masked-input
+            ref="celular"
             type="tel"
-            v-model="$store.state.passeioData.celular"
+            v-model="$store.state.customer.celular"
             :mask="['+', 5, 5, ' ', /\d/, /\d/, ' ', /\d/, /\d/, /\d/, /\d/, /\d/, ' ', /\d/, /\d/, /\d/, /\d/]"
             :guide="false"
             placeholder="+55">
           </masked-input>
-        </div>
+        </div><!-- CELULAR -->
+
+
+        <!-- INSTAGRAM -->
+        <div class="item-form">
+          <label>Instagram (Opcional)</label>
+          <input
+            ref="instagram"
+            onKeyPress="if (event.which == 32) return false"
+            type="text"
+            maxlength="30"
+            v-model="$store.state.customer.instagram"
+            placeholder="@username">
+        </div><!-- INSTAGRAM -->
 
       </div>
 
@@ -417,7 +432,7 @@
       <div class="payment-box">
         
         
-        <h2 class="__form-subtitle">Dados cartão de crédito</h2>
+        <h2 class="__form-subtitle">Dados do cartão de crédito</h2>
 
         <!-- CARD HOLDER NAME -->
         <div class="item-form">
@@ -497,9 +512,9 @@
 
 
 
-        <h2 class="__form-subtitle">Endereço de cobrança</h2>
+        <h2 class="__form-subtitle" style="margin-top: 1.6rem">Endereço de cobrança</h2>
 
-        <p>Utilizamos apenas para validar seu cartão de crédito.</p>
+        <p>Utilizaremos apenas para validar seu cartão de crédito.</p>
 
         <!-- CEP -->
         <div class="item-form">
@@ -869,7 +884,7 @@ export default {
           title: 'Ops',
           message: 'Conecte-se com uma de suas contas para continuar.'
         })
-      } else if (this.$store.state.passeioData.celular.length === 17 && this.authUser) {
+      } else if (this.$store.state.customer.celular.length === 17 && this.authUser) {
           this.$store.commit('m_cadastroPasseio10', false)
           this.$store.commit('m_cadastroPasseio11', true)
           this.$store.commit('m_passeioProgressBar', (100/11)*11)
@@ -961,6 +976,7 @@ export default {
     cardCVV () { return this.$store.state.creditCard.cardCVV },
     cardType () { return this.$store.state.cardType },
     cpf () { return this.$store.state.customer.cpf },
+    instagram () { return this.$store.state.customer.instagram },
     zipcode () { return this.$store.state.customer.zipcode },
     street () { return this.$store.state.customer.street },
     streetNumber () { return this.$store.state.customer.street_number },
@@ -1010,7 +1026,7 @@ export default {
       return this.$store.state.passeioData.subtitle !== '' ? 'background: #198CFE' : ''
     },
     form10ok () {
-      return this.$store.state.passeioData.celular.length === 17 && this.authUser ? 'background: #198CFE' : ''
+      return this.$store.state.customer.celular.length === 17 && this.authUser ? 'background: #198CFE' : ''
     },
     form11ok () {
       return this.formIsCompleted ? 'background: #198CFE' : ''
@@ -1046,6 +1062,13 @@ export default {
         }
         this.$store.state.cardType = cardNumber.card.type
         this.$store.state.cardTypeNice = cardNumber.card.niceType
+      }
+    },
+    instagram (value) {
+      console.log(value)
+      const firstDigit = value.charAt(0)
+      if (value.length === 1 && firstDigit !== '@') {
+        this.$store.state.customer.instagram = `@${value}`
       }
     },
     cardExpirationDate (value) {
@@ -1308,7 +1331,7 @@ export default {
     }
     & .__termos {
       padding: 0 7%;
-      font-size: 14px;
+      font-size: 15px;
       font-weight: 500;
       line-height: 20px;
       & a {

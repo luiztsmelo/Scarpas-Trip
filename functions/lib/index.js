@@ -300,16 +300,16 @@ exports.newPasseio = functions.https.onCall((data) => __awaiter(this, void 0, vo
                     'state': customer.state
                 },
                 'phone': {
-                    'ddd': '11',
-                    'number': '999999999'
+                    'ddd': customer.celular.slice(4, 6),
+                    'number': customer.celular.slice(7, 12) + customer.celular.slice(13, 17)
                 }
             }
         });
         /* Update user Firestore */
         yield admin.firestore().doc(`users/${passeioData.hostID}`).update({
-            celular: passeioData.celular.replace(/[^0-9\.]+/g, '')
+            celular: customer.celular,
+            instagram: customer.instagram
         });
-        delete passeioData.celular;
         /* Set acomod Firestore */
         yield admin.firestore().doc(`passeios/${passeioData.passeioID}`).set(passeioData);
         return { subscription: subscription };
