@@ -282,6 +282,7 @@ exports.newPasseio = functions.https.onCall((data) => __awaiter(this, void 0, vo
         const Pagarme = yield pagarme.client.connect({ api_key: 'ak_test_E3I46o4e7guZDqwRnSY9sW8o8HrL9D' });
         const subscription = yield Pagarme.subscriptions.create({
             'plan_id': 375944,
+            'payment_method': 'credit_card',
             'card_holder_name': creditCard.cardHolderName,
             'card_number': creditCard.cardNumber.replace(/[^0-9\.]+/g, ''),
             'card_cvv': creditCard.cardCVV,
@@ -291,10 +292,12 @@ exports.newPasseio = functions.https.onCall((data) => __awaiter(this, void 0, vo
                 'email': customer.email,
                 'document_number': customer.cpf.replace(/[^0-9\.]+/g, '').replace(/\./g, ''),
                 'address': {
-                    'zipcode': '37930000',
-                    'street': 'Ruela',
-                    'street_number': '123',
-                    'neighborhood': 'Centro'
+                    'zipcode': customer.zipcode.replace(/[^0-9\.]+/g, ''),
+                    'street': customer.street,
+                    'street_number': customer.street_number,
+                    'neighborhood': customer.neighborhood,
+                    'city': customer.city,
+                    'state': customer.state
                 },
                 'phone': {
                     'ddd': '11',

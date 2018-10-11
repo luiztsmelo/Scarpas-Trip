@@ -410,9 +410,6 @@
           <h4 class="__info">Não se preocupe, você não será cobrado.</h4>
 
 
-          <button class="__reserva-desktop-btn-ask" type="button" @click="$store.state.user.email === null ? $modal.show('sign-in-modal') : $modal.show('ask-acomod-modal'), $store.state.clickedAskAcomod = true, $store.state.isSignIn = false">Falar com {{ host.firstName }}</button>
-
-
         </form>
 
       </div><!-- ______________________________ RESERVA DESKTOP ______________________________ -->
@@ -1086,14 +1083,6 @@ export default {
             width: 100%;
             border-radius: 5px;
           }
-          & .__reserva-desktop-btn-ask {
-            font-size: 16px;
-            font-weight: 600;
-            background: transparent;
-            color: var(--colorAcomod);
-            height: 2.1rem;
-            width: 100%;
-          }
           & .__info {
             margin: .5rem 0 .8rem;
             text-align: center;
@@ -1191,7 +1180,7 @@ export default {
             display: flex;
             align-items: center;
             width: calc(100%/3);
-            margin-bottom: 1.2rem;
+            margin-bottom: 1.3rem;
             & .__img {
               width: 1.7rem;
               height: auto;

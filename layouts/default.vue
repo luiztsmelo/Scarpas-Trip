@@ -18,8 +18,6 @@
 
       <SignIn/>
 
-      <AskAcomod/>
-
       <Offline/>
     </div>
 
@@ -37,12 +35,11 @@ import Menuu from '~/components/Menu.vue'
 import Loader from '~/components/Loader.vue'
 import Share from '~/components/Share.vue'
 import MapFull from '~/components/MapFull.vue'
-import AskAcomod from '~/components/reserva-acomod/AskAcomod'
 import Offline from '~/components/Offline'
 import Alert from '~/components/Alert'
 
 export default {
-  components: { Navbar, Foobar, SignIn, Menuu, Loader, Share, MapFull, AskAcomod, Offline, Alert },
+  components: { Navbar, Foobar, SignIn, Menuu, Loader, Share, MapFull, Offline, Alert },
   async mounted () {
     this.$gmapApiPromiseLazy().then(() => { this.$store.state.markerSize = new google.maps.Size(42, 42) })
   },

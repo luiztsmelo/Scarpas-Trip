@@ -409,13 +409,15 @@
     <!-- ________________________________________ 11 - PAGAMENTO ________________________________________ -->
     <form class="cadastro-passeio" v-if="$store.state.cadastroPasseio11">
 
-      <h1 class="__form-title">Pagamento</h1>
+      <h1 class="__form-title">Detalhes sobre o pagamento</h1>
 
-      <h3 class="__form-text">{{ user.firstName }}, será cobrada uma mensalidade de <span style="font-weight:600">R$49,00</span> em seu cartão de crédito. Não se preocupe, não cobramos multa em caso de cancelamento.</h3>
+      <h3 class="__form-text">{{ user.firstName }}, será cobrada uma mensalidade de <span style="font-weight:600">R$49,00</span> em seu cartão de crédito. Não se preocupe, não cobraremos multa caso queira cancelar futuramente.</h3>
 
 
       <div class="payment-box">
         
+        
+        <h2 class="__form-subtitle">Dados cartão de crédito</h2>
 
         <!-- CARD HOLDER NAME -->
         <div class="item-form">
@@ -493,6 +495,95 @@
         </div><!-- CPF -->
 
 
+
+
+        <h2 class="__form-subtitle">Endereço de cobrança</h2>
+
+        <p>Utilizamos apenas para validar seu cartão de crédito.</p>
+
+        <!-- CEP -->
+        <div class="item-form">
+          <label :class="[ zipcodeError ? 'has-error-label' : '' ]">CEP</label>
+          <masked-input
+            ref="zipcode"
+            :class="[ zipcodeError ? 'has-error' : '' ]"
+            type="tel"
+            v-model="$store.state.customer.zipcode"
+            :mask="[/\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/]"
+            :guide="false"
+            placeholder="00000-000">
+          </masked-input>
+        </div><!-- CEP -->
+
+
+        <!-- ENDEREÇO -->
+        <div class="item-form">
+          <label :class="[ streetError ? 'has-error-label' : '' ]">Rua</label>
+          <input
+            ref="street"
+            :class="[ streetError ? 'has-error' : '' ]"
+            type="text"
+            @keypress="keyEnterStreet"
+            v-model="$store.state.customer.street"
+            placeholder="Endereço">
+        </div><!-- ENDEREÇO -->
+
+
+        <div class="flex" style="display:flex; justify-content:space-between">
+
+        <!-- NÚMERO -->
+        <div class="item-form" style="flex:50%; padding-right:.7rem">
+          <label :class="[ streetNumberError ? 'has-error-label' : '' ]">Número</label>
+          <masked-input
+            ref="streetNumber"
+            :class="[ streetNumberError ? 'has-error' : '' ]"
+            type="tel"
+            @keypress="keyEnterStreetNumber"
+            v-model="$store.state.customer.street_number"
+            :mask="[/\d/, /\d/, /\d/, /\d/]"
+            :guide="false">
+          </masked-input>
+        </div><!-- NÚMERO -->
+
+
+        <!-- BAIRRO -->
+        <div class="item-form" style="flex:50%; padding-left:.7rem">
+          <label :class="[ neighborhoodError ? 'has-error-label' : '' ]">Bairro</label>
+          <input
+            ref="bairro"
+            :class="[ neighborhoodError ? 'has-error' : '' ]"
+            type="text"
+            @keypress="keyEnterBairro"
+            v-model="$store.state.customer.neighborhood">
+        </div><!-- BAIRRO -->
+
+      </div>
+
+      <div class="flex" style="display:flex; justify-content:space-between; align-items:center">
+
+        <!-- CIDADE -->
+        <div class="item-form" style="flex:50%; padding-right:.7rem">
+          <label :class="[ cityError ? 'has-error-label' : '' ]">Cidade</label>
+          <input
+            ref="city"
+            :class="[ cityError ? 'has-error' : '' ]"
+            type="text"
+            @keypress="keyEnterCity"
+            v-model="$store.state.customer.city">
+        </div><!-- CIDADE -->
+
+
+        <!-- ESTADO -->
+        <div class="item-form" style="flex:50%; padding-left:.7rem">
+          <label :class="[ stateError ? 'has-error-label' : '' ]">Estado</label>
+          <select ref="state" :class="[ stateError ? 'has-error' : '' ]" v-model="$store.state.customer.state">
+            <option v-for="state in states" :value="state.value">{{ state.name }}</option>
+          </select>
+        </div><!-- ESTADO -->
+
+      </div>
+
+
         <h4 class="__termos">Ao anunciar, você concorda com a nossa <a href="/termos#politica_privacidade" target="_blank">Política de Privacidade</a> e <a href="/termos" target="_blank">Termos de Serviço</a>.</h4>
 
       </div> 
@@ -521,14 +612,14 @@ import 'firebase/firestore'
 import 'firebase/storage'
 import 'firebase/functions'
 import MaskedInput from 'vue-text-mask'
-import { bancos } from '../../../mixins/bancos'
+import { states } from '@/mixins/statesBrazil'
 import valid from 'card-validator'
 import CPF from 'gerador-validador-cpf'
 import scrollIntoView from 'scroll-into-view'
 
 export default {
   components: { MaskedInput },
-  mixins: [ bancos ],
+  mixins: [ states ],
   head () {
     return {
       title: 'Anunciar Passeio em Capitólio ‒ Escarpas Trip'
@@ -543,11 +634,17 @@ export default {
       showCroppaModal: false,
       isUploading: false,
       uploadProgress: 0,
-      cpfError: false,
       cardNumberError: false,
       cardHolderNameError: false,
       cardExpirationDateError: false,
-      cardCvvError: false
+      cardCvvError: false,
+      cpfError: false,
+      zipcodeError: false,
+      neighborhoodError: false,
+      streetError: false,
+      streetNumberError: false,
+      cityError: false,
+      stateError: false
     }
   },
   methods: {
@@ -561,6 +658,29 @@ export default {
       if (event.key === 'Enter') {
         scrollIntoView(this.$refs.cpf.$el)
         this.$refs.cpf.$el.focus()
+      }
+    },
+    keyEnterStreet () {
+      if (event.key === 'Enter') {
+        scrollIntoView(this.$refs.streetNumber.$el)
+        this.$refs.streetNumber.$el.focus() 
+      }  
+    },
+    keyEnterStreetNumber () {
+      if (event.key === 'Enter') {
+        this.$refs.bairro.focus()
+      } 
+    },
+    keyEnterBairro () {
+      if (event.key === 'Enter') {
+        scrollIntoView(this.$refs.city)
+        this.$refs.city.focus() 
+      }
+    },
+    keyEnterCity () {
+      if (event.key === 'Enter') {
+        scrollIntoView(this.$refs.state)
+        this.$refs.state.focus()
       }
     },
     scrollTop () {
@@ -774,7 +894,7 @@ export default {
       passeioData.hostID = this.user.userID
 
       /* Se todas as informações preenchidas */
-      if (this.cardHolderName !== '' && valid.number(this.cardNumber).isValid && valid.expirationDate(this.cardExpirationDate).isValid && valid.cvv(this.cardCVV).isValid && CPF.validate(this.cpf) && this.cpf.length === 14) {
+      if (this.formIsCompleted) {
 
         try {
           this.$store.commit('m_loader', true)
@@ -819,8 +939,14 @@ export default {
         !valid.expirationDate(this.cardExpirationDate).isValid ?  this.cardExpirationDateError = true :  this.cardExpirationDateError = false
         !valid.cvv(this.cardCVV).isValid ? this.cardCvvError = true : this.cardCvvError = false
         this.cpf.length < 14 || !CPF.validate(this.cpf) ? this.cpfError = true : this.cpfError = false
+        this.zipcode.length < 9 || !this.$store.state.validZipcode ? this.zipcodeError = true : this.zipcodeError = false
+        this.street === null || this.street === '' ? this.streetError = true : this.streetError = false
+        this.streetNumber === null || this.streetNumber === '' ? this.streetNumberError = true : this.streetNumberError = false
+        this.neighborhood === null || this.neighborhood === '' ? this.neighborhoodError = true : this.neighborhoodError = false
+        this.city === null || this.city === '' ? this.cityError = true : this.cityError = false
+        this.state === null || this.state === '' ? this.stateError = true : this.stateError = false
       }
-    },
+    }
   },
   computed: {
     /* ******************** PATHS ******************** */
@@ -835,6 +961,12 @@ export default {
     cardCVV () { return this.$store.state.creditCard.cardCVV },
     cardType () { return this.$store.state.cardType },
     cpf () { return this.$store.state.customer.cpf },
+    zipcode () { return this.$store.state.customer.zipcode },
+    street () { return this.$store.state.customer.street },
+    streetNumber () { return this.$store.state.customer.street_number },
+    neighborhood () { return this.$store.state.customer.neighborhood },
+    city () { return this.$store.state.customer.city },
+    state () { return this.$store.state.customer.state },
     /* ******************** CREDIT CARD ******************** */
     cardBrand () {
       const cardType = this.$store.state.cardType
@@ -881,8 +1013,13 @@ export default {
       return this.$store.state.passeioData.celular.length === 17 && this.authUser ? 'background: #198CFE' : ''
     },
     form11ok () {
-      if (this.cardHolderName !== '' && valid.number(this.cardNumber).isValid && valid.expirationDate(this.cardExpirationDate).isValid && valid.cvv(this.cardCVV).isValid && CPF.validate(this.cpf) && this.cpf.length === 14) {
-        return 'background: #198CFE'
+      return this.formIsCompleted ? 'background: #198CFE' : ''
+    },
+    formIsCompleted () {
+      if (this.cardHolderName !== '' && valid.number(this.cardNumber).isValid && valid.expirationDate(this.cardExpirationDate).isValid && valid.cvv(this.cardCVV).isValid && CPF.validate(this.cpf) && this.cpf.length === 14 && this.zipcode.length === 9 && this.$store.state.validZipcode && this.street !== '' && this.street !== null && this.streetNumber !== '' && this.streetNumber !== null && this.neighborhood !== '' && this.neighborhood !== null && this.city !== '' && this.city !== null && this.state !== '' && this.state !== null) {
+        return true
+      } else {
+        return false
       }
     }
   },
@@ -945,6 +1082,8 @@ export default {
       if (value.length === 14) {
         if (CPF.validate(value)) {
           this.cpfError = false
+          scrollIntoView(this.$refs.zipcode.$el)
+          this.$refs.zipcode.$el.focus()
         } else {
           this.cpfError = true
           this.$store.commit('show_alert', {
@@ -955,6 +1094,54 @@ export default {
         }
       }
     },
+    async zipcode (value) {
+      if (value.length === 9) {
+        try {
+          this.$store.commit('m_loader', true)
+          const zipcode = this.zipcode.replace(/[^0-9\.]+/g, '')
+          const zipcodeData = await this.$axios.$get('https://api.pagar.me/1/zipcodes/' + zipcode)
+          this.$store.state.customer.state = zipcodeData.state
+          this.$store.state.customer.city = zipcodeData.city
+          this.$store.state.customer.neighborhood = zipcodeData.neighborhood
+          this.$store.state.customer.street = zipcodeData.street
+          this.$store.state.validZipcode = true
+          this.$store.commit('m_loader', false)
+          this.$nextTick(() => {
+            if (this.street === null || this.street === '') {
+              scrollIntoView(this.$refs.street)
+              this.$refs.street.focus()
+            } else {
+              scrollIntoView(this.$refs.streetNumber.$el)
+              this.$refs.streetNumber.$el.focus() 
+            }
+          })
+        } catch (err) {
+          if (err.response.status === 404) {
+            this.$store.commit('show_alert', {
+              type: 'warning',
+              title: 'Erro',
+              message: 'CEP inválido.',
+            })
+          } else {
+            this.$store.commit('show_alert', {
+              type: 'warning',
+              title: 'Erro',
+              message: 'Falha na conexão. Tente novamente.',
+            })
+          }
+          this.zipcodeError = true
+          this.$store.state.validZipcode = false
+          this.$store.commit('m_loader', false)
+        }
+      } else {
+        this.zipcodeError = false
+      }
+    },
+    street (value) { value !== null ? this.streetError = false : null },
+    streetNumber (value) { value !== null ? this.streetNumberError = false : null },
+    neighborhood (value) { value !== null ? this.neighborhoodError = false : null },
+    city (value) { value !== null ? this.cityError = false : null },
+    state (value) { value !== null ? this.stateError = false : null },
     hash (value) {
       if (value === '') {
         if (this.$store.state.lastHash === `#${this.randomHashs[1]}`) {
@@ -1109,10 +1296,15 @@ export default {
       font-size: 17px;
     }
     & .__form-subtitle {
-      padding-top: 1.1rem;
+      padding: 1.5rem 7% 0;
       font-size: 18px;
       font-weight: 600;
       user-select: none;
+    }
+    & p {
+      font-size: 17px;
+      padding: .5rem 7% .2rem;
+      line-height: 26px;
     }
     & .__termos {
       padding: 0 7%;
@@ -1426,11 +1618,15 @@ export default {
         padding: 1.6rem 28% 1rem;
       }
       & .__form-subtitle {
-        padding-top: 1.5rem;
-        font-size: 19px;
+        padding: 1.7rem 28% .3rem;
+        font-size: 18px;
+      }
+      & p {
+        font-size: 17px;
+        padding: .4rem 28%;
       }
       & .__termos {
-        padding: 0 35%;
+        padding: 1rem 35% 0;
         text-align: center;
       }
       & textarea {
@@ -1442,7 +1638,7 @@ export default {
       }
       & .item-form {
         padding: 0 28%;
-        margin: 1.5rem 0;
+        margin: 1.3rem 0;
         & label {
           font-size: 15px;
         }

@@ -38,8 +38,8 @@
       <div class="sign-in-body">
         <img class="__img" src="../static/brand.svg">
 
-        <h1 class="__title">{{ $store.state.clickedAskAcomod === true || $store.state.clickedReservaAcomod === true ? 'Antes, é preciso se cadastrar' : 'Cadastrar' }}</h1>
-        <h3 class="__subtitle">{{ $store.state.clickedAskAcomod === true || $store.state.clickedReservaAcomod === true ? '' : 'Cadastre-se para fazer reservas ou anunciar na Escarpas Trip' }}</h3>
+        <h1 class="__title">{{ $store.state.clickedReservaAcomod === true ? 'Antes, é preciso se cadastrar' : 'Cadastrar' }}</h1>
+        <h3 class="__subtitle">{{ $store.state.clickedReservaAcomod === true ? '' : 'Cadastre-se para fazer reservas ou anunciar na Escarpas Trip' }}</h3>
 
         <button type="button" class="google-btn" @click="$store.dispatch('a_googleSignIn')">Cadastrar com Google</button>
         <button type="button" class="facebook-btn" @click="$store.dispatch('a_facebookSignIn')">Cadastrar com Facebook</button>
@@ -65,7 +65,6 @@ export default {
   methods: {
     closedModal () {
       this.$store.state.clickedReservaAcomod = false
-      this.$store.state.clickedAskAcomod = false
       this.$store.state.isSignIn = true
     }
   },
@@ -78,10 +77,6 @@ export default {
         this.$modal.hide('sign-in-modal')
         this.$router.push('/perfil')
       }
-      if (value && this.$store.state.clickedAskAcomod === true && this.$route.name === 'acomodacoes-id') {
-        this.$modal.hide('sign-in-modal')
-        this.$modal.show('ask-acomod-modal')
-      }
       if (value && this.$store.state.clickedReservaAcomod === true && this.$route.name === 'acomodacoes-id') {
         this.$store.state.creditCard.cardHolderName = this.$store.state.user.fullName
         this.$modal.hide('sign-in-modal')
@@ -89,12 +84,6 @@ export default {
         this.$router.push('/acomodacoes/reservar')
         this.$store.commit('m_showNavbar', false)
       }
-      /* MUDAR ISSO AQUI */
-      /* if (value !== null && this.$store.state.isMobile && this.$route.name !== 'anunciar-acomodacao') {
-        this.$modal.hide('sign-in-modal')
-        const shortEmail = this.user.substring(0, this.user.indexOf("@"))
-        this.$router.push(`/@${shortEmail}`)
-      } */
     }
   }
 }

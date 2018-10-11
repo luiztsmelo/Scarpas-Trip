@@ -116,17 +116,6 @@ const store = () => new Vuex.Store({
       email: null,
       photoURL: null
     },
-    message: {
-      timestamp: null,
-      from: null,
-      to: null,
-      text: '',
-      about: null,
-      id: null,
-      checkIn: null,
-      checkOut: null,
-      totalHospedes: null
-    },
     /*
     -------------------- CONFIGS --------------------
     */
@@ -208,7 +197,6 @@ const store = () => new Vuex.Store({
     clickedReservaAcomod: false,
     concludedReservaAcomod: false,
     concludedNewAcomod: false,
-    clickedAskAcomod: false,
     cadastroAcomod0: true,
     cadastroAcomod1: false,
     cadastroAcomod2: false,
@@ -376,17 +364,6 @@ const store = () => new Vuex.Store({
     },
     m_user (state, payload) {
       state.user = payload
-    },
-    m_resetMessage (state) {
-      state.message.timestamp = null
-      state.message.from = null
-      state.message.to = null
-      state.message.text = ''
-      state.message.about = null
-      state.message.id = null
-      state.message.checkIn = null
-      state.message.checkOut = null
-      state.message.totalHospedes = null
     },
     m_showNavbar (state, payload) {
       state.showNavbar = payload
