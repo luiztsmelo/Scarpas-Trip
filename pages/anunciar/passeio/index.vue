@@ -1229,6 +1229,7 @@ export default {
   beforeRouteEnter (to, from, next) {
     next(async vm => {
       try {
+        vm.$store.commit('m_cadastroPasseio0', true)
         if (vm.$store.state.showFoobar === true) {
           vm.$store.commit('m_showFoobar', false)
         }

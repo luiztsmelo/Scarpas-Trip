@@ -53,7 +53,7 @@
           <div class="dropdown-body" style="right: 10%">
             <ul>
               <nuxt-link to="/anunciar/acomodacao">
-                <li class="__nav-item" @click="$store.commit('m_cadastroAcomod0', true)">Acomodação</li>
+                <li class="__nav-item">Acomodação</li>
               </nuxt-link>
               <nuxt-link to="/anunciar/passeio">
                 <li class="__nav-item">Passeio</li>
