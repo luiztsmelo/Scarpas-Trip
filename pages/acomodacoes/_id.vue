@@ -1180,9 +1180,9 @@ export default {
             display: flex;
             align-items: center;
             width: calc(100%/3);
-            margin-bottom: 1.3rem;
+            margin-bottom: 1.4rem;
             & .__img {
-              width: 1.7rem;
+              width: 1.6rem;
               height: auto;
               margin-right: .8rem;
             }

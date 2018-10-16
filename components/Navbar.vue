@@ -142,7 +142,7 @@ export default {
       & .__brand-name {
         font-family: var(--main-font);
         font-size: 18px;
-        font-weight: 500;
+        font-weight: 600;
         line-height: 3.5rem;
         user-select: none;
       }
@@ -183,14 +183,14 @@ export default {
       }
       & .__nav-item {
         font-size: 14px;
-        font-weight: 500;
+        font-weight: 600;
         user-select: none;
       }
       & .__nav-item-no-a {
         padding: 0 .8rem;
         cursor: pointer;
         font-size: 14px;
-        font-weight: 500;
+        font-weight: 600;
         user-select: none;
       }
       & .__nav-item-no-a:hover {
@@ -225,7 +225,7 @@ export default {
             padding: .85rem 0;
             cursor: pointer;
             font-size: 14px;
-            font-weight: 500;
+            font-weight: 600;
             user-select: none;
           }
           & li:hover {

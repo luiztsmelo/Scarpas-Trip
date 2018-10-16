@@ -15,7 +15,7 @@ export const swiperOptions = {
           autoplay: {
             delay: 3000
           },
-          speed: 20000
+          speed: 22000
         }
       }
     }

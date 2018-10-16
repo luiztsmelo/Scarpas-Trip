@@ -1276,7 +1276,10 @@ export default {
   beforeRouteEnter (to, from, next) {
     next(async vm => {
       try {
-        vm.$store.commit('m_cadastroAcomod0', true)
+        /* Prevenir bug em caso de F5 */
+        if (!vm.$store.state.cadastroAcomod0 && !vm.$store.state.cadastroAcomod1 && !vm.$store.state.cadastroAcomod2 && !vm.$store.state.cadastroAcomod3 && !vm.$store.state.cadastroAcomod4 && !vm.$store.state.cadastroAcomod5 && !vm.$store.state.cadastroAcomod6 && !vm.$store.state.cadastroAcomod7 && !vm.$store.state.cadastroAcomod8 && !vm.$store.state.cadastroAcomod9 && !vm.$store.state.cadastroAcomod10 && !vm.$store.state.cadastroAcomod11 && !vm.$store.state.cadastroAcomod12) {
+          vm.$store.commit('m_cadastroAcomod0', true)
+        }
         if (vm.$store.state.showFoobar === true) {
           vm.$store.commit('m_showFoobar', false)
         }
@@ -1296,6 +1299,21 @@ export default {
         console.log(err)
       }
     })
+  },
+  beforeRouteLeave (to, from, next) {
+    this.$store.commit('m_cadastroAcomod1', false)
+    this.$store.commit('m_cadastroAcomod2', false)
+    this.$store.commit('m_cadastroAcomod3', false)
+    this.$store.commit('m_cadastroAcomod4', false)
+    this.$store.commit('m_cadastroAcomod5', false)
+    this.$store.commit('m_cadastroAcomod6', false)
+    this.$store.commit('m_cadastroAcomod7', false)
+    this.$store.commit('m_cadastroAcomod8', false)
+    this.$store.commit('m_cadastroAcomod9', false)
+    this.$store.commit('m_cadastroAcomod10', false)
+    this.$store.commit('m_cadastroAcomod11', false)
+    this.$store.commit('m_cadastroAcomod12', false)
+    next()
   }
 }
 </script>

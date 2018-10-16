@@ -514,7 +514,7 @@
 
         <h2 class="__form-subtitle" style="margin-top: 1.6rem">Endereço de cobrança</h2>
 
-        <p>Utilizaremos apenas para validar seu cartão de crédito.</p>
+        <p>Necessário apenas para a validação de seu cartão de crédito.</p>
 
         <!-- CEP -->
         <div class="item-form">
@@ -568,7 +568,6 @@
             ref="bairro"
             :class="[ neighborhoodError ? 'has-error' : '' ]"
             type="text"
-            @keypress="keyEnterBairro"
             v-model="$store.state.customer.neighborhood">
         </div><!-- BAIRRO -->
 
@@ -582,18 +581,23 @@
           <input
             ref="city"
             :class="[ cityError ? 'has-error' : '' ]"
+            style="cursor: default"
             type="text"
-            @keypress="keyEnterCity"
-            v-model="$store.state.customer.city">
+            v-model="$store.state.customer.city"
+            disabled>
         </div><!-- CIDADE -->
 
 
         <!-- ESTADO -->
         <div class="item-form" style="flex:50%; padding-left:.7rem">
           <label :class="[ stateError ? 'has-error-label' : '' ]">Estado</label>
-          <select ref="state" :class="[ stateError ? 'has-error' : '' ]" v-model="$store.state.customer.state">
-            <option v-for="state in states" :value="state.value">{{ state.name }}</option>
-          </select>
+          <input
+            ref="state"
+            :class="[ stateError ? 'has-error' : '' ]"
+            style="cursor: default"
+            type="text"
+            v-model="$store.state.customer.state"
+            disabled>
         </div><!-- ESTADO -->
 
       </div>
@@ -685,18 +689,6 @@ export default {
       if (event.key === 'Enter') {
         this.$refs.bairro.focus()
       } 
-    },
-    keyEnterBairro () {
-      if (event.key === 'Enter') {
-        scrollIntoView(this.$refs.city)
-        this.$refs.city.focus() 
-      }
-    },
-    keyEnterCity () {
-      if (event.key === 'Enter') {
-        scrollIntoView(this.$refs.state)
-        this.$refs.state.focus()
-      }
     },
     scrollTop () {
       document.body.scrollTop = 0
@@ -1229,7 +1221,10 @@ export default {
   beforeRouteEnter (to, from, next) {
     next(async vm => {
       try {
-        vm.$store.commit('m_cadastroPasseio0', true)
+        /* Prevenir bug em caso de F5 */
+        if (!vm.$store.state.cadastroPasseio0 && !vm.$store.state.cadastroPasseio1 && !vm.$store.state.cadastroPasseio2 && !vm.$store.state.cadastroPasseio3 && !vm.$store.state.cadastroPasseio4 && !vm.$store.state.cadastroPasseio5 && !vm.$store.state.cadastroPasseio6 && !vm.$store.state.cadastroPasseio7 && !vm.$store.state.cadastroPasseio8 && !vm.$store.state.cadastroPasseio9 && !vm.$store.state.cadastroPasseio10 && !vm.$store.state.cadastroPasseio11) {
+          vm.$store.commit('m_cadastroPasseio0', true)
+        }
         if (vm.$store.state.showFoobar === true) {
           vm.$store.commit('m_showFoobar', false)
         }
@@ -1249,6 +1244,20 @@ export default {
         console.log(err)
       }
     })
+  },
+  beforeRouteLeave (to, from, next) {
+    this.$store.commit('m_cadastroPasseio1', false)
+    this.$store.commit('m_cadastroPasseio2', false)
+    this.$store.commit('m_cadastroPasseio3', false)
+    this.$store.commit('m_cadastroPasseio4', false)
+    this.$store.commit('m_cadastroPasseio5', false)
+    this.$store.commit('m_cadastroPasseio6', false)
+    this.$store.commit('m_cadastroPasseio7', false)
+    this.$store.commit('m_cadastroPasseio8', false)
+    this.$store.commit('m_cadastroPasseio9', false)
+    this.$store.commit('m_cadastroPasseio10', false)
+    this.$store.commit('m_cadastroPasseio11', false)
+    next()
   }
 }
 </script>

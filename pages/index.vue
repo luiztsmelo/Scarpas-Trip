@@ -19,12 +19,7 @@
 
           <h1 class="__title">Acomodações</h1>
 
-          <nuxt-link to="/acomodacoes">
-            <div class="see-all">
-              <h3 class="__see-all-text">Ver mais</h3>
-              <img class="__see-all-arrow" src="../assets/img/see-all-arrow.svg">
-            </div>
-          </nuxt-link> 
+          <nuxt-link to="/acomodacoes" class="see-all" style="color: #FFA04F">Ver mais ❯</nuxt-link> 
 
         </div>
         
@@ -75,12 +70,7 @@
 
           <h1 class="__title">Passeios</h1>
 
-          <nuxt-link to="/passeios">
-            <div class="see-all">
-              <h3 class="__see-all-text">Ver mais</h3>
-              <img class="__see-all-arrow" src="../assets/img/see-all-arrow.svg">
-            </div>
-          </nuxt-link> 
+          <nuxt-link to="/passeios" class="see-all" style="color: #198CFE">Ver mais ❯</nuxt-link> 
 
         </div>
         
@@ -129,12 +119,7 @@
 
           <h1 class="__title">Próximos Eventos</h1>
 
-          <nuxt-link to="/eventos">
-            <div class="see-all">
-              <h3 class="__see-all-text">Ver mais</h3>
-              <img class="__see-all-arrow" src="../assets/img/see-all-arrow.svg">
-            </div>
-          </nuxt-link>
+          <nuxt-link to="/eventos" class="see-all" style="color: #FF7E65">Ver mais ❯</nuxt-link> 
 
         </div>
         
@@ -169,12 +154,7 @@
 
           <h1 class="__title">Atrações</h1>
 
-          <nuxt-link to="/atracoes">
-            <div class="see-all">
-              <h3 class="__see-all-text">Ver mais</h3>
-              <img class="__see-all-arrow" src="../assets/img/see-all-arrow.svg">
-            </div>
-          </nuxt-link>
+          <nuxt-link to="/atracoes" class="see-all" style="color: #81C784">Ver mais ❯</nuxt-link> 
 
         </div>
         
@@ -206,12 +186,7 @@
 
           <h1 class="__title">Restaurantes</h1>
 
-          <nuxt-link to="/restaurantes">
-            <div class="see-all">
-              <h3 class="__see-all-text">Ver mais</h3>
-              <img class="__see-all-arrow" src="../assets/img/see-all-arrow.svg">
-            </div>
-          </nuxt-link> 
+          <nuxt-link to="/restaurantes" class="see-all" style="color: #fc5656">Ver mais ❯</nuxt-link> 
 
         </div>
         
@@ -317,20 +292,13 @@ export default {
           font-weight: 700;
         }
         & .see-all {
-          display: flex;
-          align-items: center;
-          cursor: pointer;
-          & .__see-all-text {
-            font-size: 14px;
-            font-weight: 500;
-            padding-right: 4px;
-            color: #1E9297;
-          }
-          & .__see-all-arrow {
-            opacity: .6;
-            width: .56rem;
-            height: auto;
-          }
+          display: none;
+          font-size: 14px;
+          font-weight: 600;
+          padding-right: 4px;
+        }
+        & .see-all:hover {
+          text-decoration: underline;
         }
       }
       & .__subtitle {
@@ -401,7 +369,7 @@ export default {
     & .home-body {
       margin-bottom: 0;
       & .category-container {
-        padding-bottom: 6rem;
+        padding-bottom: 5rem;
         & .title-row {
           padding: 0 7% 1.2rem 7%;
           & .__title {
