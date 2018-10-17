@@ -369,7 +369,7 @@ export default {
     & .home-body {
       margin-bottom: 0;
       & .category-container {
-        padding-bottom: 5rem;
+        padding-bottom: 4rem;
         & .title-row {
           padding: 0 7% 1.2rem 7%;
           & .__title {

@@ -68,7 +68,7 @@
               :show-rating="false"
               active-color="#161616"
               inactive-color="#dedede"
-              :star-size="11"
+              :star-size="12"
               :padding="3">
             </star-rating>
             <p class="rating-number">4,7</p>
@@ -260,17 +260,27 @@
 
         <!-- ______________________________ DISPONIBILIDADE ______________________________ -->
         <h1 class="item-title">Disponibilidade</h1>
+        
+        <div class="datepicker-trigger">
+          <button
+            type="button"
+            id="datepicker-trigger"
+            style="display: none">
+          </button>
 
-        <v-calendar
-          is-linked
-          is-inline
-          is-double-paned
-          is-expanded
-          :min-date="minDate"
-          mode="single"
-          :theme-styles="calendarMobileStyle"
-          :attributes="attributesCalendar">
-        </v-calendar>
+          <AirbnbStyleDatepicker
+          style="border:none"
+            :trigger-element-id="'datepicker-trigger'"
+            :inline="true"
+            :showShortcutsMenuTrigger="false"
+            :showActionButtons="false"
+            :min-date="minDate"
+            :date-one="startDate"
+            :date-two="endDate"
+            @date-one-selected="val => { startDate = val }"
+            @date-two-selected="val => { endDate = val }"
+          />
+        </div>
         <!-- ______________________________ DISPONIBILIDADE ______________________________ -->
 
 
@@ -337,40 +347,29 @@
 
 
           <div class="item-form">
-            <v-date-picker
-              ref="datePicker"
-              mode="range"
-              v-model="$store.state.reservaAcomod.periodoReserva"
-              @input="inputDate"
-              :pane-width="290"
-              :min-date="minDate"
-              :disabled-dates="$store.state.disabledDatesAcomod"
-              :drag-attribute="attribute"
-              :select-attribute="attribute"
-              :disabled-attribute="disabledAttribute"
-              :theme-styles="datePickerDesktopStyle"
-              tint-color="#FFA04F"
-              show-caps
-              popover-visibility="focus">
-              <div
-                slot-scope="{ updateValue }">
-                <div>
-                  <input
-                    type="text"
-                    placeholder="Chegada  →  Partida"
-                    :value="outputDatePicker"
-                    @change="updateValue($event.target.value)"
-                    class="reserva-input-date"
-                  />
-                  <img
-                    src="../../assets/img/exit.svg"
-                    v-if="periodoReserva !== null"
-                    class="reserva-close-date"
-                    @click.stop="$store.state.reservaAcomod.periodoReserva = null"
-                  >
-                </div>
-              </div>
-            </v-date-picker>
+
+            <div class="datepicker-trigger">
+              <button
+                type="button"
+                id="datepicker-trigger">
+                {{ formatDates(startDate, endDate) }}
+              </button>
+
+              <AirbnbStyleDatepicker
+                :trigger-element-id="'datepicker-trigger'"
+                :fullscreen-mobile="true"
+                :showShortcutsMenuTrigger="false"
+                :monthsToShow="1"
+                :offsetX="102"
+                :offsetY="52"
+                :min-date="minDate"
+                :date-one="startDate"
+                :date-two="endDate"
+                @date-one-selected="val => { startDate = val }"
+                @date-two-selected="val => { endDate = val }"
+              />
+            </div>
+
           </div>
 
 
@@ -407,7 +406,7 @@
 
           <button class="__reserva-desktop-btn" type="button" @click="reservarDesktop">Reservar</button>
 
-          <h4 class="__info">Não se preocupe, você não será cobrado.</h4>
+          <h4 class="__info">A reserva é gratuita!</h4>
 
 
         </form>
@@ -452,24 +451,22 @@ import Host from '@/components/Host'
 import supportsWebP from 'supports-webp'
 import { mapstyle } from '@/mixins/mapstyle'
 import { swiperOptions } from '@/mixins/swiper_id'
-import { stylesCalendar } from '@/mixins/stylesCalendar'
 import { tipoAcomod } from '@/mixins/tipoAcomod'
+import format from 'date-fns/format'
+import subDays from 'date-fns/sub_days'
+import pt from 'date-fns/locale/pt'
 import dayjs from 'dayjs'
 import 'dayjs/locale/pt-br'
 dayjs.locale('pt-br')
 
 export default {
   components: { MiniLoader, ReservaMobile, Host },
-  mixins: [ mapstyle, swiperOptions, stylesCalendar, tipoAcomod ],
+  mixins: [ mapstyle, swiperOptions, tipoAcomod ],
   data () {
     return {
       showComods: false,
-      attribute: {
-        popover: {
-          hideIndicator: true,
-          visibility: 'none'
-        }
-      }
+      startDate: '',
+      endDate: ''
     }
   },
   head () {
@@ -507,6 +504,16 @@ export default {
   methods: {
     imageH (image) {
       return supportsWebP ? image.HW : image.HJ
+    },
+    formatDates (startDate, endDate) {
+      let formattedDates = ''
+      if (startDate === '') {
+        return 'Chegada / Partida'
+      } else {
+        startDate ? formattedDates = format(startDate, 'D MMM', { locale: pt }) : ''
+        endDate ? formattedDates += ' - ' + format(endDate, 'D MMM', { locale: pt }) : ''
+        return formattedDates
+      }
     },
     inputDate () { /* Em caso de alterações, lembrar também de alterar DatePicker.vue */
       this.periodoReserva.start = Date.parse(this.periodoReserva.start)
@@ -631,39 +638,11 @@ export default {
     hash () { return this.$route.hash },
     host () {return this.$store.state.host },
     periodoReserva () {return this.$store.state.reservaAcomod.periodoReserva },
-    attributesCalendar () {
-      return [
-        {
-          key: 'minDate',
-          contentStyle: {
-            opacity: 0.2,
-            textDecoration: 'line-through'
-          },
-          dates: {
-            start: null,
-            end: dayjs(new Date()).add(1, 'day')
-          }
-        },
-        {
-          key: 'disabledDatesAcomod',
-          contentStyle: {
-            opacity: 0.2,
-            textDecoration: 'line-through'
-          },
-          dates: this.$store.state.disabledDatesAcomod
-        }
-      ]
-    },
     totalHospedesArray () {
       return Array.from({length: this.acomod.totalHospedes}, (v, k) => k+1)
     },
-    outputDatePicker () {
-      if (this.periodoReserva !== null) {
-        return dayjs(this.periodoReserva.start).format('ddd, DD MMM') + '  →  ' + dayjs(this.periodoReserva.end).format('ddd, DD MMM')
-      }
-    },
-    minDate () {
-      return dayjs(new Date()).add(2, 'day').toDate()
+    minDate() {
+      return subDays(Date(), 1)
     }
   },
   watch: {
@@ -743,7 +722,7 @@ export default {
       display: flex;
       align-items: center;
       & .rating-number {
-        font-size: 13px;
+        font-size: 14px;
         font-weight: 600;
         padding-left: 3px;
       }
@@ -1040,17 +1019,18 @@ export default {
             & select:hover {
               border: 1px solid var(--color01) !important;
             }
-            & .reserva-input-date {
-              padding-left: .9rem;
-            }
-            & .reserva-close-date {
-              width: .7rem;
-              height: auto;
-              position: absolute;
-              right: 3%;
-              top: 50%;
-              transform: translateY(-50%);
-              cursor: pointer;
+            & .datepicker-trigger {
+              height: 100%;
+              background: white;
+              & #datepicker-trigger {
+                padding: .75rem;
+                height: 100%;
+                width: 100%;
+                background: white;
+                border: 1px solid #dedede;
+                outline: none;
+                text-align: left;
+              }
             }
           }
           & .reserva-info {

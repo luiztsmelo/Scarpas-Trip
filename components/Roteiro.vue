@@ -5,20 +5,65 @@
       
 
 
-      <h1 class="headline">Encontre tudo para sua viagem a Capitólio e região!</h1>
+
+      <h1 class="headline">Encontre Acomodações, Passeios, Eventos e Restaurantes em Capitólio e Região</h1>
+
 
 
 
       <form class="roteiro-form">
 
-        <button class="datas-btn" type="button">Chegada / Partida</button>
 
-        <button class="hospedes-btn" type="button">1 Hóspede</button>
+        <div class="datepicker-trigger">
+          <button
+            type="button"
+            id="datepicker-trigger">
+            {{ formatDates(startDate, endDate) }}
+          </button>
 
-        <button class="buscar-btn" type="button">Buscar</button>
+          <AirbnbStyleDatepicker
+            :trigger-element-id="'datepicker-trigger'"
+            :fullscreen-mobile="true"
+            :showShortcutsMenuTrigger="false"
+            :offset-y="7"
+            :min-date="minDate"
+            :date-one="startDate"
+            :date-two="endDate"
+            @date-one-selected="val => { startDate = val }"
+            @date-two-selected="val => { endDate = val }"
+          />
+        </div>
+
+
+        <select class="hospedes-select" v-model="$store.state.reservaAcomod.totalHospedes">
+          <option :value="n" v-for="n in 25">{{ n }} {{ n === 1 ? 'hóspede' : 'hóspedes' }}</option>
+        </select>
+
+
+        <button class="buscar-btn" type="button">Criar Roteiro</button>
+
 
       </form>
   
+
+
+      <star-rating
+        class="rating"
+        :rating="5"
+        :read-only="true"
+        :show-rating="false"
+        active-color="#fff"
+        :star-size="15"
+        :padding="10">
+      </star-rating>
+
+
+
+      <p class="testimonial">"Incrível a maneira como a Escarpas Trip facilita a organização de sua viagem. Fechamos uma casa e um passeio em poucos minutos, diretamente com os proprietários!"</p>
+
+      <p class="testimonial-name">Roberta e Conrado, Belo Horizonte</p>
+
+
 
 
     </div>
@@ -28,11 +73,35 @@
 
 <script>
 import supportsWebP from 'supports-webp'
+import format from 'date-fns/format'
+import subDays from 'date-fns/sub_days'
+import pt from 'date-fns/locale/pt'
 
 export default {
+  data() {
+    return {
+      startDate: '',
+      endDate: ''
+    }
+  },
+  methods: {
+    formatDates (startDate, endDate) {
+      let formattedDates = ''
+      if (startDate === '') {
+        return 'Chegada / Partida'
+      } else {
+        startDate ? formattedDates = format(startDate, 'D MMM', { locale: pt }) : ''
+        endDate ? formattedDates += ' - ' + format(endDate, 'D MMM', { locale: pt }) : ''
+        return formattedDates
+      }
+    }
+  },
   computed: {
     bgimg () {
       return supportsWebP ? require('@/assets/img/bgimg.webp') : require('@/assets/img/bgimg.jpg')
+    },
+    minDate() {
+      return subDays(Date(), 1)
     }
   }
 }
@@ -42,7 +111,7 @@ export default {
 
 .roteiro {
   width: 100%;
-  height: 13rem;
+  height: 17rem;
   background-repeat: no-repeat;
   background-size: cover;
   & .roteiro-container {
@@ -65,6 +134,15 @@ export default {
       line-height: 30px;
       user-select: none;
     }
+    & .rating {
+      display: none;
+    }
+    & .testimonial {
+      display: none;
+    }
+    & .testimonial-name {
+      display: none;
+    }
   }
 }
 
@@ -80,46 +158,81 @@ export default {
       display: flex;
       flex-flow: column;
       align-items: center;
-      background: rgba(0,0,0, .2);
+      background: rgba(0,0,0, .3);
       & .headline {
-        padding: 0 24% 3rem;
+        padding: 2rem 20% 0;
         width: 100%;
-        font-size: 38px;
-        font-weight: 500;
-        line-height: 50px;
+        font-size: 32px;
+        font-weight: 600;
+        line-height: 45px;
         text-align: center;
       }
       & .roteiro-form {
         display: flex;
+        margin: 3.4rem 0 2.8rem;
         align-items: center;
         justify-content: center;
-        background: white;
+        background: transparent;
         height: 3.4rem;
-        width: 34rem;
-        border-radius: 6px;
-        & .datas-btn {
+        width: 36rem;
+        & .datepicker-trigger {
           height: 100%;
-          flex: 40%;
-          overflow: hidden;
+          flex: 1;
           background: transparent;
-          font-weight: 500;
+          & #datepicker-trigger {
+            height: 100%;
+            width: 100%;
+            background: white;
+            text-align: center;
+            border: none;
+            border-radius: 6px 0 0 6px;
+            outline: none;
+          }
         }
-        & .hospedes-btn {
+        & .hospedes-select {
           height: 100%;
-          flex: 33%;
-          background: transparent;
-          font-weight: 500;
+          flex: 1;
+          background: white;
+          border: none;
           border-left: 1px solid #dedede;
           border-right: 1px solid #dedede;
+          text-align-last:center;
+          outline: none;
         }
         & .buscar-btn {
           height: 100%;
-          flex: 33%;
+          flex: 1;
           background: var(--colorAcomod);
           color: white;
-          font-weight: 600;
+          font-weight: 700;
           border-radius: 0 6px 6px 0;
+          transition: var(--main-transition);
         }
+        & .buscar-btn:hover {
+          background: #ED8226;
+        }
+      }
+      & .rating {
+        display: inline-flex;
+        margin: .6rem 0;
+      }
+      & .testimonial {
+        display: inline-flex;
+        padding: 0 26%;
+        color: white;
+        font-size: 14px;
+        line-height: 1.45;
+        font-weight: 500;
+        font-style: italic;
+        text-align: center;
+      }
+      & .testimonial-name {
+        display: inline-flex;
+        padding-top: .6rem;
+        color: white;
+        font-size: 14px;
+        font-weight: 400;
+        text-align: center;
       }
     }
   }  

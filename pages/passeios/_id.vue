@@ -70,7 +70,7 @@
               :show-rating="false"
               active-color="#161616"
               inactive-color="#dedede"
-              :star-size="11"
+              :star-size="12"
               :padding="3">
             </star-rating>
             <p class="rating-number">4,7</p>
@@ -149,16 +149,26 @@
         <!-- ______________________________ DISPONIBILIDADE ______________________________ -->
         <h1 class="item-title">Disponibilidade</h1>
 
-        <v-calendar
-          is-linked
-          is-inline
-          is-double-paned
-          is-expanded
-          :min-date="minDate"
-          mode="single"
-          :theme-styles="calendarMobileStyle"
-          :attributes="attributesCalendar">
-        </v-calendar>
+        <div class="datepicker-trigger">
+          <button
+            type="button"
+            id="datepicker-trigger"
+            style="display: none">
+          </button>
+
+          <AirbnbStyleDatepicker
+          style="border:none"
+            :trigger-element-id="'datepicker-trigger'"
+            :inline="true"
+            :showShortcutsMenuTrigger="false"
+            :showActionButtons="false"
+            :min-date="minDate"
+            :date-one="startDate"
+            :date-two="endDate"
+            @date-one-selected="val => { startDate = val }"
+            @date-two-selected="val => { endDate = val }"
+          />
+        </div>
         <!-- ______________________________ DISPONIBILIDADE ______________________________ -->
 
 
@@ -199,7 +209,7 @@
 
         <button class="__reserva-desktop-btn" type="button">Reservar</button>
 
-        <h4 class="__info">Não se preocupe, você não será cobrado.</h4>
+        <h4 class="__info">A reserva é gratuita!</h4>
 
       </div><!-- ______________________________ RESERVA DESKTOP ______________________________ -->
 
@@ -235,6 +245,9 @@ import supportsWebP from 'supports-webp'
 import { mapstyle } from '../../mixins/mapstyle'
 import { swiperOptions } from '../../mixins/swiper_id'
 import { stylesCalendar } from '@/mixins/stylesCalendar'
+import format from 'date-fns/format'
+import subDays from 'date-fns/sub_days'
+import pt from 'date-fns/locale/pt'
 import dayjs from 'dayjs'
 import 'dayjs/locale/pt-br'
 dayjs.locale('pt-br')
@@ -244,6 +257,8 @@ export default {
   mixins: [ mapstyle, swiperOptions, stylesCalendar ],
   data () {
     return {
+      startDate: '',
+      endDate: ''
     }
   },
   head () {
@@ -281,6 +296,16 @@ export default {
     }
   },
   methods: {
+    formatDates (startDate, endDate) {
+      let formattedDates = ''
+      if (startDate === '') {
+        return 'Chegada / Partida'
+      } else {
+        startDate ? formattedDates = format(startDate, 'D MMM', { locale: pt }) : ''
+        endDate ? formattedDates += ' - ' + format(endDate, 'D MMM', { locale: pt }) : ''
+        return formattedDates
+      }
+    },
     scrollTopbarBg (evt, el) {
       return window.scrollY >= this.$store.state.heightImageBox
         ? el.setAttribute("style", "background: white; box-shadow: 0px 1px 1px 0px rgba(0,0,0,0.1)")
@@ -323,23 +348,8 @@ export default {
     passeio () { return this.$store.state.passeio },
     host () {return this.$store.state.host },
     showShare () { return this.$store.state.showShare },
-    minDate () {
-      return dayjs(new Date()).subtract(1, 'day').toDate()
-    },
-    attributesCalendar () {
-      return [
-        {
-          key: 'minDate',
-          contentStyle: {
-            opacity: 0.2,
-            textDecoration: 'line-through'
-          },
-          dates: {
-            start: null,
-            end: dayjs(new Date()).subtract(1, 'day')
-          }
-        }
-      ]
+    minDate() {
+      return subDays(Date(), 1)
     }
   },
   beforeRouteEnter (to, from, next) {
@@ -414,7 +424,7 @@ export default {
       display: flex;
       align-items: center;
       & .rating-number {
-        font-size: 13px;
+        font-size: 14px;
         font-weight: 600;
         padding-left: 3px;
       }

@@ -63,7 +63,8 @@ module.exports = {
     '~/plugins/v-calendar',
     '~/plugins/scroll',
     '~/plugins/vue-js-modal',
-    '~/plugins/vue-star-rating'
+    '~/plugins/vue-star-rating',
+    '~/plugins/vue-airbnb-style-datepicker'
   ],
   /* _________________________________________ LOADINGS __________________________________________ */
   loading: false,
