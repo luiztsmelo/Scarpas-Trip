@@ -260,27 +260,33 @@
 
         <!-- ______________________________ DISPONIBILIDADE ______________________________ -->
         <h1 class="item-title">Disponibilidade</h1>
-        
-        <div class="datepicker-trigger">
-          <button
-            type="button"
-            id="datepicker-trigger"
-            style="display: none">
-          </button>
 
-          <AirbnbStyleDatepicker
-          style="border:none"
-            :trigger-element-id="'datepicker-trigger'"
-            :inline="true"
-            :showShortcutsMenuTrigger="false"
-            :showActionButtons="false"
-            :min-date="minDate"
-            :date-one="startDate"
-            :date-two="endDate"
-            @date-one-selected="val => { startDate = val }"
-            @date-two-selected="val => { endDate = val }"
-          />
+        <div class="disponibilidade-box">
+
+          <div class="datepicker-trigger">
+            <button
+              type="button"
+              id="datepicker-trigger"
+              style="display: none">
+            </button>
+
+            <AirbnbStyleDatepicker
+              style="border:none"
+              :trigger-element-id="'datepicker-trigger'"
+              :inline="true"
+              :showShortcutsMenuTrigger="false"
+              :showActionButtons="false"
+              :min-date="minDate"
+              :date-one="startDate"
+              :date-two="endDate"
+              @date-one-selected="val => { startDate = val }"
+              @date-two-selected="val => { endDate = val }"
+            />
+          </div>
+
         </div>
+        
+        
         <!-- ______________________________ DISPONIBILIDADE ______________________________ -->
 
 
@@ -510,8 +516,14 @@ export default {
       if (startDate === '') {
         return 'Chegada / Partida'
       } else {
-        startDate ? formattedDates = format(startDate, 'D MMM', { locale: pt }) : ''
-        endDate ? formattedDates += ' - ' + format(endDate, 'D MMM', { locale: pt }) : ''
+        const startDay = format(startDate, 'D', { locale: pt })
+        const startMonth = format(startDate, 'MMM', { locale: pt })
+        const startMonthCapitalized = startMonth.charAt(0).toUpperCase() + startMonth.slice(1)
+        const endDay = format(endDate, 'D', { locale: pt })
+        const endMonth = format(endDate, 'MMM', { locale: pt })
+        const endMonthCapitalized = endMonth.charAt(0).toUpperCase() + endMonth.slice(1)
+        startDate ? formattedDates = `${startDay} de ${startMonthCapitalized}` : ''
+        endDate ? formattedDates += ' - ' + `${endDay} de ${endMonthCapitalized}` : ''
         return formattedDates
       }
     },
@@ -683,7 +695,7 @@ export default {
 .acomods-id {
   background-color: white;
   margin-bottom: 5.3rem;
-  transition: all .27s cubic-bezier(.15,.97,.43,.93);
+  transition: all .35s cubic-bezier(.15,.97,.43,.93);
   
 
 
@@ -855,6 +867,9 @@ export default {
 
 
   /* __________ DISPONIBILIDADE __________ */
+  & .disponibilidade-box {
+    padding: 0 3.5%;
+  }  /* __________ DISPONIBILIDADE __________ */
 
 
 
@@ -992,18 +1007,6 @@ export default {
             display: flex;
             flex-flow: column;
             margin-top: 1.2rem;
-            & input {
-              cursor: pointer;
-              width: 100%;
-              padding: .75rem .6rem;
-              border: 1px solid #dedede;
-              outline: none;
-              background: white;
-              transition: .15s border ease;
-            }
-            & input:hover {
-              border: 1px solid var(--color01) !important;
-            }
             & select {
               cursor: pointer;
               width: 100%;
@@ -1030,6 +1033,9 @@ export default {
                 border: 1px solid #dedede;
                 outline: none;
                 text-align: left;
+              }
+              & #datepicker-trigger:hover {
+                border: 1px solid var(--color01);
               }
             }
           }
@@ -1168,6 +1174,14 @@ export default {
             }
           }
         }/* __________ COMODIDADES __________ */
+
+
+
+
+        /* __________ DISPONIBILIDADE __________ */
+        & .disponibilidade-box {
+          padding: 0;
+        }  /* __________ DISPONIBILIDADE __________ */
 
 
 

@@ -10,7 +10,7 @@
 .asd__list-complete-enter,
 .asd__list-complete-leave-to {
   opacity: 0;
-  transform: translateY(30px); }
+  transform: translateY(1rem); }
 
 .asd__list-complete-leave-active {
   position: absolute;
@@ -62,16 +62,13 @@
     padding-right: 15px; }
   .asd__change-month-button > button {
     background-color: white;
-    border: 1px solid #dedede;
-    border-radius: 3px;
     padding: 4px 8px;
     cursor: pointer; }
-    .asd__change-month-button > button:hover {
-      border: 1px solid #dedede; }
+
     .asd__change-month-button > button > svg {
       height: 19px;
       width: 19px;
-      fill: #82888a; }
+      fill: #161616; }
 
 .asd__days-legend {
   font-size: 15px;
@@ -82,7 +79,7 @@
 
 .asd__day-title {
   display: inline-block;
-  width: 14.28571%;
+  width: calc(100%/7);
   text-align: center;
   margin-bottom: 4px;
   font-size: 0.8em;
@@ -123,7 +120,7 @@
     .asd__day--enabled:focus {
       outline: none }
   .asd__day--disabled, .asd__day--empty {
-    opacity: 0.3; }
+    opacity: 0.25; }
     .asd__day--disabled button, .asd__day--empty button {
       cursor: default; }
   .asd__day--empty {
@@ -145,8 +142,8 @@
   padding: 0; }
 
 .asd__action-buttons {
-  min-height: 45px;
-  padding-top: 5px; }
+  min-height: 43px;
+  padding-top: 3px; }
   .asd__action-buttons button {
     display: block;
     position: relative;

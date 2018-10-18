@@ -107,7 +107,7 @@
           
           <div class="item">
             <img class="__img" src="../../assets/img/guests.svg">
-            <h3>{{ passeio.capacidade }} {{ passeio.capacidade === 1 ? 'pessoa' : 'pessoas' }}</h3>
+            <h3>Até {{ passeio.capacidade }} {{ passeio.capacidade === 1 ? 'pessoa' : 'pessoas' }}</h3>
           </div>
 
           <div class="item">
@@ -160,13 +160,12 @@
           style="border:none"
             :trigger-element-id="'datepicker-trigger'"
             :inline="true"
+            :mode="'single'"
             :showShortcutsMenuTrigger="false"
             :showActionButtons="false"
             :min-date="minDate"
-            :date-one="startDate"
-            :date-two="endDate"
-            @date-one-selected="val => { startDate = val }"
-            @date-two-selected="val => { endDate = val }"
+            :date-one="diaPasseio"
+            @date-one-selected="val => { diaPasseio = val }"
           />
         </div>
         <!-- ______________________________ DISPONIBILIDADE ______________________________ -->
@@ -204,13 +203,48 @@
 
       <!-- ______________________________ RESERVA DESKTOP ______________________________ -->
       <div class="reserva-desktop">
+        <form class="reserva-desktop-form">
 
-        <h1 class="__valor">R${{ passeio.valorPasseio.toLocaleString() }}<span class="__valor-pessoa"> por pessoa</span></h1>
 
-        <button class="__reserva-desktop-btn" type="button">Reservar</button>
+          <h1 class="__valor">R${{ passeio.valorPasseio.toLocaleString() }}<span class="__valor-pessoa"> por pessoa</span></h1>
 
-        <h4 class="__info">A reserva é gratuita!</h4>
 
+          <div class="item-form">
+            <select v-model="$store.state.reservaAcomod.totalHospedes">
+              <option :value="n" v-for="n in capacidadeArray">{{ n }} {{ n === 1 ? 'pessoa' : 'pessoas' }}</option>
+            </select>
+          </div>
+
+
+          <div class="item-form">
+
+            <div class="datepicker-trigger">
+              <button
+                type="button"
+                id="datepicker-trigger">
+                {{ formatDate(diaPasseio) }}
+              </button>
+
+              <AirbnbStyleDatepicker
+                :trigger-element-id="'datepicker-trigger'"
+                :showShortcutsMenuTrigger="false"
+                :monthsToShow="1"
+                :mode="'single'"
+                :offsetX="102"
+                :offsetY="52"
+                :min-date="minDate"
+                :date-one="diaPasseio"
+                @date-one-selected="val => { diaPasseio = val }"
+              />
+            </div>
+
+          </div>
+
+          <button class="__reserva-desktop-btn" type="button">Reservar</button>
+
+          <h4 class="__info">A reserva é gratuita!</h4>
+
+        </form>
       </div><!-- ______________________________ RESERVA DESKTOP ______________________________ -->
 
 
@@ -257,8 +291,7 @@ export default {
   mixins: [ mapstyle, swiperOptions, stylesCalendar ],
   data () {
     return {
-      startDate: '',
-      endDate: ''
+      diaPasseio: ''
     }
   },
   head () {
@@ -296,15 +329,13 @@ export default {
     }
   },
   methods: {
-    formatDates (startDate, endDate) {
-      let formattedDates = ''
-      if (startDate === '') {
-        return 'Chegada / Partida'
-      } else {
-        startDate ? formattedDates = format(startDate, 'D MMM', { locale: pt }) : ''
-        endDate ? formattedDates += ' - ' + format(endDate, 'D MMM', { locale: pt }) : ''
-        return formattedDates
-      }
+    formatDate (diaPasseio) {
+      const weekday = format(diaPasseio, 'ddd', { locale: pt })
+      const weekdayCapitalized = weekday.charAt(0).toUpperCase() + weekday.slice(1)
+      const day = format(diaPasseio, 'D', { locale: pt })
+      const month = format(diaPasseio, 'MMMM', { locale: pt })
+      const monthCapitalized = month.charAt(0).toUpperCase() + month.slice(1)
+      return diaPasseio === '' ? 'Selecionar data' : `${weekdayCapitalized}, ${day} de ${monthCapitalized}`
     },
     scrollTopbarBg (evt, el) {
       return window.scrollY >= this.$store.state.heightImageBox
@@ -350,6 +381,9 @@ export default {
     showShare () { return this.$store.state.showShare },
     minDate() {
       return subDays(Date(), 1)
+    },
+    capacidadeArray () {
+      return Array.from({length: this.passeio.capacidade}, (v, k) => k+1)
     }
   },
   beforeRouteEnter (to, from, next) {
@@ -384,7 +418,7 @@ export default {
   flex-flow: column;
   background-color: white;
   margin-bottom: 5.5rem;
-  transition: all .27s cubic-bezier(.15,.97,.43,.93);
+  transition: all .35s cubic-bezier(.15,.97,.43,.93);
   
 
 
@@ -612,34 +646,95 @@ export default {
         flex-basis: 31%;
         border: 1px solid #dedede;
         align-self: flex-start;
-        padding: 1rem 1.4rem;
-        & .__valor {
-          font-size: 34px;
-          font-weight: 400;
-          padding-bottom: 1.2rem;
-          & .__valor-pessoa {
-            font-size: 16px;
+        & .reserva-desktop-form {
+          padding: 1rem 1.4rem;
+          & .__valor {
+            font-size: 34px;
             font-weight: 400;
+            padding-bottom: 1.2rem;
+            & .__valor-pessoa {
+              font-size: 16px;
+              font-weight: 400;
+            }
+          }
+          & .item-form {
+            display: flex;
+            flex-flow: column;
+            margin-top: 1.2rem;
+            & select {
+              cursor: pointer;
+              width: 100%;
+              padding: .75rem .6rem;
+              border: 1px solid #dedede;
+              outline: none;
+              background: white;
+              transition: .15s border ease;
+              & option {
+                background: white;
+              }
+            }
+            & select:hover {
+              border: 1px solid var(--color01) !important;
+            }
+            & .datepicker-trigger {
+              height: 100%;
+              background: white;
+              & #datepicker-trigger {
+                padding: .75rem;
+                height: 100%;
+                width: 100%;
+                background: white;
+                border: 1px solid #dedede;
+                outline: none;
+                text-align: left;
+              }
+              & #datepicker-trigger:hover {
+                border: 1px solid var(--color01);
+              }
+            }
+          }
+          & .reserva-info {
+            margin-top: .9rem;
+            & .reserva-info_item {
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              & h3 {
+                font-size: 15px;
+              }
+            }
+            & .reserva-info_item-total {
+              display: flex;
+              justify-content: space-between;
+              border-top: 1px solid #dedede;
+              & h3 {
+                font-size: 17px;
+                font-weight: 500;
+              }
+            }
+          }
+          & .__reserva-desktop-btn {
+            margin-top: 1.3rem;
+            font-size: 17px;
+            font-weight: 700;
+            background: var(--colorPasseio);
+            color: white;
+            height: 3.2rem;
+            width: 100%;
+            border-radius: 5px;
+          }
+          & .__info {
+            margin: .5rem 0 .8rem;
+            text-align: center;
+            font-size: 12px;
+            font-weight: 500;
+            line-height: 17px;
           }
         }
-        & .__reserva-desktop-btn {
-          margin-top: 1.3rem;
-          font-size: 17px;
-          font-weight: 700;
-          background: var(--colorPasseio);
-          color: white;
-          height: 3.2rem;
-          width: 100%;
-          border-radius: 5px;
-        }
-        & .__info {
-          margin: .5rem 0 .8rem;
-          text-align: center;
-          font-size: 12px;
-          font-weight: 500;
-          line-height: 17px;
-        }
       }
+
+
+      
       & .desktop-view-info {
         margin-right: 5%;
         flex-basis: 69%;
