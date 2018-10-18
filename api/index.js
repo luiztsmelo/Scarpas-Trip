@@ -11,8 +11,6 @@ const addDays = require('date-fns/add_days')
 
 const app = express()
 
-const port = 7000
-
 const cal = icalGenerator({
   domain: 'escarpastrip.com',
   prodId: { company: 'escarpastrip.com', product: '7280' },
@@ -41,6 +39,6 @@ app.get('/airbnb', (req, res) => {
   })
 })
 
-app.listen(port, () => {
-  console.log(`Listening on port ${port}!`)
+app.listen(process.env.PORT || 7000, () => {
+  console.log(`Server is running on port ${7000}!`)
 })
