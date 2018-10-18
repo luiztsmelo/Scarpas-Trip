@@ -6,7 +6,6 @@ const express = require('express')
 /* const ICAL = require('ical.js') */
 const icalGenerator = require('ical-generator')
 const addDays = require('date-fns/add_days')
-/* const ical = require('node-ical') */
 /* const puppeteer = require('puppeteer') */
 
 const app = express()
