@@ -39,6 +39,7 @@ app.get('/airbnb', (req, res) => {
   })
 })
 
-app.listen(process.env.PORT || 7000, () => {
-  console.log(`Server is running on port ${7000}!`)
-})
+module.exports = {
+  path: '/api',
+  handler: app
+}
