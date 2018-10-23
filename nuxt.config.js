@@ -1,6 +1,6 @@
 module.exports = {
   mode: 'spa',
-  serverMiddleware: ['~/api/index.js'],
+  /* serverMiddleware: ['~/api/index.js'], */
   /* ________________________________________ BUILD ________________________________________ */
   build: {
     postcss: {

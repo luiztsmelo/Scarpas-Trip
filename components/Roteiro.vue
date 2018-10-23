@@ -47,7 +47,7 @@
   
 
 
-      <star-rating
+      <!-- <star-rating
         class="rating"
         :rating="5"
         :read-only="true"
@@ -61,7 +61,7 @@
 
       <p class="testimonial">"Incrível a maneira como a Escarpas Trip facilita a organização de sua viagem para Capitólio. Fechamos uma casa e um passeio em poucos minutos, diretamente com os proprietários!"</p>
 
-      <p class="testimonial-name">Roberta e Conrado, Belo Horizonte</p>
+      <p class="testimonial-name">Roberta e Conrado, Belo Horizonte</p> -->
 
 
 

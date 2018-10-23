@@ -1,5 +1,8 @@
 {
   "name": "functions",
+  "engines": { 
+    "node": "8" 
+  },
   "scripts": {
     "lint": "tslint --project tsconfig.json",
     "build": "tsc",
@@ -12,9 +15,11 @@
   "main": "lib/index.js",
   "dependencies": {
     "axios": "^0.18.0",
+    "date-fns": "^1.29.0",
     "dayjs": "^1.7.7",
     "firebase-admin": "~5.12.1",
     "firebase-functions": "^2.0.5",
+    "node-ical": "^0.8.0",
     "node-mailjet": "^3.3.0",
     "numeral": "^2.0.6",
     "pagarme": "^3.8.0"

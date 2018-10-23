@@ -15,7 +15,7 @@
     <div class="datepicker-body">
 
 
-      <v-date-picker
+      <!-- <v-date-picker
         is-inline
         is-expanded
         mode="range"
@@ -29,7 +29,7 @@
         :theme-styles="datePickerMobileStyle"
         tint-color="#FFA04F"
         show-caps>
-      </v-date-picker>
+      </v-date-picker> -->
     
 
     </div>

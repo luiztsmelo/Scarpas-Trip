@@ -135,7 +135,6 @@ const store = () => new Vuex.Store({
     acomodProgressBar: 0,
     acomodPlace: null,
     imageCountAc: 0,
-    disabledDatesAcomod: null,
     acomodData: { /* Atualizar action */
       createdAt: null,
       acomodID: null,
@@ -445,9 +444,6 @@ const store = () => new Vuex.Store({
     /*
     ########## Acomodação ##########
     */
-    m_disabledDatesAcomod (state, payload) {
-      state.disabledDatesAcomod = payload
-    },
     m_showReservaAcomod (state, payload) {
       state.showReservaAcomod = payload
     },

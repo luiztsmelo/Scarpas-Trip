@@ -5,7 +5,9 @@ import * as dayjs from 'dayjs'
 import 'dayjs/locale/pt-br'
 import * as numeral from 'numeral'
 import 'numeral/locales/pt-br'
-/* import axios from 'axios' */
+import axios from 'axios'
+const ical = require('node-ical')
+const eachDay = require('date-fns/each_day')
 
 
 /* Firebase admin */
@@ -39,7 +41,8 @@ const AirtableConfig = {
 
 /* _______________________________________________ WATCHERS _______________________________________________ */
 
-/* TRIGGER URL GERAL: https://us-central1-escarpas-trip.cloudfunctions.net/<function-name> */
+
+/* TRIGGER: https://us-central1-escarpas-trip.cloudfunctions.net/watch_reservaExpiration */
 
 exports.watch_reservaExpiration = functions.https.onRequest(async (req, res) => {
   try {
@@ -78,6 +81,63 @@ exports.watch_reservaExpiration = functions.https.onRequest(async (req, res) => 
     res.status(500).end()
   }
 })
+
+
+
+/* TRIGGER: https://us-central1-escarpas-trip.cloudfunctions.net/watch_icalAirbnb */
+
+exports.watch_icalAirbnb = functions.https.onRequest(async (req, res) => {
+  try {
+    const acomodsSnap = await admin.firestore().collection('acomods').get()
+    const acomods = acomodsSnap.docs.map(doc => doc.data())
+
+    for (const acomod of acomods) {
+
+      if (acomod.icalAirbnb !== '') {
+        const icalAirbnb = await axios.get(acomod.icalAirbnb)
+
+        ical.parseICS(icalAirbnb.data, async (err, data) => {
+          if (err) {
+            console.log(err)
+          } else {
+            delete data.prodid
+
+            const disabledDatesArrays = []
+
+            for (const event of (<any>Object).values(data)) {
+              disabledDatesArrays.push(eachDay(event.start, event.end))
+            }
+
+            const mergedDisabledDates = [].concat(...disabledDatesArrays)
+
+            /* const parsedDisabledDates = []
+
+            mergedDisabledDates.forEach(date => {
+              parsedDisabledDates.push(Date.parse(date))
+            }) */
+            
+            await admin.firestore().doc(`acomods/${acomod.acomodID}`).set({
+              disabledDates: mergedDisabledDates
+            }, { merge: true })
+            
+            console.log(`${acomod.acomodID}:`, mergedDisabledDates)
+          }
+        })
+
+      } else {
+        console.log(`${acomod.acomodID} não está sincronizada com o Airbnb.`)
+      }
+
+    }
+
+    res.status(200).end()
+
+  } catch (err) {
+    console.log(err)
+    res.status(500).end()
+  }
+})
+
 
 
 /* ________________________________________________ USER ________________________________________________ */

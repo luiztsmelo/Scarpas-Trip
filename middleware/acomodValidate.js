@@ -8,9 +8,6 @@ export default async function ({ store, route, redirect }) {
     const acomod = await firebase.firestore().doc(`acomods/${route.params.id}`).get()
 
     if (acomod.exists) {
-      /* Get reservas em andamento p/ desabilitar datas no datePicker */
-      firebase.firestore().collection('reservasAcomods').where('acomodID', '==', route.params.id).where('isRunning', '==', true).get()
-      .then(reservas => { store.commit('m_disabledDatesAcomod', reservas.docs.map(acomod => acomod.data().periodoReserva)) }).catch(err => console.log(err))
       /* Add visit a essa acomod */
       firebase.firestore().collection(`acomods/${route.params.id}/visits`).add({
         date: new Date().getTime(),

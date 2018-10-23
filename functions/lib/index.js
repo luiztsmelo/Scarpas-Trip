@@ -1,12 +1,4 @@
 "use strict";
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 const functions = require("firebase-functions");
 const admin = require("firebase-admin");
@@ -15,7 +7,9 @@ const dayjs = require("dayjs");
 require("dayjs/locale/pt-br");
 const numeral = require("numeral");
 require("numeral/locales/pt-br");
-/* import axios from 'axios' */
+const axios_1 = require("axios");
+const ical = require('node-ical');
+const eachDay = require('date-fns/each_day');
 /* Firebase admin */
 admin.initializeApp(functions.config().firebase);
 /* Mailjet */
@@ -35,10 +29,10 @@ const AirtableConfig = {
   }
 } */
 /* _______________________________________________ WATCHERS _______________________________________________ */
-/* TRIGGER URL GERAL: https://us-central1-escarpas-trip.cloudfunctions.net/<function-name> */
-exports.watch_reservaExpiration = functions.https.onRequest((req, res) => __awaiter(this, void 0, void 0, function* () {
+/* TRIGGER: https://us-central1-escarpas-trip.cloudfunctions.net/watch_reservaExpiration */
+exports.watch_reservaExpiration = functions.https.onRequest(async (req, res) => {
     try {
-        const snap = yield admin.firestore().collection('reservasAcomods').where('status', '==', 'pending').get();
+        const snap = await admin.firestore().collection('reservasAcomods').where('status', '==', 'pending').get();
         const pendingReservas = snap.docs.map(doc => doc.data());
         /* Para evitar bugs, checar se há alguma reserva pending primeiro */
         if (pendingReservas.length > 0) {
@@ -49,7 +43,7 @@ exports.watch_reservaExpiration = functions.https.onRequest((req, res) => __awai
                 /* Se feita a 2 dias atrás */
                 if (requestedDate.diff(dateNow, 'day') <= -2) {
                     /* Update status para 'expired' na Firestore */
-                    yield admin.firestore().doc(`reservasAcomods/${reserva.reservaID}`).update({ status: 'expired', isRunning: false });
+                    await admin.firestore().doc(`reservasAcomods/${reserva.reservaID}`).update({ status: 'expired', isRunning: false });
                     console.log(`Reserva ${reserva.reservaID} [${requestedDate.diff(dateNow, 'day')}] foi expirada.`);
                 }
                 else {
@@ -67,17 +61,59 @@ exports.watch_reservaExpiration = functions.https.onRequest((req, res) => __awai
         console.log(err);
         res.status(500).end();
     }
-}));
+});
+/* TRIGGER: https://us-central1-escarpas-trip.cloudfunctions.net/watch_icalAirbnb */
+exports.watch_icalAirbnb = functions.https.onRequest(async (req, res) => {
+    try {
+        const acomodsSnap = await admin.firestore().collection('acomods').get();
+        const acomods = acomodsSnap.docs.map(doc => doc.data());
+        for (const acomod of acomods) {
+            if (acomod.icalAirbnb !== '') {
+                const icalAirbnb = await axios_1.default.get(acomod.icalAirbnb);
+                ical.parseICS(icalAirbnb.data, async (err, data) => {
+                    if (err) {
+                        console.log(err);
+                    }
+                    else {
+                        delete data.prodid;
+                        const disabledDatesArrays = [];
+                        for (const event of Object.values(data)) {
+                            disabledDatesArrays.push(eachDay(event.start, event.end));
+                        }
+                        const mergedDisabledDates = [].concat(...disabledDatesArrays);
+                        /* const parsedDisabledDates = []
+            
+                        mergedDisabledDates.forEach(date => {
+                          parsedDisabledDates.push(Date.parse(date))
+                        }) */
+                        await admin.firestore().doc(`acomods/${acomod.acomodID}`).set({
+                            disabledDates: mergedDisabledDates
+                        }, { merge: true });
+                        console.log(`${acomod.acomodID}:`, mergedDisabledDates);
+                    }
+                });
+            }
+            else {
+                console.log(`${acomod.acomodID} não está sincronizada com o Airbnb.`);
+            }
+        }
+        res.status(200).end();
+    }
+    catch (err) {
+        console.log(err);
+        res.status(500).end();
+    }
+});
 /* ________________________________________________ USER ________________________________________________ */
-exports.newUser = functions.https.onCall((data) => __awaiter(this, void 0, void 0, function* () {
+exports.newUser = functions.https.onCall(async (data) => {
     const user = data.user;
     try {
         /* Criar user na Firestore */
-        yield admin.firestore().doc(`users/${user.userID}`).set(user);
+        await admin.firestore().doc(`users/${user.userID}`).set(user);
         /* Adicionar createdAt ao user */
-        yield admin.firestore().doc(`users/${user.userID}`).set({ createdAt: Date.now() }, { merge: true });
+        await admin.firestore().doc(`users/${user.userID}`).set({ createdAt: Date.now() }, { merge: true });
         /* Enviar welcome e-mail */
-        yield Mailjet.post('send', { 'version': 'v3.1' }).request({
+        await Mailjet.post('send', { 'version': 'v3.1' }).request({
             'Messages': [{
                     'From': { 'Email': ESemail, 'Name': ESname },
                     'To': [{
@@ -97,14 +133,14 @@ exports.newUser = functions.https.onCall((data) => __awaiter(this, void 0, void 
         console.log(err);
         throw new functions.https.HttpsError('aborted', err.message, err);
     }
-}));
+});
 /* ________________________________________________ ACOMODS ________________________________________________ */
-exports.newAcomod = functions.https.onCall((data) => __awaiter(this, void 0, void 0, function* () {
+exports.newAcomod = functions.https.onCall(async (data) => {
     const acomodData = data.acomodData;
     const bankAccount = data.bankAccount;
     try {
-        const Pagarme = yield pagarme.client.connect({ api_key: 'ak_test_E3I46o4e7guZDqwRnSY9sW8o8HrL9D' });
-        const recipient = yield Pagarme.recipients.create({
+        const Pagarme = await pagarme.client.connect({ api_key: 'ak_test_E3I46o4e7guZDqwRnSY9sW8o8HrL9D' });
+        const recipient = await Pagarme.recipients.create({
             transfer_enabled: false,
             transfer_interval: 'daily',
             automatic_anticipation_enabled: true,
@@ -122,20 +158,20 @@ exports.newAcomod = functions.https.onCall((data) => __awaiter(this, void 0, voi
         });
         acomodData.recipientID = recipient.id;
         /* Update user Firestore */
-        yield admin.firestore().doc(`users/${acomodData.hostID}`).update({
+        await admin.firestore().doc(`users/${acomodData.hostID}`).update({
             isAcomodHost: true,
             celular: acomodData.celular.replace(/[^0-9\.]+/g, '')
         });
         delete acomodData.celular;
         /* Set acomod Firestore */
-        yield admin.firestore().doc(`acomods/${acomodData.acomodID}`).set(acomodData);
+        await admin.firestore().doc(`acomods/${acomodData.acomodID}`).set(acomodData);
     }
     catch (err) {
         console.log(err);
         throw new functions.https.HttpsError('aborted', err.message, err);
     }
-}));
-exports.newReservaAcomod = functions.https.onCall((data) => __awaiter(this, void 0, void 0, function* () {
+});
+exports.newReservaAcomod = functions.https.onCall(async (data) => {
     try {
         const reservaAcomod = data.reservaAcomod;
         const creditCard = data.creditCard;
@@ -144,18 +180,18 @@ exports.newReservaAcomod = functions.https.onCall((data) => __awaiter(this, void
         const host = data.host;
         const visitID = data.visitID;
         /* Update celular guest */
-        yield admin.firestore().doc(`users/${reservaAcomod.guestID}`).update({
+        await admin.firestore().doc(`users/${reservaAcomod.guestID}`).update({
             celular: customer.celular.replace(/\s/g, '')
         });
         /* Get guest */
-        const guestSnap = yield admin.firestore().doc(`users/${reservaAcomod.guestID}`).get();
+        const guestSnap = await admin.firestore().doc(`users/${reservaAcomod.guestID}`).get();
         const guest = guestSnap.data();
         reservaAcomod.requested = new Date().getTime();
         reservaAcomod.acomodID = acomod.acomodID;
-        const Pagarme = yield pagarme.client.connect({ api_key: 'ak_test_E3I46o4e7guZDqwRnSY9sW8o8HrL9D' });
+        const Pagarme = await pagarme.client.connect({ api_key: 'ak_test_E3I46o4e7guZDqwRnSY9sW8o8HrL9D' });
         let transaction = null;
         if (reservaAcomod.paymentMethod === 'credit_card') {
-            transaction = yield Pagarme.transactions.create({
+            transaction = await Pagarme.transactions.create({
                 'amount': reservaAcomod.valorReservaTotal * 100,
                 'capture': false,
                 'installments': reservaAcomod.parcelas,
@@ -199,7 +235,7 @@ exports.newReservaAcomod = functions.https.onCall((data) => __awaiter(this, void
             });
         }
         else {
-            transaction = yield Pagarme.transactions.create({
+            transaction = await Pagarme.transactions.create({
                 'amount': reservaAcomod.valorReservaTotal * 100,
                 'capture': false,
                 'payment_method': 'boleto',
@@ -225,13 +261,13 @@ exports.newReservaAcomod = functions.https.onCall((data) => __awaiter(this, void
                     }]
             });
         }
-        reservaAcomod.reservaID = yield transaction.id.toString();
+        reservaAcomod.reservaID = await transaction.id.toString();
         /* Criar reserva na Firestore */
-        yield admin.firestore().doc(`reservasAcomods/${reservaAcomod.reservaID}`).set(reservaAcomod);
+        await admin.firestore().doc(`reservasAcomods/${reservaAcomod.reservaID}`).set(reservaAcomod);
         /* Atualizar visit */
-        yield admin.firestore().doc(`acomods/${acomod.acomodID}/visits/${visitID}`).update({ concludedReserva: true });
+        await admin.firestore().doc(`acomods/${acomod.acomodID}/visits/${visitID}`).update({ concludedReserva: true });
         /* Enviar e-mail para Host */
-        yield Mailjet.post('send', { 'version': 'v3.1' }).request({
+        await Mailjet.post('send', { 'version': 'v3.1' }).request({
             'Messages': [{
                     'From': { 'Email': ESemail, 'Name': ESname },
                     'To': [{
@@ -269,18 +305,18 @@ exports.newReservaAcomod = functions.https.onCall((data) => __awaiter(this, void
         console.log(err.response);
         throw new functions.https.HttpsError('aborted', err.message, err);
     }
-}));
-exports.payHostAcomod = functions.https.onCall((data) => __awaiter(this, void 0, void 0, function* () {
+});
+exports.payHostAcomod = functions.https.onCall(async (data) => {
     /* ENVIAR PAGAMENTO PARA O HOST NO DIA SEGUINTE DO CHECK-IN */
-}));
+});
 /* ________________________________________________ PASSEIOS ________________________________________________ */
-exports.newPasseio = functions.https.onCall((data) => __awaiter(this, void 0, void 0, function* () {
+exports.newPasseio = functions.https.onCall(async (data) => {
     const passeioData = data.passeioData;
     const creditCard = data.creditCard;
     const customer = data.customer;
     try {
-        const Pagarme = yield pagarme.client.connect({ api_key: 'ak_test_E3I46o4e7guZDqwRnSY9sW8o8HrL9D' });
-        const subscription = yield Pagarme.subscriptions.create({
+        const Pagarme = await pagarme.client.connect({ api_key: 'ak_test_E3I46o4e7guZDqwRnSY9sW8o8HrL9D' });
+        const subscription = await Pagarme.subscriptions.create({
             'plan_id': 375944,
             'payment_method': 'credit_card',
             'card_holder_name': creditCard.cardHolderName,
@@ -306,29 +342,29 @@ exports.newPasseio = functions.https.onCall((data) => __awaiter(this, void 0, vo
             }
         });
         /* Update user Firestore */
-        yield admin.firestore().doc(`users/${passeioData.hostID}`).update({
+        await admin.firestore().doc(`users/${passeioData.hostID}`).update({
             celular: customer.celular,
             instagram: customer.instagram
         });
         /* Set acomod Firestore */
-        yield admin.firestore().doc(`passeios/${passeioData.passeioID}`).set(passeioData);
+        await admin.firestore().doc(`passeios/${passeioData.passeioID}`).set(passeioData);
         return { subscription: subscription };
     }
     catch (err) {
         console.log(err);
         throw new functions.https.HttpsError('aborted', err.message, err);
     }
-}));
+});
 /* ________________________________________________ E-MAILS ________________________________________________ */
 exports.email_reservaAcceptedToGuest = functions.firestore
     .document('reservasAcomods/{reservaID}')
     /* Quando Status = 'awaiting_payment' */
-    .onUpdate((change) => __awaiter(this, void 0, void 0, function* () {
+    .onUpdate(async (change) => {
     const reservaAcomod = change.after.data();
     if (reservaAcomod.status === 'awaiting_payment') {
         try {
             /* Get acomod data */
-            const docAcomod = yield admin.firestore().doc(`acomods/${reservaAcomod.acomodID}`).get();
+            const docAcomod = await admin.firestore().doc(`acomods/${reservaAcomod.acomodID}`).get();
             const acomod = docAcomod.data();
             /* Ajustar datas */
             const startDate = new Date(reservaAcomod.periodoReserva.start);
@@ -336,7 +372,7 @@ exports.email_reservaAcceptedToGuest = functions.firestore
             const checkIn = dayjs(startDate).format('ddd, DD MMM YYYY');
             const checkOut = dayjs(endDate).format('ddd, DD MMM YYYY');
             /* Enviar e-mail */
-            yield Mailjet.post('send', { 'version': 'v3.1' }).request({
+            await Mailjet.post('send', { 'version': 'v3.1' }).request({
                 'Messages': [{
                         'From': { 'Email': ESemail, 'Name': ESname },
                         'To': [{
@@ -370,5 +406,5 @@ exports.email_reservaAcceptedToGuest = functions.firestore
             console.log(err);
         }
     }
-}));
+});
 //# sourceMappingURL=index.js.map

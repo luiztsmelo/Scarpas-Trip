@@ -276,6 +276,7 @@
               :inline="true"
               :showShortcutsMenuTrigger="false"
               :showActionButtons="false"
+              :disabledDates="disabledDates"
               :min-date="minDate"
               :date-one="startDate"
               :date-two="endDate"
@@ -366,6 +367,7 @@
                 :fullscreen-mobile="true"
                 :showShortcutsMenuTrigger="false"
                 :monthsToShow="1"
+                :disabledDates="disabledDates"
                 :offsetX="102"
                 :offsetY="52"
                 :min-date="minDate"
@@ -653,8 +655,16 @@ export default {
     totalHospedesArray () {
       return Array.from({length: this.acomod.totalHospedes}, (v, k) => k+1)
     },
-    minDate() {
+    minDate () {
       return subDays(Date(), 1)
+    },
+    disabledDates () {
+      const mergedDisabledDates = [...new Set([
+        ...this.acomod.disabledDates.airBnb,
+        ...this.acomod.disabledDates.booking,
+        ...this.acomod.disabledDates.escarpasTrip
+      ])]
+      return mergedDisabledDates
     }
   },
   watch: {
