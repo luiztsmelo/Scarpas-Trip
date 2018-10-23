@@ -61,7 +61,6 @@ module.exports = {
     '~/plugins/vue-autosize',
     '~/plugins/vue-awesome-swiper',
     '~/plugins/v-money',
-    '~/plugins/v-calendar',
     '~/plugins/scroll',
     '~/plugins/vue-js-modal',
     '~/plugins/vue-star-rating',

@@ -46,6 +46,7 @@ function parseHrtimeToSeconds (hrtime) {
   return seconds
 }
 
+/* ________________________________________ Sync Airbnb iCalendar ________________________________________ */
 app.get('/airbnb', async (req, res) => {
   const startTime = process.hrtime()
   try {
@@ -62,7 +63,7 @@ app.get('/airbnb', async (req, res) => {
           } else {
             delete data.prodid
 
-            const disabledDatesArrays = []
+            let disabledDatesArrays = []
 
             for (const event of Object.values(data)) {
               disabledDatesArrays.push(eachDay(event.start, event.end))
@@ -70,7 +71,7 @@ app.get('/airbnb', async (req, res) => {
 
             const mergedDisabledDates = [].concat(...disabledDatesArrays)
 
-            const parsedDisabledDates = []
+            let parsedDisabledDates = []
 
             mergedDisabledDates.forEach(date => {
               parsedDisabledDates.push(format(date, 'YYYY-MM-DD'))
@@ -78,7 +79,7 @@ app.get('/airbnb', async (req, res) => {
 
             await admin.firestore().doc(`acomods/${acomod.acomodID}`).set({
               disabledDates: {
-                airBnb: parsedDisabledDates
+                airbnb: parsedDisabledDates
               }
             }, { merge: true })
 
@@ -90,12 +91,64 @@ app.get('/airbnb', async (req, res) => {
       }
     }
 
-    res.status(200).send(`200 - ${parseHrtimeToSeconds(process.hrtime(startTime))}s`)
+    res.status(200).send(`<h1>👍</h1> ${parseHrtimeToSeconds(process.hrtime(startTime))}s`)
   } catch (err) {
     console.log(err)
-    res.end()
+    res.send('<h1>👎</h1>')
   }
-})
+})/* ________________________________________ Sync Airbnb iCalendar ________________________________________ */
+
+/* ________________________________________ Sync Booking iCalendar ________________________________________ */
+app.get('/booking', async (req, res) => {
+  const startTime = process.hrtime()
+  try {
+    const acomodsSnap = await admin.firestore().collection('acomods').get()
+    const acomods = acomodsSnap.docs.map(doc => doc.data())
+
+    for (const acomod of acomods) {
+      if (acomod.iCalendars.booking !== '') {
+        const icalBooking = await axios.get(acomod.iCalendars.booking)
+
+        ical.parseICS(icalBooking.data, async (err, data) => {
+          if (err) {
+            res.send('Parse error.')
+          } else {
+            delete data.prodid
+
+            let disabledDatesArrays = []
+
+            for (const event of Object.values(data)) {
+              disabledDatesArrays.push(eachDay(event.start, event.end))
+            }
+
+            const mergedDisabledDates = [].concat(...disabledDatesArrays)
+
+            let parsedDisabledDates = []
+
+            mergedDisabledDates.forEach(date => {
+              parsedDisabledDates.push(format(date, 'YYYY-MM-DD'))
+            })
+
+            await admin.firestore().doc(`acomods/${acomod.acomodID}`).set({
+              disabledDates: {
+                booking: parsedDisabledDates
+              }
+            }, { merge: true })
+
+            console.log(`${acomod.acomodID}:`, parsedDisabledDates)
+          }
+        })
+      } else {
+        console.log(`${acomod.acomodID} não está sincronizada com o Booking.`)
+      }
+    }
+
+    res.status(200).send(`<h1>👍</h1> ${parseHrtimeToSeconds(process.hrtime(startTime))}s`)
+  } catch (err) {
+    console.log(err)
+    res.send('<h1>👎</h1>')
+  }
+})/* ________________________________________ Sync Booking iCalendar ________________________________________ */
 
 app.listen(7000)
 

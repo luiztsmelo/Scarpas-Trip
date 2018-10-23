@@ -120,9 +120,10 @@
     .asd__day--enabled:focus {
       outline: none }
   .asd__day--disabled, .asd__day--empty {
-    opacity: 0.25; }
+    opacity: 0.15; }
     .asd__day--disabled button, .asd__day--empty button {
-      cursor: default; }
+      cursor: default;
+      background-color: #dedede; }
   .asd__day--empty {
     border: none; }
   .asd__day--disabled:hover {

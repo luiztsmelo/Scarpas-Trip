@@ -15,21 +15,6 @@
     <div class="datepicker-body">
 
 
-      <!-- <v-date-picker
-        is-inline
-        is-expanded
-        mode="range"
-        @input="inputDate"
-        v-model="$store.state.reservaAcomod.periodoReserva"
-        :min-date="minDate"
-        :disabled-dates="$store.state.disabledDatesAcomod"
-        :drag-attribute="attribute"
-        :select-attribute="attribute"
-        :disabled-attribute="disabledAttribute"
-        :theme-styles="datePickerMobileStyle"
-        tint-color="#FFA04F"
-        show-caps>
-      </v-date-picker> -->
     
 
     </div>
@@ -46,21 +31,13 @@
 </template>
 
 <script>
-import { stylesCalendar } from '~/mixins/stylesCalendar'
 import dayjs from 'dayjs'
 import 'dayjs/locale/pt-br'
 dayjs.locale('pt-br')
 
 export default {
-  mixins: [ stylesCalendar ],
-  data() {
+  data () {
     return {
-      attribute: {
-        popover: {
-          hideIndicator: true,
-          visibility: 'none'
-        }
-      }
     }
   },
   methods: {

@@ -69,35 +69,26 @@
 
         <!-- Datas -->
         <div class="item-form">
-          <v-date-picker
-            v-show="$store.state.filters.date === null"
-            mode='range'
-            @drag='drag = $event'
-            v-model='$store.state.filters.date'
-            :show-popover='false'
-            :min-date='new Date()'
-            :pane-width="290"
-            :drag-attribute="attribute"
-            :select-attribute="attribute"
-            :disabled-attribute="disabledAttribute"
-            :theme-styles="datePickerDesktopStyle"
-            tint-color='#FFA04F'
-            show-caps
-            popover-visibility='focus'>
-            <div
-              slot-scope="{ updateValue }">
-              <div>
-                <input
-                  type="text"
-                  value="Datas"
-                  @change="updateValue($event.target.value)"
-                  class="inputDatePicker"
-                  disabled
-                />
-              </div>
-            </div>
-          </v-date-picker>
+          <div class="datepicker-trigger">
+            <button
+              type="button"
+              id="datepicker-trigger">
+              {{ formatDates(startDate, endDate) }}
+            </button>
 
+            <AirbnbStyleDatepicker
+              :trigger-element-id="'datepicker-trigger'"
+              :fullscreen-mobile="true"
+              :showShortcutsMenuTrigger="false"
+              :monthsToShow="1"
+              :offsetY="10"
+              :min-date="minDate"
+              :date-one="startDate"
+              :date-two="endDate"
+              @date-one-selected="val => { startDate = val }"
+              @date-two-selected="val => { endDate = val }"
+            />
+          </div>
         </div><!-- Datas -->
 
 
@@ -367,8 +358,10 @@
 import firebase from '@firebase/app'
 import 'firebase/firestore'
 import supportsWebP from 'supports-webp'
+import format from 'date-fns/format'
+import pt from 'date-fns/locale/pt'
+import subDays from 'date-fns/sub_days'
 import { mapstyle } from '@/mixins/mapstyle'
-import { stylesCalendar } from '@/mixins/stylesCalendar'
 import FiltrarAcomods from '@/components/FiltrarAcomods'
 import dayjs from 'dayjs'
 import 'dayjs/locale/pt-br'
@@ -376,7 +369,7 @@ dayjs.locale('pt-br')
 
 export default {
   components: { FiltrarAcomods },
-  mixins: [ mapstyle, stylesCalendar ],
+  mixins: [ mapstyle ],
   head () {
     return {
       title: 'Acomodações em Capitólio ‒ Escarpas Trip'
@@ -385,6 +378,8 @@ export default {
   transition: 'opacity',
   data () {
     return {
+      startDate: '',
+      endDate: '',
       dropdownBtnIsOpen: false,
       showLocal: false,
       showHospedes: false,
@@ -403,12 +398,6 @@ export default {
         { 'name': 'Hostel' }
       ],
       drag: null,
-      attribute: {
-        popover: {
-          hideIndicator: true,
-          visibility: 'none'
-        }
-      },
       swiperOption: {
         slidesPerView: 1,
         pagination: {
@@ -421,6 +410,22 @@ export default {
     }
   },
   methods: {
+    formatDates (startDate, endDate) {
+      let formattedDates = ''
+      if (startDate === '') {
+        return 'Datas'
+      } else {
+        const startDay = format(startDate, 'D', { locale: pt })
+        const startMonth = format(startDate, 'MMM', { locale: pt })
+        const startMonthCapitalized = startMonth.charAt(0).toUpperCase() + startMonth.slice(1)
+        const endDay = format(endDate, 'D', { locale: pt })
+        const endMonth = format(endDate, 'MMM', { locale: pt })
+        const endMonthCapitalized = endMonth.charAt(0).toUpperCase() + endMonth.slice(1)
+        startDate ? formattedDates = `${startDay} de ${startMonthCapitalized}` : ''
+        endDate ? formattedDates += ' - ' + `${endDay} de ${endMonthCapitalized}` : ''
+        return formattedDates
+      }
+    },
     imageH (image) {
       return supportsWebP ? image.HW : image.HJ
     },
@@ -518,6 +523,9 @@ export default {
   },
   computed: {
     filters () { return this.$store.state.filters },
+    minDate () {
+      return subDays(Date(), 1)
+    },
     selectedSomeFilter () {
       if (this.filters.date !== null || this.filters.hospedes > 0 || this.filters.tipoAcomod !== null || this.filters.preco !== null || this.filters.avaliacao !== null) {
         return true
@@ -844,12 +852,6 @@ export default {
             color: var(--color01);
           }
           & select:hover {
-            border: 1px solid var(--color01);
-          }
-          & .inputDatePicker {
-            max-width: 4.6rem;
-          }
-          & .fake-input:hover {
             border: 1px solid var(--color01);
           }
           & .dropdown {

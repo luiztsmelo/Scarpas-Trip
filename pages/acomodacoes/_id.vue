@@ -461,8 +461,8 @@ import { mapstyle } from '@/mixins/mapstyle'
 import { swiperOptions } from '@/mixins/swiper_id'
 import { tipoAcomod } from '@/mixins/tipoAcomod'
 import format from 'date-fns/format'
-import subDays from 'date-fns/sub_days'
 import pt from 'date-fns/locale/pt'
+import subDays from 'date-fns/sub_days'
 import dayjs from 'dayjs'
 import 'dayjs/locale/pt-br'
 dayjs.locale('pt-br')
@@ -660,7 +660,7 @@ export default {
     },
     disabledDates () {
       const mergedDisabledDates = [...new Set([
-        ...this.acomod.disabledDates.airBnb,
+        ...this.acomod.disabledDates.airbnb,
         ...this.acomod.disabledDates.booking,
         ...this.acomod.disabledDates.escarpasTrip
       ])]
