@@ -14,44 +14,32 @@
 
           <p class="__host-member">Membro desde {{ createdAt }}</p>
 
-          <div class="rating">
-            <star-rating
-              :rating="4.5"
-              :increment="0.1"
-              :read-only="true"
-              :show-rating="false"
-              active-color="#161616"
-              inactive-color="#dedede"
-              :star-size="18"
-              :padding="3">
-            </star-rating>
-            <p class="rating-number">Ótimo</p>
-          </div>
+   
 
-          <h3 class="__subtitle">Entre em contato com {{ host.firstName }} para negociar os detalhes da reserva.</h3>
+          <h3 class="__subtitle">Entre em contato com {{ host.firstName }} para negociarem os detalhes da reserva.</h3>
         </div>
 
 
         <div class="contatos">
 
           <div class="contato">
-            <h3 class="__label">WhatsApp</h3>
-            <a class="__link" :href="`https://api.whatsapp.com/send?phone=${host.celular.replace(/[^0-9\.]+/g, '')}`" target="_blank">{{ host.celular }}</a>
+            <img class="__img" src="../assets/img/whatsapp.svg">
+            <a class="__link" :href="`https://api.whatsapp.com/send?phone=${host.celular.replace(/[^0-9\.]+/g, '')}`" target="_blank">WhatsApp</a>
           </div>
 
           <div class="contato">
-            <h3 class="__label">Celular</h3>
-            <a class="__link" :href="`tel:+${host.celular.replace(/[^0-9\.]+/g, '')}`" target="_blank">{{ host.celular }}</a>
+            <img class="__img" src="../assets/img/phone.svg">
+            <a class="__link" :href="`tel:+${host.celular.replace(/[^0-9\.]+/g, '')}`" target="_blank">Celular</a>
           </div>
 
           <div class="contato" v-if="host.instagram !== undefined">
-            <h3 class="__label">Instagram</h3>
-            <a class="__link" :href="`https://www.instagram.com/${host.instagram.substring(1)}/`" target="_blank">{{ host.instagram }}</a>
+            <img class="__img" src="../assets/img/instagram.svg">
+            <a class="__link" :href="`https://www.instagram.com/${host.instagram.substring(1)}/`" target="_blank">Instagram</a>
           </div>
 
           <div class="contato" style="border:none">
-            <h3 class="__label">E-mail</h3>
-            <a class="__link" :href="`mailto:${host.email}`" target="_blank">{{ host.email }}</a>
+            <img class="__img" src="../assets/img/email.svg">
+            <a class="__link" :href="`mailto:${host.email}`" target="_blank">E-mail</a>
           </div>
 
         </div>
@@ -136,16 +124,7 @@ export default {
       & .__host-member {
         text-align: center;
         font-size: 15px;
-      }
-      & .rating {
-        display: flex;
-        align-items: center;
-        margin: 1rem 0;
-        & .rating-number {
-          font-size: 16px;
-          font-weight: 600;
-          padding-left: 3px;
-        }
+        padding-bottom: 1.2rem;
       }
       & .__subtitle {
         text-align: center;
@@ -155,19 +134,18 @@ export default {
       padding: .8rem 7% 0;
       & .contato {
         display: flex;
-        flex-flow: column;
         align-items: center;
         padding: 1.5rem 0;
         border-bottom: 1px solid #dedede;
-        & .__label {
-          padding-bottom: .5rem;
-          font-size: 15px;
-          font-weight: 500;
+        & .__img {
+          width: 1.8rem;
+          height: auto;
+          margin-right: .8rem;
         }
         & .__link {
-          font-size: 18px;
+          font-size: 17px;
           font-weight: 500;
-          color: var(--colorPasseio);
+          color: var(--colorAcomod);
         }
       }
     }

@@ -653,7 +653,7 @@ export default {
       & .reserva-desktop {
         flex-basis: 31%;
         border: 1px solid #dedede;
-        border-radius: 6px;
+        border-radius: 7px;
         align-self: flex-start;
         & .reserva-desktop-form {
           display: flex;

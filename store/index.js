@@ -180,9 +180,15 @@ const store = () => new Vuex.Store({
       }
     },
     reservaAcomod: { /* Atualizar Action */
+      createdAt: null,
       reservaID: null,
       acomodID: null,
-      createdAt: null,
+      hostID: null,
+      guest: {
+        fullName: '',
+        email: '',
+        celular: ''
+      },
       status: 'pending',
       totalHospedes: 1,
       startDate: '',
@@ -191,9 +197,7 @@ const store = () => new Vuex.Store({
       valorNoitesTotal: null,
       limpezaFee: null,
       valorReservaTotal: null,
-      message: '',
-      hostID: null,
-      guestID: null
+      message: ''
     },
     paymentAdded: false,
     validZipcode: false,
@@ -847,9 +851,15 @@ const store = () => new Vuex.Store({
     },
     a_resetReservaAcomod ({ state }) { /* Resetar dados quando usuário for p/ outra acomod (evitar bugs) */
       state.reservaAcomod = {
+        createdAt: null,
         reservaID: null,
         acomodID: null,
-        createdAt: null,
+        hostID: null,
+        guest: {
+          fullName: '',
+          email: '',
+          celular: ''
+        },
         status: 'pending',
         totalHospedes: 1,
         startDate: '',
@@ -858,9 +868,7 @@ const store = () => new Vuex.Store({
         valorNoitesTotal: null,
         limpezaFee: null,
         valorReservaTotal: null,
-        message: '',
-        hostID: null,
-        guestID: null
+        message: ''
       }
       state.customer = {
         name: '',

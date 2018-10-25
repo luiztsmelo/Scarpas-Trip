@@ -39,6 +39,7 @@ export const reservaAcomod = {
       cardExpirationDateError: false,
       cardCvvError: false,
       nameError: false,
+      emailError: false,
       cpfError: false,
       celularError: false,
       zipcodeError: false,
