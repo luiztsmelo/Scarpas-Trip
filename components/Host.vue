@@ -116,13 +116,13 @@ export default {
       align-items: center;
       padding: 1rem 7% 0;
       & .__host-img {
-        width: 6rem;
+        width: 6.2rem;
         height: auto;
         border-radius: 50%;
         text-align: center;
       }
       & .__host-name {
-        font-size: 31px;
+        font-size: 34px;
         padding: 1rem 0 .2rem;
         text-align: center;
       }
@@ -140,7 +140,7 @@ export default {
       & .contato {
         display: flex;
         align-items: center;
-        padding: 1.5rem 0;
+        padding: 1.7rem 0;
         border-bottom: 1px solid #dedede;
         & .__img {
           width: 1.8rem;
