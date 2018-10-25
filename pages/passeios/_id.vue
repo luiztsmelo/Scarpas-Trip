@@ -636,6 +636,7 @@ export default {
             & .__img {
               width: 100%;
               height: auto;
+              border-radius: 6px;
             }
           }
         }
@@ -652,7 +653,7 @@ export default {
       & .reserva-desktop {
         flex-basis: 31%;
         border: 1px solid #dedede;
-        border-radius: 5px;
+        border-radius: 6px;
         align-self: flex-start;
         & .reserva-desktop-form {
           display: flex;

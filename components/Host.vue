@@ -175,10 +175,8 @@ export default {
 }
 
 /* TRANSITIONS */
-.host-animation-enter {
-  transform: translateX(100%);
+.host-animation-enter, .host-animation-leave-active {
+  transform: translateY(100%);
 }
-.host-animation-leave-active {
-  transform: translateX(100%);
-}
+
 </style>
