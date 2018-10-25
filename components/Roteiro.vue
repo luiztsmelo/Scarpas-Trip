@@ -90,8 +90,8 @@ export default {
       if (startDate === '') {
         return 'Chegada / Partida'
       } else {
-        startDate ? formattedDates = format(startDate, 'D MMM', { locale: pt }) : ''
-        endDate ? formattedDates += ' - ' + format(endDate, 'D MMM', { locale: pt }) : ''
+        startDate ? formattedDates = format(startDate, 'D [de] MMM', { locale: pt }) : ''
+        endDate ? formattedDates += ' - ' + format(endDate, 'D [de] MMM', { locale: pt }) : ''
         return formattedDates
       }
     }

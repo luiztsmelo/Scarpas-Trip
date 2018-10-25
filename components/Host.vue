@@ -24,22 +24,22 @@
 
           <div class="contato">
             <img class="__img" src="../assets/img/whatsapp.svg">
-            <a class="__link" :href="`https://api.whatsapp.com/send?phone=${host.celular.replace(/[^0-9\.]+/g, '')}`" target="_blank">WhatsApp</a>
+            <a class="__link" :style="linkColor" :href="`https://api.whatsapp.com/send?phone=${host.celular.replace(/[^0-9\.]+/g, '')}`" target="_blank">WhatsApp</a>
           </div>
 
           <div class="contato">
             <img class="__img" src="../assets/img/phone.svg">
-            <a class="__link" :href="`tel:+${host.celular.replace(/[^0-9\.]+/g, '')}`" target="_blank">Celular</a>
+            <a class="__link" :style="linkColor" :href="`tel:+${host.celular.replace(/[^0-9\.]+/g, '')}`" target="_blank">Celular</a>
           </div>
 
           <div class="contato" v-if="host.instagram !== undefined">
             <img class="__img" src="../assets/img/instagram.svg">
-            <a class="__link" :href="`https://www.instagram.com/${host.instagram.substring(1)}/`" target="_blank">Instagram</a>
+            <a class="__link" :style="linkColor" :href="`https://www.instagram.com/${host.instagram.substring(1)}/`" target="_blank">Instagram</a>
           </div>
 
           <div class="contato" style="border:none">
             <img class="__img" src="../assets/img/email.svg">
-            <a class="__link" :href="`mailto:${host.email}`" target="_blank">E-mail</a>
+            <a class="__link" :style="linkColor" :href="`mailto:${host.email}`" target="_blank">E-mail</a>
           </div>
 
         </div>
@@ -52,9 +52,8 @@
 </template>
 
 <script>
-import dayjs from 'dayjs'
-import 'dayjs/locale/pt-br'
-dayjs.locale('pt-br')
+import format from 'date-fns/format'
+import pt from 'date-fns/locale/pt'
 
 export default {
   methods: {
@@ -68,9 +67,15 @@ export default {
     acomod () { return this.$store.state.acomod },
     host () { return this.$store.state.host },
     createdAt () {
-      const month = dayjs(this.host.createdAt).format('MMMM')
-      const year = dayjs(this.host.createdAt).format('YYYY')
-      return month.toLowerCase() + ' de ' + year
+      return format(this.host.createdAt, 'MMMM [de] YYYY', { locale: pt })
+    },
+    linkColor () {
+      if (this.$route.name === 'acomodacoes-id') {
+        return 'color: #FFA04F'
+      }
+      if (this.$route.name === 'passeios-id') {
+        return 'color: #198CFE'
+      }
     }
   }, 
   watch: {
@@ -145,7 +150,6 @@ export default {
         & .__link {
           font-size: 17px;
           font-weight: 500;
-          color: var(--colorAcomod);
         }
       }
     }

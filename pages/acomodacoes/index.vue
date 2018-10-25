@@ -415,14 +415,8 @@ export default {
       if (startDate === '') {
         return 'Datas'
       } else {
-        const startDay = format(startDate, 'D', { locale: pt })
-        const startMonth = format(startDate, 'MMM', { locale: pt })
-        const startMonthCapitalized = startMonth.charAt(0).toUpperCase() + startMonth.slice(1)
-        const endDay = format(endDate, 'D', { locale: pt })
-        const endMonth = format(endDate, 'MMM', { locale: pt })
-        const endMonthCapitalized = endMonth.charAt(0).toUpperCase() + endMonth.slice(1)
-        startDate ? formattedDates = `${startDay} de ${startMonthCapitalized}` : ''
-        endDate ? formattedDates += ' - ' + `${endDay} de ${endMonthCapitalized}` : ''
+        startDate ? formattedDates = format(startDate, 'D [de] MMM', { locale: pt }) : ''
+        endDate ? formattedDates += ' - ' + format(endDate, 'D [de] MMM', { locale: pt }) : ''
         return formattedDates
       }
     },
