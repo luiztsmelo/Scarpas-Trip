@@ -158,7 +158,7 @@ export default {
       display: flex;
       flex-flow: column;
       align-items: center;
-      background: rgba(0,0,0, .3);
+      background: rgba(0,0,0, .2);
       & .headline {
         padding: 2rem 20% 0;
         width: 100%;
@@ -174,7 +174,7 @@ export default {
         justify-content: center;
         background: transparent;
         height: 3.4rem;
-        width: 36rem;
+        width: 38rem;
         & .datepicker-trigger {
           height: 100%;
           flex: 1;
@@ -185,7 +185,7 @@ export default {
             background: white;
             text-align: center;
             border: none;
-            border-radius: 6px 0 0 6px;
+            border-radius: 200px 0 0 200px;
             outline: none;
           }
         }
@@ -205,11 +205,7 @@ export default {
           background: var(--colorAcomod);
           color: white;
           font-weight: 700;
-          border-radius: 0 6px 6px 0;
-          transition: var(--main-transition);
-        }
-        & .buscar-btn:hover {
-          background: #ED8226;
+          border-radius: 0 200px 200px 0;
         }
       }
       & .rating {

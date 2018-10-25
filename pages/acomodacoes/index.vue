@@ -658,7 +658,7 @@ export default {
         overflow: hidden;
         line-height: 0;
         margin-bottom: .5rem;
-        border-radius: 3px;
+        border-radius: 4px;
         & .swiper-container {
           position: relative;
           & .swiper-wrapper {

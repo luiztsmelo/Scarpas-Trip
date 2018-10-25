@@ -244,6 +244,15 @@
 
           <h4 class="__info">A reserva é gratuita!</h4>
 
+
+          <button class="__reserva-desktop-ask-btn" type="button">Falar com {{ host.firstName }}</button>
+
+
+          <div class="highlight" v-if="$store.state.visitsLastMonth >= 0">
+            <h3 class="__text">Este passeio recebeu {{ $store.state.visitsLastMonth }} visualizações no último mês.</h3>
+            <img class="__img" src="../../assets/img/visits-passeio.svg">
+          </div>
+
         </form>
       </div><!-- ______________________________ RESERVA DESKTOP ______________________________ -->
 
@@ -307,12 +316,11 @@ export default {
       ]
     }
   },
+  middleware: 'passeioValidate',
   transition: 'id',
   async fetch ({ store, params }) {
     try {
-      store.commit('m_loader', true)
-
-      /* Get acomod */
+      /* Get passeio */
       const passeio = await firebase.firestore().doc(`passeios/${params.id}`).get()
 
       /* Get host */
@@ -320,7 +328,6 @@ export default {
       
       store.commit('m_passeio', passeio.data())
       store.commit('m_host', host.data())
-
       store.commit('m_loader', false)
 
     } catch (err) {
@@ -592,7 +599,7 @@ export default {
         width: 10rem;
         height: 3.2rem;
         background:var(--colorPasseio);
-        border-radius: 5px;
+        border-radius: 200px;
         font-size: 16px;
         font-weight: 700;
         color: white;
@@ -645,9 +652,12 @@ export default {
       & .reserva-desktop {
         flex-basis: 31%;
         border: 1px solid #dedede;
+        border-radius: 5px;
         align-self: flex-start;
         & .reserva-desktop-form {
-          padding: 1rem 1.4rem;
+          display: flex;
+          flex-flow: column;
+          padding: 1.4rem;
           & .__valor {
             font-size: 34px;
             font-weight: 400;
@@ -664,10 +674,11 @@ export default {
             & select {
               cursor: pointer;
               width: 100%;
-              padding: .75rem .6rem;
+              padding: .8rem .65rem;
               border: 1px solid #dedede;
               outline: none;
               background: white;
+              border-radius: 5px;
               transition: .15s border ease;
               & option {
                 background: white;
@@ -680,13 +691,14 @@ export default {
               height: 100%;
               background: white;
               & #datepicker-trigger {
-                padding: .75rem;
+                padding: .8rem;
                 height: 100%;
                 width: 100%;
                 background: white;
                 border: 1px solid #dedede;
                 outline: none;
                 text-align: left;
+                border-radius: 5px;
               }
               & #datepicker-trigger:hover {
                 border: 1px solid var(--color01);
@@ -721,7 +733,7 @@ export default {
             color: white;
             height: 3.2rem;
             width: 100%;
-            border-radius: 5px;
+            border-radius: 200px;
           }
           & .__info {
             margin: .5rem 0 .8rem;
@@ -729,6 +741,33 @@ export default {
             font-size: 12px;
             font-weight: 500;
             line-height: 17px;
+          }
+          & .__reserva-desktop-ask-btn {
+            font-size: 16px;
+            font-weight: 600;
+            background: white;
+            color: var(--colorPasseio);
+            height: 2rem;
+          }
+          & .__reserva-desktop-ask-btn:hover {
+            text-decoration: underline;
+          }
+          & .highlight {
+            display: flex;
+            align-items: center;
+            border-top: 1px solid #dedede;
+            padding-top: 1rem;
+            margin-top: 1rem;
+            & .__text {
+              font-size: 13px;
+              font-weight: 500;
+              line-height: 1.35;
+            }
+            & .__img {
+              margin-left: .6rem;
+              width: 2.4rem;
+              height: auto;
+            }
           }
         }
       }

@@ -2,7 +2,7 @@
   <modal
     name="detalhes-valor-modal"
     class="detalhes-valor"
-    width="24%"
+    width="25%"
     height="auto">
 
 
@@ -24,20 +24,12 @@
         <h3 id="valor">R${{ reservaAcomod.valorNoitesTotal.toLocaleString() }}</h3>
       </div>
 
-      <div class="item" v-if="acomod.limpezaFee !== 0">
+      <div class="item" v-if="acomod.limpezaFee !== 0" style="padding-bottom: .8rem">
         <div style="display:flex;flex:row;align-items:center">
           <h3>Taxa de limpeza</h3>
           <img src="../../assets/img/info.svg" style="width:.95rem;height:auto;margin-left:.3rem;cursor:pointer" @click="limpezaFeeDialog">
         </div>
         <h3>R${{ acomod.limpezaFee.toLocaleString() }}</h3>
-      </div>
-
-      <div class="item" style="padding-bottom: .8rem">
-        <div style="display:flex;flex:row;align-items:center">
-          <h3>Taxa de serviço</h3>
-          <img src="../../assets/img/info.svg" style="width:.95rem;height:auto;margin-left:.3rem;cursor:pointer" @click="serviceFeeDialog">
-        </div>
-        <h3>R${{ reservaAcomod.serviceFeeTotal.toLocaleString() }}</h3>
       </div>
 
       <div class="item" style="padding-top: .8rem; border-top: 1px solid #dedede">
@@ -58,13 +50,6 @@ export default {
       this.$modal.show('dialog', {
         title: 'Taxa de Limpeza',
         text: `Taxa cobrada pelo proprietário para arcar com os custos de limpeza ${this.tipoAcomod}.`,
-        buttons: [{ title: 'OK' }]
-      })
-    },
-    serviceFeeDialog () {
-      this.$modal.show('dialog', {
-        title: 'Taxa de Serviço',
-        text: `Taxa cobrada com o intuito de garantir suporte e total segurança em sua estadia caso algum problema aconteça.`,
         buttons: [{ title: 'OK' }]
       })
     }
@@ -93,10 +78,10 @@ export default {
 
 .detalhes-valor {
   & .detalhes-valor-body {
-    margin: 2rem 2.1rem 1.3rem;
+    margin: 2rem 2rem 1.3rem;
     & .__title {
       padding: .7rem 0 1.7rem 0;
-      font-size: 20px;
+      font-size: 19px;
       font-weight: 600;
     }
     & .item {

@@ -6,11 +6,11 @@ export default async function ({ store, route, redirect }) {
   try {
     store.commit('m_loader', true)
 
-    const acomod = await firebase.firestore().doc(`acomods/${route.params.id}`).get()
+    const passeio = await firebase.firestore().doc(`passeios/${route.params.id}`).get()
 
-    if (acomod.exists) {
-      /* Add visit a essa acomod */
-      firebase.firestore().collection(`acomods/${route.params.id}/visits`).add({
+    if (passeio.exists) {
+      /* Add visit a esse passeio */
+      firebase.firestore().collection(`passeios/${route.params.id}/visits`).add({
         date: new Date().getTime(),
         fromMobile: store.state.isMobile,
         clickedReservaBtn: false,
@@ -18,19 +18,19 @@ export default async function ({ store, route, redirect }) {
         concludedReserva: false
       })
       .then(visit => { store.state.visitID = visit.id }).catch(err => console.log(err))
-      /* Get visits do mês atual dessa acomod */
+      /* Get visits do mês atual desse passeio */
       const startDateLast30Days = subDays(new Date(), 30)
-      firebase.firestore().collection(`acomods/${route.params.id}/visits`).where('date', '>', Date.parse(startDateLast30Days)).get()
+      firebase.firestore().collection(`passeios/${route.params.id}/visits`).where('date', '>', Date.parse(startDateLast30Days)).get()
       .then(visits => { store.commit('m_visitsLastMonth', visits.size) }).catch(err => console.log(err))
     } else {
       store.commit('m_loader', false)
       store.commit('show_alert', {
         type: 'warning',
         title: 'Ops',
-        message: `A acomodação ${route.params.id} não está listada. Veja se alguma dessas lhe agrada.`,
+        message: `O passeio ${route.params.id} não está listada. Veja se algum desses lhe agrada.`,
         persist: true
       })
-      redirect('/acomodacoes')
+      redirect('/passeios')
     }
   } catch (err) {
     redirect('/')

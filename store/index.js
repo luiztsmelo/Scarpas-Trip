@@ -20,7 +20,6 @@ const store = () => new Vuex.Store({
     showFoobar: true,
     showShare: false,
     showHost: false,
-    showParcelas: false,
     showFiltrarAcomods: false,
     menuIconAnime: false,
     loader: false,
@@ -35,7 +34,7 @@ const store = () => new Vuex.Store({
     heightImageBox: null,
     fromWithoutAddress: false,
     visitID: null,
-    visits: null,
+    visitsLastMonth: null,
     perfil: {
       reservas: {
         acomods: null
@@ -62,8 +61,7 @@ const store = () => new Vuex.Store({
       cardNumber: '',
       cardHolderName: '',
       cardExpirationDate: '',
-      cardCVV: '',
-      parcelas: null
+      cardCVV: ''
     },
     cardType: null,
     cardTypeNice: null,
@@ -138,7 +136,7 @@ const store = () => new Vuex.Store({
     acomodData: { /* Atualizar action */
       createdAt: null,
       acomodID: null,
-      hostID: null,
+      hostID: '',
       recipientID: null,
       celular: '',
       tipoAcomod: 'Casa',
@@ -170,22 +168,28 @@ const store = () => new Vuex.Store({
       allowBabys: false,
       allowFumar: false,
       regrasAdicionais: [],
-      images: []
+      images: [],
+      iCalendars: {
+        airbnb: '',
+        booking: ''
+      },
+      disabledDates: {
+        airbnb: [],
+        booking: [],
+        escarpasTrip: []
+      }
     },
     reservaAcomod: { /* Atualizar Action */
       reservaID: null,
       acomodID: null,
-      requested: null,
-      paymentMethod: 'credit_card',
-      parcelas: '1',
+      createdAt: null,
       status: 'pending',
-      isRunning: true,
       totalHospedes: 1,
-      periodoReserva: null,
+      startDate: '',
+      endDate: '',
       noites: null,
       valorNoitesTotal: null,
       limpezaFee: null,
-      serviceFeeTotal: null,
       valorReservaTotal: null,
       message: '',
       hostID: null,
@@ -193,7 +197,6 @@ const store = () => new Vuex.Store({
     },
     paymentAdded: false,
     validZipcode: false,
-    clickedReservaAcomod: false,
     concludedReservaAcomod: false,
     concludedNewAcomod: false,
     cadastroAcomod0: true,
@@ -387,14 +390,11 @@ const store = () => new Vuex.Store({
     m_showHost (state, payload) {
       state.showHost = payload
     },
-    m_showParcelas (state, payload) {
-      state.showParcelas = payload
-    },
     m_showFiltrarAcomods (state, payload) {
       state.showFiltrarAcomods = payload
     },
-    m_visits (state, payload) {
-      state.visits = payload
+    m_visitsLastMonth (state, payload) {
+      state.visitsLastMonth = payload
     },
     m_allAcomods (state, payload) {
       state.allAcomods = payload
@@ -473,10 +473,6 @@ const store = () => new Vuex.Store({
       state.creditCard.cardHolderName = ''
       state.creditCard.cardExpirationDate = ''
       state.creditCard.cardCVV = ''
-      state.creditCard.parcelas = null
-    },
-    m_parcelas (state, payload) {
-      state.creditCard.parcelas = payload
     },
     m_bankAccount (state, payload) {
       state.bankAccount = payload
@@ -805,7 +801,7 @@ const store = () => new Vuex.Store({
       commit('m_acomodData', {
         createdAt: null,
         acomodID: null,
-        hostID: null,
+        hostID: '',
         recipientID: null,
         celular: '',
         tipoAcomod: 'Casa',
@@ -837,24 +833,30 @@ const store = () => new Vuex.Store({
         allowBabys: false,
         allowFumar: false,
         regrasAdicionais: [],
-        images: []
+        images: [],
+        iCalendars: {
+          airbnb: '',
+          booking: ''
+        },
+        disabledDates: {
+          airbnb: [],
+          booking: [],
+          escarpasTrip: []
+        }
       })
     },
     a_resetReservaAcomod ({ state }) { /* Resetar dados quando usuário for p/ outra acomod (evitar bugs) */
       state.reservaAcomod = {
         reservaID: null,
         acomodID: null,
-        requested: null,
-        paymentMethod: 'credit_card',
-        parcelas: '1',
+        createdAt: null,
         status: 'pending',
-        isRunning: true,
         totalHospedes: 1,
-        periodoReserva: null,
+        startDate: '',
+        endDate: '',
         noites: null,
         valorNoitesTotal: null,
         limpezaFee: null,
-        serviceFeeTotal: null,
         valorReservaTotal: null,
         message: '',
         hostID: null,

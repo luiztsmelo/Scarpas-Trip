@@ -38,8 +38,8 @@
       <div class="sign-in-body">
         <img class="__img" src="../static/brand.svg">
 
-        <h1 class="__title">{{ $store.state.clickedReservaAcomod === true ? 'Antes, é preciso se cadastrar' : 'Cadastrar' }}</h1>
-        <h3 class="__subtitle">{{ $store.state.clickedReservaAcomod === true ? '' : 'Cadastre-se para fazer reservas ou anunciar na Escarpas Trip' }}</h3>
+        <h1 class="__title">Cadastrar</h1>
+        <h3 class="__subtitle"></h3>
 
         <button type="button" class="google-btn" @click="$store.dispatch('a_googleSignIn')">Cadastrar com Google</button>
         <button type="button" class="facebook-btn" @click="$store.dispatch('a_facebookSignIn')">Cadastrar com Facebook</button>
@@ -64,7 +64,6 @@
 export default {
   methods: {
     closedModal () {
-      this.$store.state.clickedReservaAcomod = false
       this.$store.state.isSignIn = true
     }
   },
@@ -76,13 +75,6 @@ export default {
       if (value && this.$route.path === '/') {
         this.$modal.hide('sign-in-modal')
         this.$router.push('/perfil')
-      }
-      if (value && this.$store.state.clickedReservaAcomod === true && this.$route.name === 'acomodacoes-id') {
-        this.$store.state.creditCard.cardHolderName = this.$store.state.user.fullName
-        this.$modal.hide('sign-in-modal')
-        this.$store.commit('m_isReservar', true)
-        this.$router.push('/acomodacoes/reservar')
-        this.$store.commit('m_showNavbar', false)
       }
     }
   }

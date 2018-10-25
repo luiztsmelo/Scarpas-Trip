@@ -1062,7 +1062,6 @@ export default {
       const acomodData = this.$store.state.acomodData
 
       acomodData.createdAt = Date.now()
-
       acomodData.hostID = this.user.userID
 
       /* Se todas as informações preenchidas */

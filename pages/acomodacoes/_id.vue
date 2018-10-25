@@ -278,10 +278,11 @@
               :showActionButtons="false"
               :disabledDates="disabledDates"
               :min-date="minDate"
-              :date-one="startDate"
-              :date-two="endDate"
-              @date-one-selected="val => { startDate = val }"
-              @date-two-selected="val => { endDate = val }"
+              :date-one="$store.state.reservaAcomod.startDate"
+              :date-two="$store.state.reservaAcomod.endDate"
+              @date-one-selected="val => { $store.state.reservaAcomod.startDate = val }"
+              @date-two-selected="val => { $store.state.reservaAcomod.endDate = val, calcValoresReserva() }"
+              @closed="closedDatepicker"
             />
           </div>
 
@@ -359,10 +360,11 @@
               <button
                 type="button"
                 id="datepicker-trigger">
-                {{ formatDates(startDate, endDate) }}
+                {{ formattedDates() }}
               </button>
 
               <AirbnbStyleDatepicker
+                :trigger="showDatepicker"
                 :trigger-element-id="'datepicker-trigger'"
                 :fullscreen-mobile="true"
                 :showShortcutsMenuTrigger="false"
@@ -371,17 +373,18 @@
                 :offsetX="102"
                 :offsetY="52"
                 :min-date="minDate"
-                :date-one="startDate"
-                :date-two="endDate"
-                @date-one-selected="val => { startDate = val }"
-                @date-two-selected="val => { endDate = val }"
+                :date-one="$store.state.reservaAcomod.startDate"
+                :date-two="$store.state.reservaAcomod.endDate"
+                @date-one-selected="val => { $store.state.reservaAcomod.startDate = val }"
+                @date-two-selected="val => { $store.state.reservaAcomod.endDate = val, calcValoresReserva() }"
+                @closed="closedDatepicker"
               />
             </div>
 
           </div>
 
 
-          <div class="reserva-info" v-if="periodoReserva !== null">
+          <div class="reserva-info" v-if="reservaAcomod.startDate !== '' && reservaAcomod.endDate !== ''">
             
             <div class="reserva-info_item" style="padding-bottom: .2rem">
               <h3>{{ `R$${acomod.valorNoite.toLocaleString()} x ${$store.state.reservaAcomod.noites} ${$store.state.reservaAcomod.noites == 1 ? 'noite' : 'noites'}` }}</h3>
@@ -396,15 +399,7 @@
               <h3>R${{ acomod.limpezaFee.toLocaleString() }}</h3>
             </div>
 
-            <div class="reserva-info_item" style="padding-bottom: .4rem">
-              <div style="display:flex;flex:row;align-items:center">
-                <h3>Taxa de serviço</h3>
-                <img src="../../assets/img/info.svg" style="width:.95rem;height:auto;margin-left:.3rem;cursor:pointer" @click="serviceFeeDialog">
-              </div>
-              <h3>R${{ $store.state.reservaAcomod.serviceFeeTotal.toLocaleString() }}</h3>
-            </div>
-
-            <div class="reserva-info_item-total" style="padding-top: .3rem">
+            <div class="reserva-info_item-total" style="padding-top: .4rem; margin-top: .4rem">
               <h3>Total</h3>
               <h3>R${{ $store.state.reservaAcomod.valorReservaTotal.toLocaleString() }}</h3>
             </div>
@@ -412,9 +407,19 @@
           </div>
 
 
+
           <button class="__reserva-desktop-btn" type="button" @click="reservarDesktop">Reservar</button>
 
           <h4 class="__info">A reserva é gratuita!</h4>
+
+
+          <button class="__reserva-desktop-ask-btn" type="button">Falar com {{ host.firstName }}</button>
+
+
+          <div class="highlight" v-if="$store.state.visitsLastMonth >= 0">
+            <h3 class="__text">{{ tipoAcomodE }} recebeu {{ $store.state.visitsLastMonth }} visualizações no último mês.</h3>
+            <img class="__img" src="../../assets/img/visits-acomod.svg">
+          </div>
 
 
         </form>
@@ -463,9 +468,7 @@ import { tipoAcomod } from '@/mixins/tipoAcomod'
 import format from 'date-fns/format'
 import pt from 'date-fns/locale/pt'
 import subDays from 'date-fns/sub_days'
-import dayjs from 'dayjs'
-import 'dayjs/locale/pt-br'
-dayjs.locale('pt-br')
+import differenceInDays from 'date-fns/difference_in_days'
 
 export default {
   components: { MiniLoader, ReservaMobile, Host },
@@ -473,8 +476,7 @@ export default {
   data () {
     return {
       showComods: false,
-      startDate: '',
-      endDate: ''
+      showDatepicker: false
     }
   },
   head () {
@@ -513,9 +515,11 @@ export default {
     imageH (image) {
       return supportsWebP ? image.HW : image.HJ
     },
-    formatDates (startDate, endDate) {
+    formattedDates () {
+      const startDate = this.reservaAcomod.startDate
+      const endDate = this.reservaAcomod.endDate
       let formattedDates = ''
-      if (startDate === '') {
+      if (this.reservaAcomod.startDate === '') {
         return 'Chegada / Partida'
       } else {
         const startDay = format(startDate, 'D', { locale: pt })
@@ -529,34 +533,24 @@ export default {
         return formattedDates
       }
     },
-    inputDate () { /* Em caso de alterações, lembrar também de alterar DatePicker.vue */
-      this.periodoReserva.start = Date.parse(this.periodoReserva.start)
-      this.periodoReserva.end = Date.parse(this.periodoReserva.end)
+    calcValoresReserva () { /* Em caso de alterações, lembrar também de alterar DatePicker.vue */
+      const startDate = this.reservaAcomod.startDate
+      const endDate = this.reservaAcomod.endDate
 
-      const startDate = dayjs(this.periodoReserva.start)
-      const endDate = dayjs(this.periodoReserva.end)
-
-      const noites = endDate.diff(startDate, 'day')
+      const noites = differenceInDays(endDate, startDate)
       this.$store.commit('m_noites', noites)
 
       const valorNoitesTotal = Math.round(this.acomod.valorNoite * noites)
       this.$store.commit('m_valorNoitesTotal', valorNoitesTotal)
 
-      const serviceFeeTotal = Math.round(valorNoitesTotal * this.$store.state.serviceFeeAcomod)
-      this.$store.commit('m_serviceFeeTotal', serviceFeeTotal)
-
-      const valorReservaTotal = valorNoitesTotal + this.acomod.limpezaFee + serviceFeeTotal
+      const valorReservaTotal = valorNoitesTotal + this.acomod.limpezaFee
       this.$store.commit('m_valorReservaTotal', valorReservaTotal)
 
       this.$store.state.reservaAcomod.limpezaFee = this.acomod.limpezaFee
-
-      const parcelas = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map(n => {
-        return {
-          id: n,
-          valorParcela: Number( (valorReservaTotal/n).toFixed(2) )
-        }
-      })
-      this.$store.commit('m_parcelas', parcelas)
+    },
+    closedDatepicker () {
+      this.showDatepicker = false
+      this.reservaAcomod.endDate === '' ? this.reservaAcomod.startDate = '' : ''
     },
     scrollTopbarBg (evt, el) {
       return window.scrollY >= this.$store.state.heightImageBox
@@ -588,19 +582,12 @@ export default {
       firebase.firestore().doc(`acomods/${this.$route.params.id}/visits/${this.$store.state.visitID}`).update({ 
         clickedReservaBtn: true
       })
-      if (this.periodoReserva === null) {
-        this.$nextTick(() => this.$refs.datePicker.$el.focus())
+      if (this.reservaAcomod.startDate === '' && this.reservaAcomod.endDate === '') {
+        this.showDatepicker = true
       } else {
-        if (this.$store.state.user.email === null) {
-          this.$store.state.isSignIn = false
-          this.$store.state.clickedReservaAcomod = true
-          this.$modal.show('sign-in-modal')
-        } else {
-          this.$store.state.creditCard.cardHolderName = this.$store.state.user.fullName
-          this.$store.commit('m_isReservar', true)
-          this.$router.push('/acomodacoes/reservar')
-          this.$store.commit('m_showNavbar', false)
-        }
+        this.$store.commit('m_isReservar', true)
+        this.$router.push('/acomodacoes/reservar')
+        this.$store.commit('m_showNavbar', false)
       }
     },
     reservarMobile () {
@@ -616,13 +603,6 @@ export default {
       this.$modal.show('dialog', {
         title: 'Taxa de Limpeza',
         text: `Taxa cobrada pelo proprietário para arcar com os custos de limpeza ${this.tipoAcomodD}.`,
-        buttons: [{ title: 'OK' }]
-      })
-    },
-    serviceFeeDialog () {
-      this.$modal.show('dialog', {
-        title: 'Taxa de Serviço',
-        text: `Taxa cobrada com o intuito de garantir suporte e total segurança em sua estadia caso algum problema aconteça.`,
         buttons: [{ title: 'OK' }]
       })
     },
@@ -650,8 +630,8 @@ export default {
     acomod () { return this.$store.state.acomod },
     showShare () { return this.$store.state.showShare },
     hash () { return this.$route.hash },
-    host () {return this.$store.state.host },
-    periodoReserva () {return this.$store.state.reservaAcomod.periodoReserva },
+    host () { return this.$store.state.host },
+    reservaAcomod () { return this.$store.state.reservaAcomod },
     totalHospedesArray () {
       return Array.from({length: this.acomod.totalHospedes}, (v, k) => k+1)
     },
@@ -942,7 +922,7 @@ export default {
         width: 10rem;
         height: 3.2rem;
         background:var(--colorAcomod);
-        border-radius: 5px;
+        border-radius: 200px;
         font-size: 16px;
         font-weight: 700;
         color: white;
@@ -1001,9 +981,12 @@ export default {
       & .reserva-desktop {
         flex-basis: 31%;
         border: 1px solid #dedede;
+        border-radius: 5px;
         align-self: flex-start;
         & .reserva-desktop-form {
-          padding: 1rem 1.4rem;
+          display: flex;
+          flex-flow: column;
+          padding: 1.4rem;
           & .__valor {
             font-size: 34px;
             font-weight: 400;
@@ -1020,10 +1003,11 @@ export default {
             & select {
               cursor: pointer;
               width: 100%;
-              padding: .75rem .6rem;
+              padding: .8rem .65rem;
               border: 1px solid #dedede;
               outline: none;
               background: white;
+              border-radius: 5px;
               transition: .15s border ease;
               & option {
                 background: white;
@@ -1036,13 +1020,14 @@ export default {
               height: 100%;
               background: white;
               & #datepicker-trigger {
-                padding: .75rem;
+                padding: .8rem;
                 height: 100%;
                 width: 100%;
                 background: white;
                 border: 1px solid #dedede;
                 outline: none;
                 text-align: left;
+                border-radius: 5px;
               }
               & #datepicker-trigger:hover {
                 border: 1px solid var(--color01);
@@ -1076,8 +1061,7 @@ export default {
             background: var(--colorAcomod);
             color: white;
             height: 3.2rem;
-            width: 100%;
-            border-radius: 5px;
+            border-radius: 200px;
           }
           & .__info {
             margin: .5rem 0 .8rem;
@@ -1085,6 +1069,33 @@ export default {
             font-size: 12px;
             font-weight: 500;
             line-height: 17px;
+          }
+          & .__reserva-desktop-ask-btn {
+            font-size: 16px;
+            font-weight: 600;
+            background: white;
+            color: var(--colorAcomod);
+            height: 2rem;
+          }
+          & .__reserva-desktop-ask-btn:hover {
+            text-decoration: underline;
+          }
+          & .highlight {
+            display: flex;
+            align-items: center;
+            border-top: 1px solid #dedede;
+            padding-top: 1rem;
+            margin-top: 1rem;
+            & .__text {
+              font-size: 13px;
+              font-weight: 500;
+              line-height: 1.35;
+            }
+            & .__img {
+              margin-left: .6rem;
+              width: 2.4rem;
+              height: auto;
+            }
           }
         }
       }

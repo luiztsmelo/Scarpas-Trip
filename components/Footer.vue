@@ -9,7 +9,6 @@
       <nuxt-link to="#"><h3 class="__subtitle">Contato</h3></nuxt-link>
       <nuxt-link to="/termos"><h3 class="__subtitle">Termos de Serviço</h3></nuxt-link>
       <nuxt-link to="/termos#politica_privacidade"><h3 class="__subtitle">Política de Privacidade</h3></nuxt-link>
-      <nuxt-link to="/termos#politica_cancelamento"><h3 class="__subtitle">Política de Cancelamento</h3></nuxt-link>
     </div>
 
     <div class="box">
@@ -21,26 +20,10 @@
     </div>
 
     <div class="box" style="margin-left: 4rem">
+      <h1 class="__title">Siga-nos</h1>
       <div class="follow">
         <a href="https://www.facebook.com/escarpastrip/"><img class="__img-follow" src="../assets/img/facebookb.svg"></a>
         <a href="https://www.instagram.com/escarpastrip/"><img class="__img-follow" src="../assets/img/instagram.svg"></a>
-      </div>
-
-      <div class="imgs-payment">
-        <img class="__img-payment" src="../assets/img/mastercard.svg" style="transform: scale(.8)">
-        <img class="__img-payment" src="../assets/img/visa.svg">
-        <img class="__img-payment" src="../assets/img/hipercard.svg">
-        <img class="__img-payment" src="../assets/img/amex.svg" style="transform: scale(.5)">
-        <img class="__img-payment" src="../assets/img/elo.svg" style="transform: scale(1.18)">
-        <img class="__img-payment" src="../assets/img/boleto.png" style="transform: scale(.69)">
-      </div>
-
-      <div class="trust">
-        <img class="__img-lock" src="../assets/img/lock.svg">
-        <div class="trust-text">
-          <h2>Reserva 100% segura</h2>
-          <h3>Seus dados protegidos</h3>
-        </div>
       </div>
     </div>
 
@@ -64,7 +47,7 @@ export default {
   margin-top: 4.5rem;
   width: 100%;
   height: 17rem;
-  padding: 3.2rem 7%;
+  padding: 3.5rem 7%;
   & .__img {
     width: 3.4rem;
     height: auto;
@@ -84,45 +67,13 @@ export default {
     & .__subtitle:hover {
       text-decoration: underline;
     }
-    & .trust {
-      display: flex;
-      align-items: center;
-      & .__img-lock {
-        width: 1.9rem;
-        height: auto;
-        margin-right: .6rem;
-      }
-      & .trust-text {
-        & h2 {
-          font-size: 13px;
-          font-weight: 700;
-          line-height: 17px;
-        }
-        & h3 {
-          font-size: 12px;
-          font-weight: 400;
-          line-height: 17px;
-        }
-      }
-    }
-    & .imgs-payment {
-      display: flex;
-      align-items: center;
-      margin: 1.1rem 0;
-      transform: translateX(-0.3rem);
-      & .__img-payment {
-        width: 2.2rem;
-        height: auto;
-        margin-right: .6rem;
-      }
-    }
     & .follow {
       display: flex;
       align-items: center;
       & .__img-follow {
-        width: 1.9rem;
+        width: 2rem;
         height: auto;
-        margin-right: 1.5rem;
+        margin: .5rem 1rem 0 0;
       }
     }
   }

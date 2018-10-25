@@ -147,7 +147,7 @@
 
 
       <!-- ______________________________ ATRAÇÕES ______________________________ -->
-      <div class="category-container">
+      <!-- <div class="category-container">
 
 
         <div class="title-row">
@@ -172,7 +172,7 @@
         </div>
 
 
-      </div><!-- ______________________________ ATRAÇÕES ______________________________ -->
+      </div> --><!-- ______________________________ ATRAÇÕES ______________________________ -->
 
 
 
@@ -314,7 +314,7 @@ export default {
           & .__card-img {
             width: 100%; 
             height: auto;
-            border-radius: 3px;
+            border-radius: 4px;
             margin-bottom: .2rem;
           }
           & .__card-info {

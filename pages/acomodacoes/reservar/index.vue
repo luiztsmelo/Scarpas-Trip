@@ -40,9 +40,7 @@
 
           <h1 class="__title">Revisar regras {{ tipoAcomodD }}</h1>
 
-          <h3 class="__text">{{ $store.state.visits }} pessoas visualizaram {{ tipoAcomodE }} na última semana.</h3>
-        
-
+          
           <div class="etapa-1-item" v-if="!acomod.allowFestas || !acomod.allowPets || !acomod.allowBabys || !acomod.allowFumar">
             <h3 class="__text">Nesta casa não é permitido:</h3>
             <h3>{{ !acomod.allowFestas ? 'Festas' : '' }}</h3>
@@ -60,7 +58,7 @@
           <!-- <h3>Regras de Cancelamento</h3> -->
 
 
-          <button class="__next-btn" type="button" :style="form1ok" @click="nextBtn1">Concordar</button>
+          <button class="__next-btn" type="button" :style="form1ok" @click="nextBtn1">Continuar</button>
 
         </div><!-- ******* ETAPA 1 ******* -->
 
@@ -328,17 +326,6 @@
             </div><!-- ************** BILLING ************** -->
 
 
-            <!-- PARCELAS -->
-            <div class="item-form" style="padding-top: 1.2rem" v-if="reservaAcomod.paymentMethod === 'credit_card'">
-              <label>Deseja pagar em quantas parcelas sem juros?</label>
-              <select v-model="$store.state.reservaAcomod.parcelas">
-                <option v-for="parcela in $store.state.creditCard.parcelas" :value="parcela.id.toString()">
-                  {{ `${parcela.id}x R$${parcela.valorParcela.toLocaleString('pt-BR', {minimumFractionDigits: 2})}` }}
-                </option>
-              </select>
-            </div><!-- PARCELAS -->
-
-
             <div class="politica-cancelamento" style="padding-top: 1.2rem">
               <h3 class="__subtitle">Política de cancelamento: ???</h3>
               <h3 class="__text">Cancele em 48h da reserva e até 7 dias antes do check-in para receber um reembolso integral.</h3>
@@ -379,7 +366,7 @@
 
             <div class="detalhes-reserva-data_item">
               <img src="../../../assets/img/calendar.svg" class="__img" style="transform: scale(.91)">
-              <h3 style="font-size:15px">{{ periodoReserva }}</h3>
+              <h3 style="font-size: 15px;  text-transform: capitalize">{{ periodoReserva }}</h3>
             </div>
 
             <div class="detalhes-reserva-data_item">
@@ -395,20 +382,13 @@
 
             <div class="detalhes-reserva-valor_item-total" style="padding-top: .8rem">
               <h3 style="font-size:17px">Total</h3>
-              <h3 class="__valor-total">R${{ reservaAcomod.valorReservaTotal.toLocaleString('pt-BR', { minimumFractionDigits: 2 }) }}</h3>
+              <h3 class="__valor-total">R${{ reservaAcomod.valorReservaTotal.toLocaleString() }}</h3>
             </div>
 
             <span class="__ver-detalhes" @click="$modal.show('detalhes-valor-modal')">Detalhes do valor</span>
 
             <detalhes-valor/>
 
-          </div>
-
-
-
-          <div class="detalhes-reserva-cancelamento">
-            <img src="../../../assets/img/shield.svg" class="__cancelamento-img">
-            <h3 class="__cancelamento-text">Cancelamento com devolução integral do valor pago até dia ???.</h3>
           </div>
           
 
@@ -481,9 +461,8 @@ import { tipoAcomod } from '@/mixins/tipoAcomod'
 import valid from 'card-validator'
 import CPF from 'gerador-validador-cpf'
 import scrollIntoView from 'scroll-into-view'
-import dayjs from 'dayjs'
-import 'dayjs/locale/pt-br'
-dayjs.locale('pt-br')
+import format from 'date-fns/format'
+import pt from 'date-fns/locale/pt'
 
 export default {
   components: { MaskedInput, detalhesValor },
@@ -665,10 +644,10 @@ export default {
   },
   computed: {
     form1ok () {
-      return 'background: #50CB9D'
+      return 'background: #FFA04F'
     },
     form2ok () {
-      return this.reservaAcomod.message !== '' ? 'background: #50CB9D' : ''
+      return this.reservaAcomod.message !== '' ? 'background: #FFA04F' : ''
     },
     form3ok () {
       if (this.reservaAcomod.paymentMethod === 'credit_card') {
@@ -699,8 +678,10 @@ export default {
 
     /* ******************** DATES ******************** */
     periodoReserva () {
-      if (this.reservaAcomod.periodoReserva !== null) {
-        return dayjs(this.reservaAcomod.periodoReserva.start).format('ddd, DD MMM YYYY') + ' / ' + dayjs(this.reservaAcomod.periodoReserva.end).format('ddd, DD MMM YYYY')
+      const startDate = this.reservaAcomod.startDate
+      const endDate = this.reservaAcomod.endDate
+      if (startDate !== '' && endDate !== '') {
+        return `${format(startDate, 'ddd, DD MMM YYYY', { locale: pt })} / ${format(endDate, 'ddd, DD MMM YYYY', { locale: pt })}`
       }
     }
   },
@@ -856,7 +837,7 @@ export default {
 .reservar {
   display: flex;
   flex-flow: column;
-  transition: all .27s cubic-bezier(.15,.97,.43,.93);
+  transition: var(--pages-transition);
   
   /* ******* HEADER PROGRESS ******* */
   & .header-progress {
@@ -1045,14 +1026,16 @@ export default {
       flex: 36%;
       max-width: 36%;
       align-self: flex-start;
-      & .__acomod-img {
+      & .__img {
         width: 100%;
         height: auto;
+        border-radius: 6px 6px 0 0;
       }
       & .card-body {
         border-left: 1px solid #dedede;
         border-right: 1px solid #dedede;
         border-bottom: 1px solid #dedede;
+        border-radius: 0 0 6px 6px;
         & .__acomod-title {
           margin: 0 1.3rem;
           padding: 1.2rem 0;
@@ -1095,22 +1078,6 @@ export default {
             font-size: 14px;
             font-weight: 500;
             color: var(--colorAcomod);
-          }
-        }
-        & .detalhes-reserva-cancelamento {
-          display: flex;
-          align-items: center;
-          padding-bottom: .8rem;
-          margin: 0 1.3rem;
-          & .__cancelamento-img {
-            margin-right: .6rem;
-            width: 1.5rem;
-            height: auto;
-          }
-          & .__cancelamento-text {
-            font-size: 13px; 
-            font-weight: 500;
-            line-height: 16px;
           }
         }
       }
@@ -1166,13 +1133,13 @@ export default {
 .__next-btn {
   position: relative;
   margin-top: 2.5rem;
-  padding: 0 1.5rem;
+  padding: 0 1.7rem;
   height: 3.2rem;
   font-size: 17px;
   font-weight: 600;
   background:rgb(237, 237, 237);
   color: white;
-  border-radius: 5px;
+  border-radius: 200px;
   transition: var(--main-transition);
 }
 
