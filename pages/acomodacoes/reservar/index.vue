@@ -15,11 +15,7 @@
         
         <h3 class="__arrow-right">→</h3>
 
-        <h3 class="__item-progress" :style="etapaProgressed2" @click="backEtapa2">2. Mensagem</h3>
-
-        <h3 class="__arrow-right">→</h3>
-
-        <h3 class="__item-progress" :style="etapaProgressed3" @click="backEtapa3">3. Confirmação</h3>
+        <h3 class="__item-progress" :style="etapaProgressed2" @click="backEtapa2">2. Revisar detalhes e confirmar</h3>
       </div>
 
     </div><!-- ******* HEADER PROGRESS ******* -->
@@ -68,7 +64,7 @@
 
           <!-- CELULAR -->
           <div class="item-form">
-            <label :class="[ celularError ? 'has-error-label' : '' ]">Celular</label>
+            <label :class="[ celularError ? 'has-error-label' : '' ]">Celular / WhatsApp</label>
             <masked-input
               ref="celular"
               :class="[ celularError ? 'has-error' : '' ]"
@@ -92,61 +88,20 @@
         <!-- ******* ETAPA 2 ******* -->
         <div v-if="$store.state.reservaAcomodDesktop2 === true">
 
-          <h1 class="__title">Conte a {{ host.firstName }} sobre sua viagem</h1>
-
-
-          <div class="message">
-            
-            <h3 class="__text">Ajude {{ host.firstName }} a preparar {{ tipoAcomodA }} para sua estadia respondendo às suas perguntas:</h3>
-
-            <div class="host-message">
-              <img class="__img" :src="host.photoURL">
-              <div class="message-box">
-                <h3 class="__message">Oi {{ reservaAcomod.guest.fullName }}! </h3>
-                <h3 class="__message">Estou te aguardando ansiosamente por aqui. Por favor, me avise a hora em que irá chegar.</h3>
-                <h3 class="__message">{{ host.firstName }}.</h3>
-              </div>
-            </div>
-
-            <textarea
-              ref="message"
-              :class="[ messageError ? 'has-error-textarea' : '' ]"
-              v-model="reservaAcomod.message"
-              @focus="onFocusMessage"
-              v-autosize="messageAutosize"
-              maxlength="1000"
-              rows="6"
-              placeholder="Escreva sua resposta aqui">
-            {{messageAutosize}}</textarea>
-
-          </div>
-
-
-          <button class="__next-btn" type="button" :style="form2ok" @click="nextBtn2">Continuar</button>
-
-        </div><!-- ******* ETAPA 2 ******* -->
-
-
-
-
-        <!-- ******* ETAPA 3 ******* -->
-        <div v-if="$store.state.reservaAcomodDesktop3 === true">
-
-          <h1 class="__title">Confirmação</h1>
+          <h1 class="__title">Revisar detalhes e confirmar</h1>
 
 
           <h3 class="__text">Texto aqui.</h3>
 
-          
+
           <h4 class="__termos">Eu concordo com as regras {{ tipoAcomodD }}, <a href="/termos#politica_cancelamento" target="_blank">Política de Cancelamento</a> e <a href="/termos" target="_blank">Termos de Serviço</a>.</h4>
 
 
-      
+          <button class="__next-btn" type="button" :style="form2ok" @click="confirmarReserva">Confirmar Reserva</button>
 
-          <button class="__next-btn" type="button" style="font-weight: 700" :style="form3ok" @click="concluirReserva">Concluir Reserva</button>
+        </div><!-- ******* ETAPA 2 ******* -->
 
 
-        </div><!-- ******* ETAPA 3 ******* -->
         
 
       </div><!-- ________________________________________ FLEX LEFT ________________________________________ -->
@@ -201,7 +156,7 @@
           <div class="detalhes-reserva-valor" v-if="reservaAcomod.valorReservaTotal !== null">
 
             <div class="detalhes-reserva-valor_item-total" style="padding-top: .8rem">
-              <h3 style="font-size:17px">Total</h3>
+              <h3>Total</h3>
               <h3 class="__valor-total">R${{ reservaAcomod.valorReservaTotal.toLocaleString() }}</h3>
             </div>
 
@@ -236,31 +191,27 @@
 
     <div class="concluded-reserva" v-if="$store.state.concludedReservaAcomod">
 
-      <img class="__img" src="../../../assets/img/brand.svg">
+      <img class="__img" src="../../../assets/img/congratulations.svg">
 
-      <h1 class="__title">Pedido de reserva enviado</h1>
+      <h1 class="__title">Parabéns pela escolha! Agora é hora de relaxar.</h1>
 
       <h3 class="__text">
-        {{ host.firstName }} irá analisar seu pedido e dentro de 24h você receberá um e-mail e SMS com a confirmação de sua reserva, juntamente com as informações de contato do anunciante.
+        Dentro dos próximos dias {{ host.firstName }} irá entrar em contato com você para decidirem os detalhes de sua estadia. O código de sua reserva é <span style="font-weight:600">{{ reservaAcomod.reservaID }}</span>. Anote-o para eventuais consultas.
       </h3>
-
-      <h3 class="__subtitle">Código da Reserva</h3>
-      <h3 class="__text">{{ reservaAcomod.reservaID }}</h3>
-
-      <h3 class="__subtitle">Cancelamento</h3>
-      <h3 class="__text">
-        É possível cancelar sua reserva, com reembolso total, até dia tal, acessando sua <nuxt-link to="/@name" style="text-decoration:underline">página pessoal</nuxt-link>. Para mais detalhes, leia nossa <nuxt-link to="/" style="text-decoration:underline">Política de Cancelamento</nuxt-link>.
-      </h3>
+      
+      <h3 class="__subtitle">Aproveite e reserve também um passeio!</h3>
 
       <h3 class="__subtitle">Dúvidas?</h3>
       <h3 class="__text">Entre em contato conosco pelo nosso WhatsApp: (34) 99141-0085 ou e-mail: contato@escarpastrip.com.</h3>
       
       
-      <nuxt-link to="/perfil" style="margin-top:4rem">
-        <button class="__next-btn" type="button" style="background: #50CB9D; margin:0">Acessar Página Pessoal</button>
+      <!-- TODO: ADICIONAR RECOMENDAÇÕES -->
+
+
+      <nuxt-link to="/" style="margin-top:4rem">
+        <button class="__next-btn" type="button" style="background: #FFA04F; margin:0">Voltar para Página Inicial!</button>
       </nuxt-link>
       
-
     </div>
 
 
@@ -271,7 +222,6 @@
 <script>
 import firebase from '@firebase/app'
 import 'firebase/firestore'
-import 'firebase/functions'
 import supportsWebP from 'supports-webp'
 import MaskedInput from 'vue-text-mask'
 import detalhesValor from '@/components/reserva-acomod/detalhesValor'
@@ -295,9 +245,7 @@ export default {
     return {
       nameError: false,
       emailError: false,
-      celularError: false,
-      messageAutosize: '', /* Vue Autosize */
-      messageError: false
+      celularError: false
     }
   },
   methods: {
@@ -320,9 +268,6 @@ export default {
         this.$refs.email.focus()
       }
     },
-    onFocusMessage () {
-      scrollIntoView(this.$refs.message)
-    },
     nextBtn1 () {
       if (this.reservaAcomod.guest.fullName !== '' && Email.validate(this.reservaAcomod.guest.email) && this.reservaAcomod.guest.celular.length === 17) {
         this.$store.state.etapaReserva2ok = true, this.$store.commit('m_reservaAcomodDesktop1', false), this.$store.commit('m_reservaAcomodDesktop2', true), this.scrollTop()
@@ -337,29 +282,32 @@ export default {
         this.reservaAcomod.guest.celular.length < 17 ? this.celularError = true : this.celularError = false
       }
     },
-    nextBtn2 () {
-      if (this.reservaAcomod.message.length > 0) {
-        this.$store.state.etapaReserva3ok = true, this.$store.commit('m_reservaAcomodDesktop2', false), this.$store.commit('m_reservaAcomodDesktop3', true), this.scrollTop()
-      } else {
-        this.messageError = true
-      }
-    },
-    async concluirReserva () {
+    async confirmarReserva () {
       try {
         this.$store.commit('m_loader', true)
 
+        /* Gerar reservaID */
+        let reservaID = await Math.floor(Math.random() * (99999 - 10000 + 1) + 10000).toString()
+        const reserva = await firebase.firestore().doc(`reservasAcomods/${reservaID}`).get()
+        if (reserva.exists) {
+          do {
+            reservaID = Math.floor(Math.random() * (99999 - 10000 + 1) + 10000).toString()
+            this.reservaAcomod.reservaID = reservaID
+          } while (!reserva.exists)
+        } else {
+          this.reservaAcomod.reservaID = reservaID
+        }
+
+        this.reservaAcomod.createdAt = Date.now()
+        this.reservaAcomod.acomodID = this.acomod.acomodID
         this.reservaAcomod.hostID = this.acomod.hostID
 
+        /* Criar reserva na Firestore */
+        await firebase.firestore().doc(`reservasAcomods/${this.reservaAcomod.reservaID}`).set(this.reservaAcomod)
 
-        transaction = await firebase.functions().httpsCallable('newReservaAcomod')({
-          reservaAcomod: this.reservaAcomod,
-          acomod: this.acomod,
-          host: this.host,
-          visitID: this.$store.state.visitID
-        })
+        /* Atualizar visit */
+        await firebase.firestore().doc(`acomods/${this.acomod.acomodID}/visits/${this.$store.state.visitID}`).update({ concludedReserva: true })
 
-        this.reservaAcomod.reservaID = transaction.data.reservaID
-        this.$store.commit('m_resetCreditCard')
         this.$store.state.concludedReservaAcomod = true
         this.scrollTop()
         this.$store.commit('m_loader', false)
@@ -369,37 +317,32 @@ export default {
         this.$store.commit('m_loader', false)
         this.$store.commit('show_alert', {
           type: 'warning',
-          title: 'Erro',
-          message: 'Falha no servidor. Tente novamente.'
+          title: 'Ops',
+          persist: true,
+          message: 'Falha no servidor. Tente novamente ou entre em contato conosco por favor.'
         })
       }
     },
     backEtapa1 () {
       if (this.$store.state.etapaReserva1ok === true) {
-        this.$store.commit('m_reservaAcomodDesktop1', true), this.$store.commit('m_reservaAcomodDesktop2', false), this.$store.commit('m_reservaAcomodDesktop3', false)
+        this.$store.commit('m_reservaAcomodDesktop1', true), this.$store.commit('m_reservaAcomodDesktop2', false)
       }
     },
     backEtapa2 () {
       if (this.$store.state.etapaReserva2ok === true) {
-        this.$store.commit('m_reservaAcomodDesktop1', false), this.$store.commit('m_reservaAcomodDesktop2', true), this.$store.commit('m_reservaAcomodDesktop3', false)
-      }
-    },
-    backEtapa3 () {
-      if (this.$store.state.etapaReserva3ok === true) {
-        this.$store.commit('m_reservaAcomodDesktop1', false), this.$store.commit('m_reservaAcomodDesktop2', false), this.$store.commit('m_reservaAcomodDesktop3', true)
+        this.$store.commit('m_reservaAcomodDesktop1', false), this.$store.commit('m_reservaAcomodDesktop2', true)
       }
     }
   },
   computed: {
     /* ******************** PATHS ******************** */
+    reservaAcomod () { return this.$store.state.reservaAcomod },
     acomod () { return this.$store.state.acomod },
     host () { return this.$store.state.host },
-    reservaAcomod () { return this.$store.state.reservaAcomod },
-    concludedReservaAcomod () { return this.$store.state.concludedReservaAcomod },
     name () { return this.reservaAcomod.guest.fullName },
     email () { return this.reservaAcomod.guest.email },
     celular () { return this.reservaAcomod.guest.celular },
-    message () { return this.reservaAcomod.message },
+    concludedReservaAcomod () { return this.$store.state.concludedReservaAcomod },
     /* ******************** FORM STYLES ******************** */
     form1ok () {
       if (this.reservaAcomod.guest.fullName !== '' && Email.validate(this.reservaAcomod.guest.email) && this.reservaAcomod.guest.celular.length === 17) {
@@ -407,9 +350,6 @@ export default {
       }
     },
     form2ok () {
-      return this.reservaAcomod.message !== '' ? 'background: #FFA04F' : ''
-    },
-    form3ok () {
       return 'background: #FFA04F'
     },
     /* ******************** PROGRESS ******************** */
@@ -419,10 +359,6 @@ export default {
     etapaProgressed2 () {
       return this.$store.state.etapaReserva2ok === true ? 'font-weight: 600' : 'cursor: default'
     },
-    etapaProgressed3 () {
-      return this.$store.state.etapaReserva3ok === true ? 'font-weight: 600' : 'cursor: default'
-    },
-
     /* ******************** IMAGES ******************** */
     imageH () {
       return supportsWebP ? this.acomod.images[0].HW : this.acomod.images[0].HJ
@@ -440,8 +376,7 @@ export default {
   watch: {
     name (value) { value !== '' ? this.nameError = false : '' },
     email (value) { value !== '' ? this.emailError = false : '' },
-    celular (value) { value !== '' ? this.celularError = false : '' },
-    message (value) { value !== '' ? this.messageError = false : '' }
+    celular (value) { value !== '' ? this.celularError = false : '' }
   },
   beforeRouteEnter (to, from, next) {
     next(vm => {
@@ -454,7 +389,6 @@ export default {
   beforeRouteLeave (to, from, next) {
     this.$store.commit('m_isReservar', false)
     this.$store.dispatch('a_resetReservaAcomod')
-    this.$store.commit('m_resetCreditCard')
     this.$store.state.concludedReservaAcomod = false
     next()
   }
@@ -531,48 +465,6 @@ export default {
         line-height: 20px;
         & a {
           color: var(--colorAcomod);
-        }
-      }
-      & .message {
-        & .host-message {
-          display: flex;
-          margin: 1.7rem 0 1rem 0;
-          padding-bottom: 1.5rem;
-          border-bottom: 1px solid #dedede;
-          & .__img { 
-            border-radius: 50%;
-            width: 2.6rem;
-            height: auto;
-            align-self: flex-end;
-          }
-          & .message-box {
-            position: relative;
-            width: 100%;
-            border-radius: 6px 6px 6px 0;
-            background: var(--colorAcomod);
-            padding: 1rem 1.2rem;
-            margin-left: 8px;
-            & .__message {
-              padding: .2rem 0;
-              font-size: 15px;
-              font-weight: 500;
-              line-height: 22px;
-              color: white;
-            }
-          }
-          & .message-box::after {
-            content: '';
-            position: absolute;
-            left: 0;
-            bottom: 0;
-            width: 0;
-            height: 0;
-            border: 12px solid transparent;
-            border-right-color: var(--colorAcomod);
-            border-left: 0;
-            border-bottom: 0;
-            margin-left: -12px;
-          }
         }
       }
       & .item-form {
@@ -654,7 +546,7 @@ export default {
         border-radius: 0 0 7px 7px;
         padding: 1.4rem;
         & .__card-title {
-          font-size: 18px;
+          font-size: 17px;
           font-weight: 600;
           white-space: nowrap;
           overflow: hidden;
@@ -690,7 +582,7 @@ export default {
             display: flex;
             justify-content: space-between;
             & .__valor-total {
-              font-size: 18px;
+              font-size: 17px;
               font-weight: 600;
             }
           }
@@ -727,26 +619,27 @@ export default {
     }
   }
   & .concluded-reserva {
-    padding: 4rem 24%;
+    padding: 4rem 26%;
     display: flex;
     flex-flow: column;
     align-items: center;
     & .__img {
-      width: 54px;
+      width: 5.5rem;
       height: auto;
     }
     & .__title {
       text-align: center;
-      font-size: 36px;
-      padding: .8rem 0 .7rem 0;
+      font-size: 35px;
+      padding-top: 1.2rem;
     }
     & .__subtitle {
-      padding-top: 2rem;
+      padding-top: 2.5rem;
       text-align: center;
-      font-size: 18px;
+      font-size: 20px;
       font-weight: 600;
     }
     & .__text {
+      padding-top: .5rem;
       text-align: center;
     }
   }
@@ -755,8 +648,8 @@ export default {
 .__next-btn {
   position: relative;
   margin-top: 2.3rem;
-  padding: 0 1.7rem;
-  height: 3.2rem;
+  padding: 0 1.8rem;
+  height: 3.1rem;
   font-size: 17px;
   font-weight: 600;
   background:rgb(237, 237, 237);

@@ -189,15 +189,13 @@ const store = () => new Vuex.Store({
         email: '',
         celular: ''
       },
-      status: 'pending',
       totalHospedes: 1,
       startDate: '',
       endDate: '',
       noites: null,
       valorNoitesTotal: null,
       limpezaFee: null,
-      valorReservaTotal: null,
-      message: ''
+      valorReservaTotal: null
     },
     paymentAdded: false,
     validZipcode: false,
@@ -227,10 +225,8 @@ const store = () => new Vuex.Store({
     reservaAcomodBilling: false,
     reservaAcomodDesktop1: true,
     reservaAcomodDesktop2: false,
-    reservaAcomodDesktop3: false,
     etapaReserva1ok: true,
     etapaReserva2ok: false,
-    etapaReserva3ok: false,
     /*
     ########## Evento ##########
     */
@@ -860,15 +856,13 @@ const store = () => new Vuex.Store({
           email: '',
           celular: ''
         },
-        status: 'pending',
         totalHospedes: 1,
         startDate: '',
         endDate: '',
         noites: null,
         valorNoitesTotal: null,
         limpezaFee: null,
-        valorReservaTotal: null,
-        message: ''
+        valorReservaTotal: null
       }
       state.customer = {
         name: '',
@@ -886,10 +880,8 @@ const store = () => new Vuex.Store({
       state.cardTypeNice = null
       state.reservaAcomodDesktop1 = true
       state.reservaAcomodDesktop2 = false
-      state.reservaAcomodDesktop3 = false
       state.etapaReserva1ok = true
       state.etapaReserva2ok = false
-      state.etapaReserva3ok = false
     },
     /*
     #################### EVENTOS ####################
