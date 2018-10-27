@@ -6,7 +6,6 @@ const axios = require('axios')
 const ical = require('node-ical')
 const icalGenerator = require('ical-generator')
 const format = require('date-fns/format')
-const addDays = require('date-fns/add_days')
 const eachDay = require('date-fns/each_day')
 
 const app = express()
@@ -19,32 +18,45 @@ admin.initializeApp({
   }),
   databaseURL: 'https://escarpas-trip.firebaseio.com'
 })
-
 admin.firestore().settings({
   timestampsInSnapshots: true /* Breaking change. Prevenção de bug */
-})
-
-const cal = icalGenerator({
-  domain: 'escarpastrip.com',
-  prodId: { company: 'escarpastrip.com', product: '7280' },
-  events: [
-    {
-      start: new Date(),
-      end: addDays(new Date(), 2),
-      summary: 'Example Event',
-      description: 'It works ;)'
-    }
-  ]
-})
-
-app.get('/calendar', (req, res) => {
-  cal.serve(res)
 })
 
 function parseHrtimeToSeconds (hrtime) {
   var seconds = (hrtime[0] + (hrtime[1] / 1e9)).toFixed(3)
   return seconds
 }
+
+/* ________________________________________ Gerar iCalendar ________________________________________ */
+app.get('/icalendar/:acomodID', async (req, res) => {
+  try {
+    const acomodID = req.params.acomodID
+    const acomodDoc = await admin.firestore().doc(`acomods/${acomodID}`).get()
+    const acomod = acomodDoc.data()
+
+    if (acomodDoc.exists) {
+      const cal = icalGenerator({
+        domain: 'www.escarpastrip.com',
+        prodId: { company: 'Escarpas Trip', product: acomodID }
+      })
+
+      for (const date of Object.values(acomod.disabledDates_escarpasTrip)) {
+        await cal.createEvent({
+          start: date,
+          end: date,
+          allDay: true,
+          summary: 'Not available'
+        })
+      }
+
+      cal.serve(res)
+    } else {
+      res.status(404).end()
+    }
+  } catch (err) {
+    res.status(500).end()
+  }
+})
 
 /* ________________________________________ Sync Airbnb iCalendar ________________________________________ */
 app.get('/airbnb', async (req, res) => {
@@ -59,7 +71,7 @@ app.get('/airbnb', async (req, res) => {
 
         ical.parseICS(icalAirbnb.data, async (err, data) => {
           if (err) {
-            res.send('Parse error.')
+            res.status(500).end()
           } else {
             delete data.prodid
 
@@ -78,9 +90,7 @@ app.get('/airbnb', async (req, res) => {
             })
 
             await admin.firestore().doc(`acomods/${acomod.acomodID}`).set({
-              disabledDates: {
-                airbnb: parsedDisabledDates
-              }
+              disabledDates_airbnb: parsedDisabledDates
             }, { merge: true })
 
             console.log(`${acomod.acomodID}:`, parsedDisabledDates)
@@ -93,8 +103,7 @@ app.get('/airbnb', async (req, res) => {
 
     res.status(200).send(`<h1>👍</h1> ${parseHrtimeToSeconds(process.hrtime(startTime))}s`)
   } catch (err) {
-    console.log(err)
-    res.send('<h1>👎</h1>')
+    res.status(500).end()
   }
 })/* ________________________________________ Sync Airbnb iCalendar ________________________________________ */
 
@@ -130,9 +139,7 @@ app.get('/booking', async (req, res) => {
             })
 
             await admin.firestore().doc(`acomods/${acomod.acomodID}`).set({
-              disabledDates: {
-                booking: parsedDisabledDates
-              }
+              disabledDates_booking: parsedDisabledDates
             }, { merge: true })
 
             console.log(`${acomod.acomodID}:`, parsedDisabledDates)
@@ -145,8 +152,7 @@ app.get('/booking', async (req, res) => {
 
     res.status(200).send(`<h1>👍</h1> ${parseHrtimeToSeconds(process.hrtime(startTime))}s`)
   } catch (err) {
-    console.log(err)
-    res.send('<h1>👎</h1>')
+    res.status(500).end()
   }
 })/* ________________________________________ Sync Booking iCalendar ________________________________________ */
 

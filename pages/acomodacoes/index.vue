@@ -1026,14 +1026,15 @@ export default {
     }
     & .map-desktop {
       position: fixed;
-      bottom: 1rem;
+      /* bottom: 1rem; */
       right: 7%;
       width: 26.5%;
-      height: calc(100% - var(--navbarHeightDesktop) - 3.7rem - 2rem);
+      height: 100%;
+      /* height: calc(100% - var(--navbarHeightDesktop) - 3.7rem - 2rem); */
     }
-    & .map-desktop > div {
+    /* & .map-desktop > div {
       border-radius: 3px !important;
-    }
+    } */
     & .map-desktop > div > div {
       background-color: #fff !important;
     }

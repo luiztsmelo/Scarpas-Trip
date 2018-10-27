@@ -199,17 +199,18 @@
         Dentro dos próximos dias {{ host.firstName }} irá entrar em contato com você para decidirem os detalhes de sua estadia. O código de sua reserva é <span style="font-weight:600">{{ reservaAcomod.reservaID }}</span>. Anote-o para eventuais consultas.
       </h3>
       
-      <h3 class="__subtitle">Aproveite e reserve também um passeio!</h3>
+
+      <!-- TODO: ADICIONAR RECOMENDAÇÕES -->
+      <!-- <h3 class="__subtitle">Aproveite e reserve também um passeio!</h3> -->
+
 
       <h3 class="__subtitle">Dúvidas?</h3>
       <h3 class="__text">Entre em contato conosco pelo nosso WhatsApp: (34) 99141-0085 ou e-mail: contato@escarpastrip.com.</h3>
       
-      
-      <!-- TODO: ADICIONAR RECOMENDAÇÕES -->
 
 
       <nuxt-link to="/" style="margin-top:4rem">
-        <button class="__next-btn" type="button" style="background: #FFA04F; margin:0">Voltar para Página Inicial!</button>
+        <button class="__next-btn" type="button" style="background: #FFA04F; margin:0">Voltar para Página Inicial</button>
       </nuxt-link>
       
     </div>
@@ -230,6 +231,7 @@ import scrollIntoView from 'scroll-into-view'
 import * as Email from 'email-validator'
 import format from 'date-fns/format'
 import pt from 'date-fns/locale/pt'
+import eachDay from 'date-fns/each_day'
 
 export default {
   components: { MaskedInput, detalhesValor },
@@ -286,7 +288,7 @@ export default {
       try {
         this.$store.commit('m_loader', true)
 
-        /* Gerar reservaID */
+        /* Gerar reservaID e popular reservaAcomod */
         let reservaID = await Math.floor(Math.random() * (99999 - 10000 + 1) + 10000).toString()
         const reserva = await firebase.firestore().doc(`reservasAcomods/${reservaID}`).get()
         if (reserva.exists) {
@@ -300,14 +302,32 @@ export default {
 
         this.reservaAcomod.createdAt = Date.now()
         this.reservaAcomod.acomodID = this.acomod.acomodID
+        this.reservaAcomod.tipoAcomod = this.acomod.tipoAcomod
         this.reservaAcomod.hostID = this.acomod.hostID
+        this.reservaAcomod.guest.firstName = this.reservaAcomod.guest.fullName.split(' ')[0]
 
         /* Criar reserva na Firestore */
         await firebase.firestore().doc(`reservasAcomods/${this.reservaAcomod.reservaID}`).set(this.reservaAcomod)
 
+        /* Atualizar disabledDates */
+        const eachDayReserva = eachDay(this.reservaAcomod.startDate, this.reservaAcomod.endDate)
+
+        let parsedEachDayReserva = []
+
+        eachDayReserva.forEach(date => {
+          parsedEachDayReserva.push(format(date, 'YYYY-MM-DD'))
+        })
+
+        for (const date of parsedEachDayReserva) {
+          await firebase.firestore().doc(`acomods/${this.acomod.acomodID}`).update({
+            disabledDates_escarpasTrip: firebase.firestore.FieldValue.arrayUnion(date)
+          })
+        }
+
         /* Atualizar visit */
         await firebase.firestore().doc(`acomods/${this.acomod.acomodID}/visits/${this.$store.state.visitID}`).update({ concludedReserva: true })
 
+        /* Finalizar */
         this.$store.state.concludedReservaAcomod = true
         this.scrollTop()
         this.$store.commit('m_loader', false)
@@ -629,7 +649,7 @@ export default {
     }
     & .__title {
       text-align: center;
-      font-size: 35px;
+      font-size: 34px;
       padding-top: 1.2rem;
     }
     & .__subtitle {

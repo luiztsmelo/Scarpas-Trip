@@ -1,10 +1,15 @@
 import * as functions from 'firebase-functions'
 import * as admin from 'firebase-admin'
 import * as pagarme from 'pagarme'
-import * as dayjs from 'dayjs'
-import 'dayjs/locale/pt-br'
 import * as numeral from 'numeral'
 import 'numeral/locales/pt-br'
+const Nexmo = require('nexmo')
+const format = require('date-fns/format')
+const pt = require('date-fns/locale/pt')
+
+
+const escarpasTripEmail = 'contato@escarpastrip.com'
+const escarpasTripPhone = '5537999325598'
 
 
 /* Firebase admin */
@@ -12,13 +17,15 @@ admin.initializeApp(functions.config().firebase)
 
 
 /* Mailjet */
-const Mailjet = require ('node-mailjet').connect(`${functions.config().mailjetpublic.key}`, `${functions.config().mailjetprivate.key}`)
-const ESemail = 'contato@escarpastrip.com'
-const ESname = 'Escarpas Trip'
+const Mailjet = require('node-mailjet').connect(`${functions.config().mailjetpublic.key}`, `${functions.config().mailjetprivate.key}`)
 
 
-/* Day.js */
-dayjs.locale('pt-br')
+/* Nexmo */
+const nexmo = new Nexmo({
+  apiKey: functions.config().nexmo.key,
+  apiSecret: functions.config().nexmo.secret,
+  applicationId: functions.config().nexmo.id
+})
 
 
 /* Numeral */
@@ -52,7 +59,7 @@ exports.newUser = functions.https.onCall(async data => {
     /* Enviar welcome e-mail */
     await Mailjet.post('send', {'version': 'v3.1'}).request({
       'Messages': [{
-        'From': { 'Email': ESemail, 'Name': ESname },
+        'From': { 'Email': escarpasTripEmail, 'Name': 'Escarpas Trip' },
         'To': [{
           'Email': user.email,
           'Name': user.fullName
@@ -126,151 +133,81 @@ exports.newAcomod = functions.https.onCall(async data => {
 
 
 
-exports.newReservaAcomod = functions.https.onCall(async data => {
+exports.email_newReservaAcomod_host = functions.firestore.document('reservasAcomods/{reservaID}').onCreate(async (snap, context) => {
   try {
-    const reservaAcomod = data.reservaAcomod
-    const creditCard = data.creditCard
-    const customer = data.customer
-    const acomod = data.acomod
-    const host = data.host
-    const visitID = data.visitID
+    const reservaAcomod = snap.data()
 
-    /* Update celular guest */
-    await admin.firestore().doc(`users/${reservaAcomod.guestID}`).update({
-      celular: customer.celular.replace(/\s/g, '')
-    })
+    const acomodSnap = await admin.firestore().doc(`acomods/${reservaAcomod.acomodID}`).get()
+    const acomod = acomodSnap.data()
 
-    /* Get guest */
-    const guestSnap = await admin.firestore().doc(`users/${reservaAcomod.guestID}`).get()
-    const guest = guestSnap.data()
+    const hostSnap = await admin.firestore().doc(`users/${reservaAcomod.hostID}`).get()
+    const host = hostSnap.data()
 
-    reservaAcomod.requested = new Date().getTime()
-    reservaAcomod.acomodID = acomod.acomodID
-    
-    const Pagarme = await pagarme.client.connect({ api_key: 'ak_test_E3I46o4e7guZDqwRnSY9sW8o8HrL9D' })
-
-    let transaction = null
-
-    if (reservaAcomod.paymentMethod === 'credit_card') {
-      transaction = await Pagarme.transactions.create({
-        'amount': reservaAcomod.valorReservaTotal * 100,
-        'capture': false,
-        'installments': reservaAcomod.parcelas,
-        'payment_method': 'credit_card',
-        'card_number': creditCard.cardNumber.replace(/[^0-9\.]+/g, ''),
-        'card_cvv': creditCard.cardCVV,
-        'card_expiration_date': creditCard.cardExpirationDate.replace(/[^0-9\.]+/g, ''),
-        'card_holder_name': creditCard.cardHolderName,
-        'customer': {
-          'external_id': guest.userID,
-          'name': guest.fullName,
-          'type': 'individual',
-          'country': 'br',
-          'email': guest.email,
-          'documents': [{
-            'type': 'cpf',
-            'number': customer.cpf.replace(/[^0-9\.]+/g, '').replace(/\./g, '')
-          }],
-          'phone_numbers': [ guest.celular ]
-        },
-        'billing': {
-          'name': guest.fullName,
-          'address': {
-            'country': 'br',
-            'state': customer.state,
-            'city': customer.city,
-            'neighborhood': customer.neighborhood,
-            'street': customer.street,
-            'street_number': customer.street_number,
-            'zipcode': customer.zipcode.replace(/[^0-9\.]+/g, '')
-          }
-        },
-        'items': [{
-          'id': acomod.acomodID,
-          'title': acomod.title,
-          'category': 'Acomod',
-          'unit_price': acomod.valorNoite * 100,
-          'quantity': reservaAcomod.noites,
-          'tangible': false
-        }]
-      })
-    } else {
-      transaction = await Pagarme.transactions.create({
-        'amount': reservaAcomod.valorReservaTotal * 100,
-        'capture': false,
-        'payment_method': 'boleto',
-        'customer': {
-          'external_id': guest.userID,
-          'name': guest.fullName,
-          'type': 'individual',
-          'country': 'br',
-          'email': guest.email,
-          'documents': [{
-            'type': 'cpf',
-            'number': customer.cpf.replace(/[^0-9\.]+/g, '').replace(/\./g, '')
-          }],
-          'phone_numbers': [ guest.celular ]
-        },
-        'items': [{
-          'id': acomod.acomodID,
-          'title': acomod.title,
-          'category': 'Acomod',
-          'unit_price': acomod.valorNoite * 100,
-          'quantity': reservaAcomod.noites,
-          'tangible': false
-        }]
-      })
-    }
-
-    reservaAcomod.reservaID = await transaction.id.toString()
-
-    /* Criar reserva na Firestore */
-    await admin.firestore().doc(`reservasAcomods/${reservaAcomod.reservaID}`).set(reservaAcomod)
-
-    /* Atualizar visit */
-    await admin.firestore().doc(`acomods/${acomod.acomodID}/visits/${visitID}`).update({ concludedReserva: true })
-
-    /* Enviar e-mail para Host */
     await Mailjet.post('send', {'version': 'v3.1'}).request({
       'Messages': [{
-        'From': { 'Email': ESemail, 'Name': ESname },
+        'From': { 'Email': escarpasTripEmail, 'Name': 'Escarpas Trip' },
         'To': [{
           'Email': host.email,
           'Name': host.fullName
         }],
         'TemplateID': 477332,
         'TemplateLanguage': true,
-        'Subject': 'Novo Pedido de Reserva',
+        'Subject': `Nova reserva recebida, ${host.firstName}`,
         'Variables': {
           'reservaID': reservaAcomod.reservaID,
           'acomodURL': `https://www.escarpastrip.com/acomodacoes/${reservaAcomod.acomodID}`,
-          'guestFirstName': guest.firstName,
+          'guestFirstName': reservaAcomod.guest.firstName,
           'hostFirstName': host.firstName,
           'title': acomod.title,
           'acomodPhoto': acomod.images[0].HJ,
-          'checkIn': dayjs(reservaAcomod.periodoReserva.start).format('ddd, DD MMM YYYY'),
-          'checkOut': dayjs(reservaAcomod.periodoReserva.end).format('ddd, DD MMM YYYY'),
-          'dayAfterCheckin': dayjs(reservaAcomod.periodoReserva.start).add(1, 'day').format('DD/MM/YYYY'),
+          'startDate': format(reservaAcomod.startDate, 'ddd, DD MMM YYYY', { locale: pt }),
+          'endDate': format(reservaAcomod.endDate, 'ddd, DD MMM YYYY', { locale: pt }),
           'totalHospedes': reservaAcomod.totalHospedes,
           'noites': reservaAcomod.noites,
           'valorNoite': numeral(acomod.valorNoite).format('$0,0'),
           'valorNoitesTotal': numeral(reservaAcomod.valorNoitesTotal).format('$0,0'),
           'limpezaFee': numeral(reservaAcomod.limpezaFee).format('$0,0'),
-          'hostAmount': numeral(reservaAcomod.valorNoitesTotal + reservaAcomod.limpezaFee).format('$0,0'),
-          'guestPhoto': guest.photoURL,
-          'message': reservaAcomod.message
+          'hostAmount': numeral(reservaAcomod.valorNoitesTotal + reservaAcomod.limpezaFee).format('$0,0')
         }
       }]
     })
 
-    return { reservaID: reservaAcomod.reservaID }
-
   } catch (err) {
-    /* ENVIAR MENSAGEM P/ MIM CASO ALGUM PROBLEMA ACONTEÇA */
     console.log(err.response)
     throw new functions.https.HttpsError('aborted', err.message, err)
   }
 })
+
+
+
+
+/* exports.whatsapp_newReservaAcomod_host = functions.firestore.document('reservasAcomods/{reservaID}').onCreate(async (snap, context) => {
+  try {
+    const reservaAcomod = snap.data()
+
+    const acomodSnap = await admin.firestore().doc(`acomods/${reservaAcomod.acomodID}`).get()
+    const acomod = acomodSnap.data()
+
+    const hostSnap = await admin.firestore().doc(`users/${reservaAcomod.hostID}`).get()
+    const host = hostSnap.data()
+
+    nexmo.channel.send(
+      { "type": "whatsapp", "number": host.celular },
+      { "type": "whatsapp", "number": escarpasTripPhone },
+      {
+        "content": {
+          "type": "text",
+          "text": "Nova reserva recebida"
+        }
+      },
+      (err, data) => { console.log(data.message_uuid) }
+    )
+
+  } catch (err) {
+    console.log(err.response)
+    throw new functions.https.HttpsError('aborted', err.message, err)
+  }
+}) */
 
 
 
@@ -329,67 +266,3 @@ exports.newPasseio = functions.https.onCall(async data => {
     throw new functions.https.HttpsError('aborted', err.message, err)
   }
 })
-
-
-
-
-
-
-
-/* ________________________________________________ E-MAILS ________________________________________________ */
-
-
-exports.email_reservaAcceptedToGuest = functions.firestore
-  .document('reservasAcomods/{reservaID}')
-  /* Quando Status = 'awaiting_payment' */
-  .onUpdate(async change => {
-    const reservaAcomod = change.after.data()
-
-    if (reservaAcomod.status === 'awaiting_payment') {
-      try {
-        /* Get acomod data */
-        const docAcomod = await admin.firestore().doc(`acomods/${reservaAcomod.acomodID}`).get()
-        const acomod = docAcomod.data()
-
-        /* Ajustar datas */
-        const startDate = new Date(reservaAcomod.periodoReserva.start)
-        const endDate = new Date(reservaAcomod.periodoReserva.end)
-        const checkIn = dayjs(startDate).format('ddd, DD MMM YYYY')
-        const checkOut = dayjs(endDate).format('ddd, DD MMM YYYY')
-
-        /* Enviar e-mail */
-        await Mailjet.post('send', {'version': 'v3.1'}).request({
-          'Messages': [{
-            'From': { 'Email': ESemail, 'Name': ESname },
-            'To': [{
-              'Email': reservaAcomod.guestEmail,
-              'Name': reservaAcomod.guestName
-            }],
-            'TemplateID': 448210,
-            'TemplateLanguage': true,
-            'Subject': `Ótimas notícias, ${reservaAcomod.guestName.split(' ')[0]}`,
-            'Variables': {
-              'reservaID': reservaAcomod.reservaID,
-              'acomodURL': `https://www.escarpastrip.com/acomodacoes/${reservaAcomod.acomodID}`,
-              'guestFirstName': reservaAcomod.guestName.split(' ')[0],
-              'hostFirstName': reservaAcomod.hostName.split(' ')[0],
-              'hostPhoto': reservaAcomod.hostPhoto,
-              'hostEmail': reservaAcomod.hostEmail,
-              'hostCelular': reservaAcomod.hostCelular,
-              'whatsAppHostHREF': reservaAcomod.whatsAppHostHREF,
-              'title': acomod.title,
-              'acomodPhoto': acomod.images[0].HJ,
-              'address': acomod.address,
-              'positionLAT': acomod.positionLAT,
-              'positionLNG': acomod.positionLNG,
-              'checkIn': checkIn,
-              'checkOut': checkOut
-            }
-          }]
-        })
-      } 
-      catch (err) {
-        console.log(err)
-      }
-    }
-  })

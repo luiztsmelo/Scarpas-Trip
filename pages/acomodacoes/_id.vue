@@ -322,10 +322,50 @@
 
       
         <!-- ______________________________ AVALIAÇÕES ______________________________ -->
-        <h1 class="item-title">Avaliações</h1>
+        <div class="avaliacoes-title">
 
-        <div class="avaliacoes-box">
-          <h3>Comentários aqui...</h3>
+          <h1 class="__title" v-if="acomod.avaliacoes.length > 0">
+            {{ acomod.avaliacoes.length }} {{ acomod.avaliacoes.length > 1 ? 'Avaliações': 'Avaliação' }} 
+          </h1>
+
+          <div class="rating">
+            <star-rating
+              :rating="4.7"
+              :increment="0.1"
+              :read-only="true"
+              :show-rating="false"
+              active-color="#161616"
+              inactive-color="#dedede"
+              :star-size="18"
+              :padding="5">
+            </star-rating>
+            <p class="rating-number">4,7</p>
+          </div>
+
+        </div>
+        
+
+        <div class="avaliacoes-box" v-if="acomod.avaliacoes.length > 0">
+
+          <div class="avaliacao" v-for="avaliacao in acomod.avaliacoes">
+            <h2 class="__guest-name">{{ avaliacao.guestName }}</h2>
+            <div class="rating">
+              <star-rating
+                :rating="4.7"
+                :increment="0.1"
+                :read-only="true"
+                :show-rating="false"
+                active-color="#161616"
+                inactive-color="#dedede"
+                :star-size="12"
+                :padding="3">
+              </star-rating>
+              <p class="rating-number">{{ avaliacao.rating.toString().replace('.', ',') }}</p>
+              <p class="date">{{ formatAvaliacaoDate(avaliacao) }}</p>
+            </div>
+            <h3 class="__message">{{ avaliacao.message }}</h3>
+          </div>
+
         </div><!-- ______________________________ AVALIAÇÕES ______________________________ -->
 
 
@@ -615,6 +655,10 @@ export default {
     },
     hashShare () {
       window.location.hash = "compartilhar"
+    },
+    formatAvaliacaoDate (avaliacao) {
+      const formattedDate = format(avaliacao.date, 'MMM[.] [de] YYYY', { locale: pt })
+      return formattedDate.charAt(0).toUpperCase() + formattedDate.slice(1)
     }
   },
   async mounted () {
@@ -634,9 +678,9 @@ export default {
     },
     disabledDates () {
       const mergedDisabledDates = [...new Set([
-        ...this.acomod.disabledDates.airbnb,
-        ...this.acomod.disabledDates.booking,
-        ...this.acomod.disabledDates.escarpasTrip
+        ...this.acomod.disabledDates_airbnb,
+        ...this.acomod.disabledDates_booking,
+        ...this.acomod.disabledDates_escarpasTrip
       ])]
       return mergedDisabledDates
     }
@@ -1218,6 +1262,29 @@ export default {
         /* __________ AVALIAÇÕES __________ */
         & .avaliacoes-box {
           padding: 0;
+          & .avaliacao {
+            padding-bottom: 2rem;
+            & .__guest-name {
+              font-size: 18px;
+              font-weight: 600;
+            }
+            & .rating {
+              display: flex;
+              align-items: center;
+              margin: .3rem 0 .5rem;
+              & .rating-number {
+                font-size: 14px;
+                font-weight: 600;
+                padding: 0 8px 0 2px;
+              }
+              & .date {
+                font-size: 14px;
+              }
+            }
+            & .__message {
+
+            }
+          }
         }/* __________ AVALIAÇÕES __________ */
 
 

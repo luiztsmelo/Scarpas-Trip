@@ -169,22 +169,23 @@ const store = () => new Vuex.Store({
       allowFumar: false,
       regrasAdicionais: [],
       images: [],
+      reviews: [],
       iCalendars: {
         airbnb: '',
         booking: ''
       },
-      disabledDates: {
-        airbnb: [],
-        booking: [],
-        escarpasTrip: []
-      }
+      disabledDates_airbnb: [],
+      disabledDates_booking: [],
+      disabledDates_escarpasTrip: []
     },
     reservaAcomod: { /* Atualizar Action */
       createdAt: null,
       reservaID: null,
       acomodID: null,
+      tipoAcomod: '',
       hostID: null,
       guest: {
+        firstName: '',
         fullName: '',
         email: '',
         celular: ''
@@ -834,15 +835,14 @@ const store = () => new Vuex.Store({
         allowFumar: false,
         regrasAdicionais: [],
         images: [],
+        reviews: [],
         iCalendars: {
           airbnb: '',
           booking: ''
         },
-        disabledDates: {
-          airbnb: [],
-          booking: [],
-          escarpasTrip: []
-        }
+        disabledDates_airbnb: [],
+        disabledDates_booking: [],
+        disabledDates_escarpasTrip: []
       })
     },
     a_resetReservaAcomod ({ state }) { /* Resetar dados quando usuário for p/ outra acomod (evitar bugs) */
@@ -852,6 +852,7 @@ const store = () => new Vuex.Store({
         acomodID: null,
         hostID: null,
         guest: {
+          firstName: '',
           fullName: '',
           email: '',
           celular: ''
