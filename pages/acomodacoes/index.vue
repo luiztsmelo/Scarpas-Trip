@@ -817,36 +817,24 @@ export default {
         border-bottom: 1px solid #dedede;
         & .item-form {
           margin-right: .8rem;
-          & input {
-            cursor: pointer;
+          & .datepicker-trigger {
             height: 2.1rem;
-            font-size: 14px;
-            font-weight: 400;
-            padding: 0 .9rem;
-            border: 1px solid #dedede;
-            outline: none;
-            border-radius: 100px;
             background: white;
-            color: var(--color01);
-          }
-          & input:hover {
-            border: 1px solid var(--color01);
-          }
-          & select {
-            appearance: none;
-            cursor: pointer;
-            height: 2.1rem;
-            font-size: 14px;
-            font-weight: 400;
-            padding: 0 .8rem;
-            border: 1px solid #dedede;
-            outline: none;
-            border-radius: 5px;
-            background: white;
-            color: var(--color01);
-          }
-          & select:hover {
-            border: 1px solid var(--color01);
+            & #datepicker-trigger {
+              padding: 0 .9rem;
+              height: 100%;
+              width: 100%;
+              font-size: 14px;
+              font-weight: 400;
+              background: white;
+              border: 1px solid #dedede;
+              outline: none;
+              border-radius: 100px;
+            }
+            & #datepicker-trigger:hover {
+              border: 1px solid rgb(245,245,245);
+              filter: invert(4%);
+            }
           }
           & .dropdown {
             position: relative;

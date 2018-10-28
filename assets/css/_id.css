@@ -56,10 +56,10 @@
 .avaliacoes-title {
   display: flex;
   align-items: center;
-  padding: 3rem 7% .5rem 7%;
+  padding: 4rem 7% 2rem 7%;
   & .__title {
     font-weight: 600;
-    font-size: 22px;
+    font-size: 20px;
     user-select: none;
     padding-right: 1.2rem;
   }
@@ -68,7 +68,7 @@
     align-items: center;
     transform: translateY(2px);
     & .rating-number {
-      font-size: 14px;
+      font-size: 16px;
       font-weight: 600;
       padding-left: 3px;
     }

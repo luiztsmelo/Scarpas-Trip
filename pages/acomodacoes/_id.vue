@@ -62,7 +62,7 @@
 
           <div class="rating">
             <star-rating
-              :rating="4.7"
+              :rating="averageRatings"
               :increment="0.1"
               :read-only="true"
               :show-rating="false"
@@ -71,7 +71,7 @@
               :star-size="12"
               :padding="3">
             </star-rating>
-            <p class="rating-number">4,7</p>
+            <p class="rating-number">{{ averageRatings.toString().replace('.', ',') }}</p>
           </div>
 
         </div><!-- ______________________________ RATING ______________________________ -->
@@ -330,16 +330,16 @@
 
           <div class="rating">
             <star-rating
-              :rating="4.7"
+              :rating="averageRatings"
               :increment="0.1"
               :read-only="true"
               :show-rating="false"
               active-color="#161616"
               inactive-color="#dedede"
-              :star-size="18"
-              :padding="5">
+              :star-size="$store.state.isMobile ? 16 : 18"
+              :padding="$store.state.isMobile ? 4 : 5">
             </star-rating>
-            <p class="rating-number">4,7</p>
+            <p class="rating-number">{{ averageRatings.toString().replace('.', ',') }}</p>
           </div>
 
         </div>
@@ -355,7 +355,7 @@
                 :increment="0.1"
                 :read-only="true"
                 :show-rating="false"
-                active-color="#161616"
+                active-color="#FFA04F"
                 inactive-color="#dedede"
                 :star-size="12"
                 :padding="3">
@@ -683,6 +683,14 @@ export default {
         ...this.acomod.disabledDates_escarpasTrip
       ])]
       return mergedDisabledDates
+    },
+    averageRatings () {
+      let ratingsArray = []
+      this.acomod.avaliacoes.forEach(avaliacao => {
+        ratingsArray.push(avaliacao.rating)
+      })
+      const averageRatings = ratingsArray.reduce((sum, a) => { return sum + a }, 0) / (ratingsArray.length || 1)
+      return averageRatings
     }
   },
   watch: {
@@ -921,6 +929,29 @@ export default {
   /* __________ AVALIAÇÕES __________ */
   & .avaliacoes-box {
     padding: 0 7%;
+    & .avaliacao {
+      padding-bottom: 2rem;
+      & .__guest-name {
+        font-size: 16px;
+        font-weight: 600;
+      }
+      & .rating {
+        display: flex;
+        align-items: center;
+        margin: .3rem 0 .5rem;
+        & .rating-number {
+          font-size: 14px;
+          font-weight: 600;
+          padding: 0 8px 0 2px;
+        }
+        & .date {
+          font-size: 14px;
+        }
+      }
+      & .__message {
+
+      }
+    }
   }/* __________ AVALIAÇÕES __________ */
 
 
