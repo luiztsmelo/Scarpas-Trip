@@ -91,10 +91,51 @@
           <h1 class="__title">Revisar detalhes e confirmar</h1>
 
 
-          <h3 class="__text">Texto aqui.</h3>
+          <div class="check-in-out">
+
+            <div style="display: flex; flex: 1">
+
+              <div class="calendar-box">
+                <p class="__month">{{ checkInMonth }}</p>
+                <p class="__day">{{ checkInDay }}</p>
+              </div>
+
+              <div class="calendar-info">
+                <p class="__weekday">{{ checkInWeekday }}</p>
+                <p class="__hour">{{ checkInHour }}</p>
+              </div>
+
+            </div>
+
+            <div style="display: flex; flex: 1">
+
+              <div class="calendar-box">
+                <p class="__month">{{ checkOutMonth }}</p>
+                <p class="__day">{{ checkOutDay }}</p>
+              </div>
+              
+              <div class="calendar-info">
+                <p class="__weekday">{{ checkOutWeekday }}</p>
+                <p class="__hour">{{ checkOutHour }}</p>
+              </div>
+
+            </div>
+
+          </div>
 
 
-          <h4 class="__termos">Eu concordo com as regras {{ tipoAcomodD }}, <a href="/termos#politica_cancelamento" target="_blank">Política de Cancelamento</a> e <a href="/termos" target="_blank">Termos de Serviço</a>.</h4>
+
+          <h3 class="__subtitle">Pagamento</h3>
+          
+          <h3 class="__text">Texto aqui</h3>
+
+
+
+          <h3 class="__subtitle">Regras {{ tipoAcomodD }}</h3>
+
+
+
+          <h4 class="__termos">Ao confirmar você concorda com as regras {{ tipoAcomodD }} e nossos <a href="/termos" target="_blank">Termos de Serviço</a>.</h4>
 
 
           <button class="__next-btn" type="button" :style="form2ok" @click="confirmarReserva">Confirmar Reserva</button>
@@ -160,7 +201,7 @@
               <h3 class="__valor-total">R${{ reservaAcomod.valorReservaTotal.toLocaleString() }}</h3>
             </div>
 
-            <p class="__ver-detalhes" @click="$modal.show('detalhes-valor-modal')">Detalhes do valor</p>
+            <p class="__ver-detalhes" @click="$modal.show('detalhes-valor-modal')">Ver detalhes</p>
 
             <detalhes-valor/>
 
@@ -193,7 +234,7 @@
 
       <img class="__img" src="../../../assets/img/congratulations.svg">
 
-      <h1 class="__title">Parabéns pela escolha! Agora é hora de relaxar.</h1>
+      <h1 class="__title">Boa {{ reservaAcomod.guest.fullName.split(' ')[0] }}! Agora é hora de relaxar.</h1>
 
       <h3 class="__text">
         Dentro dos próximos dias {{ host.firstName }} irá entrar em contato com você para decidirem os detalhes de sua estadia. O código de sua reserva é <span style="font-weight:600">{{ reservaAcomod.reservaID }}</span>. Anote-o para eventuais consultas.
@@ -389,8 +430,34 @@ export default {
       const startDate = this.reservaAcomod.startDate
       const endDate = this.reservaAcomod.endDate
       if (startDate !== '' && endDate !== '') {
-        return `${format(startDate, 'ddd, DD MMM YYYY', { locale: pt })} / ${format(endDate, 'ddd, DD MMM YYYY', { locale: pt })}`
+        return `${format(startDate, 'ddd, DD MMM YYYY', { locale: pt })}  →  ${format(endDate, 'ddd, DD MMM YYYY', { locale: pt })}`
       }
+    },
+    checkInMonth () {
+      return format(this.reservaAcomod.startDate, 'MMM', { locale: pt }).toUpperCase()
+    },
+    checkInDay () {
+      return format(this.reservaAcomod.startDate, 'DD')
+    },
+    checkInWeekday () {
+      const weekday = format(this.reservaAcomod.startDate, 'dddd', { locale: pt })
+      return `Check-in ${weekday.includes('feira') ? 'na' : 'no'} ${weekday.charAt(0).toUpperCase() + weekday.slice(1)}`
+    },
+    checkInHour () {
+      return `Após as ${this.acomod.checkInTime}`
+    },
+    checkOutMonth () {
+      return format(this.reservaAcomod.endDate, 'MMM', { locale: pt }).toUpperCase()
+    },
+    checkOutDay () {
+      return format(this.reservaAcomod.endDate, 'DD')
+    },
+    checkOutWeekday () {
+      const weekday = format(this.reservaAcomod.endDate, 'dddd', { locale: pt })
+      return `Check-out ${weekday.includes('feira') ? 'na' : 'no'} ${weekday.charAt(0).toUpperCase() + weekday.slice(1)}`
+    },
+    checkOutHour () {
+      return `Até as ${this.acomod.checkOutTime}`
     }
   },
   watch: {
@@ -465,18 +532,60 @@ export default {
     & .flex-left {
       flex: 64%;
       & .__title {
-        padding-bottom: 1.5rem;
         font-size: 32px;
+        line-height: 1.25;
         user-select: none;
+        padding-bottom: 1.5rem;
       }
       & .__subtitle {
-        padding-top: .5rem;
-        font-size: 16px;
+        margin-top: 2.4rem;
+        padding-top: 2.4rem;
+        padding-bottom: .5rem;
+        border-top: 1px solid #dedede;
+        font-size: 19px;
         font-weight: 600;
       }
       & .__text {
         padding-top: .5rem;
         font-size: 16px;
+      }
+      & .check-in-out {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-top: 2.5rem;
+        & .calendar-box {
+          display: flex;
+          flex-flow: column;
+          align-items: center;
+          justify-content: center;
+          width: 3.3rem;
+          height: 3.3rem;
+          background: rgb(245,245,245);
+          border-radius: 5px;
+          margin-right: .6rem;
+          & .__month {
+            padding-bottom: 6px;
+            font-size: 11px;
+            font-weight: 700;
+          }
+          & .__day {
+            font-size: 16px;
+            font-weight: 600;
+          }
+        }
+        & .calendar-info {
+          display: flex;
+          flex-flow: column;
+          justify-content: center;
+          & .__weekday {
+            font-size: 15px;
+            padding-bottom: 5px;
+          }
+          & .__hour {
+            font-size: 15px;
+          }
+        }
       }
       & .__termos {
         padding-top: 3rem;
@@ -490,7 +599,7 @@ export default {
       & .item-form {
         display: flex;
         flex-flow: column;
-        margin: 1.6rem 0;
+        margin: 1.7rem 0;
         & label {
           user-select: none;
           font-weight: 500;
@@ -552,7 +661,7 @@ export default {
     & .flex-right {
       flex: 36%;
       max-width: 36%;
-      margin-left: 16%;
+      margin-left: 15%;
       align-self: flex-start;
       & .__img {
         width: 100%;
@@ -598,6 +707,8 @@ export default {
           }
         }
         & .detalhes-reserva-valor {
+          display: flex;
+          flex-flow: column;
           & .detalhes-reserva-valor_item-total {
             display: flex;
             justify-content: space-between;

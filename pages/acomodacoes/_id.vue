@@ -305,7 +305,7 @@
 
           <gmap-map
             :center="{lat: acomod.positionLAT, lng: acomod.positionLNG}"
-            :zoom="14"
+            :zoom="15"
             :options="{ styles: styles, draggable: $store.state.isMobile ? false : true, fullscreenControl: $store.state.isMobile ? false : true, zoomControl: $store.state.isMobile ? false : true, mapTypeControl: false, streetViewControl: false }"
             @click="fullscreenMobile">
               <Gmap-Marker
@@ -1300,12 +1300,9 @@ export default {
               font-weight: 600;
             }
             & .rating {
-              display: flex;
-              align-items: center;
               margin: .3rem 0 .5rem;
               & .rating-number {
                 font-size: 14px;
-                font-weight: 600;
                 padding: 0 8px 0 2px;
               }
               & .date {
@@ -1313,7 +1310,6 @@ export default {
               }
             }
             & .__message {
-
             }
           }
         }/* __________ AVALIAÇÕES __________ */

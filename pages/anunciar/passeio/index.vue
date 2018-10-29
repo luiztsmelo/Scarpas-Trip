@@ -1762,12 +1762,12 @@ export default {
       }
       & .back-next {
         bottom: 2rem;
-        height: 2.85rem;
-        width: 25%;
+        height: 2.9rem;
+        width: 24%;
         box-shadow: 3px 3px 20px 1px rgba(0,0,0,0.18);
         & .back-next-body {
           & button {
-            height: 2.85rem;
+            height: 2.9rem;
           }
           & .__back {
             font-size: 17px;
