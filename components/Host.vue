@@ -16,7 +16,7 @@
 
    
 
-          <h3 class="__subtitle">Entre em contato com {{ host.firstName }} para negociarem os detalhes da reserva.</h3>
+          <h3 class="__subtitle">{{ subtitleNegociacao }}</h3>
         </div>
 
 
@@ -75,6 +75,14 @@ export default {
       }
       if (this.$route.name === 'passeios-id') {
         return 'color: #198CFE'
+      }
+    },
+    subtitleNegociacao () {
+      if (this.$route.name === 'acomodacoes-id') {
+        return `Entre em contato com ${this.host.firstName} para negociarem os detalhes da reserva.`
+      }
+      if (this.$route.name === 'passeios-id') {
+        return `Entre em contato com ${this.host.firstName} para negociarem o dia e o horário do passeio.`
       }
     }
   }, 
@@ -143,7 +151,7 @@ export default {
         padding: 1.7rem 0;
         border-bottom: 1px solid #dedede;
         & .__img {
-          width: 1.8rem;
+          width: 1.7rem;
           height: auto;
           margin-right: .8rem;
         }

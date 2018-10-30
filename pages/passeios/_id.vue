@@ -106,15 +106,19 @@
         <div class="info-box">
           
           <div class="item">
+            <img class="__img" src="../../assets/img/marker.svg">
+            <h3>{{ passeio.localSaida }}</h3>
+          </div>
+
+          <div class="item">
             <img class="__img" src="../../assets/img/guests.svg">
             <h3>Até {{ passeio.capacidade }} {{ passeio.capacidade === 1 ? 'pessoa' : 'pessoas' }}</h3>
           </div>
 
           <div class="item">
             <img class="__img" src="../../assets/img/clock.svg">
-            <h3>{{ passeio.duracao }}</h3>
+            <h3>Duração de {{ passeio.duracao }}</h3>
           </div>
-
 
         </div><!-- ______________________________ INFO ______________________________ -->
 
@@ -209,43 +213,12 @@
           <h1 class="__valor">R${{ passeio.valorPasseio.toLocaleString() }}<span class="__valor-pessoa"> por pessoa</span></h1>
 
 
-          <div class="item-form">
-            <select v-model="$store.state.reservaAcomod.totalHospedes">
-              <option :value="n" v-for="n in capacidadeArray">{{ n }} {{ n === 1 ? 'pessoa' : 'pessoas' }}</option>
-            </select>
-          </div>
+          <h3 class="__text">Entre em contato com {{ host.firstName }} para negociarem o dia e o horário do passeio.</h3>
 
 
-          <div class="item-form">
 
-            <div class="datepicker-trigger">
-              <button
-                type="button"
-                id="datepicker-trigger">
-                {{ formatDate(diaPasseio) }}
-              </button>
+          <button class="__reserva-desktop-btn" type="button">Falar com {{ host.firstName }}</button>
 
-              <AirbnbStyleDatepicker
-                :trigger-element-id="'datepicker-trigger'"
-                :showShortcutsMenuTrigger="false"
-                :monthsToShow="1"
-                :mode="'single'"
-                :offsetX="102"
-                :offsetY="52"
-                :min-date="minDate"
-                :date-one="diaPasseio"
-                @date-one-selected="val => { diaPasseio = val }"
-              />
-            </div>
-
-          </div>
-
-          <button class="__reserva-desktop-btn" type="button">Reservar</button>
-
-          <h4 class="__info">A reserva é gratuita!</h4>
-
-
-          <button class="__reserva-desktop-ask-btn" type="button">Falar com {{ host.firstName }}</button>
 
 
           <div class="highlight" v-if="$store.state.visitsLastMonth >= 0">
@@ -269,7 +242,7 @@
       <div class="reserva-body">
         <h3 class="__reserva-valor">R${{ passeio.valorPasseio }}<span class="__reserva-valor-pessoa"> por pessoa</span></h3>
         <button class="__reserva-btn" @click="$store.commit('m_showHost', true), hashHost()">
-          Reservar
+          Falar com {{ host.firstName }}
         </button>
       </div>
     </div>
@@ -668,66 +641,8 @@ export default {
               font-weight: 400;
             }
           }
-          & .item-form {
-            display: flex;
-            flex-flow: column;
-            margin-top: 1.2rem;
-            & select {
-              cursor: pointer;
-              width: 100%;
-              padding: .8rem .65rem;
-              border: 1px solid #dedede;
-              outline: none;
-              background: white;
-              border-radius: 5px;
-              transition: .15s border ease;
-              & option {
-                background: white;
-              }
-            }
-            & select:hover {
-              border: 1px solid var(--color01) !important;
-            }
-            & .datepicker-trigger {
-              height: 100%;
-              background: white;
-              & #datepicker-trigger {
-                padding: .8rem;
-                height: 100%;
-                width: 100%;
-                background: white;
-                border: 1px solid #dedede;
-                outline: none;
-                text-align: left;
-                border-radius: 5px;
-              }
-              & #datepicker-trigger:hover {
-                border: 1px solid var(--color01);
-              }
-            }
-          }
-          & .reserva-info {
-            margin-top: .9rem;
-            & .reserva-info_item {
-              display: flex;
-              justify-content: space-between;
-              align-items: center;
-              & h3 {
-                font-size: 15px;
-              }
-            }
-            & .reserva-info_item-total {
-              display: flex;
-              justify-content: space-between;
-              border-top: 1px solid #dedede;
-              & h3 {
-                font-size: 17px;
-                font-weight: 500;
-              }
-            }
-          }
           & .__reserva-desktop-btn {
-            margin-top: 1.3rem;
+            margin: 1.5rem 0;
             font-size: 17px;
             font-weight: 700;
             background: var(--colorPasseio);
@@ -736,22 +651,9 @@ export default {
             width: 100%;
             border-radius: 200px;
           }
-          & .__info {
-            margin: .5rem 0 .8rem;
-            text-align: center;
-            font-size: 12px;
-            font-weight: 500;
-            line-height: 17px;
-          }
-          & .__reserva-desktop-ask-btn {
-            font-size: 16px;
-            font-weight: 600;
-            background: white;
-            color: var(--colorPasseio);
-            height: 2rem;
-          }
-          & .__reserva-desktop-ask-btn:hover {
-            text-decoration: underline;
+          & .__text {
+            padding: .8rem 0;
+            font-size: 15px;
           }
           & .highlight {
             display: flex;

@@ -3,7 +3,8 @@
     
 
 
-    <!-- ******* HEADER PROGRESS ******* -->
+
+    <!-- ________________________________________ HEADER PROGRESS ________________________________________ -->
     <div class="header-progress" v-if="!$store.state.concludedReservaAcomod">
 
       <nuxt-link to="/" class="brand">
@@ -18,7 +19,8 @@
         <h3 class="__item-progress" :style="etapaProgressed2" @click="backEtapa2">2. Revisar detalhes e confirmar</h3>
       </div>
 
-    </div><!-- ******* HEADER PROGRESS ******* -->
+    </div><!-- ________________________________________ HEADER PROGRESS ________________________________________ -->
+
 
 
 
@@ -26,13 +28,17 @@
     <div class="reserva-body" v-if="!$store.state.concludedReservaAcomod">
 
 
+
+
       <!-- ________________________________________ FLEX LEFT ________________________________________ -->
       <div class="flex-left">
 
 
 
-        <!-- ******* ETAPA 1 ******* -->
+
+        <!-- ******************** IDENTIFICAÇÃO ******************** -->
         <div v-if="$store.state.reservaAcomodDesktop1 === true">
+
 
           <h1 class="__title">Ótima escolha! Podemos te conhecer melhor?</h1>
 
@@ -80,17 +86,21 @@
 
           <button class="__next-btn" type="button" :style="form1ok" @click="nextBtn1">Continuar</button>
 
-        </div><!-- ******* ETAPA 1 ******* -->
+
+        </div><!-- ******************** IDENTIFICAÇÃO ******************** -->
 
 
 
 
-        <!-- ******* ETAPA 2 ******* -->
+
+        <!-- ******************** DETALHES E CONFIRMAÇÃO ******************** -->
         <div v-if="$store.state.reservaAcomodDesktop2 === true">
+
 
           <h1 class="__title">Revisar detalhes e confirmar</h1>
 
 
+          <!-- CHECK IN OUT -->
           <div class="check-in-out">
 
             <div style="display: flex; flex: 1">
@@ -121,31 +131,67 @@
 
             </div>
 
-          </div>
+          </div><!-- CHECK IN OUT -->
 
 
 
-          <h3 class="__subtitle">Pagamento</h3>
-          
-          <h3 class="__text">Texto aqui</h3>
-
-
-
+          <!-- REGRAS -->
           <h3 class="__subtitle">Regras {{ tipoAcomodD }}</h3>
 
+          <div class="regra">
+            <img class="__bullet" src="../../../assets/img/check.svg" v-if="acomod.allowFestas">
+            <img class="__bullet" src="../../../assets/img/close-mobile.svg" v-else>
+            <h3>{{ acomod.allowFestas ? 'São permitidas festas ou eventos.' : 'Não são permitidas festas ou eventos.' }}</h3>
+          </div>
+          <div class="regra">
+            <img class="__bullet" src="../../../assets/img/check.svg" v-if="acomod.allowPets">
+            <img class="__bullet" src="../../../assets/img/close-mobile.svg" v-else>
+            <h3>{{ acomod.allowPets ? 'São permitidos animais de estimação.' : 'Não são permitidos animais de estimação.' }}</h3>
+          </div>
+          <div class="regra">
+            <img class="__bullet" src="../../../assets/img/check.svg" v-if="acomod.allowBabys">
+            <img class="__bullet" src="../../../assets/img/close-mobile.svg" v-else>
+            <h3>{{ acomod.allowBabys ? 'É adequada para bebês e recém-nascidos.' : 'Não é adequada para bebês e recém-nascidos.' }}</h3>
+          </div>
+          <div class="regra">
+            <img class="__bullet" src="../../../assets/img/check.svg" v-if="acomod.allowFumar">
+            <img class="__bullet" src="../../../assets/img/close-mobile.svg" v-else>
+            <h3>{{ acomod.allowFumar ? 'É permitido fumar.' : 'Não é permitido fumar.' }}</h3>
+          </div>
+
+          <h3 class="__text" style="padding-top: 1rem" v-for="regra in acomod.regrasAdicionais">{{ regra }}</h3>
+          <!-- REGRAS -->
+          
 
 
+
+          <!-- PAGAMENTO -->
+          <h3 class="__subtitle">Pagamento</h3>
+          
+          <h3 class="__text">{{ reservaAcomod.guest.fullName.split(' ')[0] }}, o pagamento do valor total desta reserva, <span style="font-weight:600">R${{ reservaAcomod.valorReservaTotal.toLocaleString() }}</span>, deverá ser efetuado diretamente com o anunciante, {{ host.firstName }}, no dia do check-out.</h3>
+          
+          <h3 class="__text">Forma de pagamento...</h3>
+          <!-- PAGAMENTO -->
+
+
+
+          <!-- TERMOS -->
           <h4 class="__termos">Ao confirmar você concorda com as regras {{ tipoAcomodD }} e nossos <a href="/termos" target="_blank">Termos de Serviço</a>.</h4>
+          <!-- TERMOS -->
+
 
 
           <button class="__next-btn" type="button" :style="form2ok" @click="confirmarReserva">Confirmar Reserva</button>
 
-        </div><!-- ******* ETAPA 2 ******* -->
+
+        </div><!-- ******************** DETALHES E CONFIRMAÇÃO ******************** -->
+
 
 
         
 
       </div><!-- ________________________________________ FLEX LEFT ________________________________________ -->
+
 
 
 
@@ -219,17 +265,24 @@
 
 
 
+
+
+    <!-- ________________________________________ FOOTER ________________________________________ -->
     <div class="footer" v-if="!$store.state.concludedReservaAcomod">
       <div style="display: flex; align-items: center">
         <img class="__img" src="../../../assets/img/brand.svg">
         <h3 class="__text">&copy Escarpas Trip. Capitólio/MG - Brasil. CNPJ: 99.999.999/9999-99.</h3>
       </div>
       <a class="__ajuda" href="/ajuda" target="_blank" >Ajuda</a>
-    </div>
+    </div><!-- ________________________________________ FOOTER ________________________________________ -->
 
 
 
 
+
+
+
+    <!-- ________________________________________ CONCLUDED RESERVA ________________________________________ -->
     <div class="concluded-reserva" v-if="$store.state.concludedReservaAcomod">
 
       <img class="__img" src="../../../assets/img/congratulations.svg">
@@ -254,7 +307,9 @@
         <button class="__next-btn" type="button" style="background: #FFA04F; margin:0">Voltar para Página Inicial</button>
       </nuxt-link>
       
-    </div>
+    </div><!-- ________________________________________ CONCLUDED RESERVA ________________________________________ -->
+
+
 
 
 
@@ -444,7 +499,7 @@ export default {
       return `Check-in ${weekday.includes('feira') ? 'na' : 'no'} ${weekday.charAt(0).toUpperCase() + weekday.slice(1)}`
     },
     checkInHour () {
-      return `Após as ${this.acomod.checkInTime}`
+      return this.acomod.checkInTime === 'A qualquer hora' ? 'A qualquer hora' : `Após as ${this.acomod.checkInTime}`
     },
     checkOutMonth () {
       return format(this.reservaAcomod.endDate, 'MMM', { locale: pt }).toUpperCase()
@@ -457,7 +512,7 @@ export default {
       return `Check-out ${weekday.includes('feira') ? 'na' : 'no'} ${weekday.charAt(0).toUpperCase() + weekday.slice(1)}`
     },
     checkOutHour () {
-      return `Até as ${this.acomod.checkOutTime}`
+      return this.acomod.checkOutTime === 'A qualquer hora' ? 'A qualquer hora' : `Até as ${this.acomod.checkOutTime}`
     }
   },
   watch: {
@@ -559,8 +614,8 @@ export default {
           flex-flow: column;
           align-items: center;
           justify-content: center;
-          width: 3.3rem;
-          height: 3.3rem;
+          width: 3.4rem;
+          height: 3.4rem;
           background: rgb(245,245,245);
           border-radius: 5px;
           margin-right: .6rem;
@@ -585,6 +640,16 @@ export default {
           & .__hour {
             font-size: 15px;
           }
+        }
+      }
+      & .regra {
+        padding-top: .5rem;
+        display: flex;
+        align-items: center;
+        & .__bullet {
+          width: .8rem;
+          height: auto;
+          margin-right: .6rem;
         }
       }
       & .__termos {
@@ -624,44 +689,13 @@ export default {
         & input:hover {
           border-bottom: 1px solid rgb(42,42,42) !important;
         }
-        & select {
-          width: 100%;
-          font-size: 17px;
-          font-weight: 400;
-          background: white;
-          color: var(--color01);
-          padding: 1rem 0;
-          border: none;
-          border-bottom: 1px solid #dedede;
-          outline: none;
-          transition: .2s all ease;
-        }
-        & select:focus {
-          border-bottom: 1px solid var(--color01) !important;
-        }
-        & select:hover {
-          border-bottom: 1px solid var(--color01) !important;
-        }
-      }
-      & textarea {
-        width: 100%;
-        min-width: 100%;
-        max-width: 100%;
-        font-size: 17px;
-        font-weight: 400;
-        line-height: 26px;
-        background: white;
-        padding: 0;
-        border: none;
-        outline: none;
-        resize: none;
       }
     }
     /* ******* FLEX RIGHT ******* */
     & .flex-right {
       flex: 36%;
       max-width: 36%;
-      margin-left: 15%;
+      margin-left: 13%;
       align-self: flex-start;
       & .__img {
         width: 100%;
@@ -795,10 +829,6 @@ export default {
 .has-error {
   color: #F31431 !important;
   border-bottom: 1px solid #F31431 !important;
-}
-.has-error-textarea {
-  color: #F31431 !important;
-  border: 1px solid #F31431 !important;
 }
 
 </style>

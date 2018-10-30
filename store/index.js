@@ -243,7 +243,7 @@ const store = () => new Vuex.Store({
     blobEvL2: null,
     blobEvH2J: null,
     blobEvH2W: null,
-    eventoData: {/* Atualizar a action */
+    eventoData: { /* Atualizar a action */
       eventoID: null,
       title: '',
       subtitle: '',
