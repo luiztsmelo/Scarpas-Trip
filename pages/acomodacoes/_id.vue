@@ -988,8 +988,8 @@ export default {
         font-weight: 400;
       }
       & .__reserva-btn {
-        width: 10rem;
-        height: 3.2rem;
+        width: 11rem;
+        height: 3.3rem;
         background:var(--colorAcomod);
         border-radius: 200px;
         font-size: 16px;

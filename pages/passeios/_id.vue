@@ -153,24 +153,28 @@
         <!-- ______________________________ DISPONIBILIDADE ______________________________ -->
         <h1 class="item-title">Disponibilidade</h1>
 
-        <div class="datepicker-trigger">
-          <button
-            type="button"
-            id="datepicker-trigger"
-            style="display: none">
-          </button>
+        <div class="disponibilidade-box">
 
-          <AirbnbStyleDatepicker
-          style="border:none"
-            :trigger-element-id="'datepicker-trigger'"
-            :inline="true"
-            :mode="'single'"
-            :showShortcutsMenuTrigger="false"
-            :showActionButtons="false"
-            :min-date="minDate"
-            :date-one="diaPasseio"
-            @date-one-selected="val => { diaPasseio = val }"
-          />
+          <div class="datepicker-trigger">
+            <button
+              type="button"
+              id="datepicker-trigger"
+              style="display: none">
+            </button>
+
+            <AirbnbStyleDatepicker
+            style="border:none"
+              :trigger-element-id="'datepicker-trigger'"
+              :inline="true"
+              :mode="'single'"
+              :showShortcutsMenuTrigger="false"
+              :showActionButtons="false"
+              :min-date="minDate"
+              :date-one="diaPasseio"
+              @date-one-selected="val => { diaPasseio = val }"
+            />
+          </div>
+
         </div>
         <!-- ______________________________ DISPONIBILIDADE ______________________________ -->
 
@@ -178,13 +182,12 @@
 
 
 
-        <!-- ______________________________ LOCAL SAÍDA ______________________________ -->
-        <h1 class="item-title">Local de Saída</h1>
+        <!-- ______________________________ PAGAMENTO ______________________________ -->
+        <h1 class="item-title">Formas de pagamento aceitas</h1>
 
-        <div class="local-saida-box">
-          <h3>{{ passeio.localSaida }}</h3>
-          <h3>Mapa aqui...</h3>
-        </div><!-- ______________________________ LOCAL SAÍDA ______________________________ -->
+        <div class="pagamento-box">
+          <h3>Formas de pagamento...</h3>
+        </div><!-- ______________________________ PAGAMENTO ______________________________ -->
 
 
 
@@ -516,15 +519,18 @@ export default {
 
 
   /* __________ DISPONIBILIDADE __________ */
+  & .disponibilidade-box {
+    padding: 0 3.5%;
+  }  /* __________ DISPONIBILIDADE __________ */
 
 
 
 
 
-  /* __________ LOCAL SAÍDA BOX __________ */
-  & .local-saida-box {
+  /* __________ PAGAMENTO BOX __________ */
+  & .pagamento-box {
     padding: 0 7%;
-  }/* __________ LOCAL SAÍDA BOX __________ */
+  }/* __________ PAGAMENTO BOX __________ */
 
 
 
@@ -569,8 +575,8 @@ export default {
         font-weight: 400;
       }
       & .__reserva-btn {
-        width: 10rem;
-        height: 3.2rem;
+        width: 11rem;
+        height: 3.3rem;
         background:var(--colorPasseio);
         border-radius: 200px;
         font-size: 16px;
@@ -761,10 +767,19 @@ export default {
 
 
 
-        /* __________ LOCAL SAÍDA BOX __________ */
-        & .local-saida-box {
+        /* __________ DISPONIBILIDADE __________ */
+        & .disponibilidade-box {
           padding: 0;
-        }/* __________ LOCAL SAÍDA BOX __________ */
+        }  /* __________ DISPONIBILIDADE __________ */
+
+
+
+
+
+        /* __________ PAGAMENTO BOX __________ */
+        & .pagamento-box {
+          padding: 0;
+        }/* __________ PAGAMENTO BOX __________ */
 
 
 
