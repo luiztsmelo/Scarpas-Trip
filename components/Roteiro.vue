@@ -1,13 +1,12 @@
 <template>
   <div class="roteiro" :style="{ backgroundImage: 'url(' + bgimg + ')'}">
     
+
     <div class="roteiro-container">
-      
 
 
 
-      <h1 class="headline">Encontre Acomodações, Passeios, Eventos e Restaurantes em Capitólio e Região</h1>
-
+      <h1 class="headline">Acomodações, Passeios, Eventos e Restaurantes em Capitólio e Região</h1>
 
 
 
@@ -47,25 +46,6 @@
   
 
 
-      <!-- <star-rating
-        class="rating"
-        :rating="5"
-        :read-only="true"
-        :show-rating="false"
-        active-color="#fff"
-        :star-size="15"
-        :padding="10">
-      </star-rating>
-
-
-
-      <p class="testimonial">"Incrível a maneira como a Escarpas Trip facilita a organização de sua viagem para Capitólio. Fechamos uma casa e um passeio em poucos minutos, diretamente com os proprietários!"</p>
-
-      <p class="testimonial-name">Roberta e Conrado, Belo Horizonte</p> -->
-
-
-
-
     </div>
 
   </div>     
@@ -98,7 +78,8 @@ export default {
   },
   computed: {
     bgimg () {
-      return supportsWebP ? require('@/assets/img/bgimg.webp') : require('@/assets/img/bgimg.jpg')
+      return require('@/assets/img/bgimg2.jpg')
+      /* return supportsWebP ? require('@/assets/img/bgimg.webp') : require('@/assets/img/bgimg.jpg') */
     },
     minDate() {
       return subDays(Date(), 1)
@@ -115,7 +96,7 @@ export default {
   background-repeat: no-repeat;
   background-size: cover;
   & .roteiro-container {
-    background: rgba(0,0,0,.4);
+    background: rgba(0,0,0,.2);
     padding: 1rem 0;
     position: relative;
     display: flex;
@@ -134,18 +115,8 @@ export default {
       line-height: 30px;
       user-select: none;
     }
-    & .rating {
-      display: none;
-    }
-    & .testimonial {
-      display: none;
-    }
-    & .testimonial-name {
-      display: none;
-    }
   }
 }
-
 
 
 
@@ -158,23 +129,23 @@ export default {
       display: flex;
       flex-flow: column;
       align-items: center;
-      background: rgba(0,0,0, .2);
+      background: rgba(0,0,0, 0);
       & .headline {
         padding: 2rem 20% 0;
         width: 100%;
-        font-size: 32px;
+        font-size: 37px;
         font-weight: 600;
-        line-height: 45px;
+        line-height: 48px;
         text-align: center;
       }
       & .roteiro-form {
         display: flex;
-        margin: 3.4rem 0 2.8rem;
+        margin: 4rem 0 2.8rem;
         align-items: center;
         justify-content: center;
         background: transparent;
         height: 3.4rem;
-        width: 38rem;
+        width: 40rem;
         & .datepicker-trigger {
           height: 100%;
           flex: 1;
@@ -207,28 +178,6 @@ export default {
           font-weight: 700;
           border-radius: 0 200px 200px 0;
         }
-      }
-      & .rating {
-        display: inline-flex;
-        margin: .6rem 0;
-      }
-      & .testimonial {
-        display: inline-flex;
-        padding: 0 26%;
-        color: white;
-        font-size: 14px;
-        line-height: 1.45;
-        font-weight: 500;
-        font-style: italic;
-        text-align: center;
-      }
-      & .testimonial-name {
-        display: inline-flex;
-        padding-top: .6rem;
-        color: white;
-        font-size: 14px;
-        font-weight: 400;
-        text-align: center;
       }
     }
   }  

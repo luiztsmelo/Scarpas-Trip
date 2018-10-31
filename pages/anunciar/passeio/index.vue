@@ -148,7 +148,7 @@
           <option>Kanto da Ilha</option>
           <option>Outro</option>
         </select>
-        <textarea class="__local-saida-text" v-model="localSaida" rows="1" v-if="$store.state.passeioData.localSaida === 'Outro'" autofocus></textarea>
+        <input type="text" class="__local-saida-text" v-model="localSaida" autofocus v-else>
       </div> 
 
 
@@ -173,6 +173,35 @@
       <h1 class="__form-title">Quais pontos turísticos são visitados?</h1>
 
  
+      <div class="pontos-visitados">
+
+        <div class="ponto" :class="[ $store.state.passeioData.pontosVisitados.canyons ? 'ponto-checked' : '' ]" @click="$store.state.passeioData.pontosVisitados.canyons = !$store.state.passeioData.pontosVisitados.canyons">
+          <progressive-background class="__img" :src="canyons" :aspect-ratio="2/3"/>
+          <h2 class="__name">Canyons de Furnas</h2>
+        </div>
+
+        <div class="ponto" :class="[ $store.state.passeioData.pontosVisitados.miranteCanyons ? 'ponto-checked' : '' ]" @click="$store.state.passeioData.pontosVisitados.miranteCanyons = !$store.state.passeioData.pontosVisitados.miranteCanyons">
+          <progressive-background class="__img" :src="miranteCanyons" :aspect-ratio="2/3"/>
+          <h2 class="__name">Mirante dos Canyons</h2>
+        </div>
+
+        <div class="ponto" :class="[ $store.state.passeioData.pontosVisitados.morroChapeu ? 'ponto-checked' : '' ]" @click="$store.state.passeioData.pontosVisitados.morroChapeu = !$store.state.passeioData.pontosVisitados.morroChapeu">
+          <progressive-background class="__img" :src="morroChapeu" :aspect-ratio="2/3"/>
+          <h2 class="__name">Morro do Chapéu</h2>
+        </div>
+
+        <div class="ponto" :class="[ $store.state.passeioData.pontosVisitados.cachoeiraFilo ? 'ponto-checked' : '' ]" @click="$store.state.passeioData.pontosVisitados.cachoeiraFilo = !$store.state.passeioData.pontosVisitados.cachoeiraFilo">
+          <progressive-background class="__img" :src="cachoeiraFilo" :aspect-ratio="2/3"/>
+          <h2 class="__name">Cachoeira do Filó</h2>
+        </div>
+
+        <div class="ponto" :class="[ $store.state.passeioData.pontosVisitados.cachoeiraFecho ? 'ponto-checked' : '' ]" @click="$store.state.passeioData.pontosVisitados.cachoeiraFecho = !$store.state.passeioData.pontosVisitados.cachoeiraFecho">
+          <progressive-background class="__img" :src="cachoeiraFecho" :aspect-ratio="2/3"/>
+          <h2 class="__name">Cachoeira Fecho da Serra</h2>
+        </div>
+
+      </div>
+
 
       <div class="back-next"> 
         <div class="back-next-body">
@@ -631,14 +660,14 @@ import 'firebase/firestore'
 import 'firebase/storage'
 import 'firebase/functions'
 import MaskedInput from 'vue-text-mask'
-import { states } from '@/mixins/statesBrazil'
+import { pontosTuristicos } from '@/mixins/pontosTuristicos'
 import valid from 'card-validator'
 import CPF from 'gerador-validador-cpf'
 import scrollIntoView from 'scroll-into-view'
 
 export default {
   components: { MaskedInput },
-  mixins: [ states ],
+  mixins: [ pontosTuristicos ],
   head () {
     return {
       title: 'Anunciar Passeio em Capitólio ‒ Escarpas Trip'
@@ -1412,6 +1441,41 @@ export default {
         border-bottom: 1px solid var(--color01);
       }
     }
+    & .pontos-visitados {
+      margin-top: 1rem;
+      padding: 0 calc(7% - 1%);
+      display: flex;
+      flex-flow: column;
+      align-items: center;
+      & .ponto {
+        cursor: pointer;
+        margin: 1rem 0;
+        width: 100%;
+        border-radius: 7px;
+        box-shadow: 1px 1px 8px 1px rgba(0,0,0,0.12);
+        transition: var(--main-transition);
+        & .__img {
+          width: 100%;
+          height: auto;
+          border-radius: 7px 7px 0 0;
+        }
+        & .__name {
+          padding: .7rem 0;
+          font-size: 15px;
+          font-weight: 600;
+          width: 100%;
+          text-align: center;
+          user-select: none;
+        }
+      }
+      & .ponto:hover {
+        box-shadow: 3px 3px 20px 1px rgba(0,0,0,0.25);
+      }
+      & .ponto-checked {
+        background: var(--colorPasseio);
+        color: white;
+      }
+    }
     & .payment-box {
       display: flex;
       flex-flow: column;
@@ -1684,6 +1748,28 @@ export default {
         }
         & select:hover {
           border-bottom: 1px solid var(--color01);
+        }
+      }
+      & .pontos-visitados {
+        margin-top: 2rem;
+        padding: 0 calc(28% - 2%);
+        flex-flow: row wrap;
+        & .ponto {
+          margin: 2%;
+          width: 46%;
+          & .__img {
+          }
+          & .__name {
+            padding: .5rem 0;
+            font-size: 15px;
+          }
+        }
+        & .ponto:hover {
+          box-shadow: 3px 3px 20px 1px rgba(0,0,0,0.25);
+        }
+        & .ponto-checked {
+          background: var(--colorPasseio);
+          color: white;
         }
       }
       & .modal-croppa {
