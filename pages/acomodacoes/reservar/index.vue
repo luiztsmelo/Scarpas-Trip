@@ -795,16 +795,16 @@ export default {
     & .__title {
       text-align: center;
       font-size: 34px;
-      padding-top: 1.2rem;
+      padding-top: 1.3rem;
     }
     & .__subtitle {
       padding-top: 2.5rem;
       text-align: center;
-      font-size: 20px;
+      font-size: 19px;
       font-weight: 600;
     }
     & .__text {
-      padding-top: .5rem;
+      padding-top: .7rem;
       text-align: center;
     }
   }

@@ -35,7 +35,7 @@
 
 
         <select class="hospedes-select" v-model="$store.state.reservaAcomod.totalHospedes">
-          <option :value="n" v-for="n in 25">{{ n }} {{ n === 1 ? 'hóspede' : 'hóspedes' }}</option>
+          <option :value="n" v-for="n in 25">{{ n }} {{ n === 1 ? 'pessoa' : 'pessoas' }}</option>
         </select>
 
 

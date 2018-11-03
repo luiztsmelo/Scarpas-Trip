@@ -106,13 +106,13 @@
         <div class="info-box">
           
           <div class="item">
-            <img class="__img" src="../../assets/img/marker.svg">
-            <h3>{{ passeio.localSaida }}</h3>
+            <img class="__img" src="../../assets/img/guests.svg">
+            <h3>Até {{ passeio.capacidade }} {{ passeio.capacidade === 1 ? 'pessoa' : 'pessoas' }}</h3>
           </div>
 
           <div class="item">
-            <img class="__img" src="../../assets/img/guests.svg">
-            <h3>Até {{ passeio.capacidade }} {{ passeio.capacidade === 1 ? 'pessoa' : 'pessoas' }}</h3>
+            <img class="__img" src="../../assets/img/marker.svg">
+            <h3>Partindo de {{ passeio.localSaida }}</h3>
           </div>
 
           <div class="item">
@@ -140,12 +140,14 @@
 
 
 
-        <!-- ______________________________ PONTOS VISITADOS ______________________________ -->
-        <h1 class="item-title">Pontos Visitados</h1>
+        <!-- ______________________________ ROTAS ______________________________ -->
+        <h1 class="item-title">Rotas</h1>
 
-        <div class="pontos-box">
-          <h3>Imagens dos pontos turísticos visitados</h3>
-        </div><!-- ______________________________ PONTOS VISITADOS ______________________________ -->
+        <div class="rotas-box">
+          <h3>Rotas aqui...</h3>
+        </div><!-- ______________________________ ROTAS ______________________________ -->
+
+
 
 
 
@@ -216,7 +218,7 @@
           <h1 class="__valor">R${{ passeio.valorPasseio.toLocaleString() }}<span class="__valor-pessoa"> por pessoa</span></h1>
 
 
-          <h3 class="__text">Entre em contato com {{ host.firstName }} para negociarem o dia e o horário do passeio.</h3>
+          <h3 class="__text">Entre em contato com {{ host.firstName }} para negociar o dia e o horário do passeio.</h3>
 
 
 
@@ -509,10 +511,10 @@ export default {
 
 
 
-  /* __________ PONTOS VISITADOS BOX __________ */
-  & .pontos-box {
+  /* __________ ROTAS BOX __________ */
+  & .rotas-box {
     padding: 0 7%;
-  }/* __________ PONTOS VISITADOS BOX __________ */
+  }/* __________ ROTAS BOX __________ */
 
 
 
@@ -615,7 +617,6 @@ export default {
             & .__img {
               width: 100%;
               height: auto;
-              border-radius: 6px;
             }
           }
         }
@@ -758,10 +759,10 @@ export default {
 
 
 
-        /* __________ PONTOS VISITADOS BOX __________ */
-        & .pontos-box {
+        /* __________ ROTAS BOX __________ */
+        & .rotas-box {
           padding: 0;
-        }/* __________ PONTOS VISITADOS BOX __________ */
+        }/* __________ ROTAS BOX __________ */
 
 
 

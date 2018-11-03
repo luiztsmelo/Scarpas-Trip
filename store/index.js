@@ -282,23 +282,13 @@ const store = () => new Vuex.Store({
       tipoPasseio: 'Lancha',
       capacidade: 1,
       duracao: null,
-      pontosVisitados: {
-        canyons: false,
-        miranteCanyons: false,
-        morroChapeu: false,
-        cachoeiraCastainha: false,
-        cascataEcoParque: false,
-        cachoeiraFilo: false,
-        cachoeiraFecho: false,
-        recantoVikings: false,
-        cachoeiraCapivara: false,
-        cachoeiraLobo: false,
-        cachoeiraSossegada: false,
-        cascaDanta: false,
-        pedreiraLagoaAzul: false,
-        cachoeiraCocacola: false,
-        cachoeiraDicadinha: false
-      },
+      rotas: [
+        {
+          duracao: '',
+          valor: 0,
+          pontosVisitados: []
+        }
+      ],
       localSaida: null,
       valorPasseio: 0,
       images: [],
@@ -668,6 +658,16 @@ const store = () => new Vuex.Store({
     },
     m_localSaida (state, payload) {
       state.passeioData.localSaida = payload
+    },
+    m_addRotaPasseio (state) {
+      state.passeioData.rotas.push({
+        duracao: '',
+        valor: 0,
+        pontosVisitados: []
+      })
+    },
+    m_removeRotaPasseio (state, index) {
+      state.passeioData.rotas.splice(index, 1)
     },
     m_imageCountPas (state) {
       state.imageCountPas++

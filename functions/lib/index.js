@@ -5,21 +5,22 @@ const admin = require("firebase-admin");
 const pagarme = require("pagarme");
 const numeral = require("numeral");
 require("numeral/locales/pt-br");
-const Nexmo = require('nexmo');
+/* const Nexmo = require('nexmo') */
 const format = require('date-fns/format');
 const pt = require('date-fns/locale/pt');
 const escarpasTripEmail = 'contato@escarpastrip.com';
-const escarpasTripPhone = '5537999325598';
+/* const escarpasTripPhone = '5537999325598' */
 /* Firebase admin */
 admin.initializeApp(functions.config().firebase);
 /* Mailjet */
 const Mailjet = require('node-mailjet').connect(`${functions.config().mailjetpublic.key}`, `${functions.config().mailjetprivate.key}`);
 /* Nexmo */
-const nexmo = new Nexmo({
-    apiKey: functions.config().nexmo.key,
-    apiSecret: functions.config().nexmo.secret,
-    applicationId: functions.config().nexmo.id
-});
+/* const nexmo = new Nexmo({
+  apiKey: functions.config().nexmo.key,
+  apiSecret: functions.config().nexmo.secret,
+  applicationId: functions.config().nexmo.id,
+  privateKey: require('./private.key') ERRADO
+}) */
 /* Numeral */
 numeral.locale('pt-br');
 /* Axios */
@@ -154,7 +155,7 @@ exports.email_newReservaAcomod_host = functions.firestore.document('reservasAcom
       {
         "content": {
           "type": "text",
-          "text": "Nova reserva recebida"
+          "text": "Nova reserva recebida!"
         }
       },
       (err, data) => { console.log(data.message_uuid) }

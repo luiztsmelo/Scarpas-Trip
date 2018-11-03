@@ -167,13 +167,64 @@
 
 
 
-    <!-- ________________________________________ 5 - PONTOS VISITADOS ________________________________________ -->
+    <!-- ________________________________________ 5 - ROTAS ________________________________________ -->
     <form class="cadastro-passeio" v-if="$store.state.cadastroPasseio5">
 
-      <h1 class="__form-title">Quais pontos turísticos são visitados?</h1>
+      <h1 class="__form-title">Quais rotas são oferecidas?</h1>
 
+      <div class="rotas">
+        
+        <transition-group name="rotas-animation" tag="div" style="width: 100%">
+          <div class="rota" v-for="(rota, index) in $store.state.passeioData.rotas" :key="index + 1">
+            <div class="rota-body">
+
+              <h1 class="__title">Rota {{ index + 1 }}</h1>
+
+              <img class="__remove-rota" src="../../../assets/img/exit.svg" @click="$store.commit('m_removeRotaPasseio', index)">
+
+
+              <div class="question">
+                <label>Duração:</label>
+
+                <input type="time" v-model="rota.duracao">
+              </div>
+
+
+              <div class="question">
+                <label>Valor por pessoa:</label>
+
+                <money 
+                  v-model="rota.valor"
+                  onKeyPress="if (event.which == 13) return false">
+                </money>
+              </div>
+
+
+              <div class="question">
+                <label>Pontos visitados:</label>
+
+                <multiselect 
+                  v-model="rota.pontosVisitados" 
+                  placeholder="Adicionar ponto" 
+                  :options="pontos" 
+                  :multiple="true" 
+                  :taggable="true">
+                </multiselect>
+                
+
+              </div>
+
+            </div>
+          </div>
+        </transition-group>
+
+
+        <button class="add-rota-btn" type="button" @click="$store.commit('m_addRotaPasseio')">Adicionar Rota</button>
+
+
+      </div>
  
-      <div class="pontos-visitados">
+      <!-- <div class="pontos-visitados">
 
         <div class="ponto" :class="[ $store.state.passeioData.pontosVisitados.canyons ? 'ponto-checked' : '' ]" @click="$store.state.passeioData.pontosVisitados.canyons = !$store.state.passeioData.pontosVisitados.canyons">
           <progressive-background class="__img" :src="canyons" :aspect-ratio="2/3"/>
@@ -200,7 +251,7 @@
           <h2 class="__name">Cachoeira Fecho da Serra</h2>
         </div>
 
-      </div>
+      </div> -->
 
 
       <div class="back-next"> 
@@ -210,7 +261,7 @@
         </div>
       </div> 
     
-    </form><!-- ________________________________________ 5 - PONTOS VISITADOS ________________________________________ -->
+    </form><!-- ________________________________________ 5 - ROTAS ________________________________________ -->
 
 
 
@@ -679,6 +730,28 @@ export default {
       title: '', /* Vue Autosize */
       subtitle: '', /* Vue Autosize */
       localSaida: '',
+      pontos: [
+        'Canyons de Furnas',
+        'Mirante dos Canyons',
+        'Cachoeira do Filó',
+        'Morro do Chapéu',
+        'Cachoeira Cascatinha',
+        'Vale dos Tucanos',
+        'Cachoeira da Ilha',
+        'Porto Escarpas',
+        'Cachoeira Lagoa Azul',
+        'Kanto da Ilha',
+        'Cascata Eco Parque',
+        'Cachoeira Fecho da Serra',
+        'Recanto dos Vikings',
+        'Cachoeira da Capivara',
+        'Cachoeira do Lobo',
+        'Cachoeira Sossegada',
+        'Casca Danta',
+        'Pedreira Lagoa Azul',
+        'Cachoeira Coca-cola',
+        'Cachoeira Dicadinha'
+      ],
       showCroppaModal: false,
       isUploading: false,
       uploadProgress: 0,
@@ -723,6 +796,7 @@ export default {
       document.body.scrollTop = 0
       document.documentElement.scrollTop = 0
     },
+    /* ******************** ROTAS ******************** */
     /* ******************** IMAGE INPUT ******************** */
     async imageConfirm () {
       try {
@@ -1441,7 +1515,7 @@ export default {
         border-bottom: 1px solid var(--color01);
       }
     }
-    & .pontos-visitados {
+    /* & .pontos-visitados {
       margin-top: 1rem;
       padding: 0 calc(7% - 1%);
       display: flex;
@@ -1475,7 +1549,7 @@ export default {
         background: var(--colorPasseio);
         color: white;
       }
-    }
+    } */
     & .payment-box {
       display: flex;
       flex-flow: column;
@@ -1750,7 +1824,63 @@ export default {
           border-bottom: 1px solid var(--color01);
         }
       }
-      & .pontos-visitados {
+      & .rotas {
+        display: flex;
+        flex-flow: column;
+        align-items: center;
+        margin: 1.6rem calc(28% - 2%) 0;
+        & .rota {
+          border: 1px solid #dedede;
+          border-radius: 8px;
+          width: 100%;
+          margin-bottom: 1.8rem;
+          transition: var(--main-transition);
+          & .rota-body {
+            position: relative;
+            display: flex;
+            flex-flow: column;
+            padding: 1.5rem;
+            & .__title {
+              font-size: 18px;
+              font-weight: 600;
+              padding-bottom: 1rem;
+            }
+            & .__remove-rota {
+              cursor: pointer;
+              position: absolute;
+              top: 1.5rem;
+              right: 1.5rem;
+              width: .9rem;
+              height: auto;
+            }
+            & .question {
+              min-height: 2.7rem;
+              & label {
+                font-size: 15px;
+                font-weight: 500;
+                padding-right: 4px;
+              }
+              & input {
+                cursor: text;
+                width: 6rem;
+                border: none;
+                outline: none;
+                font-size: 17px;
+              }
+            }
+          }
+        }
+        & .add-rota-btn {
+          background: white;
+          font-size: 17px;
+          font-weight: 600;
+        }
+        & .add-rota-btn:hover {
+          text-decoration: underline;
+        }
+      }
+      
+      /* & .pontos-visitados {
         margin-top: 2rem;
         padding: 0 calc(28% - 2%);
         flex-flow: row wrap;
@@ -1771,7 +1901,7 @@ export default {
           background: var(--colorPasseio);
           color: white;
         }
-      }
+      } */
       & .modal-croppa {
         & .modal-croppa-body {
           & h1 {
@@ -1877,4 +2007,43 @@ export default {
   border-bottom: 1px solid #F31431 !important;
 }
 
+/* Multiselect */
+.multiselect, .multiselect__input, .multiselect__single {
+  font-size: 15px;
+}
+.multiselect__tags {
+  padding: 15px 0 10px;
+  border: none;
+  border-bottom: 1px solid #dedede;
+  font-size: 15px;
+  border-radius: 0px;
+  & .multiselect__tag {
+    background: var(--colorPasseio);
+    line-height: 1.1;
+    & .multiselect__tag-icon::after {
+      color: white;
+      font-size: 25px;
+      font-weight: 400;
+    }
+    & .multiselect__tag-icon:hover {
+      background: #161616;
+    }
+  }
+}
+.multiselect__select::before {
+  display: none;
+}
+
+/* Rotas transitions */
+.rotas-animation-enter {
+  opacity: 0;
+  transform: translateY(15px);
+}
+..rotas-animation-leave-to {
+  opacity: 0;
+}
+.rotas-animation-leave-active {
+  opacity: 0;
+  transform: scale(.94);
+}
 </style>
