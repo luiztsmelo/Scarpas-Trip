@@ -87,7 +87,7 @@
       <div class="item-form">
         <label>Capacidade</label>
         <select v-model="$store.state.passeioData.capacidade">
-          <option v-for="n in 25" :value="n">{{ n }}</option>
+          <option v-for="n in 20" :value="n">{{ n }} {{ n === 1 ? 'pessoa' : 'pessoas' }}</option>
         </select>
       </div> 
 
@@ -184,15 +184,7 @@
 
 
               <div class="question">
-                <label>Duração:</label>
-
-                <input type="time" v-model="rota.duracao">
-              </div>
-
-
-              <div class="question">
                 <label>Valor por pessoa:</label>
-
                 <money 
                   v-model="rota.valor"
                   onKeyPress="if (event.which == 13) return false">
@@ -201,18 +193,23 @@
 
 
               <div class="question">
-                <label>Pontos visitados:</label>
+                <label>Duração:</label>
+                <input type="time" v-model="rota.duracao">
+              </div>
 
+
+              <div class="question">
+                <label>Pontos visitados:</label>
                 <multiselect 
                   v-model="rota.pontosVisitados" 
                   placeholder="Adicionar ponto" 
+                  tag-placeholder="Adicionar ponto" 
                   :options="pontos" 
                   :multiple="true" 
                   :taggable="true">
                 </multiselect>
-                
-
               </div>
+
 
             </div>
           </div>
@@ -730,28 +727,6 @@ export default {
       title: '', /* Vue Autosize */
       subtitle: '', /* Vue Autosize */
       localSaida: '',
-      pontos: [
-        'Canyons de Furnas',
-        'Mirante dos Canyons',
-        'Cachoeira do Filó',
-        'Morro do Chapéu',
-        'Cachoeira Cascatinha',
-        'Vale dos Tucanos',
-        'Cachoeira da Ilha',
-        'Porto Escarpas',
-        'Cachoeira Lagoa Azul',
-        'Kanto da Ilha',
-        'Cascata Eco Parque',
-        'Cachoeira Fecho da Serra',
-        'Recanto dos Vikings',
-        'Cachoeira da Capivara',
-        'Cachoeira do Lobo',
-        'Cachoeira Sossegada',
-        'Casca Danta',
-        'Pedreira Lagoa Azul',
-        'Cachoeira Coca-cola',
-        'Cachoeira Dicadinha'
-      ],
       showCroppaModal: false,
       isUploading: false,
       uploadProgress: 0,
@@ -1852,6 +1827,10 @@ export default {
               right: 1.5rem;
               width: .9rem;
               height: auto;
+              transition: var(--main-transition);
+            }
+            & .__remove-rota:hover {
+              opacity: .5;
             }
             & .question {
               min-height: 2.7rem;
@@ -2012,9 +1991,9 @@ export default {
   font-size: 15px;
 }
 .multiselect__tags {
-  padding: 15px 0 10px;
+  cursor: text;
+  padding: 15px 0 0 0;
   border: none;
-  border-bottom: 1px solid #dedede;
   font-size: 15px;
   border-radius: 0px;
   & .multiselect__tag {
@@ -2026,9 +2005,13 @@ export default {
       font-weight: 400;
     }
     & .multiselect__tag-icon:hover {
-      background: #161616;
+      background: var(--colorPasseio);
+      opacity: .8;
     }
   }
+}
+.multiselect__select {
+  cursor: text;
 }
 .multiselect__select::before {
   display: none;

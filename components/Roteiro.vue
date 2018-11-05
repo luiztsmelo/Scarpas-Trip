@@ -1,5 +1,5 @@
 <template>
-  <div class="roteiro" :style="{ backgroundImage: 'url(' + bgimg + ')'}">
+  <div class="roteiro">
     
 
     <div class="roteiro-container">
@@ -77,10 +77,6 @@ export default {
     }
   },
   computed: {
-    bgimg () {
-      return require('@/assets/img/bgimg2.jpg')
-      /* return supportsWebP ? require('@/assets/img/bgimg.webp') : require('@/assets/img/bgimg.jpg') */
-    },
     minDate() {
       return subDays(Date(), 1)
     }
@@ -93,6 +89,7 @@ export default {
 .roteiro {
   width: 100%;
   height: 17rem;
+  background-image: url('../assets/img/bgimg2.jpg');
   background-repeat: no-repeat;
   background-size: cover;
   & .roteiro-container {
