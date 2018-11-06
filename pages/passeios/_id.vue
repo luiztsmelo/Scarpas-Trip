@@ -141,25 +141,24 @@
 
 
         <!-- ______________________________ ROTAS ______________________________ -->
-        <h1 class="item-title">Rotas</h1>
-
         <div class="rotas-box">
 
           <div class="rota" v-for="(rota, index) in passeio.rotas" :key="index + 1">
 
-            <div class="rota-body">
-              <h1 class="__title">Rota {{ index + 1 }}</h1>
+            <h1 class="__title">Rota {{ passeio.rotas.length > 1 ? index + 1 : '' }}</h1>
 
+            <h3 style="padding: .3rem 0">Valor por pessoa: <span style="font-weight:500">R${{ rota.valor }}</span></h3>
 
-              <div class="pontos-visitados">
+            <h3 style="padding: .3rem 0">Duração: <span style="font-weight:500">{{ rota.duracao }}</span></h3>
 
-                <div class="ponto" v-for="(ponto, index) in rota.pontosVisitados">
-                  <progressive-background class="__img" :src="pontoImgSrc(ponto)" :aspect-ratio="2/3"/>
-                  <p class="__number">{{ index + 1 }}</p>
-                  <h2 class="__name">{{ ponto }}</h2>
-                </div>
+            <div class="pontos-visitados">
 
+              <div class="ponto" v-for="(ponto, index) in rota.pontosVisitados">
+                <progressive-background class="__img" :src="pontoImgSrc(ponto)" :aspect-ratio="2/3"/>
+                <p class="__number">{{ index + 1 }}</p>
+                <h2 class="__name">{{ ponto }}</h2>
               </div>
+
             </div>
             
           </div>
@@ -534,6 +533,60 @@ export default {
   /* __________ ROTAS BOX __________ */
   & .rotas-box {
     padding: 0 7%;
+    display: flex;
+    flex-flow: column;
+    & .rota {
+      border-radius: 6px;
+      width: 100%;
+      margin-bottom: 1.5rem;
+        & .__title {
+          font-weight: 600;
+          font-size: 16px;
+          padding: 3rem 0 .5rem 0;
+          user-select: none;
+        }
+        & .pontos-visitados {
+          margin-top: 1rem;
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          grid-gap: 16px;
+          & .ponto {
+            position: relative;
+            border-radius: 6px;
+            /* box-shadow: 1px 1px 8px 1px rgba(0,0,0,0.12); */
+            border: 1px solid #dedede;
+            & .__img {
+              width: 100%;
+              height: auto;
+              border-radius: 6px 6px 0 0;
+            }
+            & .__number {
+              position: absolute;
+              left: 0;
+              top: 0;
+              padding: 4px 6px;
+              border-radius: 8px 0 8px 0;
+              z-index: 99;
+              font-size: 15px;
+              font-weight: 600;
+              background: rgba(0,0,0,.3);
+              color: white;
+            }
+            & .__name {
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              min-height: 2.5rem;
+              padding: 0 .7rem;
+              font-size: 13px;
+              font-weight: 500;
+              width: 100%;
+              text-align: center;
+              user-select: none;
+            }
+          }
+        }
+    }
   }/* __________ ROTAS BOX __________ */
 
 
@@ -598,7 +651,7 @@ export default {
       }
       & .__reserva-btn {
         width: 11rem;
-        height: 3.3rem;
+        height: 3.2rem;
         background:var(--colorPasseio);
         border-radius: 200px;
         font-size: 16px;
@@ -785,29 +838,25 @@ export default {
           display: flex;
           flex-flow: column;
           & .rota {
-            border: 1px solid #dedede;
             border-radius: 8px;
             width: 100%;
             margin-bottom: 1.5rem;
-            & .rota-body {
-              position: relative;
-              display: flex;
-              flex-flow: column;
-              padding: 1.5rem;
               & .__title {
                 font-size: 18px;
                 font-weight: 600;
-                padding-bottom: 1rem;
+                padding: 4.5rem 0 1rem 0;
+                user-select: none;
               }
               & .pontos-visitados {
                 margin-top: 1rem;
                 display: grid;
-                grid-gap: 16px;
                 grid-template-columns: 1fr 1fr 1fr 1fr;
+                grid-gap: 16px;
                 & .ponto {
                   position: relative;
                   border-radius: 8px;
-                  box-shadow: 1px 1px 8px 1px rgba(0,0,0,0.12);
+                  /* box-shadow: 1px 1px 8px 1px rgba(0,0,0,0.12); */
+                  border: 1px solid #dedede;
                   & .__img {
                     width: 100%;
                     height: auto;
@@ -839,7 +888,6 @@ export default {
                   }
                 }
               }
-            }
           }
         }/* __________ ROTAS BOX __________ */
 

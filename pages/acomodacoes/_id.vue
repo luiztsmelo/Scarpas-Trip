@@ -989,7 +989,7 @@ export default {
       }
       & .__reserva-btn {
         width: 11rem;
-        height: 3.3rem;
+        height: 3.2rem;
         background:var(--colorAcomod);
         border-radius: 200px;
         font-size: 16px;

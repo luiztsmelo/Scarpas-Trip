@@ -286,7 +286,7 @@ export default {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: 0 7% 1.1rem 7%;
+        padding: 0 7% 1rem 7%;
         & .__title {
           font-size: 23px;
           font-weight: 700;
@@ -305,12 +305,11 @@ export default {
         padding: 0 7%;
       }
       & .cards-container {
-        padding: 0 5.9%;
-        display: flex;
-        flex-flow: row wrap;
+        padding: 0 7%;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-gap: 15px;
         & .card {
-          margin: .6rem 1.3%;
-          flex: 0 1 47%;
           & .__card-img {
             width: 100%; 
             height: auto;
@@ -380,10 +379,9 @@ export default {
         & .__subtitle {
         }
         & .cards-container {
-          padding: 0 6.5%;
+          grid-template-columns: 1fr 1fr 1fr 1fr;
+          grid-gap: 20px;
           & .card {
-            margin: 1rem .6%;
-            flex: 0 1 23.8%;
             & .__card-img {
               margin-bottom: .3rem;
             }
