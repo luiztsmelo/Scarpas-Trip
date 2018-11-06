@@ -1,0 +1,288 @@
+.reservar {
+  display: flex;
+  flex-flow: column;
+  transition: var(--pages-transition);
+  
+  /* ******* HEADER PROGRESS ******* */
+  & .header-progress {
+    position: relative;
+    display: flex;
+    align-content: center;
+    align-items: center;
+    height: 5rem;
+    width: 100%;
+    & .brand {
+      position: absolute;
+      left: 2%;
+      & .__brand-img {
+        cursor: pointer;
+        width: 2.6rem;
+        height: auto;
+      }
+    }
+    & .progress {
+      padding-left: 12%;
+      display: flex;
+      align-items: center;
+      width: 100%;
+      & .__item-progress {
+        cursor: pointer;
+        user-select: none;
+        font-size: 14px;
+      }
+      & .__arrow-right {
+        margin: 0 1rem;
+      }
+    }
+  }
+
+  /* ******* BODY ******* */
+  & .reserva-body {
+    padding-bottom: 4rem;
+    margin: 1.2rem 12% 0;
+    display: flex;
+    border-bottom: 1px solid #dedede;
+    /* ******* FLEX LEFT ******* */
+    & .flex-left {
+      flex: 64%;
+      & .__title {
+        font-size: 32px;
+        line-height: 1.25;
+        user-select: none;
+        padding-bottom: 1.5rem;
+      }
+      & .__subtitle {
+        margin-top: 2.4rem;
+        padding-top: 2.4rem;
+        padding-bottom: .5rem;
+        border-top: 1px solid #dedede;
+        font-size: 19px;
+        font-weight: 600;
+      }
+      & .__text {
+        padding-top: .5rem;
+        font-size: 16px;
+      }
+      & .check-in-out {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-top: 2.5rem;
+        & .calendar-box {
+          display: flex;
+          flex-flow: column;
+          align-items: center;
+          justify-content: center;
+          width: 3.4rem;
+          height: 3.4rem;
+          background: rgb(245,245,245);
+          border-radius: 5px;
+          margin-right: .6rem;
+          & .__month {
+            padding-bottom: 6px;
+            font-size: 11px;
+            font-weight: 700;
+          }
+          & .__day {
+            font-size: 16px;
+            font-weight: 600;
+          }
+        }
+        & .calendar-info {
+          display: flex;
+          flex-flow: column;
+          justify-content: center;
+          & .__weekday {
+            font-size: 15px;
+            padding-bottom: 5px;
+          }
+          & .__hour {
+            font-size: 15px;
+          }
+        }
+      }
+      & .regra {
+        padding-top: .5rem;
+        display: flex;
+        align-items: center;
+        & .__bullet {
+          width: .8rem;
+          height: auto;
+          margin-right: .6rem;
+        }
+      }
+      & .__termos {
+        padding-top: 3rem;
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 20px;
+      }
+      & .item-form {
+        display: flex;
+        flex-flow: column;
+        margin: 1.7rem 0;
+        & label {
+          user-select: none;
+          font-weight: 500;
+          font-size: 14px;
+        }
+        & input {
+          cursor: text;
+          width: 100%;
+          font-size: 17px;
+          font-weight: 400;
+          background: white;
+          color: var(--color01);
+          padding: 1rem 0;
+          border: none;
+          border-bottom: 1px solid #dedede;
+          outline: none;
+          transition: all .2s ease;
+        }
+        & input:focus {
+          border-bottom: 1px solid rgb(42,42,42) !important;
+        }
+        & input:hover {
+          border-bottom: 1px solid rgb(42,42,42) !important;
+        }
+      }
+    }
+    /* ******* FLEX RIGHT ******* */
+    & .flex-right {
+      flex: 36%;
+      min-width: 36%;
+      max-width: 36%;
+      margin-left: 13%;
+      align-self: flex-start;
+      & .__img {
+        width: 100%;
+        height: auto;
+        border-radius: 7px 7px 0 0;
+      }
+      & .card-body {
+        border-left: 1px solid #dedede;
+        border-right: 1px solid #dedede;
+        border-bottom: 1px solid #dedede;
+        border-radius: 0 0 7px 7px;
+        padding: 1.4rem;
+        & .__card-title {
+          font-size: 17px;
+          font-weight: 600;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+        & .rating {
+          display: flex;
+          align-items: center;
+          margin: .8rem 0;
+          & .rating-number {
+            font-size: 14px;
+            font-weight: 600;
+            padding-left: 3px;
+          }
+        }
+        & .detalhes-reserva-data {
+          padding: .8rem 0;
+          border-top: 1px solid #dedede;
+          border-bottom: 1px solid #dedede;
+          & .detalhes-reserva-data_item {
+            display: flex;
+            align-items: center;
+            padding: .3rem 0;
+            & .__img {
+              margin-right: .6rem;
+              width: 1.5rem;
+              height: auto;
+            }
+          }
+        }
+        & .detalhes-reserva-valor {
+          display: flex;
+          flex-flow: column;
+          & .detalhes-reserva-valor_item-total {
+            display: flex;
+            justify-content: space-between;
+            & .__valor-total {
+              font-size: 17px;
+              font-weight: 600;
+            }
+          }
+          & .__ver-detalhes {
+            user-select: none;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--colorAcomod);
+          }
+        }
+      }
+    }
+  }
+  & .footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: .9rem 12% .7rem;
+    & .__img {
+      margin-right: .7rem;
+      width: 1.2rem;
+      height: auto;
+      align-self: center;
+    }
+    & .__text {
+      font-size: 13px;
+      font-weight: 500;
+    }
+    & .__ajuda {
+      font-size: 14px;
+      font-weight: 600;
+    }
+  }
+  & .concluded-reserva {
+    padding: 4rem 26%;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    & .__img {
+      width: 5.5rem;
+      height: auto;
+    }
+    & .__title {
+      text-align: center;
+      font-size: 34px;
+      padding-top: 1.3rem;
+    }
+    & .__subtitle {
+      padding-top: 2.5rem;
+      text-align: center;
+      font-size: 19px;
+      font-weight: 600;
+    }
+    & .__text {
+      padding-top: .7rem;
+      text-align: center;
+    }
+  }
+}
+
+.__next-btn {
+  position: relative;
+  margin-top: 2.3rem;
+  padding: 0 1.8rem;
+  height: 3.1rem;
+  font-size: 17px;
+  font-weight: 600;
+  background:rgb(237, 237, 237);
+  color: white;
+  border-radius: 200px;
+  transition: var(--main-transition);
+}
+
+.has-error-label {
+  color: #F31431 !important;
+}
+.has-error {
+  color: #F31431 !important;
+  border-bottom: 1px solid #F31431 !important;
+}

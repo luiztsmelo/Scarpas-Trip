@@ -194,11 +194,11 @@
 
               <div class="question">
                 <label>Duração:</label>
-                <input type="time" v-model="rota.duracao">
+                <input type="time" step="1800" v-model="rota.duracao">
               </div>
 
 
-              <div class="question">
+              <div class="question" style="padding-top: 7px">
                 <label>Pontos visitados:</label>
                 <multiselect 
                   v-model="rota.pontosVisitados" 
@@ -1490,41 +1490,59 @@ export default {
         border-bottom: 1px solid var(--color01);
       }
     }
-    /* & .pontos-visitados {
-      margin-top: 1rem;
-      padding: 0 calc(7% - 1%);
+    & .rotas {
       display: flex;
       flex-flow: column;
       align-items: center;
-      & .ponto {
-        cursor: pointer;
-        margin: 1rem 0;
+      margin: 1rem 7% 0;
+      & .rota {
+        border: 1px solid #dedede;
+        border-radius: 6px;
         width: 100%;
-        border-radius: 7px;
-        box-shadow: 1px 1px 8px 1px rgba(0,0,0,0.12);
+        margin-bottom: 1.5rem;
         transition: var(--main-transition);
-        & .__img {
-          width: 100%;
-          height: auto;
-          border-radius: 7px 7px 0 0;
+        & .rota-body {
+          position: relative;
+          display: flex;
+          flex-flow: column;
+          padding: 1rem;
+          & .__title {
+            font-size: 17px;
+            font-weight: 600;
+            padding-bottom: 1rem;
+          }
+          & .__remove-rota {
+            cursor: pointer;
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            width: .9rem;
+            height: auto;
+            transition: var(--main-transition);
+          }
+          & .question {
+            min-height: 2.4rem;
+            & label {
+              font-size: 15px;
+              font-weight: 500;
+              padding-right: 4px;
+            }
+            & input {
+              cursor: text;
+              width: 6rem;
+              border: none;
+              outline: none;
+              font-size: 17px;
+            }
+          }
         }
-        & .__name {
-          padding: .7rem 0;
-          font-size: 15px;
-          font-weight: 600;
-          width: 100%;
-          text-align: center;
-          user-select: none;
-        }
       }
-      & .ponto:hover {
-        box-shadow: 3px 3px 20px 1px rgba(0,0,0,0.25);
+      & .add-rota-btn {
+        background: white;
+        font-size: 17px;
+        font-weight: 600;
       }
-      & .ponto-checked {
-        background: var(--colorPasseio);
-        color: white;
-      }
-    } */
+    }
     & .payment-box {
       display: flex;
       flex-flow: column;
@@ -1800,87 +1818,37 @@ export default {
         }
       }
       & .rotas {
-        display: flex;
-        flex-flow: column;
-        align-items: center;
         margin: 1.6rem calc(28% - 2%) 0;
         & .rota {
-          border: 1px solid #dedede;
           border-radius: 8px;
-          width: 100%;
-          margin-bottom: 1.8rem;
-          transition: var(--main-transition);
+          margin-bottom: 1.7rem;
           & .rota-body {
-            position: relative;
-            display: flex;
-            flex-flow: column;
             padding: 1.5rem;
             & .__title {
               font-size: 18px;
-              font-weight: 600;
-              padding-bottom: 1rem;
             }
             & .__remove-rota {
-              cursor: pointer;
-              position: absolute;
               top: 1.5rem;
               right: 1.5rem;
-              width: .9rem;
-              height: auto;
-              transition: var(--main-transition);
             }
             & .__remove-rota:hover {
               opacity: .5;
             }
             & .question {
-              min-height: 2.7rem;
+              min-height: 2.4rem;
               & label {
-                font-size: 15px;
-                font-weight: 500;
-                padding-right: 4px;
               }
               & input {
-                cursor: text;
-                width: 6rem;
-                border: none;
-                outline: none;
-                font-size: 17px;
               }
             }
           }
         }
         & .add-rota-btn {
-          background: white;
-          font-size: 17px;
-          font-weight: 600;
         }
         & .add-rota-btn:hover {
           text-decoration: underline;
         }
       }
-      
-      /* & .pontos-visitados {
-        margin-top: 2rem;
-        padding: 0 calc(28% - 2%);
-        flex-flow: row wrap;
-        & .ponto {
-          margin: 2%;
-          width: 46%;
-          & .__img {
-          }
-          & .__name {
-            padding: .5rem 0;
-            font-size: 15px;
-          }
-        }
-        & .ponto:hover {
-          box-shadow: 3px 3px 20px 1px rgba(0,0,0,0.25);
-        }
-        & .ponto-checked {
-          background: var(--colorPasseio);
-          color: white;
-        }
-      } */
       & .modal-croppa {
         & .modal-croppa-body {
           & h1 {

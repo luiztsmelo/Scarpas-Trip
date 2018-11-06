@@ -115,11 +115,6 @@
             <h3>Partindo de {{ passeio.localSaida }}</h3>
           </div>
 
-          <div class="item">
-            <img class="__img" src="../../assets/img/clock.svg">
-            <h3>Duração de {{ passeio.duracao }}</h3>
-          </div>
-
         </div><!-- ______________________________ INFO ______________________________ -->
 
 
@@ -149,7 +144,7 @@
 
             <h3 style="padding: .3rem 0">Valor por pessoa: <span style="font-weight:500">R${{ rota.valor }}</span></h3>
 
-            <h3 style="padding: .3rem 0">Duração: <span style="font-weight:500">{{ rota.duracao }}</span></h3>
+            <h3 style="padding: .3rem 0">Duração: <span style="font-weight:500">{{ formatDuracaoRota(rota) }}</span></h3>
 
             <div class="pontos-visitados">
 
@@ -183,15 +178,15 @@
             </button>
 
             <AirbnbStyleDatepicker
-            style="border:none"
+              style="border:none"
               :trigger-element-id="'datepicker-trigger'"
               :inline="true"
               :mode="'single'"
               :showShortcutsMenuTrigger="false"
               :showActionButtons="false"
               :min-date="minDate"
-              :date-one="diaPasseio"
-              @date-one-selected="val => { diaPasseio = val }"
+              :date-one="$store.state.reservaPasseio.date"
+              @date-one-selected="val => { $store.state.reservaPasseio.date = val }"
             />
           </div>
 
@@ -233,15 +228,57 @@
         <form class="reserva-desktop-form">
 
 
-          <h1 class="__valor">R${{ passeio.valorPasseio.toLocaleString() }}<span class="__valor-pessoa"> por pessoa</span></h1>
+          <h1 class="__valor">R${{ passeio.rotas[reservaPasseio.rota - 1].valor.toLocaleString() }}<span class="__valor-pessoa"> por pessoa</span></h1>
 
 
-          <h3 class="__text">Entre em contato com {{ host.firstName }} para negociar o dia e o horário do passeio.</h3>
+          <div class="item-form" v-if="passeio.rotas.length > 1">
+            <select v-model="$store.state.reservaPasseio.rota">
+              <option :value="n" v-for="n in passeio.rotas.length">Rota {{ n }}</option>
+            </select>
+          </div>
+
+
+          <div class="item-form">
+            <select v-model="$store.state.reservaPasseio.totalPessoas">
+              <option :value="n" v-for="n in capacidadeArray">{{ n }} {{ n === 1 ? 'pessoa' : 'pessoas' }}</option>
+            </select>
+          </div>
+
+
+          <div class="item-form">
+
+            <div class="datepicker-trigger">
+              <button
+                type="button"
+                id="datepicker-trigger">
+                {{ formatDate() }}
+              </button>
+
+              <AirbnbStyleDatepicker
+                :trigger="showDatepicker"
+                :trigger-element-id="'datepicker-trigger'"
+                :showShortcutsMenuTrigger="false"
+                :monthsToShow="1"
+                :mode="'single'"
+                :offsetX="102"
+                :offsetY="52"
+                :min-date="minDate"
+                :date-one="$store.state.reservaPasseio.date"
+                @date-one-selected="val => { $store.state.reservaPasseio.date = val }"
+                @closed="closedDatepicker"
+              />
+            </div>
+
+          </div>
 
 
 
-          <button class="__reserva-desktop-btn" type="button">Falar com {{ host.firstName }}</button>
+          <button class="__reserva-desktop-btn" type="button" @click="reservarDesktop">Reservar</button>
 
+          <h4 class="__info">A reserva é gratuita!</h4>
+
+
+          <button class="__reserva-desktop-ask-btn" type="button">Falar com {{ host.firstName }}</button>
 
 
           <div class="highlight" v-if="$store.state.visitsLastMonth >= 0">
@@ -265,7 +302,7 @@
       <div class="reserva-body">
         <h3 class="__reserva-valor">R${{ passeio.valorPasseio }}<span class="__reserva-valor-pessoa"> por pessoa</span></h3>
         <button class="__reserva-btn" @click="$store.commit('m_showHost', true), hashHost()">
-          Falar com {{ host.firstName }}
+          Reservar
         </button>
       </div>
     </div>
@@ -297,7 +334,7 @@ export default {
   mixins: [ mapstyle, swiperOptions, stylesCalendar, pontosTuristicos ],
   data () {
     return {
-      diaPasseio: ''
+      showDatepicker: false
     }
   },
   head () {
@@ -333,13 +370,33 @@ export default {
     }
   },
   methods: {
-    formatDate (diaPasseio) {
-      const weekday = format(diaPasseio, 'ddd', { locale: pt })
+    formatDate () {
+      const date = this.reservaPasseio.date
+      const weekday = format(date, 'ddd', { locale: pt })
       const weekdayCapitalized = weekday.charAt(0).toUpperCase() + weekday.slice(1)
-      const day = format(diaPasseio, 'D', { locale: pt })
-      const month = format(diaPasseio, 'MMMM', { locale: pt })
+      const day = format(date, 'D', { locale: pt })
+      const month = format(date, 'MMMM', { locale: pt })
       const monthCapitalized = month.charAt(0).toUpperCase() + month.slice(1)
-      return diaPasseio === '' ? 'Selecionar data' : `${weekdayCapitalized}, ${day} de ${monthCapitalized}`
+      return date === '' ? 'Selecionar data' : `${weekdayCapitalized}, ${day} de ${monthCapitalized}`
+    },
+    formatDuracaoRota (rota) {
+      const hour = rota.duracao.slice(0,2).replace(/\b0+/g, '') 
+      const minutes = rota.duracao.slice(3,5)
+      let formattedDuracao = ''
+      minutes !== '00' ? formattedDuracao = `${hour} horas e ${minutes} minutos` : formattedDuracao = `${hour} horas`
+      return formattedDuracao
+    },
+    reservarDesktop () {
+      firebase.firestore().doc(`passeios/${this.$route.params.id}/visits/${this.$store.state.visitID}`).update({ 
+        clickedReservaBtn: true
+      })
+      if (this.reservaPasseio.date === '') {
+        this.showDatepicker = true
+      } else {
+        this.$store.commit('m_isReservar', true)
+        this.$router.push('/passeios/reservar')
+        this.$store.commit('m_showNavbar', false)
+      }
     },
     scrollTopbarBg (evt, el) {
       return window.scrollY >= this.$store.state.heightImageBox
@@ -381,7 +438,8 @@ export default {
   },
   computed: {
     passeio () { return this.$store.state.passeio },
-    host () {return this.$store.state.host },
+    host () { return this.$store.state.host },
+    reservaPasseio () { return this.$store.state.reservaPasseio },
     showShare () { return this.$store.state.showShare },
     minDate() {
       return subDays(Date(), 1)
@@ -549,11 +607,10 @@ export default {
           margin-top: 1rem;
           display: grid;
           grid-template-columns: 1fr 1fr;
-          grid-gap: 16px;
+          grid-gap: 14px;
           & .ponto {
             position: relative;
             border-radius: 6px;
-            /* box-shadow: 1px 1px 8px 1px rgba(0,0,0,0.12); */
             border: 1px solid #dedede;
             & .__img {
               width: 100%;
@@ -721,19 +778,69 @@ export default {
               font-weight: 400;
             }
           }
+          & .item-form {
+            display: flex;
+            flex-flow: column;
+            margin-top: 1.2rem;
+            & select {
+              cursor: pointer;
+              width: 100%;
+              padding: .8rem .65rem;
+              border: 1px solid #dedede;
+              outline: none;
+              background: white;
+              border-radius: 5px;
+              transition: .15s border ease;
+              & option {
+                background: white;
+              }
+            }
+            & select:hover {
+              border: 1px solid var(--color01) !important;
+            }
+            & .datepicker-trigger {
+              height: 100%;
+              background: white;
+              & #datepicker-trigger {
+                padding: .8rem;
+                height: 100%;
+                width: 100%;
+                background: white;
+                border: 1px solid #dedede;
+                outline: none;
+                text-align: left;
+                border-radius: 5px;
+              }
+              & #datepicker-trigger:hover {
+                border: 1px solid var(--color01);
+              }
+            }
+          }
           & .__reserva-desktop-btn {
-            margin: 1.5rem 0;
+            margin-top: 1.3rem;
             font-size: 17px;
             font-weight: 700;
             background: var(--colorPasseio);
             color: white;
             height: 3.2rem;
-            width: 100%;
             border-radius: 200px;
           }
-          & .__text {
-            padding: .8rem 0;
-            font-size: 15px;
+          & .__info {
+            margin: .5rem 0 .8rem;
+            text-align: center;
+            font-size: 12px;
+            font-weight: 500;
+            line-height: 17px;
+          }
+          & .__reserva-desktop-ask-btn {
+            font-size: 16px;
+            font-weight: 600;
+            background: white;
+            color: var(--colorPasseio);
+            height: 2rem;
+          }
+          & .__reserva-desktop-ask-btn:hover {
+            text-decoration: underline;
           }
           & .highlight {
             display: flex;
@@ -834,57 +941,32 @@ export default {
 
         /* __________ ROTAS BOX __________ */
         & .rotas-box {
-          padding: 0;
-          display: flex;
-          flex-flow: column;
+          padding: 0;  
           & .rota {
             border-radius: 8px;
-            width: 100%;
-            margin-bottom: 1.5rem;
               & .__title {
                 font-size: 18px;
                 font-weight: 600;
                 padding: 4.5rem 0 1rem 0;
-                user-select: none;
               }
               & .pontos-visitados {
-                margin-top: 1rem;
-                display: grid;
                 grid-template-columns: 1fr 1fr 1fr 1fr;
                 grid-gap: 16px;
                 & .ponto {
-                  position: relative;
                   border-radius: 8px;
                   /* box-shadow: 1px 1px 8px 1px rgba(0,0,0,0.12); */
-                  border: 1px solid #dedede;
                   & .__img {
-                    width: 100%;
-                    height: auto;
                     border-radius: 8px 8px 0 0;
                   }
                   & .__number {
-                    position: absolute;
-                    left: 0;
-                    top: 0;
-                    padding: 4px 6px;
                     border-radius: 8px 0 8px 0;
-                    z-index: 99;
-                    font-size: 15px;
-                    font-weight: 600;
                     background: rgba(0,0,0,.3);
                     color: white;
                   }
                   & .__name {
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
                     min-height: 2.3rem;
-                    padding: 0 .7rem;
                     font-size: 13px;
                     font-weight: 500;
-                    width: 100%;
-                    text-align: center;
-                    user-select: none;
                   }
                 }
               }

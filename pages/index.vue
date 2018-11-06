@@ -84,7 +84,7 @@
 
             <p class="__card-title">{{ passeio.title }}</p>
 
-            <p class="__card-subtitle">R${{ passeio.valorPasseio.toLocaleString() }}<span class="__card-valor-noite"> por pessoa</span></p>
+            <p class="__card-subtitle">R${{ passeio.rotas[0].valor.toLocaleString() }}<span class="__card-valor-noite"> por pessoa</span></p>
             
             <div class="rating">
               <star-rating
@@ -308,7 +308,7 @@ export default {
         padding: 0 7%;
         display: grid;
         grid-template-columns: 1fr 1fr;
-        grid-gap: 15px;
+        grid-gap: 14px;
         & .card {
           & .__card-img {
             width: 100%; 

@@ -178,6 +178,20 @@ const store = () => new Vuex.Store({
       disabledDates_booking: [],
       disabledDates_escarpasTrip: []
     },
+    concludedNewAcomod: false,
+    cadastroAcomod0: true,
+    cadastroAcomod1: false,
+    cadastroAcomod2: false,
+    cadastroAcomod3: false,
+    cadastroAcomod4: false,
+    cadastroAcomod5: false,
+    cadastroAcomod6: false,
+    cadastroAcomod7: false,
+    cadastroAcomod8: false,
+    cadastroAcomod9: false,
+    cadastroAcomod10: false,
+    cadastroAcomod11: false,
+    cadastroAcomod12: false,
     reservaAcomod: { /* Atualizar Action */
       createdAt: null,
       reservaID: null,
@@ -198,23 +212,6 @@ const store = () => new Vuex.Store({
       limpezaFee: null,
       valorReservaTotal: null
     },
-    paymentAdded: false,
-    validZipcode: false,
-    concludedReservaAcomod: false,
-    concludedNewAcomod: false,
-    cadastroAcomod0: true,
-    cadastroAcomod1: false,
-    cadastroAcomod2: false,
-    cadastroAcomod3: false,
-    cadastroAcomod4: false,
-    cadastroAcomod5: false,
-    cadastroAcomod6: false,
-    cadastroAcomod7: false,
-    cadastroAcomod8: false,
-    cadastroAcomod9: false,
-    cadastroAcomod10: false,
-    cadastroAcomod11: false,
-    cadastroAcomod12: false,
     reservaAcomod1: true,
     reservaAcomod2: false,
     reservaAcomod3: false,
@@ -228,6 +225,67 @@ const store = () => new Vuex.Store({
     reservaAcomodDesktop2: false,
     etapaReserva1ok: true,
     etapaReserva2ok: false,
+    paymentAdded: false,
+    validZipcode: false,
+    concludedReservaAcomod: false,
+    /*
+    ########## Passeio ##########
+    */
+    passeios: null,
+    passeio: null,
+    passeioProgressBar: 0,
+    imageCountPas: 0,
+    passeioData: { /* Atualizar a action */
+      createdAt: null,
+      passeioID: null,
+      hostID: null,
+      tipoPasseio: 'Lancha',
+      capacidade: 1,
+      duracao: null,
+      rotas: [
+        {
+          duracao: '',
+          valor: 0,
+          pontosVisitados: []
+        }
+      ],
+      localSaida: null,
+      valorPasseio: 0,
+      images: [],
+      title: '',
+      subtitle: ''
+    },
+    cadastroPasseio0: true,
+    cadastroPasseio1: false,
+    cadastroPasseio2: false,
+    cadastroPasseio3: false,
+    cadastroPasseio4: false,
+    cadastroPasseio5: false,
+    cadastroPasseio6: false,
+    cadastroPasseio7: false,
+    cadastroPasseio8: false,
+    cadastroPasseio9: false,
+    cadastroPasseio10: false,
+    cadastroPasseio11: false,
+    reservaPasseio: {
+      createdAt: null,
+      reservaID: null,
+      passeioID: null,
+      tipoPasseio: '',
+      hostID: null,
+      guest: {
+        firstName: '',
+        fullName: '',
+        email: '',
+        celular: ''
+      },
+      totalPessoas: 1,
+      date: '',
+      rota: 1
+    },
+    concludedReservaPasseio: false,
+    reservaPasseioDesktop1: true,
+    reservaPasseioDesktop2: false,
     /*
     ########## Evento ##########
     */
@@ -268,45 +326,6 @@ const store = () => new Vuex.Store({
     cadastroEvento5: false,
     cadastroEvento6: false,
     cadastroEvento7: false,
-    /*
-    ########## Passeio ##########
-    */
-    passeios: null,
-    passeio: null,
-    passeioProgressBar: 0,
-    imageCountPas: 0,
-    passeioData: { /* Atualizar a action */
-      createdAt: null,
-      passeioID: null,
-      hostID: null,
-      tipoPasseio: 'Lancha',
-      capacidade: 1,
-      duracao: null,
-      rotas: [
-        {
-          duracao: '',
-          valor: 0,
-          pontosVisitados: []
-        }
-      ],
-      localSaida: null,
-      valorPasseio: 0,
-      images: [],
-      title: '',
-      subtitle: ''
-    },
-    cadastroPasseio0: true,
-    cadastroPasseio1: false,
-    cadastroPasseio2: false,
-    cadastroPasseio3: false,
-    cadastroPasseio4: false,
-    cadastroPasseio5: false,
-    cadastroPasseio6: false,
-    cadastroPasseio7: false,
-    cadastroPasseio8: false,
-    cadastroPasseio9: false,
-    cadastroPasseio10: false,
-    cadastroPasseio11: false,
     /*
     ########## Atração ##########
     */
@@ -577,9 +596,6 @@ const store = () => new Vuex.Store({
     m_reservaAcomodDesktop2 (state, payload) {
       state.reservaAcomodDesktop2 = payload
     },
-    m_reservaAcomodDesktop3 (state, payload) {
-      state.reservaAcomodDesktop3 = payload
-    },
     /*
     ########## Evento ##########
     */
@@ -716,6 +732,12 @@ const store = () => new Vuex.Store({
     },
     m_cadastroPasseio11 (state, payload) {
       state.cadastroPasseio11 = payload
+    },
+    m_reservaPasseioDesktop1 (state, payload) {
+      state.reservaPasseioDesktop1 = payload
+    },
+    m_reservaPasseioDesktop2 (state, payload) {
+      state.reservaPasseioDesktop2 = payload
     },
     /*
     ########## Atração ##########
@@ -881,20 +903,6 @@ const store = () => new Vuex.Store({
         limpezaFee: null,
         valorReservaTotal: null
       }
-      state.customer = {
-        name: '',
-        cpf: '',
-        celular: '',
-        instagram: '',
-        zipcode: '',
-        street: '',
-        street_number: '',
-        neighborhood: '',
-        city: '',
-        state: ''
-      }
-      state.cardType = null
-      state.cardTypeNice = null
       state.reservaAcomodDesktop1 = true
       state.reservaAcomodDesktop2 = false
       state.etapaReserva1ok = true
@@ -949,6 +957,28 @@ const store = () => new Vuex.Store({
         title: '',
         subtitle: ''
       })
+    },
+    a_resetReservaPasseio ({ state }) { /* Resetar dados quando usuário for p/ outro passeio (evitar bugs) */
+      state.reservaPasseio = {
+        createdAt: null,
+        reservaID: null,
+        passeioID: null,
+        tipoPasseio: '',
+        hostID: null,
+        guest: {
+          firstName: '',
+          fullName: '',
+          email: '',
+          celular: ''
+        },
+        totalPessoas: 1,
+        date: '',
+        rota: 1
+      }
+      state.reservaPasseioDesktop1 = true
+      state.reservaPasseioDesktop2 = false
+      state.etapaReserva1ok = true
+      state.etapaReserva2ok = false
     },
     /*
     #################### ATRAÇÕES ####################
