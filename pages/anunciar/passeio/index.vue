@@ -820,13 +820,13 @@ export default {
       }
     },
     nextBtn3 () {
-      if (this.$store.state.passeioData.duracao !== null) {
+      if (this.$store.state.passeioData.horarios.length > 0) {
         this.$store.commit('m_cadastroPasseio3', false), this.$store.commit('m_cadastroPasseio4', true), this.$store.commit('m_passeioProgressBar', (100/10)*4), this.scrollTop(), window.location.hash = `${this.randomHashs[4]}`
       } else {
         this.$store.commit('show_alert', {
           type: 'warning',
           title: 'Ops',
-          message: 'Adicione a duração do passeio.'
+          message: 'Adicione um horário de partida.'
         })
       }
     },
@@ -837,17 +837,23 @@ export default {
         this.$store.commit('show_alert', {
           type: 'warning',
           title: 'Ops',
-          message: 'Adicione o local de partida do passeio.'
+          message: 'Adicione o local de partida.'
         })
       }
     },
     nextBtn5 () {
-      if (1<2) {
+      if (this.$store.state.passeioData.rotas.length > 0) {
         this.$store.commit('m_cadastroPasseio5', false), this.$store.commit('m_cadastroPasseio6', true), this.$store.commit('m_passeioProgressBar', (100/10)*6), this.scrollTop(), window.location.hash = `${this.randomHashs[6]}`
+      } else {
+        this.$store.commit('show_alert', {
+          type: 'warning',
+          title: 'Ops',
+          message: 'Adicione uma rota.'
+        })
       }
     },
     nextBtn6 () {
-      if (this.imageURL1 !== null) {
+      if (this.$store.state.passeioData.images.length > 0) {
         this.$store.commit('m_cadastroPasseio6', false), this.$store.commit('m_cadastroPasseio7', true), this.$store.commit('m_passeioProgressBar', (100/10)*7), this.scrollTop(), window.location.hash = `${this.randomHashs[7]}`
       } else {
         this.$store.commit('show_alert', {
@@ -999,10 +1005,10 @@ export default {
       return this.$store.state.passeioData.localPartida !== null ? 'background: #198CFE' : ''
     },
     form5ok () {
-      return 1<2 ? 'background: #198CFE' : ''
+      return this.$store.state.passeioData.rotas.length > 0 ? 'background: #198CFE' : ''
     },
     form6ok () {
-      return this.$store.state.passeioData.images.length >= 1 ? 'background: #198CFE' : ''
+      return this.$store.state.passeioData.images.length > 0 ? 'background: #198CFE' : ''
     },
     form7ok () {
       return this.$store.state.passeioData.title !== '' ? 'background: #198CFE' : ''

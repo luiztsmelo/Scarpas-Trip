@@ -299,7 +299,7 @@
     <!-- ______________________________ RESERVA MOBILE ______________________________ --> 
     <div class="reserva-mobile">
       <div class="reserva-body">
-        <h3 class="__reserva-valor">R${{ passeio.valorPasseio }}<span class="__reserva-valor-pessoa"> por pessoa</span></h3>
+        <h3 class="__reserva-valor">R${{ passeio.rotas[reservaPasseio.rota - 1].valor.toLocaleString() }}<span class="__reserva-valor-pessoa"> por pessoa</span></h3>
         <button class="__reserva-btn" @click="$store.commit('m_showHost', true), hashHost()">
           Reservar
         </button>
