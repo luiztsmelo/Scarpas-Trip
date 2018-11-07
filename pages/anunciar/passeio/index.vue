@@ -204,6 +204,8 @@
                   v-model="rota.pontosVisitados" 
                   placeholder="Adicionar ponto" 
                   tag-placeholder="Adicionar ponto" 
+                  :searchable="$store.state.isMobile ? false : true"
+                  :hide-selected="true"
                   :options="pontos" 
                   :multiple="true" 
                   :taggable="true">
@@ -1456,6 +1458,8 @@ export default {
               width: 6rem;
               border: none;
               outline: none;
+              background: white;
+              color: var(--color01);
               font-size: 17px;
             }
           }
