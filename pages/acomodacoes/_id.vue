@@ -282,7 +282,6 @@
               :date-two="$store.state.reservaAcomod.endDate"
               @date-one-selected="val => { $store.state.reservaAcomod.startDate = val }"
               @date-two-selected="val => { $store.state.reservaAcomod.endDate = val, calcValoresReserva() }"
-              @closed="closedDatepicker"
             />
           </div>
 

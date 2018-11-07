@@ -112,7 +112,7 @@
 
           <div class="item">
             <img class="__img" src="../../assets/img/marker.svg">
-            <h3>Partindo de {{ passeio.localSaida }}</h3>
+            <h3>Partindo de {{ passeio.localPartida }}</h3>
           </div>
 
         </div><!-- ______________________________ INFO ______________________________ -->
@@ -265,7 +265,6 @@
                 :min-date="minDate"
                 :date-one="$store.state.reservaPasseio.date"
                 @date-one-selected="val => { $store.state.reservaPasseio.date = val }"
-                @closed="closedDatepicker"
               />
             </div>
 

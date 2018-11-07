@@ -134,49 +134,51 @@ exports.newAcomod = functions.https.onCall(async data => {
 
 
 
-exports.email_newReservaAcomod_host = functions.firestore.document('reservasAcomods/{reservaID}').onCreate(async (snap, context) => {
-  try {
-    const reservaAcomod = snap.data()
+exports.email_newReservaAcomod_host = functions.firestore
+  .document('reservasAcomods/{reservaID}')
+  .onCreate(async (snap, context) => {
+    try {
+      const reservaAcomod = snap.data()
 
-    const acomodSnap = await admin.firestore().doc(`acomods/${reservaAcomod.acomodID}`).get()
-    const acomod = acomodSnap.data()
+      const acomodSnap = await admin.firestore().doc(`acomods/${reservaAcomod.acomodID}`).get()
+      const acomod = acomodSnap.data()
 
-    const hostSnap = await admin.firestore().doc(`users/${reservaAcomod.hostID}`).get()
-    const host = hostSnap.data()
+      const hostSnap = await admin.firestore().doc(`users/${reservaAcomod.hostID}`).get()
+      const host = hostSnap.data()
 
-    await Mailjet.post('send', {'version': 'v3.1'}).request({
-      'Messages': [{
-        'From': { 'Email': escarpasTripEmail, 'Name': 'Escarpas Trip' },
-        'To': [{
-          'Email': host.email,
-          'Name': host.fullName
-        }],
-        'TemplateID': 477332,
-        'TemplateLanguage': true,
-        'Subject': `Nova reserva recebida, ${host.firstName}`,
-        'Variables': {
-          'reservaID': reservaAcomod.reservaID,
-          'acomodURL': `https://www.escarpastrip.com/acomodacoes/${reservaAcomod.acomodID}`,
-          'guestFirstName': reservaAcomod.guest.firstName,
-          'hostFirstName': host.firstName,
-          'title': acomod.title,
-          'acomodPhoto': acomod.images[0].HJ,
-          'startDate': format(reservaAcomod.startDate, 'ddd, DD MMM YYYY', { locale: pt }),
-          'endDate': format(reservaAcomod.endDate, 'ddd, DD MMM YYYY', { locale: pt }),
-          'totalHospedes': reservaAcomod.totalHospedes,
-          'noites': reservaAcomod.noites,
-          'valorNoite': numeral(acomod.valorNoite).format('$0,0'),
-          'valorNoitesTotal': numeral(reservaAcomod.valorNoitesTotal).format('$0,0'),
-          'limpezaFee': numeral(reservaAcomod.limpezaFee).format('$0,0'),
-          'hostAmount': numeral(reservaAcomod.valorNoitesTotal + reservaAcomod.limpezaFee).format('$0,0')
-        }
-      }]
-    })
+      await Mailjet.post('send', {'version': 'v3.1'}).request({
+        'Messages': [{
+          'From': { 'Email': escarpasTripEmail, 'Name': 'Escarpas Trip' },
+          'To': [{
+            'Email': host.email,
+            'Name': host.fullName
+          }],
+          'TemplateID': 477332,
+          'TemplateLanguage': true,
+          'Subject': `Nova reserva recebida, ${host.firstName}`,
+          'Variables': {
+            'reservaID': reservaAcomod.reservaID,
+            'acomodURL': `https://www.escarpastrip.com/acomodacoes/${reservaAcomod.acomodID}`,
+            'guestFirstName': reservaAcomod.guest.firstName,
+            'hostFirstName': host.firstName,
+            'title': acomod.title,
+            'acomodPhoto': acomod.images[0].HJ,
+            'startDate': format(reservaAcomod.startDate, 'ddd, DD MMM YYYY', { locale: pt }),
+            'endDate': format(reservaAcomod.endDate, 'ddd, DD MMM YYYY', { locale: pt }),
+            'totalHospedes': reservaAcomod.totalHospedes,
+            'noites': reservaAcomod.noites,
+            'valorNoite': numeral(acomod.valorNoite).format('$0,0'),
+            'valorNoitesTotal': numeral(reservaAcomod.valorNoitesTotal).format('$0,0'),
+            'limpezaFee': numeral(reservaAcomod.limpezaFee).format('$0,0'),
+            'hostAmount': numeral(reservaAcomod.valorNoitesTotal + reservaAcomod.limpezaFee).format('$0,0')
+          }
+        }]
+      })
 
-  } catch (err) {
-    console.log(err.response)
-    throw new functions.https.HttpsError('aborted', err.message, err)
-  }
+    } catch (err) {
+      console.log(err.response)
+      throw new functions.https.HttpsError('aborted', err.message, err)
+    }
 })
 
 

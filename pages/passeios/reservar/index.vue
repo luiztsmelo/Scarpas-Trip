@@ -332,7 +332,7 @@ export default {
 
         /* Atualizar disabledDates */
         await firebase.firestore().doc(`passeios/${this.passeio.passeioID}`).update({
-          disabledDates: format(reservaPasseio.date, 'YYYY-MM-DD') /* CONFERIR MERGE */
+          disabledDates: format(this.reservaPasseio.date, 'YYYY-MM-DD') /* CONFERIR SE ESTÁ MERGINDO */
         })
 
         /* Atualizar visit */

@@ -10,7 +10,7 @@
       <h1 class="__title">Ainda gasta anunciando seu passeio? Aqui é gratuito.</h1>
       
 
-      <button class="__anunciar-btn" @click="$store.commit('m_cadastroPasseio1', true), $store.commit('m_cadastroPasseio0', false), $store.commit('m_passeioProgressBar', (100/11)), hashPasseio()">Anunciar</button>
+      <button class="__anunciar-btn" @click="$store.commit('m_cadastroPasseio1', true), $store.commit('m_cadastroPasseio0', false), $store.commit('m_passeioProgressBar', (100/10)), hashPasseio()">Anunciar</button>
 
     </div><!-- PLANO PASSEIO MOBILE -->
 
@@ -27,7 +27,7 @@
         <h3 class="__text">Além disso...</h3>
         
 
-        <button class="__anunciar-btn" @click="$store.commit('m_cadastroPasseio1', true), $store.commit('m_cadastroPasseio0', false), $store.commit('m_passeioProgressBar', (100/11)), hashPasseio()">Anunciar</button>
+        <button class="__anunciar-btn" @click="$store.commit('m_cadastroPasseio1', true), $store.commit('m_cadastroPasseio0', false), $store.commit('m_passeioProgressBar', (100/10)), hashPasseio()">Anunciar</button>
       </div>
 
     </div><!-- PLANO PASSEIO DESKTOP -->
@@ -87,7 +87,7 @@
       <div class="item-form">
         <label>Capacidade</label>
         <select v-model="$store.state.passeioData.capacidade">
-          <option v-for="n in 20" :value="n">{{ n }} {{ n === 1 ? 'pessoa' : 'pessoas' }}</option>
+          <option v-for="n in 15" :value="n">{{ n }} {{ n === 1 ? 'pessoa' : 'pessoas' }}</option>
         </select>
       </div> 
 
@@ -107,15 +107,20 @@
 
 
 
-    <!-- ________________________________________ 3 - DURAÇÃO ________________________________________ -->
+    <!-- ________________________________________ 3 - HORÁRIOS DE PARTIDA ________________________________________ -->
     <form class="cadastro-passeio" v-if="$store.state.cadastroPasseio3">
 
-      <h1 class="__form-title">Qual o tempo de duração do passeio?</h1>
+      <h1 class="__form-title">Quais são os horários de partida?</h1>
 
-      <div class="item-form">
-        <label>Duração</label>
-        <input type="time" v-model="$store.state.passeioData.duracao" required>
-      </div> 
+      <div class="item-form" v-for="(horario, index) in $store.state.passeioData.horarios" :key="index + 1">
+        <div style="display: flex; align-items: center; justify-content: space-between">
+          <label>Horário {{ index + 1}}</label>
+          <img class="remove-horario" src="../../../assets/img/exit.svg" @click="$store.commit('m_removeHorarioPasseio', index)" v-if="$store.state.passeioData.horarios.length > 1">
+        </div>
+        <input type="time" v-model="horario.horario" required>
+      </div>
+
+      <button class="add-horario-btn" type="button" @click="$store.commit('m_addHorarioPasseio')">Adicionar Horário</button>
 
 
       <div class="back-next"> 
@@ -125,7 +130,7 @@
         </div>
       </div> 
     
-    </form><!-- ________________________________________ 3 - DURAÇÃO ________________________________________ -->
+    </form><!-- ________________________________________ 3 - HORÁRIOS DE PARTIDA ________________________________________ -->
 
 
 
@@ -133,22 +138,20 @@
 
 
 
-    <!-- ________________________________________ 4 - LOCAL DE SAÍDA ________________________________________ -->
+    <!-- ________________________________________ 4 - LOCAL DE PARTIDA ________________________________________ -->
     <form class="cadastro-passeio" v-if="$store.state.cadastroPasseio4">
 
-      <h1 class="__form-title">O passeio sai de onde?</h1>
+      <h1 class="__form-title">Seu passeio parte de onde?</h1>
 
       <div class="item-form">
-        <label>Local de Saída</label>
-        <select v-model="$store.state.passeioData.localSaida" @input="setLocalSaida" v-if="$store.state.passeioData.localSaida !== 'Outro'">
+        <label>Local de Partida</label>
+        <select v-model="$store.state.passeioData.localPartida">
           <option>Capitólio</option>
           <option>Escarpas do Lago</option>
           <option>Ponte do Turvo</option>
           <option>Barragem do Dique</option>
           <option>Kanto da Ilha</option>
-          <option>Outro</option>
         </select>
-        <input type="text" class="__local-saida-text" v-model="localSaida" autofocus v-else>
       </div> 
 
 
@@ -159,7 +162,7 @@
         </div>
       </div> 
     
-    </form><!-- ________________________________________ 4 - LOCAL DE SAÍDA ________________________________________ -->
+    </form><!-- ________________________________________ 4 - LOCAL DE PARTIDA ________________________________________ -->
 
 
 
@@ -182,7 +185,6 @@
 
               <img class="__remove-rota" src="../../../assets/img/exit.svg" @click="$store.commit('m_removeRotaPasseio', index)">
 
-
               <div class="question">
                 <label>Valor por pessoa:</label>
                 <money 
@@ -191,14 +193,12 @@
                 </money>
               </div>
 
-
               <div class="question">
                 <label>Duração:</label>
-                <input type="time" step="1800" v-model="rota.duracao">
+                <input type="time" v-model="rota.duracao">
               </div>
 
-
-              <div class="question" style="padding-top: 7px">
+              <div class="question" style="padding-top: 2px">
                 <label>Pontos visitados:</label>
                 <multiselect 
                   v-model="rota.pontosVisitados" 
@@ -210,46 +210,14 @@
                 </multiselect>
               </div>
 
-
             </div>
           </div>
         </transition-group>
 
-
         <button class="add-rota-btn" type="button" @click="$store.commit('m_addRotaPasseio')">Adicionar Rota</button>
-
 
       </div>
  
-      <!-- <div class="pontos-visitados">
-
-        <div class="ponto" :class="[ $store.state.passeioData.pontosVisitados.canyons ? 'ponto-checked' : '' ]" @click="$store.state.passeioData.pontosVisitados.canyons = !$store.state.passeioData.pontosVisitados.canyons">
-          <progressive-background class="__img" :src="canyons" :aspect-ratio="2/3"/>
-          <h2 class="__name">Canyons de Furnas</h2>
-        </div>
-
-        <div class="ponto" :class="[ $store.state.passeioData.pontosVisitados.miranteCanyons ? 'ponto-checked' : '' ]" @click="$store.state.passeioData.pontosVisitados.miranteCanyons = !$store.state.passeioData.pontosVisitados.miranteCanyons">
-          <progressive-background class="__img" :src="miranteCanyons" :aspect-ratio="2/3"/>
-          <h2 class="__name">Mirante dos Canyons</h2>
-        </div>
-
-        <div class="ponto" :class="[ $store.state.passeioData.pontosVisitados.morroChapeu ? 'ponto-checked' : '' ]" @click="$store.state.passeioData.pontosVisitados.morroChapeu = !$store.state.passeioData.pontosVisitados.morroChapeu">
-          <progressive-background class="__img" :src="morroChapeu" :aspect-ratio="2/3"/>
-          <h2 class="__name">Morro do Chapéu</h2>
-        </div>
-
-        <div class="ponto" :class="[ $store.state.passeioData.pontosVisitados.cachoeiraFilo ? 'ponto-checked' : '' ]" @click="$store.state.passeioData.pontosVisitados.cachoeiraFilo = !$store.state.passeioData.pontosVisitados.cachoeiraFilo">
-          <progressive-background class="__img" :src="cachoeiraFilo" :aspect-ratio="2/3"/>
-          <h2 class="__name">Cachoeira do Filó</h2>
-        </div>
-
-        <div class="ponto" :class="[ $store.state.passeioData.pontosVisitados.cachoeiraFecho ? 'ponto-checked' : '' ]" @click="$store.state.passeioData.pontosVisitados.cachoeiraFecho = !$store.state.passeioData.pontosVisitados.cachoeiraFecho">
-          <progressive-background class="__img" :src="cachoeiraFecho" :aspect-ratio="2/3"/>
-          <h2 class="__name">Cachoeira Fecho da Serra</h2>
-        </div>
-
-      </div> -->
-
 
       <div class="back-next"> 
         <div class="back-next-body">
@@ -266,38 +234,9 @@
 
 
 
-    <!-- ________________________________________ 6 - VALOR ________________________________________ -->
+
+    <!-- ________________________________________ 6 - IMAGENS ________________________________________ -->
     <form class="cadastro-passeio" v-if="$store.state.cadastroPasseio6">
-
-      <h1 class="__form-title">Quanto você cobra por pessoa?</h1>
-
-      <div class="item-form">
-        <label>Valor</label>
-        <money 
-          v-model="$store.state.passeioData.valorPasseio"
-          onKeyPress="if (event.which == 13) return false"
-          @keyup.enter="nextBtn6">
-        </money>
-      </div>
-
-
-      <div class="back-next"> 
-        <div class="back-next-body">
-          <button type="button" class="__back" @click="backBtn6">Voltar</button>
-          <button type="button" class="__next" :style="form6ok" @click="nextBtn6">Próximo</button>
-        </div>
-      </div> 
-    
-    </form><!-- ________________________________________ 6 - VALOR ________________________________________ -->
-
-
-
-
-
-
-
-    <!-- ________________________________________ 7 - IMAGENS ________________________________________ -->
-    <form class="cadastro-passeio" v-if="$store.state.cadastroPasseio7">
 
       <h1 class="__form-title">Adicione imagens</h1>
 
@@ -357,12 +296,12 @@
 
       <div class="back-next"> 
         <div class="back-next-body">
-          <button type="button" class="__back" @click="backBtn7">Voltar</button>
-          <button type="button" class="__next" :style="form7ok" @click="nextBtn7">Próximo</button>
+          <button type="button" class="__back" @click="backBtn6">Voltar</button>
+          <button type="button" class="__next" :style="form6ok" @click="nextBtn6">Próximo</button>
         </div>
       </div> 
     
-    </form><!-- ________________________________________ 7 - IMAGENS ________________________________________ -->
+    </form><!-- ________________________________________ 6 - IMAGENS ________________________________________ -->
 
 
 
@@ -370,8 +309,8 @@
 
 
 
-    <!-- ________________________________________ 8 - TÍTULO ________________________________________ -->
-    <form class="cadastro-passeio" v-if="$store.state.cadastroPasseio8">
+    <!-- ________________________________________ 7 - TÍTULO ________________________________________ -->
+    <form class="cadastro-passeio" v-if="$store.state.cadastroPasseio7">
 
       <h1 class="__form-title">Dê um título para seu passeio</h1>
 
@@ -389,12 +328,12 @@
 
       <div class="back-next"> 
         <div class="back-next-body">
-          <button type="button" class="__back" @click="backBtn8">Voltar</button>
-          <button type="button" class="__next" :style="form8ok" @click="nextBtn8">Próximo</button>
+          <button type="button" class="__back" @click="backBtn7">Voltar</button>
+          <button type="button" class="__next" :style="form7ok" @click="nextBtn7">Próximo</button>
         </div>
       </div> 
     
-    </form><!-- ________________________________________ 8 - TÍTULO ________________________________________ -->
+    </form><!-- ________________________________________ 7 - TÍTULO ________________________________________ -->
 
 
 
@@ -402,8 +341,8 @@
 
 
 
-    <!-- ________________________________________ 9 - DESCRIÇÃO ________________________________________ -->
-    <form class="cadastro-passeio" v-if="$store.state.cadastroPasseio9">
+    <!-- ________________________________________ 8 - DESCRIÇÃO ________________________________________ -->
+    <form class="cadastro-passeio" v-if="$store.state.cadastroPasseio8">
 
       <h1 class="__form-title">Descreva seu passeio</h1>   
 
@@ -421,12 +360,12 @@
 
       <div class="back-next"> 
         <div class="back-next-body">
-          <button type="button" class="__back" @click="backBtn9">Voltar</button>
-          <button type="button" class="__next" :style="form9ok" @click="nextBtn9">Próximo</button>
+          <button type="button" class="__back" @click="backBtn8">Voltar</button>
+          <button type="button" class="__next" :style="form8ok" @click="nextBtn8">Próximo</button>
         </div>
       </div> 
     
-    </form><!-- ________________________________________ 9 - DESCRIÇÃO ________________________________________ -->
+    </form><!-- ________________________________________ 8 - DESCRIÇÃO ________________________________________ -->
 
 
 
@@ -435,8 +374,8 @@
 
 
 
-    <!-- ________________________________________ 10 - CADASTRO ________________________________________ -->
-    <form class="cadastro-passeio" v-if="$store.state.cadastroPasseio10">
+    <!-- ________________________________________ 9 - CADASTRO ________________________________________ -->
+    <form class="cadastro-passeio" v-if="$store.state.cadastroPasseio9">
 
       <h1 class="__form-title">
         {{ !authUser ? 'Antes de continuar, precisamos de seu cadastro' : `Ótimo ${user.firstName}, só mais algumas informações de contato` }}
@@ -485,12 +424,12 @@
 
       <div class="back-next"> 
         <div class="back-next-body">
-          <button type="button" class="__back" @click="backBtn10">Voltar</button>
-          <button type="button" class="__next" :style="form10ok" @click="nextBtn10">Próximo</button>
+          <button type="button" class="__back" @click="backBtn9">Voltar</button>
+          <button type="button" class="__next" :style="form9ok" @click="nextBtn9">Próximo</button>
         </div>
       </div> 
     
-    </form><!-- ________________________________________ 10 - CADASTRO ________________________________________ -->
+    </form><!-- ________________________________________ 9 - CADASTRO ________________________________________ -->
 
 
 
@@ -498,8 +437,8 @@
 
 
 
-    <!-- ________________________________________ 11 - PAGAMENTO ________________________________________ -->
-    <form class="cadastro-passeio" v-if="$store.state.cadastroPasseio11">
+    <!-- ________________________________________ 10 - PAGAMENTO ________________________________________ -->
+    <form class="cadastro-passeio" v-if="$store.state.cadastroPasseio10">
 
       <h1 class="__form-title">Detalhes sobre o pagamento</h1>
 
@@ -687,12 +626,12 @@
 
       <div class="back-next"> 
         <div class="back-next-body">
-          <button type="button" class="__back" @click="backBtn11">Voltar</button>
-          <button type="button" class="__next" :style="form11ok" @click="concluir">Anunciar</button>
+          <button type="button" class="__back" @click="backBtn10">Voltar</button>
+          <button type="button" class="__next" :style="form10ok" @click="concluir">Anunciar</button>
         </div>
       </div> 
     
-    </form><!-- ________________________________________ 11 - PAGAMENTO ________________________________________ -->
+    </form><!-- ________________________________________ 10 - PAGAMENTO ________________________________________ -->
 
 
 
@@ -726,7 +665,6 @@ export default {
     return {
       title: '', /* Vue Autosize */
       subtitle: '', /* Vue Autosize */
-      localSaida: '',
       showCroppaModal: false,
       isUploading: false,
       uploadProgress: 0,
@@ -833,10 +771,6 @@ export default {
       this.$store.state.passeioData.images.splice(index, 1)
       this.$refs.myCroppa.remove()
     },
-    /* ******************** LOCAL SAÍDA ******************** */
-    setLocalSaida (e) {
-      this.$store.commit('m_localSaida', e.target.value)
-    },
     /* ******************** BACK BUTTONS ******************** */
     backBtn1 () {
       this.$store.commit('m_cadastroPasseio1', false), this.$store.commit('m_cadastroPasseio0', true), window.history.back(1)
@@ -868,9 +802,6 @@ export default {
     backBtn10 () {
       this.$store.commit('m_cadastroPasseio10', false), this.$store.commit('m_cadastroPasseio9', true), window.history.back(1)
     },
-    backBtn11 () {
-      this.$store.commit('m_cadastroPasseio11', false), this.$store.commit('m_cadastroPasseio10', true), window.history.back(1)
-    },
     /* ******************** NEXT BUTTONS ******************** */
     hashPasseio () {
       this.$store.dispatch('a_generateRandomHashs')
@@ -878,17 +809,17 @@ export default {
     },
     nextBtn1 () {
       if (this.$store.state.passeioData.tipoPasseio !== null) {
-        this.$store.commit('m_cadastroPasseio1', false), this.$store.commit('m_cadastroPasseio2', true), this.$store.commit('m_passeioProgressBar', (100/11)*2), this.scrollTop(), window.location.hash = `${this.randomHashs[2]}`
+        this.$store.commit('m_cadastroPasseio1', false), this.$store.commit('m_cadastroPasseio2', true), this.$store.commit('m_passeioProgressBar', (100/10)*2), this.scrollTop(), window.location.hash = `${this.randomHashs[2]}`
       }
     },
     nextBtn2 () {
       if (this.$store.state.passeioData.capacidade !== null) {
-        this.$store.commit('m_cadastroPasseio2', false), this.$store.commit('m_cadastroPasseio3', true), this.$store.commit('m_passeioProgressBar', (100/11)*3), this.scrollTop(), window.location.hash = `${this.randomHashs[3]}`
+        this.$store.commit('m_cadastroPasseio2', false), this.$store.commit('m_cadastroPasseio3', true), this.$store.commit('m_passeioProgressBar', (100/10)*3), this.scrollTop(), window.location.hash = `${this.randomHashs[3]}`
       }
     },
     nextBtn3 () {
       if (this.$store.state.passeioData.duracao !== null) {
-        this.$store.commit('m_cadastroPasseio3', false), this.$store.commit('m_cadastroPasseio4', true), this.$store.commit('m_passeioProgressBar', (100/11)*4), this.scrollTop(), window.location.hash = `${this.randomHashs[4]}`
+        this.$store.commit('m_cadastroPasseio3', false), this.$store.commit('m_cadastroPasseio4', true), this.$store.commit('m_passeioProgressBar', (100/10)*4), this.scrollTop(), window.location.hash = `${this.randomHashs[4]}`
       } else {
         this.$store.commit('show_alert', {
           type: 'warning',
@@ -898,37 +829,24 @@ export default {
       }
     },
     nextBtn4 () {
-      if (this.$store.state.passeioData.localSaida !== null && this.$store.state.passeioData.localSaida !== 'Outro') {
-        this.$store.commit('m_cadastroPasseio4', false), this.$store.commit('m_cadastroPasseio5', true), this.$store.commit('m_passeioProgressBar', (100/11)*5), this.scrollTop(), window.location.hash = `${this.randomHashs[5]}`
-      } else if (this.localSaida !== '') {
-        this.$store.commit('m_cadastroPasseio4', false), this.$store.commit('m_cadastroPasseio5', true), this.$store.commit('m_passeioProgressBar', (100/11)*5), this.$store.commit('m_localSaida', this.localSaida), this.scrollTop(), window.location.hash = `${this.randomHashs[5]}`
+      if (this.$store.state.passeioData.localPartida !== null) {
+        this.$store.commit('m_cadastroPasseio4', false), this.$store.commit('m_cadastroPasseio5', true), this.$store.commit('m_passeioProgressBar', (100/10)*5), this.scrollTop(), window.location.hash = `${this.randomHashs[5]}`
       } else {
         this.$store.commit('show_alert', {
           type: 'warning',
           title: 'Ops',
-          message: 'Adicione o local de saída do passeio.'
+          message: 'Adicione o local de partida do passeio.'
         })
       }
     },
     nextBtn5 () {
       if (1<2) {
-        this.$store.commit('m_cadastroPasseio5', false), this.$store.commit('m_cadastroPasseio6', true), this.$store.commit('m_passeioProgressBar', (100/11)*6), this.scrollTop(), window.location.hash = `${this.randomHashs[6]}`
+        this.$store.commit('m_cadastroPasseio5', false), this.$store.commit('m_cadastroPasseio6', true), this.$store.commit('m_passeioProgressBar', (100/10)*6), this.scrollTop(), window.location.hash = `${this.randomHashs[6]}`
       }
     },
     nextBtn6 () {
-      if (this.$store.state.passeioData.valorPasseio !== 0) {
-        this.$store.commit('m_cadastroPasseio6', false), this.$store.commit('m_cadastroPasseio7', true), this.$store.commit('m_passeioProgressBar', (100/11)*7), this.scrollTop(), window.location.hash = `${this.randomHashs[7]}`
-      } else {
-        this.$store.commit('show_alert', {
-          type: 'warning',
-          title: 'Ops',
-          message: 'Adicione o valor por pessoa.'
-        })
-      }
-    },
-    nextBtn7 () {
       if (this.imageURL1 !== null) {
-        this.$store.commit('m_cadastroPasseio7', false), this.$store.commit('m_cadastroPasseio8', true), this.$store.commit('m_passeioProgressBar', (100/11)*8), this.scrollTop(), window.location.hash = `${this.randomHashs[8]}`
+        this.$store.commit('m_cadastroPasseio6', false), this.$store.commit('m_cadastroPasseio7', true), this.$store.commit('m_passeioProgressBar', (100/10)*7), this.scrollTop(), window.location.hash = `${this.randomHashs[7]}`
       } else {
         this.$store.commit('show_alert', {
           type: 'warning',
@@ -937,17 +855,17 @@ export default {
         })
       }
     },
-    nextBtn8 () {
+    nextBtn7 () {
       if (this.$store.state.passeioData.title !== '') {
-        this.$store.commit('m_cadastroPasseio8', false), this.$store.commit('m_cadastroPasseio9', true), this.$store.commit('m_passeioProgressBar', (100/11)*9), this.scrollTop(), window.location.hash = `${this.randomHashs[9]}`
+        this.$store.commit('m_cadastroPasseio7', false), this.$store.commit('m_cadastroPasseio8', true), this.$store.commit('m_passeioProgressBar', (100/10)*8), this.scrollTop(), window.location.hash = `${this.randomHashs[8]}`
+      }
+    },
+    nextBtn8 () {
+      if (this.$store.state.passeioData.subtitle !== '') {
+        this.$store.commit('m_cadastroPasseio8', false), this.$store.commit('m_cadastroPasseio9', true), this.$store.commit('m_passeioProgressBar', (100/10)*9), this.scrollTop(), window.location.hash = `${this.randomHashs[9]}`
       }
     },
     nextBtn9 () {
-      if (this.$store.state.passeioData.subtitle !== '') {
-        this.$store.commit('m_cadastroPasseio9', false), this.$store.commit('m_cadastroPasseio10', true), this.$store.commit('m_passeioProgressBar', (100/11)*10), this.scrollTop(), window.location.hash = `${this.randomHashs[10]}`
-      }
-    },
-    nextBtn10 () {
       if (!this.authUser) {
         this.$store.commit('show_alert', {
           type: 'warning',
@@ -955,11 +873,11 @@ export default {
           message: 'Conecte-se com uma de suas contas para continuar.'
         })
       } else if (this.$store.state.customer.celular.length === 17 && this.authUser) {
-          this.$store.commit('m_cadastroPasseio10', false)
-          this.$store.commit('m_cadastroPasseio11', true)
-          this.$store.commit('m_passeioProgressBar', (100/11)*11)
+          this.$store.commit('m_cadastroPasseio9', false)
+          this.$store.commit('m_cadastroPasseio10', true)
+          this.$store.commit('m_passeioProgressBar', (100/10)*10)
           this.scrollTop()
-          window.location.hash = `${this.randomHashs[11]}`
+          window.location.hash = `${this.randomHashs[10]}`
           this.$store.state.creditCard.cardHolderName = this.user.fullName
           this.$store.state.customer.name = this.user.fullName
           this.$store.state.customer.email = this.user.email
@@ -1073,32 +991,27 @@ export default {
       return this.$store.state.passeioData.capacidade !== null ? 'background: #198CFE' : ''
     },
     form3ok () {
-      return this.$store.state.passeioData.duracao !== null ? 'background: #198CFE' : ''
+      return this.$store.state.passeioData.horarios.length > 0 ? 'background: #198CFE' : ''
     },
     form4ok () {
-      return this.$store.state.passeioData.localSaida !== null && this.$store.state.passeioData.localSaida !== 'Outro' ? 'background: #198CFE'
-      : this.localSaida !== '' ? 'background: #198CFE' 
-      : ''
+      return this.$store.state.passeioData.localPartida !== null ? 'background: #198CFE' : ''
     },
     form5ok () {
       return 1<2 ? 'background: #198CFE' : ''
     },
     form6ok () {
-      return this.$store.state.passeioData.valorPasseio !== 0 ? 'background: #198CFE' : ''
-    },
-    form7ok () {
       return this.$store.state.passeioData.images.length >= 1 ? 'background: #198CFE' : ''
     },
-    form8ok () {
+    form7ok () {
       return this.$store.state.passeioData.title !== '' ? 'background: #198CFE' : ''
     },
-    form9ok () {
+    form8ok () {
       return this.$store.state.passeioData.subtitle !== '' ? 'background: #198CFE' : ''
     },
-    form10ok () {
+    form9ok () {
       return this.$store.state.customer.celular.length === 17 && this.authUser ? 'background: #198CFE' : ''
     },
-    form11ok () {
+    form10ok () {
       return this.formIsCompleted ? 'background: #198CFE' : ''
     },
     formIsCompleted () {
@@ -1489,6 +1402,18 @@ export default {
       & select:focus {
         border-bottom: 1px solid var(--color01);
       }
+      & .remove-horario {
+        cursor: pointer;
+        width: .75rem;
+        height: auto;
+      }
+    }
+    & .add-horario-btn {
+      padding: 0 7%;
+      background: white;
+      font-size: 17px;
+      font-weight: 600;
+      color: var(--colorPasseio);
     }
     & .rotas {
       display: flex;
@@ -1518,7 +1443,6 @@ export default {
             right: 1rem;
             width: .9rem;
             height: auto;
-            transition: var(--main-transition);
           }
           & .question {
             min-height: 2.4rem;
@@ -1541,6 +1465,7 @@ export default {
         background: white;
         font-size: 17px;
         font-weight: 600;
+        color: var(--colorPasseio);
       }
     }
     & .payment-box {
@@ -1817,6 +1742,12 @@ export default {
           border-bottom: 1px solid var(--color01);
         }
       }
+      & .add-horario-btn {
+        padding: 0 28%;
+      }
+      & .add-horario-btn:hover {
+        text-decoration: underline;
+      }
       & .rotas {
         margin: 1.6rem calc(28% - 2%) 0;
         & .rota {
@@ -1830,9 +1761,6 @@ export default {
             & .__remove-rota {
               top: 1.5rem;
               right: 1.5rem;
-            }
-            & .__remove-rota:hover {
-              opacity: .5;
             }
             & .question {
               min-height: 2.4rem;
@@ -1946,6 +1874,16 @@ export default {
   }
 }
 
+/* Remove default appearance from input time */
+input[type=time]::-webkit-inner-spin-button, 
+input[type=time]::-webkit-outer-spin-button,
+input[type=time]::-webkit-clear-button {
+  display: none;
+  appearance: none;
+  margin: 0;
+}
+
+/* Error */
 .has-error-label {
   color: #F31431 !important;
 }
