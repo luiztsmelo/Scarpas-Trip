@@ -271,6 +271,13 @@
           </div>
 
 
+          <div class="item-form">
+            <select v-model="$store.state.reservaPasseio.horario">
+              <option :value="horario" v-for="(horario, index) in formattedHorarios" :key="index">{{ horario }}</option>
+            </select>
+          </div>
+
+
 
           <button class="__reserva-desktop-btn" type="button" @click="reservarDesktop">Reservar</button>
 
@@ -385,6 +392,16 @@ export default {
       minutes !== '00' ? formattedDuracao = `${hour} horas e ${minutes} minutos` : formattedDuracao = `${hour} horas`
       return formattedDuracao
     },
+    timeToSec (time) {
+      const parts = time.split(':')
+      return (parts[0] * 3600) + (parts[1] * 60)
+    },
+    pad (num) {
+      return num < 10 ? '0' + num : '' + num
+    },
+    formatTime (secs) {
+      return [ this.pad(Math.floor(secs/3600)%60), this.pad(Math.floor(secs/60)%60) ].join(':')
+    },
     reservarDesktop () {
       firebase.firestore().doc(`passeios/${this.$route.params.id}/visits/${this.$store.state.visitID}`).update({ 
         clickedReservaBtn: true
@@ -445,6 +462,15 @@ export default {
     },
     capacidadeArray () {
       return Array.from({length: this.passeio.capacidade}, (v, k) => k+1)
+    },
+    formattedHorarios () {
+      let formattedHorarios = []
+      for (const horario of this.passeio.horarios) {
+        const sum = this.formatTime(this.timeToSec(horario.horario) + this.timeToSec(this.passeio.rotas[this.reservaPasseio.rota-1].duracao))
+        formattedHorarios.push(`${horario.horario} − ${sum}`)
+      }
+      this.reservaPasseio.horario = formattedHorarios[0]
+      return formattedHorarios
     }
   },
   beforeRouteEnter (to, from, next) {

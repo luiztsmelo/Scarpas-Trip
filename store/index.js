@@ -287,7 +287,8 @@ const store = () => new Vuex.Store({
       },
       totalPessoas: 1,
       date: '',
-      rota: 1
+      rota: 1,
+      horario: ''
     },
     concludedReservaPasseio: false,
     reservaPasseioDesktop1: true,
@@ -996,7 +997,8 @@ const store = () => new Vuex.Store({
         },
         totalPessoas: 1,
         date: '',
-        rota: 1
+        rota: 1,
+        horario: ''
       }
       state.reservaPasseioDesktop1 = true
       state.reservaPasseioDesktop2 = false

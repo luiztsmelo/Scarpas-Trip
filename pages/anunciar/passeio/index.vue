@@ -107,20 +107,63 @@
 
 
 
-    <!-- ________________________________________ 3 - HORÁRIOS DE PARTIDA ________________________________________ -->
+    <!-- ________________________________________ 3 - IMAGENS ________________________________________ -->
     <form class="cadastro-passeio" v-if="$store.state.cadastroPasseio3">
 
-      <h1 class="__form-title">Quais são os horários de partida?</h1>
+      <h1 class="__form-title">Adicione imagens</h1>
 
-      <div class="item-form" v-for="(horario, index) in $store.state.passeioData.horarios" :key="index + 1">
-        <div style="display: flex; align-items: center; justify-content: space-between">
-          <label>Horário {{ index + 1}}</label>
-          <img class="remove-horario" src="../../../assets/img/exit.svg" @click="$store.commit('m_removeHorarioPasseio', index)" v-if="$store.state.passeioData.horarios.length > 1">
+
+      <div class="modal-croppa" v-show="showCroppaModal" @click="showCroppaModal=false">
+        <div class="modal-croppa-body" @click.stop>
+          <h1>Ajustar imagem</h1>
+          <croppa
+            ref="myCroppa"
+            @file-choose="showCroppaModal = true"
+            :width="$store.state.isMobile ? 639/2 : 639"
+            :height="$store.state.isMobile ? 426/2 : 426"
+            :quality="$store.state.isMobile ? 2 : 1"
+            :placeholder="'Carregando...'"
+            :placeholder-color="'white'"
+            :accept="'.jpg, .jpeg, .png, .webp'"
+            :zoom-speed="$store.state.isMobile ? 2 : 4"
+            :prevent-white-space="true"
+            :show-remove-button="false">
+          </croppa>
+          <button class="__croppa-btn" type="button" @click="showCroppaModal=false, imageConfirm()">Confirmar</button>
         </div>
-        <input type="time" v-model="horario.horario" required>
       </div>
 
-      <button class="add-horario-btn" type="button" @click="$store.commit('m_addHorarioPasseio')">Adicionar Horário</button>
+
+      <!-- Preview images -->
+      <div class="after-choose-image" :class="[ $store.state.passeioData.images.length == 0 ? 'center-first-image' : '' ]">
+
+        <div class="image-box" v-for="(image, index) in $store.state.passeioData.images">
+          <div class="delete" @click="!isUploading ? deleteImage(image, index) : ''">
+            <img src="../../../assets/img/delete.svg" class="__delete-img">
+          </div>
+          <progressive-background class="__image" :src="image.HJ" :placeholder="image.L" :aspect-ratio="2/3"/>
+        </div>
+
+
+        <div class="image-box __add-image" @click="!isUploading ? $refs.myCroppa.chooseFile() : ''">
+          <svg class="loader-svg" v-if="isUploading">
+            <circle
+              class="__circle"
+              :stroke-width="$store.state.isMobile ? 3 : 4"
+              stroke="#161616"
+              :stroke-dasharray="$store.state.isMobile ? `${14.5*2*Math.PI} ${14.5*2*Math.PI}` : `${18*2*Math.PI} ${18*2*Math.PI}`"
+              :stroke-dashoffset="$store.state.isMobile ? 14.5*2*Math.PI - this.uploadProgress/100*14.5*2*Math.PI : 18*2*Math.PI - this.uploadProgress/100*18*2*Math.PI"
+              fill="transparent"
+              :r="$store.state.isMobile ? 14.5 : 18"
+              :cx="$store.state.isMobile ? 16 : 20"
+              :cy="$store.state.isMobile ? 16 : 20"
+            />
+          </svg>
+          <img src="../../../assets/img/add-image.svg" class="__add-image-svg" v-else>
+          <progressive-background src="../../../assets/img/add-image.png" :aspect-ratio="2/3"/>
+        </div>
+
+      </div><!-- Preview images -->
 
 
       <div class="back-next"> 
@@ -130,7 +173,8 @@
         </div>
       </div> 
     
-    </form><!-- ________________________________________ 3 - HORÁRIOS DE PARTIDA ________________________________________ -->
+    </form><!-- ________________________________________ 3 - IMAGENS ________________________________________ -->
+
 
 
 
@@ -237,63 +281,20 @@
 
 
 
-    <!-- ________________________________________ 6 - IMAGENS ________________________________________ -->
+    <!-- ________________________________________ 6 - HORÁRIOS DE PARTIDA ________________________________________ -->
     <form class="cadastro-passeio" v-if="$store.state.cadastroPasseio6">
 
-      <h1 class="__form-title">Adicione imagens</h1>
+      <h1 class="__form-title">Quais são os horários de partida?</h1>
 
-
-      <div class="modal-croppa" v-show="showCroppaModal" @click="showCroppaModal=false">
-        <div class="modal-croppa-body" @click.stop>
-          <h1>Ajustar imagem</h1>
-          <croppa
-            ref="myCroppa"
-            @file-choose="showCroppaModal = true"
-            :width="$store.state.isMobile ? 639/2 : 639"
-            :height="$store.state.isMobile ? 426/2 : 426"
-            :quality="$store.state.isMobile ? 2 : 1"
-            :placeholder="'Carregando...'"
-            :placeholder-color="'white'"
-            :accept="'.jpg, .jpeg, .png, .webp'"
-            :zoom-speed="$store.state.isMobile ? 2 : 4"
-            :prevent-white-space="true"
-            :show-remove-button="false">
-          </croppa>
-          <button class="__croppa-btn" type="button" @click="showCroppaModal=false, imageConfirm()">Confirmar</button>
+      <div class="item-form" v-for="(horario, index) in $store.state.passeioData.horarios" :key="index + 1">
+        <div style="display: flex; align-items: center; justify-content: space-between">
+          <label>Horário {{ index + 1}}</label>
+          <img class="remove-horario" src="../../../assets/img/exit.svg" @click="$store.commit('m_removeHorarioPasseio', index)" v-if="$store.state.passeioData.horarios.length > 1">
         </div>
+        <input type="time" v-model="horario.horario" required>
       </div>
 
-
-      <!-- Preview images -->
-      <div class="after-choose-image" :class="[ $store.state.passeioData.images.length == 0 ? 'center-first-image' : '' ]">
-
-        <div class="image-box" v-for="(image, index) in $store.state.passeioData.images">
-          <div class="delete" @click="!isUploading ? deleteImage(image, index) : ''">
-            <img src="../../../assets/img/delete.svg" class="__delete-img">
-          </div>
-          <progressive-background class="__image" :src="image.HJ" :placeholder="image.L" :aspect-ratio="2/3"/>
-        </div>
-
-
-        <div class="image-box __add-image" @click="!isUploading ? $refs.myCroppa.chooseFile() : ''">
-          <svg class="loader-svg" v-if="isUploading">
-            <circle
-              class="__circle"
-              :stroke-width="$store.state.isMobile ? 3 : 4"
-              stroke="#161616"
-              :stroke-dasharray="$store.state.isMobile ? `${14.5*2*Math.PI} ${14.5*2*Math.PI}` : `${18*2*Math.PI} ${18*2*Math.PI}`"
-              :stroke-dashoffset="$store.state.isMobile ? 14.5*2*Math.PI - this.uploadProgress/100*14.5*2*Math.PI : 18*2*Math.PI - this.uploadProgress/100*18*2*Math.PI"
-              fill="transparent"
-              :r="$store.state.isMobile ? 14.5 : 18"
-              :cx="$store.state.isMobile ? 16 : 20"
-              :cy="$store.state.isMobile ? 16 : 20"
-            />
-          </svg>
-          <img src="../../../assets/img/add-image.svg" class="__add-image-svg" v-else>
-          <progressive-background src="../../../assets/img/add-image.png" :aspect-ratio="2/3"/>
-        </div>
-
-      </div><!-- Preview images -->
+      <button class="add-horario-btn" type="button" @click="$store.commit('m_addHorarioPasseio')">Adicionar Horário</button>
 
 
       <div class="back-next"> 
@@ -303,7 +304,7 @@
         </div>
       </div> 
     
-    </form><!-- ________________________________________ 6 - IMAGENS ________________________________________ -->
+    </form><!-- ________________________________________ 6 - HORÁRIOS DE PARTIDA ________________________________________ -->
 
 
 
@@ -820,13 +821,13 @@ export default {
       }
     },
     nextBtn3 () {
-      if (this.$store.state.passeioData.horarios.length > 0) {
+      if (this.$store.state.passeioData.images.length > 0) {
         this.$store.commit('m_cadastroPasseio3', false), this.$store.commit('m_cadastroPasseio4', true), this.$store.commit('m_passeioProgressBar', (100/10)*4), this.scrollTop(), window.location.hash = `${this.randomHashs[4]}`
       } else {
         this.$store.commit('show_alert', {
           type: 'warning',
           title: 'Ops',
-          message: 'Adicione um horário de partida.'
+          message: 'Adicione pelo menos 3 imagens.'
         })
       }
     },
@@ -853,13 +854,13 @@ export default {
       }
     },
     nextBtn6 () {
-      if (this.$store.state.passeioData.images.length > 0) {
+      if (this.$store.state.passeioData.horarios.length > 0) {
         this.$store.commit('m_cadastroPasseio6', false), this.$store.commit('m_cadastroPasseio7', true), this.$store.commit('m_passeioProgressBar', (100/10)*7), this.scrollTop(), window.location.hash = `${this.randomHashs[7]}`
       } else {
         this.$store.commit('show_alert', {
           type: 'warning',
           title: 'Ops',
-          message: 'Adicione pelo menos 3 imagens.'
+          message: 'Adicione um horário de partida.'
         })
       }
     },
@@ -999,7 +1000,7 @@ export default {
       return this.$store.state.passeioData.capacidade !== null ? 'background: #198CFE' : ''
     },
     form3ok () {
-      return this.$store.state.passeioData.horarios.length > 0 ? 'background: #198CFE' : ''
+      return this.$store.state.passeioData.images.length > 0 ? 'background: #198CFE' : ''
     },
     form4ok () {
       return this.$store.state.passeioData.localPartida !== null ? 'background: #198CFE' : ''
@@ -1008,7 +1009,7 @@ export default {
       return this.$store.state.passeioData.rotas.length > 0 ? 'background: #198CFE' : ''
     },
     form6ok () {
-      return this.$store.state.passeioData.images.length > 0 ? 'background: #198CFE' : ''
+      return this.$store.state.passeioData.horarios.length > 0 ? 'background: #198CFE' : ''
     },
     form7ok () {
       return this.$store.state.passeioData.title !== '' ? 'background: #198CFE' : ''
