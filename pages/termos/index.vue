@@ -4,15 +4,15 @@
 
     <div class="sidenav">
 
-      <nuxt-link to="'/termos'">
+      <nuxt-link to="/termos">
         <h3 class="__item" :class="[ this.isTermos ? '__item-selected' : '' ]">Termos de Serviço</h3>
       </nuxt-link>
 
-      <nuxt-link to="'/termos#politica_privacidade'">
+      <nuxt-link to="/termos#politica_privacidade">
         <h3 class="__item" :class="[ this.isPrivacidade ? '__item-selected' : '' ]">Política de Privacidade</h3>
       </nuxt-link>
 
-      <nuxt-link to="'/termos#politica_cancelamento'">
+      <nuxt-link to="/termos#politica_cancelamento">
         <h3 class="__item" :class="[ this.isCancelamento ? '__item-selected' : '' ]">Política de Cancelamento</h3>
       </nuxt-link>
 

@@ -144,7 +144,9 @@
 
             <h3 style="padding: .3rem 0">Valor por pessoa: <span style="font-weight:500">R${{ rota.valor }}</span></h3>
 
-            <h3 style="padding: .3rem 0">Duração: <span style="font-weight:500">{{ formatDuracaoRota(rota) }}</span></h3>
+            <h3 style="padding: .3rem 0">Horário de partida: <span style="font-weight:500">{{ rota.horarioPartida }}</span></h3>
+
+            <h3 style="padding: .3rem 0">Duração: <span style="font-weight:500">{{ rota.duracao }} {{ rota.duracao === 1 ? 'hora' : 'horas' }}</span></h3>
 
             <div class="pontos-visitados">
 
@@ -271,14 +273,6 @@
           </div>
 
 
-          <div class="item-form">
-            <select v-model="$store.state.reservaPasseio.horario">
-              <option :value="horario" v-for="(horario, index) in formattedHorarios" :key="index">{{ horario }}</option>
-            </select>
-          </div>
-
-
-
           <button class="__reserva-desktop-btn" type="button" @click="reservarDesktop">Reservar</button>
 
           <h4 class="__info">A reserva é gratuita!</h4>
@@ -378,19 +372,11 @@ export default {
   methods: {
     formatDate () {
       const date = this.reservaPasseio.date
-      const weekday = format(date, 'ddd', { locale: pt })
+      const weekday = format(date, 'dddd', { locale: pt })
       const weekdayCapitalized = weekday.charAt(0).toUpperCase() + weekday.slice(1)
       const day = format(date, 'D', { locale: pt })
       const month = format(date, 'MMMM', { locale: pt })
-      const monthCapitalized = month.charAt(0).toUpperCase() + month.slice(1)
-      return date === '' ? 'Selecionar data' : `${weekdayCapitalized}, ${day} de ${monthCapitalized}`
-    },
-    formatDuracaoRota (rota) {
-      const hour = rota.duracao.slice(0,2).replace(/\b0+/g, '') 
-      const minutes = rota.duracao.slice(3,5)
-      let formattedDuracao = ''
-      minutes !== '00' ? formattedDuracao = `${hour} horas e ${minutes} minutos` : formattedDuracao = `${hour} horas`
-      return formattedDuracao
+      return date === '' ? 'Selecionar data' : `${weekdayCapitalized}, ${day} de ${month}`
     },
     timeToSec (time) {
       const parts = time.split(':')
@@ -632,22 +618,22 @@ export default {
           margin-top: 1rem;
           display: grid;
           grid-template-columns: 1fr 1fr;
-          grid-gap: 14px;
+          grid-gap: 10px;
           & .ponto {
             position: relative;
-            border-radius: 6px;
+            border-radius: 10px;
             border: 1px solid #dedede;
             & .__img {
               width: 100%;
               height: auto;
-              border-radius: 6px 6px 0 0;
+              border-radius: 10px 10px 0 0;
             }
             & .__number {
               position: absolute;
               left: 0;
               top: 0;
-              padding: 4px 6px;
-              border-radius: 8px 0 8px 0;
+              padding: 5px 7px;
+              border-radius: 10px 0 10px 0;
               z-index: 99;
               font-size: 15px;
               font-weight: 600;
@@ -788,7 +774,7 @@ export default {
       & .reserva-desktop {
         flex-basis: 31%;
         border: 1px solid #dedede;
-        border-radius: 7px;
+        border-radius: 12px;
         align-self: flex-start;
         & .reserva-desktop-form {
           display: flex;
@@ -814,7 +800,7 @@ export default {
               border: 1px solid #dedede;
               outline: none;
               background: white;
-              border-radius: 5px;
+              border-radius: 6px;
               transition: .15s border ease;
               & option {
                 background: white;
@@ -834,7 +820,7 @@ export default {
                 border: 1px solid #dedede;
                 outline: none;
                 text-align: left;
-                border-radius: 5px;
+                border-radius: 6px;
               }
               & #datepicker-trigger:hover {
                 border: 1px solid var(--color01);
@@ -968,7 +954,6 @@ export default {
         & .rotas-box {
           padding: 0;  
           & .rota {
-            border-radius: 8px;
               & .__title {
                 font-size: 18px;
                 font-weight: 600;
@@ -978,15 +963,10 @@ export default {
                 grid-template-columns: 1fr 1fr 1fr 1fr;
                 grid-gap: 16px;
                 & .ponto {
-                  border-radius: 8px;
                   /* box-shadow: 1px 1px 8px 1px rgba(0,0,0,0.12); */
                   & .__img {
-                    border-radius: 8px 8px 0 0;
                   }
                   & .__number {
-                    border-radius: 8px 0 8px 0;
-                    background: rgba(0,0,0,.3);
-                    color: white;
                   }
                   & .__name {
                     min-height: 2.3rem;

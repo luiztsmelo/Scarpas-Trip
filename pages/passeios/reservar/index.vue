@@ -102,13 +102,25 @@
 
        
 
+          <!-- PAGAMENTO -->
+          <h3 class="__subtitle">Lembretes</h3>
+          
+          <h3 class="__text">Lembretes aqui.</h3>
+          <!-- PAGAMENTO -->
 
+
+
+          <!-- PAGAMENTO -->
+          <h3 class="__subtitle">Pagamento</h3>
+          
+          <h3 class="__text">{{ reservaPasseio.guest.fullName.split(' ')[0] }}, detalhes sobre o pagamento aqui.</h3>
+          <!-- PAGAMENTO -->
 
 
 
 
           <!-- TERMOS -->
-          <h4 class="__termos">Ao confirmar você concorda com as regras do passeio e nossos <a href="/termos" target="_blank" style="color:#198CFE">Termos de Serviço</a>.</h4>
+          <h4 class="__termos">Ao confirmar você concorda com nossos <a href="/termos" target="_blank" style="color:#198CFE">Termos de Serviço</a> e <a href="/termos#politica_privacidade" target="_blank" style="color:#198CFE">Política de Privacidade</a>.</h4>
           <!-- TERMOS -->
 
 
@@ -160,7 +172,7 @@
 
             <div class="detalhes-reserva-data_item">
               <img src="../../../assets/img/calendar.svg" class="__img" style="transform: scale(.91)">
-              <h3 style="font-size: 15px;  text-transform: capitalize">{{ periodoReserva }}</h3>
+              <h3 style="font-size: 15px">{{ periodoReserva }}</h3>
             </div>
 
             <div class="detalhes-reserva-data_item">
@@ -398,12 +410,11 @@ export default {
     /* ******************** DATES ******************** */
     periodoReserva () {
       const date = this.reservaPasseio.date
-      const weekday = format(date, 'ddd', { locale: pt })
+      const weekday = format(date, 'dddd', { locale: pt })
       const weekdayCapitalized = weekday.charAt(0).toUpperCase() + weekday.slice(1)
       const day = format(date, 'D', { locale: pt })
       const month = format(date, 'MMMM', { locale: pt })
-      const monthCapitalized = month.charAt(0).toUpperCase() + month.slice(1)
-      return date !== '' ? `${weekdayCapitalized}, ${day} de ${monthCapitalized}` : ''
+      return date !== '' ? `${weekdayCapitalized}, ${day} de ${month}` : ''
     }
   },
   watch: {

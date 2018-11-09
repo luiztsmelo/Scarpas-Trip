@@ -1049,7 +1049,7 @@ export default {
       & .reserva-desktop {
         flex-basis: 31%;
         border: 1px solid #dedede;
-        border-radius: 7px;
+        border-radius: 12px;
         align-self: flex-start;
         & .reserva-desktop-form {
           display: flex;
@@ -1075,7 +1075,7 @@ export default {
               border: 1px solid #dedede;
               outline: none;
               background: white;
-              border-radius: 5px;
+              border-radius: 6px;
               transition: .15s border ease;
               & option {
                 background: white;
@@ -1095,7 +1095,7 @@ export default {
                 border: 1px solid #dedede;
                 outline: none;
                 text-align: left;
-                border-radius: 5px;
+                border-radius: 6px;
               }
               & #datepicker-trigger:hover {
                 border: 1px solid var(--color01);

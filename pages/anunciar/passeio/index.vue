@@ -238,8 +238,15 @@
               </div>
 
               <div class="question">
+                <label>Horário partida:</label>
+                <input type="time" v-model="rota.horarioPartida">
+              </div>
+
+              <div class="question">
                 <label>Duração:</label>
-                <input type="time" v-model="rota.duracao">
+                <select v-model="rota.duracao">
+                  <option v-for="n in 12" :value="n">{{ n }} {{ n === 1 ? 'hora' : 'horas' }}</option>
+                </select>
               </div>
 
               <div class="question" style="padding-top: 2px">
@@ -281,20 +288,12 @@
 
 
 
-    <!-- ________________________________________ 6 - HORÁRIOS DE PARTIDA ________________________________________ -->
+    <!-- ________________________________________ 6 - LEMBRETES ________________________________________ -->
     <form class="cadastro-passeio" v-if="$store.state.cadastroPasseio6">
 
-      <h1 class="__form-title">Quais são os horários de partida?</h1>
+      <h1 class="__form-title">Lembretes?</h1>
 
-      <div class="item-form" v-for="(horario, index) in $store.state.passeioData.horarios" :key="index + 1">
-        <div style="display: flex; align-items: center; justify-content: space-between">
-          <label>Horário {{ index + 1}}</label>
-          <img class="remove-horario" src="../../../assets/img/exit.svg" @click="$store.commit('m_removeHorarioPasseio', index)" v-if="$store.state.passeioData.horarios.length > 1">
-        </div>
-        <input type="time" v-model="horario.horario" required>
-      </div>
-
-      <button class="add-horario-btn" type="button" @click="$store.commit('m_addHorarioPasseio')">Adicionar Horário</button>
+    
 
 
       <div class="back-next"> 
@@ -304,7 +303,7 @@
         </div>
       </div> 
     
-    </form><!-- ________________________________________ 6 - HORÁRIOS DE PARTIDA ________________________________________ -->
+    </form><!-- ________________________________________ 6 - LEMBRETES ________________________________________ -->
 
 
 
@@ -854,7 +853,7 @@ export default {
       }
     },
     nextBtn6 () {
-      if (this.$store.state.passeioData.horarios.length > 0) {
+      if (1<2) {
         this.$store.commit('m_cadastroPasseio6', false), this.$store.commit('m_cadastroPasseio7', true), this.$store.commit('m_passeioProgressBar', (100/10)*7), this.scrollTop(), window.location.hash = `${this.randomHashs[7]}`
       } else {
         this.$store.commit('show_alert', {
@@ -1009,7 +1008,7 @@ export default {
       return this.$store.state.passeioData.rotas.length > 0 ? 'background: #198CFE' : ''
     },
     form6ok () {
-      return this.$store.state.passeioData.horarios.length > 0 ? 'background: #198CFE' : ''
+      return 1<2 ? 'background: #198CFE' : ''
     },
     form7ok () {
       return this.$store.state.passeioData.title !== '' ? 'background: #198CFE' : ''
@@ -1411,18 +1410,6 @@ export default {
       & select:focus {
         border-bottom: 1px solid var(--color01);
       }
-      & .remove-horario {
-        cursor: pointer;
-        width: .75rem;
-        height: auto;
-      }
-    }
-    & .add-horario-btn {
-      padding: 0 7%;
-      background: white;
-      font-size: 17px;
-      font-weight: 600;
-      color: var(--colorPasseio);
     }
     & .rotas {
       display: flex;
@@ -1462,6 +1449,15 @@ export default {
             }
             & input {
               cursor: text;
+              width: 6rem;
+              border: none;
+              outline: none;
+              background: white;
+              color: var(--color01);
+              font-size: 17px;
+            }
+            & select {
+              cursor: pointer;
               width: 6rem;
               border: none;
               outline: none;
@@ -1752,12 +1748,6 @@ export default {
         & select:hover {
           border-bottom: 1px solid var(--color01);
         }
-      }
-      & .add-horario-btn {
-        padding: 0 28%;
-      }
-      & .add-horario-btn:hover {
-        text-decoration: underline;
       }
       & .rotas {
         margin: 1.6rem calc(28% - 2%) 0;

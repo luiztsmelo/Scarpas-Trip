@@ -241,19 +241,12 @@ const store = () => new Vuex.Store({
       hostID: null,
       tipoPasseio: 'Lancha',
       capacidade: 1,
-      horarios: [
-        {
-          horario: '09:00'
-        },
-        {
-          horario: '13:00'
-        }
-      ],
       localPartida: null,
       rotas: [
         {
-          duracao: '',
           valor: 0,
+          horarioPartida: '',
+          duracao: 1,
           pontosVisitados: []
         }
       ],
@@ -679,18 +672,11 @@ const store = () => new Vuex.Store({
     m_passeioData (state, payload) {
       state.passeioData = payload
     },
-    m_addHorarioPasseio (state) {
-      state.passeioData.horarios.push({
-        horario: ''
-      })
-    },
-    m_removeHorarioPasseio (state, index) {
-      state.passeioData.horarios.splice(index, 1)
-    },
     m_addRotaPasseio (state) {
       state.passeioData.rotas.push({
-        duracao: '',
         valor: 0,
+        horarioPartida: '',
+        duracao: '',
         pontosVisitados: []
       })
     },
@@ -961,19 +947,12 @@ const store = () => new Vuex.Store({
         hostID: null,
         tipoPasseio: 'Lancha',
         capacidade: 1,
-        horarios: [
-          {
-            horario: '09:00'
-          },
-          {
-            horario: '13:00'
-          }
-        ],
         localPartida: null,
         rotas: [
           {
-            duracao: '',
             valor: 0,
+            horarioPartida: '',
+            duracao: 1,
             pontosVisitados: []
           }
         ],
