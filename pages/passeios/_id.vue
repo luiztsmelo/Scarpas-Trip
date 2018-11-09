@@ -301,9 +301,7 @@
     <div class="reserva-mobile">
       <div class="reserva-body">
         <h3 class="__reserva-valor">R${{ passeio.rotas[reservaPasseio.rota - 1].valor.toLocaleString() }}<span class="__reserva-valor-pessoa"> por pessoa</span></h3>
-        <button class="__reserva-btn" @click="$store.commit('m_showHost', true), hashHost()">
-          Reservar
-        </button>
+        <button class="__reserva-btn" @click="$store.commit('m_showHost', true), hashHost()">Reservar</button>
       </div>
     </div>
     <!-- ______________________________ RESERVA MOBILE ______________________________ -->
@@ -618,7 +616,7 @@ export default {
           margin-top: 1rem;
           display: grid;
           grid-template-columns: 1fr 1fr;
-          grid-gap: 10px;
+          grid-gap: 8px;
           & .ponto {
             position: relative;
             border-radius: 10px;
@@ -718,7 +716,8 @@ export default {
         font-weight: 400;
       }
       & .__reserva-btn {
-        width: 11rem;
+        width: 50%;
+        max-width: 12rem;
         height: 3.2rem;
         background:var(--colorPasseio);
         border-radius: 200px;
