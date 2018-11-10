@@ -33,7 +33,7 @@
           <div class="rating">
             <star-rating
               :rating="4.2"
-              :increment="0.1"
+              :increment="0.5"
               :read-only="true"
               :show-rating="false"
               active-color="#161616"

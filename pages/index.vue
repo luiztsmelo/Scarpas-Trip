@@ -38,8 +38,8 @@
 
             <div class="rating">
               <star-rating
-                :rating="4.2"
-                :increment="0.1"
+                :rating="4.8"
+                :increment="0.5"
                 :read-only="true"
                 :show-rating="false"
                 active-color="#161616"
@@ -47,7 +47,7 @@
                 :star-size="10"
                 :padding="2">
               </star-rating>
-              <p class="rating-number">4,2</p>
+              <p class="rating-count">2</p>
             </div>
             
           </nuxt-link>
@@ -89,7 +89,7 @@
             <div class="rating">
               <star-rating
                 :rating="4.6"
-                :increment="0.1"
+                :increment="0.5"
                 :read-only="true"
                 :show-rating="false"
                 active-color="#161616"
@@ -97,7 +97,7 @@
                 :star-size="10"
                 :padding="2">
               </star-rating>
-              <p class="rating-number">4,6</p>
+              <p class="rating-count">3</p>
             </div>
 
           </nuxt-link> 
@@ -340,9 +340,9 @@ export default {
             padding-top: .1rem;
             display: flex;
             align-items: center;
-            & .rating-number {
+            & .rating-count {
               font-size: 12px;
-              font-weight: 500;
+              font-weight: 600;
               padding-left: 2px;
             }
           }
@@ -407,7 +407,7 @@ export default {
             }
             & .rating {
               padding-top: .2rem;
-              & .rating-number {
+              & .rating-count {
               }
             }
           }

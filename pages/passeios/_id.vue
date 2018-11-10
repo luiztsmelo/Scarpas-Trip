@@ -62,19 +62,17 @@
 
           <h3 class="__tipo" style="color: #198CFE">{{ passeio.tipoPasseio }}</h3>
 
-          <div class="rating">
-            <star-rating
-              :rating="4.7"
-              :increment="0.1"
-              :read-only="true"
-              :show-rating="false"
-              active-color="#161616"
-              inactive-color="#dedede"
-              :star-size="12"
-              :padding="3">
-            </star-rating>
-            <p class="rating-number">4,7</p>
-          </div>
+          <star-rating
+            class="rating"
+            :rating="4.7"
+            :increment="0.5"
+            :read-only="true"
+            :show-rating="false"
+            active-color="#161616"
+            inactive-color="#dedede"
+            :star-size="13"
+            :padding="4">
+          </star-rating>
 
         </div><!-- ______________________________ RATING ______________________________ -->
 
@@ -526,13 +524,7 @@ export default {
       font-weight: 600;
     }
     & .rating {
-      display: flex;
-      align-items: center;
-      & .rating-number {
-        font-size: 14px;
-        font-weight: 600;
-        padding-left: 3px;
-      }
+      padding-left: 3px;
     }
   }/* __________ RATING BOX __________ */
 
@@ -557,9 +549,6 @@ export default {
       color: var(--colorPasseio);
       font-weight: 500;
       user-select: none;
-    }
-    & .__anunciante-name:hover {
-      text-decoration: underline;
     }
   }/* __________ ANUNCIANTE BOX __________ */
 
@@ -890,13 +879,6 @@ export default {
             font-weight: 600;
           }
           & .rating {
-            display: flex;
-            align-items: center;
-            & .rating-number {
-              font-size: 16px;
-              font-weight: 600;
-              padding-left: 3px;
-            }
           }
         }/* __________ RATING BOX __________ */
 
@@ -912,6 +894,9 @@ export default {
             margin-right: .7rem;
           }
           & .__anunciante-name {
+          }
+          & .__anunciante-name:hover {
+            text-decoration: underline;
           }
         }/* __________ ANUNCIANTE BOX __________ */
 

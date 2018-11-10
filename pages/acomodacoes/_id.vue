@@ -60,19 +60,17 @@
 
           <h3 class="__tipo" style="color: #FFA04F">{{ acomod.tipoAcomod }}</h3>
 
-          <div class="rating">
-            <star-rating
-              :rating="averageRatings"
-              :increment="0.1"
-              :read-only="true"
-              :show-rating="false"
-              active-color="#161616"
-              inactive-color="#dedede"
-              :star-size="12"
-              :padding="3">
-            </star-rating>
-            <p class="rating-number">{{ averageRatings.toString().replace('.', ',') }}</p>
-          </div>
+          <star-rating
+            class="rating"
+            :rating="averageRatings"
+            :increment="0.1"
+            :read-only="true"
+            :show-rating="false"
+            active-color="#161616"
+            inactive-color="#dedede"
+            :star-size="13"
+            :padding="4">
+          </star-rating>
 
         </div><!-- ______________________________ RATING ______________________________ -->
         
@@ -327,43 +325,54 @@
             {{ acomod.avaliacoes.length }} {{ acomod.avaliacoes.length > 1 ? 'Avaliações': 'Avaliação' }} 
           </h1>
 
-          <div class="rating">
-            <star-rating
-              :rating="averageRatings"
-              :increment="0.1"
-              :read-only="true"
-              :show-rating="false"
-              active-color="#161616"
-              inactive-color="#dedede"
-              :star-size="$store.state.isMobile ? 16 : 18"
-              :padding="$store.state.isMobile ? 4 : 5">
-            </star-rating>
-            <p class="rating-number">{{ averageRatings.toString().replace('.', ',') }}</p>
-          </div>
+          <star-rating
+            class="rating"
+            :rating="averageRatings"
+            :increment="0.5"
+            :read-only="true"
+            :show-rating="false"
+            active-color="#161616"
+            inactive-color="#dedede"
+            :star-size="$store.state.isMobile ? 16 : 19"
+            :padding="$store.state.isMobile ? 4 : 5">
+          </star-rating>
 
         </div>
         
 
         <div class="avaliacoes-box" v-if="acomod.avaliacoes.length > 0">
 
-          <div class="avaliacao" v-for="avaliacao in acomod.avaliacoes">
-            <h2 class="__guest-name">{{ avaliacao.guestName }}</h2>
-            <div class="rating">
-              <star-rating
-                :rating="4.7"
-                :increment="0.1"
-                :read-only="true"
-                :show-rating="false"
-                active-color="#FFA04F"
-                inactive-color="#dedede"
-                :star-size="12"
-                :padding="3">
-              </star-rating>
-              <p class="rating-number">{{ avaliacao.rating.toString().replace('.', ',') }}</p>
-              <p class="date">{{ formatAvaliacaoDate(avaliacao) }}</p>
+
+          <div class="avaliacoes-by-categories">
+            <div class="category">
+              <p class="__name">Recepção</p>
+              <star-rating class="__rating" :rating="4.5" :increment="0.5" :read-only="true" :show-rating="false" active-color="#161616" inactive-color="#dedede" :star-size="15" :padding="4"></star-rating>
             </div>
+            <div class="category">
+              <p class="__name">Limpeza</p>
+              <star-rating class="__rating" :rating="4.5" :increment="0.5" :read-only="true" :show-rating="false" active-color="#161616" inactive-color="#dedede" :star-size="15" :padding="4"></star-rating>
+            </div>
+            <div class="category">
+              <p class="__name">Precisão do anúncio</p>
+              <star-rating class="__rating" :rating="4.5" :increment="0.5" :read-only="true" :show-rating="false" active-color="#161616" inactive-color="#dedede" :star-size="15" :padding="4"></star-rating>
+            </div>
+            <div class="category">
+              <p class="__name">Valor</p>
+              <star-rating class="__rating" :rating="4.5" :increment="0.5" :read-only="true" :show-rating="false" active-color="#161616" inactive-color="#dedede" :star-size="15" :padding="4"></star-rating>
+            </div>
+          </div>
+
+
+          <div class="avaliacao" v-for="(avaliacao, index) in acomod.avaliacoes" :v-key="index">
+            <h2 class="__guest-name">{{ avaliacao.guestName }}</h2>
+            <p class="__date">{{ formatAvaliacaoDate(avaliacao) }}</p>
             <h3 class="__message">{{ avaliacao.message }}</h3>
           </div>
+
+
+          <button class="add-avaliacao-btn" type="button" @click="$modal.show('add-avaliacao-desktop')">Deixar uma avaliação</button>
+
+          <add-avaliacao-desktop></add-avaliacao-desktop>
 
         </div><!-- ______________________________ AVALIAÇÕES ______________________________ -->
 
@@ -500,6 +509,7 @@ import 'firebase/firestore'
 import MiniLoader from '@/components/MiniLoader.vue'
 import ReservaMobile from '@/components/reserva-acomod/ReservaMobile'
 import Host from '@/components/Host'
+import AddAvaliacaoDesktop from '@/components/AddAvaliacaoDesktop'
 import supportsWebP from 'supports-webp'
 import { mapstyle } from '@/mixins/mapstyle'
 import { swiperOptions } from '@/mixins/swiper_id'
@@ -510,7 +520,7 @@ import subDays from 'date-fns/sub_days'
 import differenceInDays from 'date-fns/difference_in_days'
 
 export default {
-  components: { MiniLoader, ReservaMobile, Host },
+  components: { MiniLoader, ReservaMobile, Host, AddAvaliacaoDesktop },
   mixins: [ mapstyle, swiperOptions, tipoAcomod ],
   data () {
     return {
@@ -656,7 +666,7 @@ export default {
       window.location.hash = "compartilhar"
     },
     formatAvaliacaoDate (avaliacao) {
-      const formattedDate = format(avaliacao.date, 'MMM[.] [de] YYYY', { locale: pt })
+      const formattedDate = format(avaliacao.date, 'MMMM [de] YYYY', { locale: pt })
       return formattedDate.charAt(0).toUpperCase() + formattedDate.slice(1)
     }
   },
@@ -766,13 +776,7 @@ export default {
       font-weight: 600;
     }
     & .rating {
-      display: flex;
-      align-items: center;
-      & .rating-number {
-        font-size: 14px;
-        font-weight: 600;
-        padding-left: 3px;
-      }
+      margin-left: 3px;
     }
   }/* __________ RATING BOX __________ */
   
@@ -934,22 +938,19 @@ export default {
         font-size: 16px;
         font-weight: 600;
       }
-      & .rating {
-        display: flex;
-        align-items: center;
-        margin: .3rem 0 .5rem;
-        & .rating-number {
-          font-size: 14px;
-          font-weight: 600;
-          padding: 0 8px 0 2px;
-        }
-        & .date {
-          font-size: 14px;
-        }
+      & .__date {
+        padding: .4rem 0 .5rem;
+        font-size: 14px;
       }
       & .__message {
-
       }
+    }
+    & .add-avaliacao-btn {
+      padding: 0;
+      background: white;
+      color: var(--colorAcomod);
+      font-size: 16px;
+      font-weight: 600;
     }
   }/* __________ AVALIAÇÕES __________ */
 
@@ -1282,7 +1283,7 @@ export default {
             padding: 0 0 1rem 0;
           }
           & .vue-map-container {
-            height: 400px;
+            height: 430px;
           }
         }/* __________ LOCAL __________ */
 
@@ -1292,24 +1293,32 @@ export default {
         /* __________ AVALIAÇÕES __________ */
         & .avaliacoes-box {
           padding: 0;
+          & .avaliacoes-by-categories {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-column-gap: 10%;
+            grid-row-gap: 1rem;
+            margin-bottom: 2.5rem;
+            & .category {
+              display: flex;
+              align-items: center;
+              justify-content: space-between;
+            }
+          }
           & .avaliacao {
-            padding-bottom: 2rem;
             & .__guest-name {
               font-size: 18px;
-              font-weight: 600;
             }
-            & .rating {
-              margin: .3rem 0 .5rem;
-              & .rating-number {
-                font-size: 14px;
-                padding: 0 8px 0 2px;
-              }
-              & .date {
-                font-size: 14px;
-              }
+            & .__date {
             }
             & .__message {
             }
+          }
+          & .add-avaliacao-btn {
+            font-size: 17px;
+          }
+          & .add-avaliacao-btn:hover {
+            text-decoration: underline;
           }
         }/* __________ AVALIAÇÕES __________ */
 

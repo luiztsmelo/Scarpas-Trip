@@ -41,7 +41,7 @@
 .id-title {
   font-weight: 700;
   font-size: 26px;
-  line-height: 32px;
+  line-height: 1.25;
   padding: 0 7%;
   margin-top: .5rem;
 }
@@ -64,14 +64,7 @@
     padding-right: 1.2rem;
   }
   & .rating {
-    display: flex;
-    align-items: center;
     transform: translateY(2px);
-    & .rating-number {
-      font-size: 16px;
-      font-weight: 600;
-      padding-left: 3px;
-    }
   }
 }
 
@@ -83,7 +76,7 @@
   .id-title {
     font-weight: 700;
     font-size: 33px;
-    line-height: 42px;
+    line-height: 1.3;
     padding: 0;
     margin: .4rem 0 1rem 0;
   }
@@ -91,7 +84,7 @@
   .item-title {
     font-size: 18px;
     font-weight: 600;
-    padding: 4.5rem 0 1rem 0;
+    padding: 4.4rem 0 1rem 0;
     user-select: none;
   }
 
@@ -101,10 +94,6 @@
       font-size: 26px;
     }
     & .rating {
-      & .rating-number {
-        font-size: 17px;
-        padding-left: 3px;
-      }
     }
   }
 }

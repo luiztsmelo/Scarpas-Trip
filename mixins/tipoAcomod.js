@@ -41,6 +41,19 @@ export const tipoAcomod = {
            : path === 'Hostel' ? 'do hostel'
            : ''
     },
+    tipoAcomodN () {
+      const path = this.acomod.tipoAcomod
+      return path === 'Casa' ? 'na casa'
+           : path === 'Apartamento' ? 'no apartamento'
+           : path === 'Rancho' ? 'no rancho'
+           : path === 'Chácara' ? 'na chácara'
+           : path === 'Pousada' ? 'na pousada'
+           : path === 'Camping' ? 'no camping'
+           : path === 'Sítio' ? 'no sítio'
+           : path === 'Fazenda' ? 'na fazenda'
+           : path === 'Hostel' ? 'no hostel'
+           : ''
+    },
     tipoAcomodDd () {
       const path = this.acomodData.tipoAcomod
       return path === 'Casa' ? 'da casa'

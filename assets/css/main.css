@@ -1,26 +1,24 @@
 :root {
   --navbarHeightMobile: 3.5rem;
   --navbarHeightDesktop: 4.5rem;
-  /* ******* FONTS ******* */
+
+  /* _______ FONTS _______ */
   --main-font: 'Montserrat', sans-serif;
-  /* ******* COLOR PALETTE ******* */
+
+  /* _______ COLOR PALETTE _______ */
   --color01: rgb(22, 22, 22);
-  --colorAcomod: #FFA04F; /* #006561 for cards info #00D8C7*/ 
+  --colorAcomod: #FFA04F;
   --colorPasseio: #198CFE; /* #0784FD for cards info */
-  --colorEvento: #FF7E65; /* #FF6089 cor bonita tbm */
+  --colorEvento: #FF7E65;
   --colorRestaurante: #fc5656;
   --colorAtracao: #81C784;
-  /* ******* MAIN TRANSITION ******* */
+
+  /* _______ MAIN TRANSITION _______ */
   --pages-transition: cubic-bezier(0.455, 0.03, 0.515, 0.955) all .3s;
   --main-transition: cubic-bezier(0.190, 1.000, 0.220, 1.000) all .6s;
 }
 
-::selection {
-  background: #FFF59D;
-}
-
-html 
-{
+html {
   font-family: var(--main-font);
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
@@ -33,8 +31,7 @@ html
   -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
 }
 
-*, *:before, *:after 
-{
+*, *:before, *:after {
   box-sizing: border-box;
   margin: 0;
 }
@@ -44,22 +41,15 @@ html
   flex-flow: column;
 }
 
-/* ******* TEXT ******* */
+/* _______ TEXT _______ */
+::selection {
+  background: #FFF59D;
+}
 
 h3 {
   font-size: 16px;
   font-weight: 400;
   line-height: 26px;
-}
-
-/* ******* TEXT ******* */
-
-button {
-  font-family: var(--main-font);
-  cursor: pointer;
-  border: none;
-  outline: none !important;
-  user-select: none;
 }
 
 li {
@@ -70,6 +60,14 @@ a a:hover, a:visited, a:link, a:active
 {
   text-decoration: none;
   color: var(--color01);
+  outline: none !important;
+  user-select: none;
+}
+
+button {
+  font-family: var(--main-font);
+  cursor: pointer;
+  border: none;
   outline: none !important;
   user-select: none;
 }
@@ -93,29 +91,20 @@ textarea {
   opacity: 1;
 }
 
-
-
-/* ******* PAGE TRANSITIONS ******* */
-.slide-left-enter,
-.slide-right-leave-active 
-{
+/* _______ PAGE TRANSITIONS _______ */
+.slide-left-enter, .slide-right-leave-active {
   opacity: 0;
   transform: scale(1.05);
 }
 
-.slide-left-leave-active,
-.slide-right-enter 
-{
+.slide-left-leave-active, .slide-right-enter {
   opacity: 0;
   transform: translateX(.95);
 }
 
-.opacity-leave-active,
-.opacity-enter 
-{
+.opacity-leave-active, .opacity-enter {
   opacity: 0;
 }
-
 
 .id-enter { 
   transform: translateY(1.6rem);
@@ -124,8 +113,7 @@ textarea {
   opacity: 0;
 }
 
-
-/* Sign-in buttons */
+/* _______ SIGN-IN BUTTONS _______ */
 .google-btn {
   background-image: url('../img/google.svg');
   background-position: 15px;
@@ -140,7 +128,7 @@ textarea {
   transition: .15s border ease;
   text-align: left;
 }
-.google-btn:hover{
+.google-btn:hover {
   border: 1px solid var(--color01);
 }
 .facebook-btn {
@@ -157,12 +145,11 @@ textarea {
   transition: .15s border ease;
   text-align: left;
 }
-.facebook-btn:hover{
+.facebook-btn:hover {
   border: 1px solid var(--color01);
-}/* Sign-in buttons */
+}
 
-
-/* vue-js-modal */
+/* _______ VUE.JS MODAL _______ */
 .v--modal {
   border-radius: 5px !important;
 }
@@ -186,30 +173,4 @@ textarea {
   color: var(--color01) !important;
   font-size: 14px !important;
   font-weight: 600 !important;
-}/* vue-js-modal */
-
-
-/* vue-lazyload */
-/* img[lazy=loading] {
-  transform: translateZ(0);
-  filter: blur(7px);
 }
-img[lazy='loaded'] {
-  transform: translateZ(0);
-  filter: blur(7px);
-  animation-name: fadein;
-  animation-duration: .45s;
-  animation-iteration-count: 1;
-  animation-fill-mode: forwards;
-  animation-direction: normal;
-  animation-timing-function: ease-out;
-}
-@keyframes fadein {
-  0% {
-    filter: blur(7px);
-  }
-  100% {
-    filter: blur(0);
-  }
-} */
-/* vue-lazyload */

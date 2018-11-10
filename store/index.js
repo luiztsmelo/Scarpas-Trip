@@ -35,6 +35,20 @@ const store = () => new Vuex.Store({
     fromWithoutAddress: false,
     visitID: null,
     visitsLastMonth: null,
+    /*
+    -------------------- USER --------------------
+    */
+    authUser: false,
+    user: {
+      userID: null,
+      firstName: null,
+      fullName: null,
+      email: null,
+      photoURL: null
+    },
+    /*
+    -------------------- PERFIL --------------------
+    */
     perfil: {
       reservas: {
         acomods: null
@@ -47,7 +61,7 @@ const store = () => new Vuex.Store({
       showMessages: false,
       showEdit: false
     },
-    bankAccount: {
+    bankAccount: { /* !!! REMOVER !!! */
       bankCode: '',
       type: 'conta_corrente',
       agencia: '',
@@ -57,6 +71,9 @@ const store = () => new Vuex.Store({
       legalName: '',
       docNumber: ''
     },
+    /*
+    -------------------- CREDIT CARD --------------------
+    */
     creditCard: {
       cardNumber: '',
       cardHolderName: '',
@@ -65,6 +82,9 @@ const store = () => new Vuex.Store({
     },
     cardType: null,
     cardTypeNice: null,
+    /*
+    -------------------- CUSTOMER --------------------
+    */
     customer: {
       name: '',
       email: '',
@@ -77,6 +97,9 @@ const store = () => new Vuex.Store({
       city: '',
       state: ''
     },
+    /*
+    -------------------- FILTERS --------------------
+    */
     filters: {
       date: null,
       local: null,
@@ -104,20 +127,23 @@ const store = () => new Vuex.Store({
       persist: false
     },
     /*
-    -------------------- USER --------------------
+    -------------------- AVALIAÇÕES --------------------
     */
-    authUser: false,
-    user: {
-      userID: null,
-      firstName: null,
-      fullName: null,
-      email: null,
-      photoURL: null
+    avaliacaoAcomod: {
+      createdAt: null,
+      ratings: {
+        recepcao: null,
+        limpeza: null,
+        precisao: null,
+        valor: null
+      },
+      fullName: '',
+      comment: ''
     },
-    /*
-    -------------------- CONFIGS --------------------
-    */
-    serviceFeeAcomod: 0.1,
+    avaliacaoAcomodEtapa1: true,
+    avaliacaoAcomodEtapa2: false,
+    avaliacaoPasseioEtapa1: true,
+    avaliacaoPasseioEtapa2: false,
     /*
     -------------------- ANÚNCIOS --------------------
     */
@@ -370,7 +396,12 @@ const store = () => new Vuex.Store({
     /*
     -------------------- GERAL --------------------
     */
-
+    m_avaliacaoAcomodEtapa1 (state, payload) {
+      state.avaliacaoAcomodEtapa1 = payload
+    },
+    m_avaliacaoAcomodEtapa2 (state, payload) {
+      state.avaliacaoAcomodEtapa2 = payload
+    },
     show_alert (state, payload) {
       state.alert = payload
     },
