@@ -369,7 +369,7 @@ export default {
       transform: translateY(-50%);
       & .__reserva-valor {
         font-size: 17px;
-        font-weight: 500;
+        font-weight: 400;
       }
       & .__reserva-btn {
         font-size: 16px;

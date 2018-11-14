@@ -68,7 +68,7 @@
             :increment="0.5"
             :read-only="true"
             :show-rating="false"
-            active-color="#161616"
+            active-color="#2A2A2A"
             inactive-color="#dedede"
             :star-size="13"
             :padding="4">
@@ -140,11 +140,11 @@
 
             <h1 class="__title">Rota {{ passeio.rotas.length > 1 ? index + 1 : '' }}</h1>
 
-            <h3 style="padding: .3rem 0">Valor por pessoa: <span style="font-weight:500">R${{ rota.valor }}</span></h3>
+            <h3 style="padding: .3rem 0">Valor por pessoa: <span style="font-weight: 600">R${{ rota.valor }}</span></h3>
 
-            <h3 style="padding: .3rem 0">Horário de partida: <span style="font-weight:500">{{ rota.horarioPartida }}</span></h3>
+            <h3 style="padding: .3rem 0">Horário de partida: <span style="font-weight: 600">{{ rota.horarioPartida }}</span></h3>
 
-            <h3 style="padding: .3rem 0">Duração: <span style="font-weight:500">{{ rota.duracao }} {{ rota.duracao === 1 ? 'hora' : 'horas' }}</span></h3>
+            <h3 style="padding: .3rem 0">Duração: <span style="font-weight: 600">{{ rota.duracao }} {{ rota.duracao === 1 ? 'hora' : 'horas' }}</span></h3>
 
             <div class="pontos-visitados">
 
@@ -520,7 +520,7 @@ export default {
     align-items: center;
     & .__tipo {
       padding-right: 1rem;
-      font-size: 15px;
+      font-size: 16px;
       font-weight: 600;
     }
     & .rating {
@@ -547,7 +547,7 @@ export default {
     & .__anunciante-name {
       cursor: pointer;
       color: var(--colorPasseio);
-      font-weight: 500;
+      font-weight: 400;
       user-select: none;
     }
   }/* __________ ANUNCIANTE BOX __________ */
@@ -634,7 +634,7 @@ export default {
               min-height: 2.5rem;
               padding: 0 .7rem;
               font-size: 13px;
-              font-weight: 500;
+              font-weight: 400;
               width: 100%;
               text-align: center;
               user-select: none;
@@ -825,14 +825,14 @@ export default {
             border-radius: 200px;
           }
           & .__info {
-            margin: .5rem 0 .8rem;
+            margin: .4rem 0 .8rem;
             text-align: center;
-            font-size: 12px;
-            font-weight: 500;
+            font-size: 13px;
+            font-weight: 400;
             line-height: 17px;
           }
           & .__reserva-desktop-ask-btn {
-            font-size: 16px;
+            font-size: 17px;
             font-weight: 600;
             background: white;
             color: var(--colorPasseio);
@@ -849,7 +849,7 @@ export default {
             margin-top: 1rem;
             & .__text {
               font-size: 13px;
-              font-weight: 500;
+              font-weight: 400;
               line-height: 1.35;
             }
             & .__img {
@@ -875,7 +875,7 @@ export default {
           margin-top: 0;
           & .__tipo {
             padding-right: 1rem;
-            font-size: 16px;
+            font-size: 17px;
             font-weight: 600;
           }
           & .rating {
@@ -955,7 +955,7 @@ export default {
                   & .__name {
                     min-height: 2.3rem;
                     font-size: 13px;
-                    font-weight: 500;
+                    font-weight: 600;
                   }
                 }
               }

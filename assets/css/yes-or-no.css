@@ -36,7 +36,7 @@
   & .is-true {
     color: white;
     background: var(--colorAcomod);
-    font-weight: 500;
+    font-weight: 600;
   }
 }
 

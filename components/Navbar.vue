@@ -142,7 +142,7 @@ export default {
       & .__brand-name {
         font-family: var(--main-font);
         font-size: 18px;
-        font-weight: 500;
+        font-weight: 400;
         line-height: 3.5rem;
         user-select: none;
       }
@@ -257,7 +257,6 @@ export default {
         }
         & .__brand-name {
           font-size: 19px;
-          font-weight: 500;
           line-height: var(--navbarHeightDesktop);
         }
       }

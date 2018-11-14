@@ -215,7 +215,7 @@
               :increment="0.5"
               :read-only="true"
               :show-rating="false"
-              active-color="#161616"
+              active-color="#2A2A2A"
               inactive-color="#dedede"
               :star-size="12"
               :padding="3">

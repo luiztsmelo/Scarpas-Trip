@@ -113,8 +113,8 @@
       }
       & .__termos {
         padding-top: 3rem;
-        font-size: 14px;
-        font-weight: 500;
+        font-size: 15px;
+        font-weight: 400;
         line-height: 20px;
       }
       & .item-form {
@@ -123,7 +123,7 @@
         margin: 1.7rem 0;
         & label {
           user-select: none;
-          font-weight: 500;
+          font-weight: 400;
           font-size: 14px;
         }
         & input {
@@ -212,7 +212,7 @@
             user-select: none;
             cursor: pointer;
             font-size: 14px;
-            font-weight: 500;
+            font-weight: 600;
             color: var(--colorAcomod);
           }
         }
@@ -232,11 +232,11 @@
     }
     & .__text {
       font-size: 13px;
-      font-weight: 500;
+      font-weight: 400;
     }
     & .__ajuda {
-      font-size: 14px;
-      font-weight: 600;
+      font-size: 15px;
+      font-weight: 700;
     }
   }
   & .concluded-reserva {

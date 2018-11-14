@@ -3,10 +3,10 @@
   --navbarHeightDesktop: 4.5rem;
 
   /* _______ FONTS _______ */
-  --main-font: 'Montserrat', sans-serif;
+  --main-font: 'Open Sans', sans-serif;
 
   /* _______ COLOR PALETTE _______ */
-  --color01: rgb(22, 22, 22);
+  --color01: rgb(42, 42, 42);
   --colorAcomod: #FFA04F;
   --colorPasseio: #198CFE; /* #0784FD for cards info */
   --colorEvento: #FF7E65;
@@ -124,7 +124,7 @@ textarea {
   height: 2.5rem;
   border-radius: 5px;
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 600;
   transition: .15s border ease;
   text-align: left;
 }
@@ -141,7 +141,7 @@ textarea {
   height: 2.5rem;
   border-radius: 5px;
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 600;
   transition: .15s border ease;
   text-align: left;
 }

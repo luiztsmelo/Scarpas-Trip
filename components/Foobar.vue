@@ -103,8 +103,8 @@ export default {
       justify-content: center;
       align-items: center;
       & .__foobar-title {
-        font-size: 10px;
-        font-weight: 500;
+        font-size: 11px;
+        font-weight: 400;
         color: var(--colorAcomod);
       }
       & .colortitle {

@@ -36,7 +36,7 @@
               :increment="0.5"
               :read-only="true"
               :show-rating="false"
-              active-color="#161616"
+              active-color="#2A2A2A"
               inactive-color="#dedede"
               :star-size="10"
               :padding="2">
@@ -427,7 +427,7 @@ export default {
       this.$refs.infoWindow[index].$children[0].$el.style.color = '#FFA04F'
     },
     mouseOutCard (index) {
-      this.$refs.infoWindow[index].$children[0].$el.style.color = '#161616'
+      this.$refs.infoWindow[index].$children[0].$el.style.color = '#2A2A2A'
     },
     /* __________ FILTERS __________ */
     openFiltrarAcomods () {
@@ -604,7 +604,7 @@ export default {
       & .spinner > div {
         width: 7px;
         height: 7px;
-        background-color: #161616;
+        background-color: #2A2A2A;
         border-radius: 100%;
         display: inline-flex;
         margin: 0 .18rem;
@@ -673,7 +673,7 @@ export default {
         & .__card-tipo-acomod {
           padding-top: .1rem;
           text-transform: uppercase;
-          font-size: 11px;
+          font-size: 12px;
           font-weight: 600;
           color: var(--colorAcomod);
         }
@@ -685,19 +685,19 @@ export default {
         }
         & .__card-valor {
           font-size: 15px;
-          font-weight: 500;
+          font-weight: 400;
           & .__card-valor-dia {
             font-size: 15px;
             font-weight: 400;
           }
         }
         & .rating {
-          padding-top: .3rem;
+          padding-top: .2rem;
           display: flex;
           align-items: center;
           & .rating-number {
             font-size: 12px;
-            font-weight: 500;
+            font-weight: 400;
             padding-left: 2px;
           }
         }
@@ -783,7 +783,6 @@ export default {
           display: flex;
           flex-flow: column;
           & .__card-tipo-acomod {
-            font-size: 11px;
             font-weight: 600;
           }
           & .__card-title {
@@ -792,7 +791,7 @@ export default {
           }
           & .__card-valor {
             font-size: 14px;
-            font-weight: 500;
+            font-weight: 400;
             & .__card-valor-dia {
               font-size: 14px;
               font-weight: 400;
@@ -927,7 +926,7 @@ export default {
                   }
                 }
                 & .option:hover > .radio {
-                  border: 1px solid #161616;
+                  border: 1px solid #2A2A2A;
                 }
               }
               & .preco-box {
@@ -953,7 +952,7 @@ export default {
                   }
                 }
                 & .quantia:hover > .radio {
-                  border: 1px solid #161616;
+                  border: 1px solid #2A2A2A;
                 }
               }
               & .buttons {
@@ -969,7 +968,7 @@ export default {
                   height: 2.1rem;
                   background: transparent;
                   font-size: 15px;
-                  font-weight: 500;
+                  font-weight: 600;
                   transition: var(--main-transition);
                 }
                 & .__limpar-btn:hover {
@@ -1002,7 +1001,7 @@ export default {
           right: 7%;
           background: transparent;
           font-size: 15px;
-          font-weight: 500;
+          font-weight: 600;
         }
         & .__limpar-filtros-btn:hover {
           text-decoration: underline;
@@ -1038,7 +1037,7 @@ export default {
         cursor: pointer;
         font-family: var(--main-font) !important;
         font-size: 14px;
-        font-weight: 500;
+        font-weight: 600;
         transition: var(--main-transition);
       }
     }

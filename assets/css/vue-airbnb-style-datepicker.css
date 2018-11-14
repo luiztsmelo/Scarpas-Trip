@@ -68,7 +68,7 @@
     .asd__change-month-button > button > svg {
       height: 19px;
       width: 19px;
-      fill: #161616; }
+      fill: #2A2A2A; }
 
 .asd__days-legend {
   font-size: 15px;
@@ -109,7 +109,7 @@
 
 .asd__day {
   line-height: 38px;
-  font-weight: 500;
+  font-weight: 400;
   height: 38px;
   padding: 0;
   overflow: hidden; }
@@ -139,7 +139,7 @@
   text-align: center;
   user-select: none;
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 400;
   padding: 0; }
 
 .asd__action-buttons {

@@ -239,7 +239,7 @@ export default {
       & .__user-name {
         padding: 1rem;
         font-size: 18px;
-        font-weight: 500;
+        font-weight: 600;
         text-align: center;
         border-left: 1px solid #dedede;
         border-right: 1px solid #dedede;
@@ -252,7 +252,7 @@ export default {
           cursor: pointer;
           user-select: none;
           font-size: 15px;
-          font-weight: 500;
+          font-weight: 400;
           padding: 1rem;
         }
         & li:hover {
@@ -311,7 +311,7 @@ export default {
             }
             & .__item-text {
               font-size: 15px;
-              font-weight: 500;
+              font-weight: 400;
             }
             & .__item-info {
               width: .9rem;
@@ -331,7 +331,7 @@ export default {
             & .__btn {
               padding: 0 1.2rem 0 0;
               font-size: 15px;
-              font-weight: 500;
+              font-weight: 600;
               background: transparent;
             }
             & .__btn:hover {

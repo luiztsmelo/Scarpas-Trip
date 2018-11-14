@@ -146,7 +146,7 @@ export default {
         padding-top: .8rem;
         text-align: center;
         font-size: 14px;
-        font-weight: 500;
+        font-weight: 400;
         user-select: none;
         & a:hover {
           text-decoration: underline;

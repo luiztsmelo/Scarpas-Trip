@@ -122,7 +122,7 @@ export default {
   data () {
     return {
       polylineOptions: {
-        strokeColor: '#2a2a2a',
+        strokeColor: '#2A2A2A',
         strokeOpacity: 1,
         strokeWeight: 2
       }
@@ -308,7 +308,7 @@ export default {
       transform: translateY(-50%);
       & .__reserva-km {
         font-size: 17px;
-        font-weight: 500;
+        font-weight: 600;
       }
       & .__reserva-btn {
         font-size: 16px;

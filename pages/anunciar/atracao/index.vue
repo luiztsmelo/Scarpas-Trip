@@ -256,7 +256,7 @@ export default {
       title: '', /* Vue Autosize */
       subtitle: '', /* Vue Autosize */
       polylineOptions: {
-        strokeColor: '#2a2a2a',
+        strokeColor: '#2A2A2A',
         strokeOpacity: 1,
         strokeWeight: 2
       },
@@ -613,7 +613,7 @@ export default {
       width: 30%;
       height: 2rem;
       color: white;
-      background: #2a2a2a;
+      background: #2A2A2A;
     }
     & .__map-btn-remove {
       width: 70%;
@@ -633,7 +633,7 @@ export default {
     & .__croppa-btn {
       margin: .3rem 0;
       font-size: 15px;
-      font-weight: 500;
+      font-weight: 600;
       background: #81C784;
       color: white;
       padding: .8rem 1.2rem;
@@ -676,14 +676,14 @@ export default {
         }
         & .__back {
           font-size: var(--fontSizeAnuncioText);
-          font-weight: 500;
+          font-weight: 600;
           border-radius: 2rem 0 0 2rem;
           cursor: pointer;
           background: white;
         }
         & .__next {
           font-size: var(--fontSizeAnuncioText);
-          font-weight: 500;
+          font-weight: 700;
           border-radius: 0 2rem 2rem 0;
           transition: all .3s ease;
           cursor: no-drop;

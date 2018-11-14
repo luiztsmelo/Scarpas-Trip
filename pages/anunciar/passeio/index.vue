@@ -150,7 +150,7 @@
             <circle
               class="__circle"
               :stroke-width="$store.state.isMobile ? 3 : 4"
-              stroke="#161616"
+              stroke="#2A2A2A"
               :stroke-dasharray="$store.state.isMobile ? `${14.5*2*Math.PI} ${14.5*2*Math.PI}` : `${18*2*Math.PI} ${18*2*Math.PI}`"
               :stroke-dashoffset="$store.state.isMobile ? 14.5*2*Math.PI - this.uploadProgress/100*14.5*2*Math.PI : 18*2*Math.PI - this.uploadProgress/100*18*2*Math.PI"
               fill="transparent"
@@ -1318,7 +1318,7 @@ export default {
     & .__form-title {
       padding: 2.7rem 7% 1.4rem 7%;
       line-height: 1.25;
-      font-size: 29px;
+      font-size: 30px;
       font-weight: 700;
       z-index: 999;
       user-select: none !important;
@@ -1341,7 +1341,7 @@ export default {
     & .__termos {
       padding: 0 7%;
       font-size: 15px;
-      font-weight: 500;
+      font-weight: 600;
       line-height: 20px;
       & a {
         color: var(--colorPasseio);
@@ -1374,7 +1374,7 @@ export default {
       flex-flow: column;
       margin: 1.2rem 0;
       & label {
-        font-weight: 500;
+        font-weight: 400;
         font-size: 14px;
         user-select: none;
       }
@@ -1444,7 +1444,7 @@ export default {
             min-height: 2.4rem;
             & label {
               font-size: 15px;
-              font-weight: 500;
+              font-weight: 400;
               padding-right: 4px;
             }
             & input {
@@ -1706,7 +1706,7 @@ export default {
       padding: 0 0 9rem 0;
       & .__form-title {
         padding: 3.5rem 28% 1.3rem;
-        font-size: 32px;
+        font-size: 33px;
         font-weight: 700;
         text-align: center;
       }
@@ -1863,11 +1863,11 @@ export default {
           }
           & .__back {
             font-size: 17px;
-            font-weight: 500;
+            font-weight: 600;
           }
           & .__next {
             font-size: 17px;
-            font-weight: 600;
+            font-weight: 700;
           }
         }
       }

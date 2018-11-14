@@ -737,14 +737,14 @@ export default {
         }
         & .__back {
           font-size: 16px;
-          font-weight: 500;
+          font-weight: 600;
           border-radius: 2rem 0 0 2rem;
           cursor: pointer;
           background: white;
         }
         & .__next {
           font-size: 16px;
-          font-weight: 500;
+          font-weight: 700;
           border-radius: 0 2rem 2rem 0;
           transition: all .3s ease;
           cursor: no-drop;
@@ -776,7 +776,7 @@ export default {
     & .__croppa-btn {
       margin: .3rem 0;
       font-size: 15px;
-      font-weight: 500;
+      font-weight: 600;
       background: #FF7D6C;
       color: white;
       padding: .8rem 1.2rem;

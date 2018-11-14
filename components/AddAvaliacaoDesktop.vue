@@ -31,7 +31,7 @@
             v-model="category.rating"
             :increment="0.5"
             :show-rating="false"
-            active-color="#161616"
+            active-color="#2A2A2A"
             inactive-color="#dedede"
             :star-size="24"
             :padding="5">
@@ -66,7 +66,10 @@
 
       <!-- ____________________ AFTER ____________________ -->
       <div class="after" v-if="!$store.state.avaliacaoAcomodEtapa1 && !$store.state.avaliacaoAcomodEtapa2">
-        <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52"><circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none"/><path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/></svg>
+        <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+          <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none"/>
+          <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+        </svg>
       </div><!-- ____________________ AFTER ____________________ -->
 
 
@@ -310,6 +313,7 @@ export default {
   }
 }
 
+/* CHECKMARK */
 .checkmark__circle {
   stroke-dasharray: 332;
   stroke-dashoffset: 332;
@@ -319,7 +323,6 @@ export default {
   fill: none;
   animation: stroke 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
 }
-
 .checkmark {
   width: 112px;
   height: 112px;
@@ -332,14 +335,12 @@ export default {
   box-shadow: inset 0px 0px 0px var(--colorAcomod);
   animation: fill .4s ease-in-out .4s forwards, scale .3s ease-in-out .9s both;
 }
-
 .checkmark__check {
   transform-origin: 50% 50%;
   stroke-dasharray: 96;
   stroke-dashoffset: 96;
   animation: stroke 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.8s forwards;
 }
-
 @keyframes stroke {
   100% {
     stroke-dashoffset: 0;
