@@ -211,7 +211,7 @@
 
           <div class="rating">
             <star-rating
-              :rating="4.7"
+              :rating="acomod.averageRating"
               :increment="0.5"
               :read-only="true"
               :show-rating="false"
@@ -220,7 +220,7 @@
               :star-size="12"
               :padding="3">
             </star-rating>
-            <p class="rating-number">4,7</p>
+            <p class="rating-number"></p>
           </div>
 
 

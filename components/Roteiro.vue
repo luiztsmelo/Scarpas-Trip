@@ -89,7 +89,7 @@ export default {
 .roteiro {
   width: 100%;
   height: 17rem;
-  background-image: url('../assets/img/bgimg2.jpg');
+  background-image: url('../assets/img/bgimg.jpg');
   background-repeat: no-repeat;
   background-size: cover;
   & .roteiro-container {
@@ -141,7 +141,7 @@ export default {
         align-items: center;
         justify-content: center;
         background: transparent;
-        height: 3.4rem;
+        height: 3.2rem;
         width: 40rem;
         & .datepicker-trigger {
           height: 100%;

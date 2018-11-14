@@ -32,7 +32,7 @@
           <p class="__card-valor">R${{ acomod.valorNoite }}<span class="__card-valor-dia"> por noite</span></p>
           <div class="rating">
             <star-rating
-              :rating="4.2"
+              :rating="acomod.averageRating"
               :increment="0.5"
               :read-only="true"
               :show-rating="false"
@@ -41,7 +41,7 @@
               :star-size="10"
               :padding="2">
             </star-rating>
-            <p class="rating-number">4,2</p>
+            <p class="rating-number">{{ acomod.avaliacoes.length }}</p>
           </div>
           
         </div>

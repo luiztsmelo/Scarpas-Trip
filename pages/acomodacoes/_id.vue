@@ -62,8 +62,8 @@
 
           <star-rating
             class="rating"
-            :rating="averageRatings"
-            :increment="0.1"
+            :rating="acomod.averageRating"
+            :increment="0.5"
             :read-only="true"
             :show-rating="false"
             active-color="#161616"
@@ -321,13 +321,13 @@
         <!-- ______________________________ AVALIAÇÕES ______________________________ -->
         <div class="avaliacoes-title">
 
-          <h1 class="__title" v-if="acomod.avaliacoes.length > 0">
-            {{ acomod.avaliacoes.length }} {{ acomod.avaliacoes.length > 1 ? 'Avaliações': 'Avaliação' }} 
+          <h1 class="__title">
+            {{ acomod.avaliacoes.length }} {{ acomod.avaliacoes.length === 1 ? 'Avaliação': 'Avaliações' }} 
           </h1>
 
           <star-rating
             class="rating"
-            :rating="averageRatings"
+            :rating="acomod.averageRating"
             :increment="0.5"
             :read-only="true"
             :show-rating="false"
@@ -340,33 +340,33 @@
         </div>
         
 
-        <div class="avaliacoes-box" v-if="acomod.avaliacoes.length > 0">
+        <div class="avaliacoes-box">
 
 
-          <div class="avaliacoes-by-categories">
+          <div class="avaliacoes-by-categories" v-if="acomod.avaliacoes.length > 0">
             <div class="category">
               <p class="__name">Recepção</p>
-              <star-rating class="__rating" :rating="4.5" :increment="0.5" :read-only="true" :show-rating="false" active-color="#161616" inactive-color="#dedede" :star-size="15" :padding="4"></star-rating>
+              <star-rating class="__rating" :rating="acomod.averageRating_recepcao" :increment="0.5" :read-only="true" :show-rating="false" active-color="#161616" inactive-color="#dedede" :star-size="15" :padding="4"></star-rating>
             </div>
             <div class="category">
               <p class="__name">Limpeza</p>
-              <star-rating class="__rating" :rating="4.5" :increment="0.5" :read-only="true" :show-rating="false" active-color="#161616" inactive-color="#dedede" :star-size="15" :padding="4"></star-rating>
+              <star-rating class="__rating" :rating="acomod.averageRating_limpeza" :increment="0.5" :read-only="true" :show-rating="false" active-color="#161616" inactive-color="#dedede" :star-size="15" :padding="4"></star-rating>
             </div>
             <div class="category">
               <p class="__name">Precisão do anúncio</p>
-              <star-rating class="__rating" :rating="4.5" :increment="0.5" :read-only="true" :show-rating="false" active-color="#161616" inactive-color="#dedede" :star-size="15" :padding="4"></star-rating>
+              <star-rating class="__rating" :rating="acomod.averageRating_precisao" :increment="0.5" :read-only="true" :show-rating="false" active-color="#161616" inactive-color="#dedede" :star-size="15" :padding="4"></star-rating>
             </div>
             <div class="category">
               <p class="__name">Valor</p>
-              <star-rating class="__rating" :rating="4.5" :increment="0.5" :read-only="true" :show-rating="false" active-color="#161616" inactive-color="#dedede" :star-size="15" :padding="4"></star-rating>
+              <star-rating class="__rating" :rating="acomod.averageRating_valor" :increment="0.5" :read-only="true" :show-rating="false" active-color="#161616" inactive-color="#dedede" :star-size="15" :padding="4"></star-rating>
             </div>
           </div>
 
 
           <div class="avaliacao" v-for="(avaliacao, index) in acomod.avaliacoes" :v-key="index">
-            <h2 class="__guest-name">{{ avaliacao.guestName }}</h2>
+            <h2 class="__guest-name">{{ avaliacao.fullName }}</h2>
             <p class="__date">{{ formatAvaliacaoDate(avaliacao) }}</p>
-            <h3 class="__message">{{ avaliacao.message }}</h3>
+            <h3 class="__message">{{ avaliacao.comment }}</h3>
           </div>
 
 
@@ -666,7 +666,7 @@ export default {
       window.location.hash = "compartilhar"
     },
     formatAvaliacaoDate (avaliacao) {
-      const formattedDate = format(avaliacao.date, 'MMMM [de] YYYY', { locale: pt })
+      const formattedDate = format(avaliacao.createdAt, 'MMMM [de] YYYY', { locale: pt })
       return formattedDate.charAt(0).toUpperCase() + formattedDate.slice(1)
     }
   },
@@ -692,14 +692,6 @@ export default {
         ...this.acomod.disabledDates_escarpasTrip
       ])]
       return mergedDisabledDates
-    },
-    averageRatings () {
-      let ratingsArray = []
-      this.acomod.avaliacoes.forEach(avaliacao => {
-        ratingsArray.push(avaliacao.rating)
-      })
-      const averageRatings = ratingsArray.reduce((sum, a) => { return sum + a }, 0) / (ratingsArray.length || 1)
-      return averageRatings
     }
   },
   watch: {
@@ -939,7 +931,7 @@ export default {
         font-weight: 600;
       }
       & .__date {
-        padding: .4rem 0 .5rem;
+        padding: .3rem 0 .6rem;
         font-size: 14px;
       }
       & .__message {

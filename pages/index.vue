@@ -38,7 +38,7 @@
 
             <div class="rating">
               <star-rating
-                :rating="4.8"
+                :rating="acomod.averageRating"
                 :increment="0.5"
                 :read-only="true"
                 :show-rating="false"
@@ -47,7 +47,7 @@
                 :star-size="10"
                 :padding="2">
               </star-rating>
-              <p class="rating-count">2</p>
+              <p class="rating-count">{{ acomod.avaliacoes.length }}</p>
             </div>
             
           </nuxt-link>

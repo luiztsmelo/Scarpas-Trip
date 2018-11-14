@@ -8,11 +8,14 @@
 
     <div class="body">
 
-      <img src="../assets/img/close-modal.svg" style="cursor:pointer;position:absolute;top:1rem;right:1rem;width:1rem;height:auto" @click="$modal.hide('add-avaliacao-desktop')">
+
+      <img src="../assets/img/close-modal.svg" style="cursor:pointer;position:absolute;top:1rem;right:1rem;width:1rem;height:auto" @click="$modal.hide('add-avaliacao-desktop')" v-if="$store.state.avaliacaoAcomodEtapa1 || $store.state.avaliacaoAcomodEtapa2">
 
 
 
-      <h1 class="title">{{ title }}</h1>
+
+      <h1 class="title" v-if="$store.state.avaliacaoAcomodEtapa1 || $store.state.avaliacaoAcomodEtapa2">{{ title }}</h1>
+
 
 
 
@@ -30,7 +33,7 @@
             :show-rating="false"
             active-color="#161616"
             inactive-color="#dedede"
-            :star-size="25"
+            :star-size="24"
             :padding="5">
           </star-rating>
         </div>
@@ -39,16 +42,44 @@
 
 
 
+
       <!-- ____________________ COMMENT ____________________ -->
       <div class="comment-input" v-if="$store.state.avaliacaoAcomodEtapa2">
 
+        <input
+          type="text" 
+          placeholder="Seu nome"
+          pattern="[A-Za-z]"
+          v-model="$store.state.avaliacaoAcomod.fullName">
+
+        <textarea 
+          rows="15" 
+          maxlength="700" 
+          placeholder="Seu comentário"
+          v-model="$store.state.avaliacaoAcomod.comment">
+        </textarea>
 
       </div><!-- ____________________ COMMENT ____________________ -->
 
 
 
 
-      <button type="button" @click="btnClick">{{ $store.state.avaliacaoAcomodEtapa1 ? 'Próximo' : 'Publicar avaliação' }}</button>
+      <!-- ____________________ AFTER ____________________ -->
+      <div class="after" v-if="!$store.state.avaliacaoAcomodEtapa1 && !$store.state.avaliacaoAcomodEtapa2">
+        <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52"><circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none"/><path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/></svg>
+      </div><!-- ____________________ AFTER ____________________ -->
+
+
+
+
+      <button 
+        type="button" 
+        :style="btnStyle" 
+        @click="btnClick" 
+        v-if="$store.state.avaliacaoAcomodEtapa1 || $store.state.avaliacaoAcomodEtapa2">
+        {{ $store.state.avaliacaoAcomodEtapa1 ? 'Próximo' : 'Publicar avaliação' }}
+      </button>
+
 
 
 
@@ -59,6 +90,8 @@
 </template>
 
 <script>
+import firebase from '@firebase/app'
+import 'firebase/firestore'
 import { tipoAcomod } from '@/mixins/tipoAcomod'
 
 export default {
@@ -74,22 +107,95 @@ export default {
     }
   },
   methods: {
-    btnClick () {
-      if (this.$store.state.avaliacaoAcomodEtapa1) {
-        if (this.categoriesAcomod[0].rating !== 0 && this.categoriesAcomod[1].rating !== 0 && this.categoriesAcomod[2].rating !== 0 && this.categoriesAcomod[3].rating !== 0) {
-          this.$store.state.avaliacaoAcomod.ratings.recepcao = this.categoriesAcomod[0].rating
-          this.$store.state.avaliacaoAcomod.ratings.limpeza = this.categoriesAcomod[1].rating
-          this.$store.state.avaliacaoAcomod.ratings.precisao = this.categoriesAcomod[2].rating
-          this.$store.state.avaliacaoAcomod.ratings.valor = this.categoriesAcomod[3].rating
-          this.$store.commit('m_avaliacaoAcomodEtapa1', false)
-          this.$store.commit('m_avaliacaoAcomodEtapa2', true)
+    async btnClick () {
+      try {
+        /* _______________ ETAPA 1 _______________ */
+        if (this.$store.state.avaliacaoAcomodEtapa1) {
+
+          if (this.categoriesAcomod[0].rating !== 0 && this.categoriesAcomod[1].rating !== 0 && this.categoriesAcomod[2].rating !== 0 && this.categoriesAcomod[3].rating !== 0) {
+            this.$store.state.avaliacaoAcomod.ratings.recepcao = this.categoriesAcomod[0].rating
+            this.$store.state.avaliacaoAcomod.ratings.limpeza = this.categoriesAcomod[1].rating
+            this.$store.state.avaliacaoAcomod.ratings.precisao = this.categoriesAcomod[2].rating
+            this.$store.state.avaliacaoAcomod.ratings.valor = this.categoriesAcomod[3].rating
+            this.$store.commit('m_avaliacaoAcomodEtapa1', false)
+            this.$store.commit('m_avaliacaoAcomodEtapa2', true)
+          }
+
+        } else { /* _______________ ETAPA 2 _______________ */  
+
+          if (this.$store.state.avaliacaoAcomod.fullName !== '' && this.$store.state.avaliacaoAcomod.comment !== '') {
+
+            this.$store.state.avaliacaoAcomod.createdAt = Date.now()
+
+            /* Set new avaliacao */
+            await firebase.firestore().doc(`acomods/${this.acomod.acomodID}`).update({
+              avaliacoes: firebase.firestore.FieldValue.arrayUnion(this.$store.state.avaliacaoAcomod)
+            })
+
+            const avaliacaoAcomodClone = JSON.parse(JSON.stringify(this.$store.state.avaliacaoAcomod))
+            this.acomod.avaliacoes.push(avaliacaoAcomodClone)
+
+            /* Calc & set averages */
+            let ratings = []
+            let recepcaoRatings = []
+            let limpezaRatings = []
+            let precisaoRatings = []
+            let valorRatings = []
+
+            this.acomod.avaliacoes.forEach(avaliacao => {
+              ratings.push(avaliacao.ratings.recepcao)
+              ratings.push(avaliacao.ratings.limpeza)
+              ratings.push(avaliacao.ratings.precisao)
+              ratings.push(avaliacao.ratings.valor)
+              recepcaoRatings.push(avaliacao.ratings.recepcao)
+              limpezaRatings.push(avaliacao.ratings.limpeza)
+              precisaoRatings.push(avaliacao.ratings.precisao)
+              valorRatings.push(avaliacao.ratings.valor)
+            })
+
+            const averageRating = ratings.reduce((sum, a) => { return sum + a }, 0) / (ratings.length || 1)
+            const averageRating_recepcao = recepcaoRatings.reduce((sum, a) => { return sum + a }, 0) / (recepcaoRatings.length || 1)
+            const averageRating_limpeza = limpezaRatings.reduce((sum, a) => { return sum + a }, 0) / (limpezaRatings.length || 1)
+            const averageRating_precisao = precisaoRatings.reduce((sum, a) => { return sum + a }, 0) / (precisaoRatings.length || 1)
+            const averageRating_valor = valorRatings.reduce((sum, a) => { return sum + a }, 0) / (valorRatings.length || 1)
+
+            await firebase.firestore().doc(`acomods/${this.acomod.acomodID}`).update({
+              averageRating: averageRating,
+              averageRating_recepcao: averageRating_recepcao,
+              averageRating_limpeza: averageRating_limpeza,
+              averageRating_precisao: averageRating_precisao,
+              averageRating_valor: averageRating_valor
+            })
+
+            this.acomod.averageRating = averageRating
+            this.acomod.averageRating_recepcao = averageRating_recepcao
+            this.acomod.averageRating_limpeza = averageRating_limpeza
+            this.acomod.averageRating_precisao = averageRating_precisao
+            this.acomod.averageRating_valor = averageRating_valor
+
+            this.$store.commit('m_avaliacaoAcomodEtapa2', false)
+
+            await new Promise(resolve => setTimeout(resolve, 2000))
+
+            this.$modal.hide('add-avaliacao-desktop')
+
+            this.$store.commit('m_resetAvaliacaoAcomod')
+
+            this.categoriesAcomod[0].rating = 0
+            this.categoriesAcomod[1].rating = 0
+            this.categoriesAcomod[2].rating = 0
+            this.categoriesAcomod[3].rating = 0
+          }
+
         }
-      } else {
-        alert('else')
+
+      } catch (err) {
+        console.log(err)
       }
     }
   },
   computed: {
+    acomod () { return this.$store.state.acomod },
     title () {
       if (this.$route.name === 'acomodacoes-id') {
         if (this.$store.state.avaliacaoAcomodEtapa1) {
@@ -98,12 +204,29 @@ export default {
           return `Deixe seu comentário`
         }
       }
-      if (this.$route.name === 'passeio-id') {
+      if (this.$route.name === 'passeios-id') {
         if (this.$store.state.avaliacaoPasseioEtapa1) {
           return `Como você avalia esse passeio?`
         } else {
           return `Deixe seu comentário`
         }
+      }
+    },
+    btnStyle () {
+      if (this.$route.name === 'acomodacoes-id') {
+        if (this.$store.state.avaliacaoAcomodEtapa1) {
+          if (this.categoriesAcomod[0].rating !== 0 && this.categoriesAcomod[1].rating !== 0 && this.categoriesAcomod[2].rating !== 0 && this.categoriesAcomod[3].rating !== 0) {
+            return 'background: #FFA04F'
+          }
+        } else {
+          if (this.$store.state.avaliacaoAcomod.fullName !== '' && this.$store.state.avaliacaoAcomod.comment !== '') {
+            return 'background: #FFA04F'
+          }
+        }
+      }
+      if (this.$route.name === 'passeios-id') {
+        if (this.$store.state.avaliacaoPasseioEtapa1) {
+        } 
       }
     }
   }
@@ -121,7 +244,7 @@ export default {
     padding: 2.6rem 3rem;
     & .title {
       font-size: 33px;
-      line-height: 1.35;
+      line-height: 1.3;
     }
     & .ratings-input {
       & .category {
@@ -134,33 +257,105 @@ export default {
           flex-flow: column;
           margin-right: 1rem;
           & .__name {
-            font-size: 18px;
+            font-size: 17px;
             font-weight: 600;
             padding-bottom: 4px;
           }
           & .__desc {
-            font-size: 15px;
+            font-size: 14px;
             font-weight: 400;
           }
         }
         & rating {
-
         }
       }
     }
     & .comment-input {
-      
+      & input {
+        cursor: text;
+        width: 100%;
+        font-size: 21px;
+        font-weight: 600;
+        background: white;
+        color: var(--color01);
+        padding: 1.8rem 0;
+        border: none;
+        outline: none;
+      }
+      & textarea {
+        border: none;
+        outline: none;
+        resize: none;
+        font-size: 17px;
+        width: 100%;
+      }
+    }
+    & .after {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
     }
     & button {
       align-self: center;
-      padding: 0 2rem;
-      background: var(--colorAcomod);
+      padding: 0 2.3rem;
+      background: #dedede;
       color: white;
       font-size: 16px;
       font-weight: 600;
       border-radius: 200px;
-      height: 3rem;
+      height: 2.9rem;
+      transition: var(--main-transition);
     }
+  }
+}
+
+.checkmark__circle {
+  stroke-dasharray: 332;
+  stroke-dashoffset: 332;
+  stroke-width: 2;
+  stroke-miterlimit: 10;
+  stroke: var(--colorAcomod);
+  fill: none;
+  animation: stroke 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
+}
+
+.checkmark {
+  width: 112px;
+  height: 112px;
+  border-radius: 50%;
+  display: block;
+  stroke-width: 2;
+  stroke: #fff;
+  stroke-miterlimit: 10;
+  margin: 10% auto;
+  box-shadow: inset 0px 0px 0px var(--colorAcomod);
+  animation: fill .4s ease-in-out .4s forwards, scale .3s ease-in-out .9s both;
+}
+
+.checkmark__check {
+  transform-origin: 50% 50%;
+  stroke-dasharray: 96;
+  stroke-dashoffset: 96;
+  animation: stroke 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.8s forwards;
+}
+
+@keyframes stroke {
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes scale {
+  0%, 100% {
+    transform: none;
+  }
+  50% {
+    transform: scale3d(1.2, 1.2, 1);
+  }
+}
+@keyframes fill {
+  100% {
+    box-shadow: inset 0px 0px 0px 60px var(--colorAcomod);
   }
 }
 

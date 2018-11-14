@@ -132,10 +132,10 @@ const store = () => new Vuex.Store({
     avaliacaoAcomod: {
       createdAt: null,
       ratings: {
-        recepcao: null,
-        limpeza: null,
-        precisao: null,
-        valor: null
+        recepcao: 0,
+        limpeza: 0,
+        precisao: 0,
+        valor: 0
       },
       fullName: '',
       comment: ''
@@ -195,7 +195,12 @@ const store = () => new Vuex.Store({
       allowFumar: false,
       regrasAdicionais: [],
       images: [],
-      reviews: [],
+      avaliacoes: [],
+      averageRating: 0,
+      averageRating_recepcao: 0,
+      averageRating_limpeza: 0,
+      averageRating_precisao: 0,
+      averageRating_valor: 0,
       iCalendars: {
         airbnb: '',
         booking: ''
@@ -401,6 +406,16 @@ const store = () => new Vuex.Store({
     },
     m_avaliacaoAcomodEtapa2 (state, payload) {
       state.avaliacaoAcomodEtapa2 = payload
+    },
+    m_resetAvaliacaoAcomod (state) {
+      state.avaliacaoAcomodEtapa1 = true
+      state.avaliacaoAcomod.createdAt = null
+      state.avaliacaoAcomod.ratings.recepcao = 0
+      state.avaliacaoAcomod.ratings.limpeza = 0
+      state.avaliacaoAcomod.ratings.precisao = 0
+      state.avaliacaoAcomod.ratings.valor = 0
+      state.avaliacaoAcomod.fullName = ''
+      state.avaliacaoAcomod.comment = ''
     },
     show_alert (state, payload) {
       state.alert = payload
@@ -902,7 +917,12 @@ const store = () => new Vuex.Store({
         allowFumar: false,
         regrasAdicionais: [],
         images: [],
-        reviews: [],
+        avaliacoes: [],
+        averageRating: 0,
+        averageRating_recepcao: 0,
+        averageRating_limpeza: 0,
+        averageRating_precisao: 0,
+        averageRating_valor: 0,
         iCalendars: {
           airbnb: '',
           booking: ''
