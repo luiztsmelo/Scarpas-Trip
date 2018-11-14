@@ -109,7 +109,7 @@
 
 .asd__day {
   line-height: 38px;
-  font-weight: 400;
+  font-weight: 500;
   height: 38px;
   padding: 0;
   overflow: hidden; }
@@ -139,7 +139,7 @@
   text-align: center;
   user-select: none;
   font-size: 14px;
-  font-weight: 400;
+  font-weight: 500;
   padding: 0; }
 
 .asd__action-buttons {

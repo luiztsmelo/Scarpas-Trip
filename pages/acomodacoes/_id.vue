@@ -66,7 +66,7 @@
             :increment="0.5"
             :read-only="true"
             :show-rating="false"
-            active-color="#2A2A2A"
+            active-color="#161616"
             inactive-color="#dedede"
             :star-size="13"
             :padding="4">
@@ -331,7 +331,7 @@
             :increment="0.5"
             :read-only="true"
             :show-rating="false"
-            active-color="#2A2A2A"
+            active-color="#161616"
             inactive-color="#dedede"
             :star-size="$store.state.isMobile ? 16 : 19"
             :padding="$store.state.isMobile ? 4 : 5">
@@ -346,19 +346,19 @@
           <div class="avaliacoes-by-categories" v-if="acomod.avaliacoes.length > 0">
             <div class="category">
               <p class="__name">Recepção</p>
-              <star-rating class="__rating" :rating="acomod.averageRating_recepcao" :increment="0.5" :read-only="true" :show-rating="false" active-color="#2A2A2A" inactive-color="#dedede" :star-size="15" :padding="4"></star-rating>
+              <star-rating class="__rating" :rating="acomod.averageRating_recepcao" :increment="0.5" :read-only="true" :show-rating="false" active-color="#161616" inactive-color="#dedede" :star-size="15" :padding="4"></star-rating>
             </div>
             <div class="category">
               <p class="__name">Limpeza</p>
-              <star-rating class="__rating" :rating="acomod.averageRating_limpeza" :increment="0.5" :read-only="true" :show-rating="false" active-color="#2A2A2A" inactive-color="#dedede" :star-size="15" :padding="4"></star-rating>
+              <star-rating class="__rating" :rating="acomod.averageRating_limpeza" :increment="0.5" :read-only="true" :show-rating="false" active-color="#161616" inactive-color="#dedede" :star-size="15" :padding="4"></star-rating>
             </div>
             <div class="category">
               <p class="__name">Precisão do anúncio</p>
-              <star-rating class="__rating" :rating="acomod.averageRating_precisao" :increment="0.5" :read-only="true" :show-rating="false" active-color="#2A2A2A" inactive-color="#dedede" :star-size="15" :padding="4"></star-rating>
+              <star-rating class="__rating" :rating="acomod.averageRating_precisao" :increment="0.5" :read-only="true" :show-rating="false" active-color="#161616" inactive-color="#dedede" :star-size="15" :padding="4"></star-rating>
             </div>
             <div class="category">
               <p class="__name">Valor</p>
-              <star-rating class="__rating" :rating="acomod.averageRating_valor" :increment="0.5" :read-only="true" :show-rating="false" active-color="#2A2A2A" inactive-color="#dedede" :star-size="15" :padding="4"></star-rating>
+              <star-rating class="__rating" :rating="acomod.averageRating_valor" :increment="0.5" :read-only="true" :show-rating="false" active-color="#161616" inactive-color="#dedede" :star-size="15" :padding="4"></star-rating>
             </div>
           </div>
 
@@ -764,7 +764,7 @@ export default {
     align-items: center;
     & .__tipo {
       padding-right: 1rem;
-      font-size: 16px;
+      font-size: 15px;
       font-weight: 600;
     }
     & .rating {
@@ -790,7 +790,7 @@ export default {
     & .__anunciante-name {
       cursor: pointer;
       color: var(--colorAcomod);
-      font-weight: 400;
+      font-weight: 500;
       user-select: none;
     }
     & .__anunciante-name:hover {
@@ -1126,14 +1126,14 @@ export default {
             border-radius: 200px;
           }
           & .__info {
-            margin: .4rem 0 .8rem;
+            margin: .5rem 0 .8rem;
             text-align: center;
-            font-size: 13px;
-            font-weight: 400;
+            font-size: 12px;
+            font-weight: 500;
             line-height: 17px;
           }
           & .__reserva-desktop-ask-btn {
-            font-size: 17px;
+            font-size: 16px;
             font-weight: 600;
             background: white;
             color: var(--colorAcomod);
@@ -1150,7 +1150,7 @@ export default {
             margin-top: 1rem;
             & .__text {
               font-size: 13px;
-              font-weight: 400;
+              font-weight: 500;
               line-height: 1.35;
             }
             & .__img {
@@ -1176,7 +1176,7 @@ export default {
           margin-top: 0;
           & .__tipo {
             padding-right: 1rem;
-            font-size: 17px;
+            font-size: 16px;
             font-weight: 600;
           }
           & .rating {

@@ -25,7 +25,7 @@ Vue.use(AirbnbStyleDatepicker, {
     selected: '#FFA04F',
     inRange: '#FFCA9D',
     selectedText: '#fff',
-    text: '#2A2A2A',
+    text: '#161616',
     inRangeBorder: '#dedede',
     disabled: '#fff'
   },

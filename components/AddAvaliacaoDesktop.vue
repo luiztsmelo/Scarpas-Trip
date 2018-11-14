@@ -31,7 +31,7 @@
             v-model="category.rating"
             :increment="0.5"
             :show-rating="false"
-            active-color="#2A2A2A"
+            active-color="#161616"
             inactive-color="#dedede"
             :star-size="24"
             :padding="5">

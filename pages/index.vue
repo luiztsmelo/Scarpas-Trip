@@ -42,7 +42,7 @@
                 :increment="0.5"
                 :read-only="true"
                 :show-rating="false"
-                active-color="#2A2A2A"
+                active-color="#161616"
                 inactive-color="#dedede"
                 :star-size="10"
                 :padding="2">
@@ -92,7 +92,7 @@
                 :increment="0.5"
                 :read-only="true"
                 :show-rating="false"
-                active-color="#2A2A2A"
+                active-color="#161616"
                 inactive-color="#dedede"
                 :star-size="10"
                 :padding="2">
@@ -330,10 +330,10 @@ export default {
           }
           & .__card-subtitle {
             font-size: 14px;
-            font-weight: 400;
+            font-weight: 500;
             & .__card-valor-noite {
               font-size: 14px;
-              font-weight: 400;
+              font-weight: 500;
             }
           }
           & .rating {
@@ -388,7 +388,7 @@ export default {
             & .__card-info {
               padding-top: .3rem;
               text-transform: uppercase;
-              font-size: 12px;
+              font-size: 11px;
               font-weight: 600;
             }
             & .__card-title {
@@ -399,10 +399,8 @@ export default {
             }
             & .__card-subtitle {
               font-size: 15px;
-              font-weight: 400;
               & .__card-valor-noite {
                 font-size: 15px;
-                font-weight: 400;
               }
             }
             & .rating {

@@ -157,7 +157,7 @@ export default {
         }
         & .__link {
           font-size: 17px;
-          font-weight: 400;
+          font-weight: 500;
         }
       }
     }

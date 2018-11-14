@@ -74,7 +74,7 @@ export default {
     & .alert-text {
       & .__message {
         font-size: 15px;
-        font-weight: 400;
+        font-weight: 500;
         line-height: 1.35;
         user-select: none;
         & .__title {

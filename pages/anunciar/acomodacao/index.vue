@@ -325,7 +325,7 @@
             <circle
               class="__circle"
               :stroke-width="$store.state.isMobile ? 3 : 4"
-              stroke="#2A2A2A"
+              stroke="#161616"
               :stroke-dasharray="$store.state.isMobile ? `${14.5*2*Math.PI} ${14.5*2*Math.PI}` : `${18*2*Math.PI} ${18*2*Math.PI}`"
               :stroke-dashoffset="$store.state.isMobile ? 14.5*2*Math.PI - this.uploadProgress/100*14.5*2*Math.PI : 18*2*Math.PI - this.uploadProgress/100*18*2*Math.PI"
               fill="transparent"
@@ -614,7 +614,7 @@
             <vue-simple-suggest
               ref="bankCode"
               :class="[ bankCodeError ? 'has-error' : '' ]"
-              style="color:#2A2A2A !important"
+              style="color:#161616 !important"
               mode="select"
               @select="onSelectBankCode"
               v-model="$store.state.bankAccount.bankCode"
@@ -1377,7 +1377,7 @@ export default {
     & .__form-title {
       padding: 2.7rem 7% 1.4rem 7%;
       line-height: 1.25;
-      font-size: 30px;
+      font-size: 29px;
       font-weight: 700;
       z-index: 999;
       user-select: none !important;
@@ -1395,7 +1395,7 @@ export default {
     & .__termos {
       padding: 0 7%;
       font-size: 14px;
-      font-weight: 400;
+      font-weight: 500;
       line-height: 20px;
       & a {
         color: var(--colorAcomod);
@@ -1428,7 +1428,7 @@ export default {
       flex-flow: column;
       margin: 2.1rem 0;
       & label {
-        font-weight: 400;
+        font-weight: 500;
         font-size: 14px;
         user-select: none;
       }
@@ -1537,7 +1537,7 @@ export default {
           background-repeat: no-repeat;
           background-size: 21px;
           background-color: white;
-          font-weight: 400;
+          font-weight: 500;
           border-bottom: 1px solid #dedede;
           width: 3rem;
           min-width: 3rem;
@@ -1550,7 +1550,7 @@ export default {
       user-select: none;
       margin: 0 7%;
       font-size: 16px;
-      font-weight: 600;
+      font-weight: 500;
       transform: translateY(-1.1rem);
       color: var(--colorAcomod);
       transition: .2s all ease;
@@ -1786,7 +1786,7 @@ export default {
       padding: 0 0 9rem 0;
       & .__form-title {
         padding: 3.5rem 28% 1.3rem;
-        font-size: 33px;
+        font-size: 32px;
         font-weight: 700;
         text-align: center;
       }
@@ -1940,11 +1940,11 @@ export default {
           }
           & .__back {
             font-size: 17px;
-            font-weight: 600;
+            font-weight: 500;
           }
           & .__next {
             font-size: 17px;
-            font-weight: 700;
+            font-weight: 600;
           }
         }
       }

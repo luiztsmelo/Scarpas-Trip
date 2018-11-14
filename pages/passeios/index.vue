@@ -156,9 +156,10 @@ export default {
         }
         & .__card-valor {
           font-size: 16px;
-          font-weight: 400;
+          font-weight: 500;
           & .__card-valor-pessoa {
             font-size: 14px;
+            font-weight: 500;
           }
         }
       }

@@ -83,7 +83,7 @@ export default {
       & .__numero {
         width: 2.5rem;
         font-size: 17px;
-        font-weight: 400;
+        font-weight: 500;
       }
       & .__valor {
         font-size: 18px;

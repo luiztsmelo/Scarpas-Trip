@@ -36,7 +36,7 @@
               :increment="0.5"
               :read-only="true"
               :show-rating="false"
-              active-color="#2A2A2A"
+              active-color="#161616"
               inactive-color="#dedede"
               :star-size="10"
               :padding="2">
@@ -427,7 +427,7 @@ export default {
       this.$refs.infoWindow[index].$children[0].$el.style.color = '#FFA04F'
     },
     mouseOutCard (index) {
-      this.$refs.infoWindow[index].$children[0].$el.style.color = '#2A2A2A'
+      this.$refs.infoWindow[index].$children[0].$el.style.color = '#161616'
     },
     /* __________ FILTERS __________ */
     openFiltrarAcomods () {
@@ -604,7 +604,7 @@ export default {
       & .spinner > div {
         width: 7px;
         height: 7px;
-        background-color: #2A2A2A;
+        background-color: #161616;
         border-radius: 100%;
         display: inline-flex;
         margin: 0 .18rem;
@@ -673,7 +673,7 @@ export default {
         & .__card-tipo-acomod {
           padding-top: .1rem;
           text-transform: uppercase;
-          font-size: 12px;
+          font-size: 11px;
           font-weight: 600;
           color: var(--colorAcomod);
         }
@@ -685,10 +685,10 @@ export default {
         }
         & .__card-valor {
           font-size: 15px;
-          font-weight: 400;
+          font-weight: 500;
           & .__card-valor-dia {
             font-size: 15px;
-            font-weight: 400;
+            font-weight: 500;
           }
         }
         & .rating {
@@ -697,7 +697,7 @@ export default {
           align-items: center;
           & .rating-number {
             font-size: 12px;
-            font-weight: 400;
+            font-weight: 500;
             padding-left: 2px;
           }
         }
@@ -791,10 +791,10 @@ export default {
           }
           & .__card-valor {
             font-size: 14px;
-            font-weight: 400;
+            font-weight: 500;
             & .__card-valor-dia {
               font-size: 14px;
-              font-weight: 400;
+              font-weight: 500;
             }
           }
         }
@@ -926,7 +926,7 @@ export default {
                   }
                 }
                 & .option:hover > .radio {
-                  border: 1px solid #2A2A2A;
+                  border: 1px solid #161616;
                 }
               }
               & .preco-box {
@@ -952,7 +952,7 @@ export default {
                   }
                 }
                 & .quantia:hover > .radio {
-                  border: 1px solid #2A2A2A;
+                  border: 1px solid #161616;
                 }
               }
               & .buttons {
@@ -1037,7 +1037,7 @@ export default {
         cursor: pointer;
         font-family: var(--main-font) !important;
         font-size: 14px;
-        font-weight: 600;
+        font-weight: 500;
         transition: var(--main-transition);
       }
     }

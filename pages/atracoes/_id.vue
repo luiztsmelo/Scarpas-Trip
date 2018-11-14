@@ -122,7 +122,7 @@ export default {
   data () {
     return {
       polylineOptions: {
-        strokeColor: '#2A2A2A',
+        strokeColor: '#161616',
         strokeOpacity: 1,
         strokeWeight: 2
       }

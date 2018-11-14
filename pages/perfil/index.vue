@@ -239,7 +239,7 @@ export default {
       & .__user-name {
         padding: 1rem;
         font-size: 18px;
-        font-weight: 600;
+        font-weight: 500;
         text-align: center;
         border-left: 1px solid #dedede;
         border-right: 1px solid #dedede;
@@ -252,14 +252,14 @@ export default {
           cursor: pointer;
           user-select: none;
           font-size: 15px;
-          font-weight: 400;
+          font-weight: 500;
           padding: 1rem;
         }
         & li:hover {
-          font-weight: 600;
+          font-weight: 500;
         }
         & .li-active {
-          font-weight: 700;
+          font-weight: 600;
         }
       }
     }

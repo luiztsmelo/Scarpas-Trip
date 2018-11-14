@@ -15,7 +15,7 @@ export const stylesCalendar = {
       /* ____________________ Date Picker Desktop ____________________ */
       datePickerDesktopStyle: {
         wrapper: {
-          color: '#2A2A2A',
+          color: '#161616',
           borderTop: '10px solid white',
           borderBottom: '8px solid white',
           borderLeft: '15px solid white',
@@ -34,7 +34,7 @@ export const stylesCalendar = {
           fontWeight: '400'
         },
         weekdays: {
-          color: '#2A2A2A',
+          color: '#161616',
           fontWeight: '400',
           padding: '21px 5px 6px 5px'
         },
@@ -60,7 +60,7 @@ export const stylesCalendar = {
       /* ____________________ Date Picker Mobile ____________________ */
       datePickerMobileStyle: {
         wrapper: {
-          color: '#2A2A2A',
+          color: '#161616',
           border: '0',
           padding: '0 4px',
           background: 'white'
@@ -77,7 +77,7 @@ export const stylesCalendar = {
           fontWeight: '700'
         },
         weekdays: {
-          color: '#2A2A2A',
+          color: '#161616',
           fontSize: '16px',
           fontWeight: '400',
           padding: '21px 5px 6px 5px'
@@ -97,7 +97,7 @@ export const stylesCalendar = {
       /* ____________________ Calendar Desktop ____________________ */
       calendarDesktopStyle: {
         wrapper: {
-          color: '#2A2A2A',
+          color: '#161616',
           margin: '10px 0px 0 0px',
           padding: '10px 0px 0 0px',
           background: 'white',
@@ -114,7 +114,7 @@ export const stylesCalendar = {
           fontWeight: '600'
         },
         weekdays: {
-          color: '#2A2A2A',
+          color: '#161616',
           fontSize: '15px',
           fontWeight: '500',
           padding: '14px 5px 6px 5px'
@@ -136,7 +136,7 @@ export const stylesCalendar = {
       /* ____________________ Calendar Mobile ____________________ */
       calendarMobileStyle: {
         wrapper: {
-          color: '#2A2A2A',
+          color: '#161616',
           margin: '10px 0px 0 0px',
           padding: '10px 0px 0 0px',
           background: 'white',
@@ -154,7 +154,7 @@ export const stylesCalendar = {
           fontWeight: '600'
         },
         weekdays: {
-          color: '#2A2A2A',
+          color: '#161616',
           fontSize: '15px',
           fontWeight: '500',
           padding: '16px 10px 6px 10px'

@@ -132,7 +132,7 @@ export default {
       font-size: 11px;
       font-weight: 400;
       & strong {
-        font-weight: 600;
+        font-weight: 500;
       }
     }
   }
