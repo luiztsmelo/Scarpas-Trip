@@ -924,6 +924,18 @@ export default {
   /* __________ AVALIAÇÕES __________ */
   & .avaliacoes-box {
     padding: 0 7%;
+    margin-bottom: 1.5rem;
+    & .avaliacoes-by-categories {
+      display: grid;
+      grid-template-columns: 1fr;
+      grid-row-gap: 1.3rem;
+      margin-bottom: 2.5rem;
+      & .category {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+    }
     & .avaliacao {
       padding-bottom: 2rem;
       & .__guest-name {
@@ -1112,7 +1124,7 @@ export default {
               border-top: 1px solid #dedede;
               & h3 {
                 font-size: 17px;
-                font-weight: 600;
+                font-weight: 500;
               }
             }
           }

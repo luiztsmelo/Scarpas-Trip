@@ -64,7 +64,7 @@
 
           <star-rating
             class="rating"
-            :rating="4.7"
+            :rating="passeio.averageRating"
             :increment="0.5"
             :read-only="true"
             :show-rating="false"
@@ -209,10 +209,61 @@
 
       
         <!-- ______________________________ AVALIAÇÕES ______________________________ -->
-        <h1 class="item-title">Avaliações</h1>
+        <div class="avaliacoes-title">
+
+          <h1 class="__title">
+            {{ passeio.avaliacoes.length }} {{ passeio.avaliacoes.length === 1 ? 'Avaliação': 'Avaliações' }} 
+          </h1>
+
+          <star-rating
+            class="rating"
+            :rating="passeio.averageRating"
+            :increment="0.5"
+            :read-only="true"
+            :show-rating="false"
+            active-color="#161616"
+            inactive-color="#dedede"
+            :star-size="$store.state.isMobile ? 16 : 19"
+            :padding="$store.state.isMobile ? 4 : 5">
+          </star-rating>
+
+        </div>
+        
 
         <div class="avaliacoes-box">
-          <h3>Comentários aqui...</h3>
+
+
+          <div class="avaliacoes-by-categories" v-if="passeio.avaliacoes.length > 0">
+            <div class="category">
+              <p class="__name">Habilidade do Guia</p>
+              <star-rating class="__rating" :rating="passeio.averageRating_habilidade" :increment="0.5" :read-only="true" :show-rating="false" active-color="#161616" inactive-color="#dedede" :star-size="15" :padding="4"></star-rating>
+            </div>
+            <div class="category">
+              <p class="__name">Segurança</p>
+              <star-rating class="__rating" :rating="passeio.averageRating_seguranca" :increment="0.5" :read-only="true" :show-rating="false" active-color="#161616" inactive-color="#dedede" :star-size="15" :padding="4"></star-rating>
+            </div>
+            <div class="category">
+              <p class="__name">Precisão do anúncio</p>
+              <star-rating class="__rating" :rating="passeio.averageRating_precisao" :increment="0.5" :read-only="true" :show-rating="false" active-color="#161616" inactive-color="#dedede" :star-size="15" :padding="4"></star-rating>
+            </div>
+            <div class="category">
+              <p class="__name">Valor</p>
+              <star-rating class="__rating" :rating="passeio.averageRating_valor" :increment="0.5" :read-only="true" :show-rating="false" active-color="#161616" inactive-color="#dedede" :star-size="15" :padding="4"></star-rating>
+            </div>
+          </div>
+
+
+          <div class="avaliacao" v-for="(avaliacao, index) in passeio.avaliacoes" :v-key="index">
+            <h2 class="__guest-name">{{ avaliacao.fullName }}</h2>
+            <p class="__date">{{ formatAvaliacaoDate(avaliacao) }}</p>
+            <h3 class="__message">{{ avaliacao.comment }}</h3>
+          </div>
+
+
+          <button class="add-avaliacao-btn" type="button" @click="$modal.show('add-avaliacao-desktop')">Deixar uma avaliação</button>
+
+          <add-avaliacao-desktop></add-avaliacao-desktop>
+
         </div><!-- ______________________________ AVALIAÇÕES ______________________________ -->
 
 
@@ -313,6 +364,7 @@
 import firebase from '@firebase/app'
 import 'firebase/firestore'
 import Host from '../../components/Host'
+import AddAvaliacaoDesktop from '@/components/AddAvaliacaoDesktop'
 import supportsWebP from 'supports-webp'
 import { mapstyle } from '../../mixins/mapstyle'
 import { swiperOptions } from '../../mixins/swiper_id'
@@ -326,7 +378,7 @@ import 'dayjs/locale/pt-br'
 dayjs.locale('pt-br')
 
 export default {
-  components: { Host },
+  components: { Host, AddAvaliacaoDesktop },
   mixins: [ mapstyle, swiperOptions, stylesCalendar, pontosTuristicos ],
   data () {
     return {
@@ -429,6 +481,10 @@ export default {
             document.documentElement.webkitRequestFullScreen(Element.ALLOW_KEYBOARD_INPUT);
         }
       }
+    },
+    formatAvaliacaoDate (avaliacao) {
+      const formattedDate = format(avaliacao.createdAt, 'MMMM [de] YYYY', { locale: pt })
+      return formattedDate.charAt(0).toUpperCase() + formattedDate.slice(1)
     }
   },
   async mounted () {
@@ -666,10 +722,42 @@ export default {
 
 
 
-  /* __________ AVALIAÇÕES BOX __________ */
+  /* __________ AVALIAÇÕES __________ */
   & .avaliacoes-box {
     padding: 0 7%;
-  }/* __________ AVALIAÇÕES BOX __________ */
+    margin-bottom: 1.5rem;
+    & .avaliacoes-by-categories {
+      display: grid;
+      grid-template-columns: 1fr;
+      grid-row-gap: 1.3rem;
+      margin-bottom: 2.5rem;
+      & .category {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+    }
+    & .avaliacao {
+      padding-bottom: 2rem;
+      & .__guest-name {
+        font-size: 16px;
+        font-weight: 600;
+      }
+      & .__date {
+        padding: .3rem 0 .6rem;
+        font-size: 14px;
+      }
+      & .__message {
+      }
+    }
+    & .add-avaliacao-btn {
+      padding: 0;
+      background: white;
+      color: var(--colorPasseio);
+      font-size: 16px;
+      font-weight: 600;
+    }
+  }/* __________ AVALIAÇÕES __________ */
 
 
 
@@ -983,10 +1071,37 @@ export default {
 
 
 
-        /* __________ AVALIAÇÕES BOX __________ */
+        /* __________ AVALIAÇÕES __________ */
         & .avaliacoes-box {
           padding: 0;
-        }/* __________ AVALIAÇÕES BOX __________ */
+          & .avaliacoes-by-categories {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-column-gap: 10%;
+            grid-row-gap: 1rem;
+            margin-bottom: 2.5rem;
+            & .category {
+              display: flex;
+              align-items: center;
+              justify-content: space-between;
+            }
+          }
+          & .avaliacao {
+            & .__guest-name {
+              font-size: 18px;
+            }
+            & .__date {
+            }
+            & .__message {
+            }
+          }
+          & .add-avaliacao-btn {
+            font-size: 17px;
+          }
+          & .add-avaliacao-btn:hover {
+            text-decoration: underline;
+          }
+        }/* __________ AVALIAÇÕES __________ */
       }
     }
     

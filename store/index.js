@@ -140,6 +140,17 @@ const store = () => new Vuex.Store({
       fullName: '',
       comment: ''
     },
+    avaliacaoPasseio: {
+      createdAt: null,
+      ratings: {
+        habilidade: 0,
+        seguranca: 0,
+        precisao: 0,
+        valor: 0
+      },
+      fullName: '',
+      comment: ''
+    },
     avaliacaoAcomodEtapa1: true,
     avaliacaoAcomodEtapa2: false,
     avaliacaoPasseioEtapa1: true,
@@ -283,7 +294,13 @@ const store = () => new Vuex.Store({
       ],
       images: [],
       title: '',
-      subtitle: ''
+      subtitle: '',
+      avaliacoes: [],
+      averageRating: 0,
+      averageRating_habilidade: 0,
+      averageRating_seguranca: 0,
+      averageRating_precisao: 0,
+      averageRating_valor: 0
     },
     cadastroPasseio0: true,
     cadastroPasseio1: false,
@@ -407,6 +424,12 @@ const store = () => new Vuex.Store({
     m_avaliacaoAcomodEtapa2 (state, payload) {
       state.avaliacaoAcomodEtapa2 = payload
     },
+    m_avaliacaoPasseioEtapa1 (state, payload) {
+      state.avaliacaoPasseioEtapa1 = payload
+    },
+    m_avaliacaoPasseioEtapa2 (state, payload) {
+      state.avaliacaoPasseioEtapa2 = payload
+    },
     m_resetAvaliacaoAcomod (state) {
       state.avaliacaoAcomodEtapa1 = true
       state.avaliacaoAcomod.createdAt = null
@@ -416,6 +439,16 @@ const store = () => new Vuex.Store({
       state.avaliacaoAcomod.ratings.valor = 0
       state.avaliacaoAcomod.fullName = ''
       state.avaliacaoAcomod.comment = ''
+    },
+    m_resetAvaliacaoPasseio (state) {
+      state.avaliacaoPasseioEtapa1 = true
+      state.avaliacaoPasseio.createdAt = null
+      state.avaliacaoPasseio.ratings.habilidade = 0
+      state.avaliacaoPasseio.ratings.seguranca = 0
+      state.avaliacaoPasseio.ratings.precisao = 0
+      state.avaliacaoPasseio.ratings.valor = 0
+      state.avaliacaoPasseio.fullName = ''
+      state.avaliacaoPasseio.comment = ''
     },
     show_alert (state, payload) {
       state.alert = payload
@@ -1009,7 +1042,13 @@ const store = () => new Vuex.Store({
         ],
         images: [],
         title: '',
-        subtitle: ''
+        subtitle: '',
+        avaliacoes: [],
+        averageRating: 0,
+        averageRating_habilidade: 0,
+        averageRating_seguranca: 0,
+        averageRating_precisao: 0,
+        averageRating_valor: 0
       })
     },
     a_resetReservaPasseio ({ state }) { /* Resetar dados quando usuário for p/ outro passeio (evitar bugs) */

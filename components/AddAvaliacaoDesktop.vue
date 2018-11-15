@@ -9,18 +9,18 @@
     <div class="body">
 
 
-      <img src="../assets/img/close-modal.svg" style="cursor:pointer;position:absolute;top:1rem;right:1rem;width:1rem;height:auto" @click="$modal.hide('add-avaliacao-desktop')" v-if="$store.state.avaliacaoAcomodEtapa1 || $store.state.avaliacaoAcomodEtapa2">
+      <img src="../assets/img/close-modal.svg" style="cursor:pointer;position:absolute;top:1rem;right:1rem;width:1rem;height:auto" @click="$modal.hide('add-avaliacao-desktop')" v-if="$route.name === 'acomodacoes-id' ? $store.state.avaliacaoAcomodEtapa1 || $store.state.avaliacaoAcomodEtapa2 : $store.state.avaliacaoPasseioEtapa1 || $store.state.avaliacaoPasseioEtapa2">
 
 
 
 
-      <h1 class="title" v-if="$store.state.avaliacaoAcomodEtapa1 || $store.state.avaliacaoAcomodEtapa2">{{ title }}</h1>
+      <h1 class="title" v-if="$route.name === 'acomodacoes-id' ? $store.state.avaliacaoAcomodEtapa1 || $store.state.avaliacaoAcomodEtapa2 : $store.state.avaliacaoPasseioEtapa1 || $store.state.avaliacaoPasseioEtapa2">{{ title }}</h1>
 
 
 
 
-      <!-- ____________________ RATINGS ____________________ -->
-      <div class="ratings-input" v-if="$store.state.avaliacaoAcomodEtapa1">
+      <!-- ____________________ RATINGS ACOMOD ____________________ -->
+      <div class="ratings-input" v-if="$store.state.avaliacaoAcomodEtapa1 && $route.name === 'acomodacoes-id'">
         <div class="category" v-for="(category, index) in categoriesAcomod" :key="index">
           <div class="description">
             <h2 class="__name">{{ category.name }}</h2>
@@ -37,14 +37,37 @@
             :padding="5">
           </star-rating>
         </div>
-      </div><!-- ____________________ RATINGS ____________________ -->
+      </div><!-- ____________________ RATINGS ACOMOD ____________________ -->
+
+
+
+
+      <!-- ____________________ RATINGS PASSEIO ____________________ -->
+      <div class="ratings-input" v-if="$store.state.avaliacaoPasseioEtapa1 && $route.name === 'passeios-id'">
+        <div class="category" v-for="(category, index) in categoriesPasseio" :key="index">
+          <div class="description">
+            <h2 class="__name">{{ category.name }}</h2>
+            <h3 class="__desc">{{ category.desc }}</h3>
+          </div>
+          <star-rating
+            class="rating"
+            v-model="category.rating"
+            :increment="0.5"
+            :show-rating="false"
+            active-color="#161616"
+            inactive-color="#dedede"
+            :star-size="24"
+            :padding="5">
+          </star-rating>
+        </div>
+      </div><!-- ____________________ RATINGS PASSEIO ____________________ -->
 
 
 
 
 
-      <!-- ____________________ COMMENT ____________________ -->
-      <div class="comment-input" v-if="$store.state.avaliacaoAcomodEtapa2">
+      <!-- ____________________ COMMENT ACOMOD ____________________ -->
+      <div class="comment-input" v-if="$store.state.avaliacaoAcomodEtapa2 && $route.name === 'acomodacoes-id'">
 
         <input
           type="text" 
@@ -59,13 +82,35 @@
           v-model="$store.state.avaliacaoAcomod.comment">
         </textarea>
 
-      </div><!-- ____________________ COMMENT ____________________ -->
+      </div><!-- ____________________ COMMENT ACOMOD ____________________ -->
+
+
+
+
+      <!-- ____________________ COMMENT PASSEIO ____________________ -->
+      <div class="comment-input" v-if="$store.state.avaliacaoPasseioEtapa2 && $route.name === 'passeios-id'">
+
+        <input
+          type="text" 
+          placeholder="Seu nome"
+          pattern="[A-Za-z]"
+          v-model="$store.state.avaliacaoPasseio.fullName">
+
+        <textarea 
+          rows="15" 
+          maxlength="700" 
+          placeholder="Seu comentário"
+          v-model="$store.state.avaliacaoPasseio.comment">
+        </textarea>
+
+      </div><!-- ____________________ COMMENT PASSEIO ____________________ -->
+
 
 
 
 
       <!-- ____________________ AFTER ____________________ -->
-      <div class="after" v-if="!$store.state.avaliacaoAcomodEtapa1 && !$store.state.avaliacaoAcomodEtapa2">
+      <div class="after" v-if="$route.name === 'acomodacoes-id' ? !$store.state.avaliacaoAcomodEtapa1 && !$store.state.avaliacaoAcomodEtapa2 : !$store.state.avaliacaoPasseioEtapa1 && !$store.state.avaliacaoPasseioEtapa2">
         <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
           <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none"/>
           <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
@@ -75,12 +120,13 @@
 
 
 
+
       <button 
         type="button" 
         :style="btnStyle" 
         @click="btnClick" 
-        v-if="$store.state.avaliacaoAcomodEtapa1 || $store.state.avaliacaoAcomodEtapa2">
-        {{ $store.state.avaliacaoAcomodEtapa1 ? 'Próximo' : 'Publicar avaliação' }}
+        v-if="$route.name === 'acomodacoes-id' ? $store.state.avaliacaoAcomodEtapa1 || $store.state.avaliacaoAcomodEtapa2 : $store.state.avaliacaoPasseioEtapa1 || $store.state.avaliacaoPasseioEtapa2">
+        {{ $store.state.avaliacaoAcomodEtapa1 || $store.state.avaliacaoPasseioEtapa1 ? 'Próximo' : 'Publicar avaliação' }}
       </button>
 
 
@@ -106,90 +152,184 @@ export default {
         { name: 'Limpeza', desc: 'Quão limpa estava?', rating: 0 },
         { name: 'Precisão do anúncio', desc: 'Quão preciso está o anúncio?', rating: 0 },
         { name: 'Valor', desc: 'O valor correspondeu às suas expectativas?', rating: 0 }
+      ],
+      categoriesPasseio: [
+        { name: 'Habilidade do Guia', desc: 'Quão bem o guia conduziu o passeio?', rating: 0 },
+        { name: 'Segurança', desc: 'Quão seguro você sentiu?', rating: 0 },
+        { name: 'Precisão do anúncio', desc: 'Quão preciso está o anúncio?', rating: 0 },
+        { name: 'Valor', desc: 'O valor correspondeu às suas expectativas?', rating: 0 }
       ]
     }
   },
   methods: {
     async btnClick () {
       try {
-        /* _______________ ETAPA 1 _______________ */
-        if (this.$store.state.avaliacaoAcomodEtapa1) {
 
-          if (this.categoriesAcomod[0].rating !== 0 && this.categoriesAcomod[1].rating !== 0 && this.categoriesAcomod[2].rating !== 0 && this.categoriesAcomod[3].rating !== 0) {
-            this.$store.state.avaliacaoAcomod.ratings.recepcao = this.categoriesAcomod[0].rating
-            this.$store.state.avaliacaoAcomod.ratings.limpeza = this.categoriesAcomod[1].rating
-            this.$store.state.avaliacaoAcomod.ratings.precisao = this.categoriesAcomod[2].rating
-            this.$store.state.avaliacaoAcomod.ratings.valor = this.categoriesAcomod[3].rating
-            this.$store.commit('m_avaliacaoAcomodEtapa1', false)
-            this.$store.commit('m_avaliacaoAcomodEtapa2', true)
+        if (this.$route.name === 'acomodacoes-id') {
+
+          /* _______________ ETAPA 1 _______________ */
+          if (this.$store.state.avaliacaoAcomodEtapa1) {
+
+            if (this.categoriesAcomod[0].rating !== 0 && this.categoriesAcomod[1].rating !== 0 && this.categoriesAcomod[2].rating !== 0 && this.categoriesAcomod[3].rating !== 0) {
+              this.$store.state.avaliacaoAcomod.ratings.recepcao = this.categoriesAcomod[0].rating
+              this.$store.state.avaliacaoAcomod.ratings.limpeza = this.categoriesAcomod[1].rating
+              this.$store.state.avaliacaoAcomod.ratings.precisao = this.categoriesAcomod[2].rating
+              this.$store.state.avaliacaoAcomod.ratings.valor = this.categoriesAcomod[3].rating
+              this.$store.commit('m_avaliacaoAcomodEtapa1', false)
+              this.$store.commit('m_avaliacaoAcomodEtapa2', true)
+            }
+
+          } else { /* _______________ ETAPA 2 _______________ */  
+
+            if (this.$store.state.avaliacaoAcomod.fullName !== '' && this.$store.state.avaliacaoAcomod.comment !== '') {
+
+              this.$store.state.avaliacaoAcomod.createdAt = Date.now()
+
+              /* Set new avaliacao */
+              await firebase.firestore().doc(`acomods/${this.acomod.acomodID}`).update({
+                avaliacoes: firebase.firestore.FieldValue.arrayUnion(this.$store.state.avaliacaoAcomod)
+              })
+
+              const avaliacaoAcomodClone = JSON.parse(JSON.stringify(this.$store.state.avaliacaoAcomod))
+              this.acomod.avaliacoes.push(avaliacaoAcomodClone)
+
+              /* Calc & set averages */
+              let ratings = []
+              let recepcaoRatings = []
+              let limpezaRatings = []
+              let precisaoRatings = []
+              let valorRatings = []
+
+              this.acomod.avaliacoes.forEach(avaliacao => {
+                ratings.push(avaliacao.ratings.recepcao)
+                ratings.push(avaliacao.ratings.limpeza)
+                ratings.push(avaliacao.ratings.precisao)
+                ratings.push(avaliacao.ratings.valor)
+                recepcaoRatings.push(avaliacao.ratings.recepcao)
+                limpezaRatings.push(avaliacao.ratings.limpeza)
+                precisaoRatings.push(avaliacao.ratings.precisao)
+                valorRatings.push(avaliacao.ratings.valor)
+              })
+
+              const averageRating = ratings.reduce((sum, a) => { return sum + a }, 0) / (ratings.length || 1)
+              const averageRating_recepcao = recepcaoRatings.reduce((sum, a) => { return sum + a }, 0) / (recepcaoRatings.length || 1)
+              const averageRating_limpeza = limpezaRatings.reduce((sum, a) => { return sum + a }, 0) / (limpezaRatings.length || 1)
+              const averageRating_precisao = precisaoRatings.reduce((sum, a) => { return sum + a }, 0) / (precisaoRatings.length || 1)
+              const averageRating_valor = valorRatings.reduce((sum, a) => { return sum + a }, 0) / (valorRatings.length || 1)
+
+              await firebase.firestore().doc(`acomods/${this.acomod.acomodID}`).update({
+                averageRating: averageRating,
+                averageRating_recepcao: averageRating_recepcao,
+                averageRating_limpeza: averageRating_limpeza,
+                averageRating_precisao: averageRating_precisao,
+                averageRating_valor: averageRating_valor
+              })
+
+              this.acomod.averageRating = averageRating
+              this.acomod.averageRating_recepcao = averageRating_recepcao
+              this.acomod.averageRating_limpeza = averageRating_limpeza
+              this.acomod.averageRating_precisao = averageRating_precisao
+              this.acomod.averageRating_valor = averageRating_valor
+
+              this.$store.commit('m_avaliacaoAcomodEtapa2', false)
+
+              await new Promise(resolve => setTimeout(resolve, 1800))
+
+              this.$modal.hide('add-avaliacao-desktop')
+
+              this.$store.commit('m_resetAvaliacaoAcomod')
+
+              this.categoriesAcomod[0].rating = 0
+              this.categoriesAcomod[1].rating = 0
+              this.categoriesAcomod[2].rating = 0
+              this.categoriesAcomod[3].rating = 0
+            }
+
           }
+        }
 
-        } else { /* _______________ ETAPA 2 _______________ */  
 
-          if (this.$store.state.avaliacaoAcomod.fullName !== '' && this.$store.state.avaliacaoAcomod.comment !== '') {
+        if (this.$route.name === 'passeios-id') {
 
-            this.$store.state.avaliacaoAcomod.createdAt = Date.now()
+          /* _______________ ETAPA 1 _______________ */
+          if (this.$store.state.avaliacaoPasseioEtapa1) {
 
-            /* Set new avaliacao */
-            await firebase.firestore().doc(`acomods/${this.acomod.acomodID}`).update({
-              avaliacoes: firebase.firestore.FieldValue.arrayUnion(this.$store.state.avaliacaoAcomod)
-            })
+            if (this.categoriesPasseio[0].rating !== 0 && this.categoriesPasseio[1].rating !== 0 && this.categoriesPasseio[2].rating !== 0 && this.categoriesPasseio[3].rating !== 0) {
+              this.$store.state.avaliacaoPasseio.ratings.habilidade = this.categoriesPasseio[0].rating
+              this.$store.state.avaliacaoPasseio.ratings.seguranca = this.categoriesPasseio[1].rating
+              this.$store.state.avaliacaoPasseio.ratings.precisao = this.categoriesPasseio[2].rating
+              this.$store.state.avaliacaoPasseio.ratings.valor = this.categoriesPasseio[3].rating
+              this.$store.commit('m_avaliacaoPasseioEtapa1', false)
+              this.$store.commit('m_avaliacaoPasseioEtapa2', true)
+            }
 
-            const avaliacaoAcomodClone = JSON.parse(JSON.stringify(this.$store.state.avaliacaoAcomod))
-            this.acomod.avaliacoes.push(avaliacaoAcomodClone)
+          } else { /* _______________ ETAPA 2 _______________ */  
 
-            /* Calc & set averages */
-            let ratings = []
-            let recepcaoRatings = []
-            let limpezaRatings = []
-            let precisaoRatings = []
-            let valorRatings = []
+            if (this.$store.state.avaliacaoPasseio.fullName !== '' && this.$store.state.avaliacaoPasseio.comment !== '') {
 
-            this.acomod.avaliacoes.forEach(avaliacao => {
-              ratings.push(avaliacao.ratings.recepcao)
-              ratings.push(avaliacao.ratings.limpeza)
-              ratings.push(avaliacao.ratings.precisao)
-              ratings.push(avaliacao.ratings.valor)
-              recepcaoRatings.push(avaliacao.ratings.recepcao)
-              limpezaRatings.push(avaliacao.ratings.limpeza)
-              precisaoRatings.push(avaliacao.ratings.precisao)
-              valorRatings.push(avaliacao.ratings.valor)
-            })
+              this.$store.state.avaliacaoPasseio.createdAt = Date.now()
 
-            const averageRating = ratings.reduce((sum, a) => { return sum + a }, 0) / (ratings.length || 1)
-            const averageRating_recepcao = recepcaoRatings.reduce((sum, a) => { return sum + a }, 0) / (recepcaoRatings.length || 1)
-            const averageRating_limpeza = limpezaRatings.reduce((sum, a) => { return sum + a }, 0) / (limpezaRatings.length || 1)
-            const averageRating_precisao = precisaoRatings.reduce((sum, a) => { return sum + a }, 0) / (precisaoRatings.length || 1)
-            const averageRating_valor = valorRatings.reduce((sum, a) => { return sum + a }, 0) / (valorRatings.length || 1)
+              /* Set new avaliacao */
+              await firebase.firestore().doc(`passeios/${this.passeio.passeioID}`).update({
+                avaliacoes: firebase.firestore.FieldValue.arrayUnion(this.$store.state.avaliacaoPasseio)
+              })
 
-            await firebase.firestore().doc(`acomods/${this.acomod.acomodID}`).update({
-              averageRating: averageRating,
-              averageRating_recepcao: averageRating_recepcao,
-              averageRating_limpeza: averageRating_limpeza,
-              averageRating_precisao: averageRating_precisao,
-              averageRating_valor: averageRating_valor
-            })
+              const avaliacaoPasseioClone = JSON.parse(JSON.stringify(this.$store.state.avaliacaoPasseio))
+              this.passeio.avaliacoes.push(avaliacaoPasseioClone)
 
-            this.acomod.averageRating = averageRating
-            this.acomod.averageRating_recepcao = averageRating_recepcao
-            this.acomod.averageRating_limpeza = averageRating_limpeza
-            this.acomod.averageRating_precisao = averageRating_precisao
-            this.acomod.averageRating_valor = averageRating_valor
+              /* Calc & set averages */
+              let ratings = []
+              let habilidadeRatings = []
+              let segurancaRatings = []
+              let precisaoRatings = []
+              let valorRatings = []
 
-            this.$store.commit('m_avaliacaoAcomodEtapa2', false)
+              this.passeio.avaliacoes.forEach(avaliacao => {
+                ratings.push(avaliacao.ratings.habilidade)
+                ratings.push(avaliacao.ratings.seguranca)
+                ratings.push(avaliacao.ratings.precisao)
+                ratings.push(avaliacao.ratings.valor)
+                habilidadeRatings.push(avaliacao.ratings.habilidade)
+                segurancaRatings.push(avaliacao.ratings.seguranca)
+                precisaoRatings.push(avaliacao.ratings.precisao)
+                valorRatings.push(avaliacao.ratings.valor)
+              })
 
-            await new Promise(resolve => setTimeout(resolve, 2000))
+              const averageRating = ratings.reduce((sum, a) => { return sum + a }, 0) / (ratings.length || 1)
+              const averageRating_habilidade = habilidadeRatings.reduce((sum, a) => { return sum + a }, 0) / (habilidadeRatings.length || 1)
+              const averageRating_seguranca = segurancaRatings.reduce((sum, a) => { return sum + a }, 0) / (segurancaRatings.length || 1)
+              const averageRating_precisao = precisaoRatings.reduce((sum, a) => { return sum + a }, 0) / (precisaoRatings.length || 1)
+              const averageRating_valor = valorRatings.reduce((sum, a) => { return sum + a }, 0) / (valorRatings.length || 1)
 
-            this.$modal.hide('add-avaliacao-desktop')
+              await firebase.firestore().doc(`passeios/${this.passeio.passeioID}`).update({
+                averageRating: averageRating,
+                averageRating_habilidade: averageRating_habilidade,
+                averageRating_seguranca: averageRating_seguranca,
+                averageRating_precisao: averageRating_precisao,
+                averageRating_valor: averageRating_valor
+              })
 
-            this.$store.commit('m_resetAvaliacaoAcomod')
+              this.passeio.averageRating = averageRating
+              this.passeio.averageRating_habilidade = averageRating_habilidade
+              this.passeio.averageRating_seguranca = averageRating_seguranca
+              this.passeio.averageRating_precisao = averageRating_precisao
+              this.passeio.averageRating_valor = averageRating_valor
 
-            this.categoriesAcomod[0].rating = 0
-            this.categoriesAcomod[1].rating = 0
-            this.categoriesAcomod[2].rating = 0
-            this.categoriesAcomod[3].rating = 0
+              this.$store.commit('m_avaliacaoPasseioEtapa2', false)
+
+              await new Promise(resolve => setTimeout(resolve, 1800))
+
+              this.$modal.hide('add-avaliacao-desktop')
+
+              this.$store.commit('m_resetAvaliacaoPasseio')
+
+              this.categoriesPasseio[0].rating = 0
+              this.categoriesPasseio[1].rating = 0
+              this.categoriesPasseio[2].rating = 0
+              this.categoriesPasseio[3].rating = 0
+            }
+
           }
-
         }
 
       } catch (err) {
@@ -199,6 +339,7 @@ export default {
   },
   computed: {
     acomod () { return this.$store.state.acomod },
+    passeio () { return this.$store.state.passeio },
     title () {
       if (this.$route.name === 'acomodacoes-id') {
         if (this.$store.state.avaliacaoAcomodEtapa1) {
@@ -229,7 +370,14 @@ export default {
       }
       if (this.$route.name === 'passeios-id') {
         if (this.$store.state.avaliacaoPasseioEtapa1) {
-        } 
+          if (this.categoriesPasseio[0].rating !== 0 && this.categoriesPasseio[1].rating !== 0 && this.categoriesPasseio[2].rating !== 0 && this.categoriesPasseio[3].rating !== 0) {
+            return 'background: #198CFE'
+          }
+        } else {
+          if (this.$store.state.avaliacaoPasseio.fullName !== '' && this.$store.state.avaliacaoPasseio.comment !== '') {
+            return 'background: #198CFE'
+          }
+        }
       }
     }
   }

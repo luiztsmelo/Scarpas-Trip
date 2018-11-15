@@ -1001,7 +1001,7 @@ export default {
           right: 7%;
           background: transparent;
           font-size: 15px;
-          font-weight: 600;
+          font-weight: 500;
         }
         & .__limpar-filtros-btn:hover {
           text-decoration: underline;

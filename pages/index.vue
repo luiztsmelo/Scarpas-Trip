@@ -88,7 +88,7 @@
             
             <div class="rating">
               <star-rating
-                :rating="4.6"
+                :rating="passeio.averageRating"
                 :increment="0.5"
                 :read-only="true"
                 :show-rating="false"
@@ -97,7 +97,7 @@
                 :star-size="10"
                 :padding="2">
               </star-rating>
-              <p class="rating-count">3</p>
+              <p class="rating-count">{{ passeio.avaliacoes.length }}</p>
             </div>
 
           </nuxt-link> 

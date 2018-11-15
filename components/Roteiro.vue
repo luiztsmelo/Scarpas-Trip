@@ -88,7 +88,7 @@ export default {
 
 .roteiro {
   width: 100%;
-  height: 17rem;
+  height: 15rem;
   background-image: url('../assets/img/bgimg.jpg');
   background-repeat: no-repeat;
   background-size: cover;
@@ -107,10 +107,13 @@ export default {
       flex-flow: column;
       padding: 0 7%;
       color: white;
-      font-size: 20px;
+      font-size: 21px;
       font-weight: 600;
       line-height: 30px;
       user-select: none;
+    }
+    & .roteiro-form {
+      display: none;
     }
   }
 }
