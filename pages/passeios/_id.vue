@@ -724,12 +724,11 @@ export default {
 
   /* __________ AVALIAÇÕES __________ */
   & .avaliacoes-box {
-    padding: 0 7%;
-    margin-bottom: 1.5rem;
+    padding: 0 7% 2rem;
     & .avaliacoes-by-categories {
       display: grid;
       grid-template-columns: 1fr;
-      grid-row-gap: 1.3rem;
+      grid-row-gap: 1.4rem;
       margin-bottom: 2.5rem;
       & .category {
         display: flex;
@@ -790,7 +789,7 @@ export default {
       }
       & .__reserva-valor-pessoa {
         font-size: 14px;
-        font-weight: 500;
+        font-weight: 400;
       }
       & .__reserva-btn {
         width: 50%;
