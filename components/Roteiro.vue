@@ -2,11 +2,21 @@
   <div class="roteiro">
     
 
+    
+    <div class="slideshow">
+      <figure class="img-1"></figure>
+      <figure class="img-2"></figure>
+      <figure class="img-3"></figure>
+      <figure class="img-4"></figure>
+    </div>
+
+
+
     <div class="roteiro-container">
 
+      
 
-
-      <h1 class="headline">Acomodações, Passeios, Eventos e Restaurantes em Capitólio e Região</h1>
+      <h1 class="headline">Encontre tudo para sua viagem a Capitólio</h1>
 
 
 
@@ -89,9 +99,47 @@ export default {
 .roteiro {
   width: 100%;
   height: 15rem;
-  background-image: url('../assets/img/bgimg.jpg');
-  background-repeat: no-repeat;
-  background-size: cover;
+  position: relative;
+  & .slideshow {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    & figure {
+      all: initial;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      animation: slideShow 30s linear infinite 0s;
+    }
+    & .img-1 {
+      opacity: 1;
+      background: url('../assets/img/bgimg.jpg') no-repeat center center;
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+    & .img-2 {
+      animation-delay: 8s;
+      background: url('../assets/img/bgimg4.jpg') no-repeat center center;
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+    & .img-3 {
+      animation-delay: 16s;
+      background: url('../assets/img/bgimg3.jpg') no-repeat center center;
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+    & .img-4 {
+      animation-delay: 24s;
+      background: url('../assets/img/bgimg2.jpg') no-repeat center center;
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+  }
   & .roteiro-container {
     background: rgba(0,0,0,.2);
     padding: 1rem 0;
@@ -107,7 +155,7 @@ export default {
       flex-flow: column;
       padding: 0 7%;
       color: white;
-      font-size: 21px;
+      font-size: 22px;
       font-weight: 600;
       line-height: 30px;
       user-select: none;
@@ -122,20 +170,20 @@ export default {
 
 @media (min-width: 1024px) {
   .roteiro {
-    height: 29.5rem;
+    height: 29.7rem;
     background-attachment: fixed;
     background-position: center;
     & .roteiro-container {
       display: flex;
       flex-flow: column;
       align-items: center;
-      background: rgba(0,0,0, 0);
+      background: rgba(0,0,0, .25);
       & .headline {
-        padding: 2rem 20% 0;
+        padding: 2rem 30% 0;
         width: 100%;
-        font-size: 37px;
+        font-size: 40px;
         font-weight: 600;
-        line-height: 48px;
+        line-height: 54px;
         text-align: center;
       }
       & .roteiro-form {
@@ -182,4 +230,26 @@ export default {
     }
   }  
 }
+
+@keyframes slideShow {
+  0% {
+    opacity: 0;
+    transform: scale(1);
+  }
+  5% {
+    opacity: 1;
+  }
+  25% {
+    opacity: 1;
+  }
+  30% {
+    opacity: 0;
+    transform: scale(1.12);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.12);
+  }
+}
+
 </style>

@@ -30,7 +30,7 @@ module.exports = {
   ],
   /* _______________________________________ HEAD ________________________________________ */
   head: {
-    title: 'Escarpas Trip: Casas, Passeios, Atrações, Eventos e Restaurantes em Capitólio e Região',
+    title: 'Escarpas Trip: Encontre tudo para sua viagem a Capitólio',
     meta: [
       { name: 'viewport', content: 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' },
       { hid: 'description', name: 'description', content: 'Planeje sua viagem a Capitólio e região de forma simples, agradável e segura.' },
