@@ -936,7 +936,7 @@ export default {
       }
     }
     & .avaliacao {
-      padding-bottom: 2rem;
+      padding-bottom: 2.1rem;
       & .__guest-name {
         font-size: 16px;
         font-weight: 600;

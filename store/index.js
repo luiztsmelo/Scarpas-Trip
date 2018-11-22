@@ -1,12 +1,12 @@
 import Vuex from 'vuex'
-import createPersistedState from 'vuex-persistedstate'
+/* import createPersistedState from 'vuex-persistedstate' */
 import firebase from '@firebase/app'
 import 'firebase/firestore'
 import 'firebase/auth'
 import 'firebase/functions'
 
 const store = () => new Vuex.Store({
-  plugins: [ createPersistedState({ storage: window.sessionStorage }) ],
+  /* plugins: [ createPersistedState({ storage: window.sessionStorage }) ], */
   /* ________________________________________________ STATE ________________________________________________ */
   state: {
     /*
@@ -100,6 +100,7 @@ const store = () => new Vuex.Store({
     /*
     -------------------- FILTERS --------------------
     */
+    /* ___ Acomods ___ */
     filters: {
       date: null,
       local: null,
@@ -110,6 +111,17 @@ const store = () => new Vuex.Store({
     },
     allAcomods: null,
     filteredAcomods: null,
+    /* ___ Passeios ___ */
+    filtersPasseios: {
+      date: null,
+      local: null,
+      pessoas: 0,
+      tipoPasseio: null,
+      valor: null,
+      avaliacao: null
+    },
+    allPasseios: null,
+    filteredPasseios: null,
     /*
     -------------------- GOOGLE MAPS --------------------
     */

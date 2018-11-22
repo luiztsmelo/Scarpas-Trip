@@ -155,7 +155,7 @@ export default {
       ],
       categoriesPasseio: [
         { name: 'Habilidade do Guia', desc: 'Quão bem o guia conduziu o passeio?', rating: 0 },
-        { name: 'Segurança', desc: 'Quão seguro você sentiu?', rating: 0 },
+        { name: 'Segurança', desc: 'Quão seguro você se sentiu?', rating: 0 },
         { name: 'Precisão do anúncio', desc: 'Quão preciso está o anúncio?', rating: 0 },
         { name: 'Valor', desc: 'O valor correspondeu às suas expectativas?', rating: 0 }
       ]

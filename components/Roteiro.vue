@@ -117,25 +117,25 @@ export default {
     }
     & .img-1 {
       opacity: 1;
-      background: url('../assets/img/bgimg.jpg') no-repeat center center;
+      background: url('https://firebasestorage.googleapis.com/v0/b/escarpas-trip.appspot.com/o/utils%2Fbgimg.jpg?alt=media&token=45249ced-7096-40f5-a782-c7f449f0fd00') no-repeat center center;
       background-repeat: no-repeat;
       background-size: cover;
     }
     & .img-2 {
       animation-delay: 8s;
-      background: url('../assets/img/bgimg4.jpg') no-repeat center center;
+      background: url('https://firebasestorage.googleapis.com/v0/b/escarpas-trip.appspot.com/o/utils%2Fbgimg2.jpg?alt=media&token=6013c6ee-5fe8-4d5d-85f8-bd06e47045e6') no-repeat center center;
       background-repeat: no-repeat;
       background-size: cover;
     }
     & .img-3 {
       animation-delay: 16s;
-      background: url('../assets/img/bgimg3.jpg') no-repeat center center;
+      background: url('https://firebasestorage.googleapis.com/v0/b/escarpas-trip.appspot.com/o/utils%2Fbgimg3.jpg?alt=media&token=a383e428-897a-4c36-9494-a212d695c2fc') no-repeat center center;
       background-repeat: no-repeat;
       background-size: cover;
     }
     & .img-4 {
       animation-delay: 24s;
-      background: url('../assets/img/bgimg2.jpg') no-repeat center center;
+      background: url('https://firebasestorage.googleapis.com/v0/b/escarpas-trip.appspot.com/o/utils%2Fbgimg4.jpg?alt=media&token=6a6e54d7-8671-46ff-9e77-cc79d5047fd0') no-repeat center center;
       background-repeat: no-repeat;
       background-size: cover;
     }

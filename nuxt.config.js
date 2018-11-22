@@ -1,5 +1,5 @@
 module.exports = {
-  mode: 'spa',
+  /* mode: 'spa', */
   /* serverMiddleware: ['~/api/index.js'], */
   /* ________________________________________ BUILD ________________________________________ */
   build: {
@@ -54,18 +54,19 @@ module.exports = {
   },
   /* ________________________________________ PLUGINS ________________________________________ */
   plugins: [
-    '~/plugins/firebase',
-    '~/plugins/vue-progressive-image',
-    '~/plugins/vue-google-maps',
-    '~/plugins/vue-croppa',
-    '~/plugins/vue-autosize',
-    '~/plugins/vue-awesome-swiper',
-    '~/plugins/v-money',
-    '~/plugins/scroll',
-    '~/plugins/vue-js-modal',
-    '~/plugins/vue-star-rating',
-    '~/plugins/vue-airbnb-style-datepicker',
-    '~/plugins/vue-multiselect'
+    { src: '~/plugins/firebase' },
+    { src: '~/plugins/vue-progressive-image', ssr: false },
+    { src: '~/plugins/vue-google-maps', ssr: false },
+    { src: '~/plugins/vue-croppa', ssr: false },
+    { src: '~/plugins/vue-autosize', ssr: false },
+    { src: '~/plugins/vue-awesome-swiper', ssr: false },
+    { src: '~/plugins/v-money', ssr: false },
+    { src: '~/plugins/scroll', ssr: false },
+    { src: '~/plugins/vue-js-modal', ssr: false },
+    { src: '~/plugins/vue-star-rating', ssr: false },
+    { src: '~/plugins/vue-airbnb-style-datepicker', ssr: false },
+    { src: '~/plugins/vue-multiselect', ssr: false },
+    { src: '~/plugins/localStorage.js', ssr: false }
   ],
   /* _________________________________________ LOADINGS __________________________________________ */
   loading: false,

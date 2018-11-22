@@ -2,25 +2,23 @@
   <div class="app">
 
     <div>
-      <alert/>
-      
-      <Loader/>
 
-      <Share/>
-
-      <Menuu/>
+      <nuxt keep-alive/>
       
       <Navbar/>
-      <nuxt keep-alive/>
       <Foobar/>
 
-      <MapFull/>
+      <no-ssr>
+        <SignIn/>
+        <alert/>
+        <Loader/>
+        <Share/>
+        <Menuu/>
+        <MapFull/>
+        <Offline/>
+      </no-ssr>  
 
-      <SignIn/>
-
-      <Offline/>
     </div>
-
 
   </div>
 </template>
