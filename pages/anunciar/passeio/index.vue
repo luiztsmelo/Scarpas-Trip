@@ -188,15 +188,19 @@
       <h1 class="__form-title">Seu passeio parte de onde?</h1>
 
       <div class="item-form">
-        <label>Local de Partida</label>
-        <select v-model="$store.state.passeioData.localPartida">
-          <option>Capitólio</option>
-          <option>Escarpas do Lago</option>
-          <option>Ponte do Turvo</option>
-          <option>Barragem do Dique</option>
-          <option>Kanto da Ilha</option>
-        </select>
-      </div> 
+        <label>Local</label>
+        <gmap-autocomplete
+          onKeyPress="if (event.which == 13) return false" 
+          placeholder="Digite o endereço completo aqui"
+          @place_changed="setPlace">
+        </gmap-autocomplete>
+      </div>
+
+      <h3 class="without-address" @click="$modal.show('local-map-modal'), $store.state.fromWithoutAddress=true">
+        Seu local de partida não possui endereço?
+      </h3>
+
+      <localMap/>
 
 
       <div class="back-next"> 
@@ -288,10 +292,10 @@
 
 
 
-    <!-- ________________________________________ 6 - LEMBRETES ________________________________________ -->
+    <!-- ________________________________________ 6 - FORMAS DE PAGAMENTO ________________________________________ -->
     <form class="cadastro-passeio" v-if="$store.state.cadastroPasseio6">
 
-      <h1 class="__form-title">Lembretes?</h1>
+      <h1 class="__form-title">Quais formas de pagamento você aceita?</h1>
 
     
 
@@ -303,7 +307,7 @@
         </div>
       </div> 
     
-    </form><!-- ________________________________________ 6 - LEMBRETES ________________________________________ -->
+    </form><!-- ________________________________________ 6 - FORMAS DE PAGAMENTO ________________________________________ -->
 
 
 
@@ -649,13 +653,14 @@ import 'firebase/firestore'
 import 'firebase/storage'
 import 'firebase/functions'
 import MaskedInput from 'vue-text-mask'
+import localMap from '~/components/localMap.vue'
 import { pontosTuristicos } from '@/mixins/pontosTuristicos'
 import valid from 'card-validator'
 import CPF from 'gerador-validador-cpf'
 import scrollIntoView from 'scroll-into-view'
 
 export default {
-  components: { MaskedInput },
+  components: { MaskedInput, localMap },
   mixins: [ pontosTuristicos ],
   head () {
     return {
@@ -711,7 +716,14 @@ export default {
       document.body.scrollTop = 0
       document.documentElement.scrollTop = 0
     },
-    /* ******************** ROTAS ******************** */
+    /* ******************** GOOGLE MAPS ******************** */
+    setPlace (place) {
+      this.$store.commit('m_passeioPlace', place)
+      this.$store.state.passeioData.positionLAT = this.$store.state.passeioPlace.geometry.location.lat()
+      this.$store.state.passeioData.positionLNG = this.$store.state.passeioPlace.geometry.location.lng()
+      this.$store.state.passeioData.address = this.$store.state.passeioPlace.formatted_address
+      this.$modal.show('local-map-modal')
+    },
     /* ******************** IMAGE INPUT ******************** */
     async imageConfirm () {
       try {
@@ -831,13 +843,13 @@ export default {
       }
     },
     nextBtn4 () {
-      if (this.$store.state.passeioData.localPartida !== null) {
+      if (this.$store.state.passeioPlace !== null || this.$store.state.passeioData.positionLAT !== -20.6141320) {
         this.$store.commit('m_cadastroPasseio4', false), this.$store.commit('m_cadastroPasseio5', true), this.$store.commit('m_passeioProgressBar', (100/10)*5), this.scrollTop(), window.location.hash = `${this.randomHashs[5]}`
       } else {
         this.$store.commit('show_alert', {
           type: 'warning',
           title: 'Ops',
-          message: 'Adicione o local de partida.'
+          message: 'Adicione um local de partida.'
         })
       }
     },
@@ -866,11 +878,23 @@ export default {
     nextBtn7 () {
       if (this.$store.state.passeioData.title !== '') {
         this.$store.commit('m_cadastroPasseio7', false), this.$store.commit('m_cadastroPasseio8', true), this.$store.commit('m_passeioProgressBar', (100/10)*8), this.scrollTop(), window.location.hash = `${this.randomHashs[8]}`
+      } else {
+        this.$store.commit('show_alert', {
+          type: 'warning',
+          title: 'Ops',
+          message: 'Adicione um título.'
+        })
       }
     },
     nextBtn8 () {
       if (this.$store.state.passeioData.subtitle !== '') {
         this.$store.commit('m_cadastroPasseio8', false), this.$store.commit('m_cadastroPasseio9', true), this.$store.commit('m_passeioProgressBar', (100/10)*9), this.scrollTop(), window.location.hash = `${this.randomHashs[9]}`
+      } else {
+        this.$store.commit('show_alert', {
+          type: 'warning',
+          title: 'Ops',
+          message: 'Adicione uma descrição.'
+        })
       }
     },
     nextBtn9 () {
@@ -1002,7 +1026,7 @@ export default {
       return this.$store.state.passeioData.images.length > 0 ? 'background: #198CFE' : ''
     },
     form4ok () {
-      return this.$store.state.passeioData.localPartida !== null ? 'background: #198CFE' : ''
+      return this.$store.state.passeioPlace !== null || this.$store.state.passeioData.positionLAT !== -20.6141320 ? 'background:#198CFE' : ''
     },
     form5ok () {
       return this.$store.state.passeioData.rotas.length > 0 ? 'background: #198CFE' : ''
@@ -1341,10 +1365,13 @@ export default {
     & .__termos {
       padding: 0 7%;
       font-size: 15px;
-      font-weight: 500;
+      font-weight: 400;
       line-height: 20px;
       & a {
         color: var(--colorPasseio);
+      }
+      & a:hover {
+        text-decoration: underline;
       }
     }
     & textarea {
@@ -1410,6 +1437,19 @@ export default {
       & select:focus {
         border-bottom: 1px solid var(--color01);
       }
+    }
+    & .without-address {
+      display: inline-flex;
+      cursor: pointer;
+      user-select: none;
+      margin: 0 7%;
+      font-size: 16px;
+      font-weight: 500;
+      color: var(--colorPasseio);
+      transition: .2s all ease;
+    }
+    & .without-address:hover {
+      text-decoration: underline;
     }
     & .rotas {
       display: flex;
@@ -1748,6 +1788,9 @@ export default {
         & select:hover {
           border-bottom: 1px solid var(--color01);
         }
+      }
+      & .without-address {
+        margin: 0 28%;
       }
       & .rotas {
         margin: 1.6rem calc(28% - 2%) 0;

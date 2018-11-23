@@ -90,6 +90,7 @@ const store = () => new Vuex.Store({
       email: '',
       cpf: '',
       celular: '',
+      instagram: '',
       zipcode: '',
       street: '',
       street_number: '',
@@ -288,6 +289,7 @@ const store = () => new Vuex.Store({
     passeios: null,
     passeio: null,
     passeioProgressBar: 0,
+    passeioPlace: null,
     imageCountPas: 0,
     passeioData: { /* Atualizar a action */
       createdAt: null,
@@ -295,7 +297,9 @@ const store = () => new Vuex.Store({
       hostID: null,
       tipoPasseio: 'Lancha',
       capacidade: 1,
-      localPartida: null,
+      positionLAT: -20.6141320,
+      positionLNG: -46.0478760,
+      address: null,
       rotas: [
         {
           valor: 0,
@@ -762,6 +766,9 @@ const store = () => new Vuex.Store({
     },
     m_passeioData (state, payload) {
       state.passeioData = payload
+    },
+    m_passeioPlace (state, payload) {
+      state.passeioPlace = payload
     },
     m_addRotaPasseio (state) {
       state.passeioData.rotas.push({

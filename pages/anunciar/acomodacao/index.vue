@@ -269,6 +269,7 @@
 
       <localMap/>
 
+
       <div class="back-next"> 
         <div class="back-next-body">
           <button type="button" class="__back" @click="backBtn5">Voltar</button>
@@ -878,7 +879,6 @@ export default {
     },
     /* ******************** GOOGLE MAPS ******************** */
     setPlace (place) {
-      console.log(place)
       this.$store.commit('m_acomodPlace', place)
       this.$store.state.acomodData.positionLAT = this.$store.state.acomodPlace.geometry.location.lat()
       this.$store.state.acomodData.positionLNG = this.$store.state.acomodPlace.geometry.location.lng()
@@ -1394,11 +1394,14 @@ export default {
     }
     & .__termos {
       padding: 0 7%;
-      font-size: 14px;
-      font-weight: 500;
+      font-size: 15px;
+      font-weight: 400;
       line-height: 20px;
       & a {
         color: var(--colorAcomod);
+      }
+      & a:hover {
+        text-decoration: underline;
       }
     }
     & textarea {

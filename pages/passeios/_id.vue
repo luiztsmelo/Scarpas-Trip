@@ -166,7 +166,7 @@
 
 
         <!-- ______________________________ DISPONIBILIDADE ______________________________ -->
-        <h1 class="item-title">Disponibilidade</h1>
+        <h1 class="item-title">Datas disponíveis</h1>
 
         <div class="disponibilidade-box">
 
@@ -197,12 +197,39 @@
 
 
 
+
+        <!-- ______________________________ LOCAL ______________________________ -->
+        <h1 class="item-title">Local de partida</h1>
+
+        <div class="local-box">
+
+          <h3 class="__adress">{{ passeio.address }}</h3>
+
+          <gmap-map
+            :center="{ lat: passeio.positionLAT, lng: passeio.positionLNG }"
+            :zoom="15"
+            :options="{ styles: styles, draggable: $store.state.isMobile ? false : true, fullscreenControl: $store.state.isMobile ? false : true, zoomControl: $store.state.isMobile ? false : true, mapTypeControl: false, streetViewControl: false }"
+            @click="fullscreenMobile">
+              <Gmap-Marker
+                :position="{ lat: passeio.positionLAT, lng: passeio.positionLNG }"
+                :icon="{ url: $store.state.markerUrl, scaledSize: $store.state.markerSize }">
+              </Gmap-Marker>
+          </gmap-map>
+
+        </div><!-- ______________________________ LOCAL ______________________________ -->
+
+
+
+
+
+
         <!-- ______________________________ PAGAMENTO ______________________________ -->
         <h1 class="item-title">Formas de pagamento aceitas</h1>
 
         <div class="pagamento-box">
           <h3>Formas de pagamento...</h3>
         </div><!-- ______________________________ PAGAMENTO ______________________________ -->
+
 
 
 
@@ -712,6 +739,19 @@ export default {
 
 
 
+  /* __________ LOCAL __________ */
+  & .local-box {
+    & .__adress {
+      padding: 0 7% .6rem 7%;
+    }
+    & .vue-map-container {
+      width: 100%; 
+      height: 250px;
+    }
+  }/* __________ LOCAL __________ */
+
+
+
 
   /* __________ PAGAMENTO BOX __________ */
   & .pagamento-box {
@@ -1058,6 +1098,18 @@ export default {
           padding: 0;
         }  /* __________ DISPONIBILIDADE __________ */
 
+
+
+
+        /* __________ LOCAL __________ */
+        & .local-box {
+          & .__adress {
+            padding: 0 0 1rem 0;
+          }
+          & .vue-map-container {
+            height: 430px;
+          }
+        }/* __________ LOCAL __________ */
 
 
 

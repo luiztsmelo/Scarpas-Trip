@@ -35,7 +35,7 @@
       
       <gmap-map
         ref="map"
-        :center="{lat: $store.state.acomodData.positionLAT, lng: $store.state.acomodData.positionLNG}"
+        :center="centerMap"
         :zoom="mapZoom"
         :options="mapOptions"
         :style="mapStyle"
@@ -45,8 +45,8 @@
             :draggable="true"
             :animation="4"
             @dragend="newPosition"
-            :position="{lat: $store.state.acomodData.positionLAT, lng: $store.state.acomodData.positionLNG}"
-            :icon="{url: $store.state.markerUrl, scaledSize: $store.state.markerSize}">
+            :position="markerPosition"
+            :icon="{ url: $store.state.markerUrl, scaledSize: $store.state.markerSize }">
           </Gmap-Marker>
       </gmap-map>
 
@@ -62,7 +62,7 @@
 import { mapstyle } from '../mixins/mapstyle'
 
 export default {
-  mixins: [mapstyle],
+  mixins: [ mapstyle ],
   data () {
     return {
       address: '',
@@ -82,9 +82,16 @@ export default {
     },
     confirmar () {
       if (this.$store.state.fromWithoutAddress == true) {
-        this.$store.state.acomodData.positionLAT = this.lat
-        this.$store.state.acomodData.positionLNG = this.lng
-        this.$store.state.acomodData.address = this.address
+        if (this.$route.name === 'anunciar-acomodacao') {
+          this.$store.state.acomodData.positionLAT = this.lat
+          this.$store.state.acomodData.positionLNG = this.lng
+          this.$store.state.acomodData.address = this.address
+        }
+        if (this.$route.name === 'anunciar-passeio') {
+          this.$store.state.passeioData.positionLAT = this.lat
+          this.$store.state.passeioData.positionLNG = this.lng
+          this.$store.state.passeioData.address = this.address
+        }
       }
       this.$modal.hide('local-map-modal')
     }
@@ -103,8 +110,29 @@ export default {
         zoomControl: this.$store.state.isMobile == true ? false : true
       }
     },
+    centerMap () {
+      if (this.$route.name === 'anunciar-acomodacao') {
+        return { lat: this.$store.state.acomodData.positionLAT, lng: this.$store.state.acomodData.positionLNG }
+      }
+      if (this.$route.name === 'anunciar-passeio') {
+        return { lat: this.$store.state.passeioData.positionLAT, lng: this.$store.state.passeioData.positionLNG }
+      }
+    },
     mapZoom () {
-      return this.$store.state.acomodPlace !== null ? 16 : 14
+      if (this.$route.name === 'anunciar-acomodacao') {
+        return this.$store.state.acomodPlace !== null ? 16 : 14
+      }
+      if (this.$route.name === 'anunciar-passeio') {
+        return this.$store.state.passeioPlace !== null ? 16 : 14
+      }
+    },
+    markerPosition () {
+      if (this.$route.name === 'anunciar-acomodacao') {
+        return { lat: this.$store.state.acomodData.positionLAT, lng: this.$store.state.acomodData.positionLNG }
+      }
+      if (this.$route.name === 'anunciar-passeio') {
+        return { lat: this.$store.state.passeioData.positionLAT, lng: this.$store.state.passeioData.positionLNG }
+      } 
     }
   }
 }
