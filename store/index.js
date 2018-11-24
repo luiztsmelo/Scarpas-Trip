@@ -21,6 +21,7 @@ const store = () => new Vuex.Store({
     showShare: false,
     showHost: false,
     showFiltrarAcomods: false,
+    showFiltrarPasseios: false,
     menuIconAnime: false,
     loader: false,
     miniLoader: false,
@@ -118,7 +119,7 @@ const store = () => new Vuex.Store({
       local: null,
       pessoas: 0,
       tipoPasseio: null,
-      valor: null,
+      preco: null,
       avaliacao: null
     },
     allPasseios: null,
@@ -514,14 +515,23 @@ const store = () => new Vuex.Store({
     m_showFiltrarAcomods (state, payload) {
       state.showFiltrarAcomods = payload
     },
+    m_showFiltrarPasseios (state, payload) {
+      state.showFiltrarPasseio = payload
+    },
     m_visitsLastMonth (state, payload) {
       state.visitsLastMonth = payload
     },
     m_allAcomods (state, payload) {
       state.allAcomods = payload
     },
+    m_allPasseios (state, payload) {
+      state.allPasseios = payload
+    },
     m_filteredAcomods (state, payload) {
       state.filteredAcomods = payload
+    },
+    m_filteredPasseios (state, payload) {
+      state.filteredPasseios = payload
     },
     m_decrementHospedes (state) {
       if (state.filters.hospedes > 0) {
@@ -540,6 +550,15 @@ const store = () => new Vuex.Store({
       state.filters.tipoAcomod = null
       state.filters.preco = null
       state.filters.avaliacao = null
+    },
+    m_resetFiltersPasseios (state) {
+      state.filteredPasseios = null
+      state.filtersPasseios.date = null
+      state.filtersPasseios.local = 0
+      state.filtersPasseios.pessoas = null
+      state.filtersPasseios.tipoPasseio = null
+      state.filtersPasseios.preco = null
+      state.filtersPasseios.avaliacao = null
     },
     m_perfil (state, payload) {
       state.perfil = payload

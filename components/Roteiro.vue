@@ -166,7 +166,7 @@ export default {
 
 @media (min-width: 1024px) {
   .roteiro {
-    height: 29.7rem;
+    height: calc(100vh - var(--navbarHeightDesktop) * 2);
     background-attachment: fixed;
     background-position: center;
     & .roteiro-container {

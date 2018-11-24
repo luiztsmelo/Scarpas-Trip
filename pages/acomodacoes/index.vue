@@ -363,9 +363,6 @@ import pt from 'date-fns/locale/pt'
 import subDays from 'date-fns/sub_days'
 import { mapstyle } from '@/mixins/mapstyle'
 import FiltrarAcomods from '@/components/FiltrarAcomods'
-import dayjs from 'dayjs'
-import 'dayjs/locale/pt-br'
-dayjs.locale('pt-br')
 
 export default {
   components: { FiltrarAcomods },
@@ -397,7 +394,6 @@ export default {
         { 'name': 'Fazenda' },
         { 'name': 'Hostel' }
       ],
-      drag: null,
       swiperOption: {
         slidesPerView: 1,
         pagination: {
@@ -525,15 +521,6 @@ export default {
         return true
       } else {
         return false
-      }
-    },
-    outputDatePicker () {
-      if (this.filters.date !== null) {
-        const dayStart = dayjs(this.filters.date.start).format('D')
-        const monthStart = dayjs(this.filters.date.start).format('MMM')
-        const dayEnd = dayjs(this.filters.date.end).format('D')
-        const monthEnd = dayjs(this.filters.date.end).format('MMM')
-        return  `${dayStart} de ${monthStart} - ${dayEnd} de ${monthEnd}`
       }
     },
     onLocalBtn () {
