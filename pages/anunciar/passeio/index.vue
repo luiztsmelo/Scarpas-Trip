@@ -1807,7 +1807,6 @@ export default {
               right: 1.5rem;
             }
             & .question {
-              min-height: 2.4rem;
               & label {
               }
               & input {

@@ -65,14 +65,6 @@ export default {
       this.$store.commit('m_valorReservaTotal', valorReservaTotal)
 
       this.$store.state.reservaAcomod.limpezaFee = this.acomod.limpezaFee
-
-      const parcelas = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map(n => {
-        return {
-          id: n,
-          valorParcela: Number( (valorReservaTotal/n).toFixed(2) )
-        }
-      })
-      this.$store.commit('m_parcelas', parcelas)
     },
     confirmBtn () {
       if (this.$store.state.reservaAcomod.periodoReserva !== null) {

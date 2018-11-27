@@ -49,7 +49,7 @@ export default {
   height: 17rem;
   padding: 3.5rem 7%;
   & .__img {
-    width: 3.4rem;
+    width: 3.6rem;
     height: auto;
     margin-right: 2.8rem;
     align-self: flex-start;

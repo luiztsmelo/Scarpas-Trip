@@ -56,6 +56,7 @@
         <select v-model="$store.state.acomodData.tipoAcomod">
           <option>Casa</option>
           <option>Apartamento</option>
+          <option>Suíte</option>
           <option>Rancho</option>
           <option>Chácara</option>
           <option>Pousada</option>
@@ -79,26 +80,77 @@
 
 
 
-    <!-- ________________________________________ 2 - TOTAL DE HÓSPEDES ________________________________________ -->
+    <!-- ________________________________________ 2 - QUARTOS ________________________________________ -->
     <form class="cadastro-acomodacao" v-if="$store.state.cadastroAcomod2">
 
-      <h1 class="__form-title">Quantas pessoas {{ tipoAcomodSd }} pode acomodar?</h1>
+      <h1 class="__form-title">Configuração dos quartos</h1>
 
-      <div class="item-form">
-        <label>Total de Hóspedes</label>
-        <select v-model="$store.state.acomodData.totalHospedes">
-          <option v-for="n in 25" :value="n">{{ n }}</option>
-        </select>
+
+      <div class="quartos">
+
+        <div class="quarto" v-for="(quarto, index) in $store.state.acomodData.quartos" :key="index + 1">
+          <div class="quarto-body">
+
+            
+            <div class="heading">
+              <input class="__nome" type="text" v-model="quarto.nome">
+              <img class="__remove-img" src="../../../assets/img/close-mobile.svg">
+            </div>
+            
+
+
+            <div class="questions">
+
+              <div class="question">
+                <label>Acomoda até:</label>
+                <select v-model="quarto.acomoda">
+                  <option v-for="n in 12" :value="n">{{ n }} {{ n === 1 ? 'hóspede' : 'hóspedes' }}</option>
+                </select>
+              </div>
+
+              <!-- v-if pousada e afins -->
+              <div class="question">
+                <label>Valor por noite:</label>
+                <money 
+                  v-model="quarto.valor"
+                  onKeyPress="if (event.which == 13) return false">
+                </money>
+              </div><!-- v-if pousada e afins -->
+
+            </div>
+
+
+            <div class="mobilias">
+
+              <div class="mobilia" v-for="(mobilia, index) in quarto.mobilias">
+                <img src="../../../assets/img/cama_casal.svg" style="width: 1.7rem; height: auto">
+                <p>{{ mobilia === 'cama_casal' ? 'Cama de casal' : ''}}</p>
+              </div>
+
+              <div class="add-mobilia">
+                <img src="../../../assets/img/add.svg" style="width: 1.5rem; height: auto">
+                <p>Adicionar mobília</p>
+              </div>
+
+            </div>
+        
+
+          </div>
+        </div>
+
+        <button class="add-quarto-btn" type="button">Adicionar quarto</button>
+
       </div>
+
 
       <div class="back-next"> 
         <div class="back-next-body">
           <button type="button" class="__back" @click="backBtn2">Voltar</button>
           <button type="button" class="__next" :style="form2ok" @click="nextBtn2">Próximo</button>
         </div>
-      </div> 
+      </div>
 
-    </form><!-- ________________________________________ 2 - TOTAL DE HÓSPEDES ________________________________________ -->
+    </form><!-- ________________________________________ 2 - QUARTOS ________________________________________ -->
 
 
 
@@ -107,23 +159,7 @@
     <!-- ________________________________________ 3 - CARACTERÍSTICAS ________________________________________ -->
     <form class="cadastro-acomodacao" v-if="$store.state.cadastroAcomod3">
 
-      <h1 class="__form-title">Características físicas {{ tipoAcomodDd }}</h1>
-
-      <div class="item-form">
-        <label>Nº de Quartos</label>
-        <select v-model="$store.state.acomodData.totalQuartos">
-          <option v-for="n in 10">{{ n }}</option>
-          <option>Mais de 10</option>
-        </select>
-      </div> 
-
-      <div class="item-form">
-        <label>Quantos são Suítes?</label>
-        <select v-model="$store.state.acomodData.totalSuites">
-          <option>0</option>
-          <option v-for="n in totalSuites">{{ n }}</option>
-        </select>
-      </div>
+      <h1 class="__form-title">Outras instalações {{ tipoAcomodDd }}</h1>
 
       <div class="item-form">
         <label>Nº de Banheiros</label>
@@ -502,13 +538,14 @@
       <h1 class="__form-title">Dê um título para seu anúncio</h1>
 
       <textarea 
-      v-model="$store.state.acomodData.title"
-      v-autosize="title"
-      maxlength="60"
-      rows="1"
-      :placeholder="'ex: ' + tipoAcomodUpperLinda + ' em Capitólio' + totalSuitesTitulo"
-      required>
-      {{title}}</textarea>
+        v-model="$store.state.acomodData.title"
+        v-autosize="title"
+        maxlength="60"
+        rows="1"
+        :placeholder="'ex: ' + tipoAcomodUpperLinda + ' em Capitólio'"
+        required>
+        {{title}}
+      </textarea>
 
       <span class="__lenght-calc">{{ titleLength }}</span>
 
@@ -953,7 +990,7 @@ export default {
       }
     },
     nextBtn2 () {
-      if (this.$store.state.acomodData.totalHospedes > 0) {
+      if (1<2) {
         this.$store.commit('m_cadastroAcomod2', false), this.$store.commit('m_cadastroAcomod3', true), this.$store.commit('m_acomodProgressBar', (100/12)*3), this.scrollTop(), window.location.hash = `${this.randomHashs[3]}`
       }
     },
@@ -1127,16 +1164,6 @@ export default {
     contaDV () { return this.$store.state.bankAccount.contaDV },
     legalName () { return this.$store.state.bankAccount.legalName },
     docNumber () { return this.$store.state.bankAccount.docNumber },
-    totalSuites () {
-      if (this.$store.state.acomodData.totalQuartos !== '1') {
-        return Array.from({length: this.$store.state.acomodData.totalQuartos}, (v, k) => k+1)
-      } else {
-        return 10
-      }
-    },
-    totalSuitesTitulo () {
-      return this.$store.state.acomodData.totalSuites != 1 ? ' com ' + this.$store.state.acomodData.totalSuites + ' suítes' : ''
-    },
     titleLength () {
       return 60 - this.$store.state.acomodData.title.length
     },
@@ -1147,7 +1174,7 @@ export default {
       return this.$store.state.acomodData.tipoAcomod !== null ? 'background:#FFA04F' : ''
     },
     form2ok () {
-      return this.$store.state.acomodData.totalHospedes > 0 ? 'background:#FFA04F' : ''
+      return 1<2 ? 'background:#FFA04F' : ''
     },
     form3ok () {
       return 1<2 ? 'background:#FFA04F' : ''
@@ -1468,7 +1495,15 @@ export default {
         border-bottom: 1px solid var(--color01);
       }
     }
-    
+    & .quartos {
+      & .quarto {
+        & .quarto-body {
+          & .__nome {
+
+          }
+        }
+      }
+    }
     & .comodidades-box {
       padding: 0 7%;
       & .item-form-switches {
@@ -1826,6 +1861,144 @@ export default {
         }
         & select:hover {
           border-bottom: 1px solid var(--color01);
+        }
+      }
+      & .quartos {
+        display: flex;
+        flex-flow: column;
+        align-items: center;
+        margin: 1.6rem calc(28% - 2%) 0;
+        & .quarto {
+          border: 1px solid #dedede;
+          width: 100%;
+          transition: var(--main-transition);
+          border-radius: 10px;
+          margin-bottom: 1.7rem;
+          & .quarto-body {
+            position: relative;
+            display: flex;
+            flex-flow: column;
+            & .heading {
+              display: flex;
+              align-items: center;
+              justify-content: space-between;
+              background: #dedede;
+              border-radius: 10px 10px 0 0;
+              padding: .7rem 1.5rem;
+              & .__nome {
+                width: 100%;
+                cursor: text;
+                border: none;
+                outline: none;
+                font-size: 19px;
+                font-weight: 600;
+                background: transparent;
+                color: white;
+              }
+              & .__remove-img {
+                cursor: pointer;
+                width: 1.1rem;
+                height: auto;
+                filter: invert(100%) brightness(200%);
+                margin-left: 1.5rem;
+              }
+            }
+            & .questions {
+              display: flex;
+              align-items: center;
+              justify-content: space-between;
+              margin: 1rem 1.5rem;
+              & .question {
+                & label {
+                  font-size: 16px;
+                  font-weight: 400;
+                  padding-right: 2px;
+                }
+                & input {
+                  cursor: text;
+                  width: 3.8rem;
+                  border: none;
+                  outline: none;
+                  background: white;
+                  color: var(--color01);
+                  font-size: 16px;
+                  font-weight: 500;
+                }
+                & select {
+                  cursor: pointer;
+                  border: none;
+                  outline: none;
+                  background: white;
+                  color: var(--color01);
+                  font-size: 16px;
+                  font-weight: 500;
+                }
+              }
+            }
+            & .mobilias {
+              display: grid;
+              grid-template-columns: repeat(auto-fill, minmax(5rem, 1fr));
+              grid-auto-rows: 1fr;
+              grid-gap: 10px;
+              margin: 1rem 1.5rem 1.5rem;
+              & .mobilia {
+                cursor: pointer;
+                display: flex;
+                flex-flow: column;
+                align-items: center;
+                justify-content: center;
+                border: 1px solid #dedede;
+                border-radius: 6px;
+                padding: 1rem;
+                & p {
+                  padding-top: 8px;
+                  text-align: center;
+                  font-size: 13px;
+                  font-weight: 500;
+                }
+              }
+              & .add-mobilia {
+                cursor: pointer;
+                display: flex;
+                flex-flow: column;
+                align-items: center;
+                justify-content: center;
+                border: 1px solid #dedede;
+                border-radius: 6px;
+                padding: 1rem;
+                transition: var(--main-transition);
+                & p {
+                  padding-top: 8px;
+                  text-align: center;
+                  font-size: 13px;
+                  font-weight: 500;
+                }
+              }
+              & .add-mobilia:hover {
+                background: rgb(245,245,245);
+              }
+            }
+            & .camas::before {
+              content: '';
+              width: 0;
+              padding-bottom: 100%;
+              grid-row: 1 / 1;
+              grid-column: 1 / 1;
+            }
+            & .camas > *:first-child {
+              grid-row: 1 / 1;
+              grid-column: 1 / 1;
+            }
+          }
+        }
+        & .add-quarto-btn {
+          background: white;
+          font-size: 17px;
+          font-weight: 600;
+          color: var(--colorAcomod);
+        }
+        & .add-quarto-btn:hover {
+          text-decoration: underline;
         }
       }
       & .comodidades-box {

@@ -96,24 +96,6 @@
         </div><!-- ______________________________ ANUNCIANTE ______________________________ -->
 
 
-        
-
-
-
-        <!-- ______________________________ INFO ______________________________ -->
-        <div class="info-box">
-          
-          <div class="item">
-            <img class="__img" src="../../assets/img/guests.svg">
-            <h3>Até {{ passeio.capacidade }} {{ passeio.capacidade === 1 ? 'pessoa' : 'pessoas' }}</h3>
-          </div>
-
-          <div class="item">
-            <img class="__img" src="../../assets/img/marker.svg">
-            <h3>Partindo de {{ passeio.localPartida }}</h3>
-          </div>
-
-        </div><!-- ______________________________ INFO ______________________________ -->
 
 
 
@@ -639,24 +621,6 @@ export default {
 
 
 
-  /* __________ INFO BOX __________ */
-  & .info-box {
-    padding: 0 7%;
-    & .item {
-      display: flex;
-      flex-flow: row;
-      align-items: center;
-      margin-top: 1.2rem;
-      & .__img {
-        width: 1.6rem;
-        height: auto;
-        margin: 0 .7rem 0 0;
-      }
-    }
-  }/* __________ INFO BOX __________ */
-
-
-
 
 
   /* __________ SOBRE BOX __________ */
@@ -1014,7 +978,7 @@ export default {
 
         /* __________ ANUNCIANTE BOX __________ */
         & .anunciante-box {
-          padding: 1.5rem 0 2.5rem;
+          padding: 1.5rem 0 0 0;
           & .__anunciante-img {
             width: 4rem;
             height: 4rem;
@@ -1026,27 +990,6 @@ export default {
             text-decoration: underline;
           }
         }/* __________ ANUNCIANTE BOX __________ */
-
-
-
-
-        /* __________ INFO BOX __________ */
-        & .info-box {
-          padding: 0; 
-          display: flex;
-          justify-content: space-between;
-          & .item {
-            display: flex;
-            flex-flow: column;
-            align-items: center;
-            margin-top: .8rem;
-            & .__img {
-              width: 2.1rem;
-              height: auto;
-              margin: 0 0 .7rem 0;
-            }
-          }
-        }/* __________ INFO BOX __________ */
 
 
 

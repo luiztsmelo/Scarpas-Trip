@@ -94,35 +94,6 @@
         </div><!-- ______________________________ ANUNCIANTE ______________________________ -->
 
 
-        
-
-
-
-        <!-- ______________________________ INFO ______________________________ -->
-        <div class="info-box">
-          
-          <div class="item">
-            <img class="__img" src="../../assets/img/guests.svg">
-            <h3>{{ acomod.totalHospedes }} {{ acomod.totalHospedes == '1' ? 'hóspede' : 'hóspedes' }}</h3>
-          </div>
-
-          <div class="item">
-            <img class="__img" src="../../assets/img/quarto.svg">
-            <h3>{{ acomod.totalQuartos }} {{ acomod.totalQuartos == '1' ? 'quarto' : 'quartos' }} ({{ acomod.totalSuites }} {{ acomod.totalSuites == '1' ? 'suíte' : 'suítes' }})</h3>
-          </div>
-
-          <div class="item">
-            <img class="__img" src="../../assets/img/banheiro.svg" style="transform: scale(1.06)">
-            <h3>{{ acomod.totalBanheiros }} {{ acomod.totalBanheiros == '1' ? 'banheiro' : 'banheiros' }}</h3>
-          </div>
-
-          <div class="item">
-            <img class="__img" src="../../assets/img/garagem.svg" style="transform: scale(1.01)">
-            <h3>{{ acomod.totalGaragem }} {{ acomod.totalGaragem == '1' ? 'vaga' : 'vagas' }} garagem</h3>
-          </div>
-
-        </div><!-- ______________________________ INFO ______________________________ -->
-
 
 
 
@@ -801,23 +772,6 @@ export default {
 
 
 
-  /* __________ INFO BOX __________ */
-  & .info-box {
-    padding: 0 7%;
-    & .item {
-      display: flex;
-      flex-flow: row;
-      align-items: center;
-      margin-top: 1.2rem;
-      & .__img {
-        width: 1.6rem;
-        height: auto;
-        margin: 0 .7rem 0 0;
-      }
-    }
-  }/* __________ INFO BOX __________ */
-
-
 
 
   /* __________ SOBRE BOX __________ */
@@ -1206,7 +1160,7 @@ export default {
 
         /* __________ ANUNCIANTE __________ */
         & .anunciante-box {
-          padding: 1.5rem 0 2.5rem;
+          padding: 1.5rem 0 0 0;
           & .__anunciante-img {
             width: 4rem;
             height: 4rem;
@@ -1217,25 +1171,6 @@ export default {
         }/* __________ ANUNCIANTE __________ */
 
 
-
-
-        /* __________ INFO __________ */
-        & .info-box {
-          padding: 0; 
-          display: flex;
-          justify-content: space-between;
-          & .item {
-            display: flex;
-            flex-flow: column;
-            align-items: center;
-            margin-top: .8rem;
-            & .__img {
-              width: 2.1rem;
-              height: auto;
-              margin: 0 0 .7rem 0;
-            }
-          }
-        }/* __________ INFO __________ */
 
 
 

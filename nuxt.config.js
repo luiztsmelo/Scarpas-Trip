@@ -70,11 +70,11 @@ module.exports = {
   ],
   /* _________________________________________ LOADINGS __________________________________________ */
   loading: false,
-  loadingIndicator: {
+  /* loadingIndicator: {
     name: 'pulse',
     color: '#dedede',
     background: 'white'
-  },
+  }, */
   /* _______________________________________ APP MANIFEST _______________________________________ */
   manifest: {
     name: 'Escarpas Trip',
