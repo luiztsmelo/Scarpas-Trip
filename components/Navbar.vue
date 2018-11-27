@@ -135,13 +135,13 @@ export default {
       display: flex;
       align-items: center;
       & .__brand-img {
-        width: 1.85rem;
+        width: 2rem;
         height: auto;
         margin-right: .5rem;
       }
       & .__brand-name {
         font-family: var(--main-font);
-        font-size: 18px;
+        font-size: 17px;
         font-weight: 500;
         line-height: 3.5rem;
         user-select: none;

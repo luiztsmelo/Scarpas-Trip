@@ -196,7 +196,7 @@ const store = () => new Vuex.Store({
           nome: 'Quarto 1',
           acomoda: 1,
           valor: 0,
-          mobilias: ['cama_casal']
+          mobilias: ['cama_casal', 'cama_solteiro', 'sofa']
         }
       ],
       totalHospedes: 0,
@@ -805,6 +805,17 @@ const store = () => new Vuex.Store({
     },
     m_removeRotaPasseio (state, index) {
       state.passeioData.rotas.splice(index, 1)
+    },
+    m_addQuarto (state) {
+      state.acomodData.quartos.push({
+        nome: `Quarto ${state.acomodData.quartos.length + 1}`,
+        acomoda: 1,
+        valor: 0,
+        mobilias: []
+      })
+    },
+    m_removeQuarto (state, index) {
+      state.acomodData.quartos.splice(index, 1)
     },
     m_imageCountPas (state) {
       state.imageCountPas++

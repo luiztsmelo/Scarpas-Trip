@@ -88,57 +88,61 @@
 
       <div class="quartos">
 
-        <div class="quarto" v-for="(quarto, index) in $store.state.acomodData.quartos" :key="index + 1">
-          <div class="quarto-body">
+        <transition-group name="quartos-animation" tag="div" style="width: 100%">
+          <div class="quarto" v-for="(quarto, index) in $store.state.acomodData.quartos" :key="index + 1">
+            <div class="quarto-body">
 
-            
-            <div class="heading">
-              <input class="__nome" type="text" v-model="quarto.nome">
-              <img class="__remove-img" src="../../../assets/img/close-mobile.svg">
-            </div>
-            
+              
+              <div class="heading">
+                <input class="__nome" type="text" v-model="quarto.nome">
+                <img class="__remove-img" src="../../../assets/img/close-mobile.svg" @click="$store.commit('m_removeQuarto', index)">
+              </div>
+              
 
 
-            <div class="questions">
+              <div class="questions">
 
-              <div class="question">
-                <label>Acomoda até:</label>
-                <select v-model="quarto.acomoda">
-                  <option v-for="n in 12" :value="n">{{ n }} {{ n === 1 ? 'hóspede' : 'hóspedes' }}</option>
-                </select>
+                <div class="question">
+                  <label>Acomoda até:</label>
+                  <select v-model="quarto.acomoda">
+                    <option v-for="n in 12" :value="n">{{ n }} {{ n === 1 ? 'hóspede' : 'hóspedes' }}</option>
+                  </select>
+                </div>
+
+                <!-- v-if pousada e afins -->
+                <div class="question">
+                  <label>Valor por noite:</label>
+                  <money 
+                    v-model="quarto.valor"
+                    onKeyPress="if (event.which == 13) return false">
+                  </money>
+                </div><!-- v-if pousada e afins -->
+
               </div>
 
-              <!-- v-if pousada e afins -->
-              <div class="question">
-                <label>Valor por noite:</label>
-                <money 
-                  v-model="quarto.valor"
-                  onKeyPress="if (event.which == 13) return false">
-                </money>
-              </div><!-- v-if pousada e afins -->
+
+              <div class="mobilias">
+
+                <div class="mobilia" v-for="(mobilia, index) in quarto.mobilias">
+                  <img :src="mobiliaImage(mobilia)" style="width: 1.7rem; height: auto">
+                  <p>{{ mobiliaText(mobilia) }}</p>
+                </div>
+
+                <div class="add-mobilia">
+                  <img src="../../../assets/img/add.svg" style="width: 1.5rem; height: auto">
+                  <p>Adicionar mobília</p>
+                </div>
+
+              </div>
+          
 
             </div>
-
-
-            <div class="mobilias">
-
-              <div class="mobilia" v-for="(mobilia, index) in quarto.mobilias">
-                <img src="../../../assets/img/cama_casal.svg" style="width: 1.7rem; height: auto">
-                <p>{{ mobilia === 'cama_casal' ? 'Cama de casal' : ''}}</p>
-              </div>
-
-              <div class="add-mobilia">
-                <img src="../../../assets/img/add.svg" style="width: 1.5rem; height: auto">
-                <p>Adicionar mobília</p>
-              </div>
-
-            </div>
-        
-
           </div>
-        </div>
+        </transition-group>         
 
-        <button class="add-quarto-btn" type="button">Adicionar quarto</button>
+
+        <button class="add-quarto-btn" type="button" @click="$store.commit('m_addQuarto')">Adicionar quarto</button>
+
 
       </div>
 
@@ -817,6 +821,18 @@ export default {
     }
   },
   methods: {
+    mobiliaImage (mobilia) {
+      return mobilia === 'cama_casal' ? require('@/assets/img/cama_casal.svg')
+           : mobilia === 'cama_solteiro' ? require('@/assets/img/cama_solteiro.svg')
+           : mobilia === 'sofa' ? require('@/assets/img/sofa.svg')
+           : ''
+    },
+    mobiliaText (mobilia) {
+      return mobilia === 'cama_casal' ? 'Cama de casal'
+           : mobilia === 'cama_solteiro' ? 'Cama de solteiro'
+           : mobilia === 'sofa' ? 'Sofá'
+           : ''
+    },
     onSelectBankCode () {
       scrollIntoView(this.$refs.type)
       this.$refs.type.focus()
@@ -1937,10 +1953,10 @@ export default {
             }
             & .mobilias {
               display: grid;
-              grid-template-columns: repeat(auto-fill, minmax(5rem, 1fr));
+              grid-template-columns: repeat(auto-fill, minmax(6rem, 1fr));
               grid-auto-rows: 1fr;
-              grid-gap: 10px;
-              margin: 1rem 1.5rem 1.5rem;
+              grid-gap: 12px;
+              margin: .5rem 1.5rem 1.5rem;
               & .mobilia {
                 cursor: pointer;
                 display: flex;
@@ -1948,7 +1964,7 @@ export default {
                 align-items: center;
                 justify-content: center;
                 border: 1px solid #dedede;
-                border-radius: 6px;
+                border-radius: 7px;
                 padding: 1rem;
                 & p {
                   padding-top: 8px;
@@ -1957,6 +1973,9 @@ export default {
                   font-weight: 500;
                 }
               }
+              & .mobilia:hover {
+                border: 1px solid #161616;
+              }
               & .add-mobilia {
                 cursor: pointer;
                 display: flex;
@@ -1964,7 +1983,7 @@ export default {
                 align-items: center;
                 justify-content: center;
                 border: 1px solid #dedede;
-                border-radius: 6px;
+                border-radius: 7px;
                 padding: 1rem;
                 transition: var(--main-transition);
                 & p {
@@ -1975,7 +1994,7 @@ export default {
                 }
               }
               & .add-mobilia:hover {
-                background: rgb(245,245,245);
+                border: 1px solid #161616;
               }
             }
             & .camas::before {
@@ -2134,6 +2153,19 @@ export default {
 .has-error {
   color:#FF0134 !important;
   border-bottom: 1px solid #FF0134 !important;
+}
+
+/* Quartos transitions */
+.quartos-animation-enter {
+  opacity: 0;
+  transform: translateY(15px);
+}
+.quartos-animation-leave-to {
+  opacity: 0;
+}
+.quartos-animation-leave-active {
+  opacity: 0;
+  transform: scale(.94);
 }
 
 </style>

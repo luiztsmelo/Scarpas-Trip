@@ -1971,7 +1971,7 @@ input[type=time]::-webkit-clear-button {
   opacity: 0;
   transform: translateY(15px);
 }
-..rotas-animation-leave-to {
+.rotas-animation-leave-to {
   opacity: 0;
 }
 .rotas-animation-leave-active {
