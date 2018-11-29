@@ -46,7 +46,7 @@ export default {
   },
   methods: {
     addMobilia (mobilia) {
-      this.$store.state.acomodData.quartos[this.$store.state.indexQuarto].mobilias.push(mobilia.id)
+      this.$store.commit('m_addMobilia', mobilia)
       this.$modal.hide('add-mobilia-modal')
     }
   },

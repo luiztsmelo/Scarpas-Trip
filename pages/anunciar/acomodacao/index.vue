@@ -120,10 +120,11 @@
 
               </div>
 
-
+              
               <div class="mobilias">
-
-                <div class="mobilia" v-for="(mobilia, index) in quarto.mobilias">
+                
+                <div class="mobilia" v-for="(mobilia, index) in quarto.mobilias" @click="$store.commit('m_removeMobilia', index)">
+                  <img class="remove-mobilia" src="../../../assets/img/close-mobile.svg">
                   <img :src="mobiliaImage(mobilia)" style="width: 1.7rem; height: auto">
                   <p>{{ mobiliaText(mobilia) }}</p>
                 </div>
@@ -140,7 +141,7 @@
 
             </div>
           </div>
-        </transition-group>         
+        </transition-group>      
 
 
         <button class="add-quarto-btn" type="button" @click="$store.commit('m_addQuarto')">Adicionar quarto</button>
@@ -1560,10 +1561,10 @@ export default {
           }
           & .questions {
             display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin: 1rem 1.5rem;
+            flex-flow: column;
+            margin: .7rem 1.5rem;
             & .question {
+              margin: .5rem 0;
               & label {
                 font-size: 16px;
                 font-weight: 400;
@@ -1597,6 +1598,7 @@ export default {
             grid-gap: 12px;
             margin: .5rem 1.5rem 1.5rem;
             & .mobilia {
+              position: relative;
               cursor: pointer;
               display: flex;
               flex-flow: column;
@@ -1605,6 +1607,15 @@ export default {
               border: 1px solid #dedede;
               border-radius: 7px;
               padding: 1rem;
+              transition: var(--main-transition);
+              & .remove-mobilia {
+                cursor: pointer;
+                position: absolute;
+                top: 7px;
+                right: 7px;
+                width: .8rem;
+                height: auto;
+              }
               & p {
                 padding-top: 10px;
                 text-align: center;
@@ -2031,8 +2042,12 @@ export default {
               }
             }
             & .questions {
-              margin: 1rem 1.5rem;
+              flex-flow: row;
+              align-items: center;
+              justify-content: space-between;
+              margin: 1.1rem 1.5rem;
               & .question {
+                margin: 0;
                 & label {
                 }
                 & input {
@@ -2042,8 +2057,13 @@ export default {
               }
             }
             & .mobilias {
-              margin: .5rem 1.5rem 1.5rem;
+              margin: .4rem 1.5rem 1.5rem;
               & .mobilia {
+                & .remove-mobilia {
+                  width: .7rem;
+                  display: none;
+                  transition: var(--main-transition);
+                }
                 & p {
                   padding-top: 8px;
                   font-size: 13px;
@@ -2051,6 +2071,9 @@ export default {
               }
               & .mobilia:hover {
                 border: 1px solid #161616;
+              }
+              & .mobilia:hover > .remove-mobilia {
+                display: block;
               }
               & .add-mobilia {
 

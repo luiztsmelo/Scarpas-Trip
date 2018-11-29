@@ -611,6 +611,12 @@ const store = () => new Vuex.Store({
     m_removeQuarto (state, index) {
       state.acomodData.quartos.splice(index, 1)
     },
+    m_addMobilia (state, mobilia) {
+      state.acomodData.quartos[state.indexQuarto].mobilias.push(mobilia.id)
+    },
+    m_removeMobilia (state, index) {
+      state.acomodData.quartos[state.indexQuarto].mobilias.splice(index, 1)
+    },
     m_indexQuarto (state, index) {
       state.indexQuarto = index
     },
