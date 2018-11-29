@@ -68,6 +68,9 @@ module.exports = {
     { src: '~/plugins/vue-multiselect', ssr: false },
     { src: '~/plugins/localStorage.js', ssr: false }
   ],
+  router: {
+    middleware: ['isMobile'] /* Only dev: update isMobile store on page changes */
+  },
   /* _________________________________________ LOADINGS __________________________________________ */
   loading: false,
   /* loadingIndicator: {

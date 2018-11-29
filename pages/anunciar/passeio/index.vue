@@ -1285,7 +1285,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 
 .anunciar-passeio {
   margin-top: var(--navbarHeightMobile);

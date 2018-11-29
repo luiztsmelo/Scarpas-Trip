@@ -173,7 +173,7 @@ export default {
       display: flex;
       flex-flow: column;
       align-items: center;
-      background: rgba(0,0,0, .25);
+      background: rgba(0,0,0, .2);
       & .headline {
         padding: 2rem 30% 0;
         width: 100%;

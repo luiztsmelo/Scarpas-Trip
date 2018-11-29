@@ -89,7 +89,7 @@
       <div class="quartos">
 
         <transition-group name="quartos-animation" tag="div" style="width: 100%">
-          <div class="quarto" v-for="(quarto, index) in $store.state.acomodData.quartos" :key="index + 1">
+          <div class="quarto" v-for="(quarto, index) in $store.state.acomodData.quartos" :key="index" @click="$store.commit('m_indexQuarto', index)">
             <div class="quarto-body">
 
               
@@ -111,7 +111,7 @@
 
                 <!-- v-if pousada e afins -->
                 <div class="question">
-                  <label>Valor por noite:</label>
+                  <label>Valor da diária:</label>
                   <money 
                     v-model="quarto.valor"
                     onKeyPress="if (event.which == 13) return false">
@@ -128,10 +128,12 @@
                   <p>{{ mobiliaText(mobilia) }}</p>
                 </div>
 
-                <div class="add-mobilia">
+                <div class="add-mobilia" @click="$modal.show('add-mobilia-modal')">
                   <img src="../../../assets/img/add.svg" style="width: 1.5rem; height: auto">
                   <p>Adicionar mobília</p>
                 </div>
+
+                <add-mobilia></add-mobilia>
 
               </div>
           
@@ -790,11 +792,12 @@ import { bancos } from '@/mixins/bancos'
 import { tipoAcomod } from '@/mixins/tipoAcomod'
 import VueSimpleSuggest from 'vue-simple-suggest'
 import localMap from '~/components/localMap.vue'
+import AddMobilia from '~/components/AddMobilia.vue'
 import CPF from 'gerador-validador-cpf'
 import scrollIntoView from 'scroll-into-view'
 
 export default {
-  components: { MaskedInput, VueSimpleSuggest, localMap },
+  components: { MaskedInput, VueSimpleSuggest, localMap, AddMobilia },
   mixins: [ bancos, tipoAcomod ],
   head () {
     return {
@@ -822,14 +825,18 @@ export default {
   },
   methods: {
     mobiliaImage (mobilia) {
-      return mobilia === 'cama_casal' ? require('@/assets/img/cama_casal.svg')
-           : mobilia === 'cama_solteiro' ? require('@/assets/img/cama_solteiro.svg')
+      return mobilia === 'cama_solteiro' ? require('@/assets/img/cama_solteiro.svg')
+           : mobilia === 'cama_casal' ? require('@/assets/img/cama_casal.svg')
+           : mobilia === 'cama_queen' ? require('@/assets/img/cama_casal.svg')
+           : mobilia === 'cama_king' ? require('@/assets/img/cama_casal.svg')
            : mobilia === 'sofa' ? require('@/assets/img/sofa.svg')
            : ''
     },
     mobiliaText (mobilia) {
-      return mobilia === 'cama_casal' ? 'Cama de casal'
-           : mobilia === 'cama_solteiro' ? 'Cama de solteiro'
+      return mobilia === 'cama_solteiro' ? 'Cama solteiro'
+           : mobilia === 'cama_casal' ? 'Cama casal'
+           : mobilia === 'cama_queen' ? 'Cama queen'
+           : mobilia === 'cama_king' ? 'Cama king'
            : mobilia === 'sofa' ? 'Sofá'
            : ''
     },
@@ -1360,7 +1367,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 @import url('~/assets/css/switcher.css');
 @import url('~/assets/css/yes-or-no.css');
 @import url('~/assets/css/vue-simple-suggest.css');
@@ -1512,12 +1519,144 @@ export default {
       }
     }
     & .quartos {
+      display: flex;
+      flex-flow: column;
+      align-items: center;
+      margin: 1.6rem 7% 0;
       & .quarto {
+        border: 1px solid #dedede;
+        width: 100%;
+        transition: var(--main-transition);
+        border-radius: 10px;
+        margin-bottom: 1.7rem;
         & .quarto-body {
-          & .__nome {
-
+          position: relative;
+          display: flex;
+          flex-flow: column;
+          & .heading {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #dedede;
+            border-radius: 10px 10px 0 0;
+            padding: .7rem 1.5rem;
+            & .__nome {
+              width: 100%;
+              cursor: text;
+              border: none;
+              outline: none;
+              font-size: 19px;
+              font-weight: 600;
+              background: transparent;
+              color: white;
+            }
+            & .__remove-img {
+              cursor: pointer;
+              width: 1.1rem;
+              height: auto;
+              filter: invert(100%) brightness(200%);
+              margin-left: 1.5rem;
+            }
+          }
+          & .questions {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin: 1rem 1.5rem;
+            & .question {
+              & label {
+                font-size: 16px;
+                font-weight: 400;
+                padding-right: 2px;
+              }
+              & input {
+                cursor: text;
+                width: 3.8rem;
+                border: none;
+                outline: none;
+                background: white;
+                color: var(--color01);
+                font-size: 16px;
+                font-weight: 500;
+              }
+              & select {
+                cursor: pointer;
+                border: none;
+                outline: none;
+                background: white;
+                color: var(--color01);
+                font-size: 16px;
+                font-weight: 500;
+              }
+            }
+          }
+          & .mobilias {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(6rem, 1fr));
+            grid-auto-rows: 1fr;
+            grid-gap: 12px;
+            margin: .5rem 1.5rem 1.5rem;
+            & .mobilia {
+              cursor: pointer;
+              display: flex;
+              flex-flow: column;
+              align-items: center;
+              justify-content: center;
+              border: 1px solid #dedede;
+              border-radius: 7px;
+              padding: 1rem;
+              & p {
+                padding-top: 10px;
+                text-align: center;
+                font-size: 14px;
+                font-weight: 500;
+              }
+            }
+            & .mobilia:hover {
+              border: 1px solid #161616;
+            }
+            & .add-mobilia {
+              cursor: pointer;
+              display: flex;
+              flex-flow: column;
+              align-items: center;
+              justify-content: center;
+              border: 1px solid #dedede;
+              border-radius: 7px;
+              padding: 1rem;
+              transition: var(--main-transition);
+              & p {
+                padding-top: 10px;
+                text-align: center;
+                font-size: 14px;
+                font-weight: 500;
+              }
+            }
+            & .add-mobilia:hover {
+              border: 1px solid #161616;
+            }
+          }
+          & .camas::before {
+            content: '';
+            width: 0;
+            padding-bottom: 100%;
+            grid-row: 1 / 1;
+            grid-column: 1 / 1;
+          }
+          & .camas > *:first-child {
+            grid-row: 1 / 1;
+            grid-column: 1 / 1;
           }
         }
+      }
+      & .add-quarto-btn {
+        background: white;
+        font-size: 18px;
+        font-weight: 600;
+        color: var(--colorAcomod);
+      }
+      & .add-quarto-btn:hover {
+        text-decoration: underline;
       }
     }
     & .comodidades-box {
@@ -1880,141 +2019,54 @@ export default {
         }
       }
       & .quartos {
-        display: flex;
-        flex-flow: column;
-        align-items: center;
         margin: 1.6rem calc(28% - 2%) 0;
         & .quarto {
-          border: 1px solid #dedede;
-          width: 100%;
-          transition: var(--main-transition);
-          border-radius: 10px;
-          margin-bottom: 1.7rem;
           & .quarto-body {
-            position: relative;
-            display: flex;
-            flex-flow: column;
             & .heading {
-              display: flex;
-              align-items: center;
-              justify-content: space-between;
-              background: #dedede;
-              border-radius: 10px 10px 0 0;
               padding: .7rem 1.5rem;
               & .__nome {
-                width: 100%;
-                cursor: text;
-                border: none;
-                outline: none;
-                font-size: 19px;
-                font-weight: 600;
-                background: transparent;
-                color: white;
               }
               & .__remove-img {
-                cursor: pointer;
-                width: 1.1rem;
-                height: auto;
-                filter: invert(100%) brightness(200%);
                 margin-left: 1.5rem;
               }
             }
             & .questions {
-              display: flex;
-              align-items: center;
-              justify-content: space-between;
               margin: 1rem 1.5rem;
               & .question {
                 & label {
-                  font-size: 16px;
-                  font-weight: 400;
-                  padding-right: 2px;
                 }
                 & input {
-                  cursor: text;
-                  width: 3.8rem;
-                  border: none;
-                  outline: none;
-                  background: white;
-                  color: var(--color01);
-                  font-size: 16px;
-                  font-weight: 500;
                 }
                 & select {
-                  cursor: pointer;
-                  border: none;
-                  outline: none;
-                  background: white;
-                  color: var(--color01);
-                  font-size: 16px;
-                  font-weight: 500;
                 }
               }
             }
             & .mobilias {
-              display: grid;
-              grid-template-columns: repeat(auto-fill, minmax(6rem, 1fr));
-              grid-auto-rows: 1fr;
-              grid-gap: 12px;
               margin: .5rem 1.5rem 1.5rem;
               & .mobilia {
-                cursor: pointer;
-                display: flex;
-                flex-flow: column;
-                align-items: center;
-                justify-content: center;
-                border: 1px solid #dedede;
-                border-radius: 7px;
-                padding: 1rem;
                 & p {
                   padding-top: 8px;
-                  text-align: center;
                   font-size: 13px;
-                  font-weight: 500;
                 }
               }
               & .mobilia:hover {
                 border: 1px solid #161616;
               }
               & .add-mobilia {
-                cursor: pointer;
-                display: flex;
-                flex-flow: column;
-                align-items: center;
-                justify-content: center;
-                border: 1px solid #dedede;
-                border-radius: 7px;
-                padding: 1rem;
-                transition: var(--main-transition);
+
                 & p {
                   padding-top: 8px;
-                  text-align: center;
                   font-size: 13px;
-                  font-weight: 500;
                 }
               }
               & .add-mobilia:hover {
                 border: 1px solid #161616;
               }
             }
-            & .camas::before {
-              content: '';
-              width: 0;
-              padding-bottom: 100%;
-              grid-row: 1 / 1;
-              grid-column: 1 / 1;
-            }
-            & .camas > *:first-child {
-              grid-row: 1 / 1;
-              grid-column: 1 / 1;
-            }
           }
         }
         & .add-quarto-btn {
-          background: white;
           font-size: 17px;
-          font-weight: 600;
-          color: var(--colorAcomod);
         }
         & .add-quarto-btn:hover {
           text-decoration: underline;

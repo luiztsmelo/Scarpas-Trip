@@ -25,7 +25,6 @@
 
 <script>
 import isMobile from 'ismobilejs'
-
 import Navbar from '~/components/Navbar.vue'
 import Foobar from '~/components/Foobar.vue'
 import SignIn from '~/components/SignIn.vue'
@@ -38,13 +37,10 @@ import Alert from '~/components/Alert'
 
 export default {
   components: { Navbar, Foobar, SignIn, Menuu, Loader, Share, MapFull, Offline, Alert },
-  async mounted () {
-    this.$gmapApiPromiseLazy().then(() => { this.$store.state.markerSize = new google.maps.Size(42, 42) })
-  },
   beforeCreate () {
-    /* Detect Device */
-    isMobile.any ? this.$store.commit('m_isMobile', true) : this.$store.commit('m_isMobile', false)
     if (process.browser) {
+      /* Detect Device */
+      isMobile.any ? this.$store.commit('m_isMobile', true) : this.$store.commit('m_isMobile', false)
       /* Desativate loader on refresh */
       if (performance.navigation.type == performance.navigation.TYPE_RELOAD) {
         this.$store.commit('m_loader', false)
@@ -65,6 +61,9 @@ export default {
         this.$store.state.lastHash = this.$route.hash
       })
     }
+  },
+  async mounted () {
+    this.$gmapApiPromiseLazy().then(() => { this.$store.state.markerSize = new google.maps.Size(42, 42) })
   }
 }
 </script>

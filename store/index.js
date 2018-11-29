@@ -196,7 +196,7 @@ const store = () => new Vuex.Store({
           nome: 'Quarto 1',
           acomoda: 1,
           valor: 0,
-          mobilias: ['cama_casal', 'cama_solteiro', 'sofa']
+          mobilias: ['cama_casal']
         }
       ],
       totalHospedes: 0,
@@ -240,6 +240,7 @@ const store = () => new Vuex.Store({
       disabledDates_booking: [],
       disabledDates_escarpasTrip: []
     },
+    indexQuarto: 0,
     concludedNewAcomod: false,
     cadastroAcomod0: true,
     cadastroAcomod1: false,
@@ -599,6 +600,20 @@ const store = () => new Vuex.Store({
     m_acomodID (state, payload) {
       state.acomodData.acomodID = payload
     },
+    m_addQuarto (state) {
+      state.acomodData.quartos.push({
+        nome: `Quarto ${state.acomodData.quartos.length + 1}`,
+        acomoda: 1,
+        valor: 0,
+        mobilias: []
+      })
+    },
+    m_removeQuarto (state, index) {
+      state.acomodData.quartos.splice(index, 1)
+    },
+    m_indexQuarto (state, index) {
+      state.indexQuarto = index
+    },
     m_imageCountAc (state) {
       state.imageCountAc++
     },
@@ -607,9 +622,6 @@ const store = () => new Vuex.Store({
     },
     m_valorNoitesTotal (state, payload) {
       state.reservaAcomod.valorNoitesTotal = payload
-    },
-    m_serviceFeeTotal (state, payload) {
-      state.reservaAcomod.serviceFeeTotal = payload
     },
     m_valorReservaTotal (state, payload) {
       state.reservaAcomod.valorReservaTotal = payload
@@ -805,17 +817,6 @@ const store = () => new Vuex.Store({
     },
     m_removeRotaPasseio (state, index) {
       state.passeioData.rotas.splice(index, 1)
-    },
-    m_addQuarto (state) {
-      state.acomodData.quartos.push({
-        nome: `Quarto ${state.acomodData.quartos.length + 1}`,
-        acomoda: 1,
-        valor: 0,
-        mobilias: []
-      })
-    },
-    m_removeQuarto (state, index) {
-      state.acomodData.quartos.splice(index, 1)
     },
     m_imageCountPas (state) {
       state.imageCountPas++
