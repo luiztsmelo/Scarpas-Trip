@@ -6,7 +6,7 @@ export const tipoAcomod = {
       const path = this.acomod.tipoAcomod
       return path === 'Casa' ? 'a casa'
            : path === 'Apartamento' ? 'o apartamento'
-           : path === 'Suíte' ? 'a suíte'
+           : path === 'Suítes' ? 'a Suítes'
            : path === 'Rancho' ? 'o rancho'
            : path === 'Chácara' ? 'a chácara'
            : path === 'Pousada' ? 'a pousada'
@@ -20,7 +20,7 @@ export const tipoAcomod = {
       const path = this.acomodData.tipoAcomod
       return path === 'Casa' ? 'a casa'
            : path === 'Apartamento' ? 'o apartamento'
-           : path === 'Suíte' ? 'a suíte'
+           : path === 'Suítes' ? 'a Suítes'
            : path === 'Rancho' ? 'o rancho'
            : path === 'Chácara' ? 'a chácara'
            : path === 'Pousada' ? 'a pousada'
@@ -34,7 +34,7 @@ export const tipoAcomod = {
       const path = this.acomod.tipoAcomod
       return path === 'Casa' ? 'da casa'
            : path === 'Apartamento' ? 'do apartamento'
-           : path === 'Suíte' ? 'da suíte'
+           : path === 'Suítes' ? 'da Suítes'
            : path === 'Rancho' ? 'do rancho'
            : path === 'Chácara' ? 'da chácara'
            : path === 'Pousada' ? 'da pousada'
@@ -48,7 +48,7 @@ export const tipoAcomod = {
       const path = this.acomod.tipoAcomod
       return path === 'Casa' ? 'na casa'
            : path === 'Apartamento' ? 'no apartamento'
-           : path === 'Suíte' ? 'na suíte'
+           : path === 'Suítes' ? 'na Suítes'
            : path === 'Rancho' ? 'no rancho'
            : path === 'Chácara' ? 'na chácara'
            : path === 'Pousada' ? 'na pousada'
@@ -62,7 +62,7 @@ export const tipoAcomod = {
       const path = this.acomodData.tipoAcomod
       return path === 'Casa' ? 'da casa'
            : path === 'Apartamento' ? 'do apartamento'
-           : path === 'Suíte' ? 'da suíte'
+           : path === 'Suítes' ? 'da Suítes'
            : path === 'Rancho' ? 'do rancho'
            : path === 'Chácara' ? 'da chácara'
            : path === 'Pousada' ? 'da pousada'
@@ -76,7 +76,7 @@ export const tipoAcomod = {
       const path = this.acomod.tipoAcomod
       return path === 'Casa' ? 'sua casa'
            : path === 'Apartamento' ? 'seu apartamento'
-           : path === 'Suíte' ? 'sua suíte'
+           : path === 'Suítes' ? 'sua Suítes'
            : path === 'Rancho' ? 'seu rancho'
            : path === 'Chácara' ? 'sua chácara'
            : path === 'Pousada' ? 'sua pousada'
@@ -90,7 +90,7 @@ export const tipoAcomod = {
       const path = this.acomodData.tipoAcomod
       return path === 'Casa' ? 'sua casa'
            : path === 'Apartamento' ? 'seu apartamento'
-           : path === 'Suíte' ? 'sua suíte'
+           : path === 'Suítes' ? 'sua Suítes'
            : path === 'Rancho' ? 'seu rancho'
            : path === 'Chácara' ? 'sua chácara'
            : path === 'Pousada' ? 'sua pousada'
@@ -104,7 +104,7 @@ export const tipoAcomod = {
       const path = this.acomodData.tipoAcomod
       return path === 'Casa' ? 'Linda casa'
            : path === 'Apartamento' ? 'Lindo apartamento'
-           : path === 'Suíte' ? 'Linda suíte'
+           : path === 'Suítes' ? 'Linda Suítes'
            : path === 'Rancho' ? 'Lindo rancho'
            : path === 'Chácara' ? 'Linda chácara'
            : path === 'Pousada' ? 'Linda pousada'
@@ -118,7 +118,7 @@ export const tipoAcomod = {
       const path = this.acomod.tipoAcomod
       return path === 'Casa' ? 'Esta casa'
            : path === 'Apartamento' ? 'Este apartamento'
-           : path === 'Suíte' ? 'Esta suíte'
+           : path === 'Suítes' ? 'Esta Suítes'
            : path === 'Rancho' ? 'Este rancho'
            : path === 'Chácara' ? 'Esta chácara'
            : path === 'Pousada' ? 'Esta pousada'

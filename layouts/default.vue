@@ -37,7 +37,8 @@ import Alert from '~/components/Alert'
 
 export default {
   components: { Navbar, Foobar, SignIn, Menuu, Loader, Share, MapFull, Offline, Alert },
-  beforeCreate () {
+  async mounted () {
+    this.$gmapApiPromiseLazy().then(() => { this.$store.state.markerSize = new google.maps.Size(42, 42) })
     if (process.browser) {
       /* Detect Device */
       isMobile.any ? this.$store.commit('m_isMobile', true) : this.$store.commit('m_isMobile', false)
@@ -61,9 +62,6 @@ export default {
         this.$store.state.lastHash = this.$route.hash
       })
     }
-  },
-  async mounted () {
-    this.$gmapApiPromiseLazy().then(() => { this.$store.state.markerSize = new google.maps.Size(42, 42) })
   }
 }
 </script>

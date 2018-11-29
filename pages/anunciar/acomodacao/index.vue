@@ -56,7 +56,7 @@
         <select v-model="$store.state.acomodData.tipoAcomod">
           <option>Casa</option>
           <option>Apartamento</option>
-          <option>Suíte</option>
+          <option>Suítes</option>
           <option>Rancho</option>
           <option>Chácara</option>
           <option>Pousada</option>
@@ -105,7 +105,7 @@
                 <div class="question">
                   <label>Acomoda até:</label>
                   <select v-model="quarto.acomoda">
-                    <option v-for="n in 12" :value="n">{{ n }} {{ n === 1 ? 'hóspede' : 'hóspedes' }}</option>
+                    <option v-for="n in 12" :key="n" :value="n">{{ n }} {{ n === 1 ? 'hóspede' : 'hóspedes' }}</option>
                   </select>
                 </div>
 
@@ -121,27 +121,25 @@
               </div>
 
               
-              <div class="mobilias">
-                
-                <div class="mobilia" v-for="(mobilia, index) in quarto.mobilias" @click="$store.commit('m_removeMobilia', index)">
+              <transition-group name="mobilias-animation" tag="div" class="mobilias">
+                <div class="mobilia" v-for="(mobilia, index) in quarto.mobilias" :key="index" @click="$store.commit('m_removeMobilia', index)">
                   <img class="remove-mobilia" src="../../../assets/img/close-mobile.svg">
                   <img :src="mobiliaImage(mobilia)" style="width: 1.7rem; height: auto">
                   <p style="user-select: none">{{ mobiliaText(mobilia) }}</p>
                 </div>
 
-                <div class="add-mobilia" @click="$modal.show('add-mobilia-modal')">
+                <div class="add-mobilia" @click="$modal.show('add-mobilia-modal')" key="add">
                   <img src="../../../assets/img/add.svg" style="width: 1.5rem; height: auto">
                   <p style="user-select: none">Adicionar mobília</p>
                 </div>
+              </transition-group>
 
-                <add-mobilia></add-mobilia>
+              <add-mobilia></add-mobilia>
 
-              </div>
-          
 
             </div>
           </div>
-        </transition-group>      
+        </transition-group>
 
 
         <button class="add-quarto-btn" type="button" @click="$store.commit('m_addQuarto')">Adicionar quarto</button>
@@ -171,14 +169,14 @@
       <div class="item-form">
         <label>Nº de Banheiros</label>
         <select v-model="$store.state.acomodData.totalBanheiros">
-          <option v-for="n in 10">{{ n }}</option>
+          <option v-for="n in 10" :key="n">{{ n }}</option>
         </select>
       </div> 
 
       <div class="item-form">
         <label>Vagas na Garagem</label>
         <select v-model="$store.state.acomodData.totalGaragem">
-          <option v-for="n in 10">{{ n }}</option>
+          <option v-for="n in 10" :key="n">{{ n }}</option>
         </select>
       </div> 
 
@@ -356,7 +354,7 @@
       <!-- Preview images -->
       <div class="after-choose-image" :class="[ $store.state.acomodData.images.length == 0 ? 'center-first-image' : '' ]">
 
-        <div class="image-box" v-for="(image, index) in $store.state.acomodData.images">
+        <div class="image-box" v-for="(image, index) in $store.state.acomodData.images" :key="index">
           <div class="delete" @click="!isUploading ? deleteImage(image, index) : ''">
             <img src="../../../assets/img/delete.svg" class="__delete-img">
           </div>
@@ -511,7 +509,7 @@
         <!-- Regras adicionais -->
         <h3 class="__form-subtitle" style="margin-top:.6rem">Regras adicionais</h3>
 
-        <div class="new-regras" v-for="(regra, index) in $store.state.acomodData.regrasAdicionais">
+        <div class="new-regras" v-for="(regra, index) in $store.state.acomodData.regrasAdicionais" :key="index">
           <h3 class="__regra-text">{{ regra }}</h3>
           <button class="__regra-remove" type="button" @click="removeRegra(index)"></button>
         </div>
@@ -1613,7 +1611,7 @@ export default {
                 position: absolute;
                 top: 7px;
                 right: 7px;
-                width: .8rem;
+                width: .7rem;
                 height: auto;
               }
               & p {
@@ -2060,7 +2058,6 @@ export default {
               margin: .4rem 1.5rem 1.5rem;
               & .mobilia {
                 & .remove-mobilia {
-                  width: .7rem;
                   display: none;
                   transition: var(--main-transition);
                 }
@@ -2239,6 +2236,18 @@ export default {
   opacity: 0;
 }
 .quartos-animation-leave-active {
+  opacity: 0;
+  transform: scale(.94);
+}
+
+/* Mobílias transitions */
+.mobilias-animation-enter {
+  opacity: 0;
+}
+.mobilias-animation-leave-to {
+  opacity: 0;
+}
+.mobilias-animation-leave-active {
   opacity: 0;
   transform: scale(.94);
 }
