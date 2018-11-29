@@ -126,12 +126,12 @@
                 <div class="mobilia" v-for="(mobilia, index) in quarto.mobilias" @click="$store.commit('m_removeMobilia', index)">
                   <img class="remove-mobilia" src="../../../assets/img/close-mobile.svg">
                   <img :src="mobiliaImage(mobilia)" style="width: 1.7rem; height: auto">
-                  <p>{{ mobiliaText(mobilia) }}</p>
+                  <p style="user-select: none">{{ mobiliaText(mobilia) }}</p>
                 </div>
 
                 <div class="add-mobilia" @click="$modal.show('add-mobilia-modal')">
                   <img src="../../../assets/img/add.svg" style="width: 1.5rem; height: auto">
-                  <p>Adicionar mobília</p>
+                  <p style="user-select: none">Adicionar mobília</p>
                 </div>
 
                 <add-mobilia></add-mobilia>

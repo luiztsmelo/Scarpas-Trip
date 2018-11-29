@@ -9,7 +9,8 @@
     <div class="add-mobilia-body">
 
 
-      <img src="../assets/img/close-modal.svg" class="close-btn" @click="$modal.hide('add-mobilia-modal')">
+      <img v-if="$store.state.isMobile" src="../assets/img/close-mobile.svg" class="close-btn" @click="$modal.hide('add-mobilia-modal')">
+      <img v-else src="../assets/img/close-modal.svg" class="close-btn" @click="$modal.hide('add-mobilia-modal')">
       
 
       <h1 class="__title">Selecione uma mobília</h1>
@@ -18,7 +19,7 @@
       <div class="mobilia" v-for="(mobilia, index) in mobilias" :key="mobilia.id" @click="addMobilia(mobilia)">
         <div class="desc">
           <img :src="mobilia.imgPath">
-          <p>{{ mobilia.nome }}</p>
+          <p style="user-select: none">{{ mobilia.nome }}</p>
         </div>
         <button>Adicionar</button>
       </div>
@@ -87,12 +88,12 @@ export default {
       justify-content: space-between;
       width: 100%;
       border-bottom: 1px solid #dedede;
-      padding: 2.5rem 0;
+      padding: 2.6rem 0;
       & .desc {
         display: flex;
         align-items: center;
         & img {
-          width: 1.5rem;
+          width: 1.55rem;
           height: auto;
           margin-right: 1rem;
         }
