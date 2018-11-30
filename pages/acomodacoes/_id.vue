@@ -116,54 +116,14 @@
 
 
         <div class="comodidades-box-mobile" @click="showComods = true, hashComods()">
-          <img class="__img" v-if="acomod.hasRoupasCama" src="../../assets/img/hasRoupasCama.svg" style="transform: scale(1.01)">
-          <img class="__img" v-if="acomod.hasPiscina" src="../../assets/img/hasPiscina.svg">
-          <img class="__img" v-if="acomod.hasChurrasqueira" src="../../assets/img/hasChurrasqueira.svg">
-          <img class="__img" v-if="acomod.hasCozinha" src="../../assets/img/hasCozinha.svg" style="transform: scale(1.07)">
-          <img class="__img" v-if="acomod.hasWifi" src="../../assets/img/hasWifi.svg" style="transform: scale(.98)">
-          <img class="__img" v-if="acomod.hasArCond" src="../../assets/img/hasArCond.svg">
-          <img class="__img" v-if="acomod.hasCaixaSom" src="../../assets/img/hasCaixaSom.svg" style="transform: scale(.92)">
-          <img class="__img" v-if="acomod.hasBarracas" src="../../assets/img/hasBarracas.svg" style="transform: scale(1.1)">
-          <img class="__img" v-if="acomod.hasPier" src="../../assets/img/hasPier.svg">
+          <img class="__img" v-for="(comodidade, index) in acomod.comodidades" :key="comodidade.name" :src="comodidadeImgSrc(comodidade)">
         </div>
 
 
         <div class="comodidades-box-desktop">
-          <div class="item" v-if="acomod.hasRoupasCama">
-            <img class="__img" src="../../assets/img/hasRoupasCama.svg" style="transform: scale(1.01)">
-            <h3>Roupas de Cama</h3>
-          </div>
-          <div class="item" v-if="acomod.hasPiscina">
-            <img class="__img" src="../../assets/img/hasPiscina.svg">
-            <h3>Piscina</h3>
-          </div>
-          <div class="item" v-if="acomod.hasChurrasqueira">
-            <img class="__img" src="../../assets/img/hasChurrasqueira.svg">
-            <h3>Churrasqueira</h3>
-          </div>
-          <div class="item" v-if="acomod.hasCozinha">
-            <img class="__img" src="../../assets/img/hasCozinha.svg" style="transform: scale(1.07)">
-            <h3>Cozinha preparada</h3>
-          </div>
-          <div class="item" v-if="acomod.hasWifi">
-            <img class="__img" src="../../assets/img/hasWifi.svg" style="transform: scale(.98)">
-            <h3>Wi-Fi</h3>
-          </div>
-          <div class="item" v-if="acomod.hasArCond">
-            <img class="__img" src="../../assets/img/hasArCond.svg">
-            <h3>Ar condicionado</h3>
-          </div>
-          <div class="item" v-if="acomod.hasCaixaSom">
-            <img class="__img" src="../../assets/img/hasCaixaSom.svg" style="transform: scale(.92)">
-            <h3>Caixa de Som</h3>
-          </div>
-          <div class="item" v-if="acomod.hasBarracas">
-            <img class="__img" src="../../assets/img/hasBarracas.svg" style="transform: scale(1.1)">
-            <h3>Barracas</h3>
-          </div>
-          <div class="item" v-if="acomod.hasPier">
-            <img class="__img" src="../../assets/img/hasPier.svg">
-            <h3>Pier</h3>
+          <div class="item" v-for="(comodidade, index) in acomod.comodidades" :key="comodidade.name">
+            <img class="__img" :src="comodidadeImgSrc(comodidade)">
+            <h3>{{ comodidade.name }}</h3>
           </div>
         </div>
 
@@ -181,41 +141,9 @@
       
               <h1 class="__title">Comodidades</h1>
 
-              <div class="comods-item" v-if="acomod.hasRoupasCama">
-                <img src="../../assets/img/hasRoupasCama.svg" class="__img" style="transform: scale(1.01)">
-                <h3>Roupas de Cama</h3>
-              </div>
-              <div class="comods-item" v-if="acomod.hasPiscina">
-                <img src="../../assets/img/hasPiscina.svg" class="__img">
-                <h3>Piscina</h3>
-              </div>
-              <div class="comods-item" v-if="acomod.hasChurrasqueira">
-                <img src="../../assets/img/hasChurrasqueira.svg" class="__img">
-                <h3>Churrasqueira</h3>
-              </div>
-              <div class="comods-item" v-if="acomod.hasCozinha">
-                <img src="../../assets/img/hasCozinha.svg" class="__img" style="transform: scale(1.07)">
-                <h3>Cozinha Preparada</h3>
-              </div>
-              <div class="comods-item" v-if="acomod.hasWifi">
-                <img src="../../assets/img/hasWifi.svg" class="__img" style="transform: scale(.98)">
-                <h3>WiFi</h3>
-              </div>
-              <div class="comods-item" v-if="acomod.hasArCond">
-                <img src="../../assets/img/hasArCond.svg" class="__img">
-                <h3>Ar Condicionado</h3>
-              </div>
-              <div class="comods-item" v-if="acomod.hasCaixaSom">
-                <img src="../../assets/img/hasCaixaSom.svg" class="__img" style="transform: scale(.92)">
-                <h3>Caixa de Som</h3>
-              </div>
-              <div class="comods-item" v-if="acomod.hasBarracas">
-                <img src="../../assets/img/hasBarracas.svg" class="__img" style="transform: scale(1.1)">
-                <h3>Barracas</h3>
-              </div>
-              <div class="comods-item" v-if="acomod.hasPier">
-                <img src="../../assets/img/hasPier.svg" class="__img">
-                <h3>Pier</h3>
+              <div class="comods-item" v-for="(comodidade, index) in acomod.comodidades" :key="comodidade.name">
+                <img class="__img" :src="comodidadeImgSrc(comodidade)">
+                <h3>{{ comodidade.name }}</h3>
               </div>
 
             </div> 
@@ -532,6 +460,17 @@ export default {
     }
   },
   methods: {
+    comodidadeImgSrc (comodidade) {
+      return comodidade.name === 'Roupas de cama' ? require('@/assets/img/hasRoupasCama.svg')
+           : comodidade.name === 'Piscina' ? require('@/assets/img/hasPiscina.svg')
+           : comodidade.name === 'Churrasqueira' ? require('@/assets/img/hasChurrasqueira.svg')
+           : comodidade.name === 'Wi-Fi gratuito' ? require('@/assets/img/hasWifi.svg')
+           : comodidade.name === 'Ar condicionado' ? require('@/assets/img/hasArCond.svg')
+           : comodidade.name === 'Barracas' ? require('@/assets/img/hasBarracas.svg')
+           : comodidade.name === 'Pier' ? require('@/assets/img/hasPier.svg')
+           : ''
+      '../../assets/img/hasRoupasCama.svg'
+    },
     imageH (image) {
       return supportsWebP ? image.HW : image.HJ
     },

@@ -204,15 +204,15 @@ const store = () => new Vuex.Store({
       totalGaragem: '1',
       valorNoite: 0,
       limpezaFee: 0,
-      hasRoupasCama: false,
-      hasPiscina: false,
-      hasChurrasqueira: false,
-      hasCozinha: false,
-      hasWifi: false,
-      hasArCond: false,
-      hasCaixaSom: false,
-      hasBarracas: false,
-      hasPier: false,
+      comodidades: [
+        { name: 'Roupas de cama', condition: false },
+        { name: 'Piscina', condition: false },
+        { name: 'Churrasqueira', condition: false },
+        { name: 'Wi-Fi gratuito', condition: false },
+        { name: 'Ar condicionado', condition: false },
+        { name: 'Barracas', condition: false },
+        { name: 'Pier', condition: false }
+      ],
       positionLAT: -20.6141320,
       positionLNG: -46.0478760,
       address: null,
@@ -436,6 +436,11 @@ const store = () => new Vuex.Store({
   },
   /* ________________________________________________ GETTERS ________________________________________________ */
   getters: {
+    tipoAcomodComValorQuartos (state) {
+      if (state.acomodData.tipoAcomod === 'Pousada' || state.acomodData.tipoAcomod === 'Suítes') { 
+        return true 
+      } else return false
+    }
   },
   /* _______________________________________________ MUTATIONS _______________________________________________ */
   mutations: {
@@ -619,6 +624,12 @@ const store = () => new Vuex.Store({
     },
     m_indexQuarto (state, index) {
       state.indexQuarto = index
+    },
+    m_addComodidade (state, { index, comodidade }) {
+      state.acomodData.comodidades.splice(index, 0, comodidade.nome)
+    },
+    m_removeComodidade (state, index) {
+      state.acomodData.comodidades[index] = ''
     },
     m_imageCountAc (state) {
       state.imageCountAc++
@@ -983,24 +994,29 @@ const store = () => new Vuex.Store({
         recipientID: null,
         celular: '',
         tipoAcomod: 'Casa',
-        title: '',
-        subtitle: '',
-        valorNoite: 0,
-        limpezaFee: 0,
-        totalHospedes: 1,
-        totalQuartos: '1',
-        totalSuites: '1',
+        quartos: [
+          {
+            nome: 'Quarto 1',
+            acomoda: 1,
+            valor: 0,
+            mobilias: ['cama_casal']
+          }
+        ],
+        totalHospedes: 0,
         totalBanheiros: '1',
         totalGaragem: '1',
-        hasRoupasCama: false,
-        hasPiscina: false,
-        hasChurrasqueira: false,
-        hasCozinha: false,
-        hasWifi: false,
-        hasArCond: false,
-        hasCaixaSom: false,
-        hasBarracas: false,
-        hasPier: false,
+        valorNoite: 0,
+        limpezaFee: 0,
+        comodidades: [
+          { name: 'Roupas de cama', condition: false },
+          { name: 'Piscina', condition: false },
+          { name: 'Churrasqueira', condition: false },
+          { name: 'Wi-Fi gratuito', condition: false },
+          { name: 'Ar condicionado', condition: false },
+          { name: 'Caixa de Som', condition: false },
+          { name: 'Barracas', condition: false },
+          { name: 'Pier', condition: false }
+        ],
         positionLAT: -20.6141320,
         positionLNG: -46.0478760,
         address: null,
@@ -1012,6 +1028,8 @@ const store = () => new Vuex.Store({
         allowFumar: false,
         regrasAdicionais: [],
         images: [],
+        title: '',
+        subtitle: '',
         avaliacoes: [],
         averageRating: 0,
         averageRating_recepcao: 0,

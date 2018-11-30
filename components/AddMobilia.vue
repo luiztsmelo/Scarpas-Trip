@@ -105,7 +105,7 @@ export default {
       }
     }
     & .mobilia:last-child {
-      border-bottom: none 
+      border-bottom: none
     }
   }
 }

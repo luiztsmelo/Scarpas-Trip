@@ -109,14 +109,13 @@
                   </select>
                 </div>
 
-                <!-- v-if pousada e afins -->
-                <div class="question">
+                <div class="question" v-if="$store.getters.tipoAcomodComValorQuartos">
                   <label>Valor da diária:</label>
                   <money 
                     v-model="quarto.valor"
                     onKeyPress="if (event.which == 13) return false">
                   </money>
-                </div><!-- v-if pousada e afins -->
+                </div>
 
               </div>
 
@@ -176,6 +175,7 @@
       <div class="item-form">
         <label>Vagas na Garagem</label>
         <select v-model="$store.state.acomodData.totalGaragem">
+          <option :key="0">0</option>
           <option v-for="n in 10" :key="n">{{ n }}</option>
         </select>
       </div> 
@@ -199,80 +199,15 @@
 
       <h1 class="__form-title">Quais comodidades são oferecidas?</h1>
 
+
       <div class="comodidades-box">
 
-        <div class="item-form-switches" @click="sliderRoupasCama">
-          <h3>Roupas de Cama</h3>
-          <label class="switch" ref="sliderRoupasCama" @click="sliderRoupasCama">
-            <input type="checkbox" v-model="$store.state.acomodData.hasRoupasCama">
-            <span class="slider round"></span>
-          </label>
+        <div class="item-form-switches" v-for="(comodidade, index) in $store.state.acomodData.comodidades" :key="comodidade.name" @click="comodidade.condition = !comodidade.condition">
+          <h3>{{ comodidade.name }}</h3>
+          <div class="switch" :class="[ comodidade.condition === true ? 'switch-on' : '' ]">
+            <div class="slider"></div>
+          </div>
         </div>
-
-        <div class="item-form-switches" @click="sliderPiscina">
-          <h3>Piscina</h3>
-          <label class="switch" ref="sliderPiscina" @click="sliderPiscina">
-            <input type="checkbox" v-model="$store.state.acomodData.hasPiscina">
-            <span class="slider round"></span>
-          </label>
-        </div>
-
-        <div class="item-form-switches" @click="sliderChurrasqueira">
-          <h3>Churrasqueira</h3>
-          <label class="switch" ref="sliderChurrasqueira" @click="sliderChurrasqueira">
-            <input type="checkbox" v-model="$store.state.acomodData.hasChurrasqueira">
-            <span class="slider round"></span>
-          </label>
-        </div>
-
-        <div class="item-form-switches" @click="sliderCozinha">
-          <h3>Cozinha Preparada</h3>
-          <label class="switch" ref="sliderCozinha" @click="sliderCozinha">
-            <input type="checkbox" v-model="$store.state.acomodData.hasCozinha">
-            <span class="slider round"></span>
-          </label>
-        </div>
-
-        <div class="item-form-switches" @click="sliderWifi">
-          <h3>Wi-Fi</h3>
-          <label class="switch" ref="sliderWifi" @click="sliderWifi">
-            <input type="checkbox" v-model="$store.state.acomodData.hasWifi">
-            <span class="slider round"></span>
-          </label>
-        </div>
-
-        <div class="item-form-switches" @click="sliderArCond">
-          <h3>Ar condicionado</h3>
-          <label class="switch" ref="sliderArCond" @click="sliderArCond">
-            <input type="checkbox" v-model="$store.state.acomodData.hasArCond">
-            <span class="slider round"></span>
-          </label>
-        </div>
-
-        <div class="item-form-switches" @click="sliderCaixaSom">
-          <h3>Caixa de Som</h3>
-          <label class="switch" ref="sliderCaixaSom" @click="sliderCaixaSom">
-            <input type="checkbox" v-model="$store.state.acomodData.hasCaixaSom">
-            <span class="slider round"></span>
-          </label>
-        </div>
-
-        <div class="item-form-switches" @click="sliderBarracas">
-          <h3>Barracas</h3>
-          <label class="switch" ref="sliderBarracas" @click="sliderBarracas">
-            <input type="checkbox" v-model="$store.state.acomodData.hasBarracas">
-            <span class="slider round"></span>
-          </label>
-        </div>
-
-        <div class="item-form-switches" @click="sliderPier" style="border:none">
-          <h3>Pier</h3>
-          <label class="switch" ref="sliderPier" @click="sliderPier">
-            <input type="checkbox" v-model="$store.state.acomodData.hasPier">
-            <span class="slider round"></span>
-          </label>
-        </div>
-
         
       </div>
       
@@ -944,16 +879,6 @@ export default {
       this.$store.state.acomodData.address = this.$store.state.acomodPlace.formatted_address
       this.$modal.show('local-map-modal')
     },
-    /* ******************** COMODIDADES ******************** */
-    sliderRoupasCama () { this.$refs.sliderRoupasCama.click() },
-    sliderPiscina () { this.$refs.sliderPiscina.click() },
-    sliderChurrasqueira () { this.$refs.sliderChurrasqueira.click() },
-    sliderCozinha () { this.$refs.sliderCozinha.click() },
-    sliderWifi () { this.$refs.sliderWifi.click() },
-    sliderArCond () { this.$refs.sliderArCond.click() },
-    sliderCaixaSom () { this.$refs.sliderCaixaSom.click() },
-    sliderBarracas () { this.$refs.sliderBarracas.click() },
-    sliderPier () { this.$refs.sliderPier.click() },
     /* ******************** REGRAS ******************** */
     addRegra () {
       if (this.newRegra) {
@@ -1367,7 +1292,6 @@ export default {
 </script>
 
 <style scoped>
-@import url('~/assets/css/switcher.css');
 @import url('~/assets/css/yes-or-no.css');
 @import url('~/assets/css/vue-simple-suggest.css');
 
@@ -1676,11 +1600,36 @@ export default {
         justify-content: space-between;
         align-items: center;
         border-bottom: 1px solid #dedede;
-        padding: 1.7rem 0;
+        padding: 2rem 0;
         & h3 {
           user-select: none;
           font-size: 17px;
         }
+        & .switch {
+          display: flex;
+          flex-flow: column;
+          align-items: flex-start;
+          width: 44px;
+          height: 26px;
+          background-color: #dedede;
+          border-radius: 100px;
+          transition: .3s;
+          & .slider {
+            margin: 2px;
+            height: 22px;
+            width: 22px;
+            border-radius: 50%;
+            background: white;
+            transition: all .5s ease-in-out;
+          }
+        }
+        & .switch-on {
+          align-items: flex-end;
+          background: var(--colorAcomod);
+        }
+      }
+      & .item-form-switches:last-child {
+        border-bottom: none
       }
     }
     & .regras-box {
