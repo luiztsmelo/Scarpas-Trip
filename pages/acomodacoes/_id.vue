@@ -122,8 +122,8 @@
 
         <div class="comodidades-box-desktop">
           <div class="item" v-for="(comodidade, index) in acomod.comodidades" :key="comodidade.name">
-            <img class="__img" :src="comodidadeImgSrc(comodidade)">
-            <h3>{{ comodidade.name }}</h3>
+            <img class="__img" :class="[ comodidade.condition === false ? 'comodidade-img-disabled' : '' ]" :src="comodidadeImgSrc(comodidade)">
+            <h3 :class="[ comodidade.condition === false ? 'comodidade-text-disabled' : '' ]">{{ comodidade.name }}</h3>
           </div>
         </div>
 
@@ -142,8 +142,8 @@
               <h1 class="__title">Comodidades</h1>
 
               <div class="comods-item" v-for="(comodidade, index) in acomod.comodidades" :key="comodidade.name">
-                <img class="__img" :src="comodidadeImgSrc(comodidade)">
-                <h3>{{ comodidade.name }}</h3>
+                <img class="__img" :class="[ comodidade.condition === false ? 'comodidade-img-disabled' : '' ]" :src="comodidadeImgSrc(comodidade)">
+                <h3 :class="[ comodidade.condition === false ? 'comodidade-text-disabled' : '' ]">{{ comodidade.name }}</h3>
               </div>
 
             </div> 
@@ -771,17 +771,20 @@ export default {
       font-size: 29px;
       font-weight: 700;
     }
-    & .comods-item { 
+    & .comods-item {
       display: flex;
       flex-flow: row;
       align-items: center;
-      padding: 1.6rem 0;
+      padding: 1.7rem 0;
       border-bottom: 1px solid #dedede;
       & .__img {
         margin-right: 1rem;
-        width: 1.9rem;
+        width: 1.8rem;
         height: auto;
       }
+    }
+    & .comods-item:last-child {
+      border-bottom: none
     }
   }
 }/* __________ COMODIDADES __________ */
@@ -1210,6 +1213,14 @@ export default {
       display: none;
     }/* __________ RESERVA __________ */
   }
+}
+
+.comodidade-img-disabled {
+  filter: invert(80%);
+}
+.comodidade-text-disabled {
+  color: #DFDFDF;
+  text-decoration: line-through;
 }
 
 </style>

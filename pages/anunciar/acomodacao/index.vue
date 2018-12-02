@@ -405,44 +405,18 @@
 
 
         <!-- Regras -->
-        <h3 class="__form-subtitle" style="margin-top:.4rem">Regras</h3>
+        <h3 class="__form-subtitle" style="margin-top:1.2rem; padding:0">Regras</h3>
 
-        <div class="item-form-regras">
-          <h3>Festas são permitidas?</h3>
-          <div class="yes-or-no">
-            <div class="__no" :class="[ !$store.state.acomodData.allowFestas ? 'is-false' : '' ]" @click="$store.state.acomodData.allowFestas = false">Não</div>
-            <div class="__yes" :class="[ $store.state.acomodData.allowFestas ? 'is-true' : '' ]" @click="$store.state.acomodData.allowFestas = true">Sim</div>
+        <div class="item-form-switches" v-for="(regra, index) in $store.state.acomodData.regras" :key="index" @click="regra.condition = !regra.condition">
+          <h3>{{ regra.name }}</h3>
+          <div class="switch" :class="[ regra.condition === true ? 'switch-on' : '' ]">
+            <div class="slider"></div>
           </div>
-        </div>
-
-        <div class="item-form-regras">
-          <h3>Animais de estimação são permitidos?</h3>
-          <div class="yes-or-no">
-            <div class="__no" :class="[ !$store.state.acomodData.allowPets ? 'is-false' : '' ]" @click="$store.state.acomodData.allowPets = false">Não</div>
-            <div class="__yes" :class="[ $store.state.acomodData.allowPets ? 'is-true' : '' ]" @click="$store.state.acomodData.allowPets = true">Sim</div>
-          </div>
-        </div>
-
-        <div class="item-form-regras">
-          <h3>É adequado para bebês?</h3>
-          <div class="yes-or-no">
-            <div class="__no" :class="[ !$store.state.acomodData.allowBabys ? 'is-false' : '' ]" @click="$store.state.acomodData.allowBabys = false">Não</div>
-            <div class="__yes" :class="[ $store.state.acomodData.allowBabys ? 'is-true' : '' ]" @click="$store.state.acomodData.allowBabys = true">Sim</div>
-          </div>
-        </div>
-
-        <div class="item-form-regras" style="border: none">
-          <h3>Fumar é permitido?</h3>
-          <div class="yes-or-no">
-            <div class="__no" :class="[ !$store.state.acomodData.allowFumar ? 'is-false' : '' ]" @click="$store.state.acomodData.allowFumar = false">Não</div>
-            <div class="__yes" :class="[ $store.state.acomodData.allowFumar ? 'is-true' : '' ]" @click="$store.state.acomodData.allowFumar = true">Sim</div>
-          </div>
-        </div>
-        <!-- Regras -->
+        </div><!-- Regras -->
 
 
         <!-- Regras adicionais -->
-        <h3 class="__form-subtitle" style="margin-top:.6rem">Regras adicionais</h3>
+        <h3 class="__form-subtitle" style="margin-top:2.5rem; padding:0">Regras adicionais</h3>
 
         <div class="new-regras" v-for="(regra, index) in $store.state.acomodData.regrasAdicionais" :key="index">
           <h3 class="__regra-text">{{ regra }}</h3>
@@ -477,6 +451,7 @@
 
       <h1 class="__form-title">Dê um título para seu anúncio</h1>
 
+
       <textarea 
         v-model="$store.state.acomodData.title"
         v-autosize="title"
@@ -487,7 +462,8 @@
         {{title}}
       </textarea>
 
-      <span class="__lenght-calc">{{ titleLength }}</span>
+      <span class="__lenght-calc">{{ 60 - $store.state.acomodData.title.length }}</span>
+
 
       <div class="back-next"> 
         <div class="back-next-body">
@@ -507,6 +483,7 @@
 
       <h1 class="__form-title">Descreva melhor {{ tipoAcomodSd }}</h1>   
 
+
       <textarea 
       v-model="$store.state.acomodData.subtitle"
       v-autosize="subtitle"
@@ -516,7 +493,8 @@
       required>
       {{subtitle}}</textarea>
 
-      <span class="__lenght-calc">{{ subtitleLength }}</span> 
+      <span class="__lenght-calc">{{ 1000 - $store.state.acomodData.subtitle.length }}</span> 
+
 
       <div class="back-next"> 
         <div class="back-next-body">
@@ -550,17 +528,32 @@
 
 
       <div v-if="authUser">
-
+        
+        <!-- CELULAR -->
         <div class="item-form">
           <label>Celular / WhatsApp</label>
           <masked-input
+            ref="celular"
             type="tel"
-            v-model="$store.state.acomodData.celular"
+            v-model="$store.state.customer.celular"
             :mask="['+', 5, 5, ' ', /\d/, /\d/, ' ', /\d/, /\d/, /\d/, /\d/, /\d/, ' ', /\d/, /\d/, /\d/, /\d/]"
             :guide="false"
             placeholder="+55">
           </masked-input>
-        </div>
+        </div><!-- CELULAR -->
+
+
+        <!-- INSTAGRAM -->
+        <div class="item-form">
+          <label>Instagram (Opcional)</label>
+          <input
+            ref="instagram"
+            onKeyPress="if (event.which == 32) return false"
+            type="text"
+            maxlength="30"
+            v-model="$store.state.customer.instagram"
+            placeholder="@username">
+        </div><!-- INSTAGRAM -->
 
       </div>
 
@@ -578,121 +571,189 @@
 
 
 
-    <!-- ________________________________________ 12 - DADOS BANCÁRIOS ________________________________________ -->
+    <!-- ________________________________________ 12 - PAGAMENTO ________________________________________ -->
     <form class="cadastro-acomodacao" v-if="$store.state.cadastroAcomod12">
 
-      <h1 class="__form-title">Insira suas informações bancárias</h1>   
+      <h1 class="__form-title">Detalhes sobre o pagamento</h1>   
 
-      <h3 class="__form-text">{{ user.firstName }}, para finalizar precisamos dos dados de sua conta bancária para podermos transferir a você os seus ganhos financeiros. Não se preocupe, suas informações estarão seguras.</h3>
+      <h3 class="__form-text">{{ user.firstName }}, será cobrada uma mensalidade de <span style="font-weight:600">R$49,00</span> em seu cartão de crédito. Não se preocupe, não cobraremos multa caso queira cancelar futuramente.</h3>
 
-      <div class="recebedor-box">
 
-          <div class="item-form">
-            <label :class="[ bankCodeError ? 'has-error-label' : '' ]">Nome do Banco</label>
-            <vue-simple-suggest
-              ref="bankCode"
-              :class="[ bankCodeError ? 'has-error' : '' ]"
-              style="color:#161616 !important"
-              mode="select"
-              @select="onSelectBankCode"
-              v-model="$store.state.bankAccount.bankCode"
-              :list="bancos"
-              :filter-by-query="true">
-            </vue-simple-suggest>
-          </div>
+      <div class="payment-box">
+        
+        
+        <h2 class="__form-subtitle">Dados do cartão de crédito</h2>
 
-          <div class="item-form">
-            <label>Tipo de Conta</label>
-            <select v-model="$store.state.bankAccount.type" ref="type">
-              <option selected :value="'conta_corrente'">Conta Corrente</option>
-              <option :value="'conta_poupanca'">Conta Poupança</option>
-              <option :value="'conta_corrente_conjunta'">Conta Corrente Conjunta</option>
-              <option :value="'conta_poupanca_conjunta'">Conta Poupança Conjunta</option>
-            </select>
-          </div>
+        <!-- CARD HOLDER NAME -->
+        <div class="item-form">
+          <label :class="[ cardHolderNameError ? 'has-error-label' : '' ]">Nome impresso no Cartão</label>
+          <input
+            :class="[ cardHolderNameError ? 'has-error' : '' ]"
+            type="text" pattern="[A-Za-z]"
+            @keypress="keyEnterName"
+            v-model="$store.state.creditCard.cardHolderName">
+        </div><!-- CARD HOLDER NAME -->
 
-          <div class="item-form">
-            <div class="flex-row" style="display:flex">
-              <div class="agencia" style="flex:50%; margin-right:.5rem">
-                <label :class="[ agenciaError ? 'has-error-label' : '' ]">Agência</label>
-                <masked-input
-                  ref="agencia"
-                  :class="[ agenciaError ? 'has-error' : '' ]"
-                  type="tel"
-                  @keypress="keyEnterAgencia"
-                  v-model="$store.state.bankAccount.agencia"
-                  :mask="[/\d/, /\d/, /\d/, /\d/, /\d/]"
-                  :guide="false">
-                </masked-input>
-              </div>
-              <div class="agencia-dv" style="flex:50%; margin-left:.5rem">
-                <label :class="[ agenciaDVError ? 'has-error-label' : '' ]">Dígito</label>
-                <masked-input
-                  ref="agenciaDV"
-                  :class="[ agenciaDVError ? 'has-error' : '' ]"
-                  type="tel"
-                  @keypress="keyEnterAgenciaDV"
-                  v-model="$store.state.bankAccount.agenciaDV"
-                  @focus="agenciaDVfocus"
-                  @blur="$store.commit('hide_alert')"
-                  :mask="[/\d/]"
-                  :guide="false">
-                </masked-input>
-              </div>
-            </div>
-          </div>
 
-          <div class="item-form">
-            <div class="flex-row" style="display:flex">
-              <div class="conta" style="flex:50%; margin-right:.5rem">
-                <label :class="[ contaError ? 'has-error-label' : '' ]">Conta</label>
-                <masked-input
-                  ref="conta"
-                  :class="[ contaError ? 'has-error' : '' ]"
-                  type="tel"
-                  @keypress="keyEnterConta"
-                  v-model="$store.state.bankAccount.conta"
-                  :mask="[/\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/]"
-                  :guide="false">
-                </masked-input>
-              </div>
-              <div class="conta-dv" style="flex:50%; margin-left:.5rem">
-                <label :class="[ contaDVError ? 'has-error-label' : '' ]">Dígito</label>
-                <masked-input
-                  ref="contaDV"
-                  :class="[ contaDVError ? 'has-error' : '' ]"
-                  type="tel"
-                  @keypress="keyEnterContaDV"
-                  v-model="$store.state.bankAccount.contaDV"
-                  :mask="[/\d/, /\d/]"
-                  :guide="false">
-                </masked-input>
-              </div>
-            </div>
-          </div>
+        <!-- CARD NUMBER -->
+        <div class="item-form">
+          <label :class="[ cardNumberError ? 'has-error-label' : '' ]">Número do Cartão</label>
+          <masked-input
+            ref="cardNumber"
+            :style="{ backgroundImage: 'url(' + cardBrand + ')', backgroundPosition: 'left center', backgroundRepeat: 'no-repeat', backgroundSize: '34px', paddingLeft: cardType !== null ? '48px' : '' }"
+            :class="[ cardNumberError ? 'has-error' : '' ]"
+            type="tel"
+            v-model="$store.state.creditCard.cardNumber"
+            :mask="[/\d/, /\d/, /\d/, /\d/, ' ', /\d/, /\d/, /\d/, /\d/, ' ', /\d/, /\d/, /\d/, /\d/, ' ', /\d/, /\d/, /\d/, /\d/]"
+            :guide="false"
+            placeholder="0000 0000 0000 0000">
+          </masked-input>
+        </div><!-- CARD NUMBER -->
 
-          <div class="item-form">
-            <label :class="[ legalNameError ? 'has-error-label' : '' ]">Seu Nome Completo</label>
-            <input 
-              ref="nome"
-              :class="[ legalNameError ? 'has-error' : '' ]"
-              type="text"
-              @keypress="keyEnterNome"
-              v-model="$store.state.bankAccount.legalName">
-          </div>
 
-          <div class="item-form">
-            <label :class="[ docNumberError ? 'has-error-label' : '' ]">CPF</label>
+        <div style="display:flex; justify-content:space-between">
+                
+          <!-- CARD EXPIRATION -->
+          <div class="item-form" style="flex: 50%; padding-right:.7rem">
+            <label :class="[ cardExpirationDateError ? 'has-error-label' : '' ]">Validade</label>
             <masked-input
-              ref="cpf"
-              :class="[ docNumberError ? 'has-error' : '' ]"
+              ref="cardExpirationDate"
+              :class="[ cardExpirationDateError ? 'has-error' : '' ]"
               type="tel"
-              v-model="$store.state.bankAccount.docNumber"
-              :mask="[/\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '-', /\d/, /\d/]"
+              v-model="$store.state.creditCard.cardExpirationDate"
+              :mask="[/\d/, /\d/, ' ', '/', ' ', /\d/, /\d/]"
               :guide="false"
-              placeholder="000.000.000-00">
+              placeholder="MM / AA">
             </masked-input>
-          </div>
+          </div><!-- CARD EXPIRATION -->
+
+          <!-- CVV -->
+          <div class="item-form" style="flex:50%; padding-left:.7rem">
+            <label :class="[ cardCvvError ? 'has-error-label' : '' ]">CVV</label>
+            <masked-input
+              ref="cvv"
+              :class="[ cardCvvError ? 'has-error' : '' ]"
+              type="tel"
+              @keypress="keyEnterCVV"
+              v-model="$store.state.creditCard.cardCVV"
+              :mask="[/\d/, /\d/, /\d/, /\d/]"
+              :guide="false"
+              placeholder="123">
+            </masked-input>
+          </div><!-- CVV -->
+
+        </div>
+
+
+        <!-- CPF -->
+        <div class="item-form">
+          <label :class="[ cpfError ? 'has-error-label' : '' ]">CPF</label>
+          <masked-input
+            ref="cpf"
+            :class="[ cpfError ? 'has-error' : '' ]"
+            type="tel"
+            v-model="$store.state.customer.cpf"
+            :mask="[/\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '-', /\d/, /\d/]"
+            :guide="false"
+            placeholder="000.000.000-00">
+          </masked-input>
+        </div><!-- CPF -->
+
+
+
+
+        <h2 class="__form-subtitle" style="margin-top: 1.6rem">Endereço de cobrança</h2>
+
+        <p>Necessário apenas para a validação de seu cartão de crédito.</p>
+
+        <!-- CEP -->
+        <div class="item-form">
+          <label :class="[ zipcodeError ? 'has-error-label' : '' ]">CEP</label>
+          <masked-input
+            ref="zipcode"
+            :class="[ zipcodeError ? 'has-error' : '' ]"
+            type="tel"
+            v-model="$store.state.customer.zipcode"
+            :mask="[/\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/]"
+            :guide="false"
+            placeholder="00000-000">
+          </masked-input>
+        </div><!-- CEP -->
+
+
+        <!-- ENDEREÇO -->
+        <div class="item-form">
+          <label :class="[ streetError ? 'has-error-label' : '' ]">Rua</label>
+          <input
+            ref="street"
+            :class="[ streetError ? 'has-error' : '' ]"
+            type="text"
+            @keypress="keyEnterStreet"
+            v-model="$store.state.customer.street"
+            placeholder="Endereço">
+        </div><!-- ENDEREÇO -->
+
+
+        <div class="flex" style="display:flex; justify-content:space-between">
+
+        <!-- NÚMERO -->
+        <div class="item-form" style="flex:50%; padding-right:.7rem">
+          <label :class="[ streetNumberError ? 'has-error-label' : '' ]">Número</label>
+          <masked-input
+            ref="streetNumber"
+            :class="[ streetNumberError ? 'has-error' : '' ]"
+            type="tel"
+            @keypress="keyEnterStreetNumber"
+            v-model="$store.state.customer.street_number"
+            :mask="[/\d/, /\d/, /\d/, /\d/]"
+            :guide="false">
+          </masked-input>
+        </div><!-- NÚMERO -->
+
+
+        <!-- BAIRRO -->
+        <div class="item-form" style="flex:50%; padding-left:.7rem">
+          <label :class="[ neighborhoodError ? 'has-error-label' : '' ]">Bairro</label>
+          <input
+            ref="bairro"
+            :class="[ neighborhoodError ? 'has-error' : '' ]"
+            type="text"
+            v-model="$store.state.customer.neighborhood">
+        </div><!-- BAIRRO -->
+
+      </div>
+
+      <div class="flex" style="display:flex; justify-content:space-between; align-items:center">
+
+        <!-- CIDADE -->
+        <div class="item-form" style="flex:50%; padding-right:.7rem">
+          <label :class="[ cityError ? 'has-error-label' : '' ]">Cidade</label>
+          <input
+            ref="city"
+            :class="[ cityError ? 'has-error' : '' ]"
+            style="cursor: default"
+            type="text"
+            v-model="$store.state.customer.city"
+            disabled>
+        </div><!-- CIDADE -->
+
+
+        <!-- ESTADO -->
+        <div class="item-form" style="flex:50%; padding-left:.7rem">
+          <label :class="[ stateError ? 'has-error-label' : '' ]">Estado</label>
+          <input
+            ref="state"
+            :class="[ stateError ? 'has-error' : '' ]"
+            style="cursor: default"
+            type="text"
+            v-model="$store.state.customer.state"
+            disabled>
+        </div><!-- ESTADO -->
+
+      </div>
+
+
+        <h4 class="__termos">Ao anunciar, você concorda com a nossa <a href="/termos#politica_privacidade" target="_blank">Política de Privacidade</a> e <a href="/termos" target="_blank">Termos de Serviço</a>.</h4>
 
       </div>
 
@@ -704,7 +765,7 @@
         </div>
       </div> 
     
-    </form><!-- ________________________________________ 12 - DADOS BANCÁRIOS ________________________________________ -->
+    </form><!-- ________________________________________ 12 - PAGAMENTO ________________________________________ -->
 
 
 
@@ -720,19 +781,17 @@ import firebase from '@firebase/app'
 import 'firebase/firestore'
 import 'firebase/storage'
 import 'firebase/functions'
-import isMobile from 'ismobilejs'
 import MaskedInput from 'vue-text-mask'
-import { bancos } from '@/mixins/bancos'
 import { tipoAcomod } from '@/mixins/tipoAcomod'
-import VueSimpleSuggest from 'vue-simple-suggest'
 import localMap from '~/components/localMap.vue'
 import AddMobilia from '~/components/AddMobilia.vue'
+import valid from 'card-validator'
 import CPF from 'gerador-validador-cpf'
 import scrollIntoView from 'scroll-into-view'
 
 export default {
-  components: { MaskedInput, VueSimpleSuggest, localMap, AddMobilia },
-  mixins: [ bancos, tipoAcomod ],
+  components: { MaskedInput, localMap, AddMobilia },
+  mixins: [ tipoAcomod ],
   head () {
     return {
       title: 'Anunciar Acomodação em Capitólio ‒ Escarpas Trip'
@@ -748,16 +807,48 @@ export default {
       isUploading: false,
       uploadProgress: 0,
       newRegra: '',
-      bankCodeError: false,
-      agenciaError: false,
-      agenciaDVError: false,
-      contaError: false,
-      contaDVError: false,
-      legalNameError: false,
-      docNumberError: false
+      cardNumberError: false,
+      cardHolderNameError: false,
+      cardExpirationDateError: false,
+      cardCvvError: false,
+      cpfError: false,
+      zipcodeError: false,
+      neighborhoodError: false,
+      streetError: false,
+      streetNumberError: false,
+      cityError: false,
+      stateError: false
     }
   },
   methods: {
+    keyEnterName () {
+      if (event.key === 'Enter') {
+        scrollIntoView(this.$refs.cardNumber.$el)
+        this.$refs.cardNumber.$el.focus()
+      }
+    },
+    keyEnterCVV () {
+      if (event.key === 'Enter') {
+        scrollIntoView(this.$refs.cpf.$el)
+        this.$refs.cpf.$el.focus()
+      }
+    },
+    keyEnterStreet () {
+      if (event.key === 'Enter') {
+        scrollIntoView(this.$refs.streetNumber.$el)
+        this.$refs.streetNumber.$el.focus() 
+      }  
+    },
+    keyEnterStreetNumber () {
+      if (event.key === 'Enter') {
+        this.$refs.bairro.focus()
+      } 
+    },
+    scrollTop () {
+      document.body.scrollTop = 0
+      document.documentElement.scrollTop = 0
+    },
+    /* ******************** QUARTOS ******************** */
     mobiliaImage (mobilia) {
       return mobilia === 'cama_solteiro' ? require('@/assets/img/cama_solteiro.svg')
            : mobilia === 'cama_casal' ? require('@/assets/img/cama_casal.svg')
@@ -774,41 +865,13 @@ export default {
            : mobilia === 'sofa' ? 'Sofá'
            : ''
     },
-    onSelectBankCode () {
-      scrollIntoView(this.$refs.type)
-      this.$refs.type.focus()
-    },
-    keyEnterAgencia () {
-      if (event.key === 'Enter') {
-        this.$refs.agenciaDV.$el.focus()
-      }
-    },
-    keyEnterAgenciaDV () {
-      if (event.key === 'Enter') {
-        scrollIntoView(this.$refs.conta.$el)
-        this.$refs.conta.$el.focus()
-      }
-    },
-    keyEnterConta () {
-      if (event.key === 'Enter') {
-        this.$refs.contaDV.$el.focus()
-      }
-    },
-    keyEnterContaDV () {
-      if (event.key === 'Enter') {
-        scrollIntoView(this.$refs.nome)
-        this.$refs.nome.focus()
-      }
-    },
-    keyEnterNome () {
-      if (event.key === 'Enter') {
-        scrollIntoView(this.$refs.cpf.$el)
-        this.$refs.cpf.$el.focus()
-      }
-    },
-    scrollTop () {
-      document.body.scrollTop = 0
-      document.documentElement.scrollTop = 0
+    /* ******************** GOOGLE MAPS ******************** */
+    setPlace (place) {
+      this.$store.commit('m_acomodPlace', place)
+      this.$store.state.acomodData.positionLAT = this.$store.state.acomodPlace.geometry.location.lat()
+      this.$store.state.acomodData.positionLNG = this.$store.state.acomodPlace.geometry.location.lng()
+      this.$store.state.acomodData.address = this.$store.state.acomodPlace.formatted_address
+      this.$modal.show('local-map-modal')
     },
     /* ******************** IMAGE INPUT ******************** */
     async imageConfirm () {
@@ -870,14 +933,6 @@ export default {
       storageRef.child('H' + image.id + 'W.webp').delete()
       this.$store.state.acomodData.images.splice(index, 1)
       this.$refs.myCroppa.remove()
-    },
-    /* ******************** GOOGLE MAPS ******************** */
-    setPlace (place) {
-      this.$store.commit('m_acomodPlace', place)
-      this.$store.state.acomodData.positionLAT = this.$store.state.acomodPlace.geometry.location.lat()
-      this.$store.state.acomodData.positionLNG = this.$store.state.acomodPlace.geometry.location.lng()
-      this.$store.state.acomodData.address = this.$store.state.acomodPlace.formatted_address
-      this.$modal.show('local-map-modal')
     },
     /* ******************** REGRAS ******************** */
     addRegra () {
@@ -1024,13 +1079,20 @@ export default {
           title: 'Ops',
           message: 'Conecte-se com uma de suas contas para continuar.'
         })
-      } else if (this.$store.state.acomodData.celular.length === 17 && this.authUser) {
-          this.$store.commit('m_cadastroAcomod11', false), this.$store.commit('m_cadastroAcomod12', true), this.$store.commit('m_acomodProgressBar', (100/12)*12), this.scrollTop(), window.location.hash = `${this.randomHashs[12]}`, this.$store.state.bankAccount.legalName = this.user.fullName
+      } else if (this.$store.state.customer.celular.length === 17 && this.authUser) {
+          this.$store.commit('m_cadastroAcomod11', false)
+          this.$store.commit('m_cadastroAcomod12', true)
+          this.$store.commit('m_acomodProgressBar', (100/12)*12)
+          this.scrollTop()
+          window.location.hash = `${this.randomHashs[12]}`,
+          this.$store.state.creditCard.cardHolderName = this.user.fullName
+          this.$store.state.customer.name = this.user.fullName
+          this.$store.state.customer.email = this.user.email
       } else {
         this.$store.commit('show_alert', {
           type: 'warning',
           title: 'Ops',
-          message: 'Adicione um número válido.'
+          message: 'Adicione um número de celular válido.'
         })
       }
     },
@@ -1046,24 +1108,28 @@ export default {
       const acomodData = this.$store.state.acomodData
 
       acomodData.createdAt = Date.now()
+
       acomodData.hostID = this.user.userID
 
       /* Se todas as informações preenchidas */
-      if (this.bankCode !== '' && this.agencia !== '' && this.agenciaDV !== '' && this.conta !== '' && this.contaDV !== '' && this.legalName !== '' && this.docNumber.length === 14 && CPF.validate(this.docNumber)) {
+      if (this.formIsCompleted) {
 
         try {
           this.$store.commit('m_loader', true)
 
-          /* Criar recebedor no Pagarme, criar acomod na Firestore e atualizar user */
-          await firebase.functions().httpsCallable('newAcomod')({
+          /* Criar assinatura no Pagarme, criar acomod na Firestore e atualizar user */
+          const subscription = await firebase.functions().httpsCallable('newAcomod')({
             acomodData: acomodData,
-            bankAccount: this.$store.state.bankAccount
+            creditCard: this.$store.state.creditCard,
+            customer: this.$store.state.customer
           })
 
+          console.log(subscription)
+
           /* Necessário para o correto funcionamento do backBtn _id (Ver middleware: newAcomodConcludedCheck.js) */
-          this.$store.state.concludedNewAcomod = true 
+          this.$store.state.concludedNewAcomod = true
           
-          /* Ir para página da acomod criada */
+          /* Ir para página do acomod criado */
           this.$router.push('/acomodacoes/' + acomodData.acomodID)
 
           /* Resetar acomodData */
@@ -1086,13 +1152,17 @@ export default {
           title: 'Erro',
           message: 'Informações incompletas.'
         })
-        this.bankCode === '' ? this.bankCodeError = true : this.bankCodeError = false
-        this.agencia === '' ? this.agenciaError = true : this.agenciaError = false
-        this.agenciaDV === '' ?  this.agenciaDVError = true :  this.agenciaDVError = false
-        this.conta === '' ? this.contaError = true : this.contaError = false
-        this.contaDV === '' ? this.contaDVError = true : this.contaDVError = false
-        this.legalName === '' ? this.legalNameError = true : this.legalNameError = false
-        this.docNumber.length < 14 || !CPF.validate(this.docNumber) ? this.docNumberError = true : this.docNumberError = false
+        this.cardHolderName.length < 3 ? this.cardHolderNameError = true : this.cardHolderNameError = false
+        !valid.number(this.cardNumber).isValid ? this.cardNumberError = true : this.cardNumberError = false
+        !valid.expirationDate(this.cardExpirationDate).isValid ?  this.cardExpirationDateError = true :  this.cardExpirationDateError = false
+        !valid.cvv(this.cardCVV).isValid ? this.cardCvvError = true : this.cardCvvError = false
+        this.cpf.length < 14 || !CPF.validate(this.cpf) ? this.cpfError = true : this.cpfError = false
+        this.zipcode.length < 9 || !this.$store.state.validZipcode ? this.zipcodeError = true : this.zipcodeError = false
+        this.street === null || this.street === '' ? this.streetError = true : this.streetError = false
+        this.streetNumber === null || this.streetNumber === '' ? this.streetNumberError = true : this.streetNumberError = false
+        this.neighborhood === null || this.neighborhood === '' ? this.neighborhoodError = true : this.neighborhoodError = false
+        this.city === null || this.city === '' ? this.cityError = true : this.cityError = false
+        this.state === null || this.state === '' ? this.stateError = true : this.stateError = false
       }
     }
   },
@@ -1102,21 +1172,33 @@ export default {
     authUser () { return this.$store.state.authUser },
     hash () { return this.$route.hash },
     randomHashs () { return this.$store.state.randomHashs },
-    /* Bank Account */
-    bankCode () { return this.$store.state.bankAccount.bankCode },
-    type () { return this.$store.state.bankAccount.type },
-    agencia () { return this.$store.state.bankAccount.agencia },
-    agenciaDV () { return this.$store.state.bankAccount.agenciaDV },
-    conta () { return this.$store.state.bankAccount.conta },
-    contaDV () { return this.$store.state.bankAccount.contaDV },
-    legalName () { return this.$store.state.bankAccount.legalName },
-    docNumber () { return this.$store.state.bankAccount.docNumber },
-    titleLength () {
-      return 60 - this.$store.state.acomodData.title.length
+    creditCard () { return this.$store.state.creditCard },
+    cardNumber () { return this.$store.state.creditCard.cardNumber },
+    cardHolderName () { return this.$store.state.creditCard.cardHolderName },
+    cardExpirationDate () { return this.$store.state.creditCard.cardExpirationDate },
+    cardCVV () { return this.$store.state.creditCard.cardCVV },
+    cardType () { return this.$store.state.cardType },
+    cpf () { return this.$store.state.customer.cpf },
+    instagram () { return this.$store.state.customer.instagram },
+    zipcode () { return this.$store.state.customer.zipcode },
+    street () { return this.$store.state.customer.street },
+    streetNumber () { return this.$store.state.customer.street_number },
+    neighborhood () { return this.$store.state.customer.neighborhood },
+    city () { return this.$store.state.customer.city },
+    state () { return this.$store.state.customer.state },
+    /* ******************** CREDIT CARD ******************** */
+    cardBrand () {
+      const cardType = this.$store.state.cardType
+      return cardType === 'visa' ? require('@/assets/img/visa.svg')
+           : cardType === 'mastercard' ? require('@/assets/img/mastercard.svg')
+           : cardType === 'american-express' ? require('@/assets/img/amex.svg')
+           : cardType === 'elo' ? require('@/assets/img/elo.svg')
+           : cardType === 'discover' ? require('@/assets/img/discover.svg')
+           : cardType === 'diners-club' ? require('@/assets/img/diners.svg')
+           : cardType === 'jcb' ? require('@/assets/img/jcb.svg')
+           : ''
     },
-    subtitleLength () {
-      return 1000 - this.$store.state.acomodData.subtitle.length
-    },
+    /* ******************** FORM STYLES ******************** */
     form1ok () {
       return this.$store.state.acomodData.tipoAcomod !== null ? 'background:#FFA04F' : ''
     },
@@ -1148,26 +1230,89 @@ export default {
       return this.$store.state.acomodData.subtitle !== '' ? 'background:#FFA04F' : ''
     },
     form11ok () {
-      return this.$store.state.acomodData.celular.length === 17 && this.authUser ? 'background:#FFA04F' : ''
+      return this.$store.state.customer.celular.length === 17 && this.authUser ? 'background: #FFA04F' : ''
     },
     form12ok () {
-      return this.bankCode !== null && this.agencia !== '' && this.agenciaDV !== '' && this.conta !== '' && this.contaDV !== '' && this.legalName !== '' && this.docNumber.length === 14 && CPF.validate(this.docNumber) ? 'background:#FFA04F' : ''
+      return this.formIsCompleted ? 'background: #FFA04F' : ''
+    },
+    formIsCompleted () {
+      if (this.cardHolderName !== '' && valid.number(this.cardNumber).isValid && valid.expirationDate(this.cardExpirationDate).isValid && valid.cvv(this.cardCVV).isValid && CPF.validate(this.cpf) && this.cpf.length === 14 && this.zipcode.length === 9 && this.$store.state.validZipcode && this.street !== '' && this.street !== null && this.streetNumber !== '' && this.streetNumber !== null && this.neighborhood !== '' && this.neighborhood !== null && this.city !== '' && this.city !== null && this.state !== '' && this.state !== null) {
+        return true
+      } else {
+        return false
+      }
     }
   },
   watch: {
-    bankCode (value) { value !== '' ? this.bankCodeError = false : '' },
-    agencia (value) { value !== '' ? this.agenciaError = false : '' },
-    agenciaDV (value) { value !== '' ? this.agenciaDVError = false : '' },
-    conta (value) { value !== '' ? this.contaError = false : '' },
-    contaDV (value) { value !== '' ? this.contaDVError = false : '' },
-    legalName (value) { value !== '' ? this.legalNameError = false : '' },
-    docNumber (value) { 
-      value !== '' ? this.docNumberError = false : ''
+    cardNumber (value) {
+      const cardNumber = valid.number(value)
+      cardNumber.isPotentiallyValid ? this.cardNumberError = false : this.cardNumberError = true
+      if (cardNumber.card) {
+        if (cardNumber.card.type === 'american-express' ? value.length === 18 : value.length === 19) {
+          if (cardNumber.isValid) {
+            this.cardNumberError = false
+            this.$nextTick(() => {
+              scrollIntoView(this.$refs.cardExpirationDate.$el)
+              this.$refs.cardExpirationDate.$el.focus()
+            })
+          } else {
+            this.cardNumberError = true
+            this.$store.commit('show_alert', {
+              type: 'warning',
+              title: 'Erro',
+              message: 'Número inválido.',
+            })
+          }
+        }
+        this.$store.state.cardType = cardNumber.card.type
+        this.$store.state.cardTypeNice = cardNumber.card.niceType
+      }
+    },
+    instagram (value) {
+      console.log(value)
+      const firstDigit = value.charAt(0)
+      if (value.length === 1 && firstDigit !== '@') {
+        this.$store.state.customer.instagram = `@${value}`
+      }
+    },
+    cardExpirationDate (value) {
+      const firstDigit = value.charAt(0)
+      firstDigit > 1 ? this.$store.state.creditCard.cardExpirationDate = `0${firstDigit} / ` : ''
+      const cardExpirationDate = valid.expirationDate(value)
+      if (cardExpirationDate.isPotentiallyValid) {
+        this.cardExpirationDateError = false
+      } else {
+        this.cardExpirationDateError = true
+        this.$store.commit('show_alert', {
+          type: 'warning',
+          title: 'Erro',
+          message: 'Data inválida.'
+        })
+      }
+      cardExpirationDate.isValid ? this.$refs.cvv.$el.focus() : ''
+    },
+    cardCVV (value) {
+      const cardCVV = valid.cvv(value)
+      if (cardCVV.isPotentiallyValid) {
+        this.cardCvvError = false
+      } else {
+        this.cardCvvError = true
+        this.$store.commit('show_alert', {
+          type: 'warning',
+          title: 'Erro',
+          message: 'Código de segurança inválido.'
+        })
+      }
+    },
+    cpf (value) {
+      value !== '' ? this.cpfError = false : '' 
       if (value.length === 14) {
         if (CPF.validate(value)) {
-          this.docNumberError = false
+          this.cpfError = false
+          scrollIntoView(this.$refs.zipcode.$el)
+          this.$refs.zipcode.$el.focus()
         } else {
-          this.docNumberError = true
+          this.cpfError = true
           this.$store.commit('show_alert', {
             type: 'warning',
             title: 'Erro',
@@ -1176,6 +1321,54 @@ export default {
         }
       }
     },
+    async zipcode (value) {
+      if (value.length === 9) {
+        try {
+          this.$store.commit('m_loader', true)
+          const zipcode = this.zipcode.replace(/[^0-9\.]+/g, '')
+          const zipcodeData = await this.$axios.$get('https://api.pagar.me/1/zipcodes/' + zipcode)
+          this.$store.state.customer.state = zipcodeData.state
+          this.$store.state.customer.city = zipcodeData.city
+          this.$store.state.customer.neighborhood = zipcodeData.neighborhood
+          this.$store.state.customer.street = zipcodeData.street
+          this.$store.state.validZipcode = true
+          this.$store.commit('m_loader', false)
+          this.$nextTick(() => {
+            if (this.street === null || this.street === '') {
+              scrollIntoView(this.$refs.street)
+              this.$refs.street.focus()
+            } else {
+              scrollIntoView(this.$refs.streetNumber.$el)
+              this.$refs.streetNumber.$el.focus() 
+            }
+          })
+        } catch (err) {
+          if (err.response.status === 404) {
+            this.$store.commit('show_alert', {
+              type: 'warning',
+              title: 'Erro',
+              message: 'CEP inválido.',
+            })
+          } else {
+            this.$store.commit('show_alert', {
+              type: 'warning',
+              title: 'Erro',
+              message: 'Falha na conexão. Tente novamente.',
+            })
+          }
+          this.zipcodeError = true
+          this.$store.state.validZipcode = false
+          this.$store.commit('m_loader', false)
+        }
+      } else {
+        this.zipcodeError = false
+      }
+    },
+    street (value) { value !== null ? this.streetError = false : null },
+    streetNumber (value) { value !== null ? this.streetNumberError = false : null },
+    neighborhood (value) { value !== null ? this.neighborhoodError = false : null },
+    city (value) { value !== null ? this.cityError = false : null },
+    state (value) { value !== null ? this.stateError = false : null },
     hash (value) {
       if (value === '') {
         if (this.$store.state.lastHash === `#${this.randomHashs[1]}`) {
@@ -1292,8 +1485,6 @@ export default {
 </script>
 
 <style scoped>
-@import url('~/assets/css/yes-or-no.css');
-@import url('~/assets/css/vue-simple-suggest.css');
 
 .anunciar-acomodacao {
   margin-top: var(--navbarHeightMobile);
@@ -1345,8 +1536,7 @@ export default {
   & .cadastro-acomodacao {
     height: 100%;
     background: white;
-    color: var(--color01);
-    padding: 0 0 8rem 0;
+    padding: 0 0 6rem 0;
     & .__form-title {
       padding: 2.7rem 7% 1.4rem 7%;
       line-height: 1.25;
@@ -1356,14 +1546,19 @@ export default {
       user-select: none !important;
     }
     & .__form-text {
-      padding: .7rem 7%;
+      padding: 1rem 7%;
       font-size: 17px;
     }
     & .__form-subtitle {
-      padding-top: 1.1rem;
+      padding: 1.5rem 7% 0;
       font-size: 18px;
       font-weight: 600;
       user-select: none;
+    }
+    & p {
+      font-size: 17px;
+      padding: .5rem 7% .2rem;
+      line-height: 26px;
     }
     & .__termos {
       padding: 0 7%;
@@ -1402,7 +1597,7 @@ export default {
       padding: 0 7%;
       display: flex;
       flex-flow: column;
-      margin: 2.1rem 0;
+      margin: 1.2rem 0;
       & label {
         font-weight: 500;
         font-size: 14px;
@@ -1543,6 +1738,7 @@ export default {
                 text-align: center;
                 font-size: 14px;
                 font-weight: 500;
+                line-height: 1.1;
               }
             }
             & .mobilia:hover {
@@ -1563,6 +1759,7 @@ export default {
                 text-align: center;
                 font-size: 14px;
                 font-weight: 500;
+                line-height: 1.25;
               }
             }
             & .add-mobilia:hover {
@@ -1594,57 +1791,47 @@ export default {
     }
     & .comodidades-box {
       padding: 0 7%;
-      & .item-form-switches {
-        cursor: pointer;
+    }
+    & .item-form-switches {
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #dedede;
+      padding: 2rem 0;
+      transition: .2s;
+      & h3 {
+        user-select: none;
+        font-size: 17px;
+      }
+      & .switch {
         display: flex;
-        justify-content: space-between;
-        align-items: center;
-        border-bottom: 1px solid #dedede;
-        padding: 2rem 0;
-        & h3 {
-          user-select: none;
-          font-size: 17px;
-        }
-        & .switch {
-          display: flex;
-          flex-flow: column;
-          align-items: flex-start;
-          width: 44px;
-          height: 26px;
-          background-color: #dedede;
-          border-radius: 100px;
+        flex-flow: column;
+        align-items: flex-start;
+        width: 44px;
+        height: 26px;
+        background-color: #dedede;
+        border-radius: 100px;
+        transition: .3s;
+        & .slider {
+          margin: 2px;
+          height: 22px;
+          width: 22px;
+          border-radius: 50%;
+          background: white;
           transition: .3s;
-          & .slider {
-            margin: 2px;
-            height: 22px;
-            width: 22px;
-            border-radius: 50%;
-            background: white;
-            transition: all .5s ease-in-out;
-          }
-        }
-        & .switch-on {
-          align-items: flex-end;
-          background: var(--colorAcomod);
         }
       }
-      & .item-form-switches:last-child {
-        border-bottom: none
+      & .switch-on {
+        align-items: flex-end;
+        background: var(--colorAcomod);
       }
+    }
+    & .item-form-switches:last-child {
+      border-bottom: none;
     }
     & .regras-box {
       padding: .5rem 7% 0;
-      & .item-form-regras {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        border-bottom: 1px solid #dedede;
-        padding: 1.6rem 0;
-        & h3 {
-          user-select: none;
-          font-size: 17px;
-        }
-      }
       & .new-regras {
         display: flex;
         justify-content: space-between;
@@ -1702,14 +1889,11 @@ export default {
       margin: 0 7%;
       font-size: 16px;
       font-weight: 500;
-      transform: translateY(-1.1rem);
       color: var(--colorAcomod);
       transition: .2s all ease;
     }
     & .without-address:hover {
       text-decoration: underline;
-    }
-    & .recebedor-box {
     }
     & .modal-croppa {
       background: rgba(0, 0, 0, 0.8);
@@ -1844,6 +2028,11 @@ export default {
         font-size: 15px;
       }
     }
+    & .payment-box {
+      display: flex;
+      flex-flow: column;
+      padding-top: 1rem;
+    }
     & .back-next {
       position: fixed;
       z-index: 3;
@@ -1942,14 +2131,18 @@ export default {
         text-align: center;
       }
       & .__form-text {
-        padding: 1.4rem 28% 0;
+        padding: 1.6rem 28% 1rem;
       }
       & .__form-subtitle {
-        padding-top: 1.5rem;
-        font-size: 19px;
+        padding: 1.7rem 28% .3rem;
+        font-size: 18px;
+      }
+      & p {
+        font-size: 17px;
+        padding: .4rem 28%;
       }
       & .__termos {
-        padding: 0 35%;
+        padding: 1rem 35% 0;
         text-align: center;
       }
       & textarea {
@@ -1961,7 +2154,7 @@ export default {
       }
       & .item-form {
         padding: 0 28%;
-        margin: 2.7rem 0;
+        margin: 1.3rem 0;
         & label {
           font-size: 15px;
         }
@@ -2043,33 +2236,20 @@ export default {
       }
       & .comodidades-box {
         padding: .6rem 28% 0;
-        & .item-form-switches {
-          padding: 1.7rem 0;
-          transition: .2s all ease;
-          & h3 {
-          }
+      }
+      & .item-form-switches {
+        padding: 1.7rem 0;
+        & h3 {
         }
-        & .item-form-switches:hover {
-          border-bottom: 1px solid var(--color01);
-        }
+      }
+      & .item-form-switches:hover {
+        border-bottom: 1px solid var(--color01);
       }
       & .regras-box {
         padding: .6rem 28% 0;
-        & .item-form-regras {
-          padding: 1.7rem 0;
-          transition: .2s all ease;
-          & h3 {
-          }
-        }
-        & .item-form-regras:hover {
-          border-bottom: 1px solid var(--color01);
-        }
       }
       & .without-address {
         margin: 0 28%;
-        transform: translateY(-1.7rem);
-      }
-      & .recebedor-box {
       }
       & .modal-croppa {
         & .modal-croppa-body {

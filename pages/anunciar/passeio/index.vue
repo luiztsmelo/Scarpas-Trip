@@ -329,7 +329,7 @@
       required>
       {{title}}</textarea>
 
-      <span class="__lenght-calc">{{ 60 - this.$store.state.passeioData.title.length }}</span>
+      <span class="__lenght-calc">{{ 60 - $store.state.passeioData.title.length }}</span>
 
 
       <div class="back-next"> 
@@ -361,7 +361,7 @@
       required>
       {{subtitle}}</textarea>
 
-      <span class="__lenght-calc">{{ 1000 - this.$store.state.passeioData.subtitle.length }}</span> 
+      <span class="__lenght-calc">{{ 1000 - $store.state.passeioData.subtitle.length }}</span> 
 
 
       <div class="back-next"> 
@@ -627,7 +627,7 @@
 
         <h4 class="__termos">Ao anunciar, você concorda com a nossa <a href="/termos#politica_privacidade" target="_blank">Política de Privacidade</a> e <a href="/termos" target="_blank">Termos de Serviço</a>.</h4>
 
-      </div> 
+      </div>
 
 
       <div class="back-next"> 
@@ -667,6 +667,7 @@ export default {
       title: 'Anunciar Passeio em Capitólio ‒ Escarpas Trip'
     }
   },
+  middleware: 'newPasseioConcludedCheck',
   transition: 'opacity',
   data () {
     return {
@@ -917,7 +918,7 @@ export default {
         this.$store.commit('show_alert', {
           type: 'warning',
           title: 'Ops',
-          message: 'Adicione um número válido.'
+          message: 'Adicione um número de celular válido.'
         })
       }
     },
@@ -943,8 +944,8 @@ export default {
 
           console.log(subscription)
 
-          /* Necessário para o correto funcionamento do backBtn _id (Ver middleware: newAcomodConcludedCheck.js) */
-          this.$store.state.concludedNewAcomod = true
+          /* Necessário para o correto funcionamento do backBtn _id (Ver middleware: newPasseioConcludedCheck.js) */
+          this.$store.state.concludedNewPasseio = true
           
           /* Ir para página do passeio criado */
           this.$router.push('/passeios/' + passeioData.passeioID)
@@ -1766,11 +1767,11 @@ export default {
         text-align: center;
       }
       & textarea {
-        padding: 0 26%;
+        padding: 0 28%;
         margin: 1.7rem 0 .6rem 0;
       }
       & .__lenght-calc {
-        padding: 0 26%;
+        padding: 0 28%;
       }
       & .item-form {
         padding: 0 28%;

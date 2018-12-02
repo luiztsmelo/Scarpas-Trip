@@ -218,10 +218,12 @@ const store = () => new Vuex.Store({
       address: null,
       checkInTime: '14:00',
       checkOutTime: 'A qualquer hora',
-      allowFestas: false,
-      allowPets: false,
-      allowBabys: false,
-      allowFumar: false,
+      regras: [
+        { name: 'Festas são permitidas?', condition: false },
+        { name: 'Animais de estimação são permitidos?', condition: false },
+        { name: 'É adequado para bebês?', condition: false },
+        { name: 'Fumar é permitido?', condition: false }
+      ],
       regrasAdicionais: [],
       images: [],
       title: '',
@@ -326,6 +328,7 @@ const store = () => new Vuex.Store({
       averageRating_precisao: 0,
       averageRating_valor: 0
     },
+    concludedNewPasseio: false,
     cadastroPasseio0: true,
     cadastroPasseio1: false,
     cadastroPasseio2: false,
@@ -437,8 +440,8 @@ const store = () => new Vuex.Store({
   /* ________________________________________________ GETTERS ________________________________________________ */
   getters: {
     tipoAcomodComValorQuartos (state) {
-      if (state.acomodData.tipoAcomod === 'Pousada' || state.acomodData.tipoAcomod === 'Suítes') { 
-        return true 
+      if (state.acomodData.tipoAcomod === 'Pousada' || state.acomodData.tipoAcomod === 'Suítes') {
+        return true
       } else return false
     }
   },
