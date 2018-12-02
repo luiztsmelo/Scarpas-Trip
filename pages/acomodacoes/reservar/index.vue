@@ -138,25 +138,10 @@
           <!-- REGRAS -->
           <h3 class="__subtitle">Regras {{ tipoAcomodD }}</h3>
 
-          <div class="regra">
-            <img class="__bullet" src="../../../assets/img/check.svg" v-if="acomod.allowFestas">
+          <div class="regra" v-for="(regra, index) in acomod.regras" :key="index">
+            <img class="__bullet" src="../../../assets/img/check.svg" v-if="regra.condition === true">
             <img class="__bullet" src="../../../assets/img/close-mobile.svg" v-else>
-            <h3>{{ acomod.allowFestas ? 'São permitidas festas ou eventos.' : 'Não são permitidas festas ou eventos.' }}</h3>
-          </div>
-          <div class="regra">
-            <img class="__bullet" src="../../../assets/img/check.svg" v-if="acomod.allowPets">
-            <img class="__bullet" src="../../../assets/img/close-mobile.svg" v-else>
-            <h3>{{ acomod.allowPets ? 'São permitidos animais de estimação.' : 'Não são permitidos animais de estimação.' }}</h3>
-          </div>
-          <div class="regra">
-            <img class="__bullet" src="../../../assets/img/check.svg" v-if="acomod.allowBabys">
-            <img class="__bullet" src="../../../assets/img/close-mobile.svg" v-else>
-            <h3>{{ acomod.allowBabys ? 'É adequada para bebês e recém-nascidos.' : 'Não é adequada para bebês e recém-nascidos.' }}</h3>
-          </div>
-          <div class="regra">
-            <img class="__bullet" src="../../../assets/img/check.svg" v-if="acomod.allowFumar">
-            <img class="__bullet" src="../../../assets/img/close-mobile.svg" v-else>
-            <h3>{{ acomod.allowFumar ? 'É permitido fumar.' : 'Não é permitido fumar.' }}</h3>
+            <h3>{{ regraText(regra) }}</h3>
           </div>
 
           <h3 class="__text" style="padding-top: 1rem" v-for="regra in acomod.regrasAdicionais">{{ regra }}</h3>
@@ -347,6 +332,20 @@ export default {
     }
   },
   methods: {
+    regraText (regra) {
+      if (regra.name === 'Festas são permitidas?') {
+        return regra.condition === true ? 'São permitidas festas ou eventos.' : 'Não são permitidas festas ou eventos.'
+      }
+      if (regra.name === 'Animais de estimação são permitidos?') {
+        return regra.condition === true ? 'São permitidos animais de estimação.' : 'Não são permitidos animais de estimação.'
+      }
+      if (regra.name === 'É adequado para bebês?') {
+        return regra.condition === true ? 'É adequada para bebês e recém-nascidos.' : 'Não é adequada para bebês e recém-nascidos.'
+      }
+      if (regra.name === 'Fumar é permitido?') {
+        return regra.condition === true ? 'É permitido fumar.' : 'Não é permitido fumar.'
+      }
+    },
     scrollTop () {
       document.body.scrollTop = 0
       document.documentElement.scrollTop = 0

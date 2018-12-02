@@ -313,7 +313,7 @@ export default {
           & .__card-img {
             width: 100%; 
             height: auto;
-            border-radius: 4px;
+            border-radius: 5px;
             margin-bottom: .2rem;
           }
           & .__card-info {
