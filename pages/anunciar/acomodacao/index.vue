@@ -94,7 +94,7 @@
 
               
               <div class="heading">
-                <input class="__nome" type="text" v-model="quarto.nome">
+                <input class="__nome" type="text" v-model="quarto.name">
                 <img class="__remove-img" src="../../../assets/img/close-mobile.svg" @click="$store.commit('m_removeQuarto', index)">
               </div>
               
@@ -1766,14 +1766,14 @@ export default {
               border: 1px solid #161616;
             }
           }
-          & .camas::before {
+          & .mobilias::before {
             content: '';
             width: 0;
             padding-bottom: 100%;
             grid-row: 1 / 1;
             grid-column: 1 / 1;
           }
-          & .camas > *:first-child {
+          & .mobilias > *:first-child {
             grid-row: 1 / 1;
             grid-column: 1 / 1;
           }
@@ -1809,6 +1809,7 @@ export default {
         flex-flow: column;
         align-items: flex-start;
         width: 44px;
+        min-width: 44px;
         height: 26px;
         background-color: #dedede;
         border-radius: 100px;

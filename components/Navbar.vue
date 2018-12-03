@@ -135,7 +135,7 @@ export default {
       display: flex;
       align-items: center;
       & .__brand-img {
-        width: 2rem;
+        width: 1.95rem;
         height: auto;
         margin-right: .5rem;
       }
@@ -252,7 +252,7 @@ export default {
     & .navbar-body {
       & .brand {
         & .__brand-img {
-          width: 2.6rem;
+          width: 2.4rem;
           height: auto;
         }
         & .__brand-name {

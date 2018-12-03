@@ -111,6 +111,37 @@
 
 
 
+        <!-- ______________________________ QUARTOS ______________________________ -->
+        <h1 class="item-title">Quartos</h1>
+
+        <div class="quartos-box">
+
+          <div class="quarto" v-for="(quarto, index) in acomod.quartos" :key="index">
+
+              <h1 class="__name">{{ quarto.name }}</h1>
+
+              <div class="infos">
+                <p class="__info">Acomoda até: <span style="font-weight: 500">{{ quarto.acomoda }} {{ quarto.acomoda > 1 ? 'hóspedes' : 'hóspede' }}</span></p>
+                <p class="__info">Valor da diária: <span style="font-weight: 500">R$ {{ quarto.valor }}</span></p>
+              </div>
+              
+              <div class="mobilias">
+                <div class="mobilia" v-for="(mobilia, index) in quarto.mobilias" :key="index">
+                  <img :src="mobiliaImage(mobilia)" style="width: 1.6rem; height: auto">
+                  <p style="user-select: none">{{ mobiliaText(mobilia) }}</p>
+                </div>
+              </div>
+              
+          </div>
+
+        </div><!-- ______________________________ QUARTOS ______________________________ -->
+
+
+
+
+
+
+
         <!-- ______________________________ COMODIDADES ______________________________ -->
         <h1 class="item-title">Comodidades</h1>
 
@@ -460,6 +491,24 @@ export default {
     }
   },
   methods: {
+    /* ******************** QUARTOS ******************** */
+    mobiliaImage (mobilia) {
+      return mobilia === 'cama_solteiro' ? require('@/assets/img/cama_solteiro.svg')
+           : mobilia === 'cama_casal' ? require('@/assets/img/cama_casal.svg')
+           : mobilia === 'cama_queen' ? require('@/assets/img/cama_casal.svg')
+           : mobilia === 'cama_king' ? require('@/assets/img/cama_casal.svg')
+           : mobilia === 'sofa' ? require('@/assets/img/sofa.svg')
+           : ''
+    },
+    mobiliaText (mobilia) {
+      return mobilia === 'cama_solteiro' ? 'Cama solteiro'
+           : mobilia === 'cama_casal' ? 'Cama casal'
+           : mobilia === 'cama_queen' ? 'Cama queen'
+           : mobilia === 'cama_king' ? 'Cama king'
+           : mobilia === 'sofa' ? 'Sofá'
+           : ''
+    },
+    /* ******************** COMODIDADES ******************** */
     comodidadeImgSrc (comodidade) {
       return comodidade.name === 'Roupas de cama' ? require('@/assets/img/hasRoupasCama.svg')
            : comodidade.name === 'Piscina' ? require('@/assets/img/hasPiscina.svg')
@@ -590,7 +639,12 @@ export default {
     host () { return this.$store.state.host },
     reservaAcomod () { return this.$store.state.reservaAcomod },
     totalHospedesArray () {
-      return Array.from({length: this.acomod.totalHospedes}, (v, k) => k+1)
+      let hospedesArray = []
+      this.acomod.quartos.forEach(quarto => {
+        hospedesArray.push(quarto.acomoda)
+      })
+      const totalHospedes = hospedesArray.reduce((x, y) => x + y, 0)
+      return Array.from({ length: totalHospedes }, (v, k) => k + 1)
     },
     minDate () {
       return subDays(Date(), 1)
@@ -717,6 +771,72 @@ export default {
   & .sobre-box {
     padding: 0 7%;
   }/* __________ SOBRE BOX __________ */
+
+
+
+
+
+
+  /* __________ QUARTOS __________ */
+  & .quartos-box {
+    padding: 0 7%;
+    & .quarto {
+      border: 1px solid #dedede;
+      width: 100%;
+      border-radius: 10px;
+      margin-bottom: 1.7rem;
+      & .__name {
+        border-radius: 10px 10px 0 0;
+        background: #dedede;
+        color: white;
+        padding: .6rem 1rem;
+        font-size: 17px;
+        font-weight: 600;
+      }
+      & .infos {
+        display: flex;
+        flex-flow: column;
+        padding: .7rem 1rem;
+        & .__info {
+          padding: .4rem 0;
+        }
+      }
+      & .mobilias {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(4.5rem, 1fr));
+        grid-auto-rows: 1fr;
+        grid-gap: 12px;
+        margin: 0 1rem 1rem;
+        & .mobilia {
+          display: flex;
+          flex-flow: column;
+          align-items: center;
+          justify-content: center;
+          border: 1px solid #dedede;
+          border-radius: 7px;
+          padding: .8rem;
+          & p {
+            padding-top: 10px;
+            text-align: center;
+            font-size: 14px;
+            font-weight: 500;
+            line-height: 1.1;
+          }
+        }
+      }
+      & .mobilias::before {
+        content: '';
+        width: 0;
+        padding-bottom: 100%;
+        grid-row: 1 / 1;
+        grid-column: 1 / 1;
+      }
+      & .mobilias > *:first-child {
+        grid-row: 1 / 1;
+        grid-column: 1 / 1;
+      }
+    }
+  }/* __________ QUARTOS __________ */
 
 
 
@@ -1123,6 +1243,40 @@ export default {
         }/* __________ SOBRE __________ */
 
 
+
+
+
+        /* __________ QUARTOS __________ */
+        & .quartos-box {
+          padding: 0;
+          & .quarto {
+            margin-bottom: 1.7rem;
+            & .__name {
+              padding: .7rem 1.4rem;
+              font-size: 19px;
+            }
+            & .infos {
+              flex-flow: row;
+              align-items: center;
+              justify-content: space-between;
+              padding: 1.3rem 1.4rem;
+              & .__info {
+                padding: 0;
+              }
+            }
+            & .mobilias {
+              grid-template-columns: repeat(auto-fill, minmax(5rem, 1fr));
+              margin: 0 1.4rem 1.4rem;
+              & .mobilia {
+                padding: 1rem;
+                & p {
+                }
+              }
+            }
+          }
+        }/* __________ QUARTOS __________ */
+
+
       
 
 
@@ -1131,17 +1285,17 @@ export default {
           display: none;
         }
         & .comodidades-box-desktop {
-          display: flex;
-          flex-flow: row wrap;
+          display: grid;
+          grid-template-columns: 1fr 1fr 1fr;
+          grid-column-gap: 1rem;
+          grid-row-gap: 1.5rem;
           & .item {
             display: flex;
             align-items: center;
-            width: calc(100%/3);
-            margin-bottom: 1.4rem;
             & .__img {
               width: 1.6rem;
               height: auto;
-              margin-right: .8rem;
+              margin-right: 1rem;
             }
           }
         }/* __________ COMODIDADES __________ */
