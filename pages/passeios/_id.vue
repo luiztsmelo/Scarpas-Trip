@@ -151,7 +151,7 @@
 
 
         <!-- ______________________________ DISPONIBILIDADE ______________________________ -->
-        <h1 class="item-title">Datas disponíveis</h1>
+        <h1 class="item-title">Disponibilidade</h1>
 
         <div class="disponibilidade-box">
 
