@@ -36,7 +36,7 @@
 
             <p class="__card-subtitle">R${{ acomod.valorNoite.toLocaleString() }}<span class="__card-valor-noite"> por noite</span></p>
 
-            <div class="rating">
+            <div class="rating" v-if="acomod.avaliacoes.length > 0">
               <star-rating
                 :rating="acomod.averageRating"
                 :increment="0.5"
@@ -49,6 +49,8 @@
               </star-rating>
               <p class="rating-count">{{ acomod.avaliacoes.length }}</p>
             </div>
+
+            <div class="new" v-else><p>NOVA</p></div>
             
           </nuxt-link>
 
@@ -86,7 +88,7 @@
 
             <p class="__card-subtitle">R${{ passeio.rotas[0].valor.toLocaleString() }}<span class="__card-valor-noite"> por pessoa</span></p>
             
-            <div class="rating">
+            <div class="rating" v-if="passeio.avaliacoes.length > 0">
               <star-rating
                 :rating="passeio.averageRating"
                 :increment="0.5"
@@ -99,6 +101,8 @@
               </star-rating>
               <p class="rating-count">{{ passeio.avaliacoes.length }}</p>
             </div>
+
+            <div class="new" v-else><p>NOVO</p></div>
 
           </nuxt-link> 
         </div>
@@ -344,6 +348,17 @@ export default {
               font-size: 12px;
               font-weight: 600;
               padding-left: 2px;
+            }
+          }
+          & .new {
+            margin-top: .3rem;
+            display: inline-flex;
+            border: 1px solid #dedede;
+            border-radius: 50px;
+            & p {
+              padding: 3px 8px;
+              font-size: 11px;
+              font-weight: 600;
             }
           }
         }

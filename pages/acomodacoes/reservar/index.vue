@@ -226,16 +226,8 @@
 
 
           <div class="detalhes-reserva-valor" v-if="reservaAcomod.valorReservaTotal !== null">
-
-            <div class="detalhes-reserva-valor_item-total" style="padding-top: .8rem">
-              <h3>Total</h3>
-              <h3 class="__valor-total">R${{ reservaAcomod.valorReservaTotal.toLocaleString() }}</h3>
-            </div>
-
-            <p class="__ver-detalhes" @click="$modal.show('detalhes-valor-modal')">Ver detalhes</p>
-
-            <detalhes-valor/>
-
+            <h3>Total</h3>
+            <h3 class="__valor-total">R${{ reservaAcomod.valorReservaTotal.toLocaleString() }}</h3>
           </div>
           
 
@@ -306,7 +298,6 @@ import firebase from '@firebase/app'
 import 'firebase/firestore'
 import supportsWebP from 'supports-webp'
 import MaskedInput from 'vue-text-mask'
-import detalhesValor from '@/components/reserva-acomod/detalhesValor'
 import { tipoAcomod } from '@/mixins/tipoAcomod'
 import scrollIntoView from 'scroll-into-view'
 import * as Email from 'email-validator'
@@ -315,7 +306,7 @@ import pt from 'date-fns/locale/pt'
 import eachDay from 'date-fns/each_day'
 
 export default {
-  components: { MaskedInput, detalhesValor },
+  components: { MaskedInput },
   mixins: [ tipoAcomod ],
   head () {
     return {

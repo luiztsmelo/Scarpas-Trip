@@ -175,9 +175,7 @@ exports.email_newReservaAcomod_host = functions.firestore
             'totalHospedes': reservaAcomod.totalHospedes,
             'noites': reservaAcomod.noites,
             'valorNoite': numeral(acomod.valorNoite).format('$0,0'),
-            'valorNoitesTotal': numeral(reservaAcomod.valorNoitesTotal).format('$0,0'),
-            'limpezaFee': numeral(reservaAcomod.limpezaFee).format('$0,0'),
-            'hostAmount': numeral(reservaAcomod.valorNoitesTotal + reservaAcomod.limpezaFee).format('$0,0')
+            'valorReservaTotal': numeral(reservaAcomod.valorReservaTotal).format('$0,0'),
           }
         }]
       })

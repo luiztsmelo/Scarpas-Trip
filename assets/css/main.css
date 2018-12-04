@@ -122,7 +122,7 @@ textarea {
   background-color: white;
   border: 1px solid #dedede;
   height: 2.5rem;
-  border-radius: 5px;
+  border-radius: 6px;
   font-size: 14px;
   font-weight: 500;
   transition: .15s border ease;
@@ -139,7 +139,7 @@ textarea {
   background-color: white;
   border: 1px solid #dedede;
   height: 2.5rem;
-  border-radius: 5px;
+  border-radius: 6px;
   font-size: 14px;
   font-weight: 500;
   transition: .15s border ease;
@@ -151,7 +151,7 @@ textarea {
 
 /* _______ VUE.JS MODAL _______ */
 .v--modal {
-  border-radius: 5px !important;
+  border-radius: 10px !important;
 }
 .v--modal-overlay {
   z-index: 9999999 !important;

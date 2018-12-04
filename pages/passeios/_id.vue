@@ -63,6 +63,7 @@
           <h3 class="__tipo" style="color: #198CFE">{{ passeio.tipoPasseio }}</h3>
 
           <star-rating
+            v-if="passeio.avaliacoes.length > 0"
             class="rating"
             :rating="passeio.averageRating"
             :increment="0.5"
@@ -73,6 +74,8 @@
             :star-size="13"
             :padding="4">
           </star-rating>
+
+          <div class="new" v-else><p>NOVO</p></div>
 
         </div><!-- ______________________________ RATING ______________________________ -->
 
@@ -221,10 +224,11 @@
         <div class="avaliacoes-title">
 
           <h1 class="__title">
-            {{ passeio.avaliacoes.length }} {{ passeio.avaliacoes.length === 1 ? 'Avaliação': 'Avaliações' }} 
+            {{ passeio.avaliacoes.length > 0 ? passeio.avaliacoes.length : '' }} {{ passeio.avaliacoes.length === 0 ? 'Seja o primeiro a avaliar!' : passeio.avaliacoes.length === 1 ? 'Avaliação': 'Avaliações' }}
           </h1>
 
           <star-rating
+            v-if="passeio.avaliacoes.length > 0"
             class="rating"
             :rating="passeio.averageRating"
             :increment="0.5"
@@ -382,9 +386,6 @@ import { pontosTuristicos } from '@/mixins/pontosTuristicos'
 import format from 'date-fns/format'
 import subDays from 'date-fns/sub_days'
 import pt from 'date-fns/locale/pt'
-import dayjs from 'dayjs'
-import 'dayjs/locale/pt-br'
-dayjs.locale('pt-br')
 
 export default {
   components: { Host, AddAvaliacaoDesktop },
@@ -466,6 +467,22 @@ export default {
       return window.scrollY >= this.$store.state.heightImageBox
         ? el.setAttribute("style", "filter: invert(90%)")
         : el.removeAttribute("style")
+    },
+    fullscreenMobile () {
+      if (this.$store.state.isMobile === true) {
+        this.$store.commit('m_acomodMap', this.acomod)
+        /* Enter fullscreen */
+        if ((document.fullScreenElement && document.fullScreenElement !== null) ||
+        (!document.mozFullScreen && !document.webkitIsFullScreen)) {
+          if (document.documentElement.requestFullScreen) {
+             document.documentElement.requestFullScreen()
+          } else if (document.documentElement.mozRequestFullScreen) {
+            document.documentElement.mozRequestFullScreen()
+          } else if (document.documentElement.webkitRequestFullScreen) {
+            document.documentElement.webkitRequestFullScreen(Element.ALLOW_KEYBOARD_INPUT)
+          }
+        }
+      }
     },
     backBtn () {
       window.history.back(1)
@@ -590,6 +607,16 @@ export default {
     }
     & .rating {
       padding-left: 3px;
+    }
+    & .new {
+      display: inline-flex;
+      border: 1px solid #dedede;
+      border-radius: 50px;
+      & p {
+        padding: 3px 8px;
+        font-size: 11px;
+        font-weight: 600;
+      }
     }
   }/* __________ RATING BOX __________ */
 
@@ -970,6 +997,11 @@ export default {
             font-weight: 600;
           }
           & .rating {
+          }
+          & .new {
+            & p {
+              font-size: 12px;
+            }
           }
         }/* __________ RATING BOX __________ */
 

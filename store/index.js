@@ -193,7 +193,7 @@ const store = () => new Vuex.Store({
       tipoAcomod: 'Casa',
       quartos: [
         {
-          nome: 'Quarto 1',
+          name: 'Quarto 1',
           acomoda: 1,
           valor: 0,
           mobilias: ['cama_casal']
@@ -203,7 +203,6 @@ const store = () => new Vuex.Store({
       totalBanheiros: '1',
       totalGaragem: '1',
       valorNoite: 0,
-      limpezaFee: 0,
       comodidades: [
         { name: 'Roupas de cama', condition: false },
         { name: 'Piscina', condition: false },
@@ -269,12 +268,11 @@ const store = () => new Vuex.Store({
         email: '',
         celular: ''
       },
+      quarto: '',
       totalHospedes: 1,
       startDate: '',
       endDate: '',
       noites: null,
-      valorNoitesTotal: null,
-      limpezaFee: null,
       valorReservaTotal: null
     },
     reservaAcomod1: true,
@@ -610,7 +608,7 @@ const store = () => new Vuex.Store({
     },
     m_addQuarto (state) {
       state.acomodData.quartos.push({
-        nome: `Quarto ${state.acomodData.quartos.length + 1}`,
+        name: `Quarto ${state.acomodData.quartos.length + 1}`,
         acomoda: 1,
         valor: 0,
         mobilias: []
@@ -629,7 +627,7 @@ const store = () => new Vuex.Store({
       state.indexQuarto = index
     },
     m_addComodidade (state, { index, comodidade }) {
-      state.acomodData.comodidades.splice(index, 0, comodidade.nome)
+      state.acomodData.comodidades.splice(index, 0, comodidade.name)
     },
     m_removeComodidade (state, index) {
       state.acomodData.comodidades[index] = ''
@@ -639,9 +637,6 @@ const store = () => new Vuex.Store({
     },
     m_noites (state, payload) {
       state.reservaAcomod.noites = payload
-    },
-    m_valorNoitesTotal (state, payload) {
-      state.reservaAcomod.valorNoitesTotal = payload
     },
     m_valorReservaTotal (state, payload) {
       state.reservaAcomod.valorReservaTotal = payload
@@ -999,7 +994,7 @@ const store = () => new Vuex.Store({
         tipoAcomod: 'Casa',
         quartos: [
           {
-            nome: 'Quarto 1',
+            name: 'Quarto 1',
             acomoda: 1,
             valor: 0,
             mobilias: ['cama_casal']
@@ -1009,7 +1004,6 @@ const store = () => new Vuex.Store({
         totalBanheiros: '1',
         totalGaragem: '1',
         valorNoite: 0,
-        limpezaFee: 0,
         comodidades: [
           { name: 'Roupas de cama', condition: false },
           { name: 'Piscina', condition: false },
@@ -1066,8 +1060,6 @@ const store = () => new Vuex.Store({
         startDate: '',
         endDate: '',
         noites: null,
-        valorNoitesTotal: null,
-        limpezaFee: null,
         valorReservaTotal: null
       }
       state.reservaAcomodDesktop1 = true

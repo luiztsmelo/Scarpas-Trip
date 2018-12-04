@@ -27,10 +27,14 @@
         </div>
 
         <div class="card-details">
+
           <p class="__card-tipo-acomod">{{ acomod.tipoAcomod }}</p>
+
           <p class="__card-title">{{ acomod.title }}</p>
+
           <p class="__card-valor">R${{ acomod.valorNoite }}<span class="__card-valor-dia"> por noite</span></p>
-          <div class="rating">
+
+          <div class="rating" v-if="acomod.avaliacoes.length > 0">
             <star-rating
               :rating="acomod.averageRating"
               :increment="0.5"
@@ -43,6 +47,8 @@
             </star-rating>
             <p class="rating-number">{{ acomod.avaliacoes.length }}</p>
           </div>
+
+          <div class="new" v-else><p>NOVA</p></div>
           
         </div>
         
@@ -655,8 +661,6 @@ export default {
         }
       }
       & .card-details {
-        display: flex;
-        flex-flow: column;
         & .__card-tipo-acomod {
           padding-top: .1rem;
           text-transform: uppercase;
@@ -686,6 +690,17 @@ export default {
             font-size: 12px;
             font-weight: 500;
             padding-left: 2px;
+          }
+        }
+        & .new {
+          margin-top: .4rem;
+          display: inline-flex;
+          border: 1px solid #dedede;
+          border-radius: 50px;
+          & p {
+            padding: 3px 8px;
+            font-size: 11px;
+            font-weight: 600;
           }
         }
       }
@@ -767,21 +782,16 @@ export default {
           }
         }
         & .card-details {
-          display: flex;
-          flex-flow: column;
           & .__card-tipo-acomod {
             font-weight: 600;
           }
           & .__card-title {
             font-size: 16px;
-            font-weight: 700;
           }
           & .__card-valor {
             font-size: 14px;
-            font-weight: 500;
             & .__card-valor-dia {
               font-size: 14px;
-              font-weight: 500;
             }
           }
         }

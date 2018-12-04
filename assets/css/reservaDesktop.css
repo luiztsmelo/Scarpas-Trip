@@ -198,22 +198,13 @@
           }
         }
         & .detalhes-reserva-valor {
+          padding-top: .8rem;
           display: flex;
-          flex-flow: column;
-          & .detalhes-reserva-valor_item-total {
-            display: flex;
-            justify-content: space-between;
-            & .__valor-total {
-              font-size: 17px;
-              font-weight: 600;
-            }
-          }
-          & .__ver-detalhes {
-            user-select: none;
-            cursor: pointer;
-            font-size: 14px;
+          align-items: center;
+          justify-content: space-between;
+          & .__valor-total {
+            font-size: 17px;
             font-weight: 600;
-            color: var(--colorAcomod);
           }
         }
       }

@@ -61,6 +61,7 @@
           <h3 class="__tipo" style="color: #FFA04F">{{ acomod.tipoAcomod }}</h3>
 
           <star-rating
+            v-if="acomod.avaliacoes.length > 0"
             class="rating"
             :rating="acomod.averageRating"
             :increment="0.5"
@@ -71,6 +72,8 @@
             :star-size="13"
             :padding="4">
           </star-rating>
+
+          <div class="new" v-else><p>NOVA</p></div>
 
         </div><!-- ______________________________ RATING ______________________________ -->
         
@@ -112,18 +115,17 @@
 
 
         <!-- ______________________________ QUARTOS ______________________________ -->
-        <h1 class="item-title">Quartos</h1>
-
         <div class="quartos-box">
 
           <div class="quarto" v-for="(quarto, index) in acomod.quartos" :key="index">
 
               <h1 class="__name">{{ quarto.name }}</h1>
 
-              <div class="infos">
-                <p class="__info">Acomoda até: <span style="font-weight: 500">{{ quarto.acomoda }} {{ quarto.acomoda > 1 ? 'hóspedes' : 'hóspede' }}</span></p>
-                <p class="__info">Valor da diária: <span style="font-weight: 500">R$ {{ quarto.valor }}</span></p>
-              </div>
+
+              <p class="info">Acomoda até: <span style="font-weight: 500">{{ quarto.acomoda }} {{ quarto.acomoda > 1 ? 'hóspedes' : 'hóspede' }}</span></p>
+
+              <p class="info" v-if="acomod.tipoAcomod !== 'Casa'">Valor da diária: <span style="font-weight: 500">R$ {{ quarto.valor }}</span></p>
+    
               
               <div class="mobilias">
                 <div class="mobilia" v-for="(mobilia, index) in quarto.mobilias" :key="index">
@@ -252,10 +254,11 @@
         <div class="avaliacoes-title">
 
           <h1 class="__title">
-            {{ acomod.avaliacoes.length }} {{ acomod.avaliacoes.length === 1 ? 'Avaliação': 'Avaliações' }} 
+            {{ acomod.avaliacoes.length > 0 ? acomod.avaliacoes.length : '' }} {{ acomod.avaliacoes.length === 0 ? 'Seja o primeiro a avaliar!' : acomod.avaliacoes.length === 1 ? 'Avaliação': 'Avaliações' }}
           </h1>
 
           <star-rating
+            v-if="acomod.avaliacoes.length > 0"
             class="rating"
             :rating="acomod.averageRating"
             :increment="0.5"
@@ -326,6 +329,13 @@
 
 
           <div class="item-form">
+            <select v-model="$store.state.reservaAcomod.quarto">
+              <option :value="quarto" v-for="quarto in quartosOptions">{{ quarto }}</option>
+            </select>
+          </div>
+
+
+          <div class="item-form">
             <select v-model="$store.state.reservaAcomod.totalHospedes">
               <option :value="n" v-for="n in totalHospedesArray">{{ n }} {{ n === 1 ? 'hóspede' : 'hóspedes' }}</option>
             </select>
@@ -362,28 +372,10 @@
           </div>
 
 
-          <div class="reserva-info" v-if="reservaAcomod.startDate !== '' && reservaAcomod.endDate !== ''">
-            
-            <div class="reserva-info_item" style="padding-bottom: .2rem">
-              <h3>{{ `R$${acomod.valorNoite.toLocaleString()} x ${$store.state.reservaAcomod.noites} ${$store.state.reservaAcomod.noites == 1 ? 'noite' : 'noites'}` }}</h3>
-              <h3 id="valor">R${{ $store.state.reservaAcomod.valorNoitesTotal.toLocaleString() }}</h3>
-            </div>
-
-            <div class="reserva-info_item" style="padding-bottom: .2rem" v-if="acomod.limpezaFee !== 0">
-              <div style="display:flex;flex:row;align-items:center">
-                <h3>Taxa de limpeza</h3>
-                <img src="../../assets/img/info.svg" style="width:.95rem;height:auto;margin-left:.3rem;cursor:pointer" @click="limpezaFeeDialog">
-              </div>
-              <h3>R${{ acomod.limpezaFee.toLocaleString() }}</h3>
-            </div>
-
-            <div class="reserva-info_item-total" style="padding-top: .4rem; margin-top: .4rem">
-              <h3>Total</h3>
-              <h3>R${{ $store.state.reservaAcomod.valorReservaTotal.toLocaleString() }}</h3>
-            </div>
-
+          <div class="valor-reserva-total" v-if="reservaAcomod.startDate !== '' && reservaAcomod.endDate !== ''">
+            <h3>{{ `R$${acomod.valorNoite.toLocaleString()} x ${$store.state.reservaAcomod.noites} ${$store.state.reservaAcomod.noites == 1 ? 'noite' : 'noites'}` }}</h3>
+            <h3 id="valor">R${{ $store.state.reservaAcomod.valorReservaTotal.toLocaleString() }}</h3>
           </div>
-
 
 
           <button class="__reserva-desktop-btn" type="button" @click="reservarDesktop">Reservar</button>
@@ -542,13 +534,8 @@ export default {
       const noites = differenceInDays(endDate, startDate)
       this.$store.commit('m_noites', noites)
 
-      const valorNoitesTotal = Math.round(this.acomod.valorNoite * noites)
-      this.$store.commit('m_valorNoitesTotal', valorNoitesTotal)
-
-      const valorReservaTotal = valorNoitesTotal + this.acomod.limpezaFee
+      const valorReservaTotal = Math.round(this.acomod.valorNoite * noites)
       this.$store.commit('m_valorReservaTotal', valorReservaTotal)
-
-      this.$store.state.reservaAcomod.limpezaFee = this.acomod.limpezaFee
     },
     closedDatepicker () {
       this.showDatepicker = false
@@ -601,13 +588,6 @@ export default {
       this.$store.commit('m_showReservaAcomod', true)
       window.location.hash = this.$store.state.randomHashs[1]
     },
-    limpezaFeeDialog () {
-      this.$modal.show('dialog', {
-        title: 'Taxa de Limpeza',
-        text: `Taxa cobrada pelo proprietário para arcar com os custos de limpeza ${this.tipoAcomodD}.`,
-        buttons: [{ title: 'OK' }]
-      })
-    },
     backBtn () {
       window.history.back(1)
     },
@@ -638,6 +618,13 @@ export default {
     hash () { return this.$route.hash },
     host () { return this.$store.state.host },
     reservaAcomod () { return this.$store.state.reservaAcomod },
+    quartosOptions () {
+      let quartos = []
+      this.acomod.quartos.forEach(quarto => {
+        quartos.push(quarto.name)
+      })
+      return quartos
+    },
     totalHospedesArray () {
       let hospedesArray = []
       this.acomod.quartos.forEach(quarto => {
@@ -665,6 +652,8 @@ export default {
   },
   beforeRouteEnter (to, from, next) {
     next(vm => {
+      vm.$store.state.reservaAcomod.quarto = vm.acomod.quartos[0].name
+
       !vm.$store.state.isOnline ? vm.$modal.show('offline-modal') : ''
 
       if (vm.$store.state.isMobile) {
@@ -734,6 +723,16 @@ export default {
     & .rating {
       margin-left: 3px;
     }
+    & .new {
+      display: inline-flex;
+      border: 1px solid #dedede;
+      border-radius: 50px;
+      & p {
+        padding: 3px 8px;
+        font-size: 11px;
+        font-weight: 600;
+      }
+    }
   }/* __________ RATING BOX __________ */
   
 
@@ -741,7 +740,7 @@ export default {
   /* __________ ANUNCIANTE BOX __________ */
   & .anunciante-box {
     display: flex;
-    padding: 2rem 7%;
+    padding: 2rem 7% .5rem;
     align-items: center;
     & .__anunciante-img {
       cursor: pointer;
@@ -780,46 +779,37 @@ export default {
   /* __________ QUARTOS __________ */
   & .quartos-box {
     padding: 0 7%;
+    display: flex;
+    flex-flow: column;
     & .quarto {
-      border: 1px solid #dedede;
       width: 100%;
-      border-radius: 10px;
-      margin-bottom: 1.7rem;
       & .__name {
-        border-radius: 10px 10px 0 0;
-        background: #dedede;
-        color: white;
-        padding: .6rem 1rem;
-        font-size: 17px;
+        padding: 4.5rem 0 1rem 0;
+        font-size: 16px;
         font-weight: 600;
       }
-      & .infos {
-        display: flex;
-        flex-flow: column;
-        padding: .7rem 1rem;
-        & .__info {
-          padding: .4rem 0;
-        }
+      & .info {
+        padding: .3rem 0;
       }
       & .mobilias {
         display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(4.5rem, 1fr));
+        grid-template-columns: repeat(auto-fill, minmax(5.5rem, 1fr));
         grid-auto-rows: 1fr;
         grid-gap: 12px;
-        margin: 0 1rem 1rem;
+        margin-top: 1rem;
         & .mobilia {
           display: flex;
           flex-flow: column;
           align-items: center;
           justify-content: center;
           border: 1px solid #dedede;
-          border-radius: 7px;
+          border-radius: 10px;
           padding: .8rem;
           & p {
             padding-top: 10px;
             text-align: center;
             font-size: 14px;
-            font-weight: 500;
+            font-weight: 400;
             line-height: 1.1;
           }
         }
@@ -1044,16 +1034,10 @@ export default {
     /* __________ IMAGE BOX __________ */
     & .image-box {
       cursor: grab;
-      overflow: hidden;
       & .swiper-container {
-        position: relative;
         & .swiper-wrapper {
-          display: inline-flex;
-          overflow: hidden;
           & .slide {
             & .__img {
-              width: 100%;
-              height: auto;
             }
           }
         }
@@ -1123,24 +1107,13 @@ export default {
               }
             }
           }
-          & .reserva-info {
-            margin-top: .9rem;
-            & .reserva-info_item {
-              display: flex;
-              justify-content: space-between;
-              align-items: center;
-              & h3 {
-                font-size: 15px;
-              }
-            }
-            & .reserva-info_item-total {
-              display: flex;
-              justify-content: space-between;
-              border-top: 1px solid #dedede;
-              & h3 {
-                font-size: 17px;
-                font-weight: 500;
-              }
+          & .valor-reserva-total {
+            margin-top: 1.3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            & #valor {
+              font-weight: 600;
             }
           }
           & .__reserva-desktop-btn {
@@ -1207,12 +1180,10 @@ export default {
             font-weight: 600;
           }
           & .rating {
-            display: flex;
-            align-items: center;
-            & .rating-number {
-              font-size: 16px;
-              font-weight: 600;
-              padding-left: 3px;
+          }
+          & .new {
+            & p {
+              font-size: 12px;
             }
           }
         }/* __________ RATING __________ */
@@ -1250,25 +1221,13 @@ export default {
         & .quartos-box {
           padding: 0;
           & .quarto {
-            margin-bottom: 1.7rem;
             & .__name {
-              padding: .7rem 1.4rem;
-              font-size: 19px;
+              font-size: 18px;
             }
-            & .infos {
-              flex-flow: row;
-              align-items: center;
-              justify-content: space-between;
-              padding: 1.3rem 1.4rem;
-              & .__info {
-                padding: 0;
-              }
+            & .info {
             }
             & .mobilias {
-              grid-template-columns: repeat(auto-fill, minmax(5rem, 1fr));
-              margin: 0 1.4rem 1.4rem;
               & .mobilia {
-                padding: 1rem;
                 & p {
                 }
               }

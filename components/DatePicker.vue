@@ -55,16 +55,8 @@ export default {
       const noites = endDate.diff(startDate, 'day')
       this.$store.commit('m_noites', noites)
 
-      const valorNoitesTotal = Math.round(this.acomod.valorNoite * noites)
-      this.$store.commit('m_valorNoitesTotal', valorNoitesTotal)
-
-      const serviceFeeTotal = Math.round(valorNoitesTotal * this.$store.state.serviceFeeAcomod)
-      this.$store.commit('m_serviceFeeTotal', serviceFeeTotal)
-
-      const valorReservaTotal = valorNoitesTotal + this.acomod.limpezaFee + serviceFeeTotal
+      const valorReservaTotal = Math.round(this.acomod.valorNoite * noites)
       this.$store.commit('m_valorReservaTotal', valorReservaTotal)
-
-      this.$store.state.reservaAcomod.limpezaFee = this.acomod.limpezaFee
     },
     confirmBtn () {
       if (this.$store.state.reservaAcomod.periodoReserva !== null) {

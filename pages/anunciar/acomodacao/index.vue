@@ -336,16 +336,12 @@
 
       <h1 class="__form-title">Qual será o valor da estadia?</h1>
 
-      <h3 class="__form-text">Será possível ajustar o valor após a publicação do anúncio, para adequar a períodos de baixa e alta temporada. A taxa de limpeza é opcional.</h3>
+
+      <h3 class="__form-text">Será possível ajustar o valor após a publicação do anúncio, para adequar a períodos de baixa e alta temporada.</h3>
 
       <div class="item-form">
         <label>Valor por noite</label>
         <money v-model="$store.state.acomodData.valorNoite"></money>
-      </div> 
-
-      <div class="item-form">
-        <label>Taxa de limpeza</label>
-        <money v-model="$store.state.acomodData.limpezaFee"></money>
       </div> 
 
 
@@ -1645,7 +1641,7 @@ export default {
         border: 1px solid #dedede;
         width: 100%;
         transition: var(--main-transition);
-        border-radius: 10px;
+        border-radius: 12px;
         margin-bottom: 1.7rem;
         & .quarto-body {
           position: relative;
@@ -1655,31 +1651,28 @@ export default {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            background: #dedede;
-            border-radius: 10px 10px 0 0;
-            padding: .7rem 1.5rem;
+            border-bottom: 1px solid #dedede;
+            border-radius: 12px 12px 0 0;
+            padding: .8rem 1.2rem;
             & .__nome {
               width: 100%;
               cursor: text;
               border: none;
               outline: none;
-              font-size: 19px;
+              font-size: 18px;
               font-weight: 600;
-              background: transparent;
-              color: white;
             }
             & .__remove-img {
               cursor: pointer;
-              width: 1.1rem;
+              width: .9rem;
               height: auto;
-              filter: invert(100%) brightness(200%);
-              margin-left: 1.5rem;
+              margin-left: 1.2rem;
             }
           }
           & .questions {
             display: flex;
             flex-flow: column;
-            margin: .7rem 1.5rem;
+            margin: .8rem 1.2rem;
             & .question {
               margin: .5rem 0;
               & label {
@@ -1710,10 +1703,10 @@ export default {
           }
           & .mobilias {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(6rem, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(5rem, 1fr));
             grid-auto-rows: 1fr;
             grid-gap: 12px;
-            margin: .5rem 1.5rem 1.5rem;
+            margin: .4rem 1.2rem 1.2rem;
             & .mobilia {
               position: relative;
               cursor: pointer;
@@ -1722,14 +1715,14 @@ export default {
               align-items: center;
               justify-content: center;
               border: 1px solid #dedede;
-              border-radius: 7px;
+              border-radius: 10px;
               padding: 1rem;
               transition: var(--main-transition);
               & .remove-mobilia {
                 cursor: pointer;
                 position: absolute;
-                top: 7px;
-                right: 7px;
+                top: 8px;
+                right: 8px;
                 width: .7rem;
                 height: auto;
               }
@@ -1751,7 +1744,7 @@ export default {
               align-items: center;
               justify-content: center;
               border: 1px solid #dedede;
-              border-radius: 7px;
+              border-radius: 10px;
               padding: 1rem;
               transition: var(--main-transition);
               & p {
@@ -2175,18 +2168,16 @@ export default {
         & .quarto {
           & .quarto-body {
             & .heading {
-              padding: .7rem 1.5rem;
               & .__nome {
               }
               & .__remove-img {
-                margin-left: 1.5rem;
               }
             }
             & .questions {
               flex-flow: row;
               align-items: center;
               justify-content: space-between;
-              margin: 1.1rem 1.5rem;
+              margin: 1.1rem 1.4rem;
               & .question {
                 margin: 0;
                 & label {
@@ -2198,7 +2189,6 @@ export default {
               }
             }
             & .mobilias {
-              margin: .4rem 1.5rem 1.5rem;
               & .mobilia {
                 & .remove-mobilia {
                   display: none;
@@ -2239,7 +2229,7 @@ export default {
         padding: .6rem 28% 0;
       }
       & .item-form-switches {
-        padding: 1.7rem 0;
+        padding: 1.8rem 0;
         & h3 {
         }
       }

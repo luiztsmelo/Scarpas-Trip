@@ -185,12 +185,8 @@
 
 
           <div class="detalhes-reserva-valor" v-if="reservaPasseio.valorReservaTotal !== null">
-
-            <div class="detalhes-reserva-valor_item-total" style="padding-top: .8rem">
-              <h3>Valor por pessoa</h3>
-              <h3 class="__valor-total">R${{ passeio.rotas[reservaPasseio.rota - 1].valor.toLocaleString() }}</h3>
-            </div>
-
+            <h3>Valor por pessoa</h3>
+            <h3 class="__valor-total">R${{ passeio.rotas[reservaPasseio.rota - 1].valor.toLocaleString() }}</h3>
           </div>
           
 
