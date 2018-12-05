@@ -191,17 +191,11 @@ const store = () => new Vuex.Store({
       recipientID: null,
       celular: '',
       tipoAcomod: 'Casa',
-      quartos: [
-        {
-          name: 'Quarto 1',
-          acomoda: 1,
-          valor: 0,
-          mobilias: ['cama_casal']
-        }
-      ],
-      totalHospedes: 0,
-      totalBanheiros: '1',
-      totalGaragem: '1',
+      totalQuartos: 1,
+      totalSuites: 1,
+      totalBanheiros: 1,
+      totalGaragem: 1,
+      quartos: [],
       valorNoite: 0,
       comodidades: [
         { name: 'Roupas de cama', condition: false },
@@ -437,8 +431,18 @@ const store = () => new Vuex.Store({
   },
   /* ________________________________________________ GETTERS ________________________________________________ */
   getters: {
-    tipoAcomodComValorQuartos (state) {
+    tipoAcomodInteira (state) {
+      if (state.acomodData.tipoAcomod === 'Casa' || state.acomodData.tipoAcomod === 'Apartamento' || state.acomodData.tipoAcomod === 'Rancho' || state.acomodData.tipoAcomod === 'Chácara' || state.acomodData.tipoAcomod === 'Sítio' || state.acomodData.tipoAcomod === 'Fazenda') {
+        return true
+      } else return false
+    },
+    tipoAcomodPousadaSuites (state) {
       if (state.acomodData.tipoAcomod === 'Pousada' || state.acomodData.tipoAcomod === 'Suítes') {
+        return true
+      } else return false
+    },
+    tipoAcomodCampingHostel (state) {
+      if (state.acomodData.tipoAcomod === 'Camping' || state.acomodData.tipoAcomod === 'Hostel') {
         return true
       } else return false
     }
@@ -606,21 +610,23 @@ const store = () => new Vuex.Store({
     m_acomodID (state, payload) {
       state.acomodData.acomodID = payload
     },
-    m_addQuarto (state) {
-      state.acomodData.quartos.push({
-        name: `Quarto ${state.acomodData.quartos.length + 1}`,
-        acomoda: 1,
-        valor: 0,
-        mobilias: []
+    m_addQuartos (state) {
+      state.acomodData.quartos = [] /* Reset caso back to tipoAcomod */
+      const totalQuartosArray = Array.from({ length: state.acomodData.totalQuartos }, (v, k) => k + 1)
+      totalQuartosArray.forEach(n => {
+        state.acomodData.quartos.push({
+          name: `Quarto ${n}`,
+          acomoda: 1,
+          valor: 0,
+          mobilias: []
+        })
       })
-    },
-    m_removeQuarto (state, index) {
-      state.acomodData.quartos.splice(index, 1)
     },
     m_addMobilia (state, mobilia) {
       state.acomodData.quartos[state.indexQuarto].mobilias.push(mobilia.id)
     },
-    m_removeMobilia (state, index) {
+    async m_removeMobilia (state, index) {
+      await new Promise(resolve => setTimeout(resolve, 50)) /* Prevenir bug caso rodar antes do m_indexQuarto */
       state.acomodData.quartos[state.indexQuarto].mobilias.splice(index, 1)
     },
     m_indexQuarto (state, index) {

@@ -56,13 +56,13 @@
         <select v-model="$store.state.acomodData.tipoAcomod">
           <option>Casa</option>
           <option>Apartamento</option>
-          <option>Suítes</option>
           <option>Rancho</option>
           <option>Chácara</option>
-          <option>Pousada</option>
-          <option>Camping</option>
           <option>Sítio</option>
           <option>Fazenda</option>
+          <option>Pousada</option>
+          <option>Suítes</option>
+          <option>Camping</option>
           <option>Hostel</option>
         </select>
       </div>
@@ -80,24 +80,70 @@
 
 
 
-    <!-- ________________________________________ 2 - QUARTOS ________________________________________ -->
+
+    <!-- ________________________________________ 2 - CARACTERÍSTICAS ________________________________________ -->
     <form class="cadastro-acomodacao" v-if="$store.state.cadastroAcomod2">
+
+      <h1 class="__form-title">Quais são as instalações {{ tipoAcomodDd }}?</h1>
+
+      <div class="item-form">
+        <label>Nº de Quartos</label>
+        <select v-model="$store.state.acomodData.totalQuartos">
+          <option v-for="n in 10" :key="n">{{ n }}</option>
+        </select>
+      </div>
+
+      <div class="item-form">
+        <label>Quantos são Suítes</label>
+        <select v-model="$store.state.acomodData.totalSuites">
+          <option v-for="n in 10" :key="n">{{ n }}</option>
+        </select>
+      </div>
+
+      <div class="item-form">
+        <label>Nº de Banheiros</label>
+        <select v-model="$store.state.acomodData.totalBanheiros">
+          <option v-for="n in 10" :key="n">{{ n }}</option>
+        </select>
+      </div>
+
+      <div class="item-form">
+        <label>Vagas na Garagem</label>
+        <select v-model="$store.state.acomodData.totalGaragem">
+          <option :key="0">0</option>
+          <option v-for="n in 10" :key="n">{{ n }}</option>
+        </select>
+      </div>
+
+
+      <div class="back-next"> 
+        <div class="back-next-body">
+          <button type="button" class="__back" @click="backBtn2">Voltar</button>
+          <button type="button" class="__next" :style="form2ok" @click="nextBtn2">Próximo</button>
+        </div>
+      </div> 
+    
+    </form><!-- ________________________________________ 2 - CARACTERÍSTICAS ________________________________________ -->
+
+
+
+
+
+
+    <!-- ________________________________________ 3 - QUARTOS ________________________________________ -->
+    <form class="cadastro-acomodacao" v-if="$store.state.cadastroAcomod3">
 
       <h1 class="__form-title">Configuração dos quartos</h1>
 
 
       <div class="quartos">
 
-        <transition-group name="quartos-animation" tag="div" style="width: 100%">
+
           <div class="quarto" v-for="(quarto, index) in $store.state.acomodData.quartos" :key="index" @click="$store.commit('m_indexQuarto', index)">
             <div class="quarto-body">
 
-              
-              <div class="heading">
-                <input class="__nome" type="text" v-model="quarto.name">
-                <img class="__remove-img" src="../../../assets/img/close-mobile.svg" @click="$store.commit('m_removeQuarto', index)">
-              </div>
-              
+
+              <input class="__name" type="text" v-model="quarto.name">
 
 
               <div class="questions">
@@ -109,7 +155,7 @@
                   </select>
                 </div>
 
-                <div class="question" v-if="$store.getters.tipoAcomodComValorQuartos">
+                <div class="question" v-if="$store.getters.tipoAcomodPousadaSuites">
                   <label>Valor da diária:</label>
                   <money 
                     v-model="quarto.valor"
@@ -138,47 +184,8 @@
 
             </div>
           </div>
-        </transition-group>
-
-
-        <button class="add-quarto-btn" type="button" @click="$store.commit('m_addQuarto')">Adicionar quarto</button>
-
 
       </div>
-
-
-      <div class="back-next"> 
-        <div class="back-next-body">
-          <button type="button" class="__back" @click="backBtn2">Voltar</button>
-          <button type="button" class="__next" :style="form2ok" @click="nextBtn2">Próximo</button>
-        </div>
-      </div>
-
-    </form><!-- ________________________________________ 2 - QUARTOS ________________________________________ -->
-
-
-
-
-
-    <!-- ________________________________________ 3 - CARACTERÍSTICAS ________________________________________ -->
-    <form class="cadastro-acomodacao" v-if="$store.state.cadastroAcomod3">
-
-      <h1 class="__form-title">Outras instalações {{ tipoAcomodDd }}</h1>
-
-      <div class="item-form">
-        <label>Nº de Banheiros</label>
-        <select v-model="$store.state.acomodData.totalBanheiros">
-          <option v-for="n in 10" :key="n">{{ n }}</option>
-        </select>
-      </div> 
-
-      <div class="item-form">
-        <label>Vagas na Garagem</label>
-        <select v-model="$store.state.acomodData.totalGaragem">
-          <option :key="0">0</option>
-          <option v-for="n in 10" :key="n">{{ n }}</option>
-        </select>
-      </div> 
 
 
       <div class="back-next"> 
@@ -186,9 +193,12 @@
           <button type="button" class="__back" @click="backBtn3">Voltar</button>
           <button type="button" class="__next" :style="form3ok" @click="nextBtn3">Próximo</button>
         </div>
-      </div> 
-    
-    </form><!-- ________________________________________ 3 - CARACTERÍSTICAS ________________________________________ -->
+      </div>
+
+    </form><!-- ________________________________________ 3 - QUARTOS ________________________________________ -->
+
+
+
 
 
 
@@ -989,7 +999,7 @@ export default {
     },
     nextBtn2 () {
       if (1<2) {
-        this.$store.commit('m_cadastroAcomod2', false), this.$store.commit('m_cadastroAcomod3', true), this.$store.commit('m_acomodProgressBar', (100/12)*3), this.scrollTop(), window.location.hash = `${this.randomHashs[3]}`
+        this.$store.commit('m_cadastroAcomod2', false), this.$store.commit('m_cadastroAcomod3', true), this.$store.commit('m_acomodProgressBar', (100/12)*3), this.scrollTop(), window.location.hash = `${this.randomHashs[3]}`, this.$store.commit('m_addQuartos')
       }
     },
     nextBtn3 () {
@@ -1647,27 +1657,16 @@ export default {
           position: relative;
           display: flex;
           flex-flow: column;
-          & .heading {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
+          & .__name {
+            padding: .8rem 1.2rem;
+            border: none;
             border-bottom: 1px solid #dedede;
             border-radius: 12px 12px 0 0;
-            padding: .8rem 1.2rem;
-            & .__nome {
-              width: 100%;
-              cursor: text;
-              border: none;
-              outline: none;
-              font-size: 18px;
-              font-weight: 600;
-            }
-            & .__remove-img {
-              cursor: pointer;
-              width: .9rem;
-              height: auto;
-              margin-left: 1.2rem;
-            }
+            width: 100%;
+            cursor: text;
+            outline: none;
+            font-size: 17px;
+            font-weight: 600;
           }
           & .questions {
             display: flex;
@@ -1771,15 +1770,6 @@ export default {
             grid-column: 1 / 1;
           }
         }
-      }
-      & .add-quarto-btn {
-        background: white;
-        font-size: 18px;
-        font-weight: 600;
-        color: var(--colorAcomod);
-      }
-      & .add-quarto-btn:hover {
-        text-decoration: underline;
       }
     }
     & .comodidades-box {
@@ -2167,11 +2157,7 @@ export default {
         margin: 1.6rem calc(28% - 2%) 0;
         & .quarto {
           & .quarto-body {
-            & .heading {
-              & .__nome {
-              }
-              & .__remove-img {
-              }
+            & .__name {
             }
             & .questions {
               flex-flow: row;
@@ -2217,12 +2203,6 @@ export default {
               }
             }
           }
-        }
-        & .add-quarto-btn {
-          font-size: 17px;
-        }
-        & .add-quarto-btn:hover {
-          text-decoration: underline;
         }
       }
       & .comodidades-box {
@@ -2347,18 +2327,6 @@ export default {
   border-bottom: 1px solid #FF0134 !important;
 }
 
-/* Quartos transitions */
-.quartos-animation-enter {
-  opacity: 0;
-  transform: translateY(15px);
-}
-.quartos-animation-leave-to {
-  opacity: 0;
-}
-.quartos-animation-leave-active {
-  opacity: 0;
-  transform: scale(.94);
-}
 
 /* Mobílias transitions */
 .mobilias-animation-enter {
