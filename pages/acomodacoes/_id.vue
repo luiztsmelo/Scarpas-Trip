@@ -149,7 +149,7 @@
 
 
         <div class="comodidades-box-mobile" @click="showComods = true, hashComods()">
-          <img class="__img" v-for="(comodidade, index) in acomod.comodidades" :key="comodidade.name" :src="comodidadeImgSrc(comodidade)">
+          <img class="__img" v-for="(comodidade, index) in comodidadesFilteredByCondition" :key="comodidade.name" :src="comodidadeImgSrc(comodidade)">
         </div>
 
 
@@ -617,6 +617,9 @@ export default {
         quartos.push(quarto.name)
       })
       return quartos
+    },
+    comodidadesFilteredByCondition () {
+      return this.acomod.comodidades.filter(comodidade => comodidade.condition === true)
     },
     totalHospedesArray () {
       let hospedesArray = []
