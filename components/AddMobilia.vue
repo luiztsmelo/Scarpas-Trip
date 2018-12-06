@@ -2,8 +2,8 @@
   <modal
     name="add-mobilia-modal"
     class="add-mobilia-modal"
-    :width="$store.state.isMobile === true ? '100%' : '32%'"
-    :height="$store.state.isMobile === true ? '100%' : '90%'">
+    :width="$store.state.isMobile ? '100%' : '32%'"
+    :height="$store.state.isMobile ? '100%' : '90%'">
 
 
     <div class="add-mobilia-body">
@@ -62,7 +62,6 @@ export default {
 
 .add-mobilia-modal {
   z-index: 10000;
-  
   & .add-mobilia-body {
     position: relative;
     display: flex;

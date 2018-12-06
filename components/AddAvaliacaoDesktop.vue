@@ -2,8 +2,8 @@
   <modal
     name="add-avaliacao-desktop"
     class="add-avaliacao-desktop"
-    width="45%"
-    height="94%">
+    :width="$store.state.isMobile ? '100%' : '45%'"
+    :height="$store.state.isMobile ? '100%' : '94%'">
 
 
     <div class="body">
@@ -33,8 +33,8 @@
             :show-rating="false"
             active-color="#161616"
             inactive-color="#dedede"
-            :star-size="24"
-            :padding="5">
+            :star-size="$store.state.isMobile ? 28 : 24"
+            :padding="$store.state.isMobile ? 6 : 5">
           </star-rating>
         </div>
       </div><!-- ____________________ RATINGS ACOMOD ____________________ -->
@@ -56,8 +56,8 @@
             :show-rating="false"
             active-color="#161616"
             inactive-color="#dedede"
-            :star-size="24"
-            :padding="5">
+            :star-size="$store.state.isMobile ? 28 : 24"
+            :padding="$store.state.isMobile ? 6 : 5">
           </star-rating>
         </div>
       </div><!-- ____________________ RATINGS PASSEIO ____________________ -->
@@ -343,7 +343,7 @@ export default {
     title () {
       if (this.$route.name === 'acomodacoes-id') {
         if (this.$store.state.avaliacaoAcomodEtapa1) {
-          return `Como você avalia sua estadia ${this.tipoAcomodN} de ${this.$store.state.host.firstName}?`
+          return `Como você avalia sua estadia aqui?`
         } else {
           return `Deixe seu comentário`
         }
@@ -387,33 +387,35 @@ export default {
 <style scoped>
 
 .add-avaliacao-desktop {
+  z-index: 10000;
   & .body {
     display: flex;
     flex-flow: column;
     justify-content: space-between;
     height: 100%;
-    padding: 2.6rem 3rem;
+    padding: 4rem 7%;
+    overflow: auto;
     & .title {
       font-size: 33px;
       line-height: 1.3;
+      padding-bottom: 2rem;
     }
     & .ratings-input {
       & .category {
         display: flex;
-        align-items: center;
-        justify-content: space-between;
-        margin: 4.2% 0;
+        flex-flow: column;
+        margin: 2.5rem 0;
         & .description {
           display: flex;
           flex-flow: column;
-          margin-right: 1rem;
+          margin: 0 1rem .5rem 0;
           & .__name {
-            font-size: 17px;
+            font-size: 18px;
             font-weight: 600;
             padding-bottom: 4px;
           }
           & .__desc {
-            font-size: 14px;
+            font-size: 16px;
             font-weight: 400;
           }
         }
@@ -429,7 +431,7 @@ export default {
         font-weight: 600;
         background: white;
         color: var(--color01);
-        padding: 1.8rem 0;
+        padding: 1rem 0 1.8rem;
         border: none;
         outline: none;
       }
@@ -448,6 +450,8 @@ export default {
       height: 100%;
     }
     & button {
+      position: absolute;
+      bottom: 1rem;
       align-self: center;
       padding: 0 2.3rem;
       background: #dedede;
@@ -455,11 +459,62 @@ export default {
       font-size: 16px;
       font-weight: 600;
       border-radius: 200px;
-      height: 2.9rem;
+      height: 3.2rem;
       transition: var(--main-transition);
     }
   }
 }
+
+@media (max-width: 425px) {
+  .v--modal {
+    border-radius: 0 !important;
+  }
+}
+
+@media (min-width: 1024px) {
+  .add-avaliacao-desktop {
+    & .body {
+      padding: 2.6rem 3rem;
+      & .title {
+        padding-bottom: 0;
+      }
+      & .ratings-input {
+        & .category {
+          flex-flow: row;
+          align-items: center;
+          justify-content: space-between;
+          margin: 4.2% 0;
+          & .description {
+            margin: 0 1rem 0 0;
+            & .__name {
+              font-size: 17px;
+            }
+            & .__desc {
+              font-size: 14px;
+            }
+          }
+          & rating {
+          }
+        }
+      }
+      & .comment-input {
+        & input {
+          padding: 1.8rem 0;
+        }
+        & textarea {
+        }
+      }
+      & .after {
+      }
+      & button {
+        position: initial;
+        bottom: initial;
+        height: 2.9rem;
+      }
+    }
+  }
+}
+
 
 /* CHECKMARK */
 .checkmark__circle {
