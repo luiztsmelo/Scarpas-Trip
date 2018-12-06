@@ -383,9 +383,9 @@ export default {
     & .home-body {
       margin-bottom: 0;
       & .category-container {
-        padding-bottom: 4rem;
+        padding-bottom: 4.5rem;
         & .title-row {
-          padding: 0 7% 1.2rem 7%;
+          padding: 0 7% 1.5rem 7%;
           & .__title {
             font-size: 29px;
             font-weight: 700;

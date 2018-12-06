@@ -198,19 +198,25 @@ const store = () => new Vuex.Store({
       quartos: [],
       valorNoite: 0,
       comodidades: [
-        { name: 'Roupas de cama', condition: false },
-        { name: 'Piscina', condition: false },
-        { name: 'Churrasqueira', condition: false },
-        { name: 'Wi-Fi gratuito', condition: false },
-        { name: 'Ar condicionado', condition: false },
-        { name: 'Barracas', condition: false },
-        { name: 'Pier', condition: false }
+        { name: 'Roupas de cama', id: 'roupas_de_cama', condition: false },
+        { name: 'Café da manhã incluso', id: 'cafe_da_manha', condition: false },
+        { name: 'Piscina', id: 'piscina', condition: false },
+        { name: 'Jacuzzi', id: 'jacuzzi', condition: false },
+        { name: 'Churrasqueira', id: 'churrasqueira', condition: false },
+        { name: 'Cozinha pronta para uso', id: 'cozinha', condition: false },
+        { name: 'Wi-Fi gratuito', id: 'wifi', condition: false },
+        { name: 'Televisão', id: 'tv', condition: false },
+        { name: 'Ar condicionado', id: 'ar_cond', condition: false },
+        { name: 'Barracas', id: 'barracas', condition: false },
+        { name: 'Pier', id: 'pier', condition: false }
       ],
       positionLAT: -20.6141320,
       positionLNG: -46.0478760,
       address: null,
-      checkInTime: '14:00',
-      checkOutTime: 'A qualquer hora',
+      checkInApos: '07h',
+      checkInAte: '21h',
+      checkOutApos: 'A qualquer hora',
+      checkOutAte: '18h',
       regras: [
         { name: 'Festas são permitidas?', condition: false },
         { name: 'Animais de estimação são permitidos?', condition: false },
@@ -432,17 +438,17 @@ const store = () => new Vuex.Store({
   /* ________________________________________________ GETTERS ________________________________________________ */
   getters: {
     tipoAcomodInteira (state) {
-      if (state.acomodData.tipoAcomod === 'Casa' || state.acomodData.tipoAcomod === 'Apartamento' || state.acomodData.tipoAcomod === 'Rancho' || state.acomodData.tipoAcomod === 'Chácara' || state.acomodData.tipoAcomod === 'Sítio' || state.acomodData.tipoAcomod === 'Fazenda') {
+      if (state.acomodData.tipoAcomod === 'Casa' || state.acomod.tipoAcomod === 'Casa' || state.acomodData.tipoAcomod === 'Apartamento' || state.acomod.tipoAcomod === 'Apartamento' || state.acomodData.tipoAcomod === 'Rancho' || state.acomod.tipoAcomod === 'Rancho' || state.acomodData.tipoAcomod === 'Chácara' || state.acomod.tipoAcomod === 'Chácara' || state.acomodData.tipoAcomod === 'Sítio' || state.acomod.tipoAcomod === 'Sítio' || state.acomodData.tipoAcomod === 'Fazenda' || state.acomod.tipoAcomod === 'Fazenda') {
         return true
       } else return false
     },
     tipoAcomodPousadaSuites (state) {
-      if (state.acomodData.tipoAcomod === 'Pousada' || state.acomodData.tipoAcomod === 'Suítes') {
+      if (state.acomodData.tipoAcomod === 'Pousada' || state.acomod.tipoAcomod === 'Pousada' || state.acomodData.tipoAcomod === 'Suítes' || state.acomod.tipoAcomod === 'Suítes') {
         return true
       } else return false
     },
     tipoAcomodCampingHostel (state) {
-      if (state.acomodData.tipoAcomod === 'Camping' || state.acomodData.tipoAcomod === 'Hostel') {
+      if (state.acomodData.tipoAcomod === 'Camping' || state.acomod.tipoAcomod === 'Camping' || state.acomodData.tipoAcomod === 'Hostel' || state.acomod.tipoAcomod === 'Hostel') {
         return true
       } else return false
     }
@@ -615,7 +621,7 @@ const store = () => new Vuex.Store({
       const totalQuartosArray = Array.from({ length: state.acomodData.totalQuartos }, (v, k) => k + 1)
       totalQuartosArray.forEach(n => {
         state.acomodData.quartos.push({
-          name: `Quarto ${n}`,
+          name: `${state.acomodData.tipoAcomod === 'Suítes' ? 'Suíte' : 'Quarto'} ${n}`,
           acomoda: 1,
           valor: 0,
           mobilias: []
@@ -998,33 +1004,28 @@ const store = () => new Vuex.Store({
         recipientID: null,
         celular: '',
         tipoAcomod: 'Casa',
-        quartos: [
-          {
-            name: 'Quarto 1',
-            acomoda: 1,
-            valor: 0,
-            mobilias: ['cama_casal']
-          }
-        ],
-        totalHospedes: 0,
-        totalBanheiros: '1',
-        totalGaragem: '1',
+        totalQuartos: 1,
+        totalSuites: 1,
+        totalBanheiros: 1,
+        totalGaragem: 1,
+        quartos: [],
         valorNoite: 0,
         comodidades: [
-          { name: 'Roupas de cama', condition: false },
-          { name: 'Piscina', condition: false },
-          { name: 'Churrasqueira', condition: false },
-          { name: 'Wi-Fi gratuito', condition: false },
-          { name: 'Ar condicionado', condition: false },
-          { name: 'Caixa de Som', condition: false },
-          { name: 'Barracas', condition: false },
-          { name: 'Pier', condition: false }
+          { name: 'Roupas de cama', id: 'roupas_de_cama', condition: false },
+          { name: 'Piscina', id: 'piscina', condition: false },
+          { name: 'Churrasqueira', id: 'churrasqueira', condition: false },
+          { name: 'Wi-Fi gratuito', id: 'wifi', condition: false },
+          { name: 'Ar condicionado', id: 'ar_cond', condition: false },
+          { name: 'Barracas', id: 'barracas', condition: false },
+          { name: 'Pier', id: 'pier', condition: false }
         ],
         positionLAT: -20.6141320,
         positionLNG: -46.0478760,
         address: null,
-        checkInTime: '14:00',
-        checkOutTime: 'A qualquer hora',
+        checkInApos: '07h',
+        checkInAte: '21h',
+        checkOutApos: 'A qualquer hora',
+        checkOutAte: '18h',
         regras: [
           { name: 'Festas são permitidas?', condition: false },
           { name: 'Animais de estimação são permitidos?', condition: false },

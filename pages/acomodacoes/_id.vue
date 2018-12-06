@@ -115,7 +115,7 @@
 
 
         <!-- ______________________________ QUARTOS ______________________________ -->
-        <div class="quartos-box">
+        <div class="quartos-box" v-if="!$store.getters.tipoAcomodCampingHostel">
 
           <div class="quarto" v-for="(quarto, index) in acomod.quartos" :key="index">
 
@@ -328,7 +328,7 @@
           <h1 class="__valor">R${{ acomod.valorNoite.toLocaleString() }}<span class="__valor-noite"> por noite</span></h1>
 
 
-          <div class="item-form">
+          <div class="item-form" v-if="$store.getters.tipoAcomodPousadaSuites">
             <select v-model="$store.state.reservaAcomod.quarto">
               <option :value="quarto" v-for="quarto in quartosOptions">{{ quarto }}</option>
             </select>
@@ -489,6 +489,7 @@ export default {
            : mobilia === 'cama_casal' ? require('@/assets/img/cama_casal.svg')
            : mobilia === 'cama_queen' ? require('@/assets/img/cama_casal.svg')
            : mobilia === 'cama_king' ? require('@/assets/img/cama_casal.svg')
+           : mobilia === 'bicama' ? require('@/assets/img/bicama.svg')
            : mobilia === 'sofa' ? require('@/assets/img/sofa.svg')
            : ''
     },
@@ -496,21 +497,13 @@ export default {
       return mobilia === 'cama_solteiro' ? 'Cama solteiro'
            : mobilia === 'cama_casal' ? 'Cama casal'
            : mobilia === 'cama_queen' ? 'Cama queen'
+           : mobilia === 'bicama' ? 'Bicama'
            : mobilia === 'cama_king' ? 'Cama king'
-           : mobilia === 'sofa' ? 'Sofá'
            : ''
     },
     /* ******************** COMODIDADES ******************** */
     comodidadeImgSrc (comodidade) {
-      return comodidade.name === 'Roupas de cama' ? require('@/assets/img/hasRoupasCama.svg')
-           : comodidade.name === 'Piscina' ? require('@/assets/img/hasPiscina.svg')
-           : comodidade.name === 'Churrasqueira' ? require('@/assets/img/hasChurrasqueira.svg')
-           : comodidade.name === 'Wi-Fi gratuito' ? require('@/assets/img/hasWifi.svg')
-           : comodidade.name === 'Ar condicionado' ? require('@/assets/img/hasArCond.svg')
-           : comodidade.name === 'Barracas' ? require('@/assets/img/hasBarracas.svg')
-           : comodidade.name === 'Pier' ? require('@/assets/img/hasPier.svg')
-           : ''
-      '../../assets/img/hasRoupasCama.svg'
+      return require(`@/assets/img/${comodidade.id}.svg`)
     },
     imageH (image) {
       return supportsWebP ? image.HW : image.HJ

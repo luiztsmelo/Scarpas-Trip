@@ -41,7 +41,9 @@ export default {
         { nome: 'Cama casal', imgPath: require('@/assets/img/cama_casal.svg'), id: 'cama_casal'},
         { nome: 'Cama queen', imgPath: require('@/assets/img/cama_casal.svg'), id: 'cama_queen'},
         { nome: 'Cama king', imgPath: require('@/assets/img/cama_casal.svg'), id: 'cama_king'},
-        { nome: 'Sofá', imgPath: require('@/assets/img/sofa.svg'), id: 'sofa'},
+        { nome: 'Bicama', imgPath: require('@/assets/img/bicama.svg'), id: 'bicama'},
+        { nome: 'Sofá', imgPath: require('@/assets/img/sofa.svg'), id: 'sofa'}
+        
       ]
     }
   },

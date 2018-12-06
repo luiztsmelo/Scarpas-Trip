@@ -84,23 +84,23 @@
     <!-- ________________________________________ 2 - CARACTERÍSTICAS ________________________________________ -->
     <form class="cadastro-acomodacao" v-if="$store.state.cadastroAcomod2">
 
-      <h1 class="__form-title">Quais são as instalações {{ tipoAcomodDd }}?</h1>
+      <h1 class="__form-title">Quais são as instalações?</h1>
 
-      <div class="item-form">
+      <div class="item-form" v-if="$store.state.acomodData.tipoAcomod !== 'Suítes' && !$store.getters.tipoAcomodCampingHostel">
         <label>Nº de Quartos</label>
         <select v-model="$store.state.acomodData.totalQuartos">
           <option v-for="n in 10" :key="n">{{ n }}</option>
         </select>
       </div>
 
-      <div class="item-form">
-        <label>Quantos são Suítes</label>
+      <div class="item-form" v-if="$store.state.acomodData.tipoAcomod !== 'Pousada' && !$store.getters.tipoAcomodCampingHostel">
+        <label>{{ $store.state.acomodData.tipoAcomod === 'Suítes' ? 'Nº de' : 'Quantos são' }} Suítes</label>
         <select v-model="$store.state.acomodData.totalSuites">
           <option v-for="n in 10" :key="n">{{ n }}</option>
         </select>
       </div>
 
-      <div class="item-form">
+      <div class="item-form" v-if="!$store.getters.tipoAcomodPousadaSuites">
         <label>Nº de Banheiros</label>
         <select v-model="$store.state.acomodData.totalBanheiros">
           <option v-for="n in 10" :key="n">{{ n }}</option>
@@ -133,7 +133,7 @@
     <!-- ________________________________________ 3 - QUARTOS ________________________________________ -->
     <form class="cadastro-acomodacao" v-if="$store.state.cadastroAcomod3">
 
-      <h1 class="__form-title">Configuração dos quartos</h1>
+      <h1 class="__form-title">Configuração {{ $store.state.acomodData.tipoAcomod === 'Suítes' ? 'das Suítes' : 'dos quartos' }}</h1>
 
 
       <div class="quartos">
@@ -213,7 +213,11 @@
       <div class="comodidades-box">
 
         <div class="item-form-switches" v-for="(comodidade, index) in $store.state.acomodData.comodidades" :key="comodidade.name" @click="comodidade.condition = !comodidade.condition">
-          <h3>{{ comodidade.name }}</h3>
+          <div class="desc">
+            <img class="__img" :src="comodidadeImgSrc(comodidade)">
+            <h3 class="__name">{{ comodidade.name }}</h3>
+          </div>
+          
           <div class="switch" :class="[ comodidade.condition === true ? 'switch-on' : '' ]">
             <div class="slider"></div>
           </div>
@@ -238,7 +242,7 @@
     <!-- ________________________________________ 5 - LOCAL ________________________________________ -->
     <form class="cadastro-acomodacao" v-if="$store.state.cadastroAcomod5">
 
-      <h1 class="__form-title">Qual a localização?</h1>
+      <h1 class="__form-title">Qual é a localização?</h1>
 
       <div class="item-form">
         <label>Local</label>
@@ -272,7 +276,7 @@
     <!-- ________________________________________ 6 - IMAGENS ________________________________________ -->
     <form class="cadastro-acomodacao" v-if="$store.state.cadastroAcomod6">
 
-      <h1 class="__form-title">Adicione imagens {{ tipoAcomodDd }}</h1>
+      <h1 class="__form-title">Adicione imagens {{ $store.state.acomodData.tipoAcomod === 'Suítes' ? '' : tipoAcomodDd }}</h1>
 
 
       <div class="modal-croppa" v-show="showCroppaModal" @click="showCroppaModal=false">
@@ -344,7 +348,7 @@
     <!-- ________________________________________ 7 - VALOR DA ESTADIA ________________________________________ -->
     <form class="cadastro-acomodacao" v-if="$store.state.cadastroAcomod7">
 
-      <h1 class="__form-title">Qual será o valor da estadia?</h1>
+      <h1 class="__form-title">Qual é o valor da estadia?</h1>
 
 
       <h3 class="__form-text">Será possível ajustar o valor após a publicação do anúncio, para adequar a períodos de baixa e alta temporada.</h3>
@@ -375,43 +379,47 @@
 
       <div class="regras-box">
 
+        
+        <h3 class="__form-subtitle" style="margin:1.3rem 0; padding:0">Horários de check-in e check-out</h3>
+
 
         <!-- Horário Check-in -->
         <div style="display:flex">
           <div class="item-form" style="padding:0;margin:1rem .5rem 1.5rem 0;flex:50%">
             <label>Check-in após:</label>
-            <select v-model="$store.state.acomodData.checkInTime">
-              <option>A qualquer hora</option>
-              <option>8:00</option>
-              <option>10:00</option>
-              <option>12:00</option>
-              <option>14:00</option>
-              <option>16:00</option>
-              <option>18:00</option>
-              <option>20:00</option>
-              <option>22:00</option>
+            <select v-model="$store.state.acomodData.checkInApos">
+              <option v-for="horario in horarios" :key="horario">{{ horario }}</option>
             </select>
           </div> 
           <div class="item-form" style="padding:0;margin:1rem 0 1.5rem .5rem;flex:50%">
-            <label>Check-out até:</label>
-            <select v-model="$store.state.acomodData.checkOutTime">
-              <option>A qualquer hora</option>
-              <option>8:00</option>
-              <option>10:00</option>
-              <option>12:00</option>
-              <option>14:00</option>
-              <option>16:00</option>
-              <option>18:00</option>
-              <option>20:00</option>
-              <option>22:00</option>
+            <label>Check-in até:</label>
+            <select v-model="$store.state.acomodData.checkInAte">
+              <option v-for="horario in horarios" :key="horario">{{ horario }}</option>
             </select>
           </div> 
         </div>
         <!-- Horário Check-in -->
 
+        <!-- Horário Check-out -->
+        <div style="display:flex">
+          <div class="item-form" style="padding:0;margin:1rem .5rem 1.5rem 0;flex:50%">
+            <label>Check-out após:</label>
+            <select v-model="$store.state.acomodData.checkOutApos">
+              <option v-for="horario in horarios" :key="horario">{{ horario }}</option>
+            </select>
+          </div> 
+          <div class="item-form" style="padding:0;margin:1rem 0 1.5rem .5rem;flex:50%">
+            <label>Check-out até:</label>
+            <select v-model="$store.state.acomodData.checkOutAte">
+              <option v-for="horario in horarios" :key="horario">{{ horario }}</option>
+            </select>
+          </div> 
+        </div>
+        <!-- Horário Check-out -->
+
 
         <!-- Regras -->
-        <h3 class="__form-subtitle" style="margin-top:1.2rem; padding:0">Regras</h3>
+        <h3 class="__form-subtitle" style="margin-top:1.3rem; padding:0">Regras</h3>
 
         <div class="item-form-switches" v-for="(regra, index) in $store.state.acomodData.regras" :key="index" @click="regra.condition = !regra.condition">
           <h3>{{ regra.name }}</h3>
@@ -422,7 +430,7 @@
 
 
         <!-- Regras adicionais -->
-        <h3 class="__form-subtitle" style="margin-top:2.5rem; padding:0">Regras adicionais</h3>
+        <h3 class="__form-subtitle" style="margin-top:2.6rem; padding:0">Regras adicionais</h3>
 
         <div class="new-regras" v-for="(regra, index) in $store.state.acomodData.regrasAdicionais" :key="index">
           <h3 class="__regra-text">{{ regra }}</h3>
@@ -823,7 +831,27 @@ export default {
       streetError: false,
       streetNumberError: false,
       cityError: false,
-      stateError: false
+      stateError: false,
+      horarios: [
+        'A qualquer hora',
+        '07h',
+        '08h',
+        '09h',
+        '10h',
+        '11h',
+        '12h',
+        '13h',
+        '14h',
+        '15h',
+        '16h',
+        '17h',
+        '18h',
+        '19h',
+        '20h',
+        '21h',
+        '22h',
+        '23h'
+      ]
     }
   },
   methods: {
@@ -860,6 +888,7 @@ export default {
            : mobilia === 'cama_casal' ? require('@/assets/img/cama_casal.svg')
            : mobilia === 'cama_queen' ? require('@/assets/img/cama_casal.svg')
            : mobilia === 'cama_king' ? require('@/assets/img/cama_casal.svg')
+           : mobilia === 'bicama' ? require('@/assets/img/bicama.svg')
            : mobilia === 'sofa' ? require('@/assets/img/sofa.svg')
            : ''
     },
@@ -867,9 +896,13 @@ export default {
       return mobilia === 'cama_solteiro' ? 'Cama solteiro'
            : mobilia === 'cama_casal' ? 'Cama casal'
            : mobilia === 'cama_queen' ? 'Cama queen'
+           : mobilia === 'bicama' ? 'Bicama'
            : mobilia === 'cama_king' ? 'Cama king'
-           : mobilia === 'sofa' ? 'Sofá'
            : ''
+    },
+    /* ******************** COMODIDADES ******************** */
+    comodidadeImgSrc (comodidade) {
+      return require(`@/assets/img/${comodidade.id}.svg`)
     },
     /* ******************** GOOGLE MAPS ******************** */
     setPlace (place) {
@@ -961,7 +994,14 @@ export default {
       this.$store.commit('m_cadastroAcomod3', false), this.$store.commit('m_cadastroAcomod2', true), window.history.back(1)
     },
     backBtn4 () {
-      this.$store.commit('m_cadastroAcomod4', false), this.$store.commit('m_cadastroAcomod3', true), window.history.back(1)
+      this.$store.commit('m_cadastroAcomod4', false)
+      if (this.$store.getters.tipoAcomodCampingHostel) {
+        this.$store.commit('m_cadastroAcomod2', true)
+        window.history.back(2)
+      } else {
+        this.$store.commit('m_cadastroAcomod3', true)
+        window.history.back(1)
+      }
     },
     backBtn5 () {
       this.$store.commit('m_cadastroAcomod5', false), this.$store.commit('m_cadastroAcomod4', true), window.history.back(1)
@@ -999,7 +1039,18 @@ export default {
     },
     nextBtn2 () {
       if (1<2) {
-        this.$store.commit('m_cadastroAcomod2', false), this.$store.commit('m_cadastroAcomod3', true), this.$store.commit('m_acomodProgressBar', (100/12)*3), this.scrollTop(), window.location.hash = `${this.randomHashs[3]}`, this.$store.commit('m_addQuartos')
+        this.$store.commit('m_cadastroAcomod2', false)
+        if (this.$store.getters.tipoAcomodCampingHostel) {
+          this.$store.commit('m_cadastroAcomod4', true)
+          window.location.hash = `${this.randomHashs[4]}`
+          this.$store.commit('m_acomodProgressBar', (100/12)*4)
+        } else {
+          this.$store.commit('m_cadastroAcomod3', true)
+          window.location.hash = `${this.randomHashs[3]}`
+          this.$store.commit('m_acomodProgressBar', (100/12)*3)
+        }        
+        this.scrollTop()
+        this.$store.commit('m_addQuartos')
       }
     },
     nextBtn3 () {
@@ -1401,7 +1452,11 @@ export default {
       } 
       if (value === `#${this.randomHashs[2]}`) {
         this.$store.commit('m_cadastroAcomod2', true)
-        this.$store.commit('m_cadastroAcomod3', false)
+        if (this.$store.getters.tipoAcomodCampingHostel) {
+          this.$store.commit('m_cadastroAcomod4', false)
+        } else {
+          this.$store.commit('m_cadastroAcomod3', false)
+        }
       } 
       if (value === `#${this.randomHashs[3]}`) {
         this.$store.commit('m_cadastroAcomod3', true)
@@ -1781,11 +1836,21 @@ export default {
       justify-content: space-between;
       align-items: center;
       border-bottom: 1px solid #dedede;
-      padding: 2rem 0;
+      padding: 2.2rem 0;
       transition: .2s;
-      & h3 {
-        user-select: none;
-        font-size: 17px;
+      & .desc {
+        display: flex;
+        align-items: center;
+        margin-right: 1rem;
+        & .__img {
+          width: 1.8rem;
+          height: auto;
+          margin-right: 1rem;
+        }
+        & .__name {
+          user-select: none;
+          font-size: 17px;
+        }
       }
       & .switch {
         display: flex;
@@ -1899,12 +1964,12 @@ export default {
         & h1 {
           font-weight: 300;
         }
-        & canvas {
+        & .croppa-container {
           cursor: grab;
           margin: 2.5rem 0 1rem 0;
           border: 2px dashed white;
         }
-        & canvas:active {
+        & .croppa-container:active {
           cursor: grabbing;
         }
       }
@@ -2209,8 +2274,12 @@ export default {
         padding: .6rem 28% 0;
       }
       & .item-form-switches {
-        padding: 1.8rem 0;
-        & h3 {
+        padding: 2rem 0;
+        & .desc {
+          & .__img {
+          }
+          & .__name {
+          }
         }
       }
       & .item-form-switches:hover {
@@ -2226,8 +2295,7 @@ export default {
         & .modal-croppa-body {
           & h1 {
           }
-          & canvas {
-            border: 3px dashed white;
+          & .croppa-container {
           }
         }
       }
