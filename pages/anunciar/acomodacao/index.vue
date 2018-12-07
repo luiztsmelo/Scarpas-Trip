@@ -2,36 +2,42 @@
   <div class="anunciar-acomodacao">
 
 
-    <!-- PLANO ACOMODAÇÃO MOBILE -->
-    <div class="plano-acomodacao-mobile" v-if="$store.state.cadastroAcomod0">
+
+
+    <!-- PLANO ACOMODAÇÃO -->
+    <div class="plano-acomodacao" v-if="$store.state.cadastroAcomod0">
       
-      <img class="__img-header" src="../../../assets/img/anuncio-acomod.svg">
-      
-      <h1 class="__title">Ainda gasta anunciando sua casa? Aqui é gratuito.</h1>
-      
+      <img class="img" src="../../../assets/img/anuncio-acomod.svg">
 
-      <button class="__anunciar-btn" @click="$store.commit('m_cadastroAcomod1', true), $store.commit('m_cadastroAcomod0', false), $store.commit('m_acomodProgressBar', (100/12)), hashAcomod()">Anunciar</button>
+      <div class="copy">
 
-    </div><!-- PLANO ACOMODAÇÃO MOBILE -->
+        <h1 class="__title">Aumente seus ganhos anunciando na Escarpas Trip</h1>
 
 
+        <div class="benefits">
 
-    <!-- PLANO ACOMODAÇÃO DESKTOP -->
-    <div class="plano-acomodacao-desktop" v-if="$store.state.cadastroAcomod0">
-      
-      <img class="__img-header" src="../../../assets/img/anuncio-acomod.svg">
+          <div class="benefit">
+            <img class="__img" src="../../../assets/img/visibility.svg">
+            <p class="__text">Ganhe maior visibilidade e aumente suas reservas</p>
+          </div>
 
-      <div class="flex1">
-        <h1 class="__title">Ainda paga para anunciar sua casa?</h1>
-        <h1 class="__subtitle">Aqui é gratuito.</h1>
+          <div class="benefit">
+            <img class="__img" src="../../../assets/img/barracas.svg">
+            <p class="__text">Ganhe visibilidade</p>
+          </div>
 
-        <h3 class="__text">Além disso...</h3>
+          <div class="benefit">
+            <img class="__img" src="../../../assets/img/save-money.svg">
+            <p class="__text">Economize, investindo apenas R$49,00/mês</p>
+          </div>
+
+        </div>
         
 
         <button class="__anunciar-btn" @click="$store.commit('m_cadastroAcomod1', true), $store.commit('m_cadastroAcomod0', false), $store.commit('m_acomodProgressBar', (100/12)), hashAcomod()">Anunciar</button>
       </div>
 
-    </div><!-- PLANO ACOMODAÇÃO DESKTOP -->
+    </div><!-- PLANO ACOMODAÇÃO -->
 
 
 
@@ -1033,7 +1039,7 @@ export default {
       window.location.hash = this.randomHashs[1]
     },
     nextBtn1 () {
-      if (this.$store.state.acomodData.tipoAcomod !== null) {
+      if (this.$store.state.acomodData.tipoAcomod !== '') {
         this.$store.commit('m_cadastroAcomod1', false), this.$store.commit('m_cadastroAcomod2', true), this.$store.commit('m_acomodProgressBar', (100/12)*2), this.scrollTop(), window.location.hash = `${this.randomHashs[2]}`
       }
     },
@@ -1257,7 +1263,7 @@ export default {
     },
     /* ******************** FORM STYLES ******************** */
     form1ok () {
-      return this.$store.state.acomodData.tipoAcomod !== null ? 'background:#FFA04F' : ''
+      return this.$store.state.acomodData.tipoAcomod !== '' ? 'background:#FFA04F' : ''
     },
     form2ok () {
       return 1<2 ? 'background:#FFA04F' : ''
@@ -1559,40 +1565,7 @@ export default {
     transition: var(--main-transition);
   }
   /* ******************** PLANO ACOMODAÇÃO ******************** */
-  & .plano-acomodacao-mobile {
-    display: flex;
-    flex-flow: column;
-    align-items: center;
-    & .__img-header {
-      margin: 3rem 0 2rem 0;
-      width: 7rem;
-      height: auto;
-    }
-    & .__title {
-      font-size: 28px;
-      font-weight: 700;
-      padding: 0 7%;
-      text-align: center;
-    }
-    & .__anunciar-btn {
-      position: fixed;
-      bottom: 1rem;
-      left: 0;
-      right: 0;
-      margin: auto;
-      height: 3rem;
-      width: 13rem;
-      color: white;
-      background: var(--colorAcomod);
-      border-radius: 100px;
-      font-size: 17px;
-      font-weight: 700;
-      box-shadow: 3px 3px 20px 1px rgba(0,0,0,0.18);
-    }
-  }
-  & .plano-acomodacao-desktop {
-    display: none;
-  }
+
   /* ******************** CADASTRO ACOMODAÇÃO ******************** */
   & .cadastro-acomodacao {
     height: 100%;
@@ -2127,48 +2100,58 @@ export default {
       top: var(--navbarHeightDesktop);
       height: 6px;
     }
-    & .plano-acomodacao-mobile {
-      display: none;
-    }
-    & .plano-acomodacao-desktop {
+    & .plano-acomodacao {
       padding: 0 7%;
       display: flex;
+      align-items: center;
       height: calc(100vh - var(--navbarHeightDesktop));
-      & .flex1 {
+      & .img {
+        flex: 25%;
+        width: 1rem;
+        height: auto;
+      }
+      & .copy {
         display: flex;
         flex-flow: column;
-        padding: 5rem 0 0 0;
         flex: 70%;
         align-items: center;
         & .__title {
-          font-size: 36px;
+          font-size: 37px;
           font-weight: 700;
-        }
-        & .__subtitle {
-          padding-top: .2rem;
-          font-size: 32px;
-          font-weight: 400;
-        }
-        & .__text {
           text-align: center;
-          padding: 2rem 0 3rem 0;
-          font-size: 18px;
-          font-weight: 400;
+        }
+        & .benefits {
+          display: flex;
+          justify-content: space-around;
+          width: 100%;
+          margin: 3.5rem 0 4.5rem;
+          padding: 0 2.5rem;
+          & .benefit {
+            width: 24%;
+            display: flex;
+            flex-flow: column;
+            align-items: center;
+            & .__img {
+              width: 3.3rem;
+              height: auto;
+              margin-bottom: .7rem;
+            }
+            & .__text {
+              line-height: 1.3;
+              text-align: center;
+              font-weight: 400;
+            }
+          } 
         }
         & .__anunciar-btn {
           width: 13rem;
-          height: 3rem;
+          height: 3.1rem;
           color: white;
           background: var(--colorAcomod);
           border-radius: 100px;
           font-size: 17px;
-          font-weight: 600;
+          font-weight: 700;
         }
-      }
-      & .__img-header {
-        flex: 25%;
-        width: 1rem;
-        height: auto;
       }
     }
     & .cadastro-acomodacao {
