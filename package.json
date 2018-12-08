@@ -5,7 +5,7 @@
   "author": "Tarcisio Melo <luiztsmelo@gmail.com>",
   "private": true,
   "engines": {
-    "node": "10.11.0",
+    "node": "10.14.1",
     "npm": "6.4.1"
   },
   "dependencies": {

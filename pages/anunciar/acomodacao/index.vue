@@ -2132,7 +2132,7 @@ export default {
             flex-flow: column;
             align-items: center;
             & .__img {
-              width: 3.3rem;
+              width: 3.2rem;
               height: auto;
               margin-bottom: .7rem;
             }

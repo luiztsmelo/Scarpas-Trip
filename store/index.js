@@ -438,19 +438,37 @@ const store = () => new Vuex.Store({
   /* ________________________________________________ GETTERS ________________________________________________ */
   getters: {
     tipoAcomodInteira (state) {
-      if (state.acomodData.tipoAcomod === 'Casa' || state.acomod.tipoAcomod === 'Casa' || state.acomodData.tipoAcomod === 'Apartamento' || state.acomod.tipoAcomod === 'Apartamento' || state.acomodData.tipoAcomod === 'Rancho' || state.acomod.tipoAcomod === 'Rancho' || state.acomodData.tipoAcomod === 'Chácara' || state.acomod.tipoAcomod === 'Chácara' || state.acomodData.tipoAcomod === 'Sítio' || state.acomod.tipoAcomod === 'Sítio' || state.acomodData.tipoAcomod === 'Fazenda' || state.acomod.tipoAcomod === 'Fazenda') {
-        return true
-      } else return false
+      if (state.acomod !== null) { /* Checar p/ evitar bug: 'Cannot read property 'tipoAcomod' of null' */
+        if (state.acomodData.tipoAcomod === 'Casa' || state.acomod.tipoAcomod === 'Casa' || state.acomodData.tipoAcomod === 'Apartamento' || state.acomod.tipoAcomod === 'Apartamento' || state.acomodData.tipoAcomod === 'Rancho' || state.acomod.tipoAcomod === 'Rancho' || state.acomodData.tipoAcomod === 'Chácara' || state.acomod.tipoAcomod === 'Chácara' || state.acomodData.tipoAcomod === 'Sítio' || state.acomod.tipoAcomod === 'Sítio' || state.acomodData.tipoAcomod === 'Fazenda' || state.acomod.tipoAcomod === 'Fazenda') {
+          return true
+        } else return false
+      } else {
+        if (state.acomodData.tipoAcomod === 'Casa' || state.acomodData.tipoAcomod === 'Apartamento' || state.acomodData.tipoAcomod === 'Rancho' || state.acomodData.tipoAcomod === 'Chácara' || state.acomodData.tipoAcomod === 'Sítio' || state.acomodData.tipoAcomod === 'Fazenda') {
+          return true
+        } else return false
+      }
     },
     tipoAcomodPousadaSuites (state) {
-      if (state.acomodData.tipoAcomod === 'Pousada' || state.acomod.tipoAcomod === 'Pousada' || state.acomodData.tipoAcomod === 'Suítes' || state.acomod.tipoAcomod === 'Suítes') {
-        return true
-      } else return false
+      if (state.acomod !== null) { /* Checar p/ evitar bug: 'Cannot read property 'tipoAcomod' of null' */
+        if (state.acomodData.tipoAcomod === 'Pousada' || state.acomod.tipoAcomod === 'Pousada' || state.acomodData.tipoAcomod === 'Suítes' || state.acomod.tipoAcomod === 'Suítes') {
+          return true
+        } else return false
+      } else {
+        if (state.acomodData.tipoAcomod === 'Pousada' || state.acomodData.tipoAcomod === 'Suítes') {
+          return true
+        } else return false
+      }
     },
     tipoAcomodCampingHostel (state) {
-      if (state.acomodData.tipoAcomod === 'Camping' || state.acomod.tipoAcomod === 'Camping' || state.acomodData.tipoAcomod === 'Hostel' || state.acomod.tipoAcomod === 'Hostel') {
-        return true
-      } else return false
+      if (state.acomod !== null) { /* Checar p/ evitar bug: 'Cannot read property 'tipoAcomod' of null' */
+        if (state.acomodData.tipoAcomod === 'Camping' || state.acomod.tipoAcomod === 'Camping' || state.acomodData.tipoAcomod === 'Hostel' || state.acomod.tipoAcomod === 'Hostel') {
+          return true
+        } else return false
+      } else {
+        if (state.acomodData.tipoAcomod === 'Camping' || state.acomodData.tipoAcomod === 'Hostel') {
+          return true
+        } else return false
+      }
     }
   },
   /* _______________________________________________ MUTATIONS _______________________________________________ */
