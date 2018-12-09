@@ -3,8 +3,8 @@
 
 
 
-    <!-- PLANO ACOMODAÇÃO -->
-    <div class="plano-acomodacao" v-if="$store.state.cadastroAcomod0">
+    <!-- FIRST PAGE -->
+    <div class="first-page" v-if="$store.state.cadastroAcomod0">
       
       <img class="img" src="../../../assets/img/anuncio-acomod.svg">
 
@@ -34,9 +34,10 @@
         
 
         <button class="__anunciar-btn" @click="$store.commit('m_cadastroAcomod1', true), $store.commit('m_cadastroAcomod0', false), $store.commit('m_acomodProgressBar', (100/12)), hashAcomod()">Anunciar</button>
+        
       </div>
 
-    </div><!-- PLANO ACOMODAÇÃO -->
+    </div><!-- FIRST PAGE -->
 
 
 
@@ -1566,8 +1567,8 @@ export default {
     z-index: 8888;
     background: var(--colorAcomod);
   }
-  /* ******************** PLANO ACOMODAÇÃO ******************** */
-  & .plano-acomodacao {
+  /* ******************** FIRST PAGE ******************** */
+  & .first-page {
     padding: 2rem 7%;
     display: flex;
     flex-flow: column;
@@ -2161,7 +2162,7 @@ export default {
       top: var(--navbarHeightDesktop);
       height: 6px;
     }
-    & .plano-acomodacao {
+    & .first-page {
       padding: 0 7%;
       flex-flow: row;
       height: calc(100vh - var(--navbarHeightDesktop));

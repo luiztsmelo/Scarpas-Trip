@@ -2,41 +2,47 @@
   <div class="anunciar-passeio">
 
 
-    <!-- PLANO PASSEIO MOBILE -->
-    <div class="plano-passeio-mobile" v-if="$store.state.cadastroPasseio0">
+    <!-- FIRST PAGE -->
+    <div class="first-page" v-if="$store.state.cadastroPasseio0">
       
-      <img class="__img-header" src="../../../assets/img/anuncio-passeio.svg">
-      
-      <h1 class="__title">Ainda gasta anunciando seu passeio? Aqui é gratuito.</h1>
-      
+      <img class="img" src="../../../assets/img/anuncio-passeio.svg">
 
-      <button class="__anunciar-btn" @click="$store.commit('m_cadastroPasseio1', true), $store.commit('m_cadastroPasseio0', false), $store.commit('m_passeioProgressBar', (100/10)), hashPasseio()">Anunciar</button>
+      <div class="copy">
 
-    </div><!-- PLANO PASSEIO MOBILE -->
+        <h1 class="__title">Aumente seus ganhos anunciando na Escarpas Trip</h1>
 
 
-    <!-- PLANO PASSEIO DESKTOP -->
-    <div class="plano-passeio-desktop" v-if="$store.state.cadastroPasseio0">
-      
-      <img class="__img-header" src="../../../assets/img/anuncio-passeio.svg">
+        <div class="benefits">
 
-      <div class="flex1">
-        <h1 class="__title">Ainda paga para anunciar seu passeio?</h1>
-        <h1 class="__subtitle">Aqui é gratuito.</h1>
+          <div class="benefit">
+            <img class="__img" src="../../../assets/img/visibility.svg">
+            <p class="__text">Ganhe maior visibilidade e aumente suas reservas</p>
+          </div>
 
-        <h3 class="__text">Além disso...</h3>
+          <div class="benefit">
+            <img class="__img" src="../../../assets/img/barracas.svg">
+            <p class="__text">Ganhe visibilidade</p>
+          </div>
+
+          <div class="benefit">
+            <img class="__img" src="../../../assets/img/save-money.svg">
+            <p class="__text">Economize, investindo apenas R$49,00/mês</p>
+          </div>
+
+        </div>
         
 
         <button class="__anunciar-btn" @click="$store.commit('m_cadastroPasseio1', true), $store.commit('m_cadastroPasseio0', false), $store.commit('m_passeioProgressBar', (100/10)), hashPasseio()">Anunciar</button>
+        
       </div>
 
-    </div><!-- PLANO PASSEIO DESKTOP -->
+    </div><!-- FIRST PAGE -->
 
 
 
 
 
-    <div class="progress-bar" v-if="!$store.state.cadastroPasseio0" :style="'width:' + $store.state.passeioProgressBar + '%'"></div>
+    <div class="progress-bar" v-if="!$store.state.cadastroPasseio0" :style="progressBarStyle"></div>
 
 
 
@@ -1016,6 +1022,10 @@ export default {
            : cardType === 'jcb' ? require('@/assets/img/jcb.svg')
            : ''
     },
+    /* ******************** PROGRESS BAR ******************** */
+    progressBarStyle () {
+      return `width:${this.$store.state.passeioProgressBar}%; ${this.$store.state.cadastroPasseio0 || this.$store.state.cadastroPasseio1 ? '' : 'transition: all .3s ease;'}`
+    },
     /* ******************** FORM STYLES ******************** */
     form1ok () {
       return this.$store.state.passeioData.tipoPasseio !== null ? 'background: #198CFE' : ''
@@ -1297,44 +1307,68 @@ export default {
     height: 4px;
     z-index: 8888;
     background: var(--colorPasseio);
-    transition: var(--main-transition);
   }
-  /* ******************** PLANO PASSEIO ******************** */
-  & .plano-passeio-mobile {
+  /* ******************** FIRST PAGE ******************** */
+  & .first-page {
+    padding: 2rem 7%;
     display: flex;
     flex-flow: column;
     align-items: center;
-    & .__img-header {
-      margin: 3rem 0 2rem 0;
-      width: 7rem;
+    & .img {
+      width: 6rem;
       height: auto;
     }
-    & .__title {
-      font-size: 28px;
-      font-weight: 700;
-      padding: 0 7%;
-      text-align: center;
-    }
-    & .__anunciar-btn {
-      position: fixed;
-      bottom: 1rem;
-      left: 0;
-      right: 0;
-      margin: auto;
-      height: 3rem;
-      color: white;
-      width: 13rem;
-      background: var(--colorPasseio);
-      border-radius: 2rem;
-      font-size: var(--fontSizeAnuncioText);
-      font-weight: 600;
-      box-shadow: 3px 3px 20px 1px rgba(0,0,0,0.18);
+    & .copy {
+      display: flex;
+      flex-flow: column;
+      align-items: center;
+      & .__title {
+        font-size: 28px;
+        font-weight: 700;
+        text-align: center;
+        margin-top: 1rem;
+      }
+      & .benefits {
+        display: flex;
+        flex-flow: column;
+        align-items: center;
+        width: 100%;
+        margin: 2.5rem 0 4.5rem;
+        padding: 0 2rem;
+        & .benefit {
+          width: 100%;
+          display: flex;
+          flex-flow: column;
+          align-items: center;
+          margin-bottom: 2.5rem;
+          & .__img {
+            width: 3.3rem;
+            height: auto;
+            margin-bottom: .7rem;
+          }
+          & .__text {
+            line-height: 1.3;
+            text-align: center;
+            font-weight: 400;
+          }
+        } 
+      }
+      & .__anunciar-btn {
+        position: fixed;
+        bottom: 1rem;
+        left: 0;
+        right: 0;
+        margin: auto;
+        width: 13rem;
+        height: 3.1rem;
+        color: white;
+        background: var(--colorPasseio);
+        border-radius: 100px;
+        font-size: 17px;
+        font-weight: 700;
+      }
     }
   }
-  & .plano-passeio-desktop {
-    display: none;
-  }
-
   /* ******************** CADASTRO PASSEIO ******************** */
   & .cadastro-passeio {
     height: 100%;
@@ -1699,48 +1733,47 @@ export default {
       top: var(--navbarHeightDesktop);
       height: 6px;
     }
-    & .plano-passeio-mobile {
-      display: none;
-    }
-    & .plano-passeio-desktop {
+    & .first-page {
       padding: 0 7%;
-      display: flex;
+      flex-flow: row;
       height: calc(100vh - var(--navbarHeightDesktop));
-      & .flex1 {
-        display: flex;
-        flex-flow: column;
-        padding: 5rem 0 0 0;
+      & .img {
+        flex: 25%;
+        width: 1rem;
+      }
+      & .copy {
         flex: 70%;
-        align-items: center;
         & .__title {
-          font-size: 36px;
-          font-weight: 700;
+          font-size: 37px;
+          margin-top: 0;
         }
-        & .__subtitle {
-          padding-top: .2rem;
-          font-size: 32px;
-          font-weight: 400;
-        }
-        & .__text {
-          text-align: center;
-          padding: 2rem 0 3rem 0;
-          font-size: 18px;
-          font-weight: 400;
+        & .benefits {
+          flex-flow: row;
+          align-items: flex-start;
+          justify-content: space-around;
+          width: 100%;
+          margin: 3.5rem 0 4.5rem;
+          padding: 0 2.5rem;
+          & .benefit {
+            width: 24%;
+            margin-bottom: 0;
+            & .__img {
+              width: 3.2rem;
+            }
+            & .__text {
+            }
+          } 
         }
         & .__anunciar-btn {
+          position: initial;
           width: 13rem;
-          height: 3rem;
+          height: 3.1rem;
           color: white;
           background: var(--colorPasseio);
           border-radius: 100px;
           font-size: 17px;
-          font-weight: 600;
+          font-weight: 700;
         }
-      }
-      & .__img-header {
-        flex: 25%;
-        width: 1rem;
-        height: auto;
       }
     }
     & .cadastro-passeio {

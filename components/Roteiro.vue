@@ -122,12 +122,12 @@ export default {
     }
     & .img-2 {
       animation-delay: 8s;
-      background: url('https://firebasestorage.googleapis.com/v0/b/escarpas-trip.appspot.com/o/utils%2Fbgimg2.jpg?alt=media&token=6013c6ee-5fe8-4d5d-85f8-bd06e47045e6') no-repeat center center;
+      background: url('https://firebasestorage.googleapis.com/v0/b/escarpas-trip.appspot.com/o/utils%2Fbgimg7.jpg?alt=media&token=f026c866-597a-4314-98f5-70aa1290c988') no-repeat center center;
       background-size: cover;
     }
     & .img-3 {
       animation-delay: 16s;
-      background: url('https://firebasestorage.googleapis.com/v0/b/escarpas-trip.appspot.com/o/utils%2Fbgimg3.jpg?alt=media&token=a383e428-897a-4c36-9494-a212d695c2fc') no-repeat center center;
+      background: url('https://firebasestorage.googleapis.com/v0/b/escarpas-trip.appspot.com/o/utils%2Fbgimg6.jpg?alt=media&token=1e49a1d3-163a-47c1-91f8-177592852b3a') no-repeat center center;
       background-size: cover;
     }
     & .img-4 {
@@ -173,7 +173,7 @@ export default {
       display: flex;
       flex-flow: column;
       align-items: center;
-      background: rgba(0,0,0, .2);
+      background: rgba(0,0,0, .15);
       & .headline {
         padding: 2rem 30% 0;
         width: 100%;
@@ -240,11 +240,11 @@ export default {
   }
   30% {
     opacity: 0;
-    transform: scale(1.12);
+    transform: scale(1.1);
   }
   100% {
     opacity: 0;
-    transform: scale(1.12);
+    transform: scale(1.1);
   }
 }
 
