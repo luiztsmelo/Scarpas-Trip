@@ -3,7 +3,6 @@
 
 
 
-
     <!-- PLANO ACOMODAÇÃO -->
     <div class="plano-acomodacao" v-if="$store.state.cadastroAcomod0">
       
@@ -42,7 +41,7 @@
 
 
 
-    <div class="progress-bar" v-if="!$store.state.cadastroAcomod0" :style="'width:' + $store.state.acomodProgressBar + '%'"></div>
+    <div class="progress-bar" v-if="!$store.state.cadastroAcomod0" :style="progressBarStyle"></div>
 
 
 
@@ -1261,6 +1260,10 @@ export default {
            : cardType === 'jcb' ? require('@/assets/img/jcb.svg')
            : ''
     },
+    /* ******************** PROGRESS BAR ******************** */
+    progressBarStyle () {
+      return `width:${this.$store.state.acomodProgressBar}%; ${this.$store.state.cadastroAcomod0 || this.$store.state.cadastroAcomod1 ? '' : 'transition: all .3s ease;'}`
+    },
     /* ******************** FORM STYLES ******************** */
     form1ok () {
       return this.$store.state.acomodData.tipoAcomod !== '' ? 'background:#FFA04F' : ''
@@ -1562,10 +1565,68 @@ export default {
     height: 4px;
     z-index: 8888;
     background: var(--colorAcomod);
-    transition: var(--main-transition);
   }
   /* ******************** PLANO ACOMODAÇÃO ******************** */
-
+  & .plano-acomodacao {
+    padding: 2rem 7%;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    & .img {
+      width: 6rem;
+      height: auto;
+    }
+    & .copy {
+      display: flex;
+      flex-flow: column;
+      align-items: center;
+      & .__title {
+        font-size: 28px;
+        font-weight: 700;
+        text-align: center;
+        margin-top: 1rem;
+      }
+      & .benefits {
+        display: flex;
+        flex-flow: column;
+        align-items: center;
+        width: 100%;
+        margin: 2.5rem 0 4.5rem;
+        padding: 0 2rem;
+        & .benefit {
+          width: 100%;
+          display: flex;
+          flex-flow: column;
+          align-items: center;
+          margin-bottom: 2.5rem;
+          & .__img {
+            width: 3.3rem;
+            height: auto;
+            margin-bottom: .7rem;
+          }
+          & .__text {
+            line-height: 1.3;
+            text-align: center;
+            font-weight: 400;
+          }
+        } 
+      }
+      & .__anunciar-btn {
+        position: fixed;
+        bottom: 1rem;
+        left: 0;
+        right: 0;
+        margin: auto;
+        width: 13rem;
+        height: 3.1rem;
+        color: white;
+        background: var(--colorAcomod);
+        border-radius: 100px;
+        font-size: 17px;
+        font-weight: 700;
+      }
+    }
+  }
   /* ******************** CADASTRO ACOMODAÇÃO ******************** */
   & .cadastro-acomodacao {
     height: 100%;
@@ -2102,48 +2163,37 @@ export default {
     }
     & .plano-acomodacao {
       padding: 0 7%;
-      display: flex;
-      align-items: center;
+      flex-flow: row;
       height: calc(100vh - var(--navbarHeightDesktop));
       & .img {
         flex: 25%;
         width: 1rem;
-        height: auto;
       }
       & .copy {
-        display: flex;
-        flex-flow: column;
         flex: 70%;
-        align-items: center;
         & .__title {
           font-size: 37px;
-          font-weight: 700;
-          text-align: center;
+          margin-top: 0;
         }
         & .benefits {
-          display: flex;
+          flex-flow: row;
+          align-items: flex-start;
           justify-content: space-around;
           width: 100%;
           margin: 3.5rem 0 4.5rem;
           padding: 0 2.5rem;
           & .benefit {
             width: 24%;
-            display: flex;
-            flex-flow: column;
-            align-items: center;
+            margin-bottom: 0;
             & .__img {
               width: 3.2rem;
-              height: auto;
-              margin-bottom: .7rem;
             }
             & .__text {
-              line-height: 1.3;
-              text-align: center;
-              font-weight: 400;
             }
           } 
         }
         & .__anunciar-btn {
+          position: initial;
           width: 13rem;
           height: 3.1rem;
           color: white;
