@@ -48,7 +48,7 @@
 
 .item-title {
   font-weight: 600;
-  font-size: 16px;
+  font-size: 17px;
   padding: 3rem 7% .5rem 7%;
   user-select: none;
 }
@@ -59,7 +59,7 @@
   padding: 4rem 7% 2rem 7%;
   & .__title {
     font-weight: 600;
-    font-size: 20px;
+    font-size: 21px;
     user-select: none;
     padding-right: 1.2rem;
   }

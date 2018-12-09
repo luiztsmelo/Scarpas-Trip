@@ -713,7 +713,7 @@ export default {
     align-items: center;
     & .__tipo {
       padding-right: 1rem;
-      font-size: 15px;
+      font-size: 16px;
       font-weight: 600;
     }
     & .rating {
@@ -724,7 +724,7 @@ export default {
       border: 1px solid #dedede;
       border-radius: 50px;
       & p {
-        padding: 3px 8px;
+        padding: 4px 8px;
         font-size: 11px;
         font-weight: 600;
       }
@@ -954,7 +954,7 @@ export default {
       padding: 0;
       background: white;
       color: var(--colorAcomod);
-      font-size: 16px;
+      font-size: 17px;
       font-weight: 600;
     }
   }/* __________ AVALIAÇÕES __________ */
@@ -982,23 +982,23 @@ export default {
       height: 100%;
       & .__reserva-valor {
         padding-right: 15px;
-        font-size: 18px;
+        font-size: 19px;
         font-weight: 600;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
       }
       & .__reserva-valor-pessoa {
-        font-size: 14px;
+        font-size: 15px;
         font-weight: 400;
       }
       & .__reserva-btn {
         width: 50%;
         max-width: 12rem;
-        height: 3.2rem;
+        height: 3.25rem;
         background:var(--colorAcomod);
         border-radius: 200px;
-        font-size: 16px;
+        font-size: 17px;
         font-weight: 700;
         color: white;
         transition: var(--main-transition);
@@ -1172,8 +1172,6 @@ export default {
           margin-top: 0;
           & .__tipo {
             padding-right: 1rem;
-            font-size: 16px;
-            font-weight: 600;
           }
           & .rating {
           }
@@ -1304,7 +1302,6 @@ export default {
             }
           }
           & .add-avaliacao-btn {
-            font-size: 17px;
           }
           & .add-avaliacao-btn:hover {
             text-decoration: underline;
