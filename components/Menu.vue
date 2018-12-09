@@ -109,18 +109,18 @@ export default {
     & .menu-item {
       display: flex;
       align-items: center;
-      padding: 0.7rem 0;
+      padding: .8rem 0;
       & .__item-img-color {
-        width: 1.27rem;
+        width: 1.3rem;
         height: auto;
         margin-right: 1rem;
-        filter: grayscale(100%) brightness(15%);
+        filter: grayscale(100%) brightness(10%);
       }
       & .__item-img {
-        width: 1.27rem;
+        width: 1.3rem;
         height: auto;
         margin-right: 1rem;
-        filter: brightness(25%);
+        filter: brightness(15%);
       }
     }
     & .tmstudio {

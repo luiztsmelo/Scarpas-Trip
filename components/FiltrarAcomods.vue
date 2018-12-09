@@ -143,10 +143,11 @@ export default {
         { 'name': 'Apartamento' },
         { 'name': 'Rancho' },
         { 'name': 'Chácara' },
-        { 'name': 'Pousada' },
-        { 'name': 'Camping' },
         { 'name': 'Sítio' },
         { 'name': 'Fazenda' },
+        { 'name': 'Pousada' },
+        { 'name': 'Suítes' },
+        { 'name': 'Camping' },
         { 'name': 'Hostel' }
       ],
       precos: [
@@ -263,13 +264,13 @@ h3 {
       & .limpar-btn {
         padding: 0;
         background: #fff;
-        font-size: 15px;
+        font-size: 16px;
         font-weight: 600;
       }
     }
     & .__title {
       line-height: 35px;
-      font-size: 29px;
+      font-size: 30px;
       padding-bottom: 1.2rem;
     }
     & .filter-btn {
@@ -290,7 +291,7 @@ h3 {
         background: var(--colorAcomod);
         color: white;
         font-weight: 700;
-        border-radius: 5px;
+        border-radius: 100px;
         transition: var(--main-transition);
       }
     }
@@ -298,7 +299,7 @@ h3 {
       padding: 2.3rem 0 1.5rem;
       border-bottom: 1px solid #dedede;
       & .__filter-title {
-        font-size: 17px;
+        font-size: 18px;
         font-weight: 600;
         padding-bottom: .8rem;
       }
