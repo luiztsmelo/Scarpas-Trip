@@ -34,7 +34,7 @@ export default {
     margin-top: var(--navbarHeightDesktop);
     & .__title {
       padding: 0 24%;
-      font-size: 36px;
+      font-size: 35px;
     }
   }
 }

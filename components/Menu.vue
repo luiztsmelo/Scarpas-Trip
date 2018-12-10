@@ -3,49 +3,49 @@
     <div class="menu" v-if="showMenu">
       <div class="menu-body">
 
-        <div style="border-bottom:1px solid #dedede;padding-bottom:.6rem" @click="checkUser(), $store.commit('m_showMenu', false), $store.commit('m_menuIconAnime', false), $store.commit('m_showFoobar', false)">
+        <div style="border-bottom:1px solid #dedede;padding-bottom:.6rem" @click="$store.commit('m_showMenu', false), $store.commit('m_menuIconAnime', false), $store.commit('m_showFoobar', false)">
           <div class="menu-item">
             <img src="../assets/img/social.svg" class="__item-img-color">
             <h3>Minha Conta</h3>
           </div>
         </div>
 
-        <div style="padding-top:.6rem" @click="$store.commit('m_showMenu', false), $store.commit('m_showFoobar', false), $store.commit('m_menuIconAnime', false), $store.commit('m_cadastroAcomod0', true)">
+        <div style="padding-top:.6rem" @click="$store.commit('m_showMenu', false), $store.commit('m_showFoobar', false), $store.commit('m_menuIconAnime', false)">
           <nuxt-link to="/anunciar/acomodacao" class="menu-item">
             <img src="../assets/img/estadia.svg" class="__item-img-color">
             <h3>Anunciar Acomodação</h3>
           </nuxt-link>
         </div>
 
-        <div @click="$store.commit('m_showMenu', false), $store.commit('m_showFoobar', false), $store.commit('m_menuIconAnime', false)">
+        <div style="padding-bottom:.6rem" @click="$store.commit('m_showMenu', false), $store.commit('m_showFoobar', false), $store.commit('m_menuIconAnime', false)">
           <nuxt-link to="/anunciar/passeio" class="menu-item">
             <img src="../assets/img/passeios.svg" class="__item-img-color">
             <h3>Anunciar Passeio</h3>
           </nuxt-link>
         </div>
 
-        <div @click="$store.commit('m_showMenu', false), $store.commit('m_showFoobar', false), $store.commit('m_menuIconAnime', false)">
+        <!-- <div @click="$store.commit('m_showMenu', false), $store.commit('m_showFoobar', false), $store.commit('m_menuIconAnime', false)">
           <nuxt-link to="/anunciar/evento" class="menu-item">
             <img src="../assets/img/eventos.svg" class="__item-img-color">
             <h3>Anunciar Evento</h3>
           </nuxt-link>
-        </div>
+        </div> -->
 
-        <div style="border-bottom:1px solid #dedede;padding-bottom:.6rem" @click="$store.commit('m_showMenu', false), $store.commit('m_showFoobar', false), $store.commit('m_menuIconAnime', false)">
+        <!-- <div @click="$store.commit('m_showMenu', false), $store.commit('m_showFoobar', false), $store.commit('m_menuIconAnime', false)">
           <nuxt-link to="/anunciar/restaurante" class="menu-item">
             <img src="../assets/img/restaurantes.svg" class="__item-img-color">
             <h3>Anunciar Restaurante</h3>
           </nuxt-link>
-        </div>
+        </div> -->
 
-        <div style="display:none">
+        <!-- <div style="display:none">
           <nuxt-link to="/anunciar/atracao" class="menu-item">
             <img src="../assets/img/restaurantes.svg" class="__item-img-color">
             <h3>Anunciar Atração</h3>
           </nuxt-link>
-        </div>
+        </div> -->
 
-        <div style="padding-top:.6rem" @click="$store.commit('m_showMenu', false), $store.commit('m_menuIconAnime', false), $store.commit('m_showFoobar', false)">
+        <div style="padding-top:.6rem; border-top:1px solid #dedede" @click="$store.commit('m_showMenu', false), $store.commit('m_menuIconAnime', false), $store.commit('m_showFoobar', false)">
           <nuxt-link to="/anunciar" class="menu-item">
             <img src="../assets/img/contato.svg" class="__item-img">
             <h3>Contato</h3>
@@ -60,7 +60,8 @@
         </div>
  
 
-        <span class="tmstudio">Desenvolvido por <strong>TMstudio</strong></span>
+        <!-- <span class="tmstudio">Desenvolvido por <strong>TMstudio</strong></span> -->
+
 
       </div> 
     </div>
@@ -69,21 +70,9 @@
 
 <script>
 export default {
-  methods: {
-    checkUser () {
-      if (this.userEmail === null) {
-        this.$modal.show('sign-in-modal')
-      } else {
-        this.$router.push('/perfil')
-      }
-    }
-  },
   computed: {
     showMenu () {
       return this.$store.state.showMenu
-    },
-    userEmail () {
-      return this.$store.state.user.email 
     }
   }
 }

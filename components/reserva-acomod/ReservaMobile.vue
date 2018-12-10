@@ -20,12 +20,11 @@ import firebase from '@firebase/app'
 import 'firebase/firestore'
 import 'firebase/functions'
 import MaskedInput from 'vue-text-mask'
-import DatePicker from '@/components/DatePicker'
 import { tipoAcomod } from '@/mixins/tipoAcomod'
 import scrollIntoView from 'scroll-into-view'
 
 export default {
-  components: { MaskedInput, DatePicker },
+  components: { MaskedInput },
   mixins: [ tipoAcomod ],
   data () {
     return {

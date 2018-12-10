@@ -71,11 +71,8 @@ export default {
     authUser () { return this.$store.state.authUser }
   },
   watch: {
-    authUser (value) {
-      if (value && this.$route.path === '/') {
-        this.$modal.hide('sign-in-modal')
-        this.$router.push('/perfil')
-      }
+    authUser (status) {
+      status === true ? this.$modal.hide('sign-in-modal') : ''
     }
   }
 }

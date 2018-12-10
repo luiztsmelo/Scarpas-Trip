@@ -229,15 +229,19 @@
 
       <h1 class="__form-title">Quais rotas são oferecidas?</h1>
 
+
       <div class="rotas">
         
         <transition-group name="rotas-animation" tag="div" style="width: 100%">
           <div class="rota" v-for="(rota, index) in $store.state.passeioData.rotas" :key="index + 1">
             <div class="rota-body">
+              
 
-              <h1 class="__title">Rota {{ index + 1 }}</h1>
-
-              <img class="__remove-rota" src="../../../assets/img/exit.svg" @click="$store.commit('m_removeRotaPasseio', index)">
+              <div class="heading">
+                <h1 class="__name">Rota {{ index + 1 }}</h1>
+                <img class="__remove-rota" src="../../../assets/img/exit.svg" @click="$store.commit('m_removeRotaPasseio', index)">
+              </div>
+              
 
               <div class="question">
                 <label>Valor por pessoa:</label>
@@ -248,12 +252,12 @@
               </div>
 
               <div class="question">
-                <label>Horário partida:</label>
+                <label>Horário de partida:</label>
                 <input type="time" v-model="rota.horarioPartida">
               </div>
 
               <div class="question">
-                <label>Duração:</label>
+                <label>Duração do passeio:</label>
                 <select v-model="rota.duracao">
                   <option v-for="n in 12" :value="n">{{ n }} {{ n === 1 ? 'hora' : 'horas' }}</option>
                 </select>
@@ -1493,52 +1497,58 @@ export default {
       margin: 1rem 7% 0;
       & .rota {
         border: 1px solid #dedede;
-        border-radius: 6px;
+        border-radius: 12px;
         width: 100%;
-        margin-bottom: 1.5rem;
+        margin-bottom: 1.7rem;
         transition: var(--main-transition);
         & .rota-body {
           position: relative;
           display: flex;
           flex-flow: column;
-          padding: 1rem;
-          & .__title {
-            font-size: 17px;
-            font-weight: 600;
-            padding-bottom: 1rem;
-          }
-          & .__remove-rota {
-            cursor: pointer;
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-            width: .9rem;
-            height: auto;
+          & .heading {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: .8rem 1.2rem;
+            margin-bottom: 1.2rem;
+            border-radius: 12px 12px 0 0;
+            border-bottom: 1px solid #dedede;
+            & .__name {
+              font-size: 17px;
+              font-weight: 600;
+            }
+            & .__remove-rota {
+              cursor: pointer;
+              width: .8rem;
+              height: auto;
+            }
           }
           & .question {
             min-height: 2.4rem;
+            margin: 0 1.2rem;
             & label {
-              font-size: 15px;
-              font-weight: 500;
-              padding-right: 4px;
+              font-size: 16px;
+              font-weight: 400;
+              padding-right: 2px;
             }
             & input {
               cursor: text;
-              width: 6rem;
+              width: 3.8rem;
               border: none;
               outline: none;
               background: white;
               color: var(--color01);
-              font-size: 17px;
+              font-size: 16px;
+              font-weight: 500;
             }
             & select {
               cursor: pointer;
-              width: 6rem;
               border: none;
               outline: none;
               background: white;
               color: var(--color01);
-              font-size: 17px;
+              font-size: 16px;
+              font-weight: 500;
             }
           }
         }
@@ -1829,16 +1839,12 @@ export default {
       & .rotas {
         margin: 1.6rem calc(28% - 2%) 0;
         & .rota {
-          border-radius: 8px;
-          margin-bottom: 1.7rem;
           & .rota-body {
-            padding: 1.5rem;
-            & .__title {
-              font-size: 18px;
-            }
-            & .__remove-rota {
-              top: 1.5rem;
-              right: 1.5rem;
+            & .heading {
+              & .__name {
+              }
+              & .__remove-rota {
+              }
             }
             & .question {
               & label {
@@ -1971,11 +1977,12 @@ input[type=time]::-webkit-clear-button {
 
 /* Multiselect */
 .multiselect, .multiselect__input, .multiselect__single {
+  margin: 1rem 0 1.2rem;
   font-size: 15px;
 }
 .multiselect__tags {
   cursor: text;
-  padding: 15px 0 0 0;
+  padding: 0;
   border: none;
   font-size: 15px;
   border-radius: 0px;

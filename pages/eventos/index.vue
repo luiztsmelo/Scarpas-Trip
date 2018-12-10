@@ -1,176 +1,40 @@
 <template>
   <div class="eventos">
-
-    <ul class="eventos-container">
-      <li class="card" v-for="evento in eventos" :key="evento.eventoID">
-        <nuxt-link :to="'/eventos/' + evento.eventoID">
-
-          <div class="image-box">
-            <swiper :options="swiperOption">
-              <swiper-slide class="slide"><img class="__img" :src="image1H(evento)"></swiper-slide>
-              <swiper-slide class="slide" v-if="ifImage2(evento)"><img class="__img" :src="image2H(evento)"></swiper-slide>
-              <div class="swiper-pagination" slot="pagination"></div>
-            </swiper>
-          </div> 
-
-          <div class="card-details">
-            <span class="__card-date">{{ evento.date }}&#160;&#8231;&#160;{{ evento.hour }}</span>
-            <span class="__card-title">{{ evento.title }}</span>
-          </div>
-
-        </nuxt-link> 
-      </li>
-    </ul>
-
-    <div class="filtrar">
-      <div class="filtrar-body">
-        <span class="__filtrar-text">Filtrar</span>
-        <img class="__filtrar-img" src="../../assets/img/filter.svg">
-      </div>
-    </div>
-
+    <h1 class="__title">Em breve os melhores eventos em Capitólio</h1>
   </div>
 </template>
 
 <script>
-import firebase from '@firebase/app'
-import 'firebase/firestore'
-import supportsWebP from 'supports-webp'
-
 export default {
   head () {
     return {
       title: 'Eventos em Capitólio ‒ Escarpas Trip'
     }
   },
-  transition: 'opacity',
-  data () {
-    return {
-      swiperOption: {
-        pagination: '.swiper-pagination'
-      }
-    }
-  },
-  fetch ({ store }) {
-    return firebase.firestore().collection('eventos').onSnapshot(snapshot => {
-      store.commit('m_eventos', snapshot.docs.map(doc => doc.data()))
-    })
-  },
-  methods: {
-    image1H (evento) {
-      return supportsWebP ? evento.imageH1W : evento.imageH1J
-    },
-    image2H (evento) {
-      return supportsWebP ? evento.imageH2W : evento.imageH2J
-    },
-    ifImage2 (evento) {
-      return evento.imageH2W === null ? '' : supportsWebP ? evento.imageH2W : evento.imageH2J
-    }
-  },
-  computed: {
-    eventos () {
-      return this.$store.state.eventos
-    }
-  },
-  beforeRouteEnter (to, from, next) {
-    next(vm => {
-      vm.$store.state.offFoobar1 = true
-      vm.$store.state.offFoobar2 = false
-      vm.$store.state.offFoobar3 = true
-      vm.$store.state.offFoobar4 = true
-      vm.$store.state.offFoobar5 = true
-      if (vm.$store.state.showFoobar === false) {
-        vm.$store.commit('m_showFoobar', true)
-      }
-      if (vm.$store.state.showNavbar === false) {
-        vm.$store.commit('m_showNavbar', true)
-      }
-    })
-  }
+  transition: 'opacity'
 }
 </script>
 
 <style>
-@import url('~/assets/css/pagination.css');
 
 .eventos {
-  margin: var(--navbarHeightMobile) 0 5.4rem 0;
+  margin-top: var(--navbarHeightMobile);
   display: flex;
   flex-flow: column;
-  transition: all .2s ease-in-out;
-  & .eventos-container {
-    padding: 0;
-    margin-bottom: 1rem;
-    display: flex;
-    flex-flow: column;
-    & .card {
-      width: 93%;
-      padding: 7% 0 1.5rem 7%;
-      & .image-box {
-        overflow: hidden;
-        margin-bottom: .3rem;
-        & .swiper-container {
-          position: relative;
-          & .swiper-wrapper {
-            display: inline-flex;
-            overflow: hidden;
-            & .slide {
-              & .__img {
-                width: 100%;
-                height: auto;
-              }
-            }
-          }
-        }
-      }
-      & .card-details {
-        display: flex;
-        flex-flow: column;
-        & .__card-date {
-          text-transform: uppercase;
-          font-size: 12px;
-          font-weight: 700;
-          color: #FF7D6C;
-        }
-        & .__card-title {
-          padding: .3rem 0;
-          font-size: 18px;
-          font-weight: 700;
-        }
-      }
-    }
+  padding: 4rem 7%;
+  transition: var(--pages-transition);
+  & .__title {
+    font-size: 27px;
+    text-align: center;
   }
-  & .filtrar {
-    position: fixed;
-    z-index: 8888;
-    bottom: 4rem;
-    left: 0;
-    right: 0;
-    margin: 0 auto;
-    height: 2.1rem;
-    width: 7rem;
-    background: white;
-    transition: all .3s ease;
-    box-shadow: 2px 2px 6px 1px rgba(0,0,0,0.27);
-    border-radius: 17px;
-    & .filtrar-body {
-      height: 100%;
-      position: relative;
-      top: 50%;
-      transform: translateY(-50%);
-      display: flex;
-      padding: 0 .7rem;
-      justify-content: space-around;
-      align-items: center;
-      & .__filtrar-text {
-        text-transform: uppercase;
-        font-size: 12px;
-        font-weight: 700;
-      }
-      & .__filtrar-img {
-        width: 1.05rem;
-        height: auto;
-      }
+}
+
+@media (min-width: 1024px) {
+  .eventos {
+    margin-top: var(--navbarHeightDesktop);
+    & .__title {
+      padding: 0 24%;
+      font-size: 35px;
     }
   }
 }

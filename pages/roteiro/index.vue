@@ -1,7 +1,7 @@
 <template>
   <div class="roteiro">
 
-    <h1>Roteiro</h1>
+    <h1 class="__title">Crie seu roteiro personalizado</h1>
 
 
   </div>
@@ -35,6 +35,10 @@ export default {
   display: flex;
   flex-flow: column;
   transition: var(--pages-transition);
+  padding: 4rem 7%;
+  & .__title {
+    text-align: center;
+  }
 }
 
 </style>

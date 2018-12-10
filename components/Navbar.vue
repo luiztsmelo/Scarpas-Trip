@@ -40,7 +40,7 @@
 
           <li class="__nav-item-no-a" @click="$modal.show('sign-in-modal')" v-if="$store.state.user.email === null">Login</li>
 
-          <nuxt-link to="/perfil" style="padding-left:0">
+          <nuxt-link to="/" style="padding-left:0">
             <li>
               <img class="__user-img" :src="$store.state.user.photoURL" @click="userBox = !userBox" v-if="$store.state.user.email !== null">
             </li>
@@ -58,12 +58,12 @@
               <nuxt-link to="/anunciar/passeio">
                 <li class="__nav-item">Passeio</li>
               </nuxt-link>
-              <nuxt-link to="/anunciar/evento">
+              <!-- <nuxt-link to="/anunciar/evento">
                 <li class="__nav-item">Evento</li>
-              </nuxt-link>
-              <nuxt-link to="/anunciar/restaurante">
+              </nuxt-link> -->
+              <!-- <nuxt-link to="/anunciar/restaurante">
                 <li class="__nav-item">Restaurante</li>
-              </nuxt-link>
+              </nuxt-link> -->
             </ul>
           </div>
         </div>

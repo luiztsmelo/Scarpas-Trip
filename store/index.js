@@ -48,31 +48,6 @@ const store = () => new Vuex.Store({
       photoURL: null
     },
     /*
-    -------------------- PERFIL --------------------
-    */
-    perfil: {
-      reservas: {
-        acomods: null
-      },
-      anuncios: {
-        acomods: null
-      },
-      showReservas: true,
-      showAnuncios: false,
-      showMessages: false,
-      showEdit: false
-    },
-    bankAccount: { /* !!! REMOVER !!! */
-      bankCode: '',
-      type: 'conta_corrente',
-      agencia: '',
-      agenciaDV: '',
-      conta: '',
-      contaDV: '',
-      legalName: '',
-      docNumber: ''
-    },
-    /*
     -------------------- CREDIT CARD --------------------
     */
     creditCard: {
@@ -600,24 +575,6 @@ const store = () => new Vuex.Store({
       state.filtersPasseios.tipoPasseio = null
       state.filtersPasseios.preco = null
       state.filtersPasseios.avaliacao = null
-    },
-    m_perfil (state, payload) {
-      state.perfil = payload
-    },
-    m_perfilReservasAcomods (state, payload) {
-      state.perfil.reservas.acomods = payload
-    },
-    m_perfilShowReservas (state, payload) {
-      state.perfil.showReservas = payload
-    },
-    m_perfilShowAnuncios (state, payload) {
-      state.perfil.showAnuncios = payload
-    },
-    m_perfilShowMessages (state, payload) {
-      state.perfil.showMessages = payload
-    },
-    m_perfilShowEdit (state, payload) {
-      state.perfil.showEdit = payload
     },
     /*
     -------------------- ANÚNCIOS --------------------
@@ -1262,18 +1219,6 @@ const store = () => new Vuex.Store({
           fullName: null,
           email: null,
           photoURL: null
-        })
-        commit('m_perfil', {
-          reservas: {
-            acomods: null
-          },
-          anuncios: {
-            acomods: null
-          },
-          showReservas: true,
-          showAnuncios: false,
-          showMessages: false,
-          showEdit: false
         })
       } catch (err) {
         console.log(err)

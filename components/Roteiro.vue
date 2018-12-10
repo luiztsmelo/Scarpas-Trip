@@ -49,7 +49,7 @@
         </select>
 
 
-        <button class="buscar-btn" type="button">Criar Roteiro</button>
+        <button class="buscar-btn" type="button" @click="criarRoteiro">Criar Roteiro</button>
 
 
       </form>
@@ -84,6 +84,9 @@ export default {
         endDate ? formattedDates += ' - ' + format(endDate, 'D [de] MMM', { locale: pt }) : ''
         return formattedDates
       }
+    },
+    criarRoteiro () {
+      this.$router.push('/roteiro')
     }
   },
   computed: {

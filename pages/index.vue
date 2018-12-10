@@ -15,13 +15,7 @@
       <div class="category-container">
 
 
-        <div class="title-row">
-
-          <h1 class="__title">Acomodações</h1>
-
-          <nuxt-link to="/acomodacoes" class="see-all" style="color: #FFA04F">Ver mais ❯</nuxt-link> 
-
-        </div>
+        <h1 class="__title">Acomodações</h1>
         
 
         <div class="cards-container" v-show="$store.state.acomods !== null">
@@ -68,13 +62,8 @@
       <div class="category-container">
 
 
-        <div class="title-row">
+        <h1 class="__title">Passeios</h1>
 
-          <h1 class="__title">Passeios</h1>
-
-          <nuxt-link to="/passeios" class="see-all" style="color: #198CFE">Ver mais ❯</nuxt-link> 
-
-        </div>
         
 
         <div class="cards-container" v-show="$store.state.passeios !== null">
@@ -115,32 +104,15 @@
 
 
 
+
       <!-- ______________________________ EVENTOS ______________________________ -->
       <div class="category-container">
 
 
-        <div class="title-row">
-
-          <h1 class="__title">Próximos Eventos</h1>
-
-          <nuxt-link to="/eventos" class="see-all" style="color: #FF7E65">Ver mais ❯</nuxt-link> 
-
-        </div>
+        <h1 class="__title">Eventos</h1>
         
 
-        <div class="cards-container" v-show="$store.state.eventos !== null">
-          <nuxt-link :to="'/eventos/' + evento.eventoID" class="card" v-for="evento in $store.state.eventos" :key="evento.eventoID">
-
-            <progressive-background class="__card-img" :src="imageEvH(evento)" :placeholder="evento.imageL1" :aspect-ratio="2/3"/>
-
-            <p class="__card-info" style="color: #FF7D6C">{{ evento.date }}&#160;&#8231;&#160;{{ evento.hour }}</p>
-
-            <p class="__card-title">{{ evento.title }}</p>
-
-            <p class="__card-subtitle">{{ evento.subtitle }}</p>
-
-          </nuxt-link> 
-        </div>
+        <h3 class="__subtitle">Em breve os melhores eventos em Capitólio.</h3>
 
 
       </div><!-- ______________________________ EVENTOS ______________________________ -->
@@ -150,49 +122,12 @@
 
 
 
-      <!-- ______________________________ ATRAÇÕES ______________________________ -->
-      <!-- <div class="category-container">
-
-
-        <div class="title-row">
-
-          <h1 class="__title">Atrações</h1>
-
-          <nuxt-link to="/atracoes" class="see-all" style="color: #81C784">Ver mais ❯</nuxt-link> 
-
-        </div>
-        
-
-        <div class="cards-container" v-show="$store.state.atracoes !== null">
-          <nuxt-link :to="'/atracoes/' + atracao.atracaoID" class="card" v-for="atracao in $store.state.atracoes" :key="atracao.atracaoID">
-
-            <progressive-background class="__card-img" :src="imageAtH(atracao)" :placeholder="atracao.imageL1" :aspect-ratio="2/3"/>
-
-            <p class="__card-info" style="color: #81C784">{{ atracao.tipoAtracao }}</p>
-
-            <p class="__card-title">{{ atracao.title }}</p>
-
-          </nuxt-link> 
-        </div>
-
-
-      </div> --><!-- ______________________________ ATRAÇÕES ______________________________ -->
-
-
-
-
 
       <!-- ______________________________ RESTAURANTES ______________________________ -->
       <div class="category-container">
 
 
-        <div class="title-row">
-
-          <h1 class="__title">Restaurantes</h1>
-
-          <nuxt-link to="/restaurantes" class="see-all" style="color: #fc5656">Ver mais ❯</nuxt-link> 
-
-        </div>
+        <h1 class="__title">Restaurantes</h1>
         
 
         <h3 class="__subtitle">Em breve os melhores restaurantes de Capitólio.</h3>
@@ -228,17 +163,11 @@ export default {
   },
   transition: 'opacity',
   methods: {
-    imageEvH (evento) {
-      return supportsWebP ? evento.imageH1W : evento.imageH1J
-    },
     imageAcH (acomod) {
       return supportsWebP ? acomod.images[0].HW : acomod.images[0].HJ
     },
     imagePasH (passeio) {
       return supportsWebP ? passeio.images[0].HW : passeio.images[0].HJ
-    },
-    imageAtH (atracao) {
-      return supportsWebP ? atracao.imageH1W : atracao.imageH1J
     }
   },
   beforeRouteEnter (to, from, next) {
@@ -259,12 +188,7 @@ export default {
       firebase.firestore().collection('passeios').get().then(passeios => {
         vm.$store.commit('m_passeios', passeios.docs.map(passeio => passeio.data()))
       })
-      firebase.firestore().collection('eventos').get().then(eventos => {
-        vm.$store.commit('m_eventos', eventos.docs.map(evento => evento.data()))
-      })
-      firebase.firestore().collection('atracoes').get().then(atracoes => {
-        vm.$store.commit('m_atracoes', atracoes.docs.map(atracao => atracao.data()))
-      })
+      
     })
   }
 }
@@ -286,24 +210,10 @@ export default {
       display: flex;
       flex-flow: column;
       overflow-x: hidden;
-      & .title-row {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
+      & .__title {
         padding: 0 7% 1rem 7%;
-        & .__title {
-          font-size: 23px;
-          font-weight: 700;
-        }
-        & .see-all {
-          display: none;
-          font-size: 14px;
-          font-weight: 600;
-          padding-right: 4px;
-        }
-        & .see-all:hover {
-          text-decoration: underline;
-        }
+        font-size: 23px;
+        font-weight: 700;
       }
       & .__subtitle {
         padding: 0 7%;
@@ -366,17 +276,8 @@ export default {
     }
   }
 }
-@media (max-width: 1023px) {
-  .home {
-    & .home-body {
-      & .category-container {
-        & .see-all {
-          display: none;
-        }
-      }
-    }
-  }
-}
+
+
 @media (min-width: 1024px) {
   .home {
     margin-top: var(--navbarHeightDesktop);
@@ -384,12 +285,10 @@ export default {
       margin-bottom: 0;
       & .category-container {
         padding-bottom: 4.5rem;
-        & .title-row {
+        & .__title {
           padding: 0 7% 1.5rem 7%;
-          & .__title {
-            font-size: 29px;
-            font-weight: 700;
-          }
+          font-size: 29px;
+          font-weight: 700;
         }
         & .__subtitle {
         }
