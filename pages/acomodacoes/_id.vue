@@ -573,13 +573,15 @@ export default {
       }
     },
     reservarMobile () {
-      firebase.firestore().doc(`acomods/${this.$route.params.id}/visits/${this.$store.state.visitID}`).update({ 
+      this.$store.commit('m_showHost', true)
+      this.hashHost()
+      /* firebase.firestore().doc(`acomods/${this.$route.params.id}/visits/${this.$store.state.visitID}`).update({ 
         clickedReservaBtn: true
       })
       document.body.setAttribute('style', 'overflow: hidden')
       this.$store.dispatch('a_generateRandomHashs')
       this.$store.commit('m_showReservaAcomod', true)
-      window.location.hash = this.$store.state.randomHashs[1]
+      window.location.hash = this.$store.state.randomHashs[1] */
     },
     backBtn () {
       window.history.back(1)
