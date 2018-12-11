@@ -270,7 +270,6 @@ export default {
       title: 'Reservar: ' + this.passeio.title
     }
   },
-  middleware: 'reservaValidate',
   transition: 'opacity',
   data () {
     return {

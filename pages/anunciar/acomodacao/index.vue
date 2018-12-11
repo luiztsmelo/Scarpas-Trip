@@ -10,24 +10,19 @@
 
       <div class="copy">
 
-        <h1 class="__title">Aumente seus ganhos anunciando na Escarpas Trip</h1>
+        <h1 class="__title">Aumente suas reservas anunciando na Escarpas Trip</h1>
 
 
         <div class="benefits">
 
           <div class="benefit">
-            <img class="__img" src="../../../assets/img/visibility.svg">
-            <p class="__text">Ganhe maior visibilidade e aumente suas reservas</p>
+            <img class="__img" src="../../../assets/img/visits-acomod.svg">
+            <p class="__text">Ganhe maior visibilidade na internet</p>
           </div>
 
           <div class="benefit">
-            <img class="__img" src="../../../assets/img/barracas.svg">
-            <p class="__text">Ganhe visibilidade</p>
-          </div>
-
-          <div class="benefit">
-            <img class="__img" src="../../../assets/img/save-money.svg">
-            <p class="__text">Economize, investindo apenas R$49,00/mês</p>
+            <img class="__img" src="../../../assets/img/money.svg">
+            <p class="__text">Aumente seus ganhos reservando sem intermediários</p>
           </div>
 
         </div>
@@ -141,6 +136,10 @@
 
       <h1 class="__form-title">Configuração {{ $store.state.acomodData.tipoAcomod === 'Suítes' ? 'das Suítes' : 'dos quartos' }}</h1>
 
+      <h3 class="__form-text" v-if="$store.getters.tipoAcomodPousadaSuites">
+        Recomendamos que dê um nome para cada {{ $store.state.acomodData.tipoAcomod === 'Suítes' ? 'suíte, a fim de diferenciá-las. Ex: Standard Suite, Triple Suite, Deluxe Suite etc.' : 'quarto, a fim de diferenciá-los. Ex: Standard Room, Triple Room, Deluxe Room etc.' }}
+      </h3>
+
 
       <div class="quartos">
 
@@ -149,7 +148,8 @@
             <div class="quarto-body">
 
 
-              <input class="__name" type="text" v-model="quarto.name">
+              <h1 class="__name" style="cursor:default" v-if="$store.getters.tipoAcomodInteira">{{ quarto.name }}</h1>
+              <input class="__name" type="text" v-model="quarto.name" v-else>
 
 
               <div class="questions">
@@ -162,7 +162,7 @@
                 </div>
 
                 <div class="question" v-if="$store.getters.tipoAcomodPousadaSuites">
-                  <label>Valor da diária:</label>
+                  <label>Valor por noite:</label>
                   <money 
                     v-model="quarto.valor"
                     onKeyPress="if (event.which == 13) return false">
@@ -1019,7 +1019,14 @@ export default {
       this.$store.commit('m_cadastroAcomod7', false), this.$store.commit('m_cadastroAcomod6', true), window.history.back(1)
     },
     backBtn8 () {
-      this.$store.commit('m_cadastroAcomod8', false), this.$store.commit('m_cadastroAcomod7', true), window.history.back(1)
+      this.$store.commit('m_cadastroAcomod8', false)
+      if (this.$store.getters.tipoAcomodPousadaSuites) {
+        this.$store.commit('m_cadastroAcomod6', true)
+        window.history.back(2)
+      } else {
+        this.$store.commit('m_cadastroAcomod7', true)
+        window.history.back(1)
+      }
     },
     backBtn9 () {
       this.$store.commit('m_cadastroAcomod9', false), this.$store.commit('m_cadastroAcomod8', true), window.history.back(1)
@@ -1081,8 +1088,18 @@ export default {
       }
     },
     nextBtn6 () {
-      if (this.$store.state.acomodData.images.length >= 1) {
-        this.$store.commit('m_cadastroAcomod6', false), this.$store.commit('m_cadastroAcomod7', true), this.$store.commit('m_acomodProgressBar', (100/12)*7), this.scrollTop(), window.location.hash = `${this.randomHashs[7]}`
+      if (this.$store.state.acomodData.images.length >= 3) {
+        this.$store.commit('m_cadastroAcomod6', false)
+        if (this.$store.getters.tipoAcomodPousadaSuites) {
+          this.$store.commit('m_cadastroAcomod8', true)
+          window.location.hash = `${this.randomHashs[8]}`
+          this.$store.commit('m_acomodProgressBar', (100/12)*8)
+        } else {
+          this.$store.commit('m_cadastroAcomod7', true)
+          window.location.hash = `${this.randomHashs[7]}`
+          this.$store.commit('m_acomodProgressBar', (100/12)*7)
+        }        
+        this.scrollTop()
       } else {
         this.$store.commit('show_alert', {
           type: 'warning',
@@ -1173,6 +1190,16 @@ export default {
       acomodData.createdAt = Date.now()
 
       acomodData.hostID = this.user.userID
+
+      /* Se Pousada ou Suítes, valorNoite = valor do quarto mais barato && sort quartos */
+      if (this.$store.getters.tipoAcomodPousadaSuites) {
+        let valores = []
+        acomodData.quartos.forEach(quarto => {
+          valores.push(quarto.valor)
+        })
+        acomodData.valorNoite = Math.min(...valores)
+        acomodData.quartos.sort((a,b) => (a.valor > b.valor) ? 1 : ((b.valor > a.valor) ? -1 : 0))
+      }
 
       /* Se todas as informações preenchidas */
       if (this.formIsCompleted) {
@@ -1482,7 +1509,11 @@ export default {
       } 
       if (value === `#${this.randomHashs[6]}`) {
         this.$store.commit('m_cadastroAcomod6', true)
-        this.$store.commit('m_cadastroAcomod7', false)
+        if (this.$store.getters.tipoAcomodPousadaSuites) {
+          this.$store.commit('m_cadastroAcomod8', false)
+        } else {
+          this.$store.commit('m_cadastroAcomod7', false)
+        }
       } 
       if (value === `#${this.randomHashs[7]}`) {
         this.$store.commit('m_cadastroAcomod7', true)
@@ -2182,7 +2213,7 @@ export default {
           justify-content: space-around;
           width: 100%;
           margin: 3.5rem 0 4.5rem;
-          padding: 0 2.5rem;
+          padding: 0 5rem;
           & .benefit {
             width: 24%;
             margin-bottom: 0;
@@ -2253,7 +2284,7 @@ export default {
         }
       }
       & .quartos {
-        margin: 1.6rem calc(28% - 2%) 0;
+        margin: 1.6rem 28% 0;
         & .quarto {
           & .quarto-body {
             & .__name {

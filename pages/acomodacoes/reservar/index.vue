@@ -313,7 +313,6 @@ export default {
       title: 'Reservar: ' + this.acomod.title
     }
   },
-  middleware: 'reservaValidate',
   transition: 'opacity',
   data () {
     return {

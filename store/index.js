@@ -163,8 +163,6 @@ const store = () => new Vuex.Store({
       createdAt: null,
       acomodID: null,
       hostID: '',
-      recipientID: null,
-      celular: '',
       tipoAcomod: 'Casa',
       totalQuartos: 1,
       totalSuites: 1,
@@ -244,6 +242,7 @@ const store = () => new Vuex.Store({
         celular: ''
       },
       quarto: '',
+      valorQuarto: 0,
       totalHospedes: 1,
       startDate: '',
       endDate: '',
@@ -594,14 +593,26 @@ const store = () => new Vuex.Store({
     m_addQuartos (state) {
       state.acomodData.quartos = [] /* Reset caso back to tipoAcomod */
       const totalQuartosArray = Array.from({ length: state.acomodData.totalQuartos }, (v, k) => k + 1)
-      totalQuartosArray.forEach(n => {
-        state.acomodData.quartos.push({
-          name: `${state.acomodData.tipoAcomod === 'Suítes' ? 'Suíte' : 'Quarto'} ${n}`,
-          acomoda: 1,
-          valor: 0,
-          mobilias: []
+      const totalSuitesArray = Array.from({ length: state.acomodData.totalSuites }, (v, k) => k + 1)
+      if (state.acomodData.tipoAcomod === 'Suítes') {
+        totalSuitesArray.forEach(n => {
+          state.acomodData.quartos.push({
+            name: `Suíte ${n}`,
+            acomoda: 1,
+            valor: 0,
+            mobilias: []
+          })
         })
-      })
+      } else {
+        totalQuartosArray.forEach(n => {
+          state.acomodData.quartos.push({
+            name: `Quarto ${n}`,
+            acomoda: 1,
+            valor: 0,
+            mobilias: []
+          })
+        })
+      }
     },
     m_addMobilia (state, mobilia) {
       state.acomodData.quartos[state.indexQuarto].mobilias.push(mobilia.id)
@@ -976,8 +987,6 @@ const store = () => new Vuex.Store({
         createdAt: null,
         acomodID: null,
         hostID: '',
-        recipientID: null,
-        celular: '',
         tipoAcomod: 'Casa',
         totalQuartos: 1,
         totalSuites: 1,
@@ -1031,6 +1040,7 @@ const store = () => new Vuex.Store({
         createdAt: null,
         reservaID: null,
         acomodID: null,
+        tipoAcomod: '',
         hostID: null,
         guest: {
           firstName: '',
@@ -1038,6 +1048,8 @@ const store = () => new Vuex.Store({
           email: '',
           celular: ''
         },
+        quarto: '',
+        valorQuarto: 0,
         totalHospedes: 1,
         startDate: '',
         endDate: '',

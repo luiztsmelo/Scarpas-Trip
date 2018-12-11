@@ -16,17 +16,12 @@
 
           <div class="benefit">
             <img class="__img" src="../../../assets/img/visibility.svg">
-            <p class="__text">Ganhe maior visibilidade e aumente suas reservas</p>
+            <p class="__text">Ganhe maior visibilidade</p>
           </div>
 
           <div class="benefit">
             <img class="__img" src="../../../assets/img/barracas.svg">
             <p class="__text">Ganhe visibilidade</p>
-          </div>
-
-          <div class="benefit">
-            <img class="__img" src="../../../assets/img/save-money.svg">
-            <p class="__text">Economize, investindo apenas R$49,00/mês</p>
           </div>
 
         </div>
@@ -1763,7 +1758,7 @@ export default {
           justify-content: space-around;
           width: 100%;
           margin: 3.5rem 0 4.5rem;
-          padding: 0 2.5rem;
+          padding: 0 5rem;
           & .benefit {
             width: 24%;
             margin-bottom: 0;
@@ -1837,7 +1832,7 @@ export default {
         margin: 0 28%;
       }
       & .rotas {
-        margin: 1.6rem calc(28% - 2%) 0;
+        margin: 1.6rem 28% 0;
         & .rota {
           & .rota-body {
             & .heading {

@@ -374,7 +374,7 @@
 
           <div class="valor-reserva-total" v-if="reservaAcomod.startDate !== '' && reservaAcomod.endDate !== ''">
             <h3>{{ `R$${acomod.valorNoite.toLocaleString()} x ${$store.state.reservaAcomod.noites} ${$store.state.reservaAcomod.noites == 1 ? 'noite' : 'noites'}` }}</h3>
-            <h3 id="valor">R${{ $store.state.reservaAcomod.valorReservaTotal.toLocaleString() }}</h3>
+            <h3 id="valor">R${{ Math.round(acomod.valorNoite * $store.state.reservaAcomod.noites).toLocaleString() }}</h3>
           </div>
 
 
@@ -520,15 +520,12 @@ export default {
         return formattedDates
       }
     },
-    calcValoresReserva () { /* Em caso de alterações, lembrar também de alterar DatePicker.vue */
+    calcValoresReserva () {
       const startDate = this.reservaAcomod.startDate
       const endDate = this.reservaAcomod.endDate
 
       const noites = differenceInDays(endDate, startDate)
       this.$store.commit('m_noites', noites)
-
-      const valorReservaTotal = Math.round(this.acomod.valorNoite * noites)
-      this.$store.commit('m_valorReservaTotal', valorReservaTotal)
     },
     closedDatepicker () {
       this.showDatepicker = false
@@ -567,6 +564,8 @@ export default {
       if (this.reservaAcomod.startDate === '' && this.reservaAcomod.endDate === '') {
         this.showDatepicker = true
       } else {
+        const valorReservaTotal = Math.round(this.acomod.valorNoite * this.reservaAcomod.noites)
+        this.$store.commit('m_valorReservaTotal', valorReservaTotal)
         this.$store.commit('m_isReservar', true)
         this.$router.push('/acomodacoes/reservar')
         this.$store.commit('m_showNavbar', false)
@@ -613,6 +612,7 @@ export default {
     hash () { return this.$route.hash },
     host () { return this.$store.state.host },
     reservaAcomod () { return this.$store.state.reservaAcomod },
+    quarto () { return this.$store.state.reservaAcomod.quarto },
     quartosOptions () {
       let quartos = []
       this.acomod.quartos.forEach(quarto => {
@@ -624,12 +624,17 @@ export default {
       return this.acomod.comodidades.filter(comodidade => comodidade.condition === true)
     },
     totalHospedesArray () {
-      let hospedesArray = []
-      this.acomod.quartos.forEach(quarto => {
-        hospedesArray.push(quarto.acomoda)
-      })
-      const totalHospedes = hospedesArray.reduce((x, y) => x + y, 0)
-      return Array.from({ length: totalHospedes }, (v, k) => k + 1)
+      if (this.$store.getters.tipoAcomodPousadaSuites) {
+        const quarto = this.acomod.quartos.filter(quarto => quarto.name === this.reservaAcomod.quarto)
+        return Array.from({ length: quarto.map(quarto => quarto.acomoda)[0] }, (v, k) => k + 1)
+      } else {
+        let hospedesArray = []
+        this.acomod.quartos.forEach(quarto => {
+          hospedesArray.push(quarto.acomoda)
+        })
+        const totalHospedes = hospedesArray.reduce((x, y) => x + y, 0)
+        return Array.from({ length: totalHospedes }, (v, k) => k + 1)
+      }
     },
     minDate () {
       return subDays(Date(), 1)
@@ -646,6 +651,13 @@ export default {
   watch: {
     hash (value) {
       value === '' ? this.showComods = false : ''
+    },
+    quarto (value) {
+      if (value && this.$store.getters.tipoAcomodPousadaSuites) {
+        const quarto = this.acomod.quartos.filter(quarto => quarto.name === value)
+        console.log(quarto)
+        this.acomod.valorNoite = quarto.map(quarto => quarto.valor)[0]
+      }
     }
   },
   beforeRouteEnter (to, from, next) {
@@ -783,11 +795,11 @@ export default {
       width: 100%;
       & .__name {
         padding: 4.5rem 0 1rem 0;
-        font-size: 16px;
+        font-size: 17px;
         font-weight: 600;
       }
       & .info {
-        padding: .3rem 0;
+        padding: .2rem 0;
       }
       & .mobilias {
         display: grid;
