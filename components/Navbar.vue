@@ -38,11 +38,11 @@
           
           <li class="__nav-item-no-a" @click="anuncioDropdown = !anuncioDropdown">Anunciar</li>
 
-          <li class="__nav-item-no-a" @click="$modal.show('sign-in-modal')" v-if="$store.state.user.email === null">Login</li>
+          <li class="__nav-item-no-a" @click="$modal.show('sign-in-modal')" v-if="!authUser">Login</li>
 
           <nuxt-link to="/" style="padding-left:0">
             <li>
-              <img class="__user-img" :src="$store.state.user.photoURL" @click="userBox = !userBox" v-if="$store.state.user.email !== null">
+              <img class="__user-img" :src="userPhoto" @click="userBox = !userBox" v-if="authUser">
             </li>
           </nuxt-link>
 
@@ -96,9 +96,16 @@ export default {
   },
   computed: {
     hash () { return this.$route.hash },
-    user () { return this.$store.state.user },
+    authUser () { return this.$store.state.authUser },
     showNavbar () { return this.$store.state.showNavbar },
-    menuIconAnime () { return this.$store.state.menuIconAnime }
+    menuIconAnime () { return this.$store.state.menuIconAnime },
+    userPhoto () {
+      if (this.$store.state.user.photoURL !== null) {
+        return this.$store.state.user.photoURL
+      } else {
+        return require('@/assets/img/user.svg')
+      }
+    }
   },
   watch: {
     hash (value) {

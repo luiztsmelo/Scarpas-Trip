@@ -14,7 +14,6 @@ const store = () => new Vuex.Store({
     */
     isOnline: true,
     isMobile: false,
-    isSignIn: true,
     showNavbar: true,
     showMenu: false,
     showFoobar: true,
@@ -41,12 +40,14 @@ const store = () => new Vuex.Store({
     */
     authUser: false,
     user: {
-      userID: null,
-      firstName: null,
-      fullName: null,
-      email: null,
-      photoURL: null
+      userID: '',
+      firstName: '',
+      fullName: '',
+      email: '',
+      photoURL: ''
     },
+    isSignIn: true,
+    isEmailSignin: false,
     /*
     -------------------- CREDIT CARD --------------------
     */
@@ -1199,13 +1200,18 @@ const store = () => new Vuex.Store({
         /* Se sign-in */
         if (user !== null) {
           try {
-            commit('m_user', {
-              userID: user.uid,
-              firstName: user.displayName.split(' ')[0],
-              fullName: user.displayName,
-              email: user.email,
-              photoURL: user.providerData[0].providerId === 'facebook.com' ? `${user.photoURL}?height=300` : user.photoURL
-            })
+            if (state.isEmailSignin) {
+              state.user.userID = user.uid
+              state.user.firstName = state.user.fullName.split(' ')[0]
+            } else {
+              commit('m_user', {
+                userID: user.uid,
+                firstName: user.displayName.split(' ')[0],
+                fullName: user.displayName,
+                email: user.email,
+                photoURL: user.providerData[0].providerId === 'facebook.com' ? `${user.photoURL}?height=300` : user.photoURL
+              })
+            }
             commit('m_authUser', true)
             /* Get user para chechar se já existe na Firestore */
             const userDoc = await firebase.firestore().doc(`users/${user.uid}`).get()
@@ -1226,11 +1232,11 @@ const store = () => new Vuex.Store({
         await firebase.auth().signOut()
         commit('m_authUser', false)
         commit('m_user', {
-          userID: null,
-          firstName: null,
-          fullName: null,
-          email: null,
-          photoURL: null
+          userID: '',
+          firstName: '',
+          fullName: '',
+          email: '',
+          photoURL: ''
         })
       } catch (err) {
         console.log(err)
