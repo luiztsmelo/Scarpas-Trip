@@ -8,7 +8,7 @@
 
 
         <div class="head">
-          <img class="__host-img" :src="host.photoURL">
+          <img class="__host-img" :src="userPhoto">
 
           <h1 class="__host-name">{{ host.fullName }}</h1>
 
@@ -66,6 +66,13 @@ export default {
     hash () { return this.$route.hash },
     acomod () { return this.$store.state.acomod },
     host () { return this.$store.state.host },
+    userPhoto () {
+      if (this.host.photoURL !== '') {
+        return this.host.photoURL
+      } else {
+        return require('@/assets/img/user.svg')
+      }
+    },
     createdAt () {
       return format(this.host.createdAt, 'MMMM [de] YYYY', { locale: pt })
     },

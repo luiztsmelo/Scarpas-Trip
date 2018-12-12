@@ -870,6 +870,7 @@ export default {
       cardHolderNameError: false,
       cardExpirationDateError: false,
       cardCvvError: false,
+      celularError: false,
       cpfError: false,
       zipcodeError: false,
       neighborhoodError: false,
@@ -1252,17 +1253,31 @@ export default {
       }
 
       /* Se todas as informações preenchidas */
-      if (this.formIsCompleted) {
+      if (this.celular.length === 17) { /* MUDAR DEPOIS P/ this.formIsCompleted */
 
         try {
           this.$store.commit('m_loader', true)
 
+
           /* Criar assinatura no Pagarme, criar acomod na Firestore e atualizar user */
-          const subscription = await firebase.functions().httpsCallable('newAcomod')({
+          /* const subscription = await firebase.functions().httpsCallable('newAcomod')({
             acomodData: acomodData,
             creditCard: this.$store.state.creditCard,
             customer: this.$store.state.customer
+          }) */
+
+
+          /* __________________________ REMOVER DEPOIS E DEIXAR APENAS A FUNCTION ACIMA __________________________*/
+          /* Update user Firestore */
+          await firebase.firestore().doc(`users/${acomodData.hostID}`).update({ 
+            celular: this.$store.state.customer.celular,
+            instagram: this.$store.state.customer.instagram
           })
+          /* Set acomod Firestore */
+          await firebase.firestore().doc(`acomods/${acomodData.acomodID}`).set(acomodData)
+          /* _____________________________________________________________________________________________________*/
+
+
 
           /* Necessário para o correto funcionamento do backBtn _id (Ver middleware: newAcomodConcludedCheck.js) */
           this.$store.state.concludedNewAcomod = true
@@ -1290,10 +1305,11 @@ export default {
           title: 'Erro',
           message: 'Informações incompletas.'
         })
-        this.cardHolderName.length < 3 ? this.cardHolderNameError = true : this.cardHolderNameError = false
         !valid.number(this.cardNumber).isValid ? this.cardNumberError = true : this.cardNumberError = false
         !valid.expirationDate(this.cardExpirationDate).isValid ?  this.cardExpirationDateError = true :  this.cardExpirationDateError = false
         !valid.cvv(this.cardCVV).isValid ? this.cardCvvError = true : this.cardCvvError = false
+        this.celular.length < 17 ? this.celularError = true : this.celularError = false
+        this.cpf.length < 14 || !CPF.validate(this.cpf) ? this.cpfError = true : this.cpfError = false
         this.cpf.length < 14 || !CPF.validate(this.cpf) ? this.cpfError = true : this.cpfError = false
         this.zipcode.length < 9 || !this.$store.state.validZipcode ? this.zipcodeError = true : this.zipcodeError = false
         this.street === null || this.street === '' ? this.streetError = true : this.streetError = false
@@ -1317,6 +1333,7 @@ export default {
     cardCVV () { return this.$store.state.creditCard.cardCVV },
     cardType () { return this.$store.state.cardType },
     cpf () { return this.$store.state.customer.cpf },
+    celular () { return this.$store.state.customer.celular },
     instagram () { return this.$store.state.customer.instagram },
     zipcode () { return this.$store.state.customer.zipcode },
     street () { return this.$store.state.customer.street },
@@ -1375,7 +1392,8 @@ export default {
       return this.$store.state.user.fullName !== '' && this.$store.state.user.email !== '' && this.password !== '' ? 'background: #FFA04F' : ''
     },
     form12ok () {
-      return this.formIsCompleted ? 'background: #FFA04F' : ''
+      /* return this.formIsCompleted ? 'background: #FFA04F' : '' */
+      return this.celular.length === 17 ? 'background: #FFA04F' : ''
     },
     formIsCompleted () {
       if (this.cardHolderName !== '' && valid.number(this.cardNumber).isValid && valid.expirationDate(this.cardExpirationDate).isValid && valid.cvv(this.cardCVV).isValid && CPF.validate(this.cpf) && this.cpf.length === 14 && this.zipcode.length === 9 && this.$store.state.validZipcode && this.street !== '' && this.street !== null && this.streetNumber !== '' && this.streetNumber !== null && this.neighborhood !== '' && this.neighborhood !== null && this.city !== '' && this.city !== null && this.state !== '' && this.state !== null) {

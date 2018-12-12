@@ -89,7 +89,7 @@
 
         <!-- ______________________________ ANUNCIANTE ______________________________ -->
         <div class="anunciante-box">
-          <img class="__anunciante-img" :src="host.photoURL" @click="$store.commit('m_showHost', true), hashHost()">
+          <img class="__anunciante-img" :src="userPhoto" @click="$store.commit('m_showHost', true), hashHost()">
           <div class="box-flex-column">
             <h3 style="user-select:none">Hospedado por</h3>
             <p class="__anunciante-name" @click="$store.commit('m_showHost', true), hashHost()">{{ host.fullName }}</p>
@@ -613,6 +613,13 @@ export default {
     host () { return this.$store.state.host },
     reservaAcomod () { return this.$store.state.reservaAcomod },
     quarto () { return this.$store.state.reservaAcomod.quarto },
+    userPhoto () {
+      if (this.host.photoURL !== '') {
+        return this.host.photoURL
+      } else {
+        return require('@/assets/img/user.svg')
+      }
+    },
     quartosOptions () {
       let quartos = []
       this.acomod.quartos.forEach(quarto => {
