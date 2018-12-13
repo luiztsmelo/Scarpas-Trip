@@ -497,8 +497,9 @@ export default {
       return mobilia === 'cama_solteiro' ? 'Cama solteiro'
            : mobilia === 'cama_casal' ? 'Cama casal'
            : mobilia === 'cama_queen' ? 'Cama queen'
-           : mobilia === 'bicama' ? 'Bicama'
            : mobilia === 'cama_king' ? 'Cama king'
+           : mobilia === 'bicama' ? 'Bicama'
+           : mobilia === 'sofa' ? 'Sofá'
            : ''
     },
     /* ******************** COMODIDADES ******************** */
