@@ -16,12 +16,12 @@
 
           <div class="benefit">
             <img class="__img" src="../../../assets/img/visibility.svg">
-            <p class="__text">Ganhe maior visibilidade</p>
+            <p class="__text">Ganhe maior visibilidade na internet</p>
           </div>
 
           <div class="benefit">
-            <img class="__img" src="../../../assets/img/barracas.svg">
-            <p class="__text">Ganhe visibilidade</p>
+            <img class="__img" src="../../../assets/img/investment.svg">
+            <p class="__text">Aumente seus ganhos reservando sem intermediários</p>
           </div>
 
         </div>
@@ -303,7 +303,6 @@
       <h1 class="__form-title">Quais formas de pagamento você aceita?</h1>
 
     
-
 
       <div class="back-next"> 
         <div class="back-next-body">
@@ -848,7 +847,7 @@ export default {
       this.$store.commit('m_cadastroPasseio6', false), this.$store.commit('m_cadastroPasseio5', true), window.history.back(1)
     },
     backBtn7 () {
-      this.$store.commit('m_cadastroPasseio7', false), this.$store.commit('m_cadastroPasseio6', true), window.history.back(1)
+      this.$store.commit('m_cadastroPasseio7', false), this.$store.commit('m_cadastroPasseio5', true), window.history.back(2)
     },
     backBtn8 () {
       this.$store.commit('m_cadastroPasseio8', false), this.$store.commit('m_cadastroPasseio7', true), window.history.back(1)
@@ -898,7 +897,7 @@ export default {
     },
     nextBtn5 () {
       if (this.$store.state.passeioData.rotas.length > 0) {
-        this.$store.commit('m_cadastroPasseio5', false), this.$store.commit('m_cadastroPasseio6', true), this.$store.commit('m_passeioProgressBar', (100/10)*6), this.scrollTop(), window.location.hash = `${this.randomHashs[6]}`
+        this.$store.commit('m_cadastroPasseio5', false), this.$store.commit('m_cadastroPasseio7', true), this.$store.commit('m_passeioProgressBar', (100/10)*7), this.scrollTop(), window.location.hash = `${this.randomHashs[7]}`
       } else {
         this.$store.commit('show_alert', {
           type: 'warning',
@@ -1321,10 +1320,11 @@ export default {
       if (value === `#${this.randomHashs[5]}`) {
         this.$store.commit('m_cadastroPasseio5', true)
         this.$store.commit('m_cadastroPasseio6', false)
+        this.$store.commit('m_cadastroPasseio7', false)
       } 
       if (value === `#${this.randomHashs[6]}`) {
-        this.$store.commit('m_cadastroPasseio6', true)
-        this.$store.commit('m_cadastroPasseio7', false)
+        this.$store.commit('m_cadastroPasseio5', true)
+        this.$store.commit('m_cadastroPasseio6', false)
       } 
       if (value === `#${this.randomHashs[7]}`) {
         this.$store.commit('m_cadastroPasseio7', true)

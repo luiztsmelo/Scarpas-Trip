@@ -16,12 +16,12 @@
         <div class="benefits">
 
           <div class="benefit">
-            <img class="__img" src="../../../assets/img/visits-acomod.svg">
+            <img class="__img" src="../../../assets/img/visibility.svg">
             <p class="__text">Ganhe maior visibilidade na internet</p>
           </div>
 
           <div class="benefit">
-            <img class="__img" src="../../../assets/img/money.svg">
+            <img class="__img" src="../../../assets/img/investment.svg">
             <p class="__text">Aumente seus ganhos reservando sem intermediários</p>
           </div>
 
