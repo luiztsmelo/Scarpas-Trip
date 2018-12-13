@@ -385,31 +385,89 @@
 
 
 
-    <!-- ________________________________________ 9 - CADASTRO ________________________________________ -->
+    <!-- ________________________________________ 9 - IDENTIFICAÇÃO ________________________________________ -->
     <form class="cadastro-passeio" v-if="$store.state.cadastroPasseio9">
 
-      <h1 class="__form-title">
-        {{ !authUser ? 'Antes de continuar, precisamos de seu cadastro' : `Ótimo ${user.firstName}, só mais algumas informações de contato` }}
-      </h1> 
+      <h1 class="__form-title">Identificação</h1> 
 
 
-      <div class="signin-btns" v-if="!authUser">
+      <div class="signin-btns" v-if="!$store.state.isEmailSignin">
         <button type="button" class="google-btn" @click="$store.dispatch('a_googleSignIn')">Continuar com Google</button>
         <button type="button" class="facebook-btn" @click="$store.dispatch('a_facebookSignIn')">Continuar com Facebook</button>
+        <button type="button" class="email-btn" @click="$store.state.isEmailSignin = true">Continuar com E-mail</button>
       </div>
 
 
-      <h4 class="__termos" style="padding-top:1rem" v-if="!authUser">Ao se cadastrar com uma das opções acima, somente seu e-mail, nome e foto de perfil serão requisitados. Para mais informações, leia nossa <nuxt-link to="/termos#politica_privacidade">Política de Privacidade</nuxt-link>.</h4>
+      <div class="signin-email" v-else>
+
+        <!-- NOME -->
+        <div class="item-form">
+          <label :class="[ nameError ? 'has-error-label' : '' ]">Seu nome</label>
+          <input
+            :class="[ nameError ? 'has-error' : '' ]"
+            type="text" pattern="[A-Za-z]"
+            v-model="$store.state.user.fullName">
+        </div><!-- NOME -->
+
+        <!-- E-MAIL -->
+        <div class="item-form">
+          <label :class="[ emailError ? 'has-error-label' : '' ]">E-mail</label>
+          <input
+            ref="email"
+            :class="[ emailError ? 'has-error' : '' ]"
+            @blur="validateEmail"
+            type="email"
+            v-model="$store.state.user.email">
+        </div><!-- E-MAIL -->
+
+        <!-- SENHA -->
+        <div class="item-form">
+          <label :class="[ passwordError ? 'has-error-label' : '' ]">Senha</label>
+          <input
+            ref="password"
+            :class="[ passwordError ? 'has-error' : '' ]"
+            type="password"
+            v-model="password">
+        </div><!-- SENHA -->
+
+      </div>
 
 
-      <div v-if="authUser">
+      <div class="back-next"> 
+        <div class="back-next-body">
+          <button type="button" class="__back" @click="backBtn9">Voltar</button>
+          <button type="button" class="__next" :style="form9ok" @click="nextBtn9">Próximo</button>
+        </div>
+      </div> 
+    
+    </form><!-- ________________________________________ 9 - IDENTIFICAÇÃO ________________________________________ -->
+
+
+
+
+
+
+
+    <!-- ________________________________________ 10 - PAGAMENTO ________________________________________ -->
+    <form class="cadastro-passeio" v-if="$store.state.cadastroPasseio10">
+
+      <h1 class="__form-title">Informações de contato e confirmação</h1>   
+
+      <h3 class="__form-text">Ótimo {{ user.firstName }}! Agora só precisamos de algumas informações de contato suas e então você estará apto a colocar seu anúncio no ar!</h3>
+
+
+      <div class="payment-box">
+
+
+        <h2 class="__form-subtitle">Informações de contato</h2>
 
         <!-- CELULAR -->
         <div class="item-form">
-          <label>Celular / WhatsApp</label>
+          <label :class="[ celularError ? 'has-error-label' : '' ]">Celular / WhatsApp</label>
           <masked-input
             ref="celular"
             type="tel"
+            :class="[ celularError ? 'has-error' : '' ]"
             v-model="$store.state.customer.celular"
             :mask="['+', 5, 5, ' ', /\d/, /\d/, ' ', /\d/, /\d/, /\d/, /\d/, /\d/, ' ', /\d/, /\d/, /\d/, /\d/]"
             :guide="false"
@@ -429,51 +487,23 @@
             v-model="$store.state.customer.instagram"
             placeholder="@username">
         </div><!-- INSTAGRAM -->
-
-      </div>
-
-
-      <div class="back-next"> 
-        <div class="back-next-body">
-          <button type="button" class="__back" @click="backBtn9">Voltar</button>
-          <button type="button" class="__next" :style="form9ok" @click="nextBtn9">Próximo</button>
-        </div>
-      </div> 
-    
-    </form><!-- ________________________________________ 9 - CADASTRO ________________________________________ -->
-
-
-
-
-
-
-
-    <!-- ________________________________________ 10 - PAGAMENTO ________________________________________ -->
-    <form class="cadastro-passeio" v-if="$store.state.cadastroPasseio10">
-
-      <h1 class="__form-title">Detalhes sobre o pagamento</h1>
-
-      <h3 class="__form-text">{{ user.firstName }}, será cobrada uma mensalidade de <span style="font-weight:600">R$49,00</span> em seu cartão de crédito. Não se preocupe, não cobraremos multa caso queira cancelar futuramente.</h3>
-
-
-      <div class="payment-box">
         
         
-        <h2 class="__form-subtitle">Dados do cartão de crédito</h2>
+        <!-- <h2 class="__form-subtitle">Dados do cartão de crédito</h2> -->
 
         <!-- CARD HOLDER NAME -->
-        <div class="item-form">
+        <!-- <div class="item-form">
           <label :class="[ cardHolderNameError ? 'has-error-label' : '' ]">Nome impresso no Cartão</label>
           <input
             :class="[ cardHolderNameError ? 'has-error' : '' ]"
             type="text" pattern="[A-Za-z]"
             @keypress="keyEnterName"
             v-model="$store.state.creditCard.cardHolderName">
-        </div><!-- CARD HOLDER NAME -->
+        </div> --><!-- CARD HOLDER NAME -->
 
 
         <!-- CARD NUMBER -->
-        <div class="item-form">
+        <!-- <div class="item-form">
           <label :class="[ cardNumberError ? 'has-error-label' : '' ]">Número do Cartão</label>
           <masked-input
             ref="cardNumber"
@@ -485,13 +515,13 @@
             :guide="false"
             placeholder="0000 0000 0000 0000">
           </masked-input>
-        </div><!-- CARD NUMBER -->
+        </div> --><!-- CARD NUMBER -->
 
 
-        <div style="display:flex; justify-content:space-between">
+        <!-- <div style="display:flex; justify-content:space-between"> -->
                 
           <!-- CARD EXPIRATION -->
-          <div class="item-form" style="flex: 50%; padding-right:.7rem">
+          <!-- <div class="item-form" style="flex: 50%; padding-right:.7rem">
             <label :class="[ cardExpirationDateError ? 'has-error-label' : '' ]">Validade</label>
             <masked-input
               ref="cardExpirationDate"
@@ -502,10 +532,10 @@
               :guide="false"
               placeholder="MM / AA">
             </masked-input>
-          </div><!-- CARD EXPIRATION -->
+          </div> --><!-- CARD EXPIRATION -->
 
           <!-- CVV -->
-          <div class="item-form" style="flex:50%; padding-left:.7rem">
+          <!-- <div class="item-form" style="flex:50%; padding-left:.7rem">
             <label :class="[ cardCvvError ? 'has-error-label' : '' ]">CVV</label>
             <masked-input
               ref="cvv"
@@ -517,13 +547,13 @@
               :guide="false"
               placeholder="123">
             </masked-input>
-          </div><!-- CVV -->
+          </div> --><!-- CVV -->
 
-        </div>
+        <!-- </div> -->
 
 
         <!-- CPF -->
-        <div class="item-form">
+        <!-- <div class="item-form">
           <label :class="[ cpfError ? 'has-error-label' : '' ]">CPF</label>
           <masked-input
             ref="cpf"
@@ -534,17 +564,17 @@
             :guide="false"
             placeholder="000.000.000-00">
           </masked-input>
-        </div><!-- CPF -->
+        </div> --><!-- CPF -->
 
 
 
 
-        <h2 class="__form-subtitle" style="margin-top: 1.6rem">Endereço de cobrança</h2>
-
-        <p>Necessário apenas para a validação de seu cartão de crédito.</p>
+        <!-- <h2 class="__form-subtitle" style="margin-top: 1.6rem">Endereço de cobrança</h2>
+ -->
+        <!-- <p>Necessário apenas para a validação de seu cartão de crédito.</p> -->
 
         <!-- CEP -->
-        <div class="item-form">
+        <!-- <div class="item-form">
           <label :class="[ zipcodeError ? 'has-error-label' : '' ]">CEP</label>
           <masked-input
             ref="zipcode"
@@ -555,11 +585,11 @@
             :guide="false"
             placeholder="00000-000">
           </masked-input>
-        </div><!-- CEP -->
+        </div> --><!-- CEP -->
 
 
         <!-- ENDEREÇO -->
-        <div class="item-form">
+        <!-- <div class="item-form">
           <label :class="[ streetError ? 'has-error-label' : '' ]">Rua</label>
           <input
             ref="street"
@@ -568,13 +598,13 @@
             @keypress="keyEnterStreet"
             v-model="$store.state.customer.street"
             placeholder="Endereço">
-        </div><!-- ENDEREÇO -->
+        </div> --><!-- ENDEREÇO -->
 
 
-        <div class="flex" style="display:flex; justify-content:space-between">
+        <!-- <div class="flex" style="display:flex; justify-content:space-between"> -->
 
         <!-- NÚMERO -->
-        <div class="item-form" style="flex:50%; padding-right:.7rem">
+        <!-- <div class="item-form" style="flex:50%; padding-right:.7rem">
           <label :class="[ streetNumberError ? 'has-error-label' : '' ]">Número</label>
           <masked-input
             ref="streetNumber"
@@ -585,25 +615,25 @@
             :mask="[/\d/, /\d/, /\d/, /\d/]"
             :guide="false">
           </masked-input>
-        </div><!-- NÚMERO -->
+        </div> --><!-- NÚMERO -->
 
 
         <!-- BAIRRO -->
-        <div class="item-form" style="flex:50%; padding-left:.7rem">
+        <!-- <div class="item-form" style="flex:50%; padding-left:.7rem">
           <label :class="[ neighborhoodError ? 'has-error-label' : '' ]">Bairro</label>
           <input
             ref="bairro"
             :class="[ neighborhoodError ? 'has-error' : '' ]"
             type="text"
             v-model="$store.state.customer.neighborhood">
-        </div><!-- BAIRRO -->
+        </div> --><!-- BAIRRO -->
 
-      </div>
+      <!-- </div> -->
 
-      <div class="flex" style="display:flex; justify-content:space-between; align-items:center">
+      <!-- <div class="flex" style="display:flex; justify-content:space-between; align-items:center"> -->
 
         <!-- CIDADE -->
-        <div class="item-form" style="flex:50%; padding-right:.7rem">
+        <!-- <div class="item-form" style="flex:50%; padding-right:.7rem">
           <label :class="[ cityError ? 'has-error-label' : '' ]">Cidade</label>
           <input
             ref="city"
@@ -612,11 +642,11 @@
             type="text"
             v-model="$store.state.customer.city"
             disabled>
-        </div><!-- CIDADE -->
+        </div> --><!-- CIDADE -->
 
 
         <!-- ESTADO -->
-        <div class="item-form" style="flex:50%; padding-left:.7rem">
+        <!-- <div class="item-form" style="flex:50%; padding-left:.7rem">
           <label :class="[ stateError ? 'has-error-label' : '' ]">Estado</label>
           <input
             ref="state"
@@ -625,12 +655,12 @@
             type="text"
             v-model="$store.state.customer.state"
             disabled>
-        </div><!-- ESTADO -->
+        </div> --><!-- ESTADO -->
 
-      </div>
+      <!-- </div> -->
 
 
-        <h4 class="__termos">Ao anunciar, você concorda com a nossa <a href="/termos#politica_privacidade" target="_blank">Política de Privacidade</a> e <a href="/termos" target="_blank">Termos de Serviço</a>.</h4>
+        <!-- <h4 class="__termos">Ao anunciar, você concorda com a nossa <a href="/termos#politica_privacidade" target="_blank">Política de Privacidade</a> e <a href="/termos" target="_blank">Termos de Serviço</a>.</h4> -->
 
       </div>
 
@@ -681,10 +711,14 @@ export default {
       showCroppaModal: false,
       isUploading: false,
       uploadProgress: 0,
+      password: '',
+      nameError: false,
+      emailError: false,
       cardNumberError: false,
       cardHolderNameError: false,
       cardExpirationDateError: false,
       cardCvvError: false,
+      celularError: false,
       cpfError: false,
       zipcodeError: false,
       neighborhoodError: false,
@@ -695,6 +729,9 @@ export default {
     }
   },
   methods: {
+    validateEmail () {
+      !Email.validate(this.$store.state.user.email) ? this.emailError = true : this.emailError = false
+    },
     keyEnterName () {
       if (event.key === 'Enter') {
         scrollIntoView(this.$refs.cardNumber.$el)
@@ -820,7 +857,7 @@ export default {
       this.$store.commit('m_cadastroPasseio9', false), this.$store.commit('m_cadastroPasseio8', true), window.history.back(1)
     },
     backBtn10 () {
-      this.$store.commit('m_cadastroPasseio10', false), this.$store.commit('m_cadastroPasseio9', true), window.history.back(1)
+      this.$store.commit('m_cadastroPasseio10', false), this.$store.commit('m_cadastroPasseio8', true), window.history.back(2)
     },
     /* ******************** NEXT BUTTONS ******************** */
     hashPasseio () {
@@ -894,7 +931,12 @@ export default {
     },
     nextBtn8 () {
       if (this.$store.state.passeioData.subtitle !== '') {
-        this.$store.commit('m_cadastroPasseio8', false), this.$store.commit('m_cadastroPasseio9', true), this.$store.commit('m_passeioProgressBar', (100/10)*9), this.scrollTop(), window.location.hash = `${this.randomHashs[9]}`
+        this.$store.commit('m_cadastroPasseio8', false)
+        if (this.authUser) {
+          this.$store.commit('m_cadastroPasseio10', true), this.$store.commit('m_passeioProgressBar', (100/10)*10), this.scrollTop(), window.location.hash = `${this.randomHashs[10]}`
+        } else {
+          this.$store.commit('m_cadastroPasseio9', true), this.$store.commit('m_passeioProgressBar', (100/10)*9), this.scrollTop(), window.location.hash = `${this.randomHashs[9]}`
+        }
       } else {
         this.$store.commit('show_alert', {
           type: 'warning',
@@ -903,29 +945,59 @@ export default {
         })
       }
     },
-    nextBtn9 () {
-      if (!this.authUser) {
+    async nextBtn9 () {
+      if (this.$store.state.isEmailSignin) {
+        try {
+          this.$store.commit('m_loader', true)
+
+          const user = await firebase.firestore().collection('users').where('email', '==', this.$store.state.user.email).get()
+
+          if (user.empty) {
+            console.log('User do not exists')
+            await firebase.auth().createUserWithEmailAndPassword(this.$store.state.user.email, this.password)
+            this.$store.dispatch('a_authStateObserver')
+          } else {
+            console.log('User exists')
+            await firebase.auth().signInWithEmailAndPassword(this.$store.state.user.email, this.password)
+            this.$store.dispatch('a_authStateObserver')
+          }
+
+        } catch (err) {
+          this.$store.commit('m_loader', false)
+          console.log(err)
+          if (err.code === 'auth/weak-password') {
+            this.$store.commit('show_alert', {
+              type: 'warning',
+              title: 'Ops',
+              message: 'Senha fraca. Precisa ter pelo menos 6 dígitos.'
+            })
+          }
+          if (err.code === 'auth/wrong-password') {
+            this.$store.commit('show_alert', {
+              type: 'warning',
+              title: 'Ops',
+              message: 'Senha incorreta.'
+            })
+          }
+        }
+        
+      } else {
         this.$store.commit('show_alert', {
           type: 'warning',
           title: 'Ops',
           message: 'Conecte-se com uma de suas contas para continuar.'
         })
-      } else if (this.$store.state.customer.celular.length === 17 && this.authUser) {
-          this.$store.commit('m_cadastroPasseio9', false)
-          this.$store.commit('m_cadastroPasseio10', true)
-          this.$store.commit('m_passeioProgressBar', (100/10)*10)
-          this.scrollTop()
-          window.location.hash = `${this.randomHashs[10]}`
-          this.$store.state.creditCard.cardHolderName = this.user.fullName
-          this.$store.state.customer.name = this.user.fullName
-          this.$store.state.customer.email = this.user.email
-      } else {
-        this.$store.commit('show_alert', {
-          type: 'warning',
-          title: 'Ops',
-          message: 'Adicione um número de celular válido.'
-        })
       }
+    },
+    nextTo10 () {
+      this.$store.commit('m_cadastroPasseio9', false)
+      this.$store.commit('m_cadastroPasseio10', true)
+      this.$store.commit('m_passeioProgressBar', (100/10)*10)
+      this.scrollTop()
+      window.location.hash = `${this.randomHashs[10]}`
+      this.$store.state.creditCard.cardHolderName = this.user.fullName
+      this.$store.state.customer.name = this.user.fullName
+      this.$store.state.customer.email = this.user.email
     },
     async concluir () {
       const passeioData = this.$store.state.passeioData
@@ -935,19 +1007,30 @@ export default {
       passeioData.hostID = this.user.userID
 
       /* Se todas as informações preenchidas */
-      if (this.formIsCompleted) {
+      if (this.celular.length === 17) { /* MUDAR DEPOIS P/ this.formIsCompleted */
 
         try {
           this.$store.commit('m_loader', true)
 
+
           /* Criar assinatura no Pagarme, criar passeio na Firestore e atualizar user */
-          const subscription = await firebase.functions().httpsCallable('newPasseio')({
+          /* const subscription = await firebase.functions().httpsCallable('newPasseio')({
             passeioData: passeioData,
             creditCard: this.$store.state.creditCard,
             customer: this.$store.state.customer
-          })
+          }) */
 
-          console.log(subscription)
+
+          /* __________________________ REMOVER DEPOIS E DEIXAR APENAS A FUNCTION ACIMA __________________________*/
+          /* Update user Firestore */
+          await firebase.firestore().doc(`users/${passeioData.hostID}`).update({ 
+            celular: this.$store.state.customer.celular,
+            instagram: this.$store.state.customer.instagram
+          })
+          /* Set passeio Firestore */
+          await firebase.firestore().doc(`passeios/${passeioData.passeioID}`).set(passeioData)
+          /* _____________________________________________________________________________________________________*/
+
 
           /* Necessário para o correto funcionamento do backBtn _id (Ver middleware: newPasseioConcludedCheck.js) */
           this.$store.state.concludedNewPasseio = true
@@ -979,6 +1062,7 @@ export default {
         !valid.number(this.cardNumber).isValid ? this.cardNumberError = true : this.cardNumberError = false
         !valid.expirationDate(this.cardExpirationDate).isValid ?  this.cardExpirationDateError = true :  this.cardExpirationDateError = false
         !valid.cvv(this.cardCVV).isValid ? this.cardCvvError = true : this.cardCvvError = false
+        this.celular.length < 17 ? this.celularError = true : this.celularError = false
         this.cpf.length < 14 || !CPF.validate(this.cpf) ? this.cpfError = true : this.cpfError = false
         this.zipcode.length < 9 || !this.$store.state.validZipcode ? this.zipcodeError = true : this.zipcodeError = false
         this.street === null || this.street === '' ? this.streetError = true : this.streetError = false
@@ -1002,6 +1086,7 @@ export default {
     cardCVV () { return this.$store.state.creditCard.cardCVV },
     cardType () { return this.$store.state.cardType },
     cpf () { return this.$store.state.customer.cpf },
+    celular () { return this.$store.state.customer.celular },
     instagram () { return this.$store.state.customer.instagram },
     zipcode () { return this.$store.state.customer.zipcode },
     street () { return this.$store.state.customer.street },
@@ -1051,10 +1136,11 @@ export default {
       return this.$store.state.passeioData.subtitle !== '' ? 'background: #198CFE' : ''
     },
     form9ok () {
-      return this.$store.state.customer.celular.length === 17 && this.authUser ? 'background: #198CFE' : ''
+      return this.$store.state.user.fullName !== '' && this.$store.state.user.email !== '' && this.password !== '' ? 'background: #198CFE' : ''
     },
     form10ok () {
-      return this.formIsCompleted ? 'background: #198CFE' : ''
+      /* return this.formIsCompleted ? 'background: #198CFE' : '' */
+      return this.celular.length === 17 ? 'background: #198CFE' : ''
     },
     formIsCompleted () {
       if (this.cardHolderName !== '' && valid.number(this.cardNumber).isValid && valid.expirationDate(this.cardExpirationDate).isValid && valid.cvv(this.cardCVV).isValid && CPF.validate(this.cpf) && this.cpf.length === 14 && this.zipcode.length === 9 && this.$store.state.validZipcode && this.street !== '' && this.street !== null && this.streetNumber !== '' && this.streetNumber !== null && this.neighborhood !== '' && this.neighborhood !== null && this.city !== '' && this.city !== null && this.state !== '' && this.state !== null) {
@@ -1065,6 +1151,12 @@ export default {
     }
   },
   watch: {
+    authUser (status) {
+      if (status === true) {
+        this.$store.commit('m_loader', false)
+        this.nextTo10()
+      }
+    },
     cardNumber (value) {
       const cardNumber = valid.number(value)
       cardNumber.isPotentiallyValid ? this.cardNumberError = false : this.cardNumberError = true
@@ -1185,6 +1277,7 @@ export default {
         this.zipcodeError = false
       }
     },
+    celular (value) { value !== null ? this.celularError = false : null },
     street (value) { value !== null ? this.streetError = false : null },
     streetNumber (value) { value !== null ? this.streetNumberError = false : null },
     neighborhood (value) { value !== null ? this.neighborhoodError = false : null },
@@ -1239,11 +1332,17 @@ export default {
       } 
       if (value === `#${this.randomHashs[8]}`) {
         this.$store.commit('m_cadastroPasseio8', true)
-        this.$store.commit('m_cadastroPasseio9', false)
+        if (this.authUser) {
+          this.$store.commit('m_cadastroPasseio10', false)
+        } else {
+          this.$store.commit('m_cadastroPasseio9', false)
+        }
       } 
       if (value === `#${this.randomHashs[9]}`) {
-        this.$store.commit('m_cadastroPasseio9', true)
-        this.$store.commit('m_cadastroPasseio10', false)
+        if (this.authUser) {
+          this.$store.commit('m_cadastroPasseio10', false)
+          this.$store.commit('m_cadastroPasseio8', true)
+        }
       } 
       if (value === `#${this.randomHashs[10]}`) {
         this.$store.commit('m_cadastroPasseio10', true)
@@ -1395,18 +1494,6 @@ export default {
       font-size: 17px;
       padding: .5rem 7% .2rem;
       line-height: 26px;
-    }
-    & .__termos {
-      padding: 0 7%;
-      font-size: 15px;
-      font-weight: 400;
-      line-height: 20px;
-      & a {
-        color: var(--colorPasseio);
-      }
-      & a:hover {
-        text-decoration: underline;
-      }
     }
     & textarea {
       padding: 0 7%;
@@ -1580,12 +1667,12 @@ export default {
         & h1 {
           font-weight: 300;
         }
-        & canvas {
+        & .croppa-container {
           cursor: grab;
-          margin: 2.5rem 0 1rem 0;
+          margin: 1.5rem 0;
           border: 2px dashed white;
         }
-        & canvas:active {
+        & .croppa-container:active {
           cursor: grabbing;
         }
       }
@@ -1678,20 +1765,32 @@ export default {
       padding: 0 7%;
       & .facebook-btn {
         width: 17rem;
-        margin: .6rem 0;
+        margin: .7rem 0;
         height: 3.4rem;
         text-align: start;
-        padding-left: 50px;
+        padding-left: 55px;
         font-size: 15px;
       }
       & .google-btn {
         width: 17rem;
-        margin: .6rem 0;
+        margin: .7rem 0;
         height: 3.4rem;
         text-align: start;
-        padding-left: 50px;
+        padding-left: 55px;
         font-size: 15px;
       }
+      & .email-btn {
+        width: 17rem;
+        margin: .7rem 0;
+        height: 3.4rem;
+        text-align: start;
+        padding-left: 55px;
+        font-size: 15px;
+      }
+    }
+    & .signin-email {
+      display: flex;
+      flex-flow: column;
     }
     & .back-next {
       position: fixed;
@@ -1800,10 +1899,6 @@ export default {
         font-size: 17px;
         padding: .4rem 28%;
       }
-      & .__termos {
-        padding: 1rem 35% 0;
-        text-align: center;
-      }
       & textarea {
         padding: 0 28%;
         margin: 1.7rem 0 .6rem 0;
@@ -1859,8 +1954,7 @@ export default {
         & .modal-croppa-body {
           & h1 {
           }
-          & canvas {
-            border: 3px dashed white;
+          & .croppa-container {
           }
         }
       }
@@ -1921,13 +2015,18 @@ export default {
         flex-flow: column wrap;
       }
       & .signin-btns {
-        padding: .8rem 40% 0;
+        padding: .8rem 39% 0;
         & .facebook-btn {
           width: 100%;
         }
         & .google-btn {
           width: 100%;
         }
+        & .email-btn {
+          width: 100%;
+        }
+      }
+      & .signin-email {
       }
       & .back-next {
         bottom: 2rem;

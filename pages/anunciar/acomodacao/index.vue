@@ -530,7 +530,7 @@
 
 
 
-    <!-- ________________________________________ 11 - CADASTRO ________________________________________ -->
+    <!-- ________________________________________ 11 - IDENTIFICAÇÃO ________________________________________ -->
     <form class="cadastro-acomodacao" v-if="$store.state.cadastroAcomod11">
 
       <h1 class="__form-title">Identificação</h1> 
@@ -578,12 +578,6 @@
       </div>
 
 
-
-
-      <!-- <h4 class="__termos" style="padding-top:1rem" v-if="!authUser">Ao se cadastrar com uma das opções acima, somente seu e-mail, nome e foto de perfil serão requisitados. Para mais informações, leia nossa <nuxt-link to="/termos#politica_privacidade">Política de Privacidade</nuxt-link>.</h4> -->
-
-
-
       <div class="back-next"> 
         <div class="back-next-body">
           <button type="button" class="__back" @click="backBtn11">Voltar</button>
@@ -591,7 +585,7 @@
         </div>
       </div> 
     
-    </form><!-- ________________________________________ 11 - CADASTRO ________________________________________ -->
+    </form><!-- ________________________________________ 11 - IDENTIFICAÇÃO ________________________________________ -->
 
 
 
@@ -607,14 +601,16 @@
 
       <div class="payment-box">
 
+
         <h2 class="__form-subtitle">Informações de contato</h2>
 
         <!-- CELULAR -->
         <div class="item-form">
-          <label>Celular / WhatsApp</label>
+          <label :class="[ celularError ? 'has-error-label' : '' ]">Celular / WhatsApp</label>
           <masked-input
             ref="celular"
             type="tel"
+            :class="[ celularError ? 'has-error' : '' ]"
             v-model="$store.state.customer.celular"
             :mask="['+', 5, 5, ' ', /\d/, /\d/, ' ', /\d/, /\d/, /\d/, /\d/, /\d/, ' ', /\d/, /\d/, /\d/, /\d/]"
             :guide="false"
@@ -1530,6 +1526,7 @@ export default {
         this.zipcodeError = false
       }
     },
+    celular (value) { value !== null ? this.celularError = false : null },
     street (value) { value !== null ? this.streetError = false : null },
     streetNumber (value) { value !== null ? this.streetNumberError = false : null },
     neighborhood (value) { value !== null ? this.neighborhoodError = false : null },
@@ -1614,8 +1611,8 @@ export default {
         }
       } 
       if (value === `#${this.randomHashs[12]}`) {
-        this.$store.commit('m_cadastroAcomod11', false)
         this.$store.commit('m_cadastroAcomod12', true)
+        this.$store.commit('m_cadastroAcomod11', false)
       } 
     }
   },
@@ -1764,18 +1761,6 @@ export default {
       font-size: 17px;
       padding: .5rem 7% .2rem;
       line-height: 26px;
-    }
-    & .__termos {
-      padding: 0 7%;
-      font-size: 15px;
-      font-weight: 400;
-      line-height: 20px;
-      & a {
-        color: var(--colorAcomod);
-      }
-      & a:hover {
-        text-decoration: underline;
-      }
     }
     & textarea {
       padding: 0 7%;
@@ -2110,7 +2095,7 @@ export default {
         }
         & .croppa-container {
           cursor: grab;
-          margin: 2.5rem 0 1rem 0;
+          margin: 1.5rem 0;
           border: 2px dashed white;
         }
         & .croppa-container:active {
@@ -2344,10 +2329,6 @@ export default {
       & p {
         font-size: 17px;
         padding: .4rem 28%;
-      }
-      & .__termos {
-        padding: 1rem 35% 0;
-        text-align: center;
       }
       & textarea {
         padding: 0 28%;

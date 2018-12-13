@@ -100,7 +100,7 @@ export default {
     showNavbar () { return this.$store.state.showNavbar },
     menuIconAnime () { return this.$store.state.menuIconAnime },
     userPhoto () {
-      if (this.$store.state.user.photoURL !== null) {
+      if (this.$store.state.user.photoURL !== '') {
         return this.$store.state.user.photoURL
       } else {
         return require('@/assets/img/user.svg')

@@ -91,7 +91,7 @@
 
         <!-- ______________________________ ANUNCIANTE ______________________________ -->
         <div class="anunciante-box">
-          <img class="__anunciante-img" :src="host.photoURL" @click="$store.commit('m_showHost', true), hashHost()">
+          <img class="__anunciante-img" :src="userPhoto" @click="$store.commit('m_showHost', true), hashHost()">
           <div class="box-flex-column">
             <h3 style="user-select:none">Guiado por</h3>
             <p class="__anunciante-name" @click="$store.commit('m_showHost', true), hashHost()">{{ host.fullName }}</p>
@@ -521,6 +521,13 @@ export default {
     host () { return this.$store.state.host },
     reservaPasseio () { return this.$store.state.reservaPasseio },
     showShare () { return this.$store.state.showShare },
+    userPhoto () {
+      if (this.host.photoURL !== '') {
+        return this.host.photoURL
+      } else {
+        return require('@/assets/img/user.svg')
+      }
+    },
     minDate() {
       return subDays(Date(), 1)
     },
