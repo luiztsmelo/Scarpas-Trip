@@ -400,10 +400,10 @@ export default {
       title: this.$store.state.passeio.title + ' ‒ ' + 'Escarpas Trip',
       meta: [
         { hid: 'description', name: 'description', content: this.$store.state.passeio.subtitle },
-        { property: 'og:url', content: 'https://escarpastrip.com/passeios/' + this.$route.params.id },
+        { property: 'og:url', content: `https://escarpastrip.com/passeios/${this.$route.params.id}` },
         { property: 'og:title', content: this.$store.state.passeio.title },
         { property: 'og:description', content: this.$store.state.passeio.subtitle },
-        { property: 'og:image', content: this.$store.state.passeio.imageH1J },
+        { property: 'og:image', content: this.$store.state.passeio.images[0].HJ },
         { property: 'og:site_name', content: 'Escarpas Trip' }
       ]
     }
