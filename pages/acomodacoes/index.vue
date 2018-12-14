@@ -375,7 +375,10 @@ export default {
   mixins: [ mapstyle ],
   head () {
     return {
-      title: 'Acomodações em Capitólio ‒ Escarpas Trip'
+      title: 'Acomodações em Capitólio ‒ Escarpas Trip',
+      meta: [
+        { hid: 'acomods', name: 'description', content: 'Reserve Casas, Suítes, Pousadas, Ranchos, Campings, Hostels, Chácaras, Sítios.' }
+      ]
     }
   },
   transition: 'opacity',

@@ -244,7 +244,10 @@ export default {
   mixins: [ mapstyle ],
   head () {
     return {
-      title: 'Passeios em Capitólio ‒ Escarpas Trip'
+      title: 'Passeios em Capitólio ‒ Escarpas Trip',
+      meta: [
+        { hid: 'acomods', name: 'description', content: 'Reserve Passeios de Lancha, 4x4, Buggy, Balão, Helicóptero.' }
+      ]
     }
   },
   transition: 'opacity',
