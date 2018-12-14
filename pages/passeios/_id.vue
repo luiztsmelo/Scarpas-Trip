@@ -882,13 +882,13 @@ export default {
 
 
     & .desktop-view {
-      display: flex;
+      display: grid;
+      grid-template-columns: 70% 30%;
       margin: 1.7rem 8% 0;
       & .reserva-desktop {
-        flex-basis: 31%;
+        align-self: start;
         border: 1px solid #dedede;
         border-radius: 12px;
-        align-self: flex-start;
         & .reserva-desktop-form {
           display: flex;
           flex-flow: column;
@@ -989,8 +989,7 @@ export default {
 
       
       & .desktop-view-info {
-        margin-right: 5%;
-        flex-basis: 69%;
+        padding-right: 6%;
 
 
 
