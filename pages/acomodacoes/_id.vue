@@ -588,7 +588,7 @@ export default {
       window.location.hash = this.$store.state.randomHashs[1] */
     },
     backBtn () {
-      history.length === 2 ? this.$router.push('/') : window.history.back(1)
+      history.length <= 2 ? this.$router.push('/') : window.history.back(1)
     },
     closeComods () {
       this.showComods = false

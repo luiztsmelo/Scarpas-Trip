@@ -490,7 +490,7 @@ export default {
       }
     },
     backBtn () {
-      history.length === 2 ? this.$router.push('/') : window.history.back(1)
+      history.length <= 2 ? this.$router.push('/') : window.history.back(1)
     },
     hashHost () {
        window.location.hash = "contato"
