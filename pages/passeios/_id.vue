@@ -587,7 +587,7 @@ export default {
 
   /* __________ IMAGE BOX __________ */
   & .image-box {
-    min-height: 48vh;
+    min-height: 40vh;
     overflow: hidden;
     & .swiper-container {
       position: relative;
