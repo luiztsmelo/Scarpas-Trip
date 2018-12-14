@@ -846,7 +846,10 @@ export default {
   mixins: [ tipoAcomod ],
   head () {
     return {
-      title: 'Anunciar Acomodação em Capitólio ‒ Escarpas Trip'
+      title: 'Anunciar Acomodação em Capitólio ‒ Escarpas Trip',
+      meta: [
+        { hid: 'anuncioAcomod', name: 'description', content: 'Anuncie sua acomodação na Escarpas Trip' }
+      ]
     }
   },
   middleware: 'newAcomodConcludedCheck',

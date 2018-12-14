@@ -698,7 +698,10 @@ export default {
   mixins: [ pontosTuristicos ],
   head () {
     return {
-      title: 'Anunciar Passeio em Capitólio ‒ Escarpas Trip'
+      title: 'Anunciar Passeio em Capitólio ‒ Escarpas Trip',
+      meta: [
+        { hid: 'anuncioPasseio', name: 'description', content: 'Anuncie seu passeio na Escarpas Trip' }
+      ]
     }
   },
   middleware: 'newPasseioConcludedCheck',

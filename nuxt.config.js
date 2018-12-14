@@ -33,7 +33,7 @@ module.exports = {
     title: 'Escarpas Trip: Encontre tudo para sua viagem a Capitólio',
     meta: [
       { name: 'viewport', content: 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' },
-      { hid: 'description', name: 'description', content: 'Planeje sua viagem a Capitólio e região de forma simples, agradável e segura.' },
+      { hid: 'description', name: 'description', content: 'Reserve acomodações e passeios diretamente com o proprietário. Encontre os melhores restaurantes da cidade, e veja quais serão os próximos eventos. Inspire-se com coisas interessantes a se fazer em Capitólio. Crie um roteiro personalizado. Tudo isso de forma simples, agradável e segura.' },
       { name: 'google-site-verification', content: 'IavBb3pz5krBr8BWBDH8LcwCr2IOEwOifb6h7n3d2jU' },
       // MOBILE THEMES
       // Chrome, Firefox OS and Opera

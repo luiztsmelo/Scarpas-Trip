@@ -154,13 +154,6 @@ import Footer from '~/components/Footer'
 
 export default {
   components: { Roteiro, Footer },
-  head () {
-    return {
-      meta: [
-        { hid: 'description', name: 'description', content: 'Planeje sua viagem para Capitólio de forma simples, agradável e segura.' }
-      ]
-    }
-  },
   transition: 'opacity',
   methods: {
     imageAcH (acomod) {
