@@ -30,15 +30,16 @@
     
     <!-- ______________________________ IMAGE ______________________________ -->
     <div class="image-box" ref="imageBox">
-      <swiper :options="swiperOptions">
-        
-        <swiper-slide class="slide" v-for="image in acomod.images" :key="image.id">
-          <progressive-background class="__img" :src="imageH(image)" :placeholder="image.L" :aspect-ratio="2/3"/>
-        </swiper-slide>
+      <no-ssr>
+        <swiper :options="swiperOptions">
+          
+          <swiper-slide class="slide" v-for="image in acomod.images" :key="image.id">
+            <progressive-background class="__img" :src="imageH(image)" :placeholder="image.L" :aspect-ratio="2/3"/>
+          </swiper-slide>
 
-      </swiper>
-    </div> 
-    <!-- ______________________________ IMAGE ______________________________ -->
+        </swiper>
+      </no-ssr>  
+    </div><!-- ______________________________ IMAGE ______________________________ -->
 
 
 
@@ -275,37 +276,40 @@
 
         <div class="avaliacoes-box">
 
+          <no-ssr>
 
-          <div class="avaliacoes-by-categories" v-if="acomod.avaliacoes.length > 0">
-            <div class="category">
-              <p class="__name">Recepção</p>
-              <star-rating class="__rating" :rating="acomod.averageRating_recepcao" :increment="0.5" :read-only="true" :show-rating="false" active-color="#161616" inactive-color="#dedede" :star-size="15" :padding="4"></star-rating>
+            <div class="avaliacoes-by-categories" v-if="acomod.avaliacoes.length > 0">
+              <div class="category">
+                <p class="__name">Recepção</p>
+                <star-rating class="__rating" :rating="acomod.averageRating_recepcao" :increment="0.5" :read-only="true" :show-rating="false" active-color="#161616" inactive-color="#dedede" :star-size="15" :padding="4"></star-rating>
+              </div>
+              <div class="category">
+                <p class="__name">Limpeza</p>
+                <star-rating class="__rating" :rating="acomod.averageRating_limpeza" :increment="0.5" :read-only="true" :show-rating="false" active-color="#161616" inactive-color="#dedede" :star-size="15" :padding="4"></star-rating>
+              </div>
+              <div class="category">
+                <p class="__name">Precisão do anúncio</p>
+                <star-rating class="__rating" :rating="acomod.averageRating_precisao" :increment="0.5" :read-only="true" :show-rating="false" active-color="#161616" inactive-color="#dedede" :star-size="15" :padding="4"></star-rating>
+              </div>
+              <div class="category">
+                <p class="__name">Valor</p>
+                <star-rating class="__rating" :rating="acomod.averageRating_valor" :increment="0.5" :read-only="true" :show-rating="false" active-color="#161616" inactive-color="#dedede" :star-size="15" :padding="4"></star-rating>
+              </div>
             </div>
-            <div class="category">
-              <p class="__name">Limpeza</p>
-              <star-rating class="__rating" :rating="acomod.averageRating_limpeza" :increment="0.5" :read-only="true" :show-rating="false" active-color="#161616" inactive-color="#dedede" :star-size="15" :padding="4"></star-rating>
+
+
+            <div class="avaliacao" v-for="(avaliacao, index) in acomod.avaliacoes" :v-key="index">
+              <h2 class="__guest-name">{{ avaliacao.fullName }}</h2>
+              <p class="__date">{{ formatAvaliacaoDate(avaliacao) }}</p>
+              <h3 class="__message">{{ avaliacao.comment }}</h3>
             </div>
-            <div class="category">
-              <p class="__name">Precisão do anúncio</p>
-              <star-rating class="__rating" :rating="acomod.averageRating_precisao" :increment="0.5" :read-only="true" :show-rating="false" active-color="#161616" inactive-color="#dedede" :star-size="15" :padding="4"></star-rating>
-            </div>
-            <div class="category">
-              <p class="__name">Valor</p>
-              <star-rating class="__rating" :rating="acomod.averageRating_valor" :increment="0.5" :read-only="true" :show-rating="false" active-color="#161616" inactive-color="#dedede" :star-size="15" :padding="4"></star-rating>
-            </div>
-          </div>
 
 
-          <div class="avaliacao" v-for="(avaliacao, index) in acomod.avaliacoes" :v-key="index">
-            <h2 class="__guest-name">{{ avaliacao.fullName }}</h2>
-            <p class="__date">{{ formatAvaliacaoDate(avaliacao) }}</p>
-            <h3 class="__message">{{ avaliacao.comment }}</h3>
-          </div>
+            <button class="add-avaliacao-btn" type="button" @click="$modal.show('add-avaliacao-desktop')">Deixar uma avaliação</button>
 
-
-          <button class="add-avaliacao-btn" type="button" @click="$modal.show('add-avaliacao-desktop')">Deixar uma avaliação</button>
-
-          <add-avaliacao-desktop></add-avaliacao-desktop>
+            <add-avaliacao-desktop></add-avaliacao-desktop>
+            
+          </no-ssr>
 
         </div><!-- ______________________________ AVALIAÇÕES ______________________________ -->
 
@@ -584,7 +588,7 @@ export default {
       window.location.hash = this.$store.state.randomHashs[1] */
     },
     backBtn () {
-      window.history.back(1)
+      history.length === 2 ? this.$router.push('/') : window.history.back(1)
     },
     closeComods () {
       this.showComods = false
@@ -604,7 +608,7 @@ export default {
       return formattedDate.charAt(0).toUpperCase() + formattedDate.slice(1)
     }
   },
-  async mounted () {
+  updated () {
     this.$store.state.heightImageBox === null ? this.$store.state.heightImageBox = this.$refs.imageBox.clientHeight : null
   },
   computed: {
@@ -709,6 +713,7 @@ export default {
 
   /* __________ IMAGE BOX __________ */
   & .image-box {
+    min-height: 48vh;
     overflow: hidden;
     & .swiper-container {
       position: relative;

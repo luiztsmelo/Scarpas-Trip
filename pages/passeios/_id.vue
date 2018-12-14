@@ -31,15 +31,17 @@
 
     <!-- ______________________________ IMAGE ______________________________ -->
     <div class="image-box" ref="imageBox">
-      <swiper :options="swiperOptions">
-        
-        <swiper-slide class="slide" v-for="image in passeio.images" :key="image.id">
-          <progressive-background class="__img" :src="imageH(image)" :placeholder="image.L" :aspect-ratio="2/3"/>
-        </swiper-slide>
+      <no-ssr>
+        <swiper :options="swiperOptions">
+          
+          <swiper-slide class="slide" v-for="image in passeio.images" :key="image.id">
+            <progressive-background class="__img" :src="imageH(image)" :placeholder="image.L" :aspect-ratio="2/3"/>
+          </swiper-slide>
 
-      </swiper>
-    </div> 
-    <!-- ______________________________ IMAGE ______________________________ -->
+        </swiper>
+      </no-ssr>
+    </div><!-- ______________________________ IMAGE ______________________________ -->
+    
 
 
 
@@ -120,29 +122,29 @@
 
         <!-- ______________________________ ROTAS ______________________________ -->
         <div class="rotas-box">
+          <no-ssr>
+            <div class="rota" v-for="(rota, index) in passeio.rotas" :key="index + 1">
 
-          <div class="rota" v-for="(rota, index) in passeio.rotas" :key="index + 1">
+              <h1 class="__title">Rota {{ passeio.rotas.length > 1 ? index + 1 : '' }}</h1>
 
-            <h1 class="__title">Rota {{ passeio.rotas.length > 1 ? index + 1 : '' }}</h1>
+              <h3 style="padding: .3rem 0">Valor por pessoa: <span style="font-weight: 500">R${{ rota.valor }}</span></h3>
 
-            <h3 style="padding: .3rem 0">Valor por pessoa: <span style="font-weight: 500">R${{ rota.valor }}</span></h3>
+              <h3 style="padding: .3rem 0">Horário de partida: <span style="font-weight: 500">{{ rota.horarioPartida }}</span></h3>
 
-            <h3 style="padding: .3rem 0">Horário de partida: <span style="font-weight: 500">{{ rota.horarioPartida }}</span></h3>
+              <h3 style="padding: .3rem 0">Duração: <span style="font-weight: 500">{{ rota.duracao }} {{ rota.duracao === 1 ? 'hora' : 'horas' }}</span></h3>
 
-            <h3 style="padding: .3rem 0">Duração: <span style="font-weight: 500">{{ rota.duracao }} {{ rota.duracao === 1 ? 'hora' : 'horas' }}</span></h3>
+              <div class="pontos-visitados">
 
-            <div class="pontos-visitados">
+                <div class="ponto" v-for="(ponto, index) in rota.pontosVisitados">
+                  <progressive-background class="__img" :src="pontoImgSrc(ponto)" :aspect-ratio="2/3"/>
+                  <p class="__number">{{ index + 1 }}</p>
+                  <h2 class="__name">{{ ponto }}</h2>
+                </div>
 
-              <div class="ponto" v-for="(ponto, index) in rota.pontosVisitados">
-                <progressive-background class="__img" :src="pontoImgSrc(ponto)" :aspect-ratio="2/3"/>
-                <p class="__number">{{ index + 1 }}</p>
-                <h2 class="__name">{{ ponto }}</h2>
               </div>
-
+              
             </div>
-            
-          </div>
-
+          </no-ssr>
         </div><!-- ______________________________ ROTAS ______________________________ -->
 
 
@@ -154,27 +156,27 @@
         <h1 class="item-title">Disponibilidade</h1>
 
         <div class="disponibilidade-box">
+          <no-ssr>
+            <div class="datepicker-trigger">
+              <button
+                type="button"
+                id="datepicker-trigger"
+                style="display: none">
+              </button>
 
-          <div class="datepicker-trigger">
-            <button
-              type="button"
-              id="datepicker-trigger"
-              style="display: none">
-            </button>
-
-            <AirbnbStyleDatepicker
-              style="border:none"
-              :trigger-element-id="'datepicker-trigger'"
-              :inline="true"
-              :mode="'single'"
-              :showShortcutsMenuTrigger="false"
-              :showActionButtons="false"
-              :min-date="minDate"
-              :date-one="$store.state.reservaPasseio.date"
-              @date-one-selected="val => { $store.state.reservaPasseio.date = val }"
-            />
-          </div>
-
+              <AirbnbStyleDatepicker
+                style="border:none"
+                :trigger-element-id="'datepicker-trigger'"
+                :inline="true"
+                :mode="'single'"
+                :showShortcutsMenuTrigger="false"
+                :showActionButtons="false"
+                :min-date="minDate"
+                :date-one="$store.state.reservaPasseio.date"
+                @date-one-selected="val => { $store.state.reservaPasseio.date = val }"
+              />
+            </div>
+          </no-ssr>
         </div>
         <!-- ______________________________ DISPONIBILIDADE ______________________________ -->
 
@@ -209,11 +211,11 @@
 
 
         <!-- ______________________________ PAGAMENTO ______________________________ -->
-        <h1 class="item-title">Formas de pagamento aceitas</h1>
+        <!-- <h1 class="item-title">Formas de pagamento aceitas</h1>
 
         <div class="pagamento-box">
           <h3>Formas de pagamento...</h3>
-        </div><!-- ______________________________ PAGAMENTO ______________________________ -->
+        </div> --><!-- ______________________________ PAGAMENTO ______________________________ -->
 
 
 
@@ -245,37 +247,40 @@
 
         <div class="avaliacoes-box">
 
+          <no-ssr>
 
-          <div class="avaliacoes-by-categories" v-if="passeio.avaliacoes.length > 0">
-            <div class="category">
-              <p class="__name">Habilidade do Guia</p>
-              <star-rating class="__rating" :rating="passeio.averageRating_habilidade" :increment="0.5" :read-only="true" :show-rating="false" active-color="#161616" inactive-color="#dedede" :star-size="15" :padding="4"></star-rating>
+            <div class="avaliacoes-by-categories" v-if="passeio.avaliacoes.length > 0">
+              <div class="category">
+                <p class="__name">Habilidade do Guia</p>
+                <star-rating class="__rating" :rating="passeio.averageRating_habilidade" :increment="0.5" :read-only="true" :show-rating="false" active-color="#161616" inactive-color="#dedede" :star-size="15" :padding="4"></star-rating>
+              </div>
+              <div class="category">
+                <p class="__name">Segurança</p>
+                <star-rating class="__rating" :rating="passeio.averageRating_seguranca" :increment="0.5" :read-only="true" :show-rating="false" active-color="#161616" inactive-color="#dedede" :star-size="15" :padding="4"></star-rating>
+              </div>
+              <div class="category">
+                <p class="__name">Precisão do anúncio</p>
+                <star-rating class="__rating" :rating="passeio.averageRating_precisao" :increment="0.5" :read-only="true" :show-rating="false" active-color="#161616" inactive-color="#dedede" :star-size="15" :padding="4"></star-rating>
+              </div>
+              <div class="category">
+                <p class="__name">Valor</p>
+                <star-rating class="__rating" :rating="passeio.averageRating_valor" :increment="0.5" :read-only="true" :show-rating="false" active-color="#161616" inactive-color="#dedede" :star-size="15" :padding="4"></star-rating>
+              </div>
             </div>
-            <div class="category">
-              <p class="__name">Segurança</p>
-              <star-rating class="__rating" :rating="passeio.averageRating_seguranca" :increment="0.5" :read-only="true" :show-rating="false" active-color="#161616" inactive-color="#dedede" :star-size="15" :padding="4"></star-rating>
+
+
+            <div class="avaliacao" v-for="(avaliacao, index) in passeio.avaliacoes" :v-key="index">
+              <h2 class="__guest-name">{{ avaliacao.fullName }}</h2>
+              <p class="__date">{{ formatAvaliacaoDate(avaliacao) }}</p>
+              <h3 class="__message">{{ avaliacao.comment }}</h3>
             </div>
-            <div class="category">
-              <p class="__name">Precisão do anúncio</p>
-              <star-rating class="__rating" :rating="passeio.averageRating_precisao" :increment="0.5" :read-only="true" :show-rating="false" active-color="#161616" inactive-color="#dedede" :star-size="15" :padding="4"></star-rating>
-            </div>
-            <div class="category">
-              <p class="__name">Valor</p>
-              <star-rating class="__rating" :rating="passeio.averageRating_valor" :increment="0.5" :read-only="true" :show-rating="false" active-color="#161616" inactive-color="#dedede" :star-size="15" :padding="4"></star-rating>
-            </div>
-          </div>
 
 
-          <div class="avaliacao" v-for="(avaliacao, index) in passeio.avaliacoes" :v-key="index">
-            <h2 class="__guest-name">{{ avaliacao.fullName }}</h2>
-            <p class="__date">{{ formatAvaliacaoDate(avaliacao) }}</p>
-            <h3 class="__message">{{ avaliacao.comment }}</h3>
-          </div>
+            <button class="add-avaliacao-btn" type="button" @click="$modal.show('add-avaliacao-desktop')">Deixar uma avaliação</button>
 
+            <add-avaliacao-desktop></add-avaliacao-desktop>
 
-          <button class="add-avaliacao-btn" type="button" @click="$modal.show('add-avaliacao-desktop')">Deixar uma avaliação</button>
-
-          <add-avaliacao-desktop></add-avaliacao-desktop>
+          </no-ssr>
 
         </div><!-- ______________________________ AVALIAÇÕES ______________________________ -->
 
@@ -397,7 +402,7 @@ export default {
   },
   head () {
     return {
-      title: this.$store.state.passeio.title + ' ‒ ' + 'Escarpas Trip',
+      title: `${this.$store.state.passeio.title} ‒ Escarpas Trip`,
       meta: [
         { hid: 'description', name: 'description', content: this.$store.state.passeio.subtitle },
         { property: 'og:url', content: `https://escarpastrip.com/passeios/${this.$route.params.id}` },
@@ -485,7 +490,7 @@ export default {
       }
     },
     backBtn () {
-      window.history.back(1)
+      history.length === 2 ? this.$router.push('/') : window.history.back(1)
     },
     hashHost () {
        window.location.hash = "contato"
@@ -513,7 +518,7 @@ export default {
       return formattedDate.charAt(0).toUpperCase() + formattedDate.slice(1)
     }
   },
-  async mounted () {
+  updated () {
     this.$store.state.heightImageBox === null ? this.$store.state.heightImageBox = this.$refs.imageBox.clientHeight : null
   },
   computed: {
@@ -582,6 +587,7 @@ export default {
 
   /* __________ IMAGE BOX __________ */
   & .image-box {
+    min-height: 48vh;
     overflow: hidden;
     & .swiper-container {
       position: relative;

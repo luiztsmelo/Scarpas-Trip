@@ -6,9 +6,9 @@
       <nuxt keep-alive/>
       
       <Navbar/>
-      <Foobar/>
 
       <no-ssr>
+        <Foobar/>
         <SignIn/>
         <alert/>
         <Loader/>
