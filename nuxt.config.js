@@ -32,16 +32,31 @@ module.exports = {
   head: {
     title: 'Escarpas Trip: Encontre tudo para sua viagem a Capitólio',
     meta: [
+      { name: 'application-name', content: 'Escarpas Trip' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' },
       { hid: 'description', name: 'description', content: 'Reserve acomodações e passeios diretamente com o proprietário. Encontre os melhores restaurantes da cidade, e veja quais serão os próximos eventos. Inspire-se com coisas interessantes a se fazer em Capitólio. Crie um roteiro personalizado. Tudo isso de forma simples, agradável e segura.' },
-      { name: 'google-site-verification', content: 'IavBb3pz5krBr8BWBDH8LcwCr2IOEwOifb6h7n3d2jU' },
+      // Add to home screen
+      { name: 'mobile-web-app-capable', content: 'yes' },
+      // Twitter
+      { name: 'twitter:title', content: 'Escarpas Trip' },
+      // Schema.org
+      { itemprop: 'name', content: 'Escarpas Trip' },
+      { itemprop: 'description', content: 'Reserve acomodações e passeios diretamente com o proprietário. Encontre os melhores restaurantes da cidade, e veja quais serão os próximos eventos. Inspire-se com coisas interessantes a se fazer em Capitólio. Crie um roteiro personalizado. Tudo isso de forma simples, agradável e segura.' },
+      // Facebook / Open Graph
+      { property: 'og:site_name', content: 'Escarpas Trip' },
+      { property: 'fb:app_id', content: '798658706980670' },
+      { property: 'og:url', content: 'https://www.escarpastrip.com/' },
+      { property: 'og:type', content: 'website' },
+      { property: 'og:title', content: 'Escarpas Trip' },
+      { property: 'og:description', content: 'Reserve acomodações e passeios diretamente com o proprietário. Encontre os melhores restaurantes da cidade, e veja quais serão os próximos eventos. Inspire-se com coisas interessantes a se fazer em Capitólio. Crie um roteiro personalizado. Tudo isso de forma simples, agradável e segura.' },
+      { property: 'og:image', content: '/static/brand-128.png' },
+      { property: 'og:locale', content: 'pt-BR' },
       // MOBILE THEMES
-      // Chrome, Firefox OS and Opera
       { name: 'theme-color', content: '#fff' },
-      // Windows Phone
       { name: 'msapplication-navbutton-color', content: '#fff' },
-      // iOS Safari
-      { name: 'apple-mobile-web-app-status-bar-style', content: '#fff' }
+      { name: 'apple-mobile-web-app-status-bar-style', content: '#fff' },
+      // Google
+      { name: 'google-site-verification', content: 'IavBb3pz5krBr8BWBDH8LcwCr2IOEwOifb6h7n3d2jU' }
     ],
     link: [
       { rel: 'icon', type: 'image/png', sizes: '24x24', href: '/brand.png' },
