@@ -260,7 +260,7 @@
       </div>
 
       <h3 class="without-address" @click="$modal.show('local-map-modal'), $store.state.fromWithoutAddress=true">
-        {{ tipoAcomodSd.charAt(0).toUpperCase() + tipoAcomodSd.slice(1) }} não possui endereço?
+        {{ $store.state.acomodData.tipoAcomod === 'Suítes' ? 'Não' : `${tipoAcomodSd.charAt(0).toUpperCase() + tipoAcomodSd.slice(1)} não ` }} possui endereço?
       </h3>
 
       <localMap/>
@@ -381,7 +381,7 @@
     <!-- ________________________________________ 8 - REGRAS ________________________________________ -->
     <form class="cadastro-acomodacao" v-if="$store.state.cadastroAcomod8">
 
-      <h1 class="__form-title">Quais são as regras {{ tipoAcomodDd }}?</h1>
+      <h1 class="__form-title">Regulamentos {{ $store.state.acomodData.tipoAcomod === 'Suítes' ? '' : tipoAcomodDd }}</h1>
 
       <div class="regras-box">
 
