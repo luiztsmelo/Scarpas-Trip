@@ -639,7 +639,7 @@ export default {
   /* __________ ANUNCIANTE BOX __________ */
   & .anunciante-box {
     display: flex;
-    padding: 2rem 7%;
+    padding: 2rem 7% .5rem;
     align-items: center;
     & .__anunciante-img {
       cursor: pointer;
