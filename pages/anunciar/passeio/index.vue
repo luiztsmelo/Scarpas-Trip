@@ -877,7 +877,7 @@ export default {
       }
     },
     nextBtn3 () {
-      if (this.$store.state.passeioData.images.length > 0) {
+      if (this.$store.state.passeioData.images.length >= 3) {
         this.$store.commit('m_cadastroPasseio3', false), this.$store.commit('m_cadastroPasseio4', true), this.$store.commit('m_passeioProgressBar', (100/10)*4), this.scrollTop(), window.location.hash = `${this.randomHashs[4]}`
       } else {
         this.$store.commit('show_alert', {
@@ -1120,7 +1120,7 @@ export default {
       return this.$store.state.passeioData.capacidade !== null ? 'background: #198CFE' : ''
     },
     form3ok () {
-      return this.$store.state.passeioData.images.length > 0 ? 'background: #198CFE' : ''
+      return this.$store.state.passeioData.images.length >= 3 ? 'background: #198CFE' : ''
     },
     form4ok () {
       return this.$store.state.passeioPlace !== null || this.$store.state.passeioData.positionLAT !== -20.6141320 ? 'background:#198CFE' : ''
@@ -1618,7 +1618,7 @@ export default {
             }
             & input {
               cursor: text;
-              width: 3.8rem;
+              width: 4.2rem;
               border: none;
               outline: none;
               background: white;
