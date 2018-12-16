@@ -193,29 +193,31 @@
         <h1 class="item-title">Disponibilidade</h1>
 
         <div class="disponibilidade-box">
+          <no-ssr>
+          
+            <div class="datepicker-trigger">
+              <button
+                type="button"
+                id="datepicker-trigger"
+                style="display: none">
+              </button>
 
-          <div class="datepicker-trigger">
-            <button
-              type="button"
-              id="datepicker-trigger"
-              style="display: none">
-            </button>
-
-            <AirbnbStyleDatepicker
-              style="border:none"
-              :trigger-element-id="'datepicker-trigger'"
-              :inline="true"
-              :showShortcutsMenuTrigger="false"
-              :showActionButtons="false"
-              :disabledDates="disabledDates"
-              :min-date="minDate"
-              :date-one="$store.state.reservaAcomod.startDate"
-              :date-two="$store.state.reservaAcomod.endDate"
-              @date-one-selected="val => { $store.state.reservaAcomod.startDate = val }"
-              @date-two-selected="val => { $store.state.reservaAcomod.endDate = val, calcValoresReserva() }"
-            />
-          </div>
-
+              <AirbnbStyleDatepicker
+                style="border:none"
+                :trigger-element-id="'datepicker-trigger'"
+                :inline="true"
+                :showShortcutsMenuTrigger="false"
+                :showActionButtons="false"
+                :disabledDates="disabledDates"
+                :min-date="minDate"
+                :date-one="$store.state.reservaAcomod.startDate"
+                :date-two="$store.state.reservaAcomod.endDate"
+                @date-one-selected="val => { $store.state.reservaAcomod.startDate = val }"
+                @date-two-selected="val => { $store.state.reservaAcomod.endDate = val, calcValoresReserva() }"
+              />
+            </div>
+            
+          </no-ssr>
         </div>
         
         

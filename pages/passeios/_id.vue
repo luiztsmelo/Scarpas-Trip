@@ -157,6 +157,7 @@
 
         <div class="disponibilidade-box">
           <no-ssr>
+
             <div class="datepicker-trigger">
               <button
                 type="button"
@@ -176,6 +177,7 @@
                 @date-one-selected="val => { $store.state.reservaPasseio.date = val }"
               />
             </div>
+            
           </no-ssr>
         </div>
         <!-- ______________________________ DISPONIBILIDADE ______________________________ -->
