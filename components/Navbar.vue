@@ -149,7 +149,7 @@ export default {
       & .__brand-name {
         font-family: var(--brand-font);
         font-weight: 400;
-        font-size: 22px;
+        font-size: 23px;
         line-height: var(--navbarHeightMobile);
         user-select: none;
       }
