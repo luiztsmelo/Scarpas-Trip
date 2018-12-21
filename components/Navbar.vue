@@ -144,12 +144,12 @@ export default {
       & .__brand-img {
         width: 1.95rem;
         height: auto;
-        margin-right: .5rem;
+        margin-right: .6rem;
       }
       & .__brand-name {
         font-family: var(--brand-font);
         font-weight: 400;
-        font-size: 23px;
+        font-size: 24px;
         line-height: var(--navbarHeightMobile);
         user-select: none;
       }
