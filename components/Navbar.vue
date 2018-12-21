@@ -147,10 +147,10 @@ export default {
         margin-right: .5rem;
       }
       & .__brand-name {
-        font-family: var(--main-font);
-        font-size: 17px;
-        font-weight: 500;
-        line-height: 3.5rem;
+        font-family: var(--brand-font);
+        font-weight: 400;
+        font-size: 22px;
+        line-height: var(--navbarHeightMobile);
         user-select: none;
       }
     }
@@ -263,7 +263,7 @@ export default {
           height: auto;
         }
         & .__brand-name {
-          font-size: 19px;
+          font-size: 26px;
           line-height: var(--navbarHeightDesktop);
         }
       }

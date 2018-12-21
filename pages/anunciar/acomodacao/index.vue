@@ -537,8 +537,8 @@
 
 
       <div class="signin-btns" v-if="!$store.state.isEmailSignin">
-        <button type="button" class="google-btn" @click="$store.dispatch('a_googleSignIn')">Continuar com Google</button>
         <button type="button" class="facebook-btn" @click="$store.dispatch('a_facebookSignIn')">Continuar com Facebook</button>
+        <button type="button" class="google-btn" @click="$store.dispatch('a_googleSignIn')">Continuar com Google</button>
         <button type="button" class="email-btn" @click="$store.state.isEmailSignin = true">Continuar com E-mail</button>
       </div>
 
@@ -1112,7 +1112,7 @@ export default {
       }
     },
     nextBtn6 () {
-      if (this.$store.state.acomodData.images.length >= 1) {
+      if (this.$store.state.acomodData.images.length >= 3) {
         this.$store.commit('m_cadastroAcomod6', false)
         if (this.$store.getters.tipoAcomodPousadaSuites) {
           this.$store.commit('m_cadastroAcomod8', true)
@@ -1374,7 +1374,7 @@ export default {
       return this.$store.state.acomodPlace !== null || this.$store.state.acomodData.positionLAT !== -20.6141320 ? 'background:#FFA04F' : ''
     },
     form6ok () {
-      return this.$store.state.acomodData.images.length >= 1 ? 'background:#FFA04F' : ''
+      return this.$store.state.acomodData.images.length >= 3 ? 'background:#FFA04F' : ''
     },
     form7ok () {
       return this.$store.state.acomodData.valorNoite !== 0 ? 'background:#FFA04F' : ''

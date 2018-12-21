@@ -60,7 +60,7 @@ module.exports = {
     ],
     link: [
       { rel: 'icon', type: 'image/png', sizes: '24x24', href: '/brand.png' },
-      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700' }
+      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Marck+Script|Montserrat:300,400,500,600,700' }
     ],
     __dangerouslyDisableSanitizers: ['script'],
     script: [

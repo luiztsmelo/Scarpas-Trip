@@ -17,8 +17,9 @@
         <h1 class="__title">Acessar sua conta</h1>
         <h3 class="__subtitle">Acesse sua conta para acompanhar suas reservas ou gerenciar seus anúncios</h3>
 
-        <button type="button" class="google-btn" @click="$store.dispatch('a_googleSignIn')">Continuar com Google</button>
         <button type="button" class="facebook-btn" @click="$store.dispatch('a_facebookSignIn')">Continuar com Facebook</button>
+        <button type="button" class="google-btn" @click="$store.dispatch('a_googleSignIn')">Continuar com Google</button>
+        
         
         <h3 class="if-have-account">Não possui uma conta? <span class="underline" @click="$store.state.isSignIn = false">Cadastrar</span></h3>
 
@@ -41,8 +42,9 @@
         <h1 class="__title">Cadastrar</h1>
         <h3 class="__subtitle"></h3>
 
-        <button type="button" class="google-btn" @click="$store.dispatch('a_googleSignIn')">Cadastrar com Google</button>
         <button type="button" class="facebook-btn" @click="$store.dispatch('a_facebookSignIn')">Cadastrar com Facebook</button>
+        <button type="button" class="google-btn" @click="$store.dispatch('a_googleSignIn')">Cadastrar com Google</button>
+        
 
         <h3 class="if-have-account">Já possui uma conta? <span class="underline" @click="$store.state.isSignIn = true">Entrar</span></h3>
         

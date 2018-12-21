@@ -391,8 +391,8 @@
 
 
       <div class="signin-btns" v-if="!$store.state.isEmailSignin">
-        <button type="button" class="google-btn" @click="$store.dispatch('a_googleSignIn')">Continuar com Google</button>
         <button type="button" class="facebook-btn" @click="$store.dispatch('a_facebookSignIn')">Continuar com Facebook</button>
+        <button type="button" class="google-btn" @click="$store.dispatch('a_googleSignIn')">Continuar com Google</button>
         <button type="button" class="email-btn" @click="$store.state.isEmailSignin = true">Continuar com E-mail</button>
       </div>
 
