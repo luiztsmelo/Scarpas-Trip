@@ -76,7 +76,7 @@ export default {
   z-index: 9997;
   bottom: 0;
   left: 0;
-  height: 3.6rem;
+  height: 3.7rem;
   width: 100%;
   background: white;
   transition: var(--main-transition);
@@ -95,7 +95,7 @@ export default {
       width: 45%;
     }
     & .foobar-box {
-      margin-top: 3px;
+      margin-top: 4px;
       height: 100%;
       display: flex;
       flex-flow: column;
@@ -111,12 +111,12 @@ export default {
         color: var(--color01);
       }
       & img {
-        margin-bottom: 5px;
-        width: 1.32rem;
+        margin-bottom: 6px;
+        width: 1.33rem;
         height: auto;
       }
       & .coloricon {
-        filter: grayscale(100%) brightness(10%);
+        filter: grayscale(100%) brightness(5%);
       }
     }
   }
