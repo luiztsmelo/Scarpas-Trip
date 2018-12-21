@@ -181,6 +181,7 @@ const store = () => new Vuex.Store({
         { name: 'Wi-Fi gratuito', id: 'wifi', condition: false },
         { name: 'Televisão', id: 'tv', condition: false },
         { name: 'Ar condicionado', id: 'ar_cond', condition: false },
+        { name: 'Ventilador', id: 'ventilador', condition: false },
         { name: 'Barracas', id: 'barracas', condition: false },
         { name: 'Pier', id: 'pier', condition: false }
       ],
