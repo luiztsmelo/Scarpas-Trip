@@ -29,9 +29,9 @@
           <nuxt-link to="/eventos">
             <li class="__nav-item">Eventos</li>
           </nuxt-link>
-          <!-- <nuxt-link to="/atracoes">
+          <nuxt-link to="/atracoes">
             <li class="__nav-item">Atrações</li>
-          </nuxt-link> -->
+          </nuxt-link>
           <nuxt-link to="/restaurantes">
             <li class="__nav-item">Restaurantes</li>
           </nuxt-link>
@@ -183,7 +183,7 @@ export default {
       transform: translateX(.6rem);
       align-items: center;
       & a {
-        padding: 0 1rem;
+        padding: 0 .9rem;
       }
       & a:hover {
         color: rgb(152, 152, 152);
@@ -194,7 +194,7 @@ export default {
         user-select: none;
       }
       & .__nav-item-no-a {
-        padding: 0 1rem;
+        padding: 0 .9rem;
         cursor: pointer;
         font-size: 14px;
         font-weight: 600;

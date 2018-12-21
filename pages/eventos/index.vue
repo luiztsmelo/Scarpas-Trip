@@ -1,6 +1,6 @@
 <template>
   <div class="eventos">
-    <h1 class="__title">Em breve os melhores eventos em Capitólio</h1>
+    <h1 class="__title">Em breve.</h1>
   </div>
 </template>
 

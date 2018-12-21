@@ -112,11 +112,27 @@
         <h1 class="__title">Eventos</h1>
         
 
-        <h3 class="__subtitle">Em breve os melhores eventos em Capitólio.</h3>
+        <h3 class="__subtitle">Em breve.</h3>
 
 
       </div><!-- ______________________________ EVENTOS ______________________________ -->
 
+
+
+
+
+
+      <!-- ______________________________ ATRAÇÕES ______________________________ -->
+      <div class="category-container">
+
+
+        <h1 class="__title">Atrações</h1>
+        
+
+        <h3 class="__subtitle">Em breve.</h3>
+
+
+      </div><!-- ______________________________ ATRAÇÕES ______________________________ -->
 
 
 
@@ -130,7 +146,7 @@
         <h1 class="__title">Restaurantes</h1>
         
 
-        <h3 class="__subtitle">Em breve os melhores restaurantes de Capitólio.</h3>
+        <h3 class="__subtitle">Em breve.</h3>
 
 
       </div><!-- ______________________________ RESTAURANTES ______________________________ -->
