@@ -112,11 +112,11 @@ export default {
       }
       & img {
         margin-bottom: 6px;
-        width: 1.33rem;
+        width: 1.34rem;
         height: auto;
       }
       & .coloricon {
-        filter: grayscale(100%) brightness(5%);
+        filter: grayscale(100%) brightness(0%);
       }
     }
   }
