@@ -144,12 +144,12 @@ export default {
       & .__brand-img {
         width: 1.95rem;
         height: auto;
-        margin-right: .6rem;
+        margin-right: .55rem;
       }
       & .__brand-name {
-        font-family: var(--brand-font);
-        font-weight: 400;
-        font-size: 24px;
+        font-family: var(--main-font);
+        font-weight: 500;
+        font-size: 17px;
         line-height: var(--navbarHeightMobile);
         user-select: none;
       }
@@ -263,7 +263,7 @@ export default {
           height: auto;
         }
         & .__brand-name {
-          font-size: 26px;
+          font-size: 19px;
           line-height: var(--navbarHeightDesktop);
         }
       }
