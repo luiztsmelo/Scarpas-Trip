@@ -420,10 +420,10 @@ export default {
   async fetch ({ store, params }) {
     try {
       /* Get passeio */
-      const passeio = await firebase.firestore().doc(`passeios/${params.id}`).get()
+      let passeio = await firebase.firestore().doc(`passeios/${params.id}`).get()
 
       /* Get host */
-      const host = await firebase.firestore().doc(`users/${passeio.data().hostID}`).get()
+      let host = await firebase.firestore().doc(`users/${passeio.data().hostID}`).get()
       
       store.commit('m_passeio', passeio.data())
       store.commit('m_host', host.data())

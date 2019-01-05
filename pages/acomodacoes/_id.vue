@@ -479,10 +479,11 @@ export default {
       /* Get host */
       const host = await firebase.firestore().doc(`users/${acomod.data().hostID}`).get()
       
-      store.commit('m_acomod', acomod.data())
-      store.commit('m_host', host.data())
-      store.commit('m_loader', false)
-
+      return [
+        store.commit('m_acomod', acomod.data()),
+        store.commit('m_host', host.data()),
+        store.commit('m_loader', false)
+      ]
     } catch (err) {
       store.commit('m_loader', false)
       console.log(err)
