@@ -59,8 +59,10 @@
         <label>Tipo</label>
         <select v-model="$store.state.passeioData.tipoPasseio">
           <option>Lancha</option>
+          <option>Chalana</option>
           <option>4x4</option>
           <option>Buggy</option>
+          <option>Balão</option>
           <option>Helicóptero</option>
         </select>
       </div> 
@@ -254,9 +256,7 @@
 
               <div class="question">
                 <label>Duração do passeio:</label>
-                <select v-model="rota.duracao">
-                  <option v-for="n in 12" :value="n">{{ n }} {{ n === 1 ? 'hora' : 'horas' }}</option>
-                </select>
+                <input type="time" v-model="rota.duracao">
               </div>
 
               <div class="question" style="padding-top: 2px">
@@ -1621,7 +1621,7 @@ export default {
             }
             & input {
               cursor: text;
-              width: 4.2rem;
+              width: 4.5rem;
               border: none;
               outline: none;
               background: white;
@@ -1671,11 +1671,12 @@ export default {
         transform: translateX(-50%) translateY(-50%);
         color: white;
         & h1 {
+          font-size: 32px;
           font-weight: 300;
         }
         & .croppa-container {
           cursor: grab;
-          margin: 1.5rem 0;
+          margin: 2rem 0 1.5rem;
           border: 2px dashed white;
         }
         & .croppa-container:active {

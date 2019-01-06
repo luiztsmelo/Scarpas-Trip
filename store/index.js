@@ -288,7 +288,7 @@ const store = () => new Vuex.Store({
         {
           valor: 0,
           horarioPartida: '',
-          duracao: 1,
+          duracao: '',
           pontosVisitados: []
         }
       ],
@@ -1109,7 +1109,7 @@ const store = () => new Vuex.Store({
           {
             valor: 0,
             horarioPartida: '',
-            duracao: 1,
+            duracao: '',
             pontosVisitados: []
           }
         ],

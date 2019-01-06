@@ -291,6 +291,7 @@
           <croppa
             ref="myCroppa"
             @file-choose="showCroppaModal = true"
+            @new-image-drawn="newImageDrawn = true"
             :width="$store.state.isMobile ? 639/2 : 639"
             :height="$store.state.isMobile ? 426/2 : 426"
             :quality="$store.state.isMobile ? 2 : 1"
@@ -301,7 +302,7 @@
             :prevent-white-space="true"
             :show-remove-button="false">
           </croppa>
-          <button class="__croppa-btn" type="button" @click="showCroppaModal=false, imageConfirm()">Confirmar</button>
+          <button class="__croppa-btn" type="button" @click="showCroppaModal=false, imageConfirm()" v-if="newImageDrawn">Confirmar</button>
         </div>
       </div>
 
@@ -859,6 +860,7 @@ export default {
       title: '', /* Vue Autosize */
       subtitle: '', /* Vue Autosize */
       showCroppaModal: false,
+      newImageDrawn: false,
       isUploading: false,
       uploadProgress: 0,
       newRegra: '',
@@ -987,6 +989,7 @@ export default {
         /* Incrementar n */
         this.$store.commit('m_imageCountAc')
 
+        this.newImageDrawn = false
         this.isUploading = false
         this.uploadProgress = 0
       } catch (err) {
@@ -2099,7 +2102,7 @@ export default {
         }
         & .croppa-container {
           cursor: grab;
-          margin: 1.5rem 0;
+          margin: 2rem 0 1.5rem;
           border: 2px dashed white;
         }
         & .croppa-container:active {

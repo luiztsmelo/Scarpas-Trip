@@ -120,6 +120,19 @@
 
 
 
+        <!-- ______________________________ CAPACIDADE ______________________________ -->
+        <h1 class="item-title">Capacidade</h1>
+
+        <div class="capacidade-box">
+          <h3>{{ passeio.capacidade }} {{ passeio.capacidade === 1 ? 'pessoa' : 'pessoas' }}</h3>
+        </div><!-- ______________________________ CAPACIDADE ______________________________ -->
+
+
+
+
+
+
+
         <!-- ______________________________ ROTAS ______________________________ -->
         <div class="rotas-box">
           <no-ssr>
@@ -675,6 +688,16 @@ export default {
 
 
 
+  /* __________ CAPACIDADE BOX __________ */
+  & .capacidade-box {
+    padding: 0 7%;
+  }/* __________ CAPACIDADE BOX __________ */
+
+
+
+
+
+
   /* __________ ROTAS BOX __________ */
   & .rotas-box {
     padding: 0 7%;
@@ -1043,6 +1066,15 @@ export default {
         & .sobre-box {
           padding: 0;
         }/* __________ SOBRE BOX __________ */
+
+
+
+
+
+        /* __________ CAPACIDADE BOX __________ */
+        & .capacidade-box {
+          padding: 0;
+        }/* __________ CAPACIDADE BOX __________ */
 
 
 
