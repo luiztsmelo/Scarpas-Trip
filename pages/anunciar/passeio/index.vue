@@ -263,8 +263,8 @@
                 <label>Pontos visitados:</label>
                 <multiselect 
                   v-model="rota.pontosVisitados" 
-                  placeholder="Adicionar ponto" 
-                  tag-placeholder="Adicionar ponto" 
+                  placeholder="Adicionar pontos" 
+                  tag-placeholder="Adicionar pontos" 
                   :searchable="$store.state.isMobile ? false : true"
                   :hide-selected="true"
                   :options="pontos" 
