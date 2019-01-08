@@ -125,7 +125,7 @@
 
               <p class="info">Acomoda até: <span style="font-weight: 500">{{ quarto.acomoda }} {{ quarto.acomoda > 1 ? 'hóspedes' : 'hóspede' }}</span></p>
 
-              <p class="info" v-if="acomod.tipoAcomod !== 'Casa'">Valor da diária: <span style="font-weight: 500">R$ {{ quarto.valor }}</span></p>
+              <p class="info" v-if="$store.getters.tipoAcomodPousadaSuites">Valor da diária: <span style="font-weight: 500">R$ {{ quarto.valor }}</span></p>
     
               
               <div class="mobilias">
