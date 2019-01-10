@@ -28,7 +28,7 @@
 
             <p class="__card-title">{{ acomod.title }}</p>
 
-            <p class="__card-subtitle">R${{ acomod.valorNoite.toLocaleString() }}<span class="__card-valor-noite"> por noite</span></p>
+            <p class="__card-subtitle">R${{ acomod.valorNoiteWeekdays.toLocaleString() }}<span class="__card-valor-noite"> por noite</span></p>
 
             <div class="rating" v-if="acomod.avaliacoes.length > 0">
               <star-rating

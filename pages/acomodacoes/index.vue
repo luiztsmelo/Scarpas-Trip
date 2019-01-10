@@ -32,7 +32,7 @@
 
           <p class="__card-title">{{ acomod.title }}</p>
 
-          <p class="__card-valor">R${{ acomod.valorNoite }}<span class="__card-valor-dia"> por noite</span></p>
+          <p class="__card-valor">R${{ valorNoite(acomod) }}<span class="__card-valor-dia"> por noite</span></p>
 
           <div class="rating" v-if="acomod.avaliacoes.length > 0">
             <star-rating
@@ -335,7 +335,7 @@
         :key="acomod.acomodID"
         :position="{lat: acomod.positionLAT, lng: acomod.positionLNG}">
 
-        <nuxt-link :to="`/acomodacoes/${acomod.acomodID}`" class="__valor">R${{ acomod.valorNoite }}</nuxt-link>
+        <nuxt-link :to="`/acomodacoes/${acomod.acomodID}`" class="__valor">R${{ valorNoite(acomod) }}</nuxt-link>
 
       </GmapInfoWindow>
 
@@ -377,7 +377,7 @@ export default {
     return {
       title: 'Acomodações em Capitólio ‒ Escarpas Trip',
       meta: [
-        { hid: 'acomods', name: 'description', content: 'Reserve Casas, Suítes, Pousadas, Ranchos, Campings, Hostels, Chácaras, Sítios.' }
+        { hid: 'acomods', name: 'description', content: 'Reserve Casas, Suítes, Ranchos, Campings, Hostels, Chácaras, Sítios.' }
       ]
     }
   },
@@ -397,7 +397,6 @@ export default {
         { 'name': 'Apartamento' },
         { 'name': 'Rancho' },
         { 'name': 'Chácara' },
-        { 'name': 'Pousada' },
         { 'name': 'Camping' },
         { 'name': 'Sítio' },
         { 'name': 'Fazenda' },
@@ -427,6 +426,14 @@ export default {
     },
     imageH (image) {
       return supportsWebP ? image.HW : image.HJ
+    },
+    valorNoite (acomod) {
+      /* if date match weekdays */
+      return acomod.valorNoiteWeekdays
+      /* if date match weekend */
+      /* return acomod.valorNoiteWeekend */
+      /* if date match feriado */
+      /* return acomod.valorNoiteFeriados */
     },
     mouseOverCard (index) {
       this.$refs.infoWindow[index].$children[0].$el.style.color = '#FFA04F'

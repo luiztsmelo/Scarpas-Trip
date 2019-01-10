@@ -145,7 +145,6 @@ export default {
         { 'name': 'Chácara' },
         { 'name': 'Sítio' },
         { 'name': 'Fazenda' },
-        { 'name': 'Pousada' },
         { 'name': 'Suítes' },
         { 'name': 'Camping' },
         { 'name': 'Hostel' }

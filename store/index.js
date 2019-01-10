@@ -170,7 +170,9 @@ const store = () => new Vuex.Store({
       totalBanheiros: 1,
       totalGaragem: 1,
       quartos: [],
-      valorNoite: 0,
+      valorNoiteWeekdays: 0,
+      valorNoiteWeekend: 0,
+      valorNoiteFeriados: 0,
       comodidades: [
         { name: 'Roupas de cama', id: 'roupas_de_cama', condition: false },
         { name: 'Café da manhã incluso', id: 'cafe_da_manha', condition: false },
@@ -424,13 +426,13 @@ const store = () => new Vuex.Store({
         } else return false
       }
     },
-    tipoAcomodPousadaSuites (state) {
+    tipoAcomodSuites (state) {
       if (state.acomod !== null) { /* Checar p/ evitar bug: 'Cannot read property 'tipoAcomod' of null' */
-        if (state.acomodData.tipoAcomod === 'Pousada' || state.acomod.tipoAcomod === 'Pousada' || state.acomodData.tipoAcomod === 'Suítes' || state.acomod.tipoAcomod === 'Suítes') {
+        if (state.acomodData.tipoAcomod === 'Suítes' || state.acomod.tipoAcomod === 'Suítes') {
           return true
         } else return false
       } else {
-        if (state.acomodData.tipoAcomod === 'Pousada' || state.acomodData.tipoAcomod === 'Suítes') {
+        if (state.acomodData.tipoAcomod === 'Suítes') {
           return true
         } else return false
       }
@@ -601,7 +603,6 @@ const store = () => new Vuex.Store({
           state.acomodData.quartos.push({
             name: `Suíte ${n}`,
             acomoda: 1,
-            valor: 0,
             mobilias: []
           })
         })
@@ -610,7 +611,6 @@ const store = () => new Vuex.Store({
           state.acomodData.quartos.push({
             name: `Quarto ${n}`,
             acomoda: 1,
-            valor: 0,
             mobilias: []
           })
         })
@@ -995,7 +995,9 @@ const store = () => new Vuex.Store({
         totalBanheiros: 1,
         totalGaragem: 1,
         quartos: [],
-        valorNoite: 0,
+        valorNoiteWeekdays: 0,
+        valorNoiteWeekend: 0,
+        valorNoiteFeriados: 0,
         comodidades: [
           { name: 'Roupas de cama', id: 'roupas_de_cama', condition: false },
           { name: 'Piscina', id: 'piscina', condition: false },

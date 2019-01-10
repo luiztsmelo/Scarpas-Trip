@@ -61,7 +61,6 @@
           <option>Chácara</option>
           <option>Sítio</option>
           <option>Fazenda</option>
-          <option>Pousada</option>
           <option>Suítes</option>
           <option>Camping</option>
           <option>Hostel</option>
@@ -94,14 +93,14 @@
         </select>
       </div>
 
-      <div class="item-form" v-if="$store.state.acomodData.tipoAcomod !== 'Pousada' && !$store.getters.tipoAcomodCampingHostel">
+      <div class="item-form" v-if="!$store.getters.tipoAcomodCampingHostel">
         <label>{{ $store.state.acomodData.tipoAcomod === 'Suítes' ? 'Nº de' : 'Quantos são' }} Suítes</label>
         <select v-model="$store.state.acomodData.totalSuites">
           <option v-for="n in 10" :key="n">{{ n }}</option>
         </select>
       </div>
 
-      <div class="item-form" v-if="!$store.getters.tipoAcomodPousadaSuites">
+      <div class="item-form" v-if="!$store.getters.tipoAcomodSuites">
         <label>Nº de Banheiros</label>
         <select v-model="$store.state.acomodData.totalBanheiros">
           <option v-for="n in 10" :key="n">{{ n }}</option>
@@ -136,9 +135,7 @@
 
       <h1 class="__form-title">Configuração {{ $store.state.acomodData.tipoAcomod === 'Suítes' ? 'das Suítes' : 'dos quartos' }}</h1>
 
-      <h3 class="__form-text" v-if="$store.getters.tipoAcomodPousadaSuites">
-        Recomendamos que dê um nome para cada {{ $store.state.acomodData.tipoAcomod === 'Suítes' ? 'suíte, a fim de diferenciá-las. Ex: Standard Suite, Triple Suite, Deluxe Suite etc.' : 'quarto, a fim de diferenciá-los. Ex: Standard Room, Triple Room, Deluxe Room etc.' }}
-      </h3>
+      <h3 class="__form-text" v-if="$store.getters.tipoAcomodSuites">Recomendamos que dê um nome para cada suíte, a fim de diferenciá-las. Ex: Suíte Dupla Standard, Suíte Tripla, Suíte Deluxe etc.</h3>
 
 
       <div class="quartos">
@@ -159,14 +156,6 @@
                   <select v-model="quarto.acomoda">
                     <option v-for="n in 12" :key="n" :value="n">{{ n }} {{ n === 1 ? 'hóspede' : 'hóspedes' }}</option>
                   </select>
-                </div>
-
-                <div class="question" v-if="$store.getters.tipoAcomodPousadaSuites">
-                  <label>Valor por noite:</label>
-                  <money 
-                    v-model="quarto.valor"
-                    onKeyPress="if (event.which == 13) return false">
-                  </money>
                 </div>
 
               </div>
@@ -352,19 +341,62 @@
 
 
 
-    <!-- ________________________________________ 7 - VALOR DA ESTADIA ________________________________________ -->
+    <!-- ________________________________________ 7 - VALORES DA ESTADIA ________________________________________ -->
     <form class="cadastro-acomodacao" v-if="$store.state.cadastroAcomod7">
 
-      <h1 class="__form-title">Qual é o valor da estadia?</h1>
+      <h1 class="__form-title">Quais são os valores da estadia?</h1>
 
 
-      <h3 class="__form-text">Será possível ajustar o valor após a publicação do anúncio, para adequar a períodos de baixa e alta temporada.</h3>
+      <h3 class="__form-text">Será possível ajustar os valores após a publicação do anúncio.</h3>
 
-      <div class="item-form">
-        <label>Valor por noite</label>
-        <money v-model="$store.state.acomodData.valorNoite"></money>
-      </div> 
 
+      <!-- Suítes -->
+      <div v-if="$store.getters.tipoAcomodSuites">
+
+        <div v-for="(quarto, index) in $store.state.acomodData.quartos" :key="index">
+
+          <h3 class="__form-subtitle">{{ quarto.name }}</h3>
+
+          <div class="item-form">
+            <label>Valor por noite (Domingo a Quinta)</label>
+            <money v-model="quarto.valorNoiteWeekdays"></money>
+          </div>
+
+          <div class="item-form">
+            <label>Valor por noite (Sexta e Sábado)</label>
+            <money v-model="quarto.valorNoiteWeekend"></money>
+          </div> 
+
+          <div class="item-form">
+            <label>Valor por noite (Feriados)</label>
+            <money v-model="quarto.valorNoiteFeriados"></money>
+          </div>
+
+        </div>
+
+      </div><!-- Suítes -->
+
+
+      <!-- Outros tipos -->
+      <div v-else>
+
+        <div class="item-form">
+          <label>Valor por noite (Domingo a Quinta)</label>
+          <money v-model="$store.state.acomodData.valorNoiteWeekdays"></money>
+        </div>
+
+        <div class="item-form">
+          <label>Valor por noite (Sexta e Sábado)</label>
+          <money v-model="$store.state.acomodData.valorNoiteWeekend"></money>
+        </div> 
+
+        <div class="item-form">
+          <label>Valor por noite (Feriados)</label>
+          <money v-model="$store.state.acomodData.valorNoiteFeriados"></money>
+        </div>
+
+      </div><!-- Outros tipos -->
+      
 
       <div class="back-next"> 
         <div class="back-next-body">
@@ -373,7 +405,7 @@
         </div>
       </div> 
     
-    </form><!-- ________________________________________ 7 - VALOR DA ESTADIA ________________________________________ -->
+    </form><!-- ________________________________________ 7 - VALORES DA ESTADIA ________________________________________ -->
 
 
 
@@ -1046,14 +1078,7 @@ export default {
       this.$store.commit('m_cadastroAcomod7', false), this.$store.commit('m_cadastroAcomod6', true), window.history.back(1)
     },
     backBtn8 () {
-      this.$store.commit('m_cadastroAcomod8', false)
-      if (this.$store.getters.tipoAcomodPousadaSuites) {
-        this.$store.commit('m_cadastroAcomod6', true)
-        window.history.back(2)
-      } else {
-        this.$store.commit('m_cadastroAcomod7', true)
-        window.history.back(1)
-      }
+      this.$store.commit('m_cadastroAcomod8', false), this.$store.commit('m_cadastroAcomod7', true), window.history.back(1)
     },
     backBtn9 () {
       this.$store.commit('m_cadastroAcomod9', false), this.$store.commit('m_cadastroAcomod8', true), window.history.back(1)
@@ -1115,18 +1140,8 @@ export default {
       }
     },
     nextBtn6 () {
-      if (this.$store.state.acomodData.images.length >= 3) {
-        this.$store.commit('m_cadastroAcomod6', false)
-        if (this.$store.getters.tipoAcomodPousadaSuites) {
-          this.$store.commit('m_cadastroAcomod8', true)
-          window.location.hash = `${this.randomHashs[8]}`
-          this.$store.commit('m_acomodProgressBar', (100/12)*8)
-        } else {
-          this.$store.commit('m_cadastroAcomod7', true)
-          window.location.hash = `${this.randomHashs[7]}`
-          this.$store.commit('m_acomodProgressBar', (100/12)*7)
-        }        
-        this.scrollTop()
+      if (this.$store.state.acomodData.images.length >= 1) {
+        this.$store.commit('m_cadastroAcomod6', false), this.$store.commit('m_cadastroAcomod7', true), window.location.hash = `${this.randomHashs[7]}`, this.$store.commit('m_acomodProgressBar', (100/12)*7),this.scrollTop()
       } else {
         this.$store.commit('show_alert', {
           type: 'warning',
@@ -1245,14 +1260,20 @@ export default {
 
       acomodData.hostID = this.user.userID
 
-      /* Se Pousada ou Suítes, valorNoite = valor do quarto mais barato && sort quartos */
-      if (this.$store.getters.tipoAcomodPousadaSuites) {
-        let valores = []
-        acomodData.quartos.forEach(quarto => {
-          valores.push(quarto.valor)
+      /* Se Suítes, valorNoiteWeekdays = valor do quarto mais barato && sort suítes */
+      if (this.$store.getters.tipoAcomodSuites) {
+        let valoresNoiteWeekdays = []
+        let valoresNoiteWeekdend = []
+        let valoresNoiteFeriados = []
+        acomodData.quartos.forEach(quarto => { 
+          valoresNoiteWeekdays.push(quarto.valorNoiteWeekdays)
+          valoresNoiteWeekdend.push(quarto.valorNoiteWeekend)
+          valoresNoiteFeriados.push(quarto.valorNoiteFeriados)
         })
-        acomodData.valorNoite = Math.min(...valores)
-        acomodData.quartos.sort((a,b) => (a.valor > b.valor) ? 1 : ((b.valor > a.valor) ? -1 : 0))
+        acomodData.valorNoiteWeekdays = Math.min(...valoresNoiteWeekdays)
+        acomodData.valorNoiteWeekdend = Math.min(...valoresNoiteWeekdend)
+        acomodData.valorNoiteFeriados = Math.min(...valoresNoiteFeriados)
+        acomodData.quartos.sort((a,b) => (a.valorNoiteWeekdays > b.valorNoiteWeekdays) ? 1 : ((b.valorNoiteWeekdays > a.valorNoiteWeekdays) ? -1 : 0))
       }
 
       /* Se todas as informações preenchidas */
@@ -1377,7 +1398,7 @@ export default {
       return this.$store.state.acomodPlace !== null || this.$store.state.acomodData.positionLAT !== -20.6141320 ? 'background:#FFA04F' : ''
     },
     form6ok () {
-      return this.$store.state.acomodData.images.length >= 3 ? 'background:#FFA04F' : ''
+      return this.$store.state.acomodData.images.length >= 1 ? 'background:#FFA04F' : ''
     },
     form7ok () {
       return this.$store.state.acomodData.valorNoite !== 0 ? 'background:#FFA04F' : ''
@@ -1585,11 +1606,7 @@ export default {
       } 
       if (value === `#${this.randomHashs[6]}`) {
         this.$store.commit('m_cadastroAcomod6', true)
-        if (this.$store.getters.tipoAcomodPousadaSuites) {
-          this.$store.commit('m_cadastroAcomod8', false)
-        } else {
-          this.$store.commit('m_cadastroAcomod7', false)
-        }
+        this.$store.commit('m_cadastroAcomod7', false)
       } 
       if (value === `#${this.randomHashs[7]}`) {
         this.$store.commit('m_cadastroAcomod7', true)

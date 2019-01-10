@@ -125,7 +125,7 @@
 
               <p class="info">Acomoda até: <span style="font-weight: 500">{{ quarto.acomoda }} {{ quarto.acomoda > 1 ? 'hóspedes' : 'hóspede' }}</span></p>
 
-              <p class="info" v-if="$store.getters.tipoAcomodPousadaSuites">Valor da diária: <span style="font-weight: 500">R$ {{ quarto.valor }}</span></p>
+              <p class="info" v-if="$store.getters.tipoAcomodSuites">Valor da diária: <span style="font-weight: 500">R$ {{ quarto.valorNoiteWeekdays }}</span></p>
     
               
               <div class="mobilias">
@@ -331,10 +331,10 @@
         <form class="reserva-desktop-form">
 
 
-          <h1 class="__valor">R${{ acomod.valorNoite.toLocaleString() }}<span class="__valor-noite"> por noite</span></h1>
+          <h1 class="__valor">R${{ acomod.valorNoiteWeekdays.toLocaleString() }}<span class="__valor-noite"> por noite</span></h1>
 
 
-          <div class="item-form" v-if="$store.getters.tipoAcomodPousadaSuites">
+          <div class="item-form" v-if="$store.getters.tipoAcomodSuites">
             <select v-model="$store.state.reservaAcomod.quarto">
               <option :value="quarto" v-for="quarto in quartosOptions">{{ quarto }}</option>
             </select>
@@ -416,7 +416,7 @@
     <!-- ______________________________ RESERVA MOBILE ______________________________ --> 
     <div class="reserva-mobile">
       <div class="reserva-body">
-        <h3 class="__reserva-valor">R${{ acomod.valorNoite.toLocaleString() }}<span class="__reserva-valor-pessoa"> por noite</span></h3>
+        <h3 class="__reserva-valor">R${{ acomod.valorNoiteWeekdays.toLocaleString() }}<span class="__reserva-valor-pessoa"> por noite</span></h3>
         <button class="__reserva-btn" @click="reservarMobile">Reservar</button>
       </div>
     </div>
@@ -639,7 +639,7 @@ export default {
       return this.acomod.comodidades.filter(comodidade => comodidade.condition === true)
     },
     totalHospedesArray () {
-      if (this.$store.getters.tipoAcomodPousadaSuites) {
+      if (this.$store.getters.tipoAcomodSuites) {
         const quarto = this.acomod.quartos.filter(quarto => quarto.name === this.reservaAcomod.quarto)
         return Array.from({ length: quarto.map(quarto => quarto.acomoda)[0] }, (v, k) => k + 1)
       } else {
@@ -668,10 +668,10 @@ export default {
       value === '' ? this.showComods = false : ''
     },
     quarto (value) {
-      if (value && this.$store.getters.tipoAcomodPousadaSuites) {
+      if (value && this.$store.getters.tipoAcomodSuites) {
         const quarto = this.acomod.quartos.filter(quarto => quarto.name === value)
         console.log(quarto)
-        this.acomod.valorNoite = quarto.map(quarto => quarto.valor)[0]
+        this.acomod.valorNoiteWeekdays = quarto.map(quarto => quarto.valorNoiteWeekdays)[0]
       }
     }
   },
