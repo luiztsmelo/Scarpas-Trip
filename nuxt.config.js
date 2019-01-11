@@ -1,6 +1,7 @@
 module.exports = {
   /* mode: 'spa', */
   /* serverMiddleware: ['~/api/index.js'], */
+  modern: 'server', /* The Node.js server will check browser version based on the user agent and serve the corresponding modern or legacy bundle. */
   /* ________________________________________ BUILD ________________________________________ */
   build: {
     postcss: {
