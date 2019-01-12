@@ -194,7 +194,7 @@
       class="map-desktop"
       :class="[ dropdownBtnIsOpen === true ? 'blur' : '' ]"
       :center="{ lat: -20.6138638, lng: -46.0677806 }"
-      :zoom="13"
+      :zoom="12"
       :options="{ styles: styles, draggable:  true, fullscreenControl: false , zoomControl: false , mapTypeControl: false, streetViewControl: false, gestureHandling: 'greedy' }">
 
       <GmapInfoWindow
@@ -815,7 +815,7 @@ export default {
       background-color: #fff !important;
     }
     & .gm-style-iw {
-      padding: .3rem 0 .2rem 0;
+      padding: .2rem 0;
       background: #fff;
       display: flex;
       align-items: center;
@@ -825,8 +825,8 @@ export default {
       & .__valor {
         cursor: pointer;
         font-family: var(--main-font) !important;
-        font-size: 14px;
-        font-weight: 500;
+        font-size: 13px;
+        font-weight: 600;
         transition: var(--main-transition);
       }
     }

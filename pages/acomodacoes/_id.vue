@@ -125,7 +125,11 @@
 
               <p class="info">Acomoda até: <span style="font-weight: 500">{{ quarto.acomoda }} {{ quarto.acomoda > 1 ? 'hóspedes' : 'hóspede' }}</span></p>
 
-              <p class="info" v-if="$store.getters.tipoAcomodSuites">Valor da diária: <span style="font-weight: 500">R$ {{ quarto.valorNoiteWeekdays }}</span></p>
+              <p class="info" v-if="$store.getters.tipoAcomodSuites">Preço por noite (Dom. a Qui.): <span style="font-weight: 500">R$ {{ quarto.valorNoiteWeekdays }}</span></p>
+
+              <p class="info" v-if="$store.getters.tipoAcomodSuites">Preço por noite (Sex. e Sáb.): <span style="font-weight: 500">R$ {{ quarto.valorNoiteWeekend }}</span></p>
+
+              <p class="info" v-if="$store.getters.tipoAcomodSuites">Preço por noite (Feriados): <span style="font-weight: 500">R$ {{ quarto.valorNoiteFeriados }}</span></p>
     
               
               <div class="mobilias">
@@ -815,7 +819,7 @@ export default {
         font-weight: 600;
       }
       & .info {
-        padding: .2rem 0;
+        padding: .4rem 0;
       }
       & .mobilias {
         display: grid;
