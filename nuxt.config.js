@@ -112,21 +112,7 @@ module.exports = {
     path: '/sitemap.xml',
     hostname: 'https://www.escarpastrip.com',
     cacheTime: 1000 * 60 * 15,
-    generate: false,
-    routes: [
-      '/acomodacoes/',
-      '/passeios/',
-      '/eventos/',
-      '/atracoes/',
-      '/restaurantes/',
-      '/anunciar/acomodacao',
-      '/anunciar/passeio',
-      '/anunciar/evento',
-      '/anunciar/atracao',
-      '/anunciar/restaurante',
-      '/roteiro',
-      '/termos'
-    ]
+    generate: false
   },
   /* ________________________________________ MODULES ________________________________________ */
   modules: [
