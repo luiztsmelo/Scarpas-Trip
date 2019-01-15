@@ -112,7 +112,7 @@ module.exports = {
     path: '/static/sitemap.xml',
     hostname: 'https://www.escarpastrip.com',
     cacheTime: 1000 * 60 * 15,
-    generate: true,
+    generate: false,
     routes: [
       '/acomodacoes/',
       '/passeios/',
