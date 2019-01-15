@@ -123,6 +123,7 @@ module.exports = {
   },
   /* ________________________________________ MODULES ________________________________________ */
   modules: [
+    [ '@nuxtjs/google-analytics', { id: 'UA-132478182-1' } ],
     '@nuxtjs/pwa',
     '@nuxtjs/sitemap',
     '@nuxtjs/axios'
