@@ -104,21 +104,28 @@ module.exports = {
     lang: 'pt-br',
     iconSrc: './static/brand.png'
   },
+  icon: {
+    iconSrc: '~/static/brand.png'
+  },
   /* _________________________________________ SITEMAP _________________________________________ */
   sitemap: {
     path: '/sitemap.xml',
     hostname: 'https://www.escarpastrip.com',
     cacheTime: 1000 * 60 * 15,
-    generate: false, // Enable me when using nuxt generate
+    generate: true,
     routes: [
+      '/acomodacoes/',
+      '/passeios/',
       '/eventos/',
-      '/eventos/:id',
-      {
-        url: '/page/2',
-        changefreq: 'daily',
-        priority: 1,
-        lastmodISO: '2017-06-30T13:30:00.000Z'
-      }
+      '/atracoes/',
+      '/restaurantes/',
+      '/anunciar/acomodacao',
+      '/anunciar/passeio',
+      '/anunciar/evento',
+      '/anunciar/atracao',
+      '/anunciar/restaurante',
+      '/roteiro',
+      '/termos'
     ]
   },
   /* ________________________________________ MODULES ________________________________________ */
