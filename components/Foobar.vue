@@ -5,35 +5,35 @@
 
           <nuxt-link to="/acomodacoes">
           <div class="foobar-box" @click="$store.state.offFoobar1=false, $store.state.offFoobar2=true, $store.state.offFoobar3=true, $store.state.offFoobar4=true, $store.state.offFoobar5=true">
-            <img src="../assets/img/acomods.svg" class="__foobar1-icon" :class="{ coloricon: offFoobar1 }">
+            <img src="~/assets/img/acomods.svg" class="__foobar1-icon" :class="{ coloricon: offFoobar1 }">
             <h2 class="__foobar-title" :class="{ colortitle: offFoobar1 }">Acomodações</h2>
           </div>
         </nuxt-link>
 
         <nuxt-link to="/eventos">
           <div class="foobar-box" @click="$store.state.offFoobar1=true, $store.state.offFoobar2=false, $store.state.offFoobar3=true, $store.state.offFoobar4=true, $store.state.offFoobar5=true">
-            <img src="../assets/img/eventos.svg" class="__foobar2-icon" :class="{ coloricon: offFoobar2 }">
+            <img src="~/assets/img/eventos.svg" class="__foobar2-icon" :class="{ coloricon: offFoobar2 }">
             <h2 class="__foobar-title" :class="{ colortitle: offFoobar2 }">Eventos</h2>
           </div>
         </nuxt-link>
 
         <nuxt-link to="/atracoes">
           <div class="foobar-box" @click="$store.state.offFoobar1=true, $store.state.offFoobar2=true, $store.state.offFoobar3=false, $store.state.offFoobar4=true, $store.state.offFoobar5=true">
-            <img src="../assets/img/atracoes.svg" class="__foobar3-icon" :class="{ coloricon: offFoobar3 }">
+            <img src="~/assets/img/atracoes.svg" class="__foobar3-icon" :class="{ coloricon: offFoobar3 }">
             <h2 class="__foobar-title" :class="{ colortitle: offFoobar3 }">Atrações</h2>
           </div>
         </nuxt-link>
 
         <nuxt-link to="/passeios">
           <div class="foobar-box" @click="$store.state.offFoobar1=true, $store.state.offFoobar2=true, $store.state.offFoobar3=true, $store.state.offFoobar4=false, $store.state.offFoobar5=true">
-            <img src="../assets/img/passeios.svg" class="__foobar4-icon" :class="{ coloricon: offFoobar4 }">
+            <img src="~/assets/img/passeios.svg" class="__foobar4-icon" :class="{ coloricon: offFoobar4 }">
             <h2 class="__foobar-title" :class="{ colortitle: offFoobar4 }">Passeios</h2>
           </div>
         </nuxt-link>
 
         <nuxt-link to="/restaurantes">
           <div class="foobar-box" @click="$store.state.offFoobar1=true, $store.state.offFoobar2=true, $store.state.offFoobar3=true, $store.state.offFoobar4=true, $store.state.offFoobar5=false">
-            <img src="../assets/img/restaurantes.svg" class="__foobar5-icon" :class="{ coloricon: offFoobar5 }">
+            <img src="~/assets/img/restaurantes.svg" class="__foobar5-icon" :class="{ coloricon: offFoobar5 }">
             <h2 class="__foobar-title" :class="{ colortitle: offFoobar5 }">Restaurantes</h2>
           </div>
         </nuxt-link>

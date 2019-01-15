@@ -109,7 +109,7 @@ module.exports = {
   },
   /* _________________________________________ SITEMAP _________________________________________ */
   sitemap: {
-    path: '/sitemap.xml',
+    path: '/static/sitemap.xml',
     hostname: 'https://www.escarpastrip.com',
     cacheTime: 1000 * 60 * 15,
     generate: true,
