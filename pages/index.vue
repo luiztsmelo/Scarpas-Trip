@@ -15,7 +15,7 @@
       <div class="category-container">
 
 
-        <h1 class="__title">Acomodações</h1>
+        <h2 class="__title">Acomodações</h2>
         
 
         <div class="cards-container" v-show="$store.state.acomods !== null">
@@ -26,7 +26,7 @@
 
             <p class="__card-info" style="color: #FFA04F">{{ acomod.tipoAcomod }}</p>
 
-            <p class="__card-title">{{ acomod.title }}</p>
+            <h3 class="__card-title">{{ acomod.title }}</h3>
 
             <p class="__card-subtitle">R${{ acomod.valorNoiteWeekdays.toLocaleString() }}<span class="__card-valor-noite"> por noite</span></p>
 
@@ -41,10 +41,10 @@
                 :star-size="10"
                 :padding="2">
               </star-rating>
-              <p class="rating-count">{{ acomod.avaliacoes.length }}</p>
+              <span class="rating-count">{{ acomod.avaliacoes.length }}</span>
             </div>
 
-            <div class="new" v-else><p>NOVA</p></div>
+            <div class="new" v-else><span>NOVA</span></div>
             
           </nuxt-link>
 
@@ -62,7 +62,7 @@
       <div class="category-container">
 
 
-        <h1 class="__title">Passeios</h1>
+        <h2 class="__title">Passeios</h2>
 
         
 
@@ -73,7 +73,7 @@
 
             <p class="__card-info" style="color: #0784FD">{{ passeio.tipoPasseio }}</p>
 
-            <p class="__card-title">{{ passeio.title }}</p>
+            <h3 class="__card-title">{{ passeio.title }}</h3>
 
             <p class="__card-subtitle">R${{ passeio.rotas[0].valor.toLocaleString() }}<span class="__card-valor-noite"> por pessoa</span></p>
             
@@ -88,10 +88,10 @@
                 :star-size="10"
                 :padding="2">
               </star-rating>
-              <p class="rating-count">{{ passeio.avaliacoes.length }}</p>
+              <span class="rating-count">{{ passeio.avaliacoes.length }}</span>
             </div>
 
-            <div class="new" v-else><p>NOVO</p></div>
+            <div class="new" v-else><span>NOVO</span></div>
 
           </nuxt-link> 
         </div>
@@ -109,10 +109,10 @@
       <div class="category-container">
 
 
-        <h1 class="__title">Eventos</h1>
+        <h2 class="__title">Eventos</h2>
         
 
-        <h3 class="__subtitle">Em breve.</h3>
+        <p class="__subtitle">Em breve.</p>
 
 
       </div><!-- ______________________________ EVENTOS ______________________________ -->
@@ -126,10 +126,10 @@
       <div class="category-container">
 
 
-        <h1 class="__title">Atrações</h1>
+        <h2 class="__title">Atrações</h2>
         
 
-        <h3 class="__subtitle">Em breve.</h3>
+        <p class="__subtitle">Em breve.</p>
 
 
       </div><!-- ______________________________ ATRAÇÕES ______________________________ -->
@@ -143,10 +143,10 @@
       <div class="category-container">
 
 
-        <h1 class="__title">Restaurantes</h1>
+        <h2 class="__title">Restaurantes</h2>
         
 
-        <h3 class="__subtitle">Em breve.</h3>
+        <p class="__subtitle">Em breve.</p>
 
 
       </div><!-- ______________________________ RESTAURANTES ______________________________ -->
@@ -240,16 +240,15 @@ export default {
             margin-bottom: .2rem;
           }
           & .__card-info {
-            padding-top: .3rem;
             text-transform: uppercase;
             font-size: 11px;
             font-weight: 600;
             color: #007B77;
           }
           & .__card-title {
-            padding: .3rem 0;
             font-size: 14px;
             font-weight: 700;
+            line-height: 19px;
           }
           & .__card-subtitle {
             font-size: 14px;
@@ -260,7 +259,6 @@ export default {
             }
           }
           & .rating {
-            padding-top: .1rem;
             display: flex;
             align-items: center;
             & .rating-count {
@@ -270,11 +268,11 @@ export default {
             }
           }
           & .new {
-            margin-top: .3rem;
+            margin-top: .1rem;
             display: inline-flex;
             border: 1px solid #dedede;
             border-radius: 50px;
-            & p {
+            & span {
               padding: 3px 8px;
               font-size: 11px;
               font-weight: 600;
@@ -306,16 +304,13 @@ export default {
           grid-gap: 20px;
           & .card {
             & .__card-img {
-              margin-bottom: .3rem;
             }
             & .__card-info {
-              padding-top: .3rem;
               text-transform: uppercase;
               font-size: 11px;
               font-weight: 600;
             }
-            & .__card-title {
-              padding: .4rem 0 .3rem 0;
+            & .__card-title {;
               font-size: 16px;
               font-weight: 700;
               line-height: 1.3;
@@ -327,7 +322,6 @@ export default {
               }
             }
             & .rating {
-              padding-top: .2rem;
               & .rating-count {
               }
             }

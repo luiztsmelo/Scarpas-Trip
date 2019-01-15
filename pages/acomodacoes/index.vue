@@ -30,7 +30,7 @@
 
           <p class="__card-tipo-acomod">{{ acomod.tipoAcomod }}</p>
 
-          <p class="__card-title">{{ acomod.title }}</p>
+          <h3 class="__card-title">{{ acomod.title }}</h3>
 
           <p class="__card-valor">R${{ valorNoite(acomod) }}<span class="__card-valor-dia"> por noite</span></p>
 
@@ -45,10 +45,10 @@
               :star-size="10"
               :padding="2">
             </star-rating>
-            <p class="rating-number">{{ acomod.avaliacoes.length }}</p>
+            <span class="rating-number">{{ acomod.avaliacoes.length }}</span>
           </div>
 
-          <div class="new" v-else><p>NOVA</p></div>
+          <div class="new" v-else><span>NOVA</span></div>
           
         </div>
         
@@ -58,8 +58,8 @@
 
       <div class="empty-state" v-show="$store.state.filteredAcomods !== null && $store.state.filteredAcomods.length === 0">
         <img src="../../assets/img/empty-state.svg" class="__img">
-        <h1 class="__title">Nenhuma acomodação encontrada :(</h1>
-        <h3>Tente ajustar os filtros para obter um melhor resultado.</h3>
+        <h2 class="__title">Nenhuma acomodação encontrada :(</h2>
+        <p>Tente ajustar os filtros para obter um melhor resultado.</p>
         <button class="__limpar-filtros-btn" @click="$store.commit('m_resetFilters')">Limpar filtros</button>
       </div>
       
@@ -152,7 +152,7 @@
                   <div class="input-number">
                     <div class="__btn" :class="$store.state.filters.hospedes === 0 ? '__btn-disabled' : ''" @click="$store.commit('m_decrementHospedes')"><div class="minus"></div></div>
 
-                    <h3>{{ $store.state.filters.hospedes }}</h3>
+                    <p>{{ $store.state.filters.hospedes }}</p>
 
                     <div class="__btn" :class="$store.state.filters.hospedes === 25 ? '__btn-disabled' : ''" @click="$store.commit('m_incrementHospedes')"><div class="plus-horiz"></div><div class="plus-vert"></div></div>
                   </div>
@@ -196,7 +196,7 @@
 
                     <div class="radio"><div :class="[ $store.state.filters.tipoAcomod === tipoAcomod.name ? 'radio-checkmark' : '' ]"></div></div>
 
-                    <h3 class="__text" >{{ tipoAcomod.name }}</h3>
+                    <p class="__text" >{{ tipoAcomod.name }}</p>
 
                   </div>
 
@@ -237,20 +237,20 @@
 
                   <div class="quantia" @click="$store.state.filters.preco = 'low'">
                     <div class="radio"><div :class="[ $store.state.filters.preco === 'low' ? 'radio-checkmark' : '' ]"></div></div>
-                    <h1 class="__text">Econômico</h1>
-                    <h3 class="__valor">Até R$199</h3>
+                    <span class="__text">Econômico</span>
+                    <span class="__valor">Até R$199</span>
                   </div>
 
                   <div class="quantia" @click="$store.state.filters.preco = 'mid'">
                     <div class="radio"><div :class="[ $store.state.filters.preco === 'mid' ? 'radio-checkmark' : '' ]"></div></div>
-                    <h1 class="__text">Custo-benefício</h1>
-                    <h3 class="__valor">R$200 - R$399</h3>
+                    <span class="__text">Custo-benefício</span>
+                    <span class="__valor">R$200 - R$399</span>
                   </div>
 
                   <div class="quantia" @click="$store.state.filters.preco = 'high'">
                     <div class="radio"><div :class="[ $store.state.filters.preco === 'high' ? 'radio-checkmark' : '' ]"></div></div>
-                    <h1 class="__text">Luxo</h1>
-                    <h3 class="__valor">R$400+</h3>
+                    <span class="__text">Luxo</span>
+                    <span class="__valor">R$400+</span>
                   </div>
 
                 </div>
@@ -654,7 +654,7 @@ export default {
       & .image-box {
         overflow: hidden;
         line-height: 0;
-        margin-bottom: .5rem;
+        margin-bottom: .4rem;
         border-radius: 5px;
         & .swiper-container {
           position: relative;
@@ -672,14 +672,12 @@ export default {
       }
       & .card-details {
         & .__card-tipo-acomod {
-          padding-top: .1rem;
           text-transform: uppercase;
           font-size: 11px;
           font-weight: 600;
           color: var(--colorAcomod);
         }
         & .__card-title {
-          padding: .4rem 0;
           font-size: 18px;
           font-weight: 700;
           line-height: 1.3;
@@ -693,7 +691,6 @@ export default {
           }
         }
         & .rating {
-          padding-top: .2rem;
           display: flex;
           align-items: center;
           & .rating-number {
@@ -703,11 +700,11 @@ export default {
           }
         }
         & .new {
-          margin-top: .4rem;
+          margin-top: .2rem;
           display: inline-flex;
           border: 1px solid #dedede;
           border-radius: 50px;
-          & p {
+          & span {
             padding: 3px 8px;
             font-size: 11px;
             font-weight: 600;

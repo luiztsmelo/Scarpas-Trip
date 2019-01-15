@@ -59,7 +59,7 @@
         <!-- ______________________________ RATING ______________________________ -->
         <div class="rating-box">
 
-          <h3 class="__tipo" style="color: #FFA04F">{{ acomod.tipoAcomod }}</h3>
+          <p class="__tipo" style="color: #FFA04F">{{ acomod.tipoAcomod }}</p>
 
           <star-rating
             v-if="acomod.avaliacoes.length > 0"
@@ -74,7 +74,7 @@
             :padding="4">
           </star-rating>
 
-          <div class="new" v-else><p>NOVA</p></div>
+          <div class="new" v-else><span>NOVA</span></div>
 
         </div><!-- ______________________________ RATING ______________________________ -->
         
@@ -90,7 +90,7 @@
 
         <!-- ______________________________ ANUNCIANTE ______________________________ -->
         <div class="anunciante-box">
-          <img class="__anunciante-img" :src="userPhoto" @click="$store.commit('m_showHost', true), hashHost()">
+          <img class="__anunciante-img" :src="userPhoto" :alt="host.firstName" @click="$store.commit('m_showHost', true), hashHost()">
           <div class="box-flex-column">
             <h3 style="user-select:none">Hospedado por</h3>
             <p class="__anunciante-name" @click="$store.commit('m_showHost', true), hashHost()">{{ host.fullName }}</p>
@@ -104,10 +104,10 @@
 
 
         <!-- ______________________________ SOBRE ______________________________ -->
-        <h1 class="item-title">Sobre {{ tipoAcomodA }}</h1>
+        <h2 class="item-title">Sobre {{ tipoAcomodA }}</h2>
 
         <div class="sobre-box">
-          <h3>{{ acomod.subtitle }}</h3>
+          <p>{{ acomod.subtitle }}</p>
         </div><!-- ______________________________ SOBRE ______________________________ -->
 
 
@@ -120,7 +120,7 @@
 
           <div class="quarto" v-for="(quarto, index) in acomod.quartos" :key="index">
 
-              <h1 class="__name">{{ quarto.name }}</h1>
+              <h2 class="__name">{{ quarto.name }}</h2>
 
 
               <p class="info">Acomoda até: <span style="font-weight: 500">{{ quarto.acomoda }} {{ quarto.acomoda > 1 ? 'hóspedes' : 'hóspede' }}</span></p>
@@ -150,7 +150,7 @@
 
 
         <!-- ______________________________ COMODIDADES ______________________________ -->
-        <h1 class="item-title">Comodidades</h1>
+        <h2 class="item-title">Comodidades</h2>
 
 
         <div class="comodidades-box-mobile" @click="showComods = true, hashComods()">
@@ -161,7 +161,7 @@
         <div class="comodidades-box-desktop">
           <div class="item" v-for="(comodidade, index) in acomod.comodidades" :key="comodidade.name">
             <img class="__img" :class="[ comodidade.condition === false ? 'comodidade-img-disabled' : '' ]" :src="comodidadeImgSrc(comodidade)">
-            <h3 :class="[ comodidade.condition === false ? 'comodidade-text-disabled' : '' ]">{{ comodidade.name }}</h3>
+            <p :class="[ comodidade.condition === false ? 'comodidade-text-disabled' : '' ]">{{ comodidade.name }}</p>
           </div>
         </div>
 
@@ -177,11 +177,11 @@
 
             <div class="comods-body">
       
-              <h1 class="__title">Comodidades</h1>
+              <h2 class="__title">Comodidades</h2>
 
               <div class="comods-item" v-for="(comodidade, index) in acomod.comodidades" :key="comodidade.name">
                 <img class="__img" :class="[ comodidade.condition === false ? 'comodidade-img-disabled' : '' ]" :src="comodidadeImgSrc(comodidade)">
-                <h3 :class="[ comodidade.condition === false ? 'comodidade-text-disabled' : '' ]">{{ comodidade.name }}</h3>
+                <p :class="[ comodidade.condition === false ? 'comodidade-text-disabled' : '' ]">{{ comodidade.name }}</p>
               </div>
 
             </div> 
@@ -194,7 +194,7 @@
 
 
         <!-- ______________________________ DISPONIBILIDADE ______________________________ -->
-        <h1 class="item-title">Disponibilidade</h1>
+        <h2 class="item-title">Disponibilidade</h2>
 
         <div class="disponibilidade-box">
           <no-ssr>
@@ -233,11 +233,11 @@
 
 
         <!-- ______________________________ LOCAL ______________________________ -->
-        <h1 class="item-title">Local</h1>
+        <h2 class="item-title">Local</h2>
 
         <div class="local-box">
 
-          <h3 class="__adress">{{ acomod.address }}</h3>
+          <p class="__adress">{{ acomod.address }}</p>
 
           <gmap-map
             :center="{lat: acomod.positionLAT, lng: acomod.positionLNG}"
@@ -260,9 +260,9 @@
         <!-- ______________________________ AVALIAÇÕES ______________________________ -->
         <div class="avaliacoes-title">
 
-          <h1 class="__title">
+          <h2 class="__title">
             {{ acomod.avaliacoes.length > 0 ? acomod.avaliacoes.length : '' }} {{ acomod.avaliacoes.length === 0 ? 'Seja o primeiro a avaliar!' : acomod.avaliacoes.length === 1 ? 'Avaliação': 'Avaliações' }}
-          </h1>
+          </h2>
 
           <star-rating
             v-if="acomod.avaliacoes.length > 0"
@@ -305,9 +305,9 @@
 
 
             <div class="avaliacao" v-for="(avaliacao, index) in acomod.avaliacoes" :v-key="index">
-              <h2 class="__guest-name">{{ avaliacao.fullName }}</h2>
+              <h3 class="__guest-name">{{ avaliacao.fullName }}</h3>
               <p class="__date">{{ formatAvaliacaoDate(avaliacao) }}</p>
-              <h3 class="__message">{{ avaliacao.comment }}</h3>
+              <p class="__message">{{ avaliacao.comment }}</p>
             </div>
 
 
@@ -335,7 +335,7 @@
         <form class="reserva-desktop-form">
 
 
-          <h1 class="__valor">R${{ acomod.valorNoiteWeekdays.toLocaleString() }}<span class="__valor-noite"> por noite</span></h1>
+          <h2 class="__valor">R${{ acomod.valorNoiteWeekdays.toLocaleString() }}<span class="__valor-noite"> por noite</span></h2>
 
 
           <div class="item-form" v-if="$store.getters.tipoAcomodSuites">
@@ -383,8 +383,8 @@
 
 
           <div class="valor-reserva-total" v-if="reservaAcomod.startDate !== '' && reservaAcomod.endDate !== ''">
-            <h3>{{ `R$${acomod.valorNoite.toLocaleString()} x ${$store.state.reservaAcomod.noites} ${$store.state.reservaAcomod.noites == 1 ? 'noite' : 'noites'}` }}</h3>
-            <h3 id="valor">R${{ Math.round(acomod.valorNoite * $store.state.reservaAcomod.noites).toLocaleString() }}</h3>
+            <span>{{ `R$${acomod.valorNoite.toLocaleString()} x ${$store.state.reservaAcomod.noites} ${$store.state.reservaAcomod.noites == 1 ? 'noite' : 'noites'}` }}</span>
+            <span id="valor">R${{ Math.round(acomod.valorNoite * $store.state.reservaAcomod.noites).toLocaleString() }}</span>
           </div>
 
 
@@ -397,7 +397,7 @@
 
 
           <div class="highlight" v-if="$store.state.visitsLastMonth >= 0">
-            <h3 class="__text">{{ tipoAcomodE }} recebeu {{ $store.state.visitsLastMonth }} visualizações no último mês.</h3>
+            <span class="__text">{{ tipoAcomodE }} recebeu {{ $store.state.visitsLastMonth }} visualizações no último mês.</span>
             <img class="__img" src="../../assets/img/visits-acomod.svg">
           </div>
 
@@ -420,7 +420,7 @@
     <!-- ______________________________ RESERVA MOBILE ______________________________ --> 
     <div class="reserva-mobile">
       <div class="reserva-body">
-        <h3 class="__reserva-valor">R${{ acomod.valorNoiteWeekdays.toLocaleString() }}<span class="__reserva-valor-pessoa"> por noite</span></h3>
+        <span class="__reserva-valor">R${{ acomod.valorNoiteWeekdays.toLocaleString() }}<span class="__reserva-valor-pessoa"> por noite</span></span>
         <button class="__reserva-btn" @click="reservarMobile">Reservar</button>
       </div>
     </div>
@@ -757,7 +757,7 @@ export default {
       display: inline-flex;
       border: 1px solid #dedede;
       border-radius: 50px;
-      & p {
+      & span {
         padding: 4px 8px;
         font-size: 11px;
         font-weight: 600;
@@ -1206,7 +1206,7 @@ export default {
           & .rating {
           }
           & .new {
-            & p {
+            & span {
               font-size: 12px;
             }
           }

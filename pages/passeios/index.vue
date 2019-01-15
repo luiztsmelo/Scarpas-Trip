@@ -30,7 +30,7 @@
 
           <p class="__card-tipo-passeio">{{ passeio.tipoPasseio }}</p>
 
-          <p class="__card-title">{{ passeio.title }}</p>
+          <h3 class="__card-title">{{ passeio.title }}</h3>
 
           <p class="__card-valor">R${{ passeio.rotas[0].valor.toLocaleString() }}<span class="__card-valor-dia"> por pessoa</span></p>
 
@@ -45,10 +45,10 @@
               :star-size="10"
               :padding="2">
             </star-rating>
-            <p class="rating-number">{{ passeio.avaliacoes.length }}</p>
+            <span class="rating-number">{{ passeio.avaliacoes.length }}</span>
           </div>
 
-          <div class="new" v-else><p>NOVO</p></div>
+          <div class="new" v-else><span>NOVO</span></div>
           
         </div>
         
@@ -58,8 +58,8 @@
 
       <div class="empty-state" v-show="$store.state.filteredPasseios !== null && $store.state.filteredPasseios.length === 0">
         <img src="../../assets/img/empty-state.svg" class="__img">
-        <h1 class="__title">Nenhum passeio encontrado :(</h1>
-        <h3>Tente ajustar os filtros para obter um melhor resultado.</h3>
+        <h2 class="__title">Nenhum passeio encontrado :(</h2>
+        <p>Tente ajustar os filtros para obter um melhor resultado.</p>
         <button class="__limpar-filtros-btn" @click="$store.commit('m_resetFiltersPasseios')">Limpar filtros</button>
       </div>
       
@@ -116,7 +116,7 @@
 
                     <div class="radio"><div :class="[ $store.state.filtersPasseios.tipoPasseio === tipoPasseio.name ? 'radio-checkmark' : '' ]"></div></div>
 
-                    <h3 class="__text" >{{ tipoPasseio.name }}</h3>
+                    <p class="__text" >{{ tipoPasseio.name }}</p>
 
                   </div>
 
@@ -437,7 +437,7 @@ export default {
       & .image-box {
         overflow: hidden;
         line-height: 0;
-        margin-bottom: .5rem;
+        margin-bottom: .4rem;
         border-radius: 5px;
         & .swiper-container {
           position: relative;
@@ -455,14 +455,12 @@ export default {
       }
       & .card-details {
         & .__card-tipo-passeio {
-          padding-top: .1rem;
           text-transform: uppercase;
           font-size: 11px;
           font-weight: 600;
           color: var(--colorPasseio);
         }
         & .__card-title {
-          padding: .4rem 0;
           font-size: 18px;
           font-weight: 700;
           line-height: 1.3;
@@ -476,7 +474,6 @@ export default {
           }
         }
         & .rating {
-          padding-top: .2rem;
           display: flex;
           align-items: center;
           & .rating-number {
@@ -486,11 +483,11 @@ export default {
           }
         }
         & .new {
-          margin-top: .4rem;
+          margin-top: .2rem;
           display: inline-flex;
           border: 1px solid #dedede;
           border-radius: 50px;
-          & p {
+          & span {
             padding: 3px 8px;
             font-size: 11px;
             font-weight: 600;

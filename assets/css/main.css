@@ -51,6 +51,13 @@ h3 {
   line-height: 27px;
 }
 
+p {
+  font-family: var(--main-font);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 27px;
+}
+
 li {
   list-style: none;
 }

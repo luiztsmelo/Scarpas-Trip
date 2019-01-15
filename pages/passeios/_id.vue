@@ -62,7 +62,7 @@
         <!-- ______________________________ RATING ______________________________ -->
         <div class="rating-box">
 
-          <h3 class="__tipo" style="color: #198CFE">{{ passeio.tipoPasseio }}</h3>
+          <p class="__tipo" style="color: #198CFE">{{ passeio.tipoPasseio }}</p>
 
           <star-rating
             v-if="passeio.avaliacoes.length > 0"
@@ -77,7 +77,7 @@
             :padding="4">
           </star-rating>
 
-          <div class="new" v-else><p>NOVO</p></div>
+          <div class="new" v-else><span>NOVO</span></div>
 
         </div><!-- ______________________________ RATING ______________________________ -->
 
@@ -93,7 +93,7 @@
 
         <!-- ______________________________ ANUNCIANTE ______________________________ -->
         <div class="anunciante-box">
-          <img class="__anunciante-img" :src="userPhoto" @click="$store.commit('m_showHost', true), hashHost()">
+          <img class="__anunciante-img" :src="userPhoto" :alt="host.firstName" @click="$store.commit('m_showHost', true), hashHost()">
           <div class="box-flex-column">
             <h3 style="user-select:none">Guiado por</h3>
             <p class="__anunciante-name" @click="$store.commit('m_showHost', true), hashHost()">{{ host.fullName }}</p>
@@ -108,10 +108,10 @@
 
 
         <!-- ______________________________ SOBRE ______________________________ -->
-        <h1 class="item-title">Sobre o Passeio</h1>
+        <h2 class="item-title">Sobre o Passeio</h2>
 
         <div class="sobre-box">
-          <h3>{{ passeio.subtitle }}</h3>
+          <p>{{ passeio.subtitle }}</p>
         </div><!-- ______________________________ SOBRE ______________________________ -->
 
 
@@ -121,10 +121,10 @@
 
 
         <!-- ______________________________ CAPACIDADE ______________________________ -->
-        <h1 class="item-title">Capacidade</h1>
+        <h2 class="item-title">Capacidade</h2>
 
         <div class="capacidade-box">
-          <h3>{{ passeio.capacidade }} {{ passeio.capacidade === 1 ? 'pessoa' : 'pessoas' }}</h3>
+          <p>{{ passeio.capacidade }} {{ passeio.capacidade === 1 ? 'pessoa' : 'pessoas' }}</p>
         </div><!-- ______________________________ CAPACIDADE ______________________________ -->
 
 
@@ -138,20 +138,20 @@
           <no-ssr>
             <div class="rota" v-for="(rota, index) in passeio.rotas" :key="index + 1">
 
-              <h1 class="__title">Rota {{ passeio.rotas.length > 1 ? index + 1 : '' }}</h1>
+              <h2 class="__title">Rota {{ passeio.rotas.length > 1 ? index + 1 : '' }}</h2>
 
-              <h3 style="padding: .3rem 0">Valor por pessoa: <span style="font-weight: 500">R${{ rota.valor }}</span></h3>
+              <p style="padding: .3rem 0">Valor por pessoa: <span style="font-weight: 500">R${{ rota.valor }}</span></p>
 
-              <h3 style="padding: .3rem 0">Horário de partida: <span style="font-weight: 500">{{ rota.horarioPartida }}</span></h3>
+              <p style="padding: .3rem 0">Horário de partida: <span style="font-weight: 500">{{ rota.horarioPartida }}</span></p>
 
-              <h3 style="padding: .3rem 0">Duração: <span style="font-weight: 500">{{ rota.duracao }} {{ rota.duracao === 1 ? 'hora' : 'horas' }}</span></h3>
+              <p style="padding: .3rem 0">Duração: <span style="font-weight: 500">{{ rota.duracao }} {{ rota.duracao === 1 ? 'hora' : 'horas' }}</span></p>
 
               <div class="pontos-visitados">
 
                 <div class="ponto" v-for="(ponto, index) in rota.pontosVisitados">
                   <progressive-background class="__img" :src="pontoImgSrc(ponto)" :aspect-ratio="2/3"/>
-                  <p class="__number">{{ index + 1 }}</p>
-                  <h2 class="__name">{{ ponto }}</h2>
+                  <span class="__number">{{ index + 1 }}</span>
+                  <span class="__name">{{ ponto }}</span>
                 </div>
 
               </div>
@@ -166,7 +166,7 @@
 
 
         <!-- ______________________________ DISPONIBILIDADE ______________________________ -->
-        <h1 class="item-title">Disponibilidade</h1>
+        <h2 class="item-title">Disponibilidade</h2>
 
         <div class="disponibilidade-box">
           <no-ssr>
@@ -201,11 +201,11 @@
 
 
         <!-- ______________________________ LOCAL ______________________________ -->
-        <h1 class="item-title">Local de partida</h1>
+        <h2 class="item-title">Local de partida</h2>
 
         <div class="local-box">
 
-          <h3 class="__adress">{{ passeio.address }}</h3>
+          <p class="__adress">{{ passeio.address }}</p>
 
           <gmap-map
             :center="{ lat: passeio.positionLAT, lng: passeio.positionLNG }"
@@ -226,10 +226,10 @@
 
 
         <!-- ______________________________ PAGAMENTO ______________________________ -->
-        <!-- <h1 class="item-title">Formas de pagamento aceitas</h1>
+        <!-- <h2 class="item-title">Formas de pagamento aceitas</h2>
 
         <div class="pagamento-box">
-          <h3>Formas de pagamento...</h3>
+          <p>Formas de pagamento...</p>
         </div> --><!-- ______________________________ PAGAMENTO ______________________________ -->
 
 
@@ -240,9 +240,9 @@
         <!-- ______________________________ AVALIAÇÕES ______________________________ -->
         <div class="avaliacoes-title">
 
-          <h1 class="__title">
+          <h2 class="__title">
             {{ passeio.avaliacoes.length > 0 ? passeio.avaliacoes.length : '' }} {{ passeio.avaliacoes.length === 0 ? 'Seja o primeiro a avaliar!' : passeio.avaliacoes.length === 1 ? 'Avaliação': 'Avaliações' }}
-          </h1>
+          </h2>
 
           <star-rating
             v-if="passeio.avaliacoes.length > 0"
@@ -287,7 +287,7 @@
             <div class="avaliacao" v-for="(avaliacao, index) in passeio.avaliacoes" :v-key="index">
               <h2 class="__guest-name">{{ avaliacao.fullName }}</h2>
               <p class="__date">{{ formatAvaliacaoDate(avaliacao) }}</p>
-              <h3 class="__message">{{ avaliacao.comment }}</h3>
+              <p class="__message">{{ avaliacao.comment }}</p>
             </div>
 
 
@@ -312,7 +312,7 @@
         <form class="reserva-desktop-form">
 
 
-          <h1 class="__valor">R${{ passeio.rotas[reservaPasseio.rota - 1].valor.toLocaleString() }}<span class="__valor-pessoa"> por pessoa</span></h1>
+          <h2 class="__valor">R${{ passeio.rotas[reservaPasseio.rota - 1].valor.toLocaleString() }}<span class="__valor-pessoa"> por pessoa</span></h2>
 
 
           <div class="item-form" v-if="passeio.rotas.length > 1">
@@ -364,7 +364,7 @@
 
 
           <div class="highlight" v-if="$store.state.visitsLastMonth >= 0">
-            <h3 class="__text">Este passeio recebeu {{ $store.state.visitsLastMonth }} visualizações no último mês.</h3>
+            <span class="__text">Este passeio recebeu {{ $store.state.visitsLastMonth }} visualizações no último mês.</span>
             <img class="__img" src="../../assets/img/visits-passeio.svg">
           </div>
 
@@ -640,7 +640,7 @@ export default {
       display: inline-flex;
       border: 1px solid #dedede;
       border-radius: 50px;
-      & p {
+      & span {
         padding: 4px 8px;
         font-size: 11px;
         font-weight: 600;
@@ -1034,7 +1034,7 @@ export default {
           & .rating {
           }
           & .new {
-            & p {
+            & span {
               font-size: 12px;
             }
           }
