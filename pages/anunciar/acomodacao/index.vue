@@ -162,7 +162,7 @@
 
               
               <transition-group name="mobilias-animation" tag="div" class="mobilias">
-                <div class="mobilia" v-for="(mobilia, index) in quarto.mobilias" :key="index" @click="$store.commit('m_removeMobilia', index)">
+                <div class="mobilia" v-for="(mobilia, index) in quarto.mobilias" :key="index+1" @click="$store.commit('m_removeMobilia', index)">
                   <img class="remove-mobilia" src="../../../assets/img/close-mobile.svg">
                   <img :src="mobiliaImage(mobilia)" style="width: 1.7rem; height: auto">
                   <p style="user-select: none">{{ mobiliaText(mobilia) }}</p>
