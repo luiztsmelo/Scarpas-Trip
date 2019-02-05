@@ -6,7 +6,6 @@
     <div class="box">
       <h1 class="__title">Escarpas Trip</h1>
       <nuxt-link to="#"><h3 class="__subtitle">Sobre</h3></nuxt-link>
-      <nuxt-link to="#"><h3 class="__subtitle">Contato</h3></nuxt-link>
       <nuxt-link to="/termos"><h3 class="__subtitle">Termos de Serviço</h3></nuxt-link>
       <nuxt-link to="/termos#politica_privacidade"><h3 class="__subtitle">Política de Privacidade</h3></nuxt-link>
     </div>
@@ -15,8 +14,8 @@
       <h1 class="__title">Anunciar</h1>
       <nuxt-link to="/anunciar/acomodacao"><h3 class="__subtitle">Acomodação</h3></nuxt-link>
       <nuxt-link to="/anunciar/passeio"><h3 class="__subtitle">Passeio</h3></nuxt-link>
-      <nuxt-link to="/anunciar/evento"><h3 class="__subtitle">Evento</h3></nuxt-link>
-      <nuxt-link to="/anunciar/restaurante"><h3 class="__subtitle">Restaurante</h3></nuxt-link>
+      <!-- <nuxt-link to="/anunciar/evento"><h3 class="__subtitle">Evento</h3></nuxt-link> -->
+      <!-- <nuxt-link to="/anunciar/restaurante"><h3 class="__subtitle">Restaurante</h3></nuxt-link> -->
     </div>
 
     <div class="box" style="margin-left: 4rem">
@@ -46,7 +45,7 @@ export default {
   display: flex;
   margin-top: 4.5rem;
   width: 100%;
-  height: 17rem;
+  height: 15rem;
   padding: 3.5rem 7%;
   & .__img {
     width: 3.6rem;
