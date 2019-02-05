@@ -28,7 +28,7 @@
     </div>
 
     <h3 class="copyright">
-      &copy {{ new Date().getFullYear() }} Escarpas Trip. Todos os direitos reservados. <!-- CNPJ: 99.999.999/9999-99. --> Capitólio/MG - Brasil. <!-- Desenvolvido por TMstudio. -->
+      &copy {{ new Date().getFullYear() }} Escarpas Trip. Todos os direitos reservados. CNPJ: 32.673.211/0001-81. Capitólio/MG - Brasil. <!-- Desenvolvido por TMstudio. -->
     </h3>
 
   </div>

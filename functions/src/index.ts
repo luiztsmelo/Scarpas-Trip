@@ -95,7 +95,7 @@ exports.newAcomod = functions.https.onCall(async data => {
     const Pagarme = await pagarme.client.connect({ api_key: 'ak_test_E3I46o4e7guZDqwRnSY9sW8o8HrL9D' })
 
     const subscription = await Pagarme.subscriptions.create({
-      'plan_id': 375944,
+      'plan_id': 406863,
       'payment_method': 'credit_card',
       'card_holder_name': creditCard.cardHolderName,
       'card_number': creditCard.cardNumber.replace(/[^0-9\.]+/g, ''),
@@ -233,7 +233,7 @@ exports.newPasseio = functions.https.onCall(async data => {
     const Pagarme = await pagarme.client.connect({ api_key: 'ak_test_E3I46o4e7guZDqwRnSY9sW8o8HrL9D' })
 
     const subscription = await Pagarme.subscriptions.create({
-      'plan_id': 375944,
+      'plan_id': 406863,
       'payment_method': 'credit_card',
       'card_holder_name': creditCard.cardHolderName,
       'card_number': creditCard.cardNumber.replace(/[^0-9\.]+/g, ''),

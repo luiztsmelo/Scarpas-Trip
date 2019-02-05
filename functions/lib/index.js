@@ -69,7 +69,7 @@ exports.newAcomod = functions.https.onCall(async (data) => {
     try {
         const Pagarme = await pagarme.client.connect({ api_key: 'ak_test_E3I46o4e7guZDqwRnSY9sW8o8HrL9D' });
         const subscription = await Pagarme.subscriptions.create({
-            'plan_id': 375944,
+            'plan_id': 406863,
             'payment_method': 'credit_card',
             'card_holder_name': creditCard.cardHolderName,
             'card_number': creditCard.cardNumber.replace(/[^0-9\.]+/g, ''),
@@ -138,9 +138,7 @@ exports.email_newReservaAcomod_host = functions.firestore
                         'totalHospedes': reservaAcomod.totalHospedes,
                         'noites': reservaAcomod.noites,
                         'valorNoite': numeral(acomod.valorNoite).format('$0,0'),
-                        'valorNoitesTotal': numeral(reservaAcomod.valorNoitesTotal).format('$0,0'),
-                        'limpezaFee': numeral(reservaAcomod.limpezaFee).format('$0,0'),
-                        'hostAmount': numeral(reservaAcomod.valorNoitesTotal + reservaAcomod.limpezaFee).format('$0,0')
+                        'valorReservaTotal': numeral(reservaAcomod.valorReservaTotal).format('$0,0'),
                     }
                 }]
         });
@@ -185,7 +183,7 @@ exports.newPasseio = functions.https.onCall(async (data) => {
     try {
         const Pagarme = await pagarme.client.connect({ api_key: 'ak_test_E3I46o4e7guZDqwRnSY9sW8o8HrL9D' });
         const subscription = await Pagarme.subscriptions.create({
-            'plan_id': 375944,
+            'plan_id': 406863,
             'payment_method': 'credit_card',
             'card_holder_name': creditCard.cardHolderName,
             'card_number': creditCard.cardNumber.replace(/[^0-9\.]+/g, ''),

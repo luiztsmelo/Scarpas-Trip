@@ -627,9 +627,9 @@
     <!-- ________________________________________ 12 - PAGAMENTO ________________________________________ -->
     <form class="cadastro-acomodacao" v-if="$store.state.cadastroAcomod12">
 
-      <h1 class="__form-title">Informações de contato e confirmação</h1>   
+      <h1 class="__form-title">Dados para pagamento e confirmação</h1>   
 
-      <h3 class="__form-text">Ótimo {{ user.firstName }}! Agora só precisamos de algumas informações de contato suas e então você estará apto a colocar seu anúncio no ar!</h3>
+      <h3 class="__form-text">Ótimo {{ user.firstName }}! Será feita uma cobrança em seu cartão de crédito no valor de <span style="font-weight:600">R$29,90</span> mensais, sendo o <span style="font-weight:600">1º mês gratuito</span>. Caso não esteja gostando do serviço, cancelaremos na hora para você, sem enrolações.</h3>
 
 
       <div class="payment-box">
@@ -666,21 +666,21 @@
 
       
         
-        <!-- <h2 class="__form-subtitle" style="margin-top: 1.6rem">Dados do cartão de crédito</h2> -->
+        <h2 class="__form-subtitle" style="margin-top: 1.6rem">Dados do cartão de crédito</h2>
 
         <!-- CARD HOLDER NAME -->
-        <!-- <div class="item-form">
+        <div class="item-form">
           <label :class="[ cardHolderNameError ? 'has-error-label' : '' ]">Nome impresso no Cartão</label>
           <input
             :class="[ cardHolderNameError ? 'has-error' : '' ]"
             type="text" pattern="[A-Za-z]"
             @keypress="keyEnterName"
             v-model="$store.state.creditCard.cardHolderName">
-        </div> --><!-- CARD HOLDER NAME -->
+        </div><!-- CARD HOLDER NAME -->
 
 
         <!-- CARD NUMBER -->
-        <!-- <div class="item-form">
+        <div class="item-form">
           <label :class="[ cardNumberError ? 'has-error-label' : '' ]">Número do Cartão</label>
           <masked-input
             ref="cardNumber"
@@ -692,13 +692,13 @@
             :guide="false"
             placeholder="0000 0000 0000 0000">
           </masked-input>
-        </div> --><!-- CARD NUMBER -->
+        </div><!-- CARD NUMBER -->
 
 
-        <!-- <div style="display:flex; justify-content:space-between"> -->
+        <div style="display:flex; justify-content:space-between">
                 
           <!-- CARD EXPIRATION -->
-          <!-- <div class="item-form" style="flex: 50%; padding-right:.7rem">
+          <div class="item-form" style="flex: 50%; padding-right:.7rem">
             <label :class="[ cardExpirationDateError ? 'has-error-label' : '' ]">Validade</label>
             <masked-input
               ref="cardExpirationDate"
@@ -709,10 +709,10 @@
               :guide="false"
               placeholder="MM / AA">
             </masked-input>
-          </div> --><!-- CARD EXPIRATION -->
+          </div><!-- CARD EXPIRATION -->
 
           <!-- CVV -->
-          <!-- <div class="item-form" style="flex:50%; padding-left:.7rem">
+          <div class="item-form" style="flex:50%; padding-left:.7rem">
             <label :class="[ cardCvvError ? 'has-error-label' : '' ]">CVV</label>
             <masked-input
               ref="cvv"
@@ -724,13 +724,13 @@
               :guide="false"
               placeholder="123">
             </masked-input>
-          </div> --><!-- CVV -->
+          </div><!-- CVV -->
 
-        <!-- </div> -->
+        </div>
 
 
         <!-- CPF -->
-        <!-- <div class="item-form">
+        <div class="item-form">
           <label :class="[ cpfError ? 'has-error-label' : '' ]">CPF</label>
           <masked-input
             ref="cpf"
@@ -741,17 +741,17 @@
             :guide="false"
             placeholder="000.000.000-00">
           </masked-input>
-        </div> --><!-- CPF -->
+        </div><!-- CPF -->
 
 
 
 
-        <!-- <h2 class="__form-subtitle" style="margin-top: 1.6rem">Endereço de cobrança</h2> -->
+        <h2 class="__form-subtitle" style="margin-top: 1.6rem">Endereço de cobrança</h2>
 
-        <!-- <p>Necessário apenas para a validação de seu cartão de crédito.</p> -->
+        <p>Necessário apenas para a validação de seu cartão de crédito.</p>
 
         <!-- CEP -->
-        <!-- <div class="item-form">
+        <div class="item-form">
           <label :class="[ zipcodeError ? 'has-error-label' : '' ]">CEP</label>
           <masked-input
             ref="zipcode"
@@ -762,11 +762,11 @@
             :guide="false"
             placeholder="00000-000">
           </masked-input>
-        </div> --><!-- CEP -->
+        </div><!-- CEP -->
 
 
         <!-- ENDEREÇO -->
-        <!-- <div class="item-form">
+        <div class="item-form">
           <label :class="[ streetError ? 'has-error-label' : '' ]">Rua</label>
           <input
             ref="street"
@@ -775,69 +775,68 @@
             @keypress="keyEnterStreet"
             v-model="$store.state.customer.street"
             placeholder="Endereço">
-        </div> --><!-- ENDEREÇO -->
+        </div><!-- ENDEREÇO -->
 
 
-        <!-- <div class="flex" style="display:flex; justify-content:space-between"> -->
+        <div class="flex" style="display:flex; justify-content:space-between">
 
-        <!-- NÚMERO -->
-        <!-- <div class="item-form" style="flex:50%; padding-right:.7rem">
-          <label :class="[ streetNumberError ? 'has-error-label' : '' ]">Número</label>
-          <masked-input
-            ref="streetNumber"
-            :class="[ streetNumberError ? 'has-error' : '' ]"
-            type="tel"
-            @keypress="keyEnterStreetNumber"
-            v-model="$store.state.customer.street_number"
-            :mask="[/\d/, /\d/, /\d/, /\d/]"
-            :guide="false">
-          </masked-input>
-        </div> --><!-- NÚMERO -->
-
-
-        <!-- BAIRRO -->
-        <!-- <div class="item-form" style="flex:50%; padding-left:.7rem">
-          <label :class="[ neighborhoodError ? 'has-error-label' : '' ]">Bairro</label>
-          <input
-            ref="bairro"
-            :class="[ neighborhoodError ? 'has-error' : '' ]"
-            type="text"
-            v-model="$store.state.customer.neighborhood">
-        </div> --><!-- BAIRRO -->
-
-      <!-- </div> -->
-
-      <!-- <div class="flex" style="display:flex; justify-content:space-between; align-items:center"> -->
-
-        <!-- CIDADE -->
-        <!-- <div class="item-form" style="flex:50%; padding-right:.7rem">
-          <label :class="[ cityError ? 'has-error-label' : '' ]">Cidade</label>
-          <input
-            ref="city"
-            :class="[ cityError ? 'has-error' : '' ]"
-            style="cursor: default"
-            type="text"
-            v-model="$store.state.customer.city"
-            disabled>
-        </div> --><!-- CIDADE -->
+          <!-- NÚMERO -->
+          <div class="item-form" style="flex:50%; padding-right:.7rem">
+            <label :class="[ streetNumberError ? 'has-error-label' : '' ]">Número</label>
+            <masked-input
+              ref="streetNumber"
+              :class="[ streetNumberError ? 'has-error' : '' ]"
+              type="tel"
+              @keypress="keyEnterStreetNumber"
+              v-model="$store.state.customer.street_number"
+              :mask="[/\d/, /\d/, /\d/, /\d/]"
+              :guide="false">
+            </masked-input>
+          </div><!-- NÚMERO -->
 
 
-        <!-- ESTADO -->
-        <!-- <div class="item-form" style="flex:50%; padding-left:.7rem">
-          <label :class="[ stateError ? 'has-error-label' : '' ]">Estado</label>
-          <input
-            ref="state"
-            :class="[ stateError ? 'has-error' : '' ]"
-            style="cursor: default"
-            type="text"
-            v-model="$store.state.customer.state"
-            disabled>
-        </div> --><!-- ESTADO -->
+          <!-- BAIRRO -->
+          <div class="item-form" style="flex:50%; padding-left:.7rem">
+            <label :class="[ neighborhoodError ? 'has-error-label' : '' ]">Bairro</label>
+            <input
+              ref="bairro"
+              :class="[ neighborhoodError ? 'has-error' : '' ]"
+              type="text"
+              v-model="$store.state.customer.neighborhood">
+          </div><!-- BAIRRO -->
 
-      <!-- </div> -->
+        </div>
+
+        <div class="flex" style="display:flex; justify-content:space-between; align-items:center">
+
+          <!-- CIDADE -->
+          <div class="item-form" style="flex:50%; padding-right:.7rem">
+            <label :class="[ cityError ? 'has-error-label' : '' ]">Cidade</label>
+            <input
+              ref="city"
+              :class="[ cityError ? 'has-error' : '' ]"
+              style="cursor: default"
+              type="text"
+              v-model="$store.state.customer.city"
+              disabled>
+          </div><!-- CIDADE -->
 
 
-        <!-- <h4 class="__termos">Ao anunciar, você concorda com a nossa <a href="/termos#politica_privacidade" target="_blank">Política de Privacidade</a> e <a href="/termos" target="_blank">Termos de Serviço</a>.</h4> -->
+          <!-- ESTADO -->
+          <div class="item-form" style="flex:50%; padding-left:.7rem">
+            <label :class="[ stateError ? 'has-error-label' : '' ]">Estado</label>
+            <input
+              ref="state"
+              :class="[ stateError ? 'has-error' : '' ]"
+              style="cursor: default"
+              type="text"
+              v-model="$store.state.customer.state"
+              disabled>
+          </div><!-- ESTADO -->
+
+        </div>
+
+        <!-- <p class="__termos">Ao anunciar, você concorda com a nossa <a href="/termos#politica_privacidade" target="_blank">Política de Privacidade</a> e <a href="/termos" target="_blank">Termos de Serviço</a>.</p> -->
 
       </div>
 
@@ -1277,31 +1276,17 @@ export default {
       }
 
       /* Se todas as informações preenchidas */
-      if (this.celular.length === 17) { /* MUDAR DEPOIS P/ this.formIsCompleted */
+      if (this.formIsCompleted) {
 
         try {
           this.$store.commit('m_loader', true)
 
-
           /* Criar assinatura no Pagarme, criar acomod na Firestore e atualizar user */
-          /* const subscription = await firebase.functions().httpsCallable('newAcomod')({
+          const subscription = await firebase.functions().httpsCallable('newAcomod')({
             acomodData: acomodData,
             creditCard: this.$store.state.creditCard,
             customer: this.$store.state.customer
-          }) */
-
-
-          /* __________________________ REMOVER DEPOIS E DEIXAR APENAS A FUNCTION ACIMA __________________________*/
-          /* Update user Firestore */
-          await firebase.firestore().doc(`users/${acomodData.hostID}`).update({ 
-            celular: this.$store.state.customer.celular,
-            instagram: this.$store.state.customer.instagram
           })
-          /* Set acomod Firestore */
-          await firebase.firestore().doc(`acomods/${acomodData.acomodID}`).set(acomodData)
-          /* _____________________________________________________________________________________________________*/
-
-
 
           /* Necessário para o correto funcionamento do backBtn _id (Ver middleware: newAcomodConcludedCheck.js) */
           this.$store.state.concludedNewAcomod = true
@@ -1459,7 +1444,6 @@ export default {
       }
     },
     instagram (value) {
-      console.log(value)
       const firstDigit = value.charAt(0)
       if (value.length === 1 && firstDigit !== '@') {
         this.$store.state.customer.instagram = `@${value}`

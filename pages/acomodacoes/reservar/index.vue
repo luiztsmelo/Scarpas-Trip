@@ -248,7 +248,7 @@
     <div class="footer" v-if="!$store.state.concludedReservaAcomod">
       <div style="display: flex; align-items: center">
         <img class="__img" src="../../../assets/img/brand.svg">
-        <h3 class="__text">&copy Escarpas Trip. Capitólio/MG - Brasil. <!-- CNPJ: 99.999.999/9999-99. --></h3>
+        <h3 class="__text">&copy Escarpas Trip. Capitólio/MG - Brasil. CNPJ: 32.673.211/0001-81.</h3>
       </div>
       <a class="__ajuda" href="/ajuda" target="_blank" >Ajuda</a>
     </div><!-- ________________________________________ FOOTER ________________________________________ -->
