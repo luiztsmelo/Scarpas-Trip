@@ -45,17 +45,10 @@
           </nuxt-link>
         </div> -->
 
-        <div style="padding-top:.6rem; border-top:1px solid #dedede" @click="$store.commit('m_showMenu', false), $store.commit('m_menuIconAnime', false), $store.commit('m_showFoobar', false)">
-          <nuxt-link to="/anunciar" class="menu-item">
-            <img src="../assets/img/contato.svg" class="__item-img">
-            <h3>Contato</h3>
-          </nuxt-link>
-        </div>
-
-        <div @click="$store.commit('m_showMenu', false), $store.commit('m_menuIconAnime', false), $store.commit('m_showFoobar', false)">
-          <nuxt-link to="/anunciar" class="menu-item">
+        <div style="padding-top:.6rem; border-top:1px solid #dedede" @click="$store.commit('m_showMenu', false), $store.commit('m_menuIconAnime', false)">
+          <nuxt-link to="/sobre" class="menu-item">
             <img src="../assets/img/sobre.svg" class="__item-img">
-            <h3>Sobre</h3>
+            <h3>Sobre nós</h3>
           </nuxt-link>
         </div>
  
