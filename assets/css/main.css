@@ -73,6 +73,7 @@ a a:hover, a:visited, a:link, a:active
 button {
   font-family: var(--main-font);
   cursor: pointer;
+  padding: 0;
   border: none;
   outline: none !important;
   user-select: none;

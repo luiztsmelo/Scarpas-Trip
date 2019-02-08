@@ -48,7 +48,7 @@
         <div style="padding-top:.6rem; border-top:1px solid #dedede" @click="$store.commit('m_showMenu', false), $store.commit('m_menuIconAnime', false)">
           <nuxt-link to="/sobre" class="menu-item">
             <img src="../assets/img/sobre.svg" class="__item-img">
-            <h3>Sobre nós</h3>
+            <h3>Sobre</h3>
           </nuxt-link>
         </div>
  

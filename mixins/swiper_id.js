@@ -9,7 +9,7 @@ export const swiperOptions = {
         }
       } else {
         return {
-          slidesPerView: 2.28,
+          slidesPerView: 2.22,
           spaceBetween: 5,
           freeMode: true,
           autoplay: {

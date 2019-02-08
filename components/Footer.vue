@@ -5,7 +5,7 @@
 
     <div class="box">
       <h1 class="__title">Escarpas Trip</h1>
-      <nuxt-link to="/sobre"><h3 class="__subtitle">Sobre nós</h3></nuxt-link>
+      <nuxt-link to="/sobre"><h3 class="__subtitle">Sobre</h3></nuxt-link>
       <nuxt-link to="/termos"><h3 class="__subtitle">Termos de Serviço</h3></nuxt-link>
       <nuxt-link to="/termos#politica_privacidade"><h3 class="__subtitle">Política de Privacidade</h3></nuxt-link>
     </div>

@@ -340,43 +340,36 @@ const store = () => new Vuex.Store({
     /*
     ########## Evento ##########
     */
-    eventoID: null,
     eventos: null,
     evento: null,
-    eventoMap: null,
     eventoProgressBar: 0,
     eventoPlace: null,
-    blobEvL1: null,
-    blobEvH1J: null,
-    blobEvH1W: null,
-    blobEvL2: null,
-    blobEvH2J: null,
-    blobEvH2W: null,
     eventoData: { /* Atualizar a action */
+      createdAt: null,
       eventoID: null,
-      title: '',
-      subtitle: '',
-      date: '',
-      hour: '',
+      dates: [
+        {
+          date: '',
+          startTime: '',
+          endTime: ''
+        }
+      ],
+      flyer: '',
       positionLAT: -20.6141320,
       positionLNG: -46.0478760,
       address: null,
       valorIngresso: 0,
-      imageL1: null,
-      imageH1J: null,
-      imageH1W: null,
-      imageL2: null,
-      imageH2J: null,
-      imageH2W: null
+      title: '',
+      subtitle: ''
     },
-    cadastroEvento0: true,
-    cadastroEvento1: false,
+    cadastroEvento1: true,
     cadastroEvento2: false,
     cadastroEvento3: false,
     cadastroEvento4: false,
     cadastroEvento5: false,
     cadastroEvento6: false,
     cadastroEvento7: false,
+    cadastroEvento8: false,
     /*
     ########## Atração ##########
     */
@@ -744,73 +737,6 @@ const store = () => new Vuex.Store({
       state.reservaAcomodDesktop2 = payload
     },
     /*
-    ########## Evento ##########
-    */
-    m_eventoID (state, payload) {
-      state.eventoID = payload
-      state.eventoData.eventoID = payload
-    },
-    m_eventoData (state, payload) {
-      state.eventoData = payload
-    },
-    m_eventoMap (state, payload) {
-      state.eventoMap = payload
-    },
-    m_imageEvL1 (state, payload) {
-      state.eventoData.imageL1 = payload
-    },
-    m_imageEvH1J (state, payload) {
-      state.eventoData.imageH1J = payload
-    },
-    m_imageEvH1W (state, payload) {
-      state.eventoData.imageH1W = payload
-    },
-    m_imageEvL2 (state, payload) {
-      state.eventoData.imageL2 = payload
-    },
-    m_imageEvH2J (state, payload) {
-      state.eventoData.imageH2J = payload
-    },
-    m_imageEvH2W (state, payload) {
-      state.eventoData.imageH2W = payload
-    },
-    m_eventoPlace (state, payload) {
-      state.eventoPlace = payload
-    },
-    m_eventos (state, payload) {
-      state.eventos = payload
-    },
-    m_evento (state, payload) {
-      state.evento = payload
-    },
-    m_eventoProgressBar (state, payload) {
-      state.eventoProgressBar = payload
-    },
-    m_cadastroEvento0 (state, payload) {
-      state.cadastroEvento0 = payload
-    },
-    m_cadastroEvento1 (state, payload) {
-      state.cadastroEvento1 = payload
-    },
-    m_cadastroEvento2 (state, payload) {
-      state.cadastroEvento2 = payload
-    },
-    m_cadastroEvento3 (state, payload) {
-      state.cadastroEvento3 = payload
-    },
-    m_cadastroEvento4 (state, payload) {
-      state.cadastroEvento4 = payload
-    },
-    m_cadastroEvento5 (state, payload) {
-      state.cadastroEvento5 = payload
-    },
-    m_cadastroEvento6 (state, payload) {
-      state.cadastroEvento6 = payload
-    },
-    m_cadastroEvento7 (state, payload) {
-      state.cadastroEvento7 = payload
-    },
-    /*
     ########## Passeio ##########
     */
     m_passeioID (state, payload) {
@@ -886,6 +812,62 @@ const store = () => new Vuex.Store({
     },
     m_reservaPasseioDesktop2 (state, payload) {
       state.reservaPasseioDesktop2 = payload
+    },
+    /*
+    ########## Evento ##########
+    */
+    m_eventoID (state, payload) {
+      state.eventoID = payload
+      state.eventoData.eventoID = payload
+    },
+    m_eventoData (state, payload) {
+      state.eventoData = payload
+    },
+    m_eventoPlace (state, payload) {
+      state.eventoPlace = payload
+    },
+    m_eventos (state, payload) {
+      state.eventos = payload
+    },
+    m_evento (state, payload) {
+      state.evento = payload
+    },
+    m_eventoProgressBar (state, payload) {
+      state.eventoProgressBar = payload
+    },
+    m_addDateEvento (state) {
+      state.eventoData.dates.push({
+        date: '',
+        startTime: '',
+        endTime: ''
+      })
+    },
+    m_removeDateEvento (state, index) {
+      state.eventoData.dates.splice(index, 1)
+    },
+    m_cadastroEvento1 (state, payload) {
+      state.cadastroEvento1 = payload
+    },
+    m_cadastroEvento2 (state, payload) {
+      state.cadastroEvento2 = payload
+    },
+    m_cadastroEvento3 (state, payload) {
+      state.cadastroEvento3 = payload
+    },
+    m_cadastroEvento4 (state, payload) {
+      state.cadastroEvento4 = payload
+    },
+    m_cadastroEvento5 (state, payload) {
+      state.cadastroEvento5 = payload
+    },
+    m_cadastroEvento6 (state, payload) {
+      state.cadastroEvento6 = payload
+    },
+    m_cadastroEvento7 (state, payload) {
+      state.cadastroEvento7 = payload
+    },
+    m_cadastroEvento8 (state, payload) {
+      state.cadastroEvento8 = payload
     },
     /*
     ########## Atração ##########
@@ -1089,8 +1071,8 @@ const store = () => new Vuex.Store({
           imageH2W: null
         })
         commit('m_loader', false)
-        commit('m_cadastroEvento7', false)
-        commit('m_cadastroEvento0', true)
+        commit('m_cadastroEvento8', false)
+        commit('m_cadastroEvento1', true)
         commit('m_eventoPlace', null)
       })
     },

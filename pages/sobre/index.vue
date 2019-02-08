@@ -1,9 +1,9 @@
 <template>
   <div class="sobre">
 
-    <img src="../../assets/img/about.svg" alt="Sobre nós">
+    <img src="../../assets/img/about.svg" alt="Sobre">
 
-    <h1>Sobre nós</h1>
+    <h1>Sobre a Escarpas Trip</h1>
 
     <p>Em 2018, a Escarpas Trip foi fundada com o objetivo de se tornar a maior referência turística de Capitólio e região. Oferecemos informações detalhadas e de qualidade acerca das acomodações da região, passeios turísticos, eventos, restaurantes e atrações. Nosso CNPJ é: 32.673.211/0001-81.</p>
 
@@ -46,9 +46,9 @@ export default {
   }
   & h2 {
     font-size: 20px;
-    font-weight: 700;
+    font-weight: 600;
     text-align: center;
-    padding: 3rem 0 1rem;
+    padding: 2.5rem 0 1rem;
   }
   & p {
     text-align: center;
@@ -63,7 +63,7 @@ export default {
       font-size: 32px;
     }
     & h2 {
-      font-size: 23px;
+      font-size: 21px;
     }
     & p {
     }

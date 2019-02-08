@@ -92,6 +92,11 @@ export default {
           this.$store.state.passeioData.positionLNG = this.lng
           this.$store.state.passeioData.address = this.address
         }
+        if (this.$route.name === 'anunciar-evento') {
+          this.$store.state.eventoData.positionLAT = this.lat
+          this.$store.state.eventoData.positionLNG = this.lng
+          this.$store.state.eventoData.address = this.address
+        }
       }
       this.$modal.hide('local-map-modal')
     }
@@ -117,6 +122,9 @@ export default {
       if (this.$route.name === 'anunciar-passeio') {
         return { lat: this.$store.state.passeioData.positionLAT, lng: this.$store.state.passeioData.positionLNG }
       }
+      if (this.$route.name === 'anunciar-evento') {
+        return { lat: this.$store.state.eventoData.positionLAT, lng: this.$store.state.eventoData.positionLNG }
+      }
     },
     mapZoom () {
       if (this.$route.name === 'anunciar-acomodacao') {
@@ -125,6 +133,9 @@ export default {
       if (this.$route.name === 'anunciar-passeio') {
         return this.$store.state.passeioPlace !== null ? 16 : 14
       }
+      if (this.$route.name === 'anunciar-evento') {
+        return this.$store.state.eventoPlace !== null ? 16 : 14
+      }
     },
     markerPosition () {
       if (this.$route.name === 'anunciar-acomodacao') {
@@ -132,6 +143,9 @@ export default {
       }
       if (this.$route.name === 'anunciar-passeio') {
         return { lat: this.$store.state.passeioData.positionLAT, lng: this.$store.state.passeioData.positionLNG }
+      } 
+      if (this.$route.name === 'anunciar-evento') {
+        return { lat: this.$store.state.eventoData.positionLAT, lng: this.$store.state.eventoData.positionLNG }
       } 
     }
   }

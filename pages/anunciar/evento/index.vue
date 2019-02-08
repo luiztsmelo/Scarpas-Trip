@@ -1,0 +1,981 @@
+<template>
+  <div class="anunciar-evento">
+
+  
+
+    <div class="progress-bar" :style="progressBarStyle"></div>
+
+
+
+    <!-- CADASTRO EVENTO -->
+
+
+
+    <!-- ________________________________________ 1 - DATAS ________________________________________ -->
+    <form class="cadastro-evento" v-if="$store.state.cadastroEvento1">
+
+      <h1 class="__form-title">Quais as datas e horários do evento?</h1>
+
+
+      <div class="date" v-for="(date, index) in $store.state.eventoData.dates" :key="index+1">
+
+        <h2 class="__form-subtitle">Dia {{ index + 1 }}</h2>
+
+        <button type="button" class="remove-date" @click="$store.commit('m_removeDateEvento', index)">REMOVER</button>
+
+        <div class="item-form">
+          <label>Data</label>
+          <input type="date" v-model="date.date">
+        </div> 
+
+        <div class="item-form">
+          <label>Começa às</label>
+          <input type="time" v-model="date.startTime">
+        </div>
+
+        <div class="item-form">
+          <label>Terminas às</label>
+          <input type="time" v-model="date.endTime">
+        </div>
+
+      </div>
+
+
+      <button type="button" class="add-date" @click="$store.commit('m_addDateEvento')">Adicionar data</button>
+
+
+      <div class="back-next"> 
+        <div class="back-next-body">
+          <button type="button" class="__back" @click="backBtn1">Voltar</button>
+          <button type="button" class="__next" :style="form1ok" @click="nextBtn1">Próximo</button>
+        </div>
+      </div> 
+    
+    </form><!-- ________________________________________ 1 - DATAS ________________________________________ -->
+
+
+
+
+
+
+
+    <!-- ________________________________________ 2 - HORÁRIOS ________________________________________ -->
+    <form class="cadastro-evento" v-if="$store.state.cadastroEvento2">
+
+      <h1 class="__form-title">A definir</h1>
+
+  
+
+
+      <div class="back-next"> 
+        <div class="back-next-body">
+          <button type="button" class="__back" @click="backBtn2">Voltar</button>
+          <button type="button" class="__next" :style="form2ok" @click="nextBtn2">Próximo</button>
+        </div>
+      </div> 
+    
+    </form><!-- ________________________________________ 2 - HORÁRIOS ________________________________________ -->
+
+
+
+
+
+
+
+    <!-- ________________________________________ 3 - FLYER ________________________________________ -->
+    <form class="cadastro-evento" v-if="$store.state.cadastroEvento3">
+
+      <h1 class="__form-title">Adicione um flyer</h1>
+
+
+
+      <div class="back-next"> 
+        <div class="back-next-body">
+          <button type="button" class="__back" @click="backBtn3">Voltar</button>
+          <button type="button" class="__next" :style="form3ok" @click="nextBtn3">Próximo</button>
+        </div>
+      </div> 
+    
+    </form><!-- ________________________________________ 3 - FLYER ________________________________________ -->
+
+
+
+
+
+
+
+
+    <!-- ________________________________________ 4 - LOCAL ________________________________________ -->
+    <form class="cadastro-evento" v-if="$store.state.cadastroEvento4">
+
+      <h1 class="__form-title">Qual o local do evento?</h1>
+
+      <div class="item-form">
+        <label>Local</label>
+        <gmap-autocomplete
+          onKeyPress="if (event.which == 13) return false" 
+          placeholder="Digite o endereço completo aqui"
+          @place_changed="setPlace">
+        </gmap-autocomplete>
+      </div>
+
+      <h3 class="without-address" @click="$modal.show('local-map-modal'), $store.state.fromWithoutAddress=true">
+        O local não possui endereço?
+      </h3>
+
+      <localMap/>
+
+
+      <div class="back-next"> 
+        <div class="back-next-body">
+          <button type="button" class="__back" @click="backBtn4">Voltar</button>
+          <button type="button" class="__next" :style="form4ok" @click="nextBtn4">Próximo</button>
+        </div>
+      </div> 
+    
+    </form><!-- ________________________________________ 4 - LOCAL ________________________________________ -->
+
+
+
+
+
+
+
+    <!-- ________________________________________ 5 - VALOR DO INGRESSO ________________________________________ -->
+    <form class="cadastro-evento" v-if="$store.state.cadastroEvento5">
+
+      <h1 class="__form-title">Qual o valor do ingresso?</h1>
+
+
+
+      <div class="back-next"> 
+        <div class="back-next-body">
+          <button type="button" class="__back" @click="backBtn5">Voltar</button>
+          <button type="button" class="__next" :style="form5ok" @click="nextBtn5">Próximo</button>
+        </div>
+      </div> 
+    
+    </form><!-- ________________________________________ 5 - VALOR DO INGRESSO ________________________________________ -->
+
+
+
+
+
+
+
+
+    <!-- ________________________________________ 6 - TÍTULO ________________________________________ -->
+    <form class="cadastro-evento" v-if="$store.state.cadastroEvento6">
+
+      <h1 class="__form-title">Título do evento</h1>
+
+      <textarea 
+      v-model="$store.state.eventoData.title"
+      v-autosize="title"
+      maxlength="60"
+      rows="1"
+      placeholder="ex: Tardezinha em Escarpas do Lago"
+      required>
+      {{title}}</textarea>
+
+      <span class="__lenght-calc">{{ 60 - $store.state.eventoData.title.length }}</span>
+
+
+      <div class="back-next"> 
+        <div class="back-next-body">
+          <button type="button" class="__back" @click="backBtn6">Voltar</button>
+          <button type="button" class="__next" :style="form6ok" @click="nextBtn6">Próximo</button>
+        </div>
+      </div> 
+    
+    </form><!-- ________________________________________ 6 - TÍTULO ________________________________________ -->
+
+
+
+
+
+
+
+    <!-- ________________________________________ 7 - DESCRIÇÃO ________________________________________ -->
+    <form class="cadastro-evento" v-if="$store.state.cadastroEvento7">
+
+      <h1 class="__form-title">Descrição do evento</h1>   
+
+      <textarea 
+      v-model="$store.state.eventoData.subtitle"
+      v-autosize="subtitle"
+      maxlength="1000"
+      rows="1"
+      placeholder="Informações sobre o evento"
+      required>
+      {{subtitle}}</textarea>
+
+      <span class="__lenght-calc">{{ 1000 - $store.state.eventoData.subtitle.length }}</span> 
+
+
+      <div class="back-next"> 
+        <div class="back-next-body">
+          <button type="button" class="__back" @click="backBtn7">Voltar</button>
+          <button type="button" class="__next" :style="form7ok" @click="nextBtn7">Próximo</button>
+        </div>
+      </div> 
+    
+    </form><!-- ________________________________________ 7 - DESCRIÇÃO ________________________________________ -->
+
+
+
+
+
+
+
+    <!-- ________________________________________ 8 - IDENTIFICAÇÃO ________________________________________ -->
+    <form class="cadastro-evento" v-if="$store.state.cadastroEvento8">
+
+      <h1 class="__form-title">Identificação</h1> 
+
+      <button type="button" class="google-btn" @click="$store.dispatch('a_googleSignIn')">Continuar com Google</button>
+
+
+      <div class="back-next"> 
+        <div class="back-next-body">
+          <button type="button" class="__back" @click="backBtn8">Voltar</button>
+          <button type="button" class="__next" :style="form8ok" @click="$store.dispatch('a_googleSignIn')">Anunciar</button>
+        </div>
+      </div> 
+    
+    </form><!-- ________________________________________ 8 - IDENTIFICAÇÃO ________________________________________ -->
+
+
+
+
+    <!-- CADASTRO EVENTO -->
+
+
+  </div>
+</template>
+
+<script>
+import firebase from '@firebase/app'
+import 'firebase/firestore'
+import 'firebase/storage'
+import 'firebase/functions'
+import MaskedInput from 'vue-text-mask'
+import localMap from '~/components/localMap.vue'
+import subDays from 'date-fns/sub_days'
+
+export default {
+  components: { MaskedInput, localMap },
+  head () {
+    return {
+      title: 'Anunciar Evento em Capitólio ‒ Escarpas Trip',
+      meta: [
+        { hid: 'anuncioEvento', name: 'description', content: 'Anuncie seu evento na Escarpas Trip' }
+      ]
+    }
+  },
+  transition: 'opacity',
+  data () {
+    return {
+      title: '', /* Vue Autosize */
+      subtitle: '', /* Vue Autosize */
+      showCroppaModal: false,
+      newImageDrawn: false,
+      isUploading: false,
+      uploadProgress: 0,
+      password: '',
+      nameError: false,
+      emailError: false
+    }
+  },
+  methods: {
+    validateEmail () {
+      !Email.validate(this.$store.state.user.email) ? this.emailError = true : this.emailError = false
+    },
+    scrollTop () {
+      document.body.scrollTop = 0
+      document.documentElement.scrollTop = 0
+    },
+    /* ******************** GOOGLE MAPS ******************** */
+    setPlace (place) {
+      this.$store.commit('m_eventoPlace', place)
+      this.$store.state.eventoData.positionLAT = this.$store.state.eventoPlace.geometry.location.lat()
+      this.$store.state.eventoData.positionLNG = this.$store.state.eventoPlace.geometry.location.lng()
+      this.$store.state.eventoData.address = this.$store.state.eventoPlace.formatted_address
+      this.$modal.show('local-map-modal')
+    },
+    /* ******************** BACK BUTTONS ******************** */
+    backBtn1 () {
+      window.history.back(1)
+    },
+    backBtn2 () {
+      this.$store.commit('m_cadastroEvento2', false), this.$store.commit('m_cadastroEvento1', true), window.history.back(1)
+    },
+    backBtn3 () {
+      this.$store.commit('m_cadastroEvento3', false), this.$store.commit('m_cadastroEvento2', true), window.history.back(1)
+    },
+    backBtn4 () {
+      this.$store.commit('m_cadastroEvento4', false), this.$store.commit('m_cadastroEvento3', true), window.history.back(1)
+    },
+    backBtn5 () {
+      this.$store.commit('m_cadastroEvento5', false), this.$store.commit('m_cadastroEvento4', true), window.history.back(1)
+    },
+    backBtn6 () {
+      this.$store.commit('m_cadastroEvento6', false), this.$store.commit('m_cadastroEvento5', true), window.history.back(1)
+    },
+    backBtn7 () {
+      this.$store.commit('m_cadastroEvento7', false), this.$store.commit('m_cadastroEvento6', true), window.history.back(2)
+    },
+    backBtn8 () {
+      this.$store.commit('m_cadastroEvento8', false), this.$store.commit('m_cadastroEvento7', true), window.history.back(1)
+    },
+    backBtn9 () {
+      this.$store.commit('m_cadastroEvento9', false), this.$store.commit('m_cadastroEvento8', true), window.history.back(1)
+    },
+    /* ******************** NEXT BUTTONS ******************** */
+    hashEvento () {
+      this.$store.dispatch('a_generateRandomHashs')
+      window.location.hash = this.randomHashs[1]
+    },
+    nextBtn1 () {
+      if (1<2) {
+        this.$store.commit('m_cadastroEvento1', false), this.$store.commit('m_cadastroEvento2', true), this.$store.commit('m_eventoProgressBar', (100/8)*2), this.scrollTop(), window.location.hash = `${this.randomHashs[2]}`
+      }
+    },
+    nextBtn2 () {
+      if (1<2) {
+        this.$store.commit('m_cadastroEvento2', false), this.$store.commit('m_cadastroEvento3', true), this.$store.commit('m_eventoProgressBar', (100/8)*3), this.scrollTop(), window.location.hash = `${this.randomHashs[3]}`
+      }
+    },
+    nextBtn3 () {
+      if (1<2) {
+        this.$store.commit('m_cadastroEvento3', false), this.$store.commit('m_cadastroEvento4', true), this.$store.commit('m_eventoProgressBar', (100/8)*4), this.scrollTop(), window.location.hash = `${this.randomHashs[4]}`
+      } else {
+        this.$store.commit('show_alert', {
+          type: 'warning',
+          title: 'Ops',
+          message: 'Adicione um flyer.'
+        })
+      }
+    },
+    nextBtn4 () {
+      if (this.$store.state.eventoPlace !== null || this.$store.state.eventoData.positionLAT !== -20.6141320) {
+        this.$store.commit('m_cadastroEvento4', false), this.$store.commit('m_cadastroEvento5', true), this.$store.commit('m_eventoProgressBar', (100/8)*5), this.scrollTop(), window.location.hash = `${this.randomHashs[5]}`
+      } else {
+        this.$store.commit('show_alert', {
+          type: 'warning',
+          title: 'Ops',
+          message: 'Adicione o local do evento.'
+        })
+      }
+    },
+    nextBtn5 () {
+      if (1<2) {
+        this.$store.commit('m_cadastroEvento5', false), this.$store.commit('m_cadastroEvento6', true), this.$store.commit('m_eventoProgressBar', (100/8)*6), this.scrollTop(), window.location.hash = `${this.randomHashs[6]}`
+      } else {
+        this.$store.commit('show_alert', {
+          type: 'warning',
+          title: 'Ops',
+          message: 'Adicione o valor do ingresso.'
+        })
+      }
+    },
+    nextBtn6 () {
+      if (this.$store.state.eventoData.title !== '') {
+        this.$store.commit('m_cadastroEvento6', false), this.$store.commit('m_cadastroEvento7', true), this.$store.commit('m_eventoProgressBar', (100/8)*7), this.scrollTop(), window.location.hash = `${this.randomHashs[7]}`
+      } else {
+        this.$store.commit('show_alert', {
+          type: 'warning',
+          title: 'Ops',
+          message: 'Adicione o título.'
+        })
+      }
+    },
+    nextBtn7 () {
+      if (this.$store.state.eventoData.subtitle !== '') {
+        this.$store.commit('m_cadastroEvento7', false), this.$store.commit('m_cadastroEvento8', true), this.$store.commit('m_eventoProgressBar', (100/8)*8), this.scrollTop(), window.location.hash = `${this.randomHashs[8]}`
+      } else {
+        this.$store.commit('show_alert', {
+          type: 'warning',
+          title: 'Ops',
+          message: 'Adicione uma descrição.'
+        })
+      }
+    }
+  },
+  computed: {
+    /* ******************** PATHS ******************** */
+    user () { return this.$store.state.user },
+    authUser () { return this.$store.state.authUser },
+    hash () { return this.$route.hash },
+    randomHashs () { return this.$store.state.randomHashs },
+    /* ******************** PROGRESS BAR ******************** */
+    progressBarStyle () {
+      return `width:${this.$store.state.eventoProgressBar}%; ${this.$store.state.cadastroEvento1 ? '' : 'transition: all .3s ease;'}`
+    },
+    /* ******************** FORM STYLES ******************** */
+    form1ok () {
+      return 1<2 ? 'background: #FF7E65' : ''
+    },
+    form2ok () {
+      return 1<2 ? 'background: #FF7E65' : ''
+    },
+    form3ok () {
+      return 1<2 ? 'background: #FF7E65' : ''
+    },
+    form4ok () {
+      return this.$store.state.eventoPlace !== null || this.$store.state.eventoData.positionLAT !== -20.6141320 ? 'background:#FF7E65' : ''
+    },
+    form5ok () {
+      return 1<2 ? 'background: #FF7E65' : ''
+    },
+    form6ok () {
+      return this.$store.state.eventoData.title !== '' ? 'background: #FF7E65' : ''
+    },
+    form7ok () {
+      return this.$store.state.eventoData.subtitle !== '' ? 'background: #FF7E65' : ''
+    },
+    form8ok () {
+      return 1<2 ? 'background: #FF7E65' : ''
+    }
+  },
+  watch: {
+    async authUser (status) {
+      if (status === true && this.user.email === 'luiztsmelo@gmail.com') {
+        try {
+          this.$store.state.eventoData.createdAt = Date.now()
+
+          this.$store.commit('m_loader', true)
+
+          /* Criar evento na Firestore */
+          await firebase.firestore().doc(`eventos/${this.$store.state.eventoData.eventoID}`).set(this.$store.state.eventoData)
+
+          /* Ir para página do evento criado */
+          this.$router.push('/eventos/' + this.$store.state.eventoData.eventoID)
+
+          /* Resetar eventoData */
+          this.$store.dispatch('a_resetEventoData')
+
+          this.$store.commit('m_loader', false)
+        } catch (err) {
+          this.$store.commit('m_loader', false)
+          this.$store.commit('show_alert', {
+            type: 'warning',
+            title: 'Erro',
+            message: 'Falha na criação do anúncio.'
+          })
+        }
+      } else {
+        this.$store.commit('show_alert', {
+          type: 'warning',
+          title: 'Erro',
+          message: 'Você não possui autorização.'
+        })
+      }
+    },
+    hash (value) {
+      if (value === `#${this.randomHashs[1]}`) {
+        this.$store.commit('m_cadastroEvento1', true)
+        this.$store.commit('m_cadastroEvento2', false)
+      } 
+      if (value === `#${this.randomHashs[2]}`) {
+        this.$store.commit('m_cadastroEvento2', true)
+        this.$store.commit('m_cadastroEvento3', false)
+      } 
+      if (value === `#${this.randomHashs[3]}`) {
+        this.$store.commit('m_cadastroEvento3', true)
+        this.$store.commit('m_cadastroEvento4', false)
+      } 
+      if (value === `#${this.randomHashs[4]}`) {
+        this.$store.commit('m_cadastroEvento4', true)
+        this.$store.commit('m_cadastroEvento5', false)
+      } 
+      if (value === `#${this.randomHashs[5]}`) {
+        this.$store.commit('m_cadastroEvento5', true)
+        this.$store.commit('m_cadastroEvento6', false)
+      } 
+      if (value === `#${this.randomHashs[6]}`) {
+        this.$store.commit('m_cadastroEvento6', true)
+        this.$store.commit('m_cadastroEvento7', false)
+      } 
+      if (value === `#${this.randomHashs[7]}`) {
+        this.$store.commit('m_cadastroEvento7', true)
+        this.$store.commit('m_cadastroEvento8', false)
+      } 
+      if (value === `#${this.randomHashs[8]}`) {
+        this.$store.commit('m_cadastroEvento8', true)
+      } 
+    }
+  },
+  beforeRouteEnter (to, from, next) {
+    next(async vm => {
+      try {
+        vm.hashEvento()
+        vm.$store.commit('m_eventoProgressBar', (100/8))
+        if (vm.$store.state.showFoobar === true) {
+          vm.$store.commit('m_showFoobar', false)
+        }
+        if (vm.$store.state.eventoData.eventoID === null) {
+          let eventoID = await Math.floor(Math.random() * (9999 - 1000 + 1) + 1000).toString()
+          const evento = await firebase.firestore().doc(`eventos/${eventoID}`).get()
+          if (evento.exists) {
+            do {
+              eventoID = Math.floor(Math.random() * (9999 - 1000 + 1) + 1000).toString()
+              vm.$store.commit('m_eventoID', eventoID)
+            } while (!evento.exists)
+          } else {
+            vm.$store.commit('m_eventoID', eventoID)
+          }
+        }
+      } catch (err) {
+        console.log(err)
+      }
+    })
+  },
+  beforeRouteLeave (to, from, next) {
+    this.$store.commit('m_cadastroEvento1', true)
+    this.$store.commit('m_cadastroEvento2', false)
+    this.$store.commit('m_cadastroEvento3', false)
+    this.$store.commit('m_cadastroEvento4', false)
+    this.$store.commit('m_cadastroEvento5', false)
+    this.$store.commit('m_cadastroEvento6', false)
+    this.$store.commit('m_cadastroEvento7', false)
+    this.$store.commit('m_cadastroEvento8', false)
+    next()
+  }
+}
+</script>
+
+<style scoped>
+
+.anunciar-evento {
+  margin-top: var(--navbarHeightMobile);
+  transition: var(--pages-transition);
+  & .progress-bar {
+    position: fixed;
+    top: var(--navbarHeightMobile);
+    height: 4px;
+    z-index: 8888;
+    background: var(--colorEvento);
+  }
+  /* ******************** CADASTRO EVENTO ******************** */
+  & .cadastro-evento {
+    height: 100%;
+    background: white;
+    padding: 0 0 6rem 0;
+    & .__form-title {
+      padding: 2.7rem 7% 1.4rem 7%;
+      line-height: 1.25;
+      font-size: 29px;
+      font-weight: 700;
+      z-index: 999;
+      user-select: none !important;
+    }
+    & .__form-text {
+      padding: 1rem 7%;
+      font-size: 17px;
+    }
+    & .__form-subtitle {
+      padding: 1.5rem 7% 0;
+      font-size: 18px;
+      font-weight: 600;
+      user-select: none;
+    }
+    & p {
+      font-size: 17px;
+      padding: .5rem 7% .2rem;
+      line-height: 26px;
+    }
+    & textarea {
+      padding: 0 7%;
+      margin-bottom: .5rem;
+      width: 100%;
+      font-size: 17px;
+      font-weight: 400;
+      line-height: 26px;
+      background: white;
+      color: var(--color01);
+      border: none;
+      outline: none;
+      resize: none;
+    }
+    & .__lenght-calc {
+      padding: 0 7%;
+      padding-bottom: 6rem;
+      z-index: 999;
+      font-size: 17px;
+      font-weight: 600;
+      color: rgb(92, 92, 92);
+    }
+    & .item-form {
+      padding: 0 7%;
+      display: flex;
+      flex-flow: column;
+      margin: 1.2rem 0;
+      & label {
+        font-weight: 500;
+        font-size: 14px;
+        user-select: none;
+      }
+      & input {
+        cursor: text;
+        position: relative;
+        width: 100%;
+        font-size: 18px;
+        font-weight: 400;
+        background: white;
+        color: var(--color01);
+        padding: 1rem 0;
+        border: none;
+        border-bottom: 1px solid #dedede;
+        outline: none;
+        transition: .2s all ease;
+      }
+      & input:focus {
+        border-bottom: 1px solid var(--color01);
+      }
+      & select {
+        width: 100%;
+        font-size: 18px;
+        font-weight: 400;
+        background: white;
+        color: var(--color01);
+        padding: 1rem 0;
+        border: none;
+        border-bottom: 1px solid #dedede;
+        outline: none;
+        transition: .2s all ease;
+      }
+      & select:focus {
+        border-bottom: 1px solid var(--color01);
+      }
+    }
+    & .add-date {
+      margin: .5rem 7% 0;
+      font-size: 17px;
+      font-weight: 600;
+      color: var(--colorEvento);
+      background: transparent;
+    }
+    & .add-date:hover {
+      text-decoration: underline;
+    }
+    & .remove-date {
+      margin: 0 7%;
+      font-size: 11px;
+      font-weight: 600;
+      background: transparent;
+    }
+    & .remove-date:hover {
+      text-decoration: underline;
+    }
+    & .without-address {
+      display: inline-flex;
+      cursor: pointer;
+      user-select: none;
+      margin: 0 7%;
+      font-size: 16px;
+      font-weight: 500;
+      color: var(--colorEvento);
+      transition: .2s all ease;
+    }
+    & .without-address:hover {
+      text-decoration: underline;
+    }
+    & .modal-croppa {
+      background: rgba(0, 0, 0, 0.8);
+      width:  100%;
+      height: 100%;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 9999;
+      & .modal-croppa-body {
+        display: flex;
+        flex-flow: column;
+        align-items: center;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translateX(-50%) translateY(-50%);
+        color: white;
+        & h1 {
+          font-size: 32px;
+          font-weight: 300;
+        }
+        & .croppa-container {
+          cursor: grab;
+          margin: 2rem 0 1.5rem;
+          border: 2px dashed white;
+        }
+        & .croppa-container:active {
+          cursor: grabbing;
+        }
+      }
+    }
+    & .__croppa-btn {
+      margin: .4rem 0;
+      font-size: 16px;
+      font-weight: 600;
+      background: var(--colorEvento);
+      color: white;
+      height: 2.9rem;
+      padding: 0 1.5rem;
+      border-radius: 2rem;
+    }
+    & .after-choose-image {
+      margin-top: 1.4rem;
+      padding: 0 calc(7% - 1%);
+      display: flex;
+      flex-flow: row wrap;
+      align-items: center;
+      align-content: flex-start;
+      & .image-box {
+        position: relative;
+        margin: 1%;
+        width: 48%;
+        height: auto;
+        & .__image {
+          width: 100%;
+          height: 100%;
+          border-radius: 5px;
+        }
+        & .delete {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
+          position: absolute;
+          top: .4rem;
+          right: .4rem;
+          z-index: 5;
+          width: 2rem;
+          height: 2rem;
+          background: rgba(0, 0, 0, 0.5);
+          border-radius: 50%;
+          & .__delete-img {
+            width: 1rem;
+            height: auto;
+          }
+        }
+        & .__foto-principal {
+          position: absolute;
+          color: white;
+          background: rgba(0, 0, 0, 0.4);
+          font-size: 12px;
+          padding: .2rem 0;
+          width: 100%;
+          text-align: center;
+        }
+      }
+      & .__add-image {
+        position: relative;
+        cursor: pointer;
+        border: 2px dashed rgb(202,202,202);
+        border-radius: 5px;
+        & .loader-svg {
+          position: absolute;
+          top: 0; left: 0; bottom: 0; right: 0;
+          margin: auto;
+          width: 32px;
+          height: 32px;
+          & .__circle {
+            transition: stroke-dashoffset .8s ease;
+            transform: rotate(-90deg);
+            transform-origin: 50% 50%;
+          }
+        }
+        & .__add-image-svg {
+          position: absolute;
+          width: 1.8rem;
+          height: auto;
+          top: 0; left: 0; bottom: 0; right: 0;
+          margin: auto;
+          z-index: 5;
+        }
+      }
+    }
+    & .back-next {
+      position: fixed;
+      z-index: 3;
+      bottom: 1rem;
+      left: 0;
+      right: 0;
+      margin: auto;
+      height: 3rem;
+      width: 86%;
+      background: white;
+      box-shadow: 2px 2px 6px 1px rgba(0,0,0,0.1);
+      border-radius: 2rem;
+      & .back-next-body {
+        display: flex;
+        align-items: center;
+        & button {
+          width: 50%;
+          height: 3rem;
+        }
+        & .__back {
+          font-size: 16px;
+          font-weight: 600;
+          border-radius: 2rem 0 0 2rem;
+          background: white;
+        }
+        & .__next {
+          font-size: 16px;
+          font-weight: 600;
+          border-radius: 0 2rem 2rem 0;
+          transition: all .3s ease;
+          background: rgb(212,212,212);
+          color: white;
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: 1024px) {
+  .anunciar-evento {
+    margin-top: var(--navbarHeightDesktop);
+    & .progress-bar {
+      top: var(--navbarHeightDesktop);
+      height: 6px;
+    }
+    & .cadastro-evento {
+      padding: 0 0 9rem 0;
+      & .__form-title {
+        padding: 3.5rem 28% 1.3rem;
+        font-size: 32px;
+        font-weight: 700;
+        text-align: center;
+      }
+      & .__form-text {
+        padding: 1.6rem 28% 1rem;
+      }
+      & .__form-subtitle {
+        padding: 1.7rem 28% .3rem;
+        font-size: 18px;
+      }
+      & p {
+        font-size: 17px;
+        padding: .4rem 28%;
+      }
+      & textarea {
+        padding: 0 28%;
+        margin: 1.7rem 0 .6rem 0;
+      }
+      & .__lenght-calc {
+        padding: 0 28%;
+      }
+      & .item-form {
+        padding: 0 28%;
+        margin: 1.3rem 0;
+        & label {
+          font-size: 15px;
+        }
+        & input {
+        }
+        & input:hover {
+          border-bottom: 1px solid var(--color01);
+        }
+        & select {
+        }
+        & select:hover {
+          border-bottom: 1px solid var(--color01);
+        }
+      }
+      & .add-date {
+        margin: .5rem 28% 0;
+      }
+      & .remove-date {
+        margin: 0 28%;
+      }
+      & .without-address {
+        margin: 0 28%;
+      }
+      & .modal-croppa {
+        & .modal-croppa-body {
+          & h1 {
+          }
+          & .croppa-container {
+          }
+        }
+      }
+      & .__croppa-btn {
+      }
+      & .after-choose-image {
+        margin-top: 2rem;
+        padding: 0 calc(28% - 1%);
+        & .image-box {
+          margin: 1%;
+          width: 48%;
+          & .__image {
+          }
+          & .delete {
+            display: none;
+            top: .7rem;
+            right: .7rem;
+            width: 2.3rem;
+            height: 2.3rem;
+            & .__delete-img {
+              display: none;
+              width: 1.2rem;
+            }
+          }
+          & .__foto-principal {
+            position: absolute;
+            color: white;
+            background: rgba(0, 0, 0, 0.4);
+            font-size: 12px;
+            padding: .2rem 0;
+            width: 100%;
+            text-align: center;
+          }
+        }
+        & .image-box:hover .delete {
+          display: flex;
+        }
+        & .image-box:hover .__delete-img {
+          display: initial;
+        }
+        & .__add-image {
+          transition: .2s all ease;
+          & .loader-svg {
+            width: 40px;
+            height: 40px;
+            & .__circle {
+            }
+          }
+          & .__add-image-svg {
+            width: 2.2rem;
+          }
+        }
+        & .__add-image:hover {
+          border: 2px dashed var(--color01);
+        }
+      }
+      & .center-first-image {
+        flex-flow: column wrap;
+      }
+      & .back-next {
+        bottom: 2rem;
+        height: 2.9rem;
+        width: 24%;
+        box-shadow: 3px 3px 20px 1px rgba(0,0,0,0.18);
+        & .back-next-body {
+          & button {
+            height: 2.9rem;
+          }
+          & .__back {
+            font-size: 17px;
+            font-weight: 500;
+          }
+          & .__next {
+            font-size: 17px;
+            font-weight: 600;
+          }
+        }
+      }
+    }
+  }
+}
+
+</style>
