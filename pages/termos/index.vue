@@ -5,15 +5,11 @@
     <div class="sidenav">
 
       <nuxt-link to="/termos">
-        <h3 class="__item" :class="[ this.isTermos ? '__item-selected' : '' ]">Termos de Serviço</h3>
+        <h1 class="__item" :class="[ this.isTermos ? '__item-selected' : '' ]">Termos de Serviço</h1>
       </nuxt-link>
 
       <nuxt-link to="/termos#politica_privacidade">
-        <h3 class="__item" :class="[ this.isPrivacidade ? '__item-selected' : '' ]">Política de Privacidade</h3>
-      </nuxt-link>
-
-      <nuxt-link to="/termos#politica_cancelamento">
-        <h3 class="__item" :class="[ this.isCancelamento ? '__item-selected' : '' ]">Política de Cancelamento</h3>
+        <h1 class="__item" :class="[ this.isPrivacidade ? '__item-selected' : '' ]">Política de Privacidade</h1>
       </nuxt-link>
 
     </div>
@@ -22,8 +18,27 @@
     <div class="content">
 
       <div class="politica_privacidade" v-if="isTermos">
+
         <h1>Termos de Serviço</h1>
-        <p>Em construção</p>
+
+        <p>Última atualização: 11 de Favereiro, 2019.</p>
+
+
+        <h2>1. Acomodações</h2>
+
+
+        <h3>1.1. Anúncio</h3>
+
+        <p>A Escarpas Trip não é responsável e não administra nenhum dos imóveis anunciados neste site. Este site faz somente uma classificação de imóveis para temporada na região de Capitólio/MG. Cada anúncio realizado neste site é passado por um processo rigoroso de validação. Para a pessoa que quiser anunciar seu imóvel, é cobrada uma mensalidade no valor de R$29,90 (1º mês gratuito para avaliação).</p>
+
+        <h3>1.2. Negociação da locação</h3>
+
+        <p>A negociação da locação de um imóvel de temporada é feita entre o administrador do imóvel e o locatário (hóspede/viajante). A Escarpas Trip não realiza qualquer espécie de intermediação em relação a locação do imóvel. Não nos responsabilizamos por eventuais falhas de comunicação entre as duas partes anteriormente citadas.</p>
+
+
+        <h2>2. Passeios</h2>
+
+
       </div>
 
 
@@ -69,12 +84,6 @@
 
       </div>
 
-
-
-      <div class="politica_cancelamento" v-if="isCancelamento">
-        <h1>Política de Cancelamento</h1>
-        <p>Em construção</p>
-      </div>
       
     </div>
 
@@ -96,12 +105,10 @@ export default {
     headTitle () {
       return this.$route.fullPath === '/termos' ? 'Termos de Serviço'
            : this.$route.fullPath === '/termos#politica_privacidade' ? 'Política de Privacidade'
-           : this.$route.fullPath === '/termos#politica_cancelamento' ? 'Política de Cancelamento'
            : ''
     },
     isTermos () { return this.$route.fullPath === '/termos' },
-    isPrivacidade () { return this.$route.fullPath === '/termos#politica_privacidade' },
-    isCancelamento () { return this.$route.fullPath === '/termos#politica_cancelamento' }
+    isPrivacidade () { return this.$route.fullPath === '/termos#politica_privacidade' }
   },
   beforeRouteEnter (to, from, next) {
     next(vm => {
@@ -129,7 +136,8 @@ export default {
       flex-flow: column;
       flex: 15%;
       & .__item {
-        padding: .6rem 0;
+        padding: .5rem 0;
+        font-size: 17px;
         line-height: 22px;
         transition: .15s ease color;
       }
@@ -154,12 +162,14 @@ h1 {
   font-size: 40px;
 }
 h2 {
-  padding-top: 2.2rem;
-  font-size: 19px;
+  padding-top: 2.3rem;
+  font-size: 20px;
   font-weight: 600;
 }
 h3 {
-
+  padding-top: 1.2rem;
+  font-size: 15px;
+  font-weight: 600;
 }
 p {
   padding-top: 1rem;

@@ -14,7 +14,7 @@
     <!-- ________________________________________ 1 - DATAS ________________________________________ -->
     <form class="cadastro-evento" v-if="$store.state.cadastroEvento1">
 
-      <h1 class="__form-title">Quais as datas e horários do evento?</h1>
+      <h1 class="__form-title">Datas e horários do evento</h1>
 
 
       <div class="date" v-for="(date, index) in $store.state.eventoData.dates" :key="index+1">
@@ -59,12 +59,43 @@
 
 
 
-    <!-- ________________________________________ 2 - HORÁRIOS ________________________________________ -->
+    <!-- ________________________________________ 2 - DETALHES ________________________________________ -->
     <form class="cadastro-evento" v-if="$store.state.cadastroEvento2">
 
-      <h1 class="__form-title">A definir</h1>
+      <h1 class="__form-title">Detalhes do evento</h1>
+      
 
-  
+      
+      <h2 class="__form-subtitle">Organização</h2>
+
+      <div class="item-form">
+        <label>Nome do organizador</label>
+        <input type="text" v-model="$store.state.eventoData.organizador">
+      </div>
+
+
+
+      <h2 class="__form-subtitle">Regras</h2>
+
+      <div class="item-form">
+        <label>Classificação de idade</label>
+        <select v-model="$store.state.eventoData.classificacao">
+          <option :value="0">Livre</option>
+          <option :value="12">12 anos</option>
+          <option :value="14">14 anos</option>
+          <option :value="16">16 anos</option>
+          <option :value="18">18 anos</option>
+        </select>
+      </div>
+
+
+      <div class="item-form-switches" @click="$store.state.eventoData.openBar = !$store.state.eventoData.openBar">
+        <p>Open bar</p>
+        <div class="switch" :class="[ $store.state.eventoData.openBar === true ? 'switch-on' : '' ]">
+          <div class="slider"></div>
+        </div>
+      </div>
+
 
 
       <div class="back-next"> 
@@ -74,7 +105,7 @@
         </div>
       </div> 
     
-    </form><!-- ________________________________________ 2 - HORÁRIOS ________________________________________ -->
+    </form><!-- ________________________________________ 2 - DETALHES ________________________________________ -->
 
 
 
@@ -85,7 +116,7 @@
     <!-- ________________________________________ 3 - FLYER ________________________________________ -->
     <form class="cadastro-evento" v-if="$store.state.cadastroEvento3">
 
-      <h1 class="__form-title">Adicione um flyer</h1>
+      <h1 class="__form-title">Flyer</h1>
 
 
 
@@ -108,7 +139,7 @@
     <!-- ________________________________________ 4 - LOCAL ________________________________________ -->
     <form class="cadastro-evento" v-if="$store.state.cadastroEvento4">
 
-      <h1 class="__form-title">Qual o local do evento?</h1>
+      <h1 class="__form-title">Local do evento</h1>
 
       <div class="item-form">
         <label>Local</label>
@@ -144,7 +175,26 @@
     <!-- ________________________________________ 5 - VALOR DO INGRESSO ________________________________________ -->
     <form class="cadastro-evento" v-if="$store.state.cadastroEvento5">
 
-      <h1 class="__form-title">Qual o valor do ingresso?</h1>
+      <h1 class="__form-title">Informações sobre o ingresso</h1>
+
+
+      <h2 class="__form-subtitle">Valor do ingresso</h2>
+
+
+
+
+      <h2 class="__form-subtitle">Venda de ingresso físico</h2>
+
+
+
+
+
+      <h2 class="__form-subtitle">Venda de ingresso digital</h2>
+
+      <div class="item-form">
+        <label>URL</label>
+        <input type="text">
+      </div>
 
 
 
@@ -668,6 +718,42 @@ export default {
     & .remove-date:hover {
       text-decoration: underline;
     }
+    & .item-form-switches {
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.2rem 7%;
+      transition: .2s;
+      & p {
+        padding: 0;
+        user-select: none;
+        font-size: 17px;
+      }
+      & .switch {
+        display: flex;
+        flex-flow: column;
+        align-items: flex-start;
+        width: 44px;
+        min-width: 44px;
+        height: 26px;
+        background-color: #dedede;
+        border-radius: 100px;
+        transition: .3s;
+        & .slider {
+          margin: 2px;
+          height: 22px;
+          width: 22px;
+          border-radius: 50%;
+          background: white;
+          transition: .3s;
+        }
+      }
+      & .switch-on {
+        align-items: flex-end;
+        background: var(--colorEvento);
+      }
+    }
     & .without-address {
       display: inline-flex;
       cursor: pointer;
@@ -887,6 +973,9 @@ export default {
       }
       & .remove-date {
         margin: 0 28%;
+      }
+      & .item-form-switches {
+        padding: 1.8rem 28%;
       }
       & .without-address {
         margin: 0 28%;

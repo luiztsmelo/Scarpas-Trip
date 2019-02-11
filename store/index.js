@@ -354,6 +354,9 @@ const store = () => new Vuex.Store({
           endTime: ''
         }
       ],
+      organizador: '',
+      openBar: false,
+      classificacao: 0,
       flyer: '',
       positionLAT: -20.6141320,
       positionLNG: -46.0478760,
