@@ -29,9 +29,9 @@
           <nuxt-link to="/eventos">
             <li class="__nav-item">Eventos</li>
           </nuxt-link>
-          <nuxt-link to="/atracoes">
+          <!-- <nuxt-link to="/atracoes">
             <li class="__nav-item">Atrações</li>
-          </nuxt-link>
+          </nuxt-link> -->
           <nuxt-link to="/restaurantes">
             <li class="__nav-item">Restaurantes</li>
           </nuxt-link>

@@ -27,11 +27,11 @@
 
         <h2>1. Serviços prestados</h2>
 
-        <p>O site www.escarpastrip.com (Escarpas Trip) é uma plataforma para anúncio e divulgação de acomodações para temporada, passeios turísticos, eventos e restaurantes na região de Capitólio/MG.</p>
+        <p>O site www.escarpastrip.com (Escarpas Trip, CNPJ é 32.673.211/0001-81) é uma plataforma para anúncio e divulgação de acomodações para temporada, passeios turísticos, eventos e restaurantes na região de Capitólio/MG.</p>
 
         <p>A Escarpas Trip não é responsável e não administra nenhum dos imóveis, passeios, eventos e restaurantes anunciados neste site. Este site faz somente uma classificação e divulgação desses itens.</p>
 
-        <p>Todo anúncio passa por um processo de verificação de informação, para atestar sua confiabilidade. Todas as informações contidas nos anúncios são de inteira responsabilidade do anunciante.</p>
+        <p>Todo anúncio passa por um processo de verificação de informação para atestar sua confiabilidade. Todas as informações contidas nos anúncios são de inteira responsabilidade do anunciante.</p>
 
         <p>A negociação da reserva de um imóvel, passeio, restaurante ou aquisição de ingressos para eventos é feita exclusivamente entre o responsável pelo anúncio e o hóspede/viajante. A Escarpas Trip não realiza qualquer espécie de intermediação em relação às reservas. A Escarpas Trip não se responsabiliza por eventuais falhas de comunicação entre as duas partes anteriormente citadas.</p>
 
@@ -39,7 +39,7 @@
 
         <h2>2. Pagamentos e cancelamentos</h2>
 
-        <p>Para o proprietário ou guia turístico que deseje anunciar nesta plataforma, é cobrada uma mensalidade no valor de R$29,90 (os primeiros 30 dias são gratuitos para avaliação).</p>
+        <p>Para o proprietário ou guia turístico que deseje anunciar nesta plataforma, é cobrada uma mensalidade no valor de R$29,90 (sendo os primeiros 30 dias gratuitos para avaliação).</p>
 
         <p>O anunciante tem o direito de cancelar seu anúncio a qualquer momento. Caso efetue o cancelamento, seu anúncio continuará no banco de dados, porém ele não será mais exibido, e o pagamento recorrente da mensalidade de R$29,90 será cancelado.</p>
 
@@ -47,7 +47,7 @@
 
         <h2>3. Direitos de propriedade</h2>
 
-        <p>Todo material presente neste site, como informações e imagens, tem seus direitos autorais protegidos, sendo proibida sua cópia, divulgação, e reprodução em qualquer meio que a Escarpas Trip não autorize previamente.</p>
+        <p>Todo material presente neste site, como textos e imagens, tem seus direitos autorais protegidos, sendo proibida sua cópia, divulgação, e reprodução em qualquer meio que a Escarpas Trip não autorize previamente.</p>
 
       </div>
 
@@ -59,7 +59,9 @@
         <p>Vigente a partir de 11 de fevereiro de 2019</p>
 
         <p>Obrigado por utilizar a plataforma Escarpas Trip!</p>
-        <p>Esta Política de Privacidade descreve como coletamos, usamos, processamos e divulgamos seus dados, incluindo informações pessoais, em conjunto com o seu acesso e uso da plataforma Escarpas Trip e dos Serviços de Pagamento.</p>
+
+        <p>Esta Política de Privacidade descreve como coletamos, usamos, processamos e divulgamos seus dados, incluindo informações pessoais, em conjunto com o seu acesso e uso da plataforma Escarpas Trip.</p>
+
         <p>Quando esta Política de Privacidade menciona "Escarpas Trip", "nós", "nós" ou "nosso", refere-se à pessoa jurídica Escarpas Trip, cujo CNPJ é 32.673.211/0001-81. Os termos "usuários" ou "você", referem-se a turistas e viajantes que usam este site para procurarem imóveis, passeios, eventos e restaurantes, bem como a proprietários e anunciantes que listam propriedades para aluguel, passeios, eventos e restaurantes nesta plataforma.</p>
 
 
