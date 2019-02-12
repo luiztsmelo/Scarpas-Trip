@@ -314,22 +314,24 @@
 
           <h2 class="__valor">R${{ passeio.rotas[reservaPasseio.rota - 1].valor.toLocaleString() }}<span class="__valor-pessoa"> por pessoa</span></h2>
 
+          <p style="font-size: 15px">Entre em contato com {{ host.firstName }} para negociarem o dia e o horário do passeio.</p>
 
-          <div class="item-form" v-if="passeio.rotas.length > 1">
+
+          <!-- <div class="item-form" v-if="passeio.rotas.length > 1">
             <select v-model="$store.state.reservaPasseio.rota">
               <option :value="n" v-for="n in passeio.rotas.length">Rota {{ n }}</option>
             </select>
-          </div>
+          </div> -->
 
 
-          <div class="item-form">
+          <!-- <div class="item-form">
             <select v-model="$store.state.reservaPasseio.totalPessoas">
               <option :value="n" v-for="n in capacidadeArray">{{ n }} {{ n === 1 ? 'pessoa' : 'pessoas' }}</option>
             </select>
-          </div>
+          </div> -->
 
 
-          <div class="item-form">
+          <!-- <div class="item-form">
 
             <div class="datepicker-trigger">
               <button
@@ -352,15 +354,15 @@
               />
             </div>
 
-          </div>
+          </div> -->
 
 
-          <button class="__reserva-desktop-btn" type="button" @click="reservarDesktop">Reservar</button>
+          <button class="__reserva-desktop-btn" type="button" @click="reservarDesktop">Falar com {{ host.firstName }}</button>
 
-          <h4 class="__info">A reserva é gratuita!</h4>
+          <h4 class="__info">Diga que viu o anúncio na Escarpas Trip</h4>
 
 
-          <button class="__reserva-desktop-ask-btn" type="button">Falar com {{ host.firstName }}</button>
+          <!-- <button class="__reserva-desktop-ask-btn" type="button">Falar com {{ host.firstName }}</button> -->
 
 
           <div class="highlight" v-if="$store.state.visitsLastMonth >= 0">
@@ -383,7 +385,7 @@
     <div class="reserva-mobile">
       <div class="reserva-body">
         <h3 class="__reserva-valor">R${{ passeio.rotas[reservaPasseio.rota - 1].valor.toLocaleString() }}<span class="__reserva-valor-pessoa"> por pessoa</span></h3>
-        <button class="__reserva-btn" @click="$store.commit('m_showHost', true), hashHost()">Reservar</button>
+        <button class="__reserva-btn" @click="$store.commit('m_showHost', true), hashHost()">Falar com {{ host.firstName }}</button>
       </div>
     </div>
     <!-- ______________________________ RESERVA MOBILE ______________________________ -->
@@ -861,12 +863,13 @@ export default {
         font-weight: 400;
       }
       & .__reserva-btn {
+        padding: 0 1rem;
         width: 50%;
         max-width: 12rem;
         height: 3.25rem;
         background:var(--colorPasseio);
         border-radius: 200px;
-        font-size: 17px;
+        font-size: 16px;
         font-weight: 700;
         color: white;
         transition: var(--main-transition);
@@ -973,7 +976,7 @@ export default {
           }
           & .__reserva-desktop-btn {
             margin-top: 1.3rem;
-            font-size: 17px;
+            font-size: 16px;
             font-weight: 700;
             background: var(--colorPasseio);
             color: white;

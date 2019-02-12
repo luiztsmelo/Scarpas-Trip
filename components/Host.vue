@@ -86,10 +86,10 @@ export default {
     },
     subtitleNegociacao () {
       if (this.$route.name === 'acomodacoes-id') {
-        return `Entre em contato com ${this.host.firstName} para negociarem os detalhes da reserva.`
+        return `Entre em contato com ${this.host.firstName} para negociarem os detalhes da reserva. Diga que viu o anúncio na Escarpas Trip.`
       }
       if (this.$route.name === 'passeios-id') {
-        return `Entre em contato com ${this.host.firstName} para negociarem o dia e o horário do passeio.`
+        return `Entre em contato com ${this.host.firstName} para negociarem o dia e o horário do passeio. Diga que viu o anúncio na Escarpas Trip.`
       }
     }
   }, 

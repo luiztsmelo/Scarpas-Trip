@@ -337,22 +337,23 @@
 
           <h2 class="__valor">R${{ acomod.valorNoiteWeekdays.toLocaleString() }}<span class="__valor-noite"> por noite</span></h2>
 
+          <p style="font-size: 15px">Entre em contato com {{ host.firstName }} para tirar dúvidas ou agendar sua reserva.</p>
 
-          <div class="item-form" v-if="$store.getters.tipoAcomodSuites">
+          <!-- <div class="item-form" v-if="$store.getters.tipoAcomodSuites">
             <select v-model="$store.state.reservaAcomod.quarto">
               <option :value="quarto" v-for="quarto in quartosOptions">{{ quarto }}</option>
             </select>
-          </div>
+          </div> -->
 
 
-          <div class="item-form">
+          <!-- <div class="item-form">
             <select v-model="$store.state.reservaAcomod.totalHospedes">
               <option :value="n" v-for="n in totalHospedesArray">{{ n }} {{ n === 1 ? 'hóspede' : 'hóspedes' }}</option>
             </select>
-          </div>
+          </div> -->
 
 
-          <div class="item-form">
+          <!-- <div class="item-form">
 
             <div class="datepicker-trigger">
               <button
@@ -379,21 +380,21 @@
               />
             </div>
 
-          </div>
+          </div> -->
 
 
-          <div class="valor-reserva-total" v-if="reservaAcomod.startDate !== '' && reservaAcomod.endDate !== ''">
+          <!-- <div class="valor-reserva-total" v-if="reservaAcomod.startDate !== '' && reservaAcomod.endDate !== ''">
             <span>{{ `R$${acomod.valorNoite.toLocaleString()} x ${$store.state.reservaAcomod.noites} ${$store.state.reservaAcomod.noites == 1 ? 'noite' : 'noites'}` }}</span>
             <span id="valor">R${{ Math.round(acomod.valorNoite * $store.state.reservaAcomod.noites).toLocaleString() }}</span>
-          </div>
+          </div> -->
 
 
-          <button class="__reserva-desktop-btn" type="button" @click="reservarDesktop">Reservar</button>
+          <button class="__reserva-desktop-btn" type="button" @click="reservarDesktop">Falar com {{ host.firstName }}</button>
 
-          <h4 class="__info">A reserva é gratuita!</h4>
+          <h4 class="__info">Diga que viu o anúncio na Escarpas Trip</h4>
 
 
-          <button class="__reserva-desktop-ask-btn" type="button">Falar com {{ host.firstName }}</button>
+          <!-- <button class="__reserva-desktop-ask-btn" type="button">Falar com {{ host.firstName }}</button> -->
 
 
           <div class="highlight" v-if="$store.state.visitsLastMonth >= 0">
@@ -421,7 +422,7 @@
     <div class="reserva-mobile">
       <div class="reserva-body">
         <span class="__reserva-valor">R${{ acomod.valorNoiteWeekdays.toLocaleString() }}<span class="__reserva-valor-pessoa"> por noite</span></span>
-        <button class="__reserva-btn" @click="reservarMobile">Reservar</button>
+        <button class="__reserva-btn" @click="reservarMobile">Falar com {{ host.firstName }}</button>
       </div>
     </div>
 
@@ -1027,12 +1028,13 @@ export default {
         font-weight: 400;
       }
       & .__reserva-btn {
+        padding: 0 1rem;
         width: 50%;
         max-width: 12rem;
         height: 3.25rem;
         background:var(--colorAcomod);
         border-radius: 200px;
-        font-size: 17px;
+        font-size: 16px;
         font-weight: 700;
         color: white;
         transition: var(--main-transition);
