@@ -122,21 +122,6 @@
 
 
 
-      <!-- ______________________________ ATRAÇÕES ______________________________ -->
-      <div class="category-container">
-
-
-        <h2 class="__title">Atrações</h2>
-        
-
-        <p class="__subtitle">Em breve.</p>
-
-
-      </div><!-- ______________________________ ATRAÇÕES ______________________________ -->
-
-
-
-
 
 
       <!-- ______________________________ RESTAURANTES ______________________________ -->
@@ -231,7 +216,7 @@ export default {
         padding: 0 7%;
         display: grid;
         grid-template-columns: 1fr 1fr;
-        grid-gap: 14px;
+        grid-gap: 13px;
         & .card {
           & .__card-img {
             width: 100%; 
@@ -301,7 +286,7 @@ export default {
         }
         & .cards-container {
           grid-template-columns: 1fr 1fr 1fr 1fr;
-          grid-gap: 20px;
+          grid-gap: 17px;
           & .card {
             & .__card-img {
             }

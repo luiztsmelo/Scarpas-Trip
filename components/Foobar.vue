@@ -82,7 +82,7 @@ export default {
   transition: var(--main-transition);
   border-top: 1px solid #dedede;
   & .foobar-body {
-    padding: 0 .5rem;
+    padding: 0 .6rem;
     height: 100%;
     position: relative;
     top: 50%;
