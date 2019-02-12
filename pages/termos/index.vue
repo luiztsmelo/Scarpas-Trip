@@ -117,7 +117,7 @@ export default {
   transition: 'opacity',
   computed: {
     headTitle () {
-      return this.$route.fullPath === '/termos' ? 'Termos de Serviço'
+      return this.$route.fullPath === '/termos' ? 'Termos e condições de uso'
            : this.$route.fullPath === '/termos#politica_privacidade' ? 'Política de Privacidade'
            : ''
     },
