@@ -70,7 +70,34 @@
 
       <div class="item-form">
         <label>Nome do organizador</label>
-        <input type="text" v-model="$store.state.eventoData.organizador">
+        <input type="text" v-model="$store.state.eventoData.organizador.name">
+      </div>
+
+      <div class="item-form">
+        <label>Celular / WhatsApp</label>
+        <masked-input
+          type="tel"
+          v-model="$store.state.eventoData.organizador.whatsapp"
+          :mask="['+', 5, 5, ' ', /\d/, /\d/, ' ', /\d/, /\d/, /\d/, /\d/, /\d/, ' ', /\d/, /\d/, /\d/, /\d/]"
+          :guide="false"
+          placeholder="+55">
+        </masked-input>
+      </div>
+
+      <div class="item-form">
+        <label>Telefone Fixo</label>
+        <masked-input
+          type="tel"
+          v-model="$store.state.eventoData.organizador.telefoneFixo"
+          :mask="['+', 5, 5, ' ', /\d/, /\d/, ' ', /\d/, /\d/, /\d/, /\d/, ' ', /\d/, /\d/, /\d/, /\d/]"
+          :guide="false"
+          placeholder="+55">
+        </masked-input>
+      </div>
+
+      <div class="item-form">
+        <label>E-mail</label>
+        <input type="email" v-model="$store.state.eventoData.organizador.email">
       </div>
 
 
@@ -117,6 +144,42 @@
     <form class="cadastro-evento" v-if="$store.state.cadastroEvento3">
 
       <h1 class="__form-title">Flyer</h1>
+
+
+      <button type="button" class="add-image-btn" @click="$refs.myCroppa.chooseFile()" v-if="$store.state.eventoData.flyerHJ === ''">Adicionar flyer</button>
+
+
+      <div class="modal-croppa" v-show="showCroppaModal" @click="showCroppaModal=false">
+        <div class="modal-croppa-body" @click.stop>
+          <h1>Ajustar imagem</h1>
+          <croppa
+            ref="myCroppa"
+            @file-choose="showCroppaModal = true"
+            @new-image-drawn="newImageDrawn = true"
+            :width="$store.state.isMobile ? 720/aspectRatio/2.8 : 720/aspectRatio/1.8"
+            :height="$store.state.isMobile ? 720/2.8 : 720/1.8"
+            :quality="$store.state.isMobile ? 2.8 : 1.8"
+            :placeholder="'Carregando...'"
+            :placeholder-color="'white'"
+            :accept="'.jpg, .jpeg, .png, .webp'"
+            :zoom-speed="$store.state.isMobile ? 2 : 4"
+            :prevent-white-space="true"
+            :show-remove-button="false">
+          </croppa>
+          <div style="display:flex; align-items: center">
+            <button class="__aspect-ratio" type="button" @click="aspectRatio = 1/2">2:1</button>
+            <button class="__aspect-ratio" type="button" @click="aspectRatio = 9/16">16:9</button>
+            <button class="__aspect-ratio" type="button" @click="aspectRatio = 2/3">3:2</button>
+            <button class="__croppa-btn" type="button" @click="showCroppaModal=false, imageConfirm()" v-if="newImageDrawn">Confirmar</button>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="image-preview" v-if="$store.state.eventoData.flyerHJ !== ''">
+        <progressive-background class="__image" :src="$store.state.eventoData.flyerHJ" :placeholder="$store.state.eventoData.flyerL" :aspect-ratio="aspectRatio"/>
+        <button type="button" @click="deleteImage()">Remover</button>
+      </div>
 
 
 
@@ -180,12 +243,33 @@
 
       <h2 class="__form-subtitle">Valor do ingresso</h2>
 
+      <div class="item-form">
+        <label>Valor do ingresso:</label>
+        <money 
+          v-model="$store.state.eventoData.valorIngresso"
+          onKeyPress="if (event.which == 13) return false">
+        </money>
+      </div>
 
 
 
       <h2 class="__form-subtitle">Venda de ingresso físico</h2>
 
+      <div class="item-form">
+        <label>Nome do Estabelecimento</label>
+        <input type="text" v-model="$store.state.eventoData.ingressoFisicoEstabelecimento">
+      </div>
 
+      <div class="item-form">
+        <label>WhatsApp</label>
+        <masked-input
+          type="tel"
+          v-model="$store.state.eventoData.ingressoFisicoWhatsapp"
+          :mask="['+', 5, 5, ' ', /\d/, /\d/, ' ', /\d/, /\d/, /\d/, /\d/, /\d/, ' ', /\d/, /\d/, /\d/, /\d/]"
+          :guide="false"
+          placeholder="+55">
+        </masked-input>
+      </div>
 
 
 
@@ -193,7 +277,7 @@
 
       <div class="item-form">
         <label>URL</label>
-        <input type="text">
+        <input type="text" v-model="$store.state.eventoData.ingressoDigitalURL">
       </div>
 
 
@@ -224,7 +308,7 @@
       v-autosize="title"
       maxlength="60"
       rows="1"
-      placeholder="ex: Tardezinha em Escarpas do Lago"
+      placeholder="ex: Sunset em Escarpas do Lago"
       required>
       {{title}}</textarea>
 
@@ -283,8 +367,6 @@
 
       <h1 class="__form-title">Identificação</h1> 
 
-      <button type="button" class="google-btn" @click="$store.dispatch('a_googleSignIn')">Continuar com Google</button>
-
 
       <div class="back-next"> 
         <div class="back-next-body">
@@ -330,11 +412,7 @@ export default {
       subtitle: '', /* Vue Autosize */
       showCroppaModal: false,
       newImageDrawn: false,
-      isUploading: false,
-      uploadProgress: 0,
-      password: '',
-      nameError: false,
-      emailError: false
+      aspectRatio: 1/2
     }
   },
   methods: {
@@ -352,6 +430,49 @@ export default {
       this.$store.state.eventoData.positionLNG = this.$store.state.eventoPlace.geometry.location.lng()
       this.$store.state.eventoData.address = this.$store.state.eventoPlace.formatted_address
       this.$modal.show('local-map-modal')
+    },
+    /* ******************** IMAGE INPUT ******************** */
+    async imageConfirm () {
+      try {
+        /* Storage path */
+        const storageRef = firebase.storage().ref('eventos/' + this.$store.state.eventoData.eventoID + '/')
+
+        let blobL = await this.$refs.myCroppa.promisedBlob('image/jpeg', 0.01)
+        let blobHJ = await this.$refs.myCroppa.promisedBlob('image/jpeg')
+        let blobHW = await this.$refs.myCroppa.promisedBlob('image/webp')
+        
+        /* Upload image L */
+        await storageRef.child('flyerL.jpeg').put(blobL)
+        this.$store.state.eventoData.flyerL = await storageRef.child('flyerL.jpeg').getDownloadURL()
+        
+        /* Upload image HJ */
+        await storageRef.child('flyerHJ.jpeg').put(blobHJ)
+        this.$store.state.eventoData.flyerHJ = await storageRef.child('flyerHJ.jpeg').getDownloadURL()
+
+        /* Upload image HW */
+        await storageRef.child('flyerHW.webp').put(blobHW)
+        this.$store.state.eventoData.flyerHW = await storageRef.child('flyerHW.webp').getDownloadURL()
+
+        /* Remover imagem do croppa */
+        this.$refs.myCroppa.remove()
+
+        this.newImageDrawn = false
+
+        this.$store.state.eventoData.flyerAspectRatio = this.aspectRatio
+
+      } catch (err) {
+        console.log(err)
+      }
+    },
+    deleteImage () {
+      const storageRef = firebase.storage().ref('eventos/' + this.$store.state.eventoData.eventoID + '/')
+      storageRef.child('flyerL.jpeg').delete()
+      storageRef.child('flyerHJ.jpeg').delete()
+      storageRef.child('flyerHW.webp').delete()
+      this.$store.state.eventoData.flyerL = ''
+      this.$store.state.eventoData.flyerHJ = ''
+      this.$store.state.eventoData.flyerHW = ''
+      this.$refs.myCroppa.remove()
     },
     /* ******************** BACK BUTTONS ******************** */
     backBtn1 () {
@@ -798,8 +919,16 @@ export default {
         }
       }
     }
+    & .__aspect-ratio {
+      background: #fff;
+      border-radius: 50%;
+      width: 2.6rem;
+      height: 2.6rem;
+      font-weight: 500;
+      margin-right: 1rem;
+    }
     & .__croppa-btn {
-      margin: .4rem 0;
+      margin: .4rem 1rem;
       font-size: 16px;
       font-weight: 600;
       background: var(--colorEvento);
@@ -808,76 +937,32 @@ export default {
       padding: 0 1.5rem;
       border-radius: 2rem;
     }
-    & .after-choose-image {
-      margin-top: 1.4rem;
-      padding: 0 calc(7% - 1%);
+    & .add-image-btn {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      margin-top: 1rem;
+      font-weight: 600;
+      background: transparent;
+    }
+    & .add-image-btn:hover {
+      text-decoration: underline;
+    }
+    & .image-preview {
+      padding: 0 7%;
       display: flex;
-      flex-flow: row wrap;
+      flex-flow: column;
       align-items: center;
-      align-content: flex-start;
-      & .image-box {
-        position: relative;
-        margin: 1%;
-        width: 48%;
-        height: auto;
-        & .__image {
-          width: 100%;
-          height: 100%;
-          border-radius: 5px;
-        }
-        & .delete {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          cursor: pointer;
-          position: absolute;
-          top: .4rem;
-          right: .4rem;
-          z-index: 5;
-          width: 2rem;
-          height: 2rem;
-          background: rgba(0, 0, 0, 0.5);
-          border-radius: 50%;
-          & .__delete-img {
-            width: 1rem;
-            height: auto;
-          }
-        }
-        & .__foto-principal {
-          position: absolute;
-          color: white;
-          background: rgba(0, 0, 0, 0.4);
-          font-size: 12px;
-          padding: .2rem 0;
-          width: 100%;
-          text-align: center;
-        }
+      & .__image {
+        border-radius: 6px;
+        margin-bottom: 1rem;
       }
-      & .__add-image {
-        position: relative;
-        cursor: pointer;
-        border: 2px dashed rgb(202,202,202);
-        border-radius: 5px;
-        & .loader-svg {
-          position: absolute;
-          top: 0; left: 0; bottom: 0; right: 0;
-          margin: auto;
-          width: 32px;
-          height: 32px;
-          & .__circle {
-            transition: stroke-dashoffset .8s ease;
-            transform: rotate(-90deg);
-            transform-origin: 50% 50%;
-          }
-        }
-        & .__add-image-svg {
-          position: absolute;
-          width: 1.8rem;
-          height: auto;
-          top: 0; left: 0; bottom: 0; right: 0;
-          margin: auto;
-          z-index: 5;
-        }
+      & button {
+        font-weight: 600;
+        background: transparent;
+      }
+      & button:hover {
+        text-decoration: underline;
       }
     }
     & .back-next {
@@ -990,56 +1075,8 @@ export default {
       }
       & .__croppa-btn {
       }
-      & .after-choose-image {
-        margin-top: 2rem;
-        padding: 0 calc(28% - 1%);
-        & .image-box {
-          margin: 1%;
-          width: 48%;
-          & .__image {
-          }
-          & .delete {
-            display: none;
-            top: .7rem;
-            right: .7rem;
-            width: 2.3rem;
-            height: 2.3rem;
-            & .__delete-img {
-              display: none;
-              width: 1.2rem;
-            }
-          }
-          & .__foto-principal {
-            position: absolute;
-            color: white;
-            background: rgba(0, 0, 0, 0.4);
-            font-size: 12px;
-            padding: .2rem 0;
-            width: 100%;
-            text-align: center;
-          }
-        }
-        & .image-box:hover .delete {
-          display: flex;
-        }
-        & .image-box:hover .__delete-img {
-          display: initial;
-        }
-        & .__add-image {
-          transition: .2s all ease;
-          & .loader-svg {
-            width: 40px;
-            height: 40px;
-            & .__circle {
-            }
-          }
-          & .__add-image-svg {
-            width: 2.2rem;
-          }
-        }
-        & .__add-image:hover {
-          border: 2px dashed var(--color01);
-        }
+      & .image-preview {
+        padding: 0 32%;
       }
       & .center-first-image {
         flex-flow: column wrap;

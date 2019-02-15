@@ -123,9 +123,9 @@
             ref="myCroppa"
             @file-choose="showCroppaModal = true"
             @new-image-drawn="newImageDrawn = true"
-            :width="$store.state.isMobile ? 639/2 : 639"
-            :height="$store.state.isMobile ? 426/2 : 426"
-            :quality="$store.state.isMobile ? 2 : 1"
+            :width="$store.state.isMobile ? 720/2.2 : 720/1.2"
+            :height="$store.state.isMobile ? 480/2.2 : 480/1.2"
+            :quality="$store.state.isMobile ? 2.2 : 1.2"
             :placeholder="'Carregando...'"
             :placeholder-color="'white'"
             :accept="'.jpg, .jpeg, .png, .webp'"
@@ -453,7 +453,7 @@
 
       <h1 class="__form-title">Dados para pagamento e confirmação</h1>   
 
-      <h3 class="__form-text">Ótimo {{ user.firstName }}! Será feita uma cobrança em seu cartão de crédito no valor de <span style="font-weight:600">R$29,90</span> mensais, sendo o <span style="font-weight:600">1º mês gratuito</span>. Caso não esteja gostando do serviço, cancelaremos na hora para você, sem enrolações.</h3>
+      <h3 class="__form-text">Ótimo {{ user.firstName }}! Será feita uma cobrança mensal em seu cartão de crédito no valor de <span style="font-weight:600">R$29,90</span>, sendo os primeiros 30 dias gratuitos para sua avaliação. Você tem até o dia {{ oneMonthFromNow }} para cancelar. Após essa data, só cancelaremos as cobranças futuras, sem a devolução dos pagamentos dos meses já pagos.</h3>
 
 
       <div class="payment-box">
@@ -660,7 +660,7 @@
 
         </div>
 
-        <!-- <p class="__termos">Ao anunciar, você concorda com a nossa <a href="/termos#politica_privacidade" target="_blank">Política de Privacidade</a> e <a href="/termos" target="_blank">Termos de Serviço</a>.</p> -->
+        <p class="__termos">Ao anunciar, você concorda com os nossos <a href="/termos" target="_blank">Termos de Serviço</a> e <a href="/termos#politica_privacidade" target="_blank">Política de Privacidade</a>.</p>
 
       </div>
 
@@ -693,6 +693,9 @@ import { pontosTuristicos } from '@/mixins/pontosTuristicos'
 import valid from 'card-validator'
 import CPF from 'gerador-validador-cpf'
 import scrollIntoView from 'scroll-into-view'
+import addDays from 'date-fns/add_days'
+import format from 'date-fns/format'
+import pt from 'date-fns/locale/pt'
 
 export default {
   components: { MaskedInput, localMap },
@@ -1102,6 +1105,11 @@ export default {
     progressBarStyle () {
       return `width:${this.$store.state.passeioProgressBar}%; ${this.$store.state.cadastroPasseio0 || this.$store.state.cadastroPasseio1 ? '' : 'transition: all .3s ease;'}`
     },
+    /* ******************** FUNCTIONS ******************** */
+    oneMonthFromNow () {
+      let date = addDays(new Date(), 30)
+      return format(date, 'DD/MM/YYYY', { locale: pt })
+    },
     /* ******************** FORM STYLES ******************** */
     form1ok () {
       return this.$store.state.passeioData.tipoPasseio !== null ? 'background: #198CFE' : ''
@@ -1486,6 +1494,16 @@ export default {
       font-size: 17px;
       padding: .5rem 7% .2rem;
       line-height: 26px;
+    }
+    & .__termos {
+      font-size: 15px;
+      font-weight: 500;
+      & a {
+        color: var(--colorPasseio);
+      }
+      & a:hover {
+        text-decoration: underline;
+      }
     }
     & textarea {
       padding: 0 7%;

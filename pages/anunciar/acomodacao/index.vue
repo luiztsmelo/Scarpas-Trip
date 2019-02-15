@@ -281,9 +281,9 @@
             ref="myCroppa"
             @file-choose="showCroppaModal = true"
             @new-image-drawn="newImageDrawn = true"
-            :width="$store.state.isMobile ? 639/2 : 639"
-            :height="$store.state.isMobile ? 426/2 : 426"
-            :quality="$store.state.isMobile ? 2 : 1"
+            :width="$store.state.isMobile ? 720/2.2 : 720/1.2"
+            :height="$store.state.isMobile ? 480/2.2 : 480/1.2"
+            :quality="$store.state.isMobile ? 2.2 : 1.2"
             :placeholder="'Carregando...'"
             :placeholder-color="'white'"
             :accept="'.jpg, .jpeg, .png, .webp'"
@@ -836,7 +836,7 @@
 
         </div>
 
-        <!-- <p class="__termos">Ao anunciar, você concorda com a nossa <a href="/termos#politica_privacidade" target="_blank">Política de Privacidade</a> e <a href="/termos" target="_blank">Termos de Serviço</a>.</p> -->
+        <p class="__termos">Ao anunciar, você concorda com os nossos <a href="/termos" target="_blank">Termos de Serviço</a> e <a href="/termos#politica_privacidade" target="_blank">Política de Privacidade</a>.</p>
 
       </div>
 
@@ -1769,6 +1769,16 @@ export default {
       font-size: 17px;
       padding: .5rem 7% .2rem;
       line-height: 26px;
+    }
+    & .__termos {
+      font-size: 15px;
+      font-weight: 500;
+      & a {
+        color: var(--colorAcomod);
+      }
+      & a:hover {
+        text-decoration: underline;
+      }
     }
     & textarea {
       padding: 0 7%;

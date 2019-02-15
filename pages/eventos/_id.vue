@@ -1,0 +1,758 @@
+<template>
+  <div class="eventos-id">
+    
+
+    <host/>
+
+
+
+
+
+
+    <!-- ______________________________ TOPBAR ______________________________ -->
+    <div class="topbar" v-scroll="scrollTopbarBg">
+      <div class="topbar-body">
+
+        <div class="back-box" @click="backBtn">
+          <img class="__back-btn" v-scroll="scrollTopbarBtns" src="../../assets/img/back-w.svg" alt="voltar">
+        </div>
+        
+        <div class="share-box" @click="$store.commit('m_showShare', true), hashShare()">
+          <img class="__share-btn" v-scroll="scrollTopbarBtns" src="../../assets/img/share.svg" alt="compartilhar" >
+        </div>
+
+      </div>
+    </div><!-- ______________________________ TOPBAR ______________________________ -->
+
+
+
+
+
+
+    <!-- ______________________________ FLYER ______________________________ -->
+    <div class="flyer-box" ref="imageBox" :style="`background-image: url(${flyerH()}); background-color: ${flyerAverageColor}`">
+    
+      <!-- <progressive-background class="__flyer" :src="flyerH()" :placeholder="evento.flyerL" :aspect-ratio="evento.flyerAspectRatio"/> -->
+         
+    </div><!-- ______________________________ FLYER ______________________________ -->
+    
+
+
+
+
+
+    <div class="desktop-view"><!-- Desktop View -->
+
+
+    
+
+      <div class="desktop-view-info"><!-- Desktop View Info -->
+
+
+
+
+
+        <!-- ______________________________ RATING ______________________________ -->
+        <!-- <div class="rating-box">
+
+          <p class="__tipo" style="color: #198CFE">{{ passeio.tipoPasseio }}</p>
+
+          <star-rating
+            v-if="passeio.avaliacoes.length > 0"
+            class="rating"
+            :rating="passeio.averageRating"
+            :increment="0.5"
+            :read-only="true"
+            :show-rating="false"
+            active-color="#161616"
+            inactive-color="#dedede"
+            :star-size="13"
+            :padding="4">
+          </star-rating>
+
+          <div class="new" v-else><span>NOVO</span></div>
+
+        </div> --><!-- ______________________________ RATING ______________________________ -->
+
+
+
+
+
+        <h1 class="id-title">{{ evento.title }}</h1>
+
+
+
+
+
+        <!-- ______________________________ ORGANIZADOR ______________________________ -->
+        <!-- <div class="anunciante-box">
+          <img class="__anunciante-img" :src="userPhoto" :alt="host.firstName" @click="$store.commit('m_showHost', true), hashHost()">
+          <div class="box-flex-column">
+            <h3 style="user-select:none">Guiado por</h3>
+            <p class="__anunciante-name" @click="$store.commit('m_showHost', true), hashHost()">{{ host.fullName }}</p>
+          </div>
+        </div> --><!-- ______________________________ ORGANIZADOR ______________________________ -->
+
+
+
+
+
+
+
+
+        <!-- ______________________________ SOBRE ______________________________ -->
+        <h2 class="item-title">Sobre o evento</h2>
+
+        <div class="sobre-box">
+          <p>{{ evento.subtitle }}</p>
+        </div><!-- ______________________________ SOBRE ______________________________ -->
+
+
+
+
+
+
+
+
+        <!-- ______________________________ DISPONIBILIDADE ______________________________ -->
+        <h2 class="item-title">Datas do evento</h2>
+
+        <!-- <div class="disponibilidade-box">
+          <no-ssr>
+
+            <div class="datepicker-trigger">
+              <button
+                type="button"
+                id="datepicker-trigger"
+                style="display: none">
+              </button>
+
+              <AirbnbStyleDatepicker
+                style="border:none"
+                :trigger-element-id="'datepicker-trigger'"
+                :inline="true"
+                :mode="'single'"
+                :showShortcutsMenuTrigger="false"
+                :showActionButtons="false"
+                :min-date="minDate"
+                :date-one="$store.state.reservaPasseio.date"
+                @date-one-selected="val => { $store.state.reservaPasseio.date = val }"
+              />
+            </div>
+            
+          </no-ssr>
+        </div> --><!-- ______________________________ DISPONIBILIDADE ______________________________ -->
+
+
+
+
+
+
+        <!-- ______________________________ LOCAL ______________________________ -->
+        <h2 class="item-title">Local do evento</h2>
+
+        <div class="local-box">
+
+          <p class="__adress">{{ evento.address }}</p>
+
+          <gmap-map
+            :center="{ lat: evento.positionLAT, lng: evento.positionLNG }"
+            :zoom="15"
+            :options="{ styles: styles, draggable: $store.state.isMobile ? false : true, fullscreenControl: $store.state.isMobile ? false : true, zoomControl: $store.state.isMobile ? false : true, mapTypeControl: false, streetViewControl: false }"
+            @click="fullscreenMobile">
+              <Gmap-Marker
+                :position="{ lat: evento.positionLAT, lng: evento.positionLNG }"
+                :icon="{ url: $store.state.markerUrl, scaledSize: $store.state.markerSize }">
+              </Gmap-Marker>
+          </gmap-map>
+
+        </div><!-- ______________________________ LOCAL ______________________________ -->
+
+
+
+
+
+
+      </div><!-- Desktop View Info -->
+
+
+
+
+      <!-- ______________________________ RESERVA DESKTOP ______________________________ -->
+      <div class="reserva-desktop">
+        <form class="reserva-desktop-form">
+
+
+          <h2 class="__valor">R${{ evento.valorIngresso }}<span class="__valor-pessoa"> por pessoa</span></h2>
+
+          <p style="font-size: 15px">Informações para comprar o ingresso.</p>
+
+
+
+          <button class="__reserva-desktop-btn" type="button">Comprar ingresso</button>
+
+          <h4 class="__info">Bom evento!</h4>
+
+
+
+          <div class="highlight" v-if="$store.state.visitsLastMonth >= 0">
+            <span class="__text">Este evento recebeu {{ $store.state.visitsLastMonth }} visualizações no último mês.</span>
+            <img class="__img" src="../../assets/img/visits-evento.svg">
+          </div>
+
+        </form>
+      </div><!-- ______________________________ RESERVA DESKTOP ______________________________ -->
+
+
+
+
+    </div><!-- Desktop View -->
+
+
+
+
+    <!-- ______________________________ RESERVA MOBILE ______________________________ --> 
+    <div class="reserva-mobile">
+      <div class="reserva-body">
+        <h3 class="__reserva-valor">R${{ evento.valorIngresso }}<span class="__reserva-valor-pessoa"> por pessoa</span></h3>
+        <button class="__reserva-btn">Comprar ingresso</button>
+      </div>
+    </div>
+    <!-- ______________________________ RESERVA MOBILE ______________________________ -->
+    
+    
+    
+  </div>
+</template>
+
+<script>
+import firebase from '@firebase/app'
+import 'firebase/firestore'
+import Host from '../../components/Host'
+import supportsWebP from 'supports-webp'
+import { mapstyle } from '../../mixins/mapstyle'
+import { swiperOptions } from '../../mixins/swiper_id'
+import { stylesCalendar } from '@/mixins/stylesCalendar'
+import format from 'date-fns/format'
+import subDays from 'date-fns/sub_days'
+import pt from 'date-fns/locale/pt'
+import getAverageColor from 'get-average-color'
+
+export default {
+  components: { Host },
+  mixins: [ mapstyle, swiperOptions, stylesCalendar ],
+  data () {
+    return {
+    }
+  },
+  head () {
+    return {
+      title: `${this.$store.state.evento.title} ‒ Escarpas Trip`,
+      meta: [
+        { hid: 'description', name: 'description', content: this.$store.state.evento.subtitle },
+        { property: 'og:url', content: `https://escarpastrip.com/eventos/${this.$route.params.id}` },
+        { property: 'og:title', content: this.$store.state.evento.title },
+        { property: 'og:description', content: this.$store.state.evento.subtitle },
+        { property: 'og:image', content: this.$store.state.evento.flyer },
+        { property: 'og:site_name', content: 'Escarpas Trip' }
+      ]
+    }
+  },
+  middleware: 'eventoValidate',
+  transition: 'id',
+  async fetch ({ store, params }) {
+    try {
+      /* Get evento */
+      let evento = await firebase.firestore().doc(`eventos/${params.id}`).get()
+
+      store.commit('m_evento', evento.data())
+      store.commit('m_loader', false)
+
+    } catch (err) {
+      store.commit('m_loader', false)
+      console.log(err)
+    }
+  },
+  methods: {
+    timeToSec (time) {
+      const parts = time.split(':')
+      return (parts[0] * 3600) + (parts[1] * 60)
+    },
+    pad (num) {
+      return num < 10 ? '0' + num : '' + num
+    },
+    formatTime (secs) {
+      return [ this.pad(Math.floor(secs/3600)%60), this.pad(Math.floor(secs/60)%60) ].join(':')
+    },
+    reservarDesktop () {
+    },
+    scrollTopbarBg (evt, el) {
+      return window.scrollY >= this.$store.state.heightImageBox
+        ? el.setAttribute("style", "background: white; box-shadow: 0px 1px 1px 0px rgba(0,0,0,0.1)")
+        : el.removeAttribute("style")
+    },
+    scrollTopbarBtns (evt, el) {
+      return window.scrollY >= this.$store.state.heightImageBox
+        ? el.setAttribute("style", "filter: invert(90%)")
+        : el.removeAttribute("style")
+    },
+    fullscreenMobile () {
+      if (this.$store.state.isMobile === true) {
+        this.$store.commit('m_acomodMap', this.acomod)
+        /* Enter fullscreen */
+        if ((document.fullScreenElement && document.fullScreenElement !== null) ||
+        (!document.mozFullScreen && !document.webkitIsFullScreen)) {
+          if (document.documentElement.requestFullScreen) {
+             document.documentElement.requestFullScreen()
+          } else if (document.documentElement.mozRequestFullScreen) {
+            document.documentElement.mozRequestFullScreen()
+          } else if (document.documentElement.webkitRequestFullScreen) {
+            document.documentElement.webkitRequestFullScreen(Element.ALLOW_KEYBOARD_INPUT)
+          }
+        }
+      }
+    },
+    backBtn () {
+      history.length <= 2 ? this.$router.push('/') : window.history.back(1)
+    },
+    hashHost () {
+       window.location.hash = "contato"
+    },
+    hashShare () {
+       window.location.hash = "compartilhar"
+    },
+    flyerH () {
+      return supportsWebP ? this.evento.flyerHW : this.evento.flyerHJ
+    },
+    enterFullscreen () {
+      if ((document.fullScreenElement && document.fullScreenElement !== null) ||
+        (!document.mozFullScreen && !document.webkitIsFullScreen)) {
+        if (document.documentElement.requestFullScreen) {
+            document.documentElement.requestFullScreen();
+        } else if (document.documentElement.mozRequestFullScreen) {
+            document.documentElement.mozRequestFullScreen();
+        } else if (document.documentElement.webkitRequestFullScreen) {
+            document.documentElement.webkitRequestFullScreen(Element.ALLOW_KEYBOARD_INPUT);
+        }
+      }
+    },
+    formatAvaliacaoDate (avaliacao) {
+      const formattedDate = format(avaliacao.createdAt, 'MMMM [de] YYYY', { locale: pt })
+      return formattedDate.charAt(0).toUpperCase() + formattedDate.slice(1)
+    }
+  },
+  updated () {
+    this.$store.state.heightImageBox === null ? this.$store.state.heightImageBox = this.$refs.imageBox.clientHeight : null
+  },
+  computed: {
+    evento () { return this.$store.state.evento },
+    showShare () { return this.$store.state.showShare },
+    minDate() {
+      return subDays(Date(), 1)
+    },
+    flyerAverageColor () {
+      getAverageColor(this.evento.flyerHJ).then(rgb => {
+        console.log(rgb)
+        return rgb
+      })
+    }
+  },
+  beforeRouteEnter (to, from, next) {
+    next(vm => {
+      !vm.$store.state.isOnline ? vm.$modal.show('offline-modal') : ''
+
+      if (vm.$store.state.isMobile) {
+        vm.$store.commit('m_showNavbar', false)
+        vm.$store.commit('m_showFoobar', false)
+      } else {
+        vm.$store.commit('m_showNavbar', true)
+      }
+    })
+  },
+  beforeRouteLeave (to, from, next) {
+    if (this.$store.state.showNavbar === false && this.$store.state.showFoobar === false) {
+      this.$store.commit('m_showNavbar', true)
+      this.$store.commit('m_showFoobar', true)
+      next()
+    } else {
+      next()
+    }
+  }
+}
+</script>
+
+<style>
+@import url('~/assets/css/_id.css');
+
+.eventos-id {
+  display: flex;
+  flex-flow: column;
+  background-color: white;
+  margin-bottom: 5.5rem;
+  transition: all .35s cubic-bezier(.15,.97,.43,.93);
+  
+
+
+  /* __________ FLYER BOX __________ */
+  & .flyer-box {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    height: 65vh;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    & .__flyer {
+
+    }
+  }/* __________ FLYER BOX __________ */
+
+
+
+
+  /* __________ RATING BOX __________ */
+  & .rating-box {
+    padding: 0 7%;
+    margin-top: .5rem;
+    display: flex;
+    align-items: center;
+    & .__tipo {
+      padding-right: 1rem;
+      font-size: 16px;
+      font-weight: 600;
+    }
+    & .rating {
+      padding-left: 3px;
+    }
+    & .new {
+      display: inline-flex;
+      border: 1px solid #dedede;
+      border-radius: 50px;
+      & span {
+        padding: 4px 8px;
+        font-size: 11px;
+        font-weight: 600;
+      }
+    }
+  }/* __________ RATING BOX __________ */
+
+  
+
+
+  /* __________ ANUNCIANTE BOX __________ */
+  & .anunciante-box {
+    display: flex;
+    padding: 2rem 7% .5rem;
+    align-items: center;
+    & .__anunciante-img {
+      cursor: pointer;
+      width: 3.4rem;
+      height: 3.4rem;
+      border-radius: 50%;
+      user-select: none;
+      margin-right: .6rem;
+    }
+    & .__anunciante-name {
+      cursor: pointer;
+      color: var(--colorEvento);
+      font-weight: 500;
+      user-select: none;
+    }
+  }/* __________ ANUNCIANTE BOX __________ */
+
+
+
+
+
+
+
+  /* __________ SOBRE BOX __________ */
+  & .sobre-box {
+    padding: 0 7%;
+  }/* __________ SOBRE BOX __________ */
+
+
+
+
+
+
+  /* __________ DISPONIBILIDADE __________ */
+  & .disponibilidade-box {
+    padding: 0 3.5%;
+  }  /* __________ DISPONIBILIDADE __________ */
+
+
+
+
+  /* __________ LOCAL __________ */
+  & .local-box {
+    & .__adress {
+      padding: 0 7% .6rem 7%;
+    }
+    & .vue-map-container {
+      width: 100%; 
+      height: 250px;
+    }
+  }/* __________ LOCAL __________ */
+
+
+
+
+
+  /* __________ RESERVA __________ */
+  & .reserva-mobile {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 8888;
+    height: 4.7rem;
+    width: 100%;
+    background: white;
+    overflow: hidden;
+    box-shadow: 0px -1px 1px 0px rgba(0,0,0,0.1);
+    user-select: none;
+    & .reserva-body {
+      padding: 0 7%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 100%;
+      & .__reserva-valor {
+        padding-right: 15px;
+        font-size: 19px;
+        font-weight: 600;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      & .__reserva-valor-pessoa {
+        font-size: 15px;
+        font-weight: 400;
+      }
+      & .__reserva-btn {
+        padding: 0 1rem;
+        width: 50%;
+        max-width: 12rem;
+        height: 3.25rem;
+        background:var(--colorEvento);
+        border-radius: 200px;
+        font-size: 16px;
+        font-weight: 700;
+        color: white;
+        transition: var(--main-transition);
+      }
+    }
+  }/* __________ RESERVA __________ */
+
+}
+
+
+/* TRANSITIONS */
+
+@media (max-width: 1023px) {
+  .reserva-desktop {
+    display: none;
+  }
+}
+
+@media (min-width: 1024px) {
+  .eventos-id {
+    margin-top: var(--navbarHeightDesktop);
+
+    /* __________ FLYER BOX __________ */
+    & .flyer-box {
+   
+    }/* __________ FLYER BOX __________ */
+
+
+    & .desktop-view {
+      display: grid;
+      grid-template-columns: 70% 30%;
+      margin: 1.7rem 8% 0;
+      & .reserva-desktop {
+        align-self: start;
+        border: 1px solid #dedede;
+        border-radius: 12px;
+        & .reserva-desktop-form {
+          display: flex;
+          flex-flow: column;
+          padding: 1.4rem;
+          & .__valor {
+            font-size: 34px;
+            font-weight: 400;
+            padding-bottom: 1.2rem;
+            & .__valor-pessoa {
+              font-size: 16px;
+              font-weight: 400;
+            }
+          }
+          & .item-form {
+            display: flex;
+            flex-flow: column;
+            margin-top: 1.2rem;
+            & select {
+              cursor: pointer;
+              width: 100%;
+              padding: .8rem .65rem;
+              border: 1px solid #dedede;
+              outline: none;
+              background: white;
+              border-radius: 6px;
+              transition: .15s border ease;
+              & option {
+                background: white;
+              }
+            }
+            & select:hover {
+              border: 1px solid var(--color01) !important;
+            }
+            & .datepicker-trigger {
+              height: 100%;
+              background: white;
+              & #datepicker-trigger {
+                padding: .8rem;
+                height: 100%;
+                width: 100%;
+                background: white;
+                border: 1px solid #dedede;
+                outline: none;
+                text-align: left;
+                border-radius: 6px;
+              }
+              & #datepicker-trigger:hover {
+                border: 1px solid var(--color01);
+              }
+            }
+          }
+          & .__reserva-desktop-btn {
+            margin-top: 1.3rem;
+            font-size: 16px;
+            font-weight: 700;
+            background: var(--colorEvento);
+            color: white;
+            height: 3.2rem;
+            border-radius: 200px;
+          }
+          & .__info {
+            margin: .5rem 0 .8rem;
+            text-align: center;
+            font-size: 12px;
+            font-weight: 500;
+            line-height: 17px;
+          }
+          & .__reserva-desktop-ask-btn {
+            font-size: 16px;
+            font-weight: 600;
+            background: white;
+            color: var(--colorEvento);
+            height: 2rem;
+          }
+          & .__reserva-desktop-ask-btn:hover {
+            text-decoration: underline;
+          }
+          & .highlight {
+            display: flex;
+            align-items: center;
+            border-top: 1px solid #dedede;
+            padding-top: 1rem;
+            margin-top: 1rem;
+            & .__text {
+              font-size: 13px;
+              font-weight: 500;
+              line-height: 1.35;
+            }
+            & .__img {
+              margin-left: .6rem;
+              width: 2.4rem;
+              height: auto;
+            }
+          }
+        }
+      }
+
+
+      
+      & .desktop-view-info {
+        padding-right: 6%;
+
+
+
+        /* __________ RATING BOX __________ */
+        & .rating-box {
+          padding: 0;
+          margin-top: 0;
+          & .__tipo {
+            padding-right: 1rem;
+          }
+          & .rating {
+          }
+          & .new {
+            & span {
+              font-size: 12px;
+            }
+          }
+        }/* __________ RATING BOX __________ */
+
+
+
+
+        /* __________ ANUNCIANTE BOX __________ */
+        & .anunciante-box {
+          padding: 1.5rem 0 0 0;
+          & .__anunciante-img {
+            width: 4rem;
+            height: 4rem;
+            margin-right: .7rem;
+          }
+          & .__anunciante-name {
+          }
+          & .__anunciante-name:hover {
+            text-decoration: underline;
+          }
+        }/* __________ ANUNCIANTE BOX __________ */
+
+
+
+
+
+        /* __________ SOBRE BOX __________ */
+        & .sobre-box {
+          padding: 0;
+        }/* __________ SOBRE BOX __________ */
+
+
+
+
+
+
+        /* __________ DISPONIBILIDADE __________ */
+        & .disponibilidade-box {
+          padding: 0;
+        }  /* __________ DISPONIBILIDADE __________ */
+
+
+
+
+        /* __________ LOCAL __________ */
+        & .local-box {
+          & .__adress {
+            padding: 0 0 1rem 0;
+          }
+          & .vue-map-container {
+            height: 430px;
+          }
+        }/* __________ LOCAL __________ */
+
+      }
+    }
+    
+  
+
+    /* __________ RESERVA __________ */
+    & .reserva-mobile {
+      display: none;
+    }/* __________ RESERVA __________ */
+  }
+}
+
+</style>

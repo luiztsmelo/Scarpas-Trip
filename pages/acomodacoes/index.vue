@@ -1017,27 +1017,18 @@ export default {
     }
     & .map-desktop {
       position: fixed;
-      /* bottom: 1rem; */
       right: 7%;
       width: 26.5%;
       height: 100%;
-      /* height: calc(100% - var(--navbarHeightDesktop) - 3.7rem - 2rem); */
     }
-    /* & .map-desktop > div {
-      border-radius: 3px !important;
-    } */
     & .map-desktop > div > div {
       background-color: #fff !important;
     }
     & .gm-style-iw {
-      padding: .2rem 0;
       background: #fff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 100px;
-      transform: translateY(24px);
+      padding: 0px;
       & .__valor {
+        padding: 6px;
         cursor: pointer;
         font-family: var(--main-font) !important;
         font-size: 13px;
@@ -1045,12 +1036,11 @@ export default {
         transition: var(--main-transition);
       }
     }
-    & .gm-style > div > div > div > div > div > button { /* Remove close button */
-      display: none !important;
+    & .gm-style-iw-d {
+      overflow: initial !important;
     }
-    & .gm-style > div > div > div > div > div > div > div { /* Remove white borders */
-      background-color: transparent !important;
-      box-shadow: none !important;
+    & .gm-style > div > div > div > div > div > div > div > div > button { /* Remove close button */
+      display: none !important;
     }
     & .gm-style div div div div div div div div { /* Remove shadow of down arrow */
       box-shadow: none !important;

@@ -354,14 +354,25 @@ const store = () => new Vuex.Store({
           endTime: ''
         }
       ],
-      organizador: '',
+      organizador: {
+        name: '',
+        whatsapp: '',
+        telefoneFixo: '',
+        email: ''
+      },
       openBar: false,
       classificacao: 0,
-      flyer: '',
+      flyerL: '',
+      flyerHJ: '',
+      flyerHW: '',
+      flyerAspectRatio: null,
       positionLAT: -20.6141320,
       positionLNG: -46.0478760,
       address: null,
       valorIngresso: 0,
+      ingressoFisicoEstabelecimento: '',
+      ingressoFisicoWhatsapp: '',
+      ingressoDigitalURL: '',
       title: '',
       subtitle: ''
     },

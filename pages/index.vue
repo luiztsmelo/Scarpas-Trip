@@ -112,7 +112,32 @@
         <h2 class="__title">Eventos</h2>
         
 
-        <p class="__subtitle">Em breve.</p>
+        <div class="cards-container" v-show="$store.state.eventos !== null">
+          <nuxt-link :to="'/eventos/' + evento.eventoID" class="card" v-for="evento in $store.state.eventos" :key="evento.eventoID">
+
+            <progressive-background class="__card-img" :src="imageEvH(evento)" :placeholder="evento.flyerL" :aspect-ratio="2/3"/>
+
+            <p class="__card-info" style="color: #FF7E65">{{ evento.dates[0].date }}</p>
+
+            <h3 class="__card-title">{{ evento.title }}</h3>
+
+            <p class="__card-subtitle">R${{ evento.valorIngresso }}<span class="__card-valor-noite"> por pessoa</span></p>
+            
+            <div class="rating">
+              <star-rating
+                :rating="5"
+                :increment="0.5"
+                :read-only="true"
+                :show-rating="false"
+                active-color="#161616"
+                inactive-color="#dedede"
+                :star-size="10"
+                :padding="2">
+              </star-rating>
+            </div>
+
+          </nuxt-link> 
+        </div>
 
 
       </div><!-- ______________________________ EVENTOS ______________________________ -->
@@ -162,6 +187,9 @@ export default {
     },
     imagePasH (passeio) {
       return supportsWebP ? passeio.images[0].HW : passeio.images[0].HJ
+    },
+    imageEvH (evento) {
+      return supportsWebP ? evento.flyerHW : evento.flyerHJ
     }
   },
   beforeRouteEnter (to, from, next) {
@@ -181,6 +209,9 @@ export default {
       })
       firebase.firestore().collection('passeios').get().then(passeios => {
         vm.$store.commit('m_passeios', passeios.docs.map(passeio => passeio.data()))
+      })
+      firebase.firestore().collection('eventos').get().then(eventos => {
+        vm.$store.commit('m_eventos', eventos.docs.map(evento => evento.data()))
       })
       
     })
@@ -216,7 +247,7 @@ export default {
         padding: 0 7%;
         display: grid;
         grid-template-columns: 1fr 1fr;
-        grid-gap: 13px;
+        grid-gap: 15px;
         & .card {
           & .__card-img {
             width: 100%; 
@@ -286,7 +317,7 @@ export default {
         }
         & .cards-container {
           grid-template-columns: 1fr 1fr 1fr 1fr;
-          grid-gap: 17px;
+          grid-gap: 20px;
           & .card {
             & .__card-img {
             }

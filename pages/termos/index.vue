@@ -5,7 +5,7 @@
     <div class="sidenav">
 
       <nuxt-link to="/termos">
-        <h1 class="__item" :class="[ this.isTermos ? '__item-selected' : '' ]">Termos e condições de uso</h1>
+        <h1 class="__item" :class="[ this.isTermos ? '__item-selected' : '' ]">Termos de Serviço</h1>
       </nuxt-link>
 
       <nuxt-link to="/termos#politica_privacidade">
@@ -19,7 +19,7 @@
 
       <div class="politica_privacidade" v-if="isTermos">
 
-        <h1>Termos e condições de uso</h1>
+        <h1>Termos de Serviço</h1>
 
         <p>Vigente a partir de 11 de fevereiro de 2019</p>
 
@@ -117,7 +117,7 @@ export default {
   transition: 'opacity',
   computed: {
     headTitle () {
-      return this.$route.fullPath === '/termos' ? 'Termos e condições de uso'
+      return this.$route.fullPath === '/termos' ? 'Termos de Serviço'
            : this.$route.fullPath === '/termos#politica_privacidade' ? 'Política de Privacidade'
            : ''
     },
