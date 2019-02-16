@@ -30,7 +30,7 @@
 
 
     <!-- ______________________________ FLYER ______________________________ -->
-    <div class="flyer-box" ref="imageBox" :style="`background-color: ${evento.flyerDominantColor}`">
+    <div class="flyer-box" ref="imageBox" :style="`background-color: ${evento.flyerDarkVibrantColor}`">
     
       <progressive-background class="__flyer" :style="flyerWidth" :src="flyerH()" :placeholder="evento.flyerL" :aspect-ratio="evento.flyerAspectRatio"/>
          
@@ -366,7 +366,7 @@ export default {
       }
     },
     reservaBtnStyle () {
-      const color = Color(this.evento.flyerDominantColor)
+      const color = Color(this.evento.flyerDarkVibrantColor)
       if (color.isLight()) {
         return `background-color: ${color}; color: #161616`
       } else {

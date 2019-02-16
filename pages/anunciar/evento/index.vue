@@ -394,7 +394,6 @@ import 'firebase/functions'
 import MaskedInput from 'vue-text-mask'
 import localMap from '~/components/localMap.vue'
 import subDays from 'date-fns/sub_days'
-import analyze from 'rgbaster'
 
 export default {
   components: { MaskedInput, localMap },
@@ -461,9 +460,12 @@ export default {
 
         this.$store.state.eventoData.flyerAspectRatio = this.aspectRatio
 
-        const flyerDominantColor = await analyze(this.$store.state.eventoData.flyerHJ)
+        const Vibrant = require('node-vibrant/dist/vibrant.min.js')
 
-        this.$store.state.eventoData.flyerDominantColor = flyerDominantColor[0].color
+        const palette = await Vibrant.from(this.$store.state.eventoData.flyerHJ).getPalette()
+
+        this.$store.state.eventoData.flyerVibrantColor = palette.Vibrant.hex
+        this.$store.state.eventoData.flyerDarkVibrantColor = palette.DarkVibrant.hex
 
       } catch (err) {
         console.log(err)
