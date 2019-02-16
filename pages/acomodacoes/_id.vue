@@ -616,7 +616,7 @@ export default {
       return formattedDate.charAt(0).toUpperCase() + formattedDate.slice(1)
     }
   },
-  updated () {
+  mounted () {
     this.$store.state.heightImageBox === null ? this.$store.state.heightImageBox = this.$refs.imageBox.clientHeight : null
   },
   computed: {

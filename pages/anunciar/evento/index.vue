@@ -394,6 +394,7 @@ import 'firebase/functions'
 import MaskedInput from 'vue-text-mask'
 import localMap from '~/components/localMap.vue'
 import subDays from 'date-fns/sub_days'
+import analyze from 'rgbaster'
 
 export default {
   components: { MaskedInput, localMap },
@@ -459,6 +460,10 @@ export default {
         this.newImageDrawn = false
 
         this.$store.state.eventoData.flyerAspectRatio = this.aspectRatio
+
+        const flyerDominantColor = await analyze(this.$store.state.eventoData.flyerHJ)
+
+        this.$store.state.eventoData.flyerDominantColor = flyerDominantColor[0].color
 
       } catch (err) {
         console.log(err)

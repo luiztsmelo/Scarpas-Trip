@@ -30,9 +30,9 @@
 
 
     <!-- ______________________________ FLYER ______________________________ -->
-    <div class="flyer-box" ref="imageBox" :style="`background-image: url(${flyerH()}); background-color: ${flyerAverageColor}`">
+    <div class="flyer-box" ref="imageBox" :style="`background-color: ${evento.flyerDominantColor}`">
     
-      <!-- <progressive-background class="__flyer" :src="flyerH()" :placeholder="evento.flyerL" :aspect-ratio="evento.flyerAspectRatio"/> -->
+      <progressive-background class="__flyer" :style="flyerWidth" :src="flyerH()" :placeholder="evento.flyerL" :aspect-ratio="evento.flyerAspectRatio"/>
          
     </div><!-- ______________________________ FLYER ______________________________ -->
     
@@ -189,7 +189,7 @@
 
 
 
-          <button class="__reserva-desktop-btn" type="button">Comprar ingresso</button>
+          <button class="__reserva-desktop-btn" type="button" :style="reservaBtnStyle">Comprar ingresso</button>
 
           <h4 class="__info">Bom evento!</h4>
 
@@ -215,7 +215,7 @@
     <div class="reserva-mobile">
       <div class="reserva-body">
         <h3 class="__reserva-valor">R${{ evento.valorIngresso }}<span class="__reserva-valor-pessoa"> por pessoa</span></h3>
-        <button class="__reserva-btn">Comprar ingresso</button>
+        <button class="__reserva-btn" :style="reservaBtnStyle">Comprar ingresso</button>
       </div>
     </div>
     <!-- ______________________________ RESERVA MOBILE ______________________________ -->
@@ -236,7 +236,7 @@ import { stylesCalendar } from '@/mixins/stylesCalendar'
 import format from 'date-fns/format'
 import subDays from 'date-fns/sub_days'
 import pt from 'date-fns/locale/pt'
-import getAverageColor from 'get-average-color'
+import Color from 'color'
 
 export default {
   components: { Host },
@@ -341,7 +341,7 @@ export default {
       return formattedDate.charAt(0).toUpperCase() + formattedDate.slice(1)
     }
   },
-  updated () {
+  mounted () {
     this.$store.state.heightImageBox === null ? this.$store.state.heightImageBox = this.$refs.imageBox.clientHeight : null
   },
   computed: {
@@ -350,11 +350,28 @@ export default {
     minDate() {
       return subDays(Date(), 1)
     },
-    flyerAverageColor () {
-      getAverageColor(this.evento.flyerHJ).then(rgb => {
-        console.log(rgb)
-        return rgb
-      })
+    flyerWidth () {
+      if (this.$store.state.isMobile) {
+        return 'width: 100%'
+      } else {
+        if (this.evento.flyerAspectRatio === 1/2) {
+          return 'width: 60%'
+        }
+        if (this.evento.flyerAspectRatio === 9/16) {
+          return 'width: 54%'
+        }
+        if (this.evento.flyerAspectRatio === 2/3) {
+          return 'width: 45%'
+        }
+      }
+    },
+    reservaBtnStyle () {
+      const color = Color(this.evento.flyerDominantColor)
+      if (color.isLight()) {
+        return `background-color: ${color}; color: #161616`
+      } else {
+        return `background-color: ${color}; color: #FFF`
+      }
     }
   },
   beforeRouteEnter (to, from, next) {
@@ -398,12 +415,8 @@ export default {
     display: flex;
     flex-flow: column;
     align-items: center;
-    height: 65vh;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: contain;
+    min-height: 25vh;
     & .__flyer {
-
     }
   }/* __________ FLYER BOX __________ */
 
@@ -628,8 +641,6 @@ export default {
             margin-top: 1.3rem;
             font-size: 16px;
             font-weight: 700;
-            background: var(--colorEvento);
-            color: white;
             height: 3.2rem;
             border-radius: 200px;
           }
@@ -639,16 +650,6 @@ export default {
             font-size: 12px;
             font-weight: 500;
             line-height: 17px;
-          }
-          & .__reserva-desktop-ask-btn {
-            font-size: 16px;
-            font-weight: 600;
-            background: white;
-            color: var(--colorEvento);
-            height: 2rem;
-          }
-          & .__reserva-desktop-ask-btn:hover {
-            text-decoration: underline;
           }
           & .highlight {
             display: flex;

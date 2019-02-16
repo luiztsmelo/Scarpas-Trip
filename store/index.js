@@ -366,6 +366,7 @@ const store = () => new Vuex.Store({
       flyerHJ: '',
       flyerHW: '',
       flyerAspectRatio: null,
+      flyerDominantColor: '',
       positionLAT: -20.6141320,
       positionLNG: -46.0478760,
       address: null,
