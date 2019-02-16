@@ -117,7 +117,7 @@
 
             <progressive-background class="__card-img" :src="imageEvH(evento)" :placeholder="evento.flyerL" :aspect-ratio="2/3"/>
 
-            <p class="__card-info" :style="`color: ${evento.flyerDarkVibrantColor}`">{{ evento.dates[0].date }}</p>
+            <p class="__card-info" :style="`color: ${evento.flyerVibrantColor}`">{{ eventoDate(evento) }}</p>
 
             <h3 class="__card-title">{{ evento.title }}</h3>
 
@@ -177,6 +177,8 @@ import 'firebase/firestore'
 import supportsWebP from 'supports-webp'
 import Roteiro from '~/components/Roteiro'
 import Footer from '~/components/Footer'
+import format from 'date-fns/format'
+import pt from 'date-fns/locale/pt'
 
 export default {
   components: { Roteiro, Footer },
@@ -190,6 +192,10 @@ export default {
     },
     imageEvH (evento) {
       return supportsWebP ? evento.flyerHW : evento.flyerHJ
+    },
+    eventoDate (evento) {
+      const dateFormatted = format(evento.dates[0].date, 'DD/MM/YYYY')
+      return `${dateFormatted} ⋅ ${evento.dates[0].startTime}`
     }
   },
   beforeRouteEnter (to, from, next) {
@@ -247,7 +253,7 @@ export default {
         padding: 0 7%;
         display: grid;
         grid-template-columns: 1fr 1fr;
-        grid-gap: 15px;
+        grid-gap: 16px;
         & .card {
           & .__card-img {
             width: 100%; 
@@ -316,7 +322,7 @@ export default {
         }
         & .cards-container {
           grid-template-columns: 1fr 1fr 1fr 1fr;
-          grid-gap: 20px;
+          grid-gap: 22px;
           & .card {
             & .__card-img {
             }

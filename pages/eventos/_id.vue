@@ -30,7 +30,7 @@
 
 
     <!-- ______________________________ FLYER ______________________________ -->
-    <div class="flyer-box" ref="imageBox" :style="`background-color: ${evento.flyerDarkVibrantColor}`">
+    <div class="flyer-box" ref="imageBox" :style="`background-color: ${evento.flyerVibrantColor}`">
     
       <progressive-background class="__flyer" :style="flyerWidth" :src="flyerH()" :placeholder="evento.flyerL" :aspect-ratio="evento.flyerAspectRatio"/>
          
@@ -52,27 +52,12 @@
 
 
 
-        <!-- ______________________________ RATING ______________________________ -->
-        <!-- <div class="rating-box">
+        <!-- ______________________________ DATE ______________________________ -->
+        <div class="date-box">
 
-          <p class="__tipo" style="color: #198CFE">{{ passeio.tipoPasseio }}</p>
+          <p class="__date" :style="`color: ${evento.flyerVibrantColor}`">{{ eventoDate }}</p>
 
-          <star-rating
-            v-if="passeio.avaliacoes.length > 0"
-            class="rating"
-            :rating="passeio.averageRating"
-            :increment="0.5"
-            :read-only="true"
-            :show-rating="false"
-            active-color="#161616"
-            inactive-color="#dedede"
-            :star-size="13"
-            :padding="4">
-          </star-rating>
-
-          <div class="new" v-else><span>NOVO</span></div>
-
-        </div> --><!-- ______________________________ RATING ______________________________ -->
+        </div><!-- ______________________________ DATE ______________________________ -->
 
 
 
@@ -84,14 +69,14 @@
 
 
 
-        <!-- ______________________________ ORGANIZADOR ______________________________ -->
-        <!-- <div class="anunciante-box">
-          <img class="__anunciante-img" :src="userPhoto" :alt="host.firstName" @click="$store.commit('m_showHost', true), hashHost()">
+        <!-- ______________________________ ANUNCIANTE ______________________________ -->
+        <div class="anunciante-box">
+          <img class="__anunciante-img" src="../../assets/img/user.svg" :alt="evento.organizador">
           <div class="box-flex-column">
-            <h3 style="user-select:none">Guiado por</h3>
-            <p class="__anunciante-name" @click="$store.commit('m_showHost', true), hashHost()">{{ host.fullName }}</p>
+            <h3 style="user-select:none">Organizado por</h3>
+            <p class="__anunciante-name" :style="`color: ${evento.flyerVibrantColor}`">{{ evento.organizador.name }}</p>
           </div>
-        </div> --><!-- ______________________________ ORGANIZADOR ______________________________ -->
+        </div><!-- ______________________________ ANUNCIANTE ______________________________ -->
 
 
 
@@ -234,8 +219,8 @@ import { mapstyle } from '../../mixins/mapstyle'
 import { swiperOptions } from '../../mixins/swiper_id'
 import { stylesCalendar } from '@/mixins/stylesCalendar'
 import format from 'date-fns/format'
-import subDays from 'date-fns/sub_days'
 import pt from 'date-fns/locale/pt'
+import subDays from 'date-fns/sub_days'
 import Color from 'color'
 
 export default {
@@ -274,16 +259,6 @@ export default {
     }
   },
   methods: {
-    timeToSec (time) {
-      const parts = time.split(':')
-      return (parts[0] * 3600) + (parts[1] * 60)
-    },
-    pad (num) {
-      return num < 10 ? '0' + num : '' + num
-    },
-    formatTime (secs) {
-      return [ this.pad(Math.floor(secs/3600)%60), this.pad(Math.floor(secs/60)%60) ].join(':')
-    },
     reservarDesktop () {
     },
     scrollTopbarBg (evt, el) {
@@ -366,12 +341,16 @@ export default {
       }
     },
     reservaBtnStyle () {
-      const color = Color(this.evento.flyerDarkVibrantColor)
+      const color = Color(this.evento.flyerVibrantColor)
       if (color.isLight()) {
         return `background-color: ${color}; color: #161616`
       } else {
         return `background-color: ${color}; color: #FFF`
       }
+    },
+    eventoDate () {
+      const dateFormatted = format(this.evento.dates[0].date, 'DD [de] MMMM [de] YYYY', { locale: pt })
+      return `${dateFormatted} | ${this.evento.dates[0].startTime} - ${this.evento.dates[0].endTime}`
     }
   },
   beforeRouteEnter (to, from, next) {
@@ -423,31 +402,17 @@ export default {
 
 
 
-  /* __________ RATING BOX __________ */
-  & .rating-box {
+  /* __________ DATE BOX __________ */
+  & .date-box {
     padding: 0 7%;
     margin-top: .5rem;
     display: flex;
     align-items: center;
-    & .__tipo {
-      padding-right: 1rem;
-      font-size: 16px;
+    & .__date {
+      font-size: 15px;
       font-weight: 600;
     }
-    & .rating {
-      padding-left: 3px;
-    }
-    & .new {
-      display: inline-flex;
-      border: 1px solid #dedede;
-      border-radius: 50px;
-      & span {
-        padding: 4px 8px;
-        font-size: 11px;
-        font-weight: 600;
-      }
-    }
-  }/* __________ RATING BOX __________ */
+  }/* __________ DATE BOX __________ */
 
   
 
@@ -467,7 +432,6 @@ export default {
     }
     & .__anunciante-name {
       cursor: pointer;
-      color: var(--colorEvento);
       font-weight: 500;
       user-select: none;
     }
@@ -678,21 +642,12 @@ export default {
 
 
 
-        /* __________ RATING BOX __________ */
-        & .rating-box {
-          padding: 0;
-          margin-top: 0;
-          & .__tipo {
-            padding-right: 1rem;
+        /* __________ DATE BOX __________ */
+        & .date-box {
+          & .__date {
+            font-size: 16px;
           }
-          & .rating {
-          }
-          & .new {
-            & span {
-              font-size: 12px;
-            }
-          }
-        }/* __________ RATING BOX __________ */
+        }/* __________ DATE BOX __________ */
 
 
 
