@@ -170,6 +170,7 @@
             <button class="__aspect-ratio" type="button" @click="aspectRatio = 1/2">2:1</button>
             <button class="__aspect-ratio" type="button" @click="aspectRatio = 9/16">16:9</button>
             <button class="__aspect-ratio" type="button" @click="aspectRatio = 2/3">3:2</button>
+            <button class="__aspect-ratio" type="button" @click="aspectRatio = 1">1:1</button>
             <button class="__croppa-btn" type="button" @click="showCroppaModal=false, imageConfirm()" v-if="newImageDrawn">Confirmar</button>
           </div>
         </div>
