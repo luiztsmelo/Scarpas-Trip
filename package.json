@@ -31,7 +31,7 @@
     "nuxt": "^2.4.2",
     "scroll-into-view": "^1.9.3",
     "ssri": "^6.0.0",
-    "supports-webp": "^1.0.5",
+    "supports-webp": "^1.0.7",
     "v-money": "^0.8.1",
     "vue": "^2.5.22",
     "vue-airbnb-style-datepicker": "^2.4.1",
@@ -43,7 +43,7 @@
     "vue-progressive-image": "^3.2.0",
     "vue-star-rating": "^1.6.1",
     "vue-text-mask": "^5.2.0",
-    "vue2-google-maps": "^0.10.5",
+    "vue2-google-maps": "^0.10.6",
     "vuex-persistedstate": "^2.5.4"
   },
   "scripts": {
