@@ -121,7 +121,7 @@
 
             <!-- <img class="__card-img" :src="imageEvH(evento)" alt=""> -->
 
-            <progressive-img class="__card-img" :src="imageEvH(evento)" :placeholder="evento.flyerL" :aspect-ratio="2/3"/>
+            <progressive-img class="__card-img" :src="imageEvH(evento)" :placeholder="evento.flyerL" :aspect-ratio="evento.flyerAspectRatio"/>
 
             <p class="__card-info" :style="`color: ${evento.flyerVibrantColor}`">{{ eventoDate(evento) }}</p>
 
