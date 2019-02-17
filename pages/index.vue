@@ -122,19 +122,6 @@
             <h3 class="__card-title">{{ evento.title }}</h3>
 
             <p class="__card-subtitle">R${{ evento.valorIngresso }}<span class="__card-valor-noite"> por pessoa</span></p>
-            
-            <div class="rating">
-              <star-rating
-                :rating="5"
-                :increment="0.5"
-                :read-only="true"
-                :show-rating="false"
-                active-color="#161616"
-                inactive-color="#dedede"
-                :star-size="10"
-                :padding="2">
-              </star-rating>
-            </div>
 
           </nuxt-link> 
         </div>
