@@ -25,11 +25,11 @@
       <swiper :options="swiperOptions">
 
         <swiper-slide class="slide">
-          <progressive-background class="__img" :src="image1H(atracao)" :placeholder="atracao.imageL1" :aspect-ratio="2/3"/>
+          <progressive-img class="__img" :src="image1H(atracao)" :placeholder="atracao.imageL1" :aspect-ratio="2/3"/>
         </swiper-slide>
 
         <swiper-slide class="slide" v-if="ifImage2">
-          <progressive-background class="__img" :src="image2H(atracao)" :placeholder="atracao.imageL2" :aspect-ratio="2/3"/>
+          <progressive-img class="__img" :src="image2H(atracao)" :placeholder="atracao.imageL2" :aspect-ratio="2/3"/>
         </swiper-slide>
 
       </swiper>

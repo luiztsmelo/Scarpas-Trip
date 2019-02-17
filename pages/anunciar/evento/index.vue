@@ -179,7 +179,7 @@
 
       <div class="image-preview" v-if="$store.state.eventoData.flyerHJ !== ''">
 
-        <progressive-background class="__image" :src="$store.state.eventoData.flyerHJ" :placeholder="$store.state.eventoData.flyerL" :aspect-ratio="aspectRatio"/>
+        <progressive-img class="__image" :src="$store.state.eventoData.flyerHJ" :placeholder="$store.state.eventoData.flyerL" :aspect-ratio="aspectRatio"/>
 
         <button type="button" @click="deleteImage()">Remover</button>
 

@@ -32,7 +32,7 @@
     <!-- ______________________________ FLYER ______________________________ -->
     <div class="flyer-box" ref="imageBox" :style="`background-color: ${evento.flyerVibrantColor}`">
     
-      <progressive-background class="__flyer" :style="flyerWidth" :src="flyerH()" :placeholder="evento.flyerL" :aspect-ratio="evento.flyerAspectRatio"/>
+      <progressive-img class="__flyer" :style="flyerWidth" :src="flyerH()" :placeholder="evento.flyerL" :aspect-ratio="evento.flyerAspectRatio"/>
          
     </div><!-- ______________________________ FLYER ______________________________ -->
     

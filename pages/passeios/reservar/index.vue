@@ -145,7 +145,7 @@
       <!-- ________________________________________ FLEX RIGHT ________________________________________ -->
       <div class="flex-right">
         
-        <progressive-background class="__img" :src="imageH" :placeholder="passeio.images[0].L" :aspect-ratio="2/3"/>
+        <progressive-img class="__img" :src="imageH" :placeholder="passeio.images[0].L" :aspect-ratio="2/3"/>
 
         <div class="card-body">
 
