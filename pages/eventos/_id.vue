@@ -173,8 +173,7 @@
           <p style="font-size: 15px">Informações para comprar o ingresso.</p>
 
 
-
-          <button class="__reserva-desktop-btn" type="button" :style="reservaBtnStyle">Comprar ingresso</button>
+          <a :href="evento.ingressoDigitalURL" target="_blank" class="__reserva-desktop-btn" :style="reservaBtnStyle" >Comprar ingresso</a>
 
           <h4 class="__info">Você será enviado à página de vendas</h4>
 
@@ -210,7 +209,7 @@
     <div class="reserva-mobile">
       <div class="reserva-body">
         <h3 class="__reserva-valor">R${{ evento.valorIngresso }}<span class="__reserva-valor-pessoa"> por pessoa</span></h3>
-        <button class="__reserva-btn" :style="reservaBtnStyle">Comprar ingresso</button>
+        <a :href="evento.ingressoDigitalURL" target="_blank" class="__reserva-btn" :style="reservaBtnStyle" >Comprar ingresso</a>
       </div>
     </div>
     <!-- ______________________________ RESERVA MOBILE ______________________________ -->
@@ -269,8 +268,6 @@ export default {
     }
   },
   methods: {
-    reservarDesktop () {
-    },
     scrollTopbarBg (evt, el) {
       return window.scrollY >= this.$store.state.heightImageBox
         ? el.setAttribute("style", "background: white; box-shadow: 0px 1px 1px 0px rgba(0,0,0,0.1)")
@@ -520,11 +517,15 @@ export default {
         font-weight: 400;
       }
       & .__reserva-btn {
+        display: flex;
+        flex-flow: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
         padding: 0 1rem;
         width: 50%;
         max-width: 12rem;
         height: 3.25rem;
-        background:var(--colorEvento);
         border-radius: 200px;
         font-size: 16px;
         font-weight: 700;
@@ -615,6 +616,11 @@ export default {
             }
           }
           & .__reserva-desktop-btn {
+            display: flex;
+            flex-flow: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
             margin-top: 1.3rem;
             font-size: 16px;
             font-weight: 700;
