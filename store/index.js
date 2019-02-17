@@ -21,16 +21,16 @@ const store = () => new Vuex.Store({
     showHost: false,
     showFiltrarAcomods: false,
     showFiltrarPasseios: false,
+    showFiltrarEventos: false,
     menuIconAnime: false,
     loader: false,
     miniLoader: false,
     lastHash: null,
     randomHashs: null,
-    offFoobar1: true,
-    offFoobar2: true,
-    offFoobar3: true,
-    offFoobar4: true,
-    offFoobar5: true,
+    foobar1: false,
+    foobar2: false,
+    foobar3: false,
+    foobar4: false,
     heightImageBox: null,
     fromWithoutAddress: false,
     visitID: null,
@@ -100,6 +100,12 @@ const store = () => new Vuex.Store({
     },
     allPasseios: null,
     filteredPasseios: null,
+    /* ___ Passeios ___ */
+    filtersEventos: {
+      date: null
+    },
+    allEventos: null,
+    filteredEventos: null,
     /*
     -------------------- GOOGLE MAPS --------------------
     */
@@ -543,7 +549,10 @@ const store = () => new Vuex.Store({
       state.showFiltrarAcomods = payload
     },
     m_showFiltrarPasseios (state, payload) {
-      state.showFiltrarPasseio = payload
+      state.showFiltrarPasseios = payload
+    },
+    m_showFiltrarEventos (state, payload) {
+      state.showFiltrarEventos = payload
     },
     m_visitsLastMonth (state, payload) {
       state.visitsLastMonth = payload
@@ -554,11 +563,17 @@ const store = () => new Vuex.Store({
     m_allPasseios (state, payload) {
       state.allPasseios = payload
     },
+    m_allEventos (state, payload) {
+      state.allEventos = payload
+    },
     m_filteredAcomods (state, payload) {
       state.filteredAcomods = payload
     },
     m_filteredPasseios (state, payload) {
       state.filteredPasseios = payload
+    },
+    m_filteredEventos (state, payload) {
+      state.filteredEventos = payload
     },
     m_decrementHospedes (state) {
       if (state.filters.hospedes > 0) {
@@ -586,6 +601,10 @@ const store = () => new Vuex.Store({
       state.filtersPasseios.tipoPasseio = null
       state.filtersPasseios.preco = null
       state.filtersPasseios.avaliacao = null
+    },
+    m_resetFiltersEventos (state) {
+      state.filteredEventos = null
+      state.filteredEventos.date = null
     },
     /*
     -------------------- ANÚNCIOS --------------------

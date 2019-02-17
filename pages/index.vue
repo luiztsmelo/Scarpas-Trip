@@ -200,11 +200,10 @@ export default {
   },
   beforeRouteEnter (to, from, next) {
     next(vm => {
-      vm.$store.state.offFoobar1 = true
-      vm.$store.state.offFoobar2 = true
-      vm.$store.state.offFoobar3 = true
-      vm.$store.state.offFoobar4 = true
-      vm.$store.state.offFoobar5 = true
+      vm.$store.state.foobar1 = false
+      vm.$store.state.foobar2 = false
+      vm.$store.state.foobar3 = false
+      vm.$store.state.foobar4 = false
       vm.$store.state.concludedNewAcomod = false
       !vm.$store.state.isOnline ? vm.$modal.show('offline-modal') : ''
       !vm.$store.state.showFoobar ? vm.$store.commit('m_showFoobar', true) : ''

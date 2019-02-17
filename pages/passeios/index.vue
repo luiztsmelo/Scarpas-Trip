@@ -246,7 +246,7 @@ export default {
     return {
       title: 'Passeios em Capitólio ‒ Escarpas Trip',
       meta: [
-        { hid: 'acomods', name: 'description', content: 'Reserve Passeios de Lancha, 4x4, Buggy, Balão, Helicóptero.' }
+        { hid: 'passeios', name: 'description', content: 'Reserve Passeios de Lancha, 4x4, Buggy, Balão, Helicóptero.' }
       ]
     }
   },
@@ -350,11 +350,10 @@ export default {
   },
   beforeRouteEnter (to, from, next) {
     next(async vm => {
-      vm.$store.state.offFoobar1 = true
-      vm.$store.state.offFoobar2 = true
-      vm.$store.state.offFoobar3 = true
-      vm.$store.state.offFoobar4 = false
-      vm.$store.state.offFoobar5 = true
+      vm.$store.state.foobar1 = false
+      vm.$store.state.foobar2 = true
+      vm.$store.state.foobar3 = false
+      vm.$store.state.foobar4 = false
       !vm.$store.state.isOnline ? vm.$modal.show('offline-modal') : ''
       !vm.$store.state.showFoobar ? vm.$store.commit('m_showFoobar', true) : ''
       !vm.$store.state.showNavbar ? vm.$store.commit('m_showNavbar', true) : ''
