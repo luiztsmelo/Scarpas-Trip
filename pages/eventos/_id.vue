@@ -355,7 +355,6 @@ export default {
     },
     reservaBtnStyle () {
       const color = Color(this.evento.flyerVibrantColor)
-      console.log(color.isLight())
       if (color.isLight()) {
         return `background-color: ${color}; color: #161616`
       } else {

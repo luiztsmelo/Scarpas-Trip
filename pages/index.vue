@@ -243,7 +243,7 @@ export default {
       overflow-x: hidden;
       & .__title {
         padding: 0 7% 1rem 7%;
-        font-size: 23px;
+        font-size: 24px;
         font-weight: 700;
       }
       & .__subtitle {
@@ -263,7 +263,7 @@ export default {
           }
           & .__card-info {
             text-transform: uppercase;
-            font-size: 12px;
+            font-size: 11px;
             font-weight: 600;
           }
           & .__card-title {
@@ -289,7 +289,7 @@ export default {
             }
           }
           & .new {
-            margin-top: .1rem;
+            margin-top: .15rem;
             display: inline-flex;
             border: 1px solid #dedede;
             border-radius: 50px;
@@ -315,7 +315,7 @@ export default {
         padding-bottom: 4.5rem;
         & .__title {
           padding: 0 7% 1.5rem 7%;
-          font-size: 29px;
+          font-size: 30px;
           font-weight: 700;
         }
         & .__subtitle {

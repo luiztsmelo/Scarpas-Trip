@@ -68,7 +68,7 @@ import subDays from 'date-fns/sub_days'
 import pt from 'date-fns/locale/pt'
 
 export default {
-  data() {
+  data () {
     return {
       startDate: '',
       endDate: ''
@@ -130,7 +130,7 @@ export default {
     }
     & .img-3 {
       animation-delay: 16s;
-      background: url('https://firebasestorage.googleapis.com/v0/b/escarpas-trip.appspot.com/o/utils%2Fbgimg6.jpg?alt=media&token=1e49a1d3-163a-47c1-91f8-177592852b3a') no-repeat center center;
+      background: url('https://firebasestorage.googleapis.com/v0/b/escarpas-trip.appspot.com/o/utils%2Fbgimg6.jpg?alt=media&token=9e15b839-0619-45a7-a553-b26bd5da1dcf') no-repeat center center;
       background-size: cover;
     }
     & .img-4 {
@@ -176,13 +176,13 @@ export default {
       display: flex;
       flex-flow: column;
       align-items: center;
-      background: rgba(0,0,0, .15);
+      background: rgba(0,0,0, .2);
       & .headline {
         padding: 2rem 30% 0;
         width: 100%;
-        font-size: 40px;
-        font-weight: 600;
-        line-height: 54px;
+        font-size: 41px;
+        font-weight: 700;
+        line-height: 55px;
         text-align: center;
       }
       & .roteiro-form {
