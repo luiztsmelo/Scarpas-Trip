@@ -13,7 +13,7 @@
   --colorAtracao: #81C784;
 
   /* _______ MAIN TRANSITION _______ */
-  --pages-transition: cubic-bezier(0.455, 0.03, 0.515, 0.955) all .3s;
+  --pages-transition: cubic-bezier(0.455, 0.03, 0.515, 0.955) all .28s;
   --main-transition: cubic-bezier(0.190, 1.000, 0.220, 1.000) all .6s;
 }
 

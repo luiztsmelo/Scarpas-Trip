@@ -113,6 +113,7 @@ const store = () => new Vuex.Store({
     markerUrlPartida: 'https://firebasestorage.googleapis.com/v0/b/escarpas-trip.appspot.com/o/utils%2Fmarker-partida.svg?alt=media&token=bd41c89e-33ea-4899-bb5a-4f2fc2d936cb',
     markerUrlChegada: 'https://firebasestorage.googleapis.com/v0/b/escarpas-trip.appspot.com/o/utils%2Fmarker-chegada.svg?alt=media&token=b5b52bc5-a65f-4136-9c31-57830b969067',
     markerSize: null,
+    markerSizeSmall: null,
     /*
     -------------------- ALERT --------------------
     */
@@ -372,7 +373,6 @@ const store = () => new Vuex.Store({
       flyerHJ: '',
       flyerHW: '',
       flyerAspectRatio: null,
-      flyerVibrantColor: '',
       positionLAT: -20.6141320,
       positionLNG: -46.0478760,
       address: null,

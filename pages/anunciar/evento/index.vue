@@ -179,7 +179,7 @@
 
       <div class="image-preview" v-if="$store.state.eventoData.flyerHJ !== ''">
 
-        <progressive-img class="__image" :src="$store.state.eventoData.flyerHJ" :placeholder="$store.state.eventoData.flyerL" :aspect-ratio="aspectRatio"/>
+        <progressive-background class="__image" :src="$store.state.eventoData.flyerHJ" :placeholder="$store.state.eventoData.flyerL" :aspect-ratio="aspectRatio"/>
 
         <button type="button" @click="deleteImage()">Remover</button>
 
@@ -463,13 +463,6 @@ export default {
         this.newImageDrawn = false
 
         this.$store.state.eventoData.flyerAspectRatio = this.aspectRatio
-
-        const Vibrant = require('node-vibrant/dist/vibrant.min.js')
-
-        const palette = await Vibrant.from(this.$store.state.eventoData.flyerHJ).getPalette()
-        console.log(palette)
-
-        this.$store.state.eventoData.flyerVibrantColor = palette.Vibrant.hex
 
       } catch (err) {
         console.log(err)

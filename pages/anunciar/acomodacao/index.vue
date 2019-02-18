@@ -303,7 +303,7 @@
           <div class="delete" @click="!isUploading ? deleteImage(image, index) : ''">
             <img src="../../../assets/img/delete.svg" class="__delete-img">
           </div>
-          <progressive-img class="__image" :src="image.HJ" :placeholder="image.L" :aspect-ratio="2/3"/>
+          <progressive-background class="__image" :src="image.HJ" :placeholder="image.L" :aspect-ratio="2/3"/>
         </div>
 
 
@@ -322,7 +322,7 @@
             />
           </svg>
           <img src="../../../assets/img/add-image.svg" class="__add-image-svg" v-else>
-          <progressive-img src="../../../assets/img/add-image.png" :aspect-ratio="2/3"/>
+          <progressive-background src="../../../assets/img/add-image.png" :aspect-ratio="2/3"/>
         </div>
 
       </div><!-- Preview images -->

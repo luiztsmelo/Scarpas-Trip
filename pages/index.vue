@@ -22,7 +22,7 @@
 
           <nuxt-link :to="`/acomodacoes/${acomod.acomodID}`" class="card" v-for="acomod in $store.state.acomods" :key="acomod.acomodID">
 
-            <progressive-img class="__card-img" :src="imageAcH(acomod)" :placeholder="acomod.images[0].L" :aspect-ratio="2/3"/>
+            <progressive-background class="__card-img" :src="imageAcH(acomod)" :placeholder="acomod.images[0].L" :aspect-ratio="2/3"/>
 
             <p class="__card-info" style="color: #FFA04F">{{ acomod.tipoAcomod }}</p>
 
@@ -69,7 +69,7 @@
         <div class="cards-container" v-show="$store.state.passeios !== null">
           <nuxt-link :to="'/passeios/' + passeio.passeioID" class="card" v-for="passeio in $store.state.passeios" :key="passeio.passeioID">
             
-            <progressive-img class="__card-img" :src="imagePasH(passeio)" :placeholder="passeio.images[0].L" :aspect-ratio="2/3"/>
+            <progressive-background class="__card-img" :src="imagePasH(passeio)" :placeholder="passeio.images[0].L" :aspect-ratio="2/3"/>
 
             <p class="__card-info" style="color: #0784FD">{{ passeio.tipoPasseio }}</p>
 
@@ -117,7 +117,7 @@
 
             <progressive-background class="__card-img" :src="imageEvH(evento)" :placeholder="evento.flyerL" :aspect-ratio="2/3"/>
 
-            <p class="__card-info" :style="`color: ${evento.flyerVibrantColor}`">{{ eventoDate(evento) }}</p>
+            <p class="__card-info">{{ eventoDate(evento) }}</p>
 
             <h3 class="__card-title">{{ evento.title }}</h3>
 
@@ -251,6 +251,7 @@ export default {
             text-transform: uppercase;
             font-size: 11px;
             font-weight: 600;
+            color: var(--colorEvento);
           }
           & .__card-title {
             font-size: 14px;

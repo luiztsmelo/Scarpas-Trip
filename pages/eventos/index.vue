@@ -20,7 +20,7 @@
 
         <div class="card-details">
           
-          <p class="__card-info" :style="`color: ${evento.flyerVibrantColor}`">{{ eventoDate(evento) }}</p>
+          <p class="__card-info">{{ eventoDate(evento) }}</p>
 
           <h3 class="__card-title">{{ evento.title }}</h3>
 
@@ -92,7 +92,7 @@
       :center="{ lat: -20.6138638, lng: -46.0677806 }"
       :zoom="12"
       :options="{ styles: styles, draggable:  true, fullscreenControl: false , zoomControl: false , mapTypeControl: false, streetViewControl: false, gestureHandling: 'greedy' }">
-
+      
       <GmapInfoWindow
         ref="infoWindow"
         v-show="$store.state.allEventos !== null"
@@ -149,7 +149,6 @@ export default {
   transition: 'opacity',
   data () {
     return {
-      startDate: '',
       dropdownBtnIsOpen: false,
       swiperOption: {
         slidesPerView: 1,
@@ -317,8 +316,9 @@ export default {
       & .card-details {
         & .__card-info {
           text-transform: uppercase;
-          font-size: 11px;
+          font-size: 12px;
           font-weight: 600;
+          color: var(--colorEvento);
         }
         & .__card-title {
           font-size: 18px;
