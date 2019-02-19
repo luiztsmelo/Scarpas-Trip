@@ -21,7 +21,7 @@
 
         <h1>Termos de Serviço</h1>
 
-        <p>Vigente a partir de 11 de fevereiro de 2019</p>
+        <p>Vigente a partir de 19 de fevereiro de 2019</p>
 
 
 
@@ -137,23 +137,89 @@ export default {
 .termos {
   margin-top: var(--navbarHeightMobile);
   display: flex;
+  flex-flow: column;
   transition: var(--pages-transition);
-  padding: 0 7%;
+  padding: 0;
+  & .sidenav {
+    display: flex;
+    flex-flow: column;
+    padding: 1.2rem 7%;
+    margin-bottom: 1.2rem;
+    background: var(--color01);
+    & .__item {
+      padding: .5rem 0;
+      font-size: 17px;
+      line-height: 22px;
+      transition: .15s ease color;
+      color: rgb(192,192,192);
+    }
+    & .__item:hover {
+      color: rgb(162, 162, 162);
+    }
+    & .__item-selected {
+      font-weight: 700;
+      color: #fff !important;
+    }
+  }
+  & .content {
+    padding: 0 7%;
+    margin-bottom: 6rem;
+    & h1 {
+      padding-bottom: .5rem;
+      font-weight: 300;
+      font-size: 40px;
+    }
+    & h2 {
+      padding-top: 2.3rem;
+      font-size: 19px;
+      font-weight: 600;
+    }
+    & h3 {
+      padding-top: 1.2rem;
+      font-size: 15px;
+      font-weight: 600;
+    }
+    & p {
+      padding-top: 1rem;
+      font-size: 15px;
+      line-height: 24px;
+    }
+    & ul {
+
+    }
+    & li {
+      list-style-type: square;
+      padding-top: 1rem;
+      font-size: 15px;
+      line-height: 24px;
+    }
+    & strong {
+      font-weight: 600;
+    }
+  }
 }
+
 
 @media (min-width: 1024px) {
   .termos {
     margin: calc(var(--navbarHeightDesktop) + 3.5rem) 0 5rem;
     padding: 0 12%;
+    display: flex;
+    flex-flow: row;
     & .sidenav {
       display: flex;
       flex-flow: column;
       flex: 15%;
+      background: #fff;
+      padding: 0;
+      margin-bottom: 0;
       & .__item {
         padding: .5rem 0;
         font-size: 17px;
         line-height: 22px;
         transition: .15s ease color;
+        font-weight: 500;
+        color: var(--color01);
       }
       & .__item:hover {
         color: rgb(162, 162, 162);
@@ -165,41 +231,42 @@ export default {
     }
     & .content {
       flex: 80%;
-      padding-left: 1.5rem;
+      padding: 0 0 0 1.5rem;
+      margin-bottom: 0;
+      & h1 {
+        padding-bottom: .5rem;
+        font-weight: 300;
+        font-size: 40px;
+      }
+      & h2 {
+        padding-top: 2.3rem;
+        font-size: 19px;
+        font-weight: 600;
+      }
+      & h3 {
+        padding-top: 1.2rem;
+        font-size: 15px;
+        font-weight: 600;
+      }
+      & p {
+        padding-top: 1rem;
+        font-size: 15px;
+        line-height: 24px;
+      }
+      & ul {
+
+      }
+      & li {
+        list-style-type: square;
+        padding-top: 1rem;
+        font-size: 15px;
+        line-height: 24px;
+      }
+      & strong {
+        font-weight: 600;
+      }
+    }
     }
   }
-}
-
-h1 {
-  padding-bottom: .5rem;
-  font-weight: 300;
-  font-size: 40px;
-}
-h2 {
-  padding-top: 2.3rem;
-  font-size: 19px;
-  font-weight: 600;
-}
-h3 {
-  padding-top: 1.2rem;
-  font-size: 15px;
-  font-weight: 600;
-}
-p {
-  padding-top: 1rem;
-  font-size: 15px;
-  line-height: 24px;
-}
-ul {
-
-}
-li {
-  list-style-type: square;
-  padding-top: 1rem;
-  font-size: 15px;
-  line-height: 24px;
-}
-strong {
-  font-weight: 600;
-}
+  
 </style>
