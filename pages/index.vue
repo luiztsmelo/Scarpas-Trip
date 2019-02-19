@@ -229,7 +229,7 @@ export default {
       overflow-x: hidden;
       & .__title {
         padding: 0 7% 1rem 7%;
-        font-size: 24px;
+        font-size: 25px;
         font-weight: 700;
       }
       & .__subtitle {
@@ -248,8 +248,9 @@ export default {
             margin-bottom: .2rem;
           }
           & .__card-info {
-            text-transform: uppercase;
-            font-size: 11px;
+            font-family: 'Cool jazz', cursive;
+            /* text-transform: uppercase; */
+            font-size: 12px;
             font-weight: 600;
             color: var(--colorEvento);
           }
@@ -260,10 +261,10 @@ export default {
           }
           & .__card-subtitle {
             font-size: 14px;
-            font-weight: 500;
+            font-weight: 400;
             & .__card-valor-noite {
               font-size: 14px;
-              font-weight: 500;
+              font-weight: 400;
             }
           }
           & .rating {
@@ -302,7 +303,7 @@ export default {
         padding-bottom: 4.5rem;
         & .__title {
           padding: 0 7% 1.5rem 7%;
-          font-size: 30px;
+          font-size: 31px;
           font-weight: 700;
         }
         & .__subtitle {
@@ -314,8 +315,7 @@ export default {
             & .__card-img {
             }
             & .__card-info {
-              text-transform: uppercase;
-              font-size: 12px;
+              font-size: 13px;
               font-weight: 600;
             }
             & .__card-title {;

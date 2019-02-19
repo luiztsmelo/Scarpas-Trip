@@ -189,15 +189,15 @@ export default {
         color: rgb(152, 152, 152);
       }
       & .__nav-item {
-        font-size: 14px;
-        font-weight: 600;
+        font-size: 15px;
+        font-weight: 700;
         user-select: none;
       }
       & .__nav-item-no-a {
         padding: 0 .9rem;
         cursor: pointer;
-        font-size: 14px;
-        font-weight: 600;
+        font-size: 15px;
+        font-weight: 700;
         user-select: none;
       }
       & .__nav-item-no-a:hover {
@@ -231,8 +231,8 @@ export default {
           & li {
             padding: .85rem 0;
             cursor: pointer;
-            font-size: 14px;
-            font-weight: 600;
+            font-size: 15px;
+            font-weight: 700;
             user-select: none;
           }
           & li:hover {

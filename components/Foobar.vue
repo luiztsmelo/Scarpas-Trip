@@ -115,7 +115,7 @@ export default {
         height: auto !important;
       }
       & .__foobar-title {
-        font-size: 10px;
+        font-size: 11px;
         font-weight: 500;
         color: var(--color01);
       }

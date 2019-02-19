@@ -631,8 +631,9 @@ export default {
     display: flex;
     align-items: center;
     & .__tipo {
+      font-family: 'Cool jazz', cursive;
       padding-right: 1rem;
-      font-size: 16px;
+      font-size: 17px;
       font-weight: 600;
     }
     & .rating {

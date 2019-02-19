@@ -1,8 +1,11 @@
+@import url('../css/font_geometria.css');
+@import url('../css/font_cool_jazz.css');
+
 :root {
   --navbarHeightMobile: 3.6rem;
   --navbarHeightDesktop: 4.5rem;
 
-  --main-font: 'Montserrat', sans-serif;
+  --main-font: 'Geometria', sans-serif;
 
   /* _______ COLOR PALETTE _______ */
   --color01: rgb(22, 22, 22);

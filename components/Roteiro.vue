@@ -130,7 +130,7 @@ export default {
     }
     & .img-3 {
       animation-delay: 16s;
-      background: url('https://firebasestorage.googleapis.com/v0/b/escarpas-trip.appspot.com/o/utils%2Fbgimg6.jpg?alt=media&token=9e15b839-0619-45a7-a553-b26bd5da1dcf') no-repeat center center;
+      background: url('https://firebasestorage.googleapis.com/v0/b/escarpas-trip.appspot.com/o/utils%2Fbgimg6.jpg?alt=media&token=1787891e-2072-4087-b30b-5c3a5452c41d') no-repeat center center;
       background-size: cover;
     }
     & .img-4 {

@@ -206,23 +206,21 @@ export default {
     }
     & h2 {
       padding-top: 2.3rem;
-      font-size: 19px;
-      font-weight: 600;
+      font-size: 24px;
+      font-weight: 700;
     }
     & h3 {
       padding-top: 1.2rem;
-      font-size: 15px;
+      font-size: 18px;
       font-weight: 600;
     }
     & h4 {
       padding-top: 1.2rem;
-      font-size: 15px;
+      font-size: 16px;
       font-weight: 500;
     }
     & p {
       padding-top: 1rem;
-      font-size: 15px;
-      line-height: 24px;
     }
     & ul {
 
@@ -258,7 +256,7 @@ export default {
         font-size: 17px;
         line-height: 22px;
         transition: .15s ease color;
-        font-weight: 500;
+        font-weight: 400;
         color: var(--color01);
       }
       & .__item:hover {
@@ -273,45 +271,8 @@ export default {
       flex: 80%;
       padding: 0 0 0 1.5rem;
       margin-bottom: 0;
-      & h1 {
-        padding-bottom: .5rem;
-        font-weight: 300;
-        font-size: 40px;
-      }
-      & h2 {
-        padding-top: 2.3rem;
-        font-size: 20px;
-        font-weight: 700;
-      }
-      & h3 {
-        padding-top: 1.2rem;
-        font-size: 16px;
-        font-weight: 600;
-      }
-      & h4 {
-        padding-top: 1.2rem;
-        font-size: 15px;
-        font-weight: 500;
-      }
-      & p {
-        padding-top: 1rem;
-        font-size: 15px;
-        line-height: 24px;
-      }
-      & ul {
-
-      }
-      & li {
-        list-style-type: square;
-        padding-top: 1rem;
-        font-size: 15px;
-        line-height: 24px;
-      }
-      & strong {
-        font-weight: 600;
-      }
-    }
     }
   }
+}
   
 </style>

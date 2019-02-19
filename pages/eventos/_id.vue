@@ -402,7 +402,8 @@ export default {
     display: flex;
     align-items: center;
     & .__date {
-      font-size: 15px;
+      font-family: 'Cool jazz', cursive;
+      font-size: 16px;
       font-weight: 600;
     }
   }/* __________ DATE BOX __________ */
@@ -652,7 +653,7 @@ export default {
           padding: 0;
           margin-top: 0;
           & .__date {
-            font-size: 16px;
+            font-size: 17px;
           }
         }/* __________ DATE BOX __________ */
 
