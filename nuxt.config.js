@@ -60,8 +60,7 @@ module.exports = {
       { name: 'google-site-verification', content: 'IavBb3pz5krBr8BWBDH8LcwCr2IOEwOifb6h7n3d2jU' }
     ],
     link: [
-      { rel: 'icon', type: 'image/png', sizes: '24x24', href: '/brand.png' },
-      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700' }
+      { rel: 'icon', type: 'image/png', sizes: '24x24', href: '/brand.png' }
     ],
     __dangerouslyDisableSanitizers: ['script'],
     script: [
