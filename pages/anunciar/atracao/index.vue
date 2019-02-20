@@ -256,7 +256,7 @@ export default {
       title: '', /* Vue Autosize */
       subtitle: '', /* Vue Autosize */
       polylineOptions: {
-        strokeColor: '#161616',
+        strokeColor: '#343434',
         strokeOpacity: 1,
         strokeWeight: 2
       },
@@ -613,7 +613,7 @@ export default {
       width: 30%;
       height: 2rem;
       color: white;
-      background: #161616;
+      background: #343434;
     }
     & .__map-btn-remove {
       width: 70%;

@@ -186,7 +186,7 @@ export default {
       font-size: 17px;
       line-height: 22px;
       transition: .15s ease color;
-      color: rgb(192,192,192);
+      color: rgb(172,172,172);
     }
     & .__item:hover {
       color: rgb(162, 162, 162);

@@ -53,9 +53,9 @@ module.exports = {
       { property: 'og:image', content: '/static/brand-128.png' },
       { property: 'og:locale', content: 'pt-BR' },
       // MOBILE THEMES
-      { name: 'theme-color', content: '#161616' },
-      { name: 'msapplication-navbutton-color', content: '#161616' },
-      { name: 'apple-mobile-web-app-status-bar-style', content: '#161616' },
+      { name: 'theme-color', content: '#343434' },
+      { name: 'msapplication-navbutton-color', content: '#343434' },
+      { name: 'apple-mobile-web-app-status-bar-style', content: '#343434' },
       // Google
       { name: 'google-site-verification', content: 'IavBb3pz5krBr8BWBDH8LcwCr2IOEwOifb6h7n3d2jU' }
     ],

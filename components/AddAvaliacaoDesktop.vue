@@ -31,7 +31,7 @@
             v-model="category.rating"
             :increment="0.5"
             :show-rating="false"
-            active-color="#161616"
+            active-color="#343434"
             inactive-color="#dedede"
             :star-size="$store.state.isMobile ? 28 : 24"
             :padding="$store.state.isMobile ? 6 : 5">
@@ -54,7 +54,7 @@
             v-model="category.rating"
             :increment="0.5"
             :show-rating="false"
-            active-color="#161616"
+            active-color="#343434"
             inactive-color="#dedede"
             :star-size="$store.state.isMobile ? 28 : 24"
             :padding="$store.state.isMobile ? 6 : 5">

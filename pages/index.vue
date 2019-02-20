@@ -28,7 +28,7 @@
 
             <h3 class="__card-title">{{ acomod.title }}</h3>
 
-            <p class="__card-subtitle">R${{ acomod.valorNoiteWeekdays.toLocaleString() }}<span class="__card-valor-noite"> por noite</span></p>
+            <p class="__card-subtitle">R${{ acomod.valorNoiteWeekdays.toLocaleString() }} por noite</p>
 
             <div class="rating" v-if="acomod.avaliacoes.length > 0">
               <star-rating
@@ -36,7 +36,7 @@
                 :increment="0.5"
                 :read-only="true"
                 :show-rating="false"
-                active-color="#161616"
+                active-color="#343434"
                 inactive-color="#dedede"
                 :star-size="10"
                 :padding="2">
@@ -75,7 +75,7 @@
 
             <h3 class="__card-title">{{ passeio.title }}</h3>
 
-            <p class="__card-subtitle">R${{ passeio.rotas[0].valor.toLocaleString() }}<span class="__card-valor-noite"> por pessoa</span></p>
+            <p class="__card-subtitle">R${{ passeio.rotas[0].valor.toLocaleString() }} por pessoa</p>
             
             <div class="rating" v-if="passeio.avaliacoes.length > 0">
               <star-rating
@@ -83,7 +83,7 @@
                 :increment="0.5"
                 :read-only="true"
                 :show-rating="false"
-                active-color="#161616"
+                active-color="#343434"
                 inactive-color="#dedede"
                 :star-size="10"
                 :padding="2">
@@ -121,7 +121,7 @@
 
             <h3 class="__card-title">{{ evento.title }}</h3>
 
-            <p class="__card-subtitle">R${{ evento.valorIngresso }}<span class="__card-valor-noite"> por pessoa</span></p>
+            <p class="__card-subtitle">R${{ evento.valorIngresso }} por pessoa</p>
 
           </nuxt-link> 
         </div>
@@ -248,7 +248,7 @@ export default {
             margin-bottom: .2rem;
           }
           & .__card-info {
-            font-family: 'Cool jazz', cursive;
+            font-family: var(--details-font);
             /* text-transform: uppercase; */
             font-size: 12px;
             font-weight: 600;
@@ -260,12 +260,8 @@ export default {
             line-height: 19px;
           }
           & .__card-subtitle {
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 400;
-            & .__card-valor-noite {
-              font-size: 14px;
-              font-weight: 400;
-            }
           }
           & .rating {
             display: flex;
@@ -315,19 +311,16 @@ export default {
             & .__card-img {
             }
             & .__card-info {
-              font-size: 13px;
+              font-size: 14px;
               font-weight: 600;
             }
             & .__card-title {;
-              font-size: 16px;
+              font-size: 17px;
               font-weight: 700;
               line-height: 1.3;
             }
             & .__card-subtitle {
               font-size: 15px;
-              & .__card-valor-noite {
-                font-size: 15px;
-              }
             }
             & .rating {
               & .rating-count {

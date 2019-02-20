@@ -170,7 +170,7 @@
 
           <h2 class="__valor">R${{ evento.valorIngresso }}<span class="__valor-pessoa"> por pessoa</span></h2>
 
-          <p style="font-size: 15px">Informações para comprar o ingresso.</p>
+          <p style="font-size: 16px">Informações para comprar o ingresso.</p>
 
 
           <a :href="evento.ingressoDigitalURL" target="_blank" class="__reserva-desktop-btn" :style="reservaBtnStyle" >Comprar ingresso</a>
@@ -402,8 +402,8 @@ export default {
     display: flex;
     align-items: center;
     & .__date {
-      font-family: 'Cool jazz', cursive;
-      font-size: 16px;
+      font-family: var(--details-font);
+      font-size: 18px;
       font-weight: 600;
     }
   }/* __________ DATE BOX __________ */
@@ -617,7 +617,7 @@ export default {
           & .__info {
             margin: .5rem 0 .8rem;
             text-align: center;
-            font-size: 12px;
+            font-size: 13px;
             font-weight: 500;
             line-height: 17px;
           }
@@ -628,8 +628,8 @@ export default {
             padding-top: 1rem;
             margin-top: 1rem;
             & .__text {
-              font-size: 13px;
-              font-weight: 500;
+              font-size: 14px;
+              font-weight: 400;
               line-height: 1.35;
             }
             & .__img {
@@ -653,7 +653,6 @@ export default {
           padding: 0;
           margin-top: 0;
           & .__date {
-            font-size: 17px;
           }
         }/* __________ DATE BOX __________ */
 

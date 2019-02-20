@@ -71,7 +71,7 @@
             :increment="0.5"
             :read-only="true"
             :show-rating="false"
-            active-color="#161616"
+            active-color="#343434"
             inactive-color="#dedede"
             :star-size="13"
             :padding="4">
@@ -251,7 +251,7 @@
             :increment="0.5"
             :read-only="true"
             :show-rating="false"
-            active-color="#161616"
+            active-color="#343434"
             inactive-color="#dedede"
             :star-size="$store.state.isMobile ? 16 : 19"
             :padding="$store.state.isMobile ? 4 : 5">
@@ -267,19 +267,19 @@
             <div class="avaliacoes-by-categories" v-if="passeio.avaliacoes.length > 0">
               <div class="category">
                 <p class="__name">Habilidade do Guia</p>
-                <star-rating class="__rating" :rating="passeio.averageRating_habilidade" :increment="0.5" :read-only="true" :show-rating="false" active-color="#161616" inactive-color="#dedede" :star-size="15" :padding="4"></star-rating>
+                <star-rating class="__rating" :rating="passeio.averageRating_habilidade" :increment="0.5" :read-only="true" :show-rating="false" active-color="#343434" inactive-color="#dedede" :star-size="15" :padding="4"></star-rating>
               </div>
               <div class="category">
                 <p class="__name">Segurança</p>
-                <star-rating class="__rating" :rating="passeio.averageRating_seguranca" :increment="0.5" :read-only="true" :show-rating="false" active-color="#161616" inactive-color="#dedede" :star-size="15" :padding="4"></star-rating>
+                <star-rating class="__rating" :rating="passeio.averageRating_seguranca" :increment="0.5" :read-only="true" :show-rating="false" active-color="#343434" inactive-color="#dedede" :star-size="15" :padding="4"></star-rating>
               </div>
               <div class="category">
                 <p class="__name">Precisão do anúncio</p>
-                <star-rating class="__rating" :rating="passeio.averageRating_precisao" :increment="0.5" :read-only="true" :show-rating="false" active-color="#161616" inactive-color="#dedede" :star-size="15" :padding="4"></star-rating>
+                <star-rating class="__rating" :rating="passeio.averageRating_precisao" :increment="0.5" :read-only="true" :show-rating="false" active-color="#343434" inactive-color="#dedede" :star-size="15" :padding="4"></star-rating>
               </div>
               <div class="category">
                 <p class="__name">Valor</p>
-                <star-rating class="__rating" :rating="passeio.averageRating_valor" :increment="0.5" :read-only="true" :show-rating="false" active-color="#161616" inactive-color="#dedede" :star-size="15" :padding="4"></star-rating>
+                <star-rating class="__rating" :rating="passeio.averageRating_valor" :increment="0.5" :read-only="true" :show-rating="false" active-color="#343434" inactive-color="#dedede" :star-size="15" :padding="4"></star-rating>
               </div>
             </div>
 
@@ -314,7 +314,7 @@
 
           <h2 class="__valor">R${{ passeio.rotas[reservaPasseio.rota - 1].valor.toLocaleString() }}<span class="__valor-pessoa"> por pessoa</span></h2>
 
-          <p style="font-size: 15px">Entre em contato com {{ host.firstName }} para negociarem o dia e o horário do passeio.</p>
+          <p style="font-size: 16px">Entre em contato com {{ host.firstName }} para negociarem o dia e o horário do passeio.</p>
 
 
           <!-- <div class="item-form" v-if="passeio.rotas.length > 1">
@@ -631,9 +631,9 @@ export default {
     display: flex;
     align-items: center;
     & .__tipo {
-      font-family: 'Cool jazz', cursive;
+      font-family: var(--details-font);
       padding-right: 1rem;
-      font-size: 17px;
+      font-size: 18px;
       font-weight: 600;
     }
     & .rating {
@@ -860,7 +860,7 @@ export default {
         text-overflow: ellipsis;
       }
       & .__reserva-valor-pessoa {
-        font-size: 15px;
+        font-size: 16px;
         font-weight: 400;
       }
       & .__reserva-btn {
@@ -987,7 +987,7 @@ export default {
           & .__info {
             margin: .5rem 0 .8rem;
             text-align: center;
-            font-size: 12px;
+            font-size: 13px;
             font-weight: 500;
             line-height: 17px;
           }
@@ -1008,8 +1008,8 @@ export default {
             padding-top: 1rem;
             margin-top: 1rem;
             & .__text {
-              font-size: 13px;
-              font-weight: 500;
+              font-size: 14px;
+              font-weight: 400;
               line-height: 1.35;
             }
             & .__img {

@@ -56,11 +56,11 @@ export default {
   & .box {
     margin: 0 2.3rem;
     & .__title {
-      font-size: 15px;
+      font-size: 16px;
       padding-bottom: .5rem;
     }
     & .__subtitle {
-      font-size: 14px;
+      font-size: 15px;
       line-height: 26px;
     }
     & .__subtitle:hover {

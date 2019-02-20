@@ -149,7 +149,7 @@ export default {
       & .__brand-name {
         font-family: var(--main-font);
         font-weight: 500;
-        font-size: 17px;
+        font-size: 18px;
         line-height: var(--navbarHeightMobile);
         user-select: none;
       }
@@ -190,14 +190,14 @@ export default {
       }
       & .__nav-item {
         font-size: 15px;
-        font-weight: 700;
+        font-weight: 500;
         user-select: none;
       }
       & .__nav-item-no-a {
         padding: 0 .9rem;
         cursor: pointer;
         font-size: 15px;
-        font-weight: 700;
+        font-weight: 500;
         user-select: none;
       }
       & .__nav-item-no-a:hover {
@@ -232,7 +232,7 @@ export default {
             padding: .85rem 0;
             cursor: pointer;
             font-size: 15px;
-            font-weight: 700;
+            font-weight: 500;
             user-select: none;
           }
           & li:hover {
@@ -263,7 +263,7 @@ export default {
           height: auto;
         }
         & .__brand-name {
-          font-size: 19px;
+          font-size: 20px;
           line-height: var(--navbarHeightDesktop);
         }
       }

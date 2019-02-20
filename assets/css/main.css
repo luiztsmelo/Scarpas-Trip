@@ -6,11 +6,12 @@
   --navbarHeightDesktop: 4.5rem;
 
   --main-font: 'Geometria', sans-serif;
+  --details-font: 'Cool jazz', cursive;
 
   /* _______ COLOR PALETTE _______ */
-  --color01: rgb(22, 22, 22);
+  --color01: rgb(52, 52, 52);
   --colorAcomod: #FFA04F;
-  --colorPasseio: #198CFE; /* #0784FD for cards info */
+  --colorPasseio: #198CFE;
   --colorEvento: #FF7E65;
   --colorRestaurante: #FBC02D;
   --colorAtracao: #81C784;
@@ -192,7 +193,7 @@ textarea {
 }
 .dialog-c-text {
   color: var(--color01) !important;
-  font-size: 15px !important;
+  font-size: 16px !important;
   line-height: 24px !important;
   padding-bottom: .5rem !important;
 }

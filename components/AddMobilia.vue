@@ -144,7 +144,7 @@ export default {
         }
       }
       & .mobilia:hover {
-        border-bottom: 1px solid #161616;
+        border-bottom: 1px solid #343434;
       }
       & .mobilia:hover > button {
         text-decoration: underline;

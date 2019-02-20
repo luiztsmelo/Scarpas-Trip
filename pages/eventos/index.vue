@@ -24,7 +24,7 @@
 
           <h3 class="__card-title">{{ evento.title }}</h3>
 
-          <p class="__card-valor">R${{ evento.valorIngresso }}<span class="__card-valor-dia"> por pessoa</span></p>
+          <p class="__card-valor">R${{ evento.valorIngresso }} por pessoa</p>
           
         </div>
         
@@ -176,7 +176,7 @@ export default {
       this.$refs.infoWindow[index].$children[0].$el.style.color = '#FF7E65'
     },
     mouseOutCard (index) {
-      this.$refs.infoWindow[index].$children[0].$el.style.color = '#161616'
+      this.$refs.infoWindow[index].$children[0].$el.style.color = '#343434'
     },
     /* __________ FILTERS __________ */
     openFiltrarEventos () {
@@ -250,7 +250,7 @@ export default {
       & .spinner > div {
         width: 7px;
         height: 7px;
-        background-color: #161616;
+        background-color: #343434;
         border-radius: 100%;
         display: inline-flex;
         margin: 0 .18rem;
@@ -315,23 +315,19 @@ export default {
       }
       & .card-details {
         & .__card-info {
-          text-transform: uppercase;
-          font-size: 12px;
+          font-family: var(--details-font);
+          font-size: 15px;
           font-weight: 600;
           color: var(--colorEvento);
         }
         & .__card-title {
-          font-size: 18px;
+          font-size: 19px;
           font-weight: 700;
           line-height: 1.3;
         }
         & .__card-valor {
           font-size: 15px;
-          font-weight: 500;
-          & .__card-valor-dia {
-            font-size: 15px;
-            font-weight: 500;
-          }
+          font-weight: 400;
         }
       }
     }
@@ -415,13 +411,10 @@ export default {
           & .__card-info {
           }
           & .__card-title {
-            font-size: 16px;
+            font-size: 18px;
           }
           & .__card-valor {
             font-size: 14px;
-            & .__card-valor-dia {
-              font-size: 14px;
-            }
           }
         }
       }
@@ -559,7 +552,7 @@ export default {
                   }
                 }
                 & .quantia:hover > .radio {
-                  border: 1px solid #161616;
+                  border: 1px solid #343434;
                 }
               }
               & .buttons {
@@ -634,8 +627,8 @@ export default {
         padding: 6px;
         cursor: pointer;
         font-family: var(--main-font) !important;
-        font-size: 13px;
-        font-weight: 600;
+        font-size: 14px;
+        font-weight: 500;
         transition: var(--main-transition);
       }
     }

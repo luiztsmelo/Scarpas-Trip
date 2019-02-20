@@ -154,7 +154,7 @@
             <circle
               class="__circle"
               :stroke-width="$store.state.isMobile ? 3 : 4"
-              stroke="#161616"
+              stroke="#343434"
               :stroke-dasharray="$store.state.isMobile ? `${14.5*2*Math.PI} ${14.5*2*Math.PI}` : `${18*2*Math.PI} ${18*2*Math.PI}`"
               :stroke-dashoffset="$store.state.isMobile ? 14.5*2*Math.PI - this.uploadProgress/100*14.5*2*Math.PI : 18*2*Math.PI - this.uploadProgress/100*18*2*Math.PI"
               fill="transparent"

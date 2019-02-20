@@ -32,7 +32,7 @@
 
           <h3 class="__card-title">{{ acomod.title }}</h3>
 
-          <p class="__card-valor">R${{ valorNoite(acomod) }}<span class="__card-valor-dia"> por noite</span></p>
+          <p class="__card-valor">R${{ valorNoite(acomod) }} por noite</p>
 
           <div class="rating" v-if="acomod.avaliacoes.length > 0">
             <star-rating
@@ -40,7 +40,7 @@
               :increment="0.5"
               :read-only="true"
               :show-rating="false"
-              active-color="#161616"
+              active-color="#343434"
               inactive-color="#dedede"
               :star-size="10"
               :padding="2">
@@ -439,7 +439,7 @@ export default {
       this.$refs.infoWindow[index].$children[0].$el.style.color = '#FFA04F'
     },
     mouseOutCard (index) {
-      this.$refs.infoWindow[index].$children[0].$el.style.color = '#161616'
+      this.$refs.infoWindow[index].$children[0].$el.style.color = '#343434'
     },
     /* __________ FILTERS __________ */
     openFiltrarAcomods () {
@@ -606,7 +606,7 @@ export default {
       & .spinner > div {
         width: 7px;
         height: 7px;
-        background-color: #161616;
+        background-color: #343434;
         border-radius: 100%;
         display: inline-flex;
         margin: 0 .18rem;
@@ -671,23 +671,19 @@ export default {
       }
       & .card-details {
         & .__card-tipo-acomod {
-          text-transform: uppercase;
-          font-size: 11px;
+          font-family: var(--details-font);
+          font-size: 15px;
           font-weight: 600;
           color: var(--colorAcomod);
         }
         & .__card-title {
-          font-size: 18px;
+          font-size: 19px;
           font-weight: 700;
           line-height: 1.3;
         }
         & .__card-valor {
           font-size: 15px;
-          font-weight: 500;
-          & .__card-valor-dia {
-            font-size: 15px;
-            font-weight: 500;
-          }
+          font-weight: 400;
         }
         & .rating {
           display: flex;
@@ -789,16 +785,12 @@ export default {
         }
         & .card-details {
           & .__card-tipo-acomod {
-            font-weight: 600;
           }
           & .__card-title {
-            font-size: 16px;
+            font-size: 18px;
           }
           & .__card-valor {
             font-size: 14px;
-            & .__card-valor-dia {
-              font-size: 14px;
-            }
           }
         }
       }
@@ -929,7 +921,7 @@ export default {
                   }
                 }
                 & .option:hover > .radio {
-                  border: 1px solid #161616;
+                  border: 1px solid #343434;
                 }
               }
               & .preco-box {
@@ -955,7 +947,7 @@ export default {
                   }
                 }
                 & .quantia:hover > .radio {
-                  border: 1px solid #161616;
+                  border: 1px solid #343434;
                 }
               }
               & .buttons {
@@ -1030,8 +1022,8 @@ export default {
         padding: 6px;
         cursor: pointer;
         font-family: var(--main-font) !important;
-        font-size: 13px;
-        font-weight: 600;
+        font-size: 14px;
+        font-weight: 500;
         transition: var(--main-transition);
       }
     }
