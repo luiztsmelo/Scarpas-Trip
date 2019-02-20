@@ -239,7 +239,7 @@ export default {
         padding: 0 7%;
         display: grid;
         grid-template-columns: 1fr 1fr;
-        grid-gap: 16px;
+        grid-gap: 13px;
         & .card {
           & .__card-img {
             width: 100%; 
