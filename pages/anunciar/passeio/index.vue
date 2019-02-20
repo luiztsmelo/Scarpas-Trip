@@ -1487,7 +1487,7 @@ export default {
     & .__form-subtitle {
       padding: 1.5rem 7% 0;
       font-size: 18px;
-      font-weight: 600;
+      font-weight: 700;
       user-select: none;
     }
     & p {
@@ -1523,7 +1523,7 @@ export default {
       padding-bottom: 6rem;
       z-index: 999;
       font-size: 17px;
-      font-weight: 600;
+      font-weight: 700;
       color: rgb(92, 92, 92);
     }
     & .item-form {
@@ -1607,7 +1607,7 @@ export default {
             border-bottom: 1px solid #dedede;
             & .__name {
               font-size: 17px;
-              font-weight: 600;
+              font-weight: 700;
             }
             & .__remove-rota {
               cursor: pointer;
@@ -1648,7 +1648,7 @@ export default {
       & .add-rota-btn {
         background: white;
         font-size: 17px;
-        font-weight: 600;
+        font-weight: 700;
         color: var(--colorPasseio);
       }
     }
@@ -1691,7 +1691,7 @@ export default {
     & .__croppa-btn {
       margin: .4rem 0;
       font-size: 16px;
-      font-weight: 600;
+      font-weight: 700;
       background: var(--colorPasseio);
       color: white;
       height: 2.9rem;
@@ -1824,13 +1824,13 @@ export default {
         }
         & .__back {
           font-size: 16px;
-          font-weight: 600;
+          font-weight: 700;
           border-radius: 2rem 0 0 2rem;
           background: white;
         }
         & .__next {
           font-size: 16px;
-          font-weight: 600;
+          font-weight: 700;
           border-radius: 0 2rem 2rem 0;
           transition: all .3s ease;
           background: rgb(212,212,212);
@@ -2054,7 +2054,7 @@ export default {
           }
           & .__next {
             font-size: 17px;
-            font-weight: 600;
+            font-weight: 700;
           }
         }
       }

@@ -750,7 +750,7 @@ export default {
       font-family: var(--details-font);
       padding-right: 1rem;
       font-size: 18px;
-      font-weight: 600;
+      font-weight: 700;
     }
     & .rating {
       margin-left: 3px;
@@ -762,7 +762,7 @@ export default {
       & span {
         padding: 4px 8px;
         font-size: 11px;
-        font-weight: 600;
+        font-weight: 500;
       }
     }
   }/* __________ RATING BOX __________ */
@@ -818,7 +818,7 @@ export default {
       & .__name {
         padding: 4.5rem 0 1rem 0;
         font-size: 17px;
-        font-weight: 600;
+        font-weight: 700;
       }
       & .info {
         padding: .4rem 0;
@@ -977,7 +977,7 @@ export default {
       padding-bottom: 2.1rem;
       & .__guest-name {
         font-size: 16px;
-        font-weight: 600;
+        font-weight: 700;
       }
       & .__date {
         padding: .3rem 0 .6rem;
@@ -991,7 +991,7 @@ export default {
       background: white;
       color: var(--colorAcomod);
       font-size: 17px;
-      font-weight: 600;
+      font-weight: 700;
     }
   }/* __________ AVALIAÇÕES __________ */
 
@@ -1019,7 +1019,7 @@ export default {
       & .__reserva-valor {
         padding-right: 15px;
         font-size: 19px;
-        font-weight: 600;
+        font-weight: 700;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
@@ -1146,7 +1146,7 @@ export default {
             justify-content: space-between;
             align-items: center;
             & #valor {
-              font-weight: 600;
+              font-weight: 700;
             }
           }
           & .__reserva-desktop-btn {
@@ -1167,7 +1167,7 @@ export default {
           }
           & .__reserva-desktop-ask-btn {
             font-size: 16px;
-            font-weight: 600;
+            font-weight: 700;
             background: white;
             color: var(--colorAcomod);
             height: 2rem;

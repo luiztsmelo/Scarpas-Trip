@@ -189,7 +189,7 @@ textarea {
   padding-top: .2rem !important;
   color: var(--color01) !important;
   font-size: 17px !important;
-  font-weight: 600 !important;
+  font-weight: 700 !important;
 }
 .dialog-c-text {
   color: var(--color01) !important;
@@ -200,5 +200,5 @@ textarea {
 .vue-dialog-button {
   color: var(--color01) !important;
   font-size: 14px !important;
-  font-weight: 600 !important;
+  font-weight: 700 !important;
 }

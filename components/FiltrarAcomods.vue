@@ -264,7 +264,7 @@ h3 {
         padding: 0;
         background: #fff;
         font-size: 16px;
-        font-weight: 600;
+        font-weight: 700;
       }
     }
     & .__title {
@@ -299,7 +299,7 @@ h3 {
       border-bottom: 1px solid #dedede;
       & .__filter-title {
         font-size: 18px;
-        font-weight: 600;
+        font-weight: 700;
         padding-bottom: .8rem;
       }
       & .option {

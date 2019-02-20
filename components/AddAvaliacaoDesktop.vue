@@ -411,7 +411,7 @@ export default {
           margin: 0 1rem .5rem 0;
           & .__name {
             font-size: 18px;
-            font-weight: 600;
+            font-weight: 700;
             padding-bottom: 4px;
           }
           & .__desc {
@@ -428,7 +428,7 @@ export default {
         cursor: text;
         width: 100%;
         font-size: 21px;
-        font-weight: 600;
+        font-weight: 700;
         background: white;
         color: var(--color01);
         padding: 1rem 0 1.8rem;
@@ -457,7 +457,7 @@ export default {
       background: #dedede;
       color: white;
       font-size: 16px;
-      font-weight: 600;
+      font-weight: 700;
       border-radius: 200px;
       height: 3.2rem;
       transition: var(--main-transition);

@@ -47,7 +47,7 @@
 }
 
 .item-title {
-  font-weight: 600;
+  font-weight: 700;
   font-size: 17px;
   padding: 3rem 7% .5rem 7%;
   user-select: none;
@@ -58,7 +58,7 @@
   align-items: center;
   padding: 4rem 7% 2rem 7%;
   & .__title {
-    font-weight: 600;
+    font-weight: 700;
     font-size: 21px;
     user-select: none;
     padding-right: 1.2rem;
@@ -83,7 +83,7 @@
 
   .item-title {
     font-size: 18px;
-    font-weight: 600;
+    font-weight: 700;
     padding: 4.4rem 0 1rem 0;
     user-select: none;
   }

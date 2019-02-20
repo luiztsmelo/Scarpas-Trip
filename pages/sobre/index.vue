@@ -46,7 +46,7 @@ export default {
   }
   & h2 {
     font-size: 20px;
-    font-weight: 600;
+    font-weight: 700;
     text-align: center;
     padding: 2.5rem 0 1rem;
   }

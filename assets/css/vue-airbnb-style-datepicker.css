@@ -102,7 +102,7 @@
 
 .asd__month-name {
   font-size: 1.1em;
-  font-weight: 600;
+  font-weight: 700;
   text-align: center;
   margin: 0 0 45px;
   line-height: 1.4em; }
@@ -152,7 +152,7 @@
     border: none;
     font-weight: bold;
     font-size: 15px;
-    font-weight: 600;
+    font-weight: 700;
     cursor: pointer; }
     .asd__action-buttons button:hover {
       text-decoration: underline; }

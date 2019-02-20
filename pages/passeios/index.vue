@@ -422,7 +422,7 @@ export default {
       & .__limpar-filtros-btn {
         background: white;
         color: var(--colorPasseio);
-        font-weight: 600;
+        font-weight: 700;
         padding: 0;
         margin: 1.2rem 0;
       }
@@ -456,7 +456,7 @@ export default {
         & .__card-tipo-passeio {
           font-family: var(--details-font);
           font-size: 15px;
-          font-weight: 600;
+          font-weight: 700;
           color: var(--colorPasseio);
         }
         & .__card-title {
@@ -485,7 +485,7 @@ export default {
           & span {
             padding: 3px 8px;
             font-size: 11px;
-            font-weight: 600;
+            font-weight: 700;
           }
         }
       }
@@ -573,7 +573,6 @@ export default {
             font-size: 18px;
           }
           & .__card-valor {
-            font-size: 14px;
           }
         }
       }
@@ -722,7 +721,7 @@ export default {
                     position: absolute;
                     left: 2rem;
                     font-size: 15px;
-                    font-weight: 600;
+                    font-weight: 700;
                     padding-bottom: .2rem;
                   }
                   & .__valor {
@@ -746,7 +745,7 @@ export default {
                   height: 2.1rem;
                   background: transparent;
                   font-size: 15px;
-                  font-weight: 600;
+                  font-weight: 700;
                   transition: var(--main-transition);
                 }
                 & .__limpar-btn:hover {
@@ -764,7 +763,7 @@ export default {
                   background: transparent;
                   color: var(--colorPasseio);
                   font-size: 15px;
-                  font-weight: 600;
+                  font-weight: 700;
                   transition: var(--main-transition);
                 }
                 & .__filtrar-btn:hover {

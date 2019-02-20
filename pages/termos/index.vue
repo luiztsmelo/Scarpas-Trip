@@ -212,7 +212,7 @@ export default {
     & h3 {
       padding-top: 1.2rem;
       font-size: 18px;
-      font-weight: 600;
+      font-weight: 700;
     }
     & h4 {
       padding-top: 1.2rem;
@@ -232,7 +232,7 @@ export default {
       line-height: 24px;
     }
     & strong {
-      font-weight: 600;
+      font-weight: 700;
     }
   }
 }

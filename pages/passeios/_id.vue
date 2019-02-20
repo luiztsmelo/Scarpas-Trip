@@ -634,7 +634,7 @@ export default {
       font-family: var(--details-font);
       padding-right: 1rem;
       font-size: 18px;
-      font-weight: 600;
+      font-weight: 700;
     }
     & .rating {
       padding-left: 3px;
@@ -646,7 +646,7 @@ export default {
       & span {
         padding: 4px 8px;
         font-size: 11px;
-        font-weight: 600;
+        font-weight: 700;
       }
     }
   }/* __________ RATING BOX __________ */
@@ -711,7 +711,7 @@ export default {
       width: 100%;
       margin-bottom: 1.5rem;
         & .__title {
-          font-weight: 600;
+          font-weight: 700;
           font-size: 16px;
           padding: 3rem 0 .5rem 0;
           user-select: none;
@@ -738,7 +738,7 @@ export default {
               border-radius: 10px 0 10px 0;
               z-index: 99;
               font-size: 15px;
-              font-weight: 600;
+              font-weight: 700;
               background: rgba(0,0,0,.3);
               color: white;
             }
@@ -812,7 +812,7 @@ export default {
       padding-bottom: 2.1rem;
       & .__guest-name {
         font-size: 16px;
-        font-weight: 600;
+        font-weight: 700;
       }
       & .__date {
         padding: .3rem 0 .6rem;
@@ -826,7 +826,7 @@ export default {
       background: white;
       color: var(--colorPasseio);
       font-size: 17px;
-      font-weight: 600;
+      font-weight: 700;
     }
   }/* __________ AVALIAÇÕES __________ */
 
@@ -854,7 +854,7 @@ export default {
       & .__reserva-valor {
         padding-right: 15px;
         font-size: 19px;
-        font-weight: 600;
+        font-weight: 700;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
@@ -993,7 +993,7 @@ export default {
           }
           & .__reserva-desktop-ask-btn {
             font-size: 16px;
-            font-weight: 600;
+            font-weight: 700;
             background: white;
             color: var(--colorPasseio);
             height: 2rem;
@@ -1090,7 +1090,7 @@ export default {
           & .rota {
               & .__title {
                 font-size: 18px;
-                font-weight: 600;
+                font-weight: 700;
                 padding: 4.5rem 0 1rem 0;
               }
               & .pontos-visitados {

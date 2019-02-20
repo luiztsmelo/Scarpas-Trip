@@ -57,7 +57,7 @@
         padding-bottom: .5rem;
         border-top: 1px solid #dedede;
         font-size: 19px;
-        font-weight: 600;
+        font-weight: 700;
       }
       & .__text {
         padding-top: .5rem;
@@ -85,7 +85,7 @@
           }
           & .__day {
             font-size: 16px;
-            font-weight: 600;
+            font-weight: 700;
           }
         }
         & .calendar-info {
@@ -167,7 +167,7 @@
         padding: 1.4rem;
         & .__card-title {
           font-size: 17px;
-          font-weight: 600;
+          font-weight: 700;
           white-space: nowrap;
           overflow: hidden;
           text-overflow: ellipsis;
@@ -178,7 +178,7 @@
           margin: .8rem 0;
           & .rating-number {
             font-size: 14px;
-            font-weight: 600;
+            font-weight: 700;
             padding-left: 3px;
           }
         }
@@ -204,7 +204,7 @@
           justify-content: space-between;
           & .__valor-total {
             font-size: 17px;
-            font-weight: 600;
+            font-weight: 700;
           }
         }
       }
@@ -227,7 +227,7 @@
     }
     & .__ajuda {
       font-size: 15px;
-      font-weight: 600;
+      font-weight: 700;
     }
   }
   & .concluded-reserva {
@@ -248,7 +248,7 @@
       padding-top: 2.5rem;
       text-align: center;
       font-size: 19px;
-      font-weight: 600;
+      font-weight: 700;
     }
     & .__text {
       padding-top: .7rem;
@@ -263,7 +263,7 @@
   padding: 0 1.8rem;
   height: 3.1rem;
   font-size: 17px;
-  font-weight: 600;
+  font-weight: 700;
   background:rgb(237, 237, 237);
   color: white;
   border-radius: 200px;

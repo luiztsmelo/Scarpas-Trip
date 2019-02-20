@@ -543,7 +543,7 @@ export default {
       padding-bottom: 6rem;
       z-index: 999;
       font-size: var(--fontSizeAnuncioText);
-      font-weight: 600;
+      font-weight: 700;
       color: rgb(90, 90, 90);
     }
     & .item-form {
@@ -624,7 +624,7 @@ export default {
     & .__input-btn {
       margin: 1rem 7%;
       font-size: 15px;
-      font-weight: 600;
+      font-weight: 700;
       background: #81C784;
       color: white;
       padding: .8rem 1.2rem;
@@ -633,7 +633,7 @@ export default {
     & .__croppa-btn {
       margin: .3rem 0;
       font-size: 15px;
-      font-weight: 600;
+      font-weight: 700;
       background: #81C784;
       color: white;
       padding: .8rem 1.2rem;
@@ -676,7 +676,7 @@ export default {
         }
         & .__back {
           font-size: var(--fontSizeAnuncioText);
-          font-weight: 600;
+          font-weight: 700;
           border-radius: 2rem 0 0 2rem;
           cursor: pointer;
           background: white;

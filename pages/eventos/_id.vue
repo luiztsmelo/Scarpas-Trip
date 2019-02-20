@@ -404,7 +404,7 @@ export default {
     & .__date {
       font-family: var(--details-font);
       font-size: 18px;
-      font-weight: 600;
+      font-weight: 700;
     }
   }/* __________ DATE BOX __________ */
 
@@ -491,7 +491,7 @@ export default {
       & .__reserva-valor {
         padding-right: 15px;
         font-size: 19px;
-        font-weight: 600;
+        font-weight: 700;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;

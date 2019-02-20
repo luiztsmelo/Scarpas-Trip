@@ -752,7 +752,7 @@ export default {
     & .__form-subtitle {
       padding: 1.5rem 7% 0;
       font-size: 18px;
-      font-weight: 600;
+      font-weight: 700;
       user-select: none;
     }
     & p {
@@ -778,7 +778,7 @@ export default {
       padding-bottom: 6rem;
       z-index: 999;
       font-size: 17px;
-      font-weight: 600;
+      font-weight: 700;
       color: rgb(92, 92, 92);
     }
     & .item-form {
@@ -827,7 +827,7 @@ export default {
     & .add-date {
       margin: .5rem 7% 0;
       font-size: 17px;
-      font-weight: 600;
+      font-weight: 700;
       color: var(--colorEvento);
       background: transparent;
     }
@@ -837,7 +837,7 @@ export default {
     & .remove-date {
       margin: 0 7%;
       font-size: 11px;
-      font-weight: 600;
+      font-weight: 700;
       background: transparent;
     }
     & .remove-date:hover {
@@ -934,7 +934,7 @@ export default {
     & .__croppa-btn {
       margin: .4rem 1rem;
       font-size: 16px;
-      font-weight: 600;
+      font-weight: 700;
       background: var(--colorEvento);
       color: white;
       height: 2.9rem;
@@ -946,7 +946,7 @@ export default {
       left: 50%;
       transform: translateX(-50%);
       margin-top: 1rem;
-      font-weight: 600;
+      font-weight: 700;
       background: transparent;
     }
     & .add-image-btn:hover {
@@ -962,7 +962,7 @@ export default {
         margin-bottom: 1rem;
       }
       & button {
-        font-weight: 600;
+        font-weight: 700;
         background: transparent;
       }
       & button:hover {
@@ -990,13 +990,13 @@ export default {
         }
         & .__back {
           font-size: 16px;
-          font-weight: 600;
+          font-weight: 700;
           border-radius: 2rem 0 0 2rem;
           background: white;
         }
         & .__next {
           font-size: 16px;
-          font-weight: 600;
+          font-weight: 700;
           border-radius: 0 2rem 2rem 0;
           transition: all .3s ease;
           background: rgb(212,212,212);
@@ -1100,7 +1100,7 @@ export default {
           }
           & .__next {
             font-size: 17px;
-            font-weight: 600;
+            font-weight: 700;
           }
         }
       }

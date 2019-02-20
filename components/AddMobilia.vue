@@ -102,7 +102,7 @@ export default {
       & button {
         background: white;
         color: var(--colorAcomod);
-        font-weight: 600;
+        font-weight: 700;
       }
     }
     & .mobilia:last-child {

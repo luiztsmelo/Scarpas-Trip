@@ -249,18 +249,17 @@ export default {
           }
           & .__card-info {
             font-family: var(--details-font);
-            /* text-transform: uppercase; */
-            font-size: 12px;
-            font-weight: 600;
+            font-size: 13px;
+            font-weight: 700;
             color: var(--colorEvento);
           }
           & .__card-title {
-            font-size: 14px;
+            font-size: 15px;
             font-weight: 700;
             line-height: 19px;
           }
           & .__card-subtitle {
-            font-size: 13px;
+            font-size: 14px;
             font-weight: 400;
           }
           & .rating {
@@ -268,8 +267,8 @@ export default {
             align-items: center;
             & .rating-count {
               font-size: 12px;
-              font-weight: 600;
-              padding-left: 2px;
+              font-weight: 500;
+              padding-left: 3px;
             }
           }
           & .new {
@@ -280,7 +279,7 @@ export default {
             & span {
               padding: 3px 8px;
               font-size: 11px;
-              font-weight: 600;
+              font-weight: 500;
             }
           }
         }
@@ -312,11 +311,9 @@ export default {
             }
             & .__card-info {
               font-size: 14px;
-              font-weight: 600;
             }
             & .__card-title {;
               font-size: 17px;
-              font-weight: 700;
               line-height: 1.3;
             }
             & .__card-subtitle {

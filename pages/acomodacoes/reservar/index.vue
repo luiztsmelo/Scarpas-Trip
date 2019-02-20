@@ -459,10 +459,10 @@ export default {
     },
     /* ******************** PROGRESS ******************** */
     etapaProgressed1 () {
-      return this.$store.state.etapaReserva1ok === true ? 'font-weight: 600' : 'cursor: default'
+      return this.$store.state.etapaReserva1ok === true ? 'font-weight: 700' : 'cursor: default'
     },
     etapaProgressed2 () {
-      return this.$store.state.etapaReserva2ok === true ? 'font-weight: 600' : 'cursor: default'
+      return this.$store.state.etapaReserva2ok === true ? 'font-weight: 700' : 'cursor: default'
     },
     /* ******************** IMAGES ******************** */
     imageH () {
