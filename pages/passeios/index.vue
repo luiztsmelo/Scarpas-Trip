@@ -455,8 +455,8 @@ export default {
       & .card-details {
         & .__card-tipo-passeio {
           font-family: var(--details-font);
-          font-size: 15px;
-          font-weight: 700;
+          font-size: 18px;
+          font-weight: 400;
           color: var(--colorPasseio);
         }
         & .__card-title {

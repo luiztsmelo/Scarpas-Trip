@@ -1,12 +1,14 @@
 @import url('../css/font_geometria.css');
 @import url('../css/font_cool_jazz.css');
+@import url('../css/font_romantic_beach.css');
+@import url('../css/font_midnight_drive.css');
 
 :root {
   --navbarHeightMobile: 3.6rem;
   --navbarHeightDesktop: 4.5rem;
 
   --main-font: 'Geometria', sans-serif;
-  --details-font: 'Cool jazz', cursive;
+  --details-font: 'Romantic Beach', cursive;
 
   /* _______ COLOR PALETTE _______ */
   --color01: rgb(52, 52, 52);

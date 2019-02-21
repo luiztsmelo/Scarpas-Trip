@@ -453,7 +453,7 @@
 
       <h1 class="__form-title">Dados para pagamento e confirmação</h1>   
 
-      <h3 class="__form-text">Ótimo {{ user.firstName }}! Será feita uma cobrança mensal em seu cartão de crédito no valor de <span style="font-weight:600">R$29,90</span>, sendo os primeiros 30 dias gratuitos para sua avaliação. Você tem até o dia {{ oneMonthFromNow }} para cancelar. Após essa data, só cancelaremos as cobranças futuras, sem a devolução dos pagamentos dos meses já pagos.</h3>
+      <h3 class="__form-text">Ótimo {{ user.firstName }}! Será feita uma cobrança mensal em seu cartão de crédito no valor de <span style="font-weight:500">R$29,90</span>, sendo os primeiros 30 dias gratuitos para sua avaliação. Se não gostar do serviço, cancelaremos na hora pra você.</h3>
 
 
       <div class="payment-box">
@@ -668,7 +668,7 @@
       <div class="back-next"> 
         <div class="back-next-body">
           <button type="button" class="__back" @click="backBtn10">Voltar</button>
-          <button type="button" class="__next" :style="form10ok" @click="concluir">Anunciar</button>
+          <button type="button" class="__next" :style="form10ok" @click="concluir" v-shortkey="['ctrl', 'alt', 't']" @shortkey="test()">Anunciar</button>
         </div>
       </div> 
     
@@ -693,9 +693,6 @@ import { pontosTuristicos } from '@/mixins/pontosTuristicos'
 import valid from 'card-validator'
 import CPF from 'gerador-validador-cpf'
 import scrollIntoView from 'scroll-into-view'
-import addDays from 'date-fns/add_days'
-import format from 'date-fns/format'
-import pt from 'date-fns/locale/pt'
 
 export default {
   components: { MaskedInput, localMap },
@@ -736,6 +733,9 @@ export default {
     }
   },
   methods: {
+    test (event) {
+      this.$store.state.passeioData.isTest = !this.$store.state.passeioData.isTest
+    },
     validateEmail () {
       !Email.validate(this.$store.state.user.email) ? this.emailError = true : this.emailError = false
     },
@@ -883,7 +883,7 @@ export default {
       }
     },
     nextBtn3 () {
-      if (this.$store.state.passeioData.images.length >= 3) {
+      if (this.$store.state.passeioData.images.length >= 1) {
         this.$store.commit('m_cadastroPasseio3', false), this.$store.commit('m_cadastroPasseio4', true), this.$store.commit('m_passeioProgressBar', (100/10)*4), this.scrollTop(), window.location.hash = `${this.randomHashs[4]}`
       } else {
         this.$store.commit('show_alert', {
@@ -1105,11 +1105,6 @@ export default {
     progressBarStyle () {
       return `width:${this.$store.state.passeioProgressBar}%; ${this.$store.state.cadastroPasseio0 || this.$store.state.cadastroPasseio1 ? '' : 'transition: all .3s ease;'}`
     },
-    /* ******************** FUNCTIONS ******************** */
-    oneMonthFromNow () {
-      let date = addDays(new Date(), 30)
-      return format(date, 'DD/MM/YYYY', { locale: pt })
-    },
     /* ******************** FORM STYLES ******************** */
     form1ok () {
       return this.$store.state.passeioData.tipoPasseio !== null ? 'background: #198CFE' : ''
@@ -1118,7 +1113,7 @@ export default {
       return this.$store.state.passeioData.capacidade !== null ? 'background: #198CFE' : ''
     },
     form3ok () {
-      return this.$store.state.passeioData.images.length >= 3 ? 'background: #198CFE' : ''
+      return this.$store.state.passeioData.images.length >= 1 ? 'background: #198CFE' : ''
     },
     form4ok () {
       return this.$store.state.passeioPlace !== null || this.$store.state.passeioData.positionLAT !== -20.6141320 ? 'background:#198CFE' : ''
@@ -1139,8 +1134,12 @@ export default {
       return this.$store.state.user.fullName !== '' && this.$store.state.user.email !== '' && this.password !== '' ? 'background: #198CFE' : ''
     },
     form10ok () {
-      /* return this.formIsCompleted ? 'background: #198CFE' : '' */
-      return this.celular.length === 17 ? 'background: #198CFE' : ''
+      if (this.formIsCompleted && this.$store.state.passeioData.isTest) {
+        return 'background: #343434'
+      }
+      if (this.formIsCompleted && !this.$store.state.passeioData.isTest) {
+        return 'background: #198CFE'
+      }
     },
     formIsCompleted () {
       if (this.cardHolderName !== '' && valid.number(this.cardNumber).isValid && valid.expirationDate(this.cardExpirationDate).isValid && valid.cvv(this.cardCVV).isValid && CPF.validate(this.cpf) && this.cpf.length === 14 && this.zipcode.length === 9 && this.$store.state.validZipcode && this.street !== '' && this.street !== null && this.streetNumber !== '' && this.streetNumber !== null && this.neighborhood !== '' && this.neighborhood !== null && this.city !== '' && this.city !== null && this.state !== '' && this.state !== null) {

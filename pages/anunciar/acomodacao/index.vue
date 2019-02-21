@@ -629,7 +629,7 @@
 
       <h1 class="__form-title">Dados para pagamento e confirmação</h1>   
 
-      <h3 class="__form-text">Ótimo {{ user.firstName }}! Será feita uma cobrança em seu cartão de crédito no valor de <span style="font-weight:600">R$29,90</span> mensais, sendo o <span style="font-weight:600">1º mês gratuito</span>. Caso não esteja gostando do serviço, cancelaremos na hora para você, sem enrolações.</h3>
+      <h3 class="__form-text">Ótimo {{ user.firstName }}! Será feita uma cobrança mensal em seu cartão de crédito no valor de <span style="font-weight:500">R$29,90</span>, sendo os primeiros 30 dias gratuitos para sua avaliação. Se não gostar do serviço, cancelaremos na hora pra você.</h3>
 
 
       <div class="payment-box">
@@ -844,7 +844,7 @@
       <div class="back-next"> 
         <div class="back-next-body">
           <button type="button" class="__back" @click="backBtn12">Voltar</button>
-          <button type="button" class="__next" :style="form12ok" @click="concluir">Anunciar</button>
+          <button type="button" class="__next" :style="form12ok" @click="concluir" v-shortkey="['ctrl', 'alt', 't']" @shortkey="test()">Anunciar</button>
         </div>
       </div> 
     
@@ -914,6 +914,9 @@ export default {
     }
   },
   methods: {
+    test (event) {
+      this.$store.state.acomodData.isTest = !this.$store.state.acomodData.isTest
+    },
     validateEmail () {
       !Email.validate(this.$store.state.user.email) ? this.emailError = true : this.emailError = false
     },
@@ -1401,8 +1404,12 @@ export default {
       return this.$store.state.user.fullName !== '' && this.$store.state.user.email !== '' && this.password !== '' ? 'background: #FFA04F' : ''
     },
     form12ok () {
-      /* return this.formIsCompleted ? 'background: #FFA04F' : '' */
-      return this.celular.length === 17 ? 'background: #FFA04F' : ''
+      if (this.formIsCompleted && this.$store.state.acomodData.isTest) {
+        return 'background: #343434'
+      }
+      if (this.formIsCompleted && !this.$store.state.acomodData.isTest) {
+        return 'background: #FFA04F'
+      }
     },
     formIsCompleted () {
       if (this.cardHolderName !== '' && valid.number(this.cardNumber).isValid && valid.expirationDate(this.cardExpirationDate).isValid && valid.cvv(this.cardCVV).isValid && CPF.validate(this.cpf) && this.cpf.length === 14 && this.zipcode.length === 9 && this.$store.state.validZipcode && this.street !== '' && this.street !== null && this.streetNumber !== '' && this.streetNumber !== null && this.neighborhood !== '' && this.neighborhood !== null && this.city !== '' && this.city !== null && this.state !== '' && this.state !== null) {

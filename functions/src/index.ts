@@ -58,7 +58,7 @@ exports.newUser = functions.https.onCall(async data => {
     await admin.firestore().doc(`users/${user.userID}`).set({ createdAt: Date.now() }, { merge: true })
 
     /* Enviar welcome e-mail */
-    await Mailjet.post('send', {'version': 'v3.1'}).request({
+    /* await Mailjet.post('send', {'version': 'v3.1'}).request({
       'Messages': [{
         'From': { 'Email': escarpasTripEmail, 'Name': 'Escarpas Trip' },
         'To': [{
@@ -72,7 +72,7 @@ exports.newUser = functions.https.onCall(async data => {
           'firstName': user.firstName
         }
       }]
-    })
+    }) */
   } catch (err) {
     console.log(err)
     throw new functions.https.HttpsError('aborted', err.message, err)
@@ -92,10 +92,10 @@ exports.newAcomod = functions.https.onCall(async data => {
   const customer = data.customer
 
   try {
-    const Pagarme = await pagarme.client.connect({ api_key: 'ak_test_E3I46o4e7guZDqwRnSY9sW8o8HrL9D' })
+    const Pagarme = await pagarme.client.connect({ api_key: acomodData.isTest ? functions.config().pagarme.testkey : functions.config().pagarme.livekey })
 
     const subscription = await Pagarme.subscriptions.create({
-      'plan_id': 406863,
+      'plan_id': acomodData.isTest ? 406863 : 369551,
       'payment_method': 'credit_card',
       'card_holder_name': creditCard.cardHolderName,
       'card_number': creditCard.cardNumber.replace(/[^0-9\.]+/g, ''),
@@ -230,10 +230,10 @@ exports.newPasseio = functions.https.onCall(async data => {
   const customer = data.customer
 
   try {
-    const Pagarme = await pagarme.client.connect({ api_key: 'ak_test_E3I46o4e7guZDqwRnSY9sW8o8HrL9D' })
+    const Pagarme = await pagarme.client.connect({ api_key: passeioData.isTest ? functions.config().pagarme.testkey : functions.config().pagarme.livekey })
 
     const subscription = await Pagarme.subscriptions.create({
-      'plan_id': 406863,
+      'plan_id': passeioData.isTest ? 406863 : 369551,
       'payment_method': 'credit_card',
       'card_holder_name': creditCard.cardHolderName,
       'card_number': creditCard.cardNumber.replace(/[^0-9\.]+/g, ''),

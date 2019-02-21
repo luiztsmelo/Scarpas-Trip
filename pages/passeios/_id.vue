@@ -633,8 +633,8 @@ export default {
     & .__tipo {
       font-family: var(--details-font);
       padding-right: 1rem;
-      font-size: 18px;
-      font-weight: 700;
+      font-size: 22px;
+      font-weight: 400;
     }
     & .rating {
       padding-left: 3px;

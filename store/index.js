@@ -170,6 +170,7 @@ const store = () => new Vuex.Store({
     acomodData: { /* Atualizar action */
       createdAt: null,
       acomodID: null,
+      isTest: false,
       hostID: '',
       tipoAcomod: 'Casa',
       totalQuartos: 1,
@@ -287,6 +288,7 @@ const store = () => new Vuex.Store({
     passeioData: { /* Atualizar a action */
       createdAt: null,
       passeioID: null,
+      isTest: false,
       hostID: null,
       tipoPasseio: 'Lancha',
       capacidade: 1,
@@ -1004,6 +1006,7 @@ const store = () => new Vuex.Store({
       commit('m_acomodData', {
         createdAt: null,
         acomodID: null,
+        isTest: false,
         hostID: '',
         tipoAcomod: 'Casa',
         totalQuartos: 1,
@@ -1119,10 +1122,13 @@ const store = () => new Vuex.Store({
       commit('m_passeioData', {
         createdAt: null,
         passeioID: null,
+        isTest: false,
         hostID: null,
         tipoPasseio: 'Lancha',
         capacidade: 1,
-        localPartida: null,
+        positionLAT: -20.6141320,
+        positionLNG: -46.0478760,
+        address: null,
         rotas: [
           {
             valor: 0,

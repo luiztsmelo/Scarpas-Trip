@@ -403,8 +403,8 @@ export default {
     align-items: center;
     & .__date {
       font-family: var(--details-font);
-      font-size: 18px;
-      font-weight: 700;
+      font-size: 22px;
+      font-weight: 400;
     }
   }/* __________ DATE BOX __________ */
 

@@ -81,7 +81,8 @@ module.exports = {
     { src: '~/plugins/vue-star-rating', ssr: false },
     { src: '~/plugins/vue-airbnb-style-datepicker', ssr: false },
     { src: '~/plugins/vue-multiselect', ssr: false },
-    { src: '~/plugins/localStorage.js', ssr: false }
+    { src: '~/plugins/localStorage.js', ssr: false },
+    { src: '~/plugins/vue-shortkey.js', ssr: false }
   ],
   router: {
     middleware: ['isMobile'] /* Only dev: update isMobile store on page changes */

@@ -315,9 +315,9 @@ export default {
       }
       & .card-details {
         & .__card-info {
-          font-family: var(--details-font);
-          font-size: 15px;
-          font-weight: 700;
+          text-transform: uppercase;
+          font-size: 12px;
+          font-weight: 500;
           color: var(--colorEvento);
         }
         & .__card-title {

@@ -117,7 +117,7 @@
 
             <progressive-background class="__card-img" :src="imageEvH(evento)" :placeholder="evento.flyerL" :aspect-ratio="2/3"/>
 
-            <p class="__card-info">{{ eventoDate(evento) }}</p>
+            <p class="__card-info" style="color: #FF7E65">{{ eventoDate(evento) }}</p>
 
             <h3 class="__card-title">{{ evento.title }}</h3>
 
@@ -249,9 +249,8 @@ export default {
           }
           & .__card-info {
             font-family: var(--details-font);
-            font-size: 13px;
-            font-weight: 700;
-            color: var(--colorEvento);
+            font-size: 17px;
+            font-weight: 400;
           }
           & .__card-title {
             font-size: 15px;
@@ -310,7 +309,6 @@ export default {
             & .__card-img {
             }
             & .__card-info {
-              font-size: 14px;
             }
             & .__card-title {;
               font-size: 17px;
