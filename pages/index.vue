@@ -22,7 +22,9 @@
 
           <nuxt-link :to="`/acomodacoes/${acomod.acomodID}`" class="card" v-for="acomod in $store.state.acomods" :key="acomod.acomodID">
 
-            <progressive-background class="__card-img" :src="imageAcH(acomod)" :placeholder="acomod.images[0].L" :aspect-ratio="2/3"/>
+            <div class="__card-img" :style="`background-image: url(${imageAcH(acomod)})`"></div>
+
+            <!-- <progressive-background class="__card-img" :src="imageAcH(acomod)" :placeholder="acomod.images[0].L" :aspect-ratio="2/3"/> -->
 
             <p class="__card-info" style="color: #FFA04F">{{ acomod.tipoAcomod }}</p>
 
@@ -69,7 +71,9 @@
         <div class="cards-container" v-show="$store.state.passeios !== null">
           <nuxt-link :to="'/passeios/' + passeio.passeioID" class="card" v-for="passeio in $store.state.passeios" :key="passeio.passeioID">
             
-            <progressive-background class="__card-img" :src="imagePasH(passeio)" :placeholder="passeio.images[0].L" :aspect-ratio="2/3"/>
+            <div class="__card-img" :style="`background-image: url(${imagePasH(passeio)})`"></div>
+
+            <!-- <progressive-background class="__card-img" :src="imagePasH(passeio)" :placeholder="passeio.images[0].L" :aspect-ratio="2/3"/> -->
 
             <p class="__card-info" style="color: #0784FD">{{ passeio.tipoPasseio }}</p>
 
@@ -115,7 +119,9 @@
         <div class="cards-container" v-show="$store.state.eventos !== null">
           <nuxt-link :to="'/eventos/' + evento.eventoID" class="card" v-for="evento in $store.state.eventos" :key="evento.eventoID">
 
-            <progressive-background class="__card-img" :src="imageEvH(evento)" :placeholder="evento.flyerL" :aspect-ratio="2/3"/>
+            <div class="__card-img" :style="`background-image: url(${imageEvH(evento)})`"></div>
+
+            <!-- <progressive-background class="__card-img" :src="imageEvH(evento)" :placeholder="evento.flyerL" :aspect-ratio="2/3"/> -->
 
             <p class="__card-info" style="color: #FF7E65">{{ eventoDate(evento) }}</p>
 
@@ -241,11 +247,22 @@ export default {
         grid-gap: 13px;
         & .card {
           & .__card-img {
+            background-color: #dedede;
+            background-size: cover;
+            background-position: center; 
+            background-repeat: no-repeat;
+            width: 100%;
+            height: 0;
+            padding-top: calc(2/3 * 100%);
+            border-radius: 5px;
+            margin-bottom: .2rem;
+          }
+          /* & .__card-img {
             width: 100%; 
             height: auto;
             border-radius: 5px;
             margin-bottom: .2rem;
-          }
+          } */
           & .__card-info {
             text-transform: uppercase;
             font-size: 11px;
