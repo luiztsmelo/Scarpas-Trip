@@ -1304,7 +1304,7 @@ export default {
 
         } catch (err) {
           this.$store.commit('m_loader', false)
-          console.log(err.message)
+          console.log(err.details)
           this.$store.commit('show_alert', {
             type: 'warning',
             title: 'Erro',
