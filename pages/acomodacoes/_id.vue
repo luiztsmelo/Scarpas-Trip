@@ -34,7 +34,7 @@
         <swiper :options="swiperOptions">
           
           <swiper-slide class="slide" v-for="image in acomod.images" :key="image.id">
-            <progressive-background class="__img" :src="imageH(image)" :placeholder="image.L" :aspect-ratio="2/3"/>
+            <div class="__img" :style="`background-image: url(${imageH(image)})`"></div>
           </swiper-slide>
 
         </swiper>
@@ -728,8 +728,13 @@ export default {
         overflow: hidden;
         & .slide {
           & .__img {
+            background-color: #dedede;
+            background-size: cover;
+            background-position: center; 
+            background-repeat: no-repeat;
             width: 100%;
-            height: auto;
+            height: 0;
+            padding-top: calc(2/3 * 100%);
           }
         }
       }

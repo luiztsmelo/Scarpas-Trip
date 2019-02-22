@@ -31,8 +31,8 @@
 
     <!-- ______________________________ FLYER ______________________________ -->
     <div class="flyer-box" ref="imageBox" :style="`background-color: #FF7E65`">
-    
-      <progressive-background class="__flyer" :style="flyerWidth" :src="flyerH()" :placeholder="evento.flyerL" :aspect-ratio="evento.flyerAspectRatio"/>
+      
+      <img class="__flyer" :src="flyerH()" :style="flyerWidth">
          
     </div><!-- ______________________________ FLYER ______________________________ -->
     
@@ -385,6 +385,7 @@ export default {
     display: flex;
     flex-flow: column;
     align-items: center;
+    justify-content: center;
     min-height: 25vh;
     & .__flyer {
     }
@@ -400,9 +401,8 @@ export default {
     display: flex;
     align-items: center;
     & .__date {
-      font-family: var(--details-font);
-      font-size: 22px;
-      font-weight: 400;
+      font-size: 16px;
+      font-weight: 700;
     }
   }/* __________ DATE BOX __________ */
 

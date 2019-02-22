@@ -24,8 +24,6 @@
 
             <div class="__card-img" :style="`background-image: url(${imageAcH(acomod)})`"></div>
 
-            <!-- <progressive-background class="__card-img" :src="imageAcH(acomod)" :placeholder="acomod.images[0].L" :aspect-ratio="2/3"/> -->
-
             <p class="__card-info" style="color: #FFA04F">{{ acomod.tipoAcomod }}</p>
 
             <h3 class="__card-title">{{ acomod.title }}</h3>
@@ -73,8 +71,6 @@
             
             <div class="__card-img" :style="`background-image: url(${imagePasH(passeio)})`"></div>
 
-            <!-- <progressive-background class="__card-img" :src="imagePasH(passeio)" :placeholder="passeio.images[0].L" :aspect-ratio="2/3"/> -->
-
             <p class="__card-info" style="color: #0784FD">{{ passeio.tipoPasseio }}</p>
 
             <h3 class="__card-title">{{ passeio.title }}</h3>
@@ -120,8 +116,6 @@
           <nuxt-link :to="'/eventos/' + evento.eventoID" class="card" v-for="evento in $store.state.eventos" :key="evento.eventoID">
 
             <div class="__card-img" :style="`background-image: url(${imageEvH(evento)})`"></div>
-
-            <!-- <progressive-background class="__card-img" :src="imageEvH(evento)" :placeholder="evento.flyerL" :aspect-ratio="2/3"/> -->
 
             <p class="__card-info" style="color: #FF7E65">{{ eventoDate(evento) }}</p>
 

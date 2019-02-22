@@ -14,9 +14,9 @@
       <!-- Card -->
       <nuxt-link class="card" v-for="(evento, index) in $store.state.filteredEventos !== null ? $store.state.filteredEventos : $store.state.allEventos" :key="evento.eventoID" @mouseover.native="mouseOverCard(index)" @mouseout.native="mouseOutCard(index)" :to="`/eventos/${evento.eventoID}`" v-show="$store.state.allEventos !== null">
 
-        <div class="image-box">
-          <progressive-background class="__img" :src="flyerH(evento)" :placeholder="evento.flyerL" :aspect-ratio="2/3"/>
-        </div>
+
+        <div class="__card-img" :style="`background-image: url(${flyerH(evento)})`"></div>
+
 
         <div class="card-details">
           
@@ -293,24 +293,16 @@ export default {
     & .card {
       width: 93%;
       padding: 4% 0 0 7%;
-      & .image-box {
-        overflow: hidden;
-        line-height: 0;
+      & .__card-img {
+        background-color: #dedede;
+        background-size: cover;
+        background-position: center; 
+        background-repeat: no-repeat;
+        width: 100%;
+        height: 0;
+        padding-top: calc(2/3 * 100%);
         margin-bottom: .4rem;
         border-radius: 5px;
-        & .swiper-container {
-          position: relative;
-          & .swiper-wrapper {
-            display: inline-flex;
-            overflow: hidden;
-            & .slide {
-              & .__img {
-                width: 100%;
-                height: auto;
-              }
-            }
-          }
-        }
       }
       & .card-details {
         & .__card-info {
@@ -390,21 +382,7 @@ export default {
         min-height: 21rem;
         padding: 0;
         margin-bottom: 1rem;
-        & .image-box {
-          overflow: hidden;
-          & .swiper-container {
-            position: relative;
-            & .swiper-wrapper {
-              display: inline-flex;
-              overflow: hidden;
-              & .slide {
-                & .__img {
-                  width: 100%;
-                  height: auto;
-                }
-              }
-            }
-          }
+        & .__card-img {
         }
         & .card-details {
           & .__card-info {
