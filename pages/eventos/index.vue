@@ -215,7 +215,6 @@ export default {
       vm.$store.state.foobar2 = false
       vm.$store.state.foobar3 = true
       vm.$store.state.foobar4 = false
-      !vm.$store.state.isOnline ? vm.$modal.show('offline-modal') : ''
       !vm.$store.state.showFoobar ? vm.$store.commit('m_showFoobar', true) : ''
       !vm.$store.state.showNavbar ? vm.$store.commit('m_showNavbar', true) : ''
 

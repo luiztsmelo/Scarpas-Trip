@@ -12,7 +12,6 @@ const store = () => new Vuex.Store({
     /*
     -------------------- GERAL --------------------
     */
-    isOnline: true,
     isMobile: false,
     showNavbar: true,
     showMenu: false,
@@ -510,9 +509,6 @@ const store = () => new Vuex.Store({
       state.alert.title = ''
       state.alert.message = ''
       state.alert.persist = false
-    },
-    m_isOnline (state, payload) {
-      state.isOnline = payload
     },
     m_isMobile (state, payload) {
       state.isMobile = payload

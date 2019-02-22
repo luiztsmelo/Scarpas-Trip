@@ -348,8 +348,6 @@ export default {
   },
   beforeRouteEnter (to, from, next) {
     next(vm => {
-      !vm.$store.state.isOnline ? vm.$modal.show('offline-modal') : ''
-
       if (vm.$store.state.isMobile) {
         vm.$store.commit('m_showNavbar', false)
         vm.$store.commit('m_showFoobar', false)

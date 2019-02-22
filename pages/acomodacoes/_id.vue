@@ -684,8 +684,6 @@ export default {
     next(vm => {
       vm.$store.state.reservaAcomod.quarto = vm.acomod.quartos[0].name
 
-      !vm.$store.state.isOnline ? vm.$modal.show('offline-modal') : ''
-
       if (vm.$store.state.isMobile) {
         vm.$store.commit('m_showNavbar', false)
         vm.$store.commit('m_showFoobar', false)

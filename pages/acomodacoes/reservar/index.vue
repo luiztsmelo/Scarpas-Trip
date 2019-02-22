@@ -511,7 +511,6 @@ export default {
   },
   beforeRouteEnter (to, from, next) {
     next(vm => {
-      !vm.$store.state.isOnline ? vm.$modal.show('offline-modal') : ''
       firebase.firestore().doc(`acomods/${vm.$store.state.acomod.acomodID}/visits/${vm.$store.state.visitID}`).update({ 
         wentToReservaPage: true
       })
