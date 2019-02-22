@@ -316,8 +316,8 @@ export default {
       & .card-details {
         & .__card-info {
           text-transform: uppercase;
-          font-size: 12px;
-          font-weight: 500;
+          font-size: 13px;
+          font-weight: 700;
           color: var(--colorEvento);
         }
         & .__card-title {

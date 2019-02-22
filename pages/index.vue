@@ -248,9 +248,9 @@ export default {
             margin-bottom: .2rem;
           }
           & .__card-info {
-            font-family: var(--details-font);
-            font-size: 17px;
-            font-weight: 400;
+            text-transform: uppercase;
+            font-size: 11px;
+            font-weight: 700;
           }
           & .__card-title {
             font-size: 15px;

@@ -28,7 +28,7 @@
 
         <div class="card-details">
 
-          <p class="__card-tipo-passeio">{{ passeio.tipoPasseio }}</p>
+          <p class="__card-info">{{ passeio.tipoPasseio }}</p>
 
           <h3 class="__card-title">{{ passeio.title }}</h3>
 
@@ -453,10 +453,10 @@ export default {
         }
       }
       & .card-details {
-        & .__card-tipo-passeio {
-          font-family: var(--details-font);
-          font-size: 18px;
-          font-weight: 400;
+        & .__card-info {
+          text-transform: uppercase;
+          font-size: 12px;
+          font-weight: 700;
           color: var(--colorPasseio);
         }
         & .__card-title {
@@ -567,7 +567,7 @@ export default {
           }
         }
         & .card-details {
-          & .__card-tipo-passeio {
+          & .__card-info {
           }
           & .__card-title {
             font-size: 18px;
