@@ -104,7 +104,7 @@ exports.newAcomod = functions.https.onCall(async (data) => {
     }
     catch (err) {
         console.log(err.response);
-        throw new functions.https.HttpsError('aborted', err.response.errors.message, err.response.errors);
+        throw new functions.https.HttpsError('aborted', err.response, err.response.errors);
     }
 });
 exports.email_newReservaAcomod_host = functions.firestore
@@ -217,8 +217,8 @@ exports.newPasseio = functions.https.onCall(async (data) => {
         return { subscription: subscription };
     }
     catch (err) {
-        console.log(err);
-        throw new functions.https.HttpsError('aborted', err.message, err);
+        console.log(err.response);
+        throw new functions.https.HttpsError('aborted', err.response, err.response.errors);
     }
 });
 //# sourceMappingURL=index.js.map
