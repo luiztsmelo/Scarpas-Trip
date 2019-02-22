@@ -1308,7 +1308,7 @@ export default {
           this.$store.commit('show_alert', {
             type: 'warning',
             title: 'Erro',
-            message: 'Falha no servidor. Tente novamente.'
+            message: err.details[0].message
           })
         }
       } else {
