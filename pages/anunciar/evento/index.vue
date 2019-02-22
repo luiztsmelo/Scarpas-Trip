@@ -178,8 +178,8 @@
 
 
       <div class="image-preview" v-if="$store.state.eventoData.flyerHJ !== ''">
-
-        <progressive-background class="__image" :src="$store.state.eventoData.flyerHJ" :placeholder="$store.state.eventoData.flyerL" :aspect-ratio="aspectRatio"/>
+        
+        <img class="__img" :src="$store.state.eventoData.flyerHJ">
 
         <button type="button" @click="deleteImage()">Remover</button>
 
@@ -957,8 +957,11 @@ export default {
       display: flex;
       flex-flow: column;
       align-items: center;
-      & .__image {
-        border-radius: 6px;
+      & .__img {
+        max-height: 20rem;
+        min-height: 20rem;
+        width: auto;
+        border-radius: 5px;
         margin-bottom: 1rem;
       }
       & button {

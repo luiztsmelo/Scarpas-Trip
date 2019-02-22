@@ -149,7 +149,7 @@
               <div class="pontos-visitados">
 
                 <div class="ponto" v-for="(ponto, index) in rota.pontosVisitados">
-                  <progressive-background class="__img" :src="pontoImgSrc(ponto)" :aspect-ratio="2/3"/>
+                  <div class="__img" :style="`background-image: url(${pontoImgSrc(ponto)})`"></div>
                   <span class="__number">{{ index + 1 }}</span>
                   <span class="__name">{{ ponto }}</span>
                 </div>
@@ -729,8 +729,13 @@ export default {
             border-radius: 10px;
             border: 1px solid #dedede;
             & .__img {
+              background-color: #dedede;
+              background-size: cover;
+              background-position: center; 
+              background-repeat: no-repeat;
               width: 100%;
-              height: auto;
+              height: 0;
+              padding-top: calc(2/3 * 100%);
               border-radius: 10px 10px 0 0;
             }
             & .__number {

@@ -186,7 +186,8 @@
       <!-- ________________________________________ FLEX RIGHT ________________________________________ -->
       <div class="flex-right">
         
-        <progressive-background class="__img" :src="imageH" :placeholder="acomod.images[0].L" :aspect-ratio="2/3"/>
+        <div class="__img" :style="`background-image: url(${imageH})`"></div>
+
 
         <div class="card-body">
 

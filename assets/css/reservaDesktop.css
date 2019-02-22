@@ -155,8 +155,13 @@
       margin-left: 13%;
       align-self: flex-start;
       & .__img {
+        background-color: #dedede;
+        background-size: cover;
+        background-position: center; 
+        background-repeat: no-repeat;
         width: 100%;
-        height: auto;
+        height: 0;
+        padding-top: calc(2/3 * 100%);
         border-radius: 10px 10px 0 0;
       }
       & .card-body {

@@ -303,7 +303,7 @@
           <div class="delete" @click="!isUploading ? deleteImage(image, index) : ''">
             <img src="../../../assets/img/delete.svg" class="__delete-img">
           </div>
-          <progressive-background class="__image" :src="image.HJ" :placeholder="image.L" :aspect-ratio="2/3"/>
+          <div class="__img" :style="`background-image: url(${image.HJ})`"></div>
         </div>
 
 
@@ -321,8 +321,8 @@
               :cy="$store.state.isMobile ? 16 : 20"
             />
           </svg>
-          <img src="../../../assets/img/add-image.svg" class="__add-image-svg" v-else>
-          <progressive-background src="../../../assets/img/add-image.png" :aspect-ratio="2/3"/>
+          <img class="__add-image-svg" src="../../../assets/img/add-image.svg" v-else>
+          <div class="__add-image-back"></div>
         </div>
 
       </div><!-- Preview images -->
@@ -2151,9 +2151,14 @@ export default {
         margin: 1%;
         width: 48%;
         height: auto;
-        & .__image {
+        & .__img {
+          background-color: #dedede;
+          background-size: cover;
+          background-position: center; 
+          background-repeat: no-repeat;
           width: 100%;
-          height: 100%;
+          height: 0;
+          padding-top: calc(2/3 * 100%);
           border-radius: 5px;
         }
         & .delete {
@@ -2208,6 +2213,15 @@ export default {
           top: 0; left: 0; bottom: 0; right: 0;
           margin: auto;
           z-index: 5;
+        }
+        & .__add-image-back {
+          background-image: url('../../../assets/img/add-image.png');
+          background-size: cover;
+          background-position: center; 
+          background-repeat: no-repeat;
+          width: 100%;
+          height: 0;
+          padding-top: calc(2/3 * 100%);
         }
       }
     }
@@ -2469,7 +2483,7 @@ export default {
         & .image-box {
           margin: 1%;
           width: 48%;
-          & .__image {
+          & .__img {
           }
           & .delete {
             display: none;

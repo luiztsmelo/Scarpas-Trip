@@ -70,7 +70,6 @@ module.exports = {
   /* ________________________________________ PLUGINS ________________________________________ */
   plugins: [
     { src: '~/plugins/firebase' },
-    { src: '~/plugins/vue-progressive-image', ssr: false },
     { src: '~/plugins/vue-google-maps', ssr: false },
     { src: '~/plugins/vue-croppa', ssr: false },
     { src: '~/plugins/vue-autosize', ssr: false },
