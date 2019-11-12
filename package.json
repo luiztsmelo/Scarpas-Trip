@@ -4,10 +4,6 @@
   "description": "Escarpas Trip",
   "author": "Tarcisio Melo <luiztsmelo@gmail.com>",
   "private": true,
-  "engines": {
-    "node": "10.14.1",
-    "npm": "6.4.1"
-  },
   "dependencies": {
     "@nuxtjs/axios": "^5.3.6",
     "@nuxtjs/google-analytics": "^2.0.2",
@@ -21,12 +17,12 @@
     "date-fns": "^1.30.1",
     "email-validator": "^2.0.4",
     "express": "^4.16.4",
-    "firebase": "^5.8.3",
+    "firebase": "^7.3.0",
     "gerador-validador-cpf": "^3.1.3",
     "hoek": "^5.0.3",
     "ical-generator": "^1.4.3",
     "ismobilejs": "^0.5.1",
-    "nuxt": "^2.4.2",
+    "nuxt": "^2.10.2",
     "scroll-into-view": "^1.9.3",
     "ssri": "^6.0.0",
     "supports-webp": "^1.0.7",

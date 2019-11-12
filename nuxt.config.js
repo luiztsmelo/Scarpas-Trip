@@ -1,8 +1,7 @@
 module.exports = {
   /* mode: 'spa', */
   /* serverMiddleware: ['~/api/index.js'], */
-  modern: 'server', /* The Node.js server will check browser version based on the user agent and serve the corresponding modern or legacy bundle. */
-  /* ________________________________________ BUILD ________________________________________ */
+  modern: true,
   build: {
     postcss: {
       preset: {
@@ -24,12 +23,10 @@ module.exports = {
     }
     /* analyze: true */
   },
-  /* ________________________________________ CSS ________________________________________ */
   css: [
     '@/assets/css/normalize.css',
     '@/assets/css/main.css'
   ],
-  /* _______________________________________ HEAD ________________________________________ */
   head: {
     title: 'Escarpas Trip: Encontre tudo para sua viagem a Capitólio',
     meta: [
@@ -67,7 +64,6 @@ module.exports = {
       { innerHTML: '{ "@context": "http://schema.org", "@type": "Organization", "url": "https://www.escarpastrip.com/", "logo": "https://firebasestorage.googleapis.com/v0/b/escarpas-trip.appspot.com/o/utils%2Fbrand-512.png?alt=media&token=a13bf7e0-e31d-4b77-9d43-e32e6095c42b" }', type: 'application/ld+json' }
     ]
   },
-  /* ________________________________________ PLUGINS ________________________________________ */
   plugins: [
     { src: '~/plugins/firebase' },
     { src: '~/plugins/vue-google-maps', ssr: false },
@@ -86,14 +82,12 @@ module.exports = {
   router: {
     middleware: ['isMobile'] /* Only dev: update isMobile store on page changes */
   },
-  /* _________________________________________ LOADINGS __________________________________________ */
   loading: false,
   /* loadingIndicator: {
     name: 'pulse',
     color: '#dedede',
     background: 'white'
   }, */
-  /* _______________________________________ APP MANIFEST _______________________________________ */
   manifest: {
     name: 'Escarpas Trip',
     ogTitle: 'Escarpas Trip',
@@ -106,14 +100,12 @@ module.exports = {
   icon: {
     iconSrc: '~/static/brand.png'
   },
-  /* _________________________________________ SITEMAP _________________________________________ */
   sitemap: {
     path: '/sitemap.xml',
     hostname: 'https://www.escarpastrip.com',
     cacheTime: 1000 * 60 * 15,
     generate: false
   },
-  /* ________________________________________ MODULES ________________________________________ */
   modules: [
     [ '@nuxtjs/google-analytics', { id: 'UA-132478182-1' } ],
     '@nuxtjs/pwa',

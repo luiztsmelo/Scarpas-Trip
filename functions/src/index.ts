@@ -108,6 +108,7 @@ exports.newAcomod = functions.https.onCall(async data => {
           'zipcode': customer.zipcode.replace(/[^0-9\.]+/g, ''),
           'street': customer.street,
           'street_number': customer.street_number,
+          'street_number': customer.street_number,
           'neighborhood': customer.neighborhood,
           'city': customer.city,
           'state': customer.state
